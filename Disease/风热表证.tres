@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DiseaseData" load_steps=2 format=3 uid="uid://by0q5yw0861to"]
+
+[ext_resource type="Script" uid="uid://dccfyx4mej452" path="res://Disease/DiseaseData.gd" id="1_kj3y3"]
+
+[resource]
+script = ExtResource("1_kj3y3")
+disease_id = ""
+disease_name = "风热表症"
+description = ""
+category = ""
+symptoms = Array[String]([])
+pulse_qi = 100.0
+pulse_blood = 100.0
+pulse_cold_hot = 2.0
+pulse_wet_dry = 10.0
+recommended_formula_id = ""
+metadata/_custom_type_script = "uid://dccfyx4mej452"

@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmut05e1apxa5"]
+
+[ext_resource type="Script" uid="uid://b2ho4f6rjxsqr" path="res://Test/test_disease_pulse.gd" id="1_t64qv"]
+[ext_resource type="Script" uid="uid://cqs7cn5g00f7v" path="res://Pulse/PulseDrawer.gd" id="2_1bldu"]
+[ext_resource type="Script" uid="uid://cse2gud2bttup" path="res://Npc/NpcManager.gd" id="3_1bldu"]
+
+[node name="TestDiseasePulse" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t64qv")
+
+[node name="PulseDrawer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_1bldu")
+pulse_color = Color(1, 1, 1, 1)
+
+[node name="DiseaseName" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="NextButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 1000.0
+offset_right = 136.0
+offset_bottom = 1050.0
+text = "下一个"
+
+[node name="PrevButton" type="Button" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 1000.0
+offset_right = 76.0
+offset_bottom = 1050.0
+scale = Vector2(1.0112, 0.989177)
+text = "上一个"
+
+[node name="SpawnNpcButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 1000.0
+offset_right = 213.0
+offset_bottom = 1050.0
+text = "生成NPC"
+
+[node name="NpcManager" type="Node" parent="."]
+script = ExtResource("3_1bldu")
+
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="PrevButton" to="." method="_on_prev_button_pressed"]
+[connection signal="pressed" from="SpawnNpcButton" to="." method="_on_spawn_npc_button_pressed"]

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DiseaseData" load_steps=2 format=3 uid="uid://bo4fdsemxsqur"]
+
+[ext_resource type="Script" uid="uid://dccfyx4mej452" path="res://Disease/DiseaseData.gd" id="1_k3jy1"]
+
+[resource]
+script = ExtResource("1_k3jy1")
+disease_id = ""
+disease_name = "健康"
+description = "一呼一吸（一息）脉动 4 到 5 次"
+category = ""
+symptoms = Array[String]([])
+pulse_qi = 100.0
+pulse_blood = 100.0
+pulse_cold_hot = 1.3
+pulse_wet_dry = 10.0
+recommended_formula_id = ""
+metadata/_custom_type_script = "uid://dccfyx4mej452"
