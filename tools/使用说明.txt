@@ -1,0 +1,6 @@
+github更新
+
+cd /d F:\Doctor
+git add .
+git commit -m "update"
+git push origin main

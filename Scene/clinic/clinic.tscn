@@ -1,0 +1,319 @@
+[gd_scene format=3 uid="uid://brf2blpetnvs1"]
+
+[ext_resource type="Script" uid="uid://d3fc1n20xbhxf" path="res://Scene/clinic/Clinic.gd" id="1_osrcs"]
+[ext_resource type="Script" uid="uid://cqs7cn5g00f7v" path="res://Pulse/PulseDrawer.gd" id="2_1bldu"]
+[ext_resource type="Script" uid="uid://cse2gud2bttup" path="res://Npc/NpcManager.gd" id="3_1bldu"]
+[ext_resource type="Script" uid="uid://botxi4gauhtuh" path="res://Herb/HerbDataBase.gd" id="3_o2cm7"]
+[ext_resource type="Script" uid="uid://bu22qb68brdh" path="res://Formula/FormulaDataBase.gd" id="4_5ak1j"]
+[ext_resource type="Script" uid="uid://ckajxgh63gyoe" path="res://Pulse/PulsePanel.gd" id="5_ml4in"]
+
+[node name="Clinic" type="Control" unique_id=360139135]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_osrcs")
+
+[node name="NpcManager" type="Node" parent="." unique_id=1143092364]
+script = ExtResource("3_1bldu")
+
+[node name="HerbDataBase" type="Node" parent="." unique_id=1051564161]
+script = ExtResource("3_o2cm7")
+
+[node name="FormulaDataBase" type="Node" parent="." unique_id=1883359923]
+script = ExtResource("4_5ak1j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=744765107]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DiagnosisPanel" type="Panel" parent="VBoxContainer" unique_id=944464422]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="DiagnosisLayout" type="VBoxContainer" parent="VBoxContainer/DiagnosisPanel" unique_id=1153841944]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoLabel" type="Label" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout" unique_id=1000043409]
+custom_minimum_size = Vector2(600, 140)
+layout_mode = 2
+size_flags_vertical = 1
+autowrap_mode = 2
+
+[node name="NpcButtonRow" type="HBoxContainer" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout" unique_id=906841336]
+layout_mode = 2
+
+[node name="PrevButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow" unique_id=1972989327]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "上一个"
+
+[node name="NextButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow" unique_id=120535984]
+layout_mode = 2
+text = "下一个"
+
+[node name="SpawnNpcButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow" unique_id=206876856]
+layout_mode = 2
+text = "生成NPC"
+
+[node name="OpenPulseWindowButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow" unique_id=1895980174]
+layout_mode = 2
+text = "把脉"
+
+[node name="PrescriptionLayout" type="VBoxContainer" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout" unique_id=502149805]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HerbSelectRow" type="HBoxContainer" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout" unique_id=1545270282]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="HerbList" type="ItemList" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/HerbSelectRow" unique_id=1777185498]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HerbEditColumn" type="VBoxContainer" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/HerbSelectRow" unique_id=1608769651]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+
+[node name="AmountInput" type="LineEdit" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/HerbSelectRow/HerbEditColumn" unique_id=192545152]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="UnitOption" type="OptionButton" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/HerbSelectRow/HerbEditColumn" unique_id=2065091564]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AddHerbButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/HerbSelectRow/HerbEditColumn" unique_id=1860173093]
+layout_mode = 2
+size_flags_vertical = 3
+text = "加入"
+
+[node name="PrescriptionView" type="VBoxContainer" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout" unique_id=2139401175]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PrescriptionTitle" type="Label" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView" unique_id=1872483725]
+layout_mode = 2
+size_flags_vertical = 1
+text = "当前处方"
+
+[node name="RoleContainer" type="HBoxContainer" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView" unique_id=1005324887]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="JunPanel" type="Panel" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer" unique_id=1045271407]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel" unique_id=1238195867]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="JunTitle" type="Label" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel/VBoxContainer" unique_id=1118317221]
+layout_mode = 2
+text = "君"
+
+[node name="JunList" type="ItemList" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel/VBoxContainer" unique_id=976743980]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ChenPanel" type="Panel" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer" unique_id=814505891]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer/ChenPanel" unique_id=369813670]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="ChenTitle" type="Label" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer/ChenPanel/VBoxContainer" unique_id=1917424852]
+layout_mode = 2
+text = "臣"
+
+[node name="ChenList" type="ItemList" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer/ChenPanel/VBoxContainer" unique_id=273681161]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ZuoPanel" type="Panel" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer" unique_id=1797866075]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer/ZuoPanel" unique_id=419256569]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ZuoTitle" type="Label" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer/ZuoPanel/VBoxContainer" unique_id=1190112965]
+layout_mode = 2
+text = "佐"
+
+[node name="ZuoList" type="ItemList" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer/ZuoPanel/VBoxContainer" unique_id=1472075152]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ShiPanel" type="Panel" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer" unique_id=938401989]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel" unique_id=382071752]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShiTitle" type="Label" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel/VBoxContainer" unique_id=1861816253]
+layout_mode = 2
+text = "使"
+
+[node name="ShiList" type="ItemList" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel/VBoxContainer" unique_id=758842041]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PrescriptionActionRow" type="HBoxContainer" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView" unique_id=676136758]
+layout_mode = 2
+
+[node name="RemoveHerbButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/PrescriptionActionRow" unique_id=558655039]
+layout_mode = 2
+text = "移除选中药材"
+
+[node name="ClearPrescriptionButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/PrescriptionLayout/PrescriptionView/PrescriptionActionRow" unique_id=1375215839]
+layout_mode = 2
+text = "清空处方"
+
+[node name="SubmitButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout" unique_id=1414165733]
+layout_mode = 2
+text = "提交处方"
+
+[node name="PulseWindow" type="Window" parent="." unique_id=307565648]
+oversampling_override = 1.0
+title = "脉诊"
+position = Vector2i(120, 36)
+size = Vector2i(1600, 1000)
+
+[node name="PulsePanel" type="Panel" parent="PulseWindow" unique_id=2024857142]
+clip_contents = true
+custom_minimum_size = Vector2(0, 300)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+script = ExtResource("5_ml4in")
+
+[node name="PulsePanelLayout" type="HBoxContainer" parent="PulseWindow/PulsePanel" unique_id=192662974]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RightPulseButtonRow" type="VBoxContainer" parent="PulseWindow/PulsePanel/PulsePanelLayout" unique_id=1127979207]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Float" type="Label" parent="PulseWindow/PulsePanel/PulsePanelLayout/RightPulseButtonRow" unique_id=667646995]
+layout_mode = 2
+size_flags_vertical = 3
+text = "浮脉"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightCunButton" type="Button" parent="PulseWindow/PulsePanel/PulsePanelLayout/RightPulseButtonRow" unique_id=1675961501]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "右寸"
+
+[node name="RightGuanButton" type="Button" parent="PulseWindow/PulsePanel/PulsePanelLayout/RightPulseButtonRow" unique_id=1383769838]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "右关"
+
+[node name="RightChiButton" type="Button" parent="PulseWindow/PulsePanel/PulsePanelLayout/RightPulseButtonRow" unique_id=824155350]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "右尺"
+
+[node name="PulseDrawer" type="Control" parent="PulseWindow/PulsePanel/PulsePanelLayout" unique_id=1247323526]
+custom_minimum_size = Vector2(800, 400)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+script = ExtResource("2_1bldu")
+
+[node name="LeftPulseButtonRow" type="VBoxContainer" parent="PulseWindow/PulsePanel/PulsePanelLayout" unique_id=1425198494]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Float" type="Label" parent="PulseWindow/PulsePanel/PulsePanelLayout/LeftPulseButtonRow" unique_id=1337004489]
+layout_mode = 2
+size_flags_vertical = 3
+text = "浮脉"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftCunButton" type="Button" parent="PulseWindow/PulsePanel/PulsePanelLayout/LeftPulseButtonRow" unique_id=439430556]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "左寸"
+
+[node name="LeftGuanButton" type="Button" parent="PulseWindow/PulsePanel/PulsePanelLayout/LeftPulseButtonRow" unique_id=1096746345]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "左关"
+
+[node name="LeftChiButton" type="Button" parent="PulseWindow/PulsePanel/PulsePanelLayout/LeftPulseButtonRow" unique_id=88576002]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "左尺"
+
+[connection signal="pressed" from="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/PrevButton" to="." method="_on_prev_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/SpawnNpcButton" to="." method="_on_spawn_npc_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/DiagnosisPanel/DiagnosisLayout/SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="close_requested" from="PulseWindow" to="." method="_on_pulse_window_close_requested"]
+[connection signal="pressed" from="PulseWindow/PulsePanel/PulsePanelLayout/RightPulseButtonRow/RightCunButton" to="." method="_on_right_cun_button_pressed"]
+[connection signal="pressed" from="PulseWindow/PulsePanel/PulsePanelLayout/RightPulseButtonRow/RightGuanButton" to="." method="_on_right_guan_button_pressed"]
+[connection signal="pressed" from="PulseWindow/PulsePanel/PulsePanelLayout/RightPulseButtonRow/RightChiButton" to="." method="_on_right_chi_button_pressed"]
+[connection signal="pressed" from="PulseWindow/PulsePanel/PulsePanelLayout/LeftPulseButtonRow/LeftCunButton" to="." method="_on_left_cun_button_pressed"]
+[connection signal="pressed" from="PulseWindow/PulsePanel/PulsePanelLayout/LeftPulseButtonRow/LeftGuanButton" to="." method="_on_left_guan_button_pressed"]
+[connection signal="pressed" from="PulseWindow/PulsePanel/PulsePanelLayout/LeftPulseButtonRow/LeftChiButton" to="." method="_on_left_chi_button_pressed"]

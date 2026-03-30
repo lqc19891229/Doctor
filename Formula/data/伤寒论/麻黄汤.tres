@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="FormulaData" format=3 uid="uid://cmkqdm4xasjfg"]
+
+[ext_resource type="Script" uid="uid://dh3m27lloov6r" path="res://Formula/FormulaIngredient.gd" id="1_ingredient_script"]
+[ext_resource type="Script" uid="uid://dqqrne3qwyt6w" path="res://Formula/FormulaData.gd" id="2_formula_script"]
+[ext_resource type="Resource" uid="uid://dtha3uqu06xc5" path="res://Herb/data/麻黄.tres" id="herb_1"]
+[ext_resource type="Resource" uid="uid://c40kvsrkp7awi" path="res://Herb/data/桂枝.tres" id="herb_2"]
+[ext_resource type="Resource" uid="uid://btqtqcnl0l6yx" path="res://Herb/data/杏仁.tres" id="herb_3"]
+[ext_resource type="Resource" uid="uid://bgsswoxpkrxyb" path="res://Herb/data/甘草.tres" id="herb_4"]
+
+[sub_resource type="Resource" id="Ingredient_2"]
+script = ExtResource("1_ingredient_script")
+herb = ExtResource("herb_2")
+amount = 2.0
+
+[sub_resource type="Resource" id="Ingredient_1"]
+script = ExtResource("1_ingredient_script")
+herb = ExtResource("herb_1")
+amount = 3.0
+
+[sub_resource type="Resource" id="Ingredient_4"]
+script = ExtResource("1_ingredient_script")
+herb = ExtResource("herb_4")
+amount = 1.0
+
+[sub_resource type="Resource" id="Ingredient_3"]
+script = ExtResource("1_ingredient_script")
+herb = ExtResource("herb_3")
+amount = 2.0
+
+[resource]
+script = ExtResource("2_formula_script")
+formula_id = "ma_huang_tang"
+formula_name = "麻黄汤"
+source_book = "伤寒论"
+target_disease_id = "wind_cold_exterior_excess"
+target_disease_name = "风寒表实证"
+indication_text = "风寒表实证"
+jun_group = Array[ExtResource("1_ingredient_script")]([SubResource("Ingredient_1")])
+chen_group = Array[ExtResource("1_ingredient_script")]([SubResource("Ingredient_2")])
+zuo_group = Array[ExtResource("1_ingredient_script")]([SubResource("Ingredient_3")])
+shi_group = Array[ExtResource("1_ingredient_script")]([SubResource("Ingredient_4")])

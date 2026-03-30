@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HerbData" format=3 uid="uid://bgsswoxpkrxyb"]
+
+[ext_resource type="Script" uid="uid://0gwonig4qo0s" path="res://Herb/HerbData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+herb_id = "gan_cao"
+herb_name = "甘草"
+nature = "平"
+taste = "甘"
+meridians = "心,脾,肺"

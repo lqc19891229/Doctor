@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HerbData" format=3 uid="uid://c40kvsrkp7awi"]
+
+[ext_resource type="Script" uid="uid://0gwonig4qo0s" path="res://Herb/HerbData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+herb_id = "gui_zhi"
+herb_name = "桂枝"
+nature = "温"
+taste = "辛,甘"
+meridians = "表,心,肺"
