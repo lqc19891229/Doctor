@@ -1,14 +1,11 @@
-[gd_resource type="Resource" script_class="NpcData" load_steps=3 format=3 uid="uid://dpec6nbvomqry"]
+[gd_resource type="Resource" script_class="NpcData" format=3 uid="uid://dpec6nbvomqry"]
 
-[ext_resource type="Resource" uid="uid://cgw12ike3wo7u" path="res://Disease/data/风寒表实证.tres" id="1_3v6an"]
+[ext_resource type="Resource" uid="uid://cx27w6fan8m4s" path="res://Disease/data/测试脉象.tres" id="1_3v6an"]
 [ext_resource type="Script" uid="uid://cgp57bles5qo1" path="res://Npc/NpcData.gd" id="1_6wmuf"]
 
 [resource]
 script = ExtResource("1_6wmuf")
 npc_id = "001"
 npc_name = "李翘辰"
-gender = "男"
-age = 20
 disease = ExtResource("1_3v6an")
-is_treated = false
 metadata/_custom_type_script = "uid://cgp57bles5qo1"

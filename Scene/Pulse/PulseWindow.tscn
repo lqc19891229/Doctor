@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://b24f211e0acte"]
+
+[ext_resource type="Script" uid="uid://cs8dpone7jush" path="res://Scene/Pulse/PulseWindowUI.gd.gd" id="1_in46w"]
+[ext_resource type="Script" uid="uid://ckajxgh63gyoe" path="res://Scene/Pulse/PulsePanel.gd" id="2_js3rb"]
+[ext_resource type="Script" uid="uid://cqs7cn5g00f7v" path="res://Scene/Pulse/PulseDrawer.gd" id="3_js3rb"]
+
+[node name="PulseWindow" type="Window" unique_id=50916568]
+oversampling_override = 1.0
+title = "脉诊"
+position = Vector2i(0, 36)
+size = Vector2i(1600, 1000)
+script = ExtResource("1_in46w")
+
+[node name="PulsePanel" type="Panel" parent="." unique_id=1797286107]
+clip_contents = true
+custom_minimum_size = Vector2(0, 300)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+script = ExtResource("2_js3rb")
+
+[node name="PulsePanelLayout" type="HBoxContainer" parent="PulsePanel" unique_id=2105484611]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RightPulseButtonRow" type="VBoxContainer" parent="PulsePanel/PulsePanelLayout" unique_id=155759891]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Float" type="Label" parent="PulsePanel/PulsePanelLayout/RightPulseButtonRow" unique_id=137155217]
+layout_mode = 2
+size_flags_vertical = 3
+text = "浮脉"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightChiButton" type="Button" parent="PulsePanel/PulsePanelLayout/RightPulseButtonRow" unique_id=843132411]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "右尺"
+
+[node name="RightGuanButton" type="Button" parent="PulsePanel/PulsePanelLayout/RightPulseButtonRow" unique_id=1568958377]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "右关"
+
+[node name="RightCunButton" type="Button" parent="PulsePanel/PulsePanelLayout/RightPulseButtonRow" unique_id=2112730087]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "右寸"
+
+[node name="PulseDrawer" type="Control" parent="PulsePanel/PulsePanelLayout" unique_id=372551311]
+custom_minimum_size = Vector2(800, 400)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+script = ExtResource("3_js3rb")
+
+[node name="LeftPulseButtonRow" type="VBoxContainer" parent="PulsePanel/PulsePanelLayout" unique_id=1370137091]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Float" type="Label" parent="PulsePanel/PulsePanelLayout/LeftPulseButtonRow" unique_id=1265374699]
+layout_mode = 2
+size_flags_vertical = 3
+text = "浮脉"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftChiButton" type="Button" parent="PulsePanel/PulsePanelLayout/LeftPulseButtonRow" unique_id=1342892433]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "左尺"
+
+[node name="LeftGuanButton" type="Button" parent="PulsePanel/PulsePanelLayout/LeftPulseButtonRow" unique_id=1321525240]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "左关"
+
+[node name="LeftCunButton" type="Button" parent="PulsePanel/PulsePanelLayout/LeftPulseButtonRow" unique_id=903992620]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "左寸"

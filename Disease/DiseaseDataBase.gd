@@ -24,7 +24,7 @@ extends Node
 ## =========================================================
 
 ## 疾病资源所在目录
-@export var disease_data_path: String = "res://disease/data/"
+@export var disease_data_path: String = "res://Disease/data/"
 
 
 ## =========================================================

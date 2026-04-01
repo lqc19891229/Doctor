@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://c1kldxjoeyc78"]
+
+[ext_resource type="Script" uid="uid://dd4y12yn0ilkd" path="res://Scene/Prescription/PrescriptionWindowUI.gd" id="1_e60oy"]
+
+[node name="PrescriptionWindow" type="Window" unique_id=901784337]
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+size = Vector2i(1920, 700)
+script = ExtResource("1_e60oy")
+
+[node name="PrescriptionLayout" type="VBoxContainer" parent="." unique_id=1762507914]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="HerbSelectRow" type="HBoxContainer" parent="PrescriptionLayout" unique_id=590644925]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="HerbList" type="GridContainer" parent="PrescriptionLayout/HerbSelectRow" unique_id=444528469]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 4
+
+[node name="HerbEditColumn" type="VBoxContainer" parent="PrescriptionLayout/HerbSelectRow" unique_id=1629682234]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+
+[node name="AmountInput" type="LineEdit" parent="PrescriptionLayout/HerbSelectRow/HerbEditColumn" unique_id=1911344790]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="UnitOption" type="OptionButton" parent="PrescriptionLayout/HerbSelectRow/HerbEditColumn" unique_id=528436743]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AddHerbButton" type="Button" parent="PrescriptionLayout/HerbSelectRow/HerbEditColumn" unique_id=2114550272]
+layout_mode = 2
+size_flags_vertical = 3
+text = "加入"
+
+[node name="PrescriptionView" type="VBoxContainer" parent="PrescriptionLayout" unique_id=1663844928]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PrescriptionTitle" type="Label" parent="PrescriptionLayout/PrescriptionView" unique_id=1429007476]
+layout_mode = 2
+size_flags_vertical = 1
+text = "当前处方"
+
+[node name="RoleContainer" type="HBoxContainer" parent="PrescriptionLayout/PrescriptionView" unique_id=377783294]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="JunPanel" type="Panel" parent="PrescriptionLayout/PrescriptionView/RoleContainer" unique_id=691344502]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel" unique_id=156482431]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="JunTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel/VBoxContainer" unique_id=135647991]
+layout_mode = 2
+text = "君"
+
+[node name="JunList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel/VBoxContainer" unique_id=931144293]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ChenPanel" type="Panel" parent="PrescriptionLayout/PrescriptionView/RoleContainer" unique_id=847712501]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ChenPanel" unique_id=924826296]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="ChenTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ChenPanel/VBoxContainer" unique_id=1646800110]
+layout_mode = 2
+text = "臣"
+
+[node name="ChenList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ChenPanel/VBoxContainer" unique_id=622450247]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ZuoPanel" type="Panel" parent="PrescriptionLayout/PrescriptionView/RoleContainer" unique_id=264077269]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ZuoPanel" unique_id=315027111]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ZuoTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ZuoPanel/VBoxContainer" unique_id=356262114]
+layout_mode = 2
+text = "佐"
+
+[node name="ZuoList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ZuoPanel/VBoxContainer" unique_id=97672710]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ShiPanel" type="Panel" parent="PrescriptionLayout/PrescriptionView/RoleContainer" unique_id=1331325757]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel" unique_id=1826330251]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShiTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel/VBoxContainer" unique_id=351366563]
+layout_mode = 2
+text = "使"
+
+[node name="ShiList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel/VBoxContainer" unique_id=421256194]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PrescriptionActionRow" type="HBoxContainer" parent="PrescriptionLayout/PrescriptionView" unique_id=1571706413]
+layout_mode = 2
+
+[node name="ClearPrescriptionButton" type="Button" parent="PrescriptionLayout/PrescriptionView/PrescriptionActionRow" unique_id=1321691136]
+layout_mode = 2
+text = "清空处方"
+
+[node name="SubmitButton" type="Button" parent="PrescriptionLayout/PrescriptionView" unique_id=1983814487]
+layout_mode = 2
+text = "提交处方"

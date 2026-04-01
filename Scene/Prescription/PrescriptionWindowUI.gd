@@ -1,0 +1,670 @@
+extends Window
+class_name PrescriptionWindowUI
+
+# =========================================================
+# Prescription.gd
+# 开方窗口独立控制脚本
+#
+# 主要职责：
+# 1. 管理药材列表显示
+# 2. 管理君臣佐使区域切换
+# 3. 点击药材时加入当前处方
+# 4. 同一味药连续点击时自动累加
+# 5. 管理处方四区列表刷新
+# 6. 向 Clinic.gd 发出提示信息和提交请求
+#
+# 说明：
+# 1. info_label 不在本脚本内管理
+# 2. 本脚本通过 signal 把文本发回 Clinic.gd
+# 3. current_prescription / herb_database 由 Clinic.gd 注入
+# =========================================================
+
+
+# =========================================================
+# 对外信号
+# =========================================================
+
+# 请求 Clinic.gd 更新 info_label
+signal info_requested(text: String)
+
+# 请求 Clinic.gd 执行 submit_prescription()
+signal submit_requested()
+
+
+# =========================================================
+# 常量定义
+# =========================================================
+const ROLE_JUN := "君"
+const ROLE_CHEN := "臣"
+const ROLE_ZUO := "佐"
+const ROLE_SHI := "使"
+
+
+# =========================================================
+# 场景节点引用
+# 注意：
+# 这里默认你的 Prescription 场景根节点就是 Window，
+# 并且下面挂着 PrescriptionLayout
+# =========================================================
+
+# ---------- 药材选择 ----------
+@onready var prescription_layout: Control = $PrescriptionLayout
+@onready var herb_list: GridContainer = $PrescriptionLayout/HerbSelectRow/HerbList
+@onready var amount_input: LineEdit = $PrescriptionLayout/HerbSelectRow/HerbEditColumn/AmountInput
+@onready var unit_option: OptionButton = $PrescriptionLayout/HerbSelectRow/HerbEditColumn/UnitOption
+@onready var add_herb_button: Button = $PrescriptionLayout/HerbSelectRow/HerbEditColumn/AddHerbButton
+
+# ---------- 处方四区列表 ----------
+@onready var jun_list: ItemList = $PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel/VBoxContainer/JunList
+@onready var chen_list: ItemList = $PrescriptionLayout/PrescriptionView/RoleContainer/ChenPanel/VBoxContainer/ChenList
+@onready var zuo_list: ItemList = $PrescriptionLayout/PrescriptionView/RoleContainer/ZuoPanel/VBoxContainer/ZuoList
+@onready var shi_list: ItemList = $PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel/VBoxContainer/ShiList
+
+# ---------- 处方四区面板（用于高亮） ----------
+@onready var jun_panel: Control = $PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel
+@onready var chen_panel: Control = $PrescriptionLayout/PrescriptionView/RoleContainer/ChenPanel
+@onready var zuo_panel: Control = $PrescriptionLayout/PrescriptionView/RoleContainer/ZuoPanel
+@onready var shi_panel: Control = $PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel
+
+# ---------- 操作按钮 ----------
+@onready var clear_prescription_button: Button = $PrescriptionLayout/PrescriptionView/PrescriptionActionRow/ClearPrescriptionButton
+@onready var submit_button: Button = $PrescriptionLayout/PrescriptionView/SubmitButton
+
+
+# =========================================================
+# 外部注入数据（由 Clinic.gd 传入）
+# =========================================================
+
+# 药材数据库
+var herb_database = null
+
+# 当前处方对象（Prescription 实例）
+var current_prescription = null
+
+
+# =========================================================
+# 运行时状态
+# =========================================================
+
+# 当前选中的药材ID
+var selected_herb_id: String = ""
+
+# 当前选中的药材按钮
+var selected_herb_button: Button = null
+
+# 当前选中的配伍区域
+var current_selected_role: String = ROLE_JUN
+
+
+# =========================================================
+# 生命周期
+# =========================================================
+func _ready() -> void:
+	_setup_unit_option()
+	_connect_signals()
+	_set_selected_role(ROLE_JUN)
+
+# =========================================================
+# 对外初始化接口
+# 由 Clinic.gd 调用
+#
+# herb_db:
+#   HerbDataBase 节点
+#
+# prescription:
+#   当前共用的 Prescription 实例
+# =========================================================
+func setup(herb_db, prescription) -> void:
+	herb_database = herb_db
+	current_prescription = prescription
+
+	selected_herb_id = ""
+	selected_herb_button = null
+	_set_selected_role(ROLE_JUN)	
+
+	_refresh_herb_list()
+	_refresh_prescription_list()
+
+
+# =========================================================
+# 初始化：单位下拉
+# =========================================================
+func _setup_unit_option() -> void:
+	if unit_option == null:
+		return
+
+	unit_option.clear()
+	unit_option.add_item("分")
+	unit_option.add_item("钱")
+	unit_option.add_item("两")
+	unit_option.add_item("斤")
+	unit_option.select(1)
+
+
+# =========================================================
+# 初始化：信号连接
+# =========================================================
+func _connect_signals() -> void:
+	_safe_connect_pressed(add_herb_button, _on_add_herb_button_pressed)	
+	_safe_connect_pressed(clear_prescription_button, _on_clear_prescription_button_pressed)
+	_safe_connect_pressed(submit_button, _on_submit_button_pressed)
+
+	if close_requested != null and not close_requested.is_connected(_on_close_requested):
+		close_requested.connect(_on_close_requested)
+
+	_safe_connect_item_selected(jun_list, _on_jun_list_item_selected)
+	_safe_connect_item_selected(chen_list, _on_chen_list_item_selected)
+	_safe_connect_item_selected(zuo_list, _on_zuo_list_item_selected)
+	_safe_connect_item_selected(shi_list, _on_shi_list_item_selected)
+
+	_safe_connect_item_clicked(jun_list, _on_jun_list_item_clicked)
+	_safe_connect_item_clicked(chen_list, _on_chen_list_item_clicked)
+	_safe_connect_item_clicked(zuo_list, _on_zuo_list_item_clicked)
+	_safe_connect_item_clicked(shi_list, _on_shi_list_item_clicked)
+
+	_safe_connect_gui_input(jun_list, _on_jun_list_gui_input)
+	_safe_connect_gui_input(chen_list, _on_chen_list_gui_input)
+	_safe_connect_gui_input(zuo_list, _on_zuo_list_gui_input)
+	_safe_connect_gui_input(shi_list, _on_shi_list_gui_input)
+
+
+func _safe_connect_pressed(button: BaseButton, callable_fn: Callable) -> void:
+	if button != null and not button.pressed.is_connected(callable_fn):
+		button.pressed.connect(callable_fn)
+
+
+func _safe_connect_item_selected(list_node: ItemList, callable_fn: Callable) -> void:
+	if list_node != null and not list_node.item_selected.is_connected(callable_fn):
+		list_node.item_selected.connect(callable_fn)
+
+
+func _safe_connect_item_clicked(list_node: ItemList, callable_fn: Callable) -> void:
+	if list_node != null and not list_node.item_clicked.is_connected(callable_fn):
+		list_node.item_clicked.connect(callable_fn)
+
+
+func _safe_connect_gui_input(control_node: Control, callable_fn: Callable) -> void:
+	if control_node != null and not control_node.gui_input.is_connected(callable_fn):
+		control_node.gui_input.connect(callable_fn)
+
+
+# =========================================================
+# 当前区域设置 / 高亮
+# =========================================================
+func _set_selected_role(role_name: String) -> void:
+	current_selected_role = role_name
+	_refresh_role_highlight()
+
+
+func _refresh_role_highlight() -> void:
+	var normal_color := Color(0.35, 0.35, 0.35, 1.0)
+	var selected_color := Color(0.95, 0.85, 0.45, 1.0)
+
+	if jun_panel != null:
+		jun_panel.modulate = normal_color
+	if chen_panel != null:
+		chen_panel.modulate = normal_color
+	if zuo_panel != null:
+		zuo_panel.modulate = normal_color
+	if shi_panel != null:
+		shi_panel.modulate = normal_color
+
+	match current_selected_role:
+		ROLE_JUN:
+			if jun_panel != null:
+				jun_panel.modulate = selected_color
+		ROLE_CHEN:
+			if chen_panel != null:
+				chen_panel.modulate = selected_color
+		ROLE_ZUO:
+			if zuo_panel != null:
+				zuo_panel.modulate = selected_color
+		ROLE_SHI:
+			if shi_panel != null:
+				shi_panel.modulate = selected_color
+
+
+# =========================================================
+# 获取当前选中的单位 key
+# =========================================================
+func _get_selected_unit_key() -> String:
+	if unit_option == null:
+		return "qian"
+
+	match unit_option.selected:
+		0:
+			return "fen"
+		1:
+			return "qian"
+		2:
+			return "liang"
+		3:
+			return "jin"
+		_:
+			return "qian"
+
+
+# =========================================================
+# 药材列表刷新
+# GridContainer 版本
+# 一行多个药材按钮，满了自动换行
+# =========================================================
+func _refresh_herb_list() -> void:
+	if herb_list == null:
+		return
+
+	# 清空旧按钮
+	for child in herb_list.get_children():
+		child.queue_free()
+
+	selected_herb_id = ""
+	selected_herb_button = null
+
+	if herb_database == null:
+		emit_signal("info_requested", "药材数据库未初始化")
+		return
+
+	var herbs = herb_database.get_all_herbs()
+	for herb in herbs:
+		if herb == null:
+			continue
+
+		var herb_button := Button.new()
+		herb_button.text = herb.herb_name
+		herb_button.custom_minimum_size = Vector2(120, 44)
+		herb_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		herb_button.focus_mode = Control.FOCUS_NONE
+
+		# 保存 herb_id，后面点击时直接读取
+		herb_button.set_meta("herb_id", herb.herb_id)
+
+		# 初始未选中样式
+		_set_herb_button_selected_style(herb_button, false)
+
+		# 点击事件
+		herb_button.pressed.connect(_on_herb_grid_button_pressed.bind(herb_button))
+
+		herb_list.add_child(herb_button)
+
+
+# =========================================================
+# 点击药材按钮
+# 规则：
+# 1. 点击一次，按当前 UnitOption 加入“1个单位”
+# 2. 同一味药再次点击时，按底层“分”累加，避免换单位时出错
+# =========================================================
+func _on_herb_grid_button_pressed(herb_button: Button) -> void:
+	if herb_button == null:
+		return
+
+	if current_prescription == null:
+		emit_signal("info_requested", "当前处方未初始化")
+		return
+
+	# 取消上一个高亮
+	if selected_herb_button != null and is_instance_valid(selected_herb_button):
+		_set_herb_button_selected_style(selected_herb_button, false)
+
+	# 更新当前选中
+	selected_herb_button = herb_button
+	selected_herb_id = str(herb_button.get_meta("herb_id"))
+
+	# 当前按钮高亮
+	_set_herb_button_selected_style(selected_herb_button, true)
+
+	# 每次点击固定加 1 个当前单位
+	var add_amount := 1.0
+	var add_unit := _get_selected_unit_key()
+
+	# 先看当前角色区域里是否已有这味药
+	var exist_item := _find_prescription_item_in_role(current_selected_role, selected_herb_id)
+
+	# 已存在：按“分”累加
+	if not exist_item.is_empty():
+		var old_amount: float = float(exist_item.get("amount", 0.0))
+		var old_unit: String = str(exist_item.get("unit", "qian"))
+
+		var old_total_fen := HerbUnit.to_fen(old_amount, old_unit)
+		var add_total_fen := HerbUnit.to_fen(add_amount, add_unit)
+		var new_total_fen := old_total_fen + add_total_fen
+
+		var new_amount := HerbUnit.from_fen(new_total_fen, add_unit)
+
+		var ok_update := set_prescription_herb_amount(selected_herb_id, new_amount, add_unit)
+		if not ok_update:
+			emit_signal("info_requested", "累加药材失败：%s" % herb_button.text)
+			return
+
+		emit_signal("info_requested", "已加入%s区：%s，当前%s" % [
+			current_selected_role,
+			herb_button.text,
+			HerbUnit.format_amount(new_amount, add_unit)
+		])
+		return
+
+	# 不存在：首次加入
+	var ok_add := add_herb_by_id(selected_herb_id, add_amount, add_unit)
+	if not ok_add:
+		emit_signal("info_requested", "加入药材失败：%s" % herb_button.text)
+		return
+
+	emit_signal("info_requested", "已加入%s区：%s %s" % [
+		current_selected_role,
+		herb_button.text,
+		HerbUnit.format_amount(add_amount, add_unit)
+	])
+
+
+# =========================================================
+# 设置药材按钮选中样式
+# =========================================================
+func _set_herb_button_selected_style(herb_button: Button, is_selected: bool) -> void:
+	if herb_button == null:
+		return
+
+	if is_selected:
+		herb_button.modulate = Color(1.0, 0.95, 0.65, 1.0)
+	else:
+		herb_button.modulate = Color(1.0, 1.0, 1.0, 1.0)
+
+
+# =========================================================
+# 处方操作
+# =========================================================
+func add_herb_by_id(herb_id: String, amount: float, unit: String = "qian") -> bool:
+	if herb_database == null:
+		push_warning("PrescriptionWindowUI.add_herb_by_id: herb_database 未初始化")
+		return false
+
+	var herb = herb_database.get_herb_by_id(herb_id)
+	if herb == null:
+		push_warning("PrescriptionWindowUI.add_herb_by_id: 未找到药材 -> " + herb_id)
+		return false
+
+	return add_herb_to_prescription(herb, amount, unit)
+
+
+func add_herb_to_prescription(herb, amount: float, unit: String = "qian") -> bool:
+	if herb == null:
+		push_warning("PrescriptionWindowUI.add_herb_to_prescription: herb 为 null")
+		return false
+
+	if current_prescription == null:
+		push_warning("PrescriptionWindowUI.add_herb_to_prescription: current_prescription 为 null")
+		return false
+
+	var ok = current_prescription.add_herb(herb, amount, unit, current_selected_role)
+
+	if ok:
+		_refresh_prescription_list()
+	else:
+		push_warning("加入药材失败：%s %s %s" % [herb.herb_name, amount, unit])
+
+	return ok
+
+
+func set_prescription_herb_amount(herb_id: String, amount: float, unit: String) -> bool:
+	if current_prescription == null:
+		return false
+
+	var ok = current_prescription.set_herb_amount_and_unit(herb_id, amount, unit)
+
+	if ok:
+		_refresh_prescription_list()
+
+	return ok
+
+
+func remove_herb_from_prescription(herb_id: String) -> void:
+	if current_prescription == null:
+		return
+
+	current_prescription.remove_herb(herb_id)
+	_refresh_prescription_list()
+
+
+func clear_current_prescription() -> void:
+	if current_prescription == null:
+		return
+
+	current_prescription.clear()
+	_refresh_prescription_list()
+
+
+# =========================================================
+# 处方四区刷新
+# =========================================================
+func _refresh_prescription_list() -> void:
+	if current_prescription == null:
+		return
+
+	if jun_list != null:
+		jun_list.clear()
+	if chen_list != null:
+		chen_list.clear()
+	if zuo_list != null:
+		zuo_list.clear()
+	if shi_list != null:
+		shi_list.clear()
+
+	_fill_role_list(jun_list, current_prescription.get_herbs_by_role(ROLE_JUN))
+	_fill_role_list(chen_list, current_prescription.get_herbs_by_role(ROLE_CHEN))
+	_fill_role_list(zuo_list, current_prescription.get_herbs_by_role(ROLE_ZUO))
+	_fill_role_list(shi_list, current_prescription.get_herbs_by_role(ROLE_SHI))
+
+	_refresh_role_highlight()
+
+
+func _fill_role_list(list_node: ItemList, herb_items: Array[Dictionary]) -> void:
+	if list_node == null:
+		return
+
+	for item in herb_items:
+		var herb_name: String = item.get("herb_name", "")
+		var herb_id: String = item.get("herb_id", "")
+		var amount: float = float(item.get("amount", 0.0))
+		var unit: String = item.get("unit", "")
+
+		if herb_id == "":
+			continue
+
+		var text := "%s  %s" % [herb_name, HerbUnit.format_amount(amount, unit)]
+		list_node.add_item(text)
+
+		var index := list_node.item_count - 1
+		list_node.set_item_metadata(index, herb_id)
+
+
+# =========================================================
+# 处方区辅助
+# =========================================================
+func _get_list_by_role(role_name: String) -> ItemList:
+	match role_name:
+		ROLE_JUN:
+			return jun_list
+		ROLE_CHEN:
+			return chen_list
+		ROLE_ZUO:
+			return zuo_list
+		ROLE_SHI:
+			return shi_list
+		_:
+			return jun_list
+
+
+func _get_selected_herb_id_from_list(list_node: ItemList) -> String:
+	if list_node == null:
+		return ""
+
+	var selected := list_node.get_selected_items()
+	if selected.is_empty():
+		return ""
+
+	var index: int = selected[0]
+	return list_node.get_item_metadata(index) as String
+
+
+func _get_selected_prescription_herb_id() -> String:
+	# 先从当前高亮区域取
+	var primary_list := _get_list_by_role(current_selected_role)
+	var herb_id := _get_selected_herb_id_from_list(primary_list)
+	if herb_id != "":
+		return herb_id
+
+	# 当前区域没选中，再遍历全部区域
+	for role_name in [ROLE_JUN, ROLE_CHEN, ROLE_ZUO, ROLE_SHI]:
+		var list_node := _get_list_by_role(role_name)
+		herb_id = _get_selected_herb_id_from_list(list_node)
+		if herb_id != "":
+			return herb_id
+
+	return ""
+
+
+# =========================================================
+# 在指定角色区域中查找某味药材
+# 找到返回对应 Dictionary
+# 找不到返回 {}
+# =========================================================
+func _find_prescription_item_in_role(role_name: String, herb_id: String) -> Dictionary:
+	if current_prescription == null:
+		return {}
+
+	var herb_items: Array[Dictionary] = current_prescription.get_herbs_by_role(role_name)
+
+	for item in herb_items:
+		if str(item.get("herb_id", "")) == herb_id:
+			return item
+
+	return {}
+
+
+# =========================================================
+# UI按钮事件
+# =========================================================
+func _on_add_herb_button_pressed() -> void:
+	# 如果你已经完全改成“点药材按钮直接加”，
+	# 这里可以保留兼容，也可以后面把 AddHerbButton 隐藏掉
+
+	if selected_herb_id == "":
+		emit_signal("info_requested", "请先选择一味药材")
+		return
+
+	var amount_text := amount_input.text.strip_edges()
+	if amount_text == "":
+		emit_signal("info_requested", "请输入剂量")
+		return
+
+	var amount := amount_text.to_float()
+	if amount <= 0.0:
+		emit_signal("info_requested", "剂量必须大于 0")
+		return
+
+	var unit := _get_selected_unit_key()
+	var ok := add_herb_by_id(selected_herb_id, amount, unit)
+
+	if not ok:
+		emit_signal("info_requested", "加入药材失败：%s" % selected_herb_id)
+		return
+
+	emit_signal("info_requested", "已加入%s区：%s %s" % [
+		current_selected_role,
+		selected_herb_id,
+		HerbUnit.format_amount(amount, unit)
+	])
+
+func _on_clear_prescription_button_pressed() -> void:
+	clear_current_prescription()
+	emit_signal("info_requested", "当前处方已清空")
+
+
+func _on_submit_button_pressed() -> void:
+	emit_signal("submit_requested")
+
+
+# =========================================================
+# 四区列表选中事件
+# =========================================================
+func _on_jun_list_item_selected(_index: int) -> void:
+	_set_selected_role(ROLE_JUN)
+
+
+func _on_chen_list_item_selected(_index: int) -> void:
+	_set_selected_role(ROLE_CHEN)
+
+
+func _on_zuo_list_item_selected(_index: int) -> void:
+	_set_selected_role(ROLE_ZUO)
+
+
+func _on_shi_list_item_selected(_index: int) -> void:
+	_set_selected_role(ROLE_SHI)
+
+
+func _remove_clicked_role_item(role_name: String, list_node: ItemList, index: int, mouse_button_index: int) -> void:
+	if mouse_button_index != MOUSE_BUTTON_LEFT:
+		return
+
+	if list_node == null:
+		return
+
+	if index < 0 or index >= list_node.item_count:
+		return
+
+	_set_selected_role(role_name)
+
+	var herb_id := str(list_node.get_item_metadata(index))
+	if herb_id == "":
+		emit_signal("info_requested", "未找到要移除的药材")
+		return
+
+	var herb_name := list_node.get_item_text(index).split("  ")[0]
+	remove_herb_from_prescription(herb_id)
+	emit_signal("info_requested", "已移除%s区药材：%s" % [role_name, herb_name])
+
+
+func _on_jun_list_item_clicked(index: int, _at_position: Vector2, mouse_button_index: int) -> void:
+	_remove_clicked_role_item(ROLE_JUN, jun_list, index, mouse_button_index)
+
+
+func _on_chen_list_item_clicked(index: int, _at_position: Vector2, mouse_button_index: int) -> void:
+	_remove_clicked_role_item(ROLE_CHEN, chen_list, index, mouse_button_index)
+
+
+func _on_zuo_list_item_clicked(index: int, _at_position: Vector2, mouse_button_index: int) -> void:
+	_remove_clicked_role_item(ROLE_ZUO, zuo_list, index, mouse_button_index)
+
+
+func _on_shi_list_item_clicked(index: int, _at_position: Vector2, mouse_button_index: int) -> void:
+	_remove_clicked_role_item(ROLE_SHI, shi_list, index, mouse_button_index)
+
+
+# =========================================================
+# 点击空白时也切换当前区域
+# =========================================================
+func _on_jun_list_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_set_selected_role(ROLE_JUN)
+
+
+func _on_chen_list_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_set_selected_role(ROLE_CHEN)
+
+
+func _on_zuo_list_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_set_selected_role(ROLE_ZUO)
+
+
+func _on_shi_list_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_set_selected_role(ROLE_SHI)
+
+
+# =========================================================
+# 窗口关闭
+# 这里只负责隐藏自己，不处理 Clinic 的 info_label
+# =========================================================
+func _on_close_requested() -> void:
+	hide()
