@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://brf2blpetnvs1"]
 
 [ext_resource type="Script" uid="uid://d3fc1n20xbhxf" path="res://Scene/Clinic/Clinic.gd" id="1_y7fei"]
-[ext_resource type="Script" uid="uid://cse2gud2bttup" path="res://Npc/NpcManager.gd" id="2_l04vw"]
-[ext_resource type="Script" uid="uid://botxi4gauhtuh" path="res://Herb/HerbDataBase.gd" id="3_436d3"]
-[ext_resource type="Script" uid="uid://bu22qb68brdh" path="res://Formula/FormulaDataBase.gd" id="4_las05"]
+[ext_resource type="Script" uid="uid://cse2gud2bttup" path="res://System/NpcManager.gd" id="2_l04vw"]
 [ext_resource type="PackedScene" uid="uid://c1kldxjoeyc78" path="res://Scene/Prescription/PrescriptionWindow.tscn" id="5_h552d"]
 [ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="6_k4yeq"]
 
@@ -21,12 +19,6 @@ script = ExtResource("1_y7fei")
 [node name="NpcManager" type="Node" parent="." unique_id=1143092364]
 script = ExtResource("2_l04vw")
 
-[node name="HerbDataBase" type="Node" parent="." unique_id=1051564161]
-script = ExtResource("3_436d3")
-
-[node name="FormulaDataBase" type="Node" parent="." unique_id=1883359923]
-script = ExtResource("4_las05")
-
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=744765107]
 layout_mode = 1
 anchors_preset = 15
@@ -34,6 +26,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TopBar" type="HBoxContainer" parent="VBoxContainer" unique_id=1682440384]
+layout_mode = 2
+
+[node name="DayLabel" type="Label" parent="VBoxContainer/TopBar" unique_id=1631137196]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "第1天"
 
 [node name="DiagnosisPanel" type="Panel" parent="VBoxContainer" unique_id=944464422]
 layout_mode = 2
@@ -78,6 +79,10 @@ text = "把脉"
 layout_mode = 2
 text = "开方"
 
+[node name="EndTodayButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow" unique_id=808354826]
+layout_mode = 2
+text = "结束当天"
+
 [node name="PrescriptionWindow" parent="." unique_id=901784337 instance=ExtResource("5_h552d")]
 visible = false
 
@@ -87,3 +92,4 @@ visible = false
 [connection signal="pressed" from="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/PrevButton" to="." method="_on_prev_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/SpawnNpcButton" to="." method="_on_spawn_npc_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/EndTodayButton" to="." method="_on_end_today_pressed"]

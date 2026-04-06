@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b24f211e0acte"]
 
-[ext_resource type="Script" uid="uid://cs8dpone7jush" path="res://Scene/Pulse/PulseWindowUI.gd.gd" id="1_in46w"]
+[ext_resource type="Script" uid="uid://cs8dpone7jush" path="res://Scene/Pulse/PulseWindowUI.gd" id="1_in46w"]
 [ext_resource type="Script" uid="uid://ckajxgh63gyoe" path="res://Scene/Pulse/PulsePanel.gd" id="2_js3rb"]
 [ext_resource type="Script" uid="uid://cqs7cn5g00f7v" path="res://Scene/Pulse/PulseDrawer.gd" id="3_js3rb"]
 

@@ -15,13 +15,17 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Doctor"
-run/main_scene="uid://brf2blpetnvs1"
+run/main_scene="uid://5kw50n6ckjh0"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
 [autoload]
 
-FormulaDB="*res://Formula/FormulaDataBase.gd"
+FormulaDB="*uid://bu22qb68brdh"
 DiseaseDB="*uid://eqa2shxsxbe"
+Unlock="*uid://c1wsj77ed03q7"
+DiseaseBookDB="*uid://b8nx7e8bkaaot"
+BookDB="*uid://ckaw5q24k0cfb"
+HerbDB="*uid://botxi4gauhtuh"
 
 [display]
 

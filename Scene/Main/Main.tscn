@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://5kw50n6ckjh0"]
+
+[ext_resource type="Script" uid="uid://ceraw4tmmepvk" path="res://Scene/Main/Main.gd" id="1_o28sc"]
+
+[node name="Main" type="Node" unique_id=899515328]
+script = ExtResource("1_o28sc")
+
+[node name="CurrentSceneRoot" type="Node" parent="." unique_id=381807020]

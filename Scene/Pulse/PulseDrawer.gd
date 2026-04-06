@@ -117,15 +117,9 @@ func _draw_single_region() -> void:
 	# 单脉象模式下，显示当前区域
 	_draw_region_wave(target_rect, current_region_id)
 
-	# 可选：画中心线
+	# 画四等分辅助线（1/4、1/2、3/4）
 	if show_center_line:
-		var center_y := target_rect.position.y + target_rect.size.y * 0.5
-		draw_line(
-			Vector2(target_rect.position.x, center_y),
-			Vector2(target_rect.position.x + target_rect.size.x, center_y),
-			Color(1, 1, 1, 0.08),
-			1.0
-		)
+		_draw_quarter_guides(target_rect)
 
 
 # =========================================================
@@ -148,18 +142,47 @@ func _draw_group_regions() -> void:
 		# 绘制这一块自己的脉象
 		_draw_region_wave(target_rect, group_region_ids[i])
 
-		# 中线
+		# 画每个区块内部的四等分辅助线（1/4、1/2、3/4）
 		if show_center_line:
-			var center_y := target_rect.position.y + target_rect.size.y * 0.5
-			draw_line(
-				Vector2(target_rect.position.x, center_y),
-				Vector2(target_rect.position.x + target_rect.size.x, center_y),
-				Color(1, 1, 1, 0.08),
-				1.0
-			)
+			_draw_quarter_guides(target_rect)
 
 		# 外框分隔线
 		draw_rect(target_rect, Color(1, 1, 1, 0.08), false, 1.0)
+
+
+# =========================================================
+# 在指定矩形内绘制四等分辅助线
+# 作用：把当前矩形区域按高度平均分成 4 份
+#       因此需要绘制 3 条水平线，位置分别在 1/4、1/2、3/4
+# =========================================================
+func _draw_quarter_guides(target_rect: Rect2) -> void:
+	var guide_color := Color(1, 1, 1, 0.08)
+	var h := target_rect.size.y
+
+	var y1 := target_rect.position.y + h * 0.25
+	var y2 := target_rect.position.y + h * 0.50
+	var y3 := target_rect.position.y + h * 0.75
+
+	draw_line(
+		Vector2(target_rect.position.x, y1),
+		Vector2(target_rect.position.x + target_rect.size.x, y1),
+		guide_color,
+		1.0
+	)
+
+	draw_line(
+		Vector2(target_rect.position.x, y2),
+		Vector2(target_rect.position.x + target_rect.size.x, y2),
+		guide_color,
+		1.0
+	)
+
+	draw_line(
+		Vector2(target_rect.position.x, y3),
+		Vector2(target_rect.position.x + target_rect.size.x, y3),
+		guide_color,
+		1.0
+	)
 
 
 # =========================================================

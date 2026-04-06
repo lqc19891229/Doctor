@@ -268,7 +268,11 @@ func _refresh_herb_list() -> void:
 	for herb in herbs:
 		if herb == null:
 			continue
-
+			
+		# ❗只显示已解锁药材
+		if not Unlock.is_herb_unlocked(herb.herb_id):
+			continue
+			
 		var herb_button := Button.new()
 		herb_button.text = herb.herb_name
 		herb_button.custom_minimum_size = Vector2(120, 44)
@@ -285,7 +289,6 @@ func _refresh_herb_list() -> void:
 		herb_button.pressed.connect(_on_herb_grid_button_pressed.bind(herb_button))
 
 		herb_list.add_child(herb_button)
-
 
 # =========================================================
 # 点击药材按钮

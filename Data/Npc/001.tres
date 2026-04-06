@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NpcData" format=3 uid="uid://dpec6nbvomqry"]
+
+[ext_resource type="Resource" uid="uid://cx27w6fan8m4s" path="res://Disease/data/test.tres" id="1_3v6an"]
+[ext_resource type="Script" uid="uid://cgp57bles5qo1" path="res://Npc/NpcData.gd" id="1_6wmuf"]
+
+[resource]
+script = ExtResource("1_6wmuf")
+npc_id = "001"
+npc_name = "李翘辰"
+disease = ExtResource("1_3v6an")
+metadata/_custom_type_script = "uid://cgp57bles5qo1"

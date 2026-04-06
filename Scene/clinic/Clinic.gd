@@ -2,7 +2,7 @@ extends Control
 
 # =========================================================
 # Clinic.gd
-# 诊室主控制脚本（瘦身版）
+# 诊室主控制脚本（接入 Main 流程版）
 #
 # 主要职责：
 # 1. 管理当前病人数据刷新
@@ -10,7 +10,16 @@ extends Control
 # 3. 管理开方窗口的打开/关闭
 # 4. 持有当前处方数据，并接收 PrescriptionWindow 的信号
 # 5. 提交处方并与标准方比较
+# 6. 向 Main 发出“当天接诊结束”信号
 # =========================================================
+
+
+# =========================================================
+# 对外信号
+# =========================================================
+
+# 通知 Main：Clinic 当天流程结束
+signal clinic_finished
 
 
 # =========================================================
@@ -33,15 +42,16 @@ const DEFAULT_DISPLAY_REGION := "浮脉"
 @onready var info_label: Label = $VBoxContainer/DiagnosisPanel/DiagnosisLayout/InfoLabel
 
 # ---------- 数据库 / 管理器 ----------
-@onready var herb_database = $HerbDataBase
-@onready var formula_database = $FormulaDataBase
+@onready var herb_database = HerbDB
+@onready var formula_database = FormulaDB
 @onready var npc_manager = $NpcManager
 
 # ---------- 开方窗口 ----------
 @onready var open_prescription_window_button: Button = $VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/OpenPrescriptionWindowButton
 @onready var prescription_window: PrescriptionWindowUI = $PrescriptionWindow
 
-
+# ---------- 结束当天 ----------
+@onready var end_today_button: Button = $VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/EndTodayButton
 # =========================================================
 # 运行时状态
 # =========================================================
@@ -101,6 +111,7 @@ func _setup_prescription_window() -> void:
 func _connect_signals() -> void:
 	_safe_connect_pressed(open_prescription_window_button, _on_open_prescription_window_button_pressed)
 	_safe_connect_pressed(open_pulse_window_button, _on_open_pulse_window_button_pressed)
+	_safe_connect_pressed(end_today_button, _on_end_today_pressed)
 
 	# ---------- 脉象窗口信号 ----------
 	if pulse_window != null:
@@ -186,7 +197,6 @@ func refresh_current_patient() -> void:
 
 # =========================================================
 # 显示单个脉象区域
-# 具体区域映射和 Drawer 操作已交给 PulseWindowUI
 # =========================================================
 func show_region(display_region_name: String) -> void:
 	if not _ensure_current_npc_valid(true):
@@ -219,7 +229,6 @@ func show_region(display_region_name: String) -> void:
 
 # =========================================================
 # 显示整只手的四宫格脉象
-# 具体区域映射和 Drawer 操作已交给 PulseWindowUI
 # =========================================================
 func show_hand_group(hand_side: String) -> void:
 	if not _ensure_current_npc_valid(true):
@@ -250,15 +259,8 @@ func show_hand_group(hand_side: String) -> void:
 
 # =========================================================
 # 键盘把脉
-# 右手：Q / A / Z
-# 左手：U / J / M
-# 三键同时按下时显示整手
 # =========================================================
 func _update_pulse_keyboard_display() -> void:
-	# =========================================================
-	# 读取输入动作（按“脉位语义”命名，而不是按键名命名）
-	# 这样以后即使改键位，也不用再改下面的显示逻辑
-	# =========================================================
 	var right_cun_pressed := Input.is_action_pressed("pulse_right_cun")
 	var right_guan_pressed := Input.is_action_pressed("pulse_right_guan")
 	var right_chi_pressed := Input.is_action_pressed("pulse_right_chi")
@@ -267,12 +269,6 @@ func _update_pulse_keyboard_display() -> void:
 	var left_guan_pressed := Input.is_action_pressed("pulse_left_guan")
 	var left_chi_pressed := Input.is_action_pressed("pulse_left_chi")
 
-	# =========================================================
-	# 生成本帧输入签名
-	# 作用：
-	# 1. 如果本帧按键状态和上一帧完全一样，就不重复刷新显示
-	# 2. 避免 _process() 每帧都重复调用 show_region()/show_hand_group()
-	# =========================================================
 	var signature := "%s%s%s|%s%s%s" % [
 		"1" if right_cun_pressed else "0",
 		"1" if right_guan_pressed else "0",
@@ -287,12 +283,6 @@ func _update_pulse_keyboard_display() -> void:
 
 	last_pulse_input_signature = signature
 
-	# =========================================================
-	# 统计当前按下数量
-	# 作用：
-	# 1. 只允许“单键”或“单手三键”
-	# 2. 其他混合按法一律视为无效输入
-	# =========================================================
 	var right_pressed_count := 0
 	var left_pressed_count := 0
 
@@ -312,9 +302,6 @@ func _update_pulse_keyboard_display() -> void:
 
 	var total_pressed_count := right_pressed_count + left_pressed_count
 
-	# =========================================================
-	# 优先级 1：单手三键 = 显示整只手
-	# =========================================================
 	if right_pressed_count == 3 and left_pressed_count == 0:
 		pulse_keyboard_override_active = true
 		show_hand_group("right")
@@ -325,9 +312,6 @@ func _update_pulse_keyboard_display() -> void:
 		show_hand_group("left")
 		return
 
-	# =========================================================
-	# 优先级 2：只按了一个键 = 显示对应单脉象
-	# =========================================================
 	if total_pressed_count == 1:
 		pulse_keyboard_override_active = true
 
@@ -355,14 +339,6 @@ func _update_pulse_keyboard_display() -> void:
 			show_region("左尺")
 			return
 
-	# =========================================================
-	# 其他情况：
-	# 例如：
-	# 1. 同时按了左右手的键
-	# 2. 按了两键但不是整手
-	# 3. 全部松开
-	# 都恢复到当前默认显示区域
-	# =========================================================
 	if pulse_keyboard_override_active:
 		pulse_keyboard_override_active = false
 		show_region(current_display_region_name)
@@ -375,7 +351,6 @@ func _reset_pulse_keyboard_state() -> void:
 
 # =========================================================
 # 清空脉象显示
-# 具体清空逻辑交给 PulseWindowUI
 # =========================================================
 func _clear_pulse() -> void:
 	if pulse_window != null:
@@ -412,9 +387,6 @@ func _get_current_disease_id() -> String:
 
 # =========================================================
 # 获取当前病人对应标准方
-# 优先级：
-# 1. recommended_formula_id
-# 2. 根据 disease_id 查找
 # =========================================================
 func _get_current_standard_formula() -> FormulaData:
 	if current_npc == null or current_npc.disease == null:
@@ -466,6 +438,17 @@ func submit_prescription() -> void:
 
 
 # =========================================================
+# 结束当天接诊
+# 作用：
+# 1. 告诉 Main：Clinic 已完成当前阶段
+# 2. 后面 Main 收到后可切到 Bookshelf / 夜晚流程
+# =========================================================
+func finish_clinic_for_today() -> void:
+	print("Clinic 发出 clinic_finished")
+	emit_signal("clinic_finished")
+
+
+# =========================================================
 # 调试函数
 # 正式版可删
 # =========================================================
@@ -493,7 +476,6 @@ func _on_spawn_npc_button_pressed() -> void:
 
 func _on_submit_button_pressed() -> void:
 	submit_prescription()
-
 
 # =========================================================
 # 脉象窗口
@@ -531,7 +513,6 @@ func _on_prescription_window_close_requested() -> void:
 
 # =========================================================
 # 接收 PrescriptionWindow 发回的提示信息
-# info_label 统一留在 Clinic.gd
 # =========================================================
 func _on_prescription_info_requested(text: String) -> void:
 	info_label.text = text
@@ -542,3 +523,17 @@ func _on_prescription_info_requested(text: String) -> void:
 # =========================================================
 func _on_prescription_submit_requested() -> void:
 	submit_prescription()
+
+
+func _on_end_today_pressed() -> void:
+	print("按钮被点击")
+	finish_clinic_for_today()
+
+# =========================================================
+# 设置当前天数（由 Main 调用）
+# =========================================================
+func set_day(day: int) -> void:
+	if has_node("VBoxContainer/TopBar/DayLabel"):
+		$VBoxContainer/TopBar/DayLabel.text = "第 %d 天" % day
+	else:
+		print("DayLabel 路径找不到")

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="BookData" format=3 uid="uid://dd2owmgcl30yj"]
+
+[ext_resource type="Script" uid="uid://cixamdh4e6ecy" path="res://System/Book/BookData.gd.gd" id="1_xh25k"]
+
+[resource]
+script = ExtResource("1_xh25k")
+book_name = "伤寒论"
+metadata/_custom_type_script = "uid://cixamdh4e6ecy"

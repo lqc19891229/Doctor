@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DiseaseData" format=3 uid="uid://cx27w6fan8m4s"]
+
+[ext_resource type="Script" uid="uid://dccfyx4mej452" path="res://Disease/DiseaseData.gd" id="1_ahowl"]
+
+[resource]
+script = ExtResource("1_ahowl")
+disease_id = "test"
+disease_name = "脉象测试"
+exterior_qi = 0.0
+exterior_blood = 0.0
+exterior_wet_dry = 0.1
+lung_qi = 150.0
+metadata/_custom_type_script = "uid://dccfyx4mej452"
