@@ -10,7 +10,8 @@ extends Control
 # 3. 管理开方窗口的打开/关闭
 # 4. 持有当前处方数据，并接收 PrescriptionWindow 的信号
 # 5. 提交处方并与标准方比较
-# 6. 向 Main 发出“当天接诊结束”信号
+# 6. 管理行医记考窗口的打开/关闭
+# 7. 向 Main 发出“当天接诊结束”信号
 # =========================================================
 
 
@@ -50,8 +51,17 @@ const DEFAULT_DISPLAY_REGION := "浮脉"
 @onready var open_prescription_window_button: Button = $VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/OpenPrescriptionWindowButton
 @onready var prescription_window: PrescriptionWindowUI = $PrescriptionWindow
 
+# ---------- 行医记考 ----------
+# 说明：
+# 1. 这里使用 get_node_or_null，避免场景还没接好时报错
+# 2. 按钮和窗口建议都挂在 NpcButtonRow 下，便于白天统一操作
+@onready var clinical_log_button: Button = find_child("Openclinical_logWindowButton", true, false) as Button
+@onready var clinical_log_window: ClinicalLogWindow = find_child("ClinicalLogWindow", true, false) as ClinicalLogWindow
+
 # ---------- 结束当天 ----------
 @onready var end_today_button: Button = $VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/EndTodayButton
+
+
 # =========================================================
 # 运行时状态
 # =========================================================
@@ -77,12 +87,16 @@ var pulse_keyboard_override_active: bool = false
 # 上一帧按键签名，用于避免每帧重复刷新
 var last_pulse_input_signature: String = ""
 
+# 当前天数（由 Main 注入）
+var current_day: int = 1
+
 
 # =========================================================
 # 生命周期
 # =========================================================
 func _ready() -> void:
 	_setup_prescription_window()
+	_setup_clinical_log_window()
 	_connect_signals()
 
 	refresh_clinic_view()
@@ -106,12 +120,28 @@ func _setup_prescription_window() -> void:
 
 
 # =========================================================
+# 初始化：行医记考窗口
+# =========================================================
+func _setup_clinical_log_window() -> void:
+	if clinical_log_window == null:
+		return
+
+	clinical_log_window.hide()
+
+	# 如果脚本里有 open_window/close_window/refresh_view，则后续直接调用
+	# 这里只做最基础的标题设置，避免未挂脚本时报错
+	if "title" in clinical_log_window:
+		clinical_log_window.title = "行医记考"
+
+
+# =========================================================
 # 初始化：信号连接
 # =========================================================
 func _connect_signals() -> void:
 	_safe_connect_pressed(open_prescription_window_button, _on_open_prescription_window_button_pressed)
 	_safe_connect_pressed(open_pulse_window_button, _on_open_pulse_window_button_pressed)
 	_safe_connect_pressed(end_today_button, _on_end_today_pressed)
+	_safe_connect_pressed(clinical_log_button, _on_clinical_log_button_pressed)
 
 	# ---------- 脉象窗口信号 ----------
 	if pulse_window != null:
@@ -158,6 +188,10 @@ func refresh_clinic_view() -> void:
 	# 病人切换后，如果处方窗口已经存在，也同步刷新它
 	if prescription_window != null:
 		prescription_window.setup(herb_database, current_prescription)
+
+	# 病人切换后，如果行医记考窗口存在，也顺手刷新一次内容
+	if clinical_log_window != null and clinical_log_window.has_method("refresh_view"):
+		clinical_log_window.refresh_view()
 
 
 # =========================================================
@@ -377,6 +411,37 @@ func close_prescription_window() -> void:
 
 
 # =========================================================
+# 行医记考窗口开关
+# =========================================================
+func open_clinical_log_window() -> void:
+	if clinical_log_window == null:
+		info_label.text = "行医记考窗口不存在"
+		print("ClinicalLogWindow 没找到，请检查节点名字和挂载位置")
+		return
+
+	print("找到 ClinicalLogWindow：", clinical_log_window)
+
+	if clinical_log_window.has_method("refresh_view"):
+		clinical_log_window.refresh_view()
+
+	if clinical_log_window.has_method("open_window"):
+		clinical_log_window.open_window()
+	else:
+		clinical_log_window.show()
+		clinical_log_window.grab_focus()
+
+
+func close_clinical_log_window() -> void:
+	if clinical_log_window == null:
+		return
+
+	if clinical_log_window.has_method("close_window"):
+		clinical_log_window.close_window()
+	else:
+		clinical_log_window.hide()
+
+
+# =========================================================
 # 获取当前病人的 disease_id
 # =========================================================
 func _get_current_disease_id() -> String:
@@ -477,6 +542,7 @@ func _on_spawn_npc_button_pressed() -> void:
 func _on_submit_button_pressed() -> void:
 	submit_prescription()
 
+
 # =========================================================
 # 脉象窗口
 # =========================================================
@@ -512,6 +578,13 @@ func _on_prescription_window_close_requested() -> void:
 
 
 # =========================================================
+# 行医记考窗口
+# =========================================================
+func _on_clinical_log_button_pressed() -> void:
+	open_clinical_log_window()
+
+
+# =========================================================
 # 接收 PrescriptionWindow 发回的提示信息
 # =========================================================
 func _on_prescription_info_requested(text: String) -> void:
@@ -529,10 +602,13 @@ func _on_end_today_pressed() -> void:
 	print("按钮被点击")
 	finish_clinic_for_today()
 
+
 # =========================================================
 # 设置当前天数（由 Main 调用）
 # =========================================================
 func set_day(day: int) -> void:
+	current_day = day
+
 	if has_node("VBoxContainer/TopBar/DayLabel"):
 		$VBoxContainer/TopBar/DayLabel.text = "第 %d 天" % day
 	else:

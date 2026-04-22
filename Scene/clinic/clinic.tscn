@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://brf2blpetnvs1"]
 
 [ext_resource type="Script" uid="uid://d3fc1n20xbhxf" path="res://Scene/Clinic/Clinic.gd" id="1_y7fei"]
-[ext_resource type="Script" uid="uid://cse2gud2bttup" path="res://System/NpcManager.gd" id="2_l04vw"]
+[ext_resource type="Script" uid="uid://cse2gud2bttup" path="res://System/Npc/NpcManager.gd" id="2_l04vw"]
 [ext_resource type="PackedScene" uid="uid://c1kldxjoeyc78" path="res://Scene/Prescription/PrescriptionWindow.tscn" id="5_h552d"]
+[ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/clinical_log/clinical_log_window.tscn" id="5_ruh48"]
 [ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="6_k4yeq"]
 
 [node name="Clinic" type="Control" unique_id=360139135]
@@ -79,6 +80,10 @@ text = "把脉"
 layout_mode = 2
 text = "开方"
 
+[node name="Openclinical_logWindowButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow" unique_id=1425448604]
+layout_mode = 2
+text = "行医记考"
+
 [node name="EndTodayButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow" unique_id=808354826]
 layout_mode = 2
 text = "结束当天"
@@ -87,6 +92,9 @@ text = "结束当天"
 visible = false
 
 [node name="PulseWindow" parent="." unique_id=50916568 instance=ExtResource("6_k4yeq")]
+visible = false
+
+[node name="ClinicalLogWindow" parent="." unique_id=1159353037 instance=ExtResource("5_ruh48")]
 visible = false
 
 [connection signal="pressed" from="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/PrevButton" to="." method="_on_prev_button_pressed"]

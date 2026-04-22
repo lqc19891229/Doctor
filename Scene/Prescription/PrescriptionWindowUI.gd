@@ -50,9 +50,7 @@ const ROLE_SHI := "使"
 # ---------- 药材选择 ----------
 @onready var prescription_layout: Control = $PrescriptionLayout
 @onready var herb_list: GridContainer = $PrescriptionLayout/HerbSelectRow/HerbList
-@onready var amount_input: LineEdit = $PrescriptionLayout/HerbSelectRow/HerbEditColumn/AmountInput
 @onready var unit_option: OptionButton = $PrescriptionLayout/HerbSelectRow/HerbEditColumn/UnitOption
-@onready var add_herb_button: Button = $PrescriptionLayout/HerbSelectRow/HerbEditColumn/AddHerbButton
 
 # ---------- 处方四区列表 ----------
 @onready var jun_list: ItemList = $PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel/VBoxContainer/JunList
@@ -67,8 +65,8 @@ const ROLE_SHI := "使"
 @onready var shi_panel: Control = $PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel
 
 # ---------- 操作按钮 ----------
-@onready var clear_prescription_button: Button = $PrescriptionLayout/PrescriptionView/PrescriptionActionRow/ClearPrescriptionButton
-@onready var submit_button: Button = $PrescriptionLayout/PrescriptionView/SubmitButton
+@onready var clear_prescription_button: Button = $PrescriptionLayout/HerbSelectRow/HerbEditColumn/ClearPrescriptionButton
+@onready var submit_button: Button = $PrescriptionLayout/HerbSelectRow/HerbEditColumn/SubmitButton
 
 
 # =========================================================
@@ -104,6 +102,7 @@ func _ready() -> void:
 	_connect_signals()
 	_set_selected_role(ROLE_JUN)
 
+
 # =========================================================
 # 对外初始化接口
 # 由 Clinic.gd 调用
@@ -120,7 +119,7 @@ func setup(herb_db, prescription) -> void:
 
 	selected_herb_id = ""
 	selected_herb_button = null
-	_set_selected_role(ROLE_JUN)	
+	_set_selected_role(ROLE_JUN)
 
 	_refresh_herb_list()
 	_refresh_prescription_list()
@@ -145,7 +144,6 @@ func _setup_unit_option() -> void:
 # 初始化：信号连接
 # =========================================================
 func _connect_signals() -> void:
-	_safe_connect_pressed(add_herb_button, _on_add_herb_button_pressed)	
 	_safe_connect_pressed(clear_prescription_button, _on_clear_prescription_button_pressed)
 	_safe_connect_pressed(submit_button, _on_submit_button_pressed)
 
@@ -268,16 +266,18 @@ func _refresh_herb_list() -> void:
 	for herb in herbs:
 		if herb == null:
 			continue
-			
+
 		# ❗只显示已解锁药材
 		if not Unlock.is_herb_unlocked(herb.herb_id):
 			continue
-			
+
 		var herb_button := Button.new()
 		herb_button.text = herb.herb_name
 		herb_button.custom_minimum_size = Vector2(120, 44)
 		herb_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		herb_button.focus_mode = Control.FOCUS_NONE
+		# 允许鼠标左右键输入事件透传到 gui_input
+		herb_button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
 
 		# 保存 herb_id，后面点击时直接读取
 		herb_button.set_meta("herb_id", herb.herb_id)
@@ -285,15 +285,18 @@ func _refresh_herb_list() -> void:
 		# 初始未选中样式
 		_set_herb_button_selected_style(herb_button, false)
 
-		# 点击事件
+		# 左键：增加一单位
 		herb_button.pressed.connect(_on_herb_grid_button_pressed.bind(herb_button))
+		# 右键：减少一单位
+		herb_button.gui_input.connect(_on_herb_grid_button_gui_input.bind(herb_button))
 
 		herb_list.add_child(herb_button)
+
 
 # =========================================================
 # 点击药材按钮
 # 规则：
-# 1. 点击一次，按当前 UnitOption 加入“1个单位”
+# 1. 左键点击一次，按当前 UnitOption 加入“1个单位”
 # 2. 同一味药再次点击时，按底层“分”累加，避免换单位时出错
 # =========================================================
 func _on_herb_grid_button_pressed(herb_button: Button) -> void:
@@ -356,6 +359,40 @@ func _on_herb_grid_button_pressed(herb_button: Button) -> void:
 		herb_button.text,
 		HerbUnit.format_amount(add_amount, add_unit)
 	])
+
+
+# =========================================================
+# 药材按钮右键事件
+# 规则：
+# 1. 右键下方药材按钮时，优先减少当前选中区域的一单位
+# 2. 如果当前区域没有该药材，则自动到其它区域里查找并减少
+# 3. 减到 0 或以下时，直接从处方中移除
+# =========================================================
+func _on_herb_grid_button_gui_input(event: InputEvent, herb_button: Button) -> void:
+	if herb_button == null:
+		return
+
+	if not (event is InputEventMouseButton):
+		return
+
+	var mouse_event := event as InputEventMouseButton
+	if not mouse_event.pressed:
+		return
+
+	if mouse_event.button_index != MOUSE_BUTTON_RIGHT:
+		return
+
+	# 阻止右键触发其它默认行为
+	herb_button.accept_event()
+
+	# 右键时也同步当前高亮药材按钮，便于视觉反馈
+	if selected_herb_button != null and is_instance_valid(selected_herb_button):
+		_set_herb_button_selected_style(selected_herb_button, false)
+	selected_herb_button = herb_button
+	selected_herb_id = str(herb_button.get_meta("herb_id"))
+	_set_herb_button_selected_style(selected_herb_button, true)
+
+	_decrease_herb_by_id(selected_herb_id, herb_button.text)
 
 
 # =========================================================
@@ -432,6 +469,65 @@ func clear_current_prescription() -> void:
 
 	current_prescription.clear()
 	_refresh_prescription_list()
+
+
+# =========================================================
+# 减少药材逻辑
+# =========================================================
+func _decrease_herb_by_id(herb_id: String, herb_name: String = "") -> void:
+	if current_prescription == null:
+		emit_signal("info_requested", "当前处方未初始化")
+		return
+
+	if herb_id == "":
+		emit_signal("info_requested", "未找到要减少的药材")
+		return
+
+	# 优先减少当前选中区域；若当前区域没有，再去其它区域里找
+	var target_role := current_selected_role
+	var target_item := _find_prescription_item_in_role(target_role, herb_id)
+
+	if target_item.is_empty():
+		for role_name in [ROLE_JUN, ROLE_CHEN, ROLE_ZUO, ROLE_SHI]:
+			if role_name == current_selected_role:
+				continue
+			target_item = _find_prescription_item_in_role(role_name, herb_id)
+			if not target_item.is_empty():
+				target_role = role_name
+				break
+
+	if target_item.is_empty():
+		emit_signal("info_requested", "该药材尚未加入处方：%s" % herb_name)
+		return
+
+	# 找到了实际所在区域后，同步当前选中区域高亮
+	_set_selected_role(target_role)
+
+	var old_amount: float = float(target_item.get("amount", 0.0))
+	var old_unit: String = str(target_item.get("unit", "qian"))
+	var decrease_unit := _get_selected_unit_key()
+	var old_total_fen := HerbUnit.to_fen(old_amount, old_unit)
+	var decrease_total_fen := HerbUnit.to_fen(1.0, decrease_unit)
+	var new_total_fen := old_total_fen - decrease_total_fen
+
+	# 减到 0 或以下，直接移除
+	if new_total_fen <= 0.0:
+		remove_herb_from_prescription(herb_id)
+		emit_signal("info_requested", "已移除%s区药材：%s" % [target_role, herb_name])
+		return
+
+	# 仍然大于 0，则保留并更新为当前单位显示
+	var new_amount := HerbUnit.from_fen(new_total_fen, decrease_unit)
+	var ok_update := set_prescription_herb_amount(herb_id, new_amount, decrease_unit)
+	if not ok_update:
+		emit_signal("info_requested", "减少药材失败：%s" % herb_name)
+		return
+
+	emit_signal("info_requested", "已减少%s区药材：%s，当前%s" % [
+		target_role,
+		herb_name,
+		HerbUnit.format_amount(new_amount, decrease_unit)
+	])
 
 
 # =========================================================
@@ -545,37 +641,6 @@ func _find_prescription_item_in_role(role_name: String, herb_id: String) -> Dict
 # =========================================================
 # UI按钮事件
 # =========================================================
-func _on_add_herb_button_pressed() -> void:
-	# 如果你已经完全改成“点药材按钮直接加”，
-	# 这里可以保留兼容，也可以后面把 AddHerbButton 隐藏掉
-
-	if selected_herb_id == "":
-		emit_signal("info_requested", "请先选择一味药材")
-		return
-
-	var amount_text := amount_input.text.strip_edges()
-	if amount_text == "":
-		emit_signal("info_requested", "请输入剂量")
-		return
-
-	var amount := amount_text.to_float()
-	if amount <= 0.0:
-		emit_signal("info_requested", "剂量必须大于 0")
-		return
-
-	var unit := _get_selected_unit_key()
-	var ok := add_herb_by_id(selected_herb_id, amount, unit)
-
-	if not ok:
-		emit_signal("info_requested", "加入药材失败：%s" % selected_herb_id)
-		return
-
-	emit_signal("info_requested", "已加入%s区：%s %s" % [
-		current_selected_role,
-		selected_herb_id,
-		HerbUnit.format_amount(amount, unit)
-	])
-
 func _on_clear_prescription_button_pressed() -> void:
 	clear_current_prescription()
 	emit_signal("info_requested", "当前处方已清空")
@@ -605,7 +670,7 @@ func _on_shi_list_item_selected(_index: int) -> void:
 
 
 func _remove_clicked_role_item(role_name: String, list_node: ItemList, index: int, mouse_button_index: int) -> void:
-	if mouse_button_index != MOUSE_BUTTON_LEFT:
+	if mouse_button_index != MOUSE_BUTTON_RIGHT:
 		return
 
 	if list_node == null:

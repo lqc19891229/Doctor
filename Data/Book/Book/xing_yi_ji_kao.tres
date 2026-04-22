@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ClinicalLogData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/Book/ClinicalLogData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+book_type = "clinical_log"
+book_id = "xing_yi_ji_kao"
+book_name = "行医记考"
+detail_text = ""
+author_name = ""
+sort_index = 0
+visible_by_default = true
+read_once = false
+allow_daytime_open = true

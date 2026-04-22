@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="FormulaBookData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/Book/FormulaBookData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+book_type = "formula"
+book_id = "yan_shi_ji_sheng_fang"
+book_name = "严氏济生方"
+detail_text = ""
+author_name = "严用和"
+sort_index = 4
+visible_by_default = true
+read_once = false
+allow_daytime_open = true
+unlock_entry_ids = Array[String]([])

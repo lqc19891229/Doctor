@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="DiseaseData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Disease/DiseaseData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+disease_id = "tan_mi_xin_qiao"
+disease_name = "痰迷心窍"
+recommended_formula_id = "di_tan_tang"
+exterior_qi = 100.0
+exterior_blood = 100.0
+exterior_cold_hot = 1.3
+exterior_wet_dry = 10.0
+heart_qi = 100.0
+heart_blood = 100.0
+heart_cold_hot = 1.3
+heart_wet_dry = 10.0
+liver_qi = 100.0
+liver_blood = 100.0
+liver_cold_hot = 1.3
+liver_wet_dry = 10.0
+spleen_qi = 100.0
+spleen_blood = 100.0
+spleen_cold_hot = 1.3
+spleen_wet_dry = 10.0
+lung_qi = 100.0
+lung_blood = 100.0
+lung_cold_hot = 1.3
+lung_wet_dry = 10.0
+kidney_yin_qi = 100.0
+kidney_yin_blood = 100.0
+kidney_yin_cold_hot = 1.3
+kidney_yin_wet_dry = 10.0
+kidney_yang_qi = 100.0
+kidney_yang_blood = 100.0
+kidney_yang_cold_hot = 1.3
+kidney_yang_wet_dry = 10.0

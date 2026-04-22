@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://rfnj1k2mnruh"]
+
+[ext_resource type="Script" uid="uid://bvc6jjyjfrq11" path="res://Scene/clinical_log/ClinicalLogWindow.gd" id="1_4dmlf"]
+
+[node name="ClinicalLogWindow" type="Window" unique_id=1159353037]
+oversampling_override = 1.0
+title = "行医记考"
+position = Vector2i(0, 36)
+size = Vector2i(1600, 1000)
+script = ExtResource("1_4dmlf")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1381153526]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1077201321]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=279005135]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TabContainer" type="TabContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=685977214]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="DiseasePage" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1471360721]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Left" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage" unique_id=770913058]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SearchBar" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Left" unique_id=1002975457]
+layout_mode = 2
+placeholder_text = "搜索疾病"
+
+[node name="DiseaseList" type="ItemList" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Left" unique_id=1658599805]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Right" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage" unique_id=505542607]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="DiseaseName" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right" unique_id=1843496594]
+layout_mode = 2
+text = "疾病名称"
+horizontal_alignment = 1
+
+[node name="DiseaseDetail" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right" unique_id=430855226]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "请选择左侧疾病条目"
+scroll_following = true
+
+[node name="FormulaPage" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1370928369]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Left" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage" unique_id=557561604]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SearchBar" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Left" unique_id=1437568058]
+layout_mode = 2
+placeholder_text = "搜索方剂"
+
+[node name="FormulaList" type="ItemList" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Left" unique_id=34641383]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Right" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage" unique_id=970681361]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="FormulaName" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right" unique_id=2141239894]
+layout_mode = 2
+text = "方剂名称"
+horizontal_alignment = 1
+
+[node name="FormulaDetail" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right" unique_id=1632150745]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "请选择左侧方剂条目"
+scroll_following = true
+
+[node name="HerbPage" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1129129444]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Left" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage" unique_id=881073121]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SearchBar" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Left" unique_id=889016072]
+layout_mode = 2
+placeholder_text = "搜索药材"
+
+[node name="HerbList" type="ItemList" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Left" unique_id=653784190]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Right" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage" unique_id=817449215]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="HerbName" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right" unique_id=2082325845]
+layout_mode = 2
+text = "药材名称"
+horizontal_alignment = 1
+
+[node name="HerbDetail" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right" unique_id=2001340007]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "请选择左侧药材条目"
+scroll_following = true

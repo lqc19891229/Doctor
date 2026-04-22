@@ -1,0 +1,72 @@
+[gd_resource type="Resource" script_class="FormulaData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Formula/FormulaIngredient.gd" id="1"]
+[ext_resource type="Script" path="res://System/Formula/FormulaData.gd" id="2"]
+[ext_resource type="Resource" path="res://Data/Herb/rou_gui.tres" id="herb_1"]
+[ext_resource type="Resource" path="res://Data/Herb/hui_xiang.tres" id="herb_2"]
+[ext_resource type="Resource" path="res://Data/Herb/dang_gui.tres" id="herb_3"]
+[ext_resource type="Resource" path="res://Data/Herb/gou_qi_zi.tres" id="herb_4"]
+[ext_resource type="Resource" path="res://Data/Herb/wu_yao.tres" id="herb_5"]
+[ext_resource type="Resource" path="res://Data/Herb/fu_ling.tres" id="herb_6"]
+[ext_resource type="Resource" path="res://Data/Herb/chen_xiang.tres" id="herb_7"]
+[ext_resource type="Resource" path="res://Data/Herb/sheng_jiang.tres" id="herb_8"]
+
+[sub_resource type="Resource" id="Ingredient_1"]
+script = ExtResource("1")
+herb = ExtResource("herb_1")
+amount = 1.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_2"]
+script = ExtResource("1")
+herb = ExtResource("herb_2")
+amount = 2.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_3"]
+script = ExtResource("1")
+herb = ExtResource("herb_3")
+amount = 2.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_4"]
+script = ExtResource("1")
+herb = ExtResource("herb_4")
+amount = 3.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_5"]
+script = ExtResource("1")
+herb = ExtResource("herb_5")
+amount = 2.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_6"]
+script = ExtResource("1")
+herb = ExtResource("herb_6")
+amount = 2.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_7"]
+script = ExtResource("1")
+herb = ExtResource("herb_7")
+amount = 1.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_8"]
+script = ExtResource("1")
+herb = ExtResource("herb_8")
+amount = 1.0
+unit = "qian"
+required = true
+
+[resource]
+script = ExtResource("2")
+formula_id = "nuan_gan_jian"
+formula_name = "暖肝煎"
+target_disease_id = "han_zhi_gan_mai"
+target_disease_name = "寒滞肝脉"
+jun_group = [SubResource("Ingredient_1"), SubResource("Ingredient_2")]
+chen_group = [SubResource("Ingredient_3"), SubResource("Ingredient_4")]
+zuo_group = [SubResource("Ingredient_5"), SubResource("Ingredient_6")]
+shi_group = [SubResource("Ingredient_7"), SubResource("Ingredient_8")]

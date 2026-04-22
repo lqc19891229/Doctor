@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HerbData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Herb/HerbData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+herb_id = "feng_mi"
+herb_name = "蜂蜜"
+nature = "平"
+taste = Array[String](["甘"])
+meridians = Array[String](["脾", "肺"])

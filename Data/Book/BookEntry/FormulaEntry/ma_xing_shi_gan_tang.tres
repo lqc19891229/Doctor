@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FormulaBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/FormulaBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "ma_xing_shi_gan_tang"
+book_id = "shang_han_lun"
+title = "麻杏石甘汤"
+detail_text = "正文测试文字"
+formula_id = "ma_xing_shi_gan_tang"
+required_herb_ids = Array[String](["ma_huang", "shi_gao", "xing_ren", "gan_cao"])

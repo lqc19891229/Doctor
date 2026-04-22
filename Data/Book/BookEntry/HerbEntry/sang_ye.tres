@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HerbBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/HerbBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "sang_ye"
+book_id = "shen_nong_bai_cao_jing"
+title = "桑叶"
+detail_text = "桑叶\n\n【气味】\n甘、苦，寒\n\n【毒性】\n无毒\n\n【归经】\n归肺、肝经\n\n【主治】\n疏散风热\n清肺润燥\n平抑肝阳\n清肝明目\n凉血止血\n\n【释名】\n子名椹\n时珍曰︰徐锴《说文解字》云︰桑，音若，东方自然神木之名，其字象形。桑乃蚕所食，异于东方自然之神木，故加木于桑下而别之。\n《典术》云︰桑乃箕星之精。\n\n【发明】\n颂曰︰桑叶可常服。神仙服食方︰以四月桑茂盛时采叶。又十月霜后三分，二分已落时，一分在者，名神仙叶，即采取，与前叶同阴干捣末，丸、散任服，或煎水代茶饮之。又霜后叶煮汤，淋渫手足，去风痹殊胜。又微炙和桑衣煎服，治痢及金疮诸损伤，止血。\n\n震亨曰︰经霜桑叶研末，米饮服，止盗汗。\n\n时珍曰︰桑叶乃手、足阳明之药，汁煎代茗，能止消渴。"
+herb_id = "sang_ye"

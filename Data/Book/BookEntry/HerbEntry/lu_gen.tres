@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HerbBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/HerbBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "lu_gen"
+book_id = "shen_nong_bai_cao_jing"
+title = "芦根"
+detail_text = "芦根\n\n【气味】\n甘，寒\n\n【毒性】\n无毒\n\n【归经】\n归肺、胃经\n\n【主治】\n清热泻火\n生津止渴\n除烦止呕\n利尿\n\n【释名】\n苇（音伟）、葭（音加），花名\n\n时珍曰︰按毛苌\n《诗疏》云︰苇之初生曰葭；未秀曰芦；长成曰苇。苇者，伟大也。芦者，色卢黑也。葭者，嘉美也。\n\n【发明】\n时珍曰︰按《雷公炮炙论》序云︰益食加觞，须煎芦、朴。注云︰用逆水芦根并浓朴二味等分，煎汤服。盖芦根甘能益胃，寒能降火故也。"
+herb_id = "lu_gen"

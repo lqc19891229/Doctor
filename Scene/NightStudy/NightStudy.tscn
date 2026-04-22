@@ -4,25 +4,93 @@
 
 [node name="NightStudy" type="Control" unique_id=1990398157]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ikniv")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=257490240]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1641044593]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="InfoLabel" type="Label" parent="VBoxContainer" unique_id=580677906]
+[node name="VBoxRoot" type="VBoxContainer" parent="MarginContainer" unique_id=646348250]
 layout_mode = 2
-text = "夜晚读书"
 
-[node name="ButtonRow" type="HBoxContainer" parent="VBoxContainer" unique_id=607324720]
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxRoot" unique_id=583857876]
+layout_mode = 2
+text = "夜读"
+
+[node name="ContentRow" type="HBoxContainer" parent="MarginContainer/VBoxRoot" unique_id=745767981]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BookPanel" type="PanelContainer" parent="MarginContainer/VBoxRoot/ContentRow" unique_id=1617596319]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BookVBox" type="VBoxContainer" parent="MarginContainer/VBoxRoot/ContentRow/BookPanel" unique_id=1835840276]
 layout_mode = 2
 
-[node name="ReadButton" type="Button" parent="VBoxContainer/ButtonRow" unique_id=658028749]
+[node name="BookTitle" type="Label" parent="MarginContainer/VBoxRoot/ContentRow/BookPanel/BookVBox" unique_id=2120342913]
+layout_mode = 2
+text = "医书列表"
+
+[node name="BookList" type="ItemList" parent="MarginContainer/VBoxRoot/ContentRow/BookPanel/BookVBox" unique_id=1764411966]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EntryPanel" type="PanelContainer" parent="MarginContainer/VBoxRoot/ContentRow" unique_id=1951439416]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EntryVBox" type="VBoxContainer" parent="MarginContainer/VBoxRoot/ContentRow/EntryPanel" unique_id=1660901098]
+layout_mode = 2
+
+[node name="EntryTitle" type="Label" parent="MarginContainer/VBoxRoot/ContentRow/EntryPanel/EntryVBox" unique_id=2049629444]
+layout_mode = 2
+text = "条目列表"
+
+[node name="EntryList" type="ItemList" parent="MarginContainer/VBoxRoot/ContentRow/EntryPanel/EntryVBox" unique_id=397650445]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DetailPanel" type="PanelContainer" parent="MarginContainer/VBoxRoot/ContentRow" unique_id=508696297]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_stretch_ratio = 5.0
+
+[node name="DetailVBox" type="VBoxContainer" parent="MarginContainer/VBoxRoot/ContentRow/DetailPanel" unique_id=580791287]
+layout_mode = 2
+
+[node name="DetailTitle" type="Label" parent="MarginContainer/VBoxRoot/ContentRow/DetailPanel/DetailVBox" unique_id=1369937330]
+layout_mode = 2
+text = "正文内容"
+
+[node name="DetailText" type="RichTextLabel" parent="MarginContainer/VBoxRoot/ContentRow/DetailPanel/DetailVBox" unique_id=403378030]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InfoLabel" type="Label" parent="MarginContainer/VBoxRoot" unique_id=352818861]
+layout_mode = 2
+text = "请选择今晚要阅读的医书。"
+
+[node name="ButtonRow" type="HBoxContainer" parent="MarginContainer/VBoxRoot" unique_id=1689106686]
+layout_mode = 2
+
+[node name="ReadButton" type="Button" parent="MarginContainer/VBoxRoot/ButtonRow" unique_id=658028749]
 layout_mode = 2
 text = "读书"
 
-[node name="NextDayButton" type="Button" parent="VBoxContainer/ButtonRow" unique_id=2136836206]
+[node name="NextDayButton" type="Button" parent="MarginContainer/VBoxRoot/ButtonRow" unique_id=2136836206]
 layout_mode = 2
 text = "进入明天"

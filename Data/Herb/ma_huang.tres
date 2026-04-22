@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="HerbData" format=3 uid="uid://dtha3uqu06xc5"]
+[gd_resource type="Resource" script_class="HerbData" load_steps=2 format=3]
 
-[ext_resource type="Script" uid="uid://0gwonig4qo0s" path="res://Herb/HerbData.gd" id="1"]
+[ext_resource type="Script" path="res://System/Herb/HerbData.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
 herb_id = "ma_huang"
 herb_name = "麻黄"
 nature = "温"
-taste = "辛,苦"
-meridians = "表,肺"
+taste = Array[String](["辛", "苦"])
+meridians = Array[String](["肺", "肾"])

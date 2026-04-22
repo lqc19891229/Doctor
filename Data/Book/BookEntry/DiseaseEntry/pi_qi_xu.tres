@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DiseaseBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/DiseaseBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "pi_qi_xu"
+book_id = "huang_di_nei_jing"
+title = "脾气虚"
+detail_text = "正文测试文字"
+disease_id = "pi_qi_xu"
+prerequisite_entry_ids = Array[String](["si_jun_zi_tang"])

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FormulaBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/FormulaBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "huang_lian_wen_dan_tang"
+book_id = "bei_ji_qian_jin_yao_fang"
+title = "黄连温胆汤"
+detail_text = "正文测试文字"
+formula_id = "huang_lian_wen_dan_tang"
+required_herb_ids = Array[String](["huang_lian", "ban_xia", "zhu_ru", "chen_pi", "zhi_shi", "fu_ling", "gan_cao", "sheng_jiang", "da_zao"])

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HerbBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/HerbBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "li_pi"
+book_id = "shen_nong_bai_cao_jing"
+title = "梨皮"
+detail_text = ""
+herb_id = "li_pi"

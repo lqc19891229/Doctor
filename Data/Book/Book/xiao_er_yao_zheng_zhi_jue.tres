@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="FormulaBookData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/Book/FormulaBookData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+book_type = "formula"
+book_id = "xiao_er_yao_zheng_zhi_jue"
+book_name = "小儿药证直决"
+detail_text = ""
+author_name = "钱乙"
+sort_index = 4
+visible_by_default = true
+read_once = false
+allow_daytime_open = true
+unlock_entry_ids = Array[String]([])

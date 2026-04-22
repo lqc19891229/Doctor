@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="FormulaData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Formula/FormulaIngredient.gd" id="1"]
+[ext_resource type="Script" path="res://System/Formula/FormulaData.gd" id="2"]
+[ext_resource type="Resource" path="res://Data/Herb/gui_zhi.tres" id="herb_1"]
+[ext_resource type="Resource" path="res://Data/Herb/gan_cao.tres" id="herb_2"]
+
+[sub_resource type="Resource" id="Ingredient_1"]
+script = ExtResource("1")
+herb = ExtResource("herb_1")
+amount = 4.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_2"]
+script = ExtResource("1")
+herb = ExtResource("herb_2")
+amount = 2.0
+unit = "qian"
+required = true
+
+[resource]
+script = ExtResource("2")
+formula_id = "gui_zhi_gan_cao_tang"
+formula_name = "桂枝甘草汤"
+target_disease_id = "xin_yang_xu"
+target_disease_name = "心阳虚"
+jun_group = [SubResource("Ingredient_1")]
+chen_group = [SubResource("Ingredient_2")]
+zuo_group = []
+shi_group = []

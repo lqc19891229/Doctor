@@ -22,10 +22,10 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 
 FormulaDB="*uid://bu22qb68brdh"
 DiseaseDB="*uid://eqa2shxsxbe"
-Unlock="*uid://c1wsj77ed03q7"
-DiseaseBookDB="*uid://b8nx7e8bkaaot"
+BookEntryDB="*uid://b8nx7e8bkaaot"
 BookDB="*uid://ckaw5q24k0cfb"
 HerbDB="*uid://botxi4gauhtuh"
+Unlock="*uid://c66vpcevgornl"
 
 [display]
 

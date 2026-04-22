@@ -30,13 +30,7 @@ func _ready() -> void:
 
 # 初始化开局数据
 func _init_game_data() -> void:
-	# 临时测试解锁
-	Unlock.unlock_herb("ma_huang")
-	Unlock.unlock_herb("gui_zhi")
-
 	print("Main 初始化完成，当前第 %d 天" % current_day)
-	print("麻黄是否解锁：", Unlock.is_herb_unlocked("ma_huang"))
-	print("桂枝是否解锁：", Unlock.is_herb_unlocked("gui_zhi"))
 
 # 进入 Clinic
 func _enter_clinic() -> void:
