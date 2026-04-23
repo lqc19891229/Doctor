@@ -7,5 +7,5 @@ script = ExtResource("1")
 entry_id = "zi_wan"
 book_id = "shen_nong_bai_cao_jing"
 title = "紫菀"
-detail_text = ""
+detail_text = "紫菀\n\n【气味】\n味辛、苦，性温\n\n【毒性】\n无毒\n\n【归经】\n归肺经\n\n【主治】\n润肺下气\n化痰止咳\n\n【释名】\n青菀（《别录》）、紫蒨（《别录》）、返魂草（《纲目》）、夜牵牛\n\n时珍曰︰其根色紫而柔宛，故名许慎《说文》作茈菀。《斗门方》谓之返魂草。\n\n【发明】"
 herb_id = "zi_wan"

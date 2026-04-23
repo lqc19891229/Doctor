@@ -9,4 +9,4 @@ book_id = "wen_bing_tiao_bian"
 title = "银翘散"
 detail_text = "正文测试文字"
 formula_id = "yin_qiao_san"
-required_herb_ids = Array[String](["jin_yin_hua", "lian_qiao", "niu_bang", "jing_jie", "bo_he", "dou_chi", "jie_geng", "lu_gen", "zhu_ye", "gan_cao"])
+required_herb_ids = Array[String](["jin_yin_hua", "lian_qiao", "niu_bang_zi", "jing_jie", "bo_he", "dan_dou_chi", "jie_geng", "lu_gen", "zhu_ye", "gan_cao"])

@@ -5,7 +5,7 @@
 [ext_resource type="Resource" path="res://Data/Herb/sheng_di_huang.tres" id="herb_1"]
 [ext_resource type="Resource" path="res://Data/Herb/gou_qi_zi.tres" id="herb_2"]
 [ext_resource type="Resource" path="res://Data/Herb/sha_shen.tres" id="herb_3"]
-[ext_resource type="Resource" path="res://Data/Herb/mai_dong.tres" id="herb_4"]
+[ext_resource type="Resource" path="res://Data/Herb/mai_men_dong.tres" id="herb_4"]
 [ext_resource type="Resource" path="res://Data/Herb/dang_gui.tres" id="herb_5"]
 [ext_resource type="Resource" path="res://Data/Herb/chuan_lian_zi.tres" id="herb_6"]
 

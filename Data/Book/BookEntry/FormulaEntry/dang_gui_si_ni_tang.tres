@@ -9,4 +9,4 @@ book_id = "shang_han_lun"
 title = "当归四逆汤"
 detail_text = "正文测试文字"
 formula_id = "dang_gui_si_ni_tang"
-required_herb_ids = Array[String](["dang_gui", "gui_zhi", "shao_yao", "xi_xin", "tong_cao", "gan_cao", "da_zao"])
+required_herb_ids = Array[String](["dang_gui", "gui_zhi", "shao_yao", "xi_xin", "mu_tong", "gan_cao", "da_zao"])

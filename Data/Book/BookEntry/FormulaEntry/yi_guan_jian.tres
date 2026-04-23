@@ -9,4 +9,4 @@ book_id = "liu_zhou_yi_hua"
 title = "一贯煎"
 detail_text = "正文测试文字"
 formula_id = "yi_guan_jian"
-required_herb_ids = Array[String](["sheng_di_huang", "gou_qi_zi", "sha_shen", "mai_dong", "dang_gui", "chuan_lian_zi"])
+required_herb_ids = Array[String](["sheng_di_huang", "gou_qi_zi", "sha_shen", "mai_men_dong", "dang_gui", "chuan_lian_zi"])

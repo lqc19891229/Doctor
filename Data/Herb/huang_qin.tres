@@ -8,4 +8,4 @@ herb_id = "huang_qin"
 herb_name = "黄芩"
 nature = "寒"
 taste = Array[String](["苦"])
-meridians = Array[String](["心", "肝", "脾", "肺", "肾"])
+meridians = Array[String](["肝", "脾", "肺"])

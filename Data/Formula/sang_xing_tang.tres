@@ -6,8 +6,8 @@
 [ext_resource type="Resource" path="res://Data/Herb/xing_ren.tres" id="herb_2"]
 [ext_resource type="Resource" path="res://Data/Herb/sha_shen.tres" id="herb_3"]
 [ext_resource type="Resource" path="res://Data/Herb/bei_mu.tres" id="herb_4"]
-[ext_resource type="Resource" path="res://Data/Herb/dou_chi.tres" id="herb_5"]
-[ext_resource type="Resource" path="res://Data/Herb/zhi_pi.tres" id="herb_6"]
+[ext_resource type="Resource" path="res://Data/Herb/dan_dou_chi.tres" id="herb_5"]
+[ext_resource type="Resource" path="res://Data/Herb/zhi_zi.tres" id="herb_6"]
 [ext_resource type="Resource" path="res://Data/Herb/li_pi.tres" id="herb_7"]
 
 [sub_resource type="Resource" id="Ingredient_1"]

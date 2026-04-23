@@ -6,7 +6,7 @@
 [ext_resource type="Resource" path="res://Data/Herb/gui_zhi.tres" id="herb_2"]
 [ext_resource type="Resource" path="res://Data/Herb/shao_yao.tres" id="herb_3"]
 [ext_resource type="Resource" path="res://Data/Herb/xi_xin.tres" id="herb_4"]
-[ext_resource type="Resource" path="res://Data/Herb/tong_cao.tres" id="herb_5"]
+[ext_resource type="Resource" path="res://Data/Herb/mu_tong.tres" id="herb_5"]
 [ext_resource type="Resource" path="res://Data/Herb/gan_cao.tres" id="herb_6"]
 [ext_resource type="Resource" path="res://Data/Herb/da_zao.tres" id="herb_7"]
 

@@ -9,4 +9,4 @@ book_id = "jin_gui_yao_lue"
 title = "天王补心丹"
 detail_text = "正文测试文字"
 formula_id = "tian_wang_bu_xin_dan"
-required_herb_ids = Array[String](["sheng_di_huang", "tian_dong", "mai_dong", "suan_zao_ren", "bai_zi_ren", "dang_gui", "ren_shen", "fu_ling", "xuan_shen", "dan_shen", "yuan_zhi", "wu_wei_zi", "jie_geng"])
+required_herb_ids = Array[String](["sheng_di_huang", "tian_men_dong", "mai_men_dong", "suan_zao_ren", "bai_zi_ren", "dang_gui", "ren_shen", "fu_ling", "xuan_shen", "dan_shen", "yuan_zhi", "wu_wei_zi", "jie_geng"])
