@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1")
 entry_id = "gan_qi_yu_jie"
-book_id = "huang_di_nei_jing"
+book_id = "zhu_bing_yuan_hou_lun"
 title = "肝气郁结"
-detail_text = "正文测试文字"
+detail_text = "肝气郁结\n\n【病机】\n情志不遂，肝失疏泄，气机郁滞、经脉不畅。\n\n【症状】\n胸胁、乳房、少腹胀痛走窜；情绪抑郁、易怒、善太息；咽部异物感（梅核气）、胸闷嗳气；女子月经不调、痛经；\n\n【脉象】\n左关（肝胆）：波峰高\n\n【标准方】\n柴胡疏肝散"
 disease_id = "gan_qi_yu_jie"
 prerequisite_entry_ids = Array[String](["chai_hu_shu_gan_san"])

@@ -99,6 +99,7 @@ required = true
 script = ExtResource("2")
 formula_id = "huo_xiang_zheng_qi_san"
 formula_name = "藿香正气散"
+detail_text = "正文测试文字"
 target_disease_id = "shi_sheng_kun_pi"
 target_disease_name = "湿盛困脾"
 jun_group = [SubResource("Ingredient_1")]

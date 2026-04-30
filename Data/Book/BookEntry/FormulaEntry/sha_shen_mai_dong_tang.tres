@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "sha_shen_mai_dong_tang"
 book_id = "wen_bing_tiao_bian"
 title = "沙参麦冬汤"
-detail_text = "正文测试文字"
+detail_text = "沙参麦冬汤\n\n【出处】\n《温病条辩》\n\n【功效】\n清养肺胃，生津润燥\n\n【主治】\n肺阴虚\n\n【组成】\n君：沙参 三钱，麦门冬 三钱\n臣：玉竹 二钱，天花粉 一钱五分\n佐：扁豆 一钱五分，桑叶 一钱五分\n使：甘草 一钱\n\n【配伍】\n沙参、麦冬：养阴润肺、生津止渴，直补肺阴。\n玉竹、天花粉：增强养阴生津、润燥止咳，清虚热、润肺燥。\n桑叶：轻清宣肺、疏散虚热；\n扁豆：健脾养胃，培土生金，助生津之源。\n甘草：调和诸药，益气和中。"
 formula_id = "sha_shen_mai_dong_tang"
 required_herb_ids = Array[String](["sha_shen", "mai_men_dong", "yu_zhu", "tian_hua_fen", "bian_dou", "sang_ye", "gan_cao"])

@@ -49,7 +49,13 @@ const ROLE_SHI := "使"
 
 # ---------- 药材选择 ----------
 @onready var prescription_layout: Control = $PrescriptionLayout
-@onready var herb_list: GridContainer = $PrescriptionLayout/HerbSelectRow/HerbList
+
+# 药材搜索框
+@onready var herb_search: LineEdit = $PrescriptionLayout/HerbSelectRow/HerbSearchColumn/HerbSearch
+
+# 药材按钮列表
+@onready var herb_list: GridContainer = $PrescriptionLayout/HerbSelectRow/HerbSearchColumn/HerbListScroll/HerbList
+
 @onready var unit_option: OptionButton = $PrescriptionLayout/HerbSelectRow/HerbEditColumn/UnitOption
 
 # ---------- 处方四区列表 ----------
@@ -92,6 +98,10 @@ var selected_herb_button: Button = null
 
 # 当前选中的配伍区域
 var current_selected_role: String = ROLE_JUN
+
+# 当前药材搜索关键词
+# 用于过滤 HerbList 中显示的药材按钮
+var herb_search_keyword: String = ""
 
 
 # =========================================================
@@ -146,6 +156,10 @@ func _setup_unit_option() -> void:
 func _connect_signals() -> void:
 	_safe_connect_pressed(clear_prescription_button, _on_clear_prescription_button_pressed)
 	_safe_connect_pressed(submit_button, _on_submit_button_pressed)
+
+	# 搜索框文字变化时，刷新药材列表
+	if herb_search != null and not herb_search.text_changed.is_connected(_on_herb_search_text_changed):
+		herb_search.text_changed.connect(_on_herb_search_text_changed)
 
 	if close_requested != null and not close_requested.is_connected(_on_close_requested):
 		close_requested.connect(_on_close_requested)
@@ -267,8 +281,12 @@ func _refresh_herb_list() -> void:
 		if herb == null:
 			continue
 
-		# ❗只显示已解锁药材
+		# 只显示已解锁药材
 		if not Unlock.is_herb_unlocked(herb.herb_id):
+			continue
+
+		# 只显示搜索匹配的药材
+		if not _is_herb_match_search(herb):
 			continue
 
 		var herb_button := Button.new()
@@ -291,6 +309,36 @@ func _refresh_herb_list() -> void:
 		herb_button.gui_input.connect(_on_herb_grid_button_gui_input.bind(herb_button))
 
 		herb_list.add_child(herb_button)
+
+
+
+# =========================================================
+# 药材搜索
+# =========================================================
+func _on_herb_search_text_changed(new_text: String) -> void:
+	# 去掉前后空格，避免玩家误输入空格导致搜不到
+	# 转小写后可以匹配英文 herb_id
+	herb_search_keyword = new_text.strip_edges().to_lower()
+
+	# 搜索内容变化后，重新刷新药材按钮列表
+	_refresh_herb_list()
+
+
+func _is_herb_match_search(herb) -> bool:
+	# 没输入关键词时，显示全部已解锁药材
+	if herb_search_keyword == "":
+		return true
+
+	if herb == null:
+		return false
+
+	# 匹配中文药材名，例如“桂枝”
+	var herb_name := str(herb.herb_name).to_lower()
+
+	# 匹配药材 id，例如“gui_zhi”
+	var herb_id := str(herb.herb_id).to_lower()
+
+	return herb_name.contains(herb_search_keyword) or herb_id.contains(herb_search_keyword)
 
 
 # =========================================================

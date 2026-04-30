@@ -43,6 +43,7 @@ required = true
 script = ExtResource("2")
 formula_id = "bai_hu_gui_zhi_tang"
 formula_name = "白虎桂枝汤"
+detail_text = "白虎桂枝汤\n\n【出处】\n《金匮要略》\n\n【功效】\n清热通络，和营祛风\n\n【主治】\n热痹\n\n【组成】\n君：石膏 二两\n臣：知母 六钱\n佐：桂枝 三钱，粳米 五钱\n使：甘草 三钱\n\n【配伍】\n生石膏：大寒大清，清气分实热，泻火除烦，专治关节红肿灼热。\n知母：苦寒清热、滋阴润燥，助石膏清泄里热。\n桂枝：辛温通络、祛风和营，引药直达经络关节，散经络风湿热邪；辛温反佐，防寒凉凝滞气血。\n炙甘草、粳米：益气养胃，缓和石膏、知母寒凉之性，保护胃气。"
 target_disease_id = "re_bi"
 target_disease_name = "热痹"
 jun_group = [SubResource("Ingredient_1")]

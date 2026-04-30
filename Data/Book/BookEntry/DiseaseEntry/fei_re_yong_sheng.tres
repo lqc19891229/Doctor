@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1")
 entry_id = "fei_re_yong_sheng"
-book_id = "huang_di_nei_jing"
+book_id = "zhu_bing_yuan_hou_lun"
 title = "肺热壅盛"
-detail_text = "正文测试文字"
+detail_text = "肺热壅盛\n\n【病机】\n邪热壅滞于肺，肺失宣降，气机闭塞，热盛气逆\n\n【症状】\n咳嗽气粗、喘促胸闷；痰黄黏稠、不易咳出；发热、口渴咽痛；鼻翼煽动，大便偏干，小便黄。\n\n【脉象】\n右寸（肺）：波速快\n\n【标准方】\n麻杏石甘汤"
 disease_id = "fei_re_yong_sheng"
 prerequisite_entry_ids = Array[String](["ma_xing_shi_gan_tang"])

@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "fang_feng_tang"
 book_id = "tai_ping_hui_min_he_ji_ju_fang"
 title = "防风汤"
-detail_text = "正文测试文字"
+detail_text = "防风汤\n\n【出处】\n《太平惠民和剂局方》\n\n【功效】\n祛风通络，散寒除湿\n\n【主治】\n行痹（风痹）\n\n【组成】\n君：防风 五钱\n臣：桂枝 三钱，秦艽 三钱\n佐：当归 二钱，川芎 二钱，葛根 三钱\n使：甘草 一钱\n\n【配伍】\n防风：祛风胜湿、走窜经络，专治游走痹痛。\n桂枝：温散风寒、通经活络；\n秦艽：祛风湿、通络止痛，善治游走痹。\n当归：养血和营、祛风通络；\n川芎：活血通络；\n葛根：解肌舒筋；\n甘草调和诸药，调和营卫。"
 formula_id = "fang_feng_tang"
 required_herb_ids = Array[String](["fang_feng", "gui_zhi", "qin_jiao", "dang_gui", "chuan_xiong", "ge_gen", "gan_cao"])

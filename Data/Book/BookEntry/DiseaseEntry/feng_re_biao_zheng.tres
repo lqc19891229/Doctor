@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DiseaseBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/DiseaseBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "feng_re_biao_zheng"
+book_id = "zhu_bing_yuan_hou_lun"
+title = "风热表证"
+detail_text = "风热表证\n\n【病机】\n风热之邪侵袭肺卫，卫气失和，肺失清肃\n\n【症状】\n发热重，咽喉红肿，痰涕黄稠\n\n【脉象】\n浮脉（表）：波速快\n\n【标准方】\n银翘散"
+disease_id = "feng_re_biao_zheng"
+prerequisite_entry_ids = Array[String](["yin_qiao_san"])

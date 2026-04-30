@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "ma_huang_tang"
 book_id = "shang_han_lun"
 title = "麻黄汤"
-detail_text = "正文测试文字"
+detail_text = "麻黄汤\n\n【出处】\n《伤寒论》\n\n【功效】\n发汗解表，宣肺平喘\n\n【主治】\n风寒表实证\n\n【组成】\n君：麻黄 三钱\n臣：桂枝 二钱\n佐：杏仁 二钱\n使：甘草 一钱\n\n【配伍】\n麻桂相须，增强发汗散寒之力，专治表实无汗。\n麻杏相使，宣降相配，专治寒邪闭肺之喘逆。\n甘草调和诸药"
 formula_id = "ma_huang_tang"
 required_herb_ids = Array[String](["ma_huang", "gui_zhi", "xing_ren", "gan_cao"])

@@ -36,6 +36,7 @@ required = true
 script = ExtResource("2")
 formula_id = "er_chen_tang"
 formula_name = "二陈汤"
+detail_text = "二陈汤\n\n【出处】\n《太平惠民和剂局方》\n\n【功效】\n燥湿化痰，理气和中\n\n【主治】\n痰湿阻肺\n\n【组成】\n君：半夏 五钱\n臣：陈皮 五钱\n佐：茯苓 三钱\n使：甘草 一钱五分\n\n【配伍】\n半夏：辛温燥烈，燥湿化痰、降逆止呕。\n陈皮：理气行滞、燥湿化痰，使气顺则痰消。\n茯苓：健脾渗湿，杜生痰之源。\n甘草：调和诸药，益气和中。"
 target_disease_id = "tan_shi_zu_fei"
 target_disease_name = "痰湿阻肺"
 jun_group = [SubResource("Ingredient_1")]

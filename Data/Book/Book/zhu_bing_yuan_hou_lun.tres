@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="DiseaseBookData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/Book/DiseaseBookData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+book_type = "disease"
+book_id = "zhu_bing_yuan_hou_lun"
+book_name = "诸病源候论"
+detail_text = ""
+author_name = "巢元方"
+sort_index = 3
+visible_by_default = true
+read_once = false
+allow_daytime_open = true
+unlock_entry_ids = Array[String]([])

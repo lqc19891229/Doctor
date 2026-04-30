@@ -17,6 +17,7 @@ grow_vertical = 2
 size_flags_vertical = 3
 
 [node name="PrescriptionView" type="VBoxContainer" parent="PrescriptionLayout" unique_id=1663844928]
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -111,7 +112,18 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="HerbList" type="GridContainer" parent="PrescriptionLayout/HerbSelectRow" unique_id=444528469]
+[node name="HerbSearchColumn" type="VBoxContainer" parent="PrescriptionLayout/HerbSelectRow" unique_id=498839916]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HerbSearch" type="LineEdit" parent="PrescriptionLayout/HerbSelectRow/HerbSearchColumn" unique_id=1590971093]
+layout_mode = 2
+
+[node name="HerbListScroll" type="ScrollContainer" parent="PrescriptionLayout/HerbSelectRow/HerbSearchColumn" unique_id=205035393]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HerbList" type="GridContainer" parent="PrescriptionLayout/HerbSelectRow/HerbSearchColumn/HerbListScroll" unique_id=444528469]
 custom_minimum_size = Vector2(0, 140)
 layout_mode = 2
 size_flags_horizontal = 3

@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "long_dan_xie_gan_tang"
 book_id = "lan_shi_mi_cang"
 title = "龙胆泻肝汤"
-detail_text = "正文测试文字"
+detail_text = "龙胆泻肝汤\n\n【出处】\n《兰室秘藏》\n\n【功效】\n清泻肝胆实火，清利肝经湿热\n\n【主治】\n肝火上炎\n\n【组成】\n君：龙胆草 二钱\n臣：黄芩 三钱，栀子 三钱\n佐：泽泻四钱，木通三钱，车前子 三钱，当归 三钱，生地黄 六钱，柴胡 三钱\n使：甘草 二钱\n\n【配伍】\n龙胆草：大苦大寒，直泻肝胆实火、清利下焦湿热。\n黄芩、栀子：苦寒泻火，清热燥湿，助龙胆草清泻肝火。\n泽泻、木通、车前子：清热利湿，导湿热从小便而去；\n生地黄、当归：滋阴养血，防苦寒药燥烈伤阴；\n柴胡：疏肝引经，畅达肝胆气机。\n生甘草清热解毒、调和诸药，护胃安中。"
 formula_id = "long_dan_xie_gan_tang"
 required_herb_ids = Array[String](["long_dan_cao", "huang_qin", "zhi_zi", "ze_xie", "mu_tong", "che_qian_zi", "dang_gui", "sheng_di_huang", "chai_hu", "gan_cao"])

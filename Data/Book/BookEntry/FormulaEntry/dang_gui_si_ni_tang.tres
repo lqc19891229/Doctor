@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "dang_gui_si_ni_tang"
 book_id = "shang_han_lun"
 title = "当归四逆汤"
-detail_text = "正文测试文字"
+detail_text = "当归四逆汤\n\n【出处】\n《伤寒论》\n\n【功效】\n温经散寒，养血通脉\n\n【主治】\n寒凝心脉\n\n【组成】\n君：当归 四钱\n臣：桂枝 三钱，芍药 三钱\n佐：细辛 一钱，木通 二钱\n使：甘草 二钱，大枣 二钱\n\n【配伍】\n当归：养血和血、温补肝血，濡养经脉。\n桂枝：温通经脉、宣通阳气；\n白芍：养血敛阴，缓急止痛；\n细辛：直入三阴，温经散寒、破寒凝。\n通草：通利经脉，引寒邪外泄。\n大枣、炙甘草益气健脾、调和诸药，养血以助脉道充盈。"
 formula_id = "dang_gui_si_ni_tang"
 required_herb_ids = Array[String](["dang_gui", "gui_zhi", "shao_yao", "xi_xin", "mu_tong", "gan_cao", "da_zao"])

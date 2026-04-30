@@ -92,6 +92,7 @@ required = true
 script = ExtResource("2")
 formula_id = "gui_pi_tang"
 formula_name = "归脾汤"
+detail_text = "正文测试文字"
 target_disease_id = "xin_pi_liang_xu"
 target_disease_name = "心脾两虚"
 jun_group = [SubResource("Ingredient_1"), SubResource("Ingredient_2")]

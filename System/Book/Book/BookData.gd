@@ -1,7 +1,7 @@
 extends Resource
 class_name BookData
 
-@export_enum("herb", "disease", "formula", "clinical_log")
+@export_enum("herb", "disease", "formula", "theory", "clinical_log")
 var book_type: String = "disease"
 
 @export var book_id: String = ""
@@ -35,9 +35,12 @@ func is_disease_book() -> bool:
 
 func is_formula_book() -> bool:
 	return book_type == "formula"
-
+	
+func is_theory_book() -> bool:
+	return book_type == "theory"
+	
 func is_medical_theory_book() -> bool:
-	return is_disease_book() or is_formula_book()
+	return is_disease_book() or is_formula_book() or is_theory_book()
 
 func is_clinical_log_book() -> bool:
 	return book_type == "clinical_log"
@@ -75,6 +78,8 @@ func get_book_type_label() -> String:
 			return "病证书"
 		"formula":
 			return "方剂书"
+		"theory":
+			return "医理书"
 		"clinical_log":
 			return "行医记考"
 		_:

@@ -64,6 +64,7 @@ required = true
 script = ExtResource("2")
 formula_id = "jin_gui_shen_qi_wan"
 formula_name = "金匮肾气丸"
+detail_text = "正文测试文字"
 target_disease_id = "shen_yang_xu"
 target_disease_name = "肾阳虚"
 jun_group = [SubResource("Ingredient_1"), SubResource("Ingredient_2")]

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1")
 entry_id = "gan_pi_bu_he"
-book_id = "huang_di_nei_jing"
+book_id = "zhu_bing_yuan_hou_lun"
 title = "肝脾不和"
 detail_text = "正文测试文字"
 disease_id = "gan_pi_bu_he"

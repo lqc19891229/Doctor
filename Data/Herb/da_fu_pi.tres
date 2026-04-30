@@ -6,6 +6,6 @@
 script = ExtResource("1")
 herb_id = "da_fu_pi"
 herb_name = "大腹皮"
-nature = "微温"
+nature = "温"
 taste = Array[String](["辛"])
-meridians = Array[String](["心", "脾", "肺"])
+meridians = Array[String](["脾", "肺"])

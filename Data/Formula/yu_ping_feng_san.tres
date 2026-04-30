@@ -29,6 +29,7 @@ required = true
 script = ExtResource("2")
 formula_id = "yu_ping_feng_san"
 formula_name = "玉屏风散"
+detail_text = "正文测试文字"
 target_disease_id = "wei_qi_xu"
 target_disease_name = "卫气虚"
 jun_group = [SubResource("Ingredient_1")]

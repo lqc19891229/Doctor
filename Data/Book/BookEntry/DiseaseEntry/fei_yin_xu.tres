@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1")
 entry_id = "fei_yin_xu"
-book_id = "huang_di_nei_jing"
+book_id = "zhu_bing_yuan_hou_lun"
 title = "肺阴虚"
-detail_text = "正文测试文字"
+detail_text = "肺阴虚\n\n【病机】\n肺阴亏虚，虚火内生，肺失滋润、清肃无权。\n\n【症状】\n干咳无痰，或痰少黏稠难咯；咽干口燥、声音嘶哑；潮热盗汗、五心烦热；颧红、形体消瘦\n\n【脉象】\n右寸（肺）：波速快，波宽窄，\n\n【标准方】\n沙参麦冬汤"
 disease_id = "fei_yin_xu"
 prerequisite_entry_ids = Array[String](["sha_shen_mai_dong_tang"])

@@ -25,15 +25,25 @@ enum DrawMode {
 
 # 旧版兼容参数：
 # 仍然保留，方便外部代码或调试使用
-@export var qi_value: float = 100.0
-@export var blood_value: float = 100.0
-@export var cold_hot_value: float = 1.3
-@export var wet_dry_value: float = 10.0
+# 统一度量后的默认值：
+# 1.0 = 健康基准值
+@export var qi_value: float = 1.0
+@export var blood_value: float = 1.0
+@export var cold_hot_value: float = 1.0
+@export var wet_dry_value: float = 1.0
 
 @export var pulse_color: Color = Color(0.95, 0.95, 0.95)
 @export var animate_wave: bool = true
 @export var point_count: int = 360
 @export var show_center_line: bool = true
+
+# 健康脉象基准值：
+# 外部输入统一用 1.0 表示健康
+# 绘图时再乘回原本的实际显示值
+const BASE_QI := 100.0
+const BASE_BLOOD := 100.0
+const BASE_COLD_HOT := 1.3
+const BASE_WET_DRY := 10.0
 
 # 缩放参数：
 # 用来把四轴数值映射成实际绘制效果
@@ -45,8 +55,8 @@ enum DrawMode {
 # 整套区域数据
 # 例如：
 # {
-#   "exterior": {"qi": 120, "blood": 90, "speed": 0.7, "width": 11},
-#   "lung":     {"qi": 80,  "blood": 70, "speed": 1.2, "width": 8}
+#   "exterior": {"qi": 1.2, "blood": 0.9, "speed": 0.7, "width": 1.1},
+#   "lung":     {"qi": 0.8, "blood": 0.7, "speed": 1.2, "width": 0.8}
 # }
 var pulse_regions: Dictionary = {}
 
@@ -78,10 +88,18 @@ func _process(delta: float) -> void:
 		var region_data: Dictionary = pulse_regions[region_id]
 
 		# 速度优先读取 speed，没有就退回 old key cold_hot，再退回默认值
-		var cold_hot := float(region_data.get("speed", region_data.get("cold_hot", 1.0)))
+		# 这里读取的是统一值：1.0 = 健康速度
+		var cold_hot_logic := float(region_data.get("speed", region_data.get("cold_hot", 1.0)))
 
 		# 波宽优先读取 width，没有就退回 old key wet_dry，再退回默认值
-		var wet_dry := float(region_data.get("width", region_data.get("wet_dry", 10.0)))
+		# 这里读取的是统一值：1.0 = 健康波宽
+		var wet_dry_logic := float(region_data.get("width", region_data.get("wet_dry", 1.0)))
+
+		# 转成实际绘图值：
+		# speed: 1.0 -> 1.3
+		# width: 1.0 -> 10.0
+		var cold_hot := cold_hot_logic * BASE_COLD_HOT
+		var wet_dry := wet_dry_logic * BASE_WET_DRY
 
 		var speed := cold_hot * speed_scale
 		var frequency := 20.0 / (wet_dry * frequency_scale + 0.0001)
@@ -196,10 +214,24 @@ func _draw_region_wave(target_rect: Rect2, region_id: String) -> void:
 	var region_data: Dictionary = pulse_regions[region_id]
 
 	# 当前区域自己的四轴
-	var qi := float(region_data.get("qi", 100.0))
-	var blood := float(region_data.get("blood", 100.0))
-	var cold_hot := float(region_data.get("speed", region_data.get("cold_hot", 1.0)))
-	var wet_dry := float(region_data.get("width", region_data.get("wet_dry", 10.0)))
+	# 这里读取的是统一值：
+	# 1.0 = 健康基准
+	# 小于 1.0 = 不足 / 偏弱
+	# 大于 1.0 = 亢盛 / 偏强
+	var qi_logic := float(region_data.get("qi", 1.0))
+	var blood_logic := float(region_data.get("blood", 1.0))
+	var cold_hot_logic := float(region_data.get("speed", region_data.get("cold_hot", 1.0)))
+	var wet_dry_logic := float(region_data.get("width", region_data.get("wet_dry", 1.0)))
+
+	# 转成实际绘图值：
+	# qi:      1.0 -> 100.0
+	# blood:   1.0 -> 100.0
+	# speed:   1.0 -> 1.3
+	# width:   1.0 -> 10.0
+	var qi := qi_logic * BASE_QI
+	var blood := blood_logic * BASE_BLOOD
+	var cold_hot := cold_hot_logic * BASE_COLD_HOT
+	var wet_dry := wet_dry_logic * BASE_WET_DRY
 
 	var w := target_rect.size.x
 	var h := target_rect.size.y
@@ -244,6 +276,7 @@ func _draw_region_wave(target_rect: Rect2, region_id: String) -> void:
 
 # =========================================================
 # 旧接口：直接设置当前默认四轴参数
+# 注意：这里传入的也是统一值，1.0 = 健康基准
 # 主要用于兼容旧逻辑 / 调试
 # =========================================================
 func set_pulse_values(qi: float, blood: float, cold_hot: float, wet_dry: float) -> void:

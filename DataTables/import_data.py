@@ -19,6 +19,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from shutil import copy2
 from typing import Any
 from openpyxl import load_workbook
 
@@ -29,6 +30,10 @@ CURRENT_DIR = Path(__file__).resolve().parent
 BASE_DIR = CURRENT_DIR.parent
 # Excel 配置表路径
 EXCEL_PATH = CURRENT_DIR / "Data.xlsx"
+# DetailText 根目录：用于先把 txt 正文写入 Data.xlsx
+DETAIL_TEXT_DIR = CURRENT_DIR / "DetailText"
+# 导入正文前自动备份 Excel，避免误覆盖无法回退
+DETAIL_TEXT_BACKUP_PATH = CURRENT_DIR / "Data.backup_before_detailtext_import.xlsx"
 # 导出的 Godot 资源根目录
 OUTPUT_DIR = BASE_DIR / "Data"
 
@@ -63,6 +68,130 @@ SHEET_DISEASE = "Disease"
 SHEET_PULSE = "Pulse"
 SHEET_FORMULA = "Formula"
 SHEET_FORMULA_INGREDIENT = "FormulaIngredient"
+
+
+# 三类正文导入配置：文件夹名、sheet 名、匹配名称列、目标正文列
+DETAIL_TEXT_IMPORT_CONFIGS = [
+    {"folder_name": "药材", "sheet_name": "Herb", "name_column": "HerbName", "detail_column": "DetailText"},
+    {"folder_name": "疾病", "sheet_name": "Disease", "name_column": "DiseaseName", "detail_column": "DetailText"},
+    {"folder_name": "方剂", "sheet_name": "Formula", "name_column": "FormulaName", "detail_column": "DetailText"},
+]
+
+
+def normalize_detail_text(text: str) -> str:
+    """
+    功能：清洗 DetailText txt 正文。
+    作用：去掉 BOM，统一换行符，并去掉首尾空白。
+    """
+    text = text.replace("\ufeff", "")
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    return text.strip()
+
+
+def load_detail_text_txt_map(source_dir: Path) -> dict[str, str]:
+    """
+    功能：读取某个 DetailText 子目录下的所有 .txt 文件。
+    返回：文件名（不带 .txt） -> 文件正文。
+    """
+    if not source_dir.exists():
+        log(f"跳过 DetailText 导入：找不到目录 {source_dir}")
+        return {}
+
+    txt_files = sorted(source_dir.glob("*.txt"))
+    if not txt_files:
+        log(f"跳过 DetailText 导入：目录下没有 .txt 文件 {source_dir}")
+        return {}
+
+    txt_map: dict[str, str] = {}
+    for txt_path in txt_files:
+        item_name = txt_path.stem.strip()
+        if not item_name:
+            log(f"跳过空文件名：{txt_path.name}")
+            continue
+        txt_map[item_name] = normalize_detail_text(txt_path.read_text(encoding="utf-8"))
+    return txt_map
+
+
+def find_sheet_column_index(ws, column_name: str) -> int:
+    """
+    功能：在 sheet 表头中查找指定列名。
+    返回：openpyxl 使用的 1-based 列索引。
+    """
+    header_row = next(ws.iter_rows(min_row=1, max_row=1, values_only=True))
+    for index, value in enumerate(header_row, start=1):
+        if value == column_name:
+            return index
+    raise ValueError(f"{ws.title} sheet 缺少 {column_name} 列")
+
+
+def import_detail_text_for_one_sheet(wb, config: dict[str, str]) -> None:
+    """
+    功能：把一个分类的 txt 正文写入对应 sheet 的 DetailText 列。
+    匹配规则：txt 文件名 = sheet 中的名称列。
+    """
+    folder_name = config["folder_name"]
+    sheet_name = config["sheet_name"]
+    name_column = config["name_column"]
+    detail_column = config["detail_column"]
+
+    txt_map = load_detail_text_txt_map(DETAIL_TEXT_DIR / folder_name)
+    if not txt_map:
+        return
+
+    if sheet_name not in wb.sheetnames:
+        raise ValueError(f"Excel 中不存在 sheet：{sheet_name}")
+
+    ws = wb[sheet_name]
+    name_col = find_sheet_column_index(ws, name_column)
+    detail_col = find_sheet_column_index(ws, detail_column)
+
+    matched_count = 0
+    missing_txt_names: list[str] = []
+    unused_txt_names = set(txt_map.keys())
+
+    for row_index in range(2, ws.max_row + 1):
+        item_name = ws.cell(row=row_index, column=name_col).value
+        item_name = str(item_name).strip() if item_name is not None else ""
+        if not item_name:
+            continue
+        if item_name in txt_map:
+            ws.cell(row=row_index, column=detail_col).value = txt_map[item_name]
+            matched_count += 1
+            unused_txt_names.discard(item_name)
+        else:
+            missing_txt_names.append(item_name)
+
+    log(f"{sheet_name} DetailText 写入完成，成功匹配：{matched_count} 条")
+
+    if missing_txt_names:
+        log(f"{sheet_name} 中以下 {name_column} 没有找到同名 txt：")
+        for name in missing_txt_names:
+            print(f" - {name}")
+
+    if unused_txt_names:
+        log(f"{folder_name} 文件夹中以下 txt 没有匹配到 {sheet_name}：")
+        for name in sorted(unused_txt_names):
+            print(f" - {name}")
+
+
+def import_detail_text_txt_to_excel() -> None:
+    """
+    功能：正式导出 .tres 前，先把 DetailText 目录中的 txt 正文写入 Data.xlsx。
+    范围：药材、疾病、方剂。
+    """
+    if not DETAIL_TEXT_DIR.exists():
+        log(f"未找到 DetailText 目录，跳过 txt 正文导入：{DETAIL_TEXT_DIR}")
+        return
+
+    copy2(EXCEL_PATH, DETAIL_TEXT_BACKUP_PATH)
+    log(f"已备份 Data.xlsx：{DETAIL_TEXT_BACKUP_PATH.name}")
+
+    wb = load_workbook(EXCEL_PATH)
+    for config in DETAIL_TEXT_IMPORT_CONFIGS:
+        import_detail_text_for_one_sheet(wb, config)
+
+    wb.save(EXCEL_PATH)
+    log("DetailText txt -> Data.xlsx 导入完成")
 
 
 def log(msg: str) -> None:
@@ -731,6 +860,9 @@ def build_disease_resources(indexed_data: dict[str, Any]) -> None:
         pulse_row = pulse_map.get(disease_id, {})
 
         disease_name = as_str(disease_row.get("DiseaseName"))
+        # 读取 Disease sheet 的 DetailText，写入 DiseaseData 资源本体。
+        # 这样游戏逻辑直接加载 res://Data/Disease/*.tres 时也能拿到正文。
+        detail_text = as_str(disease_row.get("DetailText"))
         recommended_formula_id = as_str(disease_row.get("RecommendedFormulaID"))
 
         disease_content = f'''[gd_resource type="Resource" script_class="DiseaseData" load_steps=2 format=3]
@@ -741,6 +873,7 @@ def build_disease_resources(indexed_data: dict[str, Any]) -> None:
 script = ExtResource("1")
 disease_id = {format_godot_string(disease_id)}
 disease_name = {format_godot_string(disease_name)}
+detail_text = {format_godot_string(detail_text)}
 recommended_formula_id = {format_godot_string(recommended_formula_id)}
 exterior_qi = {as_float(pulse_row.get("EQ"), 100.0)}
 exterior_blood = {as_float(pulse_row.get("EB"), 100.0)}
@@ -814,6 +947,9 @@ def build_formula_resources(indexed_data: dict[str, Any]) -> None:
         # 获取该方剂包含的所有药材组成行
         ingredient_rows = formula_ingredient_map.get(formula_id, [])
         formula_name = as_str(formula_row.get("FormulaName"))
+        # 读取 Formula sheet 的 DetailText，写入 FormulaData 资源本体。
+        # 图鉴条目 FormulaBookEntryData 仍然继续使用同一列。
+        detail_text = as_str(formula_row.get("DetailText"))
         target_disease_name = as_str(formula_row.get("TargetDiseaseName"))
         target_disease_id = get_formula_target_disease_id(formula_row, disease_name_to_id)
         required_herb_ids = get_formula_required_herb_ids(
@@ -897,6 +1033,7 @@ required = {"true" if required else "false"}'''
             'script = ExtResource("2")',
             f'formula_id = {format_godot_string(formula_id)}',
             f'formula_name = {format_godot_string(formula_name)}',
+            f'detail_text = {format_godot_string(detail_text)}',
             f'target_disease_id = {format_godot_string(target_disease_id)}',
             f'target_disease_name = {format_godot_string(target_disease_name)}',
             f'jun_group = {format_group(jun_sub_ids)}',
@@ -962,12 +1099,15 @@ def main() -> None:
     log(f"Excel 路径: {EXCEL_PATH}")
     log(f"输出目录: {OUTPUT_DIR}")
 
-    # 第一步：读取 Excel 原始数据
+    # 第一步：先把 DetailText 文件夹中的 txt 正文同步进 Data.xlsx
+    import_detail_text_txt_to_excel()
+
+    # 第二步：读取 Excel 原始数据
     raw_data = load_excel_data(EXCEL_PATH)
-    # 第二步：建立索引，加速后续查找和反查
+    # 第三步：建立索引，加速后续查找和反查
     indexed_data = build_index(raw_data)
 
-    # 第三步：先校验数据，校验不通过则停止生成
+    # 第四步：先校验数据，校验不通过则停止生成
     errors = validate_data(indexed_data)
     if errors:
         log("数据校验失败，已停止生成：")
@@ -975,9 +1115,9 @@ def main() -> None:
             print(" -", err)
         return
 
-    # 第四步：清理旧资源，准备重新导出
+    # 第五步：清理旧资源，准备重新导出
     clear_output_dirs()
-    # 第五步：按模块生成各类 .tres 资源
+    # 第六步：按模块生成各类 .tres 资源
     build_book_resources(indexed_data)
     build_herb_resources(indexed_data)
     build_disease_resources(indexed_data)

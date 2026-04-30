@@ -6,6 +6,7 @@
 script = ExtResource("1")
 disease_id = "gan_pi_bu_he"
 disease_name = "肝脾不和"
+detail_text = "正文测试文字"
 recommended_formula_id = "xiao_yao_san"
 exterior_qi = 100.0
 exterior_blood = 100.0

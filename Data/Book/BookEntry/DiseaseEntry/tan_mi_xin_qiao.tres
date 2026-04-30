@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1")
 entry_id = "tan_mi_xin_qiao"
-book_id = "huang_di_nei_jing"
+book_id = "zhu_bing_yuan_hou_lun"
 title = "痰迷心窍"
-detail_text = "正文测试文字"
+detail_text = "痰迷心窍\n\n【病机】\n痰湿浊邪蒙蔽心窍，神明失主，多由情志郁结、脾失健运、痰浊内生，上蒙心神所致。\n\n【症状】\n神志痴呆、精神抑郁、表情淡漠；喃喃自语、举止失常、昏不知人；喉中痰鸣、胸闷痰多、意识模糊；甚则突然昏仆、不省人事；\n\n【脉象】\n左寸（心）：波宽宽\n\n【标准方】\n涤痰汤"
 disease_id = "tan_mi_xin_qiao"
 prerequisite_entry_ids = Array[String](["di_tan_tang"])

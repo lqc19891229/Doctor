@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="DiseaseData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Disease/DiseaseData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+disease_id = "wen_zao_zheng"
+disease_name = "温燥证"
+detail_text = "温燥证\n\n【病机】\n初秋燥热之邪侵袭肺卫，肺失清润\n\n【症状】\n发热恶风，口鼻干燥、咽干口渴、干咳少痰，痰涕黄稠\n\n【脉象】\n浮脉（表）：波速快，波宽窄\n\n【标准方】\n桑杏汤"
+recommended_formula_id = "sang_xing_tang"
+exterior_qi = 1.0
+exterior_blood = 1.0
+exterior_cold_hot = 1.3
+exterior_wet_dry = 0.7
+heart_qi = 100.0
+heart_blood = 100.0
+heart_cold_hot = 1.3
+heart_wet_dry = 10.0
+liver_qi = 100.0
+liver_blood = 100.0
+liver_cold_hot = 1.3
+liver_wet_dry = 10.0
+spleen_qi = 100.0
+spleen_blood = 100.0
+spleen_cold_hot = 1.3
+spleen_wet_dry = 10.0
+lung_qi = 100.0
+lung_blood = 100.0
+lung_cold_hot = 1.3
+lung_wet_dry = 10.0
+kidney_yin_qi = 100.0
+kidney_yin_blood = 100.0
+kidney_yin_cold_hot = 1.3
+kidney_yin_wet_dry = 10.0
+kidney_yang_qi = 100.0
+kidney_yang_blood = 100.0
+kidney_yang_cold_hot = 1.3
+kidney_yang_wet_dry = 10.0

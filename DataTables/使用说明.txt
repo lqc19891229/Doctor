@@ -10,5 +10,4 @@ import_data.py导入数据
 ----------------------------------
 在文件夹地址栏输入cmd，回车
 python import_data.py
-python import_herb_detailtext_from_txt.py
 ----------------------------------

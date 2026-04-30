@@ -11,6 +11,7 @@
 [ext_resource type="Resource" path="res://Data/Herb/chen_pi.tres" id="herb_7"]
 [ext_resource type="Resource" path="res://Data/Herb/ren_shen.tres" id="herb_8"]
 [ext_resource type="Resource" path="res://Data/Herb/gan_cao.tres" id="herb_9"]
+[ext_resource type="Resource" path="res://Data/Herb/sheng_jiang.tres" id="herb_10"]
 
 [sub_resource type="Resource" id="Ingredient_1"]
 script = ExtResource("1")
@@ -66,14 +67,21 @@ herb = ExtResource("herb_9")
 amount = 3.0
 unit = "qian"
 required = true
+[sub_resource type="Resource" id="Ingredient_10"]
+script = ExtResource("1")
+herb = ExtResource("herb_10")
+amount = 2.0
+unit = "qian"
+required = true
 
 [resource]
 script = ExtResource("2")
 formula_id = "gou_teng_san"
 formula_name = "钩藤散"
+detail_text = "钩藤散\n\n【出处】\n《普济本事方》\n\n【功效】\n平肝息风，清热化痰，益气养阴\n\n【主治】\n肝阳上亢\n\n【组成】\n君：钩藤 三钱，菊花 三钱\n臣：防风 三钱，石膏 三钱\n佐：茯苓 三钱，半夏 三钱，陈皮 三钱，人参 三钱\n使：甘草 三钱\n\n【配伍】\n钩藤、菊花：平肝息风、清利头目\n石膏：清热泻火、除烦止晕\n防风：祛风解痉、载药上行\n半夏、陈皮、茯苓：燥湿化痰、和胃降逆\n麦冬、人参：益气养阴、扶正固本\n茯神：宁心安神\n炙甘草、生姜+调和诸药、和胃止呕、制半夏之毒"
 target_disease_id = "gan_yang_shang_kang"
 target_disease_name = "肝阳上亢"
 jun_group = [SubResource("Ingredient_1"), SubResource("Ingredient_2")]
 chen_group = [SubResource("Ingredient_3"), SubResource("Ingredient_4")]
 zuo_group = [SubResource("Ingredient_5"), SubResource("Ingredient_6"), SubResource("Ingredient_7"), SubResource("Ingredient_8")]
-shi_group = [SubResource("Ingredient_9")]
+shi_group = [SubResource("Ingredient_9"), SubResource("Ingredient_10")]

@@ -56,16 +56,16 @@ extends Resource
 ## -------------------------
 @export_group("表")
 @export_range(0.0, 200.0, 0.1)
-var exterior_qi: float = 100.0
+var exterior_qi: float = 1
 
 @export_range(0.0, 200.0, 0.1)
-var exterior_blood: float = 100.0
+var exterior_blood: float = 1
 
 @export_range(0.0, 100.0, 0.1)
-var exterior_cold_hot: float = 1.3
+var exterior_cold_hot: float = 1
 
 @export_range(0.0, 100.0, 0.1)
-var exterior_wet_dry: float = 10.0
+var exterior_wet_dry: float = 1
 
 
 ## -------------------------
@@ -73,16 +73,16 @@ var exterior_wet_dry: float = 10.0
 ## -------------------------
 @export_group("心")
 @export_range(0.0, 200.0, 0.1)
-var heart_qi: float = 100.0
+var heart_qi: float = 1
 
 @export_range(0.0, 200.0, 0.1)
-var heart_blood: float = 100.0
+var heart_blood: float = 1
 
 @export_range(0.0, 100.0, 0.1)
-var heart_cold_hot: float = 1.3
+var heart_cold_hot: float = 1
 
 @export_range(0.0, 100.0, 0.1)
-var heart_wet_dry: float = 10.0
+var heart_wet_dry: float = 1
 
 
 ## -------------------------
@@ -90,16 +90,16 @@ var heart_wet_dry: float = 10.0
 ## -------------------------
 @export_group("肝")
 @export_range(0.0, 200.0, 0.1)
-var liver_qi: float = 100.0
+var liver_qi: float = 1
 
 @export_range(0.0, 200.0, 0.1)
-var liver_blood: float = 100.0
+var liver_blood: float = 1
 
 @export_range(0.0, 100.0, 0.1)
-var liver_cold_hot: float = 1.3
+var liver_cold_hot: float = 1
 
 @export_range(0.0, 100.0, 0.1)
-var liver_wet_dry: float = 10.0
+var liver_wet_dry: float = 1
 
 
 ## -------------------------
@@ -107,16 +107,16 @@ var liver_wet_dry: float = 10.0
 ## -------------------------
 @export_group("脾")
 @export_range(0.0, 200.0, 0.1)
-var spleen_qi: float = 100.0
+var spleen_qi: float = 1
 
 @export_range(0.0, 200.0, 0.1)
-var spleen_blood: float = 100.0
+var spleen_blood: float = 1
 
 @export_range(0.0, 100.0, 0.1)
-var spleen_cold_hot: float = 1.3
+var spleen_cold_hot: float = 1
 
 @export_range(0.0, 100.0, 0.1)
-var spleen_wet_dry: float = 10.0
+var spleen_wet_dry: float = 1
 
 
 ## -------------------------
@@ -124,16 +124,16 @@ var spleen_wet_dry: float = 10.0
 ## -------------------------
 @export_group("肺")
 @export_range(0.0, 200.0, 0.1)
-var lung_qi: float = 100.0
+var lung_qi: float = 1
 
 @export_range(0.0, 200.0, 0.1)
-var lung_blood: float = 100.0
+var lung_blood: float = 1
 
 @export_range(0.0, 100.0, 0.1)
-var lung_cold_hot: float = 1.3
+var lung_cold_hot: float = 1
 
 @export_range(0.0, 100.0, 0.1)
-var lung_wet_dry: float = 10.0
+var lung_wet_dry: float = 1
 
 
 ## -------------------------
@@ -141,16 +141,16 @@ var lung_wet_dry: float = 10.0
 ## -------------------------
 @export_group("肾阴")
 @export_range(0.0, 200.0, 0.1)
-var kidney_yin_qi: float = 100.0
+var kidney_yin_qi: float = 1
 
 @export_range(0.0, 200.0, 0.1)
-var kidney_yin_blood: float = 100.0
+var kidney_yin_blood: float = 1
 
 @export_range(0.0, 100.0, 0.1)
-var kidney_yin_cold_hot: float = 1.3
+var kidney_yin_cold_hot: float = 1
 
 @export_range(0.0, 100.0, 0.1)
-var kidney_yin_wet_dry: float = 10.0
+var kidney_yin_wet_dry: float = 1
 
 
 ## -------------------------
@@ -158,16 +158,16 @@ var kidney_yin_wet_dry: float = 10.0
 ## -------------------------
 @export_group("肾阳")
 @export_range(0.0, 200.0, 0.1)
-var kidney_yang_qi: float = 100.0
+var kidney_yang_qi: float = 1
 
 @export_range(0.0, 200.0, 0.1)
-var kidney_yang_blood: float = 100.0
+var kidney_yang_blood: float = 1
 
 @export_range(0.0, 100.0, 0.1)
-var kidney_yang_cold_hot: float = 1.3
+var kidney_yang_cold_hot: float = 1
 
 @export_range(0.0, 100.0, 0.1)
-var kidney_yang_wet_dry: float = 10.0
+var kidney_yang_wet_dry: float = 1
 
 
 ## =========================================================

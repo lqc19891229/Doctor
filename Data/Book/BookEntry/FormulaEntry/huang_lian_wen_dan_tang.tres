@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "huang_lian_wen_dan_tang"
 book_id = "bei_ji_qian_jin_yao_fang"
 title = "黄连温胆汤"
-detail_text = "正文测试文字"
+detail_text = "黄连温胆汤\n\n【出处】\n《备急千金要方》\n\n【功效】\n清热化痰，和中安神\n\n【主治】\n痰火扰心\n\n【组成】\n君：黄连 三钱\n臣：半夏 四钱，竹茹 五钱\n佐：陈皮 四钱，枳实 四钱，茯苓 四钱\n使：甘草 二钱，生姜 一钱，大枣 一钱\n\n【配伍】\n黄连：苦寒直折，清心泻火、燥湿清热，专清痰火。\n半夏：燥湿化痰；\n竹茹：清热化痰、除烦安神。\n陈皮：理气化痰；\n枳实：破气消痞、导痰下行；\n茯苓：健脾渗湿，绝生痰之源。\n甘草:调和诸药，和中缓急。\n生姜：和胃止呕，制半夏之毒\n大枣：益气补中，调和脾胃"
 formula_id = "huang_lian_wen_dan_tang"
 required_herb_ids = Array[String](["huang_lian", "ban_xia", "zhu_ru", "chen_pi", "zhi_shi", "fu_ling", "gan_cao", "sheng_jiang", "da_zao"])

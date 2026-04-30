@@ -8,13 +8,15 @@ class_name UnlockManager
 # - Herb 条目：对应药材已解锁即可查看
 # - Formula 条目：所需药材全部已解锁后可阅读
 # - Disease 条目：前置条目全部已读后可阅读
-# - 病证书（disease）和方剂书（formula）为独立书籍类型
+# - Theory 条目：前置理论条目全部已读后可阅读
+# - 病证书（disease）、方剂书（formula）、医理书（theory）为独立书籍类型
 # - 行医记考（clinical_log）作为白天查看入口，显示夜晚已解锁内容
 #
 # 注意：
 # - Herb 条目“查看”不记为已读
-# - Formula / Disease 条目在首次阅读后会记为已读
+# - Formula / Disease / Theory 条目在首次阅读后会记为已读
 # - Formula / Disease 阅读后会顺便解锁对应实体
+# - Theory 阅读后只标记已读，不解锁任何实体
 # - 所有实体一旦解锁，会同步进入 clinical_log
 # =========================================================
 
@@ -217,12 +219,13 @@ func read_book_by_day(book: BookData) -> void:
 # =========================================================
 # 八、条件判断函数
 # 说明：
-# - Formula 条目：通常用于病证/方剂书中的“方剂条目”
-# - Disease 条目：通常用于病证/方剂书中的“病证条目”
+# - Formula 条目：通常用于方剂书中的“方剂条目”
+# - Disease 条目：通常用于病证书中的“病证条目”
+# - Theory 条目：通常用于医理书中的“理论条目”
 # =========================================================
 
 # 判断前置条目是否全部已完成（已读）
-# 供 Disease 条目使用
+# 供 Disease / Theory 条目使用
 func are_prerequisites_completed(prerequisite_ids: Array[String]) -> bool:
 	for entry_id in prerequisite_ids:
 		var clean_id := String(entry_id).strip_edges()
@@ -294,6 +297,19 @@ func _can_read_disease(entry: DiseaseBookEntryData) -> bool:
 	return are_prerequisites_completed(entry.prerequisite_entry_ids)
 
 
+# Theory 条目是否可首次阅读
+# 规则：未读 + 前置理论条目全部已读
+func _can_read_theory(entry: TheoryBookEntryData) -> bool:
+	if entry == null:
+		return false
+
+	# 已读后不再走“首次阅读”
+	if is_entry_read(entry.entry_id):
+		return false
+
+	return are_prerequisites_completed(entry.prerequisite_entry_ids)
+
+
 # =========================================================
 # 十、条目状态判断
 # =========================================================
@@ -319,13 +335,16 @@ func can_read_entry(entry_id: String) -> bool:
 	if entry is DiseaseBookEntryData:
 		return _can_read_disease(entry as DiseaseBookEntryData)
 
+	if entry is TheoryBookEntryData:
+		return _can_read_theory(entry as TheoryBookEntryData)
+
 	return false
 
 
 # 是否应该显示在条目列表中
 # 规则：
 # - Herb：药材解锁后显示
-# - Formula / Disease：已读后始终显示；未读时满足阅读条件也显示
+# - Formula / Disease / Theory：已读后始终显示；未读时满足阅读条件也显示
 func is_entry_visible(entry_id: String) -> bool:
 	var clean_id := entry_id.strip_edges()
 	if clean_id == "":
@@ -372,6 +391,10 @@ func read_entry(entry: BookEntryData) -> void:
 	# 标记条目为已读
 	mark_entry_as_read(entry.entry_id)
 
+	# Theory 条目：只标记已读，不解锁疾病 / 方剂 / 药材
+	if entry is TheoryBookEntryData:
+		return
+
 	# Formula 条目：阅读后解锁对应方剂实体
 	if entry is FormulaBookEntryData:
 		var formula_entry := entry as FormulaBookEntryData
@@ -395,7 +418,7 @@ func read_entry(entry: BookEntryData) -> void:
 # 获取某本书下“当前可显示/可阅读”的条目
 # 规则：
 # - Herb：药材已解锁就显示
-# - Formula / Disease：已读后显示；未读但满足条件也显示
+# - Formula / Disease / Theory：已读后显示；未读但满足条件也显示
 func get_readable_entries_by_book(book_id: String) -> Array[BookEntryData]:
 	var result: Array[BookEntryData] = []
 	var clean_book_id := book_id.strip_edges()
@@ -420,31 +443,51 @@ func get_readable_entries_by_book(book_id: String) -> Array[BookEntryData]:
 # 十三、给行医记考使用的辅助函数
 # =========================================================
 
+# 把 Dictionary 的 key 安全转换成 Array[String]
+# 说明：
+# - Godot 4 中 Dictionary.keys() 返回普通 Array
+# - 直接返回给 Array[String] 可能出现类型不匹配
+# - 这里统一转成干净的 String 数组
+func _dict_keys_to_string_array(source: Dictionary) -> Array[String]:
+	var result: Array[String] = []
+
+	for key in source.keys():
+		var clean_id := String(key).strip_edges()
+
+		# 跳过空 key，避免后续 UI 或查询数据库时报错
+		if clean_id == "":
+			continue
+
+		result.append(clean_id)
+
+	return result
+
+
 # 获取所有已解锁的药材ID
 func get_unlocked_herb_id_list() -> Array[String]:
-	return unlocked_herb_ids.keys()
+	return _dict_keys_to_string_array(unlocked_herb_ids)
 
 
 # 获取所有已解锁的方剂ID
 func get_unlocked_formula_id_list() -> Array[String]:
-	return unlocked_formula_ids.keys()
+	return _dict_keys_to_string_array(unlocked_formula_ids)
 
 
 # 获取所有已解锁的疾病ID
 func get_unlocked_disease_id_list() -> Array[String]:
-	return unlocked_disease_ids.keys()
+	return _dict_keys_to_string_array(unlocked_disease_ids)
 
 
 # 获取行医记考中可见的药材ID
 func get_clinical_log_herb_id_list() -> Array[String]:
-	return clinical_log_unlocked_herb_ids.keys()
+	return _dict_keys_to_string_array(clinical_log_unlocked_herb_ids)
 
 
 # 获取行医记考中可见的方剂ID
 func get_clinical_log_formula_id_list() -> Array[String]:
-	return clinical_log_unlocked_formula_ids.keys()
+	return _dict_keys_to_string_array(clinical_log_unlocked_formula_ids)
 
 
 # 获取行医记考中可见的疾病ID
 func get_clinical_log_disease_id_list() -> Array[String]:
-	return clinical_log_unlocked_disease_ids.keys()
+	return _dict_keys_to_string_array(clinical_log_unlocked_disease_ids)

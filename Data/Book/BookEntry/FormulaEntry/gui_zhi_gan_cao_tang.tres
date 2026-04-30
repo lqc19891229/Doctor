@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "gui_zhi_gan_cao_tang"
 book_id = "shang_han_lun"
 title = "桂枝甘草汤"
-detail_text = "正文测试文字"
+detail_text = "桂枝甘草汤\n\n【出处】\n《伤寒论》\n\n【功效】\n温补心阳，益气定悸\n\n【主治】\n心阳虚\n\n【组成】\n君：桂枝 四钱\n臣：甘草 二钱\n佐：\n使：\n\n【配伍】\n桂枝：辛甘温，温通心阳、平冲降逆、温经通脉。\n炙甘草：益气补中、缓急养心，甘温益气。"
 formula_id = "gui_zhi_gan_cao_tang"
 required_herb_ids = Array[String](["gui_zhi", "gan_cao"])

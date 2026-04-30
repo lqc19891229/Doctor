@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1")
 entry_id = "han_ning_xin_mai"
-book_id = "huang_di_nei_jing"
+book_id = "zhu_bing_yuan_hou_lun"
 title = "寒凝心脉"
-detail_text = "正文测试文字"
+detail_text = "寒凝心脉\n\n【病机】\n素体阳虚，阴寒凝滞，寒邪痹阻心脉、胸阳不振，心脉拘急不通而痛。\n\n【症状】\n猝然胸痛、痛势剧烈、遇寒加重、得温痛减；胸闷气短、心悸怔忡；畏寒肢冷、面色苍白、唇甲青紫；\n\n【脉象】\n左寸（心）：波速慢\n\n【标准方】\n当归四逆汤"
 disease_id = "han_ning_xin_mai"
 prerequisite_entry_ids = Array[String](["dang_gui_si_ni_tang"])
