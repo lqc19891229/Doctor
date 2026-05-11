@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="NpcData" format=3 uid="uid://dpec6nbvomqry"]
 
 [ext_resource type="Script" uid="uid://cgp57bles5qo1" path="res://System/Npc/NpcData.gd" id="1_6wmuf"]
-[ext_resource type="Resource" uid="uid://cgw12ike3wo7u" path="res://Data/Disease/feng_han_biao_shi_zhong_zheng.tres" id="1_qsmfh"]
+[ext_resource type="Resource" path="res://Data/Disease/feng_han_biao_xu_zheng.tres" id="1_qsmfh"]
 
 [resource]
 script = ExtResource("1_6wmuf")

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DiseaseBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/DiseaseBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "shen_xu_shui_fan"
+book_id = "zhu_bing_yuan_hou_lun"
+title = "肾虚水泛"
+detail_text = "肾虚水泛\n\n【病机】\n肾阳虚衰，气化无权，水湿内停，泛溢肌肤\n\n【症状】\n周身浮肿，腰以下肿甚，按之凹陷不起；腰膝酸软冷痛，畏寒肢冷；小便短少，或小便不利；心悸气短、喘咳痰稀如水；面色㿠白或灰黯\n\n【脉象】\n左尺（肾阴）：波宽宽\n右尺（肾阳）：波峰低，波速慢\n右关（脾胃，大小肠）：波宽宽\n\n【标准方】\n真武汤"
+disease_id = "shen_xu_shui_fan"
+prerequisite_entry_ids = Array[String](["zhen_wu_tang"])

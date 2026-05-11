@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="NpcData" format=3 uid="uid://cnj56ffnbq4qm"]
 
-[ext_resource type="Resource" uid="uid://cgw12ike3wo7u" path="res://Data/Disease/feng_han_biao_shi_zhong_zheng.tres" id="1_jql2g"]
+[ext_resource type="Resource" path="res://Data/Disease/pi_qi_xu.tres" id="1_p2odf"]
 [ext_resource type="Script" uid="uid://cgp57bles5qo1" path="res://System/Npc/NpcData.gd" id="1_qplh5"]
 
 [resource]
 script = ExtResource("1_qplh5")
 npc_id = "003"
 npc_name = "李一川"
-disease = ExtResource("1_jql2g")
+disease = ExtResource("1_p2odf")
 metadata/_custom_type_script = "uid://cgp57bles5qo1"

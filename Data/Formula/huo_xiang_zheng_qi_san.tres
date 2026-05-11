@@ -3,23 +3,24 @@
 [ext_resource type="Script" path="res://System/Formula/FormulaIngredient.gd" id="1"]
 [ext_resource type="Script" path="res://System/Formula/FormulaData.gd" id="2"]
 [ext_resource type="Resource" path="res://Data/Herb/huo_xiang.tres" id="herb_1"]
-[ext_resource type="Resource" path="res://Data/Herb/ban_xia.tres" id="herb_2"]
-[ext_resource type="Resource" path="res://Data/Herb/chen_pi.tres" id="herb_3"]
-[ext_resource type="Resource" path="res://Data/Herb/hou_po.tres" id="herb_4"]
-[ext_resource type="Resource" path="res://Data/Herb/da_fu_pi.tres" id="herb_5"]
-[ext_resource type="Resource" path="res://Data/Herb/su_ye.tres" id="herb_6"]
-[ext_resource type="Resource" path="res://Data/Herb/bai_zhi.tres" id="herb_7"]
-[ext_resource type="Resource" path="res://Data/Herb/fu_ling.tres" id="herb_8"]
-[ext_resource type="Resource" path="res://Data/Herb/bai_zhu.tres" id="herb_9"]
-[ext_resource type="Resource" path="res://Data/Herb/jie_geng.tres" id="herb_10"]
-[ext_resource type="Resource" path="res://Data/Herb/sheng_jiang.tres" id="herb_11"]
-[ext_resource type="Resource" path="res://Data/Herb/da_zao.tres" id="herb_12"]
-[ext_resource type="Resource" path="res://Data/Herb/gan_cao.tres" id="herb_13"]
+[ext_resource type="Resource" path="res://Data/Herb/su_ye.tres" id="herb_2"]
+[ext_resource type="Resource" path="res://Data/Herb/bai_zhi.tres" id="herb_3"]
+[ext_resource type="Resource" path="res://Data/Herb/ban_xia.tres" id="herb_4"]
+[ext_resource type="Resource" path="res://Data/Herb/hou_po.tres" id="herb_5"]
+[ext_resource type="Resource" path="res://Data/Herb/bai_zhu.tres" id="herb_6"]
+[ext_resource type="Resource" path="res://Data/Herb/cang_zhu.tres" id="herb_7"]
+[ext_resource type="Resource" path="res://Data/Herb/chen_pi.tres" id="herb_8"]
+[ext_resource type="Resource" path="res://Data/Herb/fu_ling.tres" id="herb_9"]
+[ext_resource type="Resource" path="res://Data/Herb/da_fu_pi.tres" id="herb_10"]
+[ext_resource type="Resource" path="res://Data/Herb/jie_geng.tres" id="herb_11"]
+[ext_resource type="Resource" path="res://Data/Herb/gan_cao.tres" id="herb_12"]
+[ext_resource type="Resource" path="res://Data/Herb/sheng_jiang.tres" id="herb_13"]
+[ext_resource type="Resource" path="res://Data/Herb/da_zao.tres" id="herb_14"]
 
 [sub_resource type="Resource" id="Ingredient_1"]
 script = ExtResource("1")
 herb = ExtResource("herb_1")
-amount = 3.0
+amount = 5.0
 unit = "qian"
 required = true
 [sub_resource type="Resource" id="Ingredient_2"]
@@ -31,31 +32,31 @@ required = true
 [sub_resource type="Resource" id="Ingredient_3"]
 script = ExtResource("1")
 herb = ExtResource("herb_3")
-amount = 2.0
+amount = 3.0
 unit = "qian"
 required = true
 [sub_resource type="Resource" id="Ingredient_4"]
 script = ExtResource("1")
 herb = ExtResource("herb_4")
-amount = 2.0
+amount = 4.0
 unit = "qian"
 required = true
 [sub_resource type="Resource" id="Ingredient_5"]
 script = ExtResource("1")
 herb = ExtResource("herb_5")
-amount = 3.0
+amount = 4.0
 unit = "qian"
 required = true
 [sub_resource type="Resource" id="Ingredient_6"]
 script = ExtResource("1")
 herb = ExtResource("herb_6")
-amount = 2.0
+amount = 4.0
 unit = "qian"
 required = true
 [sub_resource type="Resource" id="Ingredient_7"]
 script = ExtResource("1")
 herb = ExtResource("herb_7")
-amount = 2.0
+amount = 4.0
 unit = "qian"
 required = true
 [sub_resource type="Resource" id="Ingredient_8"]
@@ -67,25 +68,25 @@ required = true
 [sub_resource type="Resource" id="Ingredient_9"]
 script = ExtResource("1")
 herb = ExtResource("herb_9")
-amount = 3.0
+amount = 5.0
 unit = "qian"
 required = true
 [sub_resource type="Resource" id="Ingredient_10"]
 script = ExtResource("1")
 herb = ExtResource("herb_10")
-amount = 2.0
+amount = 5.0
 unit = "qian"
 required = true
 [sub_resource type="Resource" id="Ingredient_11"]
 script = ExtResource("1")
 herb = ExtResource("herb_11")
-amount = 1.0
+amount = 2.0
 unit = "qian"
 required = true
 [sub_resource type="Resource" id="Ingredient_12"]
 script = ExtResource("1")
 herb = ExtResource("herb_12")
-amount = 1.0
+amount = 2.0
 unit = "qian"
 required = true
 [sub_resource type="Resource" id="Ingredient_13"]
@@ -94,15 +95,21 @@ herb = ExtResource("herb_13")
 amount = 2.0
 unit = "qian"
 required = true
+[sub_resource type="Resource" id="Ingredient_14"]
+script = ExtResource("1")
+herb = ExtResource("herb_14")
+amount = 2.0
+unit = "qian"
+required = true
 
 [resource]
 script = ExtResource("2")
 formula_id = "huo_xiang_zheng_qi_san"
 formula_name = "藿香正气散"
-detail_text = "正文测试文字"
-target_disease_id = "shi_sheng_kun_pi"
-target_disease_name = "湿盛困脾"
+detail_text = "藿香正气散\n\n【出处】\n《太平惠民和剂局方》\n\n【功效】\n解表散寒，化湿和中，理气止呕\n\n【主治】\n外感风寒，内伤湿滞\n\n【组成】\n君：藿香 五钱\n臣：苏叶 三钱，白芷 三钱，半夏 四钱，厚朴 四钱\n佐：白术 四钱，苍术 四钱，陈皮 三钱，茯苓 五钱，大腹皮 五钱 ，桔梗 二钱\n使：甘草 二钱，生姜 二钱，大枣 二钱\n\n【配伍】\n藿香：芳香化湿、和中止呕，兼解表散寒，表里兼顾。\n紫苏、白芷：解表散寒、化湿辟秽，助藿香散外感风寒。\n陈皮、半夏、厚朴、大腹皮：理气燥湿、消胀除满、降逆止呕；\n白术、苍术、 茯苓：健脾祛湿、实脾止泻；\n桔梗：宣利肺气、载药上行。\n炙甘草、姜枣：调和脾胃，益气和中，调和诸药。"
+target_disease_id = "wai_gan_feng_han_nei_shang_shi_zhi"
+target_disease_name = "外感风寒，内伤湿滞"
 jun_group = [SubResource("Ingredient_1")]
-chen_group = [SubResource("Ingredient_2"), SubResource("Ingredient_3"), SubResource("Ingredient_4"), SubResource("Ingredient_5"), SubResource("Ingredient_6"), SubResource("Ingredient_7")]
-zuo_group = [SubResource("Ingredient_8"), SubResource("Ingredient_9"), SubResource("Ingredient_10"), SubResource("Ingredient_11"), SubResource("Ingredient_12")]
-shi_group = [SubResource("Ingredient_13")]
+chen_group = [SubResource("Ingredient_2"), SubResource("Ingredient_3"), SubResource("Ingredient_4"), SubResource("Ingredient_5")]
+zuo_group = [SubResource("Ingredient_6"), SubResource("Ingredient_7"), SubResource("Ingredient_8"), SubResource("Ingredient_9"), SubResource("Ingredient_10"), SubResource("Ingredient_11")]
+shi_group = [SubResource("Ingredient_12"), SubResource("Ingredient_13"), SubResource("Ingredient_14")]

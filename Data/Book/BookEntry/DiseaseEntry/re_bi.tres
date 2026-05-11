@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "re_bi"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "热痹"
-detail_text = "热痹\n\n【病机】\n风湿热邪侵袭经络关节，或风寒湿邪郁而化热，气血壅滞、经络痹阻。\n\n【症状】\n关节红肿灼热、疼痛剧烈；触之发热、拒按，得冷稍舒；发热、口渴、烦躁；肢体屈伸不利。\n\n【脉象】\n浮脉（表）：波峰高，波速快（最明显），波宽宽\n\n【标准方】\n白虎桂枝汤"
+detail_text = "热痹\n\n【病机】\n风湿热邪侵袭经络关节，或风寒湿邪郁而化热，气血壅滞、经络痹阻。\n\n【症状】\n关节红肿灼热、疼痛剧烈；触之发热、拒按，得冷稍舒；发热、口渴、烦躁；肢体屈伸不利。\n\n【脉象】\n浮脉（表）：波峰高（轻微），波速快（剧烈），波宽宽（轻微）\n\n【标准方】\n白虎桂枝汤"
 disease_id = "re_bi"
 prerequisite_entry_ids = Array[String](["bai_hu_gui_zhi_tang"])

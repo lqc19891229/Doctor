@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FormulaBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/FormulaBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "jin_suo_gu_jing_wan"
+book_id = "yi_fang_ji_jie"
+title = "金锁固精丸"
+detail_text = "金锁固精丸\n\n【出处】\n《医方集解》\n\n【功效】\n补肾涩精，固摄肾气\n\n【主治】\n肾气不固\n\n【组成】\n君：蒺藜 五钱\n臣：芡实 五钱\n佐：龙骨 五钱，牡蛎 五钱，莲须 三钱\n使：莲子 三两\n\n【配伍】\n沙苑蒺藜：补肾益精、平补肝肾，固本培元。\n芡实+健脾益肾、固涩精气。\n莲须：专涩精；\n龙骨、牡蛎：重镇收敛、固涩滑脱。\n莲子：养心安神，补肾涩精，制丸药赋型"
+formula_id = "jin_suo_gu_jing_wan"
+required_herb_ids = Array[String](["sha_yuan_zi", "qian_shi", "long_gu", "mu_li", "lian_xu", "lian_zi"])

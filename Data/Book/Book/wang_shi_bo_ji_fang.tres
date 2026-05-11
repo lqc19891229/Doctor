@@ -5,11 +5,11 @@
 [resource]
 script = ExtResource("1")
 book_type = "formula"
-book_id = "dan_xi_xin_fa"
-book_name = "丹溪心法"
+book_id = "wang_shi_bo_ji_fang"
+book_name = "王氏博济方"
 detail_text = ""
-author_name = "朱震亨"
-sort_index = 18
+author_name = "王衮"
+sort_index = 20
 visible_by_default = true
 read_once = false
 allow_daytime_open = true

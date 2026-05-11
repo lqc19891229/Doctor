@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1")
 entry_id = "liu_wei_di_huang_wan"
-book_id = "jin_gui_yao_lue"
+book_id = "xiao_er_yao_zheng_zhi_jue"
 title = "六味地黄丸"
-detail_text = "正文测试文字"
+detail_text = "六味地黄丸\n\n【出处】\n《金匮要略》\n\n【功效】\n滋阴补肾\n\n【主治】\n肾阴虚\n\n【组成】\n君：熟地黄 八钱\n臣：山茱萸 四钱，山药 四钱\n佐：泽泻 三钱，茯苓 三钱，丹皮 三钱\n使：\n\n【配伍】\n熟地黄：重用滋阴补肾、填精益髓。\n萸肉：补肝肾、敛精气；\n山药：补脾益肾、固涩下焦。\n泽泻：泻肾浊、防熟地滋腻；\n丹皮：清泻虚火、凉血除蒸；\n茯苓：健脾渗湿、助山药补脾。"
 formula_id = "liu_wei_di_huang_wan"
 required_herb_ids = Array[String](["shu_di_huang", "shan_zhu_yu", "shan_yao", "ze_xie", "fu_ling", "dan_pi"])

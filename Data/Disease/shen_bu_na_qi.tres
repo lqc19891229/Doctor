@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="DiseaseData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Disease/DiseaseData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+disease_id = "shen_bu_na_qi"
+disease_name = "肾不纳气"
+detail_text = "肾不纳气\n\n【病机】\n久病咳喘、年老肾虚、劳伤肾气；肾气亏虚，下元不固，不能摄纳肺气，气浮于上。属虚喘、肺肾两虚，无明显实邪。\n\n【症状】\n喘促日久、呼多吸少、动则喘甚；气短不足以息、吸气浅表；腰膝酸软、神疲乏力；或自汗、语声低怯\n\n【脉象】\n右寸（肺）：波峰低\n右尺（肾阳）：波峰低\n\n【标准方】\n人参蛤蚧散"
+recommended_formula_id = "ren_shen_ge_jie_san"
+exterior_qi = 1.0
+exterior_blood = 1.0
+exterior_cold_hot = 1.0
+exterior_wet_dry = 1.0
+heart_qi = 1.0
+heart_blood = 1.0
+heart_cold_hot = 1.0
+heart_wet_dry = 1.0
+liver_qi = 1.0
+liver_blood = 1.0
+liver_cold_hot = 1.0
+liver_wet_dry = 1.0
+spleen_qi = 1.0
+spleen_blood = 1.0
+spleen_cold_hot = 1.0
+spleen_wet_dry = 1.0
+lung_qi = 0.5
+lung_blood = 1.0
+lung_cold_hot = 1.0
+lung_wet_dry = 1.0
+kidney_yin_qi = 1.0
+kidney_yin_blood = 1.0
+kidney_yin_cold_hot = 1.0
+kidney_yin_wet_dry = 1.0
+kidney_yang_qi = 0.5
+kidney_yang_blood = 1.0
+kidney_yang_cold_hot = 1.0
+kidney_yang_wet_dry = 1.0

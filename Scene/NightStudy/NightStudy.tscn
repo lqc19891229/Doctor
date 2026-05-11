@@ -26,9 +26,12 @@ grow_vertical = 2
 [node name="VBoxRoot" type="VBoxContainer" parent="MarginContainer" unique_id=646348250]
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxRoot" unique_id=583857876]
+[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxRoot" unique_id=518785526]
 layout_mode = 2
-text = "夜读"
+
+[node name="DayLabel" type="Label" parent="MarginContainer/VBoxRoot/TopBar" unique_id=1950310144]
+layout_mode = 2
+text = "天数"
 
 [node name="ContentRow" type="HBoxContainer" parent="MarginContainer/VBoxRoot" unique_id=745767981]
 layout_mode = 2

@@ -6,3 +6,39 @@
 script = ExtResource("1_o28sc")
 
 [node name="CurrentSceneRoot" type="Node" parent="." unique_id=381807020]
+
+[node name="MainMenuLayer" type="CanvasLayer" parent="." unique_id=1999044094]
+
+[node name="MenuPanel" type="Panel" parent="MainMenuLayer" unique_id=435203338]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuLayer/MenuPanel" unique_id=979900440]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NewGameButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer" unique_id=477426475]
+layout_mode = 2
+size_flags_vertical = 3
+text = "新游戏"
+
+[node name="LoadGameButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer" unique_id=503802410]
+layout_mode = 2
+size_flags_vertical = 3
+text = "读取存档"
+
+[node name="QuitGameButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer" unique_id=934317025]
+layout_mode = 2
+size_flags_vertical = 3
+text = "退出游戏"

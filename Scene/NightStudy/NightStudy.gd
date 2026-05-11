@@ -7,6 +7,9 @@ signal study_finished
 # 节点引用
 # =========================
 
+# 顶部天数显示
+@onready var day_label: Label = $MarginContainer/VBoxRoot/TopBar/DayLabel
+
 @onready var info_label: Label = $MarginContainer/VBoxRoot/InfoLabel
 @onready var read_button: Button = $MarginContainer/VBoxRoot/ButtonRow/ReadButton
 @onready var next_day_button: Button = $MarginContainer/VBoxRoot/ButtonRow/NextDayButton
@@ -33,6 +36,9 @@ var selected_entry: BookEntryData = null
 
 
 func _ready() -> void:
+	# 进入 NightStudy 后，刷新顶部天数显示
+	_update_day_label()
+
 	# 绑定按钮与列表事件
 	read_button.pressed.connect(_on_read_button_pressed)
 	next_day_button.pressed.connect(_on_next_day_button_pressed)
@@ -43,6 +49,19 @@ func _ready() -> void:
 	_clear_entry_and_detail()
 	read_button.disabled = true
 	info_label.text = "请选择今晚要阅读的医书。"
+
+
+# =========================
+# 刷新顶部天数显示
+# =========================
+
+func _update_day_label() -> void:
+	# 如果场景中没有 DayLabel，直接跳过，避免报错
+	if day_label == null:
+		return
+
+	# 天数统一从 GameTimeManager 读取
+	day_label.text = GameTime.get_day_text()
 
 
 # =========================

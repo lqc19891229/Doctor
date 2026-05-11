@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HerbData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Herb/HerbData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+herb_id = "long_gu"
+herb_name = "龙骨"
+nature = "平"
+taste = Array[String](["甘", "涩"])
+meridians = Array[String](["心", "肝", "肾"])

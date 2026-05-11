@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "bai_hu_tang"
 book_id = "shang_han_lun"
 title = "白虎汤"
-detail_text = "正文测试文字"
+detail_text = "白虎汤\n\n【出处】\n《伤寒论》\n\n【功效】\n清热生津，辛寒清气\n\n【主治】\n气分热盛\n\n【组成】\n君：石膏 二两\n臣：知母 六钱\n佐：粳米 三钱\n使：甘草 二钱\n\n【配伍】\n生石膏：辛甘大寒，清泻阳明气分实热，除壮热、止大汗。\n知母：苦寒质润，清热泻火、滋阴生津，助石膏清润除烦止渴。\n粳米、炙甘草：益气养胃、缓和石膏知母寒凉之性，保护胃气；生津补液，防大寒伤中。"
 formula_id = "bai_hu_tang"
 required_herb_ids = Array[String](["shi_gao", "zhi_mu", "jing_mi", "gan_cao"])

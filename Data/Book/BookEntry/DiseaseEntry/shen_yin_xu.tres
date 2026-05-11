@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "shen_yin_xu"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "肾阴虚"
-detail_text = "正文测试文字"
+detail_text = "肾阴虚\n\n【病机】\n久病耗伤、房劳过度、过服温燥，肾阴亏虚、虚火内生、失于滋养。\n\n【症状】\n腰膝酸痛、眩晕耳鸣、健忘；潮热盗汗、五心烦热、口燥咽干；男子遗精早泄，女子经少、闭经或崩漏；形体消瘦、失眠多梦\n\n【脉象】\n左尺（肾阴）：波线细，波宽窄\n右尺（肾阳）：波速快\n\n【标准方】\n六味地黄丸"
 disease_id = "shen_yin_xu"
 prerequisite_entry_ids = Array[String](["liu_wei_di_huang_wan"])

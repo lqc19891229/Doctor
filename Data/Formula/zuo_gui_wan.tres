@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="FormulaData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Formula/FormulaIngredient.gd" id="1"]
+[ext_resource type="Script" path="res://System/Formula/FormulaData.gd" id="2"]
+[ext_resource type="Resource" path="res://Data/Herb/shu_di_huang.tres" id="herb_1"]
+[ext_resource type="Resource" path="res://Data/Herb/gui_ban_jiao.tres" id="herb_2"]
+[ext_resource type="Resource" path="res://Data/Herb/lu_jiao_jiao.tres" id="herb_3"]
+[ext_resource type="Resource" path="res://Data/Herb/gou_qi_zi.tres" id="herb_4"]
+[ext_resource type="Resource" path="res://Data/Herb/tu_si_zi.tres" id="herb_5"]
+[ext_resource type="Resource" path="res://Data/Herb/shan_zhu_yu.tres" id="herb_6"]
+[ext_resource type="Resource" path="res://Data/Herb/shan_yao.tres" id="herb_7"]
+[ext_resource type="Resource" path="res://Data/Herb/niu_xi.tres" id="herb_8"]
+
+[sub_resource type="Resource" id="Ingredient_1"]
+script = ExtResource("1")
+herb = ExtResource("herb_1")
+amount = 8.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_2"]
+script = ExtResource("1")
+herb = ExtResource("herb_2")
+amount = 4.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_3"]
+script = ExtResource("1")
+herb = ExtResource("herb_3")
+amount = 4.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_4"]
+script = ExtResource("1")
+herb = ExtResource("herb_4")
+amount = 4.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_5"]
+script = ExtResource("1")
+herb = ExtResource("herb_5")
+amount = 4.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_6"]
+script = ExtResource("1")
+herb = ExtResource("herb_6")
+amount = 4.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_7"]
+script = ExtResource("1")
+herb = ExtResource("herb_7")
+amount = 4.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_8"]
+script = ExtResource("1")
+herb = ExtResource("herb_8")
+amount = 3.0
+unit = "qian"
+required = true
+
+[resource]
+script = ExtResource("2")
+formula_id = "zuo_gui_wan"
+formula_name = "左归丸"
+detail_text = "左归丸\n\n【出处】\n《景岳全书》\n\n【功效】\n滋阴补肾，填精益髓\n\n【主治】\n肾精不足\n\n【组成】\n君：熟地黄 八钱\n臣：龟板胶 四钱，鹿角胶 四钱，枸杞子 四钱，菟丝子 四钱\n佐：山茱萸 四钱，山药 四钱\n使：牛膝 三钱\n\n【配伍】\n熟地黄：大补真阴、填精补髓。\n山药、枸杞、山茱萸：滋补肝肾、养阴固精，助熟地滋补肾精。\n龟鹿二胶：峻补精血、阴阳双补、侧重填髓\n菟丝子：补肾益精\n川牛膝：补肝肾、强筋骨、引药下行"
+target_disease_id = "shen_jing_bu_zu"
+target_disease_name = "肾精不足"
+jun_group = [SubResource("Ingredient_1")]
+chen_group = [SubResource("Ingredient_2"), SubResource("Ingredient_3"), SubResource("Ingredient_4"), SubResource("Ingredient_5")]
+zuo_group = [SubResource("Ingredient_6"), SubResource("Ingredient_7")]
+shi_group = [SubResource("Ingredient_8")]

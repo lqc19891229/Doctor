@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="DiseaseData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Disease/DiseaseData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+disease_id = "wai_gan_feng_han_nei_shang_shi_zhi"
+disease_name = "外感风寒，内伤湿滞"
+detail_text = "外感风寒，内伤湿滞\n\n【病机】\n外感风寒之邪束表，内伤饮食湿浊阻滞中焦；表有风寒、里有湿滞\n\n【症状】\n外感风寒：恶寒发热、头痛身重、无汗、鼻塞流清涕；内伤湿滞：胸膈满闷、脘腹胀痛、恶心呕吐、肠鸣泄泻；怕冷发热 + 又吐又泻、身重胸闷\n\n【脉象】\n浮脉（表）：波速慢\n右关（脾胃，大小肠）：波宽宽\n\n【标准方】\n藿香正气散"
+recommended_formula_id = "huo_xiang_zheng_qi_san"
+exterior_qi = 1.0
+exterior_blood = 1.0
+exterior_cold_hot = 0.5
+exterior_wet_dry = 1.0
+heart_qi = 1.0
+heart_blood = 1.0
+heart_cold_hot = 1.0
+heart_wet_dry = 1.0
+liver_qi = 1.0
+liver_blood = 1.0
+liver_cold_hot = 1.0
+liver_wet_dry = 1.0
+spleen_qi = 1.0
+spleen_blood = 1.0
+spleen_cold_hot = 1.0
+spleen_wet_dry = 1.5
+lung_qi = 1.0
+lung_blood = 1.0
+lung_cold_hot = 1.0
+lung_wet_dry = 1.0
+kidney_yin_qi = 1.0
+kidney_yin_blood = 1.0
+kidney_yin_cold_hot = 1.0
+kidney_yin_wet_dry = 1.0
+kidney_yang_qi = 1.0
+kidney_yang_blood = 1.0
+kidney_yang_cold_hot = 1.0
+kidney_yang_wet_dry = 1.0

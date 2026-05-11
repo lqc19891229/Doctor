@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DiseaseBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/DiseaseBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "shen_qi_bu_gu"
+book_id = "zhu_bing_yuan_hou_lun"
+title = "肾气不固"
+detail_text = "肾气不固\n\n【病机】\n久病劳损、年老体弱、房事不节，肾气亏虚、封藏固摄无权，偏虚证、无明显寒热。\n\n【症状】\n腰膝酸软、神疲乏力，耳鸣；小便频数清长、夜尿多、遗尿、小便失禁；男子：滑精、早泄；女子：带下清稀量多、胎动易滑；\n\n【脉象】\n左尺（肾阴）：波宽宽\n右尺（肾阳）：波峰低\n\n【标准方】\n金锁固精丸"
+disease_id = "shen_qi_bu_gu"
+prerequisite_entry_ids = Array[String](["jin_suo_gu_jing_wan"])

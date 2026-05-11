@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://System/Formula/FormulaIngredient.gd" id="1"]
 [ext_resource type="Script" path="res://System/Formula/FormulaData.gd" id="2"]
 [ext_resource type="Resource" path="res://Data/Herb/huang_qi.tres" id="herb_1"]
-[ext_resource type="Resource" path="res://Data/Herb/long_yan.tres" id="herb_2"]
-[ext_resource type="Resource" path="res://Data/Herb/ren_shen.tres" id="herb_3"]
+[ext_resource type="Resource" path="res://Data/Herb/ren_shen.tres" id="herb_2"]
+[ext_resource type="Resource" path="res://Data/Herb/long_yan.tres" id="herb_3"]
 [ext_resource type="Resource" path="res://Data/Herb/bai_zhu.tres" id="herb_4"]
 [ext_resource type="Resource" path="res://Data/Herb/dang_gui.tres" id="herb_5"]
 [ext_resource type="Resource" path="res://Data/Herb/suan_zao_ren.tres" id="herb_6"]
@@ -92,7 +92,7 @@ required = true
 script = ExtResource("2")
 formula_id = "gui_pi_tang"
 formula_name = "归脾汤"
-detail_text = "正文测试文字"
+detail_text = "归脾汤\n\n【出处】\n《严氏济生方》\n\n【功效】\n益气补血，健脾养心\n\n【主治】\n心脾两虚\n\n【组成】\n君：黄芪 一两，人参 五钱\n臣：龙眼 五钱，白术 五钱，当归 五钱，酸枣仁 六钱\n佐：茯神 五钱，远志 三钱，木香 二钱\n使：甘草 二钱，生姜 一钱，大枣 一钱\n\n【配伍】\n黄芪、人参：大补脾气，益气生血。\n当归、龙眼：肉养血补心、安神。\n白术：助健脾；\n酸枣仁、茯神：宁心安神；\n远志：安神益智、交通心肾；\n木香：理气醒脾，防滋补壅滞碍胃。\n炙甘草、姜枣：益气和中、调和诸药，助脾胃生化气血。"
 target_disease_id = "xin_pi_liang_xu"
 target_disease_name = "心脾两虚"
 jun_group = [SubResource("Ingredient_1"), SubResource("Ingredient_2")]

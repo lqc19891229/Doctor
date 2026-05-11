@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FormulaData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Formula/FormulaIngredient.gd" id="1"]
+[ext_resource type="Script" path="res://System/Formula/FormulaData.gd" id="2"]
+
+
+[resource]
+script = ExtResource("2")
+formula_id = "ren_shen_ge_jie_san"
+formula_name = "人参蛤蚧散"
+detail_text = "人参蛤蚧散\n\n【出处】\n《博济方》\n\n【功效】\n补肺益肾，纳气定喘，止咳化痰\n\n【主治】\n肾不纳气\n\n【组成】\n君：蛤蚧 五钱，人参 四钱\n臣：知母 三钱，贝母 三钱，桑白皮 三钱\n佐：茯苓 四钱，杏仁 四钱\n使：甘草 三钱\n\n【配伍】\n蛤蚧：补肺益肾、温肾纳气、定喘止嗽，专治肾不纳气虚喘。\n人参：大补元气、补益肺气，助蛤蚧固本益气。\n杏仁、贝母：润肺化痰、降气止咳\n桑白皮、知母：清泻肺热、润燥止咳\n茯苓：健脾渗湿、杜绝生痰之源\n炙甘草：益气和中，调和诸药。"
+target_disease_id = "shen_bu_na_qi"
+target_disease_name = "肾不纳气"
+jun_group = []
+chen_group = []
+zuo_group = []
+shi_group = []

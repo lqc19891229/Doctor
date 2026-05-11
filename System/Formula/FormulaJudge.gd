@@ -20,8 +20,8 @@ class_name FormulaJudge
 #
 # 4. 剂量严重错误判定
 # error_ratio = abs(实际剂量 - 标准剂量) / 标准剂量
-# - error_ratio >= 1/3 -> 严重错误
-# - 0 < error_ratio < 1/3 -> 轻微错误
+# - error_ratio >= 1/2 -> 严重错误
+# - 0 < error_ratio < 1/2 -> 轻微错误
 # - error_ratio == 0 -> 正确
 #
 # 5. 最终分数允许为负数
@@ -199,14 +199,20 @@ func judge_formula(player_prescription: Prescription, standard_formula: FormulaD
 	# -------------------------
 	result.score = 100 - total_penalty
 
-	if (
-		result.missing_herb_ids.is_empty()
-		and result.extra_herb_ids.is_empty()
-		and result.minor_dosage_errors.is_empty()
-		and result.major_dosage_errors.is_empty()
-	):
+	# 根据最终分数计算评价等级
+	# 100分：甲等
+	# 80~99分：乙等
+	# 60~79分：丙等
+	# 60分以下：丁等
+	result.grade = _get_score_grade(result.score)
+
+	# level 保留原本的 perfect / pass / fail 结构，方便旧逻辑继续使用
+	if result.score == 100:
 		result.success = true
 		result.level = "perfect"
+	elif result.score >= 60:
+		result.success = true
+		result.level = "pass"
 	else:
 		result.success = false
 		result.level = "fail"
@@ -337,7 +343,9 @@ func _get_dose_error_type(player_fen: int, standard_fen: int) -> String:
 
 	var error_ratio: float = abs(float(player_fen - standard_fen)) / float(standard_fen)
 
-	if error_ratio >= (1.0 / 3.0):
+	# 误差 >= 1/2：严重错误，扣对应全值
+	# 误差 > 0 且 < 1/2：轻微错误，扣对应一半
+	if error_ratio >= 0.5:
 		return "severe"
 	elif error_ratio > 0.0:
 		return "minor"
@@ -346,7 +354,28 @@ func _get_dose_error_type(player_fen: int, standard_fen: int) -> String:
 
 
 # =========================================================
-# 七、剂量偏差方向文本
+# 七、根据分数返回评价等级
+#
+# 100分：甲等
+# 80~99分：乙等
+# 60~79分：丙等
+# 60分以下：丁等
+# =========================================================
+func _get_score_grade(score: int) -> String:
+	if score == 100:
+		return "甲等"
+
+	if score >= 80:
+		return "乙等"
+
+	if score >= 60:
+		return "丙等"
+
+	return "丁等"
+
+
+# =========================================================
+# 八、剂量偏差方向文本
 # =========================================================
 func _get_dose_diff_text(player_fen: int, standard_fen: int) -> String:
 	if player_fen > standard_fen:
@@ -357,7 +386,7 @@ func _get_dose_diff_text(player_fen: int, standard_fen: int) -> String:
 
 
 # =========================================================
-# 八、生成四行显示文本
+# 九、生成四行显示文本
 #
 # 输出示例：
 # 君：麻黄✅️ 3钱✅️
@@ -381,7 +410,7 @@ func _build_role_display_text(role_display_map: Dictionary) -> String:
 
 
 # =========================================================
-# 九、工具：转成 Array[String]
+# 十、工具：转成 Array[String]
 # =========================================================
 func _to_string_array(value) -> Array[String]:
 	var result: Array[String] = []
@@ -394,7 +423,7 @@ func _to_string_array(value) -> Array[String]:
 
 
 # =========================================================
-# 十、工具：空数组时给一个占位符
+# 十一、工具：空数组时给一个占位符
 # =========================================================
 func _join_or_placeholder(items: Array[String]) -> String:
 	if items.is_empty():
@@ -403,7 +432,7 @@ func _join_or_placeholder(items: Array[String]) -> String:
 
 
 # =========================================================
-# 十一、快速测试
+# 十二、快速测试
 # =========================================================
 func judge_and_print(player_prescription: Prescription, standard_formula: FormulaData) -> JudgeResult:
 	var result := judge_formula(player_prescription, standard_formula)

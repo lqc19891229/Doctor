@@ -491,3 +491,161 @@ func get_clinical_log_formula_id_list() -> Array[String]:
 # 获取行医记考中可见的疾病ID
 func get_clinical_log_disease_id_list() -> Array[String]:
 	return _dict_keys_to_string_array(clinical_log_unlocked_disease_ids)
+
+
+
+# =========================================================
+# 测试功能：一键解锁所有条目
+# 说明：
+# 1. 仅用于开发测试。
+# 2. 药材条目：解锁对应药材。
+# 3. 方剂条目：标记条目已读，并解锁对应方剂。
+# 4. 病证条目：标记条目已读，并解锁对应疾病。
+# 5. 医理条目：标记条目已读。
+# 6. 神农百草经的阅读天数会补到全部药材已解锁。
+# =========================================================
+func unlock_all_entries_for_test() -> Dictionary:
+	var result := {
+		"entry_count": 0,
+		"herb_count": 0,
+		"formula_count": 0,
+		"disease_count": 0,
+		"theory_count": 0
+	}
+
+	# 防御：BookEntryDB 必须已经加载完成。
+	if BookEntryDB == null:
+		return result
+
+	var all_entries: Array[BookEntryData] = BookEntryDB.get_all_entries()
+
+	for entry in all_entries:
+		if entry == null:
+			continue
+
+		result["entry_count"] += 1
+
+		# 药材条目：只解锁药材，不强行标记为已读。
+		# 因为当前规则里 Herb 条目是“查看”，不是“阅读”。
+		if entry is HerbBookEntryData:
+			var herb_entry := entry as HerbBookEntryData
+			unlock_herb(herb_entry.herb_id)
+			result["herb_count"] += 1
+			continue
+
+		# 其他书籍条目：统一标记为已读，方便 NightStudy 直接回看。
+		mark_entry_as_read(entry.entry_id)
+
+		# 方剂条目：同步解锁方剂本体。
+		if entry is FormulaBookEntryData:
+			var formula_entry := entry as FormulaBookEntryData
+			unlock_formula(formula_entry.formula_id)
+			result["formula_count"] += 1
+			continue
+
+		# 病证条目：同步解锁疾病本体。
+		if entry is DiseaseBookEntryData:
+			var disease_entry := entry as DiseaseBookEntryData
+			unlock_disease(disease_entry.disease_id)
+			result["disease_count"] += 1
+			continue
+
+		# 医理条目：只需要已读状态。
+		if entry is TheoryBookEntryData:
+			result["theory_count"] += 1
+
+	# 把带药材解锁顺序的书籍进度补满。
+	# 这样 NightStudy 中“神农百草经”的进度也会显示为满。
+	if BookDB != null:
+		var all_books: Array[BookData] = BookDB.get_all_books()
+		for book in all_books:
+			if book == null:
+				continue
+
+			var herb_unlock_order := book.get_herb_unlock_order()
+			if herb_unlock_order.is_empty():
+				continue
+
+			book_read_days[book.book_id] = herb_unlock_order.size()
+
+	print("[UnlockManager] 测试解锁全部条目：", result)
+	return result
+
+
+# =========================================================
+# 十四、存档 / 读档
+# =========================================================
+
+# 重置所有解锁与阅读进度
+# 用于新游戏
+func reset_progress() -> void:
+	read_entry_ids.clear()
+	unlocked_herb_ids.clear()
+	unlocked_disease_ids.clear()
+	unlocked_formula_ids.clear()
+	clinical_log_unlocked_herb_ids.clear()
+	clinical_log_unlocked_disease_ids.clear()
+	clinical_log_unlocked_formula_ids.clear()
+	book_read_days.clear()
+
+
+# 存档用：导出当前所有进度
+func get_save_data() -> Dictionary:
+	return {
+		"read_entry_ids": read_entry_ids,
+		"unlocked_herb_ids": unlocked_herb_ids,
+		"unlocked_disease_ids": unlocked_disease_ids,
+		"unlocked_formula_ids": unlocked_formula_ids,
+		"clinical_log_unlocked_herb_ids": clinical_log_unlocked_herb_ids,
+		"clinical_log_unlocked_disease_ids": clinical_log_unlocked_disease_ids,
+		"clinical_log_unlocked_formula_ids": clinical_log_unlocked_formula_ids,
+		"book_read_days": book_read_days
+	}
+
+
+# 读档用：恢复所有进度
+func load_save_data(data: Dictionary) -> void:
+	reset_progress()
+
+	read_entry_ids = _load_bool_dictionary(data.get("read_entry_ids", {}))
+	unlocked_herb_ids = _load_bool_dictionary(data.get("unlocked_herb_ids", {}))
+	unlocked_disease_ids = _load_bool_dictionary(data.get("unlocked_disease_ids", {}))
+	unlocked_formula_ids = _load_bool_dictionary(data.get("unlocked_formula_ids", {}))
+	clinical_log_unlocked_herb_ids = _load_bool_dictionary(data.get("clinical_log_unlocked_herb_ids", {}))
+	clinical_log_unlocked_disease_ids = _load_bool_dictionary(data.get("clinical_log_unlocked_disease_ids", {}))
+	clinical_log_unlocked_formula_ids = _load_bool_dictionary(data.get("clinical_log_unlocked_formula_ids", {}))
+	book_read_days = _load_int_dictionary(data.get("book_read_days", {}))
+
+
+# 把 JSON 读出来的 Dictionary 转回 {String: true}
+func _load_bool_dictionary(source) -> Dictionary:
+	var result := {}
+
+	if typeof(source) != TYPE_DICTIONARY:
+		return result
+
+	for key in source.keys():
+		var clean_key := String(key).strip_edges()
+		if clean_key == "":
+			continue
+
+		result[clean_key] = bool(source[key])
+
+	return result
+
+
+# 把 JSON 读出来的 Dictionary 转回 {String: int}
+func _load_int_dictionary(source) -> Dictionary:
+	var result := {}
+
+	if typeof(source) != TYPE_DICTIONARY:
+		return result
+
+	for key in source.keys():
+		var clean_key := String(key).strip_edges()
+		if clean_key == "":
+			continue
+
+		result[clean_key] = int(source[key])
+
+	return result

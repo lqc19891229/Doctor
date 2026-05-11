@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c1kldxjoeyc78" path="res://Scene/Prescription/PrescriptionWindow.tscn" id="5_h552d"]
 [ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/clinical_log/clinical_log_window.tscn" id="5_ruh48"]
 [ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="6_k4yeq"]
+[ext_resource type="PackedScene" uid="uid://drw157phi8l3n" path="res://Scene/Test/InfoWindow.tscn" id="6_y7fei"]
 
 [node name="Clinic" type="Control" unique_id=360139135]
 layout_mode = 3
@@ -35,7 +36,13 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-text = "第1天"
+text = "天数"
+
+[node name="TimeLabel" type="Label" parent="VBoxContainer/TopBar" unique_id=583757275]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "时辰"
 
 [node name="DiagnosisPanel" type="Panel" parent="VBoxContainer" unique_id=944464422]
 layout_mode = 2
@@ -44,49 +51,31 @@ size_flags_stretch_ratio = 2.0
 
 [node name="DiagnosisLayout" type="VBoxContainer" parent="VBoxContainer/DiagnosisPanel" unique_id=1153841944]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -31.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
-[node name="InfoLabel" type="Label" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout" unique_id=1000043409]
-custom_minimum_size = Vector2(600, 140)
-layout_mode = 2
-size_flags_vertical = 1
-autowrap_mode = 2
-
-[node name="NpcButtonRow" type="HBoxContainer" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout" unique_id=906841336]
+[node name="ButtonRow" type="HBoxContainer" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout" unique_id=906841336]
 layout_mode = 2
 
-[node name="PrevButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow" unique_id=1972989327]
-custom_minimum_size = Vector2(50, 50)
+[node name="OpenPulseWindowButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/ButtonRow" unique_id=1895980174]
 layout_mode = 2
-text = "上一个"
-
-[node name="NextButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow" unique_id=120535984]
-layout_mode = 2
-text = "下一个"
-
-[node name="SpawnNpcButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow" unique_id=206876856]
-layout_mode = 2
-text = "生成NPC"
-
-[node name="OpenPulseWindowButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow" unique_id=1895980174]
-layout_mode = 2
+size_flags_horizontal = 3
 text = "把脉"
 
-[node name="OpenPrescriptionWindowButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow" unique_id=1911117914]
+[node name="OpenPrescriptionWindowButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/ButtonRow" unique_id=1911117914]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "开方"
 
-[node name="Openclinical_logWindowButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow" unique_id=1425448604]
+[node name="Openclinical_logWindowButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/ButtonRow" unique_id=1425448604]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "行医记考"
-
-[node name="EndTodayButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow" unique_id=808354826]
-layout_mode = 2
-text = "结束当天"
 
 [node name="PrescriptionWindow" parent="." unique_id=901784337 instance=ExtResource("5_h552d")]
 visible = false
@@ -97,7 +86,5 @@ visible = false
 [node name="ClinicalLogWindow" parent="." unique_id=1159353037 instance=ExtResource("5_ruh48")]
 visible = false
 
-[connection signal="pressed" from="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/PrevButton" to="." method="_on_prev_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/NextButton" to="." method="_on_next_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/SpawnNpcButton" to="." method="_on_spawn_npc_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/DiagnosisPanel/DiagnosisLayout/NpcButtonRow/EndTodayButton" to="." method="_on_end_today_pressed"]
+[node name="InfoWindow" parent="." unique_id=1635719098 instance=ExtResource("6_y7fei")]
+visible = false

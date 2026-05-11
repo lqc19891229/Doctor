@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "jin_gui_shen_qi_wan"
 book_id = "jin_gui_yao_lue"
 title = "金匮肾气丸"
-detail_text = "正文测试文字"
+detail_text = "金匮肾气丸\n\n【出处】\n《金匮要略》\n\n【功效】\n温补肾阳，化气行水\n\n【主治】\n肾阳虚\n\n【组成】\n君：附子 二钱，桂枝 三钱\n臣：熟地黄 一钱，山茱萸 四钱，山药 五钱\n佐：泽泻 三钱，茯苓 三钱，丹皮 三钱\n使：\n\n【配伍】\n附子、桂枝：温补肾阳、温通命门，微微生火、鼓舞肾气。\n熟地、山萸肉、山药：即六味三补，滋补肾阴、阴中求阳。\n丹皮、茯苓、泽泻：即六味三泻，泻浊降火、渗湿利水，防滋腻壅滞。"
 formula_id = "jin_gui_shen_qi_wan"
 required_herb_ids = Array[String](["fu_zi", "gui_zhi", "shu_di_huang", "shan_zhu_yu", "shan_yao", "ze_xie", "fu_ling", "dan_pi"])

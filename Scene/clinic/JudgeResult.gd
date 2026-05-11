@@ -33,6 +33,13 @@ var level: String = "fail"
 # fail    = 0~59
 var score: int = 0
 
+# 评价等级
+# 甲等：100分
+# 乙等：80~99分
+# 丙等：60~79分
+# 丁等：60分以下
+var grade: String = "丁等"
+
 # 给玩家或 UI 显示的主信息
 var message: String = ""
 
@@ -135,6 +142,7 @@ func get_summary_text() -> String:
 		lines.append(message)
 
 	lines.append("评分：%d" % score)
+	lines.append("评价：%s" % grade)
 
 	if matched_formula_name != "":
 		lines.append("标准方：%s" % matched_formula_name)
@@ -169,6 +177,7 @@ func debug_print() -> void:
 	print("success: ", success)
 	print("level: ", level)
 	print("score: ", score)
+	print("grade: ", grade)
 	print("message: ", message)
 	print("matched_formula_id: ", matched_formula_id)
 	print("matched_formula_name: ", matched_formula_name)
@@ -192,6 +201,7 @@ func to_dict() -> Dictionary:
 		"success": success,
 		"level": level,
 		"score": score,
+		"grade": grade,
 		"message": message,
 
 		"matched_formula_id": matched_formula_id,

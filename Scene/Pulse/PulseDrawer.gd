@@ -47,7 +47,7 @@ const BASE_WET_DRY := 10.0
 
 # 缩放参数：
 # 用来把四轴数值映射成实际绘制效果
-@export var amplitude_scale: float = 0.6
+@export var amplitude_scale: float = 0.5
 @export var line_width_scale: float = 0.25
 @export var speed_scale: float = 1.0
 @export var frequency_scale: float = 0.5

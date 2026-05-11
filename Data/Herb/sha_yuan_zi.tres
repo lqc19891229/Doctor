@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1")
-herb_id = "shao_yao"
-herb_name = "芍药"
-nature = "寒"
-taste = Array[String](["苦"])
-meridians = Array[String](["肝", "脾"])
+herb_id = "sha_yuan_zi"
+herb_name = "沙苑子"
+nature = "温"
+taste = Array[String](["甘"])
+meridians = Array[String](["肝", "肾"])
