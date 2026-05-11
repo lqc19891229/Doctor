@@ -411,14 +411,30 @@ func show_hand_group(hand_side: String) -> void:
 # =========================================================
 
 func _update_pulse_keyboard_display() -> void:
+	# =====================================================
+	# 读取右手三键状态
+	# Q / A / Z 对应右尺 / 右关 / 右寸
+	# 只有三键同时按下，才显示右手脉象图。
+	# =====================================================
 	var right_cun_pressed := Input.is_action_pressed("pulse_right_cun")
 	var right_guan_pressed := Input.is_action_pressed("pulse_right_guan")
 	var right_chi_pressed := Input.is_action_pressed("pulse_right_chi")
 
+	# =====================================================
+	# 读取左手三键状态
+	# W / S / X 对应左尺 / 左关 / 左寸
+	# 只有三键同时按下，才显示左手脉象图。
+	# =====================================================
 	var left_cun_pressed := Input.is_action_pressed("pulse_left_cun")
 	var left_guan_pressed := Input.is_action_pressed("pulse_left_guan")
 	var left_chi_pressed := Input.is_action_pressed("pulse_left_chi")
 
+	# =====================================================
+	# 生成当前按键签名
+	# 用途：
+	# 如果这一帧和上一帧按键状态完全一样，
+	# 就不重复刷新 PulseWindow，避免画面抖动。
+	# =====================================================
 	var signature := "%s%s%s|%s%s%s" % [
 		"1" if right_cun_pressed else "0",
 		"1" if right_guan_pressed else "0",
@@ -433,6 +449,9 @@ func _update_pulse_keyboard_display() -> void:
 
 	last_pulse_input_signature = signature
 
+	# =====================================================
+	# 计算左右手各自按下了几个键
+	# =====================================================
 	var right_pressed_count := 0
 	var left_pressed_count := 0
 
@@ -452,46 +471,44 @@ func _update_pulse_keyboard_display() -> void:
 
 	var total_pressed_count := right_pressed_count + left_pressed_count
 
+	# =====================================================
+	# 右手：必须 Q / A / Z 三键同时按下
+	# 条件：
+	# 1. 右手三个键全按下
+	# 2. 左手没有任何键按下
+	# =====================================================
 	if right_pressed_count == 3 and left_pressed_count == 0:
 		pulse_keyboard_override_active = true
 		show_hand_group("right")
 		return
 
+	# =====================================================
+	# 左手：必须 W / S / X 三键同时按下
+	# 条件：
+	# 1. 左手三个键全按下
+	# 2. 右手没有任何键按下
+	# =====================================================
 	if left_pressed_count == 3 and right_pressed_count == 0:
 		pulse_keyboard_override_active = true
 		show_hand_group("left")
 		return
 
-	if total_pressed_count == 1:
-		pulse_keyboard_override_active = true
-
-		if right_cun_pressed:
-			show_region("右寸")
-			return
-
-		if right_guan_pressed:
-			show_region("右关")
-			return
-
-		if right_chi_pressed:
-			show_region("右尺")
-			return
-
-		if left_cun_pressed:
-			show_region("左寸")
-			return
-
-		if left_guan_pressed:
-			show_region("左关")
-			return
-
-		if left_chi_pressed:
-			show_region("左尺")
-			return
-
-	if pulse_keyboard_override_active:
+	# =====================================================
+	# 其他所有情况都显示按键提示页
+	# 包括：
+	# 1. 没有按键
+	# 2. 只按一个键
+	# 3. 只按两个键
+	# 4. 左右手混按
+	# 5. 三键松开过程中的中间状态
+	#
+	# 这样可以彻底避免松键时闪过单个脉象图。
+	# =====================================================
+	if pulse_keyboard_override_active or total_pressed_count != 0:
 		pulse_keyboard_override_active = false
-		show_region(current_display_region_name)
+
+		if pulse_window != null and pulse_window.has_method("show_hint_tab"):
+			pulse_window.show_hint_tab()
 
 
 func _reset_pulse_keyboard_state() -> void:
@@ -706,9 +723,13 @@ func _on_open_pulse_window_button_pressed() -> void:
 	if pulse_window == null:
 		return
 
+	# 打开脉诊窗口时，只显示按键提示页。
+	# 不再自动调用 show_region()，避免窗口一打开就跳到脉象图。
 	pulse_window.open_window()
 
-	show_region(current_display_region_name)
+	if pulse_window.has_method("show_hint_tab"):
+		pulse_window.show_hint_tab()
+
 	last_pulse_input_signature = ""
 
 

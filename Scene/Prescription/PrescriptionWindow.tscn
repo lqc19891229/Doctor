@@ -5,7 +5,7 @@
 [node name="PrescriptionWindow" type="Window" unique_id=901784337]
 oversampling_override = 1.0
 position = Vector2i(0, 36)
-size = Vector2i(1920, 700)
+size = Vector2i(1200, 1000)
 script = ExtResource("1_e60oy")
 
 [node name="PrescriptionLayout" type="VBoxContainer" parent="." unique_id=1762507914]

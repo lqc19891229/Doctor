@@ -1,97 +1,148 @@
 [gd_scene format=3 uid="uid://b24f211e0acte"]
 
 [ext_resource type="Script" uid="uid://cs8dpone7jush" path="res://Scene/Pulse/PulseWindowUI.gd" id="1_in46w"]
-[ext_resource type="Script" uid="uid://ckajxgh63gyoe" path="res://Scene/Pulse/PulsePanel.gd" id="2_js3rb"]
-[ext_resource type="Script" uid="uid://cqs7cn5g00f7v" path="res://Scene/Pulse/PulseDrawer.gd" id="3_js3rb"]
+[ext_resource type="Script" uid="uid://cqs7cn5g00f7v" path="res://Scene/Pulse/PulseDrawer.gd" id="2_drawer"]
 
-[node name="PulseWindow" type="Window" unique_id=50916568]
+[node name="PulseWindow" type="Window" unique_id=1028787152]
 oversampling_override = 1.0
 title = "脉诊"
 position = Vector2i(0, 36)
-size = Vector2i(1600, 1000)
+size = Vector2i(1200, 1000)
+unresizable = true
 script = ExtResource("1_in46w")
 
-[node name="PulsePanel" type="Panel" parent="." unique_id=1797286107]
-clip_contents = true
-custom_minimum_size = Vector2(0, 300)
+[node name="LayerTabs" type="TabContainer" parent="." unique_id=1959220331]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 3
-script = ExtResource("2_js3rb")
+current_tab = 0
 
-[node name="PulsePanelLayout" type="HBoxContainer" parent="PulsePanel" unique_id=2105484611]
-layout_mode = 1
-anchors_preset = 15
+[node name="按键提示" type="Control" parent="LayerTabs" unique_id=1433950808]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="KeyHintPanel" type="PanelContainer" parent="LayerTabs/按键提示" unique_id=751632266]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RightPulseButtonRow" type="VBoxContainer" parent="PulsePanel/PulsePanelLayout" unique_id=155759891]
+[node name="KeyHintLabel" type="Label" parent="LayerTabs/按键提示/KeyHintPanel" unique_id=1711602170]
+layout_mode = 2
+text = "按键提示：
+
+右寸：Z
+右关：A
+右尺：Q
+
+左寸：X
+左关：S
+左尺：W
+
+同时按一只手三键可查看整手脉象"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="右手脉象" type="Control" parent="LayerTabs" unique_id=416110597]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="RightHandLayout" type="HBoxContainer" parent="LayerTabs/右手脉象" unique_id=1686573971]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RightLabelColumn" type="VBoxContainer" parent="LayerTabs/右手脉象/RightHandLayout" unique_id=764737746]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="Float" type="Label" parent="PulsePanel/PulsePanelLayout/RightPulseButtonRow" unique_id=137155217]
+[node name="FloatLabel" type="Label" parent="LayerTabs/右手脉象/RightHandLayout/RightLabelColumn" unique_id=1625807829]
 layout_mode = 2
 size_flags_vertical = 3
 text = "浮脉"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RightChiButton" type="Button" parent="PulsePanel/PulsePanelLayout/RightPulseButtonRow" unique_id=843132411]
+[node name="RightChiLabel" type="Label" parent="LayerTabs/右手脉象/RightHandLayout/RightLabelColumn" unique_id=1324466226]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "右尺"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="RightGuanButton" type="Button" parent="PulsePanel/PulsePanelLayout/RightPulseButtonRow" unique_id=1568958377]
+[node name="RightGuanLabel" type="Label" parent="LayerTabs/右手脉象/RightHandLayout/RightLabelColumn" unique_id=429314849]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "右关"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="RightCunButton" type="Button" parent="PulsePanel/PulsePanelLayout/RightPulseButtonRow" unique_id=2112730087]
+[node name="RightCunLabel" type="Label" parent="LayerTabs/右手脉象/RightHandLayout/RightLabelColumn" unique_id=403704099]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "右寸"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="PulseDrawer" type="Control" parent="PulsePanel/PulsePanelLayout" unique_id=372551311]
-custom_minimum_size = Vector2(800, 400)
+[node name="RightPulseDrawer" type="Control" parent="LayerTabs/右手脉象/RightHandLayout" unique_id=207634879]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 5.0
-script = ExtResource("3_js3rb")
+script = ExtResource("2_drawer")
 
-[node name="LeftPulseButtonRow" type="VBoxContainer" parent="PulsePanel/PulsePanelLayout" unique_id=1370137091]
+[node name="左手脉象" type="Control" parent="LayerTabs" unique_id=642620651]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="LeftHandLayout" type="HBoxContainer" parent="LayerTabs/左手脉象" unique_id=796273218]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftLabelColumn" type="VBoxContainer" parent="LayerTabs/左手脉象/LeftHandLayout" unique_id=1994483751]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="Float" type="Label" parent="PulsePanel/PulsePanelLayout/LeftPulseButtonRow" unique_id=1265374699]
+[node name="FloatLabel" type="Label" parent="LayerTabs/左手脉象/LeftHandLayout/LeftLabelColumn" unique_id=635468915]
 layout_mode = 2
 size_flags_vertical = 3
 text = "浮脉"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LeftChiButton" type="Button" parent="PulsePanel/PulsePanelLayout/LeftPulseButtonRow" unique_id=1342892433]
+[node name="LeftChiLabel" type="Label" parent="LayerTabs/左手脉象/LeftHandLayout/LeftLabelColumn" unique_id=489007859]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "左尺"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="LeftGuanButton" type="Button" parent="PulsePanel/PulsePanelLayout/LeftPulseButtonRow" unique_id=1321525240]
+[node name="LeftGuanLabel" type="Label" parent="LayerTabs/左手脉象/LeftHandLayout/LeftLabelColumn" unique_id=338384917]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "左关"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="LeftCunButton" type="Button" parent="PulsePanel/PulsePanelLayout/LeftPulseButtonRow" unique_id=903992620]
+[node name="LeftCunLabel" type="Label" parent="LayerTabs/左手脉象/LeftHandLayout/LeftLabelColumn" unique_id=963203170]
+layout_mode = 2
+size_flags_vertical = 3
+text = "左寸"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftPulseDrawer" type="Control" parent="LayerTabs/左手脉象/LeftHandLayout" unique_id=1044432513]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "左寸"
+script = ExtResource("2_drawer")

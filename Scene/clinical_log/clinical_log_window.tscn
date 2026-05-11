@@ -5,8 +5,8 @@
 [node name="ClinicalLogWindow" type="Window" unique_id=1159353037]
 oversampling_override = 1.0
 title = "行医记考"
-position = Vector2i(0, 36)
-size = Vector2i(1600, 1000)
+position = Vector2i(1220, 36)
+size = Vector2i(700, 1000)
 script = ExtResource("1_4dmlf")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=1381153526]

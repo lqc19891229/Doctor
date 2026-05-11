@@ -106,13 +106,11 @@ func _ready() -> void:
 # =========================================================
 
 # 打开窗口
-# 说明：
-# 1. 每次打开前重新刷新内容
-# 2. 使用 popup_centered() 让窗口显示正常
+# 每次打开前重新刷新内容
+
 func open_window() -> void:
 	refresh_view()
-	popup_centered()
-
+	show()
 
 # 关闭窗口
 func close_window() -> void:
