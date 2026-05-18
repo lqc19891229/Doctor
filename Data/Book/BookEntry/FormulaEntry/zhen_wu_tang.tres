@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "zhen_wu_tang"
 book_id = "shang_han_lun"
 title = "真武汤"
-detail_text = "真武汤.txt\n\n【出处】\n《伤寒论》\n\n【功效】\n温阳利水\n\n【主治】\n肾虚水泛\n\n【组成】\n君：附子 三钱\n臣：茯苓 三钱，白术 三钱\n佐：生姜 二钱，白芍 三钱\n使：\n\n【配伍】\n附子：大辛大热，温补肾阳、散阴寒，助气化以行水。\n茯苓：健脾渗湿、利水消肿；\n白术：健脾燥湿、培土制水。\n生姜：温散水气、助附子温阳，兼和胃散饮。\n芍药：利小便、柔肝缓急止痛，防附子燥热伤阴，敛阴和营。"
+detail_text = "真武汤\n【出处】《伤寒论》\n【功效】温阳利水\n【主治】肾虚水泛\n【组成】\n君：附子 三钱\n臣：茯苓 三钱，白术 三钱\n佐：生姜 二钱，白芍 三钱\n使：\n【配伍】\n附子：大辛大热，温补肾阳、散阴寒，助气化以行水。\n茯苓：健脾渗湿、利水消肿；\n白术：健脾燥湿、培土制水。\n生姜：温散水气、助附子温阳，兼和胃散饮。\n芍药：利小便、柔肝缓急止痛，防附子燥热伤阴，敛阴和营。"
 formula_id = "zhen_wu_tang"
 required_herb_ids = Array[String](["fu_zi", "fu_ling", "bai_zhu", "sheng_jiang", "bai_shao"])

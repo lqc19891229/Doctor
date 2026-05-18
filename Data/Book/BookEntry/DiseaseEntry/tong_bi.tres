@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "tong_bi"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "痛痹"
-detail_text = "痛痹（寒痹）\n\n【病机】\n风寒湿邪痹阻经络，寒邪偏盛。寒主收引、凝滞，气血不通则疼痛剧烈。\n\n【症状】\n肢体关节疼痛剧烈、固定不移；遇寒加重、得温痛减；关节屈伸不利，局部怕冷\n\n【脉象】\n浮脉（表）：波峰高（轻微），波速慢（剧烈），波宽宽（轻微）\n\n【标准方】\n乌头汤"
+detail_text = "痛痹（寒痹）\n\n【病机】风寒湿邪痹阻经络，寒邪偏盛。寒主收引、凝滞，气血不通则疼痛剧烈。\n\n【症状】肢体关节疼痛剧烈、固定不移；遇寒加重、得温痛减；关节屈伸不利，局部怕冷\n\n【脉象】\n浮脉（表）：波峰高（轻微），波速慢（剧烈），波宽宽（轻微）\n\n【标准方】乌头汤"
 disease_id = "tong_bi"
 prerequisite_entry_ids = Array[String](["wu_tou_tang"])

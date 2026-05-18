@@ -33,6 +33,12 @@ layout_mode = 2
 layout_mode = 2
 text = "天数"
 
+[node name="ThoughtsPoint" type="Label" parent="MarginContainer/VBoxRoot/TopBar" unique_id=864715056]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+text = "心得：0"
+
 [node name="ContentRow" type="HBoxContainer" parent="MarginContainer/VBoxRoot" unique_id=745767981]
 layout_mode = 2
 size_flags_vertical = 3

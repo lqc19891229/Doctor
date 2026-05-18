@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "xing_su_san"
 book_id = "wen_bing_tiao_bian"
 title = "杏苏散"
-detail_text = "杏苏散\n\n【出处】\n《温病条辨》\n\n【功效】\n轻宣凉燥，理肺化痰\n\n【主治】\n凉燥证\n\n【组成】\n君：杏仁 三钱，苏叶 三钱\n臣：半夏 三钱，前胡 三钱，陈皮 三钱\n佐：茯苓 二钱，桔梗 二钱，枳壳 二钱\n使：甘草 一钱\n\n【配伍】\n苏叶：辛温发散，轻宣凉燥、疏散风寒；\n杏仁：苦温润燥，降肺止咳。\n前胡：疏风降气、化痰；\n桔梗枳壳：一升一降，宣畅肺气。\n半夏、陈皮、茯苓：燥湿化痰、理气健脾，杜生痰之源。\n生甘草：调和诸药"
+detail_text = "杏苏散\n【出处】《温病条辨》\n【功效】轻宣凉燥，理肺化痰\n【主治】凉燥证\n【组成】\n君：杏仁 三钱，苏叶 三钱\n臣：半夏 三钱，前胡 三钱，陈皮 三钱\n佐：茯苓 二钱，桔梗 二钱，枳壳 二钱\n使：甘草 一钱\n【配伍】\n苏叶：辛温发散，轻宣凉燥、疏散风寒；\n杏仁：苦温润燥，降肺止咳。\n前胡：疏风降气、化痰；\n桔梗枳壳：一升一降，宣畅肺气。\n半夏、陈皮、茯苓：燥湿化痰、理气健脾，杜生痰之源。\n生甘草：调和诸药"
 formula_id = "xing_su_san"
 required_herb_ids = Array[String](["xing_ren", "su_ye", "ban_xia", "qian_hu", "chen_pi", "fu_ling", "jie_geng", "zhi_ke", "gan_cao"])

@@ -28,11 +28,15 @@ class_name Main
 # 预加载场景
 const CLINIC_SCENE: PackedScene = preload("res://Scene/Clinic/Clinic.tscn")
 const NIGHT_STUDY_SCENE: PackedScene = preload("res://Scene/NightStudy/NightStudy.tscn")
+const STORY_SCENE: PackedScene = preload("res://Scene/Story/Story.tscn")
 
 
 # 当前子场景实例
 var current_scene: Node = null
 
+# 剧情结束后要回到的目标。
+# 使用逻辑名，不使用场景路径，避免 Story 直接替换 Main。
+var pending_story_return_target: String = ""
 
 func _ready() -> void:
 	# 连接开始菜单按钮
@@ -91,6 +95,11 @@ func _on_new_game_button_pressed() -> void:
 	GameTime.start_new_game()
 	Unlock.reset_progress()
 
+	# 新游戏必须清空剧情播放记录。
+	# 否则如果从旧流程回到主菜单再点新游戏，
+	# StoryManager 内存里可能还残留 played_story_ids。
+	StoryManager.load_save_data({})
+
 	SaveManager.save_game()
 
 	_hide_main_menu()
@@ -147,6 +156,15 @@ func _enter_clinic() -> void:
 	else:
 		print("current_scene 没有 clinic_finished 信号")
 
+	# 连接剧情请求信号。
+	# 注意：必须在 start_new_day() 之前连接，否则 Clinic 进入当天自动剧情时信号会丢失。
+	if current_scene.has_signal("story_requested"):
+		if not current_scene.is_connected("story_requested", Callable(self, "_on_story_requested")):
+			current_scene.connect("story_requested", Callable(self, "_on_story_requested"))
+			print("Main 已连接 story_requested 信号")
+	else:
+		print("current_scene 没有 story_requested 信号")
+
 	# 刷新左上角天数显示
 	if current_scene.has_method("set_day"):
 		current_scene.call("set_day", GameTime.current_day)
@@ -180,6 +198,74 @@ func _enter_night_study() -> void:
 		print("current_scene 没有 study_finished 信号")
 
 	print("已进入 NightStudy 场景，第 %d 天" % GameTime.current_day)
+
+
+# =========================================================
+# Clinic 请求播放剧情
+# =========================================================
+func _on_story_requested(story_path: String, return_target: String) -> void:
+	# Main 不再根据剧情路径判断是否重复播放。
+	# 是否能播放，统一交给 StoryData.story_id + StoryManager 判断。
+	_play_story(story_path, return_target)
+
+
+func _play_story(story_path: String, return_target: String) -> void:
+	if story_path.is_empty():
+		push_warning("剧情路径为空")
+		return
+
+	var loaded_story := load(story_path)
+	if loaded_story == null:
+		push_warning("剧情文件加载失败：" + story_path)
+		return
+
+	if not loaded_story is StoryData:
+		push_warning("文件不是 StoryData：" + story_path)
+		return
+	var story_data: StoryData = loaded_story as StoryData
+
+	# 读取剧情 ID。
+	# 以后无论剧情文件路径怎么改，只要 story_id 不变，
+	# 重复播放判断都不会失效。
+	var story_id: String = story_data.story_id
+
+	# 读取是否只播放一次。
+	var play_once: bool = story_data.play_once
+
+	# 一次性剧情如果已经播放过，就不再进入 Story 场景。
+	if play_once and StoryManager.has_played_story(story_id):
+		print("剧情已播放，跳过：", story_id)
+		return
+	pending_story_return_target = return_target
+
+	# 只暂存剧情数据，不让 StoryManager 自己切换场景。
+	# set_story() 内部会把 story_id 记录到 played_story_ids。
+	var story_set_success: bool = StoryManager.set_story(story_data)
+
+	if story_set_success:
+		SaveManager.save_game()
+
+		_clear_current_scene()
+
+	current_scene = STORY_SCENE.instantiate()
+	current_scene_root.add_child(current_scene)
+
+	if current_scene.has_signal("story_finished"):
+		current_scene.connect("story_finished", Callable(self, "_on_story_finished"))
+
+	print("Main 播放剧情：", story_path)
+
+
+func _on_story_finished() -> void:
+	StoryManager.clear_story()
+
+	var target := pending_story_return_target
+	pending_story_return_target = ""
+
+	if target == "night":
+		_enter_night_study()
+	else:
+		_enter_clinic()
 
 
 # =========================================================

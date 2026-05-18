@@ -24,6 +24,10 @@ extends Control
 # 通知 Main：Clinic 当天流程结束
 signal clinic_finished
 
+# 通知 Main：Clinic 请求播放剧情
+# Clinic 不直接切换 Story 场景，避免破坏 Main 管理的主流程。
+signal story_requested(story_path: String, return_target: String)
+
 
 # =========================================================
 # 常量定义
@@ -44,6 +48,13 @@ const DEFAULT_DISPLAY_REGION := "浮脉"
 # 3. 使用 find_child，避免你暂时还没在 TopBar 加 TimeLabel 时报错
 @onready var day_label: Label = find_child("DayLabel", true, false) as Label
 @onready var time_label: Label = find_child("TimeLabel", true, false) as Label
+
+# ---------- 心得显示 ----------
+# 说明：
+# 1. ThoughtsPoint 是 Clinic.tscn 中 VBoxContainer/TopBar/ThoughtsPoint 这个 Label。
+# 2. 这里使用固定路径，避免 find_child 找错节点。
+# 3. 这个 Label 只负责显示 UnlockManager 中保存的心得数量。
+@onready var thoughts_point_label: Label = get_node_or_null("VBoxContainer/TopBar/ThoughtsPoint") as Label
 
 # ---------- 脉象窗口 ----------
 @onready var pulse_window: PulseWindowUI = $PulseWindow
@@ -109,6 +120,12 @@ var current_day: int = 1
 # 防止 Clinic 结束信号重复发出
 var clinic_finished_emitted: bool = false
 
+# 上一次显示在 UI 上的心得数量
+# 说明：
+# - 使用这个值避免每帧重复改 Label 文本。
+# - 初始设为 -1，保证进入场景后一定刷新一次。
+var last_displayed_thoughts_point: int = -1
+
 
 # =========================================================
 # 生命周期
@@ -121,14 +138,28 @@ func _ready() -> void:
 	_connect_signals()
 
 	refresh_clinic_view()
+	_update_thoughts_point_ui(true)
 
-	print("药材数量：", herb_database.get_all_herbs().size())
-	formula_database.debug_print_all_formulas()
+	# 调试输出：仅在 Debug 构建中打印数据库加载情况，避免正式版刷屏。
+	if OS.is_debug_build():
+		print("药材数量：", herb_database.get_all_herbs().size())
+		if formula_database != null and formula_database.has_method("debug_print_all_formulas"):
+			formula_database.debug_print_all_formulas()
+
+	# 注意：不要在 _ready() 里自动触发剧情。
+	# Main 还没有连接 story_requested 信号时，_ready() 发出的信号会丢失。
+	# 自动剧情统一放到 start_new_day()，由 Main 连接好信号后调用。
 
 
 func _process(_delta: float) -> void:
 	# Clinic 不在这里处理时间计时
 	# 时间推进统一交给 GameTimeManager.gd
+
+	# 每帧检查一次心得数量。
+	# 说明：
+	# - 只有数量变化时才会真正改 Label 文本。
+	# - 这样即使心得来自读档、调试窗口或其它脚本，也能同步到 TopBar。
+	_update_thoughts_point_ui(false)
 
 	# 只有脉象窗口打开时才处理键盘把脉逻辑
 	if pulse_window != null and pulse_window.visible:
@@ -178,6 +209,37 @@ func _update_time_ui() -> void:
 			time_label.text = "辰时"
 
 
+
+# =========================================================
+# 刷新 TopBar 心得显示
+# =========================================================
+func _update_thoughts_point_ui(force_refresh: bool = false) -> void:
+	# 如果 Label 没找到，直接返回，避免报错。
+	# 正确路径应为：Clinic/VBoxContainer/TopBar/ThoughtsPoint
+	if thoughts_point_label == null:
+		return
+
+	# 读取 UnlockManager 中的心得数量。
+	# 这里不用 info_label 的文本，因为 info_label 只是提示窗口，不是数据源。
+	var current_points := 0	
+	if Unlock != null and Unlock.has_method("get_experience_points"):
+		current_points = Unlock.get_experience_points()
+
+	# 数量没变化且不是强制刷新时，不重复改文本。
+	if not force_refresh and current_points == last_displayed_thoughts_point:
+		return
+
+	last_displayed_thoughts_point = current_points
+
+	# 强制保证 Label 可见，并给一个最小尺寸，避免在 HBoxContainer 中被压到看不见。
+	thoughts_point_label.visible = true
+	thoughts_point_label.custom_minimum_size = Vector2(120, 24)
+	thoughts_point_label.size_flags_horizontal = Control.SIZE_SHRINK_END
+	thoughts_point_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+
+	# 最终显示文本。
+	thoughts_point_label.text = "心得：%d" % current_points
+
 # =========================================================
 # GameTimeManager：时间变化回调
 # =========================================================
@@ -212,12 +274,6 @@ func _setup_clinical_log_window() -> void:
 		return
 
 	clinical_log_window.hide()
-
-	# 如果脚本里有 open_window/close_window/refresh_view，则后续直接调用
-	# 这里只做最基础的标题设置，避免未挂脚本时报错
-	if "title" in clinical_log_window:
-		clinical_log_window.title = "行医记考"
-
 
 # =========================================================
 # 初始化：信号连接
@@ -271,11 +327,63 @@ func _safe_connect_custom_signal(target: Object, signal_name: StringName, callab
 		return
 
 	if not target.has_signal(signal_name):
-		print("InfoWindow 缺少信号：", signal_name)
+		if OS.is_debug_build():
+			print("InfoWindow 缺少信号：", signal_name)
 		return
 
 	if not target.is_connected(signal_name, callable_fn):
 		target.connect(signal_name, callable_fn)
+
+
+# =========================================================
+# 通用工具函数
+# =========================================================
+
+func _set_info_text(text: String) -> void:
+	# 统一写入信息窗口文本。
+	# 说明：
+	# 1. 其它函数不再直接访问 info_label.text，减少空节点报错风险。
+	# 2. 如果 InfoLabel 暂未接入场景，则在 Debug 构建中打印，方便排查。
+	if info_label != null:
+		info_label.text = text
+	elif OS.is_debug_build():
+		print(text)
+
+
+func _get_pressed_action_count(action_names: Array[StringName]) -> int:
+	# 统计一组输入动作中，当前被按下的动作数量。
+	# 用于键盘把脉时判断左右手三键是否同时按下。
+	var pressed_count := 0
+	for action_name in action_names:
+		if Input.is_action_pressed(action_name):
+			pressed_count += 1
+	return pressed_count
+
+
+func _show_pulse_result(result: Dictionary) -> void:
+	# 统一处理 PulseWindow 返回的脉象显示结果。
+	# 说明：
+	# 1. show_region() 与 show_hand_group() 原本有重复的信息拼接。
+	# 2. 这里集中生成提示文本，后续新增病人字段时只需要改一处。
+	if not _ensure_current_npc_valid(true):
+		return
+
+	var result_text: String = result.get("text", "")
+	if not result.get("ok", false):
+		_set_info_text("病人：%s\n疾病：%s\n%s" % [
+			current_npc.npc_name,
+			current_npc.disease.disease_name,
+			result_text
+		])
+		return
+
+	_set_info_text("病人：%s\n性别：%s  年龄：%d\n疾病：%s\n%s" % [
+		current_npc.npc_name,
+		current_npc.gender,
+		current_npc.age,
+		current_npc.disease.disease_name,
+		result_text
+	])
 
 
 # =========================================================
@@ -304,6 +412,8 @@ func refresh_clinic_view() -> void:
 	if clinical_log_window != null and clinical_log_window.has_method("refresh_view"):
 		clinical_log_window.refresh_view()
 
+	_update_thoughts_point_ui(true)
+
 
 # =========================================================
 # 病人有效性检查
@@ -316,13 +426,13 @@ func _ensure_current_npc_valid(show_message: bool = false) -> bool:
 
 	if current_npc == null:
 		if show_message:
-			info_label.text = "当前没有病人数据"
+			_set_info_text("当前没有病人数据")
 			_clear_pulse()
 		return false
 
 	if current_npc.disease == null:
 		if show_message:
-			info_label.text = "病人：%s\n未绑定疾病数据" % current_npc.npc_name
+			_set_info_text("病人：%s\n未绑定疾病数据" % current_npc.npc_name)
 			_clear_pulse()
 		return false
 
@@ -347,32 +457,17 @@ func refresh_current_patient() -> void:
 # =========================================================
 
 func show_region(display_region_name: String) -> void:
+	# 显示指定名称的单个脉象区域，并同步刷新信息提示。
 	if not _ensure_current_npc_valid(true):
 		return
 
 	current_display_region_name = display_region_name
 
 	if pulse_window == null:
-		info_label.text = "脉象窗口不存在"
+		_set_info_text("脉象窗口不存在")
 		return
 
-	var result := pulse_window.show_region(display_region_name, current_npc.disease)
-
-	if not result.get("ok", false):
-		info_label.text = "病人：%s\n疾病：%s\n%s" % [
-			current_npc.npc_name,
-			current_npc.disease.disease_name,
-			result.get("text", "")
-		]
-		return
-
-	info_label.text = "病人：%s\n性别：%s  年龄：%d\n疾病：%s\n%s" % [
-		current_npc.npc_name,
-		current_npc.gender,
-		current_npc.age,
-		current_npc.disease.disease_name,
-		result.get("text", "")
-	]
+	_show_pulse_result(pulse_window.show_region(display_region_name, current_npc.disease))
 
 
 # =========================================================
@@ -380,30 +475,16 @@ func show_region(display_region_name: String) -> void:
 # =========================================================
 
 func show_hand_group(hand_side: String) -> void:
+	# 显示整只手的脉象区域，并同步刷新信息提示。
+	# hand_side 建议传入 "left" 或 "right"。
 	if not _ensure_current_npc_valid(true):
 		return
 
 	if pulse_window == null:
-		info_label.text = "脉象窗口不存在"
+		_set_info_text("脉象窗口不存在")
 		return
 
-	var result := pulse_window.show_hand_group(hand_side, current_npc.disease)
-
-	if not result.get("ok", false):
-		info_label.text = "病人：%s\n疾病：%s\n%s" % [
-			current_npc.npc_name,
-			current_npc.disease.disease_name,
-			result.get("text", "")
-		]
-		return
-
-	info_label.text = "病人：%s\n性别：%s  年龄：%d\n疾病：%s\n%s" % [
-		current_npc.npc_name,
-		current_npc.gender,
-		current_npc.age,
-		current_npc.disease.disease_name,
-		result.get("text", "")
-	]
+	_show_pulse_result(pulse_window.show_hand_group(hand_side, current_npc.disease))
 
 
 # =========================================================
@@ -411,102 +492,46 @@ func show_hand_group(hand_side: String) -> void:
 # =========================================================
 
 func _update_pulse_keyboard_display() -> void:
-	# =====================================================
-	# 读取右手三键状态
-	# Q / A / Z 对应右尺 / 右关 / 右寸
-	# 只有三键同时按下，才显示右手脉象图。
-	# =====================================================
-	var right_cun_pressed := Input.is_action_pressed("pulse_right_cun")
-	var right_guan_pressed := Input.is_action_pressed("pulse_right_guan")
-	var right_chi_pressed := Input.is_action_pressed("pulse_right_chi")
-
-	# =====================================================
-	# 读取左手三键状态
-	# W / S / X 对应左尺 / 左关 / 左寸
-	# 只有三键同时按下，才显示左手脉象图。
-	# =====================================================
-	var left_cun_pressed := Input.is_action_pressed("pulse_left_cun")
-	var left_guan_pressed := Input.is_action_pressed("pulse_left_guan")
-	var left_chi_pressed := Input.is_action_pressed("pulse_left_chi")
-
-	# =====================================================
-	# 生成当前按键签名
-	# 用途：
-	# 如果这一帧和上一帧按键状态完全一样，
-	# 就不重复刷新 PulseWindow，避免画面抖动。
-	# =====================================================
-	var signature := "%s%s%s|%s%s%s" % [
-		"1" if right_cun_pressed else "0",
-		"1" if right_guan_pressed else "0",
-		"1" if right_chi_pressed else "0",
-		"1" if left_cun_pressed else "0",
-		"1" if left_guan_pressed else "0",
-		"1" if left_chi_pressed else "0"
+	# 根据键盘输入刷新把脉窗口显示。
+	# 规则：
+	# 1. 右手 Q/A/Z 三键全按，且左手未按时，显示右手四宫格。
+	# 2. 左手 W/S/X 三键全按，且右手未按时，显示左手四宫格。
+	# 3. 其它状态显示提示页，避免松键时闪过单个脉象。
+	var right_actions: Array[StringName] = [
+		&"pulse_right_cun",
+		&"pulse_right_guan",
+		&"pulse_right_chi"
 	]
+	var left_actions: Array[StringName] = [
+		&"pulse_left_cun",
+		&"pulse_left_guan",
+		&"pulse_left_chi"
+	]
+
+	var signature := ""
+	for action_name in right_actions + left_actions:
+		signature += "1" if Input.is_action_pressed(action_name) else "0"
 
 	if signature == last_pulse_input_signature:
 		return
-
 	last_pulse_input_signature = signature
 
-	# =====================================================
-	# 计算左右手各自按下了几个键
-	# =====================================================
-	var right_pressed_count := 0
-	var left_pressed_count := 0
-
-	if right_cun_pressed:
-		right_pressed_count += 1
-	if right_guan_pressed:
-		right_pressed_count += 1
-	if right_chi_pressed:
-		right_pressed_count += 1
-
-	if left_cun_pressed:
-		left_pressed_count += 1
-	if left_guan_pressed:
-		left_pressed_count += 1
-	if left_chi_pressed:
-		left_pressed_count += 1
-
+	var right_pressed_count := _get_pressed_action_count(right_actions)
+	var left_pressed_count := _get_pressed_action_count(left_actions)
 	var total_pressed_count := right_pressed_count + left_pressed_count
 
-	# =====================================================
-	# 右手：必须 Q / A / Z 三键同时按下
-	# 条件：
-	# 1. 右手三个键全按下
-	# 2. 左手没有任何键按下
-	# =====================================================
 	if right_pressed_count == 3 and left_pressed_count == 0:
 		pulse_keyboard_override_active = true
 		show_hand_group("right")
 		return
 
-	# =====================================================
-	# 左手：必须 W / S / X 三键同时按下
-	# 条件：
-	# 1. 左手三个键全按下
-	# 2. 右手没有任何键按下
-	# =====================================================
 	if left_pressed_count == 3 and right_pressed_count == 0:
 		pulse_keyboard_override_active = true
 		show_hand_group("left")
 		return
 
-	# =====================================================
-	# 其他所有情况都显示按键提示页
-	# 包括：
-	# 1. 没有按键
-	# 2. 只按一个键
-	# 3. 只按两个键
-	# 4. 左右手混按
-	# 5. 三键松开过程中的中间状态
-	#
-	# 这样可以彻底避免松键时闪过单个脉象图。
-	# =====================================================
 	if pulse_keyboard_override_active or total_pressed_count != 0:
 		pulse_keyboard_override_active = false
-
 		if pulse_window != null and pulse_window.has_method("show_hint_tab"):
 			pulse_window.show_hint_tab()
 
@@ -551,11 +576,12 @@ func close_prescription_window() -> void:
 
 func open_clinical_log_window() -> void:
 	if clinical_log_window == null:
-		info_label.text = "行医记考窗口不存在"
+		_set_info_text("行医记考窗口不存在")
 		print("ClinicalLogWindow 没找到，请检查节点名字和挂载位置")
 		return
 
-	print("找到 ClinicalLogWindow：", clinical_log_window)
+	if OS.is_debug_build():
+		print("找到 ClinicalLogWindow：", clinical_log_window)
 
 	if clinical_log_window.has_method("refresh_view"):
 		clinical_log_window.refresh_view()
@@ -575,6 +601,33 @@ func close_clinical_log_window() -> void:
 		clinical_log_window.close_window()
 	else:
 		clinical_log_window.hide()
+
+
+# =========================================================
+# 提交处方后统一关闭诊疗窗口
+# =========================================================
+
+func close_treatment_windows_after_submit() -> void:
+	# 关闭把脉窗口
+	# 说明：
+	# 1. 优先调用 PulseWindowUI 自己的 close_window()，保证窗口内部状态能正确处理。
+	# 2. 如果以后把脉窗口脚本没有 close_window()，则退回到 hide()，避免报错。
+	if pulse_window != null:
+		if pulse_window.has_method("close_window"):
+			pulse_window.close_window()
+		else:
+			pulse_window.hide()
+
+	# 重置键盘把脉状态。
+	# 说明：
+	# 防止窗口已经关闭，但 pulse_keyboard_override_active 或 last_pulse_input_signature 仍保留旧状态。
+	_reset_pulse_keyboard_state()
+
+	# 关闭开方窗口
+	close_prescription_window()
+
+	# 关闭行医记考窗口
+	close_clinical_log_window()
 
 
 # =========================================================
@@ -635,29 +688,53 @@ func _get_current_standard_formula() -> FormulaData:
 # 提交处方并判定
 # =========================================================
 
-func submit_prescription() -> void:
+func submit_prescription() -> bool:
 	if current_npc == null:
-		info_label.text = "当前没有病人，无法提交处方"
-		return
+		_set_info_text("当前没有病人，无法提交处方")
+		return false
 
 	if current_npc.disease == null:
-		info_label.text = "当前病人没有绑定疾病，无法提交处方"
-		return
+		_set_info_text("当前病人没有绑定疾病，无法提交处方")
+		return false
 
 	if current_prescription.is_empty():
-		info_label.text = "当前处方为空，请先开方"
-		return
+		_set_info_text("当前处方为空，请先开方")
+		return false
 
 	var standard_formula := _get_current_standard_formula()
 	if standard_formula == null:
-		info_label.text = "未找到疾病【%s】对应的标准方" % current_npc.disease.disease_name
-		return
+		_set_info_text("未找到疾病【%s】对应的标准方" % current_npc.disease.disease_name)
+		return false
 
+	var was_already_submitted := diagnosis_submitted
 	var result := formula_judge.judge_formula(current_prescription, standard_formula)
 	diagnosis_submitted = true
 
-	info_label.text = result.get_summary_text()
-	result.debug_print()
+	var summary_text := result.get_summary_text()
+
+	# 甲等满分时获得 1 点心得。
+	# 说明：
+	# 1. grade == "甲等"：评价达到最高档。
+	# 2. score == 100：必须是满分甲等，避免普通甲等也给心得。
+	# 3. was_already_submitted 用于防止同一名病人重复提交刷心得。
+	if result.grade == "甲等" and result.score == 100 and not was_already_submitted:
+		Unlock.add_experience_point(1)
+		_update_thoughts_point_ui(true)
+		summary_text += "\n获得心得：+1"
+		summary_text += "\n当前心得：%d" % Unlock.get_experience_points()
+
+		# 获得心得后立即存档，避免切场景或退出时丢失。
+		if SaveManager != null and SaveManager.has_method("save_game"):
+			SaveManager.save_game()
+	elif result.grade == "甲等" and result.score == 100 and was_already_submitted:
+		_update_thoughts_point_ui(true)
+		summary_text += "\n本病人已提交过处方，不重复获得心得。"
+		summary_text += "\n当前心得：%d" % Unlock.get_experience_points()
+
+	_set_info_text(summary_text)
+	if OS.is_debug_build():
+		result.debug_print()
+	return true
 
 
 # =========================================================
@@ -682,16 +759,6 @@ func finish_clinic_for_today() -> void:
 	print("Clinic 发出 clinic_finished")
 	emit_signal("clinic_finished")
 
-
-# =========================================================
-# 调试函数
-# 正式版可删
-# =========================================================
-
-func debug_print_current_prescription() -> void:
-	current_prescription.debug_print()
-
-
 # =========================================================
 # 病人切换按钮
 # =========================================================
@@ -712,6 +779,7 @@ func _on_spawn_npc_button_pressed() -> void:
 
 
 func _on_submit_button_pressed() -> void:
+	# 兼容旧提交按钮。当前主要由 PrescriptionWindow 的 submit_requested 信号触发。
 	submit_prescription()
 
 
@@ -776,7 +844,7 @@ func _on_info_window_close_requested() -> void:
 # =========================================================
 
 func _on_prescription_info_requested(text: String) -> void:
-	info_label.text = text
+	_set_info_text(text)
 
 
 # =========================================================
@@ -784,11 +852,21 @@ func _on_prescription_info_requested(text: String) -> void:
 # =========================================================
 
 func _on_prescription_submit_requested() -> void:
-	submit_prescription()
+	# 接收开方窗口的提交请求。
+	# 只有处方成功判定后，才关闭治疗窗口并刷新到下一名随机病人。
+	# 这样可以避免“空处方/无标准方”也直接跳到下一名病人的问题。
+	if not submit_prescription():
+		return
+
+	close_treatment_windows_after_submit()
+
+	if npc_manager != null:
+		npc_manager.spawn_random_npc()
+		refresh_clinic_view()
 
 
 func _on_end_today_pressed() -> void:
-	print("按钮被点击")
+	# InfoWindow 中“结束当天”按钮的回调。
 	finish_clinic_for_today()
 
 
@@ -801,6 +879,7 @@ func set_day(day: int) -> void:
 
 	# DayLabel / TimeLabel 统一从 GameTimeManager 刷新
 	_update_time_ui()
+	_update_thoughts_point_ui(true)
 
 
 # =========================================================
@@ -822,14 +901,123 @@ func _input(event: InputEvent) -> void:
 func _on_unlock_all_entries_requested() -> void:
 	var result: Dictionary = Unlock.unlock_all_entries_for_test()
 
-	if info_label != null:
-		info_label.text = "测试功能：已解锁全部条目\n条目：%d\n药材：%d\n方剂：%d\n疾病：%d\n医理：%d" % [
-			result.get("entry_count", 0),
-			result.get("herb_count", 0),
-			result.get("formula_count", 0),
-			result.get("disease_count", 0),
-			result.get("theory_count", 0)
-		]
+	_set_info_text("测试功能：已解锁全部条目\n条目：%d\n药材：%d\n方剂：%d\n疾病：%d\n医理：%d" % [
+		result.get("entry_count", 0),
+		result.get("herb_count", 0),
+		result.get("formula_count", 0),
+		result.get("disease_count", 0),
+		result.get("theory_count", 0)
+	])
 
 	if clinical_log_window != null and clinical_log_window.has_method("refresh_view"):
 		clinical_log_window.refresh_view()
+
+
+# =========================================================
+# 剧情系统入口
+# 说明：
+# 1. Clinic 只负责在合适时机请求剧情。
+# 2. 剧情是否满足触发条件，统一交给 StoryManager 判断。
+# 3. Clinic 仍然通过 story_requested 通知 Main 切换到 Story.tscn。
+# 4. 为了兼容你现在的 Main.gd，这里仍然传 story_path，不传空路径。
+# =========================================================
+
+func start_story_from_clinic(story_path: String, return_target: String = "clinic") -> void:
+	# story_path 示例：res://Data/Story/teaching_test.tres
+	# Clinic 不直接切换 Story 场景，只向 Main 发出请求。
+	# return_target 使用逻辑名，例如："clinic" / "night"。
+	if story_path.is_empty():
+		push_warning("Clinic.start_story_from_clinic 收到空剧情路径。")
+		return
+
+	emit_signal("story_requested", story_path, return_target)
+
+func start_new_day(day: int) -> void:
+	# 记录当前天数。
+	current_day = day
+
+	# 每天开始时，允许 Clinic 结束信号重新发出。
+	# 否则第一天结束后，第二天可能无法再次进入夜晚流程。
+	clinic_finished_emitted = false
+
+	# 刷新时间和心得显示。
+	_update_time_ui()
+	_update_thoughts_point_ui(true)
+
+	# 自动剧情触发入口。
+	# 具体触发条件不再写死在 Clinic.gd，改由 StoryData + StoryManager 决定。
+	_try_start_auto_story("clinic", current_day)
+
+
+func _try_start_auto_story(trigger_scene: String, day: int) -> bool:
+	# StoryManager 没有接好时，直接跳过，避免阻塞诊室流程。
+	if StoryManager == null:
+		push_warning("Clinic 无法访问 StoryManager。")
+		return false
+
+	# 需要使用之前修改过的 StoryManager.gd。
+	# 其中必须包含 find_trigger_story(trigger_scene, current_day)。
+	if not StoryManager.has_method("find_trigger_story"):
+		push_warning("StoryManager 缺少 find_trigger_story()，无法自动检查剧情触发条件。")
+		return false
+
+	# 让 StoryManager 统一检查是否有满足条件的剧情。
+	var story: StoryData = StoryManager.find_trigger_story(trigger_scene, day)
+	if story == null:
+		return false
+
+	# 找到这个 StoryData 对应的资源路径。
+	# 这样可以继续兼容 Main.gd 当前的 story_requested(story_path, return_target) 逻辑。
+	var story_path := _find_registered_story_path(story)
+	if story_path.is_empty():
+		push_warning("找到可触发剧情，但没有找到对应资源路径。请检查 StoryManager.registered_story_paths。")
+		return false
+
+	# 优先使用 StoryData 自己配置的 return_scene。
+	# 如果没有配置，就默认返回 clinic。
+	var return_target := "clinic"
+	if story.return_scene != "":
+		return_target = story.return_scene
+
+	# 仍然只发信号给 Main，不在 Clinic 里直接切换场景。
+	start_story_from_clinic(story_path, return_target)
+	return true
+
+
+func _find_registered_story_path(target_story: StoryData) -> String:
+	# 从 StoryManager.registered_story_paths 中反查剧情资源路径。
+	# 这样自动触发仍然由 StoryManager 管理剧情列表。
+	if target_story == null:
+		return ""
+
+	# 如果 StoryManager 还没有 registered_story_paths，说明使用的不是新版 StoryManager。
+	var story_paths = StoryManager.get("registered_story_paths")
+	if typeof(story_paths) != TYPE_ARRAY:
+		push_warning("StoryManager 缺少 registered_story_paths。")
+		return ""
+
+	for story_path in story_paths:
+		if typeof(story_path) != TYPE_STRING:
+			continue
+
+		var loaded_story: Resource = load(story_path)
+		if loaded_story == null:
+			continue
+
+		if not loaded_story is StoryData:
+			continue
+
+		var story := loaded_story as StoryData
+
+		# Godot 资源通常会被缓存，同一路径加载到的是同一个资源实例。
+		# 这里先用实例比较，最直接。
+		if story == target_story:
+			return story_path
+
+		# 如果实例比较失败，就用 story_id 再兜底比较。
+		var target_story_id: String = target_story.get("story_id")
+		var current_story_id: String = story.get("story_id")
+		if not target_story_id.is_empty() and target_story_id == current_story_id:
+			return story_path
+
+	return ""

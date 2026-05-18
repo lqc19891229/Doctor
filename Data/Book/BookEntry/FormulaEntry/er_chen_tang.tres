@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "er_chen_tang"
 book_id = "tai_ping_hui_min_he_ji_ju_fang"
 title = "二陈汤"
-detail_text = "二陈汤\n\n【出处】\n《太平惠民和剂局方》\n\n【功效】\n燥湿化痰，理气和中\n\n【主治】\n痰湿阻肺\n\n【组成】\n君：半夏 五钱\n臣：陈皮 五钱\n佐：茯苓 三钱\n使：甘草 一钱五分\n\n【配伍】\n半夏：辛温燥烈，燥湿化痰、降逆止呕。\n陈皮：理气行滞、燥湿化痰，使气顺则痰消。\n茯苓：健脾渗湿，杜生痰之源。\n甘草：调和诸药，益气和中。"
+detail_text = "二陈汤\n【出处】《太平惠民和剂局方》\n【功效】燥湿化痰，理气和中\n【主治】痰湿阻肺\n【组成】\n君：半夏 五钱\n臣：陈皮 五钱\n佐：茯苓 三钱\n使：甘草 一钱五分\n【配伍】\n半夏：辛温燥烈，燥湿化痰、降逆止呕。\n陈皮：理气行滞、燥湿化痰，使气顺则痰消。\n茯苓：健脾渗湿，杜生痰之源。\n甘草：调和诸药，益气和中。"
 formula_id = "er_chen_tang"
 required_herb_ids = Array[String](["ban_xia", "chen_pi", "fu_ling", "gan_cao"])

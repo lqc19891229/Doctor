@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "ma_xing_shi_gan_tang"
 book_id = "shang_han_lun"
 title = "麻杏石甘汤"
-detail_text = "麻杏石甘汤\n\n【出处】\n《伤寒论》\n\n【功效】\n辛凉疏表，清肺平喘\n\n【主治】\n肺热壅盛\n\n【组成】\n君：麻黄 三钱\n臣：石膏 八钱\n佐：杏仁 三钱\n使：甘草 二钱\n\n【配伍】\n麻黄：辛温，宣肺平喘、开泄肺气，散邪解表。\n石膏:辛甘大寒，清泻肺热、生津止渴，清里热以制麻黄之温。\n杏仁:苦降肺气，降利平喘，与麻黄一宣一降，恢复肺之宣肃。\n炙甘草:调和诸药，益气护中，缓急润肺。"
+detail_text = "麻杏石甘汤\n【出处】《伤寒论》\n【功效】辛凉疏表，清肺平喘\n【主治】肺热壅盛\n【组成】\n君：麻黄 三钱\n臣：石膏 八钱\n佐：杏仁 三钱\n使：甘草 二钱\n【配伍】\n麻黄：辛温，宣肺平喘、开泄肺气，散邪解表。\n石膏:辛甘大寒，清泻肺热、生津止渴，清里热以制麻黄之温。\n杏仁:苦降肺气，降利平喘，与麻黄一宣一降，恢复肺之宣肃。\n炙甘草:调和诸药，益气护中，缓急润肺。"
 formula_id = "ma_xing_shi_gan_tang"
 required_herb_ids = Array[String](["ma_huang", "shi_gao", "xing_ren", "gan_cao"])

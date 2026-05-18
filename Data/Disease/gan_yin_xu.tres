@@ -6,7 +6,7 @@
 script = ExtResource("1")
 disease_id = "gan_yin_xu"
 disease_name = "肝阴虚"
-detail_text = "肝阴虚\n\n【病机】\n情志化火、久病耗伤，肝阴不足、虚火内生、头目筋脉失养。\n\n【症状】\n头晕耳鸣、两目干涩、视物昏花；胁肋隐隐灼痛、五心烦热；潮热盗汗、口燥咽干、面部烘热；手足蠕动、筋脉拘急；\n\n【脉象】\n左关（肝胆）：波线细，波速快，波宽窄\n\n【标准方】\n一贯煎"
+detail_text = "肝阴虚\n\n【病机】情志化火、久病耗伤，肝阴不足、虚火内生、头目筋脉失养。\n\n【症状】头晕耳鸣、两目干涩、视物昏花；胁肋隐隐灼痛、五心烦热；潮热盗汗、口燥咽干、面部烘热；手足蠕动、筋脉拘急；\n\n【脉象】\n左关（肝胆）：波线细，波速快，波宽窄\n\n【标准方】一贯煎"
 recommended_formula_id = "yi_guan_jian"
 exterior_qi = 1.0
 exterior_blood = 1.0

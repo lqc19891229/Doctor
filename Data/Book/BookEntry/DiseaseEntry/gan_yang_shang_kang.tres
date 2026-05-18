@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "gan_yang_shang_kang"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "肝阳上亢"
-detail_text = "肝阳上亢\n\n【病机】\n肝肾阴虚，阴不制阳、肝阳升发太过、上扰头目，属本虚标实。\n\n【症状】\n眩晕耳鸣、头目胀痛、面红目赤；急躁易怒、失眠多梦、腰膝酸软；头重脚轻、步履不稳\n\n【脉象】\n左关（肝胆）：波峰高，波速快\n\n【标准方】\n钩藤散"
+detail_text = "肝阳上亢\n\n【病机】肝肾阴虚，阴不制阳、肝阳升发太过、上扰头目，属本虚标实。\n\n【症状】眩晕耳鸣、头目胀痛、面红目赤；急躁易怒、失眠多梦、腰膝酸软；头重脚轻、步履不稳\n\n【脉象】\n左关（肝胆）：波峰高，波速快\n\n【标准方】钩藤散"
 disease_id = "gan_yang_shang_kang"
 prerequisite_entry_ids = Array[String](["gou_teng_san"])

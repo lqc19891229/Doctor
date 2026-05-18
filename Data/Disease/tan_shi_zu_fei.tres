@@ -6,7 +6,7 @@
 script = ExtResource("1")
 disease_id = "tan_shi_zu_fei"
 disease_name = "痰湿阻肺"
-detail_text = "痰湿阻肺\n\n【病机】\n脾失健运，痰湿内生，上壅于肺，肺失宣降。\n\n【症状】\n咳嗽痰多，色白黏稠、量多易咯；胸闷、气喘、喉间痰鸣；肢体困重，口淡不渴\n\n【脉象】\n右寸（肺）：波宽宽\n\n【标准方】\n二陈汤"
+detail_text = "痰湿阻肺\n\n【病机】脾失健运，痰湿内生，上壅于肺，肺失宣降。\n\n【症状】咳嗽痰多，色白黏稠、量多易咯；胸闷、气喘、喉间痰鸣；肢体困重，口淡不渴\n\n【脉象】\n右寸（肺）：波宽宽\n\n【标准方】二陈汤"
 recommended_formula_id = "er_chen_tang"
 exterior_qi = 1.0
 exterior_blood = 1.0

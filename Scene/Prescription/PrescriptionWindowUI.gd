@@ -161,6 +161,10 @@ func _connect_signals() -> void:
 	if herb_search != null and not herb_search.text_changed.is_connected(_on_herb_search_text_changed):
 		herb_search.text_changed.connect(_on_herb_search_text_changed)
 
+	# 搜索框获得焦点时，按 Esc 清空当前搜索内容
+	if herb_search != null and not herb_search.gui_input.is_connected(_on_herb_search_gui_input):
+		herb_search.gui_input.connect(_on_herb_search_gui_input)
+
 	if close_requested != null and not close_requested.is_connected(_on_close_requested):
 		close_requested.connect(_on_close_requested)
 
@@ -322,6 +326,35 @@ func _on_herb_search_text_changed(new_text: String) -> void:
 
 	# 搜索内容变化后，重新刷新药材按钮列表
 	_refresh_herb_list()
+
+
+func _on_herb_search_gui_input(event: InputEvent) -> void:
+	# 只处理键盘事件，鼠标点击、拖拽等事件直接忽略
+	if not (event is InputEventKey):
+		return
+
+	var key_event := event as InputEventKey
+
+	# 只处理按下瞬间，避免按键释放时重复触发
+	if not key_event.pressed:
+		return
+
+	# 只响应 Esc 键
+	if key_event.keycode != KEY_ESCAPE:
+		return
+
+	# 搜索栏为空时不拦截 Esc，避免影响窗口其它快捷逻辑
+	if herb_search == null or herb_search.text == "":
+		return
+
+	# 清空搜索栏；clear() 会自动触发 text_changed，从而刷新药材列表
+	herb_search.clear()
+
+	# 清空后继续聚焦搜索栏，方便玩家马上输入下一个药材名
+	herb_search.grab_focus()
+
+	# 阻止 Esc 继续传递，避免误触发其它界面逻辑
+	get_viewport().set_input_as_handled()
 
 
 func _is_herb_match_search(herb) -> bool:
@@ -782,5 +815,38 @@ func _on_shi_list_gui_input(event: InputEvent) -> void:
 # 窗口关闭
 # 这里只负责隐藏自己，不处理 Clinic 的 info_label
 # =========================================================
+# 关闭开方窗口
+func close_window() -> void:
+	# 当前窗口关闭时只隐藏，不销毁
+	hide()
+# =========================================================
+# Esc 快捷键关闭窗口
+# =========================================================
+func _unhandled_input(event: InputEvent) -> void:
+	# 窗口未显示时，不处理 Esc，避免影响其他界面
+	if not visible:
+		return
+
+	# 只处理键盘事件
+	if not (event is InputEventKey):
+		return
+
+	var key_event := event as InputEventKey
+
+	# 只处理按下瞬间，忽略长按重复触发
+	if not key_event.pressed or key_event.echo:
+		return
+
+	# 只响应 Esc 键
+	if key_event.keycode != KEY_ESCAPE:
+		return
+
+	# 关闭当前窗口
+	close_window()
+
+	# 阻止 Esc 继续向下传递，避免影响其他窗口或主场景
+	get_viewport().set_input_as_handled()
+
+
 func _on_close_requested() -> void:
 	hide()

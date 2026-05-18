@@ -9,22 +9,52 @@ script = ExtResource("1_o28sc")
 
 [node name="MainMenuLayer" type="CanvasLayer" parent="." unique_id=1999044094]
 
+[node name="TextureRect" type="TextureRect" parent="MainMenuLayer" unique_id=667132309]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleContainer" type="Control" parent="MainMenuLayer" unique_id=2016345439]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 80.0
+offset_right = 300.0
+offset_bottom = 240.0
+grow_horizontal = 2
+
+[node name="Title" type="TextureRect" parent="MainMenuLayer/TitleContainer" unique_id=1679446212]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
 [node name="MenuPanel" type="Panel" parent="MainMenuLayer" unique_id=435203338]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuLayer/MenuPanel" unique_id=979900440]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_right = 500.0
-offset_bottom = 500.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuLayer/MenuPanel" unique_id=979900440]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = 60.0
+offset_right = 150.0
+offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 

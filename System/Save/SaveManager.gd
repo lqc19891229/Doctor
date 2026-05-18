@@ -32,11 +32,12 @@ func save_game() -> void:
 	# time：保存天数和白天/黑夜
 	# progress：保存医书阅读、药材、疾病、方剂等解锁进度
 	var save_data: Dictionary = {
-		"time": {
-			"current_day": GameTime.current_day,
-			"current_phase": GameTime.current_phase
-		},
-		"progress": Unlock.get_save_data()
+	"time": {
+		"current_day": GameTime.current_day,
+		"current_phase": GameTime.current_phase
+	},
+	"progress": Unlock.get_save_data(),
+	"story": StoryManager.get_save_data()
 	}
 
 	# 打开文件，WRITE 表示写入模式
@@ -104,7 +105,8 @@ func load_game() -> bool:
 
 	# 读取进度数据
 	_load_progress_data(save_data)
-
+	# 读取剧情播放状态
+	_load_story_data(save_data)
 	print("读档完成：第 %d 天，阶段：%s" % [GameTime.current_day, GameTime.current_phase])
 
 	return true
@@ -164,7 +166,24 @@ func _load_progress_data(save_data: Dictionary) -> void:
 
 	# 恢复解锁和阅读进度
 	Unlock.load_save_data(save_data["progress"])
+	
+# =========================================================
+# 读取剧情数据
+# =========================================================
+func _load_story_data(save_data: Dictionary) -> void:
+	# 没有 story 字段，说明是旧存档。
+	# 这时清空剧情播放记录，避免内存残留。
+	if not save_data.has("story"):
+		StoryManager.load_save_data({})
+		return
 
+	# story 字段格式不对，也重置剧情状态。
+	if typeof(save_data["story"]) != TYPE_DICTIONARY:
+		StoryManager.load_save_data({})
+		return
+
+	# 恢复剧情播放记录。
+	StoryManager.load_save_data(save_data["story"])
 
 # =========================================================
 # 删除存档

@@ -2,165 +2,111 @@ extends RefCounted
 class_name HerbUnit
 
 # =========================================================
-# HerbUnit.gd
-# 药材单位工具
+# 脚本功能：
+#   药材剂量单位工具类。
 #
-# 作用：
-# 1. 统一处理药材剂量单位
-# 2. 提供单位换算（底层统一为“分”）
-# 3. 提供适合中药剂量的文本显示
+# 主要职责：
+#   1. 统一维护药材剂量单位常量。
+#   2. 将不同单位统一换算为底层单位“分”。
+#   3. 将底层“分”转换为适合界面显示的中药剂量文本。
+#   4. 提供阿拉伯数字转中文数字的显示辅助函数。
 #
 # 底层统一单位：分
-#
 # 换算关系：
-# 1钱 = 10分
-# 1两 = 100分
-# 1斤 = 1600分
+#   1钱 = 10分
+#   1两 = 100分
+#   1斤 = 1600分
 # =========================================================
-
 
 # =========================================================
 # 一、单位常量
 # =========================================================
-const UNIT_FEN := "fen"
-const UNIT_QIAN := "qian"
-const UNIT_LIANG := "liang"
-const UNIT_JIN := "jin"
+const UNIT_FEN := "fen"      # 分
+const UNIT_QIAN := "qian"    # 钱
+const UNIT_LIANG := "liang"  # 两
+const UNIT_JIN := "jin"      # 斤
 
-const FEN_PER_FEN := 1
-const FEN_PER_QIAN := 10
-const FEN_PER_LIANG := 100
-const FEN_PER_JIN := 1600
+const FEN_PER_FEN := 1        # 1分对应的分值
+const FEN_PER_QIAN := 10      # 1钱对应的分值
+const FEN_PER_LIANG := 100    # 1两对应的分值
+const FEN_PER_JIN := 1600     # 1斤对应的分值
+
+# 单位到显示名称的映射表。
+const UNIT_DISPLAY_NAMES := {
+	UNIT_FEN: "分",
+	UNIT_QIAN: "钱",
+	UNIT_LIANG: "两",
+	UNIT_JIN: "斤",
+}
+
+# 单位到底层“分”的换算倍率映射表。
+const UNIT_FEN_RATES := {
+	UNIT_FEN: FEN_PER_FEN,
+	UNIT_QIAN: FEN_PER_QIAN,
+	UNIT_LIANG: FEN_PER_LIANG,
+	UNIT_JIN: FEN_PER_JIN,
+}
+
+# 中文数字表，用于数字转中文显示。
+const CHINESE_DIGITS := ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"]
+
+# 中文整数单位表，当前用于 0 ~ 9999 的常规数字显示。
+const CHINESE_UNITS := ["", "十", "百", "千"]
 
 
 # =========================================================
-# 二、合法性检查
-# 作用：
-#   判断传入的单位字符串是否为系统支持的合法单位
+# 二、单位检查与换算
 # =========================================================
+
+# 函数功能：判断传入单位是否为系统支持的合法单位。
 static func is_valid_unit(unit: String) -> bool:
-	return unit in [UNIT_FEN, UNIT_QIAN, UNIT_LIANG, UNIT_JIN]
+	return UNIT_FEN_RATES.has(unit)
 
 
-# =========================================================
-# 三、单位显示名
-# 作用：
-#   把内部单位 key 转成界面显示文字
-# 示例：
-#   "fen"   -> "分"
-#   "qian"  -> "钱"
-#   "liang" -> "两"
-#   "jin"   -> "斤"
-# =========================================================
+# 函数功能：把内部单位 key 转换为界面显示用中文名称。
 static func get_unit_display_name(unit: String) -> String:
-	match unit:
-		UNIT_FEN:
-			return "分"
-		UNIT_QIAN:
-			return "钱"
-		UNIT_LIANG:
-			return "两"
-		UNIT_JIN:
-			return "斤"
-		_:
-			return unit
+	return UNIT_DISPLAY_NAMES.get(unit, unit)
 
 
-# =========================================================
-# 四、换算倍率（转成分）
-# 作用：
-#   获取某个单位对应多少“分”
-# 示例：
-#   get_fen_rate("qian")  -> 10
-#   get_fen_rate("liang") -> 100
-# =========================================================
+# 函数功能：获取指定单位换算为底层单位“分”的倍率。
 static func get_fen_rate(unit: String) -> int:
-	match unit:
-		UNIT_FEN:
-			return FEN_PER_FEN
-		UNIT_QIAN:
-			return FEN_PER_QIAN
-		UNIT_LIANG:
-			return FEN_PER_LIANG
-		UNIT_JIN:
-			return FEN_PER_JIN
-		_:
-			push_warning("HerbUnit.get_fen_rate: 未知单位 -> " + unit)
-			return 1
+	if not is_valid_unit(unit):
+		push_warning("HerbUnit.get_fen_rate: 未知单位 -> " + unit)
+		return FEN_PER_FEN
+
+	return UNIT_FEN_RATES[unit]
 
 
-# =========================================================
-# 五、转成总分
-# 作用：
-#   把“数量 + 单位”统一转换成底层总分值
-#
-# 示例：
-#   to_fen(3, "qian")    = 30
-#   to_fen(1.5, "liang") = 150
-# =========================================================
+# 函数功能：把“数量 + 单位”统一换算成底层总分值。
 static func to_fen(amount: float, unit: String) -> int:
 	if amount <= 0.0:
 		return 0
 
-	var rate := get_fen_rate(unit)
-	return int(round(amount * rate))
+	return int(round(amount * get_fen_rate(unit)))
 
 
-# =========================================================
-# 六、从总分转换成某单位数量
-# 作用：
-#   把底层总分值换算回指定单位
-#
-# 示例：
-#   from_fen(150, "liang") = 1.5
-#   from_fen(30, "qian")   = 3.0
-# =========================================================
+# 函数功能：把底层总分值换算回指定单位的数量。
 static func from_fen(total_fen: int, unit: String) -> float:
 	if total_fen <= 0:
 		return 0.0
 
-	var rate := float(get_fen_rate(unit))
-	return total_fen / rate
+	return float(total_fen) / float(get_fen_rate(unit))
 
 
-# =========================================================
-# 七、单位之间直接转换
-# 作用：
-#   在不同单位之间直接换算
-#
-# 示例：
-#   convert(3, "qian", "fen")    = 30
-#   convert(150, "fen", "liang") = 1.5
-# =========================================================
+# 函数功能：在两个单位之间直接换算。
 static func convert(amount: float, from_unit: String, to_unit: String) -> float:
-	var total_fen := to_fen(amount, from_unit)
-	return from_fen(total_fen, to_unit)
+	return from_fen(to_fen(amount, from_unit), to_unit)
 
 
 # =========================================================
-# 八、数字转中文
-# 作用：
-#   把整数转换成中文数字，供界面显示使用
-#
-# 当前支持：
-#   0 ~ 9999 的常规显示
-#
-# 示例：
-#   0   -> 零
-#   1   -> 一
-#   9   -> 九
-#   10  -> 十
-#   11  -> 十一
-#   20  -> 二十
-#   21  -> 二十一
-#   105 -> 一百零五
+# 三、中文数字显示
 # =========================================================
+
+# 函数功能：把整数转换成中文数字文本，主要用于剂量显示。
+# 说明：当前适合 0 ~ 9999 的常规显示；超过该范围仍会尽量显示，但单位表只覆盖到“千”。
 static func number_to_chinese(num: int) -> String:
-	var digits := ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"]
-	var units := ["", "十", "百", "千"]
-
 	if num == 0:
-		return "零"
+		return CHINESE_DIGITS[0]
 
 	if num < 0:
 		return "负" + number_to_chinese(-num)
@@ -177,57 +123,39 @@ static func number_to_chinese(num: int) -> String:
 			if result != "":
 				need_zero = true
 		else:
-			var part = digits[digit] + units[unit_index]
+			var unit_text := ""
+			if unit_index < CHINESE_UNITS.size():
+				unit_text = CHINESE_UNITS[unit_index]
+
+			var part: String = CHINESE_DIGITS[digit] + unit_text
 
 			if need_zero:
-				part = "零" + part
+				part = CHINESE_DIGITS[0] + part
 				need_zero = false
 
 			result = part + result
 
-		value /= 10
+		# 使用整数除法，避免 Godot 4 中“/”产生浮点结果。
+		value = value / 10
 		unit_index += 1
 
-	# 10~19 显示为“十、十一、十二”
+	# 10 ~ 19 显示为“十、十一、十二”，而不是“一十、一十一、一十二”。
 	if result.begins_with("一十"):
 		result = result.substr(1)
 
 	return result
 
 
-# =========================================================
-# 九、浮点数转中文显示
-# 作用：
-#   把 float 转成中文数字文本
-#
-# 规则：
-#   1. 整数：直接转中文整数
-#   2. 小数：使用“点”逐位读法
-#
-# 示例：
-#   1.0   -> 一
-#   1.5   -> 一点五
-#   12.25 -> 十二点二五
-#
-# 说明：
-#   当前主要用于显示层，不影响内部数值计算
-# =========================================================
+# 函数功能：把浮点数转换成中文数字文本。
+# 规则：整数直接使用中文整数；小数使用“点”逐位读取，最多保留两位小数。
 static func float_to_chinese(amount: float) -> String:
-	var int_part := int(amount)
+	var rounded_amount = round(amount * 100.0) / 100.0
+	var int_part := int(rounded_amount)
 
-	# 本质上是整数时，直接返回整数中文
-	if is_equal_approx(amount, float(int_part)):
+	if is_equal_approx(rounded_amount, float(int_part)):
 		return number_to_chinese(int_part)
 
-	var digits := ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"]
-
-	# 限制到两位小数，避免浮点误差导致显示异常
-	var rounded_amount = round(amount * 100.0) / 100.0
 	var text := str(rounded_amount)
-
-	if text.ends_with(".0"):
-		return number_to_chinese(int(round(rounded_amount)))
-
 	var parts := text.split(".")
 	var integer_text := number_to_chinese(int(parts[0]))
 	var decimal_text := ""
@@ -235,7 +163,7 @@ static func float_to_chinese(amount: float) -> String:
 	if parts.size() > 1:
 		for ch in parts[1]:
 			if ch >= "0" and ch <= "9":
-				decimal_text += digits[int(ch)]
+				decimal_text += CHINESE_DIGITS[int(ch)]
 
 	if decimal_text == "":
 		return integer_text
@@ -244,59 +172,37 @@ static func float_to_chinese(amount: float) -> String:
 
 
 # =========================================================
-# 十、总分转复合显示
-# 作用：
-#   把总分转换为“斤两钱分”的复合文本
-#
-# 示例：
-#   1873分 = 一斤二两七钱三分
-#   120分  = 一两二钱
-#   30分   = 三钱
-#   11分   = 一钱一分
+# 四、剂量文本格式化
 # =========================================================
+
+# 函数功能：把底层总分值转换为“斤两钱分”的复合单位文本。
 static func format_fen_as_compound(total_fen: int) -> String:
 	if total_fen <= 0:
 		return "零分"
 
 	var remain := total_fen
-
-	var jin: int = remain / FEN_PER_JIN
-	remain = remain % FEN_PER_JIN
-
-	var liang: int = remain / FEN_PER_LIANG
-	remain = remain % FEN_PER_LIANG
-
-	var qian: int = remain / FEN_PER_QIAN
-	remain = remain % FEN_PER_QIAN
-
-	var fen: int = remain
-
 	var parts: Array[String] = []
 
-	if jin > 0:
-		parts.append("%s斤" % number_to_chinese(jin))
-	if liang > 0:
-		parts.append("%s两" % number_to_chinese(liang))
-	if qian > 0:
-		parts.append("%s钱" % number_to_chinese(qian))
-	if fen > 0:
-		parts.append("%s分" % number_to_chinese(fen))
+	var jin := remain / FEN_PER_JIN
+	remain %= FEN_PER_JIN
+
+	var liang := remain / FEN_PER_LIANG
+	remain %= FEN_PER_LIANG
+
+	var qian := remain / FEN_PER_QIAN
+	remain %= FEN_PER_QIAN
+
+	var fen := remain
+
+	_append_compound_part(parts, jin, "斤")
+	_append_compound_part(parts, liang, "两")
+	_append_compound_part(parts, qian, "钱")
+	_append_compound_part(parts, fen, "分")
 
 	return "".join(parts)
 
 
-# =========================================================
-# 十一、自动选一个较合适的显示方式
-# 作用：
-#   根据总分值自动选择更简洁的显示格式
-#
-# 示例：
-#   1600 -> 一斤
-#   200  -> 二两
-#   30   -> 三钱
-#   3    -> 三分
-#   150  -> 一两五钱
-# =========================================================
+# 函数功能：根据总分值自动选择较简洁的剂量显示格式。
 static func format_fen_auto(total_fen: int) -> String:
 	if total_fen <= 0:
 		return "零分"
@@ -313,19 +219,14 @@ static func format_fen_auto(total_fen: int) -> String:
 	return format_fen_as_compound(total_fen)
 
 
-# =========================================================
-# 十二、格式化“数量 + 单位”
-# 作用：
-#   把输入的 amount + unit 先转成总分，
-#   再按中药进位规则显示成复合单位文本
-#
-# 示例：
-#   format_amount(11, "fen")   -> 一钱一分
-#   format_amount(20, "fen")   -> 二钱
-#   format_amount(11, "qian")  -> 一两一钱
-#   format_amount(10, "qian")  -> 一两
-#   format_amount(1.5, "liang")-> 一两五钱
-# =========================================================
+# 函数功能：把输入的“数量 + 单位”格式化为中药剂量文本。
 static func format_amount(amount: float, unit: String) -> String:
-	var total_fen := to_fen(amount, unit)
-	return format_fen_as_compound(total_fen)
+	return format_fen_as_compound(to_fen(amount, unit))
+
+
+# 函数功能：向复合剂量文本数组中追加非零单位片段。
+static func _append_compound_part(parts: Array[String], amount: int, unit_name: String) -> void:
+	if amount <= 0:
+		return
+
+	parts.append("%s%s" % [number_to_chinese(amount), unit_name])

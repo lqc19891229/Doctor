@@ -6,7 +6,7 @@
 script = ExtResource("1")
 disease_id = "xin_qi_xu"
 disease_name = "心气虚"
-detail_text = "心气虚\n\n【病机】\n心气不足，鼓动无力，心神失养。\n\n【症状】\n心悸怔忡，活动后加重；气短、胸闷、精神疲倦；自汗，面色淡白；\n\n【脉象】\n左寸（心）：波峰低\n\n【标准方】\n养心汤"
+detail_text = "心气虚\n\n【病机】心气不足，鼓动无力，心神失养。\n\n【症状】心悸怔忡，活动后加重；气短、胸闷、精神疲倦；自汗，面色淡白；\n\n【脉象】\n左寸（心）：波峰低\n\n【标准方】养心汤"
 recommended_formula_id = "yang_xin_tang"
 exterior_qi = 1.0
 exterior_blood = 1.0

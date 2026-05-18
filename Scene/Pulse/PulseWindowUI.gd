@@ -145,6 +145,36 @@ func close_window() -> void:
 # =========================================================
 # 点击窗口右上角关闭按钮
 # =========================================================
+
+# =========================================================
+# Esc 快捷键关闭窗口
+# =========================================================
+func _unhandled_input(event: InputEvent) -> void:
+	# 窗口未显示时，不处理 Esc，避免影响其他界面
+	if not visible:
+		return
+
+	# 只处理键盘事件
+	if not (event is InputEventKey):
+		return
+
+	var key_event := event as InputEventKey
+
+	# 只处理按下瞬间，忽略长按重复触发
+	if not key_event.pressed or key_event.echo:
+		return
+
+	# 只响应 Esc 键
+	if key_event.keycode != KEY_ESCAPE:
+		return
+
+	# 关闭当前窗口
+	close_window()
+
+	# 阻止 Esc 继续向下传递，避免影响其他窗口或主场景
+	get_viewport().set_input_as_handled()
+
+
 func _on_close_requested() -> void:
 	hide()
 

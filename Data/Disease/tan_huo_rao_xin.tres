@@ -6,7 +6,7 @@
 script = ExtResource("1")
 disease_id = "tan_huo_rao_xin"
 disease_name = "痰火扰心"
-detail_text = "痰火扰心\n\n【病机】\n痰浊郁而化火，痰火互结、上扰心神，神明躁动不宁。\n\n【症状】\n心烦失眠、躁扰不宁、狂躁易怒；多梦易惊、甚至胡言乱语、哭笑无常；胸闷痞满、口苦、痰多黄稠；\n\n【脉象】\n左寸（心）：波速快，波宽宽\n\n【标准方】\n黄连温胆汤"
+detail_text = "痰火扰心\n\n【病机】痰浊郁而化火，痰火互结、上扰心神，神明躁动不宁。\n\n【症状】心烦失眠、躁扰不宁、狂躁易怒；多梦易惊、甚至胡言乱语、哭笑无常；胸闷痞满、口苦、痰多黄稠；\n\n【脉象】\n左寸（心）：波速快，波宽宽\n\n【标准方】黄连温胆汤"
 recommended_formula_id = "huang_lian_wen_dan_tang"
 exterior_qi = 1.0
 exterior_blood = 1.0

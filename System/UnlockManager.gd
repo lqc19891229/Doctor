@@ -85,7 +85,51 @@ var book_read_days: Dictionary = {}
 
 
 # =========================================================
-# 五、基础状态函数
+# 五、心得点数
+# 说明：
+# - 白天开方获得满分甲等评价时，获得 1 点心得
+# - 夜间读书首次解锁条目时，消耗 1 点心得
+# - 1 点心得解锁 1 条内容
+# =========================================================
+
+# 当前拥有的心得数量
+var experience_points: int = 5
+
+
+# 获取当前心得数量
+func get_experience_points() -> int:
+	return experience_points
+
+
+# 增加心得
+# amount: 增加数量，默认增加 1 点
+func add_experience_point(amount: int = 1) -> void:
+	# 防止传入 0 或负数导致异常加减
+	if amount <= 0:
+		return
+
+	experience_points += amount
+
+
+# 是否至少拥有 1 点心得
+func has_experience_point() -> bool:
+	return experience_points > 0
+
+
+# 消耗 1 点心得
+# 返回值：
+# - true：消耗成功
+# - false：心得不足，消耗失败
+func consume_experience_point() -> bool:
+	if experience_points <= 0:
+		return false
+
+	experience_points -= 1
+	return true
+
+
+# =========================================================
+# 六、基础状态函数
 # =========================================================
 
 # 判断某条医书条目是否已读
@@ -157,7 +201,7 @@ func is_formula_unlocked(formula_id: String) -> bool:
 
 
 # =========================================================
-# 六、行医记考状态函数
+# 七、行医记考状态函数
 # =========================================================
 
 # 药材是否已同步到行医记考
@@ -176,7 +220,7 @@ func is_formula_unlocked_in_clinical_log(formula_id: String) -> bool:
 
 
 # =========================================================
-# 七、神农百草经阅读推进
+# 八、神农百草经阅读推进
 # =========================================================
 
 # 获取某本书已经读了多少天
@@ -217,7 +261,7 @@ func read_book_by_day(book: BookData) -> void:
 
 
 # =========================================================
-# 八、条件判断函数
+# 九、条件判断函数
 # 说明：
 # - Formula 条目：通常用于方剂书中的“方剂条目”
 # - Disease 条目：通常用于病证书中的“病证条目”
@@ -259,7 +303,7 @@ func are_required_herbs_unlocked(required_herb_ids: Array[String]) -> bool:
 
 
 # =========================================================
-# 九、分类型判断逻辑
+# 十、分类型判断逻辑
 # =========================================================
 
 # Herb 条目是否可查看
@@ -311,7 +355,7 @@ func _can_read_theory(entry: TheoryBookEntryData) -> bool:
 
 
 # =========================================================
-# 十、条目状态判断
+# 十一、条目状态判断
 # =========================================================
 
 # 是否满足“首次阅读 / 查看”条件
@@ -372,7 +416,7 @@ func is_entry_readable(entry_id: String) -> bool:
 
 
 # =========================================================
-# 十一、执行阅读
+# 十二、执行阅读
 # =========================================================
 
 # 真正执行“阅读条目”
@@ -409,7 +453,7 @@ func read_entry(entry: BookEntryData) -> void:
 
 
 # =========================================================
-# 十二、获取条目列表
+# 十三、获取条目列表
 # 说明：
 # - 这里返回的是“当前可在夜晚界面显示/阅读”的条目
 # - clinical_log 不应调用这套夜读条目逻辑
@@ -440,7 +484,7 @@ func get_readable_entries_by_book(book_id: String) -> Array[BookEntryData]:
 
 
 # =========================================================
-# 十三、给行医记考使用的辅助函数
+# 十四、给行医记考使用的辅助函数
 # =========================================================
 
 # 把 Dictionary 的 key 安全转换成 Array[String]
@@ -573,7 +617,7 @@ func unlock_all_entries_for_test() -> Dictionary:
 
 
 # =========================================================
-# 十四、存档 / 读档
+# 十五、存档 / 读档
 # =========================================================
 
 # 重置所有解锁与阅读进度
@@ -588,6 +632,9 @@ func reset_progress() -> void:
 	clinical_log_unlocked_formula_ids.clear()
 	book_read_days.clear()
 
+	# 重置心得点数
+	experience_points = 5
+
 
 # 存档用：导出当前所有进度
 func get_save_data() -> Dictionary:
@@ -599,7 +646,10 @@ func get_save_data() -> Dictionary:
 		"clinical_log_unlocked_herb_ids": clinical_log_unlocked_herb_ids,
 		"clinical_log_unlocked_disease_ids": clinical_log_unlocked_disease_ids,
 		"clinical_log_unlocked_formula_ids": clinical_log_unlocked_formula_ids,
-		"book_read_days": book_read_days
+		"book_read_days": book_read_days,
+
+		# 保存心得点数
+		"experience_points": experience_points
 	}
 
 
@@ -615,6 +665,9 @@ func load_save_data(data: Dictionary) -> void:
 	clinical_log_unlocked_disease_ids = _load_bool_dictionary(data.get("clinical_log_unlocked_disease_ids", {}))
 	clinical_log_unlocked_formula_ids = _load_bool_dictionary(data.get("clinical_log_unlocked_formula_ids", {}))
 	book_read_days = _load_int_dictionary(data.get("book_read_days", {}))
+
+	# 读取心得点数；旧存档没有该字段时默认为 0
+	experience_points = int(data.get("experience_points", 0))
 
 
 # 把 JSON 读出来的 Dictionary 转回 {String: true}

@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="6_k4yeq"]
 [ext_resource type="PackedScene" uid="uid://drw157phi8l3n" path="res://Scene/Test/InfoWindow.tscn" id="6_y7fei"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l04vw"]
+
 [node name="Clinic" type="Control" unique_id=360139135]
 layout_mode = 3
 anchors_preset = 15
@@ -18,8 +20,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_y7fei")
 
-[node name="NpcManager" type="Node" parent="." unique_id=1143092364]
-script = ExtResource("2_l04vw")
+[node name="Background" type="Control" parent="." unique_id=1968545623]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundImage" type="TextureRect" parent="Background" unique_id=341227285]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=744765107]
 layout_mode = 1
@@ -44,10 +62,19 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "时辰"
 
+[node name="ThoughtsPoint" type="Label" parent="VBoxContainer/TopBar" unique_id=571981417]
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "心得：0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="DiagnosisPanel" type="Panel" parent="VBoxContainer" unique_id=944464422]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_l04vw")
 
 [node name="DiagnosisLayout" type="VBoxContainer" parent="VBoxContainer/DiagnosisPanel" unique_id=1153841944]
 layout_mode = 1
@@ -88,3 +115,6 @@ visible = false
 
 [node name="InfoWindow" parent="." unique_id=1635719098 instance=ExtResource("6_y7fei")]
 visible = false
+
+[node name="NpcManager" type="Node" parent="." unique_id=1143092364]
+script = ExtResource("2_l04vw")

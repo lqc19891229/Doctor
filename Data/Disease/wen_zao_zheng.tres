@@ -6,7 +6,7 @@
 script = ExtResource("1")
 disease_id = "wen_zao_zheng"
 disease_name = "温燥证"
-detail_text = "温燥证\n\n【病机】\n初秋燥热之邪侵袭肺卫，肺失清润\n\n【症状】\n发热恶风，口鼻干燥、咽干口渴、干咳少痰，痰涕黄稠\n\n【脉象】\n浮脉（表）：波速快，波宽窄\n\n【标准方】\n桑杏汤"
+detail_text = "温燥证\n\n【病机】初秋燥热之邪侵袭肺卫，肺失清润\n\n【症状】发热恶风，口鼻干燥、咽干口渴、干咳少痰，痰涕黄稠\n\n【脉象】\n浮脉（表）：波速快，波宽窄\n\n【标准方】桑杏汤"
 recommended_formula_id = "sang_xing_tang"
 exterior_qi = 1.0
 exterior_blood = 1.0

@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="StoryData" format=3 uid="uid://dylr8r860tuiy"]
+
+[ext_resource type="Script" uid="uid://norr1xwbdche" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" uid="uid://5hg5tfa6de3p" path="res://System/Story/StoryData.gd" id="2_storydata"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+text = "嘉靖年间，蕲州城内疫病初起，百姓惶惶。"
+
+[sub_resource type="Resource" id="Resource_5kk8p"]
+script = ExtResource("1_storyline")
+speaker = "李时珍"
+text = "医者诊病，不可只看表象。先察其色，再候其脉。"
+
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+speaker = "病人"
+text = "先生，我近日胸闷乏力，夜里还常常发热。"
+
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+speaker = "李时珍"
+text = "脉象偏浮，热象已显。需查医书，再定方药。"
+
+[sub_resource type="Resource" id="StoryLine_005"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+text = "治疗完成后，新的药材记录被收入本草图鉴。"
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "001"
+trigger_day = 1
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("Resource_5kk8p"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005")])

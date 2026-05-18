@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://rfnj1k2mnruh"]
 
 [ext_resource type="Script" uid="uid://bvc6jjyjfrq11" path="res://Scene/clinical_log/ClinicalLogWindow.gd" id="1_4dmlf"]
+[ext_resource type="Script" uid="uid://jjpaynmj2itt" path="res://Scene/clinical_log/ClassicalVerticalRichTextLabel.gd" id="2_k7shg"]
+[ext_resource type="FontFile" uid="uid://bas0ewdnmpdaq" path="res://Fonts/SourceHanSerifSC-Regular.otf" id="2_tttq2"]
+[ext_resource type="Texture2D" uid="uid://5520nroqgroa" path="res://Assets/bookpage.png" id="2_wi6tf"]
 
 [node name="ClinicalLogWindow" type="Window" unique_id=1159353037]
 oversampling_override = 1.0
 title = "行医记考"
-position = Vector2i(1220, 36)
-size = Vector2i(700, 1000)
+position = Vector2i(1010, 36)
+size = Vector2i(900, 1000)
 script = ExtResource("1_4dmlf")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=1381153526]
@@ -32,9 +35,10 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-current_tab = 0
+current_tab = 2
 
 [node name="DiseasePage" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1471360721]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -46,30 +50,54 @@ size_flags_vertical = 3
 [node name="SearchBar" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Left" unique_id=1002975457]
 layout_mode = 2
 placeholder_text = "搜索疾病"
+clear_button_enabled = true
 
 [node name="DiseaseList" type="ItemList" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Left" unique_id=1658599805]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Right" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage" unique_id=505542607]
+[node name="Right" type="Control" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage" unique_id=141818597]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="DiseaseName" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right" unique_id=1843496594]
-layout_mode = 2
-text = "疾病名称"
-horizontal_alignment = 1
+[node name="BookPage" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right" unique_id=562918772]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wi6tf")
+expand_mode = 1
 
-[node name="DiseaseDetail" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right" unique_id=430855226]
+[node name="DiseaseDetailScroll" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right" unique_id=1576857465]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 0
+
+[node name="DiseaseDetail" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right/DiseaseDetailScroll" unique_id=430855226]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_tttq2")
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "请选择左侧疾病条目"
 scroll_following = true
+script = ExtResource("2_k7shg")
+column_gap = "    "
+right_padding_chars = 1
+top_padding_lines = 1
+fixed_rows_per_column = 23
 
 [node name="FormulaPage" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1370928369]
 visible = false
@@ -84,33 +112,56 @@ size_flags_vertical = 3
 [node name="SearchBar" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Left" unique_id=1437568058]
 layout_mode = 2
 placeholder_text = "搜索方剂"
+clear_button_enabled = true
 
 [node name="FormulaList" type="ItemList" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Left" unique_id=34641383]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Right" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage" unique_id=970681361]
+[node name="Right" type="Control" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage" unique_id=1865438345]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="FormulaName" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right" unique_id=2141239894]
-layout_mode = 2
-text = "方剂名称"
-horizontal_alignment = 1
+[node name="BookPage" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right" unique_id=1579743912]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wi6tf")
+expand_mode = 1
 
-[node name="FormulaDetail" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right" unique_id=1632150745]
+[node name="FormulaDetailScroll" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right" unique_id=1809417451]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 0
+
+[node name="FormulaDetail" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right/FormulaDetailScroll" unique_id=1632150745]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_tttq2")
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "请选择左侧方剂条目"
 scroll_following = true
+script = ExtResource("2_k7shg")
+column_gap = "    "
+right_padding_chars = 1
+top_padding_lines = 1
+fixed_rows_per_column = 23
 
 [node name="HerbPage" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1129129444]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -122,27 +173,51 @@ size_flags_vertical = 3
 [node name="SearchBar" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Left" unique_id=889016072]
 layout_mode = 2
 placeholder_text = "搜索药材"
+clear_button_enabled = true
 
 [node name="HerbList" type="ItemList" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Left" unique_id=653784190]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Right" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage" unique_id=817449215]
+[node name="Right" type="Control" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage" unique_id=85599324]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="HerbName" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right" unique_id=2082325845]
-layout_mode = 2
-text = "药材名称"
-horizontal_alignment = 1
+[node name="BookPage" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right" unique_id=843028695]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wi6tf")
+expand_mode = 1
 
-[node name="HerbDetail" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right" unique_id=2001340007]
+[node name="HerbDetailScroll" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right" unique_id=795088380]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 0
+
+[node name="HerbDetail" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right/HerbDetailScroll" unique_id=2001340007]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_tttq2")
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "请选择左侧药材条目"
 scroll_following = true
+script = ExtResource("2_k7shg")
+column_gap = "    "
+right_padding_chars = 1
+top_padding_lines = 1
+fixed_rows_per_column = 23

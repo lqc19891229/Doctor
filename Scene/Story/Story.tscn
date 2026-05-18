@@ -1,0 +1,227 @@
+[gd_scene format=3 uid="uid://bplfruj5kbkii"]
+
+[ext_resource type="Script" uid="uid://eg24ntnjfeh" path="res://Scene/Story/Story.gd" id="1_story_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialogue"]
+content_margin_left = 28.0
+content_margin_top = 22.0
+content_margin_right = 28.0
+content_margin_bottom = 18.0
+bg_color = Color(0.08, 0.055, 0.035, 0.9)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.72, 0.56, 0.36, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0, 0, 0, 0.42)
+shadow_size = 14
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_name"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.18, 0.11, 0.055, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.6, 0.38, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_subtitle"]
+content_margin_left = 32.0
+content_margin_top = 24.0
+content_margin_right = 32.0
+content_margin_bottom = 24.0
+bg_color = Color(0, 0, 0, 0.42)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[node name="Story" type="Control" unique_id=1724897051]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_story_script")
+
+[node name="BackgroundRect" type="TextureRect" parent="." unique_id=541257213]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="DarkMask" type="ColorRect" parent="." unique_id=1167324796]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.18)
+
+[node name="CharacterLayer" type="Control" parent="." unique_id=451120394]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PortraitRect" type="TextureRect" parent="CharacterLayer" unique_id=2119207232]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -420.0
+offset_right = 360.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DialogueBlock" type="Control" parent="." unique_id=2031369324]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DialoguePanel" type="Panel" parent="DialogueBlock" unique_id=833814965]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 180.0
+offset_top = -286.0
+offset_right = -180.0
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialogue")
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogueBlock/DialoguePanel" unique_id=536825321]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 34
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 34
+theme_override_constants/margin_bottom = 18
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogueBlock/DialoguePanel/MarginContainer" unique_id=454815683]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SpeakerLabel" type="Label" parent="DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer" unique_id=438664020]
+custom_minimum_size = Vector2(240, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_name")
+text = "李时珍"
+vertical_alignment = 1
+
+[node name="DialogueLabel" type="RichTextLabel" parent="DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer" unique_id=1313367091]
+custom_minimum_size = Vector2(0, 116)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "人物对话显示区域"
+fit_content = true
+scroll_active = false
+
+[node name="ContinueLabel" type="Label" parent="DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer" unique_id=1823323477]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "点击 / 空格 / 回车 继续"
+horizontal_alignment = 2
+
+[node name="SubtitleBlock" type="Control" parent="." unique_id=1749512874]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubtitlePanel" type="Panel" parent="SubtitleBlock" unique_id=500605721]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -560.0
+offset_top = -110.0
+offset_right = 560.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_subtitle")
+
+[node name="MarginContainer" type="MarginContainer" parent="SubtitleBlock/SubtitlePanel" unique_id=1646952549]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 18
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubtitleBlock/SubtitlePanel/MarginContainer" unique_id=147500762]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SubtitleLabel" type="RichTextLabel" parent="SubtitleBlock/SubtitlePanel/MarginContainer/VBoxContainer" unique_id=226665660]
+custom_minimum_size = Vector2(0, 122)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 34
+text = "背景字幕显示区域"
+fit_content = true
+scroll_active = false
+
+[node name="ContinueLabel" type="Label" parent="SubtitleBlock/SubtitlePanel/MarginContainer/VBoxContainer" unique_id=784895611]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "点击 / 空格 / 回车 继续"
+horizontal_alignment = 2

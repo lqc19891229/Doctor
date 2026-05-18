@@ -7,8 +7,7 @@
 oversampling_override = 1.0
 title = "脉诊"
 position = Vector2i(0, 36)
-size = Vector2i(1200, 1000)
-unresizable = true
+size = Vector2i(1000, 1000)
 script = ExtResource("1_in46w")
 
 [node name="LayerTabs" type="TabContainer" parent="." unique_id=1959220331]
@@ -17,9 +16,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+current_tab = 1
+tab_0/hidden = true
+tab_1/hidden = true
+tab_2/hidden = true
 
 [node name="按键提示" type="Control" parent="LayerTabs" unique_id=1433950808]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -31,24 +34,17 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="KeyHintLabel" type="Label" parent="LayerTabs/按键提示/KeyHintPanel" unique_id=1711602170]
+custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
 text = "按键提示：
 
-右寸：Z
-右关：A
-右尺：Q
-
-左寸：X
-左关：S
-左尺：W
-
-同时按一只手三键可查看整手脉象"
+右手脉象：Q+A+Z
+左手脉象：W+S+X"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="右手脉象" type="Control" parent="LayerTabs" unique_id=416110597]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 

@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "feng_han_biao_xu_zheng"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "风寒表虚证"
-detail_text = "风寒表虚证\n\n【病机】\n风寒袭表，卫气不固，营阴外泄\n\n【症状】\n恶风发热，头痛流清涕，出汗\n\n【脉象】\n浮脉（表）：波峰低，波速慢\n\n【标准方】\n桂枝汤"
+detail_text = "风寒表虚证\n\n【病机】风寒袭表，卫气不固，营阴外泄\n\n【症状】恶风发热，头痛流清涕，出汗\n\n【脉象】\n浮脉（表）：波峰低，波速慢\n\n【标准方】桂枝汤"
 disease_id = "feng_han_biao_xu_zheng"
 prerequisite_entry_ids = Array[String](["gui_zhi_tang"])

@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "pi_xu_shi_sheng"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "脾虚湿盛"
-detail_text = "脾虚湿盛\n\n【病机】\n脾气本虚，运化无力，水湿内生，湿浊内停\n\n【症状】\n食少纳呆，脘腹痞闷，饭后胀甚；神疲乏力、少气懒言、四肢困重；大便溏薄、或泄泻、黏滞不爽；面色萎黄，或肢体浮肿、带下量多清稀\n\n【脉象】\n右关（脾胃，大小肠）：波峰低，波宽宽\n\n【标准方】\n参苓白术散"
+detail_text = "脾虚湿盛\n\n【病机】脾气本虚，运化无力，水湿内生，湿浊内停\n\n【症状】食少纳呆，脘腹痞闷，饭后胀甚；神疲乏力、少气懒言、四肢困重；大便溏薄、或泄泻、黏滞不爽；面色萎黄，或肢体浮肿、带下量多清稀\n\n【脉象】\n右关（脾胃，大小肠）：波峰低，波宽宽\n\n【标准方】参苓白术散"
 disease_id = "pi_xu_shi_sheng"
 prerequisite_entry_ids = Array[String](["shen_ling_bai_zhu_san"])

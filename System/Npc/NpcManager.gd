@@ -1,3 +1,10 @@
+## =========================================================
+## 脚本功能：
+## 管理 NPC 数据的加载、切换与随机生成。
+## 负责从资源目录读取 NPC 模板，从 DiseaseDB 读取疾病数据，
+## 并根据模板和疾病数据生成运行时 NPC。
+## =========================================================
+
 extends Node
 
 # NPC 模板列表（固定资源）
@@ -26,13 +33,26 @@ const GIVEN_NAMES := [
 ]
 
 
+# ============================================================
+# 生命周期初始化
+# ============================================================
+
+# 函数功能：
+# 节点进入场景树后执行初始化。
+# 初始化随机数种子，并加载 NPC 模板和疾病数据。
 func _ready() -> void:
 	randomize()
 	load_all_npcs()
 	load_all_diseases_from_database()
 
 
-# 加载所有 NPC 模板
+# ============================================================
+# 数据加载
+# ============================================================
+
+# 函数功能：
+# 从 res://Data/Npc 目录中加载所有 NPC 模板资源。
+# 加载成功后同时写入 NPC 模板列表和当前 NPC 列表。
 func load_all_npcs() -> void:
 	npc_list.clear()
 	npc_template_list.clear()
@@ -64,7 +84,9 @@ func load_all_npcs() -> void:
 	print("当前 NPC 列表数量：", npc_list.size())
 
 
-# 加载所有 Disease	
+# 函数功能：
+# 从 DiseaseDB 中读取所有疾病数据。
+# 随机生成 NPC 时会从该列表中随机分配疾病。
 func load_all_diseases_from_database() -> void:
 	disease_list.clear()
 
@@ -77,7 +99,13 @@ func load_all_diseases_from_database() -> void:
 	print("从 DiseaseDB 加载 Disease 数量：", disease_list.size())
 
 
-# 获取当前 NPC
+# ============================================================
+# 当前 NPC 获取与切换
+# ============================================================
+
+# 函数功能：
+# 获取当前索引对应的 NPC。
+# 如果列表为空则返回 null；如果索引越界则重置到第一个 NPC。
 func get_current_npc() -> NpcData:
 	if npc_list.is_empty():
 		return null
@@ -88,7 +116,9 @@ func get_current_npc() -> NpcData:
 	return npc_list[current_index]
 
 
-# 上一个 NPC
+# 函数功能：
+# 将当前 NPC 切换到上一个。
+# 如果已经位于第一个 NPC，则循环切换到最后一个 NPC。
 func prev_npc() -> void:
 	if npc_list.is_empty():
 		return
@@ -99,7 +129,9 @@ func prev_npc() -> void:
 		current_index = npc_list.size() - 1
 
 
-# 下一个 NPC
+# 函数功能：
+# 将当前 NPC 切换到下一个。
+# 如果已经位于最后一个 NPC，则循环切换到第一个 NPC。
 func next_npc() -> void:
 	if npc_list.is_empty():
 		return
@@ -110,24 +142,38 @@ func next_npc() -> void:
 		current_index = 0
 
 
-# 随机姓名
+# ============================================================
+# 随机基础信息生成
+# ============================================================
+
+# 函数功能：
+# 从姓氏库和名字库中随机组合一个 NPC 姓名。
 func random_name() -> String:
 	var surname = SURNAMES[randi() % SURNAMES.size()]
 	var given = GIVEN_NAMES[randi() % GIVEN_NAMES.size()]
 	return surname + given
 
 
-# 随机性别
+# 函数功能：
+# 随机生成 NPC 性别。
 func random_gender() -> String:
 	return "男" if randi() % 2 == 0 else "女"
 
 
-# 随机年龄
+# 函数功能：
+# 随机生成 NPC 年龄。
+# 当前年龄范围为 16 到 70 岁。
 func random_age() -> int:
 	return randi_range(16, 70)
 
 
-# 生成一个随机 NPC
+# ============================================================
+# 随机 NPC 创建与加入列表
+# ============================================================
+
+# 函数功能：
+# 根据随机 NPC 模板和随机疾病生成一个新的运行时 NPC。
+# 生成失败时返回 null。
 func generate_random_npc() -> NpcData:
 	if npc_template_list.is_empty():
 		print("没有 NPC 模板，无法生成")
@@ -157,7 +203,9 @@ func generate_random_npc() -> NpcData:
 	return npc
 
 
-# 生成并加入当前列表
+# 函数功能：
+# 生成一个随机 NPC，并加入当前 NPC 列表。
+# 生成成功后会自动切换到新生成的 NPC。
 func spawn_random_npc() -> NpcData:
 	var npc := generate_random_npc()
 
