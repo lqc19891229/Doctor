@@ -61,6 +61,11 @@ class_name ClassicalVerticalRichTextLabel
 # 横向展开时，最小内容宽度，避免短文本太窄。
 @export var min_horizontal_content_width: float = 1200.0
 
+# 手动指定每页显示多少竖列。
+# 0 = 自动根据 ScrollContainer 可见宽度估算。
+# 如果自动分页仍偏宽，可以在检查器里改成 6、7、8。
+@export var fixed_columns_per_page: int = 13
+
 
 # =========================================================
 # 二、内部变量
@@ -117,6 +122,65 @@ func _ready() -> void:
 func set_source_text(value: String) -> void:
 	_source_text = value
 	_request_rebuild()
+
+
+# 外部分页系统使用：
+# 把完整原文按“当前竖排布局”切成多页。
+# 每一页已经是 RichTextLabel 可直接显示的竖排矩阵，不会再被二次切字。
+func build_source_text_pages(value: String, preferred_columns_per_page: int = 0) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	var clean_text := _normalize_source_text(value)
+	var rows_per_column := _estimate_rows_per_column(clean_text.length())
+	var columns := _split_text_to_columns(clean_text, rows_per_column)
+
+	if columns.is_empty():
+		result.append({
+			"text": "",
+			"column_count": 1,
+		})
+		return result
+
+	var columns_per_page := _estimate_columns_per_page(preferred_columns_per_page)
+
+	for start_index in range(0, columns.size(), columns_per_page):
+		var page_columns: Array[String] = []
+		var end_index = min(start_index + columns_per_page, columns.size())
+
+		for column_index in range(start_index, end_index):
+			page_columns.append(columns[column_index])
+
+		result.append({
+			"text": _build_vertical_text_from_columns(page_columns, rows_per_column),
+			"column_count": page_columns.size(),
+		})
+
+	return result
+
+
+# 外部分页系统使用：
+# 直接显示 build_source_text_pages 生成的某一页。
+# 注意这里不能再调用 set_source_text，否则这一页会被再次拆列。
+func set_prebuilt_vertical_page(page_data: Dictionary) -> void:
+	var page_text := str(page_data.get("text", ""))
+	var column_count := int(page_data.get("column_count", 1))
+
+	_source_text = ""
+	_display_text = page_text
+	_update_horizontal_content_size(column_count)
+
+	_is_applying_text = true
+	text = _display_text
+	_is_applying_text = false
+
+	_defer_scroll_to_right_edge()
+	scroll_to_line(0)
+
+
+# 外部翻页后调用：把外层 ScrollContainer 移回竖排文本开头。
+# 竖排古书从右往左读，所以文本开头在横向滚动条最右侧。
+func scroll_to_text_start() -> void:
+	call_deferred("_scroll_parent_to_right_edge")
+	call_deferred("_scroll_parent_to_right_edge_late")
 
 
 # 读取原始横排文本，方便调试。
@@ -214,8 +278,17 @@ func _scroll_parent_to_right_edge() -> void:
 
 	if parent_node is ScrollContainer:
 		var scroll_parent := parent_node as ScrollContainer
-		scroll_parent.scroll_horizontal = int(custom_minimum_size.x)
+
+		# 用一个足够大的值，让 Godot 自动夹到最大滚动位置。
+		# 这样比 custom_minimum_size.x 更稳，避免尺寸尚未刷新时停在正文中段。
+		scroll_parent.scroll_horizontal = 100000000
 		scroll_parent.scroll_vertical = 0
+
+
+func _scroll_parent_to_right_edge_late() -> void:
+	# 等一帧，让 ScrollContainer 和 RichTextLabel 的尺寸先完成更新。
+	await get_tree().process_frame
+	_scroll_parent_to_right_edge()
 
 
 # =========================================================
@@ -245,10 +318,6 @@ func _normalize_source_text(value: String) -> String:
 
 
 func _estimate_rows_per_column(_char_count: int) -> int:
-	# 如果手动指定了每列字数，就优先使用手动值。
-	if fixed_rows_per_column > 0:
-		return clamp(fixed_rows_per_column, min_rows_per_column, max_rows_per_column)
-
 	var font_size := get_theme_font_size("normal_font_size")
 	if font_size <= 0:
 		font_size = get_theme_default_font_size()
@@ -257,9 +326,68 @@ func _estimate_rows_per_column(_char_count: int) -> int:
 
 	var line_spacing := get_theme_constant("line_separation")
 	var row_height = max(1.0, float(font_size + line_spacing))
-	var visible_rows := int(floor(size.y / row_height))
 
-	return clamp(visible_rows, min_rows_per_column, max_rows_per_column)
+	# 优先使用外层 ScrollContainer 的可见高度。
+	# 因为 RichTextLabel 自己的 size.y 有时还没刷新，直接用它会算错。
+	var visible_height := size.y
+	var parent_node := get_parent()
+	if parent_node is ScrollContainer:
+		visible_height = (parent_node as ScrollContainer).size.y
+
+	# 如果节点还没有完成布局，不强行按 0 高度计算。
+	if visible_height <= 0.0:
+		if fixed_rows_per_column > 0:
+			return clamp(fixed_rows_per_column, min_rows_per_column, max_rows_per_column)
+		return min_rows_per_column
+
+	# 可见行数要扣掉上边距。
+	# 字距 char_spacing_lines > 0 时，每个字之间还会额外吃掉空行。
+	var visible_lines = int(floor(visible_height / row_height)) - max(0, top_padding_lines)
+	visible_lines = max(1, visible_lines)
+
+	var spacing = max(0, char_spacing_lines)
+	var max_fit_rows = visible_lines
+	if spacing > 0:
+		# rows 个字实际占用：rows + (rows - 1) * spacing。
+		# 反推当前高度最多能放多少个字。
+		max_fit_rows = int(floor(float(visible_lines + spacing) / float(spacing + 1)))
+
+	# 手动指定每列字数时，也不能超过真实可见高度。
+	if fixed_rows_per_column > 0:
+		return clamp(min(fixed_rows_per_column, max_fit_rows), min_rows_per_column, max_rows_per_column)
+
+	return clamp(max_fit_rows, min_rows_per_column, max_rows_per_column)
+
+
+func _estimate_columns_per_page(preferred_columns_per_page: int = 0) -> int:
+	# 函数参数优先级最高，方便不同页面单独控制。
+	if preferred_columns_per_page > 0:
+		return max(1, preferred_columns_per_page)
+
+	# 检查器里的固定值优先于自动估算。
+	if fixed_columns_per_page > 0:
+		return max(1, fixed_columns_per_page)
+
+	var font_size := get_theme_font_size("normal_font_size")
+	if font_size <= 0:
+		font_size = get_theme_default_font_size()
+	if font_size <= 0:
+		font_size = 16
+
+	var visible_width := size.x
+	var parent_node := get_parent()
+	if parent_node is ScrollContainer:
+		visible_width = (parent_node as ScrollContainer).size.x
+
+	# 节点还没完成布局时给一个保守值。
+	if visible_width <= 0.0:
+		return 6
+
+	var column_width = max(1.0, float(font_size) * column_width_multiplier)
+	var result := int(floor(visible_width / column_width))
+
+	# 减 1 留出列距和边框余量，避免刚好超出后被裁。
+	return max(1, result - 1)
 
 
 # =========================================================
