@@ -8,7 +8,7 @@ class_name Main
 # 2. 新游戏
 # 3. 读取存档
 # 4. 退出游戏
-# 5. 在 Clinic 和 NightStudy 之间切换
+# 5. 在 Clinic 和 Night 之间切换
 # 6. 白天/黑夜结束时自动存档
 # =========================================================
 
@@ -27,7 +27,7 @@ class_name Main
 
 # 预加载场景
 const CLINIC_SCENE: PackedScene = preload("res://Scene/Clinic/Clinic.tscn")
-const NIGHT_STUDY_SCENE: PackedScene = preload("res://Scene/NightStudy/NightStudy.tscn")
+const NIGHT_SCENE: PackedScene = preload("res://Scene/Night/Night.tscn")
 const STORY_SCENE: PackedScene = preload("res://Scene/Story/Story.tscn")
 
 
@@ -37,6 +37,7 @@ var current_scene: Node = null
 # 剧情结束后要回到的目标。
 # 使用逻辑名，不使用场景路径，避免 Story 直接替换 Main。
 var pending_story_return_target: String = ""
+
 
 func _ready() -> void:
 	# 连接开始菜单按钮
@@ -128,7 +129,7 @@ func _on_load_game_button_pressed() -> void:
 	if GameTime.is_day():
 		_enter_clinic()
 	else:
-		_enter_night_study()
+		_enter_night()
 
 
 # =========================================================
@@ -180,24 +181,24 @@ func _enter_clinic() -> void:
 
 
 # =========================================================
-# 进入 NightStudy
+# 进入 Night
 # =========================================================
-func _enter_night_study() -> void:
+func _enter_night() -> void:
 	_clear_current_scene()
 
-	# 实例化夜晚读书场景
-	current_scene = NIGHT_STUDY_SCENE.instantiate()
+	# 实例化夜晚主场景
+	current_scene = NIGHT_SCENE.instantiate()
 	current_scene_root.add_child(current_scene)
 
-	# 连接 study_finished 信号
-	if current_scene.has_signal("study_finished"):
-		if not current_scene.is_connected("study_finished", Callable(self, "_on_study_finished")):
-			current_scene.connect("study_finished", Callable(self, "_on_study_finished"))
-			print("Main 已连接 study_finished 信号")
+	# 连接 night_finished 信号
+	if current_scene.has_signal("night_finished"):
+		if not current_scene.is_connected("night_finished", Callable(self, "_on_night_finished")):
+			current_scene.connect("night_finished", Callable(self, "_on_night_finished"))
+			print("Main 已连接 night_finished 信号")
 	else:
-		print("current_scene 没有 study_finished 信号")
+		print("current_scene 没有 night_finished 信号")
 
-	print("已进入 NightStudy 场景，第 %d 天" % GameTime.current_day)
+	print("已进入 Night 场景，第 %d 天" % GameTime.current_day)
 
 
 # =========================================================
@@ -222,6 +223,7 @@ func _play_story(story_path: String, return_target: String) -> void:
 	if not loaded_story is StoryData:
 		push_warning("文件不是 StoryData：" + story_path)
 		return
+
 	var story_data: StoryData = loaded_story as StoryData
 
 	# 读取剧情 ID。
@@ -236,22 +238,30 @@ func _play_story(story_path: String, return_target: String) -> void:
 	if play_once and StoryManager.has_played_story(story_id):
 		print("剧情已播放，跳过：", story_id)
 		return
+
 	pending_story_return_target = return_target
 
 	# 只暂存剧情数据，不让 StoryManager 自己切换场景。
 	# set_story() 内部会把 story_id 记录到 played_story_ids。
 	var story_set_success: bool = StoryManager.set_story(story_data)
 
-	if story_set_success:
-		SaveManager.save_game()
+	if not story_set_success:
+		push_warning("剧情设置失败：" + story_path)
+		pending_story_return_target = ""
+		return
 
-		_clear_current_scene()
+	SaveManager.save_game()
+
+	_clear_current_scene()
 
 	current_scene = STORY_SCENE.instantiate()
 	current_scene_root.add_child(current_scene)
 
 	if current_scene.has_signal("story_finished"):
-		current_scene.connect("story_finished", Callable(self, "_on_story_finished"))
+		if not current_scene.is_connected("story_finished", Callable(self, "_on_story_finished")):
+			current_scene.connect("story_finished", Callable(self, "_on_story_finished"))
+	else:
+		print("current_scene 没有 story_finished 信号")
 
 	print("Main 播放剧情：", story_path)
 
@@ -263,7 +273,7 @@ func _on_story_finished() -> void:
 	pending_story_return_target = ""
 
 	if target == "night":
-		_enter_night_study()
+		_enter_night()
 	else:
 		_enter_clinic()
 
@@ -278,21 +288,21 @@ func _on_clinic_finished() -> void:
 	GameTime.finish_day()
 	SaveManager.save_game()
 
-	print("Clinic 已结束，切换到夜晚阅读场景")
-	_enter_night_study()
+	print("Clinic 已结束，切换到 Night 场景")
+	_enter_night()
 
 
 # =========================================================
-# NightStudy 结束，进入下一天
+# Night 结束，进入下一天
 # 黑夜结束：
 # 第 1 天 黑夜 → 第 2 天 白天
 # 天数 +1
 # =========================================================
-func _on_study_finished() -> void:
+func _on_night_finished() -> void:
 	GameTime.finish_night()
 	SaveManager.save_game()
 
-	print("夜晚阅读结束，进入第 %d 天" % GameTime.current_day)
+	print("夜晚结束，进入第 %d 天" % GameTime.current_day)
 	_enter_clinic()
 
 

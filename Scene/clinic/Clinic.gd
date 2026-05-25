@@ -45,20 +45,16 @@ const DEFAULT_DISPLAY_REGION := "浮脉"
 # 说明：
 # 1. DayLabel 显示“第几天”
 # 2. TimeLabel 显示“当前时辰”
-# 3. 使用 find_child，避免你暂时还没在 TopBar 加 TimeLabel 时报错
 @onready var day_label: Label = find_child("DayLabel", true, false) as Label
 @onready var time_label: Label = find_child("TimeLabel", true, false) as Label
 
 # ---------- 心得显示 ----------
-# 说明：
-# 1. ThoughtsPoint 是 Clinic.tscn 中 VBoxContainer/TopBar/ThoughtsPoint 这个 Label。
-# 2. 这里使用固定路径，避免 find_child 找错节点。
-# 3. 这个 Label 只负责显示 UnlockManager 中保存的心得数量。
-@onready var thoughts_point_label: Label = get_node_or_null("VBoxContainer/TopBar/ThoughtsPoint") as Label
+#  这个 Label 只负责显示 UnlockManager 中保存的心得数量。
+@onready var thoughts_point_label: Label = find_child("ThoughtsPoint", true, false) as Label
 
 # ---------- 脉象窗口 ----------
-@onready var pulse_window: PulseWindowUI = $PulseWindow
-@onready var open_pulse_window_button: Button = $VBoxContainer/DiagnosisPanel/DiagnosisLayout/ButtonRow/OpenPulseWindowButton
+@onready var pulse_window: PulseWindow = find_child("PulseWindow", true, false) as PulseWindow
+@onready var open_pulse_window_button: Button = find_child("OpenPulseWindowButton", true, false) as Button
 
 # ---------- 信息测试窗口 ----------
 # 说明：
@@ -72,16 +68,16 @@ const DEFAULT_DISPLAY_REGION := "浮脉"
 # ---------- 数据库 / 管理器 ----------
 @onready var herb_database = HerbDB
 @onready var formula_database = FormulaDB
-@onready var npc_manager = $NpcManager
+@onready var npc_manager = find_child("NpcManager", true, false)
 
 # ---------- 开方窗口 ----------
-@onready var open_prescription_window_button: Button = $VBoxContainer/DiagnosisPanel/DiagnosisLayout/ButtonRow/OpenPrescriptionWindowButton
-@onready var prescription_window: PrescriptionWindowUI = $PrescriptionWindow
+@onready var open_prescription_window_button: Button = find_child("OpenPrescriptionWindowButton", true, false) as Button
+@onready var prescription_window: PrescriptionWindow = find_child("PrescriptionWindow", true, false) as PrescriptionWindow
 
 # ---------- 行医记考 ----------
 # 说明：
 # 1. 这里使用 find_child，避免场景还没接好时报错
-# 2. 按钮和窗口建议都挂在 NpcButtonRow 下，便于白天统一操作
+# 2. 按钮现在位于 Clinic/VBoxContainer/ButtonRow 下；使用 find_child 兼容后续 UI 调整
 @onready var clinical_log_button: Button = find_child("Openclinical_logWindowButton", true, false) as Button
 @onready var clinical_log_window: ClinicalLogWindow = find_child("ClinicalLogWindow", true, false) as ClinicalLogWindow
 
@@ -132,6 +128,7 @@ var last_displayed_thoughts_point: int = -1
 # =========================================================
 
 func _ready() -> void:
+	_validate_scene_node_bindings()
 	_setup_time_system()
 	_setup_prescription_window()
 	_setup_clinical_log_window()
@@ -164,6 +161,48 @@ func _process(_delta: float) -> void:
 	# 只有脉象窗口打开时才处理键盘把脉逻辑
 	if pulse_window != null and pulse_window.visible:
 		_update_pulse_keyboard_display()
+
+
+# =========================================================
+# 初始化：节点绑定检查
+# =========================================================
+
+func _validate_scene_node_bindings() -> void:
+	# 现在 Clinic 的 UI 结构为：
+	# Clinic
+	# ├─ Background
+	# ├─ VBoxContainer
+	# │  ├─ TopBar
+	# │  ├─ Panel        # 占位用
+	# │  └─ ButtonRow
+	# ├─ PrescriptionWindow
+	# ├─ PulseWindow
+	# ├─ ClinicalLogWindow
+	# ├─ InfoWindow
+	# └─ NpcManager
+	#
+	# 这里不要再写死 DiagnosisPanel/DiagnosisLayout 路径。
+	# find_child 会按节点名查找，适合当前这种 UI 结构仍在调整的阶段。
+	if not OS.is_debug_build():
+		return
+
+	var required_nodes := {
+		"DayLabel": day_label,
+		"TimeLabel": time_label,
+		"ThoughtsPoint": thoughts_point_label,
+		"OpenPulseWindowButton": open_pulse_window_button,
+		"OpenPrescriptionWindowButton": open_prescription_window_button,
+		"Openclinical_logWindowButton": clinical_log_button,
+		"PulseWindow": pulse_window,
+		"PrescriptionWindow": prescription_window,
+		"ClinicalLogWindow": clinical_log_window,
+		"InfoWindow": info_window,
+		"NpcManager": npc_manager
+	}
+
+	for node_name in required_nodes.keys():
+		if required_nodes[node_name] == null:
+			push_warning("Clinic.gd 未找到节点：%s，请检查 Clinic.tscn 中的节点名称。" % node_name)
 
 
 # =========================================================
@@ -610,7 +649,7 @@ func close_clinical_log_window() -> void:
 func close_treatment_windows_after_submit() -> void:
 	# 关闭把脉窗口
 	# 说明：
-	# 1. 优先调用 PulseWindowUI 自己的 close_window()，保证窗口内部状态能正确处理。
+	# 1. 优先调用 PulseWindow 自己的 close_window()，保证窗口内部状态能正确处理。
 	# 2. 如果以后把脉窗口脚本没有 close_window()，则退回到 hide()，避免报错。
 	if pulse_window != null:
 		if pulse_window.has_method("close_window"):

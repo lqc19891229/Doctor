@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://b7tqjxkejcqvs"]
+
+[ext_resource type="PackedScene" uid="uid://daannkka0fcs" path="res://Scene/ReadBook/ReadBook.tscn" id="1_s8hsq"]
+[ext_resource type="Script" uid="uid://b5g5rkphktrrq" path="res://Scene/Night/Night.gd" id="1_sax03"]
+[ext_resource type="Texture2D" uid="uid://cdktg72vwwrl1" path="res://Assets/TopBar.png" id="3_3ehag"]
+[ext_resource type="Texture2D" uid="uid://crcpg5hr371xc" path="res://Assets/night_background.png" id="3_sax03"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sax03"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5x4ej"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vb6lf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rstq2"]
+
+[node name="Night" type="Control" unique_id=1990398157]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sax03")
+
+[node name="ReadBook" parent="." unique_id=1553429074 instance=ExtResource("1_s8hsq")]
+visible = false
+
+[node name="Background" type="Control" parent="." unique_id=110989754]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundImage" type="TextureRect" parent="Background" unique_id=397061248]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_sax03")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1038758942]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBar" type="Panel" parent="VBoxContainer" unique_id=779306227]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TopBar" unique_id=957659965]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_3ehag")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar" unique_id=1740842100]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DayLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1119820502]
+physics_interpolation_mode = 1
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_sax03")
+text = "天数"
+
+[node name="TimeLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=874910477]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5x4ej")
+text = "时辰"
+
+[node name="ThoughtsPoint" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=541358754]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vb6lf")
+text = "心得：0"
+horizontal_alignment = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer" unique_id=1045108170]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 27.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rstq2")
+
+[node name="ButtonRow" type="HBoxContainer" parent="VBoxContainer" unique_id=1689106686]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="ReadBookButton" type="Button" parent="VBoxContainer/ButtonRow" unique_id=275600831]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "读书"
+
+[node name="NextDayButton" type="Button" parent="VBoxContainer/ButtonRow" unique_id=2136836206]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "进入明天"

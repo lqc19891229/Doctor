@@ -1,5 +1,5 @@
 extends Window
-class_name PrescriptionWindowUI
+class_name PrescriptionWindow
 
 # =========================================================
 # Prescription.gd
@@ -320,9 +320,11 @@ func _refresh_herb_list() -> void:
 # 药材搜索
 # =========================================================
 func _on_herb_search_text_changed(new_text: String) -> void:
-	# 去掉前后空格，避免玩家误输入空格导致搜不到
-	# 转小写后可以匹配英文 herb_id
-	herb_search_keyword = new_text.strip_edges().to_lower()
+	# 搜索输入统一做规范化：
+	# 1. 中文保持原样，可搜“白术”
+	# 2. 拼音去掉 _, -, 空格，可用“baizhu”搜到“bai_zhu”
+	# 3. 后续匹配时额外生成拼音首字母，可用“bz”搜到“bai_zhu”
+	herb_search_keyword = _normalize_herb_search_text(new_text)
 
 	# 搜索内容变化后，重新刷新药材按钮列表
 	_refresh_herb_list()
@@ -365,13 +367,39 @@ func _is_herb_match_search(herb) -> bool:
 	if herb == null:
 		return false
 
-	# 匹配中文药材名，例如“桂枝”
-	var herb_name := str(herb.herb_name).to_lower()
+	# 中文名匹配：例如“白术”
+	var herb_name := _normalize_herb_search_text(str(herb.herb_name))
 
-	# 匹配药材 id，例如“gui_zhi”
-	var herb_id := str(herb.herb_id).to_lower()
+	# 完整拼音匹配：例如 herb_id 是“bai_zhu”，输入“baizhu”也能命中
+	var herb_id_raw := str(herb.herb_id).to_lower()
+	var herb_id_full_pinyin := _normalize_herb_search_text(herb_id_raw)
 
-	return herb_name.contains(herb_search_keyword) or herb_id.contains(herb_search_keyword)
+	# 拼音首字母匹配：例如 herb_id 是“bai_zhu”，输入“bz”也能命中
+	var herb_id_initials := _get_herb_id_initials(herb_id_raw)
+
+	return (
+		herb_name.contains(herb_search_keyword)
+		or herb_id_full_pinyin.contains(herb_search_keyword)
+		or herb_id_initials.contains(herb_search_keyword)
+	)
+
+
+func _normalize_herb_search_text(value: String) -> String:
+	return value.strip_edges().to_lower() \
+		.replace("_", "") \
+		.replace("-", "") \
+		.replace(" ", "")
+
+
+func _get_herb_id_initials(herb_id: String) -> String:
+	var parts := herb_id.to_lower().split("_", false)
+	var initials := ""
+
+	for part in parts:
+		if part.length() > 0:
+			initials += part.substr(0, 1)
+
+	return initials
 
 
 # =========================================================
@@ -494,12 +522,12 @@ func _set_herb_button_selected_style(herb_button: Button, is_selected: bool) -> 
 # =========================================================
 func add_herb_by_id(herb_id: String, amount: float, unit: String = "qian") -> bool:
 	if herb_database == null:
-		push_warning("PrescriptionWindowUI.add_herb_by_id: herb_database 未初始化")
+		push_warning("PrescriptionWindow.add_herb_by_id: herb_database 未初始化")
 		return false
 
 	var herb = herb_database.get_herb_by_id(herb_id)
 	if herb == null:
-		push_warning("PrescriptionWindowUI.add_herb_by_id: 未找到药材 -> " + herb_id)
+		push_warning("PrescriptionWindow.add_herb_by_id: 未找到药材 -> " + herb_id)
 		return false
 
 	return add_herb_to_prescription(herb, amount, unit)
@@ -507,11 +535,11 @@ func add_herb_by_id(herb_id: String, amount: float, unit: String = "qian") -> bo
 
 func add_herb_to_prescription(herb, amount: float, unit: String = "qian") -> bool:
 	if herb == null:
-		push_warning("PrescriptionWindowUI.add_herb_to_prescription: herb 为 null")
+		push_warning("PrescriptionWindow.add_herb_to_prescription: herb 为 null")
 		return false
 
 	if current_prescription == null:
-		push_warning("PrescriptionWindowUI.add_herb_to_prescription: current_prescription 为 null")
+		push_warning("PrescriptionWindow.add_herb_to_prescription: current_prescription 为 null")
 		return false
 
 	var ok = current_prescription.add_herb(herb, amount, unit, current_selected_role)

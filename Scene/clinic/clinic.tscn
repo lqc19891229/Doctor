@@ -1,13 +1,30 @@
 [gd_scene format=3 uid="uid://brf2blpetnvs1"]
 
 [ext_resource type="Script" uid="uid://d3fc1n20xbhxf" path="res://Scene/Clinic/Clinic.gd" id="1_y7fei"]
+[ext_resource type="Texture2D" uid="uid://cdktg72vwwrl1" path="res://Assets/TopBar.png" id="2_436d3"]
 [ext_resource type="Script" uid="uid://cse2gud2bttup" path="res://System/Npc/NpcManager.gd" id="2_l04vw"]
+[ext_resource type="Texture2D" uid="uid://2w1pqwvxq3xr" path="res://Assets/clinic_background.png" id="2_las05"]
 [ext_resource type="PackedScene" uid="uid://c1kldxjoeyc78" path="res://Scene/Prescription/PrescriptionWindow.tscn" id="5_h552d"]
-[ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/clinical_log/clinical_log_window.tscn" id="5_ruh48"]
+[ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/clinicalLogWindow/ClinicalLogWindow.tscn" id="5_ruh48"]
 [ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="6_k4yeq"]
 [ext_resource type="PackedScene" uid="uid://drw157phi8l3n" path="res://Scene/Test/InfoWindow.tscn" id="6_y7fei"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l04vw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_436d3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_las05"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h552d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_436d3"]
+bg_color = Color(0.09239706, 0.09239707, 0.092397, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_las05"]
+bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h552d"]
+bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
 
 [node name="Clinic" type="Control" unique_id=360139135]
 layout_mode = 3
@@ -20,13 +37,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_y7fei")
 
-[node name="Background" type="Control" parent="." unique_id=1968545623]
+[node name="Background" type="Panel" parent="." unique_id=1223342041]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 28.0
 
 [node name="BackgroundImage" type="TextureRect" parent="Background" unique_id=341227285]
 layout_mode = 1
@@ -36,8 +55,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("2_las05")
 expand_mode = 1
-stretch_mode = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=744765107]
 layout_mode = 1
@@ -47,61 +66,84 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopBar" type="HBoxContainer" parent="VBoxContainer" unique_id=1682440384]
+[node name="TopBar" type="Panel" parent="VBoxContainer" unique_id=186874863]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="DayLabel" type="Label" parent="VBoxContainer/TopBar" unique_id=1631137196]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TopBar" unique_id=2033599783]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_436d3")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar" unique_id=369088393]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DayLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1631137196]
+physics_interpolation_mode = 1
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_l04vw")
 text = "天数"
 
-[node name="TimeLabel" type="Label" parent="VBoxContainer/TopBar" unique_id=583757275]
+[node name="TimeLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=583757275]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_436d3")
 text = "时辰"
 
-[node name="ThoughtsPoint" type="Label" parent="VBoxContainer/TopBar" unique_id=571981417]
-custom_minimum_size = Vector2(120, 24)
+[node name="ThoughtsPoint" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=571981417]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_las05")
 text = "心得：0"
-horizontal_alignment = 1
-vertical_alignment = 1
+horizontal_alignment = 2
 
-[node name="DiagnosisPanel" type="Panel" parent="VBoxContainer" unique_id=944464422]
+[node name="Panel" type="Panel" parent="VBoxContainer" unique_id=922939220]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 27.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_h552d")
+
+[node name="ButtonRow" type="HBoxContainer" parent="VBoxContainer" unique_id=906841336]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_l04vw")
+theme_override_constants/separation = 30
 
-[node name="DiagnosisLayout" type="VBoxContainer" parent="VBoxContainer/DiagnosisPanel" unique_id=1153841944]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -31.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="ButtonRow" type="HBoxContainer" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout" unique_id=906841336]
-layout_mode = 2
-
-[node name="OpenPulseWindowButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/ButtonRow" unique_id=1895980174]
+[node name="OpenPulseWindowButton" type="Button" parent="VBoxContainer/ButtonRow" unique_id=1895980174]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_436d3")
 text = "把脉"
 
-[node name="OpenPrescriptionWindowButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/ButtonRow" unique_id=1911117914]
+[node name="OpenPrescriptionWindowButton" type="Button" parent="VBoxContainer/ButtonRow" unique_id=1911117914]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_las05")
 text = "开方"
 
-[node name="Openclinical_logWindowButton" type="Button" parent="VBoxContainer/DiagnosisPanel/DiagnosisLayout/ButtonRow" unique_id=1425448604]
+[node name="Openclinical_logWindowButton" type="Button" parent="VBoxContainer/ButtonRow" unique_id=1425448604]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_h552d")
 text = "行医记考"
 
 [node name="PrescriptionWindow" parent="." unique_id=901784337 instance=ExtResource("5_h552d")]

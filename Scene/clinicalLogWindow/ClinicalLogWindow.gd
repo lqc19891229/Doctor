@@ -285,7 +285,7 @@ func _refresh_herb_page() -> void:
 
 func _filter_entries_by_keyword(source_entries: Array[BookEntryData], keyword: String) -> Array[BookEntryData]:
 	var result: Array[BookEntryData] = []
-	var clean_keyword := keyword.strip_edges().to_lower()
+	var clean_keyword := _normalize_clinical_log_search_text(keyword)
 
 	# 搜索为空时，显示全部条目。
 	if clean_keyword == "":
@@ -293,18 +293,72 @@ func _filter_entries_by_keyword(source_entries: Array[BookEntryData], keyword: S
 			result.append(entry)
 		return result
 
-	# 按标题和正文搜索。
+	# 支持三种搜索方式：
+	# 1. 中文标题：例如“白术”
+	# 2. 完整拼音：例如“baizhu”匹配 herb_id “bai_zhu”
+	# 3. 拼音首字母：例如“bz”匹配 herb_id “bai_zhu”
 	for entry in source_entries:
 		if entry == null:
 			continue
 
-		var title_text := entry.title.to_lower()
-		var detail_text := entry.detail_text.to_lower()
-
-		if title_text.contains(clean_keyword) or detail_text.contains(clean_keyword):
+		if _is_entry_match_clinical_log_search(entry, clean_keyword):
 			result.append(entry)
 
 	return result
+
+
+func _is_entry_match_clinical_log_search(entry: BookEntryData, clean_keyword: String) -> bool:
+	if entry == null:
+		return false
+
+	var title_text := _normalize_clinical_log_search_text(entry.title)
+	var entry_id_raw := str(entry.entry_id).to_lower()
+	var entry_id_text := _normalize_clinical_log_search_text(entry_id_raw)
+	var entry_id_initials := _get_clinical_log_id_initials(entry_id_raw)
+	var data_id_raw := _get_entry_data_id(entry).to_lower()
+	var data_id_text := _normalize_clinical_log_search_text(data_id_raw)
+	var data_id_initials := _get_clinical_log_id_initials(data_id_raw)
+
+	# 列表搜索只匹配条目名称和条目 ID，不匹配正文 detail_text。
+	# 否则搜索“杏仁”时，正文里提到杏仁的“苏叶、陈皮、麻黄”等也会出现在药材列表中。
+	return (
+		title_text.contains(clean_keyword)
+		or entry_id_text.contains(clean_keyword)
+		or entry_id_initials.contains(clean_keyword)
+		or data_id_text.contains(clean_keyword)
+		or data_id_initials.contains(clean_keyword)
+	)
+
+
+func _get_entry_data_id(entry: BookEntryData) -> String:
+	if entry is DiseaseBookEntryData:
+		return str((entry as DiseaseBookEntryData).disease_id)
+
+	if entry is FormulaBookEntryData:
+		return str((entry as FormulaBookEntryData).formula_id)
+
+	if entry is HerbBookEntryData:
+		return str((entry as HerbBookEntryData).herb_id)
+
+	return ""
+
+
+func _normalize_clinical_log_search_text(value: String) -> String:
+	return value.strip_edges().to_lower() \
+		.replace("_", "") \
+		.replace("-", "") \
+		.replace(" ", "")
+
+
+func _get_clinical_log_id_initials(value: String) -> String:
+	var parts := value.to_lower().split("_", false)
+	var initials := ""
+
+	for part in parts:
+		if part.length() > 0:
+			initials += part.substr(0, 1)
+
+	return initials
 
 
 # =========================================================
@@ -386,50 +440,15 @@ func _setup_all_page_controls() -> void:
 
 
 func _setup_page_controls(right_panel: Control, detail_scroll: ScrollContainer, controls_name: String, prev_name: String, indicator_name: String, next_name: String) -> Dictionary:
-	# 返回值统一保存三个控件，方便疾病 / 方剂 / 药材复用。
-	var result := {
-		"prev": null,
-		"indicator": null,
-		"next": null,
-	}
-
 	if right_panel == null:
-		return result
+		return {}
 
-	# 给底部翻页栏留空间，避免 ScrollContainer 覆盖按钮点击区域。
-	if detail_scroll != null:
-		detail_scroll.anchor_left = 0.0
-		detail_scroll.anchor_top = 0.0
-		detail_scroll.anchor_right = 1.0
-		detail_scroll.anchor_bottom = 1.0
-		detail_scroll.offset_left = 0.0
-		detail_scroll.offset_top = 0.0
-		detail_scroll.offset_right = 0.0
-		detail_scroll.offset_bottom = -56.0
-
-	# 如果场景里已有 PageControls，就复用；没有就运行时创建。
 	var page_controls := right_panel.get_node_or_null(controls_name) as HBoxContainer
 	if page_controls == null:
 		page_controls = HBoxContainer.new()
 		page_controls.name = controls_name
 		right_panel.add_child(page_controls)
 
-	# 把翻页栏放到最上层，并扩大点击区域。
-	right_panel.move_child(page_controls, right_panel.get_child_count() - 1)
-	page_controls.z_index = 20
-	page_controls.mouse_filter = Control.MOUSE_FILTER_STOP
-	page_controls.alignment = BoxContainer.ALIGNMENT_CENTER
-	page_controls.anchor_left = 0.0
-	page_controls.anchor_top = 1.0
-	page_controls.anchor_right = 1.0
-	page_controls.anchor_bottom = 1.0
-	page_controls.offset_left = 0.0
-	page_controls.offset_top = -56.0
-	page_controls.offset_right = 0.0
-	page_controls.offset_bottom = 0.0
-	page_controls.custom_minimum_size = Vector2(0, 56)
-
-	# 上一页按钮。
 	var prev_button := page_controls.get_node_or_null(prev_name) as Button
 	if prev_button == null:
 		prev_button = Button.new()
@@ -437,14 +456,13 @@ func _setup_page_controls(right_panel: Control, detail_scroll: ScrollContainer, 
 		prev_button.text = "上一页"
 		page_controls.add_child(prev_button)
 
-	# 页码显示。
 	var indicator := page_controls.get_node_or_null(indicator_name) as Label
 	if indicator == null:
 		indicator = Label.new()
 		indicator.name = indicator_name
+		indicator.text = "1/1"
 		page_controls.add_child(indicator)
 
-	# 下一页按钮。
 	var next_button := page_controls.get_node_or_null(next_name) as Button
 	if next_button == null:
 		next_button = Button.new()
@@ -452,21 +470,15 @@ func _setup_page_controls(right_panel: Control, detail_scroll: ScrollContainer, 
 		next_button.text = "下一页"
 		page_controls.add_child(next_button)
 
-	# 控件尺寸和鼠标接收设置。
 	prev_button.mouse_filter = Control.MOUSE_FILTER_STOP
 	next_button.mouse_filter = Control.MOUSE_FILTER_STOP
-	prev_button.custom_minimum_size = Vector2(96, 36)
-	next_button.custom_minimum_size = Vector2(96, 36)
-
 	indicator.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	indicator.custom_minimum_size = Vector2(96, 36)
-	indicator.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	indicator.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 
-	result["prev"] = prev_button
-	result["indicator"] = indicator
-	result["next"] = next_button
-	return result
+	return {
+		"prev": prev_button,
+		"indicator": indicator,
+		"next": next_button,
+	}
 
 
 # =========================================================

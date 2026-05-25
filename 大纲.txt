@@ -1,0 +1,335 @@
+《医者》Godot 项目上下文说明（给 ChatGPT 读取用）
+生成日期：2026-05-20
+项目来源：Doctor.zip
+引擎：Godot 4.6
+项目类型：中医题材诊疗/读书/处方评分循环游戏
+
+============================================================
+1. 一句话说明
+============================================================
+《医者》是一个 Godot 4.6 制作的中医诊疗模拟游戏。玩家白天在诊室接诊，通过症状、脉象、病机判断疾病，并开出中药方剂；系统根据标准方剂进行评分。夜晚玩家读医书，解锁药材、疾病、方剂和医理知识，推动后续诊疗能力成长。
+
+核心循环：
+主菜单 → 新游戏/读档 → 白天诊室接诊 → 查看脉象/医案 → 开处方 → 评分结算 → 夜晚读书 → 解锁知识 → 次日继续接诊
+
+当前阶段判断：核心玩法 Alpha 前中期。主框架、数据系统、接诊流程、脉象显示、处方窗口、方剂评分、夜读解锁、存档、剧情系统均已存在；UI 体验、评分提示、脉象辅助显示、剧情内容、工程整理仍需继续完善。
+
+============================================================
+2. 当前数据规模
+============================================================
+运行数据位于 res://Data/，以 .tres Resource 为主。
+
+当前统计：
+- 药材 Herb：108 个
+- 疾病 Disease：43 个
+- 方剂 Formula：43 个
+- NPC 模板：3 个
+- 医书 Book：21 本
+- 医书条目：约 194 个
+  - HerbEntry：108 个
+  - DiseaseEntry：43 个
+  - FormulaEntry：43 个
+  - TheoryEntry：当前目录统计中未单独发现，可能尚未填充或另有路径
+- 场景 .tscn：8 个
+- 脚本 .gd：43 个
+
+已做过初步一致性检查：
+- Herb / Disease / Formula 的 ID 未发现重复。
+- 方剂 target_disease_id 均能对应到疾病。
+- 疾病 recommended_formula_id 均能对应到方剂。
+
+============================================================
+3. 当前目录结构
+============================================================
+项目主要结构：
+
+res://
+├─ Assets/                         # 图片资源：主菜单背景、诊室背景、书页等
+├─ Fonts/                          # 字体资源
+├─ Data/                           # 运行时 .tres 数据
+│  ├─ Herb/                         # 药材数据
+│  ├─ Disease/                      # 疾病/证候数据
+│  ├─ Formula/                      # 方剂数据
+│  ├─ Npc/                          # 病人/NPC 模板数据
+│  ├─ Story/                        # 剧情数据
+│  └─ Book/
+│     ├─ Book/                      # 医书本体数据
+│     └─ BookEntry/                 # 医书条目
+│        ├─ HerbEntry/
+│        ├─ DiseaseEntry/
+│        └─ FormulaEntry/
+├─ Scene/                           # 场景和 UI
+│  ├─ Main/                         # 主入口/主菜单/场景切换
+│  ├─ Clinic/                       # 白天诊室主场景
+│  ├─ NightStudy/                   # 夜晚读书主场景
+│  ├─ Prescription/                 # 处方窗口和处方数据结构
+│  ├─ Pulse/                        # 脉象窗口和脉象绘制
+│  ├─ Story/                        # 剧情播放场景
+│  ├─ Test/                         # 开发测试窗口
+│  └─ clinical_log/                 # 医案/古籍纵排显示窗口
+├─ System/                          # 系统逻辑、数据结构、数据库单例
+│  ├─ Herb/
+│  ├─ Disease/
+│  ├─ Formula/
+│  ├─ Book/
+│  ├─ Npc/
+│  ├─ Save/
+│  ├─ Story/
+│  ├─ Time/
+│  └─ UnlockManager.gd
+└─ project.godot
+
+注意：zip 中还包含 .godot/ 和 .git/。其中 .godot 是 Godot 本地缓存/导入缓存，不建议纳入分享包或版本库。
+
+============================================================
+4. Autoload / 全局单例
+============================================================
+project.godot 中配置了以下 Autoload：
+
+- FormulaDB：方剂数据库
+- DiseaseDB：疾病数据库
+- BookEntryDB：医书条目数据库
+- BookDB：医书数据库
+- HerbDB：药材数据库
+- Unlock：解锁管理器
+- GameTime：时间/天数管理器
+- SaveManager：存档管理器
+- StoryManager：剧情管理器
+
+这些全局单例是项目运行的核心。ChatGPT 在修改代码或建议重构时，需要优先考虑这些 Autoload 的路径和名称不要随意破坏。
+
+============================================================
+5. 主流程逻辑
+============================================================
+主入口：
+- Scene/Main/Main.tscn
+- Scene/Main/Main.gd
+
+Main.gd 主要职责：
+- 显示主菜单
+- 新游戏
+- 读档
+- 退出游戏
+- 根据时间阶段切换 Clinic / NightStudy / Story 场景
+- 调用 SaveManager 保存/读取
+- 根据 StoryManager 判断是否播放剧情
+
+当前主场景预加载：
+- res://Scene/Clinic/Clinic.tscn
+- res://Scene/NightStudy/NightStudy.tscn
+- res://Scene/Story/Story.tscn
+
+流程：
+1. 新游戏：清理旧存档，初始化解锁和时间。
+2. 白天：进入 Clinic 接诊。
+3. 处方提交后进行评分。
+4. 当天结束后进入夜读。
+5. 夜读后进入下一天。
+6. 过程中可触发剧情场景。
+
+============================================================
+6. 诊室系统
+============================================================
+相关文件：
+- Scene/Clinic/Clinic.tscn
+- Scene/Clinic/Clinic.gd
+- Scene/Clinic/JudgeResult.gd
+
+Clinic.gd 是当前白天玩法主控制脚本，职责较多：
+- 管理当前病人/NPC
+- 显示患者信息、症状、诊疗信息
+- 打开脉象窗口
+- 打开处方窗口
+- 打开医案/医书窗口
+- 提交处方
+- 调用 FormulaJudge 评分
+- 显示评分结果
+- 结束当天
+- 支持开发测试入口
+
+JudgeResult.gd：
+- class_name JudgeResult
+- extends RefCounted
+- 用于承载判方结果
+- 当前放在 Scene/Clinic/ 下，但它实际属于处方评分逻辑，未来更适合移动到 System/Formula/ 或 System/Prescription/。
+
+============================================================
+7. 脉象系统
+============================================================
+相关文件：
+- Scene/Pulse/PulseWindow.tscn
+- Scene/Pulse/PulseWindowUI.gd
+- Scene/Pulse/PulsePanel.gd
+- Scene/Pulse/PulseDrawer.gd
+
+职责：
+- PulseWindowUI.gd：脉象窗口 UI 控制。
+- PulsePanel.gd：脉象区域/面板逻辑。
+- PulseDrawer.gd：负责绘制脉象曲线。
+
+当前功能：
+- 可以展示不同部位/区域的脉象。
+- 有左右手/脏腑相关的显示结构。
+- 已有脉象曲线绘制逻辑。
+- 支持玩家通过图形判断脉象。
+
+============================================================
+8. 处方与方剂评分系统
+============================================================
+相关文件：
+- Scene/Prescription/Prescription.gd
+- Scene/Prescription/PrescriptionWindow.tscn
+- Scene/Prescription/PrescriptionWindowUI.gd
+- System/Formula/FormulaJudge.gd
+- System/Formula/FormulaData.gd
+- System/Formula/FormulaIngredient.gd
+- System/Formula/FormulaDataBase.gd
+- System/Herb/HerbUnit.gd
+
+Prescription.gd：
+- class_name Prescription
+- extends RefCounted
+- 表示玩家开的处方。
+- 当前放在 Scene/Prescription/ 下，但它是纯数据逻辑，不是 UI，后续可移动到 System/Formula/ 或 System/Prescription/。
+
+PrescriptionWindowUI.gd：
+- class_name PrescriptionWindowUI
+- extends Window
+- 处方窗口 UI 控制。
+- 负责选择药材、设置剂量、设置君臣佐使、提交处方等。
+
+FormulaJudge.gd：
+- class_name FormulaJudge
+- extends RefCounted
+- 负责将玩家处方与标准方剂比较。
+- 判断内容包括：缺药、多药、剂量错误、君臣佐使角色错误等。
+- 输出评分等级和错误详情。
+
+HerbUnit.gd：
+- 处理中药剂量单位。
+- 当前涉及分、钱、两、斤等单位换算。
+
+当前下一步计划中明确写到：
+- 评分逻辑错误提示优化。
+
+============================================================
+9. 夜晚读书与解锁系统
+============================================================
+相关文件：
+- Scene/NightStudy/NightStudy.tscn
+- Scene/NightStudy/NightStudy.gd
+- System/UnlockManager.gd
+- System/Book/Book/*
+- System/Book/BookEntry/*
+- Data/Book/Book/*
+- Data/Book/BookEntry/*
+
+NightStudy.gd：
+- class_name NightStudy
+- extends Control
+- 控制夜读场景。
+- 显示医书列表和条目。
+- 阅读条目后调用 Unlock 解锁相关内容。
+
+UnlockManager.gd：
+- class_name UnlockManager
+- extends Node
+- 作为 Autoload：Unlock
+- 管理已解锁药材、疾病、方剂、书籍条目等。
+- 与 SaveManager 配合保存和恢复解锁状态。
+
+Book 系统：
+- BookData.gd / BookDataBase.gd：医书本体数据和数据库。
+- BookEntryData.gd / BookEntryDataBase.gd：医书条目数据和数据库。
+- HerbBookEntryData / DiseaseBookEntryData / FormulaBookEntryData / TheoryBookEntryData：不同类型的条目数据。
+
+============================================================
+10. 剧情系统
+============================================================
+相关文件：
+- Scene/Story/Story.tscn
+- Scene/Story/Story.gd
+- System/Story/StoryData.gd
+- System/Story/StoryLine.gd
+- System/Story/StoryManager.gd
+- Data/Story/teaching_test.tres
+
+职责：
+- StoryData：一段剧情资源。
+- StoryLine：一条剧情对白/文本。
+- StoryManager：全局剧情管理器，记录哪些剧情已播放，并判断是否应触发剧情。
+- Story.tscn / Story.gd：负责实际播放剧情。
+
+当前状态：
+- 剧情系统框架已存在。
+- 当前数据中能看到 teaching_test.tres。
+- 剧情内容量还较少，更像系统验证阶段。
+
+============================================================
+11. 存档与时间系统
+============================================================
+相关文件：
+- System/Save/SaveManager.gd
+- System/Time/GameTimeManager.gd
+
+SaveManager：
+- 作为 Autoload：SaveManager
+- 保存当前游戏进度。
+- 保存内容包括时间/天数、解锁进度、剧情播放记录等。
+- 支持新游戏删除旧存档、读档恢复。
+
+GameTime：
+- 作为 Autoload：GameTime
+- 管理当前天数和白天/夜晚阶段。
+- 与 Main.gd 场景切换流程配合。
+
+============================================================
+12. NPC / 病人系统
+============================================================
+相关文件：
+- System/Npc/NpcData.gd
+- System/Npc/NpcManager.gd
+- Data/Npc/001.tres
+- Data/Npc/002.tres
+- Data/Npc/003.tres
+
+NpcData：
+- Resource 类型。
+- 存储 NPC/病人模板数据。
+
+NpcManager：
+- 负责加载 NPC 数据。
+- 当前不是 project.godot 中的 Autoload，可能由 Clinic 或其他逻辑调用。
+
+当前 NPC 数量较少，适合后续扩展更多病例。
+
+============================================================
+13. 行医记考窗口
+============================================================
+相关文件：
+- Scene/clinical_log/clinical_log_window.tscn
+- Scene/clinical_log/ClinicalLogWindow.gd
+- Scene/clinical_log/ClassicalVerticalRichTextLabel.gd
+
+职责：
+- 展示医案或古籍文本。
+- ClassicalVerticalRichTextLabel 可能用于古文/竖排阅读表现。
+
+结构问题：
+- 当前目录名 clinical_log 使用 snake_case，而其他目录多为 PascalCase。建议后续统一成 ClinicalLog。
+
+============================================================
+14. 开发测试窗口
+============================================================
+相关文件：
+- Scene/Test/InfoWindow.tscn
+- Scene/Test/InfoWindow.gd
+
+当前功能：
+- 开发调试用。
+- 可能包含查看数据库、解锁全部内容、测试当前病例等功能。
+- Clinic.gd 中存在测试入口，例如快捷键 Ctrl + T 或类似逻辑。
+
+建议：
+- 开发阶段保留。
+- 发布试玩版前隐藏、禁用或加 debug 开关。

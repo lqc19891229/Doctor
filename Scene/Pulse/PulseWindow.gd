@@ -1,8 +1,8 @@
 extends Window
-class_name PulseWindowUI
+class_name PulseWindow
 
 # =========================================================
-# PulseWindowUI.gd
+# PulseWindow.gd
 # 三层脉象窗口控制脚本
 #
 # 第一层：按键提示

@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://c1kldxjoeyc78"]
 
-[ext_resource type="Script" uid="uid://dd4y12yn0ilkd" path="res://Scene/Prescription/PrescriptionWindowUI.gd" id="1_e60oy"]
+[ext_resource type="Script" uid="uid://dd4y12yn0ilkd" path="res://Scene/Prescription/PrescriptionWindow.gd" id="1_e60oy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_thr5s"]
+bg_color = Color(0.22745098, 0.14117648, 0.078431375, 1)
 
 [node name="PrescriptionWindow" type="Window" unique_id=901784337]
 oversampling_override = 1.0
@@ -40,11 +43,13 @@ theme_override_constants/separation = 6
 
 [node name="JunTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel/VBoxContainer" unique_id=135647991]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 text = "君"
 
 [node name="JunList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel/VBoxContainer" unique_id=931144293]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
 
 [node name="ChenPanel" type="Panel" parent="PrescriptionLayout/PrescriptionView/RoleContainer" unique_id=847712501]
 layout_mode = 2
@@ -61,11 +66,13 @@ theme_override_constants/separation = 6
 
 [node name="ChenTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ChenPanel/VBoxContainer" unique_id=1646800110]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 text = "臣"
 
 [node name="ChenList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ChenPanel/VBoxContainer" unique_id=622450247]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
 
 [node name="ZuoPanel" type="Panel" parent="PrescriptionLayout/PrescriptionView/RoleContainer" unique_id=264077269]
 layout_mode = 2
@@ -81,11 +88,13 @@ grow_vertical = 2
 
 [node name="ZuoTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ZuoPanel/VBoxContainer" unique_id=356262114]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 text = "佐"
 
 [node name="ZuoList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ZuoPanel/VBoxContainer" unique_id=97672710]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
 
 [node name="ShiPanel" type="Panel" parent="PrescriptionLayout/PrescriptionView/RoleContainer" unique_id=1331325757]
 layout_mode = 2
@@ -101,11 +110,13 @@ grow_vertical = 2
 
 [node name="ShiTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel/VBoxContainer" unique_id=351366563]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 text = "使"
 
 [node name="ShiList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel/VBoxContainer" unique_id=421256194]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
 
 [node name="HerbSelectRow" type="HBoxContainer" parent="PrescriptionLayout" unique_id=590644925]
 layout_mode = 2
@@ -118,11 +129,13 @@ size_flags_horizontal = 3
 
 [node name="HerbSearch" type="LineEdit" parent="PrescriptionLayout/HerbSelectRow/HerbSearchColumn" unique_id=1590971093]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 clear_button_enabled = true
 
 [node name="HerbListScroll" type="ScrollContainer" parent="PrescriptionLayout/HerbSelectRow/HerbSearchColumn" unique_id=205035393]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_thr5s")
 
 [node name="HerbList" type="GridContainer" parent="PrescriptionLayout/HerbSelectRow/HerbSearchColumn/HerbListScroll" unique_id=444528469]
 custom_minimum_size = Vector2(0, 140)

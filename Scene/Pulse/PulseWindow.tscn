@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b24f211e0acte"]
 
-[ext_resource type="Script" uid="uid://cs8dpone7jush" path="res://Scene/Pulse/PulseWindowUI.gd" id="1_in46w"]
+[ext_resource type="Script" uid="uid://cs8dpone7jush" path="res://Scene/Pulse/PulseWindow.gd" id="1_in46w"]
 [ext_resource type="Script" uid="uid://cqs7cn5g00f7v" path="res://Scene/Pulse/PulseDrawer.gd" id="2_drawer"]
 
 [node name="PulseWindow" type="Window" unique_id=1028787152]
@@ -16,7 +16,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 1
 tab_0/hidden = true
 tab_1/hidden = true
 tab_2/hidden = true
@@ -45,6 +44,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="右手脉象" type="Control" parent="LayerTabs" unique_id=416110597]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 

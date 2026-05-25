@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://daannkka0fcs"]
+
+[ext_resource type="Script" uid="uid://5mp4fabm540j" path="res://Scene/ReadBook/ReadBook.gd" id="1_uep66"]
+[ext_resource type="Texture2D" uid="uid://bhc7eic56v8dc" path="res://Assets/bookpage2.png" id="2_5x4ej"]
+[ext_resource type="FontFile" uid="uid://bas0ewdnmpdaq" path="res://Fonts/SourceHanSerifSC-Regular.otf" id="3_vb6lf"]
+[ext_resource type="Script" uid="uid://jjpaynmj2itt" path="res://Scene/clinicalLogWindow/ClassicalVerticalRichTextLabel.gd" id="4_rstq2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qn5vy"]
+bg_color = Color(0.41960785, 0.27058825, 0.15686275, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akuei"]
+bg_color = Color(0.41960785, 0.27058825, 0.15686275, 1)
+
+[node name="ReadBook" type="Window" unique_id=1553429074]
+oversampling_override = 1.0
+title = "读书"
+position = Vector2i(0, 36)
+size = Vector2i(1800, 1000)
+script = ExtResource("1_uep66")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1641044593]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxRoot" type="VBoxContainer" parent="MarginContainer" unique_id=646348250]
+layout_mode = 2
+
+[node name="ContentRow" type="HBoxContainer" parent="MarginContainer/VBoxRoot" unique_id=745767981]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BookPanel" type="PanelContainer" parent="MarginContainer/VBoxRoot/ContentRow" unique_id=1617596319]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BookVBox" type="VBoxContainer" parent="MarginContainer/VBoxRoot/ContentRow/BookPanel" unique_id=1835840276]
+layout_mode = 2
+
+[node name="BookTitle" type="Label" parent="MarginContainer/VBoxRoot/ContentRow/BookPanel/BookVBox" unique_id=2120342913]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qn5vy")
+text = "医书列表"
+
+[node name="BookList" type="ItemList" parent="MarginContainer/VBoxRoot/ContentRow/BookPanel/BookVBox" unique_id=1764411966]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_colors/font_hovered_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_colors/font_hovered_selected_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_colors/font_selected_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_font_sizes/font_size = 25
+
+[node name="EntryPanel" type="PanelContainer" parent="MarginContainer/VBoxRoot/ContentRow" unique_id=1951439416]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EntryVBox" type="VBoxContainer" parent="MarginContainer/VBoxRoot/ContentRow/EntryPanel" unique_id=1660901098]
+layout_mode = 2
+
+[node name="EntryTitle" type="Label" parent="MarginContainer/VBoxRoot/ContentRow/EntryPanel/EntryVBox" unique_id=2049629444]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_akuei")
+text = "条目列表"
+
+[node name="EntryList" type="ItemList" parent="MarginContainer/VBoxRoot/ContentRow/EntryPanel/EntryVBox" unique_id=397650445]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_colors/font_hovered_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_colors/font_hovered_selected_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_colors/font_selected_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_font_sizes/font_size = 25
+
+[node name="DetailPanel" type="PanelContainer" parent="MarginContainer/VBoxRoot/ContentRow" unique_id=508696297]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_stretch_ratio = 5.0
+
+[node name="DetailBookPage" type="TextureRect" parent="MarginContainer/VBoxRoot/ContentRow/DetailPanel" unique_id=749019170]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_5x4ej")
+expand_mode = 1
+
+[node name="DetailScroll" type="ScrollContainer" parent="MarginContainer/VBoxRoot/ContentRow/DetailPanel" unique_id=1870211276]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DetailText" type="RichTextLabel" parent="MarginContainer/VBoxRoot/ContentRow/DetailPanel/DetailScroll" unique_id=403378030]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_vb6lf")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+script = ExtResource("4_rstq2")
+right_padding_chars = 3
+top_padding_lines = 1
+fixed_rows_per_column = 23
+fixed_columns_per_page = 12
+
+[node name="InfoLabel" type="Label" parent="MarginContainer/VBoxRoot" unique_id=352818861]
+layout_mode = 2
+text = "请选择今晚要阅读的医书。"
+
+[node name="ButtonRow" type="HBoxContainer" parent="MarginContainer/VBoxRoot" unique_id=1689106686]
+layout_mode = 2
+
+[node name="ReadButton" type="Button" parent="MarginContainer/VBoxRoot/ButtonRow" unique_id=658028749]
+layout_mode = 2
+text = "读书"
