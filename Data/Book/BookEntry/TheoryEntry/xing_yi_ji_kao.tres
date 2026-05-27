@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TheoryBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/TheoryBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "xing_yi_ji_kao"
+book_id = "huang_di_nei_jing"
+title = "行医记考"
+detail_text = "李东壁在行医过程中记录的心得笔记，白天行医时可翻阅笔记查找药材，方剂，疾病。\n\n在搜索栏输入药材，方剂，疾病的中文名或拼音，拼音首字母可快速查找。"
+prerequisite_entry_ids = Array[String]([])

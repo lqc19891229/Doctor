@@ -2,7 +2,63 @@
 
 [ext_resource type="Script" path="res://System/Formula/FormulaIngredient.gd" id="1"]
 [ext_resource type="Script" path="res://System/Formula/FormulaData.gd" id="2"]
+[ext_resource type="Resource" path="res://Data/Herb/ge_jie.tres" id="herb_1"]
+[ext_resource type="Resource" path="res://Data/Herb/ren_shen.tres" id="herb_2"]
+[ext_resource type="Resource" path="res://Data/Herb/zhi_mu.tres" id="herb_3"]
+[ext_resource type="Resource" path="res://Data/Herb/bei_mu.tres" id="herb_4"]
+[ext_resource type="Resource" path="res://Data/Herb/sang_bai_pi.tres" id="herb_5"]
+[ext_resource type="Resource" path="res://Data/Herb/fu_ling.tres" id="herb_6"]
+[ext_resource type="Resource" path="res://Data/Herb/xing_ren.tres" id="herb_7"]
+[ext_resource type="Resource" path="res://Data/Herb/gan_cao.tres" id="herb_8"]
 
+[sub_resource type="Resource" id="Ingredient_1"]
+script = ExtResource("1")
+herb = ExtResource("herb_1")
+amount = 5.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_2"]
+script = ExtResource("1")
+herb = ExtResource("herb_2")
+amount = 4.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_3"]
+script = ExtResource("1")
+herb = ExtResource("herb_3")
+amount = 3.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_4"]
+script = ExtResource("1")
+herb = ExtResource("herb_4")
+amount = 3.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_5"]
+script = ExtResource("1")
+herb = ExtResource("herb_5")
+amount = 3.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_6"]
+script = ExtResource("1")
+herb = ExtResource("herb_6")
+amount = 4.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_7"]
+script = ExtResource("1")
+herb = ExtResource("herb_7")
+amount = 4.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_8"]
+script = ExtResource("1")
+herb = ExtResource("herb_8")
+amount = 3.0
+unit = "qian"
+required = true
 
 [resource]
 script = ExtResource("2")
@@ -11,7 +67,7 @@ formula_name = "人参蛤蚧散"
 detail_text = "人参蛤蚧散\n【出处】《博济方》\n【功效】补肺益肾，纳气定喘，止咳化痰\n【主治】肾不纳气\n【组成】\n君：蛤蚧 五钱，人参 四钱\n臣：知母 三钱，贝母 三钱，桑白皮 三钱\n佐：茯苓 四钱，杏仁 四钱\n使：甘草 三钱\n【配伍】\n蛤蚧：补肺益肾、温肾纳气、定喘止嗽，专治肾不纳气虚喘。\n人参：大补元气、补益肺气，助蛤蚧固本益气。\n杏仁、贝母：润肺化痰、降气止咳\n桑白皮、知母：清泻肺热、润燥止咳\n茯苓：健脾渗湿、杜绝生痰之源\n炙甘草：益气和中，调和诸药。"
 target_disease_id = "shen_bu_na_qi"
 target_disease_name = "肾不纳气"
-jun_group = []
-chen_group = []
-zuo_group = []
-shi_group = []
+jun_group = [SubResource("Ingredient_1"), SubResource("Ingredient_2")]
+chen_group = [SubResource("Ingredient_3"), SubResource("Ingredient_4"), SubResource("Ingredient_5")]
+zuo_group = [SubResource("Ingredient_6"), SubResource("Ingredient_7")]
+shi_group = [SubResource("Ingredient_8")]

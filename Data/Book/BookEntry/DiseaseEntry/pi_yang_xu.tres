@@ -7,6 +7,6 @@ script = ExtResource("1")
 entry_id = "pi_yang_xu"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "脾阳虚"
-detail_text = "脾阳虚\n\n【病机】脾气久虚，脾阳不足、虚寒内生、运化腐熟无权。\n\n【症状】食少纳呆、脘腹冷痛，喜温喜按；大便清稀溏薄，甚至完谷不化；畏寒肢冷、四肢不温、神疲乏力；口淡不渴、面色㿠白或萎黄；或肢体浮肿、白带清稀量多\n\n【脉象】\n右关（脾胃，大小肠）：波峰低，波速慢，波宽宽\n\n【标准方】理中丸"
+detail_text = "脾阳虚\n\n【病机】脾气久虚，脾阳不足、虚寒内生、运化腐熟无权。\n\n【症状】食少纳呆、脘腹冷痛，喜温喜按；大便清稀溏薄，甚至完谷不化；畏寒肢冷、四肢不温、神疲乏力；口淡不渴、面色㿠白或萎黄；或肢体浮肿、白带清稀量多\n\n【脉象】\n右关（脾）：波峰低，波速慢，波宽宽\n\n【标准方】理中丸"
 disease_id = "pi_yang_xu"
 prerequisite_entry_ids = Array[String](["li_zhong_wan"])

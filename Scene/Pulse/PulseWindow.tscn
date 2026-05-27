@@ -16,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+current_tab = 1
 tab_0/hidden = true
 tab_1/hidden = true
 tab_2/hidden = true
@@ -44,7 +45,6 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="右手脉象" type="Control" parent="LayerTabs" unique_id=416110597]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -62,28 +62,32 @@ layout_mode = 2
 [node name="FloatLabel" type="Label" parent="LayerTabs/右手脉象/RightHandLayout/RightLabelColumn" unique_id=1625807829]
 layout_mode = 2
 size_flags_vertical = 3
-text = "浮脉"
+theme_override_font_sizes/font_size = 25
+text = "浮脉(表)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RightChiLabel" type="Label" parent="LayerTabs/右手脉象/RightHandLayout/RightLabelColumn" unique_id=1324466226]
 layout_mode = 2
 size_flags_vertical = 3
-text = "右尺"
+theme_override_font_sizes/font_size = 25
+text = "右尺(肾阳)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RightGuanLabel" type="Label" parent="LayerTabs/右手脉象/RightHandLayout/RightLabelColumn" unique_id=429314849]
 layout_mode = 2
 size_flags_vertical = 3
-text = "右关"
+theme_override_font_sizes/font_size = 25
+text = "右关(脾)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RightCunLabel" type="Label" parent="LayerTabs/右手脉象/RightHandLayout/RightLabelColumn" unique_id=403704099]
 layout_mode = 2
 size_flags_vertical = 3
-text = "右寸"
+theme_override_font_sizes/font_size = 25
+text = "右寸(肺)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -112,28 +116,32 @@ layout_mode = 2
 [node name="FloatLabel" type="Label" parent="LayerTabs/左手脉象/LeftHandLayout/LeftLabelColumn" unique_id=635468915]
 layout_mode = 2
 size_flags_vertical = 3
-text = "浮脉"
+theme_override_font_sizes/font_size = 25
+text = "浮脉(表)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LeftChiLabel" type="Label" parent="LayerTabs/左手脉象/LeftHandLayout/LeftLabelColumn" unique_id=489007859]
 layout_mode = 2
 size_flags_vertical = 3
-text = "左尺"
+theme_override_font_sizes/font_size = 25
+text = "左尺(肾阴)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LeftGuanLabel" type="Label" parent="LayerTabs/左手脉象/LeftHandLayout/LeftLabelColumn" unique_id=338384917]
 layout_mode = 2
 size_flags_vertical = 3
-text = "左关"
+theme_override_font_sizes/font_size = 25
+text = "左关(肝)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LeftCunLabel" type="Label" parent="LayerTabs/左手脉象/LeftHandLayout/LeftLabelColumn" unique_id=963203170]
 layout_mode = 2
 size_flags_vertical = 3
-text = "左寸"
+theme_override_font_sizes/font_size = 25
+text = "左寸(心)"
 horizontal_alignment = 1
 vertical_alignment = 1
 

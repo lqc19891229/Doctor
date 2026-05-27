@@ -200,6 +200,38 @@ func is_formula_unlocked(formula_id: String) -> bool:
 	return unlocked_formula_ids.has(formula_id.strip_edges())
 
 
+# 是否存在“已解锁/可阅读，但还没阅读”的疾病或方剂条目
+# 说明：
+# - 这里的“已解锁”指条目已经满足显示/阅读条件。
+# - 这些条目会阻止神农百草经继续解锁新药材，避免玩家一直只读药材书。
+func has_unread_unlocked_disease_or_formula_entries() -> bool:
+	return get_unread_unlocked_disease_or_formula_entry_count() > 0
+
+
+# 获取当前待阅读的疾病 / 方剂条目数量
+func get_unread_unlocked_disease_or_formula_entry_count() -> int:
+	if BookEntryDB == null:
+		return 0
+
+	var count := 0
+	var all_entries: Array[BookEntryData] = BookEntryDB.get_all_entries()
+
+	for entry in all_entries:
+		if entry == null:
+			continue
+
+		if not (entry is DiseaseBookEntryData or entry is FormulaBookEntryData):
+			continue
+
+		if is_entry_read(entry.entry_id):
+			continue
+
+		if can_read_entry(entry.entry_id):
+			count += 1
+
+	return count
+
+
 # =========================================================
 # 七、行医记考状态函数
 # =========================================================
@@ -233,6 +265,21 @@ func add_book_read_day(book_id: String) -> void:
 	book_read_days[book_id] = get_book_read_days(book_id) + 1
 
 
+# 药材书是否还能继续推进新条目
+func can_continue_herb_book_reading(book: BookData) -> bool:
+	if book == null:
+		return false
+
+	if not book.is_herb_book():
+		return false
+
+	if has_unread_unlocked_disease_or_formula_entries():
+		return false
+
+	var herb_unlock_order := book.get_herb_unlock_order()
+	return get_book_read_days(book.book_id) < herb_unlock_order.size()
+
+
 # 按“每日阅读”推进整本书，并按顺序解锁药材
 func read_book_by_day(book: BookData) -> void:
 	if book == null:
@@ -241,6 +288,10 @@ func read_book_by_day(book: BookData) -> void:
 	# 没有配置药材解锁顺序则直接返回
 	var herb_unlock_order := book.get_herb_unlock_order()
 	if herb_unlock_order.is_empty():
+		return
+
+	# 有待阅读的疾病 / 方剂条目时，不允许继续推进药材书。
+	if has_unread_unlocked_disease_or_formula_entries():
 		return
 
 	# 阅读天数 +1
@@ -483,8 +534,75 @@ func get_readable_entries_by_book(book_id: String) -> Array[BookEntryData]:
 	return result
 
 
+
+
+# 获取某本书中“已解锁/可阅读，但还没阅读”的普通条目数量
+# 说明：
+# - Herb 条目不计入“新条目”，因为药材条目只查看、不标记已读。
+# - Formula / Disease / Theory 条目满足首次阅读条件时，计为新条目。
+func get_unread_readable_entry_count_by_book(book_id: String) -> int:
+	var clean_book_id := book_id.strip_edges()
+	if clean_book_id == "":
+		return 0
+
+	if BookEntryDB == null:
+		return 0
+
+	var count := 0
+	var entries: Array = BookEntryDB.get_entries_by_book(clean_book_id)
+
+	for entry in entries:
+		if entry == null:
+			continue
+
+		if entry is HerbBookEntryData:
+			continue
+
+		if is_entry_read(entry.entry_id):
+			continue
+
+		if can_read_entry(entry.entry_id):
+			count += 1
+
+	return count
+
+
+# 某本书是否有新解锁、尚未阅读的普通条目
+func has_unread_readable_entries_by_book(book_id: String) -> bool:
+	return get_unread_readable_entry_count_by_book(book_id) > 0
+
+
 # =========================================================
-# 十四、给行医记考使用的辅助函数
+# 十四、书籍显示判断
+# =========================================================
+
+# ReadBook 左侧书籍是否应该显示
+func is_book_visible_in_readbook(book: BookData) -> bool:
+	if book == null:
+		return false
+
+	if not book.visible_by_default:
+		return false
+
+	if not book.can_read_at_night():
+		return false
+
+	# 初始入口书：即使暂时没有可读条目，也显示在左侧。
+	var initial_visible_book_ids: Array[String] = [
+		"shen_nong_bai_cao_jing",
+		"huang_di_nei_jing",
+	]
+	if initial_visible_book_ids.has(book.book_id.strip_edges()):
+		return true
+
+	if book.is_herb_book():
+		return not book.get_herb_unlock_order().is_empty()
+
+	return get_readable_entries_by_book(book.book_id).size() > 0
+
+
+# =========================================================
+# 十五、给行医记考使用的辅助函数
 # =========================================================
 
 # 把 Dictionary 的 key 安全转换成 Array[String]

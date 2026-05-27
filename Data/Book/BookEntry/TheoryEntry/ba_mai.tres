@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="TheoryBookEntryData" format=3 uid="uid://bobflune4a20a"]
+
+[ext_resource type="Script" uid="uid://jun6l1wpkum4" path="res://System/Book/BookEntry/TheoryBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "ba_mai"
+book_id = "huang_di_nei_jing"
+title = "把脉"
+detail_text = "游戏中人体被划分为表、心、肝、脾、肺、肾六个区域；每个区域由气、血、寒热、湿燥四种属性构成；医者通过把脉确定病位和病性。
+
+【寸关尺】
+寸、关、尺是脉诊中的三个把脉位置，在手腕桡骨动脉上。医者通过按压这三个位置，感受脉象的强弱、快慢、沉浮、流畅程度，从而推测人体不同区域和脏腑的健康状况。
+
+【对应脏腑区域】
+浮脉：表
+左寸：心
+左关：肝
+左尺：肾阴
+右寸：肺
+右关：脾
+右尺：肾阳
+
+【脉象】
+游戏中脉象由波形图表示。
+
+波峰的高低反应气的强弱；
+波峰越高气滞程度越高，波峰越低气虚程度越高。
+
+波线的粗细反应血的状态；
+波线越粗血瘀程度越高，波线越细血虚程度越高。
+
+波宽的宽窄反应湿燥程度；
+波宽越宽越湿，波宽越窄越燥。
+
+波速的快慢反应寒热程度；
+波速越快越热，波速越慢越寒。"

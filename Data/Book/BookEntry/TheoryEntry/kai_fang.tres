@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TheoryBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/TheoryBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "kai_fang"
+book_id = "huang_di_nei_jing"
+title = "开方"
+detail_text = "点击选中君臣佐使区域，药材栏选取添加药材和药量，左键点击增加，右键减少。可以在搜索栏输入药材名或拼音，拼音首字母快速查找药材。\n\n【君臣佐使】\n方剂配伍的基本原则，指一个药方里不同药材扮演的不同角色，就像一只分工明确的团队。\n君药：针对主要病症的核心药材，力量最强，用量最大。\n臣药：辅助君药增强疗效，治疗兼带症状。\n佐药：制约君臣药的毒性或烈性，治疗次要症状。\n使药：调和诸药，引导药物直达病位，解毒缓解副作用。"
+prerequisite_entry_ids = Array[String]([])

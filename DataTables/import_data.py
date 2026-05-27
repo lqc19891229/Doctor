@@ -4,7 +4,7 @@
 """
 用途：
 1. 读取当前脚本同目录下的 Data.xlsx
-2. 解析 6 个 sheet：Book / Herb / Disease / Pulse / Formula / FormulaIngredient
+2. 解析 7 个 sheet：Book / Herb / Disease / Pulse / Formula / FormulaIngredient / Theory
 3. 支持用名称反查缺失 ID，减少 Excel 重复录入
 4. 生成 Godot 可用的 .tres 资源文件
 
@@ -41,6 +41,7 @@ BOOK_OUTPUT_DIR = OUTPUT_DIR / "Book"/ "Book"
 HERB_OUTPUT_DIR = OUTPUT_DIR / "Herb"
 DISEASE_OUTPUT_DIR = OUTPUT_DIR / "Disease"
 FORMULA_OUTPUT_DIR = OUTPUT_DIR / "Formula"
+THEORY_BOOK_ENTRY_OUTPUT_DIR = OUTPUT_DIR / "Book" / "BookEntry" / "TheoryEntry"
 
 HERB_BOOK_ENTRY_OUTPUT_DIR = OUTPUT_DIR / "Book" / "BookEntry" / "HerbEntry"
 DISEASE_BOOK_ENTRY_OUTPUT_DIR = OUTPUT_DIR / "Book" / "BookEntry" / "DiseaseEntry"
@@ -51,6 +52,7 @@ BOOK_DATA_SCRIPT_PATH = "res://System/Book/Book/BookData.gd"
 HERB_BOOK_DATA_SCRIPT_PATH = "res://System/Book/Book/HerbBookData.gd"
 DISEASE_BOOK_DATA_SCRIPT_PATH = "res://System/Book/Book/DiseaseBookData.gd"
 FORMULA_BOOK_DATA_SCRIPT_PATH = "res://System/Book/Book/FormulaBookData.gd"
+THEORY_BOOK_DATA_SCRIPT_PATH = "res://System/Book/Book/TheoryBookData.gd"
 CLINICAL_LOG_DATA_SCRIPT_PATH = "res://System/Book/Book/ClinicalLogData.gd"
 HERB_DATA_SCRIPT_PATH = "res://System/Herb/HerbData.gd"
 DISEASE_DATA_SCRIPT_PATH = "res://System/Disease/DiseaseData.gd"
@@ -60,6 +62,7 @@ FORMULA_INGREDIENT_SCRIPT_PATH = "res://System/Formula/FormulaIngredient.gd"
 HERB_BOOK_ENTRY_SCRIPT_PATH = "res://System/Book/BookEntry/HerbBookEntryData.gd"
 DISEASE_BOOK_ENTRY_SCRIPT_PATH = "res://System/Book/BookEntry/DiseaseBookEntryData.gd"
 FORMULA_BOOK_ENTRY_SCRIPT_PATH = "res://System/Book/BookEntry/FormulaBookEntryData.gd"
+THEORY_BOOK_ENTRY_SCRIPT_PATH = "res://System/Book/BookEntry/TheoryBookEntryData.gd"
 
 
 SHEET_BOOK = "Book"
@@ -68,6 +71,7 @@ SHEET_DISEASE = "Disease"
 SHEET_PULSE = "Pulse"
 SHEET_FORMULA = "Formula"
 SHEET_FORMULA_INGREDIENT = "FormulaIngredient"
+SHEET_THEORY = "Theory"
 
 
 # 三类正文导入配置：文件夹名、sheet 名、匹配名称列、目标正文列
@@ -75,8 +79,41 @@ DETAIL_TEXT_IMPORT_CONFIGS = [
     {"folder_name": "药材", "sheet_name": "Herb", "name_column": "HerbName", "detail_column": "DetailText"},
     {"folder_name": "疾病", "sheet_name": "Disease", "name_column": "DiseaseName", "detail_column": "DetailText"},
     {"folder_name": "方剂", "sheet_name": "Formula", "name_column": "FormulaName", "detail_column": "DetailText"},
+    {"folder_name": "说明", "sheet_name": "Theory", "name_column": "TheoryName", "detail_column": "DetailText"},
 ]
 
+
+
+def decode_hash_unicode_name(text: str) -> str:
+    """
+    功能：兼容 zip 解压后出现的 #U4e2d#U6587 形式路径名。
+    作用：让 DetailText 文件夹和 txt 文件名无论是中文原名，还是 #U 编码名，都能参与匹配。
+    """
+    import re
+
+    def repl(match) -> str:
+        return chr(int(match.group(1), 16))
+
+    return re.sub(r"#U([0-9a-fA-F]{4})", repl, text)
+
+
+def find_detail_text_subdir(root_dir: Path, folder_name: str) -> Path | None:
+    """
+    功能：查找 DetailText 子目录。
+    规则：优先精确匹配中文目录名；若不存在，则兼容 #U 编码目录名。
+    """
+    direct_path = root_dir / folder_name
+    if direct_path.exists():
+        return direct_path
+
+    if not root_dir.exists():
+        return None
+
+    for path in root_dir.iterdir():
+        if path.is_dir() and decode_hash_unicode_name(path.name) == folder_name:
+            return path
+
+    return None
 
 def normalize_detail_text(text: str) -> str:
     """
@@ -104,7 +141,7 @@ def load_detail_text_txt_map(source_dir: Path) -> dict[str, str]:
 
     txt_map: dict[str, str] = {}
     for txt_path in txt_files:
-        item_name = txt_path.stem.strip()
+        item_name = decode_hash_unicode_name(txt_path.stem).strip()
         if not item_name:
             log(f"跳过空文件名：{txt_path.name}")
             continue
@@ -134,7 +171,12 @@ def import_detail_text_for_one_sheet(wb, config: dict[str, str]) -> None:
     name_column = config["name_column"]
     detail_column = config["detail_column"]
 
-    txt_map = load_detail_text_txt_map(DETAIL_TEXT_DIR / folder_name)
+    source_dir = find_detail_text_subdir(DETAIL_TEXT_DIR, folder_name)
+    if source_dir is None:
+        log(f"跳过 DetailText 导入：找不到目录 {DETAIL_TEXT_DIR / folder_name}")
+        return
+
+    txt_map = load_detail_text_txt_map(source_dir)
     if not txt_map:
         return
 
@@ -177,7 +219,7 @@ def import_detail_text_for_one_sheet(wb, config: dict[str, str]) -> None:
 def import_detail_text_txt_to_excel() -> None:
     """
     功能：正式导出 .tres 前，先把 DetailText 目录中的 txt 正文写入 Data.xlsx。
-    范围：药材、疾病、方剂。
+    范围：药材、疾病、方剂、说明。
     """
     if not DETAIL_TEXT_DIR.exists():
         log(f"未找到 DetailText 目录，跳过 txt 正文导入：{DETAIL_TEXT_DIR}")
@@ -398,6 +440,8 @@ def normalize_book_type(book_type_text: Any) -> str:
         "clinical_log": "clinical_log",
         "clinicallog": "clinical_log",
         "clinical-log": "clinical_log",
+        "theory": "theory",
+        "理论": "theory",
     }
     return mapping.get(text, text)
 
@@ -460,6 +504,7 @@ def load_excel_data(excel_path: Path) -> dict[str, list[dict[str, Any]]]:
         SHEET_PULSE,
         SHEET_FORMULA,
         SHEET_FORMULA_INGREDIENT,
+        SHEET_THEORY,
     ]
 
     missing = [name for name in required_sheets if name not in wb.sheetnames]
@@ -473,6 +518,7 @@ def load_excel_data(excel_path: Path) -> dict[str, list[dict[str, Any]]]:
         SHEET_PULSE: build_row_dicts(wb[SHEET_PULSE]),
         SHEET_FORMULA: build_row_dicts(wb[SHEET_FORMULA]),
         SHEET_FORMULA_INGREDIENT: build_row_dicts(wb[SHEET_FORMULA_INGREDIENT]),
+        SHEET_THEORY: build_row_dicts(wb[SHEET_THEORY]),
     }
 
 
@@ -491,6 +537,7 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
     formula_map: dict[str, dict[str, Any]] = {}
     formula_name_to_id: dict[str, str] = {}
     formula_ingredient_map: dict[str, list[dict[str, Any]]] = {}
+    theory_map: dict[str, dict[str, Any]] = {}
 
     # 建立 BookID -> 行数据 映射
     for row in raw_data[SHEET_BOOK]:
@@ -533,6 +580,12 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
         if formula_name and formula_id:
             formula_name_to_id[formula_name] = formula_id
 
+    # 建立 TheoryID -> 行数据 映射
+    for row in raw_data[SHEET_THEORY]:
+        theory_id = as_str(row.get("TheoryID"))
+        if theory_id:
+            theory_map[theory_id] = row
+
     # 将方剂组成按 FormulaID 分组，便于后续一次性生成整个方剂资源
     for row in raw_data[SHEET_FORMULA_INGREDIENT]:
         formula_id = as_str(row.get("FormulaID"))
@@ -555,6 +608,7 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
         "formula_map": formula_map,
         "formula_name_to_id": formula_name_to_id,
         "formula_ingredient_map": formula_ingredient_map,
+        "theory_map": theory_map,
     }
 
 
@@ -637,6 +691,7 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
     pulse_map = indexed_data["pulse_map"]
     formula_map = indexed_data["formula_map"]
     formula_ingredient_map = indexed_data["formula_ingredient_map"]
+    theory_map = indexed_data["theory_map"]
 
     for book_id, row in book_map.items():
         book_name = as_str(row.get("BookName"))
@@ -645,7 +700,7 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         if not book_name:
             errors.append(f"Book 缺少 BookName: {book_id}")
 
-        if book_type not in ("herb", "disease", "formula", "clinical_log"):
+        if book_type not in ("herb", "disease", "formula", "clinical_log", "theory"):
             errors.append(f"Book 类型非法: {book_id} -> {book_type}")
 
     for herb_id, row in herb_map.items():
@@ -681,6 +736,14 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         target_disease_name = as_str(row.get("TargetDiseaseName"))
         if target_disease_name and target_disease_name not in disease_name_to_id:
             errors.append(f"Formula 目标疾病名称不存在: {formula_id} -> {target_disease_name}")
+
+    for theory_id, row in theory_map.items():
+        if not as_str(row.get("TheoryName")):
+            errors.append(f"Theory 缺少 TheoryName: {theory_id}")
+
+        book_id = as_str(row.get("BookID"))
+        if book_id and book_id not in book_map:
+            errors.append(f"Theory 引用了不存在的 BookID: {theory_id} -> {book_id}")
 
     for formula_id, rows in formula_ingredient_map.items():
         if formula_id not in formula_map:
@@ -719,6 +782,7 @@ def build_book_resources(indexed_data: dict[str, Any]) -> None:
     """
     book_map = indexed_data["book_map"]
     herb_map = indexed_data["herb_map"]
+    theory_map = indexed_data["theory_map"]
 
     ensure_dir(BOOK_OUTPUT_DIR)
 
@@ -761,6 +825,18 @@ def build_book_resources(indexed_data: dict[str, Any]) -> None:
         elif book_type == "formula":
             script_path = FORMULA_BOOK_DATA_SCRIPT_PATH
             script_class = "FormulaBookData"
+            extra_lines.append(
+                f'unlock_entry_ids = {format_godot_string_array(unlock_entry_ids)}'
+            )
+        elif book_type == "theory":
+            script_path = THEORY_BOOK_DATA_SCRIPT_PATH
+            script_class = "TheoryBookData"
+            if not unlock_entry_ids:
+                unlock_entry_ids = unique_keep_order([
+                    theory_id
+                    for theory_id, theory_row in theory_map.items()
+                    if as_str(theory_row.get("BookID")) == book_id
+                ])
             extra_lines.append(
                 f'unlock_entry_ids = {format_godot_string_array(unlock_entry_ids)}'
             )
@@ -939,6 +1015,7 @@ def build_formula_resources(indexed_data: dict[str, Any]) -> None:
     disease_name_to_id = indexed_data["disease_name_to_id"]
     formula_map = indexed_data["formula_map"]
     formula_ingredient_map = indexed_data["formula_ingredient_map"]
+    theory_map = indexed_data["theory_map"]
 
     ensure_dir(FORMULA_OUTPUT_DIR)
     ensure_dir(FORMULA_BOOK_ENTRY_OUTPUT_DIR)
@@ -1065,6 +1142,38 @@ required_herb_ids = {format_godot_string_array(required_herb_ids)}
         write_text_file(FORMULA_BOOK_ENTRY_OUTPUT_DIR / f"{safe_filename(entry_id)}.tres", entry_content)
 
 
+def build_theory_resources(indexed_data: dict[str, Any]) -> None:
+    """
+    功能：根据 Theory 表生成理论书条目资源。
+    作用：
+    1. 将黄帝内经等基础理论内容导出为 TheoryBookEntryData。
+    2. DetailText 来自 Theory sheet；运行前会先从 DetailText/说明/*.txt 自动写入。
+    """
+    theory_map = indexed_data["theory_map"]
+
+    ensure_dir(THEORY_BOOK_ENTRY_OUTPUT_DIR)
+
+    for theory_id, row in theory_map.items():
+        theory_name = as_str(row.get("TheoryName"))
+        entry_id = as_str(row.get("EntryID")) or theory_id
+        title = as_str(row.get("Title")) or theory_name
+        prerequisite_ids = split_multi_value(row.get("PrerequisiteEntryIDs"))
+
+        entry_content = f'''[gd_resource type="Resource" script_class="TheoryBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="{THEORY_BOOK_ENTRY_SCRIPT_PATH}" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = {format_godot_string(entry_id)}
+book_id = {format_godot_string(row.get("BookID"))}
+title = {format_godot_string(title)}
+detail_text = {format_godot_string(row.get("DetailText"))}
+prerequisite_entry_ids = {format_godot_string_array(prerequisite_ids)}
+'''
+        write_text_file(THEORY_BOOK_ENTRY_OUTPUT_DIR / f"{safe_filename(entry_id)}.tres", entry_content)
+
+
 def clear_output_dirs() -> None:
     """
     功能：清理旧的导出资源文件。
@@ -1080,6 +1189,7 @@ def clear_output_dirs() -> None:
         HERB_BOOK_ENTRY_OUTPUT_DIR,
         DISEASE_BOOK_ENTRY_OUTPUT_DIR,
         FORMULA_BOOK_ENTRY_OUTPUT_DIR,
+        THEORY_BOOK_ENTRY_OUTPUT_DIR,
     ]
 
     for folder in target_dirs:
@@ -1122,6 +1232,7 @@ def main() -> None:
     build_herb_resources(indexed_data)
     build_disease_resources(indexed_data)
     build_formula_resources(indexed_data)
+    build_theory_resources(indexed_data)
 
     log("导入完成")
 
