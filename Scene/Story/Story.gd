@@ -10,6 +10,8 @@ signal story_finished
 # 当前版本规则：
 # - 背景图由 StoryData.background 统一控制
 # - StoryLine 只负责：类型、说话人、文本、立绘
+# - dialogue 类型会优先根据 StoryLine.portrait_side 手动指定左右立绘位置
+# - portrait_side 为 auto 或空时，才根据 speaker 自动分配左右立绘位置
 # =========================================================
 
 # 当前测试用剧情数据。
@@ -24,7 +26,10 @@ signal story_finished
 
 @onready var background_rect: TextureRect = $BackgroundRect
 @onready var dark_mask: ColorRect = $DarkMask
-@onready var portrait_rect: TextureRect = $CharacterLayer/PortraitRect
+
+# 左右两个立绘槽。
+@onready var left_portrait_rect: TextureRect = $CharacterLayer/LeftPortraitRect
+@onready var right_portrait_rect: TextureRect = $CharacterLayer/RightPortraitRect
 
 @onready var dialogue_block: Control = $DialogueBlock
 @onready var speaker_label: Label = $DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer/SpeakerLabel
@@ -41,6 +46,17 @@ var visible_character_count: int = 0
 var type_timer: float = 0.0
 var is_typing: bool = false
 var is_finished: bool = false
+
+# speaker -> "left" / "right"。
+# 同一个 speaker 固定站位，避免每句话左右乱跳。
+var speaker_side_map: Dictionary = {}
+
+# speaker -> Texture2D。
+# 同一个 speaker 后续台词没填 portrait 时，沿用之前的立绘。
+var speaker_portrait_map: Dictionary = {}
+
+# 下一个新 speaker 分配到哪一侧。
+var next_speaker_side: String = "left"
 
 
 func _ready() -> void:
@@ -95,6 +111,9 @@ func play_story(data: StoryData) -> void:
 
 	# 清空旧剧情。
 	current_lines.clear()
+	speaker_side_map.clear()
+	speaker_portrait_map.clear()
+	next_speaker_side = "left"
 
 	if story_data != null:
 		current_lines = story_data.lines.duplicate()
@@ -150,12 +169,8 @@ func _show_dialogue_line(line_data: StoryLine) -> void:
 	# 清空文本，等待打字机逐字显示。
 	dialogue_label.text = ""
 
-	# 设置人物立绘。
-	if line_data.portrait != null:
-		portrait_rect.texture = line_data.portrait
-		portrait_rect.show()
-	else:
-		portrait_rect.hide()
+	# 根据 speaker 显示左右立绘。
+	_show_speaker_portrait(line_data)
 
 
 func _show_subtitle_line(line_data: StoryLine) -> void:
@@ -164,10 +179,87 @@ func _show_subtitle_line(line_data: StoryLine) -> void:
 	dialogue_block.hide()
 
 	# 背景字幕通常不显示人物立绘。
-	portrait_rect.hide()
+	_hide_all_portraits()
 
 	# 清空文本，等待打字机逐字显示。
 	subtitle_label.text = ""
+
+
+func _show_speaker_portrait(line_data: StoryLine) -> void:
+	if line_data.speaker.is_empty():
+		_hide_all_portraits()
+		return
+
+	# 如果当前台词带了新立绘，则记录到该 speaker 名下。
+	if line_data.portrait != null:
+		speaker_portrait_map[line_data.speaker] = line_data.portrait
+
+	# 如果当前台词没带立绘，则尝试沿用这个 speaker 之前出现过的立绘。
+	var portrait: Texture2D = speaker_portrait_map.get(line_data.speaker, null)
+
+	if portrait == null:
+		_hide_all_portraits()
+		return
+
+	var side := _get_line_portrait_side(line_data)
+
+	var active_rect: TextureRect
+	var inactive_rect: TextureRect
+
+	if side == "left":
+		active_rect = left_portrait_rect
+		inactive_rect = right_portrait_rect
+	else:
+		active_rect = right_portrait_rect
+		inactive_rect = left_portrait_rect
+
+	active_rect.texture = portrait
+	active_rect.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	active_rect.show()
+
+	# 另一侧如果已有角色立绘，保留但压暗。
+	# 这样可以形成“当前说话人亮，另一人暗”的对话效果。
+	if inactive_rect.texture != null:
+		inactive_rect.modulate = Color(0.55, 0.55, 0.55, 0.72)
+		inactive_rect.show()
+	else:
+		inactive_rect.hide()
+
+
+func _get_speaker_side(speaker: String) -> String:
+	if speaker_side_map.has(speaker):
+		return speaker_side_map[speaker]
+
+	var side := next_speaker_side
+	speaker_side_map[speaker] = side
+
+	if next_speaker_side == "left":
+		next_speaker_side = "right"
+	else:
+		next_speaker_side = "left"
+
+	return side
+
+
+func _get_line_portrait_side(line_data: StoryLine) -> String:
+	var portrait_side := "auto"
+
+	# 兼容旧资源：如果 StoryLine.gd 还没加 portrait_side，避免直接报错。
+	if "portrait_side" in line_data:
+		portrait_side = String(line_data.portrait_side).strip_edges().to_lower()
+
+	if portrait_side == "left" or portrait_side == "right":
+		# 手动指定时，顺便更新 speaker 的固定站位。
+		# 这样后续同 speaker 如果写 auto 或空，也会沿用这个手动站位。
+		speaker_side_map[line_data.speaker] = portrait_side
+		return portrait_side
+
+	return _get_speaker_side(line_data.speaker)
+
+
+func _hide_all_portraits() -> void:
+	left_portrait_rect.hide()
+	right_portrait_rect.hide()
 
 
 func _update_visible_text() -> void:
@@ -203,7 +295,7 @@ func _setup_default_view() -> void:
 	# 默认先隐藏内容块，等播放剧情时再显示。
 	dialogue_block.hide()
 	subtitle_block.hide()
-	portrait_rect.hide()
+	_hide_all_portraits()
 	continue_label.hide()
 
 	# 遮罩保留显示，用来压暗背景。

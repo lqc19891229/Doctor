@@ -88,22 +88,40 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="PortraitRect" type="TextureRect" parent="CharacterLayer" unique_id=2119207232]
+[node name="LeftPortraitRect" type="TextureRect" parent="CharacterLayer" unique_id=2119207232]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -360.0
+offset_left = -760.0
 offset_top = -420.0
-offset_right = 360.0
+offset_right = -40.0
 offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="RightPortraitRect" type="TextureRect" parent="CharacterLayer" unique_id=246678058]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = -420.0
+offset_right = 760.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
 
 [node name="DialogueBlock" type="Control" parent="." unique_id=2031369324]
 layout_mode = 1
@@ -158,6 +176,7 @@ custom_minimum_size = Vector2(0, 116)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 35
 text = "人物对话显示区域"
 fit_content = true
 scroll_active = false

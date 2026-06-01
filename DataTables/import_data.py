@@ -41,6 +41,7 @@ BOOK_OUTPUT_DIR = OUTPUT_DIR / "Book"/ "Book"
 HERB_OUTPUT_DIR = OUTPUT_DIR / "Herb"
 DISEASE_OUTPUT_DIR = OUTPUT_DIR / "Disease"
 FORMULA_OUTPUT_DIR = OUTPUT_DIR / "Formula"
+STORY_OUTPUT_DIR = OUTPUT_DIR / "Story"
 THEORY_BOOK_ENTRY_OUTPUT_DIR = OUTPUT_DIR / "Book" / "BookEntry" / "TheoryEntry"
 
 HERB_BOOK_ENTRY_OUTPUT_DIR = OUTPUT_DIR / "Book" / "BookEntry" / "HerbEntry"
@@ -58,6 +59,8 @@ HERB_DATA_SCRIPT_PATH = "res://System/Herb/HerbData.gd"
 DISEASE_DATA_SCRIPT_PATH = "res://System/Disease/DiseaseData.gd"
 FORMULA_DATA_SCRIPT_PATH = "res://System/Formula/FormulaData.gd"
 FORMULA_INGREDIENT_SCRIPT_PATH = "res://System/Formula/FormulaIngredient.gd"
+STORY_DATA_SCRIPT_PATH = "res://System/Story/StoryData.gd"
+STORY_LINE_SCRIPT_PATH = "res://System/Story/StoryLine.gd"
 
 HERB_BOOK_ENTRY_SCRIPT_PATH = "res://System/Book/BookEntry/HerbBookEntryData.gd"
 DISEASE_BOOK_ENTRY_SCRIPT_PATH = "res://System/Book/BookEntry/DiseaseBookEntryData.gd"
@@ -72,6 +75,10 @@ SHEET_PULSE = "Pulse"
 SHEET_FORMULA = "Formula"
 SHEET_FORMULA_INGREDIENT = "FormulaIngredient"
 SHEET_THEORY = "Theory"
+SHEET_STORY = "Story"
+SHEET_STORY_ALIASES = ["Story", "Stroy", "story", "stroy"]
+SHEET_STORY_LINE = "StoryLine"
+SHEET_STORY_LINE_ALIASES = ["StoryLine", "storyline"]
 
 
 # 三类正文导入配置：文件夹名、sheet 名、匹配名称列、目标正文列
@@ -149,6 +156,97 @@ def load_detail_text_txt_map(source_dir: Path) -> dict[str, str]:
     return txt_map
 
 
+
+def load_story_xlsx_rows(source_dir: Path) -> list[dict[str, Any]]:
+    """
+    功能：读取 DetailText/剧情 下的所有剧情 .xlsx 文件，合并为 StoryLine 行数据。
+    规则：每个 xlsx 第一行必须是 StoryLine 表头；空 StoryID 的行会跳过，模板文件可安全保留。
+    """
+    if not source_dir.exists():
+        log(f"跳过剧情导入：找不到目录 {source_dir}")
+        return []
+
+    xlsx_files = sorted(path for path in source_dir.glob("*.xlsx") if not path.name.startswith("~$"))
+    if not xlsx_files:
+        log(f"跳过剧情导入：目录下没有 .xlsx 文件 {source_dir}")
+        return []
+
+    required_headers = ["StoryID", "StoryName", "LineIndex", "LineType", "Speaker", "PortraitSide", "PortraitPath", "Text"]
+    rows: list[dict[str, Any]] = []
+
+    for xlsx_path in xlsx_files:
+        wb = load_workbook(xlsx_path, data_only=True)
+        ws = wb.active
+        sheet_rows = list(ws.iter_rows(values_only=True))
+        if not sheet_rows:
+            continue
+
+        headers = [as_str(cell) for cell in sheet_rows[0]]
+        missing = [name for name in required_headers if name not in headers]
+        if missing:
+            raise ValueError(f"剧情文件 {decode_hash_unicode_name(xlsx_path.name)} 缺少列：{missing}")
+
+        for raw_row in sheet_rows[1:]:
+            row = {}
+            all_empty = True
+            for i, value in enumerate(raw_row):
+                key = headers[i] if i < len(headers) else ""
+                if not key:
+                    continue
+                clean_value = normalize_cell(value)
+                row[key] = clean_value
+                if clean_value != "":
+                    all_empty = False
+
+            if all_empty:
+                continue
+
+            story_id = as_str(row.get("StoryID"))
+            if not story_id:
+                continue
+
+            rows.append({key: row.get(key, "") for key in required_headers})
+
+    return rows
+
+
+def import_story_xlsx_to_storyline_sheet(wb) -> None:
+    """
+    功能：把 DetailText/剧情/*.xlsx 合并写入 Data.xlsx 的 StoryLine sheet。
+    说明：Story sheet 保存剧情元数据；StoryLine sheet 保存具体台词。
+    """
+    source_dir = find_detail_text_subdir(DETAIL_TEXT_DIR, "剧情")
+    if source_dir is None:
+        log(f"跳过剧情导入：找不到目录 {DETAIL_TEXT_DIR / '剧情'}")
+        return
+
+    story_line_sheet_name = resolve_sheet_name(wb, SHEET_STORY_LINE, SHEET_STORY_LINE_ALIASES)
+    if story_line_sheet_name not in wb.sheetnames:
+        raise ValueError(f"Excel 中不存在 sheet：{SHEET_STORY_LINE}")
+
+    story_line_rows = load_story_xlsx_rows(source_dir)
+    if not story_line_rows:
+        return
+
+    ws = wb[story_line_sheet_name]
+    headers = [as_str(cell.value) for cell in ws[1]]
+    if not headers or not headers[0]:
+        headers = ["StoryID", "StoryName", "LineIndex", "LineType", "Speaker", "PortraitSide", "PortraitPath", "Text"]
+        for col_index, header in enumerate(headers, start=1):
+            ws.cell(row=1, column=col_index).value = header
+
+    # 清空旧数据，保留表头，避免删除 sheet 导致样式/筛选丢失。
+    if ws.max_row > 1:
+        ws.delete_rows(2, ws.max_row - 1)
+
+    for row_index, row in enumerate(story_line_rows, start=2):
+        for col_index, header in enumerate(headers, start=1):
+            if not header:
+                continue
+            ws.cell(row=row_index, column=col_index).value = row.get(header, "")
+
+    log(f"剧情 xlsx -> StoryLine 写入完成，成功导入：{len(story_line_rows)} 行")
+
 def find_sheet_column_index(ws, column_name: str) -> int:
     """
     功能：在 sheet 表头中查找指定列名。
@@ -219,7 +317,7 @@ def import_detail_text_for_one_sheet(wb, config: dict[str, str]) -> None:
 def import_detail_text_txt_to_excel() -> None:
     """
     功能：正式导出 .tres 前，先把 DetailText 目录中的 txt 正文写入 Data.xlsx。
-    范围：药材、疾病、方剂、说明。
+    范围：药材、疾病、方剂、说明、剧情。
     """
     if not DETAIL_TEXT_DIR.exists():
         log(f"未找到 DetailText 目录，跳过 txt 正文导入：{DETAIL_TEXT_DIR}")
@@ -231,6 +329,8 @@ def import_detail_text_txt_to_excel() -> None:
     wb = load_workbook(EXCEL_PATH)
     for config in DETAIL_TEXT_IMPORT_CONFIGS:
         import_detail_text_for_one_sheet(wb, config)
+
+    import_story_xlsx_to_storyline_sheet(wb)
 
     wb.save(EXCEL_PATH)
     log("DetailText txt -> Data.xlsx 导入完成")
@@ -446,6 +546,23 @@ def normalize_book_type(book_type_text: Any) -> str:
     return mapping.get(text, text)
 
 
+
+def resolve_sheet_name(wb, preferred_name: str, aliases: list[str] | None = None) -> str:
+    """
+    功能：兼容 Story / Stroy、StoryLine / storyline 等大小写或拼写差异。
+    返回实际存在的 sheet 名。
+    """
+    names = aliases or [preferred_name]
+    for name in names:
+        if name in wb.sheetnames:
+            return name
+    lower_map = {name.lower(): name for name in wb.sheetnames}
+    for name in names:
+        found = lower_map.get(name.lower())
+        if found:
+            return found
+    return preferred_name
+
 def build_row_dicts(ws) -> list[dict[str, Any]]:
     """
     功能：将一个 Excel sheet 读取为字典列表。
@@ -496,6 +613,9 @@ def load_excel_data(excel_path: Path) -> dict[str, list[dict[str, Any]]]:
 
     wb = load_workbook(excel_path, data_only=True)
 
+    story_sheet_name = resolve_sheet_name(wb, SHEET_STORY, SHEET_STORY_ALIASES)
+    story_line_sheet_name = resolve_sheet_name(wb, SHEET_STORY_LINE, SHEET_STORY_LINE_ALIASES)
+
     # 必须存在的工作表，缺一不可
     required_sheets = [
         SHEET_BOOK,
@@ -505,6 +625,8 @@ def load_excel_data(excel_path: Path) -> dict[str, list[dict[str, Any]]]:
         SHEET_FORMULA,
         SHEET_FORMULA_INGREDIENT,
         SHEET_THEORY,
+        story_sheet_name,
+        story_line_sheet_name,
     ]
 
     missing = [name for name in required_sheets if name not in wb.sheetnames]
@@ -519,6 +641,8 @@ def load_excel_data(excel_path: Path) -> dict[str, list[dict[str, Any]]]:
         SHEET_FORMULA: build_row_dicts(wb[SHEET_FORMULA]),
         SHEET_FORMULA_INGREDIENT: build_row_dicts(wb[SHEET_FORMULA_INGREDIENT]),
         SHEET_THEORY: build_row_dicts(wb[SHEET_THEORY]),
+        SHEET_STORY: build_row_dicts(wb[story_sheet_name]),
+        SHEET_STORY_LINE: build_row_dicts(wb[story_line_sheet_name]),
     }
 
 
@@ -538,6 +662,8 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
     formula_name_to_id: dict[str, str] = {}
     formula_ingredient_map: dict[str, list[dict[str, Any]]] = {}
     theory_map: dict[str, dict[str, Any]] = {}
+    story_map: dict[str, dict[str, Any]] = {}
+    story_line_map: dict[str, list[dict[str, Any]]] = {}
 
     # 建立 BookID -> 行数据 映射
     for row in raw_data[SHEET_BOOK]:
@@ -586,6 +712,21 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
         if theory_id:
             theory_map[theory_id] = row
 
+    # 建立 StoryID -> Story 元数据映射
+    for row in raw_data.get(SHEET_STORY, []):
+        story_id = as_str(row.get("StoryID"))
+        if story_id:
+            story_map[story_id] = row
+
+    # 将 StoryLine 按 StoryID 分组，便于后续按剧情生成资源
+    for row in raw_data.get(SHEET_STORY_LINE, []):
+        story_id = as_str(row.get("StoryID"))
+        if story_id:
+            story_line_map.setdefault(story_id, []).append(row)
+
+    for rows in story_line_map.values():
+        rows.sort(key=lambda item: as_int(item.get("LineIndex"), 0))
+
     # 将方剂组成按 FormulaID 分组，便于后续一次性生成整个方剂资源
     for row in raw_data[SHEET_FORMULA_INGREDIENT]:
         formula_id = as_str(row.get("FormulaID"))
@@ -609,6 +750,8 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
         "formula_name_to_id": formula_name_to_id,
         "formula_ingredient_map": formula_ingredient_map,
         "theory_map": theory_map,
+        "story_map": story_map,
+        "story_line_map": story_line_map,
     }
 
 
@@ -692,6 +835,8 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
     formula_map = indexed_data["formula_map"]
     formula_ingredient_map = indexed_data["formula_ingredient_map"]
     theory_map = indexed_data["theory_map"]
+    story_map = indexed_data["story_map"]
+    story_line_map = indexed_data["story_line_map"]
 
     for book_id, row in book_map.items():
         book_name = as_str(row.get("BookName"))
@@ -744,6 +889,24 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         book_id = as_str(row.get("BookID"))
         if book_id and book_id not in book_map:
             errors.append(f"Theory 引用了不存在的 BookID: {theory_id} -> {book_id}")
+
+    for story_id, row in story_map.items():
+        if not as_str(row.get("StoryName")):
+            errors.append(f"Story 缺少 StoryName: {story_id}")
+        if story_id not in story_line_map:
+            errors.append(f"Story 缺少 StoryLine 数据: {story_id}")
+
+    for story_id, rows in story_line_map.items():
+        if story_id not in story_map:
+            errors.append(f"StoryLine 引用了不存在的 StoryID: {story_id}")
+        for i, row in enumerate(rows, start=1):
+            line_type = as_str(row.get("LineType")) or "dialogue"
+            if line_type not in ("dialogue", "subtitle"):
+                errors.append(f"StoryLine LineType 非法: {story_id} 第{i}行 -> {line_type}")
+
+            portrait_side = as_str(row.get("PortraitSide")) or "auto"
+            if portrait_side not in ("auto", "left", "right"):
+                errors.append(f"StoryLine PortraitSide 非法: {story_id} 第{i}行 -> {portrait_side}")
 
     for formula_id, rows in formula_ingredient_map.items():
         if formula_id not in formula_map:
@@ -1174,6 +1337,107 @@ prerequisite_entry_ids = {format_godot_string_array(prerequisite_ids)}
         write_text_file(THEORY_BOOK_ENTRY_OUTPUT_DIR / f"{safe_filename(entry_id)}.tres", entry_content)
 
 
+
+def format_ext_resource_value(ext_id: str) -> str:
+    return f'ExtResource("{ext_id}")'
+
+
+def build_story_resources(indexed_data: dict[str, Any]) -> None:
+    """
+    功能：根据 Story / StoryLine 表生成剧情 .tres。
+    输出：res://Data/Story/{StoryID}.tres
+    """
+    story_map = indexed_data["story_map"]
+    story_line_map = indexed_data["story_line_map"]
+
+    ensure_dir(STORY_OUTPUT_DIR)
+
+    for story_id, story_row in story_map.items():
+        story_lines = story_line_map.get(story_id, [])
+        story_name = as_str(story_row.get("StoryName"))
+        trigger_scene = as_str(story_row.get("TriggerScene")) or "clinic"
+        trigger_day = as_int(story_row.get("TriggerDay"), 0)
+        play_once = as_bool(story_row.get("PlayOnce"), True)
+        return_scene = as_str(story_row.get("ReturnScene")) or trigger_scene
+        background_path = as_str(story_row.get("BackgroundPath"))
+
+        ext_lines = [
+            f'[ext_resource type="Script" path="{STORY_LINE_SCRIPT_PATH}" id="1_storyline"]',
+            f'[ext_resource type="Script" path="{STORY_DATA_SCRIPT_PATH}" id="2_storydata"]',
+        ]
+
+        resource_path_to_id: dict[str, str] = {}
+        next_ext_index = 1
+
+        def add_texture_resource(path_text: str, prefix: str) -> str:
+            nonlocal next_ext_index
+            clean_path = as_str(path_text)
+            if not clean_path:
+                return ""
+            if clean_path in resource_path_to_id:
+                return resource_path_to_id[clean_path]
+            ext_id = f"{prefix}_{next_ext_index}"
+            next_ext_index += 1
+            resource_path_to_id[clean_path] = ext_id
+            ext_lines.append(f'[ext_resource type="Texture2D" path="{clean_path}" id="{ext_id}"]')
+            return ext_id
+
+        background_ext_id = add_texture_resource(background_path, "background")
+
+        sub_lines: list[str] = []
+        sub_ids: list[str] = []
+        for index, line_row in enumerate(story_lines, start=1):
+            line_index = as_int(line_row.get("LineIndex"), index)
+            sub_id = f"StoryLine_{line_index:03d}"
+            sub_ids.append(sub_id)
+
+            line_type = as_str(line_row.get("LineType")) or "dialogue"
+            speaker = as_str(line_row.get("Speaker"))
+            text = as_str(line_row.get("Text"))
+            portrait_ext_id = add_texture_resource(as_str(line_row.get("PortraitPath")), "portrait")
+
+            portrait_side = as_str(line_row.get("PortraitSide")) or "auto"
+
+            block_lines = [
+                f'[sub_resource type="Resource" id="{sub_id}"]',
+                'script = ExtResource("1_storyline")',
+                f'line_type = {format_godot_string(line_type)}',
+                f'portrait_side = {format_godot_string(portrait_side)}',
+            ]
+            if speaker:
+                block_lines.append(f'speaker = {format_godot_string(speaker)}')
+            block_lines.append(f'text = {format_godot_string(text)}')
+            if portrait_ext_id:
+                block_lines.append(f'portrait = {format_ext_resource_value(portrait_ext_id)}')
+            sub_lines.append("\n".join(block_lines))
+
+        line_array = ", ".join(f'SubResource("{sub_id}")' for sub_id in sub_ids)
+
+        resource_lines = [
+            "[resource]",
+            'script = ExtResource("2_storydata")',
+            f'story_id = {format_godot_string(story_id)}',
+            f'trigger_scene = {format_godot_string(trigger_scene)}',
+            f'trigger_day = {trigger_day}',
+            f'play_once = {"true" if play_once else "false"}',
+            f'return_scene = {format_godot_string(return_scene)}',
+        ]
+        if background_ext_id:
+            resource_lines.append(f'background = {format_ext_resource_value(background_ext_id)}')
+        resource_lines.append(f'lines = Array[ExtResource("1_storyline")]([{line_array}])')
+
+        story_content_parts = [
+            '[gd_resource type="Resource" script_class="StoryData" format=3]',
+            "",
+            *ext_lines,
+            "",
+            *sub_lines,
+            "",
+            *resource_lines,
+            "",
+        ]
+        write_text_file(STORY_OUTPUT_DIR / f"{safe_filename(story_id)}.tres", "\n".join(story_content_parts))
+
 def clear_output_dirs() -> None:
     """
     功能：清理旧的导出资源文件。
@@ -1186,6 +1450,7 @@ def clear_output_dirs() -> None:
         HERB_OUTPUT_DIR,
         DISEASE_OUTPUT_DIR,
         FORMULA_OUTPUT_DIR,
+        STORY_OUTPUT_DIR,
         HERB_BOOK_ENTRY_OUTPUT_DIR,
         DISEASE_BOOK_ENTRY_OUTPUT_DIR,
         FORMULA_BOOK_ENTRY_OUTPUT_DIR,
@@ -1233,6 +1498,7 @@ def main() -> None:
     build_disease_resources(indexed_data)
     build_formula_resources(indexed_data)
     build_theory_resources(indexed_data)
+    build_story_resources(indexed_data)
 
     log("导入完成")
 

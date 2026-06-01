@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://daannkka0fcs" path="res://Scene/ReadBook/ReadBook.tscn" id="1_s8hsq"]
 [ext_resource type="Script" uid="uid://b5g5rkphktrrq" path="res://Scene/Night/Night.gd" id="1_sax03"]
 [ext_resource type="Texture2D" uid="uid://cdktg72vwwrl1" path="res://Assets/TopBar.png" id="3_3ehag"]
+[ext_resource type="Texture2D" uid="uid://crcpg5hr371xc" path="res://Assets/night_background.png" id="3_sax03"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sax03"]
 
@@ -40,6 +41,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("3_sax03")
 expand_mode = 1
 stretch_mode = 6
 

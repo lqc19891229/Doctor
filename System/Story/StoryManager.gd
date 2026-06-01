@@ -14,6 +14,10 @@ extends Node
 # - 剧情触发条件写在 StoryData 里。
 # - StoryManager 负责统一检查触发条件。
 # - Clinic / NightStudy 等场景只上报当前状态。
+#
+# 当前版本：
+# - 启动时自动扫描 res://Data/Story/ 下所有 .tres 剧情资源。
+# - 不再需要手动把每个剧情路径写进 registered_story_paths。
 # =========================================================
 
 
@@ -43,15 +47,62 @@ var has_played_clinic_intro: bool = false
 var played_story_ids: Dictionary = {}
 
 
+# 剧情资源根目录。
+# 会自动扫描这个目录下所有 .tres 文件，包括子目录。
+const STORY_DIR: String = "res://Data/Story"
+
+
 # 所有可被自动触发检查的剧情资源路径。
-# 之后你新增剧情，只要把 tres 路径加到这里即可。
-#
-# 注意：
-# 这里先放你现有教学剧情路径。
-# 如果你的实际路径不同，改成你项目里的真实路径。
-var registered_story_paths: Array[String] = [
-	"res://Data/Story/teaching_test.tres"
-]
+# 启动时会由 refresh_registered_story_paths() 自动填充。
+var registered_story_paths: Array[String] = []
+
+
+func _ready() -> void:
+	# Autoload 初始化时自动登记所有剧情资源。
+	refresh_registered_story_paths()
+
+
+func refresh_registered_story_paths() -> void:
+	# 重新扫描剧情目录。
+	# 如果运行时生成了新的 .tres，也可以手动调用这个函数刷新列表。
+	registered_story_paths.clear()
+
+	_scan_story_dir(STORY_DIR)
+
+	# 排序保证触发顺序稳定。
+	# 同一天、同场景有多个剧情满足条件时，会优先检查路径排序靠前的剧情。
+	registered_story_paths.sort()
+
+	print("已登记剧情数量：", registered_story_paths.size())
+	for story_path in registered_story_paths:
+		print("登记剧情：", story_path)
+
+
+func _scan_story_dir(dir_path: String) -> void:
+	var dir := DirAccess.open(dir_path)
+	if dir == null:
+		push_warning("剧情目录不存在：" + dir_path)
+		return
+
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+
+	while not file_name.is_empty():
+		if file_name == "." or file_name == "..":
+			file_name = dir.get_next()
+			continue
+
+		var full_path := dir_path.path_join(file_name)
+
+		if dir.current_is_dir():
+			_scan_story_dir(full_path)
+		else:
+			if file_name.ends_with(".tres"):
+				register_story_path(full_path)
+
+		file_name = dir.get_next()
+
+	dir.list_dir_end()
 
 
 func set_story(story: StoryData, return_scene: String = "") -> bool:
@@ -95,6 +146,10 @@ func start_story_file(story_path: String, return_scene: String = "") -> bool:
 
 
 func find_trigger_story(trigger_scene: String, current_day: int) -> StoryData:
+	# 如果列表为空，尝试重新扫描一次，避免初始化顺序导致未登记。
+	if registered_story_paths.is_empty():
+		refresh_registered_story_paths()
+
 	# 在所有登记过的剧情里，寻找第一个满足触发条件的剧情。
 	for story_path in registered_story_paths:
 		var loaded_story: Resource = load(story_path)
@@ -155,7 +210,7 @@ func clear_story() -> void:
 
 func register_story_path(story_path: String) -> void:
 	# 运行时登记剧情路径。
-	# 如果以后你想从别的地方动态添加剧情，可以用这个函数。
+	# 自动扫描和外部动态添加剧情都会用这个函数。
 	if story_path.is_empty():
 		return
 
@@ -255,6 +310,7 @@ func _mark_story_played(story: StoryData) -> void:
 	if play_once:
 		played_story_ids[story_id] = true
 
+
 # =========================================================
 # 保存剧情播放状态
 # =========================================================
@@ -265,6 +321,7 @@ func get_save_data() -> Dictionary:
 		"played_story_ids": played_story_ids.duplicate(true),
 		"has_played_clinic_intro": has_played_clinic_intro
 	}
+
 
 # =========================================================
 # 读取剧情播放状态

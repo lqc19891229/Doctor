@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1")
 book_type = "herb"
-book_id = "shen_nong_bai_cao_jing"
-book_name = "神农百草经"
+book_id = "shen_nong_ben_cao_jing"
+book_name = "神农本草经"
 detail_text = ""
 author_name = ""
 sort_index = 2

@@ -589,7 +589,7 @@ func is_book_visible_in_readbook(book: BookData) -> bool:
 
 	# 初始入口书：即使暂时没有可读条目，也显示在左侧。
 	var initial_visible_book_ids: Array[String] = [
-		"shen_nong_bai_cao_jing",
+		"shen_nong_ben_cao_jing",
 		"huang_di_nei_jing",
 	]
 	if initial_visible_book_ids.has(book.book_id.strip_edges()):

@@ -22,3 +22,6 @@ class_name StoryLine
 # 当前人物立绘。
 # subtitle 类型可以留空。
 @export var portrait: Texture2D
+
+# 立绘显示位置
+@export_enum("auto", "left", "right") var portrait_side: String = "auto"
