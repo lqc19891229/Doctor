@@ -56,6 +56,12 @@ const ROLE_SHI := "使"
 # 药材按钮列表
 @onready var herb_list: GridContainer = $PrescriptionLayout/HerbSelectRow/HerbSearchColumn/HerbListScroll/HerbList
 
+# 疾病搜索框
+@onready var disease_search: LineEdit = $PrescriptionLayout/DiseaseSelectRow/DiseaseSearch
+
+# 疾病按钮列表
+@onready var disease_list: GridContainer = $PrescriptionLayout/DiseaseSelectRow/DiseaseListScroll/DiseaseList
+
 @onready var unit_option: OptionButton = $PrescriptionLayout/HerbSelectRow/HerbEditColumn/UnitOption
 
 # ---------- 处方四区列表 ----------
@@ -103,6 +109,18 @@ var current_selected_role: String = ROLE_JUN
 # 用于过滤 HerbList 中显示的药材按钮
 var herb_search_keyword: String = ""
 
+# 当前疾病搜索关键词
+var disease_search_keyword: String = ""
+
+# 当前选中的疾病ID
+var selected_disease_id: String = ""
+
+# 当前选中的疾病名称
+var selected_disease_name: String = ""
+
+# 疾病数据列表
+var all_diseases: Array = []
+
 
 # =========================================================
 # 生命周期
@@ -111,7 +129,7 @@ func _ready() -> void:
 	_setup_unit_option()
 	_connect_signals()
 	_set_selected_role(ROLE_JUN)
-
+	load_all_diseases()
 
 # =========================================================
 # 对外初始化接口
@@ -129,9 +147,11 @@ func setup(herb_db, prescription) -> void:
 
 	selected_herb_id = ""
 	selected_herb_button = null
+	_sync_selected_disease_from_prescription()
 	_set_selected_role(ROLE_JUN)
 
 	_refresh_herb_list()
+	_refresh_disease_list(disease_search_keyword)
 	_refresh_prescription_list()
 
 
@@ -164,6 +184,14 @@ func _connect_signals() -> void:
 	# 搜索框获得焦点时，按 Esc 清空当前搜索内容
 	if herb_search != null and not herb_search.gui_input.is_connected(_on_herb_search_gui_input):
 		herb_search.gui_input.connect(_on_herb_search_gui_input)
+
+	# 疾病搜索框文字变化时，刷新疾病列表
+	if disease_search != null and not disease_search.text_changed.is_connected(_on_disease_search_text_changed):
+		disease_search.text_changed.connect(_on_disease_search_text_changed)
+
+	# 疾病搜索框获得焦点时，按 Esc 清空当前搜索内容
+	if disease_search != null and not disease_search.gui_input.is_connected(_on_disease_search_gui_input):
+		disease_search.gui_input.connect(_on_disease_search_gui_input)
 
 	if close_requested != null and not close_requested.is_connected(_on_close_requested):
 		close_requested.connect(_on_close_requested)
@@ -576,7 +604,7 @@ func clear_current_prescription() -> void:
 	if current_prescription == null:
 		return
 
-	current_prescription.clear()
+	current_prescription.clear()	
 	_refresh_prescription_list()
 
 
@@ -878,3 +906,255 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_close_requested() -> void:
 	hide()
+
+# =========================================================
+# 疾病诊断搜索
+# =========================================================
+func load_all_diseases() -> void:
+	all_diseases.clear()
+
+	if not Engine.has_singleton("DiseaseDB"):
+		# DiseaseDB 如果是 Autoload，通常可以直接访问。
+		# 这里保留直接调用，避免项目中未注册为 singleton 时静态检查报错。
+		pass
+
+	if typeof(DiseaseDB) == TYPE_NIL:
+		emit_signal("info_requested", "疾病数据库未初始化")
+		return
+
+	if not DiseaseDB.has_method("get_all_diseases"):
+		emit_signal("info_requested", "DiseaseDB 缺少 get_all_diseases()")
+		return
+
+	all_diseases = DiseaseDB.get_all_diseases()
+	_refresh_disease_list("")
+
+
+func _refresh_disease_list(filter_text: String = "") -> void:
+	if disease_list == null:
+		return
+
+	for child in disease_list.get_children():
+		child.queue_free()
+
+	disease_search_keyword = _normalize_disease_search_text(filter_text)
+
+	for disease in all_diseases:
+		var disease_name := _get_disease_name(disease)
+		var disease_id := _get_disease_id(disease)
+
+		if disease_name == "" or disease_id == "":
+			continue
+
+		# 只显示已经解锁的疾病。
+		# 疾病条目未阅读 / 未解锁时，不允许出现在断病区域。
+		if not Unlock.is_disease_unlocked(disease_id):
+			continue
+
+		if not _is_disease_match_search(disease_name, disease_id):
+			continue
+
+		var btn := Button.new()
+		btn.text = disease_name
+		btn.custom_minimum_size = Vector2(120, 36)
+		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		btn.focus_mode = Control.FOCUS_NONE
+		btn.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
+		btn.set_meta("disease_id", disease_id)
+		btn.set_meta("disease_name", disease_name)
+		btn.pressed.connect(_on_disease_selected.bind(disease_name, disease_id))
+		disease_list.add_child(btn)
+
+
+func _on_disease_search_text_changed(new_text: String) -> void:
+	_refresh_disease_list(new_text)
+
+
+func _on_disease_search_gui_input(event: InputEvent) -> void:
+	if not (event is InputEventKey):
+		return
+
+	var key_event := event as InputEventKey
+	if not key_event.pressed:
+		return
+
+	if key_event.keycode != KEY_ESCAPE:
+		return
+
+	if disease_search == null or disease_search.text == "":
+		return
+
+	disease_search.clear()
+	disease_search.grab_focus()
+	get_viewport().set_input_as_handled()
+
+
+func _on_disease_selected(disease_name: String, disease_id: String = "") -> void:
+	if current_prescription == null:
+		emit_signal("info_requested", "当前处方未初始化")
+		return
+
+	if disease_id.strip_edges() == "":
+		emit_signal("info_requested", "疾病数据缺少 disease_id，无法选择")
+		return
+
+	# 双保险：即使按钮被旧列表残留或外部调用触发，也不允许选择未解锁疾病。
+	if not Unlock.is_disease_unlocked(disease_id):
+		emit_signal("info_requested", "该疾病尚未解锁，不能用于断病")
+		_refresh_disease_list(disease_search_keyword)
+		return
+
+	selected_disease_name = disease_name
+	selected_disease_id = disease_id
+	_set_current_prescription_disease(disease_id, disease_name)
+
+	if disease_search != null:
+		disease_search.text = disease_name
+		disease_search.caret_column = disease_search.text.length()
+
+	_refresh_disease_list(disease_name)
+	emit_signal("info_requested", "已选择疾病诊断：%s" % disease_name)
+
+
+func _clear_selected_disease() -> void:
+	disease_search_keyword = ""
+	selected_disease_id = ""
+	selected_disease_name = ""
+
+	if current_prescription != null and current_prescription.has_method("clear_disease"):
+		current_prescription.clear_disease()
+	else:
+		_set_current_prescription_disease("", "")
+
+	if disease_search != null:
+		disease_search.clear()
+
+	_refresh_disease_list("")
+
+
+func _sync_selected_disease_from_prescription() -> void:
+	selected_disease_id = ""
+	selected_disease_name = ""
+
+	if current_prescription == null:
+		return
+
+	var prescription_disease_id := ""
+	var prescription_disease_name := ""
+
+	if _object_has_property(current_prescription, "disease_id"):
+		prescription_disease_id = str(current_prescription.get("disease_id")).strip_edges()
+
+	if _object_has_property(current_prescription, "disease_name"):
+		prescription_disease_name = str(current_prescription.get("disease_name")).strip_edges()
+
+	selected_disease_id = prescription_disease_id
+	selected_disease_name = prescription_disease_name
+	disease_search_keyword = prescription_disease_name
+
+	if disease_search != null:
+		disease_search.text = prescription_disease_name
+		disease_search.caret_column = disease_search.text.length()
+
+
+func _set_current_prescription_disease(disease_id: String, disease_name: String) -> void:
+	if current_prescription == null:
+		return
+
+	# 新版 Prescription.gd 使用 disease_id + disease_name，后续评分优先比较 disease_id。
+	if current_prescription.has_method("set_disease"):
+		current_prescription.set_disease(disease_id, disease_name)
+		return
+
+	# 兼容旧版 Prescription.gd。
+	if _object_has_property(current_prescription, "disease_id"):
+		current_prescription.set("disease_id", disease_id)
+
+	if _object_has_property(current_prescription, "disease_name"):
+		current_prescription.set("disease_name", disease_name)
+		return
+
+	if current_prescription.has_method("set_disease_name"):
+		current_prescription.set_disease_name(disease_name)
+
+
+func _object_has_property(target, property_name: String) -> bool:
+	if target == null:
+		return false
+
+	for property_info in target.get_property_list():
+		if str(property_info.get("name", "")) == property_name:
+			return true
+
+	return false
+
+
+func _is_disease_match_search(disease_name: String, disease_id: String = "") -> bool:
+	if disease_search_keyword == "":
+		return true
+
+	var normalized_name := _normalize_disease_search_text(disease_name)
+	var normalized_id := _normalize_disease_search_text(disease_id)
+	var disease_id_initials := _get_disease_id_initials(disease_id)
+
+	return (
+		normalized_name.contains(disease_search_keyword)
+		or normalized_id.contains(disease_search_keyword)
+		or disease_id_initials.contains(disease_search_keyword)
+	)
+
+
+func _normalize_disease_search_text(value: String) -> String:
+	return value.strip_edges().to_lower() \
+		.replace("_", "") \
+		.replace("-", "") \
+		.replace(" ", "")
+
+
+func _get_disease_id_initials(disease_id: String) -> String:
+	var parts := disease_id.to_lower().split("_", false)
+	var initials := ""
+
+	for part in parts:
+		if part.length() > 0:
+			initials += part.substr(0, 1)
+
+	return initials
+
+
+func _get_disease_name(disease) -> String:
+	if disease == null:
+		return ""
+
+	if disease is Dictionary:
+		if disease.has("disease_name"):
+			return str(disease.get("disease_name", "")).strip_edges()
+		if disease.has("name"):
+			return str(disease.get("name", "")).strip_edges()
+		if disease.has("display_name"):
+			return str(disease.get("display_name", "")).strip_edges()
+
+	if "disease_name" in disease:
+		return str(disease.disease_name).strip_edges()
+	if "name" in disease:
+		return str(disease.name).strip_edges()
+
+	return str(disease).strip_edges()
+
+
+func _get_disease_id(disease) -> String:
+	if disease == null:
+		return ""
+
+	if disease is Dictionary:
+		if disease.has("disease_id"):
+			return str(disease.get("disease_id", "")).strip_edges()
+		if disease.has("id"):
+			return str(disease.get("id", "")).strip_edges()
+
+	if "disease_id" in disease:
+		return str(disease.disease_id).strip_edges()
+	if "id" in disease:
+		return str(disease.id).strip_edges()
+
+	return ""

@@ -36,6 +36,9 @@ signal story_requested(story_path: String, return_target: String)
 # 默认查看的脉象区域
 const DEFAULT_DISPLAY_REGION := "浮脉"
 
+# 判定结果弹窗场景路径
+const JUDGEMENT_RESULT_SCENE_PATH := "res://Scene/JudgementResult/JudgementResult.tscn"
+
 
 # =========================================================
 # 场景节点引用
@@ -121,6 +124,16 @@ var clinic_finished_emitted: bool = false
 # - 使用这个值避免每帧重复改 Label 文本。
 # - 初始设为 -1，保证进入场景后一定刷新一次。
 var last_displayed_thoughts_point: int = -1
+
+# 最近一次处方判定结果
+# 说明：
+# 1. submit_prescription() 负责生成判定结果。
+# 2. _on_prescription_submit_requested() 负责把结果交给 JudgementResult 场景显示。
+var last_formula_judge_result = null
+var last_formula_judge_summary_text: String = ""
+
+# 当前打开的判定结果窗口
+var judgement_result_window: Control = null
 
 
 # =========================================================
@@ -434,6 +447,8 @@ func refresh_clinic_view() -> void:
 	current_npc = npc_manager.get_current_npc()
 	current_prescription.clear()
 	diagnosis_submitted = false
+	last_formula_judge_result = null
+	last_formula_judge_summary_text = ""
 	current_display_region_name = DEFAULT_DISPLAY_REGION
 
 	_reset_pulse_keyboard_state()
@@ -746,17 +761,19 @@ func submit_prescription() -> bool:
 		return false
 
 	var was_already_submitted := diagnosis_submitted
-	var result := formula_judge.judge_formula(current_prescription, standard_formula)
+	var result := formula_judge.judge_formula(current_prescription, standard_formula, current_npc.disease)
 	diagnosis_submitted = true
 
 	var summary_text := result.get_summary_text()
+	last_formula_judge_result = result
+	last_formula_judge_summary_text = summary_text
 
 	# 甲等满分时获得 1 点心得。
 	# 说明：
-	# 1. grade == "甲等"：评价达到最高档。
-	# 2. score == 100：必须是满分甲等，避免普通甲等也给心得。
+	# 1. grade == "妙手回春"：评价达到最高档。
+	# 2. score == 100：必须是满分妙手回春，避免普通甲等也给心得。
 	# 3. was_already_submitted 用于防止同一名病人重复提交刷心得。
-	if result.grade == "甲等" and result.score == 100 and not was_already_submitted:
+	if result.grade == "妙手回春" and result.score == 100 and not was_already_submitted:
 		Unlock.add_experience_point(1)
 		_update_thoughts_point_ui(true)
 		summary_text += "\n获得心得：+1"
@@ -765,15 +782,185 @@ func submit_prescription() -> bool:
 		# 获得心得后立即存档，避免切场景或退出时丢失。
 		if SaveManager != null and SaveManager.has_method("save_game"):
 			SaveManager.save_game()
-	elif result.grade == "甲等" and result.score == 100 and was_already_submitted:
+	elif result.grade == "妙手回春" and result.score == 100 and was_already_submitted:
 		_update_thoughts_point_ui(true)
 		summary_text += "\n本病人已提交过处方，不重复获得心得。"
 		summary_text += "\n当前心得：%d" % Unlock.get_experience_points()
+
+	last_formula_judge_summary_text = summary_text
 
 	_set_info_text(summary_text)
 	if OS.is_debug_build():
 		result.debug_print()
 	return true
+
+# =========================================================
+# 判定结果窗口
+# =========================================================
+
+func _show_judgement_result_window(judge_result = null, summary_text: String = "") -> void:
+	# 提交成功后，弹出专门的 JudgementResult 场景。
+	# 玩家点击任意位置关闭该场景后，再刷新到下一名病人。
+	if judgement_result_window != null and is_instance_valid(judgement_result_window):
+		judgement_result_window.queue_free()
+		judgement_result_window = null
+
+	if not ResourceLoader.exists(JUDGEMENT_RESULT_SCENE_PATH):
+		_set_info_text("未找到判定结果场景：%s\n%s" % [
+			JUDGEMENT_RESULT_SCENE_PATH,
+			summary_text
+		])
+		_go_to_next_patient_after_judgement()
+		return
+
+	var packed_scene := load(JUDGEMENT_RESULT_SCENE_PATH) as PackedScene
+	if packed_scene == null:
+		_set_info_text("判定结果场景加载失败：%s\n%s" % [
+			JUDGEMENT_RESULT_SCENE_PATH,
+			summary_text
+		])
+		_go_to_next_patient_after_judgement()
+		return
+
+	judgement_result_window = packed_scene.instantiate() as Control
+	if judgement_result_window == null:
+		_set_info_text("判定结果场景根节点必须继承 Control。\n%s" % summary_text)
+		_go_to_next_patient_after_judgement()
+		return
+
+	add_child(judgement_result_window)
+
+	if not judgement_result_window.tree_exited.is_connected(_on_judgement_result_window_closed):
+		judgement_result_window.tree_exited.connect(
+			_on_judgement_result_window_closed,
+			Object.CONNECT_ONE_SHOT
+		)
+
+	var result_data := _build_judgement_result_data(judge_result, summary_text)
+
+	if judgement_result_window.has_method("show_result"):
+		judgement_result_window.call("show_result", result_data)
+	else:
+		# 兜底：如果 JudgementResult.gd 还没有 show_result()，至少把场景显示出来。
+		judgement_result_window.visible = true
+
+
+func _build_judgement_result_data(judge_result = null, summary_text: String = "") -> Dictionary:
+	# JudgementResult 只负责显示，这里把当前病人、标准方和玩家输入整理成文本。
+	var npc_name := ""
+	var disease_name := ""
+	var standard_formula_name := ""
+	var standard_formula_text := ""
+	var player_disease_name := ""
+	var player_prescription_text := ""
+	var grade := ""
+	var total_score := 0
+
+	if current_npc != null:
+		npc_name = current_npc.npc_name
+		if current_npc.disease != null:
+			disease_name = current_npc.disease.disease_name
+
+	var standard_formula := _get_current_standard_formula()
+	if standard_formula != null:
+		standard_formula_name = standard_formula.formula_name
+		standard_formula_text = _build_standard_formula_display_text(standard_formula)
+	else:
+		standard_formula_text = "（未找到标准方）"
+
+	if current_prescription != null:
+		player_disease_name = current_prescription.disease_name.strip_edges()
+		if player_disease_name == "":
+			player_disease_name = current_prescription.disease_id.strip_edges()
+		if player_disease_name == "":
+			player_disease_name = "未选择疾病"
+		player_prescription_text = current_prescription.get_display_text()
+	else:
+		player_disease_name = "未选择疾病"
+		player_prescription_text = "（无）"
+
+	if judge_result != null:
+		var raw_grade = judge_result.get("grade")
+		if raw_grade != null:
+			grade = str(raw_grade)
+
+		var raw_score = judge_result.get("score")
+		if raw_score != null:
+			total_score = int(raw_score)
+
+	return {
+		"npc_name": npc_name,
+		"disease_name": disease_name,
+		"standard_formula_name": standard_formula_name,
+		"standard_formula_text": standard_formula_text,
+		"player_disease_name": player_disease_name,
+		"player_prescription_text": player_prescription_text,
+		"grade": grade,
+		"total_score": total_score,
+		"summary_text": summary_text
+	}
+
+
+func _build_standard_formula_display_text(formula: FormulaData) -> String:
+	if formula == null:
+		return "（无）"
+
+	var lines: Array[String] = []
+	lines.append("君：" + _build_formula_group_display_text(formula.jun_group))
+	lines.append("臣：" + _build_formula_group_display_text(formula.chen_group))
+	lines.append("佐：" + _build_formula_group_display_text(formula.zuo_group))
+	lines.append("使：" + _build_formula_group_display_text(formula.shi_group))
+	return "\n".join(lines)
+
+
+func _build_formula_group_display_text(group: Array) -> String:
+	if group.is_empty():
+		return "（无）"
+
+	var parts: Array[String] = []
+	for ingredient in group:
+		if ingredient == null:
+			continue
+		if ingredient.has_method("is_valid_data") and not ingredient.is_valid_data():
+			continue
+
+		var herb_name := ""
+		var amount_text := ""
+
+		if ingredient.has_method("get_herb_name"):
+			herb_name = str(ingredient.get_herb_name()).strip_edges()
+		if herb_name == "" and ingredient.has_method("get_herb_id"):
+			herb_name = str(ingredient.get_herb_id()).strip_edges()
+
+		if ingredient.has_method("get_amount_in_fen"):
+			amount_text = HerbUnit.format_fen_auto(int(ingredient.get_amount_in_fen()))
+
+		if herb_name == "":
+			continue
+		if amount_text == "":
+			parts.append(herb_name)
+		else:
+			parts.append("%s %s" % [herb_name, amount_text])
+
+	if parts.is_empty():
+		return "（无）"
+	return "、".join(parts)
+
+
+func _on_judgement_result_window_closed() -> void:
+	judgement_result_window = null
+
+	# 如果 JudgementResult.gd 没有自己恢复暂停，这里兜底恢复。
+	if get_tree().paused:
+		get_tree().paused = false
+
+	_go_to_next_patient_after_judgement()
+
+
+func _go_to_next_patient_after_judgement() -> void:
+	if npc_manager != null:
+		npc_manager.spawn_random_npc()
+		refresh_clinic_view()
 
 
 # =========================================================
@@ -892,16 +1079,13 @@ func _on_prescription_info_requested(text: String) -> void:
 
 func _on_prescription_submit_requested() -> void:
 	# 接收开方窗口的提交请求。
-	# 只有处方成功判定后，才关闭治疗窗口并刷新到下一名随机病人。
-	# 这样可以避免“空处方/无标准方”也直接跳到下一名病人的问题。
+	# 只有处方成功判定后，才关闭治疗窗口并弹出 JudgementResult。
+	# 玩家点击任意位置关闭 JudgementResult 后，再刷新到下一名随机病人。
 	if not submit_prescription():
 		return
 
 	close_treatment_windows_after_submit()
-
-	if npc_manager != null:
-		npc_manager.spawn_random_npc()
-		refresh_clinic_view()
+	_show_judgement_result_window(last_formula_judge_result, last_formula_judge_summary_text)
 
 
 func _on_end_today_pressed() -> void:

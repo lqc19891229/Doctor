@@ -1,6 +1,10 @@
 extends RefCounted
 class_name Prescription
 
+# 疾病诊断
+var disease_id: String = ""
+var disease_name: String = ""
+
 # 四个区域
 var jun_herbs: Array[Dictionary] = []
 var chen_herbs: Array[Dictionary] = []
@@ -14,6 +18,8 @@ var herbs: Array[Dictionary]:
 
 
 func clear() -> void:
+	# 只清空处方药材，不清空疾病诊断。
+	# 疾病诊断由玩家单独选择，用于后续评分系统。
 	jun_herbs.clear()
 	chen_herbs.clear()
 	zuo_herbs.clear()
@@ -238,3 +244,38 @@ func _build_group_text(group: Array[Dictionary]) -> String:
 			HerbUnit.format_amount(float(item.get("amount", 0.0)), str(item.get("unit", "")))
 		])
 	return "、".join(parts)
+
+
+# 疾病诊断操作方法
+func set_disease(id: String, name: String) -> void:
+	disease_id = id.strip_edges()
+	disease_name = name.strip_edges()
+
+
+func set_disease_name(name: String) -> void:
+	disease_name = name.strip_edges()
+
+
+func set_disease_id(id: String) -> void:
+	disease_id = id.strip_edges()
+
+
+func clear_disease() -> void:
+	disease_id = ""
+	disease_name = ""
+
+
+func get_disease_id() -> String:
+	return disease_id
+
+
+func get_disease_name() -> String:
+	return disease_name
+
+
+func has_disease() -> bool:
+	return disease_id != "" or disease_name != ""
+
+
+func has_disease_name() -> bool:
+	return disease_name != ""

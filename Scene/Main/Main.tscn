@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://5kw50n6ckjh0"]
 
 [ext_resource type="Script" uid="uid://ceraw4tmmepvk" path="res://Scene/Main/Main.gd" id="1_o28sc"]
-[ext_resource type="Texture2D" uid="uid://boil6kx4a3if3" path="res://Assets/Main_background.png" id="2_jytrb"]
 
 [node name="Main" type="Node" unique_id=899515328]
 script = ExtResource("1_o28sc")
@@ -16,7 +15,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_jytrb")
 
 [node name="TitleContainer" type="Control" parent="MainMenuLayer" unique_id=2016345439]
 layout_mode = 3

@@ -19,10 +19,40 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 
+[node name="DiseaseSelectRow" type="VBoxContainer" parent="PrescriptionLayout" unique_id=1790741229]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="PrescriptionLayout/DiseaseSelectRow" unique_id=1198568759]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "断病"
+
+[node name="DiseaseSearch" type="LineEdit" parent="PrescriptionLayout/DiseaseSelectRow" unique_id=407987413]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+clear_button_enabled = true
+
+[node name="DiseaseListScroll" type="ScrollContainer" parent="PrescriptionLayout/DiseaseSelectRow" unique_id=261389170]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_thr5s")
+
+[node name="DiseaseList" type="GridContainer" parent="PrescriptionLayout/DiseaseSelectRow/DiseaseListScroll" unique_id=612361927]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 4
+
 [node name="PrescriptionView" type="VBoxContainer" parent="PrescriptionLayout" unique_id=1663844928]
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="PrescriptionLayout/PrescriptionView" unique_id=2088633422]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "开方"
 
 [node name="RoleContainer" type="HBoxContainer" parent="PrescriptionLayout/PrescriptionView" unique_id=377783294]
 layout_mode = 2
@@ -121,7 +151,6 @@ theme_override_font_sizes/font_size = 25
 [node name="HerbSelectRow" type="HBoxContainer" parent="PrescriptionLayout" unique_id=590644925]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
 
 [node name="HerbSearchColumn" type="VBoxContainer" parent="PrescriptionLayout/HerbSelectRow" unique_id=498839916]
 layout_mode = 2

@@ -12,6 +12,11 @@ signal story_finished
 # - StoryLine 只负责：类型、说话人、文本、立绘
 # - dialogue 类型会优先根据 StoryLine.portrait_side 手动指定左右立绘位置
 # - portrait_side 为 auto 或空时，才根据 speaker 自动分配左右立绘位置
+#
+# 本版本修复：
+# - 打字机效果不再通过 substr() 逐字修改 RichTextLabel.text
+# - 改为先写入完整文本，再用 visible_characters 控制显示数量
+# - 避免 DialogueLabel 高度在打字过程中不断变化，导致 SpeakerLabel 被容器重排后轻微下移
 # =========================================================
 
 # 当前测试用剧情数据。
@@ -125,6 +130,8 @@ func play_story(data: StoryData) -> void:
 	is_typing = false
 	is_finished = false
 
+	_reset_text_labels()
+
 	# 整段剧情固定背景，只在开始播放时设置一次。
 	_apply_story_background()
 
@@ -166,8 +173,15 @@ func _show_dialogue_line(line_data: StoryLine) -> void:
 	# 设置说话人。
 	speaker_label.text = line_data.speaker
 
-	# 清空文本，等待打字机逐字显示。
-	dialogue_label.text = ""
+	# 关键修复：
+	# 不再每帧通过 substr() 改 dialogue_label.text。
+	# 先写入完整文本，让 RichTextLabel 一开始就计算完整布局高度。
+	# 再用 visible_characters 控制实际显示数量，避免打字过程中触发容器高度变化。
+	dialogue_label.text = current_full_text
+	dialogue_label.visible_characters = 0
+
+	# 避免隐藏的 subtitle_label 保留上一次的可见字符状态。
+	subtitle_label.visible_characters = 0
 
 	# 根据 speaker 显示左右立绘。
 	_show_speaker_portrait(line_data)
@@ -181,8 +195,12 @@ func _show_subtitle_line(line_data: StoryLine) -> void:
 	# 背景字幕通常不显示人物立绘。
 	_hide_all_portraits()
 
-	# 清空文本，等待打字机逐字显示。
-	subtitle_label.text = ""
+	# 同样使用 visible_characters 做字幕打字机效果。
+	subtitle_label.text = current_full_text
+	subtitle_label.visible_characters = 0
+
+	# 避免隐藏的 dialogue_label 保留上一次的可见字符状态。
+	dialogue_label.visible_characters = 0
 
 
 func _show_speaker_portrait(line_data: StoryLine) -> void:
@@ -263,13 +281,14 @@ func _hide_all_portraits() -> void:
 
 
 func _update_visible_text() -> void:
-	var visible_text := current_full_text.substr(0, visible_character_count)
+	var safe_count: int = clamp(visible_character_count, 0, current_full_text.length())
 
-	# 根据当前显示块更新文字。
+	# 根据当前显示块更新可见字符数量。
+	# 注意：这里不再修改 text，只修改 visible_characters。
 	if subtitle_block.visible:
-		subtitle_label.text = visible_text
+		subtitle_label.visible_characters = safe_count
 	else:
-		dialogue_label.text = visible_text
+		dialogue_label.visible_characters = safe_count
 
 
 func _show_full_text() -> void:
@@ -280,6 +299,12 @@ func _show_full_text() -> void:
 
 func _finish_typing() -> void:
 	is_typing = false
+
+	if subtitle_block.visible:
+		subtitle_label.visible_characters = current_full_text.length()
+	else:
+		dialogue_label.visible_characters = current_full_text.length()
+
 	continue_label.show()
 
 
@@ -298,8 +323,20 @@ func _setup_default_view() -> void:
 	_hide_all_portraits()
 	continue_label.hide()
 
+	_reset_text_labels()
+
 	# 遮罩保留显示，用来压暗背景。
 	dark_mask.show()
+
+
+func _reset_text_labels() -> void:
+	speaker_label.text = ""
+
+	dialogue_label.text = ""
+	dialogue_label.visible_characters = 0
+
+	subtitle_label.text = ""
+	subtitle_label.visible_characters = 0
 
 
 func _finish_story() -> void:

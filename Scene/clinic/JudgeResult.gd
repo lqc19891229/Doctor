@@ -53,6 +53,28 @@ var matched_formula_name: String = ""
 
 
 # =========================================================
+# 二点五、疾病诊断判定
+# =========================================================
+
+# 玩家选择的疾病
+var player_disease_id: String = ""
+var player_disease_name: String = ""
+
+# 标准疾病
+var standard_disease_id: String = ""
+var standard_disease_name: String = ""
+
+# 疾病判断是否正确
+var disease_correct: bool = false
+
+# 疾病判断扣分
+var disease_penalty: int = 0
+
+# 疾病判断显示文本
+var disease_message: String = ""
+
+
+# =========================================================
 # 三、错误明细
 # =========================================================
 
@@ -149,6 +171,9 @@ func get_summary_text() -> String:
 	elif matched_formula_id != "":
 		lines.append("标准方 ID：%s" % matched_formula_id)
 
+	if disease_message != "":
+		lines.append("断病：%s" % disease_message)
+
 	if not missing_herb_names.is_empty():
 		lines.append("缺少药材：%s" % "、".join(missing_herb_names))
 
@@ -180,7 +205,14 @@ func debug_print() -> void:
 	print("grade: ", grade)
 	print("message: ", message)
 	print("matched_formula_id: ", matched_formula_id)
-	print("matched_formula_name: ", matched_formula_name)
+	print("matched_formula_name: ", matched_formula_name)	
+	print("player_disease_id: ", player_disease_id)
+	print("player_disease_name: ", player_disease_name)
+	print("standard_disease_id: ", standard_disease_id)
+	print("standard_disease_name: ", standard_disease_name)
+	print("disease_correct: ", disease_correct)
+	print("disease_penalty: ", disease_penalty)
+	print("disease_message: ", disease_message)
 	print("standard_herb_count: ", standard_herb_count)
 	print("player_herb_count: ", player_herb_count)
 	print("matched_herb_count: ", matched_herb_count)
@@ -206,6 +238,14 @@ func to_dict() -> Dictionary:
 
 		"matched_formula_id": matched_formula_id,
 		"matched_formula_name": matched_formula_name,
+
+		"player_disease_id": player_disease_id,
+		"player_disease_name": player_disease_name,
+		"standard_disease_id": standard_disease_id,
+		"standard_disease_name": standard_disease_name,
+		"disease_correct": disease_correct,
+		"disease_penalty": disease_penalty,
+		"disease_message": disease_message,
 
 		"missing_herb_ids": missing_herb_ids.duplicate(),
 		"missing_herb_names": missing_herb_names.duplicate(),
