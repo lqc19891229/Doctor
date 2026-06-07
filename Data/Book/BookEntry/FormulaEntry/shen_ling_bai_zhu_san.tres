@@ -8,5 +8,5 @@ entry_id = "shen_ling_bai_zhu_san"
 book_id = "tai_ping_hui_min_he_ji_ju_fang"
 title = "参苓白术散"
 detail_text = "参苓白术散\n【出处】《太平惠民和剂局方》\n【功效】益气健脾，渗湿止泻\n【主治】脾虚湿盛\n【组成】\n君：人参 五钱，茯苓 五钱，白术 五钱\n臣：山药 五钱，莲子 三钱，扁豆 三钱，薏苡仁 七钱\n佐：砂仁 二钱，桔梗 二钱\n使：甘草 二钱\n【配伍】\n人参、白术、茯苓、炙甘草：即四君子汤，益气健脾、补益脾虚之本。\n山药、莲子：健脾益气、固肠止泻；\n扁豆、薏仁：健脾渗湿、利水除浊；\n砂仁：芳香醒脾、行气和胃，防补药滋腻碍胃；\n桔梗：宣利肺气、载药上行，培土生金，兼治肺虚久咳。"
+unlock_required_experience_points = 0
 formula_id = "shen_ling_bai_zhu_san"
-required_herb_ids = Array[String](["ren_shen", "fu_ling", "bai_zhu", "shan_yao", "lian_zi", "bian_dou", "yi_yi_ren", "sha_ren", "jie_geng", "gan_cao"])

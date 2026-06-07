@@ -8,5 +8,5 @@ entry_id = "wei_qi_xu"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "卫气虚"
 detail_text = "卫气虚\n\n【病机】素体虚弱、久病耗伤肺气，卫气不固、腠理疏松、防御固摄功能减退。\n\n【症状】自汗：不活动也出汗，动则更甚；易感冒：怕风畏冷、不耐风寒，稍受凉即感冒；面色㿠白、气短乏力、神疲懒言；皮肤腠理疏松、常畏风\n\n【脉象】\n浮脉（表）：波峰低\n\n【标准方】玉屏风散"
+unlock_required_experience_points = 0
 disease_id = "wei_qi_xu"
-prerequisite_entry_ids = Array[String](["yu_ping_feng_san"])

@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://b5bphm5xo77my"]
 
 [ext_resource type="Script" uid="uid://5gaxy23682mo" path="res://Scene/JudgementResult/JudgementResult.gd" id="1_vjwxa"]
-[ext_resource type="Texture2D" uid="uid://0fvq1fkcvh5" path="res://Assets/Main_Title.png" id="2_vdopw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vjwxa"]
+bg_color = Color(0.18039216, 0.10980392, 0.05490196, 0.9490196)
 
 [node name="JudgementResult" type="Control" unique_id=1881355118]
 custom_minimum_size = Vector2(800, 900)
@@ -36,6 +38,7 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_vjwxa")
 text = "结果判定"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -49,7 +52,6 @@ size_flags_stretch_ratio = 9.0
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
-texture = ExtResource("2_vdopw")
 expand_mode = 1
 
 [node name="Title2" type="Label" parent="Panel/VBoxContainer" unique_id=819392453]

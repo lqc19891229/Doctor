@@ -8,5 +8,5 @@ entry_id = "yi_yi_ren_tang"
 book_id = "tai_yi_yuan_jing_yan_qi_xiao_liang_fang_da_quan"
 title = "薏苡仁汤"
 detail_text = "薏苡仁汤\n【出处】《太医院经验奇效良方大全》\n【功效】除湿通络，祛风散寒\n【主治】着痹（湿痹）\n【组成】\n君：薏苡仁 一两\n臣：羌活 三钱，独活 三钱，麻黄 三钱，桂枝 三钱\n佐：当归 二钱，川芎 二钱\n使：甘草 三钱\n【配伍】\n薏苡仁：利水渗湿、健脾除痹、舒筋缓急，专治湿痹重着。\n羌活、独活：祛风胜湿、通络止痛，上下分治周身湿邪\n麻、桂：温经散寒、通阳通络，助祛湿\n当归、川芎：养血活血、通络止痛，治风先治血、血行风自灭\n甘草：调和诸药，温散助祛湿。"
+unlock_required_experience_points = 0
 formula_id = "yi_yi_ren_tang"
-required_herb_ids = Array[String](["yi_yi_ren", "qiang_huo", "du_huo", "ma_huang", "gui_zhi", "dang_gui", "chuan_xiong", "gan_cao"])

@@ -8,5 +8,5 @@ entry_id = "han_zhi_gan_mai"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "寒滞肝脉"
 detail_text = "寒滞肝脉\n\n【病机】外感寒邪、凝滞肝经，肝脉拘急、气血阻滞、阳气被遏，属实寒证。\n\n【症状】少腹冷痛、睾丸坠胀冷痛、疝气痛；巅顶头痛、畏寒喜暖、得温痛减、遇寒加重；四肢厥冷、面色青白；\n\n【脉象】\n左关（肝）：波速慢\n\n【标准方】暖肝煎"
+unlock_required_experience_points = 0
 disease_id = "han_zhi_gan_mai"
-prerequisite_entry_ids = Array[String](["nuan_gan_jian"])

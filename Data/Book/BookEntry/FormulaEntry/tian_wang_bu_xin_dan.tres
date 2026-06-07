@@ -8,5 +8,5 @@ entry_id = "tian_wang_bu_xin_dan"
 book_id = "jin_gui_yao_lue"
 title = "天王补心丹"
 detail_text = "天王补心丹\n【出处】《金匮要略》\n【功效】滋阴养血，补心安神\n【主治】心阴虚\n【组成】\n君：生地黄 四两\n臣：天门冬 一两，麦门冬 一两，酸枣仁 一两，柏子仁 一两，当归一两\n佐：人参五钱，茯苓 五钱，玄参 五钱，丹参 五钱，远志 五钱，五味子 五钱\n使：桔梗 五钱\n【配伍】\n生地黄：重用甘寒，滋阴养血、清心降火，直补心肾阴血。\n天冬、麦冬、玄参：滋阴清热、生津润燥，壮水制虚火；\n当归、丹参：养血和血、清心安神。\n人参、茯苓：益气宁心；\n酸枣仁、柏子仁、五味子：养心安神、敛汗宁心；\n远志：交通心肾、安神益智。\n桔梗：载药上行入心经，引药归经。"
+unlock_required_experience_points = 0
 formula_id = "tian_wang_bu_xin_dan"
-required_herb_ids = Array[String](["sheng_di_huang", "tian_men_dong", "mai_men_dong", "suan_zao_ren", "bai_zi_ren", "dang_gui", "ren_shen", "fu_ling", "xuan_shen", "dan_shen", "yuan_zhi", "wu_wei_zi", "jie_geng"])

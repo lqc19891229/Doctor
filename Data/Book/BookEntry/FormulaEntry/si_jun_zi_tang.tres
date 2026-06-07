@@ -8,5 +8,5 @@ entry_id = "si_jun_zi_tang"
 book_id = "tai_ping_hui_min_he_ji_ju_fang"
 title = "四君子汤"
 detail_text = "四君子汤\n【出处】《太平惠民和剂局方》\n【功效】益气健脾\n【主治】脾气虚\n【组成】\n君：人参 四钱\n臣：白术 三钱\n佐：茯苓 三钱\n使：甘草 二钱\n【配伍】\n人参：大补元气、益气健脾。\n白术：健脾燥湿，助人参运化。\n茯苓：健脾渗湿，宁心安神，使补而不滞。\n炙甘草：益气和中、调和诸药。"
+unlock_required_experience_points = 0
 formula_id = "si_jun_zi_tang"
-required_herb_ids = Array[String](["ren_shen", "bai_zhu", "fu_ling", "gan_cao"])

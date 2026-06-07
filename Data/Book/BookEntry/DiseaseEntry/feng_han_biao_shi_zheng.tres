@@ -8,5 +8,5 @@ entry_id = "feng_han_biao_shi_zheng"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "风寒表实证"
 detail_text = "风寒表实证\n\n【病机】寒邪束表、腠理闭塞、卫阳被遏\n\n【症状】恶寒发热，头身酸疼，无汗而喘\n\n【脉象】\n浮脉（表）：波峰高，波速慢\n\n【标准方】麻黄汤"
+unlock_required_experience_points = 0
 disease_id = "feng_han_biao_shi_zheng"
-prerequisite_entry_ids = Array[String](["ma_huang_tang"])

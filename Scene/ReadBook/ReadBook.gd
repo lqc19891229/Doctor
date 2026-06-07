@@ -9,8 +9,6 @@ signal player_data_changed
 # =========================
 
 @onready var info_label: Label = $MarginContainer/VBoxRoot/InfoLabel
-@onready var read_button: Button = $MarginContainer/VBoxRoot/ButtonRow/ReadButton
-
 # 左侧：书籍列表
 @onready var book_list: ItemList = $MarginContainer/VBoxRoot/ContentRow/BookPanel/BookVBox/BookList
 
@@ -53,10 +51,11 @@ func _ready() -> void:
 
 	_connect_ui_signals()
 
+	Unlock.refresh_auto_unlocks_by_experience()
 	_refresh_book_list()
 	_clear_entry_and_detail()
-	read_button.disabled = true
-	info_label.text = "请选择今晚要阅读的医书。当前心得：%d" % Unlock.get_experience_points()
+
+	info_label.text = "请选择要查看的医书。当前累计心得：%d" % Unlock.get_experience_points()
 
 
 func _process(_delta: float) -> void:
@@ -68,6 +67,8 @@ func _process(_delta: float) -> void:
 # =========================
 
 func open_window() -> void:
+	Unlock.refresh_auto_unlocks_by_experience()
+	_refresh_book_list()
 	show()
 
 
@@ -90,9 +91,6 @@ func _unhandled_input(event: InputEvent) -> void:
 # =========================
 
 func _connect_ui_signals() -> void:
-	if not read_button.pressed.is_connected(_on_read_button_pressed):
-		read_button.pressed.connect(_on_read_button_pressed)
-
 	if not book_list.item_selected.is_connected(_on_book_selected):
 		book_list.item_selected.connect(_on_book_selected)
 
@@ -143,7 +141,7 @@ func _update_thoughts_point_ui() -> void:
 	thoughts_point_label.custom_minimum_size = Vector2(120, 24)
 	thoughts_point_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	thoughts_point_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	thoughts_point_label.text = "心得：%d" % current_points
+	thoughts_point_label.text = "累计心得：%d" % current_points
 
 
 # =========================
@@ -182,7 +180,7 @@ func _refresh_book_list() -> void:
 		var new_entry_count = Unlock.get_unread_readable_entry_count_by_book(book.book_id)
 		var display_name := book.book_name
 		if new_entry_count > 0:
-			display_name += "  【新 %d】" % new_entry_count
+			display_name += "  【新%d】" % new_entry_count
 
 		books.append(book)
 		book_new_entry_counts.append(new_entry_count)
@@ -191,7 +189,7 @@ func _refresh_book_list() -> void:
 
 		if new_entry_count > 0:
 			book_list.set_item_custom_fg_color(item_index, Color(1.0, 0.82, 0.32, 1.0))
-			book_list.set_item_tooltip(item_index, "有 %d 个新解锁条目可以阅读" % new_entry_count)
+			book_list.set_item_tooltip(item_index, "有 %d 个新解锁条目可以查看" % new_entry_count)
 
 		if selected_book_id != "" and book.book_id.strip_edges() == selected_book_id:
 			selected_index = item_index
@@ -238,94 +236,43 @@ func _refresh_entry_list_for_selected_book() -> void:
 	if selected_book == null:
 		return
 
-	# -------------------------
-	# 1) 药材书：神农百草经
-	# -------------------------
-	if selected_book.is_herb_book():
-		readable_entries = Unlock.get_readable_entries_by_book(selected_book.book_id)
-
-		for entry in readable_entries:
-			if entry == null:
-				continue
-
-			entry_list.add_item(entry.title)
-
-		var herb_unlock_order := selected_book.get_herb_unlock_order()
-		var total := herb_unlock_order.size()
-		var days := Unlock.get_book_read_days(selected_book.book_id)
-		var unlocked_count = min(days, total)
-		var pending_count := Unlock.get_unread_unlocked_disease_or_formula_entry_count()
-		var can_continue := Unlock.can_continue_herb_book_reading(selected_book)
-
-		if pending_count > 0:
-			info_label.text = "《%s》 进度：%d/%d，已解锁药材：%d\n还有 %d 个已解锁但未阅读的疾病/方剂条目。请先阅读它们，之后才能继续阅读神农百草经的新条目。\n当前心得：%d" % [
-				selected_book.book_name, days, total, unlocked_count, pending_count, Unlock.get_experience_points()
-			]
-		elif days >= total:
-			info_label.text = "《%s》已经全部读完。已解锁药材：%d/%d\n当前心得：%d" % [
-				selected_book.book_name, unlocked_count, total, Unlock.get_experience_points()
-			]
-		else:
-			var next_herb := String(herb_unlock_order[days]).strip_edges()
-			info_label.text = "《%s》 进度：%d/%d，已解锁药材：%d，下一味：%s\n当前心得：%d" % [
-				selected_book.book_name, days, total, unlocked_count, next_herb, Unlock.get_experience_points()
-			]
-
-		read_button.text = "阅读本书"
-		read_button.disabled = not can_continue
-
-		if readable_entries.size() > 0:
-			entry_list.select(0)
-			selected_entry = readable_entries[0]
-			_set_detail_text(_build_entry_text(selected_entry))
-		else:
-			_set_detail_text("")
-
-		return
-
-	# -------------------------
-	# 2) 普通医书：如伤寒论
-	# -------------------------
 	readable_entries = Unlock.get_readable_entries_by_book(selected_book.book_id)
 
 	for entry in readable_entries:
 		if entry == null:
 			continue
 
-		var display_name := entry.title
-
-		if Unlock.is_entry_read(entry.entry_id):
-			display_name += " [已读]"
-		else:
-			display_name += " [未读]"
-
-		entry_list.add_item(display_name)
-
-	read_button.text = "阅读条目"
-	read_button.disabled = readable_entries.is_empty()
+		# 条目旁边不再标注“已读 / 未读 / 可查看”。
+		entry_list.add_item(entry.title)
 
 	if readable_entries.is_empty():
-		info_label.text = "《%s》当前没有可阅读条目。" % selected_book.book_name
+		info_label.text = "《%s》当前没有已解锁条目。
+当前累计心得：%d" % [
+			selected_book.book_name,
+			Unlock.get_experience_points()
+		]
 		_set_detail_text("")
 		return
 
 	var new_entry_count = Unlock.get_unread_readable_entry_count_by_book(selected_book.book_id)
 	if new_entry_count > 0:
-		info_label.text = "《%s》共有 %d 个可阅读条目，其中 %d 个新解锁条目尚未阅读。\n当前心得：%d" % [
-			selected_book.book_name, readable_entries.size(), new_entry_count, Unlock.get_experience_points()
+		info_label.text = "《%s》共有 %d 个已解锁条目，其中 %d 个尚未查看。
+当前累计心得：%d" % [
+			selected_book.book_name,
+			readable_entries.size(),
+			new_entry_count,
+			Unlock.get_experience_points()
 		]
 	else:
-		info_label.text = "《%s》共有 %d 个可阅读条目。\n当前心得：%d" % [
-			selected_book.book_name, readable_entries.size(), Unlock.get_experience_points()
+		info_label.text = "《%s》共有 %d 个已解锁条目。
+当前累计心得：%d" % [
+			selected_book.book_name,
+			readable_entries.size(),
+			Unlock.get_experience_points()
 		]
 
 	entry_list.select(0)
-	selected_entry = readable_entries[0]
-
-	if Unlock.is_entry_read(selected_entry.entry_id):
-		_set_detail_text(_build_entry_text(selected_entry))
-	else:
-		_set_detail_text("该条目尚未阅读，阅读后显示正文内容。")
+	_show_entry_by_index(0)
 
 
 # =========================
@@ -360,102 +307,75 @@ func _on_book_selected(index: int) -> void:
 # =========================
 
 func _on_entry_selected(index: int) -> void:
+	_show_entry_by_index(index)
+
+
+# =========================
+# 直接查看条目
+# =========================
+
+func _show_entry_by_index(index: int) -> void:
 	if index < 0 or index >= readable_entries.size():
 		return
 
 	selected_entry = readable_entries[index]
-
-	if selected_book != null and selected_book.is_herb_book():
-		_set_detail_text(_build_entry_text(selected_entry))
-		return
-
-	if Unlock.is_entry_read(selected_entry.entry_id):
-		_set_detail_text(_build_entry_text(selected_entry))
-	else:
-		_set_detail_text("该条目尚未阅读，阅读后显示正文内容。")
-
-
-# =========================
-# 点击阅读
-# =========================
-
-func _on_read_button_pressed() -> void:
-	if selected_book == null:
-		return
-
-	# 药材书：消耗 1 点心得，推进整本书进度。
-	if selected_book.is_herb_book():
-		var herb_unlock_order := selected_book.get_herb_unlock_order()
-		var days := Unlock.get_book_read_days(selected_book.book_id)
-
-		if days >= herb_unlock_order.size():
-			info_label.text = "《%s》已经全部读完。\n当前心得：%d" % [
-				selected_book.book_name, Unlock.get_experience_points()
-			]
-			return
-
-		var pending_count := Unlock.get_unread_unlocked_disease_or_formula_entry_count()
-		if pending_count > 0:
-			_update_thoughts_point_ui()
-			info_label.text = "还有 %d 个已解锁但未阅读的疾病/方剂条目。请先阅读它们，之后才能继续阅读神农百草经的新条目。" % pending_count
-			read_button.disabled = true
-			return
-
-		if not Unlock.consume_experience_point():
-			_update_thoughts_point_ui()
-			info_label.text = "心得不足。白天开方获得满分甲等评价后，可获得 1 点心得。"
-			return
-
-		_update_thoughts_point_ui()
-		Unlock.read_book_by_day(selected_book)
-		_save_and_notify_player_data_changed()
-
-		_refresh_book_list()
-		_refresh_entry_list_for_selected_book()
-		_update_thoughts_point_ui()
-		info_label.text += "\n消耗心得：-1，当前心得：%d" % Unlock.get_experience_points()
-
-		if readable_entries.size() > 0:
-			entry_list.select(0)
-			selected_entry = readable_entries[0]
-			_set_detail_text(_build_entry_text(selected_entry))
-		else:
-			_set_detail_text("")
-
-		return
-
-	# 普通书：阅读当前条目。
 	if selected_entry == null:
 		return
 
-	if Unlock.is_entry_read(selected_entry.entry_id):
-		_update_thoughts_point_ui()
-		_set_detail_text(_build_entry_text(selected_entry))
-		info_label.text = "该条目已读，可直接回看。\n当前心得：%d" % Unlock.get_experience_points()
+	var current_entry_id := selected_entry.entry_id.strip_edges()
+	if current_entry_id == "":
 		return
 
-	if not Unlock.consume_experience_point():
+	# 只允许查看已经通过累计心得解锁，或已经读过的条目。
+	if not Unlock.is_entry_unlocked(current_entry_id) and not Unlock.is_entry_read(current_entry_id):
 		_update_thoughts_point_ui()
-		info_label.text = "心得不足。白天开方获得满分甲等评价后，可获得 1 点心得。"
+		info_label.text = "该条目尚未解锁。获得更多心得后会自动解锁。
+当前累计心得：%d" % Unlock.get_experience_points()
+		_set_detail_text("")
 		return
 
+	var was_unread := not Unlock.is_entry_read(current_entry_id)
+
+	# 第一次查看普通条目时标记为已读，并同步解锁对应疾病 / 方剂。
+	# 条目的出现 / 解锁只由 UnlockManager 中的累计心得规则控制。
+	if was_unread:
+		Unlock.read_entry(selected_entry)
+		_save_and_notify_player_data_changed()
+
+	_set_detail_text(_build_entry_text(selected_entry))
 	_update_thoughts_point_ui()
 
-	var current_entry_id := selected_entry.entry_id
-	Unlock.read_entry(selected_entry)
-	_save_and_notify_player_data_changed()
+	if was_unread:
+		_refresh_book_list()
+		_reselect_current_book_in_list()
+		_refresh_entry_list_titles_keep_selection(current_entry_id)
+		info_label.text = "已查看条目。
+当前累计心得：%d" % Unlock.get_experience_points()
 
-	_refresh_book_list()
-	_refresh_entry_list_for_selected_book()
-	_update_thoughts_point_ui()
-	info_label.text += "\n消耗心得：-1，当前心得：%d" % Unlock.get_experience_points()
 
+func _reselect_current_book_in_list() -> void:
+	if selected_book == null:
+		return
+
+	var current_book_id := selected_book.book_id.strip_edges()
+	if current_book_id == "":
+		return
+
+	for i in range(books.size()):
+		if books[i] != null and books[i].book_id.strip_edges() == current_book_id:
+			book_list.select(i)
+			return
+
+
+func _refresh_entry_list_titles_keep_selection(entry_id: String) -> void:
 	for i in range(readable_entries.size()):
-		if readable_entries[i].entry_id == current_entry_id:
-			selected_entry = readable_entries[i]
+		if readable_entries[i] == null:
+			continue
+
+		entry_list.set_item_text(i, readable_entries[i].title)
+		if readable_entries[i].entry_id.strip_edges() == entry_id:
 			entry_list.select(i)
-			_set_detail_text(_build_entry_text(selected_entry))
-			break
+			selected_entry = readable_entries[i]
 
 
 func _save_and_notify_player_data_changed() -> void:

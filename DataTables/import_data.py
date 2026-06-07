@@ -422,6 +422,29 @@ def as_int(value: Any, default: int = 0) -> int:
         return default
 
 
+def get_unlock_required_experience_points(row: dict[str, Any]) -> int:
+    """
+    功能：读取医书条目自动解锁所需累计心得。
+    作用：
+    1. 从 Excel 的 unlock required experie 列读取数值。
+    2. 空值默认 -1，表示不参与心得自动解锁。
+    3. 兼容后续可能改成更规范列名的写法。
+    """
+    possible_keys = [
+        "unlock required experie",
+        "UnlockRequiredExperience",
+        "UnlockRequiredExperiencePoints",
+        "UnlockRequiredExp",
+        "unlock_required_experience_points",
+    ]
+
+    for key in possible_keys:
+        if key in row and row.get(key) not in ("", None):
+            return as_int(row.get(key), -1)
+
+    return -1
+
+
 def as_bool(value: Any, default: bool = True) -> bool:
     """
     功能：将 Excel 单元格内容转换为布尔值。
@@ -776,27 +799,6 @@ def get_formula_target_disease_id(
     return ""
 
 
-def get_formula_required_herb_ids(
-    formula_id: str,
-    formula_row: dict[str, Any],
-    formula_ingredient_map: dict[str, list[dict[str, Any]]],
-) -> list[str]:
-    """
-    功能：获取方剂需要的药材 ID 列表。
-    作用：
-    1. 优先使用 Formula 表中手动配置的 RequiredHerbIDs。
-    2. 如果未配置，则自动从 FormulaIngredient 表推导。
-    """
-    explicit_ids = split_multi_value(formula_row.get("RequiredHerbIDs"))
-    if explicit_ids:
-        return unique_keep_order(explicit_ids)
-
-    ingredient_rows = formula_ingredient_map.get(formula_id, [])
-    herb_ids = [as_str(row.get("HerbID")) for row in ingredient_rows]
-    return unique_keep_order(herb_ids)
-
-
-
 
 def build_herb_detail_text(row: dict[str, Any]) -> str:
     """
@@ -1065,6 +1067,7 @@ meridians = {format_godot_string_array(meridian_list)}
         entry_id = as_str(row.get("EntryID")) or herb_id
         title = as_str(row.get("Title")) or herb_name
         detail_text = build_herb_detail_text(row)
+        unlock_required_experience_points = get_unlock_required_experience_points(row)
 
         entry_content = f'''[gd_resource type="Resource" script_class="HerbBookEntryData" load_steps=2 format=3]
 
@@ -1076,6 +1079,7 @@ entry_id = {format_godot_string(entry_id)}
 book_id = {format_godot_string(row.get("BookID"))}
 title = {format_godot_string(title)}
 detail_text = {format_godot_string(detail_text)}
+unlock_required_experience_points = {unlock_required_experience_points}
 herb_id = {format_godot_string(herb_id)}
 '''
         write_text_file(HERB_BOOK_ENTRY_OUTPUT_DIR / f"{safe_filename(entry_id)}.tres", entry_content)
@@ -1147,10 +1151,7 @@ kidney_yang_wet_dry = {as_float(pulse_row.get("KZH"), 1.0)}
 
         entry_id = as_str(disease_row.get("EntryID")) or disease_id
         title = as_str(disease_row.get("Title")) or disease_name
-
-        prerequisite_ids = split_multi_value(disease_row.get("PrerequisiteEntryIDs"))
-        if not prerequisite_ids and recommended_formula_id:
-            prerequisite_ids = [recommended_formula_id]
+        unlock_required_experience_points = get_unlock_required_experience_points(disease_row)
 
         entry_content = f'''[gd_resource type="Resource" script_class="DiseaseBookEntryData" load_steps=2 format=3]
 
@@ -1162,8 +1163,8 @@ entry_id = {format_godot_string(entry_id)}
 book_id = {format_godot_string(disease_row.get("BookID"))}
 title = {format_godot_string(title)}
 detail_text = {format_godot_string(disease_row.get("DetailText"))}
+unlock_required_experience_points = {unlock_required_experience_points}
 disease_id = {format_godot_string(disease_id)}
-prerequisite_entry_ids = {format_godot_string_array(prerequisite_ids)}
 '''
         write_text_file(DISEASE_BOOK_ENTRY_OUTPUT_DIR / f"{safe_filename(entry_id)}.tres", entry_content)
 
@@ -1192,11 +1193,6 @@ def build_formula_resources(indexed_data: dict[str, Any]) -> None:
         detail_text = as_str(formula_row.get("DetailText"))
         target_disease_name = as_str(formula_row.get("TargetDiseaseName"))
         target_disease_id = get_formula_target_disease_id(formula_row, disease_name_to_id)
-        required_herb_ids = get_formula_required_herb_ids(
-            formula_id,
-            formula_row,
-            formula_ingredient_map,
-        )
 
         # 记录方剂中引用到的 Herb 资源，避免重复声明 ext_resource
         herb_ext_resources: list[tuple[str, str]] = []
@@ -1288,6 +1284,7 @@ required = {"true" if required else "false"}'''
 
         entry_id = as_str(formula_row.get("EntryID")) or formula_id
         title = as_str(formula_row.get("Title")) or formula_name
+        unlock_required_experience_points = get_unlock_required_experience_points(formula_row)
 
         entry_content = f'''[gd_resource type="Resource" script_class="FormulaBookEntryData" load_steps=2 format=3]
 
@@ -1299,8 +1296,8 @@ entry_id = {format_godot_string(entry_id)}
 book_id = {format_godot_string(formula_row.get("BookID"))}
 title = {format_godot_string(title)}
 detail_text = {format_godot_string(formula_row.get("DetailText"))}
+unlock_required_experience_points = {unlock_required_experience_points}
 formula_id = {format_godot_string(formula_id)}
-required_herb_ids = {format_godot_string_array(required_herb_ids)}
 '''
         write_text_file(FORMULA_BOOK_ENTRY_OUTPUT_DIR / f"{safe_filename(entry_id)}.tres", entry_content)
 
@@ -1320,7 +1317,7 @@ def build_theory_resources(indexed_data: dict[str, Any]) -> None:
         theory_name = as_str(row.get("TheoryName"))
         entry_id = as_str(row.get("EntryID")) or theory_id
         title = as_str(row.get("Title")) or theory_name
-        prerequisite_ids = split_multi_value(row.get("PrerequisiteEntryIDs"))
+        unlock_required_experience_points = get_unlock_required_experience_points(row)
 
         entry_content = f'''[gd_resource type="Resource" script_class="TheoryBookEntryData" load_steps=2 format=3]
 
@@ -1332,7 +1329,7 @@ entry_id = {format_godot_string(entry_id)}
 book_id = {format_godot_string(row.get("BookID"))}
 title = {format_godot_string(title)}
 detail_text = {format_godot_string(row.get("DetailText"))}
-prerequisite_entry_ids = {format_godot_string_array(prerequisite_ids)}
+unlock_required_experience_points = {unlock_required_experience_points}
 '''
         write_text_file(THEORY_BOOK_ENTRY_OUTPUT_DIR / f"{safe_filename(entry_id)}.tres", entry_content)
 

@@ -8,5 +8,5 @@ entry_id = "gan_pi_bu_he"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "肝脾不和"
 detail_text = "肝脾不和（肝郁脾虚）\n\n【病机】情志不舒、肝气郁结，木旺克土；脾虚失运、肝气乘脾。\n\n【症状】胸胁胀痛、善太息、情绪抑郁易怒；脘腹胀满、嗳气食少；腹痛泄泻、泻后痛减；食欲不振、肠鸣矢气多\n\n【脉象】\n左关（肝）：波峰高\n右关（脾）：波峰低\n\n【标准方】逍遥散"
+unlock_required_experience_points = 0
 disease_id = "gan_pi_bu_he"
-prerequisite_entry_ids = Array[String](["xiao_yao_san"])

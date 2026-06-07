@@ -785,6 +785,7 @@ func _on_clear_prescription_button_pressed() -> void:
 
 func _on_submit_button_pressed() -> void:
 	emit_signal("submit_requested")
+	_clear_selected_disease()
 
 
 # =========================================================

@@ -8,5 +8,5 @@ entry_id = "li_zhong_wan"
 book_id = "shang_han_lun"
 title = "理中丸"
 detail_text = "理中丸\n【出处】《伤寒论》\n【功效】温中祛寒，补气健脾\n【主治】脾阳虚\n【组成】\n君：干姜 五钱\n臣：人参 五钱\n佐：白术 五钱\n使：甘草 五钱\n【配伍】\n干姜：大辛大热，温中祛寒、振奋脾阳。\n人参：益气健脾，补益脾胃气虚之本。\n白术：健脾燥湿，助运化、利水湿。\n炙甘草：益气和中、调和诸药，缓急止痛。"
+unlock_required_experience_points = 0
 formula_id = "li_zhong_wan"
-required_herb_ids = Array[String](["gan_jiang", "ren_shen", "bai_zhu", "gan_cao"])

@@ -768,24 +768,36 @@ func submit_prescription() -> bool:
 	last_formula_judge_result = result
 	last_formula_judge_summary_text = summary_text
 
-	# 甲等满分时获得 1 点心得。
-	# 说明：
-	# 1. grade == "妙手回春"：评价达到最高档。
-	# 2. score == 100：必须是满分妙手回春，避免普通甲等也给心得。
-	# 3. was_already_submitted 用于防止同一名病人重复提交刷心得。
-	if result.grade == "妙手回春" and result.score == 100 and not was_already_submitted:
-		Unlock.add_experience_point(1)
+	# 妙手回春时获得 1 点心得，并立刻按累计心得自动解锁条目。
+	# was_already_submitted 用于防止同一名病人重复提交刷心得。
+	var is_miaoshouhuichun := false
+	if result != null and result.has_method("is_miaoshouhuichun"):
+		is_miaoshouhuichun = result.is_miaoshouhuichun()
+	else:
+		is_miaoshouhuichun = result.grade == "妙手回春" and result.score == 100
+
+	if is_miaoshouhuichun and not was_already_submitted:
+		var newly_unlocked_titles: Array[String] = []
+		if Unlock != null and Unlock.has_method("add_experience_point"):
+			newly_unlocked_titles = Unlock.add_experience_point(1)
+
 		_update_thoughts_point_ui(true)
 		summary_text += "\n获得心得：+1"
-		summary_text += "\n当前心得：%d" % Unlock.get_experience_points()
+		summary_text += "\n当前累计心得：%d" % Unlock.get_experience_points()
 
-		# 获得心得后立即存档，避免切场景或退出时丢失。
+		if not newly_unlocked_titles.is_empty():
+			summary_text += "\n新解锁条目：%s" % "、".join(newly_unlocked_titles)
+
+		if clinical_log_window != null and clinical_log_window.has_method("refresh_view"):
+			clinical_log_window.refresh_view()
+
+		# 获得心得和自动解锁后立即存档，避免切场景或退出时丢失。
 		if SaveManager != null and SaveManager.has_method("save_game"):
 			SaveManager.save_game()
-	elif result.grade == "妙手回春" and result.score == 100 and was_already_submitted:
+	elif is_miaoshouhuichun and was_already_submitted:
 		_update_thoughts_point_ui(true)
 		summary_text += "\n本病人已提交过处方，不重复获得心得。"
-		summary_text += "\n当前心得：%d" % Unlock.get_experience_points()
+		summary_text += "\n当前累计心得：%d" % Unlock.get_experience_points()
 
 	last_formula_judge_summary_text = summary_text
 

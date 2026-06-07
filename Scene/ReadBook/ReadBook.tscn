@@ -107,10 +107,3 @@ fixed_columns_per_page = 12
 [node name="InfoLabel" type="Label" parent="MarginContainer/VBoxRoot" unique_id=352818861]
 layout_mode = 2
 text = "请选择今晚要阅读的医书。"
-
-[node name="ButtonRow" type="HBoxContainer" parent="MarginContainer/VBoxRoot" unique_id=1689106686]
-layout_mode = 2
-
-[node name="ReadButton" type="Button" parent="MarginContainer/VBoxRoot/ButtonRow" unique_id=658028749]
-layout_mode = 2
-text = "读书"

@@ -11,11 +11,6 @@ class_name TheoryBookEntryData
 # 3. 阅读后只标记为已读，不解锁疾病实体
 # =========================================================
 
-# 前置条目
-# 例如：先读“阴阳”，再读“五行”
-@export var prerequisite_entry_ids: Array[String] = []
-
-
 func get_entry_type() -> String:
 	return "theory"
 

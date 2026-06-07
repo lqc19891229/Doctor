@@ -8,5 +8,5 @@ entry_id = "si_wu_tang"
 book_id = "tai_ping_hui_min_he_ji_ju_fang"
 title = "四物汤"
 detail_text = "四物汤\n【出处】《太平惠民和剂局方》\n【功效】补血调血\n【主治】肝血虚\n【组成】\n君：熟地黄 四钱\n臣：当归 三钱\n佐：白芍 三钱，川芎 二钱\n使：\n【配伍】\n熟地黄：甘温味厚，滋阴补血、填精益髓，为补血之本。\n当归：补血养肝、活血调经，既补又行，补而不滞。\n白芍：养血敛阴、柔肝缓急，濡养筋脉。\n川芎：行气活血、疏肝通络，使补而不壅、补血不滞气。"
+unlock_required_experience_points = 0
 formula_id = "si_wu_tang"
-required_herb_ids = Array[String](["shu_di_huang", "dang_gui", "bai_shao", "chuan_xiong"])

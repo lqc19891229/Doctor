@@ -8,5 +8,5 @@ entry_id = "ping_wei_san"
 book_id = "tai_ping_hui_min_he_ji_ju_fang"
 title = "平胃散"
 detail_text = "平胃散\n【出处】《太平惠民和剂局方》\n【功效】燥湿运脾，行气和胃\n【主治】湿盛困脾\n【组成】\n君：苍术 三钱\n臣：厚朴 二钱\n佐：陈皮 二钱\n使：甘草 一钱\n【配伍】\n苍术：苦温燥湿、健脾运脾，专治湿困脾胃。\n厚朴：行气除满、燥湿化浊，消脘腹胀痞。\n陈皮：理气和胃、燥湿醒脾，使气机条达。\n炙甘草：益气和中、调和诸药；姜枣调和脾胃。"
+unlock_required_experience_points = 0
 formula_id = "ping_wei_san"
-required_herb_ids = Array[String](["cang_zhu", "hou_po", "chen_pi", "gan_cao"])

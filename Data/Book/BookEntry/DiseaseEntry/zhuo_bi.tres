@@ -8,5 +8,5 @@ entry_id = "zhuo_bi"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "着痹"
 detail_text = "着痹（湿痹）\n\n【病机】风寒湿邪侵袭，湿邪偏盛；湿性重浊、黏滞，阻滞经络、困遏气机。\n\n【症状】关节沉重酸痛、重着如裹；痛处固定，肌肤麻木、肢体困重；关节肿胀、屈伸不利\n阴雨潮湿天气加重\n\n【脉象】\n浮脉（表）：波峰高（轻微），波速慢（轻微），波宽宽（剧烈）\n\n【标准方】薏苡仁汤"
+unlock_required_experience_points = 0
 disease_id = "zhuo_bi"
-prerequisite_entry_ids = Array[String](["yi_yi_ren_tang"])

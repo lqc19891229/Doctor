@@ -8,5 +8,5 @@ entry_id = "xin_huo_kang_sheng"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "心火亢盛"
 detail_text = "心火亢盛\n\n【病机】心火内炽，火热扰心、灼伤脉络、下移小肠。\n\n【症状】心胸烦热、心悸失眠、烦躁易怒；口舌生疮、舌尖红赤疼痛；口干口苦、面红目赤；小便短赤、灼热涩痛；\n\n【脉象】\n左寸（心）：波速快\n\n【标准方】导赤散"
+unlock_required_experience_points = 0
 disease_id = "xin_huo_kang_sheng"
-prerequisite_entry_ids = Array[String](["dao_chi_san"])

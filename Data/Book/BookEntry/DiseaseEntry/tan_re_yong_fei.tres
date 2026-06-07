@@ -8,5 +8,5 @@ entry_id = "tan_re_yong_fei"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "痰热壅肺"
 detail_text = "痰热壅肺\n\n【病机】邪热入里，灼津成痰、痰热互结，壅遏肺气，肺失宣降。\n\n【症状】咳嗽气喘，痰多黄稠、黏稠难咯；胸闷胸痛，甚则鼻翼煽动；发热口渴、烦躁、大便干结、小便黄\n\n【脉象】\n右寸（肺）：波速快，波宽宽\n\n【标准方】清气化痰丸"
+unlock_required_experience_points = 0
 disease_id = "tan_re_yong_fei"
-prerequisite_entry_ids = Array[String](["qing_qi_hua_tan_wan"])

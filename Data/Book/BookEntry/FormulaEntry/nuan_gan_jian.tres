@@ -8,5 +8,5 @@ entry_id = "nuan_gan_jian"
 book_id = "jing_yue_quan_shu"
 title = "暖肝煎"
 detail_text = "暖肝煎\n【出处】《景岳全书》\n【功效】温补肝肾，行气散寒\n【主治】寒滞肝脉\n【组成】\n君：肉桂 一钱，茴香 二钱\n臣：当归 二钱，枸杞子 三钱\n佐：乌药 二钱，茯苓 二钱，沉香 一钱\n使：生姜 一钱\n【配伍】\n肉桂：温肾暖肝、散寒止痛；\n茴香：暖肝理气、专治寒疝睾丸冷痛。\n当归、枸杞：养血补肝、温补肝肾，扶正固本。\n乌药：行气散寒、疏肝止痛；\n沉香：降气暖肝、下气止痛；\n茯苓：健脾渗湿，助肝肾气化。\n生姜：散寒和胃，辅助中焦"
+unlock_required_experience_points = 0
 formula_id = "nuan_gan_jian"
-required_herb_ids = Array[String](["rou_gui", "hui_xiang", "dang_gui", "gou_qi_zi", "wu_yao", "fu_ling", "chen_xiang", "sheng_jiang"])

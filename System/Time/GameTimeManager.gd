@@ -57,6 +57,34 @@ const SHICHEN_LIST: Array[String] = [
 
 
 # =========================================================
+# 日期显示设置
+# 只影响日期文本，不影响白天 / 夜晚 / 十二时辰逻辑
+#
+# current_day = 1   嘉靖十九年春
+# current_day = 2   嘉靖十九年夏
+# current_day = 3   嘉靖十九年秋
+# current_day = 4   嘉靖十九年冬
+# current_day = 5   嘉靖二十年春
+# ...
+# 嘉靖四十五年冬之后进入万历元年春
+# =========================================================
+
+const START_ERA_NAME: String = "嘉靖"
+const START_ERA_YEAR: int = 19
+const START_ERA_LAST_YEAR: int = 45
+
+const NEXT_ERA_NAME: String = "万历"
+const NEXT_ERA_START_YEAR: int = 1
+
+const SEASON_LIST: Array[String] = [
+	"春",
+	"夏",
+	"秋",
+	"冬"
+]
+
+
+# =========================================================
 # Clinic 时间设置
 # =========================================================
 
@@ -74,7 +102,9 @@ const CLINIC_SECONDS_PER_SHICHEN: float = 60.0
 # 当前时间数据
 # =========================================================
 
-# 当前天数，只负责记录第几天
+# 当前时间序号
+# 这里只保留 current_day 变量名，方便兼容现有代码
+# 实际显示时按“季度”解释：1 = 嘉靖十九年春，2 = 嘉靖十九年夏
 var current_day: int = 1
 
 # 当前阶段
@@ -226,7 +256,69 @@ func finish_night() -> void:
 # UI 显示文本
 # =========================================================
 func get_day_text() -> String:
-	return "第 %d 天" % current_day
+	var passed_quarters: int = current_day - 1
+
+	var year_offset: int = int(passed_quarters / 4)
+	var season_index: int = passed_quarters % 4
+
+	var era_year_from_jiajing_start: int = START_ERA_YEAR + year_offset
+	var season_text: String = SEASON_LIST[season_index]
+
+	if era_year_from_jiajing_start <= START_ERA_LAST_YEAR:
+		return "%s%s年%s" % [
+			START_ERA_NAME,
+			era_year_to_chinese(era_year_from_jiajing_start),
+			season_text
+		]
+
+	var years_after_start_era: int = era_year_from_jiajing_start - START_ERA_LAST_YEAR
+	var next_era_year: int = NEXT_ERA_START_YEAR + years_after_start_era - 1
+
+	return "%s%s年%s" % [
+		NEXT_ERA_NAME,
+		era_year_to_chinese(next_era_year),
+		season_text
+	]
+
+
+func era_year_to_chinese(value: int) -> String:
+	if value == 1:
+		return "元"
+
+	return number_to_chinese(value)
+
+
+func number_to_chinese(value: int) -> String:
+	var chinese_numbers: Array[String] = [
+		"零",
+		"一",
+		"二",
+		"三",
+		"四",
+		"五",
+		"六",
+		"七",
+		"八",
+		"九",
+		"十"
+	]
+
+	if value <= 10:
+		return chinese_numbers[value]
+
+	if value < 20:
+		return "十%s" % chinese_numbers[value - 10]
+
+	var ten_digit: int = int(value / 10)
+	var one_digit: int = value % 10
+
+	if one_digit == 0:
+		return "%s十" % chinese_numbers[ten_digit]
+
+	return "%s十%s" % [
+		chinese_numbers[ten_digit],
+		chinese_numbers[one_digit]
+	]
 
 
 func get_shichen_text() -> String:
