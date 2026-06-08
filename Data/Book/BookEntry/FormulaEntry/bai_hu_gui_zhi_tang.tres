@@ -8,5 +8,5 @@ entry_id = "bai_hu_gui_zhi_tang"
 book_id = "jin_gui_yao_lue"
 title = "白虎桂枝汤"
 detail_text = "白虎桂枝汤\n【出处】《金匮要略》\n【功效】清热通络，和营祛风\n【主治】热痹\n【组成】\n君：石膏 二两\n臣：知母 六钱\n佐：桂枝 三钱，粳米 五钱\n使：甘草 三钱\n【配伍】\n生石膏：大寒大清，清气分实热，泻火除烦，专治关节红肿灼热。\n知母：苦寒清热、滋阴润燥，助石膏清泄里热。\n桂枝：辛温通络、祛风和营，引药直达经络关节，散经络风湿热邪；辛温反佐，防寒凉凝滞气血。\n炙甘草、粳米：益气养胃，缓和石膏、知母寒凉之性，保护胃气。"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 formula_id = "bai_hu_gui_zhi_tang"

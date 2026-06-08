@@ -10,7 +10,7 @@ class_name UnlockManager
 # - 条目解锁只依赖累计心得与 unlock_required_experience_points
 # - required_herb_ids / prerequisite_entry_ids 不再参与 ReadBook 解锁判断
 # - 达到累计心得阈值后，条目自动进入 unlocked_entry_ids
-# - Herb 条目：条目已解锁后，可查看并同步解锁对应药材
+# - Herb 条目：条目已解锁后，可查看，首次查看后记为已读并同步解锁对应药材
 # - Formula 条目：条目已解锁后，可阅读，阅读后解锁对应方剂
 # - Disease 条目：条目已解锁后，可阅读，阅读后解锁对应疾病
 # - Theory 条目：条目已解锁后，可阅读，阅读后只标记已读
@@ -20,7 +20,7 @@ class_name UnlockManager
 # - “解锁”和“已读”分开记录
 # - unlocked_entry_ids：条目已解锁，可在读书界面显示/查看
 # - read_entry_ids：条目已阅读/查看过
-# - Herb 条目查看后会同步解锁药材，但不强制记为普通已读
+# - Herb 条目首次查看后会同步解锁药材，并记入 read_entry_ids 用于未读提示
 # - Formula / Disease / Theory 条目在首次阅读后会记为已读
 # - Formula / Disease 阅读后会顺便解锁对应实体
 # - Theory 阅读后只标记已读，不解锁任何实体
@@ -89,7 +89,30 @@ func consume_experience_point() -> bool:
 
 
 # =========================================================
-# 六、心得自动解锁条目
+# 六、名望点数（累计值）
+# 用于剧情解锁和节奏控制
+# =========================================================
+
+var reputation_points: int = 0
+
+
+func get_reputation_points() -> int:
+	return reputation_points
+
+
+func add_reputation_points(amount: int = 1) -> void:
+	if amount == 0:
+		return
+
+	reputation_points += amount
+
+
+func has_reputation_points(required_amount: int) -> bool:
+	return reputation_points >= required_amount
+
+
+# =========================================================
+# 七、心得自动解锁条目
 # =========================================================
 
 func refresh_auto_unlocks_by_experience() -> Array[String]:
@@ -307,6 +330,7 @@ func read_book_by_day(book: BookData) -> void:
 		return
 
 	unlock_herb(herb_id)
+	unlock_entry(herb_id)
 	
 # =========================================================
 # 十、分类型判断逻辑
@@ -316,7 +340,8 @@ func _can_read_herb(entry: HerbBookEntryData) -> bool:
 	if entry == null:
 		return false
 
-	return is_entry_unlocked(entry.entry_id)
+	# 兼容旧存档：以前可能只记录了药材解锁，没有记录条目解锁。
+	return is_entry_unlocked(entry.entry_id) or is_herb_unlocked(entry.herb_id)
 
 
 func _can_read_formula(entry: FormulaBookEntryData) -> bool:
@@ -389,6 +414,12 @@ func is_entry_visible(entry_id: String) -> bool:
 	if is_entry_unlocked(clean_id):
 		return true
 
+	# 兼容旧存档：以前神农本草经阅读推进可能只解锁药材，未同步解锁书籍条目。
+	if entry is HerbBookEntryData:
+		var herb_entry := entry as HerbBookEntryData
+		if is_herb_unlocked(herb_entry.herb_id):
+			return true
+
 	if is_entry_read(clean_id):
 		return true
 
@@ -407,15 +438,15 @@ func read_entry(entry: BookEntryData) -> void:
 	if entry == null:
 		return
 
-	if entry is HerbBookEntryData:
-		var herb_entry := entry as HerbBookEntryData
-		unlock_herb(herb_entry.herb_id)
-		return
-
 	if not can_read_entry(entry.entry_id):
 		return
 
 	mark_entry_as_read(entry.entry_id)
+
+	if entry is HerbBookEntryData:
+		var herb_entry := entry as HerbBookEntryData
+		unlock_herb(herb_entry.herb_id)
+		return
 
 	if entry is TheoryBookEntryData:
 		return
@@ -467,9 +498,6 @@ func get_unread_readable_entry_count_by_book(book_id: String) -> int:
 
 	for entry in entries:
 		if entry == null:
-			continue
-
-		if entry is HerbBookEntryData:
 			continue
 
 		if is_entry_read(entry.entry_id):
@@ -633,6 +661,7 @@ func reset_progress() -> void:
 	book_read_days.clear()
 
 	experience_points = 0
+	reputation_points = 0
 
 
 func get_save_data() -> Dictionary:
@@ -646,7 +675,8 @@ func get_save_data() -> Dictionary:
 		"clinical_log_unlocked_disease_ids": clinical_log_unlocked_disease_ids,
 		"clinical_log_unlocked_formula_ids": clinical_log_unlocked_formula_ids,
 		"book_read_days": book_read_days,
-		"experience_points": experience_points
+		"experience_points": experience_points,
+		"reputation_points": reputation_points
 	}
 
 
@@ -664,6 +694,7 @@ func load_save_data(data: Dictionary) -> void:
 	book_read_days = _load_int_dictionary(data.get("book_read_days", {}))
 
 	experience_points = int(data.get("experience_points", 0))
+	reputation_points = int(data.get("reputation_points", 0))
 
 	refresh_auto_unlocks_by_experience()
 

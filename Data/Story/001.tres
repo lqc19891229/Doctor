@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
 [ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
-[ext_resource type="Texture2D" path="res://Assets/li_shi_zhen.png" id="portrait_1"]
-[ext_resource type="Texture2D" path="res://Assets/li_yan_wen.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/li_shi_zhen.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/li_yan_wen.png" id="portrait_2"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
-text = "明嘉靖十一年，蕲州州衙放榜处"
+text = "明嘉靖十九年，武昌府放榜处"
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
@@ -43,7 +43,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 speaker = "李东壁"
-text = "考了三次童试都没中，看来我不是读书的材料啊爹"
+text = "考了三次都没中举，看来我不是读书的材料啊爹"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
@@ -57,7 +57,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 speaker = "李东壁"
-text = "我看我还是跟您学医吧，科举八股什么的，太难了"
+text = "我看我还是跟您学医吧，科举八股什么的，孩儿实在是学不来…"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_009"]
 script = ExtResource("1_storyline")
@@ -66,6 +66,25 @@ portrait_side = "right"
 speaker = "李言闻"
 text = "学医哪里比得上做官有前途啊，你爹我行医一辈子，辛苦不赚钱不说，医得不好了还要受人白眼"
 portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_010"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+speaker = "李东壁"
+text = "可我真心喜欢研究那些药材方子，考证典籍。行医治病才是儿子此生志愿。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_011"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+speaker = "李言闻"
+text = "......也罢，科举考功名的学子千千万，可真能博取个功名的又有几人呢。东壁呀，你若真的想从医，今日起便随为父从《内经》，《本草》学起吧。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_012"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+text = "李东壁十四岁考中秀才，可之后九年三次乡试落榜，本就无心科举的李东壁便下定决心开始随父亲学医。"
 
 [resource]
 script = ExtResource("2_storydata")
@@ -74,4 +93,4 @@ trigger_scene = "clinic"
 trigger_day = 1
 play_once = true
 return_scene = "clinic"
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011"), SubResource("StoryLine_012")])

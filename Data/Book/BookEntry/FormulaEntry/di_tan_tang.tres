@@ -8,5 +8,5 @@ entry_id = "di_tan_tang"
 book_id = "tai_yi_yuan_jing_yan_qi_xiao_liang_fang_da_quan"
 title = "涤痰汤"
 detail_text = "涤痰汤\n【出处】《太医院经验奇效良方大全》\n【功效】涤痰开窍，益气扶正\n【主治】痰迷心窍\n【组成】\n君：半夏 二钱五分，胆南星 二钱五分\n臣：枳实 二钱，陈皮 一分五钱\n佐：竹茹 一钱，茯苓 二钱，石菖蒲 一钱，人参 一钱\n使：生姜 一钱，甘草 一钱\n【配伍】\n半夏、陈皮：燥湿化痰、理气和胃，直祛痰湿之本。\n胆南星：清气化痰，助半夏化痰之力\n枳实、竹茹：清热化痰、破气开郁，降逆涤痰。\n石菖蒲：豁痰开窍、交通心肾、醒神益智；\n茯苓：健脾渗湿，杜绝生痰之源；\n人参：益气扶正，扶助正气以运痰。\n甘草、生姜：调和诸药，益气和中，制胆南星、半夏之毒。"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 formula_id = "di_tan_tang"

@@ -29,6 +29,9 @@ signal story_finished
 # 打字机速度，数值越大显示越快。
 @export var type_speed: float = 40.0
 
+# 长按回车跳过整段剧情需要持续按住的秒数。
+@export var enter_skip_hold_seconds: float = 1.0
+
 @onready var background_rect: TextureRect = $BackgroundRect
 @onready var dark_mask: ColorRect = $DarkMask
 
@@ -51,6 +54,10 @@ var visible_character_count: int = 0
 var type_timer: float = 0.0
 var is_typing: bool = false
 var is_finished: bool = false
+
+var enter_hold_active: bool = false
+var enter_hold_time: float = 0.0
+var enter_skip_triggered: bool = false
 
 # speaker -> "left" / "right"。
 # 同一个 speaker 固定站位，避免每句话左右乱跳。
@@ -77,7 +84,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	# 没有打字时不处理。
+	_update_enter_hold_skip(delta)
+
+	# 没有打字时不处理打字机效果。
 	if not is_typing:
 		return
 
@@ -98,16 +107,85 @@ func _unhandled_input(event: InputEvent) -> void:
 	if is_finished:
 		return
 
-	# 鼠标左键、空格、回车都可以推进剧情。
-	if event.is_action_pressed("ui_accept") or event is InputEventMouseButton:
-		if event is InputEventMouseButton:
-			if not event.pressed or event.button_index != MOUSE_BUTTON_LEFT:
-				return
+	# 回车：按下时开始计时，短按松开推进，长按跳过整段剧情。
+	# 这样可以保留原本“回车推进剧情”的手感，同时增加“长按回车跳过”。
+	if event is InputEventKey:
+		var key_event := event as InputEventKey
+		if _is_enter_key_event(key_event):
+			_handle_enter_key_event(key_event)
+			get_viewport().set_input_as_handled()
+			return
 
-		if is_typing:
-			_show_full_text()
-		else:
-			advance()
+	# 鼠标左键、空格仍然可以直接推进剧情。
+	if event is InputEventMouseButton:
+		if not event.pressed or event.button_index != MOUSE_BUTTON_LEFT:
+			return
+		_advance_or_show_full_text()
+		return
+
+	if event.is_action_pressed("ui_accept"):
+		_advance_or_show_full_text()
+
+
+func _is_enter_key_event(key_event: InputEventKey) -> bool:
+	return key_event.keycode == KEY_ENTER or key_event.keycode == KEY_KP_ENTER
+
+
+func _handle_enter_key_event(key_event: InputEventKey) -> void:
+	if key_event.echo:
+		return
+
+	if key_event.pressed:
+		enter_hold_active = true
+		enter_hold_time = 0.0
+		enter_skip_triggered = false
+		return
+
+	# 松开时如果没有触发长按跳过，就按普通回车处理：显示完整当前句 / 推进下一句。
+	if enter_hold_active and not enter_skip_triggered:
+		_advance_or_show_full_text()
+
+	_reset_enter_hold_state()
+
+
+func _update_enter_hold_skip(delta: float) -> void:
+	if is_finished:
+		_reset_enter_hold_state()
+		return
+
+	if not enter_hold_active:
+		return
+
+	enter_hold_time += delta
+
+	if enter_hold_time < enter_skip_hold_seconds:
+		return
+
+	enter_skip_triggered = true
+	enter_hold_active = false
+	_skip_current_story()
+
+
+func _reset_enter_hold_state() -> void:
+	enter_hold_active = false
+	enter_hold_time = 0.0
+	enter_skip_triggered = false
+
+
+func _advance_or_show_full_text() -> void:
+	if is_typing:
+		_show_full_text()
+	else:
+		advance()
+
+
+func _skip_current_story() -> void:
+	if is_finished:
+		return
+
+	is_typing = false
+	current_line_index = current_lines.size()
+	_finish_story()
 
 
 func play_story(data: StoryData) -> void:
@@ -129,6 +207,7 @@ func play_story(data: StoryData) -> void:
 	type_timer = 0.0
 	is_typing = false
 	is_finished = false
+	_reset_enter_hold_state()
 
 	_reset_text_labels()
 
@@ -340,6 +419,7 @@ func _reset_text_labels() -> void:
 
 
 func _finish_story() -> void:
+	_reset_enter_hold_state()
 	is_finished = true
 
 	# Story 不再自己 change_scene

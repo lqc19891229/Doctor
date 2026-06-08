@@ -80,6 +80,9 @@ const ROLE_SHI := "使"
 @onready var clear_prescription_button: Button = $PrescriptionLayout/HerbSelectRow/HerbEditColumn/ClearPrescriptionButton
 @onready var submit_button: Button = $PrescriptionLayout/HerbSelectRow/HerbEditColumn/SubmitButton
 
+# ---------- 玩家提示窗口（脚本运行时自动创建，无需额外改 tscn） ----------
+var player_hint_dialog: AcceptDialog = null
+
 
 # =========================================================
 # 外部注入数据（由 Clinic.gd 传入）
@@ -128,6 +131,7 @@ var all_diseases: Array = []
 func _ready() -> void:
 	_setup_unit_option()
 	_connect_signals()
+	_setup_player_hint_dialog()
 	_set_selected_role(ROLE_JUN)
 	load_all_diseases()
 
@@ -784,8 +788,83 @@ func _on_clear_prescription_button_pressed() -> void:
 
 
 func _on_submit_button_pressed() -> void:
+	if _is_disease_empty():
+		_show_player_hint("请先填入疾病。")
+		return
+
+	if _is_prescription_herbs_empty():
+		_show_player_hint("请先填入药材。")
+		return
+
 	emit_signal("submit_requested")
 	_clear_selected_disease()
+
+
+func _setup_player_hint_dialog() -> void:
+	if player_hint_dialog != null and is_instance_valid(player_hint_dialog):
+		return
+
+	player_hint_dialog = find_child("PlayerHintDialog", true, false) as AcceptDialog
+
+	if player_hint_dialog == null:
+		player_hint_dialog = AcceptDialog.new()
+		player_hint_dialog.name = "PlayerHintDialog"
+		player_hint_dialog.title = "提示"
+		player_hint_dialog.ok_button_text = "确定"
+		player_hint_dialog.exclusive = true
+		add_child(player_hint_dialog)
+
+	player_hint_dialog.hide()
+
+
+func _show_player_hint(message: String) -> void:
+	if player_hint_dialog == null or not is_instance_valid(player_hint_dialog):
+		_setup_player_hint_dialog()
+
+	if player_hint_dialog != null:
+		player_hint_dialog.dialog_text = message
+		player_hint_dialog.popup_centered(Vector2i(420, 160))
+	else:
+		emit_signal("info_requested", message)
+
+
+func _is_disease_empty() -> bool:
+	if selected_disease_id.strip_edges() != "":
+		return false
+
+	if selected_disease_name.strip_edges() != "":
+		return false
+
+	if current_prescription == null:
+		return true
+
+	if _object_has_property(current_prescription, "disease_id"):
+		if str(current_prescription.get("disease_id")).strip_edges() != "":
+			return false
+
+	if _object_has_property(current_prescription, "disease_name"):
+		if str(current_prescription.get("disease_name")).strip_edges() != "":
+			return false
+
+	return true
+
+
+func _is_prescription_herbs_empty() -> bool:
+	if current_prescription == null:
+		return true
+
+	if current_prescription.has_method("is_empty"):
+		return current_prescription.is_empty()
+
+	if not current_prescription.has_method("get_herbs_by_role"):
+		return true
+
+	return (
+		current_prescription.get_herbs_by_role(ROLE_JUN).is_empty()
+		and current_prescription.get_herbs_by_role(ROLE_CHEN).is_empty()
+		and current_prescription.get_herbs_by_role(ROLE_ZUO).is_empty()
+		and current_prescription.get_herbs_by_role(ROLE_SHI).is_empty()
+	)
 
 
 # =========================================================

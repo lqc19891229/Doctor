@@ -8,5 +8,5 @@ entry_id = "gan_xue_xu"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "肝血虚"
 detail_text = "肝血虚\n\n【病机】肝血不足，筋脉、目、爪甲、心神失于濡养。\n\n【症状】头晕眼花、视力减退、视物模糊；爪甲干枯脆薄，肢体麻木、筋脉拘挛；面色淡白或萎黄，唇舌色淡；女子月经量少、色淡，甚则闭经；失眠多梦、易惊\n\n【脉象】\n左关（肝）：波线细\n\n【标准方】四物汤"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 disease_id = "gan_xue_xu"

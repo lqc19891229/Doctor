@@ -8,5 +8,5 @@ entry_id = "yu_ping_feng_san"
 book_id = "jiu_yuan_fang"
 title = "玉屏风散"
 detail_text = "玉屏风散\n【出处】《究原方》\n【功效】益气固表，止汗御风\n【主治】卫气虚\n【组成】\n君：黄芪  一两\n臣：白术 一两\n佐：防风 五钱\n使：\n【配伍】\n黄芪：大补肺脾之气，固表实卫、益气止汗。\n白术：健脾益气，助黄芪培补元气、固护肌表。\n防风：走肌表、疏散风邪，固表不留邪、祛风不伤正。"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 formula_id = "yu_ping_feng_san"

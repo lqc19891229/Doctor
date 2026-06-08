@@ -8,5 +8,5 @@ entry_id = "yin_qiao_san"
 book_id = "wen_bing_tiao_bian"
 title = "银翘散"
 detail_text = "银翘散\n【出处】《温病条辩》\n【功效】辛凉透表，清热解毒\n【主治】风热表证\n【组成】\n君：金银花 一两，连翘 一两\n臣：牛蒡子 六钱，荆芥四钱，薄荷 六钱，淡豆豉 五钱\n佐：桔梗 六钱，芦根 四钱，竹叶 四钱\n使：甘草 五钱\n【配伍】\n金银花、连翘：辛凉透表、疏散风热，清热解毒，轻清宣透上焦风热\n薄荷、牛蒡子：辛凉疏散风热，清利咽喉、宣肺止咳\n荆芥穗、淡豆豉：辛温透表，发汗透邪，防寒凉郁遏气机，助邪外达\n桔梗：宣肺利咽、开气止咳\n淡竹叶、芦根：清热生津、除烦止渴，缓解风热口渴\n生甘草：调和诸药，兼清热解毒、利咽止痛"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 formula_id = "yin_qiao_san"

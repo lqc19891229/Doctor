@@ -8,5 +8,5 @@ entry_id = "zhu_ru"
 book_id = "shen_nong_ben_cao_jing"
 title = "竹茹"
 detail_text = "竹茹（竹）\n【气味】味甘，性微寒。\n【毒性】无毒。\n【归经】归肺、胃、心、胆经。\n【主治】清热化痰，除烦止呕。\n【释名】时珍曰︰竹字象形。许慎《说文》云︰“竹，冬生草也”。故字从倒草。戴凯之《竹谱》云︰植物之中，有名曰竹。不刚不柔，非草非木。小异实虚，大同节目。\n\n【发明】"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 herb_id = "zhu_ru"

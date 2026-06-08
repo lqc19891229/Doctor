@@ -8,5 +8,5 @@ entry_id = "huang_lian_e_jiao_tang"
 book_id = "shang_han_lun"
 title = "黄连阿胶汤"
 detail_text = "黄连阿胶汤\n【出处】《伤寒论》\n【功效】滋阴降火，交通心肾\n【主治】心肾不交\n【组成】\n君：黄连 四钱\n臣：黄芩 三钱，白芍 三钱\n佐：阿胶 三钱\n使：鸡子黄 一两\n【配伍】\n黄连：苦寒直折，清泻心火、除烦安神。\n黄芩：助黄连清心泻火；\n阿胶：滋阴补肾、养血填阴，滋肾阴以济心火。\n白芍：敛阴和营、柔肝缓急；\n鸡子黄：滋阴润燥、养心安神，入少阴交通心肾。"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 formula_id = "huang_lian_e_jiao_tang"

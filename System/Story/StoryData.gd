@@ -11,6 +11,9 @@ var trigger_scene: String = "clinic"
 # 触发条件：第几天触发，0 表示不限制天数
 @export var trigger_day: int = 0
 
+# 触发条件：需要达到的最低名望，0 表示不限制名望
+@export var required_reputation_points: int = 0
+
 # 是否只播放一次
 @export var play_once: bool = true
 

@@ -8,5 +8,5 @@ entry_id = "shan_zhu_yu"
 book_id = "shen_nong_ben_cao_jing"
 title = "山茱萸"
 detail_text = "山茱萸\n【气味】味酸、涩，性微温。\n【毒性】无毒。\n【归经】归肝、肾经。\n【主治】补益肝肾，收涩固脱。\n【释名】蜀酸枣（《本经》）、肉枣（《纲目》）、鬾实（《别录》）、鸡足（《吴普》）、鼠矢（《吴普》）。\n\n宗奭曰︰山茱萸与吴茱萸甚不相类，治疗大不同，未审何缘命此名也？\n\n时珍曰︰《本经》一名蜀酸枣，今人呼为肉枣，皆象形也。\n\n【发明】\n好古曰︰滑则气脱，涩剂所以收之。山茱萸止小便利，秘精气，取其味酸涩以收滑也。仲景八味丸用之为君，其性味可知矣。"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 herb_id = "shan_zhu_yu"

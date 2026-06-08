@@ -284,6 +284,23 @@ func _is_story_trigger_matched(story: StoryData, trigger_scene: String, current_
 	if story_trigger_day > 0 and story_trigger_day != current_day:
 		return false
 
+	# 如果配置了名望要求，则当前名望必须达到要求。
+	# required_reputation_points <= 0 表示不限制名望。
+	var required_reputation_points: int = 0
+	var raw_required_reputation_points = story.get("required_reputation_points")
+	if raw_required_reputation_points != null:
+		required_reputation_points = int(raw_required_reputation_points)
+
+	if required_reputation_points > 0:
+		if Unlock == null:
+			return false
+
+		if not Unlock.has_method("get_reputation_points"):
+			return false
+
+		if Unlock.get_reputation_points() < required_reputation_points:
+			return false
+
 	return true
 
 

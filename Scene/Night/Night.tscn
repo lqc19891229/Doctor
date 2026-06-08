@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://daannkka0fcs" path="res://Scene/ReadBook/ReadBook.tscn" id="1_s8hsq"]
 [ext_resource type="Script" uid="uid://b5g5rkphktrrq" path="res://Scene/Night/Night.gd" id="1_sax03"]
-[ext_resource type="Texture2D" uid="uid://cdktg72vwwrl1" path="res://Assets/TopBar.png" id="3_3ehag"]
+[ext_resource type="PackedScene" uid="uid://53a2hc6l2p5q" path="res://Scene/PlayerHint/PlayerHintWindow.tscn" id="3_3ehag"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sax03"]
 
@@ -23,6 +23,9 @@ script = ExtResource("1_sax03")
 
 [node name="ReadBook" parent="." unique_id=1553429074 instance=ExtResource("1_s8hsq")]
 visible = false
+
+[node name="PlayerHintWindow" parent="." unique_id=198736852 instance=ExtResource("3_3ehag")]
+oversampling_override = 1.0
 
 [node name="Background" type="Control" parent="." unique_id=110989754]
 layout_mode = 1
@@ -62,7 +65,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_3ehag")
 expand_mode = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar" unique_id=1740842100]
@@ -85,9 +87,17 @@ text = "天数"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 29.0
 theme_override_font_sizes/font_size = 25
 theme_override_styles/focus = SubResource("StyleBoxEmpty_5x4ej")
 text = "时辰"
+
+[node name="ReputationPoint" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=358785046]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 2.0
+theme_override_font_sizes/font_size = 25
+text = "名望：0"
 
 [node name="ThoughtsPoint" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=541358754]
 layout_mode = 2

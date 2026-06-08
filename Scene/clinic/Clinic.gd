@@ -54,6 +54,7 @@ const JUDGEMENT_RESULT_SCENE_PATH := "res://Scene/JudgementResult/JudgementResul
 # ---------- 心得显示 ----------
 #  这个 Label 只负责显示 UnlockManager 中保存的心得数量。
 @onready var thoughts_point_label: Label = find_child("ThoughtsPoint", true, false) as Label
+@onready var reputation_point_label: Label = find_child("ReputationPoint", true, false) as Label
 
 # ---------- 脉象窗口 ----------
 @onready var pulse_window: PulseWindow = find_child("PulseWindow", true, false) as PulseWindow
@@ -125,6 +126,11 @@ var clinic_finished_emitted: bool = false
 # - 初始设为 -1，保证进入场景后一定刷新一次。
 var last_displayed_thoughts_point: int = -1
 
+# 上一次显示在 UI 上的名望数量
+# 说明：
+# - 名望允许为负数，所以初始值使用一个很小的值，保证进入场景后一定刷新一次。
+var last_displayed_reputation_point: int = -999999
+
 # 最近一次处方判定结果
 # 说明：
 # 1. submit_prescription() 负责生成判定结果。
@@ -149,6 +155,7 @@ func _ready() -> void:
 
 	refresh_clinic_view()
 	_update_thoughts_point_ui(true)
+	_update_reputation_point_ui(true)
 
 	# 调试输出：仅在 Debug 构建中打印数据库加载情况，避免正式版刷屏。
 	if OS.is_debug_build():
@@ -170,6 +177,7 @@ func _process(_delta: float) -> void:
 	# - 只有数量变化时才会真正改 Label 文本。
 	# - 这样即使心得来自读档、调试窗口或其它脚本，也能同步到 TopBar。
 	_update_thoughts_point_ui(false)
+	_update_reputation_point_ui(false)
 
 	# 只有脉象窗口打开时才处理键盘把脉逻辑
 	if pulse_window != null and pulse_window.visible:
@@ -203,6 +211,7 @@ func _validate_scene_node_bindings() -> void:
 		"DayLabel": day_label,
 		"TimeLabel": time_label,
 		"ThoughtsPoint": thoughts_point_label,
+		"ReputationPoint": reputation_point_label,
 		"OpenPulseWindowButton": open_pulse_window_button,
 		"OpenPrescriptionWindowButton": open_prescription_window_button,
 		"Openclinical_logWindowButton": clinical_log_button,
@@ -291,6 +300,32 @@ func _update_thoughts_point_ui(force_refresh: bool = false) -> void:
 
 	# 最终显示文本。
 	thoughts_point_label.text = "心得：%d" % current_points
+
+# =========================================================
+# 刷新 TopBar 名望显示
+# =========================================================
+func _update_reputation_point_ui(force_refresh: bool = false) -> void:
+	# 如果 Label 没找到，直接返回，避免报错。
+	# 正确路径应为：Clinic/VBoxContainer/TopBar/ReputationPoint
+	if reputation_point_label == null:
+		return
+
+	var current_points := 0
+	if Unlock != null and Unlock.has_method("get_reputation_points"):
+		current_points = Unlock.get_reputation_points()
+
+	if not force_refresh and current_points == last_displayed_reputation_point:
+		return
+
+	last_displayed_reputation_point = current_points
+
+	reputation_point_label.visible = true
+	reputation_point_label.custom_minimum_size = Vector2(120, 24)
+	reputation_point_label.size_flags_horizontal = Control.SIZE_SHRINK_END
+	reputation_point_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+
+	reputation_point_label.text = "名望：%d" % current_points
+
 
 # =========================================================
 # GameTimeManager：时间变化回调
@@ -467,6 +502,7 @@ func refresh_clinic_view() -> void:
 		clinical_log_window.refresh_view()
 
 	_update_thoughts_point_ui(true)
+	_update_reputation_point_ui(true)
 
 
 # =========================================================
@@ -737,6 +773,30 @@ func _get_current_standard_formula() -> FormulaData:
 
 	return formula_list[0]
 
+func _get_reputation_reward_by_judge_result(result) -> int:
+	if result == null:
+		return 0
+
+	var grade := ""
+	var raw_grade = result.get("grade")
+	if raw_grade != null:
+		grade = str(raw_grade).strip_edges()
+
+	match grade:
+		"妙手回春":
+			return 10
+		"甲等":
+			return 5
+		"乙等":
+			return 1
+		"丙等":
+			return 0
+		"丁等":
+			return -10
+		_:
+			return 0
+
+
 
 # =========================================================
 # 提交处方并判定
@@ -767,6 +827,29 @@ func submit_prescription() -> bool:
 	var summary_text := result.get_summary_text()
 	last_formula_judge_result = result
 	last_formula_judge_summary_text = summary_text
+
+	# 提交判定后根据评级改变名望。
+	# was_already_submitted 用于防止同一名病人重复提交刷名望。
+	var reputation_reward := _get_reputation_reward_by_judge_result(result)
+	if reputation_reward != 0 and not was_already_submitted:
+		if Unlock != null and Unlock.has_method("add_reputation_points"):
+			Unlock.add_reputation_points(reputation_reward)
+			_update_reputation_point_ui(true)
+
+			if reputation_reward > 0:
+				summary_text += "\n获得名望：+%d" % reputation_reward
+			else:
+				summary_text += "\n损失名望：%d" % reputation_reward
+
+			if Unlock.has_method("get_reputation_points"):
+				summary_text += "\n当前名望：%d" % Unlock.get_reputation_points()
+
+			if SaveManager != null and SaveManager.has_method("save_game"):
+				SaveManager.save_game()
+	elif reputation_reward != 0 and was_already_submitted:
+		summary_text += "\n本病人已提交过处方，不重复改变名望。"
+		if Unlock != null and Unlock.has_method("get_reputation_points"):
+			summary_text += "\n当前名望：%d" % Unlock.get_reputation_points()
 
 	# 妙手回春时获得 1 点心得，并立刻按累计心得自动解锁条目。
 	# was_already_submitted 用于防止同一名病人重复提交刷心得。
@@ -962,11 +1045,12 @@ func _build_formula_group_display_text(group: Array) -> String:
 func _on_judgement_result_window_closed() -> void:
 	judgement_result_window = null
 
-	# 如果 JudgementResult.gd 没有自己恢复暂停，这里兜底恢复。
-	if get_tree().paused:
-		get_tree().paused = false
+	var tree := get_tree()
+	if tree != null and tree.paused:
+		tree.paused = false
 
-	_go_to_next_patient_after_judgement()
+	if is_inside_tree():
+		_go_to_next_patient_after_judgement()
 
 
 func _go_to_next_patient_after_judgement() -> void:
@@ -1115,6 +1199,7 @@ func set_day(day: int) -> void:
 	# DayLabel / TimeLabel 统一从 GameTimeManager 刷新
 	_update_time_ui()
 	_update_thoughts_point_ui(true)
+	_update_reputation_point_ui(true)
 
 
 # =========================================================
@@ -1175,11 +1260,12 @@ func start_new_day(day: int) -> void:
 	# 否则第一天结束后，第二天可能无法再次进入夜晚流程。
 	clinic_finished_emitted = false
 
-	# 刷新时间和心得显示。
+	# 刷新时间、心得和名望显示。
 	_update_time_ui()
 	_update_thoughts_point_ui(true)
+	_update_reputation_point_ui(true)
 
-	# 自动剧情触发入口。
+	# 自动剧情触发入口.
 	# 具体触发条件不再写死在 Clinic.gd，改由 StoryData + StoryManager 决定。
 	_try_start_auto_story("clinic", current_day)
 

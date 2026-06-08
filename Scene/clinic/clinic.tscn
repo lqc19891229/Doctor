@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://brf2blpetnvs1"]
 
 [ext_resource type="Script" uid="uid://d3fc1n20xbhxf" path="res://Scene/Clinic/Clinic.gd" id="1_y7fei"]
-[ext_resource type="Texture2D" uid="uid://cdktg72vwwrl1" path="res://Assets/TopBar.png" id="2_436d3"]
 [ext_resource type="Script" uid="uid://cse2gud2bttup" path="res://System/Npc/NpcManager.gd" id="2_l04vw"]
 [ext_resource type="PackedScene" uid="uid://c1kldxjoeyc78" path="res://Scene/Prescription/PrescriptionWindow.tscn" id="5_h552d"]
 [ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/clinicalLogWindow/ClinicalLogWindow.tscn" id="5_ruh48"]
@@ -75,7 +74,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_436d3")
 expand_mode = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar" unique_id=369088393]
@@ -98,9 +96,17 @@ text = "天数"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 29.0
 theme_override_font_sizes/font_size = 25
 theme_override_styles/focus = SubResource("StyleBoxEmpty_436d3")
 text = "时辰"
+
+[node name="ReputationPoint" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=55916187]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 2.0
+theme_override_font_sizes/font_size = 25
+text = "名望：0"
 
 [node name="ThoughtsPoint" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=571981417]
 layout_mode = 2

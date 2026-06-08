@@ -8,5 +8,5 @@ entry_id = "xin_yang_xu"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "心阳虚"
 detail_text = "心阳虚\n\n【病机】心阳不足，温煦、鼓动无力，虚寒内生。\n\n【症状】心悸怔忡，心慌不安；胸闷气短、遇寒加重；畏寒怕冷、四肢不温；面色㿠白，精神疲乏，自汗\n\n【脉象】\n左寸（心）：波峰低，波速慢\n\n【标准方】桂枝甘草汤"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 disease_id = "xin_yang_xu"

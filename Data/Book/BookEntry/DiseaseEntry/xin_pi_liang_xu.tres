@@ -8,5 +8,5 @@ entry_id = "xin_pi_liang_xu"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "心脾两虚"
 detail_text = "心脾两虚\n\n【病机】思虑过度、劳倦伤脾、久病体虚、失血过多；脾气虚弱，气血生化不足，心血亏虚、心神失养，属气血两虚、虚证。\n\n【症状】心悸怔忡、失眠多梦、健忘头晕；食欲不振、腹胀便溏、神疲乏力；面色萎黄或苍白、肢体倦怠；女子月经量少色淡、淋漓不尽\n\n【脉象】\n左寸（心）：波线细\n右关（脾）：波峰低\n\n【标准方】归脾汤"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 disease_id = "xin_pi_liang_xu"

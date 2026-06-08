@@ -237,13 +237,10 @@ func _refresh_entry_list_for_selected_book() -> void:
 		return
 
 	readable_entries = Unlock.get_readable_entries_by_book(selected_book.book_id)
+	_sort_unread_entries_to_top()
 
 	for entry in readable_entries:
-		if entry == null:
-			continue
-
-		# 条目旁边不再标注“已读 / 未读 / 可查看”。
-		entry_list.add_item(entry.title)
+		_add_entry_list_item(entry)
 
 	if readable_entries.is_empty():
 		info_label.text = "《%s》当前没有已解锁条目。
@@ -278,6 +275,55 @@ func _refresh_entry_list_for_selected_book() -> void:
 # =========================
 # 拼装正文文本
 # =========================
+
+func _get_entry_list_display_name(entry: BookEntryData) -> String:
+	if entry == null:
+		return ""
+
+	var display_name := entry.title
+	if not Unlock.is_entry_read(entry.entry_id) and Unlock.can_read_entry(entry.entry_id):
+		display_name += "  【新】"
+
+	return display_name
+
+
+func _is_unread_readable_entry(entry: BookEntryData) -> bool:
+	if entry == null:
+		return false
+
+	var entry_id := entry.entry_id.strip_edges()
+	if entry_id == "":
+		return false
+
+	return Unlock.can_read_entry(entry_id) and not Unlock.is_entry_read(entry_id)
+
+
+func _sort_unread_entries_to_top() -> void:
+	var unread_entries: Array[BookEntryData] = []
+	var read_or_normal_entries: Array[BookEntryData] = []
+
+	for entry in readable_entries:
+		if _is_unread_readable_entry(entry):
+			unread_entries.append(entry)
+		else:
+			read_or_normal_entries.append(entry)
+
+	readable_entries.clear()
+	readable_entries.append_array(unread_entries)
+	readable_entries.append_array(read_or_normal_entries)
+
+
+func _add_entry_list_item(entry: BookEntryData) -> void:
+	if entry == null:
+		return
+
+	entry_list.add_item(_get_entry_list_display_name(entry))
+	var item_index := entry_list.item_count - 1
+
+	if _is_unread_readable_entry(entry):
+		entry_list.set_item_custom_fg_color(item_index, Color(1.0, 0.82, 0.32, 1.0))
+		entry_list.set_item_tooltip(item_index, "新解锁条目，尚未查看")
+
 
 func _build_entry_text(entry: BookEntryData) -> String:
 	if entry == null:
@@ -368,14 +414,20 @@ func _reselect_current_book_in_list() -> void:
 
 
 func _refresh_entry_list_titles_keep_selection(entry_id: String) -> void:
-	for i in range(readable_entries.size()):
-		if readable_entries[i] == null:
-			continue
+	_sort_unread_entries_to_top()
+	entry_list.clear()
 
-		entry_list.set_item_text(i, readable_entries[i].title)
-		if readable_entries[i].entry_id.strip_edges() == entry_id:
-			entry_list.select(i)
-			selected_entry = readable_entries[i]
+	var selected_index := -1
+	for i in range(readable_entries.size()):
+		var entry := readable_entries[i]
+		_add_entry_list_item(entry)
+
+		if entry != null and entry.entry_id.strip_edges() == entry_id:
+			selected_index = i
+			selected_entry = entry
+
+	if selected_index >= 0:
+		entry_list.select(selected_index)
 
 
 func _save_and_notify_player_data_changed() -> void:

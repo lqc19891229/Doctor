@@ -8,5 +8,5 @@ entry_id = "wai_gan_feng_han_nei_shang_shi_zhi"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "外感风寒，内伤湿滞"
 detail_text = "外感风寒，内伤湿滞\n\n【病机】外感风寒之邪束表，内伤饮食湿浊阻滞中焦；表有风寒、里有湿滞\n\n【症状】外感风寒：恶寒发热、头痛身重、无汗、鼻塞流清涕；内伤湿滞：胸膈满闷、脘腹胀痛、恶心呕吐、肠鸣泄泻；怕冷发热 + 又吐又泻、身重胸闷\n\n【脉象】\n浮脉（表）：波速慢\n右关（脾）：波宽宽\n\n【标准方】藿香正气散"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 disease_id = "wai_gan_feng_han_nei_shang_shi_zhi"

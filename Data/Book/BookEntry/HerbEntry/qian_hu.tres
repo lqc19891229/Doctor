@@ -8,5 +8,5 @@ entry_id = "qian_hu"
 book_id = "shen_nong_ben_cao_jing"
 title = "前胡"
 detail_text = "前胡\n【气味】味苦、辛，性微寒。\n【毒性】无毒。\n【归经】归肺经。\n【主治】降气化痰，散风清热。\n【释名】时珍曰：按：孙 《唐韵》作湔胡，名义未解。\n\n【发明】\n时珍曰：前胡味甘、辛，气微平，阳中之阴，降也。乃手足太阴、阳明之药，与柴胡纯阳上升入少阳、厥阴者不同也。其功长于下气，故能治痰热喘嗽、痞膈呕逆诸疾，气下则火降，痰亦降矣。所以有推陈致新之绩，为痰气要药。陶弘景言其与柴胡同功，非矣。治证虽同，而所入所主则异。"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 herb_id = "qian_hu"

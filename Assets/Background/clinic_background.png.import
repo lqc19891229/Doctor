@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6kjrut6bis1m"
-path="res://.godot/imported/li_yan_wen.png-4cb3cd2dfaf25a99560d0b6107122a96.ctex"
+uid="uid://2w1pqwvxq3xr"
+path="res://.godot/imported/clinic_background.png-044304b479b4cb4340b9b9643fb563f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/li_yan_wen.png"
-dest_files=["res://.godot/imported/li_yan_wen.png-4cb3cd2dfaf25a99560d0b6107122a96.ctex"]
+source_file="res://Assets/Background/clinic_background.png"
+dest_files=["res://.godot/imported/clinic_background.png-044304b479b4cb4340b9b9643fb563f4.ctex"]
 
 [params]
 

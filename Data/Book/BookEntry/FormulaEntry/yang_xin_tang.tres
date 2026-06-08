@@ -8,5 +8,5 @@ entry_id = "yang_xin_tang"
 book_id = "ren_zhai_zhi_zhi_fang_lun"
 title = "养心汤"
 detail_text = "养心汤\n【出处】《仁斋直指方论》\n【功效】益气补血，养心安神\n【主治】心气虚\n【组成】\n君：黄芪 五钱，人参 三钱\n臣：当归 五钱，茯神 五钱，茯苓 五钱\n佐：酸枣仁 三钱，柏子仁 三钱，远志 三钱，五味子 三钱，川芎 五钱，半夏 五钱，肉桂 三钱\n使：甘草 四钱，生姜 一钱，大枣 一钱\n【配伍】\n人参、黄芪：大补心气，固元益气，直补心气之本。\n当归、川芎：养血和营，气阴双补，气血互生。\n茯苓、茯神：健脾宁心、安神定悸\n枣仁、柏子仁、远志、五味子：养心安神、敛心止汗、交通心肾\n半夏：和胃化痰，防滋补壅滞\n肉桂：少佐温通，助心阳以鼓心气\n炙甘草、生姜、大枣：益气和中，调和诸药，制半夏之毒。"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 formula_id = "yang_xin_tang"

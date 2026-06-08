@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdktg72vwwrl1"
-path="res://.godot/imported/TopBar.png-3eef82b84da72c7228bcba42a8ebe077.ctex"
+uid="uid://bs8db1ig0w255"
+path="res://.godot/imported/li_shi_zhen.png-95748baf0dfd2a1e52b634618b722728.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/TopBar.png"
-dest_files=["res://.godot/imported/TopBar.png-3eef82b84da72c7228bcba42a8ebe077.ctex"]
+source_file="res://Assets/Portrait/li_shi_zhen.png"
+dest_files=["res://.godot/imported/li_shi_zhen.png-95748baf0dfd2a1e52b634618b722728.ctex"]
 
 [params]
 

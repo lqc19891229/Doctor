@@ -184,7 +184,7 @@ scroll_active = false
 [node name="ContinueLabel" type="Label" parent="DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer" unique_id=1823323477]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "点击 / 空格 / 回车 继续"
+text = "点击 / 空格 /  继续，回车跳过剧情"
 horizontal_alignment = 2
 
 [node name="SubtitleBlock" type="Control" parent="." unique_id=1749512874]
@@ -241,5 +241,5 @@ scroll_active = false
 [node name="ContinueLabel" type="Label" parent="SubtitleBlock/SubtitlePanel/MarginContainer/VBoxContainer" unique_id=784895611]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "点击 / 空格 / 回车 继续"
+text = "点击 / 空格 /  继续，长按回车跳过剧情"
 horizontal_alignment = 2

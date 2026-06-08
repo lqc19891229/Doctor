@@ -8,5 +8,5 @@ entry_id = "bu_fei_tang"
 book_id = "bei_ji_qian_jin_yao_fang"
 title = "补肺汤"
 detail_text = "补肺汤\n【出处】《备急千金要方》\n【功效】补肺益气，止咳平喘\n【主治】肺气虚\n【组成】\n君：人参 三钱，黄芪 五钱\n臣：熟地黄 五钱\n佐：五味子 二钱，紫菀 三钱，桑白皮 三钱\n使：\n【配伍】\n人参、黄芪：大补肺气、固表益气，补益肺气虚之本。\n熟地黄：滋肾填精，金水相生，助肺气之源。\n五味子：收敛肺气、敛汗止喘，固表止自汗。\n紫菀、桑白皮：降肺气、化痰止咳，清润不燥，补虚不滞。"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 formula_id = "bu_fei_tang"

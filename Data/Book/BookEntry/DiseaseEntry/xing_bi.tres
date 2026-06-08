@@ -8,5 +8,5 @@ entry_id = "xing_bi"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "行痹"
 detail_text = "行痹（风痹）\n\n【病机】风寒湿邪侵袭经络，以风邪偏盛为主。风性善行、走窜不定。\n\n【症状】肢体关节酸痛，疼痛游走不定，窜走周身。\n\n【脉象】\n浮脉（表）：波峰高（剧烈），波速慢（轻微），波宽宽（轻微）\n\n【标准方】防风汤"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 disease_id = "xing_bi"

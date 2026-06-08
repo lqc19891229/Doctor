@@ -8,5 +8,5 @@ entry_id = "yi_guan_jian"
 book_id = "liu_zhou_yi_hua"
 title = "一贯煎"
 detail_text = "一贯煎\n【出处】《柳州医话》\n【功效】滋阴疏肝\n【主治】肝阴虚\n【组成】\n君：生地黄 一两\n臣：枸杞子 六钱，沙参 三钱，麦门冬 三钱，当归 三钱\n佐：川楝子 一钱五分\n使：\n【配伍】\n生地黄：重用滋阴养血、补益肝肾，直补肝阴之本。\n枸杞：滋补肝肾、填精养阴；\n当归：养血柔肝、濡养经脉。\n北沙参、麦冬：养阴生津、润肺养胃，滋水以涵木；\n川楝子：苦寒疏肝泄热、行气止痛，疏肝而不伤阴。"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 formula_id = "yi_guan_jian"

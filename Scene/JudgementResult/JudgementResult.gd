@@ -1,6 +1,6 @@
 extends Control
 
-@onready var title_label: Label = $Panel/VBoxContainer/Label
+@onready var title_label: Label = $Panel/VBoxContainer/Title
 @onready var result_text: RichTextLabel = $Panel/VBoxContainer/RichTextLabel
 @onready var rating_image: TextureRect = $Panel/VBoxContainer/RatingImage  # 新增节点
 

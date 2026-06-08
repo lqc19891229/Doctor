@@ -11,11 +11,16 @@ signal night_finished
 @onready var day_label: Label = find_child("DayLabel", true, false) as Label
 @onready var time_label: Label = find_child("TimeLabel", true, false) as Label
 @onready var thoughts_point_label: Label = find_child("ThoughtsPoint", true, false) as Label
+@onready var reputation_point_label: Label = find_child("ReputationPoint", true, false) as Label
+
+# 玩家提示窗口（脚本运行时自动创建，无需额外改 tscn）
+var player_hint_dialog: AcceptDialog = null
 
 
 func _ready() -> void:
 	_validate_scene_node_bindings()
 	_setup_buttons()
+	_setup_player_hint_dialog()
 	_setup_read_book_window()
 	_refresh_topbar()
 
@@ -31,6 +36,7 @@ func _validate_scene_node_bindings() -> void:
 	_check_node_binding(day_label, "DayLabel")
 	_check_node_binding(time_label, "TimeLabel")
 	_check_node_binding(thoughts_point_label, "ThoughtsPoint")
+	_check_node_binding(reputation_point_label, "ReputationPoint")
 
 
 func _check_node_binding(node: Node, node_name: String) -> void:
@@ -54,6 +60,38 @@ func _setup_buttons() -> void:
 
 		if not next_day_button.pressed.is_connected(_on_next_day_button_pressed):
 			next_day_button.pressed.connect(_on_next_day_button_pressed)
+
+
+# =========================
+# 初始化玩家提示窗口
+# =========================
+
+func _setup_player_hint_dialog() -> void:
+	if player_hint_dialog != null and is_instance_valid(player_hint_dialog):
+		return
+
+	player_hint_dialog = find_child("PlayerHintDialog", true, false) as AcceptDialog
+
+	if player_hint_dialog == null:
+		player_hint_dialog = AcceptDialog.new()
+		player_hint_dialog.name = "PlayerHintDialog"
+		player_hint_dialog.title = "提示"
+		player_hint_dialog.ok_button_text = "确定"
+		player_hint_dialog.exclusive = true
+		add_child(player_hint_dialog)
+
+	player_hint_dialog.hide()
+
+
+func _show_player_hint(message: String) -> void:
+	if player_hint_dialog == null or not is_instance_valid(player_hint_dialog):
+		_setup_player_hint_dialog()
+
+	if player_hint_dialog != null:
+		player_hint_dialog.dialog_text = message
+		player_hint_dialog.popup_centered(Vector2i(460, 160))
+	else:
+		push_warning(message)
 
 
 # =========================
@@ -91,7 +129,16 @@ func _refresh_topbar() -> void:
 		time_label.text = "夜晚"
 
 	if thoughts_point_label != null:
-		thoughts_point_label.text = "心得：%d" % Unlock.get_experience_points()
+		if Unlock != null and Unlock.has_method("get_experience_points"):
+			thoughts_point_label.text = "心得：%d" % Unlock.get_experience_points()
+		else:
+			thoughts_point_label.text = "心得：0"
+
+	if reputation_point_label != null:
+		if Unlock != null and Unlock.has_method("get_reputation_points"):
+			reputation_point_label.text = "名望：%d" % Unlock.get_reputation_points()
+		else:
+			reputation_point_label.text = "名望：0"
 
 
 # =========================
@@ -150,4 +197,24 @@ func _on_player_data_changed() -> void:
 # =========================
 
 func _on_next_day_button_pressed() -> void:
+	if _has_unread_entries():
+		_show_player_hint("尚有未读条目，请先阅读后再休息。")
+		return
+
 	night_finished.emit()
+
+
+func _has_unread_entries() -> bool:
+	if Unlock == null:
+		return false
+
+	if Unlock.has_method("refresh_auto_unlocks_by_experience"):
+		Unlock.refresh_auto_unlocks_by_experience()
+
+	if Unlock.has_method("has_unread_unlocked_disease_or_formula_entries"):
+		return Unlock.has_unread_unlocked_disease_or_formula_entries()
+
+	if Unlock.has_method("get_unread_unlocked_disease_or_formula_entry_count"):
+		return int(Unlock.get_unread_unlocked_disease_or_formula_entry_count()) > 0
+
+	return false

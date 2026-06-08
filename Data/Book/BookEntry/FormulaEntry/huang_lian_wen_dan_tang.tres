@@ -8,5 +8,5 @@ entry_id = "huang_lian_wen_dan_tang"
 book_id = "bei_ji_qian_jin_yao_fang"
 title = "黄连温胆汤"
 detail_text = "黄连温胆汤\n【出处】《备急千金要方》\n【功效】清热化痰，和中安神\n【主治】痰火扰心\n【组成】\n君：黄连 三钱\n臣：半夏 四钱，竹茹 五钱\n佐：陈皮 四钱，枳实 四钱，茯苓 四钱\n使：甘草 二钱，生姜 一钱，大枣 一钱\n【配伍】\n黄连：苦寒直折，清心泻火、燥湿清热，专清痰火。\n半夏：燥湿化痰；\n竹茹：清热化痰、除烦安神。\n陈皮：理气化痰；\n枳实：破气消痞、导痰下行；\n茯苓：健脾渗湿，绝生痰之源。\n甘草:调和诸药，和中缓急。\n生姜：和胃止呕，制半夏之毒\n大枣：益气补中，调和脾胃"
-unlock_required_experience_points = 0
+unlock_required_experience_points = -1
 formula_id = "huang_lian_wen_dan_tang"
