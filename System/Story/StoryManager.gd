@@ -78,6 +78,32 @@ func refresh_registered_story_paths() -> void:
 		print("登记剧情：", story_path)
 
 
+func get_all_stories() -> Array[StoryData]:
+	# 给 UnlockManager 使用。
+	# UnlockManager 不再维护写死的 STORY_UNLOCKS 字典，
+	# 而是通过这里读取所有剧情 .tres，检查每个 StoryData 自己配置的名望解锁条件。
+	var result: Array[StoryData] = []
+
+	# 如果列表为空，尝试重新扫描一次，避免 Autoload 初始化顺序导致未登记。
+	if registered_story_paths.is_empty():
+		refresh_registered_story_paths()
+
+	for story_path in registered_story_paths:
+		var loaded_story: Resource = load(story_path)
+
+		if loaded_story == null:
+			push_warning("剧情资源加载失败：" + story_path)
+			continue
+
+		if not loaded_story is StoryData:
+			push_warning("加载的资源不是 StoryData：" + story_path)
+			continue
+
+		result.append(loaded_story as StoryData)
+
+	return result
+
+
 func _scan_story_dir(dir_path: String) -> void:
 	var dir := DirAccess.open(dir_path)
 	if dir == null:
@@ -241,68 +267,44 @@ func _is_story_trigger_matched(story: StoryData, trigger_scene: String, current_
 	if story == null:
 		return false
 
-	# 读取 StoryData 中配置的 story_id。
-	# 需要你在 StoryData.gd 中添加：
-	# @export var story_id: String = ""
-	var story_id: String = story.get("story_id")
-
-	# 读取 StoryData 中配置的触发场景。
-	# 需要你在 StoryData.gd 中添加：
-	# @export var trigger_scene: String = ""
-	var story_trigger_scene: String = story.get("trigger_scene")
-
-	# 读取 StoryData 中配置的触发天数。
-	# 需要你在 StoryData.gd 中添加：
-	# @export var trigger_day: int = 0
-	var story_trigger_day: int = story.get("trigger_day")
-
-	# 读取 StoryData 中配置的是否只播放一次。
-	# 需要你在 StoryData.gd 中添加：
-	# @export var play_once: bool = true
-	var play_once: bool = true
-
-	var raw_play_once = story.get("play_once")
-	if raw_play_once != null:
-		play_once = raw_play_once
-
-	# 如果没有配置 story_id，用资源路径不好记录。
-	# 所以这里要求自动触发剧情必须有 story_id。
-	if story_id.is_empty():
+	# 自动触发剧情必须有 story_id，否则无法记录已播放 / 已解锁状态。
+	var story_id := story.story_id.strip_edges()
+	if story_id == "":
 		push_warning("自动触发剧情缺少 story_id。")
 		return false
 
 	# 如果是只播放一次，并且已经播放过，则不再触发。
-	if play_once and played_story_ids.has(story_id):
+	if story.play_once and played_story_ids.has(story_id):
 		return false
 
 	# 如果配置了触发场景，则必须和当前场景一致。
-	if not story_trigger_scene.is_empty() and story_trigger_scene != trigger_scene:
+	# trigger_scene 仍然保留，因为它控制剧情在哪个场景播放。
+	var story_trigger_scene := story.trigger_scene.strip_edges()
+	if story_trigger_scene != "" and story_trigger_scene != trigger_scene:
 		return false
 
-	# 如果配置了触发天数，则必须和当前天数一致。
-	# trigger_day <= 0 表示不限制天数。
-	if story_trigger_day > 0 and story_trigger_day != current_day:
+	# 暂时保留 trigger_day：
+	# - trigger_day <= 0 表示不限制天数
+	# - trigger_day > 0 表示必须当前天数达到后才允许触发
+	# 这样可以兼容你现有按天触发的旧剧情，同时叠加名望解锁条件。
+	if story.trigger_day > 0 and current_day < story.trigger_day:
 		return false
 
-	# 如果配置了名望要求，则当前名望必须达到要求。
-	# required_reputation_points <= 0 表示不限制名望。
-	var required_reputation_points: int = 0
-	var raw_required_reputation_points = story.get("required_reputation_points")
-	if raw_required_reputation_points != null:
-		required_reputation_points = int(raw_required_reputation_points)
-
-	if required_reputation_points > 0:
+	# 名望剧情的新规则：
+	# - required_reputation_points <= 0：不需要名望解锁，按场景和播放状态正常触发。
+	# - required_reputation_points > 0：必须先由 UnlockManager 解锁，StoryManager 才允许播放。
+	# 这样“解锁”和“播放”分开：UnlockManager 管解锁，StoryManager 管播放。
+	if story.required_reputation_points > 0:
 		if Unlock == null:
 			return false
 
-		if not Unlock.has_method("get_reputation_points"):
+		if not Unlock.has_method("is_story_unlocked"):
 			return false
 
-		if Unlock.get_reputation_points() < required_reputation_points:
+		if not Unlock.is_story_unlocked(story_id):
 			return false
 
 	return true
-
 
 func _mark_story_played(story: StoryData) -> void:
 	# 空剧情不处理。

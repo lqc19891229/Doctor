@@ -426,11 +426,23 @@ def get_unlock_required_experience_points(row: dict[str, Any]) -> int:
     """
     功能：读取医书条目自动解锁所需累计心得。
     作用：
-    1. 只从 Experience 列读取数值。
+    1. 从 Excel 的 unlock required experie 列读取数值。
     2. 空值默认 -1，表示不参与心得自动解锁。
-    3. 不再兼容 Thoughts 或更早的旧列名，避免表头混用。
+    3. 兼容后续可能改成更规范列名的写法。
     """
-    return as_int(row.get("Experience"), -1)
+    possible_keys = [
+        "unlock required experie",
+        "UnlockRequiredExperience",
+        "UnlockRequiredExperiencePoints",
+        "UnlockRequiredExp",
+        "unlock_required_experience_points",
+    ]
+
+    for key in possible_keys:
+        if key in row and row.get(key) not in ("", None):
+            return as_int(row.get(key), -1)
+
+    return -1
 
 
 def as_bool(value: Any, default: bool = True) -> bool:
@@ -788,24 +800,6 @@ def get_formula_target_disease_id(
 
 
 
-def get_disease_recommended_formula_id(
-    disease_row: dict[str, Any],
-    formula_name_to_id: dict[str, str],
-) -> str:
-    """
-    功能：获取疾病推荐方剂 ID。
-    作用：
-    1. 只读取 Disease sheet 的 RecommendedFormulaName。
-    2. 用 Formula sheet 的 FormulaName 反查 FormulaID。
-    3. 不再兼容 RecommendedFormulaID，也不把名称当作 ID 直接使用。
-    """
-    recommended_formula_name = as_str(disease_row.get("RecommendedFormulaName"))
-    if not recommended_formula_name:
-        return ""
-
-    return as_str(formula_name_to_id.get(recommended_formula_name, ""))
-
-
 def build_herb_detail_text(row: dict[str, Any]) -> str:
     """
     功能：读取 Herb sheet 中配置的 DetailText 原文。
@@ -841,7 +835,6 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
     disease_name_to_id = indexed_data["disease_name_to_id"]
     pulse_map = indexed_data["pulse_map"]
     formula_map = indexed_data["formula_map"]
-    formula_name_to_id = indexed_data["formula_name_to_id"]
     formula_ingredient_map = indexed_data["formula_ingredient_map"]
     theory_map = indexed_data["theory_map"]
     story_map = indexed_data["story_map"]
@@ -874,13 +867,8 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         if book_id and book_id not in book_map:
             errors.append(f"Disease 引用了不存在的 BookID: {disease_id} -> {book_id}")
 
-        # Disease 表现在只使用 RecommendedFormulaName。
-        # 这里用方剂名称反查 FormulaID；如果名称填了但反查失败，就提示名称不存在。
-        recommended_formula_name = as_str(row.get("RecommendedFormulaName"))
-        formula_id = get_disease_recommended_formula_id(row, formula_name_to_id)
-        if recommended_formula_name and not formula_id:
-            errors.append(f"Disease 推荐方剂名称不存在: {disease_id} -> {recommended_formula_name}")
-        elif formula_id and formula_id not in formula_map:
+        formula_id = as_str(row.get("RecommendedFormulaID"))
+        if formula_id and formula_id not in formula_map:
             errors.append(f"Disease 推荐方剂不存在: {disease_id} -> {formula_id}")
 
     for formula_id, row in formula_map.items():
@@ -1106,7 +1094,6 @@ def build_disease_resources(indexed_data: dict[str, Any]) -> None:
     """
     disease_map = indexed_data["disease_map"]
     pulse_map = indexed_data["pulse_map"]
-    formula_name_to_id = indexed_data["formula_name_to_id"]
 
     ensure_dir(DISEASE_OUTPUT_DIR)
     ensure_dir(DISEASE_BOOK_ENTRY_OUTPUT_DIR)
@@ -1119,9 +1106,7 @@ def build_disease_resources(indexed_data: dict[str, Any]) -> None:
         # 读取 Disease sheet 的 DetailText，写入 DiseaseData 资源本体。
         # 这样游戏逻辑直接加载 res://Data/Disease/*.tres 时也能拿到正文。
         detail_text = as_str(disease_row.get("DetailText"))
-        # Disease 表现在填写 RecommendedFormulaName。
-        # 导出 DiseaseData 时仍写入 recommended_formula_id，供游戏逻辑继续按 ID 查方剂。
-        recommended_formula_id = get_disease_recommended_formula_id(disease_row, formula_name_to_id)
+        recommended_formula_id = as_str(disease_row.get("RecommendedFormulaID"))
 
         disease_content = f'''[gd_resource type="Resource" script_class="DiseaseData" load_steps=2 format=3]
 
@@ -1369,8 +1354,6 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
         story_name = as_str(story_row.get("StoryName"))
         trigger_scene = as_str(story_row.get("TriggerScene")) or "clinic"
         trigger_day = as_int(story_row.get("TriggerDay"), 0)
-        required_reputation_points = as_int(story_row.get("Reputation"), 0)
-        unlock_entry_id = as_str(story_row.get("EntryId"))
         play_once = as_bool(story_row.get("PlayOnce"), True)
         return_scene = as_str(story_row.get("ReturnScene")) or trigger_scene
         background_path = as_str(story_row.get("BackgroundPath"))
@@ -1433,8 +1416,6 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             f'story_id = {format_godot_string(story_id)}',
             f'trigger_scene = {format_godot_string(trigger_scene)}',
             f'trigger_day = {trigger_day}',
-            f'required_reputation_points = {required_reputation_points}',
-            f'unlock_entry_id = {format_godot_string(unlock_entry_id)}',
             f'play_once = {"true" if play_once else "false"}',
             f'return_scene = {format_godot_string(return_scene)}',
         ]

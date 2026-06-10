@@ -69,7 +69,9 @@ func _process(_delta: float) -> void:
 func open_window() -> void:
 	Unlock.refresh_auto_unlocks_by_experience()
 	_refresh_book_list()
+	_clear_entry_and_detail()
 	show()
+	_focus_book_list_on_open()
 
 
 func close_window() -> void:
@@ -210,6 +212,33 @@ func _clear_entry_and_detail() -> void:
 
 
 # =========================
+# 打开窗口时默认停在书籍栏
+# =========================
+
+func _focus_book_list_on_open() -> void:
+	if book_list == null:
+		return
+
+	# 先把键盘 / 手柄焦点放回左侧书籍列表，避免默认落到条目栏。
+	book_list.grab_focus()
+
+	# 如果当前没有选中书籍，则默认选中第一本书，只刷新条目列表，不阅读条目。
+	if selected_book == null and books.size() > 0:
+		book_list.select(0)
+		selected_book = books[0]
+		_refresh_entry_list_for_selected_book()
+		book_list.grab_focus()
+		return
+
+	# 如果之前已经选过一本书，恢复书籍栏选中状态，并重新刷新条目列表。
+	# 注意：open_window() 里已经调用过 _clear_entry_and_detail()，
+	# 所以这里必须重新刷新条目，否则再次打开窗口时条目栏会是空的。
+	_reselect_current_book_in_list()
+	_refresh_entry_list_for_selected_book()
+	book_list.grab_focus()
+
+
+# =========================
 # 设置正文文本
 # =========================
 
@@ -268,8 +297,11 @@ func _refresh_entry_list_for_selected_book() -> void:
 			Unlock.get_experience_points()
 		]
 
-	entry_list.select(0)
-	_show_entry_by_index(0)
+	# 只显示条目列表，不自动选中 / 阅读第一个条目。
+	# 玩家需要手动点击条目后，才会触发 _show_entry_by_index() 并标记已读。
+	entry_list.deselect_all()
+	selected_entry = null
+	_set_detail_text("")
 
 
 # =========================

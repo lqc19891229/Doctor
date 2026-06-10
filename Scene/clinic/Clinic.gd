@@ -481,6 +481,7 @@ func _show_pulse_result(result: Dictionary) -> void:
 func refresh_clinic_view() -> void:
 	current_npc = npc_manager.get_current_npc()
 	current_prescription.clear()
+	current_prescription.clear_disease()
 	diagnosis_submitted = false
 	last_formula_judge_result = null
 	last_formula_judge_summary_text = ""
@@ -830,6 +831,10 @@ func submit_prescription() -> bool:
 
 	# 提交判定后根据评级改变名望。
 	# was_already_submitted 用于防止同一名病人重复提交刷名望。
+	#
+	# 说明：
+	# - Unlock.add_reputation_points() 会根据当前名望静默检查并解锁剧情。
+	# - Clinic 不展示剧情解锁提示，剧情播放仍交给 StoryManager 在触发时机处理。
 	var reputation_reward := _get_reputation_reward_by_judge_result(result)
 	if reputation_reward != 0 and not was_already_submitted:
 		if Unlock != null and Unlock.has_method("add_reputation_points"):

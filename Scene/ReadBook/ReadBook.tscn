@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://daannkka0fcs"]
 
 [ext_resource type="Script" uid="uid://5mp4fabm540j" path="res://Scene/ReadBook/ReadBook.gd" id="1_uep66"]
-[ext_resource type="Texture2D" uid="uid://bhc7eic56v8dc" path="res://Assets/bookpage2.png" id="2_5x4ej"]
+[ext_resource type="Texture2D" uid="uid://bhc7eic56v8dc" path="res://Assets/Background/bookpage2.png" id="2_5x4ej"]
 [ext_resource type="FontFile" uid="uid://bas0ewdnmpdaq" path="res://Fonts/SourceHanSerifSC-Regular.otf" id="3_vb6lf"]
 [ext_resource type="Script" uid="uid://jjpaynmj2itt" path="res://Scene/clinicalLogWindow/ClassicalVerticalRichTextLabel.gd" id="4_rstq2"]
 

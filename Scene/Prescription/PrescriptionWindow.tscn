@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c1kldxjoeyc78"]
 
 [ext_resource type="Script" uid="uid://dd4y12yn0ilkd" path="res://Scene/Prescription/PrescriptionWindow.gd" id="1_e60oy"]
-[ext_resource type="PackedScene" uid="uid://53a2hc6l2p5q" path="res://Scene/PlayerHint/PlayerHintWindow.tscn" id="2_xa6n0"]
+[ext_resource type="PackedScene" uid="uid://cbsehhhrv63ek" path="res://Scene/PlayerHint/PlayerHintWindow.tscn" id="2_xa6n0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_thr5s"]
 bg_color = Color(0.22745098, 0.14117648, 0.078431375, 1)
@@ -13,7 +13,7 @@ size = Vector2i(1000, 1000)
 script = ExtResource("1_e60oy")
 
 [node name="PlayerHintWindow" parent="." unique_id=1059458014 instance=ExtResource("2_xa6n0")]
-oversampling_override = 1.0
+visible = false
 
 [node name="PrescriptionLayout" type="VBoxContainer" parent="." unique_id=1762507914]
 anchors_preset = 15

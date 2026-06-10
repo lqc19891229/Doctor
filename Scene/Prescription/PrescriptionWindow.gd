@@ -80,8 +80,8 @@ const ROLE_SHI := "使"
 @onready var clear_prescription_button: Button = $PrescriptionLayout/HerbSelectRow/HerbEditColumn/ClearPrescriptionButton
 @onready var submit_button: Button = $PrescriptionLayout/HerbSelectRow/HerbEditColumn/SubmitButton
 
-# ---------- 玩家提示窗口（脚本运行时自动创建，无需额外改 tscn） ----------
-var player_hint_dialog: AcceptDialog = null
+# ---------- 玩家提示窗口（Control 版 PlayerHintWindow，需作为 PrescriptionWindow.tscn 的子节点存在） ----------
+var player_hint_window: Node = null
 
 
 # =========================================================
@@ -801,29 +801,25 @@ func _on_submit_button_pressed() -> void:
 
 
 func _setup_player_hint_dialog() -> void:
-	if player_hint_dialog != null and is_instance_valid(player_hint_dialog):
+	if player_hint_window != null and is_instance_valid(player_hint_window):
 		return
 
-	player_hint_dialog = find_child("PlayerHintDialog", true, false) as AcceptDialog
+	player_hint_window = find_child("PlayerHintWindow", true, false)
 
-	if player_hint_dialog == null:
-		player_hint_dialog = AcceptDialog.new()
-		player_hint_dialog.name = "PlayerHintDialog"
-		player_hint_dialog.title = "提示"
-		player_hint_dialog.ok_button_text = "确定"
-		player_hint_dialog.exclusive = true
-		add_child(player_hint_dialog)
+	if player_hint_window == null:
+		push_warning("PrescriptionWindow.gd 找不到 PlayerHintWindow，请检查 PrescriptionWindow.tscn 是否已经添加 PlayerHintWindow.tscn")
+		return
 
-	player_hint_dialog.hide()
+	if player_hint_window.has_method("hide"):
+		player_hint_window.hide()
 
 
 func _show_player_hint(message: String) -> void:
-	if player_hint_dialog == null or not is_instance_valid(player_hint_dialog):
+	if player_hint_window == null or not is_instance_valid(player_hint_window):
 		_setup_player_hint_dialog()
 
-	if player_hint_dialog != null:
-		player_hint_dialog.dialog_text = message
-		player_hint_dialog.popup_centered(Vector2i(420, 160))
+	if player_hint_window != null and player_hint_window.has_method("show_hint"):
+		player_hint_window.call("show_hint", message)
 	else:
 		emit_signal("info_requested", message)
 
@@ -1162,6 +1158,9 @@ func _object_has_property(target, property_name: String) -> bool:
 	if target == null:
 		return false
 
+	if not (target is Object):
+		return false
+
 	for property_info in target.get_property_list():
 		if str(property_info.get("name", "")) == property_name:
 			return true
@@ -1214,10 +1213,10 @@ func _get_disease_name(disease) -> String:
 		if disease.has("display_name"):
 			return str(disease.get("display_name", "")).strip_edges()
 
-	if "disease_name" in disease:
-		return str(disease.disease_name).strip_edges()
-	if "name" in disease:
-		return str(disease.name).strip_edges()
+	if _object_has_property(disease, "disease_name"):
+		return str(disease.get("disease_name")).strip_edges()
+	if _object_has_property(disease, "name"):
+		return str(disease.get("name")).strip_edges()
 
 	return str(disease).strip_edges()
 
@@ -1232,9 +1231,9 @@ func _get_disease_id(disease) -> String:
 		if disease.has("id"):
 			return str(disease.get("id", "")).strip_edges()
 
-	if "disease_id" in disease:
-		return str(disease.disease_id).strip_edges()
-	if "id" in disease:
-		return str(disease.id).strip_edges()
+	if _object_has_property(disease, "disease_id"):
+		return str(disease.get("disease_id")).strip_edges()
+	if _object_has_property(disease, "id"):
+		return str(disease.get("id")).strip_edges()
 
 	return ""

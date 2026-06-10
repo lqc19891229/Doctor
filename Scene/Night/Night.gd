@@ -13,8 +13,8 @@ signal night_finished
 @onready var thoughts_point_label: Label = find_child("ThoughtsPoint", true, false) as Label
 @onready var reputation_point_label: Label = find_child("ReputationPoint", true, false) as Label
 
-# 玩家提示窗口（脚本运行时自动创建，无需额外改 tscn）
-var player_hint_dialog: AcceptDialog = null
+# 玩家提示窗口（Control 版 PlayerHintWindow，需作为 Night.tscn 的子节点存在）
+var player_hint_window: Node = null
 
 
 func _ready() -> void:
@@ -67,29 +67,25 @@ func _setup_buttons() -> void:
 # =========================
 
 func _setup_player_hint_dialog() -> void:
-	if player_hint_dialog != null and is_instance_valid(player_hint_dialog):
+	if player_hint_window != null and is_instance_valid(player_hint_window):
 		return
 
-	player_hint_dialog = find_child("PlayerHintDialog", true, false) as AcceptDialog
+	player_hint_window = find_child("PlayerHintWindow", true, false)
 
-	if player_hint_dialog == null:
-		player_hint_dialog = AcceptDialog.new()
-		player_hint_dialog.name = "PlayerHintDialog"
-		player_hint_dialog.title = "提示"
-		player_hint_dialog.ok_button_text = "确定"
-		player_hint_dialog.exclusive = true
-		add_child(player_hint_dialog)
+	if player_hint_window == null:
+		push_warning("Night.gd 找不到 PlayerHintWindow，请检查 Night.tscn 是否已经添加 PlayerHintWindow.tscn")
+		return
 
-	player_hint_dialog.hide()
+	if player_hint_window.has_method("hide"):
+		player_hint_window.hide()
 
 
 func _show_player_hint(message: String) -> void:
-	if player_hint_dialog == null or not is_instance_valid(player_hint_dialog):
+	if player_hint_window == null or not is_instance_valid(player_hint_window):
 		_setup_player_hint_dialog()
 
-	if player_hint_dialog != null:
-		player_hint_dialog.dialog_text = message
-		player_hint_dialog.popup_centered(Vector2i(460, 160))
+	if player_hint_window != null and player_hint_window.has_method("show_hint"):
+		player_hint_window.call("show_hint", message)
 	else:
 		push_warning(message)
 

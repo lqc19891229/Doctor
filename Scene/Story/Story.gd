@@ -342,8 +342,8 @@ func _get_line_portrait_side(line_data: StoryLine) -> String:
 	var portrait_side := "auto"
 
 	# 兼容旧资源：如果 StoryLine.gd 还没加 portrait_side，避免直接报错。
-	if "portrait_side" in line_data:
-		portrait_side = String(line_data.portrait_side).strip_edges().to_lower()
+	if _object_has_property(line_data, "portrait_side"):
+		portrait_side = String(line_data.get("portrait_side")).strip_edges().to_lower()
 
 	if portrait_side == "left" or portrait_side == "right":
 		# 手动指定时，顺便更新 speaker 的固定站位。
@@ -353,6 +353,20 @@ func _get_line_portrait_side(line_data: StoryLine) -> String:
 
 	return _get_speaker_side(line_data.speaker)
 
+
+
+func _object_has_property(target, property_name: String) -> bool:
+	if target == null:
+		return false
+
+	if not (target is Object):
+		return false
+
+	for property_info in target.get_property_list():
+		if str(property_info.get("name", "")) == property_name:
+			return true
+
+	return false
 
 func _hide_all_portraits() -> void:
 	left_portrait_rect.hide()

@@ -15,6 +15,8 @@ class_name UnlockManager
 # - Disease 条目：条目已解锁后，可阅读，阅读后解锁对应疾病
 # - Theory 条目：条目已解锁后，可阅读，阅读后只标记已读
 # - 行医记考（clinical_log）显示已同步解锁的实体内容
+# - 名望点数同样作为累计值，用于触发剧情 / 医书条目的自动解锁
+# - 剧情解锁条件写在 StoryData / 剧情 .tres 中，不再写死在 UnlockManager
 #
 # 注意：
 # - “解锁”和“已读”分开记录
@@ -96,20 +98,150 @@ func consume_experience_point() -> bool:
 var reputation_points: int = 0
 
 
+# =========================================================
+# 七、名望剧情解锁状态
+#
+# 剧情解锁条件现在写在每个剧情 .tres 对应的 StoryData 里。
+# UnlockManager 不再维护 const STORY_UNLOCKS。
+#
+# StoryData 里主要使用这些字段：
+# - story_id：剧情唯一 ID，用来记录是否已解锁。
+# - title：剧情标题，用于提示文本。
+# - required_reputation_points：需要达到的累计名望。
+# - unlock_entry_id：可选，剧情解锁时顺便解锁的医书条目 ID。
+#
+# 流程：
+# 1. 玩家获得名望，调用 add_reputation_points()。
+# 2. 本脚本调用 refresh_story_unlocks_by_reputation()。
+# 3. refresh_story_unlocks_by_reputation() 从 StoryManager.get_all_stories() 读取所有剧情资源。
+# 4. 达到名望条件的剧情写入 unlocked_story_ids。
+# 5. 如果剧情配置了 unlock_entry_id，则顺便解锁对应医书条目。
+# =========================================================
+
+# 已经由名望触发过的剧情 ID。
+# 用 Dictionary 是为了快速判断，并且方便直接存档。
+var unlocked_story_ids: Dictionary = {}
+
+
 func get_reputation_points() -> int:
 	return reputation_points
 
 
-func add_reputation_points(amount: int = 1) -> void:
+# 增加名望。
+#
+# 返回值：
+# - 返回本次因为名望提升而“新解锁”的剧情数据列表。
+# - 旧代码如果只是调用 Unlock.add_reputation_points(x)，不接返回值，也不会出错。
+#
+# 例：
+# var newly_unlocked_stories := Unlock.add_reputation_points(5)
+# if not newly_unlocked_stories.is_empty():
+#     显示“新剧情解锁”提示
+func add_reputation_points(amount: int = 1) -> Array[Dictionary]:
 	if amount == 0:
-		return
+		return []
 
 	reputation_points += amount
+	return refresh_story_unlocks_by_reputation()
 
 
 func has_reputation_points(required_amount: int) -> bool:
 	return reputation_points >= required_amount
 
+
+# 判断某个剧情是否已经通过名望系统解锁。
+# 注意：
+# - 这里的“解锁”不是“已经播放”。
+# - 是否已经播放，仍建议交给 StoryManager / played_story_ids 管理。
+func is_story_unlocked(story_id: String) -> bool:
+	var id := story_id.strip_edges()
+	if id == "":
+		return false
+
+	return unlocked_story_ids.has(id)
+
+
+# 手动解锁一个剧情。
+#
+# 返回值：
+# - true：本次确实新增了解锁记录
+# - false：ID 为空，或之前已经解锁过
+func unlock_story(story_id: String) -> bool:
+	var id := story_id.strip_edges()
+	if id == "":
+		return false
+
+	if unlocked_story_ids.has(id):
+		return false
+
+	unlocked_story_ids[id] = true
+	return true
+
+
+# 根据当前累计名望检查所有 StoryData 剧情资源。
+#
+# 这个函数可以被多处安全调用：
+# - 加名望后调用
+# - 读档后调用
+# - 调试时手动调用
+#
+# 因为它会先检查 unlocked_story_ids，所以不会重复解锁、重复返回。
+func refresh_story_unlocks_by_reputation() -> Array[Dictionary]:
+	var newly_unlocked: Array[Dictionary] = []
+
+	# 剧情资源统一由 StoryManager 自动扫描 res://Data/Story。
+	# 如果 StoryManager 还没准备好，直接返回空数组，避免报错。
+	if StoryManager == null:
+		return newly_unlocked
+
+	if not StoryManager.has_method("get_all_stories"):
+		push_warning("StoryManager 缺少 get_all_stories()，无法按名望解锁剧情。")
+		return newly_unlocked
+
+	var all_stories: Array[StoryData] = StoryManager.get_all_stories()
+
+	for story in all_stories:
+		if story == null:
+			continue
+
+		var story_id := story.story_id.strip_edges()
+		if story_id == "":
+			continue
+
+		# 已解锁过的剧情不重复解锁，也不会重复返回提示。
+		if is_story_unlocked(story_id):
+			continue
+
+		# required_reputation_points <= 0 表示不需要名望解锁。
+		# 这种剧情继续交给 StoryManager 按场景 / 播放状态处理，
+		# UnlockManager 不主动写入 unlocked_story_ids。
+		var required_points := int(story.required_reputation_points)
+		if required_points <= 0:
+			continue
+
+		# 名望不足，不解锁。
+		if reputation_points < required_points:
+			continue
+
+		# 写入 unlocked_story_ids。
+		if not unlock_story(story_id):
+			continue
+
+		# 如果剧情关联了某个医书条目，则剧情解锁时顺便让该条目可见 / 可读。
+		var entry_id := story.unlock_entry_id.strip_edges()
+		if entry_id != "":
+			unlock_entry(entry_id)
+
+		# 返回给调用处的数据，方便 Clinic / PlayerHintWindow 显示“新剧情解锁”。
+		# - story_id：剧情唯一 ID，也作为当前提示显示名。
+		newly_unlocked.append({
+			"story_id": story_id,
+			"title": story_id,
+			"required_reputation_points": required_points,
+			"entry_id": entry_id
+		})
+
+	return newly_unlocked
 
 # =========================================================
 # 七、心得自动解锁条目
@@ -383,7 +515,7 @@ func can_read_entry(entry_id: String) -> bool:
 	if clean_id == "":
 		return false
 
-	var entry := BookEntryDB.get_entry(clean_id)
+	var entry = BookEntryDB.get_entry(clean_id)
 	if entry == null:
 		return false
 
@@ -407,7 +539,7 @@ func is_entry_visible(entry_id: String) -> bool:
 	if clean_id == "":
 		return false
 
-	var entry := BookEntryDB.get_entry(clean_id)
+	var entry = BookEntryDB.get_entry(clean_id)
 	if entry == null:
 		return false
 
@@ -659,6 +791,7 @@ func reset_progress() -> void:
 	clinical_log_unlocked_disease_ids.clear()
 	clinical_log_unlocked_formula_ids.clear()
 	book_read_days.clear()
+	unlocked_story_ids.clear()
 
 	experience_points = 0
 	reputation_points = 0
@@ -676,7 +809,8 @@ func get_save_data() -> Dictionary:
 		"clinical_log_unlocked_formula_ids": clinical_log_unlocked_formula_ids,
 		"book_read_days": book_read_days,
 		"experience_points": experience_points,
-		"reputation_points": reputation_points
+		"reputation_points": reputation_points,
+		"unlocked_story_ids": unlocked_story_ids
 	}
 
 
@@ -692,11 +826,13 @@ func load_save_data(data: Dictionary) -> void:
 	clinical_log_unlocked_disease_ids = _load_bool_dictionary(data.get("clinical_log_unlocked_disease_ids", {}))
 	clinical_log_unlocked_formula_ids = _load_bool_dictionary(data.get("clinical_log_unlocked_formula_ids", {}))
 	book_read_days = _load_int_dictionary(data.get("book_read_days", {}))
+	unlocked_story_ids = _load_bool_dictionary(data.get("unlocked_story_ids", {}))
 
 	experience_points = int(data.get("experience_points", 0))
 	reputation_points = int(data.get("reputation_points", 0))
 
 	refresh_auto_unlocks_by_experience()
+	refresh_story_unlocks_by_reputation()
 
 
 func _load_bool_dictionary(source) -> Dictionary:
