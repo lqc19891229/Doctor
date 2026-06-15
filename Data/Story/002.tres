@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="StoryData" format=3 uid="uid://c0cym65jl24l8"]
+
+[ext_resource type="Script" uid="uid://norr1xwbdche" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" uid="uid://5hg5tfa6de3p" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" uid="uid://6kjrut6bis1m" path="res://Assets/Portrait/li_yan_wen.png" id="portrait_1"]
+[ext_resource type="Texture2D" uid="uid://bs8db1ig0w255" path="res://Assets/Portrait/li_shi_zhen.png" id="portrait_2"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+speaker = "李言闻"
+text = "东壁啊，白天教你的都听明白了吗？"
+portrait = ExtResource("portrait_1")
+portrait_side = "right"
+
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+speaker = "李东壁"
+text = "平常日子里看您治病，其实已经窥探得些门道了。"
+portrait = ExtResource("portrait_2")
+portrait_side = "left"
+
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+speaker = "李言闻"
+text = "学医最要紧的是积累，吃完晚饭去把这些天教你的内容再看一遍，明日一早你随我一起出诊。"
+portrait = ExtResource("portrait_1")
+portrait_side = "right"
+
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+speaker = "李东壁"
+text = "哇，太好了！"
+portrait = ExtResource("portrait_2")
+portrait_side = "left"
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "002"
+trigger_scene = "night"
+trigger_day = 1
+return_scene = "night"
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004")])

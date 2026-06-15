@@ -121,6 +121,9 @@ var current_shichen_index: int = CLINIC_START_SHICHEN_INDEX
 # Clinic 是否正在计时
 var clinic_clock_running: bool = false
 
+# Clinic 是否因为剧情而暂停
+var clinic_clock_paused_by_story: bool = false
+
 # Clinic 当前累计的现实秒数
 var clinic_time_accumulator: float = 0.0
 
@@ -153,10 +156,25 @@ func start_new_game() -> void:
 # 玩家进入 Clinic 时调用
 # =========================================================
 func start_clinic_time() -> void:
+	# 如果是从剧情返回 Clinic，则恢复原来的时辰和累计时间，不重置到辰时。
+	if clinic_clock_paused_by_story:
+		current_phase = PHASE_DAY
+		clinic_clock_running = true
+		clinic_clock_paused_by_story = false
+
+		time_changed.emit()
+
+		print("Clinic 从剧情恢复计时：%s %s，累计 %.2f 秒" % [
+			get_day_text(),
+			get_shichen_text(),
+			clinic_time_accumulator
+		])
+		return
+
 	# 设置为白天
 	current_phase = PHASE_DAY
 
-	# Clinic 每次进入都从辰时开始
+	# Clinic 每次正常进入都从辰时开始
 	current_shichen_index = CLINIC_START_SHICHEN_INDEX
 
 	# 清空累计时间
@@ -175,7 +193,57 @@ func start_clinic_time() -> void:
 # =========================================================
 func stop_clinic_clock() -> void:
 	clinic_clock_running = false
+	clinic_clock_paused_by_story = false
 	clinic_time_accumulator = 0.0
+
+
+# =========================================================
+# 剧情期间暂停 Clinic 计时
+# 说明：
+# 1. 只暂停，不清空 current_shichen_index
+# 2. 只暂停，不清空 clinic_time_accumulator
+# 3. 剧情结束回 Clinic 时，可继续原来的时辰进度
+# =========================================================
+func pause_clinic_clock_for_story() -> bool:
+	if not clinic_clock_running:
+		return false
+
+	clinic_clock_running = false
+	clinic_clock_paused_by_story = true
+
+	print("Clinic 因剧情暂停计时：%s %s，累计 %.2f 秒" % [
+		get_day_text(),
+		get_shichen_text(),
+		clinic_time_accumulator
+	])
+
+	return true
+
+
+func resume_clinic_clock_after_story() -> void:
+	if not clinic_clock_paused_by_story:
+		return
+
+	if not is_day():
+		clinic_clock_paused_by_story = false
+		return
+
+	clinic_clock_running = true
+	clinic_clock_paused_by_story = false
+
+	time_changed.emit()
+
+	print("Clinic 剧情结束后恢复计时：%s %s，累计 %.2f 秒" % [
+		get_day_text(),
+		get_shichen_text(),
+		clinic_time_accumulator
+	])
+
+
+func cancel_story_pause_state() -> void:
+	# 剧情结束后如果不是回 Clinic，而是去 Night，就清掉暂停状态。
+	clinic_clock_running = false
+	clinic_clock_paused_by_story = false
 
 
 # =========================================================

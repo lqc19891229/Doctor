@@ -290,10 +290,10 @@ func _is_story_trigger_matched(story: StoryData, trigger_scene: String, current_
 	if story.trigger_day > 0 and current_day < story.trigger_day:
 		return false
 
-	# 名望剧情的新规则：
+	# 名望剧情规则：
 	# - required_reputation_points <= 0：不需要名望解锁，按场景和播放状态正常触发。
 	# - required_reputation_points > 0：必须先由 UnlockManager 解锁，StoryManager 才允许播放。
-	# 这样“解锁”和“播放”分开：UnlockManager 管解锁，StoryManager 管播放。
+	# 这样“解锁”和“播放”分开：UnlockManager 管名望解锁，StoryManager 管播放。
 	if story.required_reputation_points > 0:
 		if Unlock == null:
 			return false
@@ -302,6 +302,21 @@ func _is_story_trigger_matched(story: StoryData, trigger_scene: String, current_
 			return false
 
 		if not Unlock.is_story_unlocked(story_id):
+			return false
+
+	# unlock_entry_id 现在作为剧情触发前置条件使用。
+	# - unlock_entry_id 为空：不限制医书条目。
+	# - unlock_entry_id 非空：必须先解锁对应医书条目，剧情才允许触发。
+	# 注意：这里不负责解锁条目，只负责检查条目是否已经解锁。
+	var required_entry_id := story.unlock_entry_id.strip_edges()
+	if required_entry_id != "":
+		if Unlock == null:
+			return false
+
+		if not Unlock.has_method("is_entry_unlocked"):
+			return false
+
+		if not Unlock.is_entry_unlocked(required_entry_id):
 			return false
 
 	return true

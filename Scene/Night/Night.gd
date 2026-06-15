@@ -2,6 +2,7 @@ extends Control
 class_name Night
 
 signal night_finished
+signal story_requested(story_path: String, return_target: String)
 
 @onready var read_book_window: Window = find_child("ReadBook", true, false) as Window
 
@@ -214,3 +215,74 @@ func _has_unread_entries() -> bool:
 		return int(Unlock.get_unread_unlocked_disease_or_formula_entry_count()) > 0
 
 	return false
+
+# =========================
+# 夜晚进入入口 / 自动剧情触发
+# =========================
+
+func start_night(day: int) -> void:
+	# 由 Main._enter_night() 在连接好 story_requested 后调用。
+	# 不在 _ready() 中触发剧情，避免信号尚未连接导致剧情请求丢失。
+	_refresh_topbar()
+	_try_start_auto_story("night", day)
+
+
+func _try_start_auto_story(trigger_scene: String, day: int) -> bool:
+	if StoryManager == null:
+		push_warning("Night 无法访问 StoryManager。")
+		return false
+
+	if not StoryManager.has_method("find_trigger_story"):
+		push_warning("StoryManager 缺少 find_trigger_story()，无法自动检查夜晚剧情。")
+		return false
+
+	var story: StoryData = StoryManager.find_trigger_story(trigger_scene, day)
+	if story == null:
+		return false
+
+	var story_path := _find_registered_story_path(story)
+	if story_path.is_empty():
+		push_warning("找到可触发夜晚剧情，但没有找到对应资源路径。请检查 StoryManager.registered_story_paths。")
+		return false
+
+	var return_target := "night"
+	if story.return_scene != "":
+		return_target = story.return_scene
+
+	emit_signal("story_requested", story_path, return_target)
+	return true
+
+
+func _find_registered_story_path(target_story: StoryData) -> String:
+	if target_story == null:
+		return ""
+
+	var story_paths = StoryManager.get("registered_story_paths")
+	if typeof(story_paths) != TYPE_ARRAY:
+		push_warning("StoryManager 缺少 registered_story_paths。")
+		return ""
+
+	for story_path in story_paths:
+		if typeof(story_path) != TYPE_STRING:
+			continue
+
+		var loaded_story: Resource = load(story_path)
+		if loaded_story == null:
+			continue
+
+		if not loaded_story is StoryData:
+			continue
+
+		var story := loaded_story as StoryData
+
+		# 同一路径资源通常会被缓存，优先用实例比较。
+		if story == target_story:
+			return story_path
+
+		# 实例比较失败时，用 story_id 兜底。
+		var target_story_id: String = target_story.get("story_id")
+		var current_story_id: String = story.get("story_id")
+		if not target_story_id.is_empty() and target_story_id == current_story_id:
+			return story_path
+
+	return ""

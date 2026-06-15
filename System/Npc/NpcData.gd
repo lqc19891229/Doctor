@@ -7,9 +7,12 @@
 ## 说明：
 ## 这个脚本只存数据，不负责任何游戏逻辑。
 ## 每一个 NPC 实例都可以保存：
-## 名字，性别，年龄，头像，当前疾病
+## 名字，性别，年龄，头像，当前疾病。
 ##
-## 以后可以通过 NPCData.disease 直接获取脉象数据。
+## 随机 NPC 与剧情 NPC 使用同一份数据结构：
+## - random：运行时随机生成的常规病人
+## - story：剧情指定的手动 NPC
+## - template：只作为随机生成参考的模板资源
 ## =========================================================
 
 class_name NpcData
@@ -20,8 +23,20 @@ extends Resource
 ## 一、基础身份信息
 ## =========================================================
 
-## NPC 唯一ID（方便以后存档或生成）
+## NPC 唯一 ID。
+## 随机 NPC 会在运行时生成唯一 ID。
+## 剧情 NPC 可以在 .tres 中手动填写固定 ID。
 @export var npc_id: String = ""
+
+## NPC 类型：
+## random = 随机常规病人
+## story = 剧情指定病人
+## template = 随机 NPC 生成模板
+@export_enum("random", "story", "template") var npc_type: String = "random"
+
+## 如果这个 NPC 是随机生成的，这里记录它来自哪个模板。
+## 剧情 NPC 可以留空。
+@export var source_template_id: String = ""
 
 ## NPC 名字
 @export var npc_name: String = ""
@@ -45,9 +60,8 @@ extends Resource
 ## 三、疾病信息
 ## =========================================================
 
-## 当前疾病
-## 这里直接引用 DiseaseData
-## NPC 来看病时，脉象就是从这里读取
+## 当前疾病。
+## NPC 来看病时，脉象、标准方和判定都从这里读取。
 @export var disease: DiseaseData
 
 
@@ -55,6 +69,7 @@ extends Resource
 ## 四、诊疗状态
 ## =========================================================
 
-## 是否已经被治疗
-## 以后用于剧情或任务系统
+## 是否已经被治疗。
+## 随机 NPC 生成时默认为 false。
+## 后续可以用于病人队列、剧情或任务系统。
 @export var is_treated: bool = false

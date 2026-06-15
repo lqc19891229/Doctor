@@ -56,6 +56,12 @@ const JUDGEMENT_RESULT_SCENE_PATH := "res://Scene/JudgementResult/JudgementResul
 @onready var thoughts_point_label: Label = find_child("ThoughtsPoint", true, false) as Label
 @onready var reputation_point_label: Label = find_child("ReputationPoint", true, false) as Label
 
+# ---------- 当前 NPC 立绘 ----------
+# 说明：
+# 1. 节点建议放在 Clinic/Background/Portrait。
+# 2. 使用 find_child，方便你在场景里调整层级，只要节点名仍叫 Portrait 即可。
+@onready var portrait_rect: TextureRect = find_child("Portrait", true, false) as TextureRect
+
 # ---------- 脉象窗口 ----------
 @onready var pulse_window: PulseWindow = find_child("PulseWindow", true, false) as PulseWindow
 @onready var open_pulse_window_button: Button = find_child("OpenPulseWindowButton", true, false) as Button
@@ -138,6 +144,12 @@ var last_displayed_reputation_point: int = -999999
 var last_formula_judge_result = null
 var last_formula_judge_summary_text: String = ""
 
+# 最近一次提交处方后，本次心得更新新解锁的行医记考条目标题
+# 说明：
+# 1. 只记录本次提交产生的新解锁条目。
+# 2. JudgementResult 会读取这个列表，并在 RichTextLabel 中给出解锁提示。
+var last_newly_unlocked_entry_titles: Array[String] = []
+
 # 当前打开的判定结果窗口
 var judgement_result_window: Control = null
 
@@ -212,6 +224,7 @@ func _validate_scene_node_bindings() -> void:
 		"TimeLabel": time_label,
 		"ThoughtsPoint": thoughts_point_label,
 		"ReputationPoint": reputation_point_label,
+		"Portrait": portrait_rect,
 		"OpenPulseWindowButton": open_pulse_window_button,
 		"OpenPrescriptionWindowButton": open_prescription_window_button,
 		"Openclinical_logWindowButton": clinical_log_button,
@@ -474,6 +487,30 @@ func _show_pulse_result(result: Dictionary) -> void:
 
 
 # =========================================================
+# 刷新当前 NPC 立绘
+# =========================================================
+
+func _update_npc_portrait() -> void:
+	# 只负责把 current_npc.portrait 显示到 Portrait 节点。
+	# 随机 NPC 的立绘选择逻辑放在 NpcManager.gd 中。
+	if portrait_rect == null:
+		return
+
+	if current_npc == null:
+		portrait_rect.texture = null
+		portrait_rect.visible = false
+		return
+
+	if current_npc.portrait == null:
+		portrait_rect.texture = null
+		portrait_rect.visible = false
+		return
+
+	portrait_rect.texture = current_npc.portrait
+	portrait_rect.visible = true
+
+
+# =========================================================
 # 统一刷新入口
 # 切换病人 / 生成新病人后都走这里
 # =========================================================
@@ -485,18 +522,21 @@ func refresh_clinic_view() -> void:
 	diagnosis_submitted = false
 	last_formula_judge_result = null
 	last_formula_judge_summary_text = ""
+	last_newly_unlocked_entry_titles.clear()
 	current_display_region_name = DEFAULT_DISPLAY_REGION
 
 	_reset_pulse_keyboard_state()
 
 	if not _ensure_current_npc_valid(true):
+		_update_npc_portrait()
 		return
 
+	_update_npc_portrait()
 	show_region(current_display_region_name)
 
 	# 病人切换后，如果处方窗口已经存在，也同步刷新它
 	if prescription_window != null:
-		prescription_window.setup(herb_database, current_prescription)
+		prescription_window.setup(herb_database, current_prescription, formula_database)
 
 	# 病人切换后，如果行医记考窗口存在，也顺手刷新一次内容
 	if clinical_log_window != null and clinical_log_window.has_method("refresh_view"):
@@ -538,8 +578,10 @@ func refresh_current_patient() -> void:
 	current_npc = npc_manager.get_current_npc()
 
 	if not _ensure_current_npc_valid(true):
+		_update_npc_portrait()
 		return
 
+	_update_npc_portrait()
 	show_region(current_display_region_name)
 
 
@@ -649,7 +691,7 @@ func open_prescription_window() -> void:
 	if prescription_window == null:
 		return
 
-	prescription_window.setup(herb_database, current_prescription)
+	prescription_window.setup(herb_database, current_prescription, formula_database)
 	prescription_window.show()
 	prescription_window.grab_focus()
 
@@ -828,6 +870,7 @@ func submit_prescription() -> bool:
 	var summary_text := result.get_summary_text()
 	last_formula_judge_result = result
 	last_formula_judge_summary_text = summary_text
+	last_newly_unlocked_entry_titles.clear()
 
 	# 提交判定后根据评级改变名望。
 	# was_already_submitted 用于防止同一名病人重复提交刷名望。
@@ -874,6 +917,7 @@ func submit_prescription() -> bool:
 		summary_text += "\n当前累计心得：%d" % Unlock.get_experience_points()
 
 		if not newly_unlocked_titles.is_empty():
+			last_newly_unlocked_entry_titles.assign(newly_unlocked_titles)
 			summary_text += "\n新解锁条目：%s" % "、".join(newly_unlocked_titles)
 
 		if clinical_log_window != null and clinical_log_window.has_method("refresh_view"):
@@ -997,7 +1041,8 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 		"player_prescription_text": player_prescription_text,
 		"grade": grade,
 		"total_score": total_score,
-		"summary_text": summary_text
+		"summary_text": summary_text,
+		"newly_unlocked_entry_titles": last_newly_unlocked_entry_titles.duplicate()
 	}
 
 

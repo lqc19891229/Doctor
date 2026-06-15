@@ -91,6 +91,10 @@ var player_hint_window: Node = null
 # 药材数据库
 var herb_database = null
 
+# 方剂数据库
+# 用于支持在药材搜索栏输入方剂中文名 / 拼音 / 拼音首字母时，显示该方剂包含的药材
+var formula_database = null
+
 # 当前处方对象（Prescription 实例）
 var current_prescription = null
 
@@ -145,9 +149,16 @@ func _ready() -> void:
 # prescription:
 #   当前共用的 Prescription 实例
 # =========================================================
-func setup(herb_db, prescription) -> void:
+func setup(herb_db, prescription, formula_db = null) -> void:
 	herb_database = herb_db
 	current_prescription = prescription
+
+	# 兼容旧调用：Clinic.gd 仍然可以只传 herb_db 和 prescription
+	# 若外部没有显式传入 formula_db，则使用项目自动加载的 FormulaDB
+	if formula_db != null:
+		formula_database = formula_db
+	else:
+		formula_database = FormulaDB
 
 	selected_herb_id = ""
 	selected_herb_button = null
@@ -353,9 +364,9 @@ func _refresh_herb_list() -> void:
 # =========================================================
 func _on_herb_search_text_changed(new_text: String) -> void:
 	# 搜索输入统一做规范化：
-	# 1. 中文保持原样，可搜“白术”
-	# 2. 拼音去掉 _, -, 空格，可用“baizhu”搜到“bai_zhu”
-	# 3. 后续匹配时额外生成拼音首字母，可用“bz”搜到“bai_zhu”
+	# 1. 中文保持原样，可搜“白术”，也可搜“桂枝汤”
+	# 2. 拼音去掉 _, -, 空格，可用“baizhu”搜到“bai_zhu”，也可用“guizhitang”搜到“gui_zhi_tang”
+	# 3. 后续匹配时额外生成拼音首字母，可用“bz”搜到“bai_zhu”，也可用“gzt”搜到“gui_zhi_tang”
 	herb_search_keyword = _normalize_herb_search_text(new_text)
 
 	# 搜索内容变化后，重新刷新药材按钮列表
@@ -407,13 +418,18 @@ func _is_herb_match_search(herb) -> bool:
 	var herb_id_full_pinyin := _normalize_herb_search_text(herb_id_raw)
 
 	# 拼音首字母匹配：例如 herb_id 是“bai_zhu”，输入“bz”也能命中
-	var herb_id_initials := _get_herb_id_initials(herb_id_raw)
+	var herb_id_initials := _get_id_initials(herb_id_raw)
 
-	return (
+	# 保留原本的药材搜索能力
+	if (
 		herb_name.contains(herb_search_keyword)
 		or herb_id_full_pinyin.contains(herb_search_keyword)
 		or herb_id_initials.contains(herb_search_keyword)
-	)
+	):
+		return true
+
+	# 新增：输入方剂中文名 / 拼音 / 拼音首字母时，显示该方剂包含的药材
+	return _is_herb_in_matching_formula(str(herb.herb_id))
 
 
 func _normalize_herb_search_text(value: String) -> String:
@@ -424,7 +440,11 @@ func _normalize_herb_search_text(value: String) -> String:
 
 
 func _get_herb_id_initials(herb_id: String) -> String:
-	var parts := herb_id.to_lower().split("_", false)
+	return _get_id_initials(herb_id)
+
+
+func _get_id_initials(value: String) -> String:
+	var parts := value.to_lower().split("_", false)
 	var initials := ""
 
 	for part in parts:
@@ -432,6 +452,54 @@ func _get_herb_id_initials(herb_id: String) -> String:
 			initials += part.substr(0, 1)
 
 	return initials
+
+
+func _is_herb_in_matching_formula(herb_id: String) -> bool:
+	if herb_id.strip_edges() == "":
+		return false
+
+	if formula_database == null:
+		return false
+
+	if not formula_database.has_method("get_all_formulas"):
+		return false
+
+	var formulas = formula_database.get_all_formulas()
+	for formula in formulas:
+		if formula == null:
+			continue
+
+		if not _is_formula_match_search(formula):
+			continue
+
+		if formula.has_method("has_herb_id") and formula.has_herb_id(herb_id):
+			return true
+
+	return false
+
+
+func _is_formula_match_search(formula) -> bool:
+	if herb_search_keyword == "":
+		return false
+
+	if formula == null:
+		return false
+
+	# 方剂中文名匹配：例如“桂枝汤”
+	var formula_name := _normalize_herb_search_text(str(formula.formula_name))
+
+	# 方剂拼音匹配：例如 formula_id 是“gui_zhi_tang”，输入“guizhitang”也能命中
+	var formula_id_raw := str(formula.formula_id).to_lower()
+	var formula_id_full_pinyin := _normalize_herb_search_text(formula_id_raw)
+
+	# 方剂拼音首字母匹配：例如 formula_id 是“gui_zhi_tang”，输入“gzt”也能命中
+	var formula_id_initials := _get_id_initials(formula_id_raw)
+
+	return (
+		formula_name.contains(herb_search_keyword)
+		or formula_id_full_pinyin.contains(herb_search_keyword)
+		or formula_id_initials.contains(herb_search_keyword)
+	)
 
 
 # =========================================================

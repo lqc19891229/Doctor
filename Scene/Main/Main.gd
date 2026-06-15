@@ -38,6 +38,9 @@ var current_scene: Node = null
 # 使用逻辑名，不使用场景路径，避免 Story 直接替换 Main。
 var pending_story_return_target: String = ""
 
+# 本次剧情是否暂停了 Clinic 计时
+var story_paused_clinic_clock: bool = false
+
 
 func _ready() -> void:
 	# 连接开始菜单按钮
@@ -240,6 +243,12 @@ func _play_story(story_path: String, return_target: String) -> void:
 		return
 
 	pending_story_return_target = return_target
+	story_paused_clinic_clock = false
+
+	# 进入剧情前暂停 Clinic 计时。
+	# 注意：这里是暂停，不是 stop_clinic_clock()，所以不会清空当前时辰和累计秒数。
+	if GameTime != null and GameTime.has_method("pause_clinic_clock_for_story"):
+		story_paused_clinic_clock = GameTime.pause_clinic_clock_for_story()
 
 	# 只暂存剧情数据，不让 StoryManager 自己切换场景。
 	# set_story() 内部会把 story_id 记录到 played_story_ids。
@@ -248,6 +257,10 @@ func _play_story(story_path: String, return_target: String) -> void:
 	if not story_set_success:
 		push_warning("剧情设置失败：" + story_path)
 		pending_story_return_target = ""
+		if story_paused_clinic_clock:
+			if GameTime != null and GameTime.has_method("resume_clinic_clock_after_story"):
+				GameTime.resume_clinic_clock_after_story()
+			story_paused_clinic_clock = false
 		return
 
 	SaveManager.save_game()
@@ -273,9 +286,32 @@ func _on_story_finished() -> void:
 	pending_story_return_target = ""
 
 	if target == "night":
+		# 如果剧情是从 Clinic 白天触发，但剧情结束后直接进入 Night，
+		# 就不要恢复 Clinic 计时，而是正常结束白天。
+		if story_paused_clinic_clock:
+			if GameTime != null and GameTime.has_method("cancel_story_pause_state"):
+				GameTime.cancel_story_pause_state()
+
+			if GameTime != null and GameTime.is_day():
+				GameTime.finish_day()
+				SaveManager.save_game()
+
+		story_paused_clinic_clock = false
 		_enter_night()
-	else:
+		return
+
+	if target == "clinic":
+		# 回 Clinic 时不在 Main 里直接 resume。
+		# 因为 _enter_clinic() 会实例化 Clinic，
+		# Clinic._ready() 会调用 GameTime.start_clinic_time()，
+		# 而 start_clinic_time() 已经会识别剧情暂停状态并恢复计时。
+		story_paused_clinic_clock = false
 		_enter_clinic()
+		return
+
+	# 兜底：未知 return_target 默认回 Clinic。
+	story_paused_clinic_clock = false
+	_enter_clinic()
 
 
 # =========================================================

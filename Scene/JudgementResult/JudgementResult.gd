@@ -21,6 +21,7 @@ func show_result(data: Dictionary) -> void:
 	var standard_formula_text: String = str(data.get("standard_formula_text", ""))
 	var player_disease_name: String = str(data.get("player_disease_name", ""))
 	var player_prescription_text: String = str(data.get("player_prescription_text", ""))
+	var newly_unlocked_entry_titles: Array[String] = _get_string_array(data.get("newly_unlocked_entry_titles", []))
 
 	# 清空之前内容
 	result_text.clear()
@@ -33,6 +34,9 @@ func show_result(data: Dictionary) -> void:
 	# 下半部分：玩家输入
 	result_text.append_text("断病：%s\n" % player_disease_name)
 	result_text.append_text("开方：\n%s\n" % player_prescription_text)
+
+	if not newly_unlocked_entry_titles.is_empty():
+		result_text.append_text("\n[b]心得新悟：[/b]解锁新条目：%s\n" % "、".join(newly_unlocked_entry_titles))
 
 	# -------------------------------
 	# 显示评级图片
@@ -51,6 +55,18 @@ func show_result(data: Dictionary) -> void:
 			rating_image.texture = null
 
 	rating_image.visible = rating_image.texture != null
+
+
+func _get_string_array(value) -> Array[String]:
+	var result: Array[String] = []
+
+	if value is Array:
+		for item in value:
+			var text := str(item).strip_edges()
+			if text != "":
+				result.append(text)
+
+	return result
 
 
 func _placeholder(text: String) -> String:

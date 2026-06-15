@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bas0ewdnmpdaq"
-path="res://.godot/imported/SourceHanSerifSC-Regular.otf-5db75fdd419334017877163b7a9db3e7.fontdata"
+path="res://.godot/imported/SourceHanSerifSC-Regular.otf-93055dfb64ee1ba62a75b96c940d120c.fontdata"
 
 [deps]
 
-source_file="res://Fonts/SourceHanSerifSC-Regular.otf"
-dest_files=["res://.godot/imported/SourceHanSerifSC-Regular.otf-5db75fdd419334017877163b7a9db3e7.fontdata"]
+source_file="res://Assets/Fonts/SourceHanSerifSC-Regular.otf"
+dest_files=["res://.godot/imported/SourceHanSerifSC-Regular.otf-93055dfb64ee1ba62a75b96c940d120c.fontdata"]
 
 [params]
 

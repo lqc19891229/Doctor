@@ -15,8 +15,10 @@ class_name UnlockManager
 # - Disease 条目：条目已解锁后，可阅读，阅读后解锁对应疾病
 # - Theory 条目：条目已解锁后，可阅读，阅读后只标记已读
 # - 行医记考（clinical_log）显示已同步解锁的实体内容
-# - 名望点数同样作为累计值，用于触发剧情 / 医书条目的自动解锁
+# - 名望点数同样作为累计值，用于剧情解锁和节奏控制
 # - 剧情解锁条件写在 StoryData / 剧情 .tres 中，不再写死在 UnlockManager
+# - StoryData.unlock_entry_id 现在表示剧情触发前置医书条目 ID
+# - UnlockManager 不再因为剧情名望解锁而自动解锁 unlock_entry_id 对应条目
 #
 # 注意：
 # - “解锁”和“已读”分开记录
@@ -108,14 +110,14 @@ var reputation_points: int = 0
 # - story_id：剧情唯一 ID，用来记录是否已解锁。
 # - title：剧情标题，用于提示文本。
 # - required_reputation_points：需要达到的累计名望。
-# - unlock_entry_id：可选，剧情解锁时顺便解锁的医书条目 ID。
+# - unlock_entry_id：可选，剧情触发前必须已经解锁的医书条目 ID。
 #
 # 流程：
 # 1. 玩家获得名望，调用 add_reputation_points()。
 # 2. 本脚本调用 refresh_story_unlocks_by_reputation()。
 # 3. refresh_story_unlocks_by_reputation() 从 StoryManager.get_all_stories() 读取所有剧情资源。
 # 4. 达到名望条件的剧情写入 unlocked_story_ids。
-# 5. 如果剧情配置了 unlock_entry_id，则顺便解锁对应医书条目。
+# 5. unlock_entry_id 不在这里自动解锁，由 StoryManager 在触发剧情前判断是否已解锁。
 # =========================================================
 
 # 已经由名望触发过的剧情 ID。
@@ -227,18 +229,14 @@ func refresh_story_unlocks_by_reputation() -> Array[Dictionary]:
 		if not unlock_story(story_id):
 			continue
 
-		# 如果剧情关联了某个医书条目，则剧情解锁时顺便让该条目可见 / 可读。
-		var entry_id := story.unlock_entry_id.strip_edges()
-		if entry_id != "":
-			unlock_entry(entry_id)
-
+		# unlock_entry_id 现在是剧情触发前置条件，不在这里自动解锁条目。
 		# 返回给调用处的数据，方便 Clinic / PlayerHintWindow 显示“新剧情解锁”。
 		# - story_id：剧情唯一 ID，也作为当前提示显示名。
 		newly_unlocked.append({
 			"story_id": story_id,
 			"title": story_id,
 			"required_reputation_points": required_points,
-			"entry_id": entry_id
+			"entry_id": story.unlock_entry_id.strip_edges()
 		})
 
 	return newly_unlocked

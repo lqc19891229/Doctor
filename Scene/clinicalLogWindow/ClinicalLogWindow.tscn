@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://rfnj1k2mnruh"]
 
 [ext_resource type="Script" uid="uid://bvc6jjyjfrq11" path="res://Scene/clinicalLogWindow/ClinicalLogWindow.gd" id="1_68hx3"]
-[ext_resource type="Texture2D" uid="uid://cm2x84snbdm3l" path="res://Assets/bookpage.png" id="2_rb34b"]
-[ext_resource type="FontFile" uid="uid://bas0ewdnmpdaq" path="res://Fonts/SourceHanSerifSC-Regular.otf" id="3_yklnm"]
+[ext_resource type="Texture2D" uid="uid://cm2x84snbdm3l" path="res://Assets/Background/bookpage.png" id="2_rb34b"]
+[ext_resource type="FontFile" uid="uid://bas0ewdnmpdaq" path="res://Assets/Fonts/SourceHanSerifSC-Regular.otf" id="3_yklnm"]
 [ext_resource type="Script" uid="uid://jjpaynmj2itt" path="res://Scene/clinicalLogWindow/ClassicalVerticalRichTextLabel.gd" id="4_56jji"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_68hx3"]
