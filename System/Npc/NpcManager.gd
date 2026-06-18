@@ -2,73 +2,44 @@
 ## NpcManager.gd
 ##
 ## 脚本功能：
-## 管理 NPC 数据的加载、切换与随机生成。
+## 管理 NPC 数据的加载与切换。
 ##
-## 当前随机 NPC 规则：
-## - Data/Npc 下的 .tres 只作为随机 NPC 模板读取，不再直接塞进当前病人列表。
-## - 平时接诊用 spawn_random_npc() 生成运行时随机 NPC。
-## - 随机 NPC 会随机姓名、性别、年龄、疾病，并按性别年龄随机抽取立绘。
-## - 每个随机 NPC 会生成唯一 npc_id，避免多个病人共用模板 ID。
+## 当前 NPC 规则：
+## - Data/Npc 下的 .tres / .res 全部视为预制 NPC 数据。
+## - npc_type = "random"：平日诊室刷新时，从 random NPC 池中随机抽取。
+## - npc_type = "story"：剧情触发时，按 npc_id 精确选择对应 story NPC。
+## - 抽取出来的 NPC 会 duplicate(true)，避免修改 .tres 原始资源。
 ## =========================================================
 
 extends Node
 
-# NPC 模板列表（固定资源，只作为随机生成参考，不直接当成当前病人）
-var npc_template_list: Array[NpcData] = []
+# 平日常规病人池。
+var random_npc_pool: Array[NpcData] = []
 
-# 当前可切换的 NPC 列表（运行时病人）
+# 剧情病人表。
+# key = npc_id
+# value = NpcData
+var story_npc_by_id: Dictionary = {}
+
+# 当前可切换的 NPC 列表（运行时病人实例）。
 var npc_list: Array[NpcData] = []
 
-# 疾病列表
-var disease_list: Array[DiseaseData] = []
-
-# 当前查看索引
+# 当前查看索引。
 var current_index: int = 0
 
-# 已生成的随机 NPC 数量，用于生成唯一运行时 ID。
-var random_npc_spawn_count: int = 0
-
-# 随机 NPC 立绘根目录。
-# 请在此目录下建立：
-# - male_young
-# - male_adult
-# - male_old
-# - female_young
-# - female_adult
-# - female_old
-const RANDOM_PORTRAIT_ROOT := "res://Assets/Portrait/RandomNPC"
-
-
-# 随机姓名库
-const SURNAMES := [
-	"李", "王", "张", "刘", "陈", "杨", "赵", "黄", "周", "吴",
-	"徐", "孙", "胡", "朱", "高", "林", "何", "郭", "马", "罗"
-]
-
-const MALE_GIVEN_NAMES := [
-	"一川", "子安", "明远", "承泽", "景行", "修远", "子墨", "思源",
-	"景辰", "星河", "知远", "承恩", "怀瑾", "云舟", "清和", "远山"
-]
-
-const FEMALE_GIVEN_NAMES := [
-	"安然", "若琳", "清雅", "诗雨", "梦瑶", "婉晴", "子涵", "若曦",
-	"映雪", "青黛", "云舒", "知夏", "听雨", "月白", "兰因", "书瑶"
-]
+# NPC 资源根目录。支持子文件夹递归扫描。
+const NPC_DIR := "res://Data/Npc"
 
 
 # ============================================================
 # 生命周期初始化
 # ============================================================
 
-# 函数功能：
-# 节点进入场景树后执行初始化。
-# 初始化随机数种子，并加载 NPC 模板和疾病数据。
 func _ready() -> void:
 	randomize()
 	load_all_npcs()
-	load_all_diseases_from_database()
 
-	# 诊室初始没有病人时，自动生成一位常规随机病人。
+	# 诊室初始没有病人时，自动抽取一位常规 random NPC。
 	if npc_list.is_empty():
 		spawn_random_npc()
 
@@ -78,64 +49,85 @@ func _ready() -> void:
 # ============================================================
 
 # 函数功能：
-# 从 res://Data/Npc 目录中加载所有 NPC 模板资源。
-# 注意：
-# - 这里加载到 npc_template_list。
-# - 不再直接写入 npc_list。
-# - npc_list 只保存运行时真正出现的病人。
+# 从 res://Data/Npc 目录递归加载所有 NPC 资源。
+# 资源按 NpcData.npc_type 分为 random 与 story 两类。
 func load_all_npcs() -> void:
 	npc_list.clear()
-	npc_template_list.clear()
+	random_npc_pool.clear()
+	story_npc_by_id.clear()
 	current_index = 0
-	random_npc_spawn_count = 0
 
-	var dir := DirAccess.open("res://Data/Npc")
+	_scan_npc_dir(NPC_DIR)
 
-	if dir == null:
-		print("Npc/data 文件夹不存在")
-		return
-
-	dir.list_dir_begin()
-	var file := dir.get_next()
-
-	while file != "":
-		if file.ends_with(".tres") or file.ends_with(".res"):
-			var path := "res://Data/Npc/" + file
-			var npc = load(path)
-
-			if npc is NpcData:
-				npc_template_list.append(npc)
-
-		file = dir.get_next()
-
-	dir.list_dir_end()
-
-	print("加载 NPC 随机模板数量：", npc_template_list.size())
+	print("加载 random NPC 数量：", random_npc_pool.size())
+	print("加载 story NPC 数量：", story_npc_by_id.size())
 	print("当前运行时 NPC 列表数量：", npc_list.size())
 
 
-# 函数功能：
-# 从 DiseaseDB 中读取所有疾病数据。
-# 随机生成 NPC 时会从该列表中随机分配疾病。
-func load_all_diseases_from_database() -> void:
-	disease_list.clear()
-
-	if DiseaseDB == null:
-		print("DiseaseDB 不存在")
+func _scan_npc_dir(dir_path: String) -> void:
+	var dir := DirAccess.open(dir_path)
+	if dir == null:
+		push_warning("NPC 文件夹不存在：%s" % dir_path)
 		return
 
-	disease_list = DiseaseDB.get_all_diseases()
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
 
-	print("从 DiseaseDB 加载 Disease 数量：", disease_list.size())
+	while file_name != "":
+		if file_name == "." or file_name == "..":
+			file_name = dir.get_next()
+			continue
+
+		var full_path := dir_path.path_join(file_name)
+
+		if dir.current_is_dir():
+			_scan_npc_dir(full_path)
+		else:
+			if file_name.ends_with(".tres") or file_name.ends_with(".res"):
+				_load_npc_resource(full_path)
+
+		file_name = dir.get_next()
+
+	dir.list_dir_end()
+
+
+func _load_npc_resource(path: String) -> void:
+	var loaded_resource := load(path)
+	if loaded_resource == null:
+		push_warning("NPC 资源加载失败：%s" % path)
+		return
+
+	if not loaded_resource is NpcData:
+		push_warning("加载的资源不是 NpcData：%s" % path)
+		return
+
+	var npc := loaded_resource as NpcData
+	var npc_type := npc.npc_type.strip_edges()
+
+	# 兼容旧数据：没有写 npc_type 的 NPC 默认视为 random。
+	if npc_type == "" or npc_type == "random":
+		random_npc_pool.append(npc)
+		return
+
+	if npc_type == "story":
+		var npc_id := npc.npc_id.strip_edges()
+		if npc_id == "":
+			push_warning("story NPC 缺少 npc_id：%s" % path)
+			return
+
+		if story_npc_by_id.has(npc_id):
+			push_warning("重复的 story NPC npc_id：%s，后加载的资源会覆盖前一个。" % npc_id)
+
+		story_npc_by_id[npc_id] = npc
+		return
+
+	push_warning("未知 npc_type：%s，路径：%s" % [npc_type, path])
 
 
 # ============================================================
 # 当前 NPC 获取与切换
 # ============================================================
 
-# 函数功能：
-# 获取当前索引对应的 NPC。
-# 如果列表为空，会尝试自动生成一个随机 NPC。
 func get_current_npc() -> NpcData:
 	if npc_list.is_empty():
 		spawn_random_npc()
@@ -149,252 +141,137 @@ func get_current_npc() -> NpcData:
 	return npc_list[current_index]
 
 
-# 函数功能：
-# 将当前 NPC 切换到上一个。
-# 如果已经位于第一个 NPC，则循环切换到最后一个 NPC。
 func prev_npc() -> void:
 	if npc_list.is_empty():
 		spawn_random_npc()
 		return
 
 	current_index -= 1
-
 	if current_index < 0:
 		current_index = npc_list.size() - 1
 
 
-# 函数功能：
-# 将当前 NPC 切换到下一个。
-# 如果已经位于最后一个 NPC，则循环切换到第一个 NPC。
 func next_npc() -> void:
 	if npc_list.is_empty():
 		spawn_random_npc()
 		return
 
 	current_index += 1
-
 	if current_index >= npc_list.size():
 		current_index = 0
 
 
 # ============================================================
-# 随机基础信息生成
+# NPC 实例化
 # ============================================================
 
-# 函数功能：
-# 从姓氏库和名字库中随机组合一个 NPC 姓名。
-func random_name(gender: String = "") -> String:
-	var surname = SURNAMES[randi() % SURNAMES.size()]
-	var given_names := MALE_GIVEN_NAMES
-
-	if gender == "女":
-		given_names = FEMALE_GIVEN_NAMES
-	elif gender != "男" and randi() % 2 == 1:
-		given_names = FEMALE_GIVEN_NAMES
-
-	var given = given_names[randi() % given_names.size()]
-	return surname + given
-
-
-# 函数功能：
-# 随机生成 NPC 性别。
-func random_gender() -> String:
-	return "男" if randi() % 2 == 0 else "女"
-
-
-# 函数功能：
-# 随机生成 NPC 年龄。
-# 当前年龄范围为 16 到 70 岁。
-func random_age() -> int:
-	return randi_range(16, 70)
-
-
-# ============================================================
-# 随机立绘
-# ============================================================
-
-# 函数功能：
-# 按年龄划分立绘年龄段。
-# 16 - 29：young
-# 30 - 54：adult
-# 55+：old
-func _get_age_group(age: int) -> String:
-	if age < 30:
-		return "young"
-
-	if age < 55:
-		return "adult"
-
-	return "old"
-
-
-# 函数功能：
-# 把中文性别转换成随机立绘文件夹使用的英文前缀。
-func _get_gender_folder(gender: String) -> String:
-	if gender == "女":
-		return "female"
-
-	return "male"
-
-
-# 函数功能：
-# 根据性别和年龄得到随机立绘目录。
-func _get_portrait_folder(gender: String, age: int) -> String:
-	return "%s/%s_%s" % [
-		RANDOM_PORTRAIT_ROOT,
-		_get_gender_folder(gender),
-		_get_age_group(age)
-	]
-
-
-# 函数功能：
-# 读取目录下可作为 Texture2D 加载的图片文件。
-func _get_texture_files_in_folder(folder_path: String) -> Array[String]:
-	var result: Array[String] = []
-
-	var dir := DirAccess.open(folder_path)
-	if dir == null:
-		return result
-
-	dir.list_dir_begin()
-	var file_name := dir.get_next()
-
-	while file_name != "":
-		if not dir.current_is_dir():
-			var lower_name := file_name.to_lower()
-			var is_texture_file := false
-			is_texture_file = is_texture_file or lower_name.ends_with(".png")
-			is_texture_file = is_texture_file or lower_name.ends_with(".jpg")
-			is_texture_file = is_texture_file or lower_name.ends_with(".jpeg")
-			is_texture_file = is_texture_file or lower_name.ends_with(".webp")
-
-			if is_texture_file:
-				result.append(folder_path + "/" + file_name)
-
-		file_name = dir.get_next()
-
-	dir.list_dir_end()
-	return result
-
-
-# 函数功能：
-# 根据随机 NPC 的性别、年龄，从对应目录随机抽取一张立绘。
-# 如果目录不存在、目录为空或图片加载失败，则回退到模板自带 portrait。
-func _get_random_portrait(gender: String, age: int, fallback_portrait: Texture2D = null) -> Texture2D:
-	var folder_path := _get_portrait_folder(gender, age)
-	var files := _get_texture_files_in_folder(folder_path)
-
-	if files.is_empty():
-		push_warning("随机 NPC 立绘目录为空或不存在：%s，将使用模板立绘。" % folder_path)
-		return fallback_portrait
-
-	var file_path: String = files[randi() % files.size()]
-	var texture = load(file_path)
-
-	if texture is Texture2D:
-		return texture
-
-	push_warning("随机 NPC 立绘加载失败：%s，将使用模板立绘。" % file_path)
-	return fallback_portrait
-
-
-# ============================================================
-# 随机 NPC 创建与加入列表
-# ============================================================
-
-func _get_random_template() -> NpcData:
-	if npc_template_list.is_empty():
+func _make_runtime_npc(source_npc: NpcData, forced_type: String = "") -> NpcData:
+	if source_npc == null:
 		return null
 
-	return npc_template_list[randi() % npc_template_list.size()]
-
-
-func _get_random_disease() -> DiseaseData:
-	if disease_list.is_empty():
+	var npc := source_npc.duplicate(true) as NpcData
+	if npc == null:
 		return null
 
-	return disease_list[randi() % disease_list.size()]
+	if forced_type != "":
+		npc.npc_type = forced_type
 
-
-func _make_random_npc_id(template: NpcData) -> String:
-	random_npc_spawn_count += 1
-
-	var template_id := "template"
-	if template != null:
-		template_id = template.npc_id.strip_edges()
-		if template_id == "":
-			template_id = "template"
-
-	return "random_%s_%04d" % [template_id, random_npc_spawn_count]
-
-
-# 函数功能：
-# 根据随机 NPC 模板和随机疾病生成一个新的运行时 NPC。
-# 生成失败时返回 null。
-func generate_random_npc() -> NpcData:
-	if npc_template_list.is_empty():
-		print("没有 NPC 模板，无法生成随机 NPC")
-		return null
-
-	if disease_list.is_empty():
-		print("没有 Disease 数据，无法生成随机 NPC")
-		return null
-
-	var template := _get_random_template()
-	var disease := _get_random_disease()
-
-	if template == null or disease == null:
-		return null
-
-	var npc := NpcData.new()
-
-	# 生成唯一运行时 ID，并记录来源模板。
-	npc.npc_id = _make_random_npc_id(template)
-	npc.npc_type = "random"
-	npc.source_template_id = template.npc_id.strip_edges()
-
-	# 生成时随机人物信息。
-	var generated_gender := random_gender()
-	var generated_age := random_age()
-	npc.gender = generated_gender
-	npc.npc_name = random_name(generated_gender)
-	npc.age = generated_age
-
-	# 根据性别和年龄随机抽取立绘。
-	# 如果对应目录没有图片，则自动回退到模板自带立绘。
-	npc.portrait = _get_random_portrait(generated_gender, generated_age, template.portrait)
-
-	# 运行时状态。
-	npc.disease = disease
+	# 每次进入诊室时都是新的诊疗实例，不直接污染原始 .tres。
 	npc.is_treated = false
-
 	return npc
 
 
-# 函数功能：
-# 生成一个随机 NPC，并加入当前 NPC 列表。
-# 生成成功后会自动切换到新生成的 NPC。
+# ============================================================
+# random NPC：平日刷新用
+# ============================================================
+
+func get_random_npc_template() -> NpcData:
+	if random_npc_pool.is_empty():
+		return null
+
+	return random_npc_pool[randi() % random_npc_pool.size()]
+
+
+func generate_random_npc() -> NpcData:
+	var source_npc := get_random_npc_template()
+	if source_npc == null:
+		push_warning("没有 random NPC，无法抽取平日病人。请在 Data/Npc 下创建 npc_type = random 的 NpcData。")
+		return null
+
+	return _make_runtime_npc(source_npc, "random")
+
+
 func spawn_random_npc() -> NpcData:
 	var npc := generate_random_npc()
-
 	if npc == null:
 		return null
 
 	npc_list.append(npc)
 	current_index = npc_list.size() - 1
 
-	print("生成随机 NPC：", npc.npc_name, " / ", npc.npc_id)
+	print("抽取 random NPC：", npc.npc_name, " / ", npc.npc_id)
 	if npc.disease != null:
-		print("随机 NPC 疾病：", npc.disease.disease_name)
+		print("random NPC 疾病：", npc.disease.disease_name)
 	print("当前运行时 NPC 列表数量：", npc_list.size())
 
 	return npc
 
 
-# 函数功能：
-# 清空当前运行时病人，并生成一个新的随机病人。
-# 如果你希望“换下一位普通病人”时不保留旧随机病人，可以调用这个函数。
 func replace_with_random_npc() -> NpcData:
 	npc_list.clear()
 	current_index = 0
 	return spawn_random_npc()
+
+
+# ============================================================
+# story NPC：剧情指定用
+# ============================================================
+
+func has_story_npc(npc_id: String) -> bool:
+	var clean_id := npc_id.strip_edges()
+	if clean_id == "":
+		return false
+
+	return story_npc_by_id.has(clean_id)
+
+
+func get_story_npc_template(npc_id: String) -> NpcData:
+	var clean_id := npc_id.strip_edges()
+	if clean_id == "":
+		return null
+
+	if not story_npc_by_id.has(clean_id):
+		return null
+
+	return story_npc_by_id[clean_id] as NpcData
+
+
+func generate_story_npc(npc_id: String) -> NpcData:
+	var source_npc := get_story_npc_template(npc_id)
+	if source_npc == null:
+		push_warning("找不到 story NPC：%s。请检查 Data/Npc 下是否存在 npc_type = story 且 npc_id 匹配的资源。" % npc_id)
+		return null
+
+	return _make_runtime_npc(source_npc, "story")
+
+
+func spawn_story_npc(npc_id: String) -> NpcData:
+	var npc := generate_story_npc(npc_id)
+	if npc == null:
+		return null
+
+	npc_list.append(npc)
+	current_index = npc_list.size() - 1
+
+	print("抽取 story NPC：", npc.npc_name, " / ", npc.npc_id)
+	if npc.disease != null:
+		print("story NPC 疾病：", npc.disease.disease_name)
+	print("当前运行时 NPC 列表数量：", npc_list.size())
+
+	return npc
+
+
+func replace_with_story_npc(npc_id: String) -> NpcData:
+	npc_list.clear()
+	current_index = 0
+	return spawn_story_npc(npc_id)

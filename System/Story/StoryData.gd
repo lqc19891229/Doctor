@@ -24,6 +24,10 @@ var trigger_scene: String = "clinic"
 @export_enum("clinic", "night", "map")
 var return_scene: String = "clinic"
 
+# 剧情结束后如果回到 clinic，并且需要指定当前接诊病人，填写 story NPC 的 npc_id。
+# 对应 NPC 资源需要放在 res://Data/Npc 下，且 NpcData.npc_type = "story"。
+@export var clinic_npc_id: String = ""
+
 # 背景图
 @export var background: Texture2D
 

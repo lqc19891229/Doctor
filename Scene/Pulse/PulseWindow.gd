@@ -149,6 +149,75 @@ func close_window() -> void:
 # =========================================================
 # Esc 快捷键关闭窗口
 # =========================================================
+
+# =========================================================
+# Clinic 主界面窗口快捷键转发
+# =========================================================
+const CLINIC_SHORTCUT_OPEN_PULSE := KEY_F1
+const CLINIC_SHORTCUT_OPEN_PRESCRIPTION := KEY_F2
+const CLINIC_SHORTCUT_OPEN_CLINICAL_LOG := KEY_F3
+
+
+func _input(event: InputEvent) -> void:
+	if _try_handle_clinic_window_shortcut(event):
+		return
+
+
+func _try_handle_clinic_window_shortcut(event: InputEvent) -> bool:
+	if not visible:
+		return false
+
+	if not (event is InputEventKey):
+		return false
+
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return false
+
+	if key_event.alt_pressed or key_event.ctrl_pressed or key_event.meta_pressed or key_event.shift_pressed:
+		return false
+
+	var clinic := _find_clinic_controller()
+	if clinic == null:
+		return false
+
+	match key_event.keycode:
+		CLINIC_SHORTCUT_OPEN_PULSE:
+			if clinic.has_method("open_pulse_window"):
+				clinic.open_pulse_window()
+			else:
+				return false
+		CLINIC_SHORTCUT_OPEN_PRESCRIPTION:
+			if clinic.has_method("open_prescription_window"):
+				clinic.open_prescription_window()
+			else:
+				return false
+		CLINIC_SHORTCUT_OPEN_CLINICAL_LOG:
+			if clinic.has_method("open_clinical_log_window"):
+				clinic.open_clinical_log_window()
+			else:
+				return false
+		_:
+			return false
+
+	get_viewport().set_input_as_handled()
+	return true
+
+
+func _find_clinic_controller() -> Node:
+	var node := get_parent()
+	while node != null:
+		if (
+			node.has_method("open_pulse_window")
+			and node.has_method("open_prescription_window")
+			and node.has_method("open_clinical_log_window")
+		):
+			return node
+
+		node = node.get_parent()
+
+	return null
+
 func _unhandled_input(event: InputEvent) -> void:
 	# 窗口未显示时，不处理 Esc，避免影响其他界面
 	if not visible:

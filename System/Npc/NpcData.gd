@@ -9,10 +9,9 @@
 ## 每一个 NPC 实例都可以保存：
 ## 名字，性别，年龄，头像，当前疾病。
 ##
-## 随机 NPC 与剧情 NPC 使用同一份数据结构：
-## - random：运行时随机生成的常规病人
-## - story：剧情指定的手动 NPC
-## - template：只作为随机生成参考的模板资源
+## random NPC 与 story NPC 使用同一份数据结构：
+## - random：平日诊室刷新时，从 Data/Npc 中随机抽取的常规病人
+## - story：剧情指定的手动 NPC，由剧情按 npc_id 精确选择
 ## =========================================================
 
 class_name NpcData
@@ -24,19 +23,14 @@ extends Resource
 ## =========================================================
 
 ## NPC 唯一 ID。
-## 随机 NPC 会在运行时生成唯一 ID。
-## 剧情 NPC 可以在 .tres 中手动填写固定 ID。
+## random / story 都建议在 .tres 中手动填写固定 ID。
+## story NPC 必须填写，用于剧情按 ID 精确选择。
 @export var npc_id: String = ""
 
 ## NPC 类型：
-## random = 随机常规病人
+## random = 平日诊室刷新用的常规病人
 ## story = 剧情指定病人
-## template = 随机 NPC 生成模板
-@export_enum("random", "story", "template") var npc_type: String = "random"
-
-## 如果这个 NPC 是随机生成的，这里记录它来自哪个模板。
-## 剧情 NPC 可以留空。
-@export var source_template_id: String = ""
+@export_enum("random", "story") var npc_type: String = "random"
 
 ## NPC 名字
 @export var npc_name: String = ""

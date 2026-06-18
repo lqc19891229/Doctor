@@ -39,6 +39,11 @@ const DEFAULT_DISPLAY_REGION := "浮脉"
 # 判定结果弹窗场景路径
 const JUDGEMENT_RESULT_SCENE_PATH := "res://Scene/JudgementResult/JudgementResult.tscn"
 
+# Clinic 主界面快捷键
+const SHORTCUT_OPEN_PULSE := KEY_F1
+const SHORTCUT_OPEN_PRESCRIPTION := KEY_F2
+const SHORTCUT_OPEN_CLINICAL_LOG := KEY_F3
+
 
 # =========================================================
 # 场景节点引用
@@ -163,6 +168,7 @@ func _ready() -> void:
 	_setup_time_system()
 	_setup_prescription_window()
 	_setup_clinical_log_window()
+	_setup_button_shortcuts()
 	_connect_signals()
 
 	refresh_clinic_view()
@@ -194,6 +200,24 @@ func _process(_delta: float) -> void:
 	# 只有脉象窗口打开时才处理键盘把脉逻辑
 	if pulse_window != null and pulse_window.visible:
 		_update_pulse_keyboard_display()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	# F1 / F2 / F3 是 Clinic 主界面的窗口快捷键。
+	# 使用 _unhandled_input 兜底，避免按钮焦点不在时快捷键失效。
+	if not _is_valid_shortcut_key_event(event):
+		return
+
+	match event.keycode:
+		SHORTCUT_OPEN_PULSE:
+			_on_open_pulse_window_button_pressed()
+			get_viewport().set_input_as_handled()
+		SHORTCUT_OPEN_PRESCRIPTION:
+			_on_open_prescription_window_button_pressed()
+			get_viewport().set_input_as_handled()
+		SHORTCUT_OPEN_CLINICAL_LOG:
+			_on_clinical_log_button_pressed()
+			get_viewport().set_input_as_handled()
 
 
 # =========================================================
@@ -374,6 +398,48 @@ func _setup_clinical_log_window() -> void:
 		return
 
 	clinical_log_window.hide()
+
+
+# =========================================================
+# 初始化：主界面按钮快捷键
+# =========================================================
+
+func _setup_button_shortcuts() -> void:
+	_setup_button_shortcut(open_pulse_window_button, SHORTCUT_OPEN_PULSE)
+	_setup_button_shortcut(open_prescription_window_button, SHORTCUT_OPEN_PRESCRIPTION)
+	_setup_button_shortcut(clinical_log_button, SHORTCUT_OPEN_CLINICAL_LOG)
+
+
+func _setup_button_shortcut(button: BaseButton, keycode: Key) -> void:
+	if button == null:
+		return
+
+	var shortcut := Shortcut.new()
+	var key_event := InputEventKey.new()
+	key_event.keycode = keycode
+	shortcut.events = [key_event]
+	button.shortcut = shortcut
+	button.shortcut_in_tooltip = true
+
+
+func _is_valid_shortcut_key_event(event: InputEvent) -> bool:
+	if not (event is InputEventKey):
+		return false
+
+	var key_event := event as InputEventKey
+	if not key_event.pressed:
+		return false
+	if key_event.echo:
+		return false
+	if key_event.alt_pressed or key_event.ctrl_pressed or key_event.meta_pressed or key_event.shift_pressed:
+		return false
+
+	return (
+		key_event.keycode == SHORTCUT_OPEN_PULSE
+		or key_event.keycode == SHORTCUT_OPEN_PRESCRIPTION
+		or key_event.keycode == SHORTCUT_OPEN_CLINICAL_LOG
+	)
+
 
 # =========================================================
 # 初始化：信号连接
@@ -681,6 +747,36 @@ func _reset_pulse_keyboard_state() -> void:
 func _clear_pulse() -> void:
 	if pulse_window != null:
 		pulse_window.clear_display()
+
+
+# =========================================================
+# 脉象窗口开关
+# =========================================================
+
+func open_pulse_window() -> void:
+	if pulse_window == null:
+		return
+
+	# 打开脉诊窗口时，只显示按键提示页。
+	# 不再自动调用 show_region()，避免窗口一打开就跳到脉象图。
+	pulse_window.open_window()
+
+	if pulse_window.has_method("show_hint_tab"):
+		pulse_window.show_hint_tab()
+
+	last_pulse_input_signature = ""
+
+
+func close_pulse_window() -> void:
+	if pulse_window == null:
+		return
+
+	if pulse_window.has_method("close_window"):
+		pulse_window.close_window()
+	else:
+		pulse_window.hide()
+
+	_reset_pulse_keyboard_state()
 
 
 # =========================================================
@@ -1105,7 +1201,12 @@ func _on_judgement_result_window_closed() -> void:
 
 func _go_to_next_patient_after_judgement() -> void:
 	if npc_manager != null:
-		npc_manager.spawn_random_npc()
+		# 平日下一位病人从 random NPC 池中重新抽取，并替换当前病人。
+		# 不再保留上一位已判定病人的运行时数据。
+		if npc_manager.has_method("replace_with_random_npc"):
+			npc_manager.replace_with_random_npc()
+		else:
+			npc_manager.spawn_random_npc()
 		refresh_clinic_view()
 
 
@@ -1146,7 +1247,10 @@ func _on_next_button_pressed() -> void:
 
 
 func _on_spawn_npc_button_pressed() -> void:
-	npc_manager.spawn_random_npc()
+	if npc_manager.has_method("replace_with_random_npc"):
+		npc_manager.replace_with_random_npc()
+	else:
+		npc_manager.spawn_random_npc()
 	refresh_clinic_view()
 
 
@@ -1160,17 +1264,7 @@ func _on_submit_button_pressed() -> void:
 # =========================================================
 
 func _on_open_pulse_window_button_pressed() -> void:
-	if pulse_window == null:
-		return
-
-	# 打开脉诊窗口时，只显示按键提示页。
-	# 不再自动调用 show_region()，避免窗口一打开就跳到脉象图。
-	pulse_window.open_window()
-
-	if pulse_window.has_method("show_hint_tab"):
-		pulse_window.show_hint_tab()
-
-	last_pulse_input_signature = ""
+	open_pulse_window()
 
 
 func _on_pulse_panel_region_selected(display_region_name: String) -> void:
@@ -1179,8 +1273,7 @@ func _on_pulse_panel_region_selected(display_region_name: String) -> void:
 
 
 func _on_pulse_window_close_requested() -> void:
-	pulse_window.close_window()
-	_reset_pulse_keyboard_state()
+	close_pulse_window()
 
 
 # =========================================================
@@ -1315,9 +1408,42 @@ func start_new_day(day: int) -> void:
 	_update_thoughts_point_ui(true)
 	_update_reputation_point_ui(true)
 
+	# 如果刚从剧情返回，并且剧情配置了 clinic_npc_id，优先切到对应 story NPC。
+	# 这里直接 return，避免剧情结束回诊室后又立刻触发下一段自动剧情。
+	if _apply_pending_story_npc_from_story_manager():
+		return
+
 	# 自动剧情触发入口.
 	# 具体触发条件不再写死在 Clinic.gd，改由 StoryData + StoryManager 决定。
 	_try_start_auto_story("clinic", current_day)
+
+
+func _apply_pending_story_npc_from_story_manager() -> bool:
+	if StoryManager == null:
+		return false
+
+	if not StoryManager.has_method("consume_pending_clinic_npc_id"):
+		return false
+
+	var pending_npc_id: String = StoryManager.consume_pending_clinic_npc_id()
+	if pending_npc_id.strip_edges() == "":
+		return false
+
+	if npc_manager == null:
+		push_warning("剧情指定了 story NPC，但 Clinic 找不到 NpcManager：%s" % pending_npc_id)
+		return false
+
+	if not npc_manager.has_method("replace_with_story_npc"):
+		push_warning("NpcManager 缺少 replace_with_story_npc()，无法切换剧情 NPC：%s" % pending_npc_id)
+		return false
+
+	var npc: NpcData = npc_manager.replace_with_story_npc(pending_npc_id)
+	if npc == null:
+		push_warning("剧情指定的 story NPC 加载失败：%s" % pending_npc_id)
+		return false
+
+	refresh_clinic_view()
+	return true
 
 
 func _try_start_auto_story(trigger_scene: String, day: int) -> bool:

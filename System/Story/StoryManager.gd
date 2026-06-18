@@ -30,6 +30,10 @@ var current_story: StoryData = null
 # 正式流程里主要作为记录使用，真正返回由 Main.gd 控制。
 var return_scene_override: String = ""
 
+# 剧情结束后回到 Clinic 时，需要指定接诊的 story NPC。
+# 这里不会在 clear_story() 中清空，而是等 Clinic 消费，避免 Story 场景结束后数据丢失。
+var pending_clinic_npc_id: String = ""
+
 
 # 是否已经播放过 Clinic 第一次进入剧情。
 # 注意：
@@ -140,6 +144,12 @@ func set_story(story: StoryData, return_scene: String = "") -> bool:
 	current_story = story
 	return_scene_override = return_scene
 
+	# 如果剧情配置了 clinic_npc_id，则剧情结束回到 Clinic 后指定该 story NPC 为当前病人。
+	pending_clinic_npc_id = ""
+	var raw_clinic_npc_id = story.get("clinic_npc_id")
+	if raw_clinic_npc_id != null:
+		pending_clinic_npc_id = String(raw_clinic_npc_id).strip_edges()
+
 	# 设置剧情时，顺便记录已播放。
 	# 这样可以防止同一个剧情重复触发。
 	_mark_story_played(story)
@@ -230,8 +240,16 @@ func clear_story() -> void:
 	# 清空当前剧情缓存。
 	# 不要清空 has_played_clinic_intro，否则回到 Clinic 后会重复播放教学剧情。
 	# 不要清空 played_story_ids，否则所有一次性剧情都会再次触发。
+	# 不要在这里清空 pending_clinic_npc_id，它需要等 Clinic 重新进入后消费。
 	current_story = null
 	return_scene_override = ""
+
+
+func consume_pending_clinic_npc_id() -> String:
+	# Clinic 回场景后调用。读取后立刻清空，避免重复套用同一个剧情 NPC。
+	var result := pending_clinic_npc_id.strip_edges()
+	pending_clinic_npc_id = ""
+	return result
 
 
 func register_story_path(story_path: String) -> void:

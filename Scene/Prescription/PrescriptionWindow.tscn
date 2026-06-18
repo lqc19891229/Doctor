@@ -78,7 +78,7 @@ theme_override_constants/separation = 6
 [node name="JunTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel/VBoxContainer" unique_id=135647991]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "君"
+text = "君(1)"
 
 [node name="JunList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel/VBoxContainer" unique_id=931144293]
 layout_mode = 2
@@ -101,7 +101,7 @@ theme_override_constants/separation = 6
 [node name="ChenTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ChenPanel/VBoxContainer" unique_id=1646800110]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "臣"
+text = "臣(2)"
 
 [node name="ChenList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ChenPanel/VBoxContainer" unique_id=622450247]
 layout_mode = 2
@@ -123,7 +123,7 @@ grow_vertical = 2
 [node name="ZuoTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ZuoPanel/VBoxContainer" unique_id=356262114]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "佐"
+text = "佐(3)"
 
 [node name="ZuoList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ZuoPanel/VBoxContainer" unique_id=97672710]
 layout_mode = 2
@@ -145,7 +145,7 @@ grow_vertical = 2
 [node name="ShiTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel/VBoxContainer" unique_id=351366563]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "使"
+text = "使(4)"
 
 [node name="ShiList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel/VBoxContainer" unique_id=421256194]
 layout_mode = 2

@@ -60,13 +60,14 @@ const SHICHEN_LIST: Array[String] = [
 # 日期显示设置
 # 只影响日期文本，不影响白天 / 夜晚 / 十二时辰逻辑
 #
-# current_day = 1   嘉靖十九年春
-# current_day = 2   嘉靖十九年夏
-# current_day = 3   嘉靖十九年秋
-# current_day = 4   嘉靖十九年冬
-# current_day = 5   嘉靖二十年春
+# current_day = 1    嘉靖十九年立春
+# current_day = 2    嘉靖十九年雨水
+# current_day = 3    嘉靖十九年惊蛰
 # ...
-# 嘉靖四十五年冬之后进入万历元年春
+# current_day = 24   嘉靖十九年大寒
+# current_day = 25   嘉靖二十年立春
+# ...
+# 嘉靖四十五年大寒之后进入万历元年立春
 # =========================================================
 
 const START_ERA_NAME: String = "嘉靖"
@@ -76,11 +77,31 @@ const START_ERA_LAST_YEAR: int = 45
 const NEXT_ERA_NAME: String = "万历"
 const NEXT_ERA_START_YEAR: int = 1
 
-const SEASON_LIST: Array[String] = [
-	"春",
-	"夏",
-	"秋",
-	"冬"
+const SOLAR_TERM_LIST: Array[String] = [
+	"立春",
+	"雨水",
+	"惊蛰",
+	"春分",
+	"清明",
+	"谷雨",
+	"立夏",
+	"小满",
+	"芒种",
+	"夏至",
+	"小暑",
+	"大暑",
+	"立秋",
+	"处暑",
+	"白露",
+	"秋分",
+	"寒露",
+	"霜降",
+	"立冬",
+	"小雪",
+	"大雪",
+	"冬至",
+	"小寒",
+	"大寒"
 ]
 
 
@@ -104,7 +125,7 @@ const CLINIC_SECONDS_PER_SHICHEN: float = 60.0
 
 # 当前时间序号
 # 这里只保留 current_day 变量名，方便兼容现有代码
-# 实际显示时按“季度”解释：1 = 嘉靖十九年春，2 = 嘉靖十九年夏
+# 实际显示时按“节气”解释：1 = 嘉靖十九年立春，2 = 嘉靖十九年雨水
 var current_day: int = 1
 
 # 当前阶段
@@ -324,19 +345,26 @@ func finish_night() -> void:
 # UI 显示文本
 # =========================================================
 func get_day_text() -> String:
-	var passed_quarters: int = current_day - 1
+	return get_day_text_by_index(current_day)
 
-	var year_offset: int = int(passed_quarters / 4)
-	var season_index: int = passed_quarters % 4
+
+func get_day_text_by_index(day_index: int) -> String:
+	if day_index < 1:
+		day_index = 1
+
+	var passed_terms: int = day_index - 1
+
+	var year_offset: int = int(passed_terms / SOLAR_TERM_LIST.size())
+	var solar_term_index: int = passed_terms % SOLAR_TERM_LIST.size()
 
 	var era_year_from_jiajing_start: int = START_ERA_YEAR + year_offset
-	var season_text: String = SEASON_LIST[season_index]
+	var solar_term_text: String = SOLAR_TERM_LIST[solar_term_index]
 
 	if era_year_from_jiajing_start <= START_ERA_LAST_YEAR:
 		return "%s%s年%s" % [
 			START_ERA_NAME,
 			era_year_to_chinese(era_year_from_jiajing_start),
-			season_text
+			solar_term_text
 		]
 
 	var years_after_start_era: int = era_year_from_jiajing_start - START_ERA_LAST_YEAR
@@ -345,7 +373,7 @@ func get_day_text() -> String:
 	return "%s%s年%s" % [
 		NEXT_ERA_NAME,
 		era_year_to_chinese(next_era_year),
-		season_text
+		solar_term_text
 	]
 
 

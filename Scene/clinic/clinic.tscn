@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://brf2blpetnvs1"]
 
 [ext_resource type="Script" uid="uid://d3fc1n20xbhxf" path="res://Scene/Clinic/Clinic.gd" id="1_y7fei"]
-[ext_resource type="Texture2D" uid="uid://bs8db1ig0w255" path="res://Assets/Portrait/li_shi_zhen.png" id="2_436d3"]
 [ext_resource type="Script" uid="uid://cse2gud2bttup" path="res://System/Npc/NpcManager.gd" id="2_l04vw"]
 [ext_resource type="PackedScene" uid="uid://c1kldxjoeyc78" path="res://Scene/Prescription/PrescriptionWindow.tscn" id="5_h552d"]
 [ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/clinicalLogWindow/ClinicalLogWindow.tscn" id="5_ruh48"]
@@ -62,7 +61,6 @@ offset_left = 280.0
 offset_top = 220.0
 offset_right = 850.0
 offset_bottom = 980.0
-texture = ExtResource("2_436d3")
 expand_mode = 1
 stretch_mode = 4
 
@@ -155,21 +153,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_436d3")
-text = "把脉"
+text = "把脉(F1)"
 
 [node name="OpenPrescriptionWindowButton" type="Button" parent="VBoxContainer/ButtonRow" unique_id=1911117914]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_las05")
-text = "开方"
+text = "开方(F2)"
 
 [node name="Openclinical_logWindowButton" type="Button" parent="VBoxContainer/ButtonRow" unique_id=1425448604]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_h552d")
-text = "行医记考"
+text = "行医记考(F3)"
 
 [node name="PrescriptionWindow" parent="." unique_id=901784337 instance=ExtResource("5_h552d")]
 visible = false

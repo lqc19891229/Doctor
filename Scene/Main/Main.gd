@@ -24,6 +24,13 @@ class_name Main
 @onready var load_game_button: Button = $MainMenuLayer/MenuPanel/VBoxContainer/LoadGameButton
 @onready var quit_game_button: Button = $MainMenuLayer/MenuPanel/VBoxContainer/QuitGameButton
 
+# 读取存档弹窗
+@onready var save_slot_popup: Panel = $MainMenuLayer/SaveSlotPopup
+@onready var save_slot_1_button: Button = $MainMenuLayer/SaveSlotPopup/VBoxContainer/Slot1Button
+@onready var save_slot_2_button: Button = $MainMenuLayer/SaveSlotPopup/VBoxContainer/Slot2Button
+@onready var save_slot_3_button: Button = $MainMenuLayer/SaveSlotPopup/VBoxContainer/Slot3Button
+@onready var save_slot_close_button: Button = $MainMenuLayer/SaveSlotPopup/VBoxContainer/CloseButton
+
 
 # 预加载场景
 const CLINIC_SCENE: PackedScene = preload("res://Scene/Clinic/Clinic.tscn")
@@ -41,8 +48,21 @@ var pending_story_return_target: String = ""
 # 本次剧情是否暂停了 Clinic 计时
 var story_paused_clinic_clock: bool = false
 
+# 存档槽弹窗模式：
+# "load" = 读取存档
+# "new_game" = 新游戏选择槽位
+var save_slot_popup_mode: String = "load"
+
+# 新游戏覆盖已有存档时使用的确认框。
+# 这里用代码动态创建 ConfirmationDialog，不需要额外修改 Main.tscn。
+var overwrite_confirm_dialog: ConfirmationDialog = null
+var pending_overwrite_slot_index: int = -1
+
 
 func _ready() -> void:
+	# 创建覆盖存档确认框
+	_setup_overwrite_confirm_dialog()
+
 	# 连接开始菜单按钮
 	_connect_menu_buttons()
 
@@ -65,6 +85,18 @@ func _connect_menu_buttons() -> void:
 	if not quit_game_button.pressed.is_connected(_on_quit_game_button_pressed):
 		quit_game_button.pressed.connect(_on_quit_game_button_pressed)
 
+	if not save_slot_1_button.pressed.is_connected(_on_save_slot_1_button_pressed):
+		save_slot_1_button.pressed.connect(_on_save_slot_1_button_pressed)
+
+	if not save_slot_2_button.pressed.is_connected(_on_save_slot_2_button_pressed):
+		save_slot_2_button.pressed.connect(_on_save_slot_2_button_pressed)
+
+	if not save_slot_3_button.pressed.is_connected(_on_save_slot_3_button_pressed):
+		save_slot_3_button.pressed.connect(_on_save_slot_3_button_pressed)
+
+	if not save_slot_close_button.pressed.is_connected(_on_save_slot_close_button_pressed):
+		save_slot_close_button.pressed.connect(_on_save_slot_close_button_pressed)
+
 
 # =========================================================
 # 显示开始菜单
@@ -72,9 +104,11 @@ func _connect_menu_buttons() -> void:
 func _show_main_menu() -> void:
 	_clear_current_scene()
 	main_menu_layer.visible = true
+	_close_save_slot_popup()
+	_close_overwrite_confirm_dialog()
 
-	# 没有存档时，读取按钮禁用
-	load_game_button.disabled = not SaveManager.has_save()
+	# 读取游戏按钮始终可点击，点击后在弹窗中显示三个槽位。
+	load_game_button.disabled = false
 
 
 # =========================================================
@@ -82,6 +116,8 @@ func _show_main_menu() -> void:
 # =========================================================
 func _hide_main_menu() -> void:
 	main_menu_layer.visible = false
+	_close_save_slot_popup()
+	_close_overwrite_confirm_dialog()
 
 
 # =========================================================
@@ -94,20 +130,7 @@ func _hide_main_menu() -> void:
 # 5. 进入第 1 天白天诊室
 # =========================================================
 func _on_new_game_button_pressed() -> void:
-	SaveManager.delete_save()
-
-	GameTime.start_new_game()
-	Unlock.reset_progress()
-
-	# 新游戏必须清空剧情播放记录。
-	# 否则如果从旧流程回到主菜单再点新游戏，
-	# StoryManager 内存里可能还残留 played_story_ids。
-	StoryManager.load_save_data({})
-
-	SaveManager.save_game()
-
-	_hide_main_menu()
-	_enter_clinic()
+	_open_new_game_slot_popup()
 
 
 # =========================================================
@@ -118,13 +141,109 @@ func _on_new_game_button_pressed() -> void:
 # 3. 根据存档里的 day / night 进入对应场景
 # =========================================================
 func _on_load_game_button_pressed() -> void:
-	if not SaveManager.has_save():
-		print("没有存档，无法读取")
+	_open_load_game_slot_popup()
+
+
+# =========================================================
+# 读取存档弹窗
+# =========================================================
+func _open_load_game_slot_popup() -> void:
+	save_slot_popup_mode = "load"
+	_refresh_save_slot_popup()
+	save_slot_popup.visible = true
+
+
+func _open_new_game_slot_popup() -> void:
+	save_slot_popup_mode = "new_game"
+	_refresh_save_slot_popup()
+	save_slot_popup.visible = true
+
+
+func _close_save_slot_popup() -> void:
+	if save_slot_popup != null:
+		save_slot_popup.visible = false
+
+
+func _on_save_slot_close_button_pressed() -> void:
+	_close_save_slot_popup()
+
+
+func _on_save_slot_1_button_pressed() -> void:
+	_on_save_slot_button_pressed(1)
+
+
+func _on_save_slot_2_button_pressed() -> void:
+	_on_save_slot_button_pressed(2)
+
+
+func _on_save_slot_3_button_pressed() -> void:
+	_on_save_slot_button_pressed(3)
+
+
+func _on_save_slot_button_pressed(slot_index: int) -> void:
+	if save_slot_popup_mode == "load":
+		_load_game_from_slot(slot_index)
 		return
 
-	var load_success: bool = SaveManager.load_game()
+	if save_slot_popup_mode == "new_game":
+		_start_new_game_in_slot(slot_index)
+		return
+
+	print("未知存档槽弹窗模式：", save_slot_popup_mode)
+
+
+func _refresh_save_slot_popup() -> void:
+	var buttons: Array[Button] = [
+		save_slot_1_button,
+		save_slot_2_button,
+		save_slot_3_button
+	]
+
+	for i in range(buttons.size()):
+		var slot_index: int = i + 1
+		var button: Button = buttons[i]
+		var meta: Dictionary = SaveManager.get_save_meta(slot_index)
+
+		var exists: bool = bool(meta.get("exists", false))
+		var display_name: String = String(meta.get("display_name", "空存档"))
+		var save_time: String = String(meta.get("save_time", ""))
+
+		if save_slot_popup_mode == "load":
+			if exists:
+				button.text = "读取槽位 %d\n%s\n%s" % [
+					slot_index,
+					display_name,
+					save_time
+				]
+				button.disabled = false
+			else:
+				button.text = "读取槽位 %d\n空存档" % slot_index
+				button.disabled = true
+
+		elif save_slot_popup_mode == "new_game":
+			if exists:
+				button.text = "新游戏槽位 %d\n覆盖：%s\n%s" % [
+					slot_index,
+					display_name,
+					save_time
+				]
+			else:
+				button.text = "新游戏槽位 %d\n空存档" % slot_index
+
+			# 新游戏模式下，空槽位也必须可以点击，用于创建新存档。
+			button.disabled = false
+
+
+func _load_game_from_slot(slot_index: int) -> void:
+	if not SaveManager.has_save(slot_index):
+		print("没有存档，无法读取：槽位 %d" % slot_index)
+		_refresh_save_slot_popup()
+		return
+
+	var load_success: bool = SaveManager.load_game(slot_index)
 	if not load_success:
-		print("读取存档失败")
+		print("读取存档失败：槽位 %d" % slot_index)
+		_refresh_save_slot_popup()
 		return
 
 	_hide_main_menu()
@@ -134,6 +253,134 @@ func _on_load_game_button_pressed() -> void:
 	else:
 		_enter_night()
 
+
+
+
+func _start_new_game_in_slot(slot_index: int) -> void:
+	if not SaveManager.is_valid_slot(slot_index):
+		print("新游戏失败：无效槽位 %d" % slot_index)
+		return
+
+	# 如果该槽位已有存档，先弹出确认框，避免误覆盖。
+	if SaveManager.has_save(slot_index):
+		_open_overwrite_confirm_dialog(slot_index)
+		return
+
+	_start_new_game_in_slot_without_confirm(slot_index)
+
+
+func _start_new_game_in_slot_without_confirm(slot_index: int) -> void:
+	if not SaveManager.is_valid_slot(slot_index):
+		print("新游戏失败：无效槽位 %d" % slot_index)
+		return
+
+	SaveManager.current_slot_index = slot_index
+
+	# 新游戏会覆盖当前槽位旧存档。
+	SaveManager.delete_save(slot_index)
+
+	GameTime.start_new_game()
+	Unlock.reset_progress()
+
+	# 新游戏必须清空剧情播放记录。
+	# 否则如果从旧流程回到主菜单再点新游戏，
+	# StoryManager 内存里可能还残留 played_story_ids。
+	StoryManager.load_save_data({})
+
+	SaveManager.save_game(slot_index)
+
+	_hide_main_menu()
+	_enter_clinic()
+
+	print("新游戏开始：槽位 %d" % slot_index)
+
+
+# =========================================================
+# 覆盖已有存档确认框
+# =========================================================
+func _setup_overwrite_confirm_dialog() -> void:
+	if overwrite_confirm_dialog != null:
+		return
+
+	overwrite_confirm_dialog = ConfirmationDialog.new()
+	overwrite_confirm_dialog.title = "确认覆盖"
+	overwrite_confirm_dialog.dialog_text = "该槽位已有存档，是否覆盖？"
+	overwrite_confirm_dialog.visible = false
+
+	add_child(overwrite_confirm_dialog)
+
+	if overwrite_confirm_dialog.get_ok_button() != null:
+		overwrite_confirm_dialog.get_ok_button().text = "确认覆盖"
+
+	if overwrite_confirm_dialog.get_cancel_button() != null:
+		overwrite_confirm_dialog.get_cancel_button().text = "取消"
+
+	if not overwrite_confirm_dialog.confirmed.is_connected(_on_overwrite_confirm_dialog_confirmed):
+		overwrite_confirm_dialog.confirmed.connect(_on_overwrite_confirm_dialog_confirmed)
+
+	if overwrite_confirm_dialog.has_signal("canceled"):
+		if not overwrite_confirm_dialog.canceled.is_connected(_on_overwrite_confirm_dialog_canceled):
+			overwrite_confirm_dialog.canceled.connect(_on_overwrite_confirm_dialog_canceled)
+
+	if overwrite_confirm_dialog.has_signal("close_requested"):
+		if not overwrite_confirm_dialog.close_requested.is_connected(_on_overwrite_confirm_dialog_canceled):
+			overwrite_confirm_dialog.close_requested.connect(_on_overwrite_confirm_dialog_canceled)
+
+
+func _open_overwrite_confirm_dialog(slot_index: int) -> void:
+	if not SaveManager.is_valid_slot(slot_index):
+		print("打开覆盖确认失败：无效槽位 %d" % slot_index)
+		return
+
+	_close_save_slot_popup()
+
+	pending_overwrite_slot_index = slot_index
+
+	var meta: Dictionary = SaveManager.get_save_meta(slot_index)
+	var display_name: String = String(meta.get("display_name", "该存档"))
+	var save_time: String = String(meta.get("save_time", ""))
+
+	if save_time.is_empty():
+		overwrite_confirm_dialog.dialog_text = "槽位 %d 已有存档：\n%s\n是否覆盖？" % [
+			slot_index,
+			display_name
+		]
+	else:
+		overwrite_confirm_dialog.dialog_text = "槽位 %d 已有存档：\n%s\n%s\n是否覆盖？" % [
+			slot_index,
+			display_name,
+			save_time
+		]
+
+	overwrite_confirm_dialog.popup_centered()
+
+
+func _close_overwrite_confirm_dialog() -> void:
+	if overwrite_confirm_dialog != null:
+		overwrite_confirm_dialog.hide()
+
+	pending_overwrite_slot_index = -1
+
+
+func _on_overwrite_confirm_dialog_confirmed() -> void:
+	var slot_index: int = pending_overwrite_slot_index
+
+	_close_overwrite_confirm_dialog()
+
+	if not SaveManager.is_valid_slot(slot_index):
+		print("覆盖失败：无效槽位 %d" % slot_index)
+		return
+
+	_start_new_game_in_slot_without_confirm(slot_index)
+
+
+func _on_overwrite_confirm_dialog_canceled() -> void:
+	_close_overwrite_confirm_dialog()
+
+	# 取消覆盖后回到新游戏槽位选择界面。
+	save_slot_popup_mode = "new_game"
+	_refresh_save_slot_popup()
+	save_slot_popup.visible = true
 
 # =========================================================
 # 退出游戏按钮
@@ -200,6 +447,21 @@ func _enter_night() -> void:
 			print("Main 已连接 night_finished 信号")
 	else:
 		print("current_scene 没有 night_finished 信号")
+
+	# 连接夜晚剧情请求信号。
+	# 注意：必须在 start_night() 之前连接，否则 Night 进入夜晚时自动剧情信号会丢失。
+	if current_scene.has_signal("story_requested"):
+		if not current_scene.is_connected("story_requested", Callable(self, "_on_story_requested")):
+			current_scene.connect("story_requested", Callable(self, "_on_story_requested"))
+			print("Main 已连接 Night story_requested 信号")
+	else:
+		print("current_scene 没有 story_requested 信号")
+
+	# 启动夜晚入口逻辑，包括自动检查 trigger_scene = "night" 的剧情。
+	if current_scene.has_method("start_night"):
+		current_scene.call("start_night", GameTime.current_day)
+	else:
+		print("Night 没有 start_night 方法")
 
 	print("已进入 Night 场景，第 %d 天" % GameTime.current_day)
 

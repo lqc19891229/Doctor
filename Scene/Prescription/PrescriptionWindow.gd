@@ -1022,6 +1022,118 @@ func close_window() -> void:
 # =========================================================
 # Esc 快捷键关闭窗口
 # =========================================================
+
+# =========================================================
+# Clinic 主界面窗口快捷键转发
+# =========================================================
+const CLINIC_SHORTCUT_OPEN_PULSE := KEY_F1
+const CLINIC_SHORTCUT_OPEN_PRESCRIPTION := KEY_F2
+const CLINIC_SHORTCUT_OPEN_CLINICAL_LOG := KEY_F3
+
+const ROLE_SHORTCUT_JUN := KEY_1
+const ROLE_SHORTCUT_CHEN := KEY_2
+const ROLE_SHORTCUT_ZUO := KEY_3
+const ROLE_SHORTCUT_SHI := KEY_4
+const ROLE_SHORTCUT_KP_JUN := KEY_KP_1
+const ROLE_SHORTCUT_KP_CHEN := KEY_KP_2
+const ROLE_SHORTCUT_KP_ZUO := KEY_KP_3
+const ROLE_SHORTCUT_KP_SHI := KEY_KP_4
+
+
+func _input(event: InputEvent) -> void:
+	if _try_handle_role_shortcut(event):
+		return
+
+	if _try_handle_clinic_window_shortcut(event):
+		return
+
+
+func _try_handle_role_shortcut(event: InputEvent) -> bool:
+	# 只在开方窗口显示时处理 1/2/3/4，避免影响 Clinic 或其它窗口。
+	if not visible:
+		return false
+
+	if not (event is InputEventKey):
+		return false
+
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return false
+
+	if key_event.alt_pressed or key_event.ctrl_pressed or key_event.meta_pressed or key_event.shift_pressed:
+		return false
+
+	match key_event.keycode:
+		ROLE_SHORTCUT_JUN, ROLE_SHORTCUT_KP_JUN:
+			_set_selected_role(ROLE_JUN)
+		ROLE_SHORTCUT_CHEN, ROLE_SHORTCUT_KP_CHEN:
+			_set_selected_role(ROLE_CHEN)
+		ROLE_SHORTCUT_ZUO, ROLE_SHORTCUT_KP_ZUO:
+			_set_selected_role(ROLE_ZUO)
+		ROLE_SHORTCUT_SHI, ROLE_SHORTCUT_KP_SHI:
+			_set_selected_role(ROLE_SHI)
+		_:
+			return false
+
+	get_viewport().set_input_as_handled()
+	return true
+
+
+func _try_handle_clinic_window_shortcut(event: InputEvent) -> bool:
+	if not visible:
+		return false
+
+	if not (event is InputEventKey):
+		return false
+
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return false
+
+	if key_event.alt_pressed or key_event.ctrl_pressed or key_event.meta_pressed or key_event.shift_pressed:
+		return false
+
+	var clinic := _find_clinic_controller()
+	if clinic == null:
+		return false
+
+	match key_event.keycode:
+		CLINIC_SHORTCUT_OPEN_PULSE:
+			if clinic.has_method("open_pulse_window"):
+				clinic.open_pulse_window()
+			else:
+				return false
+		CLINIC_SHORTCUT_OPEN_PRESCRIPTION:
+			if clinic.has_method("open_prescription_window"):
+				clinic.open_prescription_window()
+			else:
+				return false
+		CLINIC_SHORTCUT_OPEN_CLINICAL_LOG:
+			if clinic.has_method("open_clinical_log_window"):
+				clinic.open_clinical_log_window()
+			else:
+				return false
+		_:
+			return false
+
+	get_viewport().set_input_as_handled()
+	return true
+
+
+func _find_clinic_controller() -> Node:
+	var node := get_parent()
+	while node != null:
+		if (
+			node.has_method("open_pulse_window")
+			and node.has_method("open_prescription_window")
+			and node.has_method("open_clinical_log_window")
+		):
+			return node
+
+		node = node.get_parent()
+
+	return null
+
 func _unhandled_input(event: InputEvent) -> void:
 	# 窗口未显示时，不处理 Esc，避免影响其他界面
 	if not visible:
