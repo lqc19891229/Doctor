@@ -102,7 +102,7 @@ func _load_npc_resource(path: String) -> void:
 		return
 
 	var npc := loaded_resource as NpcData
-	var npc_type := npc.npc_type.strip_edges()
+	var npc_type := npc.npc_type.strip_edges().to_lower()
 
 	# 兼容旧数据：没有写 npc_type 的 NPC 默认视为 random。
 	if npc_type == "" or npc_type == "random":
@@ -174,11 +174,71 @@ func _make_runtime_npc(source_npc: NpcData, forced_type: String = "") -> NpcData
 		return null
 
 	if forced_type != "":
-		npc.npc_type = forced_type
+		npc.npc_type = forced_type.strip_edges().to_lower()
+	else:
+		npc.npc_type = npc.npc_type.strip_edges().to_lower()
 
-	# 每次进入诊室时都是新的诊疗实例，不直接污染原始 .tres。
-	npc.is_treated = false
+	# random NPC 每次进入 Clinic 时，随机绑定一个“已经解锁”的疾病。
+	# 注意：这里会覆盖 random NPC .tres 里原本可能填写的 disease。
+	if npc.npc_type == "random":
+		_assign_random_unlocked_disease(npc)
+
+	# 疾病绑定完成后，再初始化本次诊疗状态和本次固定台词。
+	if npc.has_method("setup_clinic_visit"):
+		npc.setup_clinic_visit()
+	else:
+		npc.is_treated = false
+
 	return npc
+
+
+func _assign_random_unlocked_disease(npc: NpcData) -> void:
+	if npc == null:
+		return
+
+	var unlocked_diseases := _get_unlocked_disease_pool()
+	if unlocked_diseases.is_empty():
+		push_warning("NpcManager: 当前没有已解锁疾病，无法给 random NPC 分配疾病。")
+		npc.disease = null
+		return
+
+	npc.disease = unlocked_diseases[randi() % unlocked_diseases.size()]
+
+
+func _get_unlocked_disease_pool() -> Array[DiseaseData]:
+	var result: Array[DiseaseData] = []
+
+	if Unlock == null:
+		push_warning("NpcManager: Unlock 不存在，无法读取已解锁疾病。")
+		return result
+
+	if DiseaseDB == null:
+		push_warning("NpcManager: DiseaseDB 不存在，无法读取疾病数据。")
+		return result
+
+	if not Unlock.has_method("get_unlocked_disease_id_list"):
+		push_warning("NpcManager: Unlock 缺少 get_unlocked_disease_id_list()。")
+		return result
+
+	if not DiseaseDB.has_method("get_disease"):
+		push_warning("NpcManager: DiseaseDB 缺少 get_disease()。")
+		return result
+
+	var unlocked_ids: Array[String] = Unlock.get_unlocked_disease_id_list()
+
+	for disease_id in unlocked_ids:
+		var clean_id := disease_id.strip_edges()
+		if clean_id == "":
+			continue
+
+		var disease := DiseaseDB.get_disease(clean_id)
+		if disease == null:
+			push_warning("NpcManager: 已解锁疾病 ID 找不到对应 DiseaseData：%s" % clean_id)
+			continue
+
+		result.append(disease)
+
+	return result
 
 
 # ============================================================

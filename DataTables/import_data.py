@@ -4,7 +4,7 @@
 """
 用途：
 1. 读取当前脚本同目录下的 Data.xlsx
-2. 解析 7 个 sheet：Book / Herb / Disease / Pulse / Formula / FormulaIngredient / Theory
+2. 解析多个 sheet：Book / Herb / Disease / Pulse / Formula / FormulaIngredient / Theory / Npc / Story / StoryLine
 3. 支持用名称反查缺失 ID，减少 Excel 重复录入
 4. 生成 Godot 可用的 .tres 资源文件
 
@@ -42,6 +42,7 @@ HERB_OUTPUT_DIR = OUTPUT_DIR / "Herb"
 DISEASE_OUTPUT_DIR = OUTPUT_DIR / "Disease"
 FORMULA_OUTPUT_DIR = OUTPUT_DIR / "Formula"
 STORY_OUTPUT_DIR = OUTPUT_DIR / "Story"
+NPC_OUTPUT_DIR = OUTPUT_DIR / "Npc"
 THEORY_BOOK_ENTRY_OUTPUT_DIR = OUTPUT_DIR / "Book" / "BookEntry" / "TheoryEntry"
 
 HERB_BOOK_ENTRY_OUTPUT_DIR = OUTPUT_DIR / "Book" / "BookEntry" / "HerbEntry"
@@ -61,6 +62,7 @@ FORMULA_DATA_SCRIPT_PATH = "res://System/Formula/FormulaData.gd"
 FORMULA_INGREDIENT_SCRIPT_PATH = "res://System/Formula/FormulaIngredient.gd"
 STORY_DATA_SCRIPT_PATH = "res://System/Story/StoryData.gd"
 STORY_LINE_SCRIPT_PATH = "res://System/Story/StoryLine.gd"
+NPC_DATA_SCRIPT_PATH = "res://System/Npc/NpcData.gd"
 
 HERB_BOOK_ENTRY_SCRIPT_PATH = "res://System/Book/BookEntry/HerbBookEntryData.gd"
 DISEASE_BOOK_ENTRY_SCRIPT_PATH = "res://System/Book/BookEntry/DiseaseBookEntryData.gd"
@@ -75,6 +77,8 @@ SHEET_PULSE = "Pulse"
 SHEET_FORMULA = "Formula"
 SHEET_FORMULA_INGREDIENT = "FormulaIngredient"
 SHEET_THEORY = "Theory"
+SHEET_NPC = "Npc"
+SHEET_NPC_ALIASES = ["Npc", "NPC", "npc"]
 SHEET_STORY = "Story"
 SHEET_STORY_ALIASES = ["Story", "Stroy", "story", "stroy"]
 SHEET_STORY_LINE = "StoryLine"
@@ -392,6 +396,70 @@ def as_str(value: Any) -> str:
     return str(value).strip()
 
 
+def get_first_value(row: dict[str, Any], column_names: list[str]) -> Any:
+    """
+    功能：按多个候选列名读取同一个字段。
+    作用：兼容 Excel 表头中带空格或不带空格的写法，例如 Portrait Before / PortraitBefore。
+    """
+    for column_name in column_names:
+        if column_name in row:
+            value = row.get(column_name)
+            if as_str(value):
+                return value
+    return ""
+
+
+def normalize_npc_type(value: Any) -> str:
+    """
+    功能：统一 NPC 类型文本。
+    作用：支持 random / story，也兼容中文策划填写。
+    """
+    text = as_str(value).lower()
+    mapping = {
+        "random": "random",
+        "随机": "random",
+        "story": "story",
+        "剧情": "story",
+    }
+    return mapping.get(text, text)
+
+
+def is_valid_resource_path(path_text: Any) -> bool:
+    """
+    功能：检查导出到 .tres 的资源路径是否是 Godot res:// 路径。
+    注意：这里只校验路径格式，不检查文件是否真实存在。
+    """
+    text = as_str(path_text)
+    return not text or text.startswith("res://")
+
+
+def get_npc_portrait_base_dir(npc_type: str) -> str:
+    """
+    功能：根据 NPC 类型返回立绘所在目录。
+    random -> res://Assets/Portrait/RandomNpc
+    story  -> res://Assets/Portrait/StoryNpc
+    """
+    if npc_type == "story":
+        return "res://Assets/Portrait/StoryNpc"
+    return "res://Assets/Portrait/RandomNpc"
+
+
+def get_npc_portrait_before_path(npc_id: str, npc_type: str) -> str:
+    """
+    功能：根据 NpcID 和 NpcType 自动生成治疗前立绘路径。
+    """
+    base_dir = get_npc_portrait_base_dir(npc_type)
+    return f"{base_dir}/{npc_id}/{npc_id}_before.png"
+
+
+def get_npc_portrait_after_path(npc_id: str, npc_type: str) -> str:
+    """
+    功能：根据 NpcID 和 NpcType 自动生成治疗后立绘路径。
+    """
+    base_dir = get_npc_portrait_base_dir(npc_type)
+    return f"{base_dir}/{npc_id}/{npc_id}_after.png"
+
+
 def as_float(value: Any, default: float = 0.0) -> float:
     """
     功能：将输入值安全转换为浮点数。
@@ -624,6 +692,7 @@ def load_excel_data(excel_path: Path) -> dict[str, list[dict[str, Any]]]:
 
     wb = load_workbook(excel_path, data_only=True)
 
+    npc_sheet_name = resolve_sheet_name(wb, SHEET_NPC, SHEET_NPC_ALIASES)
     story_sheet_name = resolve_sheet_name(wb, SHEET_STORY, SHEET_STORY_ALIASES)
     story_line_sheet_name = resolve_sheet_name(wb, SHEET_STORY_LINE, SHEET_STORY_LINE_ALIASES)
 
@@ -636,6 +705,7 @@ def load_excel_data(excel_path: Path) -> dict[str, list[dict[str, Any]]]:
         SHEET_FORMULA,
         SHEET_FORMULA_INGREDIENT,
         SHEET_THEORY,
+        npc_sheet_name,
         story_sheet_name,
         story_line_sheet_name,
     ]
@@ -652,6 +722,7 @@ def load_excel_data(excel_path: Path) -> dict[str, list[dict[str, Any]]]:
         SHEET_FORMULA: build_row_dicts(wb[SHEET_FORMULA]),
         SHEET_FORMULA_INGREDIENT: build_row_dicts(wb[SHEET_FORMULA_INGREDIENT]),
         SHEET_THEORY: build_row_dicts(wb[SHEET_THEORY]),
+        SHEET_NPC: build_row_dicts(wb[npc_sheet_name]),
         SHEET_STORY: build_row_dicts(wb[story_sheet_name]),
         SHEET_STORY_LINE: build_row_dicts(wb[story_line_sheet_name]),
     }
@@ -673,6 +744,7 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
     formula_name_to_id: dict[str, str] = {}
     formula_ingredient_map: dict[str, list[dict[str, Any]]] = {}
     theory_map: dict[str, dict[str, Any]] = {}
+    npc_map: dict[str, dict[str, Any]] = {}
     story_map: dict[str, dict[str, Any]] = {}
     story_line_map: dict[str, list[dict[str, Any]]] = {}
 
@@ -723,6 +795,12 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
         if theory_id:
             theory_map[theory_id] = row
 
+    # 建立 NpcID -> 行数据 映射。NPC 的 disease 不从 Excel 导入，运行时再随机分配。
+    for row in raw_data[SHEET_NPC]:
+        npc_id = as_str(row.get("NpcID"))
+        if npc_id:
+            npc_map[npc_id] = row
+
     # 建立 StoryID -> Story 元数据映射
     for row in raw_data.get(SHEET_STORY, []):
         story_id = as_str(row.get("StoryID"))
@@ -761,6 +839,7 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
         "formula_name_to_id": formula_name_to_id,
         "formula_ingredient_map": formula_ingredient_map,
         "theory_map": theory_map,
+        "npc_map": npc_map,
         "story_map": story_map,
         "story_line_map": story_line_map,
     }
@@ -844,6 +923,7 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
     formula_name_to_id = indexed_data["formula_name_to_id"]
     formula_ingredient_map = indexed_data["formula_ingredient_map"]
     theory_map = indexed_data["theory_map"]
+    npc_map = indexed_data["npc_map"]
     story_map = indexed_data["story_map"]
     story_line_map = indexed_data["story_line_map"]
 
@@ -903,6 +983,25 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         book_id = as_str(row.get("BookID"))
         if book_id and book_id not in book_map:
             errors.append(f"Theory 引用了不存在的 BookID: {theory_id} -> {book_id}")
+
+    for npc_id, row in npc_map.items():
+        if not as_str(row.get("NpcName")):
+            errors.append(f"Npc 缺少 NpcName: {npc_id}")
+
+        npc_type = normalize_npc_type(row.get("NpcType")) or "random"
+        if npc_type not in ("random", "story"):
+            errors.append(f"Npc 类型非法: {npc_id} -> {npc_type}")
+
+        age = as_int(row.get("Age"), -1)
+        if age < 0:
+            errors.append(f"Npc 年龄非法: {npc_id} -> {row.get('Age')}")
+
+        portrait_before_path = get_npc_portrait_before_path(npc_id, npc_type)
+        portrait_after_path = get_npc_portrait_after_path(npc_id, npc_type)
+        if not is_valid_resource_path(portrait_before_path):
+            errors.append(f"Npc 治疗前立绘路径非法: {npc_id} -> {portrait_before_path}")
+        if not is_valid_resource_path(portrait_after_path):
+            errors.append(f"Npc 治疗后立绘路径非法: {npc_id} -> {portrait_after_path}")
 
     for story_id, row in story_map.items():
         if not as_str(row.get("StoryName")):
@@ -1454,6 +1553,77 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
         ]
         write_text_file(STORY_OUTPUT_DIR / f"{safe_filename(story_id)}.tres", "\n".join(story_content_parts))
 
+
+def build_npc_resources(indexed_data: dict[str, Any]) -> None:
+    """
+    功能：根据 Npc 表生成 NPC 基础资源。
+    输出：res://Data/Npc/{NpcID}.tres
+    说明：NPC 的 disease 不从 Excel 写入，由运行时从已解锁疾病中随机分配。
+    """
+    npc_map = indexed_data["npc_map"]
+
+    ensure_dir(NPC_OUTPUT_DIR)
+
+    for npc_id, row in npc_map.items():
+        npc_name = as_str(row.get("NpcName"))
+        npc_type = normalize_npc_type(row.get("NpcType")) or "random"
+        gender = as_str(row.get("Gender"))
+        age = as_int(row.get("Age"), 0)
+        dialogue_prefix = as_str(row.get("DialoguePrefix"))
+        dialogue_suffix = as_str(row.get("DialogueSuffix"))
+        dialogue_after_treatment = as_str(row.get("DialogueAfterTreatment"))
+        dialogue_treatment_failed = as_str(row.get("dialogueTreatmentFailed"))
+        portrait_before_path = get_npc_portrait_before_path(npc_id, npc_type)
+        portrait_after_path = get_npc_portrait_after_path(npc_id, npc_type)
+
+        ext_lines = [
+            f'[ext_resource type="Script" path="{NPC_DATA_SCRIPT_PATH}" id="1"]',
+        ]
+
+        portrait_before_ext_id = ""
+        portrait_after_ext_id = ""
+
+        if portrait_before_path:
+            portrait_before_ext_id = "portrait_before_1"
+            ext_lines.append(f'[ext_resource type="Texture2D" path="{portrait_before_path}" id="{portrait_before_ext_id}"]')
+
+        if portrait_after_path:
+            portrait_after_ext_id = "portrait_after_1"
+            ext_lines.append(f'[ext_resource type="Texture2D" path="{portrait_after_path}" id="{portrait_after_ext_id}"]')
+
+        load_steps = len(ext_lines) + 1
+
+        resource_lines = [
+            "[resource]",
+            'script = ExtResource("1")',
+            f'npc_id = {format_godot_string(npc_id)}',
+            f'npc_type = {format_godot_string(npc_type)}',
+            f'npc_name = {format_godot_string(npc_name)}',
+            f'gender = {format_godot_string(gender)}',
+            f'age = {age}',
+            f'dialogue_prefix = {format_godot_string(dialogue_prefix)}',
+            f'dialogue_suffix = {format_godot_string(dialogue_suffix)}',
+            f'dialogue_after_treatment = {format_godot_string(dialogue_after_treatment)}',
+            f'dialogue_treatment_failed = {format_godot_string(dialogue_treatment_failed)}',
+        ]
+
+        if portrait_before_ext_id:
+            resource_lines.append(f'portrait_before_treatment = {format_ext_resource_value(portrait_before_ext_id)}')
+        if portrait_after_ext_id:
+            resource_lines.append(f'portrait_after_treatment = {format_ext_resource_value(portrait_after_ext_id)}')
+
+        npc_content_parts = [
+            f'[gd_resource type="Resource" script_class="NpcData" load_steps={load_steps} format=3]',
+            "",
+            *ext_lines,
+            "",
+            *resource_lines,
+            "",
+        ]
+
+        write_text_file(NPC_OUTPUT_DIR / f"{safe_filename(npc_id)}.tres", "\n".join(npc_content_parts))
+
+
 def clear_output_dirs() -> None:
     """
     功能：清理旧的导出资源文件。
@@ -1467,6 +1637,7 @@ def clear_output_dirs() -> None:
         DISEASE_OUTPUT_DIR,
         FORMULA_OUTPUT_DIR,
         STORY_OUTPUT_DIR,
+        NPC_OUTPUT_DIR,
         HERB_BOOK_ENTRY_OUTPUT_DIR,
         DISEASE_BOOK_ENTRY_OUTPUT_DIR,
         FORMULA_BOOK_ENTRY_OUTPUT_DIR,
@@ -1515,6 +1686,7 @@ def main() -> None:
     build_formula_resources(indexed_data)
     build_theory_resources(indexed_data)
     build_story_resources(indexed_data)
+    build_npc_resources(indexed_data)
 
     log("导入完成")
 

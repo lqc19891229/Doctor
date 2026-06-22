@@ -2,10 +2,17 @@
 
 [ext_resource type="Script" uid="uid://d3fc1n20xbhxf" path="res://Scene/Clinic/Clinic.gd" id="1_y7fei"]
 [ext_resource type="Script" uid="uid://cse2gud2bttup" path="res://System/Npc/NpcManager.gd" id="2_l04vw"]
+[ext_resource type="Texture2D" uid="uid://bc7sj00ahbgcm" path="res://Assets/Background/clinic_table.png" id="4_k4yeq"]
 [ext_resource type="PackedScene" uid="uid://c1kldxjoeyc78" path="res://Scene/Prescription/PrescriptionWindow.tscn" id="5_h552d"]
 [ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/clinicalLogWindow/ClinicalLogWindow.tscn" id="5_ruh48"]
 [ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="6_k4yeq"]
 [ext_resource type="PackedScene" uid="uid://drw157phi8l3n" path="res://Scene/Test/InfoWindow.tscn" id="6_y7fei"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4yeq"]
+bg_color = Color(0.18039216, 0.10980392, 0.05490196, 0.9490196)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l04vw"]
+bg_color = Color(0.33434814, 0.20553544, 0.026825193, 0.9490196)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l04vw"]
 
@@ -73,6 +80,31 @@ anchor_bottom = 1.0
 offset_top = -841.0
 grow_horizontal = 2
 grow_vertical = 0
+texture = ExtResource("4_k4yeq")
+
+[node name="NpcNameLabel" type="Label" parent="Background" unique_id=2033521846]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 0
+offset_left = 750.0
+offset_top = 700.0
+offset_right = 850.0
+offset_bottom = 750.0
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_k4yeq")
+text = "病人姓名"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NpcDialogueLabel" type="RichTextLabel" parent="Background" unique_id=286635915]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 0
+offset_left = 650.0
+offset_top = 400.0
+offset_right = 1150.0
+offset_bottom = 450.0
+theme_override_font_sizes/normal_font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_l04vw")
+text = "病人台词"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=744765107]
 layout_mode = 1

@@ -44,6 +44,9 @@ const SHORTCUT_OPEN_PULSE := KEY_F1
 const SHORTCUT_OPEN_PRESCRIPTION := KEY_F2
 const SHORTCUT_OPEN_CLINICAL_LOG := KEY_F3
 
+# NPC 台词自动隐藏时间，单位：秒
+const NPC_DIALOGUE_AUTO_HIDE_SECONDS := 10.0
+
 
 # =========================================================
 # 场景节点引用
@@ -66,6 +69,19 @@ const SHORTCUT_OPEN_CLINICAL_LOG := KEY_F3
 # 1. 节点建议放在 Clinic/Background/Portrait。
 # 2. 使用 find_child，方便你在场景里调整层级，只要节点名仍叫 Portrait 即可。
 @onready var portrait_rect: TextureRect = find_child("Portrait", true, false) as TextureRect
+
+# ---------- 当前 NPC 姓名 ----------
+# 说明：
+# 1. 节点建议放在 Portrait 附近，节点名保持 NpcNameLabel 即可。
+# 2. 只显示 current_npc.npc_name。
+@onready var npc_name_label: Label = find_child("NpcNameLabel", true, false) as Label
+
+# ---------- 当前 NPC 台词 ----------
+# 说明：
+# 1. 节点建议放在 Portrait 附近，节点名保持 NpcDialogueLabel 即可。
+# 2. 支持 Label 或 RichTextLabel；这里按 Control 接收，避免节点类型调整时报错。
+# 3. 台词在刷新病人时随机生成一次，不在 _process() 中重复刷新。
+@onready var npc_dialogue_label: Control = find_child("NpcDialogueLabel", true, false) as Control
 
 # ---------- 脉象窗口 ----------
 @onready var pulse_window: PulseWindow = find_child("PulseWindow", true, false) as PulseWindow
@@ -158,6 +174,21 @@ var last_newly_unlocked_entry_titles: Array[String] = []
 # 当前打开的判定结果窗口
 var judgement_result_window: Control = null
 
+# NPC 台词当前是否正在显示
+var npc_dialogue_visible: bool = false
+
+# NPC 台词显示令牌
+# 说明：
+# 1. 每次显示或隐藏台词都会递增。
+# 2. 用来防止旧的 10 秒计时器误隐藏新的 NPC 台词。
+var npc_dialogue_display_token: int = 0
+
+# 判定结果窗口关闭后，是否正在等待当前 NPC 的治疗结果台词展示完毕。
+# 说明：
+# 1. true 时，隐藏台词或 10 秒结束后才刷新下一位病人。
+# 2. 避免 JudgementResult 关闭后立刻刷新，导致治疗后立绘和台词看不到。
+var waiting_next_patient_after_result: bool = false
+
 
 # =========================================================
 # 生命周期
@@ -249,6 +280,8 @@ func _validate_scene_node_bindings() -> void:
 		"ThoughtsPoint": thoughts_point_label,
 		"ReputationPoint": reputation_point_label,
 		"Portrait": portrait_rect,
+		"NpcNameLabel": npc_name_label,
+		"NpcDialogueLabel": npc_dialogue_label,
 		"OpenPulseWindowButton": open_pulse_window_button,
 		"OpenPrescriptionWindowButton": open_prescription_window_button,
 		"Openclinical_logWindowButton": clinical_log_button,
@@ -505,6 +538,22 @@ func _safe_connect_custom_signal(target: Object, signal_name: StringName, callab
 # 通用工具函数
 # =========================================================
 
+func _ensure_current_npc_valid(show_message: bool = false) -> bool:
+	if current_npc == null:
+		current_npc = npc_manager.get_current_npc()
+
+	if current_npc == null:
+		if show_message:
+			_set_info_text("当前没有病人")
+		return false
+
+	if current_npc.disease == null:
+		if show_message:
+			_set_info_text("病人：%s\n未绑定疾病数据" % current_npc.npc_name)
+		return false
+
+	return true
+
 func _set_info_text(text: String) -> void:
 	# 统一写入信息窗口文本。
 	# 说明：
@@ -514,6 +563,24 @@ func _set_info_text(text: String) -> void:
 		info_label.text = text
 	elif OS.is_debug_build():
 		print(text)
+
+func _show_window_front(window_node: Window) -> void:
+	# 统一处理 Clinic 内部窗口的显示、置顶和焦点。
+	# 说明：
+	# 1. Window 已经 visible 时，单纯 show() 不会改变它在父节点中的显示层级。
+	# 2. 因此这里同时把窗口移动到父节点最后，保证再次按快捷键时能切到最前。
+	# 3. F1 / F2 / F3 打开的窗口都走这里，避免三个窗口行为不一致。
+	if window_node == null:
+		return
+
+	window_node.show()
+
+	var parent_node := window_node.get_parent()
+	if parent_node != null:
+		parent_node.move_child(window_node, parent_node.get_child_count() - 1)
+
+	window_node.grab_focus()
+
 
 
 func _get_pressed_action_count(action_names: Array[StringName]) -> int:
@@ -557,8 +624,8 @@ func _show_pulse_result(result: Dictionary) -> void:
 # =========================================================
 
 func _update_npc_portrait() -> void:
-	# 只负责把 current_npc.portrait 显示到 Portrait 节点。
-	# 随机 NPC 的立绘选择逻辑放在 NpcManager.gd 中。
+	# 只负责把 current_npc 当前诊疗状态对应的立绘显示到 Portrait 节点。
+	# 立绘选择逻辑放在 NpcData.get_current_portrait() 中。
 	if portrait_rect == null:
 		return
 
@@ -567,44 +634,143 @@ func _update_npc_portrait() -> void:
 		portrait_rect.visible = false
 		return
 
-	if current_npc.portrait == null:
+	var display_portrait: Texture2D = current_npc.get_current_portrait()
+	if display_portrait == null:
 		portrait_rect.texture = null
 		portrait_rect.visible = false
 		return
 
-	portrait_rect.texture = current_npc.portrait
+	portrait_rect.texture = display_portrait
 	portrait_rect.visible = true
 
 
 # =========================================================
-# 统一刷新入口
-# 切换病人 / 生成新病人后都走这里
+# 刷新当前 NPC 姓名
+# =========================================================
+
+func _update_npc_name() -> void:
+	# 只负责把 current_npc.npc_name 显示到 NpcNameLabel。
+	# 如果当前没有病人，或病人姓名为空，则隐藏姓名 Label。
+	if npc_name_label == null:
+		return
+
+	if current_npc == null:
+		npc_name_label.text = ""
+		npc_name_label.visible = false
+		return
+
+	var display_name := current_npc.npc_name.strip_edges()
+	npc_name_label.text = display_name
+	npc_name_label.visible = display_name != ""
+
+
+# =========================================================
+# 刷新当前 NPC 台词
+# =========================================================
+
+func _set_npc_dialogue_label_text(text: String) -> void:
+	# NpcDialogueLabel 可以是 Label，也可以是 RichTextLabel。
+	# 两者都支持 text 属性，但这里分开处理，后续改 BBCode 时更方便。
+	if npc_dialogue_label == null:
+		return
+
+	if npc_dialogue_label is RichTextLabel:
+		var rich_label := npc_dialogue_label as RichTextLabel
+		rich_label.text = text
+	elif npc_dialogue_label is Label:
+		var label := npc_dialogue_label as Label
+		label.text = text
+	else:
+		# 兜底：如果以后换成其它带 text 属性的控件，也尽量写入。
+		npc_dialogue_label.set("text", text)
+
+	_show_npc_dialogue_temporarily(text)
+
+
+func _show_npc_dialogue_temporarily(text: String) -> void:
+	if npc_dialogue_label == null:
+		return
+
+	var display_text := text.strip_edges()
+
+	npc_dialogue_display_token += 1
+	var current_token := npc_dialogue_display_token
+
+	if display_text == "":
+		npc_dialogue_visible = false
+		npc_dialogue_label.visible = false
+		return
+
+	npc_dialogue_visible = true
+	npc_dialogue_label.visible = true
+
+	await get_tree().create_timer(NPC_DIALOGUE_AUTO_HIDE_SECONDS).timeout
+
+	if current_token != npc_dialogue_display_token:
+		return
+
+	_hide_npc_dialogue()
+
+
+func _hide_npc_dialogue() -> void:
+	if npc_dialogue_label == null:
+		return
+
+	if not npc_dialogue_visible:
+		return
+
+	npc_dialogue_display_token += 1
+	npc_dialogue_visible = false
+	npc_dialogue_label.visible = false
+
+	# 如果当前是在判定结果关闭后的治疗结果展示阶段，
+	# 玩家点击隐藏台词后，直接刷新到下一位病人。
+	if waiting_next_patient_after_result:
+		waiting_next_patient_after_result = false
+		_go_to_next_patient_after_judgement()
+
+# =========================================================
+# 刷新当前病人显示
 # =========================================================
 
 func refresh_clinic_view() -> void:
 	current_npc = npc_manager.get_current_npc()
+
 	current_prescription.clear()
 	current_prescription.clear_disease()
 	diagnosis_submitted = false
+
 	last_formula_judge_result = null
 	last_formula_judge_summary_text = ""
 	last_newly_unlocked_entry_titles.clear()
+
 	current_display_region_name = DEFAULT_DISPLAY_REGION
 
 	_reset_pulse_keyboard_state()
 
 	if not _ensure_current_npc_valid(true):
 		_update_npc_portrait()
+		_update_npc_name()
+
+		# ✔ 关键修改：台词完全来自NpcData
+		if current_npc != null:
+			_set_npc_dialogue_label_text(current_npc.get_dialogue())
+		else:
+			_set_npc_dialogue_label_text("")
+
 		return
 
 	_update_npc_portrait()
+	_update_npc_name()
+
+	# ✔ 关键修改：唯一台词入口
+	_set_npc_dialogue_label_text(current_npc.get_dialogue())
+
 	show_region(current_display_region_name)
 
-	# 病人切换后，如果处方窗口已经存在，也同步刷新它
 	if prescription_window != null:
 		prescription_window.setup(herb_database, current_prescription, formula_database)
 
-	# 病人切换后，如果行医记考窗口存在，也顺手刷新一次内容
 	if clinical_log_window != null and clinical_log_window.has_method("refresh_view"):
 		clinical_log_window.refresh_view()
 
@@ -613,31 +779,7 @@ func refresh_clinic_view() -> void:
 
 
 # =========================================================
-# 病人有效性检查
-# show_message = true 时会顺带更新 info_label
-# =========================================================
-
-func _ensure_current_npc_valid(show_message: bool = false) -> bool:
-	if current_npc == null:
-		current_npc = npc_manager.get_current_npc()
-
-	if current_npc == null:
-		if show_message:
-			_set_info_text("当前没有病人数据")
-			_clear_pulse()
-		return false
-
-	if current_npc.disease == null:
-		if show_message:
-			_set_info_text("病人：%s\n未绑定疾病数据" % current_npc.npc_name)
-			_clear_pulse()
-		return false
-
-	return true
-
-
-# =========================================================
-# 刷新当前病人显示
+# 刷新当前NPC（切换/按钮）
 # =========================================================
 
 func refresh_current_patient() -> void:
@@ -645,9 +787,22 @@ func refresh_current_patient() -> void:
 
 	if not _ensure_current_npc_valid(true):
 		_update_npc_portrait()
+		_update_npc_name()
+
+		# ✔ 迁移后统一入口
+		if current_npc != null:
+			_set_npc_dialogue_label_text(current_npc.get_dialogue())
+		else:
+			_set_npc_dialogue_label_text("")
+
 		return
 
 	_update_npc_portrait()
+	_update_npc_name()
+
+	# ✔ 关键修改点
+	_set_npc_dialogue_label_text(current_npc.get_dialogue())
+
 	show_region(current_display_region_name)
 
 
@@ -759,7 +914,12 @@ func open_pulse_window() -> void:
 
 	# 打开脉诊窗口时，只显示按键提示页。
 	# 不再自动调用 show_region()，避免窗口一打开就跳到脉象图。
-	pulse_window.open_window()
+	if pulse_window.has_method("open_window"):
+		pulse_window.open_window()
+	else:
+		pulse_window.show()
+
+	_show_window_front(pulse_window)
 
 	if pulse_window.has_method("show_hint_tab"):
 		pulse_window.show_hint_tab()
@@ -788,8 +948,7 @@ func open_prescription_window() -> void:
 		return
 
 	prescription_window.setup(herb_database, current_prescription, formula_database)
-	prescription_window.show()
-	prescription_window.grab_focus()
+	_show_window_front(prescription_window)
 
 
 func close_prescription_window() -> void:
@@ -812,14 +971,15 @@ func open_clinical_log_window() -> void:
 	if OS.is_debug_build():
 		print("找到 ClinicalLogWindow：", clinical_log_window)
 
-	if clinical_log_window.has_method("refresh_view"):
-		clinical_log_window.refresh_view()
+	# 行医记考窗口和 F1 / F2 窗口一样，先统一显示并置顶。
+	# 这样窗口已经打开时，再按 F3 也会重新切到最前。
+	_show_window_front(clinical_log_window)
 
 	if clinical_log_window.has_method("open_window"):
 		clinical_log_window.open_window()
-	else:
-		clinical_log_window.show()
-		clinical_log_window.grab_focus()
+		_show_window_front(clinical_log_window)
+	elif clinical_log_window.has_method("refresh_view"):
+		clinical_log_window.refresh_view()
 
 
 func close_clinical_log_window() -> void:
@@ -924,13 +1084,9 @@ func _get_reputation_reward_by_judge_result(result) -> int:
 	match grade:
 		"妙手回春":
 			return 10
-		"甲等":
-			return 5
-		"乙等":
-			return 1
-		"丙等":
+		"治疗成功":
 			return 0
-		"丁等":
+		"治疗失败":
 			return -10
 		_:
 			return 0
@@ -969,6 +1125,7 @@ func submit_prescription() -> bool:
 	last_newly_unlocked_entry_titles.clear()
 
 	# 提交判定后根据评级改变名望。
+	# 妙手回春：名望 +10；治疗成功：名望不变；治疗失败：名望 -10。
 	# was_already_submitted 用于防止同一名病人重复提交刷名望。
 	#
 	# 说明：
@@ -994,6 +1151,17 @@ func submit_prescription() -> bool:
 		summary_text += "\n本病人已提交过处方，不重复改变名望。"
 		if Unlock != null and Unlock.has_method("get_reputation_points"):
 			summary_text += "\n当前名望：%d" % Unlock.get_reputation_points()
+
+	var result_grade := ""
+	if result != null:
+		var raw_result_grade = result.get("grade")
+		if raw_result_grade != null:
+			result_grade = str(raw_result_grade).strip_edges()
+
+	if result_grade == "治疗成功" and not was_already_submitted:
+		summary_text += "\n治疗成功：名望、心得不变"
+	elif result_grade == "治疗成功" and was_already_submitted:
+		summary_text += "\n本病人已提交过处方，名望、心得不变。"
 
 	# 妙手回春时获得 1 点心得，并立刻按累计心得自动解锁条目。
 	# was_already_submitted 用于防止同一名病人重复提交刷心得。
@@ -1026,6 +1194,13 @@ func submit_prescription() -> bool:
 		_update_thoughts_point_ui(true)
 		summary_text += "\n本病人已提交过处方，不重复获得心得。"
 		summary_text += "\n当前累计心得：%d" % Unlock.get_experience_points()
+
+	# 只有判定成功才视为治愈，切换到治疗后立绘和治疗后台词。
+	# 治疗失败则保持治疗前立绘，但显示治疗失败台词。
+	current_npc.is_treated = result.success
+	current_npc.treatment_failed = not result.success
+	_update_npc_portrait()
+	_set_npc_dialogue_label_text(current_npc.get_dialogue())
 
 	last_formula_judge_summary_text = summary_text
 
@@ -1195,8 +1370,39 @@ func _on_judgement_result_window_closed() -> void:
 	if tree != null and tree.paused:
 		tree.paused = false
 
-	if is_inside_tree():
+	if not is_inside_tree():
+		return
+
+	# 不再立刻刷新下一位病人。
+	# 先让玩家看到当前 NPC 的治疗后 / 治疗失败立绘和台词。
+	_show_current_patient_result_before_next()
+
+
+func _show_current_patient_result_before_next() -> void:
+	if current_npc == null:
 		_go_to_next_patient_after_judgement()
+		return
+
+	waiting_next_patient_after_result = true
+
+	# JudgementResult 弹窗期间，底层台词的 10 秒计时可能已经结束。
+	# 这里重新显示当前 NPC 的判定后状态。
+	_update_npc_portrait()
+	_update_npc_name()
+	_set_npc_dialogue_label_text(current_npc.get_dialogue())
+
+	var current_token := npc_dialogue_display_token
+
+	await get_tree().create_timer(NPC_DIALOGUE_AUTO_HIDE_SECONDS).timeout
+
+	if not waiting_next_patient_after_result:
+		return
+
+	if current_token != npc_dialogue_display_token:
+		return
+
+	waiting_next_patient_after_result = false
+	_go_to_next_patient_after_judgement()
 
 
 func _go_to_next_patient_after_judgement() -> void:
@@ -1351,12 +1557,36 @@ func set_day(day: int) -> void:
 # =========================================================
 
 func _input(event: InputEvent) -> void:
+	# 判定结果窗口显示期间，不处理底层 Clinic 的台词点击。
+	# 避免点击 JudgementResult 时误触底层台词隐藏逻辑。
+	if judgement_result_window != null and is_instance_valid(judgement_result_window):
+		return
+
+	# NPC 台词显示期间，点击任意区域隐藏台词。
+	# 这次点击会被标记为已处理，避免误触下面的按钮。
+	if npc_dialogue_visible:
+		if event is InputEventMouseButton:
+			var mouse_event := event as InputEventMouseButton
+			if mouse_event.pressed:
+				_hide_npc_dialogue()
+				get_viewport().set_input_as_handled()
+				return
+
+		if event is InputEventScreenTouch:
+			var touch_event := event as InputEventScreenTouch
+			if touch_event.pressed:
+				_hide_npc_dialogue()
+				get_viewport().set_input_as_handled()
+				return
+
 	if event is InputEventKey:
 		# 只在按下瞬间触发，避免长按重复弹出
 		if event.pressed and not event.echo:
 			# 判断是否按下 Ctrl + T
 			if event.ctrl_pressed and event.keycode == KEY_T:
 				open_info_window()
+				get_viewport().set_input_as_handled()
+				return
 
 # =========================================================
 # 测试功能：一键解锁所有条目

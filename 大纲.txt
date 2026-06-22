@@ -1,18 +1,18 @@
 《医者》Godot 项目上下文说明（给 ChatGPT 读取用）
-生成日期：2026-05-20
+生成日期：2026-06-22
 项目来源：Doctor.zip
 引擎：Godot 4.6
-项目类型：中医题材诊疗/读书/处方评分循环游戏
+项目类型：中医题材诊疗 / 夜读解锁 / 处方评分 / 剧情触发循环游戏
 
 ============================================================
 1. 一句话说明
 ============================================================
-《医者》是一个 Godot 4.6 制作的中医诊疗模拟游戏。玩家白天在诊室接诊，通过症状、脉象、病机判断疾病，并开出中药方剂；系统根据标准方剂进行评分。夜晚玩家读医书，解锁药材、疾病、方剂和医理知识，推动后续诊疗能力成长。
+《医者》是一个 Godot 4.6 制作的中医诊疗模拟游戏。玩家白天在诊室接诊，通过症状、脉象、病机判断疾病，并开出中药方剂；系统根据标准方剂评分，并根据治疗结果反馈 NPC 状态、评级图片、心得与名望收益。夜晚玩家读医书，消耗或积累阅读进度，逐步解锁药材、疾病、方剂、理论与行医记考内容，推动后续诊疗能力成长。
 
 核心循环：
-主菜单 → 新游戏/读档 → 白天诊室接诊 → 查看脉象/医案 → 开处方 → 评分结算 → 夜晚读书 → 解锁知识 → 次日继续接诊
+主菜单 → 新游戏 / 读档 → 白天诊室接诊 → 查看脉象 / 行医记考 → 开处方 → 评分结算 → 治疗反馈 / 名望与心得更新 → 夜晚读书 → 解锁知识 → 次日继续接诊 / 触发剧情
 
-当前阶段判断：核心玩法 Alpha 前中期。主框架、数据系统、接诊流程、脉象显示、处方窗口、方剂评分、夜读解锁、存档、剧情系统均已存在；UI 体验、评分提示、脉象辅助显示、剧情内容、工程整理仍需继续完善。
+当前阶段判断：核心玩法 Alpha 中期。主框架、数据系统、接诊流程、脉象显示、处方窗口、方剂评分、结算评级、夜读解锁、行医记考、三槽存档、时间推进、剧情系统、NPC 治疗前后台词均已存在。后续重点应放在 UI 动效、NPC 进出场表现、剧情内容扩充、病例/NPC 丰富度、工程目录整理与数据导入流程稳定化。
 
 ============================================================
 2. 当前数据规模
@@ -23,20 +23,27 @@
 - 药材 Herb：108 个
 - 疾病 Disease：43 个
 - 方剂 Formula：43 个
-- NPC 模板：3 个
+- NPC 模板：5 个
+- 剧情 Story：2 段
 - 医书 Book：21 本
-- 医书条目：约 194 个
+- 医书条目：197 个
   - HerbEntry：108 个
   - DiseaseEntry：43 个
   - FormulaEntry：43 个
-  - TheoryEntry：当前目录统计中未单独发现，可能尚未填充或另有路径
-- 场景 .tscn：8 个
-- 脚本 .gd：43 个
+  - TheoryEntry：3 个
+- 场景 .tscn：11 个
+- 脚本 .gd：46 个
+- 运行数据 .tres：419 个
+
+DataTables 当前状态：
+- DataTables/Data.xlsx：主数据表。
+- Sheet 包括：Npc、Story、StoryLine、Disease、Formula、Pulse、FormulaIngredient、Herb、Book、Theory。
+- import_data.py 已支持导入 NPC 的 DialogueAfterTreatment 与 dialogueTreatmentFailed 字段。
+- DetailText 下已包含药材、疾病、方剂、剧情、说明文本。
 
 已做过初步一致性检查：
-- Herb / Disease / Formula 的 ID 未发现重复。
-- 方剂 target_disease_id 均能对应到疾病。
-- 疾病 recommended_formula_id 均能对应到方剂。
+- Herb / Disease / Formula / Npc / Book 的 ID 未发现重复。
+- 方剂数量与疾病数量一一对应，仍建议每次批量导入后继续检查 target_disease_id 与 recommended_formula_id 的互相引用。
 
 ============================================================
 3. 当前目录结构
@@ -44,29 +51,34 @@
 项目主要结构：
 
 res://
-├─ Assets/                         # 图片资源：主菜单背景、诊室背景、书页等
+├─ Assets/                         # 图片资源：主菜单、诊室、书页、评级图、NPC立绘等
 ├─ Fonts/                          # 字体资源
 ├─ Data/                           # 运行时 .tres 数据
 │  ├─ Herb/                         # 药材数据
-│  ├─ Disease/                      # 疾病/证候数据
+│  ├─ Disease/                      # 疾病 / 证候数据
 │  ├─ Formula/                      # 方剂数据
-│  ├─ Npc/                          # 病人/NPC 模板数据
-│  ├─ Story/                        # 剧情数据
+│  ├─ Npc/                          # 随机病人与剧情 NPC 模板
+│  ├─ Story/                        # 剧情资源
 │  └─ Book/
 │     ├─ Book/                      # 医书本体数据
 │     └─ BookEntry/                 # 医书条目
 │        ├─ HerbEntry/
 │        ├─ DiseaseEntry/
-│        └─ FormulaEntry/
+│        ├─ FormulaEntry/
+│        └─ TheoryEntry/
+├─ DataTables/                      # Excel 源数据、导入脚本、DetailText 文本源
 ├─ Scene/                           # 场景和 UI
-│  ├─ Main/                         # 主入口/主菜单/场景切换
+│  ├─ Main/                         # 主入口 / 主菜单 / 场景切换
 │  ├─ Clinic/                       # 白天诊室主场景
-│  ├─ NightStudy/                   # 夜晚读书主场景
+│  ├─ JudgementResult/              # 处方评分结算窗口
+│  ├─ Night/                        # 夜晚场景
+│  ├─ ReadBook/                     # 读书窗口
+│  ├─ PlayerHint/                   # 玩家提示弹窗
 │  ├─ Prescription/                 # 处方窗口和处方数据结构
 │  ├─ Pulse/                        # 脉象窗口和脉象绘制
 │  ├─ Story/                        # 剧情播放场景
 │  ├─ Test/                         # 开发测试窗口
-│  └─ clinical_log/                 # 医案/古籍纵排显示窗口
+│  └─ clinicalLogWindow/            # 行医记考窗口
 ├─ System/                          # 系统逻辑、数据结构、数据库单例
 │  ├─ Herb/
 │  ├─ Disease/
@@ -79,7 +91,7 @@ res://
 │  └─ UnlockManager.gd
 └─ project.godot
 
-注意：zip 中还包含 .godot/ 和 .git/。其中 .godot 是 Godot 本地缓存/导入缓存，不建议纳入分享包或版本库。
+注意：zip 中仍包含 .godot/ 和 .git/。.godot 是 Godot 本地缓存 / 导入缓存，.git 是版本库信息。分享给 ChatGPT 或协作者时可保留；发布游戏或制作干净工程包时不建议包含 .godot。
 
 ============================================================
 4. Autoload / 全局单例
@@ -91,12 +103,12 @@ project.godot 中配置了以下 Autoload：
 - BookEntryDB：医书条目数据库
 - BookDB：医书数据库
 - HerbDB：药材数据库
-- Unlock：解锁管理器
-- GameTime：时间/天数管理器
+- Unlock：解锁、心得、名望、行医记考内容管理器
+- GameTime：时间 / 天数 / 时辰管理器
 - SaveManager：存档管理器
 - StoryManager：剧情管理器
 
-这些全局单例是项目运行的核心。ChatGPT 在修改代码或建议重构时，需要优先考虑这些 Autoload 的路径和名称不要随意破坏。
+这些全局单例是项目运行核心。修改代码或重构目录时，要优先保证 Autoload 名称、脚本路径、Resource uid 不被破坏。
 
 ============================================================
 5. 主流程逻辑
@@ -106,26 +118,30 @@ project.godot 中配置了以下 Autoload：
 - Scene/Main/Main.gd
 
 Main.gd 主要职责：
-- 显示主菜单
-- 新游戏
-- 读档
-- 退出游戏
-- 根据时间阶段切换 Clinic / NightStudy / Story 场景
-- 调用 SaveManager 保存/读取
-- 根据 StoryManager 判断是否播放剧情
+- 显示主菜单。
+- 新游戏选择存档槽。
+- 读档选择存档槽。
+- 覆盖旧存档确认。
+- 退出游戏。
+- 在 Clinic / Night / Story 场景之间切换。
+- 白天与黑夜结束时自动存档。
+- 接收 Clinic 的剧情请求，并在剧情结束后返回原流程。
 
 当前主场景预加载：
 - res://Scene/Clinic/Clinic.tscn
-- res://Scene/NightStudy/NightStudy.tscn
+- res://Scene/Night/Night.tscn
 - res://Scene/Story/Story.tscn
 
 流程：
-1. 新游戏：清理旧存档，初始化解锁和时间。
+1. 新游戏：选择槽位，必要时确认覆盖，重置时间、解锁、剧情记录并创建存档。
 2. 白天：进入 Clinic 接诊。
-3. 处方提交后进行评分。
-4. 当天结束后进入夜读。
-5. 夜读后进入下一天。
-6. 过程中可触发剧情场景。
+3. 接诊中可查看脉象、行医记考、打开处方窗口。
+4. 提交处方后进行评分，显示 JudgementResult。
+5. 根据评分更新 NPC 治疗状态、心得、名望、可触发剧情。
+6. 当天结束后进入 Night。
+7. 夜晚读书，阅读 / 解锁条目。
+8. 未读条目检查通过后休息，进入下一天。
+9. StoryManager 可在 Clinic 或 Night 阶段触发剧情。
 
 ============================================================
 6. 诊室系统
@@ -134,44 +150,65 @@ Main.gd 主要职责：
 - Scene/Clinic/Clinic.tscn
 - Scene/Clinic/Clinic.gd
 - Scene/Clinic/JudgeResult.gd
+- Scene/JudgementResult/JudgementResult.tscn
+- Scene/JudgementResult/JudgementResult.gd
 
 Clinic.gd 是当前白天玩法主控制脚本，职责较多：
-- 管理当前病人/NPC
-- 显示患者信息、症状、诊疗信息
-- 打开脉象窗口
-- 打开处方窗口
-- 打开医案/医书窗口
-- 提交处方
-- 调用 FormulaJudge 评分
-- 显示评分结果
-- 结束当天
-- 支持开发测试入口
+- 管理当前病人 / NPC。
+- 显示患者姓名、立绘、台词、症状与诊疗信息。
+- 接入 GameTimeManager，显示日期与时辰。
+- 显示心得与名望。
+- 打开 / 关闭脉象窗口。
+- 打开 / 关闭处方窗口。
+- 打开 / 关闭行医记考窗口。
+- 提交处方并调用 FormulaJudge 评分。
+- 打开 JudgementResult 结算窗口。
+- 根据评分决定治疗成功、失败或妙手回春。
+- 成功时切换治疗后立绘和治疗后台词。
+- 失败时保留治疗前立绘并显示治疗失败台词。
+- 支持下一名 / 上一名 / 生成随机 NPC。
+- 支持开发测试入口。
+- 支持从 Clinic 请求剧情播放。
 
 JudgeResult.gd：
 - class_name JudgeResult
 - extends RefCounted
-- 用于承载判方结果
-- 当前放在 Scene/Clinic/ 下，但它实际属于处方评分逻辑，未来更适合移动到 System/Formula/ 或 System/Prescription/。
+- 用于承载判方结果。
+- 当前仍放在 Scene/Clinic/ 下，但它实际属于处方评分逻辑，未来更适合移动到 System/Formula/ 或 System/Prescription/。
+
+JudgementResult.gd：
+- extends Control。
+- 显示病人疾病、标准方、玩家断病、玩家处方、新解锁条目。
+- 根据 grade 显示评级图片。
+- 当前评级规则：
+  - 100 分：妙手回春
+  - 60~99 分：治疗成功
+  - 0~59 分：治疗失败
+
+当前待做：
+- NPC 进入 / 离开 Clinic 场景时还没有检测到已实现淡入淡出逻辑；可在 Clinic.gd 的刷新病人、结算后切换下一名病人处加入 Tween 控制 portrait_rect 和台词框 alpha。
+- Clinic.gd 职责已经很重，后续可拆分为 PatientView、ClinicFlowController、ClinicWindowController、TreatmentResultHandler。
 
 ============================================================
 7. 脉象系统
 ============================================================
 相关文件：
 - Scene/Pulse/PulseWindow.tscn
-- Scene/Pulse/PulseWindowUI.gd
+- Scene/Pulse/PulseWindow.gd
 - Scene/Pulse/PulsePanel.gd
 - Scene/Pulse/PulseDrawer.gd
 
 职责：
-- PulseWindowUI.gd：脉象窗口 UI 控制。
-- PulsePanel.gd：脉象区域/面板逻辑。
+- PulseWindow.gd：脉象窗口 UI 控制。
+- PulsePanel.gd：脉象区域 / 面板交互逻辑。
 - PulseDrawer.gd：负责绘制脉象曲线。
 
 当前功能：
-- 可以展示不同部位/区域的脉象。
-- 有左右手/脏腑相关的显示结构。
+- 可以展示不同脉象区域。
+- 有左右手 / 脏腑相关显示结构。
 - 已有脉象曲线绘制逻辑。
 - 支持玩家通过图形判断脉象。
+- Clinic.gd 支持 F1 打开脉象窗口，并支持键盘把脉相关输入。
 
 ============================================================
 8. 处方与方剂评分系统
@@ -179,7 +216,7 @@ JudgeResult.gd：
 相关文件：
 - Scene/Prescription/Prescription.gd
 - Scene/Prescription/PrescriptionWindow.tscn
-- Scene/Prescription/PrescriptionWindowUI.gd
+- Scene/Prescription/PrescriptionWindow.gd
 - System/Formula/FormulaJudge.gd
 - System/Formula/FormulaData.gd
 - System/Formula/FormulaIngredient.gd
@@ -192,56 +229,82 @@ Prescription.gd：
 - 表示玩家开的处方。
 - 当前放在 Scene/Prescription/ 下，但它是纯数据逻辑，不是 UI，后续可移动到 System/Formula/ 或 System/Prescription/。
 
-PrescriptionWindowUI.gd：
-- class_name PrescriptionWindowUI
+PrescriptionWindow.gd：
+- class_name PrescriptionWindow
 - extends Window
 - 处方窗口 UI 控制。
-- 负责选择药材、设置剂量、设置君臣佐使、提交处方等。
+- 负责选择疾病、选择药材、设置剂量、设置君臣佐使、提交处方。
+- 已接入 PlayerHintWindow，用于提示“请先填入疾病”“请先填入药材”等操作错误。
+- 药材与疾病选择会受到 UnlockManager 解锁状态影响。
+- 可从处方窗口跳转打开行医记考。
 
 FormulaJudge.gd：
 - class_name FormulaJudge
 - extends RefCounted
 - 负责将玩家处方与标准方剂比较。
-- 判断内容包括：缺药、多药、剂量错误、君臣佐使角色错误等。
-- 输出评分等级和错误详情。
+- 当前评分规则为区域判定版：
+  - 基础分 100。
+  - 疾病判断错误或未选择，扣 100。
+  - 君药区错误扣 40。
+  - 臣药区错误扣 30。
+  - 佐药区错误扣 20。
+  - 使药区错误扣 10。
+  - 区域错误包括缺药、多药、放错区域、剂量不一致。
+  - 最终分数 max(0, 100 - 总扣分)。
+  - 100：妙手回春；60~99：治疗成功；0~59：治疗失败。
 
 HerbUnit.gd：
 - 处理中药剂量单位。
 - 当前涉及分、钱、两、斤等单位换算。
 
-当前下一步计划中明确写到：
-- 评分逻辑错误提示优化。
-
 ============================================================
 9. 夜晚读书与解锁系统
 ============================================================
 相关文件：
-- Scene/NightStudy/NightStudy.tscn
-- Scene/NightStudy/NightStudy.gd
+- Scene/Night/Night.tscn
+- Scene/Night/Night.gd
+- Scene/ReadBook/ReadBook.tscn
+- Scene/ReadBook/ReadBook.gd
+- Scene/PlayerHint/PlayerHintWindow.tscn
+- Scene/PlayerHint/PlayerHintWindow.gd
 - System/UnlockManager.gd
 - System/Book/Book/*
 - System/Book/BookEntry/*
 - Data/Book/Book/*
 - Data/Book/BookEntry/*
 
-NightStudy.gd：
-- class_name NightStudy
-- extends Control
-- 控制夜读场景。
-- 显示医书列表和条目。
-- 阅读条目后调用 Unlock 解锁相关内容。
+Night.gd：
+- class_name 未注册，extends Control。
+- 控制夜晚主场景。
+- 显示日期、时辰、心得、名望。
+- 打开 ReadBook 窗口。
+- 休息前检查是否还有未读的疾病 / 方剂类解锁条目。
+- 若仍有必须阅读的条目，使用 PlayerHintWindow 提示“尚有未读条目，请先阅读后再休息”。
+- 夜晚结束后发出 night_finished 信号回到 Main。
+
+ReadBook.gd：
+- class_name ReadBook。
+- 控制读书窗口。
+- 显示医书列表、条目列表、条目内容。
+- 调用 Unlock.refresh_auto_unlocks_by_experience() 刷新自动解锁。
+- 显示累计心得。
+- 阅读条目后更新阅读状态、心得与可读条目。
 
 UnlockManager.gd：
 - class_name UnlockManager
 - extends Node
-- 作为 Autoload：Unlock
-- 管理已解锁药材、疾病、方剂、书籍条目等。
-- 与 SaveManager 配合保存和恢复解锁状态。
+- 作为 Autoload：Unlock。
+- 管理已解锁条目、已阅读条目、药材 / 疾病 / 方剂解锁、行医记考解锁内容、读书天数、累计心得、名望、已解锁剧情。
+- 条目自动解锁主要依赖 BookEntryData.unlock_required_experience_points。
+- 行医记考会同步记录已解锁的药材、疾病、方剂实体。
+- 名望达到 StoryData.required_reputation_points 后可解锁剧情，但 StoryData.unlock_entry_id 当前作为剧情触发前置条目，不再由 UnlockManager 自动解锁。
 
 Book 系统：
 - BookData.gd / BookDataBase.gd：医书本体数据和数据库。
+- ClinicalLogData.gd：行医记考类 BookData。
+- HerbBookData / DiseaseBookData / FormulaBookData / TheoryBookData：不同书籍类型。
 - BookEntryData.gd / BookEntryDataBase.gd：医书条目数据和数据库。
-- HerbBookEntryData / DiseaseBookEntryData / FormulaBookEntryData / TheoryBookEntryData：不同类型的条目数据。
+- HerbBookEntryData / DiseaseBookEntryData / FormulaBookEntryData / TheoryBookEntryData：不同类型条目数据。
 
 ============================================================
 10. 剧情系统
@@ -252,18 +315,34 @@ Book 系统：
 - System/Story/StoryData.gd
 - System/Story/StoryLine.gd
 - System/Story/StoryManager.gd
-- Data/Story/teaching_test.tres
+- Data/Story/001.tres
+- Data/Story/002.tres
 
-职责：
-- StoryData：一段剧情资源。
-- StoryLine：一条剧情对白/文本。
-- StoryManager：全局剧情管理器，记录哪些剧情已播放，并判断是否应触发剧情。
-- Story.tscn / Story.gd：负责实际播放剧情。
+StoryData：
+- 一段剧情资源。
+- 字段包括 story_id、trigger_scene、trigger_day、required_reputation_points、unlock_entry_id、play_once、return_scene、clinic_npc_id、background、lines。
+- trigger_scene / return_scene 支持 clinic、night、map。
+- clinic_npc_id 可指定剧情结束后回到 Clinic 时使用的剧情 NPC。
+
+StoryLine：
+- 一条剧情对白 / 字幕。
+- line_type 支持 dialogue 与 subtitle。
+- dialogue 支持 speaker、text、portrait、portrait_side。
+- subtitle 可用于背景字幕 / 旁白。
+
+StoryManager：
+- 作为 Autoload：StoryManager。
+- 扫描 Data/Story。
+- 管理当前剧情、剧情触发判断、已播放记录、剧情返回目标、pending clinic NPC。
+- 与 SaveManager 配合保存 played_story_ids。
+
+Story.gd：
+- 负责实际播放剧情。
+- 支持打字机显示、按键推进、长按 Enter 跳过 / 快进、背景图、左右立绘、字幕与对白显示。
 
 当前状态：
-- 剧情系统框架已存在。
-- 当前数据中能看到 teaching_test.tres。
-- 剧情内容量还较少，更像系统验证阶段。
+- 剧情系统已从“验证框架”推进到可与主流程、名望、前置条目、剧情 NPC 联动。
+- 当前剧情资源数量仍较少，适合继续扩充主线、支线、教程和特殊病人事件。
 
 ============================================================
 11. 存档与时间系统
@@ -273,15 +352,17 @@ Book 系统：
 - System/Time/GameTimeManager.gd
 
 SaveManager：
-- 作为 Autoload：SaveManager
-- 保存当前游戏进度。
-- 保存内容包括时间/天数、解锁进度、剧情播放记录等。
-- 支持新游戏删除旧存档、读档恢复。
+- 作为 Autoload：SaveManager。
+- 使用 user://save_slot_%d.json 保存三槽存档。
+- 支持 is_valid_slot、has_save、save_game、load_game、delete_save、get_save_meta、get_all_save_meta。
+- 保存内容包括时间、解锁进度、剧情播放记录、存档元信息等。
+- Main.gd 已接入新游戏 / 读档槽位选择和覆盖确认。
 
 GameTime：
-- 作为 Autoload：GameTime
-- 管理当前天数和白天/夜晚阶段。
-- 与 Main.gd 场景切换流程配合。
+- 作为 Autoload：GameTime。
+- 管理当前天数、白天 / 夜晚阶段、Clinic 自动计时、时辰推进。
+- 支持剧情期间暂停 Clinic 计时，并在剧情结束后恢复。
+- 提供中文日期、年号、时辰文本显示。
 
 ============================================================
 12. NPC / 病人系统
@@ -289,37 +370,71 @@ GameTime：
 相关文件：
 - System/Npc/NpcData.gd
 - System/Npc/NpcManager.gd
-- Data/Npc/001.tres
-- Data/Npc/002.tres
-- Data/Npc/003.tres
+- Data/Npc/li_shi_zhen.tres
+- Data/Npc/li_si.tres
+- Data/Npc/wang_wu.tres
+- Data/Npc/zhang_san.tres
+- Data/Npc/zhao_liu.tres
 
 NpcData：
+- class_name NpcData。
 - Resource 类型。
-- 存储 NPC/病人模板数据。
+- npc_type 支持 random 与 story。
+- 基础字段包括 npc_id、npc_name、gender、age、disease。
+- 外观字段包括 portrait_before_treatment、portrait_after_treatment。
+- 治疗状态字段包括 is_treated、treatment_failed。
+- 台词字段包括 dialogue_prefix、dialogue_suffix、dialogue_after_treatment、dialogue_treatment_failed。
+- 运行时缓存 runtime_before_dialogue、runtime_after_dialogue、runtime_failed_dialogue，保证同一轮接诊台词不反复随机变化。
 
 NpcManager：
-- 负责加载 NPC 数据。
-- 当前不是 project.godot 中的 Autoload，可能由 Clinic 或其他逻辑调用。
+- 负责扫描 Data/Npc 并加载 NPC 模板。
+- 支持随机 NPC、剧情 NPC、切换上一名 / 下一名、替换当前 NPC。
+- 随机 NPC 会从已解锁疾病池中分配疾病。
+- 剧情 NPC 可通过 StoryManager 的 pending clinic_npc_id 指定。
 
-当前 NPC 数量较少，适合后续扩展更多病例。
+当前状态：
+- NPC 数量从 3 个扩展到 5 个。
+- NPC 已支持治疗前立绘、治疗后立绘、治疗后台词、治疗失败台词。
+- 下一步建议加入 NPC 进场 / 离场动画、更多职业与外观模板、与疾病严重程度相关的表情或姿态变化。
 
 ============================================================
 13. 行医记考窗口
 ============================================================
 相关文件：
-- Scene/clinical_log/clinical_log_window.tscn
-- Scene/clinical_log/ClinicalLogWindow.gd
-- Scene/clinical_log/ClassicalVerticalRichTextLabel.gd
+- Scene/clinicalLogWindow/ClinicalLogWindow.tscn
+- Scene/clinicalLogWindow/ClinicalLogWindow.gd
+- Scene/clinicalLogWindow/ClassicalVerticalRichTextLabel.gd
+- System/Book/Book/ClinicalLogData.gd
 
 职责：
-- 展示医案或古籍文本。
-- ClassicalVerticalRichTextLabel 可能用于古文/竖排阅读表现。
+- 展示已解锁的药材、疾病、方剂内容。
+- 支持从 Clinic 打开，也可从处方窗口辅助查阅。
+- ClassicalVerticalRichTextLabel 用于古文 / 竖排阅读表现。
+- 行医记考内容与 UnlockManager 的 clinical_log_unlocked_herb_ids / disease_ids / formula_ids 同步。
 
 结构问题：
-- 当前目录名 clinical_log 使用 snake_case，而其他目录多为 PascalCase。建议后续统一成 ClinicalLog。
+- 当前目录名为 clinicalLogWindow，命名风格与 Scene 下其他 PascalCase 目录不完全一致。
+- 后续可统一为 Scene/ClinicalLog/，但重命名前要同步修正场景引用、脚本路径和 uid。
 
 ============================================================
-14. 开发测试窗口
+14. 玩家提示窗口
+============================================================
+相关文件：
+- Scene/PlayerHint/PlayerHintWindow.tscn
+- Scene/PlayerHint/PlayerHintWindow.gd
+
+职责：
+- 提供轻量提示弹窗。
+- 当前已接入 Night 与 PrescriptionWindow。
+- 可用于阻止玩家非法操作时提示原因。
+- 支持按确认 / 取消键关闭。
+
+当前用途：
+- 夜晚休息前提醒仍有未读条目。
+- 处方提交前提醒未填疾病或未填药材。
+
+============================================================
+15. 开发测试窗口
 ============================================================
 相关文件：
 - Scene/Test/InfoWindow.tscn
@@ -327,9 +442,64 @@ NpcManager：
 
 当前功能：
 - 开发调试用。
-- 可能包含查看数据库、解锁全部内容、测试当前病例等功能。
-- Clinic.gd 中存在测试入口，例如快捷键 Ctrl + T 或类似逻辑。
+- Clinic.gd 中仍保留测试入口。
+- UnlockManager 支持 unlock_all_entries_for_test()，便于快速测试读书、处方与行医记考。
 
 建议：
 - 开发阶段保留。
 - 发布试玩版前隐藏、禁用或加 debug 开关。
+
+============================================================
+16. 数据导入系统
+============================================================
+相关文件：
+- DataTables/import_data.py
+- DataTables/Data.xlsx
+- DataTables/DetailText/*
+
+当前功能：
+- 从 Excel 与 DetailText 生成 Godot .tres Resource 数据。
+- 支持导入药材、疾病、脉象、方剂、方剂组成、医书、理论条目、剧情、剧情台词、NPC。
+- 支持 clinical_log 类型 Book。
+- 支持 TheoryEntry。
+- NPC 导入已支持：
+  - DialogueAfterTreatment → dialogue_after_treatment
+  - dialogueTreatmentFailed → dialogue_treatment_failed
+
+建议：
+- 统一 Excel 字段大小写风格，例如全部使用 PascalCase 或 snake_case，避免 DialogueAfterTreatment 与 dialogueTreatmentFailed 混用。
+- import_data.py 可拆分为 parser、validator、writer、resource_builder，降低单文件复杂度。
+- 每次导入后自动输出数据统计和引用完整性检查报告。
+
+============================================================
+17. 当前工程整理建议
+============================================================
+优先级 A：直接影响玩法体验
+- 给 NPC 进入 / 离开 Clinic 添加淡入淡出或移动 Tween。
+- 结算后切换下一名病人时，先淡出旧病人，再刷新数据，再淡入新病人。
+- NPC 台词框与立绘一起做 alpha 动效，避免画面突变。
+- 评分结果窗口增加更明确的错误定位与下一步学习引导。
+
+优先级 B：直接影响内容生产
+- 继续扩充 NPC 模板，至少覆盖不同年龄、性别、职业、疾病倾向。
+- 增加剧情资源数量，把主线、教程、名望事件、特殊患者分层管理。
+- 为每个疾病补充更像病人口吻的症状描述，减少机械感。
+
+优先级 C：工程维护
+- 将 JudgeResult.gd 从 Scene/Clinic 移至 System/Formula 或 System/Prescription。
+- 将 Prescription.gd 从 Scene/Prescription 移至 System/Prescription。
+- 统一目录命名：clinicalLogWindow 可改为 ClinicalLog。
+- Clinic.gd 可拆分，降低单脚本复杂度。
+- DataTables/.idea 不建议纳入发布包。
+
+============================================================
+18. ChatGPT 后续修改项目时的注意事项
+============================================================
+- 不要随意修改 Autoload 名称：FormulaDB、DiseaseDB、BookEntryDB、BookDB、HerbDB、Unlock、GameTime、SaveManager、StoryManager。
+- 不要只改 .tscn 而忘记对应 .gd 中 find_child 的节点名。
+- 新增数据字段时，需同时修改：System Resource 脚本、DataTables/import_data.py、Excel 表头、已有 .tres 数据。
+- 新增场景路径时，需同步检查 Main.gd、Clinic.gd、preload、PackedScene 引用。
+- 修改 NPC 治疗逻辑时，要同时考虑：is_treated、treatment_failed、portrait_before_treatment、portrait_after_treatment、get_dialogue()。
+- 修改剧情逻辑时，要同时考虑：StoryData.trigger_scene、required_reputation_points、unlock_entry_id、return_scene、clinic_npc_id、StoryManager 存档。
+- 修改读书逻辑时，要同时考虑：UnlockManager 的 entry 解锁、read 状态、experience_points、clinical_log 同步。
+- 修改评分逻辑时，要同时考虑：FormulaJudge、JudgeResult、JudgementResult、Clinic.submit_prescription、NPC 治疗状态与名望奖励。

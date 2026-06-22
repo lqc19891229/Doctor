@@ -46,6 +46,13 @@ extends Resource
 @export var disease_name: String = ""
 @export var recommended_formula_id: String = ""
 
+## 病证 / 症状自述
+## 说明：
+## 1. 每个元素填写一个症状，例如："咳嗽不止"、"胸中发闷"、"夜里难眠"。
+## 2. Clinic 进入病人时会从这里随机抽取一个症状，用于组合 NPC 台词。
+## 3. 为空时，Clinic 会回退显示 disease_name，避免旧疾病数据没有填写时出现空文本。
+@export var Symptoms: Array[String] = []
+
 
 ## =========================================================
 ## 二、七区独立脉象四轴
@@ -171,7 +178,34 @@ var kidney_yang_wet_dry: float = 1
 
 
 ## =========================================================
-## 三、区域名称 / 区域ID 对照
+## 三、病证文本接口
+## =========================================================
+
+func get_symptoms_text() -> String:
+	var symptom_list := get_symptom_list()
+	if symptom_list.is_empty():
+		return disease_name.strip_edges()
+	return "\n".join(symptom_list)
+
+
+func get_symptom_list() -> Array[String]:
+	var result: Array[String] = []
+	for raw_symptom in Symptoms:
+		var symptom := str(raw_symptom).strip_edges()
+		if symptom != "":
+			result.append(symptom)
+	return result
+
+
+func get_random_symptom_text() -> String:
+	var symptom_list := get_symptom_list()
+	if symptom_list.is_empty():
+		return disease_name.strip_edges()
+	return symptom_list.pick_random()
+
+
+## =========================================================
+## 四、区域名称 / 区域ID 对照
 ## =========================================================
 
 const REGION_ID_TO_NAME := {
@@ -196,7 +230,7 @@ const REGION_NAME_TO_ID := {
 
 
 ## =========================================================
-## 四、基础工具函数
+## 五、基础工具函数
 ## =========================================================
 
 ## 获取指定区域的四轴
@@ -308,7 +342,7 @@ func get_all_region_pulse_values() -> Array[Dictionary]:
 
 
 ## =========================================================
-## 五、给 PulseDrawer 直接使用的接口
+## 六、给 PulseDrawer 直接使用的接口
 ## =========================================================
 
 ## 返回 PulseDrawer 可直接使用的区域字典
@@ -357,13 +391,14 @@ func get_pulse_regions_for_drawer_visual() -> Dictionary:
 
 
 ## =========================================================
-## 六、调试输出
+## 七、调试输出
 ## =========================================================
 
 func debug_print() -> void:
 	print("疾病ID:", disease_id)
 	print("疾病名:", disease_name)
 	print("推荐方剂:", recommended_formula_id)
+	print("病证:", get_symptoms_text())
 
 	print("【七区脉象】")
 	for region_data in get_all_region_pulse_values():

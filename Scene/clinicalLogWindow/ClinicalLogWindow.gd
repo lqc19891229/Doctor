@@ -160,14 +160,26 @@ func open_window() -> void:
 	# 先显示窗口，让 Godot 开始计算窗口和子节点尺寸。
 	show()
 
+	# 如果窗口已经处于显示状态，再次打开时也要强制置顶。
+	_bring_self_to_front()
+	grab_focus()
+
 	# 等一帧，确保 Window / ScrollContainer / RichTextLabel 完成第一次布局。
 	await get_tree().process_frame
 
 	# 再等一帧更稳，避免 RichTextLabel 尺寸仍是旧值或 0。
 	await get_tree().process_frame
 
+	# 等待期间可能被关闭，避免关闭后又刷新。
+	if not visible:
+		return
+
 	# 尺寸稳定后再刷新列表和详情分页。
 	refresh_view()
+
+	# refresh_view 后再置顶一次，避免异步等待期间被其它窗口抢到前面。
+	_bring_self_to_front()
+	grab_focus()
 	
 
 func close_window() -> void:
@@ -179,6 +191,17 @@ func refresh_view() -> void:
 	_refresh_disease_page()
 	_refresh_formula_page()
 	_refresh_herb_page()
+
+
+func _bring_self_to_front() -> void:
+	# ClinicalLogWindow 是 Clinic 场景中的子窗口。
+	# visible 已经为 true 时，单独 show() 不会改变同级窗口层级。
+	# 把自己移动到父节点最后，可以保证再次按 F3 时重新显示在最前。
+	var parent_node := get_parent()
+	if parent_node == null:
+		return
+
+	parent_node.move_child(self, parent_node.get_child_count() - 1)
 
 
 # =========================================================

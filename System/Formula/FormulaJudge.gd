@@ -18,10 +18,8 @@ class_name FormulaJudge
 # 4. 综合评分 = max(0, 100 - 疾病扣分 - 处方扣分)
 # 5. 等级：
 #    - 100：妙手回春
-#    - 90~99：甲等
-#    - 70~89：乙等
-#    - 40~69：丙等
-#    - 0~39：丁等
+#    - 60~99：治疗成功
+#    - 0~59：治疗失败
 # =========================================================
 
 const ROLE_ORDER: Array[String] = ["君", "臣", "佐", "使"]
@@ -37,7 +35,7 @@ func judge_formula(player_prescription: Prescription, standard_formula: FormulaD
 		result.success = false
 		result.level = "fail"
 		result.score = 0
-		result.grade = "丁等"
+		result.grade = "治疗失败"
 		result.message = "玩家处方为空"
 		return result
 
@@ -45,7 +43,7 @@ func judge_formula(player_prescription: Prescription, standard_formula: FormulaD
 		result.success = false
 		result.level = "fail"
 		result.score = 0
-		result.grade = "丁等"
+		result.grade = "治疗失败"
 		result.message = "未找到标准方剂"
 		return result
 
@@ -103,7 +101,7 @@ func judge_formula(player_prescription: Prescription, standard_formula: FormulaD
 	if result.score == 100:
 		result.success = true
 		result.level = "perfect"
-	elif result.score >= 40:
+	elif result.score >= 60:
 		result.success = true
 		result.level = "pass"
 	else:
@@ -319,13 +317,9 @@ func _get_role_penalty(role_name: String) -> int:
 func _get_score_grade(score: int) -> String:
 	if score == 100:
 		return "妙手回春"
-	if score >= 90:
-		return "甲等"
-	if score >= 70:
-		return "乙等"
-	if score >= 40:
-		return "丙等"
-	return "丁等"
+	if score >= 60:
+		return "治疗成功"
+	return "治疗失败"
 
 
 # =========================================================

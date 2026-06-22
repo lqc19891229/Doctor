@@ -40,17 +40,18 @@ func show_result(data: Dictionary) -> void:
 
 	# -------------------------------
 	# 显示评级图片
-	match str(data.get("grade", "")):
+	# 新评级规则：
+	# 100 分：妙手回春
+	# 60~99 分：治疗成功
+	# 0~59 分：治疗失败
+	var grade := str(data.get("grade", "")).strip_edges()
+	match grade:
 		"妙手回春":
 			rating_image.texture = preload("res://Assets/Rating/rating_miaoshouhuichun.png")
-		"甲等":
-			rating_image.texture = preload("res://Assets/Rating/rating_a.png")
-		"乙等":
-			rating_image.texture = preload("res://Assets/Rating/rating_b.png")
-		"丙等":
-			rating_image.texture = preload("res://Assets/Rating/rating_c.png")
-		"丁等":
-			rating_image.texture = preload("res://Assets/Rating/rating_d.png")
+		"治疗成功":
+			rating_image.texture = preload("res://Assets/Rating/rating_success.png")
+		"治疗失败":
+			rating_image.texture = preload("res://Assets/Rating/rating_failed.png")
 		_:
 			rating_image.texture = null
 
