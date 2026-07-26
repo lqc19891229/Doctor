@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://System/Npc/NpcData.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/wang_lao_an_ren_before.png" id="portrait_before_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/wang_lao_an_ren_after.png" id="portrait_after_1"]
+
+[resource]
+script = ExtResource("1")
+npc_id = "wang_lao_an_ren"
+npc_type = "random"
+npc_name = "王老安人"
+gender = "女"
+age = 76
+dialogue_prefix = "先生，老妇这两天"
+dialogue_suffix = "劳烦您给我看看。"
+dialogue_after_treatment = "真是多谢先生了，好多了"
+dialogue_treatment_failed = "咳咳咳，哎哟..."
+portrait_before_treatment = ExtResource("portrait_before_1")
+portrait_after_treatment = ExtResource("portrait_after_1")

@@ -8,5 +8,4 @@ entry_id = "fang_feng_tang"
 book_id = "tai_ping_hui_min_he_ji_ju_fang"
 title = "防风汤"
 detail_text = "防风汤\n【出处】《太平惠民和剂局方》\n【功效】祛风通络，散寒除湿\n【主治】行痹（风痹）\n【组成】\n君：防风 五钱\n臣：桂枝 三钱，秦艽 三钱\n佐：当归 二钱，川芎 二钱，葛根 三钱\n使：甘草 一钱\n【配伍】\n防风：祛风胜湿、走窜经络，专治游走痹痛。\n桂枝：温散风寒、通经活络；\n秦艽：祛风湿、通络止痛，善治游走痹。\n当归：养血和营、祛风通络；\n川芎：活血通络；\n葛根：解肌舒筋；\n甘草调和诸药，调和营卫。"
-unlock_required_experience_points = -1
 formula_id = "fang_feng_tang"

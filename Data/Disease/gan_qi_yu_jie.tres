@@ -6,7 +6,7 @@
 script = ExtResource("1")
 disease_id = "gan_qi_yu_jie"
 disease_name = "肝气郁结"
-detail_text = "肝气郁结\n\n【病机】情志不遂，肝失疏泄，气机郁滞、经脉不畅。\n\n【症状】胸胁、乳房、少腹胀痛走窜；情绪抑郁、易怒、善太息；咽部异物感（梅核气）、胸闷嗳气；女子月经不调、痛经；\n\n【脉象】\n左关（肝）：波峰高\n\n【标准方】柴胡疏肝散"
+detail_text = "肝气郁结\n\n【病机】情志不遂，肝失疏泄，气机郁滞、经脉不畅。\n\n【症状】胸胁、乳房、少腹胀痛走窜；情绪抑郁、易怒、善太息；咽部异物感（梅核气）、胸闷嗳气；女子月经不调、痛经。\n\n【脉象】\n左关（肝）：波峰高\n\n【标准方】柴胡疏肝散"
 recommended_formula_id = "chai_hu_shu_gan_san"
 exterior_qi = 1.0
 exterior_blood = 1.0

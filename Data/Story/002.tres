@@ -17,7 +17,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 speaker = "李东壁"
-text = "平常日子里看您治病，其实已经窥探得些门道了。"
+text = "嗯，都明白了，平常日子里看您治病，其实已经窥探得些门道了。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")

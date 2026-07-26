@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://System/Npc/NpcData.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/zhao_ya_po_before.png" id="portrait_before_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/zhao_ya_po_after.png" id="portrait_after_1"]
+
+[resource]
+script = ExtResource("1")
+npc_id = "zhao_ya_po"
+npc_type = "random"
+npc_name = "赵牙婆"
+gender = "女"
+age = 45
+dialogue_prefix = "大夫，老婆子我这几日"
+dialogue_suffix = "劳烦您给我看看。"
+dialogue_after_treatment = "哎哟，谢谢先生，您真是神医啊！"
+dialogue_treatment_failed = "哎，不对啊…"
+portrait_before_treatment = ExtResource("portrait_before_1")
+portrait_after_treatment = ExtResource("portrait_after_1")

@@ -6,7 +6,7 @@
 script = ExtResource("1")
 disease_id = "gan_huo_shang_yan"
 disease_name = "肝火上炎"
-detail_text = "肝火上炎\n\n【病机】肝郁化火、暴怒伤肝，肝火炽盛、气火上逆，属实热证。\n\n【症状】头晕胀痛、面红目赤、急躁易怒；口苦口干、耳鸣耳聋、胁肋灼痛；失眠多梦、甚至狂躁；吐血、衄血；\n\n【脉象】\n左关（肝）：波速快\n\n【标准方】龙胆泻肝汤"
+detail_text = "肝火上炎\n\n【病机】肝郁化火、暴怒伤肝，肝火炽盛、气火上逆，属实热证。\n\n【症状】头晕胀痛、面红目赤、急躁易怒；口苦口干、耳鸣耳聋、胁肋灼痛；失眠多梦、甚至狂躁；吐血、衄血。\n\n【脉象】\n左关（肝）：波速快\n\n【标准方】龙胆泻肝汤"
 recommended_formula_id = "long_dan_xie_gan_tang"
 exterior_qi = 1.0
 exterior_blood = 1.0

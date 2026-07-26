@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bplfruj5kbkii"]
 
 [ext_resource type="Script" uid="uid://eg24ntnjfeh" path="res://Scene/Story/Story.gd" id="1_story_script"]
-[ext_resource type="Texture2D" uid="uid://bs8db1ig0w255" path="res://Assets/Portrait/StoryNpc/li_shi_zhen/li_shi_zhen.png" id="2_nr4v8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialogue"]
 content_margin_left = 28.0
@@ -103,7 +102,6 @@ offset_bottom = 330.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("2_nr4v8")
 expand_mode = 1
 stretch_mode = 5
 

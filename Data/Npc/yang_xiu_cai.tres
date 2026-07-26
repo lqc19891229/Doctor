@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://System/Npc/NpcData.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/yang_xiu_cai_before.png" id="portrait_before_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/yang_xiu_cai_after.png" id="portrait_after_1"]
+
+[resource]
+script = ExtResource("1")
+npc_id = "yang_xiu_cai"
+npc_type = "random"
+npc_name = "杨秀才"
+gender = "男"
+age = 27
+dialogue_prefix = "大夫，学生这几日"
+dialogue_suffix = "请您给看看吧。"
+dialogue_after_treatment = "有劳大夫了，我好多了。"
+dialogue_treatment_failed = "您给我开的这是什么药啊…"
+portrait_before_treatment = ExtResource("portrait_before_1")
+portrait_after_treatment = ExtResource("portrait_after_1")

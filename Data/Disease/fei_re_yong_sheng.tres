@@ -6,7 +6,7 @@
 script = ExtResource("1")
 disease_id = "fei_re_yong_sheng"
 disease_name = "肺热壅盛"
-detail_text = "肺热壅盛\n\n【病机】邪热壅滞于肺，肺失宣降，气机闭塞，热盛气逆\n\n【症状】咳嗽气粗、喘促胸闷；痰黄黏稠、不易咳出；发热、口渴咽痛；鼻翼煽动，大便偏干，小便黄。\n\n【脉象】\n右寸（肺）：波速快\n\n【标准方】麻杏石甘汤"
+detail_text = "肺热壅盛\n\n【病机】邪热壅滞于肺，肺失宣降，气机闭塞，热盛气逆。\n\n【症状】咳嗽气粗、喘促胸闷；痰黄黏稠、不易咳出；发热、口渴咽痛；鼻翼煽动，大便偏干，小便黄。\n\n【脉象】\n右寸（肺）：波速快\n\n【标准方】麻杏石甘汤"
 recommended_formula_id = "ma_xing_shi_gan_tang"
 exterior_qi = 1.0
 exterior_blood = 1.0

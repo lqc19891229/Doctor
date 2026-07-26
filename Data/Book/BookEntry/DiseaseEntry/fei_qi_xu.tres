@@ -7,6 +7,5 @@ script = ExtResource("1")
 entry_id = "fei_qi_xu"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "肺气虚"
-detail_text = "肺气虚\n\n【病机】肺气不足，宣降无力，卫外不固。\n\n【症状】咳喘无力，气短懒言，动则加重；语声低微、少气乏力；自汗、怕风、易感冒；痰液清稀、量少\n\n【脉象】\n右寸（肺）：波峰低\n\n【标准方】补肺汤"
-unlock_required_experience_points = -1
+detail_text = "肺气虚\n\n【病机】肺气不足，宣降无力，卫外不固。\n\n【症状】咳喘无力，气短懒言，动则加重；语声低微、少气乏力；自汗、怕风、易感冒；痰液清稀、量少。\n\n【脉象】\n右寸（肺）：波峰低\n\n【标准方】补肺汤"
 disease_id = "fei_qi_xu"

@@ -6,7 +6,7 @@
 script = ExtResource("1")
 disease_id = "xin_yin_xu"
 disease_name = "心阴虚"
-detail_text = "心阴虚\n\n【病机】心阴亏虚，心神失养，虚火内扰。\n\n【症状】心悸怔忡，心慌不安；心烦失眠、多梦易醒；五心烦热、潮热盗汗；口干咽燥、面色颧红；\n\n【脉象】\n左寸（心）：波线细，波速快，波宽窄\n\n【标准方】天王补心丹"
+detail_text = "心阴虚\n\n【病机】心阴亏虚，心神失养，虚火内扰。\n\n【症状】心悸怔忡，心慌不安；心烦失眠、多梦易醒；五心烦热、潮热盗汗；口干咽燥、面色颧红。\n\n【脉象】\n左寸（心）：波线细，波速快，波宽窄\n\n【标准方】天王补心丹"
 recommended_formula_id = "tian_wang_bu_xin_dan"
 exterior_qi = 1.0
 exterior_blood = 1.0

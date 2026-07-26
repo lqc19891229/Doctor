@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://System/Npc/NpcData.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/lei_wan_jun/lei_wan_jun_before.png" id="portrait_before_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/lei_wan_jun/lei_wan_jun_after.png" id="portrait_after_1"]
+
+[resource]
+script = ExtResource("1")
+npc_id = "lei_wan_jun"
+npc_type = "story"
+npc_name = "雷万钧"
+gender = "男"
+age = 28
+dialogue_prefix = "咳咳咳，我这几日"
+dialogue_suffix = "请您给我看看吧。"
+dialogue_after_treatment = "感觉好多了，多谢先生。"
+dialogue_treatment_failed = "你给我吃的是什么药…"
+portrait_before_treatment = ExtResource("portrait_before_1")
+portrait_after_treatment = ExtResource("portrait_after_1")

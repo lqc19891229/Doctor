@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://System/Npc/NpcData.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/su_xiu_he_before.png" id="portrait_before_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/su_xiu_he_after.png" id="portrait_after_1"]
+
+[resource]
+script = ExtResource("1")
+npc_id = "su_xiu_he"
+npc_type = "random"
+npc_name = "苏绣荷"
+gender = "女"
+age = 18
+dialogue_prefix = "先生，我这几日"
+dialogue_suffix = "麻烦您给小女子看看吧。"
+dialogue_after_treatment = "好多了，真是太谢谢先生了。"
+dialogue_treatment_failed = "咳咳咳，好难受啊"
+portrait_before_treatment = ExtResource("portrait_before_1")
+portrait_after_treatment = ExtResource("portrait_after_1")

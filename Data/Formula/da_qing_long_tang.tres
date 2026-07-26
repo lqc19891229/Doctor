@@ -1,0 +1,66 @@
+[gd_resource type="Resource" script_class="FormulaData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Formula/FormulaIngredient.gd" id="1"]
+[ext_resource type="Script" path="res://System/Formula/FormulaData.gd" id="2"]
+[ext_resource type="Resource" path="res://Data/Herb/ma_huang.tres" id="herb_1"]
+[ext_resource type="Resource" path="res://Data/Herb/gui_zhi.tres" id="herb_2"]
+[ext_resource type="Resource" path="res://Data/Herb/shi_gao.tres" id="herb_3"]
+[ext_resource type="Resource" path="res://Data/Herb/xing_ren.tres" id="herb_4"]
+[ext_resource type="Resource" path="res://Data/Herb/sheng_jiang.tres" id="herb_5"]
+[ext_resource type="Resource" path="res://Data/Herb/da_zao.tres" id="herb_6"]
+[ext_resource type="Resource" path="res://Data/Herb/gan_cao.tres" id="herb_7"]
+
+[sub_resource type="Resource" id="Ingredient_1"]
+script = ExtResource("1")
+herb = ExtResource("herb_1")
+amount = 6.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_2"]
+script = ExtResource("1")
+herb = ExtResource("herb_2")
+amount = 2.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_3"]
+script = ExtResource("1")
+herb = ExtResource("herb_3")
+amount = 1.0
+unit = "liang"
+required = true
+[sub_resource type="Resource" id="Ingredient_4"]
+script = ExtResource("1")
+herb = ExtResource("herb_4")
+amount = 3.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_5"]
+script = ExtResource("1")
+herb = ExtResource("herb_5")
+amount = 3.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_6"]
+script = ExtResource("1")
+herb = ExtResource("herb_6")
+amount = 3.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_7"]
+script = ExtResource("1")
+herb = ExtResource("herb_7")
+amount = 2.0
+unit = "qian"
+required = true
+
+[resource]
+script = ExtResource("2")
+formula_id = "da_qing_long_tang"
+formula_name = "大青龙汤"
+detail_text = "大青龙汤\n【出处】《伤寒论》\n【功效】发汗解表，兼清里热\n【主治】外寒里热\n【组成】\n君：麻黄 六钱\n臣：桂枝 二钱，石膏 一两\n佐：杏仁 三钱，生姜 三钱，大枣 三钱\n使：甘草 二钱\n【配伍】\n麻黄：发汗峻散，开表散寒，同时宣肺平喘。\n桂枝：助麻黄发汗解表，温通卫阳，散肌表寒邪，解决周身疼痛；\n石膏：辛甘大寒，专清郁于肌腠、肺胃之里热，除烦躁，制约麻黄辛温燥热之性，使发汗而不助热。\n杏仁：降利肺气，配麻黄平喘止咳；\n生姜：辛温，助解表，和胃散水气；\n大枣：补中滋液，防峻汗耗伤津液。\n炙甘草：调和诸药；缓麻黄峻烈之性，护中气；姜枣草合用，滋养营阴，防止大汗伤津。"
+target_disease_id = "biao_han_li_re"
+target_disease_name = "表寒里热"
+jun_group = [SubResource("Ingredient_1")]
+chen_group = [SubResource("Ingredient_2"), SubResource("Ingredient_3")]
+zuo_group = [SubResource("Ingredient_4"), SubResource("Ingredient_5"), SubResource("Ingredient_6")]
+shi_group = [SubResource("Ingredient_7")]

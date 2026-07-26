@@ -7,6 +7,5 @@ script = ExtResource("1")
 entry_id = "shi_sheng_kun_pi"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "湿盛困脾"
-detail_text = "湿盛困脾\n\n【病机】外感湿邪、或嗜食生冷肥甘，湿邪壅滞、脾阳被困、运化失司，属实证。\n\n【症状】脘腹痞闷、食少纳呆；恶心欲呕、口中黏腻、口淡不渴；头身困重、四肢酸楚、困倦嗜睡；大便溏稀不爽\n\n【脉象】\n右关（脾）：波宽宽\n\n【标准方】平胃散"
-unlock_required_experience_points = -1
+detail_text = "湿盛困脾\n\n【病机】外感湿邪、或嗜食生冷肥甘，湿邪壅滞、脾阳被困、运化失司，属实证。\n\n【症状】脘腹痞闷、食少纳呆；恶心欲呕、口中黏腻、口淡不渴；头身困重、四肢酸楚、困倦嗜睡；大便溏稀不爽。\n\n【脉象】\n右关（脾）：波宽宽\n\n【标准方】平胃散"
 disease_id = "shi_sheng_kun_pi"

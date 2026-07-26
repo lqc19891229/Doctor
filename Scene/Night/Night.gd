@@ -4,6 +4,8 @@ class_name Night
 signal night_finished
 signal story_requested(story_path: String, return_target: String)
 
+const TopBarControllerScript := preload("res://System/Unlock/TopBarController.gd")
+
 @onready var read_book_window: Window = find_child("ReadBook", true, false) as Window
 
 @onready var read_book_button: Button = find_child("ReadBookButton", true, false) as Button
@@ -14,6 +16,8 @@ signal story_requested(story_path: String, return_target: String)
 @onready var thoughts_point_label: Label = find_child("ThoughtsPoint", true, false) as Label
 @onready var reputation_point_label: Label = find_child("ReputationPoint", true, false) as Label
 
+var topbar_controller = null
+
 # 玩家提示窗口（Control 版 PlayerHintWindow，需作为 Night.tscn 的子节点存在）
 var player_hint_window: Node = null
 
@@ -23,7 +27,8 @@ func _ready() -> void:
 	_setup_buttons()
 	_setup_player_hint_dialog()
 	_setup_read_book_window()
-	_refresh_topbar()
+	_setup_topbar_controller()
+	_refresh_topbar(true)
 
 
 # =========================
@@ -115,27 +120,36 @@ func _setup_read_book_window() -> void:
 
 
 # =========================
+# 初始化通用顶部栏
+# =========================
+
+func _setup_topbar_controller() -> void:
+	if topbar_controller != null and is_instance_valid(topbar_controller):
+		return
+
+	topbar_controller = TopBarControllerScript.new()
+	topbar_controller.name = "TopBarController"
+	add_child(topbar_controller)
+	topbar_controller.setup(
+		day_label,
+		time_label,
+		thoughts_point_label,
+		reputation_point_label,
+		"夜晚"
+	)
+
+
+# =========================
 # 刷新顶部栏
 # =========================
 
-func _refresh_topbar() -> void:
-	if day_label != null:
-		day_label.text = GameTime.get_day_text()
+func _refresh_topbar(force_refresh: bool = false) -> void:
+	if topbar_controller == null:
+		_setup_topbar_controller()
 
-	if time_label != null:
-		time_label.text = "夜晚"
-
-	if thoughts_point_label != null:
-		if Unlock != null and Unlock.has_method("get_experience_points"):
-			thoughts_point_label.text = "心得：%d" % Unlock.get_experience_points()
-		else:
-			thoughts_point_label.text = "心得：0"
-
-	if reputation_point_label != null:
-		if Unlock != null and Unlock.has_method("get_reputation_points"):
-			reputation_point_label.text = "名望：%d" % Unlock.get_reputation_points()
-		else:
-			reputation_point_label.text = "名望：0"
+	if topbar_controller != null:
+		topbar_controller.set_time_text_override("夜晚")
+		topbar_controller.refresh_all(force_refresh)
 
 
 # =========================
@@ -205,9 +219,21 @@ func _has_unread_entries() -> bool:
 	if Unlock == null:
 		return false
 
+	# 先刷新所有可能在当前夜晚新解锁的条目，避免旧存档或延迟刷新漏检。
 	if Unlock.has_method("refresh_auto_unlocks_by_experience"):
 		Unlock.refresh_auto_unlocks_by_experience()
 
+	if Unlock.has_method("refresh_unlocks_by_dependencies"):
+		Unlock.refresh_unlocks_by_dependencies()
+
+	# 正式检查药材、方剂、疾病、理论四类未读条目。
+	if Unlock.has_method("has_unread_readable_entries"):
+		return Unlock.has_unread_readable_entries()
+
+	if Unlock.has_method("get_unread_readable_entry_count"):
+		return int(Unlock.get_unread_readable_entry_count()) > 0
+
+	# 兼容尚未更新 UnlockManager 的旧版本。
 	if Unlock.has_method("has_unread_unlocked_disease_or_formula_entries"):
 		return Unlock.has_unread_unlocked_disease_or_formula_entries()
 
@@ -223,7 +249,9 @@ func _has_unread_entries() -> bool:
 func start_night(day: int) -> void:
 	# 由 Main._enter_night() 在连接好 story_requested 后调用。
 	# 不在 _ready() 中触发剧情，避免信号尚未连接导致剧情请求丢失。
-	_refresh_topbar()
+	if topbar_controller != null:
+		topbar_controller.set_fallback_day(day)
+	_refresh_topbar(true)
 	_try_start_auto_story("night", day)
 
 

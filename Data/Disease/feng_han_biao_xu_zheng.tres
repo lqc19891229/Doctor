@@ -6,7 +6,7 @@
 script = ExtResource("1")
 disease_id = "feng_han_biao_xu_zheng"
 disease_name = "风寒表虚证"
-detail_text = "风寒表虚证\n\n【病机】风寒袭表，卫气不固，营阴外泄\n\n【症状】恶风发热，头痛流清涕，出汗\n\n【脉象】\n浮脉（表）：波峰低，波速慢\n\n【标准方】桂枝汤"
+detail_text = "风寒表虚证\n\n【病机】风寒袭表，卫气不固，营阴外泄。\n\n【症状】恶风发热，头痛流清涕，出汗。\n\n【脉象】\n浮脉（表）：波峰低，波速慢\n\n【标准方】桂枝汤"
 recommended_formula_id = "gui_zhi_tang"
 exterior_qi = 0.5
 exterior_blood = 1.0

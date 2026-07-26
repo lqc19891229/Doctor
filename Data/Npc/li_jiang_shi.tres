@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://System/Npc/NpcData.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/li_jiang_shi_before.png" id="portrait_before_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/li_jiang_shi_after.png" id="portrait_after_1"]
+
+[resource]
+script = ExtResource("1")
+npc_id = "li_jiang_shi"
+npc_type = "random"
+npc_name = "李姜氏"
+gender = "女"
+age = 39
+dialogue_prefix = "我这几日"
+dialogue_suffix = "劳烦先生给我看看。"
+dialogue_after_treatment = "先生医术真是高明，多谢了"
+dialogue_treatment_failed = "嗯？感觉好奇怪啊…"
+portrait_before_treatment = ExtResource("portrait_before_1")
+portrait_after_treatment = ExtResource("portrait_after_1")

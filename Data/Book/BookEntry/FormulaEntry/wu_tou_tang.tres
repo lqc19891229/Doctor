@@ -8,5 +8,4 @@ entry_id = "wu_tou_tang"
 book_id = "jin_gui_yao_lue"
 title = "乌头汤"
 detail_text = "乌头汤\n【出处】《金匮要略》\n【功效】温经散寒，除湿止痛\n【主治】痛痹（寒痹）\n【组成】\n君：乌头 二钱\n臣：麻黄 三钱\n佐：白芍 三钱，黄芪 三钱\n使：甘草 三钱，蜂蜜 一斤\n【配伍】\n乌头：大辛大热，温经散寒、逐寒湿、止剧痛，专治寒凝痹痛；\n麻黄：发汗散寒，宣通经络，助乌头透邪外出。\n黄芪：益气固表、扶正实卫，防辛散耗气；\n白芍：养血和营、缓急止痛，柔筋止拘挛；\n炙甘草、蜂蜜：缓乌头峻烈毒性，调和诸药，缓急止痛。"
-unlock_required_experience_points = -1
 formula_id = "wu_tou_tang"

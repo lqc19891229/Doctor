@@ -447,17 +447,25 @@ def get_npc_portrait_base_dir(npc_type: str) -> str:
 def get_npc_portrait_before_path(npc_id: str, npc_type: str) -> str:
     """
     功能：根据 NpcID 和 NpcType 自动生成治疗前立绘路径。
+    random -> res://Assets/Portrait/RandomNpc/{NpcID}_before.png
+    story  -> res://Assets/Portrait/StoryNpc/{NpcID}/{NpcID}_before.png
     """
     base_dir = get_npc_portrait_base_dir(npc_type)
-    return f"{base_dir}/{npc_id}/{npc_id}_before.png"
+    if npc_type == "story":
+        return f"{base_dir}/{npc_id}/{npc_id}_before.png"
+    return f"{base_dir}/{npc_id}_before.png"
 
 
 def get_npc_portrait_after_path(npc_id: str, npc_type: str) -> str:
     """
     功能：根据 NpcID 和 NpcType 自动生成治疗后立绘路径。
+    random -> res://Assets/Portrait/RandomNpc/{NpcID}_after.png
+    story  -> res://Assets/Portrait/StoryNpc/{NpcID}/{NpcID}_after.png
     """
     base_dir = get_npc_portrait_base_dir(npc_type)
-    return f"{base_dir}/{npc_id}/{npc_id}_after.png"
+    if npc_type == "story":
+        return f"{base_dir}/{npc_id}/{npc_id}_after.png"
+    return f"{base_dir}/{npc_id}_after.png"
 
 
 def as_float(value: Any, default: float = 0.0) -> float:
@@ -1265,7 +1273,6 @@ kidney_yang_wet_dry = {as_float(pulse_row.get("KZH"), 1.0)}
 
         entry_id = as_str(disease_row.get("EntryID")) or disease_id
         title = as_str(disease_row.get("Title")) or disease_name
-        unlock_required_experience_points = get_unlock_required_experience_points(disease_row)
 
         entry_content = f'''[gd_resource type="Resource" script_class="DiseaseBookEntryData" load_steps=2 format=3]
 
@@ -1277,7 +1284,6 @@ entry_id = {format_godot_string(entry_id)}
 book_id = {format_godot_string(disease_row.get("BookID"))}
 title = {format_godot_string(title)}
 detail_text = {format_godot_string(disease_row.get("DetailText"))}
-unlock_required_experience_points = {unlock_required_experience_points}
 disease_id = {format_godot_string(disease_id)}
 '''
         write_text_file(DISEASE_BOOK_ENTRY_OUTPUT_DIR / f"{safe_filename(entry_id)}.tres", entry_content)
@@ -1398,7 +1404,6 @@ required = {"true" if required else "false"}'''
 
         entry_id = as_str(formula_row.get("EntryID")) or formula_id
         title = as_str(formula_row.get("Title")) or formula_name
-        unlock_required_experience_points = get_unlock_required_experience_points(formula_row)
 
         entry_content = f'''[gd_resource type="Resource" script_class="FormulaBookEntryData" load_steps=2 format=3]
 
@@ -1410,7 +1415,6 @@ entry_id = {format_godot_string(entry_id)}
 book_id = {format_godot_string(formula_row.get("BookID"))}
 title = {format_godot_string(title)}
 detail_text = {format_godot_string(formula_row.get("DetailText"))}
-unlock_required_experience_points = {unlock_required_experience_points}
 formula_id = {format_godot_string(formula_id)}
 '''
         write_text_file(FORMULA_BOOK_ENTRY_OUTPUT_DIR / f"{safe_filename(entry_id)}.tres", entry_content)

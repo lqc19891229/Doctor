@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="DiseaseData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Disease/DiseaseData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+disease_id = "biao_han_li_yin"
+disease_name = "表寒里饮"
+detail_text = "表寒里饮\n\n【病机】外感风寒，寒邪束表；内有水饮伏肺，表里寒邪相合，寒饮壅遏肺气。\n\n\n【症状】恶寒发热，咳嗽气喘；痰多清稀，胸闷胸满，面部浮肿。\n\n\n【脉象】\n浮脉（表）：波速慢\n右寸（肺）：波速慢，波宽宽\n\n【标准方】小青龙汤"
+recommended_formula_id = "xiao_qing_long_tang"
+exterior_qi = 1.0
+exterior_blood = 1.0
+exterior_cold_hot = 0.5
+exterior_wet_dry = 1.0
+heart_qi = 1.0
+heart_blood = 1.0
+heart_cold_hot = 1.0
+heart_wet_dry = 1.0
+liver_qi = 1.0
+liver_blood = 1.0
+liver_cold_hot = 1.0
+liver_wet_dry = 1.0
+spleen_qi = 1.0
+spleen_blood = 1.0
+spleen_cold_hot = 1.0
+spleen_wet_dry = 1.0
+lung_qi = 1.0
+lung_blood = 1.0
+lung_cold_hot = 0.5
+lung_wet_dry = 1.5
+kidney_yin_qi = 1.0
+kidney_yin_blood = 1.0
+kidney_yin_cold_hot = 1.0
+kidney_yin_wet_dry = 1.0
+kidney_yang_qi = 1.0
+kidney_yang_blood = 1.0
+kidney_yang_cold_hot = 1.0
+kidney_yang_wet_dry = 1.0

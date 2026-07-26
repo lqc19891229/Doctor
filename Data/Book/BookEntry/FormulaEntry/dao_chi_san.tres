@@ -8,5 +8,4 @@ entry_id = "dao_chi_san"
 book_id = "xiao_er_yao_zheng_zhi_jue"
 title = "导赤散"
 detail_text = "导赤散\n【出处】《小儿药证直决》\n【功效】清心利水养阴\n【主治】心火亢盛\n【组成】\n君：生地黄 二钱，木通 二钱\n臣：竹叶 二钱\n佐：甘草 二钱\n使：\n【配伍】\n生地黄：凉血滋阴、清心降火，养阴以制心火。\n木通：清心泻火、利水通淋，导心火从小便而出。\n竹叶：清心除烦、淡渗利水，助木通清心导赤。\n生甘草：梢清热解毒、直达茎中，缓尿痛、调和诸药。"
-unlock_required_experience_points = -1
 formula_id = "dao_chi_san"

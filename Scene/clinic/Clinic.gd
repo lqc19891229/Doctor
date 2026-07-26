@@ -6,14 +6,12 @@ extends Control
 #
 # 主要职责：
 # 1. 管理当前病人数据刷新
-# 2. 管理脉象窗口的打开/关闭与键盘把脉逻辑
-# 3. 管理开方窗口的打开/关闭
-# 4. 持有当前处方数据，并接收 PrescriptionWindow 的信号
-# 5. 提交处方并与标准方比较
-# 6. 管理行医记考窗口的打开/关闭
-# 7. 管理信息测试窗口的打开/关闭
-# 8. 向 Main 发出“当天接诊结束”信号
-# 9. 接入 GameTimeManager 的 Clinic 自动计时显示
+# 2. 管理脉象键盘把脉逻辑
+# 3. 持有当前处方数据，并接收 PrescriptionWindow 的信号
+# 4. 提交处方并与标准方比较
+# 5. 向 Main 发出“当天接诊结束”信号
+# 6. 接入 GameTimeManager 的 Clinic 自动计时显示
+# 7. 请求剧情播放
 # =========================================================
 
 
@@ -39,10 +37,9 @@ const DEFAULT_DISPLAY_REGION := "浮脉"
 # 判定结果弹窗场景路径
 const JUDGEMENT_RESULT_SCENE_PATH := "res://Scene/JudgementResult/JudgementResult.tscn"
 
-# Clinic 主界面快捷键
-const SHORTCUT_OPEN_PULSE := KEY_F1
-const SHORTCUT_OPEN_PRESCRIPTION := KEY_F2
-const SHORTCUT_OPEN_CLINICAL_LOG := KEY_F3
+# 通用顶部栏控制器脚本
+const TopBarControllerScript := preload("res://System/Unlock/TopBarController.gd")
+
 
 # NPC 台词自动隐藏时间，单位：秒
 const NPC_DIALOGUE_AUTO_HIDE_SECONDS := 10.0
@@ -85,7 +82,6 @@ const NPC_DIALOGUE_AUTO_HIDE_SECONDS := 10.0
 
 # ---------- 脉象窗口 ----------
 @onready var pulse_window: PulseWindow = find_child("PulseWindow", true, false) as PulseWindow
-@onready var open_pulse_window_button: Button = find_child("OpenPulseWindowButton", true, false) as Button
 
 # ---------- 信息测试窗口 ----------
 # 说明：
@@ -102,15 +98,19 @@ const NPC_DIALOGUE_AUTO_HIDE_SECONDS := 10.0
 @onready var npc_manager = find_child("NpcManager", true, false)
 
 # ---------- 开方窗口 ----------
-@onready var open_prescription_window_button: Button = find_child("OpenPrescriptionWindowButton", true, false) as Button
 @onready var prescription_window: PrescriptionWindow = find_child("PrescriptionWindow", true, false) as PrescriptionWindow
 
 # ---------- 行医记考 ----------
 # 说明：
-# 1. 这里使用 find_child，避免场景还没接好时报错
-# 2. 按钮现在位于 Clinic/VBoxContainer/ButtonRow 下；使用 find_child 兼容后续 UI 调整
-@onready var clinical_log_button: Button = find_child("Openclinical_logWindowButton", true, false) as Button
+# 1. 这里使用 find_child，避免场景还没接好时报错。
+# 2. 窗口打开/关闭和按钮快捷键统一交给 ClinicWindowController.gd。
 @onready var clinical_log_window: ClinicalLogWindow = find_child("ClinicalLogWindow", true, false) as ClinicalLogWindow
+
+# ---------- 窗口与快捷键控制器 ----------
+@onready var window_controller: ClinicWindowController = find_child("ClinicWindowController", true, false) as ClinicWindowController
+
+# ---------- 通用顶部栏控制器 ----------
+var topbar_controller = null
 
 # ---------- 结束当天 ----------
 # 结束当天按钮已经转移到 InfoWindow，这里不再直接引用旧按钮
@@ -146,17 +146,6 @@ var current_day: int = 1
 
 # 防止 Clinic 结束信号重复发出
 var clinic_finished_emitted: bool = false
-
-# 上一次显示在 UI 上的心得数量
-# 说明：
-# - 使用这个值避免每帧重复改 Label 文本。
-# - 初始设为 -1，保证进入场景后一定刷新一次。
-var last_displayed_thoughts_point: int = -1
-
-# 上一次显示在 UI 上的名望数量
-# 说明：
-# - 名望允许为负数，所以初始值使用一个很小的值，保证进入场景后一定刷新一次。
-var last_displayed_reputation_point: int = -999999
 
 # 最近一次处方判定结果
 # 说明：
@@ -196,15 +185,20 @@ var waiting_next_patient_after_result: bool = false
 
 func _ready() -> void:
 	_validate_scene_node_bindings()
+	_setup_topbar_controller()
 	_setup_time_system()
-	_setup_prescription_window()
-	_setup_clinical_log_window()
-	_setup_button_shortcuts()
+
+	if window_controller != null:
+		window_controller.configure_prescription_context(
+			herb_database,
+			current_prescription,
+			formula_database
+		)
+
 	_connect_signals()
 
 	refresh_clinic_view()
-	_update_thoughts_point_ui(true)
-	_update_reputation_point_ui(true)
+	_refresh_topbar(true)
 
 	# 调试输出：仅在 Debug 构建中打印数据库加载情况，避免正式版刷屏。
 	if OS.is_debug_build():
@@ -225,35 +219,12 @@ func _process(_delta: float) -> void:
 	# 说明：
 	# - 只有数量变化时才会真正改 Label 文本。
 	# - 这样即使心得来自读档、调试窗口或其它脚本，也能同步到 TopBar。
-	_update_thoughts_point_ui(false)
-	_update_reputation_point_ui(false)
+	_refresh_topbar_points(false)
 
 	# 只有脉象窗口打开时才处理键盘把脉逻辑
 	if pulse_window != null and pulse_window.visible:
 		_update_pulse_keyboard_display()
 
-
-func _unhandled_input(event: InputEvent) -> void:
-	# F1 / F2 / F3 是 Clinic 主界面的窗口快捷键。
-	# 使用 _unhandled_input 兜底，避免按钮焦点不在时快捷键失效。
-	if not _is_valid_shortcut_key_event(event):
-		return
-
-	match event.keycode:
-		SHORTCUT_OPEN_PULSE:
-			_on_open_pulse_window_button_pressed()
-			get_viewport().set_input_as_handled()
-		SHORTCUT_OPEN_PRESCRIPTION:
-			_on_open_prescription_window_button_pressed()
-			get_viewport().set_input_as_handled()
-		SHORTCUT_OPEN_CLINICAL_LOG:
-			_on_clinical_log_button_pressed()
-			get_viewport().set_input_as_handled()
-
-
-# =========================================================
-# 初始化：节点绑定检查
-# =========================================================
 
 func _validate_scene_node_bindings() -> void:
 	# 现在 Clinic 的 UI 结构为：
@@ -282,19 +253,37 @@ func _validate_scene_node_bindings() -> void:
 		"Portrait": portrait_rect,
 		"NpcNameLabel": npc_name_label,
 		"NpcDialogueLabel": npc_dialogue_label,
-		"OpenPulseWindowButton": open_pulse_window_button,
-		"OpenPrescriptionWindowButton": open_prescription_window_button,
-		"Openclinical_logWindowButton": clinical_log_button,
 		"PulseWindow": pulse_window,
 		"PrescriptionWindow": prescription_window,
 		"ClinicalLogWindow": clinical_log_window,
 		"InfoWindow": info_window,
-		"NpcManager": npc_manager
+		"NpcManager": npc_manager,
+		"ClinicWindowController": window_controller
 	}
 
 	for node_name in required_nodes.keys():
 		if required_nodes[node_name] == null:
 			push_warning("Clinic.gd 未找到节点：%s，请检查 Clinic.tscn 中的节点名称。" % node_name)
+
+
+# =========================================================
+# 初始化：通用 TopBar 控制器
+# =========================================================
+
+func _setup_topbar_controller() -> void:
+	if topbar_controller != null and is_instance_valid(topbar_controller):
+		return
+
+	topbar_controller = TopBarControllerScript.new()
+	topbar_controller.name = "TopBarController"
+	add_child(topbar_controller)
+	topbar_controller.setup(
+		day_label,
+		time_label,
+		thoughts_point_label,
+		reputation_point_label
+	)
+	topbar_controller.set_fallback_day(current_day)
 
 
 # =========================================================
@@ -306,11 +295,6 @@ func _setup_time_system() -> void:
 	if GameTime.has_method("start_clinic_time"):
 		GameTime.start_clinic_time()
 
-	# 监听 GameTimeManager 的时间变化，用于刷新 TopBar
-	if GameTime.has_signal("time_changed"):
-		if not GameTime.time_changed.is_connected(_on_game_time_changed):
-			GameTime.time_changed.connect(_on_game_time_changed)
-
 	# 监听 GameTimeManager 发出的 Clinic 时间结束信号
 	# 例如：辰、巳、午、未、申结束后自动进入夜读
 	if GameTime.has_signal("clinic_time_finished"):
@@ -321,84 +305,37 @@ func _setup_time_system() -> void:
 
 
 # =========================================================
-# 刷新 TopBar 时间显示
+# 刷新 TopBar 显示
 # =========================================================
+
+func _refresh_topbar(force_refresh: bool = false) -> void:
+	if topbar_controller != null:
+		topbar_controller.refresh_all(force_refresh)
+
+
+func _refresh_topbar_points(force_refresh: bool = false) -> void:
+	if topbar_controller != null:
+		topbar_controller.refresh_points(force_refresh)
+
 
 func _update_time_ui() -> void:
-	# DayLabel 只显示天数
-	if day_label != null:
-		if GameTime.has_method("get_day_text"):
-			day_label.text = GameTime.get_day_text()
-		else:
-			day_label.text = "第 %d 天" % current_day
-
-	# TimeLabel 只显示当前时辰
-	if time_label != null:
-		if GameTime.has_method("get_shichen_text"):
-			time_label.text = GameTime.get_shichen_text()
-		else:
-			time_label.text = "辰时"
+	if topbar_controller != null:
+		topbar_controller.set_fallback_day(current_day)
+		topbar_controller.refresh_time()
 
 
-
-# =========================================================
-# 刷新 TopBar 心得显示
-# =========================================================
 func _update_thoughts_point_ui(force_refresh: bool = false) -> void:
-	# 如果 Label 没找到，直接返回，避免报错。
-	# 正确路径应为：Clinic/VBoxContainer/TopBar/ThoughtsPoint
-	if thoughts_point_label == null:
-		return
+	if topbar_controller != null:
+		topbar_controller.refresh_thoughts_point(force_refresh)
 
-	# 读取 UnlockManager 中的心得数量。
-	# 这里不用 info_label 的文本，因为 info_label 只是提示窗口，不是数据源。
-	var current_points := 0	
-	if Unlock != null and Unlock.has_method("get_experience_points"):
-		current_points = Unlock.get_experience_points()
 
-	# 数量没变化且不是强制刷新时，不重复改文本。
-	if not force_refresh and current_points == last_displayed_thoughts_point:
-		return
-
-	last_displayed_thoughts_point = current_points
-
-	# 强制保证 Label 可见，并给一个最小尺寸，避免在 HBoxContainer 中被压到看不见。
-	thoughts_point_label.visible = true
-	thoughts_point_label.custom_minimum_size = Vector2(120, 24)
-	thoughts_point_label.size_flags_horizontal = Control.SIZE_SHRINK_END
-	thoughts_point_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-
-	# 最终显示文本。
-	thoughts_point_label.text = "心得：%d" % current_points
-
-# =========================================================
-# 刷新 TopBar 名望显示
-# =========================================================
 func _update_reputation_point_ui(force_refresh: bool = false) -> void:
-	# 如果 Label 没找到，直接返回，避免报错。
-	# 正确路径应为：Clinic/VBoxContainer/TopBar/ReputationPoint
-	if reputation_point_label == null:
-		return
-
-	var current_points := 0
-	if Unlock != null and Unlock.has_method("get_reputation_points"):
-		current_points = Unlock.get_reputation_points()
-
-	if not force_refresh and current_points == last_displayed_reputation_point:
-		return
-
-	last_displayed_reputation_point = current_points
-
-	reputation_point_label.visible = true
-	reputation_point_label.custom_minimum_size = Vector2(120, 24)
-	reputation_point_label.size_flags_horizontal = Control.SIZE_SHRINK_END
-	reputation_point_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-
-	reputation_point_label.text = "名望：%d" % current_points
+	if topbar_controller != null:
+		topbar_controller.refresh_reputation_point(force_refresh)
 
 
 # =========================================================
-# GameTimeManager：时间变化回调
+# GameTimeManager：时间变化回调（兼容旧连接；新逻辑由 TopBarController 负责监听）
 # =========================================================
 
 func _on_game_time_changed() -> void:
@@ -414,109 +351,39 @@ func _on_clinic_time_finished() -> void:
 
 
 # =========================================================
-# 初始化：开方窗口
-# =========================================================
-
-func _setup_prescription_window() -> void:
-	if prescription_window != null:
-		prescription_window.hide()
-
-
-# =========================================================
-# 初始化：行医记考窗口
-# =========================================================
-
-func _setup_clinical_log_window() -> void:
-	if clinical_log_window == null:
-		return
-
-	clinical_log_window.hide()
-
-
-# =========================================================
-# 初始化：主界面按钮快捷键
-# =========================================================
-
-func _setup_button_shortcuts() -> void:
-	_setup_button_shortcut(open_pulse_window_button, SHORTCUT_OPEN_PULSE)
-	_setup_button_shortcut(open_prescription_window_button, SHORTCUT_OPEN_PRESCRIPTION)
-	_setup_button_shortcut(clinical_log_button, SHORTCUT_OPEN_CLINICAL_LOG)
-
-
-func _setup_button_shortcut(button: BaseButton, keycode: Key) -> void:
-	if button == null:
-		return
-
-	var shortcut := Shortcut.new()
-	var key_event := InputEventKey.new()
-	key_event.keycode = keycode
-	shortcut.events = [key_event]
-	button.shortcut = shortcut
-	button.shortcut_in_tooltip = true
-
-
-func _is_valid_shortcut_key_event(event: InputEvent) -> bool:
-	if not (event is InputEventKey):
-		return false
-
-	var key_event := event as InputEventKey
-	if not key_event.pressed:
-		return false
-	if key_event.echo:
-		return false
-	if key_event.alt_pressed or key_event.ctrl_pressed or key_event.meta_pressed or key_event.shift_pressed:
-		return false
-
-	return (
-		key_event.keycode == SHORTCUT_OPEN_PULSE
-		or key_event.keycode == SHORTCUT_OPEN_PRESCRIPTION
-		or key_event.keycode == SHORTCUT_OPEN_CLINICAL_LOG
-	)
-
-
-# =========================================================
 # 初始化：信号连接
 # =========================================================
 
 func _connect_signals() -> void:
-	_safe_connect_pressed(open_prescription_window_button, _on_open_prescription_window_button_pressed)
-	_safe_connect_pressed(open_pulse_window_button, _on_open_pulse_window_button_pressed)
-	_safe_connect_pressed(clinical_log_button, _on_clinical_log_button_pressed)
+	# ---------- 窗口控制器信号 ----------
+	if window_controller != null:
+		if not window_controller.pulse_window_opened.is_connected(_on_window_controller_pulse_window_opened):
+			window_controller.pulse_window_opened.connect(_on_window_controller_pulse_window_opened)
 
-	# ---------- 脉象窗口信号 ----------
+		if not window_controller.pulse_window_closed.is_connected(_on_window_controller_pulse_window_closed):
+			window_controller.pulse_window_closed.connect(_on_window_controller_pulse_window_closed)
+
+	# ---------- 脉象窗口业务信号 ----------
 	if pulse_window != null:
 		if not pulse_window.region_selected.is_connected(_on_pulse_panel_region_selected):
 			pulse_window.region_selected.connect(_on_pulse_panel_region_selected)
 
-		if not pulse_window.close_requested.is_connected(_on_pulse_window_close_requested):
-			pulse_window.close_requested.connect(_on_pulse_window_close_requested)
-
-	# ---------- 开方窗口信号 ----------
+	# ---------- 开方窗口业务信号 ----------
 	if prescription_window != null:
-		if not prescription_window.close_requested.is_connected(_on_prescription_window_close_requested):
-			prescription_window.close_requested.connect(_on_prescription_window_close_requested)
-
 		if not prescription_window.info_requested.is_connected(_on_prescription_info_requested):
 			prescription_window.info_requested.connect(_on_prescription_info_requested)
 
 		if not prescription_window.submit_requested.is_connected(_on_prescription_submit_requested):
 			prescription_window.submit_requested.connect(_on_prescription_submit_requested)
 
-	# ---------- 信息测试窗口信号 ----------
+	# ---------- 信息测试窗口业务信号 ----------
 	if info_window != null:
-		if not info_window.close_requested.is_connected(_on_info_window_close_requested):
-			info_window.close_requested.connect(_on_info_window_close_requested)
-
-		# 以下四个信号由 InfoWindow.gd 中的按钮发出
+		# 以下信号由 InfoWindow.gd 中的按钮发出
 		_safe_connect_custom_signal(info_window, "prev_npc_requested", _on_prev_button_pressed)
 		_safe_connect_custom_signal(info_window, "next_npc_requested", _on_next_button_pressed)
 		_safe_connect_custom_signal(info_window, "spawn_npc_requested", _on_spawn_npc_button_pressed)
 		_safe_connect_custom_signal(info_window, "end_today_requested", _on_end_today_pressed)
 		_safe_connect_custom_signal(info_window, "unlock_all_entries_requested", _on_unlock_all_entries_requested)
-
-func _safe_connect_pressed(button: BaseButton, callable_fn: Callable) -> void:
-	if button != null and not button.pressed.is_connected(callable_fn):
-		button.pressed.connect(callable_fn)
 
 
 func _safe_connect_custom_signal(target: Object, signal_name: StringName, callable_fn: Callable) -> void:
@@ -563,24 +430,6 @@ func _set_info_text(text: String) -> void:
 		info_label.text = text
 	elif OS.is_debug_build():
 		print(text)
-
-func _show_window_front(window_node: Window) -> void:
-	# 统一处理 Clinic 内部窗口的显示、置顶和焦点。
-	# 说明：
-	# 1. Window 已经 visible 时，单纯 show() 不会改变它在父节点中的显示层级。
-	# 2. 因此这里同时把窗口移动到父节点最后，保证再次按快捷键时能切到最前。
-	# 3. F1 / F2 / F3 打开的窗口都走这里，避免三个窗口行为不一致。
-	if window_node == null:
-		return
-
-	window_node.show()
-
-	var parent_node := window_node.get_parent()
-	if parent_node != null:
-		parent_node.move_child(window_node, parent_node.get_child_count() - 1)
-
-	window_node.grab_focus()
-
 
 
 func _get_pressed_action_count(action_names: Array[StringName]) -> int:
@@ -739,6 +588,13 @@ func refresh_clinic_view() -> void:
 	current_prescription.clear()
 	current_prescription.clear_disease()
 	diagnosis_submitted = false
+
+	if window_controller != null:
+		window_controller.configure_prescription_context(
+			herb_database,
+			current_prescription,
+			formula_database
+		)
 
 	last_formula_judge_result = null
 	last_formula_judge_summary_text = ""
@@ -905,140 +761,6 @@ func _clear_pulse() -> void:
 
 
 # =========================================================
-# 脉象窗口开关
-# =========================================================
-
-func open_pulse_window() -> void:
-	if pulse_window == null:
-		return
-
-	# 打开脉诊窗口时，只显示按键提示页。
-	# 不再自动调用 show_region()，避免窗口一打开就跳到脉象图。
-	if pulse_window.has_method("open_window"):
-		pulse_window.open_window()
-	else:
-		pulse_window.show()
-
-	_show_window_front(pulse_window)
-
-	if pulse_window.has_method("show_hint_tab"):
-		pulse_window.show_hint_tab()
-
-	last_pulse_input_signature = ""
-
-
-func close_pulse_window() -> void:
-	if pulse_window == null:
-		return
-
-	if pulse_window.has_method("close_window"):
-		pulse_window.close_window()
-	else:
-		pulse_window.hide()
-
-	_reset_pulse_keyboard_state()
-
-
-# =========================================================
-# 开方窗口开关
-# =========================================================
-
-func open_prescription_window() -> void:
-	if prescription_window == null:
-		return
-
-	prescription_window.setup(herb_database, current_prescription, formula_database)
-	_show_window_front(prescription_window)
-
-
-func close_prescription_window() -> void:
-	if prescription_window == null:
-		return
-
-	prescription_window.hide()
-
-
-# =========================================================
-# 行医记考窗口开关
-# =========================================================
-
-func open_clinical_log_window() -> void:
-	if clinical_log_window == null:
-		_set_info_text("行医记考窗口不存在")
-		print("ClinicalLogWindow 没找到，请检查节点名字和挂载位置")
-		return
-
-	if OS.is_debug_build():
-		print("找到 ClinicalLogWindow：", clinical_log_window)
-
-	# 行医记考窗口和 F1 / F2 窗口一样，先统一显示并置顶。
-	# 这样窗口已经打开时，再按 F3 也会重新切到最前。
-	_show_window_front(clinical_log_window)
-
-	if clinical_log_window.has_method("open_window"):
-		clinical_log_window.open_window()
-		_show_window_front(clinical_log_window)
-	elif clinical_log_window.has_method("refresh_view"):
-		clinical_log_window.refresh_view()
-
-
-func close_clinical_log_window() -> void:
-	if clinical_log_window == null:
-		return
-
-	if clinical_log_window.has_method("close_window"):
-		clinical_log_window.close_window()
-	else:
-		clinical_log_window.hide()
-
-
-# =========================================================
-# 提交处方后统一关闭诊疗窗口
-# =========================================================
-
-func close_treatment_windows_after_submit() -> void:
-	# 关闭把脉窗口
-	# 说明：
-	# 1. 优先调用 PulseWindow 自己的 close_window()，保证窗口内部状态能正确处理。
-	# 2. 如果以后把脉窗口脚本没有 close_window()，则退回到 hide()，避免报错。
-	if pulse_window != null:
-		if pulse_window.has_method("close_window"):
-			pulse_window.close_window()
-		else:
-			pulse_window.hide()
-
-	# 重置键盘把脉状态。
-	# 说明：
-	# 防止窗口已经关闭，但 pulse_keyboard_override_active 或 last_pulse_input_signature 仍保留旧状态。
-	_reset_pulse_keyboard_state()
-
-	# 关闭开方窗口
-	close_prescription_window()
-
-	# 关闭行医记考窗口
-	close_clinical_log_window()
-
-
-# =========================================================
-# 信息测试窗口开关
-# =========================================================
-
-func open_info_window() -> void:
-	if info_window == null:
-		return
-
-	info_window.popup_centered()
-	info_window.grab_focus()
-
-
-func close_info_window() -> void:
-	if info_window == null:
-		return
-
-	info_window.hide()
-
-
-# =========================================================
 # 获取当前病人的 disease_id
 # =========================================================
 
@@ -1090,7 +812,6 @@ func _get_reputation_reward_by_judge_result(result) -> int:
 			return -10
 		_:
 			return 0
-
 
 
 # =========================================================
@@ -1469,50 +1190,19 @@ func _on_submit_button_pressed() -> void:
 # 脉象窗口
 # =========================================================
 
-func _on_open_pulse_window_button_pressed() -> void:
-	open_pulse_window()
-
 
 func _on_pulse_panel_region_selected(display_region_name: String) -> void:
 	pulse_keyboard_override_active = false
 	show_region(display_region_name)
 
 
-func _on_pulse_window_close_requested() -> void:
-	close_pulse_window()
+func _on_window_controller_pulse_window_opened() -> void:
+	last_pulse_input_signature = ""
 
 
-# =========================================================
-# 开方窗口
-# =========================================================
+func _on_window_controller_pulse_window_closed() -> void:
+	_reset_pulse_keyboard_state()
 
-func _on_open_prescription_window_button_pressed() -> void:
-	open_prescription_window()
-
-
-func _on_prescription_window_close_requested() -> void:
-	close_prescription_window()
-
-
-# =========================================================
-# 行医记考窗口
-# =========================================================
-
-func _on_clinical_log_button_pressed() -> void:
-	open_clinical_log_window()
-
-
-# =========================================================
-# 信息测试窗口
-# =========================================================
-
-func _on_info_window_close_requested() -> void:
-	close_info_window()
-
-
-# =========================================================
-# 接收 PrescriptionWindow 发回的提示信息
-# =========================================================
 
 func _on_prescription_info_requested(text: String) -> void:
 	_set_info_text(text)
@@ -1529,7 +1219,9 @@ func _on_prescription_submit_requested() -> void:
 	if not submit_prescription():
 		return
 
-	close_treatment_windows_after_submit()
+	if window_controller != null:
+		window_controller.close_treatment_windows_after_submit()
+
 	_show_judgement_result_window(last_formula_judge_result, last_formula_judge_summary_text)
 
 
@@ -1584,7 +1276,8 @@ func _input(event: InputEvent) -> void:
 		if event.pressed and not event.echo:
 			# 判断是否按下 Ctrl + T
 			if event.ctrl_pressed and event.keycode == KEY_T:
-				open_info_window()
+				if window_controller != null:
+					window_controller.open_info_window()
 				get_viewport().set_input_as_handled()
 				return
 

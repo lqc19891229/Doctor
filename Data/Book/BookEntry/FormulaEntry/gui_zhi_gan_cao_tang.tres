@@ -8,5 +8,4 @@ entry_id = "gui_zhi_gan_cao_tang"
 book_id = "shang_han_lun"
 title = "桂枝甘草汤"
 detail_text = "桂枝甘草汤\n【出处】《伤寒论》\n【功效】温补心阳，益气定悸\n【主治】心阳虚\n【组成】\n君：桂枝 四钱\n臣：甘草 二钱\n佐：\n使：\n【配伍】\n桂枝：辛甘温，温通心阳、平冲降逆、温经通脉。\n炙甘草：益气补中、缓急养心，甘温益气。"
-unlock_required_experience_points = -1
 formula_id = "gui_zhi_gan_cao_tang"

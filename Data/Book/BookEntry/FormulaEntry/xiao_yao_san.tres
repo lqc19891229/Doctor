@@ -8,5 +8,4 @@ entry_id = "xiao_yao_san"
 book_id = "tai_ping_hui_min_he_ji_ju_fang"
 title = "逍遥散"
 detail_text = "逍遥散\n【出处】《太平惠民和剂局方》\n【功效】疏肝解郁，养血健脾\n【主治】肝脾不和（肝郁脾虚）\n【组成】\n君：柴胡 三钱\n臣：当归 三钱，白芍 三钱\n佐：白术 三钱，茯苓 三钱，生姜 一钱，薄荷 一钱\n使：甘草 一钱五分\n【配伍】\n柴胡：疏肝解郁、条达肝气，疏散郁滞。\n当归、白芍：养血柔肝，补肝体、缓肝急；防肝郁化火伤阴。\n白术、茯苓：健脾祛湿、培土荣木；\n生姜：温胃和中、调和气血。\n薄荷：助柴胡疏肝透热、疏散郁遏；\n炙甘草：益气补中，调和诸药；合白芍缓急止痛。"
-unlock_required_experience_points = -1
 formula_id = "xiao_yao_san"

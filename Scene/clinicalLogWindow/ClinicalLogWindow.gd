@@ -846,24 +846,24 @@ func _try_handle_clinic_window_shortcut(event: InputEvent) -> bool:
 	if key_event.alt_pressed or key_event.ctrl_pressed or key_event.meta_pressed or key_event.shift_pressed:
 		return false
 
-	var clinic := _find_clinic_controller()
-	if clinic == null:
+	var window_controller := _find_clinic_window_controller()
+	if window_controller == null:
 		return false
 
 	match key_event.keycode:
 		CLINIC_SHORTCUT_OPEN_PULSE:
-			if clinic.has_method("open_pulse_window"):
-				clinic.open_pulse_window()
+			if window_controller.has_method("open_pulse_window"):
+				window_controller.open_pulse_window()
 			else:
 				return false
 		CLINIC_SHORTCUT_OPEN_PRESCRIPTION:
-			if clinic.has_method("open_prescription_window"):
-				clinic.open_prescription_window()
+			if window_controller.has_method("open_prescription_window"):
+				window_controller.open_prescription_window()
 			else:
 				return false
 		CLINIC_SHORTCUT_OPEN_CLINICAL_LOG:
-			if clinic.has_method("open_clinical_log_window"):
-				clinic.open_clinical_log_window()
+			if window_controller.has_method("open_clinical_log_window"):
+				window_controller.open_clinical_log_window()
 			else:
 				return false
 		_:
@@ -873,15 +873,12 @@ func _try_handle_clinic_window_shortcut(event: InputEvent) -> bool:
 	return true
 
 
-func _find_clinic_controller() -> Node:
+func _find_clinic_window_controller() -> Node:
 	var node := get_parent()
 	while node != null:
-		if (
-			node.has_method("open_pulse_window")
-			and node.has_method("open_prescription_window")
-			and node.has_method("open_clinical_log_window")
-		):
-			return node
+		var controller := node.find_child("ClinicWindowController", true, false)
+		if controller != null:
+			return controller
 
 		node = node.get_parent()
 

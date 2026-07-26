@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://System/Npc/NpcData.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/zhang_tu_before.png" id="portrait_before_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/zhang_tu_after.png" id="portrait_after_1"]
+
+[resource]
+script = ExtResource("1")
+npc_id = "zhang_tu"
+npc_type = "random"
+npc_name = "张屠"
+gender = "男"
+age = 43
+dialogue_prefix = "哎哟大夫，俺"
+dialogue_suffix = "快给俺看看吧。"
+dialogue_after_treatment = "哈哈哈，太谢谢了。"
+dialogue_treatment_failed = "他娘的怎么感觉怪怪的"
+portrait_before_treatment = ExtResource("portrait_before_1")
+portrait_after_treatment = ExtResource("portrait_after_1")

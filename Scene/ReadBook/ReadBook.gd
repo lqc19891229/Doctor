@@ -52,6 +52,7 @@ func _ready() -> void:
 	_connect_ui_signals()
 
 	Unlock.refresh_auto_unlocks_by_experience()
+	Unlock.refresh_unlocks_by_dependencies()
 	_refresh_book_list()
 	_clear_entry_and_detail()
 
@@ -68,6 +69,7 @@ func _process(_delta: float) -> void:
 
 func open_window() -> void:
 	Unlock.refresh_auto_unlocks_by_experience()
+	Unlock.refresh_unlocks_by_dependencies()
 	_refresh_book_list()
 	_clear_entry_and_detail()
 	show()
@@ -404,18 +406,18 @@ func _show_entry_by_index(index: int) -> void:
 	if current_entry_id == "":
 		return
 
-	# 只允许查看已经通过累计心得解锁，或已经读过的条目。
+	# 只允许查看已经满足对应解锁条件，或已经读过的条目。
 	if not Unlock.is_entry_unlocked(current_entry_id) and not Unlock.is_entry_read(current_entry_id):
 		_update_thoughts_point_ui()
-		info_label.text = "该条目尚未解锁。获得更多心得后会自动解锁。
+		info_label.text = "该条目尚未解锁，请先满足对应的解锁条件。
 当前累计心得：%d" % Unlock.get_experience_points()
 		_set_detail_text("")
 		return
 
 	var was_unread := not Unlock.is_entry_read(current_entry_id)
 
-	# 第一次查看普通条目时标记为已读，并同步解锁对应疾病 / 方剂。
-	# 条目的出现 / 解锁只由 UnlockManager 中的累计心得规则控制。
+	# 第一次查看条目时标记为已读。
+	# 药材会在此时同步解锁；方剂和疾病通常已由依赖关系提前解锁。
 	if was_unread:
 		Unlock.read_entry(selected_entry)
 		_save_and_notify_player_data_changed()
