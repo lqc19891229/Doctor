@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7fmw7edatxaf"
-path="res://.godot/imported/clinic_background_autumn.png-3e48b1185e470504400714ea0f4d354b.ctex"
+uid="uid://bmuyinqvjquvu"
+path="res://.godot/imported/chen_pi.png-b079df0cc8d388695e0c2df3a2d688f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background/clinic/clinic_background_autumn.png"
-dest_files=["res://.godot/imported/clinic_background_autumn.png-3e48b1185e470504400714ea0f4d354b.ctex"]
+source_file="res://Assets/Portrait/StoryNpc/chen_pi/chen_pi.png"
+dest_files=["res://.godot/imported/chen_pi.png-b079df0cc8d388695e0c2df3a2d688f4.ctex"]
 
 [params]
 

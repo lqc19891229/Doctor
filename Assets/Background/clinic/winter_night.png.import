@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u5ne2tljlb7e"
-path="res://.godot/imported/clinic_background_spring_night.png-7d20467a382047a37ba8c1800c9c944d.ctex"
+uid="uid://b76anmx4fki7c"
+path="res://.godot/imported/winter_night.png-b9ed9b0b9922f5ff09c9acc4c1e436f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background/clinic/clinic_background_spring_night.png"
-dest_files=["res://.godot/imported/clinic_background_spring_night.png-7d20467a382047a37ba8c1800c9c944d.ctex"]
+source_file="res://Assets/Background/clinic/winter_night.png"
+dest_files=["res://.godot/imported/winter_night.png-b9ed9b0b9922f5ff09c9acc4c1e436f7.ctex"]
 
 [params]
 

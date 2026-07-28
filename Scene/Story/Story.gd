@@ -8,9 +8,11 @@ signal story_finished
 # 负责读取 StoryData，并逐句播放 StoryLine。
 #
 # 当前版本规则：
-# - 背景图由 StoryData.background 统一控制
-# - StoryLine 只负责：类型、说话人、文本、立绘
-# - dialogue 类型会优先根据 StoryLine.portrait_side 手动指定左右立绘位置
+# - 背景图只由 StoryLine.background 控制
+# - 当前台词没有设置背景时，继续沿用上一句背景
+# - 每段新剧情开始时，先重置为 default_background
+# - StoryLine 负责：类型、说话人、文本、背景、立绘
+# - dialogue 类型会优先根据 StoryLine.portrait_side 手动指定左、中、右立绘位置
 # - portrait_side 为 auto 或空时，才根据 speaker 自动分配左右立绘位置
 #
 # 本版本修复：
@@ -23,7 +25,7 @@ signal story_finished
 # 正式流程里会优先读取 StoryManager.current_story。
 @export var story_data: StoryData
 
-# StoryData.background 没设置时使用的备用背景。
+# 每段新剧情开始时使用的默认背景。
 @export var default_background: Texture2D
 
 # 打字机速度，数值越大显示越快。
@@ -35,8 +37,9 @@ signal story_finished
 @onready var background_rect: TextureRect = $BackgroundRect
 @onready var dark_mask: ColorRect = $DarkMask
 
-# 左右两个立绘槽。
+# 左、中、右三个立绘槽。
 @onready var left_portrait_rect: TextureRect = $CharacterLayer/LeftPortraitRect
+@onready var mid_portrait_rect: TextureRect = $CharacterLayer/MidPortraitRect
 @onready var right_portrait_rect: TextureRect = $CharacterLayer/RightPortraitRect
 
 @onready var dialogue_block: Control = $DialogueBlock
@@ -59,8 +62,8 @@ var enter_hold_active: bool = false
 var enter_hold_time: float = 0.0
 var enter_skip_triggered: bool = false
 
-# speaker -> "left" / "right"。
-# 同一个 speaker 固定站位，避免每句话左右乱跳。
+# speaker -> "left" / "mid" / "right"。
+# 同一个 speaker 固定站位，避免每句话位置乱跳。
 var speaker_side_map: Dictionary = {}
 
 # speaker -> Texture2D。
@@ -68,6 +71,7 @@ var speaker_side_map: Dictionary = {}
 var speaker_portrait_map: Dictionary = {}
 
 # 下一个新 speaker 分配到哪一侧。
+# auto 仍然只在 left 和 right 之间交替。
 var next_speaker_side: String = "left"
 
 
@@ -211,8 +215,9 @@ func play_story(data: StoryData) -> void:
 
 	_reset_text_labels()
 
-	# 整段剧情固定背景，只在开始播放时设置一次。
-	_apply_story_background()
+	# 每段新剧情开始时重置背景。
+	# 后续只由 StoryLine.background 控制切换。
+	_reset_story_background()
 
 	# 播放第一句。
 	advance()
@@ -231,6 +236,10 @@ func advance() -> void:
 
 
 func _show_line(line_data: StoryLine) -> void:
+	# 当前台词设置了背景时进行切换；
+	# 没有设置时继续沿用上一句背景。
+	_apply_line_background(line_data)
+
 	current_full_text = line_data.text
 	visible_character_count = 0
 	type_timer = 0.0
@@ -262,7 +271,7 @@ func _show_dialogue_line(line_data: StoryLine) -> void:
 	# 避免隐藏的 subtitle_label 保留上一次的可见字符状态。
 	subtitle_label.visible_characters = 0
 
-	# 根据 speaker 显示左右立绘。
+	# 根据 speaker 显示左、中、右立绘。
 	_show_speaker_portrait(line_data)
 
 
@@ -299,28 +308,38 @@ func _show_speaker_portrait(line_data: StoryLine) -> void:
 		return
 
 	var side := _get_line_portrait_side(line_data)
-
 	var active_rect: TextureRect
-	var inactive_rect: TextureRect
 
-	if side == "left":
-		active_rect = left_portrait_rect
-		inactive_rect = right_portrait_rect
-	else:
-		active_rect = right_portrait_rect
-		inactive_rect = left_portrait_rect
+	# 选择当前说话人所在的立绘槽。
+	match side:
+		"mid":
+			active_rect = mid_portrait_rect
+		"right":
+			active_rect = right_portrait_rect
+		_:
+			active_rect = left_portrait_rect
 
+	# 当前说话人的立绘正常显示。
 	active_rect.texture = portrait
 	active_rect.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	active_rect.show()
 
-	# 另一侧如果已有角色立绘，保留但压暗。
-	# 这样可以形成“当前说话人亮，另一人暗”的对话效果。
-	if inactive_rect.texture != null:
-		inactive_rect.modulate = Color(0.55, 0.55, 0.55, 0.72)
-		inactive_rect.show()
-	else:
-		inactive_rect.hide()
+	# 其他两个位置已有立绘时保留并压暗。
+	var portrait_rects: Array[TextureRect] = [
+		left_portrait_rect,
+		mid_portrait_rect,
+		right_portrait_rect,
+	]
+
+	for portrait_rect in portrait_rects:
+		if portrait_rect == active_rect:
+			continue
+
+		if portrait_rect.texture != null:
+			portrait_rect.modulate = Color(0.55, 0.55, 0.55, 0.72)
+			portrait_rect.show()
+		else:
+			portrait_rect.hide()
 
 
 func _get_speaker_side(speaker: String) -> String:
@@ -345,14 +364,13 @@ func _get_line_portrait_side(line_data: StoryLine) -> String:
 	if _object_has_property(line_data, "portrait_side"):
 		portrait_side = String(line_data.get("portrait_side")).strip_edges().to_lower()
 
-	if portrait_side == "left" or portrait_side == "right":
+	if portrait_side == "left" or portrait_side == "mid" or portrait_side == "right":
 		# 手动指定时，顺便更新 speaker 的固定站位。
 		# 这样后续同 speaker 如果写 auto 或空，也会沿用这个手动站位。
 		speaker_side_map[line_data.speaker] = portrait_side
 		return portrait_side
 
 	return _get_speaker_side(line_data.speaker)
-
 
 
 func _object_has_property(target, property_name: String) -> bool:
@@ -368,8 +386,10 @@ func _object_has_property(target, property_name: String) -> bool:
 
 	return false
 
+
 func _hide_all_portraits() -> void:
 	left_portrait_rect.hide()
+	mid_portrait_rect.hide()
 	right_portrait_rect.hide()
 
 
@@ -401,12 +421,16 @@ func _finish_typing() -> void:
 	continue_label.show()
 
 
-func _apply_story_background() -> void:
-	# 背景现在由 StoryData 统一控制。
-	if story_data != null and story_data.background != null:
-		background_rect.texture = story_data.background
-	else:
-		background_rect.texture = default_background
+func _reset_story_background() -> void:
+	# 每段新剧情开始时重置背景。
+	background_rect.texture = default_background
+
+
+func _apply_line_background(line_data: StoryLine) -> void:
+	# 只在当前台词明确设置了背景时切换。
+	# 留空时保留上一句正在显示的背景。
+	if line_data != null and line_data.background != null:
+		background_rect.texture = line_data.background
 
 
 func _setup_default_view() -> void:

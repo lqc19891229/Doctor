@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8b2fvviqw3a6"
-path="res://.godot/imported/clinic_background_spring.png-dd3c74c0d1ac3be5008926aaca3f00fb.ctex"
+uid="uid://lcjmc14i7a3w"
+path="res://.godot/imported/liu_fu_after.png-e9b21d0682d626617ddbb6b83164cb69.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background/clinic/clinic_background_spring.png"
-dest_files=["res://.godot/imported/clinic_background_spring.png-dd3c74c0d1ac3be5008926aaca3f00fb.ctex"]
+source_file="res://Assets/Portrait/RandomNpc/liu_fu_after.png"
+dest_files=["res://.godot/imported/liu_fu_after.png-e9b21d0682d626617ddbb6b83164cb69.ctex"]
 
 [params]
 

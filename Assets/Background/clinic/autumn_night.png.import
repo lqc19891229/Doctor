@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cusjmnmhojecs"
-path="res://.godot/imported/clinic_background_summer_night.png-6c8ea255c7b4031d6ca84a3c34ea20c1.ctex"
+uid="uid://sw1l8e0m3mbc"
+path="res://.godot/imported/autumn_night.png-5007a63f69332bceae99f1110981a54d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background/clinic/clinic_background_summer_night.png"
-dest_files=["res://.godot/imported/clinic_background_summer_night.png-6c8ea255c7b4031d6ca84a3c34ea20c1.ctex"]
+source_file="res://Assets/Background/clinic/autumn_night.png"
+dest_files=["res://.godot/imported/autumn_night.png-5007a63f69332bceae99f1110981a54d.ctex"]
 
 [params]
 

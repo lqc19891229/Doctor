@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://System/Npc/NpcData.gd" id="1"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/chen_fu_before.png" id="portrait_before_1"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/chen_fu_after.png" id="portrait_after_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/liu_fu_before.png" id="portrait_before_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/liu_fu_after.png" id="portrait_after_1"]
 
 [resource]
 script = ExtResource("1")
-npc_id = "chen_fu"
+npc_id = "liu_fu"
 npc_type = "random"
-npc_name = "陈福"
+npc_name = "刘福"
 gender = "男"
 age = 26
 dialogue_prefix = "大夫，我最近"

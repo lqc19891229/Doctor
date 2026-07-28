@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpif6hg4ag0o3"
-path="res://.godot/imported/clinic_background_winter.png-3e365df2df59b006f0119583d8b0d84b.ctex"
+uid="uid://dcgcgvocx18ha"
+path="res://.godot/imported/autumn.png-4251e4f8a1a19ec1930ee92f095a8ae4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background/clinic/clinic_background_winter.png"
-dest_files=["res://.godot/imported/clinic_background_winter.png-3e365df2df59b006f0119583d8b0d84b.ctex"]
+source_file="res://Assets/Background/clinic/autumn.png"
+dest_files=["res://.godot/imported/autumn.png-4251e4f8a1a19ec1930ee92f095a8ae4.ctex"]
 
 [params]
 

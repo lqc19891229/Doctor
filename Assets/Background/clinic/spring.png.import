@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbiqix78se3m0"
-path="res://.godot/imported/clinic_background_summer.png-fb67bb2fb603e7a0209eab9996484702.ctex"
+uid="uid://b0e681bcroyla"
+path="res://.godot/imported/spring.png-4c61774c14aab9c17cfd2ba282e5e9dd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background/clinic/clinic_background_summer.png"
-dest_files=["res://.godot/imported/clinic_background_summer.png-fb67bb2fb603e7a0209eab9996484702.ctex"]
+source_file="res://Assets/Background/clinic/spring.png"
+dest_files=["res://.godot/imported/spring.png-4c61774c14aab9c17cfd2ba282e5e9dd.ctex"]
 
 [params]
 

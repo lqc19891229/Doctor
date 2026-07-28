@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6kodxlwl4yss"
-path="res://.godot/imported/chen_fu_before.png-c7823c24d576c369aaa6cd5aaa61f0c4.ctex"
+uid="uid://bfoao0v7hfuy0"
+path="res://.godot/imported/winter.png-a5ac8d2c6e2c453f67d15f086a14d3dd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/RandomNpc/chen_fu_before.png"
-dest_files=["res://.godot/imported/chen_fu_before.png-c7823c24d576c369aaa6cd5aaa61f0c4.ctex"]
+source_file="res://Assets/Background/clinic/winter.png"
+dest_files=["res://.godot/imported/winter.png-a5ac8d2c6e2c453f67d15f086a14d3dd.ctex"]
 
 [params]
 

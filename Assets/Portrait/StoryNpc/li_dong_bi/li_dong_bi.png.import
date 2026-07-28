@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccwnqlhcoq2ma"
-path="res://.godot/imported/chen_fu_after.png-06c9026ce463e853e499d2aff8fb6cb8.ctex"
+uid="uid://btivew4tmgbst"
+path="res://.godot/imported/li_dong_bi.png-73162f14bbd9f7c6d9fe08788f4c88a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/RandomNpc/chen_fu_after.png"
-dest_files=["res://.godot/imported/chen_fu_after.png-06c9026ce463e853e499d2aff8fb6cb8.ctex"]
+source_file="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png"
+dest_files=["res://.godot/imported/li_dong_bi.png-73162f14bbd9f7c6d9fe08788f4c88a6.ctex"]
 
 [params]
 

@@ -19,9 +19,14 @@ class_name StoryLine
 # 当前台词 / 字幕内容。
 @export_multiline var text: String = ""
 
+# 当前这句指定的背景。
+# 留空时继续使用上一句背景；
+# 如果是第一句留空，则使用 StoryData.background。
+@export var background: Texture2D
+
 # 当前人物立绘。
 # subtitle 类型可以留空。
 @export var portrait: Texture2D
 
-# 立绘显示位置
-@export_enum("auto", "left", "right") var portrait_side: String = "auto"
+# 立绘显示位置。
+@export_enum("auto", "left", "mid", "right") var portrait_side: String = "auto"

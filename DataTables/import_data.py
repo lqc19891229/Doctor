@@ -84,6 +84,16 @@ SHEET_STORY_ALIASES = ["Story", "Stroy", "story", "stroy"]
 SHEET_STORY_LINE = "StoryLine"
 SHEET_STORY_LINE_ALIASES = ["StoryLine", "storyline"]
 
+# StoryLine 立绘根目录。
+STORY_PORTRAIT_BASE_DIR = "res://Assets/Portrait/StoryNpc"
+
+# 说话人显示名与立绘目录名不一致时，在这里集中配置。
+# 同时兼容“李东璧”和现有表格中的“李东壁”写法。
+STORY_SPEAKER_NPC_ID_OVERRIDES = {
+    "李东璧": "li_dong_bi",
+    "李东壁": "li_dong_bi",
+}
+
 
 # 三类正文导入配置：文件夹名、sheet 名、匹配名称列、目标正文列
 DETAIL_TEXT_IMPORT_CONFIGS = [
@@ -175,7 +185,17 @@ def load_story_xlsx_rows(source_dir: Path) -> list[dict[str, Any]]:
         log(f"跳过剧情导入：目录下没有 .xlsx 文件 {source_dir}")
         return []
 
-    required_headers = ["StoryID", "StoryName", "LineIndex", "LineType", "Speaker", "PortraitSide", "PortraitPath", "Text"]
+    required_headers = [
+        "StoryID",
+        "StoryName",
+        "LineIndex",
+        "LineType",
+        "Speaker",
+        "PortraitSide",
+        "PortraitPath",
+        "BackgroundPath",
+        "Text",
+    ]
     rows: list[dict[str, Any]] = []
 
     for xlsx_path in xlsx_files:
@@ -235,7 +255,17 @@ def import_story_xlsx_to_storyline_sheet(wb) -> None:
     ws = wb[story_line_sheet_name]
     headers = [as_str(cell.value) for cell in ws[1]]
     if not headers or not headers[0]:
-        headers = ["StoryID", "StoryName", "LineIndex", "LineType", "Speaker", "PortraitSide", "PortraitPath", "Text"]
+        headers = [
+            "StoryID",
+            "StoryName",
+            "LineIndex",
+            "LineType",
+            "Speaker",
+            "PortraitSide",
+            "PortraitPath",
+            "BackgroundPath",
+            "Text",
+        ]
         for col_index, header in enumerate(headers, start=1):
             ws.cell(row=1, column=col_index).value = header
 
@@ -466,6 +496,94 @@ def get_npc_portrait_after_path(npc_id: str, npc_type: str) -> str:
     if npc_type == "story":
         return f"{base_dir}/{npc_id}/{npc_id}_after.png"
     return f"{base_dir}/{npc_id}_after.png"
+
+
+def get_story_npc_id_from_portrait_path(path_text: Any) -> str:
+    """
+    功能：从完整 StoryNpc 立绘路径中提取角色目录名。
+    示例：
+    res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi_sad.png
+    -> li_dong_bi
+    """
+    clean_path = as_str(path_text)
+    path_prefix = f"{STORY_PORTRAIT_BASE_DIR}/"
+    if not clean_path.startswith(path_prefix):
+        return ""
+
+    relative_path = clean_path[len(path_prefix):]
+    return relative_path.split("/", 1)[0].strip()
+
+
+def build_story_speaker_npc_id_map(
+    npc_map: dict[str, dict[str, Any]],
+    story_line_map: dict[str, list[dict[str, Any]]],
+) -> dict[str, str]:
+    """
+    功能：建立 StoryLine Speaker -> 立绘目录名映射。
+    优先级：
+    1. Npc sheet 中 NpcType=story 的 NpcName / NpcID。
+    2. StoryLine 已填写的完整 StoryNpc PortraitPath。
+    3. STORY_SPEAKER_NPC_ID_OVERRIDES 中的显式覆盖。
+    """
+    result: dict[str, str] = {}
+
+    for npc_id, row in npc_map.items():
+        if normalize_npc_type(row.get("NpcType")) != "story":
+            continue
+
+        npc_name = as_str(row.get("NpcName"))
+        if npc_name:
+            result[npc_name] = npc_id
+        result[npc_id] = npc_id
+
+    # 现有完整路径反映实际立绘目录，可兼容 NpcID 与立绘目录名不同的角色。
+    for rows in story_line_map.values():
+        for row in rows:
+            speaker = as_str(row.get("Speaker"))
+            portrait_npc_id = get_story_npc_id_from_portrait_path(row.get("PortraitPath"))
+            if speaker and portrait_npc_id:
+                result[speaker] = portrait_npc_id
+
+    # 显式覆盖最后应用，确保角色别名始终指向预期目录。
+    result.update(STORY_SPEAKER_NPC_ID_OVERRIDES)
+    return result
+
+
+def resolve_story_portrait_path(
+    portrait_path_value: Any,
+    speaker: Any,
+    speaker_npc_id_map: dict[str, str],
+) -> str:
+    """
+    功能：把 StoryLine.PortraitPath 转换成完整 Godot 资源路径。
+    规则：
+    1. 已填写 res:// 完整路径时原样保留。
+    2. 留空时使用角色默认立绘：{NpcID}.png。
+    3. 填写 smail / sad 等表情名时使用：{NpcID}_{表情名}.png。
+    4. subtitle 没有 Speaker 且 PortraitPath 为空时，不写入立绘。
+    """
+    clean_value = as_str(portrait_path_value)
+    if clean_value.startswith("res://"):
+        return clean_value
+
+    speaker_name = as_str(speaker)
+    if not speaker_name:
+        return ""
+
+    npc_id = as_str(speaker_npc_id_map.get(speaker_name))
+    if not npc_id:
+        return ""
+
+    portrait_base = f"{STORY_PORTRAIT_BASE_DIR}/{npc_id}/{npc_id}"
+    if not clean_value:
+        return f"{portrait_base}.png"
+
+    variant = clean_value.strip().strip("_")
+    if variant.lower().endswith(".png"):
+        variant = variant[:-4].rstrip("_")
+    if not variant:
+        return f"{portrait_base}.png"
+    return f"{portrait_base}_{variant}.png"
 
 
 def as_float(value: Any, default: float = 0.0) -> float:
@@ -824,6 +942,8 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
     for rows in story_line_map.values():
         rows.sort(key=lambda item: as_int(item.get("LineIndex"), 0))
 
+    story_speaker_npc_id_map = build_story_speaker_npc_id_map(npc_map, story_line_map)
+
     # 将方剂组成按 FormulaID 分组，便于后续一次性生成整个方剂资源
     for row in raw_data[SHEET_FORMULA_INGREDIENT]:
         formula_id = as_str(row.get("FormulaID"))
@@ -850,6 +970,7 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
         "npc_map": npc_map,
         "story_map": story_map,
         "story_line_map": story_line_map,
+        "story_speaker_npc_id_map": story_speaker_npc_id_map,
     }
 
 
@@ -934,6 +1055,7 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
     npc_map = indexed_data["npc_map"]
     story_map = indexed_data["story_map"]
     story_line_map = indexed_data["story_line_map"]
+    story_speaker_npc_id_map = indexed_data["story_speaker_npc_id_map"]
 
     for book_id, row in book_map.items():
         book_name = as_str(row.get("BookName"))
@@ -1026,8 +1148,31 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
                 errors.append(f"StoryLine LineType 非法: {story_id} 第{i}行 -> {line_type}")
 
             portrait_side = as_str(row.get("PortraitSide")) or "auto"
-            if portrait_side not in ("auto", "left", "right"):
+            if portrait_side not in ("auto", "left", "mid", "right"):
                 errors.append(f"StoryLine PortraitSide 非法: {story_id} 第{i}行 -> {portrait_side}")
+
+            background_path = as_str(row.get("BackgroundPath"))
+            if not is_valid_resource_path(background_path):
+                errors.append(
+                    f"StoryLine BackgroundPath 非法: {story_id} 第{i}行 -> {background_path}"
+                )
+
+            speaker = as_str(row.get("Speaker"))
+            portrait_path = resolve_story_portrait_path(
+                row.get("PortraitPath"),
+                speaker,
+                story_speaker_npc_id_map,
+            )
+            if speaker and not portrait_path:
+                errors.append(
+                    f"StoryLine 无法根据 Speaker 解析立绘目录: "
+                    f"{story_id} 第{i}行 -> {speaker}；"
+                    "请在 Npc sheet 添加对应 story NPC，或填写完整 PortraitPath"
+                )
+            elif not is_valid_resource_path(portrait_path):
+                errors.append(
+                    f"StoryLine PortraitPath 非法: {story_id} 第{i}行 -> {portrait_path}"
+                )
 
     for formula_id, rows in formula_ingredient_map.items():
         if formula_id not in formula_map:
@@ -1464,6 +1609,7 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
     """
     story_map = indexed_data["story_map"]
     story_line_map = indexed_data["story_line_map"]
+    story_speaker_npc_id_map = indexed_data["story_speaker_npc_id_map"]
 
     ensure_dir(STORY_OUTPUT_DIR)
 
@@ -1476,7 +1622,6 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
         unlock_entry_id = as_str(story_row.get("EntryId"))
         play_once = as_bool(story_row.get("PlayOnce"), True)
         return_scene = as_str(story_row.get("ReturnScene")) or trigger_scene
-        background_path = as_str(story_row.get("BackgroundPath"))
 
         ext_lines = [
             f'[ext_resource type="Script" path="{STORY_LINE_SCRIPT_PATH}" id="1_storyline"]',
@@ -1499,8 +1644,6 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             ext_lines.append(f'[ext_resource type="Texture2D" path="{clean_path}" id="{ext_id}"]')
             return ext_id
 
-        background_ext_id = add_texture_resource(background_path, "background")
-
         sub_lines: list[str] = []
         sub_ids: list[str] = []
         for index, line_row in enumerate(story_lines, start=1):
@@ -1511,7 +1654,16 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             line_type = as_str(line_row.get("LineType")) or "dialogue"
             speaker = as_str(line_row.get("Speaker"))
             text = as_str(line_row.get("Text"))
-            portrait_ext_id = add_texture_resource(as_str(line_row.get("PortraitPath")), "portrait")
+            portrait_path = resolve_story_portrait_path(
+                line_row.get("PortraitPath"),
+                speaker,
+                story_speaker_npc_id_map,
+            )
+            portrait_ext_id = add_texture_resource(portrait_path, "portrait")
+            background_ext_id = add_texture_resource(
+                as_str(line_row.get("BackgroundPath")),
+                "background",
+            )
 
             portrait_side = as_str(line_row.get("PortraitSide")) or "auto"
 
@@ -1526,6 +1678,8 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             block_lines.append(f'text = {format_godot_string(text)}')
             if portrait_ext_id:
                 block_lines.append(f'portrait = {format_ext_resource_value(portrait_ext_id)}')
+            if background_ext_id:
+                block_lines.append(f'background = {format_ext_resource_value(background_ext_id)}')
             sub_lines.append("\n".join(block_lines))
 
         line_array = ", ".join(f'SubResource("{sub_id}")' for sub_id in sub_ids)
@@ -1541,8 +1695,6 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             f'play_once = {"true" if play_once else "false"}',
             f'return_scene = {format_godot_string(return_scene)}',
         ]
-        if background_ext_id:
-            resource_lines.append(f'background = {format_ext_resource_value(background_ext_id)}')
         resource_lines.append(f'lines = Array[ExtResource("1_storyline")]([{line_array}])')
 
         story_content_parts = [

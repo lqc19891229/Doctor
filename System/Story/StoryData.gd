@@ -28,8 +28,5 @@ var return_scene: String = "clinic"
 # 对应 NPC 资源需要放在 res://Data/Npc 下，且 NpcData.npc_type = "story"。
 @export var clinic_npc_id: String = ""
 
-# 背景图
-@export var background: Texture2D
-
 # 台词列表
 @export var lines: Array[StoryLine] = []
