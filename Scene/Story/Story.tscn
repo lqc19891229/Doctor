@@ -138,7 +138,6 @@ grow_vertical = 2
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
-flip_h = true
 
 [node name="DialogueBlock" type="Control" parent="." unique_id=2031369324]
 layout_mode = 1
