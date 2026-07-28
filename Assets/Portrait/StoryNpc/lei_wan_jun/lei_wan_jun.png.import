@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bs8db1ig0w255"
-path="res://.godot/imported/li_shi_zhen.png-f07f73506f1c4b505fcae2b4d0005fe4.ctex"
+uid="uid://b66t8hkochlnu"
+path="res://.godot/imported/lei_wan_jun.png-951f0e0a53f9b4449b9cdc5ba66aa99f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/StoryNpc/li_shi_zhen/li_shi_zhen.png"
-dest_files=["res://.godot/imported/li_shi_zhen.png-f07f73506f1c4b505fcae2b4d0005fe4.ctex"]
+source_file="res://Assets/Portrait/StoryNpc/lei_wan_jun/lei_wan_jun.png"
+dest_files=["res://.godot/imported/lei_wan_jun.png-951f0e0a53f9b4449b9cdc5ba66aa99f.ctex"]
 
 [params]
 

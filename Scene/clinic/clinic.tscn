@@ -1,14 +1,13 @@
 [gd_scene format=3 uid="uid://brf2blpetnvs1"]
 
-[ext_resource type="Script" uid="uid://d3fc1n20xbhxf" path="res://Scene/Clinic/Clinic.gd" id="1_y7fei"]
-[ext_resource type="Texture2D" uid="uid://c8b2fvviqw3a6" path="res://Assets/Background/clinic/clinic_background_spring.png" id="2_h552d"]
+[ext_resource type="Script" uid="uid://d3fc1n20xbhxf" path="res://Scene/clinic/Clinic.gd" id="1_y7fei"]
 [ext_resource type="Script" uid="uid://cse2gud2bttup" path="res://System/Npc/NpcManager.gd" id="2_l04vw"]
 [ext_resource type="Texture2D" uid="uid://bc7sj00ahbgcm" path="res://Assets/Background/clinic_table.png" id="4_k4yeq"]
 [ext_resource type="PackedScene" uid="uid://c1kldxjoeyc78" path="res://Scene/Prescription/PrescriptionWindow.tscn" id="5_h552d"]
 [ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/clinicalLogWindow/ClinicalLogWindow.tscn" id="5_ruh48"]
 [ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="6_k4yeq"]
 [ext_resource type="PackedScene" uid="uid://drw157phi8l3n" path="res://Scene/Test/InfoWindow.tscn" id="6_y7fei"]
-[ext_resource type="Script" uid="uid://dysun4xflegyp" path="res://Scene/Clinic/ClinicWindowController.gd" id="8_436d3"]
+[ext_resource type="Script" uid="uid://dysun4xflegyp" path="res://Scene/clinic/ClinicWindowController.gd" id="8_436d3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4yeq"]
 bg_color = Color(0.18039216, 0.10980392, 0.05490196, 0.9490196)
@@ -62,7 +61,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("2_h552d")
 expand_mode = 1
 
 [node name="Portrait" type="TextureRect" parent="Background" unique_id=1942009436]

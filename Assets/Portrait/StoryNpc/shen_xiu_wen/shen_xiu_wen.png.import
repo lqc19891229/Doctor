@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5u2q50jpjat7"
-path="res://.godot/imported/lei_wan_jun_before.png-1c27f3f600596ca7a6df6942e0aa6caa.ctex"
+uid="uid://cb2a44c42gedf"
+path="res://.godot/imported/shen_xiu_wen.png-32af703d138d0cbcdcedd1b9ea3f9311.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/RandomNpc/lei_wan_jun_before.png"
-dest_files=["res://.godot/imported/lei_wan_jun_before.png-1c27f3f600596ca7a6df6942e0aa6caa.ctex"]
+source_file="res://Assets/Portrait/StoryNpc/shen_xiu_wen/shen_xiu_wen.png"
+dest_files=["res://.godot/imported/shen_xiu_wen.png-32af703d138d0cbcdcedd1b9ea3f9311.ctex"]
 
 [params]
 

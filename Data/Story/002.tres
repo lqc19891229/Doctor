@@ -1,70 +1,68 @@
-[gd_resource type="Resource" script_class="StoryData" format=3]
+[gd_resource type="Resource" script_class="StoryData" format=3 uid="uid://4cb5xhws6cla"]
 
-[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
-[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_1"]
-[ext_resource type="Texture2D" path="res://Assets/Background/002/002.png" id="background_2"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wu_zhi_lan/wu_zhi_lan.png" id="portrait_3"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_yan_wen/li_yan_wen.png" id="portrait_4"]
+[ext_resource type="Script" uid="uid://norr1xwbdche" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" uid="uid://5hg5tfa6de3p" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" uid="uid://bwsrq54llwgvq" path="res://Assets/Background/002/002.png" id="background_2"]
+[ext_resource type="Texture2D" uid="uid://btivew4tmgbst" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_1"]
+[ext_resource type="Texture2D" uid="uid://cykknevc4511m" path="res://Assets/Portrait/StoryNpc/li_yan_wen/li_yan_wen.png" id="portrait_4"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
 speaker = "李东壁"
 text = "麻桂相须，增强发汗散寒之力，专治表实无汗。麻杏相使，宣降相配，专治寒邪闭肺之喘逆…"
-portrait = ExtResource("portrait_1")
 background = ExtResource("background_2")
+portrait = ExtResource("portrait_1")
+portrait_side = "left"
+
+[sub_resource type="Resource" id="Resource_q2im7"]
+metadata/__load_path__ = "res://Assets/Portrait/StoryNpc/wu_zhi_lan/wu_zhi_lan.png"
+
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "right"
 speaker = "吴芷兰"
 text = "相公，晚饭做好了，该吃饭了。"
-portrait = ExtResource("portrait_3")
+portrait = SubResource("Resource_q2im7")
+portrait_side = "right"
+
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
 speaker = "李东壁"
 text = "来了来了。"
 portrait = ExtResource("portrait_1")
+portrait_side = "left"
+
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "right"
 speaker = "李言闻"
 text = "东壁啊，白天教你的都听明白了吗？"
 portrait = ExtResource("portrait_4")
+portrait_side = "right"
+
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
 speaker = "李东壁"
 text = "都明白了，平常日子里看您治病，其实已经窥得些门道了。"
 portrait = ExtResource("portrait_1")
+portrait_side = "left"
+
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "right"
 speaker = "李言闻"
 text = "学医最要紧的是积累，吃完晚饭去把这些天教你的内容再看一遍，明日一早你随我一起出诊。"
 portrait = ExtResource("portrait_4")
+portrait_side = "right"
+
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
 speaker = "李东壁"
 text = "哇，太好了！"
 portrait = ExtResource("portrait_1")
+portrait_side = "left"
 
 [resource]
 script = ExtResource("2_storydata")
 story_id = "002"
 trigger_scene = "night"
 trigger_day = 1
-required_reputation_points = 0
-unlock_entry_id = ""
-play_once = true
 return_scene = "night"
 lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007")])

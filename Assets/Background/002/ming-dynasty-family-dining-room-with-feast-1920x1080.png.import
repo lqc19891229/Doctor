@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsco3qfqpmost"
-path="res://.godot/imported/chen_pi.png-b079df0cc8d388695e0c2df3a2d688f4.ctex"
+uid="uid://cm1hafo7mt7vm"
+path="res://.godot/imported/ming-dynasty-family-dining-room-with-feast-1920x1080.png-56908b3112ab1d73f380839198ac8a37.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/StoryNpc/chen_pi/chen_pi.png"
-dest_files=["res://.godot/imported/chen_pi.png-b079df0cc8d388695e0c2df3a2d688f4.ctex"]
+source_file="res://Assets/Background/002/ming-dynasty-family-dining-room-with-feast-1920x1080.png"
+dest_files=["res://.godot/imported/ming-dynasty-family-dining-room-with-feast-1920x1080.png-56908b3112ab1d73f380839198ac8a37.ctex"]
 
 [params]
 
