@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="HerbBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/HerbBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "hong_hua"
+book_id = "shen_nong_ben_cao_jing"
+title = "红花"
+detail_text = "红花（红蓝花）\n【气味】味辛，性温。\n【毒性】无毒\n【归经】归心、肝经。\n【主治】活血通经，散瘀止痛\n【释名】红花（《开宝》）、黄蓝颂曰︰其花红色，叶颇似蓝，故有蓝名。\n\n【发明】\n时珍曰︰血生于心包，藏于肝，属于冲任。红花汁与之同类，故能行男子血脉，通女子经水。多则行血，少则养血。按《养 漫笔》云︰新昌徐氏妇，病产晕已死，但胸膈 微热。有名医陆氏曰︰血闷也。得红花数十斤，乃可活。遂亟购得，以大锅煮汤，盛三桶于窗格之下，舁妇寝其上熏之，汤冷再加。有顷指动，半日乃苏。按此亦得唐许胤宗，以黄汤熏柳太后风病之法也。"
+unlock_required_experience_points = -1
+herb_id = "hong_hua"

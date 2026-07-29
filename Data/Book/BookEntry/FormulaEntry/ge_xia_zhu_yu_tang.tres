@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FormulaBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/FormulaBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "ge_xia_zhu_yu_tang"
+book_id = "yi_lin_gai_cuo"
+title = "膈下逐瘀汤"
+detail_text = "膈下逐瘀汤\n【出处】《医林改错》\n【功效】活血祛瘀，行气止痛。\n【主治】肝血瘀滞\n【组成】\n君：当归 三钱，川芎 二钱，赤芍 二钱\n臣：桃仁 三钱，红花 三钱，五灵脂 二钱，丹皮 二钱\n佐：香附 一钱，乌药 二钱，枳壳 一钱，延胡索 一钱\n使：甘草 三钱\n【配伍】\n桃仁、红花：破血逐瘀；\n五灵脂：专散胸腹瘀血、化瘀止痛，共主散膈下深部瘀血。\n当归：养血活血，散瘀不伤血；\n川芎：行气活血；\n赤芍、丹皮：凉血散瘀，清瘀久郁热。\n香附：疏肝行气；\n乌药：温散下焦膈下寒凝气滞；\n枳壳：宽中下气；\n延胡索：行气活血止痛。\n甘草：调和诸药，缓急止痛，缓和活血破瘀药峻烈之性。"
+formula_id = "ge_xia_zhu_yu_tang"

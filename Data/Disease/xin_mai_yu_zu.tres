@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="DiseaseData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Disease/DiseaseData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+disease_id = "xin_mai_yu_zu"
+disease_name = "心脉瘀阻"
+detail_text = "心脉瘀阻\n\n【病机】瘀血阻滞心之脉络，气血不通，心失濡养，不通则痛。\n\n【症状】心胸疼痛，心悸心慌，胸闷气短，喘不得卧；面色晦暗、唇甲青紫。\n\n【脉象】\n左寸（心）：波线粗\n\n【标准方】血府逐瘀汤"
+recommended_formula_id = "xue_fu_zhu_yu_tang"
+exterior_qi = 1.0
+exterior_blood = 1.0
+exterior_cold_hot = 1.0
+exterior_wet_dry = 1.0
+heart_qi = 1.0
+heart_blood = 1.5
+heart_cold_hot = 1.0
+heart_wet_dry = 1.0
+liver_qi = 1.0
+liver_blood = 1.0
+liver_cold_hot = 1.0
+liver_wet_dry = 1.0
+spleen_qi = 1.0
+spleen_blood = 1.0
+spleen_cold_hot = 1.0
+spleen_wet_dry = 1.0
+lung_qi = 1.0
+lung_blood = 1.0
+lung_cold_hot = 1.0
+lung_wet_dry = 1.0
+kidney_yin_qi = 1.0
+kidney_yin_blood = 1.0
+kidney_yin_cold_hot = 1.0
+kidney_yin_wet_dry = 1.0
+kidney_yang_qi = 1.0
+kidney_yang_blood = 1.0
+kidney_yang_cold_hot = 1.0
+kidney_yang_wet_dry = 1.0

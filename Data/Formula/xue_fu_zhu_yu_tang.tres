@@ -1,0 +1,94 @@
+[gd_resource type="Resource" script_class="FormulaData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Formula/FormulaIngredient.gd" id="1"]
+[ext_resource type="Script" path="res://System/Formula/FormulaData.gd" id="2"]
+[ext_resource type="Resource" path="res://Data/Herb/tao_ren.tres" id="herb_1"]
+[ext_resource type="Resource" path="res://Data/Herb/hong_hua.tres" id="herb_2"]
+[ext_resource type="Resource" path="res://Data/Herb/chi_shao.tres" id="herb_3"]
+[ext_resource type="Resource" path="res://Data/Herb/chuan_xiong.tres" id="herb_4"]
+[ext_resource type="Resource" path="res://Data/Herb/niu_xi.tres" id="herb_5"]
+[ext_resource type="Resource" path="res://Data/Herb/dang_gui.tres" id="herb_6"]
+[ext_resource type="Resource" path="res://Data/Herb/sheng_di_huang.tres" id="herb_7"]
+[ext_resource type="Resource" path="res://Data/Herb/jie_geng.tres" id="herb_8"]
+[ext_resource type="Resource" path="res://Data/Herb/zhi_ke.tres" id="herb_9"]
+[ext_resource type="Resource" path="res://Data/Herb/chai_hu.tres" id="herb_10"]
+[ext_resource type="Resource" path="res://Data/Herb/gan_cao.tres" id="herb_11"]
+
+[sub_resource type="Resource" id="Ingredient_1"]
+script = ExtResource("1")
+herb = ExtResource("herb_1")
+amount = 4.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_2"]
+script = ExtResource("1")
+herb = ExtResource("herb_2")
+amount = 3.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_3"]
+script = ExtResource("1")
+herb = ExtResource("herb_3")
+amount = 2.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_4"]
+script = ExtResource("1")
+herb = ExtResource("herb_4")
+amount = 2.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_5"]
+script = ExtResource("1")
+herb = ExtResource("herb_5")
+amount = 3.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_6"]
+script = ExtResource("1")
+herb = ExtResource("herb_6")
+amount = 3.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_7"]
+script = ExtResource("1")
+herb = ExtResource("herb_7")
+amount = 3.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_8"]
+script = ExtResource("1")
+herb = ExtResource("herb_8")
+amount = 2.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_9"]
+script = ExtResource("1")
+herb = ExtResource("herb_9")
+amount = 3.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_10"]
+script = ExtResource("1")
+herb = ExtResource("herb_10")
+amount = 1.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_11"]
+script = ExtResource("1")
+herb = ExtResource("herb_11")
+amount = 2.0
+unit = "qian"
+required = true
+
+[resource]
+script = ExtResource("2")
+formula_id = "xue_fu_zhu_yu_tang"
+formula_name = "血府逐瘀汤"
+detail_text = "血府逐瘀汤\n【出处】《医林改错》\n【功效】活血祛瘀，行气止痛\n【主治】心脉瘀阻\n【组成】\n君：桃仁 四钱，红花 三钱\n臣：赤芍 二钱，川芎 二钱，牛膝 三钱\n佐：当归 三钱，生地黄 三钱，桔梗 二钱，枳壳 三钱，柴胡 一钱\n使：甘草 二钱\n【配伍】\n桃仁、红花：破血行瘀，疏通胸中凝滞瘀血，直攻血府瘀阻，专治瘀血刺痛，为活血核心。\n川芎、赤芍：川芎上行头目、疏通胸胁血脉，活血行气；赤芍凉血散瘀，缓胸胁刺痛。\n牛膝：活血祛瘀，引胸中瘀血向下排出，化解胸中瘀堵。\n柴胡、枳壳：柴胡疏肝解郁，升发胸中之气；枳壳宽胸行气。气行则血行，解决气滞致瘀之本，缓解胸闷胀痛。\n桔梗：宣开肺气、上行胸中，载活血药直达血府，与牛膝一升一降，疏通胸膈气机血脉。\n当归、生地：当归补血活血，化瘀而不伤新血；生地滋阴凉血，防活血药耗伤阴血，祛瘀不伤正。\n使药：调和诸药。"
+target_disease_id = "xin_mai_yu_zu"
+target_disease_name = "心脉瘀阻"
+jun_group = [SubResource("Ingredient_1"), SubResource("Ingredient_2")]
+chen_group = [SubResource("Ingredient_3"), SubResource("Ingredient_4"), SubResource("Ingredient_5")]
+zuo_group = [SubResource("Ingredient_6"), SubResource("Ingredient_7"), SubResource("Ingredient_8"), SubResource("Ingredient_9"), SubResource("Ingredient_10")]
+shi_group = [SubResource("Ingredient_11")]

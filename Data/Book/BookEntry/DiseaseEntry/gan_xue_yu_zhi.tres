@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DiseaseBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/DiseaseBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "gan_xue_yu_zhi"
+book_id = "zhu_bing_yuan_hou_lun"
+title = "肝血瘀滞"
+detail_text = "肝血瘀滞\n\n【病机】肝气失疏，血行凝滞，瘀血痹阻肝之脉络。\n\n【症状】肌肤甲错，周身瘀斑、蛛丝红缕；胁肋刺痛胀满，情绪压抑、生气后疼痛加重。\n\n【脉象】\n左关（肝）：波线粗\n\n【标准方】膈下逐瘀汤"
+disease_id = "gan_xue_yu_zhi"

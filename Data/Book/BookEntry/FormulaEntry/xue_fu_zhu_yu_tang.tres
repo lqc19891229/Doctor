@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FormulaBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/FormulaBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "xue_fu_zhu_yu_tang"
+book_id = "yi_lin_gai_cuo"
+title = "血府逐瘀汤"
+detail_text = "血府逐瘀汤\n【出处】《医林改错》\n【功效】活血祛瘀，行气止痛\n【主治】心脉瘀阻\n【组成】\n君：桃仁 四钱，红花 三钱\n臣：赤芍 二钱，川芎 二钱，牛膝 三钱\n佐：当归 三钱，生地黄 三钱，桔梗 二钱，枳壳 三钱，柴胡 一钱\n使：甘草 二钱\n【配伍】\n桃仁、红花：破血行瘀，疏通胸中凝滞瘀血，直攻血府瘀阻，专治瘀血刺痛，为活血核心。\n川芎、赤芍：川芎上行头目、疏通胸胁血脉，活血行气；赤芍凉血散瘀，缓胸胁刺痛。\n牛膝：活血祛瘀，引胸中瘀血向下排出，化解胸中瘀堵。\n柴胡、枳壳：柴胡疏肝解郁，升发胸中之气；枳壳宽胸行气。气行则血行，解决气滞致瘀之本，缓解胸闷胀痛。\n桔梗：宣开肺气、上行胸中，载活血药直达血府，与牛膝一升一降，疏通胸膈气机血脉。\n当归、生地：当归补血活血，化瘀而不伤新血；生地滋阴凉血，防活血药耗伤阴血，祛瘀不伤正。\n使药：调和诸药。"
+formula_id = "xue_fu_zhu_yu_tang"
