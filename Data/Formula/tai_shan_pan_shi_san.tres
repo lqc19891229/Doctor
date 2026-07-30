@@ -1,0 +1,101 @@
+[gd_resource type="Resource" script_class="FormulaData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Formula/FormulaIngredient.gd" id="1"]
+[ext_resource type="Script" path="res://System/Formula/FormulaData.gd" id="2"]
+[ext_resource type="Resource" path="res://Data/Herb/bai_zhu.tres" id="herb_1"]
+[ext_resource type="Resource" path="res://Data/Herb/ren_shen.tres" id="herb_2"]
+[ext_resource type="Resource" path="res://Data/Herb/huang_qi.tres" id="herb_3"]
+[ext_resource type="Resource" path="res://Data/Herb/xu_duan.tres" id="herb_4"]
+[ext_resource type="Resource" path="res://Data/Herb/shu_di_huang.tres" id="herb_5"]
+[ext_resource type="Resource" path="res://Data/Herb/dang_gui.tres" id="herb_6"]
+[ext_resource type="Resource" path="res://Data/Herb/bai_shao.tres" id="herb_7"]
+[ext_resource type="Resource" path="res://Data/Herb/chuan_xiong.tres" id="herb_8"]
+[ext_resource type="Resource" path="res://Data/Herb/huang_qin.tres" id="herb_9"]
+[ext_resource type="Resource" path="res://Data/Herb/sha_ren.tres" id="herb_10"]
+[ext_resource type="Resource" path="res://Data/Herb/gan_cao.tres" id="herb_11"]
+[ext_resource type="Resource" path="res://Data/Herb/nuo_mi.tres" id="herb_12"]
+
+[sub_resource type="Resource" id="Ingredient_1"]
+script = ExtResource("1")
+herb = ExtResource("herb_1")
+amount = 2.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_2"]
+script = ExtResource("1")
+herb = ExtResource("herb_2")
+amount = 1.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_3"]
+script = ExtResource("1")
+herb = ExtResource("herb_3")
+amount = 1.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_4"]
+script = ExtResource("1")
+herb = ExtResource("herb_4")
+amount = 1.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_5"]
+script = ExtResource("1")
+herb = ExtResource("herb_5")
+amount = 1.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_6"]
+script = ExtResource("1")
+herb = ExtResource("herb_6")
+amount = 1.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_7"]
+script = ExtResource("1")
+herb = ExtResource("herb_7")
+amount = 8.0
+unit = "fen"
+required = true
+[sub_resource type="Resource" id="Ingredient_8"]
+script = ExtResource("1")
+herb = ExtResource("herb_8")
+amount = 8.0
+unit = "fen"
+required = true
+[sub_resource type="Resource" id="Ingredient_9"]
+script = ExtResource("1")
+herb = ExtResource("herb_9")
+amount = 1.0
+unit = "qian"
+required = true
+[sub_resource type="Resource" id="Ingredient_10"]
+script = ExtResource("1")
+herb = ExtResource("herb_10")
+amount = 5.0
+unit = "fen"
+required = true
+[sub_resource type="Resource" id="Ingredient_11"]
+script = ExtResource("1")
+herb = ExtResource("herb_11")
+amount = 5.0
+unit = "fen"
+required = true
+[sub_resource type="Resource" id="Ingredient_12"]
+script = ExtResource("1")
+herb = ExtResource("herb_12")
+amount = 5.0
+unit = "fen"
+required = true
+
+[resource]
+script = ExtResource("2")
+formula_id = "tai_shan_pan_shi_san"
+formula_name = "泰山磐石散"
+detail_text = "泰山磐石散\n【出处】《景岳全书》\n【功效】益气健脾，养血安胎\n【主治】妊娠\n【组成】\n君：白术 二钱\n臣：人参 一钱，黄芪 一钱，续断 一钱，熟地黄 一钱，当归 一钱\n佐：白芍 八分，川芎 八分，黄芩 一钱，砂仁 五分\n使：甘草 五分，糯米 五分\n【配伍】\n人参、黄芪、白术：脾胃为气血生化之源，健脾益气以固胎之本。\n当归、熟地、白芍、川芎：养血和血，补益冲任。冲为血海，任主胞胎，血足则养胎。\n续断：补肝肾、固冲任、安胎；肾主系胎。\n黄芩：清热安胎。\n砂仁：理气和胃，醒脾行滞；防补药滋腻碍胃，使气血流通，胎气安和。\n炙甘草：益气和中，调和诸药；\n糯米：补脾养胃，滋养胎元。"
+target_disease_id = "ren_shen"
+target_disease_name = "妊娠"
+jun_group = [SubResource("Ingredient_1")]
+chen_group = [SubResource("Ingredient_2"), SubResource("Ingredient_3"), SubResource("Ingredient_4"), SubResource("Ingredient_5"), SubResource("Ingredient_6")]
+zuo_group = [SubResource("Ingredient_7"), SubResource("Ingredient_8"), SubResource("Ingredient_9"), SubResource("Ingredient_10")]
+shi_group = [SubResource("Ingredient_11"), SubResource("Ingredient_12")]

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FormulaBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/FormulaBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "tai_shan_pan_shi_san"
+book_id = "jing_yue_quan_shu"
+title = "泰山磐石散"
+detail_text = "泰山磐石散\n【出处】《景岳全书》\n【功效】益气健脾，养血安胎\n【主治】妊娠\n【组成】\n君：白术 二钱\n臣：人参 一钱，黄芪 一钱，续断 一钱，熟地黄 一钱，当归 一钱\n佐：白芍 八分，川芎 八分，黄芩 一钱，砂仁 五分\n使：甘草 五分，糯米 五分\n【配伍】\n人参、黄芪、白术：脾胃为气血生化之源，健脾益气以固胎之本。\n当归、熟地、白芍、川芎：养血和血，补益冲任。冲为血海，任主胞胎，血足则养胎。\n续断：补肝肾、固冲任、安胎；肾主系胎。\n黄芩：清热安胎。\n砂仁：理气和胃，醒脾行滞；防补药滋腻碍胃，使气血流通，胎气安和。\n炙甘草：益气和中，调和诸药；\n糯米：补脾养胃，滋养胎元。"
+formula_id = "tai_shan_pan_shi_san"

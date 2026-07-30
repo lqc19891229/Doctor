@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="HerbBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/HerbBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "nuo_mi"
+book_id = "shen_nong_ben_cao_jing"
+title = "糯米"
+detail_text = "糯米（稻）\n【气味】味甘，性温。\n【毒性】无毒\n【归经】归脾、胃、肺经。\n【主治】脾胃虚寒泄泻；消渴尿多；自汗盗汗。\n【释名】稌（音杜）、糯（亦作穤）。\n\n时珍曰：稻、稌者，粳、糯之通称。《物理论》所谓 “稻者溉种之总称” 是矣。本草则专指糯以为稻也。稻从舀（音函），象人在臼上治稻之义。稌则方言稻音之转尔。其性粘软，故谓之糯。\n\n颖曰：糯米缓筋，令人多睡，其性懦也。\n\n【发明】\n思邈曰︰糯米味甘，脾之谷也，脾病宜食之。 杨士瀛曰︰痘疹用 米，取其解毒，能酿而发之也。\n\n时珍曰︰糯米性温，酿酒则热，熬饧尤甚，故脾肺虚寒者宜之。若素有痰热风病，及脾病不能转输，食之最能发病成积。孟诜、苏颂或言其性凉、性寒者，谬说也。《别录》已谓其温中坚大便，令人多热，是岂寒凉者乎？今人冷泄者，炒食即止。老人小便数者，作粢糕 或丸子，夜食亦止。其温肺暖脾可验矣。痘证用之，亦取此义。"
+unlock_required_experience_points = 105
+herb_id = "nuo_mi"
