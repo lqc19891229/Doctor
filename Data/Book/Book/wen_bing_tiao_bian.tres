@@ -6,7 +6,7 @@
 script = ExtResource("1")
 book_type = "formula"
 book_id = "wen_bing_tiao_bian"
-book_name = "温病条辩"
+book_name = "温病条辨"
 detail_text = ""
 author_name = "吴鞠通"
 sort_index = 5

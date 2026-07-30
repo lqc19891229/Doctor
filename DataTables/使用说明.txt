@@ -1,11 +1,3 @@
-github更新
-----------------------------------
-cd /d F:\Doctor
-git add .
-git commit -m "update"
-git push --force origin main
-----------------------------------
-
 import_data.py导入数据
 ----------------------------------
 在文件夹地址栏输入cmd，回车

@@ -11,7 +11,7 @@
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
-speaker = "李东壁"
+speaker = "李东璧"
 text = "麻桂相须，增强发汗散寒之力，专治表实无汗。麻杏相使，宣降相配，专治寒邪闭肺之喘逆…"
 portrait = ExtResource("portrait_1")
 background = ExtResource("background_2")
@@ -26,7 +26,7 @@ portrait = ExtResource("portrait_3")
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
-speaker = "李东壁"
+speaker = "李东璧"
 text = "来了来了。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_004"]
@@ -40,7 +40,7 @@ portrait = ExtResource("portrait_4")
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
-speaker = "李东壁"
+speaker = "李东璧"
 text = "都明白了，平常日子里看您治病，其实已经窥得些门道了。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_006"]
@@ -54,7 +54,7 @@ portrait = ExtResource("portrait_4")
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
-speaker = "李东壁"
+speaker = "李东璧"
 text = "哇，太好了！"
 portrait = ExtResource("portrait_1")
 

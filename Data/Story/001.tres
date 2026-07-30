@@ -24,7 +24,7 @@ portrait = ExtResource("portrait_2")
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
-speaker = "李东壁"
+speaker = "李东璧"
 text = "嘶...... 又没中......"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_004"]
@@ -45,7 +45,7 @@ portrait = ExtResource("portrait_2")
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
-speaker = "李东壁"
+speaker = "李东璧"
 text = "考了三次都没中举，看来我不是读书的材料啊爹"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_007"]
@@ -59,7 +59,7 @@ portrait = ExtResource("portrait_4")
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
-speaker = "李东壁"
+speaker = "李东璧"
 text = "我看我还是跟您学医吧，科举八股什么的，孩儿实在是学不来…"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_009"]
@@ -73,7 +73,7 @@ portrait = ExtResource("portrait_4")
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
-speaker = "李东壁"
+speaker = "李东璧"
 text = "可我真心喜欢研究那些药材方子，考证典籍。行医治病才是儿子此生志愿。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_011"]
@@ -87,7 +87,7 @@ portrait = ExtResource("portrait_4")
 script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
-text = "李东壁十四岁考中秀才，可之后九年三次乡试落榜，本就无心科举的李东壁决定开始随父亲学医。"
+text = "李东璧十四岁考中秀才，可之后九年三次乡试落榜，本就无心科举的李东壁决定开始随父亲学医。"
 
 [resource]
 script = ExtResource("2_storydata")

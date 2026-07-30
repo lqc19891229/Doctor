@@ -40,7 +40,7 @@ portrait = ExtResource("portrait_3")
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
-speaker = "李东壁"
+speaker = "李东璧"
 text = "顾先生，学生有礼了。"
 portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_006"]
@@ -54,7 +54,7 @@ portrait = ExtResource("portrait_1")
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
-speaker = "李东壁"
+speaker = "李东璧"
 text = "学生愚钝，辜负了老师的教导…"
 portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_008"]
@@ -75,7 +75,7 @@ portrait = ExtResource("portrait_1")
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
-speaker = "李东壁"
+speaker = "李东璧"
 text = "承蒙老师教诲，学生愿精进医术一生治病救人。"
 portrait = ExtResource("portrait_4")
 
