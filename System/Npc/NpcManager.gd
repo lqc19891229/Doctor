@@ -39,10 +39,6 @@ func _ready() -> void:
 	randomize()
 	load_all_npcs()
 
-	# 诊室初始没有病人时，自动抽取一位常规 random NPC。
-	if npc_list.is_empty():
-		spawn_random_npc()
-
 
 # ============================================================
 # 数据加载
@@ -130,9 +126,6 @@ func _load_npc_resource(path: String) -> void:
 
 func get_current_npc() -> NpcData:
 	if npc_list.is_empty():
-		spawn_random_npc()
-
-	if npc_list.is_empty():
 		return null
 
 	if current_index < 0 or current_index >= npc_list.size():
@@ -143,7 +136,6 @@ func get_current_npc() -> NpcData:
 
 func prev_npc() -> void:
 	if npc_list.is_empty():
-		spawn_random_npc()
 		return
 
 	current_index -= 1
@@ -153,7 +145,6 @@ func prev_npc() -> void:
 
 func next_npc() -> void:
 	if npc_list.is_empty():
-		spawn_random_npc()
 		return
 
 	current_index += 1

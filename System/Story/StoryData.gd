@@ -1,8 +1,20 @@
 extends Resource
 class_name StoryData
 
+const TRIGGER_TYPE_SCENE_ENTER := "scene_enter"
+const TRIGGER_TYPE_STORY_NPC_CURED := "story_npc_cured"
+
 # 剧情唯一 ID，用来记录是否已经播放过
 @export var story_id: String = ""
+
+# 剧情触发类型：
+# - scene_enter：进入指定场景时检查，兼容现有按场景 / 天数 / 名望触发的剧情。
+# - story_npc_cured：指定的 story NPC 被治愈后检查。
+@export_enum("scene_enter", "story_npc_cured")
+var trigger_type: String = TRIGGER_TYPE_SCENE_ENTER
+
+# 当 trigger_type = "story_npc_cured" 时，填写需要被治愈的 story NPC 的 npc_id。
+@export var trigger_npc_id: String = ""
 
 # 剧情触发场景，例如 clinic / night / map
 @export_enum("clinic", "night", "map")

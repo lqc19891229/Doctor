@@ -14,6 +14,8 @@ signal story_finished
 # - StoryLine 负责：类型、说话人、文本、背景、立绘
 # - dialogue 类型会优先根据 StoryLine.portrait_side 手动指定左、中、右立绘位置
 # - portrait_side 为 auto 或空时，才根据 speaker 自动分配左右立绘位置
+# - inactive_portrait_mode 为 dim 时，当前说话人在本句结束后继续留在画面
+# - inactive_portrait_mode 为 hide 时，从本句推进到下一句时当前说话人退出画面
 #
 # 本版本修复：
 # - 打字机效果不再通过 substr() 逐字修改 RichTextLabel.text
@@ -224,6 +226,10 @@ func play_story(data: StoryData) -> void:
 
 
 func advance() -> void:
+	# 推进下一句之前，先处理当前句说话人的退场设置。
+	# 例如 LineIndex 2 的陈皮填写 hide，则从第 2 句推进到第 3 句时陈皮退出画面。
+	_hide_current_line_speaker_if_needed()
+
 	current_line_index += 1
 
 	# 台词播放完毕。
@@ -342,6 +348,38 @@ func _show_speaker_portrait(line_data: StoryLine) -> void:
 			portrait_rect.hide()
 
 
+func _hide_current_line_speaker_if_needed() -> void:
+	if current_line_index < 0 or current_line_index >= current_lines.size():
+		return
+
+	var line_data: StoryLine = current_lines[current_line_index]
+	if line_data == null or line_data.speaker.is_empty():
+		return
+
+	if _get_inactive_portrait_mode(line_data) != "hide":
+		return
+
+	# 当前说话人没有已经分配的站位时，不处理任何立绘槽。
+	if not speaker_side_map.has(line_data.speaker):
+		return
+
+	var side := String(speaker_side_map[line_data.speaker])
+	var portrait_rect: TextureRect
+
+	match side:
+		"mid":
+			portrait_rect = mid_portrait_rect
+		"right":
+			portrait_rect = right_portrait_rect
+		_:
+			portrait_rect = left_portrait_rect
+
+	# 清空槽位，防止下一句把已经退场的人物重新作为非当前人物显示。
+	# speaker_portrait_map 仍保留人物立绘，因此该人物以后再次说话时可以回来。
+	portrait_rect.texture = null
+	portrait_rect.hide()
+
+
 func _get_speaker_side(speaker: String) -> String:
 	if speaker_side_map.has(speaker):
 		return speaker_side_map[speaker]
@@ -371,6 +409,19 @@ func _get_line_portrait_side(line_data: StoryLine) -> String:
 		return portrait_side
 
 	return _get_speaker_side(line_data.speaker)
+
+
+func _get_inactive_portrait_mode(line_data: StoryLine) -> String:
+	var inactive_portrait_mode := "dim"
+
+	# 兼容尚未写入 inactive_portrait_mode 字段的旧剧情资源。
+	if _object_has_property(line_data, "inactive_portrait_mode"):
+		inactive_portrait_mode = String(line_data.get("inactive_portrait_mode")).strip_edges().to_lower()
+
+	if inactive_portrait_mode == "hide":
+		return "hide"
+
+	return "dim"
 
 
 func _object_has_property(target, property_name: String) -> bool:

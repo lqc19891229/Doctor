@@ -1,101 +1,97 @@
-[gd_resource type="Resource" script_class="StoryData" format=3]
+[gd_resource type="Resource" script_class="StoryData" format=3 uid="uid://buqgecbyq0mcb"]
 
-[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
-[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
-[ext_resource type="Texture2D" path="res://Assets/Background/001/001.png" id="background_1"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chen_pi/chen_pi.png" id="portrait_2"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_3"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_yan_wen/li_yan_wen.png" id="portrait_4"]
+[ext_resource type="Script" uid="uid://norr1xwbdche" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" uid="uid://5hg5tfa6de3p" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" uid="uid://dj1p2tekf6616" path="res://Assets/Background/001/001.png" id="background_1"]
+[ext_resource type="Texture2D" uid="uid://dsco3qfqpmost" path="res://Assets/Portrait/StoryNpc/chen_pi/chen_pi.png" id="portrait_2"]
+[ext_resource type="Texture2D" uid="uid://btivew4tmgbst" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_3"]
+[ext_resource type="Texture2D" uid="uid://cykknevc4511m" path="res://Assets/Portrait/StoryNpc/li_yan_wen/li_yan_wen.png" id="portrait_4"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
 line_type = "subtitle"
-portrait_side = "auto"
 text = "明嘉靖十九年，武昌府放榜处"
 background = ExtResource("background_1")
+
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "right"
 speaker = "陈皮"
 text = "老爷，少爷，榜上没找到少爷的名字。"
 portrait = ExtResource("portrait_2")
+portrait_side = "right"
+inactive_portrait_mode = "hide"
+
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
 speaker = "李东璧"
 text = "嘶...... 又没中......"
 portrait = ExtResource("portrait_3")
+portrait_side = "left"
+
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "mid"
 speaker = "李言闻"
 text = "你再仔细看看"
 portrait = ExtResource("portrait_4")
+portrait_side = "mid"
+
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "right"
 speaker = "陈皮"
 text = "老爷，我看了好几遍了，确实没有少爷的名字…..."
 portrait = ExtResource("portrait_2")
+portrait_side = "right"
+
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
 speaker = "李东璧"
 text = "考了三次都没中举，看来我不是读书的材料啊爹"
 portrait = ExtResource("portrait_3")
+portrait_side = "left"
+
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "mid"
 speaker = "李言闻"
 text = "这说的是什么话，你看隔壁村那个老范，考了一辈子童试，年过半百中了秀才举人，你这才哪到哪"
 portrait = ExtResource("portrait_4")
+portrait_side = "mid"
+
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
 speaker = "李东璧"
 text = "我看我还是跟您学医吧，科举八股什么的，孩儿实在是学不来…"
 portrait = ExtResource("portrait_3")
+portrait_side = "left"
+
 [sub_resource type="Resource" id="StoryLine_009"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "mid"
 speaker = "李言闻"
 text = "学医哪里比得上做官有前途啊，你爹我行医一辈子，辛苦不赚钱不说，医得不好了还要受人白眼"
 portrait = ExtResource("portrait_4")
+portrait_side = "mid"
+
 [sub_resource type="Resource" id="StoryLine_010"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
 speaker = "李东璧"
 text = "可我真心喜欢研究那些药材方子，考证典籍。行医治病才是儿子此生志愿。"
 portrait = ExtResource("portrait_3")
+portrait_side = "left"
+
 [sub_resource type="Resource" id="StoryLine_011"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "mid"
 speaker = "李言闻"
 text = "......也罢，科举考功名的学子千千万，可真能博取个功名的又有几人呢。东壁呀，你若真的想从医，今日起便随为父从《内经》，《本草》学起吧。"
 portrait = ExtResource("portrait_4")
+portrait_side = "mid"
+
 [sub_resource type="Resource" id="StoryLine_012"]
 script = ExtResource("1_storyline")
 line_type = "subtitle"
-portrait_side = "auto"
 text = "李东璧十四岁考中秀才，可之后九年三次乡试落榜，本就无心科举的李东壁决定开始随父亲学医。"
 
 [resource]
 script = ExtResource("2_storydata")
 story_id = "001"
-trigger_scene = "clinic"
 trigger_day = 1
-required_reputation_points = 0
-unlock_entry_id = ""
-play_once = true
 return_scene = "night"
 lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011"), SubResource("StoryLine_012")])

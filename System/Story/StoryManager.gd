@@ -50,6 +50,14 @@ var has_played_clinic_intro: bool = false
 # played_story_ids["clinic_day_1_intro"] = true
 var played_story_ids: Dictionary = {}
 
+# 已经治愈过的 story NPC。
+# key = npc_id
+# value = true
+#
+# 当前版本以 npc_id 作为一次性治疗事件标识。
+# 如果以后同一个 NPC 会承担多次不同诊疗任务，建议再扩展为独立的 case_id。
+var cured_story_npc_ids: Dictionary = {}
+
 
 # 剧情资源根目录。
 # 会自动扫描这个目录下所有 .tres 文件，包括子目录。
@@ -182,6 +190,67 @@ func start_story_file(story_path: String, return_scene: String = "") -> bool:
 
 
 func find_trigger_story(trigger_scene: String, current_day: int) -> StoryData:
+	# 兼容原有调用：进入场景时只检查 scene_enter 类型剧情。
+	# story_npc_cured 类型剧情不会在每天进入 Clinic / Night 时提前播放。
+	return _find_matching_story(
+		trigger_scene,
+		current_day,
+		StoryData.TRIGGER_TYPE_SCENE_ENTER,
+		""
+	)
+
+
+func find_story_npc_cured_story(
+	npc_id: String,
+	trigger_scene: String,
+	current_day: int
+) -> StoryData:
+	# 指定 story NPC 被治愈后，寻找与该 NPC 匹配的后续剧情。
+	var clean_npc_id := npc_id.strip_edges()
+	if clean_npc_id == "":
+		return null
+
+	return _find_matching_story(
+		trigger_scene,
+		current_day,
+		StoryData.TRIGGER_TYPE_STORY_NPC_CURED,
+		clean_npc_id
+	)
+
+
+func report_story_npc_cured(
+	npc_id: String,
+	current_day: int,
+	trigger_scene: String = "clinic"
+) -> StoryData:
+	# Clinic 在 story NPC 治疗成功、治疗结果台词播放完毕后调用。
+	# 同一个 npc_id 只上报一次，避免重复提交或重复回调导致剧情重复触发。
+	var clean_npc_id := npc_id.strip_edges()
+	if clean_npc_id == "":
+		return null
+
+	if cured_story_npc_ids.has(clean_npc_id):
+		return null
+
+	cured_story_npc_ids[clean_npc_id] = true
+
+	return find_story_npc_cured_story(clean_npc_id, trigger_scene, current_day)
+
+
+func has_cured_story_npc(npc_id: String) -> bool:
+	var clean_npc_id := npc_id.strip_edges()
+	if clean_npc_id == "":
+		return false
+
+	return cured_story_npc_ids.has(clean_npc_id)
+
+
+func _find_matching_story(
+	trigger_scene: String,
+	current_day: int,
+	trigger_type: String,
+	trigger_npc_id: String
+) -> StoryData:
 	# 如果列表为空，尝试重新扫描一次，避免初始化顺序导致未登记。
 	if registered_story_paths.is_empty():
 		refresh_registered_story_paths()
@@ -203,7 +272,13 @@ func find_trigger_story(trigger_scene: String, current_day: int) -> StoryData:
 		var story: StoryData = loaded_story as StoryData
 
 		# 检查这个剧情是否满足触发条件。
-		if _is_story_trigger_matched(story, trigger_scene, current_day):
+		if _is_story_trigger_matched(
+			story,
+			trigger_scene,
+			current_day,
+			trigger_type,
+			trigger_npc_id
+		):
 			return story
 
 	return null
@@ -280,7 +355,13 @@ func mark_story_played_by_id(story_id: String) -> void:
 	played_story_ids[story_id] = true
 
 
-func _is_story_trigger_matched(story: StoryData, trigger_scene: String, current_day: int) -> bool:
+func _is_story_trigger_matched(
+	story: StoryData,
+	trigger_scene: String,
+	current_day: int,
+	requested_trigger_type: String,
+	requested_trigger_npc_id: String
+) -> bool:
 	# 检查 StoryData 是否为空。
 	if story == null:
 		return false
@@ -294,6 +375,31 @@ func _is_story_trigger_matched(story: StoryData, trigger_scene: String, current_
 	# 如果是只播放一次，并且已经播放过，则不再触发。
 	if story.play_once and played_story_ids.has(story_id):
 		return false
+
+	# 触发类型必须匹配。
+	# 旧剧情资源没有显式填写 trigger_type 时，会使用 StoryData 的 scene_enter 默认值。
+	var story_trigger_type := story.trigger_type.strip_edges().to_lower()
+	if story_trigger_type == "":
+		story_trigger_type = StoryData.TRIGGER_TYPE_SCENE_ENTER
+
+	var clean_requested_trigger_type := requested_trigger_type.strip_edges().to_lower()
+	if clean_requested_trigger_type == "":
+		clean_requested_trigger_type = StoryData.TRIGGER_TYPE_SCENE_ENTER
+
+	if story_trigger_type != clean_requested_trigger_type:
+		return false
+
+	# story_npc_cured 类型必须填写 trigger_npc_id，并且与本次治愈的 NPC 完全匹配。
+	if story_trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_CURED:
+		var required_npc_id := story.trigger_npc_id.strip_edges()
+		var cured_npc_id := requested_trigger_npc_id.strip_edges()
+
+		if required_npc_id == "":
+			push_warning("story_npc_cured 剧情缺少 trigger_npc_id：%s" % story_id)
+			return false
+
+		if required_npc_id != cured_npc_id:
+			return false
 
 	# 如果配置了触发场景，则必须和当前场景一致。
 	# trigger_scene 仍然保留，因为它控制剧情在哪个场景播放。
@@ -367,11 +473,13 @@ func _mark_story_played(story: StoryData) -> void:
 # 保存剧情播放状态
 # =========================================================
 func get_save_data() -> Dictionary:
-	# 返回当前已经播放过的剧情记录。
+	# 返回当前剧情进度。
 	# duplicate(true) 表示深拷贝，避免外部误改 StoryManager 内部数据。
 	return {
 		"played_story_ids": played_story_ids.duplicate(true),
-		"has_played_clinic_intro": has_played_clinic_intro
+		"has_played_clinic_intro": has_played_clinic_intro,
+		"cured_story_npc_ids": cured_story_npc_ids.duplicate(true),
+		"pending_clinic_npc_id": pending_clinic_npc_id
 	}
 
 
@@ -381,10 +489,23 @@ func get_save_data() -> Dictionary:
 func load_save_data(data: Dictionary) -> void:
 	# 先清空，避免读档时残留上一次运行的数据。
 	played_story_ids.clear()
+	cured_story_npc_ids.clear()
+	pending_clinic_npc_id = ""
+	current_story = null
+	return_scene_override = ""
 
 	# 恢复已播放剧情 ID。
 	if data.has("played_story_ids") and typeof(data["played_story_ids"]) == TYPE_DICTIONARY:
 		played_story_ids = data["played_story_ids"].duplicate(true)
+
+	# 恢复已经治愈过的 story NPC。
+	if data.has("cured_story_npc_ids") and typeof(data["cured_story_npc_ids"]) == TYPE_DICTIONARY:
+		cured_story_npc_ids = data["cured_story_npc_ids"].duplicate(true)
+
+	# 恢复剧情结束后等待 Clinic 消费的 story NPC。
+	# 这样在剧情期间退出并读档时，不会丢失剧情指定的病人。
+	if data.has("pending_clinic_npc_id"):
+		pending_clinic_npc_id = String(data["pending_clinic_npc_id"]).strip_edges()
 
 	# 恢复旧逻辑兼容变量。
 	if data.has("has_played_clinic_intro"):

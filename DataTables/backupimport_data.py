@@ -193,7 +193,6 @@ def load_story_xlsx_rows(source_dir: Path) -> list[dict[str, Any]]:
         "Speaker",
         "PortraitSide",
         "PortraitPath",
-        "Hide",
         "BackgroundPath",
         "Text",
     ]
@@ -264,7 +263,6 @@ def import_story_xlsx_to_storyline_sheet(wb) -> None:
             "Speaker",
             "PortraitSide",
             "PortraitPath",
-            "Hide",
             "BackgroundPath",
             "Text",
         ]
@@ -426,16 +424,6 @@ def as_str(value: Any) -> str:
     if value is None:
         return ""
     return str(value).strip()
-
-
-def normalize_inactive_portrait_mode(value: Any) -> str:
-    """
-    功能：把 StoryLine 的 Hide 列转换为 Godot 使用的立绘模式。
-    规则：
-    1. Hide 填写 hide（忽略大小写和首尾空格）时返回 hide。
-    2. Hide 留空时返回 dim，保持原有的非当前人物压暗效果。
-    """
-    return "hide" if as_str(value).lower() == "hide" else "dim"
 
 
 def get_first_value(row: dict[str, Any], column_names: list[str]) -> Any:
@@ -1163,13 +1151,6 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
             if portrait_side not in ("auto", "left", "mid", "right"):
                 errors.append(f"StoryLine PortraitSide 非法: {story_id} 第{i}行 -> {portrait_side}")
 
-            hide_value = as_str(row.get("Hide")).lower()
-            if hide_value not in ("", "hide"):
-                errors.append(
-                    f"StoryLine Hide 非法: {story_id} 第{i}行 -> {hide_value}；"
-                    "只允许留空或填写 hide"
-                )
-
             background_path = as_str(row.get("BackgroundPath"))
             if not is_valid_resource_path(background_path):
                 errors.append(
@@ -1685,14 +1666,12 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             )
 
             portrait_side = as_str(line_row.get("PortraitSide")) or "auto"
-            inactive_portrait_mode = normalize_inactive_portrait_mode(line_row.get("Hide"))
 
             block_lines = [
                 f'[sub_resource type="Resource" id="{sub_id}"]',
                 'script = ExtResource("1_storyline")',
                 f'line_type = {format_godot_string(line_type)}',
                 f'portrait_side = {format_godot_string(portrait_side)}',
-                f'inactive_portrait_mode = {format_godot_string(inactive_portrait_mode)}',
             ]
             if speaker:
                 block_lines.append(f'speaker = {format_godot_string(speaker)}')

@@ -9,6 +9,7 @@
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
+inactive_portrait_mode = "dim"
 speaker = "李言闻"
 text = "从今天起，你就正式开始给病患诊断开药。记住我教给你的，先把脉确定病性，辩证判断所患何病，再因病开方。如果记不住脉象，药方，就翻翻笔记。好了，病人已经在等着你了，快去吧。"
 portrait = ExtResource("portrait_1")
