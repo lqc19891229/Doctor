@@ -1,6 +1,12 @@
 extends Control
 
 signal story_finished
+signal story_treatment_requested(npc_id: String)
+signal followup_story_requested(story: StoryData, resume_treatment: bool)
+
+const JUDGEMENT_RESULT_SCENE: PackedScene = preload(
+	"res://Scene/JudgementResult/JudgementResult.tscn"
+)
 
 # =========================================================
 # Story.gd
@@ -48,9 +54,19 @@ signal story_finished
 @onready var speaker_label: Label = $DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer/SpeakerLabel
 @onready var dialogue_label: RichTextLabel = $DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer/DialogueLabel
 @onready var continue_label: Label = $DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer/ContinueLabel
+@onready var treatment_option_container: HBoxContainer = $DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer/TreatmentOptionContainer
+@onready var pulse_button: Button = $DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer/TreatmentOptionContainer/PulseButton
+@onready var prescription_button: Button = $DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer/TreatmentOptionContainer/PrescriptionButton
+@onready var clinical_log_button: Button = $DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer/TreatmentOptionContainer/ClinicalLogButton
 
 @onready var subtitle_block: Control = $SubtitleBlock
 @onready var subtitle_label: RichTextLabel = $SubtitleBlock/SubtitlePanel/MarginContainer/VBoxContainer/SubtitleLabel
+
+@onready var pulse_window: Window = $PulseWindow
+@onready var prescription_window: Window = $PrescriptionWindow
+@onready var clinical_log_window: Window = $ClinicalLogWindow
+@onready var judgement_result_host: Control = $JudgementResultHost
+@onready var initial_judgement_result: Control = $JudgementResultHost/JudgementResult
 
 var current_lines: Array[StoryLine] = []
 var current_line_index: int = -1
@@ -76,9 +92,23 @@ var speaker_portrait_map: Dictionary = {}
 # auto 仍然只在 left 和 right 之间交替。
 var next_speaker_side: String = "left"
 
+# Story 画面中的诊疗状态。业务数据由 Main 注入的隐藏 Clinic 后端持有。
+var treatment_backend: Node = null
+var treatment_npc_id: String = ""
+var treatment_trigger_scene: String = "clinic"
+var is_treatment_mode: bool = false
+var waiting_for_treatment_backend: bool = false
+var resume_treatment_after_story: bool = false
+var last_treatment_success: bool = false
+var judgement_result_window: Control = null
+
+var pulse_keyboard_override_active: bool = false
+var last_pulse_input_signature: String = ""
+
 
 func _ready() -> void:
 	_setup_default_view()
+	_connect_treatment_signals()
 
 	# StoryManager 是 Autoload，不是 Engine singleton
 	if StoryManager.current_story != null:
@@ -90,6 +120,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if is_treatment_mode and pulse_window != null and pulse_window.visible:
+		_update_story_pulse_keyboard_display()
+
 	_update_enter_hold_skip(delta)
 
 	# 没有打字时不处理打字机效果。
@@ -111,6 +144,13 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_finished:
+		return
+
+	if waiting_for_treatment_backend:
+		return
+
+	if is_treatment_mode:
+		_handle_treatment_shortcut(event)
 		return
 
 	# 回车：按下时开始计时，短按松开推进，长按跳过整段剧情。
@@ -155,7 +195,7 @@ func _handle_enter_key_event(key_event: InputEventKey) -> void:
 
 
 func _update_enter_hold_skip(delta: float) -> void:
-	if is_finished:
+	if is_finished or is_treatment_mode or waiting_for_treatment_backend:
 		_reset_enter_hold_state()
 		return
 
@@ -194,15 +234,20 @@ func _skip_current_story() -> void:
 	_finish_story()
 
 
-func play_story(data: StoryData) -> void:
+func play_story(
+	data: StoryData,
+	preserve_stage: bool = false,
+	resume_treatment_when_finished: bool = false
+) -> void:
 	# 记录当前剧情数据。
 	story_data = data
 
 	# 清空旧剧情。
 	current_lines.clear()
-	speaker_side_map.clear()
-	speaker_portrait_map.clear()
-	next_speaker_side = "left"
+	if not preserve_stage:
+		speaker_side_map.clear()
+		speaker_portrait_map.clear()
+		next_speaker_side = "left"
 
 	if story_data != null:
 		current_lines = story_data.lines.duplicate()
@@ -213,16 +258,359 @@ func play_story(data: StoryData) -> void:
 	type_timer = 0.0
 	is_typing = false
 	is_finished = false
+	is_treatment_mode = false
+	waiting_for_treatment_backend = false
+	resume_treatment_after_story = resume_treatment_when_finished
 	_reset_enter_hold_state()
 
 	_reset_text_labels()
+	treatment_option_container.hide()
+	_close_treatment_windows()
 
 	# 每段新剧情开始时重置背景。
 	# 后续只由 StoryLine.background 控制切换。
-	_reset_story_background()
+	if not preserve_stage:
+		_reset_story_background()
 
 	# 播放第一句。
 	advance()
+
+
+func play_followup_story(data: StoryData, resume_treatment: bool) -> void:
+	# 诊疗结果剧情仍在同一个 Story 实例中播放，保留最后的背景和人物站位。
+	play_story(data, true, resume_treatment)
+
+
+# =========================================================
+# Story 场景内诊疗
+# =========================================================
+
+func _connect_treatment_signals() -> void:
+	if not pulse_button.pressed.is_connected(_on_pulse_button_pressed):
+		pulse_button.pressed.connect(_on_pulse_button_pressed)
+
+	if not prescription_button.pressed.is_connected(_on_prescription_button_pressed):
+		prescription_button.pressed.connect(_on_prescription_button_pressed)
+
+	if not clinical_log_button.pressed.is_connected(_on_clinical_log_button_pressed):
+		clinical_log_button.pressed.connect(_on_clinical_log_button_pressed)
+
+	var info_callable := Callable(self, "_on_prescription_info_requested")
+	if prescription_window.has_signal("info_requested"):
+		if not prescription_window.is_connected("info_requested", info_callable):
+			prescription_window.connect("info_requested", info_callable)
+
+	var submit_callable := Callable(self, "_on_prescription_submit_requested")
+	if prescription_window.has_signal("submit_requested"):
+		if not prescription_window.is_connected("submit_requested", submit_callable):
+			prescription_window.connect("submit_requested", submit_callable)
+
+
+func start_story_npc_treatment(backend: Node, npc_id: String) -> void:
+	if backend == null or not is_instance_valid(backend):
+		cancel_story_treatment("Story 没有获得可用的 Clinic 诊疗后端。")
+		return
+
+	treatment_backend = backend
+	treatment_npc_id = npc_id.strip_edges()
+	waiting_for_treatment_backend = false
+
+	if story_data != null:
+		treatment_trigger_scene = story_data.trigger_scene.strip_edges()
+	if treatment_trigger_scene == "":
+		treatment_trigger_scene = "clinic"
+
+	_show_treatment_options()
+
+
+func cancel_story_treatment(message: String) -> void:
+	waiting_for_treatment_backend = false
+	is_treatment_mode = false
+	push_warning(message)
+	emit_signal("story_finished")
+
+
+func _show_treatment_options() -> void:
+	if treatment_backend == null or not is_instance_valid(treatment_backend):
+		cancel_story_treatment("Clinic 诊疗后端已经失效。")
+		return
+
+	is_treatment_mode = true
+	is_finished = false
+	is_typing = false
+	resume_treatment_after_story = false
+	_reset_enter_hold_state()
+	_close_treatment_windows()
+
+	dialogue_block.show()
+	subtitle_block.hide()
+	continue_label.hide()
+
+	var npc_name := ""
+	if treatment_backend.has_method("get_story_treatment_npc_name"):
+		npc_name = str(treatment_backend.call("get_story_treatment_npc_name")).strip_edges()
+
+	speaker_label.text = npc_name if npc_name != "" else "诊疗"
+	dialogue_label.text = "请选择诊疗项目。"
+	dialogue_label.visible_characters = -1
+	treatment_option_container.show()
+
+
+func _show_treatment_message(message: String) -> void:
+	dialogue_block.show()
+	subtitle_block.hide()
+	speaker_label.text = "诊疗提示"
+	dialogue_label.text = message
+	dialogue_label.visible_characters = -1
+	continue_label.hide()
+	treatment_option_container.show()
+
+
+func _on_pulse_button_pressed() -> void:
+	if not is_treatment_mode:
+		return
+
+	_show_window_front(pulse_window)
+	if pulse_window.has_method("open_window"):
+		pulse_window.call("open_window")
+	if pulse_window.has_method("show_hint_tab"):
+		pulse_window.call("show_hint_tab")
+	last_pulse_input_signature = ""
+
+
+func _on_prescription_button_pressed() -> void:
+	if not is_treatment_mode:
+		return
+
+	if treatment_backend == null or not is_instance_valid(treatment_backend):
+		cancel_story_treatment("Clinic 诊疗后端已经失效。")
+		return
+
+	var prescription = null
+	if treatment_backend.has_method("get_story_treatment_prescription"):
+		prescription = treatment_backend.call("get_story_treatment_prescription")
+
+	if prescription_window.has_method("setup"):
+		prescription_window.call("setup", HerbDB, prescription, FormulaDB)
+
+	_show_window_front(prescription_window)
+
+
+func _on_clinical_log_button_pressed() -> void:
+	if not is_treatment_mode:
+		return
+
+	_show_window_front(clinical_log_window)
+	if clinical_log_window.has_method("open_window"):
+		clinical_log_window.call("open_window")
+	elif clinical_log_window.has_method("refresh_view"):
+		clinical_log_window.call("refresh_view")
+
+
+func _show_window_front(window_node: Window) -> void:
+	if window_node == null:
+		return
+
+	window_node.show()
+	var parent_node := window_node.get_parent()
+	if parent_node != null:
+		parent_node.move_child(window_node, parent_node.get_child_count() - 1)
+	window_node.grab_focus()
+
+
+func _close_treatment_windows() -> void:
+	for window_node in [pulse_window, prescription_window, clinical_log_window]:
+		if window_node == null:
+			continue
+		if window_node.has_method("close_window"):
+			window_node.call("close_window")
+		else:
+			window_node.hide()
+
+	pulse_keyboard_override_active = false
+	last_pulse_input_signature = ""
+
+
+func _on_prescription_info_requested(text: String) -> void:
+	if not is_treatment_mode:
+		return
+	_show_treatment_message(text)
+
+
+func _on_prescription_submit_requested() -> void:
+	if not is_treatment_mode:
+		return
+
+	if treatment_backend == null or not is_instance_valid(treatment_backend):
+		cancel_story_treatment("Clinic 诊疗后端已经失效。")
+		return
+
+	if not treatment_backend.has_method("submit_story_prescription"):
+		cancel_story_treatment("Clinic 缺少 submit_story_prescription()。")
+		return
+
+	var raw_submit_result = treatment_backend.call("submit_story_prescription")
+	if typeof(raw_submit_result) != TYPE_DICTIONARY:
+		_show_treatment_message("Clinic 返回了无效的诊疗结果。")
+		return
+
+	var submit_result: Dictionary = raw_submit_result
+	if not bool(submit_result.get("ok", false)):
+		_show_treatment_message(str(submit_result.get("message", "处方提交失败。")))
+		return
+
+	last_treatment_success = bool(submit_result.get("success", false))
+	var result_data_value = submit_result.get("result_data", {})
+	var result_data: Dictionary = {}
+	if typeof(result_data_value) == TYPE_DICTIONARY:
+		result_data = result_data_value
+
+	is_treatment_mode = false
+	treatment_option_container.hide()
+	_close_treatment_windows()
+	_show_story_judgement_result(result_data)
+
+
+func _show_story_judgement_result(result_data: Dictionary) -> void:
+	if initial_judgement_result != null and is_instance_valid(initial_judgement_result):
+		judgement_result_window = initial_judgement_result
+	else:
+		judgement_result_window = JUDGEMENT_RESULT_SCENE.instantiate() as Control
+		if judgement_result_window != null:
+			judgement_result_host.add_child(judgement_result_window)
+
+	if judgement_result_window == null:
+		_on_story_judgement_result_closed()
+		return
+
+	if not judgement_result_window.tree_exited.is_connected(_on_story_judgement_result_closed):
+		judgement_result_window.tree_exited.connect(
+			_on_story_judgement_result_closed,
+			Object.CONNECT_ONE_SHOT
+		)
+
+	if judgement_result_window.has_method("show_result"):
+		judgement_result_window.call("show_result", result_data)
+	else:
+		judgement_result_window.show()
+
+
+func _on_story_judgement_result_closed() -> void:
+	judgement_result_window = null
+
+	var tree := get_tree()
+	if tree != null and tree.paused:
+		tree.paused = false
+
+	if treatment_backend == null or not is_instance_valid(treatment_backend):
+		cancel_story_treatment("判定结束时 Clinic 诊疗后端已经失效。")
+		return
+
+	var next_story: StoryData = null
+	if treatment_backend.has_method("finish_story_treatment_attempt"):
+		var raw_next_story = treatment_backend.call(
+			"finish_story_treatment_attempt",
+			last_treatment_success,
+			treatment_trigger_scene
+		)
+		if raw_next_story is StoryData:
+			next_story = raw_next_story as StoryData
+
+	if next_story != null:
+		emit_signal(
+			"followup_story_requested",
+			next_story,
+			not last_treatment_success
+		)
+		return
+
+	if last_treatment_success:
+		is_finished = true
+		emit_signal("story_finished")
+		return
+
+	# 没有配置失败剧情时，直接回到同一名 story NPC 的诊疗选项。
+	_show_treatment_options()
+
+
+func _handle_treatment_shortcut(event: InputEvent) -> void:
+	if not (event is InputEventKey):
+		return
+
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return
+	if key_event.alt_pressed or key_event.ctrl_pressed or key_event.meta_pressed or key_event.shift_pressed:
+		return
+
+	match key_event.keycode:
+		KEY_F1:
+			_on_pulse_button_pressed()
+		KEY_F2:
+			_on_prescription_button_pressed()
+		KEY_F3:
+			_on_clinical_log_button_pressed()
+		_:
+			return
+
+	get_viewport().set_input_as_handled()
+
+
+func _get_pressed_action_count(action_names: Array[StringName]) -> int:
+	var pressed_count := 0
+	for action_name in action_names:
+		if Input.is_action_pressed(action_name):
+			pressed_count += 1
+	return pressed_count
+
+
+func _update_story_pulse_keyboard_display() -> void:
+	var right_actions: Array[StringName] = [
+		&"pulse_right_cun",
+		&"pulse_right_guan",
+		&"pulse_right_chi"
+	]
+	var left_actions: Array[StringName] = [
+		&"pulse_left_cun",
+		&"pulse_left_guan",
+		&"pulse_left_chi"
+	]
+
+	var signature := ""
+	for action_name in right_actions + left_actions:
+		signature += "1" if Input.is_action_pressed(action_name) else "0"
+
+	if signature == last_pulse_input_signature:
+		return
+	last_pulse_input_signature = signature
+
+	var right_pressed_count := _get_pressed_action_count(right_actions)
+	var left_pressed_count := _get_pressed_action_count(left_actions)
+	var total_pressed_count := right_pressed_count + left_pressed_count
+
+	if right_pressed_count == 3 and left_pressed_count == 0:
+		pulse_keyboard_override_active = true
+		_show_story_pulse_hand("right")
+		return
+
+	if left_pressed_count == 3 and right_pressed_count == 0:
+		pulse_keyboard_override_active = true
+		_show_story_pulse_hand("left")
+		return
+
+	if pulse_keyboard_override_active or total_pressed_count != 0:
+		pulse_keyboard_override_active = false
+		if pulse_window.has_method("show_hint_tab"):
+			pulse_window.call("show_hint_tab")
+
+
+func _show_story_pulse_hand(hand_side: String) -> void:
+	if treatment_backend == null or not is_instance_valid(treatment_backend):
+		return
+	if not treatment_backend.has_method("show_story_pulse_hand"):
+		return
+
+	treatment_backend.call("show_story_pulse_hand", pulse_window, hand_side)
 
 
 func advance() -> void:
@@ -488,8 +876,10 @@ func _setup_default_view() -> void:
 	# 默认先隐藏内容块，等播放剧情时再显示。
 	dialogue_block.hide()
 	subtitle_block.hide()
+	treatment_option_container.hide()
 	_hide_all_portraits()
 	continue_label.hide()
+	_close_treatment_windows()
 
 	_reset_text_labels()
 
@@ -509,8 +899,26 @@ func _reset_text_labels() -> void:
 
 func _finish_story() -> void:
 	_reset_enter_hold_state()
-	is_finished = true
 
-	# Story 不再自己 change_scene
-	# 只通知 Main：剧情结束了
+	# 治疗失败剧情结束后不离开 Story，直接恢复同一名 NPC 的诊疗选项。
+	if resume_treatment_after_story:
+		resume_treatment_after_story = false
+		_show_treatment_options()
+		return
+
+	# 普通剧情配置了 clinic_npc_id 时，台词结束后请求 Main 创建隐藏 Clinic 后端。
+	var clinic_npc_id := ""
+	if story_data != null:
+		clinic_npc_id = story_data.clinic_npc_id.strip_edges()
+
+	if clinic_npc_id != "":
+		treatment_npc_id = clinic_npc_id
+		waiting_for_treatment_backend = true
+		is_typing = false
+		continue_label.hide()
+		treatment_option_container.hide()
+		emit_signal("story_treatment_requested", treatment_npc_id)
+		return
+
+	is_finished = true
 	emit_signal("story_finished")

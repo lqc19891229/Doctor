@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://bplfruj5kbkii"]
 
 [ext_resource type="Script" uid="uid://eg24ntnjfeh" path="res://Scene/Story/Story.gd" id="1_story_script"]
+[ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="2_pulse"]
+[ext_resource type="PackedScene" uid="uid://c1kldxjoeyc78" path="res://Scene/Prescription/PrescriptionWindow.tscn" id="3_prescription"]
+[ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/clinicalLogWindow/ClinicalLogWindow.tscn" id="4_clinical_log"]
+[ext_resource type="PackedScene" uid="uid://b5bphm5xo77my" path="res://Scene/JudgementResult/JudgementResult.tscn" id="5_judgement"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialogue"]
 content_margin_left = 28.0
@@ -155,7 +159,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 80.0
-offset_top = -286.0
+offset_top = -356.0
 offset_right = -80.0
 offset_bottom = -46.0
 grow_horizontal = 2
@@ -196,6 +200,33 @@ theme_override_font_sizes/normal_font_size = 35
 text = "人物对话显示区域"
 fit_content = true
 scroll_active = false
+
+[node name="TreatmentOptionContainer" type="HBoxContainer" parent="DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer" unique_id=207002001]
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="PulseButton" type="Button" parent="DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer/TreatmentOptionContainer" unique_id=207002002]
+custom_minimum_size = Vector2(260, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+text = "把脉(F1)"
+
+[node name="PrescriptionButton" type="Button" parent="DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer/TreatmentOptionContainer" unique_id=207002003]
+custom_minimum_size = Vector2(260, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+text = "开方(F2)"
+
+[node name="ClinicalLogButton" type="Button" parent="DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer/TreatmentOptionContainer" unique_id=207002004]
+custom_minimum_size = Vector2(260, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+text = "行医记考(F3)"
 
 [node name="ContinueLabel" type="Label" parent="DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer" unique_id=1823323477]
 layout_mode = 2
@@ -259,3 +290,25 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "点击 / 空格 /  继续，长按回车跳过剧情"
 horizontal_alignment = 2
+
+[node name="PulseWindow" parent="." unique_id=207002010 instance=ExtResource("2_pulse")]
+visible = false
+
+[node name="PrescriptionWindow" parent="." unique_id=207002011 instance=ExtResource("3_prescription")]
+visible = false
+
+[node name="ClinicalLogWindow" parent="." unique_id=207002012 instance=ExtResource("4_clinical_log")]
+visible = false
+
+[node name="JudgementResultHost" type="Control" parent="." unique_id=207002013]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="JudgementResult" parent="JudgementResultHost" unique_id=207002014 instance=ExtResource("5_judgement")]
+visible = false
+layout_mode = 1

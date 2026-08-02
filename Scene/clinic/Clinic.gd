@@ -178,6 +178,13 @@ var npc_dialogue_display_token: int = 0
 # 2. 避免 JudgementResult 关闭后立刻刷新，导致治疗后立绘和台词看不到。
 var waiting_next_patient_after_result: bool = false
 
+# Main 为 Story 场景创建的隐藏业务后端会在 add_child() 前把此项设为 true。
+# 后端模式只保留 NpcManager、处方与判定逻辑，不启动诊室计时和诊室 UI 信号。
+var story_treatment_backend_mode: bool = false
+
+# Story 中的开方窗口无法显示 Clinic 的 InfoWindow，因此缓存最近一次提示供 Story 读取。
+var last_info_text: String = ""
+
 
 # =========================================================
 # 生命周期
@@ -185,6 +192,12 @@ var waiting_next_patient_after_result: bool = false
 
 func _ready() -> void:
 	_validate_scene_node_bindings()
+
+	if story_treatment_backend_mode:
+		current_npc = null
+		visible = false
+		return
+
 	_setup_topbar_controller()
 	_setup_time_system()
 
@@ -199,7 +212,8 @@ func _ready() -> void:
 
 	# 病人不再在 _ready() 中自动生成。
 	# Main 会在连接好 story_requested 信号后调用 start_new_day()，
-	# 再由 start_new_day() 按“待处理 story NPC → 入口剧情 → random NPC”的顺序决定。
+	# 再由 start_new_day() 按“入口剧情 → random NPC”的顺序决定。
+	# story NPC 的诊疗由 Story 场景请求隐藏 Clinic 后端处理。
 	current_npc = null
 	_update_npc_portrait()
 	_update_npc_name()
@@ -218,6 +232,9 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if story_treatment_backend_mode:
+		return
+
 	# Clinic 不在这里处理时间计时
 	# 时间推进统一交给 GameTimeManager.gd
 
@@ -428,6 +445,8 @@ func _ensure_current_npc_valid(show_message: bool = false) -> bool:
 	return true
 
 func _set_info_text(text: String) -> void:
+	last_info_text = text
+
 	# 统一写入信息窗口文本。
 	# 说明：
 	# 1. 其它函数不再直接访问 info_label.text，减少空节点报错风险。
@@ -1316,6 +1335,9 @@ func set_day(day: int) -> void:
 # =========================================================
 
 func _input(event: InputEvent) -> void:
+	if story_treatment_backend_mode:
+		return
+
 	# 判定结果窗口显示期间，不处理底层 Clinic 的台词点击。
 	# 避免点击 JudgementResult 时误触底层台词隐藏逻辑。
 	if judgement_result_window != null and is_instance_valid(judgement_result_window):
@@ -1367,6 +1389,171 @@ func _on_unlock_all_entries_requested() -> void:
 
 
 # =========================================================
+# Story 场景诊疗后端接口
+# 说明：
+# 1. 这些接口只提供数据和判定，不负责 Story 的画面。
+# 2. story NPC 仍由 NpcManager 加载，处方仍由 Clinic 持有并提交。
+# 3. Story.tscn 中实例化的四个窗口只负责表现。
+# =========================================================
+
+func prepare_story_npc_treatment(npc_id: String, day: int) -> bool:
+	current_day = day
+	last_info_text = ""
+
+	var clean_npc_id := npc_id.strip_edges()
+	if clean_npc_id == "":
+		_set_info_text("剧情没有配置 clinic_npc_id。")
+		return false
+
+	if npc_manager == null or not npc_manager.has_method("replace_with_story_npc"):
+		_set_info_text("Clinic 找不到可用的 NpcManager story NPC 接口。")
+		return false
+
+	var npc: NpcData = npc_manager.replace_with_story_npc(clean_npc_id)
+	if npc == null:
+		_set_info_text("story NPC 加载失败：%s" % clean_npc_id)
+		return false
+
+	if npc.npc_type.strip_edges().to_lower() != "story":
+		_set_info_text("NPC【%s】的 npc_type 不是 story。" % clean_npc_id)
+		return false
+
+	current_npc = npc
+	current_prescription.clear()
+	current_prescription.clear_disease()
+	diagnosis_submitted = false
+	last_formula_judge_result = null
+	last_formula_judge_summary_text = ""
+	last_newly_unlocked_entry_titles.clear()
+	waiting_next_patient_after_result = false
+	_reset_pulse_keyboard_state()
+	return true
+
+
+func get_story_treatment_npc_name() -> String:
+	if current_npc == null:
+		return ""
+	return current_npc.npc_name
+
+
+func get_story_treatment_prescription():
+	return current_prescription
+
+
+func show_story_pulse_region(target_pulse_window: Node, display_region_name: String) -> Dictionary:
+	if current_npc == null or current_npc.disease == null:
+		return {
+			"ok": false,
+			"text": "当前没有可诊疗的剧情病人。"
+		}
+
+	if target_pulse_window == null or not target_pulse_window.has_method("show_region"):
+		return {
+			"ok": false,
+			"text": "Story 的 PulseWindow 不可用。"
+		}
+
+	var raw_result = target_pulse_window.call(
+		"show_region",
+		display_region_name,
+		current_npc.disease
+	)
+	if typeof(raw_result) == TYPE_DICTIONARY:
+		return raw_result
+
+	return {
+		"ok": false,
+		"text": "Story 的 PulseWindow 返回了无效数据。"
+	}
+
+
+func show_story_pulse_hand(target_pulse_window: Node, hand_side: String) -> Dictionary:
+	if current_npc == null or current_npc.disease == null:
+		return {
+			"ok": false,
+			"text": "当前没有可诊疗的剧情病人。"
+		}
+
+	if target_pulse_window == null or not target_pulse_window.has_method("show_hand_group"):
+		return {
+			"ok": false,
+			"text": "Story 的 PulseWindow 不可用。"
+		}
+
+	var raw_result = target_pulse_window.call(
+		"show_hand_group",
+		hand_side,
+		current_npc.disease
+	)
+	if typeof(raw_result) == TYPE_DICTIONARY:
+		return raw_result
+
+	return {
+		"ok": false,
+		"text": "Story 的 PulseWindow 返回了无效数据。"
+	}
+
+
+func submit_story_prescription() -> Dictionary:
+	# 使用与普通 Clinic 完全相同的提交与奖励逻辑，但不打开 Clinic 自己的结果窗口。
+	if not submit_prescription():
+		return {
+			"ok": false,
+			"message": last_info_text
+		}
+
+	return {
+		"ok": true,
+		"success": current_npc != null and current_npc.is_treated,
+		"result_data": _build_judgement_result_data(
+			last_formula_judge_result,
+			last_formula_judge_summary_text
+		)
+	}
+
+
+func finish_story_treatment_attempt(success: bool, trigger_scene: String) -> StoryData:
+	if current_npc == null:
+		return null
+
+	var clean_trigger_scene := trigger_scene.strip_edges()
+	if clean_trigger_scene == "":
+		clean_trigger_scene = "clinic"
+
+	var next_story: StoryData = null
+
+	if success:
+		if StoryManager != null and StoryManager.has_method("report_story_npc_cured"):
+			next_story = StoryManager.report_story_npc_cured(
+				current_npc.npc_id,
+				current_day,
+				clean_trigger_scene
+			)
+	else:
+		if StoryManager != null and StoryManager.has_method("report_story_npc_treatment_failed"):
+			next_story = StoryManager.report_story_npc_treatment_failed(
+				current_npc.npc_id,
+				current_day,
+				clean_trigger_scene
+			)
+
+		# 失败后继续治疗同一名 story NPC。
+		# diagnosis_submitted 保持 true，防止重复提交刷名望；只清空待重开的处方。
+		current_npc.is_treated = false
+		current_npc.treatment_failed = false
+		current_prescription.clear()
+		current_prescription.clear_disease()
+		last_formula_judge_result = null
+		last_formula_judge_summary_text = ""
+		last_newly_unlocked_entry_titles.clear()
+
+	if SaveManager != null and SaveManager.has_method("save_game"):
+		SaveManager.save_game()
+
+	return next_story
+
+
+# =========================================================
 # 剧情系统入口
 # 说明：
 # 1. Clinic 只负责在合适时机请求剧情。
@@ -1398,11 +1585,6 @@ func start_new_day(day: int) -> void:
 	_update_thoughts_point_ui(true)
 	_update_reputation_point_ui(true)
 
-	# 如果刚从剧情返回，并且剧情配置了 clinic_npc_id，优先切到对应 story NPC。
-	# 这里直接 return，避免剧情结束回诊室后又立刻触发下一段自动剧情。
-	if _apply_pending_story_npc_from_story_manager():
-		return
-
 	# 自动剧情触发入口.
 	# 具体触发条件不再写死在 Clinic.gd，改由 StoryData + StoryManager 决定。
 	if _try_start_auto_story("clinic", current_day):
@@ -1414,6 +1596,9 @@ func start_new_day(day: int) -> void:
 
 
 func _apply_pending_story_npc_from_story_manager() -> bool:
+	# 旧流程兼容接口，不再由 start_new_day() 调用。
+	# 新流程中的 clinic_npc_id 统一由 Main 创建隐藏 Clinic 后端，
+	# 再在 Story 场景里完成诊疗，避免 story NPC 出现在 Clinic 表现层。
 	if StoryManager == null:
 		return false
 

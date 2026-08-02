@@ -7,6 +7,10 @@ script = ExtResource("1_o28sc")
 
 [node name="CurrentSceneRoot" type="Node" parent="." unique_id=381807020]
 
+[node name="StoryTreatmentBackendRoot" type="Node" parent="." unique_id=207003001]
+
+[node name="StorySceneRoot" type="Node" parent="." unique_id=207003002]
+
 [node name="MainMenuLayer" type="CanvasLayer" parent="." unique_id=1999044094]
 
 [node name="TextureRect" type="TextureRect" parent="MainMenuLayer" unique_id=667132309]

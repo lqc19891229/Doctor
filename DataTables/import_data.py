@@ -18,6 +18,7 @@
 
 from __future__ import annotations
 
+from copy import copy
 from pathlib import Path
 from shutil import copy2
 from typing import Any
@@ -83,6 +84,40 @@ SHEET_STORY = "Story"
 SHEET_STORY_ALIASES = ["Story", "Stroy", "story", "stroy"]
 SHEET_STORY_LINE = "StoryLine"
 SHEET_STORY_LINE_ALIASES = ["StoryLine", "storyline"]
+
+# 独立剧情工作簿的标准列。
+# 新模板把剧情触发条件放在 Story sheet，把逐句台词放在 StoryLine sheet；
+# StoryLine 不再重复填写 StoryID / StoryName，由同文件的 Story 行自动继承。
+STORY_IMPORT_HEADERS = [
+    "StoryID",
+    "StoryName",
+    "TriggerType",
+    "TriggerScene",
+    "TriggerDay",
+    "Reputation",
+    "EntryId",
+    "NpcID",
+    "TriggerNpcID",
+    "PlayOnce",
+    "ReturnScene",
+    "SortIndex",
+]
+STORY_LINE_CONTENT_HEADERS = [
+    "LineIndex",
+    "LineType",
+    "Speaker",
+    "PortraitSide",
+    "PortraitPath",
+    "Hide",
+    "BackgroundPath",
+    "Text",
+]
+STORY_LINE_IMPORT_HEADERS = ["StoryID", "StoryName", *STORY_LINE_CONTENT_HEADERS]
+
+# 只在剧情 xlsx -> Data.xlsx 的内存数据中使用，不会写入 Excel 或 .tres。
+# 用于携带来源单元格的格式及来源行高。
+STORY_CELL_STYLES_KEY = "__story_cell_styles__"
+STORY_ROW_HEIGHT_KEY = "__story_row_height__"
 
 # StoryLine 立绘根目录。
 STORY_PORTRAIT_BASE_DIR = "res://Assets/Portrait/StoryNpc"
@@ -171,117 +206,343 @@ def load_detail_text_txt_map(source_dir: Path) -> dict[str, str]:
 
 
 
-def load_story_xlsx_rows(source_dir: Path) -> list[dict[str, Any]]:
+def _capture_cell_style(cell) -> dict[str, Any]:
     """
-    功能：读取 DetailText/剧情 下的所有剧情 .xlsx 文件，合并为 StoryLine 行数据。
-    规则：每个 xlsx 第一行必须是 StoryLine 表头；空 StoryID 的行会跳过，模板文件可安全保留。
+    保存单元格的可移植样式。
+
+    不直接保存 cell._style：不同工作簿的样式索引表并不相同，直接跨工作簿
+    赋值可能出现字体、边框或填充错乱。分别复制各样式对象时，openpyxl 会在
+    目标工作簿中正确注册它们。
     """
-    if not source_dir.exists():
-        log(f"跳过剧情导入：找不到目录 {source_dir}")
+    return {
+        "font": copy(cell.font),
+        "fill": copy(cell.fill),
+        "border": copy(cell.border),
+        "alignment": copy(cell.alignment),
+        "protection": copy(cell.protection),
+        "number_format": cell.number_format,
+    }
+
+
+def _apply_cell_style(cell, style_data: dict[str, Any] | None) -> None:
+    """把来源工作簿的单元格样式安全复制到目标单元格。"""
+    if not style_data:
+        return
+
+    cell.font = copy(style_data["font"])
+    cell.fill = copy(style_data["fill"])
+    cell.border = copy(style_data["border"])
+    cell.alignment = copy(style_data["alignment"])
+    cell.protection = copy(style_data["protection"])
+    cell.number_format = style_data["number_format"]
+
+
+def _read_story_sheet_rows(ws, required_headers: list[str], source_name: str) -> list[dict[str, Any]]:
+    """读取剧情工作簿中的一个 sheet，同时保留单元格样式和行高。"""
+    sheet_rows = list(ws.iter_rows())
+    if not sheet_rows:
         return []
 
-    xlsx_files = sorted(path for path in source_dir.glob("*.xlsx") if not path.name.startswith("~$"))
-    if not xlsx_files:
-        log(f"跳过剧情导入：目录下没有 .xlsx 文件 {source_dir}")
-        return []
+    headers = [as_str(cell.value) for cell in sheet_rows[0]]
+    missing = [name for name in required_headers if name not in headers]
+    if missing:
+        raise ValueError(f"剧情文件 {source_name} 的 {ws.title} sheet 缺少列：{missing}")
 
-    required_headers = [
-        "StoryID",
-        "StoryName",
-        "LineIndex",
-        "LineType",
-        "Speaker",
-        "PortraitSide",
-        "PortraitPath",
-        "Hide",
-        "BackgroundPath",
-        "Text",
-    ]
     rows: list[dict[str, Any]] = []
-
-    for xlsx_path in xlsx_files:
-        wb = load_workbook(xlsx_path, data_only=True)
-        ws = wb.active
-        sheet_rows = list(ws.iter_rows(values_only=True))
-        if not sheet_rows:
-            continue
-
-        headers = [as_str(cell) for cell in sheet_rows[0]]
-        missing = [name for name in required_headers if name not in headers]
-        if missing:
-            raise ValueError(f"剧情文件 {decode_hash_unicode_name(xlsx_path.name)} 缺少列：{missing}")
-
-        for raw_row in sheet_rows[1:]:
-            row = {}
-            all_empty = True
-            for i, value in enumerate(raw_row):
-                key = headers[i] if i < len(headers) else ""
-                if not key:
-                    continue
-                clean_value = normalize_cell(value)
-                row[key] = clean_value
-                if clean_value != "":
-                    all_empty = False
-
-            if all_empty:
+    for source_row_index, raw_row in enumerate(sheet_rows[1:], start=2):
+        row: dict[str, Any] = {}
+        cell_styles: dict[str, dict[str, Any]] = {}
+        all_empty = True
+        for i, cell in enumerate(raw_row):
+            key = headers[i] if i < len(headers) else ""
+            if not key:
                 continue
+            clean_value = normalize_cell(cell.value)
+            row[key] = clean_value
+            cell_styles[key] = _capture_cell_style(cell)
+            if clean_value != "":
+                all_empty = False
 
-            story_id = as_str(row.get("StoryID"))
-            if not story_id:
-                continue
-
-            rows.append({key: row.get(key, "") for key in required_headers})
+        if not all_empty:
+            row[STORY_CELL_STYLES_KEY] = cell_styles
+            row[STORY_ROW_HEIGHT_KEY] = ws.row_dimensions[source_row_index].height
+            rows.append(row)
 
     return rows
 
 
-def import_story_xlsx_to_storyline_sheet(wb) -> None:
+def _is_story_template_file(path: Path) -> bool:
+    """模板可以长期保留在剧情目录，但不会被当成正式剧情导入。"""
+    decoded_stem = decode_hash_unicode_name(path.stem)
+    return "模板" in decoded_stem or "模版" in decoded_stem
+
+
+def _has_story_line_content(row: dict[str, Any]) -> bool:
+    """只预填了 LineIndex 的占位行不导入；有台词或演出设置的行会保留。"""
+    return any(as_str(row.get(header)) for header in STORY_LINE_CONTENT_HEADERS if header != "LineIndex")
+
+
+def load_story_xlsx_data(source_dir: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """
-    功能：把 DetailText/剧情/*.xlsx 合并写入 Data.xlsx 的 StoryLine sheet。
-    说明：Story sheet 保存剧情元数据；StoryLine sheet 保存具体台词。
+    读取 DetailText/剧情 下的正式剧情工作簿。
+
+    新格式：
+    - Story sheet：一行剧情元数据。
+    - StoryLine sheet：只填台词列，StoryID / StoryName 自动继承 Story 行。
+
+    兼容旧格式：
+    - 单个活动 sheet 同时含 StoryID、StoryName 和台词列。
+    - 旧格式只更新 StoryLine，不覆盖 Data.xlsx 中已有的 Story 元数据。
+    """
+    if not source_dir.exists():
+        log(f"跳过剧情导入：找不到目录 {source_dir}")
+        return [], []
+
+    xlsx_files = sorted(
+        path
+        for path in source_dir.glob("*.xlsx")
+        if not path.name.startswith("~$") and not _is_story_template_file(path)
+    )
+    if not xlsx_files:
+        log(f"跳过剧情导入：目录下没有 .xlsx 文件 {source_dir}")
+        return [], []
+
+    story_rows: list[dict[str, Any]] = []
+    story_line_rows: list[dict[str, Any]] = []
+    story_sources: dict[str, str] = {}
+    line_sources: dict[tuple[str, int], str] = {}
+
+    for xlsx_path in xlsx_files:
+        wb = load_workbook(xlsx_path, data_only=True)
+        source_name = decode_hash_unicode_name(xlsx_path.name)
+        story_sheet_name = resolve_sheet_name(wb, SHEET_STORY, SHEET_STORY_ALIASES)
+        line_sheet_name = resolve_sheet_name(wb, SHEET_STORY_LINE, SHEET_STORY_LINE_ALIASES)
+
+        # 新版双 sheet 模板。
+        if story_sheet_name in wb.sheetnames and line_sheet_name in wb.sheetnames:
+            imported_story_rows = _read_story_sheet_rows(
+                wb[story_sheet_name],
+                STORY_IMPORT_HEADERS,
+                source_name,
+            )
+            imported_story_rows = [
+                {header: row.get(header, "") for header in STORY_IMPORT_HEADERS}
+                for row in imported_story_rows
+                if as_str(row.get("StoryID"))
+            ]
+
+            if not imported_story_rows:
+                log(f"跳过空剧情文件：{source_name}")
+                continue
+            if len(imported_story_rows) > 1:
+                raise ValueError(
+                    f"剧情文件 {source_name} 的 Story sheet 有多条正式剧情；"
+                    "新版 StoryLine 不含 StoryID，因此每个文件只能填写一条 Story"
+                )
+
+            story_row = imported_story_rows[0]
+            story_id = as_str(story_row.get("StoryID"))
+            story_name = as_str(story_row.get("StoryName"))
+            previous_source = story_sources.get(story_id)
+            if previous_source:
+                raise ValueError(
+                    f"剧情 StoryID 重复：{story_id} 同时出现在 {previous_source} 和 {source_name}"
+                )
+            story_sources[story_id] = source_name
+            story_rows.append(story_row)
+
+            imported_line_rows = _read_story_sheet_rows(
+                wb[line_sheet_name],
+                STORY_LINE_CONTENT_HEADERS,
+                source_name,
+            )
+            for row in imported_line_rows:
+                line_index = as_int(row.get("LineIndex"), 0)
+                if line_index <= 0 or not _has_story_line_content(row):
+                    continue
+                line_key = (story_id, line_index)
+                previous_line_source = line_sources.get(line_key)
+                if previous_line_source:
+                    raise ValueError(
+                        f"剧情行号重复：{story_id} 第 {line_index} 行同时出现在 "
+                        f"{previous_line_source} 和 {source_name}"
+                    )
+                line_sources[line_key] = source_name
+                merged_row = {
+                    "StoryID": story_id,
+                    "StoryName": story_name,
+                    **{header: row.get(header, "") for header in STORY_LINE_CONTENT_HEADERS},
+                }
+
+                # 新版 StoryLine 不含 StoryID / StoryName 两列：
+                # 目标 A/B 使用来源 LineIndex 单元格的正文样式，目标 C:J
+                # 则按同名列复制来源 A:H 的样式。
+                source_styles = row.get(STORY_CELL_STYLES_KEY, {})
+                fallback_style = source_styles.get("LineIndex")
+                merged_row[STORY_CELL_STYLES_KEY] = {
+                    "StoryID": fallback_style,
+                    "StoryName": fallback_style,
+                    **{
+                        header: source_styles.get(header)
+                        for header in STORY_LINE_CONTENT_HEADERS
+                    },
+                }
+                merged_row[STORY_ROW_HEIGHT_KEY] = row.get(STORY_ROW_HEIGHT_KEY)
+                story_line_rows.append(merged_row)
+            continue
+
+        # 旧版单 sheet 模板：每行自行携带 StoryID / StoryName。
+        legacy_rows = _read_story_sheet_rows(wb.active, STORY_LINE_IMPORT_HEADERS, source_name)
+        for row in legacy_rows:
+            story_id = as_str(row.get("StoryID"))
+            line_index = as_int(row.get("LineIndex"), 0)
+            if not story_id or line_index <= 0 or not _has_story_line_content(row):
+                continue
+            line_key = (story_id, line_index)
+            previous_line_source = line_sources.get(line_key)
+            if previous_line_source:
+                raise ValueError(
+                    f"剧情行号重复：{story_id} 第 {line_index} 行同时出现在 "
+                    f"{previous_line_source} 和 {source_name}"
+                )
+            line_sources[line_key] = source_name
+            legacy_row = {
+                header: row.get(header, "")
+                for header in STORY_LINE_IMPORT_HEADERS
+            }
+            legacy_row[STORY_CELL_STYLES_KEY] = row.get(STORY_CELL_STYLES_KEY, {})
+            legacy_row[STORY_ROW_HEIGHT_KEY] = row.get(STORY_ROW_HEIGHT_KEY)
+            story_line_rows.append(legacy_row)
+
+    # Data.xlsx 中按 StoryID 连续排列；SortIndex 只作为剧情配置数据保留，
+    # 不再影响表格中的物理行顺序。
+    story_rows.sort(key=lambda row: as_str(row.get("StoryID")))
+    story_line_rows.sort(
+        key=lambda row: (as_str(row.get("StoryID")), as_int(row.get("LineIndex"), 0))
+    )
+    return story_rows, story_line_rows
+
+
+def load_story_xlsx_rows(source_dir: Path) -> list[dict[str, Any]]:
+    """兼容旧调用方：只返回合并后的 StoryLine 行。"""
+    _, story_line_rows = load_story_xlsx_data(source_dir)
+    return story_line_rows
+
+
+def _write_rows_to_sheet(ws, rows: list[dict[str, Any]], clear_old_rows: bool) -> None:
+    """按目标表头写行，同时复制来源单元格样式和行高。"""
+    headers = [as_str(cell.value) for cell in ws[1]]
+    if clear_old_rows and ws.max_row > 1:
+        # 只清空内容，不删除行。这样可以保留模板预设的边框、底色、
+        # 数据验证和行高，同时确保数据重新从第 2 行连续写入。
+        for row_index in range(2, ws.max_row + 1):
+            for col_index in range(1, len(headers) + 1):
+                ws.cell(row=row_index, column=col_index).value = None
+
+    start_row = 2 if clear_old_rows else ws.max_row + 1
+    for row_index, row in enumerate(rows, start=start_row):
+        cell_styles = row.get(STORY_CELL_STYLES_KEY, {})
+        for col_index, header in enumerate(headers, start=1):
+            if header:
+                target_cell = ws.cell(row=row_index, column=col_index)
+                target_cell.value = row.get(header, "")
+                _apply_cell_style(target_cell, cell_styles.get(header))
+
+        # None 表示来源使用默认行高；显式设回 None 可以避免目标旧行高残留。
+        ws.row_dimensions[row_index].height = row.get(STORY_ROW_HEIGHT_KEY)
+
+
+def _upsert_story_rows(ws, imported_rows: list[dict[str, Any]]) -> None:
+    """
+    按 StoryID 合并新旧剧情，再从第 2 行连续重写。
+
+    不能用 ws.max_row + 1 追加：Excel 中只有样式的空白行也会计入 max_row，
+    会造成明明第 2 行为空，数据却从第 26 行开始写入。
+    """
+    if not imported_rows:
+        return
+
+    headers = [as_str(cell.value) for cell in ws[1]]
+    missing = [header for header in STORY_IMPORT_HEADERS if header not in headers]
+    if missing:
+        raise ValueError(f"Excel 的 {ws.title} sheet 缺少列：{missing}")
+
+    story_id_col = headers.index("StoryID") + 1
+    merged_row_by_id: dict[str, dict[str, Any]] = {}
+
+    # 先收集 Data.xlsx 中已经存在的正式剧情。
+    for row_index in range(2, ws.max_row + 1):
+        story_id = as_str(ws.cell(row=row_index, column=story_id_col).value)
+        if not story_id:
+            continue
+        merged_row_by_id[story_id] = {
+            header: ws.cell(row=row_index, column=col_index).value
+            for col_index, header in enumerate(headers, start=1)
+            if header
+        }
+
+    # 同 StoryID 的新数据覆盖旧数据；新 StoryID 自动加入。
+    for row in imported_rows:
+        story_id = as_str(row.get("StoryID"))
+        if story_id:
+            merged_row_by_id[story_id] = {
+                header: row.get(header, "")
+                for header in headers
+                if header
+            }
+
+    compact_rows = sorted(
+        merged_row_by_id.values(),
+        key=lambda row: as_str(row.get("StoryID")),
+    )
+
+    # 清除包括第 26 行等旧位置中的内容，但不破坏单元格格式。
+    for row_index in range(2, ws.max_row + 1):
+        for col_index in range(1, len(headers) + 1):
+            ws.cell(row=row_index, column=col_index).value = None
+
+    # 所有剧情统一从第 2 行连续写回。
+    for row_index, row in enumerate(compact_rows, start=2):
+        for col_index, header in enumerate(headers, start=1):
+            if header:
+                ws.cell(row=row_index, column=col_index).value = row.get(header, "")
+
+
+def import_story_xlsx_to_story_sheets(wb) -> None:
+    """
+    把 DetailText/剧情/*.xlsx 写入 Data.xlsx：
+    - Story 元数据按 StoryID 更新/追加，避免旧格式剧情丢失触发条件。
+    - StoryLine 仍按剧情目录中的正式工作簿完整重建。
     """
     source_dir = find_detail_text_subdir(DETAIL_TEXT_DIR, "剧情")
     if source_dir is None:
         log(f"跳过剧情导入：找不到目录 {DETAIL_TEXT_DIR / '剧情'}")
         return
 
+    story_sheet_name = resolve_sheet_name(wb, SHEET_STORY, SHEET_STORY_ALIASES)
     story_line_sheet_name = resolve_sheet_name(wb, SHEET_STORY_LINE, SHEET_STORY_LINE_ALIASES)
+    if story_sheet_name not in wb.sheetnames:
+        raise ValueError(f"Excel 中不存在 sheet：{SHEET_STORY}")
     if story_line_sheet_name not in wb.sheetnames:
         raise ValueError(f"Excel 中不存在 sheet：{SHEET_STORY_LINE}")
 
-    story_line_rows = load_story_xlsx_rows(source_dir)
-    if not story_line_rows:
+    story_rows, story_line_rows = load_story_xlsx_data(source_dir)
+    if not story_rows and not story_line_rows:
         return
 
-    ws = wb[story_line_sheet_name]
-    headers = [as_str(cell.value) for cell in ws[1]]
-    if not headers or not headers[0]:
-        headers = [
-            "StoryID",
-            "StoryName",
-            "LineIndex",
-            "LineType",
-            "Speaker",
-            "PortraitSide",
-            "PortraitPath",
-            "Hide",
-            "BackgroundPath",
-            "Text",
-        ]
-        for col_index, header in enumerate(headers, start=1):
-            ws.cell(row=1, column=col_index).value = header
+    _upsert_story_rows(wb[story_sheet_name], story_rows)
+    if story_line_rows:
+        _write_rows_to_sheet(wb[story_line_sheet_name], story_line_rows, clear_old_rows=True)
 
-    # 清空旧数据，保留表头，避免删除 sheet 导致样式/筛选丢失。
-    if ws.max_row > 1:
-        ws.delete_rows(2, ws.max_row - 1)
+    log(
+        "剧情 xlsx -> Data.xlsx 写入完成，"
+        f"Story 更新/新增：{len(story_rows)} 条，StoryLine 导入：{len(story_line_rows)} 行"
+    )
 
-    for row_index, row in enumerate(story_line_rows, start=2):
-        for col_index, header in enumerate(headers, start=1):
-            if not header:
-                continue
-            ws.cell(row=row_index, column=col_index).value = row.get(header, "")
 
-    log(f"剧情 xlsx -> StoryLine 写入完成，成功导入：{len(story_line_rows)} 行")
+def import_story_xlsx_to_storyline_sheet(wb) -> None:
+    """兼容旧调用方；实际会同时同步 Story 与 StoryLine。"""
+    import_story_xlsx_to_story_sheets(wb)
 
 def find_sheet_column_index(ws, column_name: str) -> int:
     """
@@ -366,7 +627,7 @@ def import_detail_text_txt_to_excel() -> None:
     for config in DETAIL_TEXT_IMPORT_CONFIGS:
         import_detail_text_for_one_sheet(wb, config)
 
-    import_story_xlsx_to_storyline_sheet(wb)
+    import_story_xlsx_to_story_sheets(wb)
 
     wb.save(EXCEL_PATH)
     log("DetailText txt -> Data.xlsx 导入完成")
@@ -1151,6 +1412,53 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         if story_id not in story_line_map:
             errors.append(f"Story 缺少 StoryLine 数据: {story_id}")
 
+        trigger_type = as_str(row.get("TriggerType")).lower() or "scene_enter"
+        if trigger_type not in (
+            "scene_enter",
+            "story_npc_cured",
+            "story_npc_treatment_failed",
+        ):
+            errors.append(f"Story TriggerType 非法: {story_id} -> {trigger_type}")
+
+        trigger_scene = as_str(row.get("TriggerScene")).lower() or "clinic"
+        if trigger_scene not in ("clinic", "night", "map"):
+            errors.append(f"Story TriggerScene 非法: {story_id} -> {trigger_scene}")
+
+        return_scene = as_str(row.get("ReturnScene")).lower()
+        if return_scene and return_scene not in ("clinic", "night", "map"):
+            errors.append(f"Story ReturnScene 非法: {story_id} -> {return_scene}")
+
+        clinic_npc_id = (
+            as_str(row.get("NpcID"))
+            or as_str(row.get("ClinicNpcID"))
+            or as_str(row.get("ClinicNpcId"))
+        )
+        if clinic_npc_id:
+            clinic_npc_row = npc_map.get(clinic_npc_id)
+            if clinic_npc_row is None:
+                errors.append(f"Story NpcID 不存在: {story_id} -> {clinic_npc_id}")
+            elif normalize_npc_type(clinic_npc_row.get("NpcType")) != "story":
+                errors.append(f"Story NpcID 不是 story NPC: {story_id} -> {clinic_npc_id}")
+
+        trigger_npc_id = (
+            as_str(row.get("TriggerNpcID"))
+            or as_str(row.get("TriggerNpcId"))
+        )
+        is_treatment_result_story = trigger_type in (
+            "story_npc_cured",
+            "story_npc_treatment_failed",
+        )
+        if is_treatment_result_story and not trigger_npc_id:
+            errors.append(f"Story 治疗结果剧情缺少 TriggerNpcID: {story_id}")
+        elif trigger_npc_id:
+            trigger_npc_row = npc_map.get(trigger_npc_id)
+            if trigger_npc_row is None:
+                errors.append(f"Story TriggerNpcID 不存在: {story_id} -> {trigger_npc_id}")
+            elif normalize_npc_type(trigger_npc_row.get("NpcType")) != "story":
+                errors.append(
+                    f"Story TriggerNpcID 不是 story NPC: {story_id} -> {trigger_npc_id}"
+                )
+
     for story_id, rows in story_line_map.items():
         if story_id not in story_map:
             errors.append(f"StoryLine 引用了不存在的 StoryID: {story_id}")
@@ -1635,12 +1943,22 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
     for story_id, story_row in story_map.items():
         story_lines = story_line_map.get(story_id, [])
         story_name = as_str(story_row.get("StoryName"))
-        trigger_scene = as_str(story_row.get("TriggerScene")) or "clinic"
+        trigger_type = as_str(story_row.get("TriggerType")).lower() or "scene_enter"
+        trigger_scene = as_str(story_row.get("TriggerScene")).lower() or "clinic"
+        trigger_npc_id = (
+            as_str(story_row.get("TriggerNpcID"))
+            or as_str(story_row.get("TriggerNpcId"))
+        )
         trigger_day = as_int(story_row.get("TriggerDay"), 0)
         required_reputation_points = as_int(story_row.get("Reputation"), 0)
         unlock_entry_id = as_str(story_row.get("EntryId"))
         play_once = as_bool(story_row.get("PlayOnce"), True)
-        return_scene = as_str(story_row.get("ReturnScene")) or trigger_scene
+        return_scene = as_str(story_row.get("ReturnScene")).lower() or trigger_scene
+        clinic_npc_id = (
+            as_str(story_row.get("ClinicNpcID"))
+            or as_str(story_row.get("ClinicNpcId"))
+            or as_str(story_row.get("NpcID"))
+        )
 
         ext_lines = [
             f'[ext_resource type="Script" path="{STORY_LINE_SCRIPT_PATH}" id="1_storyline"]',
@@ -1709,12 +2027,15 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             "[resource]",
             'script = ExtResource("2_storydata")',
             f'story_id = {format_godot_string(story_id)}',
+            f'trigger_type = {format_godot_string(trigger_type)}',
             f'trigger_scene = {format_godot_string(trigger_scene)}',
+            f'trigger_npc_id = {format_godot_string(trigger_npc_id)}',
             f'trigger_day = {trigger_day}',
             f'required_reputation_points = {required_reputation_points}',
             f'unlock_entry_id = {format_godot_string(unlock_entry_id)}',
             f'play_once = {"true" if play_once else "false"}',
             f'return_scene = {format_godot_string(return_scene)}',
+            f'clinic_npc_id = {format_godot_string(clinic_npc_id)}',
         ]
         resource_lines.append(f'lines = Array[ExtResource("1_storyline")]([{line_array}])')
 

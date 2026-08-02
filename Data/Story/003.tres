@@ -18,10 +18,13 @@ background = ExtResource("background_2")
 [resource]
 script = ExtResource("2_storydata")
 story_id = "003"
+trigger_type = "scene_enter"
 trigger_scene = "clinic"
+trigger_npc_id = ""
 trigger_day = 2
 required_reputation_points = 0
 unlock_entry_id = ""
 play_once = true
 return_scene = "clinic"
+clinic_npc_id = ""
 lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001")])

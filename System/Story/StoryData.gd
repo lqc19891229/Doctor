@@ -3,6 +3,7 @@ class_name StoryData
 
 const TRIGGER_TYPE_SCENE_ENTER := "scene_enter"
 const TRIGGER_TYPE_STORY_NPC_CURED := "story_npc_cured"
+const TRIGGER_TYPE_STORY_NPC_TREATMENT_FAILED := "story_npc_treatment_failed"
 
 # 剧情唯一 ID，用来记录是否已经播放过
 @export var story_id: String = ""
@@ -10,10 +11,12 @@ const TRIGGER_TYPE_STORY_NPC_CURED := "story_npc_cured"
 # 剧情触发类型：
 # - scene_enter：进入指定场景时检查，兼容现有按场景 / 天数 / 名望触发的剧情。
 # - story_npc_cured：指定的 story NPC 被治愈后检查。
-@export_enum("scene_enter", "story_npc_cured")
+# - story_npc_treatment_failed：指定的 story NPC 治疗失败后检查。
+@export_enum("scene_enter", "story_npc_cured", "story_npc_treatment_failed")
 var trigger_type: String = TRIGGER_TYPE_SCENE_ENTER
 
-# 当 trigger_type = "story_npc_cured" 时，填写需要被治愈的 story NPC 的 npc_id。
+# 当 trigger_type 为 story_npc_cured / story_npc_treatment_failed 时，
+# 填写对应 story NPC 的 npc_id。
 @export var trigger_npc_id: String = ""
 
 # 剧情触发场景，例如 clinic / night / map
@@ -36,7 +39,8 @@ var trigger_scene: String = "clinic"
 @export_enum("clinic", "night", "map")
 var return_scene: String = "clinic"
 
-# 剧情结束后如果回到 clinic，并且需要指定当前接诊病人，填写 story NPC 的 npc_id。
+# 本段剧情台词播放完后，如果需要直接在 Story 场景中诊疗 story NPC，
+# 填写该 NPC 的 npc_id。表现层留在 Story，诊疗数据仍由 NpcManager → Clinic 处理。
 # 对应 NPC 资源需要放在 res://Data/Npc 下，且 NpcData.npc_type = "story"。
 @export var clinic_npc_id: String = ""
 

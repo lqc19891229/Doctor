@@ -1,0 +1,125 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" path="res://Assets/Background/" id="background_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chen_pi/chen_pi.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_3"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wang_fu_hu_wei/wang_fu_hu_wei.png" id="portrait_4"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_gong_wang/chu_gong_wang.png" id="portrait_5"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = "咚咚咚...咚咚咚咚咚…"
+background = ExtResource("background_1")
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "陈皮"
+text = "大半夜的谁啊，谁在敲门啊？"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "陈皮"
+text = "啊！！！我的妈呀！！"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "出什么事儿了？"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_005"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "啊！"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_006"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "王府护卫"
+text = "奉楚恭王敕令，请先生去王府走一趟。"
+portrait = ExtResource("portrait_4")
+[sub_resource type="Resource" id="StoryLine_007"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "是什么人病了要我去看病吗？"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_008"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "王府护卫"
+text = "事关重大您去了就知道了，马车已经备好了，请先生速速启程。"
+portrait = ExtResource("portrait_4")
+[sub_resource type="Resource" id="StoryLine_009"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = "一夜舟车劳顿，李东璧到了楚恭王府。"
+[sub_resource type="Resource" id="StoryLine_010"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "楚恭王"
+text = "您就是李神医啊，比我想得要年轻许多。请先生来，是小王有事相求。"
+portrait = ExtResource("portrait_5")
+[sub_resource type="Resource" id="StoryLine_011"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "拜见王爷，有什么我能帮上忙的？"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_012"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "楚恭王"
+text = "犬子前几天突然病了，卧床不起。精神萎靡，食欲不振。小王请了好几位大夫，给开了好多方子，都不见好转。"
+portrait = ExtResource("portrait_5")
+[sub_resource type="Resource" id="StoryLine_013"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "楚恭王"
+text = "听闻蕲州李先生医术高明，特请先生来给犬子医治。"
+portrait = ExtResource("portrait_5")
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "005_01"
+trigger_type = "scene_enter"
+trigger_scene = "night"
+trigger_npc_id = ""
+trigger_day = 2
+required_reputation_points = 0
+unlock_entry_id = ""
+play_once = true
+return_scene = "night"
+clinic_npc_id = "shi_zi"
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011"), SubResource("StoryLine_012"), SubResource("StoryLine_013")])

@@ -15,6 +15,8 @@ class_name Main
 
 # 子场景挂载点
 @onready var current_scene_root: Node = $CurrentSceneRoot
+@onready var story_treatment_backend_root: Node = $StoryTreatmentBackendRoot
+@onready var story_scene_root: Node = $StorySceneRoot
 
 # 开始菜单根节点
 @onready var main_menu_layer: CanvasLayer = $MainMenuLayer
@@ -33,13 +35,16 @@ class_name Main
 
 
 # 预加载场景
-const CLINIC_SCENE: PackedScene = preload("res://Scene/Clinic/Clinic.tscn")
+const CLINIC_SCENE: PackedScene = preload("res://Scene/Clinic/clinic.tscn")
 const NIGHT_SCENE: PackedScene = preload("res://Scene/Night/Night.tscn")
 const STORY_SCENE: PackedScene = preload("res://Scene/Story/Story.tscn")
+const MAP_SCENE_PATH: String = "res://Scene/Map/Map.tscn"
 
 
 # 当前子场景实例
 var current_scene: Node = null
+var current_story_scene: Node = null
+var story_treatment_backend: Node = null
 
 # 剧情结束后要回到的目标。
 # 使用逻辑名，不使用场景路径，避免 Story 直接替换 Main。
@@ -102,6 +107,7 @@ func _connect_menu_buttons() -> void:
 # 显示开始菜单
 # =========================================================
 func _show_main_menu() -> void:
+	_clear_story_overlay()
 	_clear_current_scene()
 	main_menu_layer.visible = true
 	_close_save_slot_popup()
@@ -467,15 +473,44 @@ func _enter_night() -> void:
 
 
 # =========================================================
+# 进入 Map（为后续地图场景预留）
+# =========================================================
+func _enter_map() -> void:
+	if not ResourceLoader.exists(MAP_SCENE_PATH):
+		push_warning("未找到地图场景：%s，暂时回到 Clinic。" % MAP_SCENE_PATH)
+		_enter_clinic()
+		return
+
+	var packed_map := load(MAP_SCENE_PATH) as PackedScene
+	if packed_map == null:
+		push_warning("地图场景加载失败：%s，暂时回到 Clinic。" % MAP_SCENE_PATH)
+		_enter_clinic()
+		return
+
+	_clear_current_scene()
+	current_scene = packed_map.instantiate()
+	current_scene_root.add_child(current_scene)
+
+	if current_scene.has_signal("story_requested"):
+		var story_callable := Callable(self, "_on_story_requested")
+		if not current_scene.is_connected("story_requested", story_callable):
+			current_scene.connect("story_requested", story_callable)
+
+	if current_scene.has_method("start_map"):
+		current_scene.call("start_map", GameTime.current_day)
+
+
+# =========================================================
 # Clinic 请求播放剧情
 # =========================================================
-func _on_story_requested(story_path: String, return_target: String) -> void:
+func _on_story_requested(story_path: String, return_target: String = "") -> void:
 	# Main 不再根据剧情路径判断是否重复播放。
 	# 是否能播放，统一交给 StoryData.story_id + StoryManager 判断。
+	# return_target 只保留为旧信号兼容参数；实际返回目标读取 StoryData.return_scene。
 	_play_story(story_path, return_target)
 
 
-func _play_story(story_path: String, return_target: String) -> void:
+func _play_story(story_path: String, _legacy_return_target: String = "") -> void:
 	if story_path.is_empty():
 		push_warning("剧情路径为空")
 		return
@@ -504,7 +539,13 @@ func _play_story(story_path: String, return_target: String) -> void:
 		print("剧情已播放，跳过：", story_id)
 		return
 
-	pending_story_return_target = return_target
+	# 返回目标由当前正在播放的 StoryData 决定。
+	pending_story_return_target = story_data.return_scene
+	if pending_story_return_target.is_empty():
+		pending_story_return_target = story_data.trigger_scene
+	if pending_story_return_target.is_empty():
+		pending_story_return_target = "clinic"
+
 	story_paused_clinic_clock = false
 
 	# 进入剧情前暂停 Clinic 计时。
@@ -527,18 +568,108 @@ func _play_story(story_path: String, return_target: String) -> void:
 
 	SaveManager.save_game()
 
-	_clear_current_scene()
+	# 剧情作为覆盖层播放。原 Clinic / Night / Map 实例暂时隐藏，
+	# 这样 Story 中打开诊疗窗口时，画面始终停留在 Story 场景。
+	_set_scene_visible(current_scene, false)
+	_clear_story_overlay()
 
-	current_scene = STORY_SCENE.instantiate()
-	current_scene_root.add_child(current_scene)
-
-	if current_scene.has_signal("story_finished"):
-		if not current_scene.is_connected("story_finished", Callable(self, "_on_story_finished")):
-			current_scene.connect("story_finished", Callable(self, "_on_story_finished"))
-	else:
-		print("current_scene 没有 story_finished 信号")
+	current_story_scene = STORY_SCENE.instantiate()
+	_connect_story_scene_signals(current_story_scene)
+	story_scene_root.add_child(current_story_scene)
 
 	print("Main 播放剧情：", story_path)
+
+
+func _connect_story_scene_signals(story_node: Node) -> void:
+	if story_node == null:
+		return
+
+	var finished_callable := Callable(self, "_on_story_finished")
+	if story_node.has_signal("story_finished"):
+		if not story_node.is_connected("story_finished", finished_callable):
+			story_node.connect("story_finished", finished_callable)
+
+	var treatment_callable := Callable(self, "_on_story_treatment_requested")
+	if story_node.has_signal("story_treatment_requested"):
+		if not story_node.is_connected("story_treatment_requested", treatment_callable):
+			story_node.connect("story_treatment_requested", treatment_callable)
+
+	var followup_callable := Callable(self, "_on_followup_story_requested")
+	if story_node.has_signal("followup_story_requested"):
+		if not story_node.is_connected("followup_story_requested", followup_callable):
+			story_node.connect("followup_story_requested", followup_callable)
+
+
+func _on_story_treatment_requested(npc_id: String) -> void:
+	_clear_story_treatment_backend()
+
+	story_treatment_backend = CLINIC_SCENE.instantiate()
+	story_treatment_backend.set("story_treatment_backend_mode", true)
+	story_treatment_backend_root.add_child(story_treatment_backend)
+
+	if not story_treatment_backend.has_method("prepare_story_npc_treatment"):
+		_cancel_story_treatment("Clinic 缺少 prepare_story_npc_treatment()。")
+		return
+
+	var prepared: bool = bool(story_treatment_backend.call(
+		"prepare_story_npc_treatment",
+		npc_id,
+		GameTime.current_day
+	))
+	if not prepared:
+		_cancel_story_treatment("story NPC 诊疗后端准备失败：%s" % npc_id)
+		return
+
+	# clinic_npc_id 已经由隐藏 Clinic 后端接管，不能留到最终返回 Clinic 后再次消费。
+	if StoryManager != null and StoryManager.has_method("consume_pending_clinic_npc_id"):
+		StoryManager.consume_pending_clinic_npc_id()
+
+	if current_story_scene != null and current_story_scene.has_method("start_story_npc_treatment"):
+		current_story_scene.call(
+			"start_story_npc_treatment",
+			story_treatment_backend,
+			npc_id
+		)
+	else:
+		_cancel_story_treatment("Story 缺少 start_story_npc_treatment()。")
+
+
+func _cancel_story_treatment(message: String) -> void:
+	push_warning(message)
+	if current_story_scene != null and current_story_scene.has_method("cancel_story_treatment"):
+		current_story_scene.call("cancel_story_treatment", message)
+	else:
+		_on_story_finished()
+
+
+func _on_followup_story_requested(
+	next_story: StoryData,
+	resume_treatment: bool
+) -> void:
+	if next_story == null:
+		return
+
+	# 失败剧情结束后要回诊疗选项，因此不改最终返回目标。
+	# 治愈后的剧情则由它自己的 return_scene 决定后续去向。
+	if not resume_treatment:
+		var next_return_target := next_story.return_scene.strip_edges()
+		if next_return_target != "":
+			pending_story_return_target = next_return_target
+
+	if not StoryManager.set_story(next_story):
+		push_warning("后续剧情设置失败：%s" % next_story.story_id)
+		if resume_treatment and current_story_scene != null:
+			current_story_scene.call("play_followup_story", next_story, true)
+		return
+
+	SaveManager.save_game()
+
+	if current_story_scene != null and current_story_scene.has_method("play_followup_story"):
+		current_story_scene.call(
+			"play_followup_story",
+			next_story,
+			resume_treatment
+		)
 
 
 func _on_story_finished() -> void:
@@ -546,6 +677,7 @@ func _on_story_finished() -> void:
 
 	var target := pending_story_return_target
 	pending_story_return_target = ""
+	_clear_story_overlay()
 
 	if target == "night":
 		# 如果剧情是从 Clinic 白天触发，但剧情结束后直接进入 Night，
@@ -571,7 +703,12 @@ func _on_story_finished() -> void:
 		_enter_clinic()
 		return
 
-	# 兜底：未知 return_target 默认回 Clinic。
+	if target == "map":
+		story_paused_clinic_clock = false
+		_enter_map()
+		return
+
+	# 兜底：未知返回目标默认回 Clinic。
 	story_paused_clinic_clock = false
 	_enter_clinic()
 
@@ -611,3 +748,29 @@ func _clear_current_scene() -> void:
 	if current_scene != null and is_instance_valid(current_scene):
 		current_scene.queue_free()
 		current_scene = null
+
+
+func _set_scene_visible(scene_node: Node, should_be_visible: bool) -> void:
+	if scene_node == null or not is_instance_valid(scene_node):
+		return
+
+	if scene_node is CanvasItem:
+		(scene_node as CanvasItem).visible = should_be_visible
+
+
+func _clear_story_treatment_backend() -> void:
+	if story_treatment_backend != null and is_instance_valid(story_treatment_backend):
+		story_treatment_backend.queue_free()
+	story_treatment_backend = null
+
+
+func _clear_story_overlay() -> void:
+	var tree := get_tree()
+	if tree != null and tree.paused:
+		tree.paused = false
+
+	if current_story_scene != null and is_instance_valid(current_story_scene):
+		current_story_scene.queue_free()
+	current_story_scene = null
+
+	_clear_story_treatment_backend()

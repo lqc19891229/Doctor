@@ -68,10 +68,13 @@ portrait = ExtResource("portrait_1")
 [resource]
 script = ExtResource("2_storydata")
 story_id = "002"
+trigger_type = "scene_enter"
 trigger_scene = "night"
+trigger_npc_id = ""
 trigger_day = 1
 required_reputation_points = 0
 unlock_entry_id = ""
 play_once = true
 return_scene = "night"
+clinic_npc_id = ""
 lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007")])
