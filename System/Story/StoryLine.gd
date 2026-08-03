@@ -32,6 +32,7 @@ class_name StoryLine
 @export_enum("auto", "left", "mid", "right") var portrait_side: String = "auto"
 
 # 当前说话人在本句结束后的立绘处理方式。
-# dim = 推进到下一句后继续留在画面；其他人物说话时压暗。
+# dim = 推进到下一句后继续留在画面并压暗。
 # hide = 从本句推进到下一句时退出画面；人物以后再次说话时仍可重新显示。
-@export_enum("dim", "hide") var inactive_portrait_mode: String = "dim"
+# normal = 推进到下一句后继续留在画面，并保持正常显示亮度。
+@export_enum("dim", "hide", "normal") var inactive_portrait_mode: String = "dim"

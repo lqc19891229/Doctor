@@ -691,12 +691,15 @@ def as_str(value: Any) -> str:
 
 def normalize_inactive_portrait_mode(value: Any) -> str:
     """
-    功能：把 StoryLine 的 Hide 列转换为 Godot 使用的立绘模式。
+    功能：把 StoryLine 的 Hide 列转换为本句结束后的立绘状态。
     规则：
-    1. Hide 填写 hide（忽略大小写和首尾空格）时返回 hide。
-    2. Hide 留空时返回 dim，保持原有的非当前人物压暗效果。
+    1. 支持 hide / dim / normal，忽略大小写和首尾空格。
+    2. Hide 留空或填写未知值时返回 dim，兼容旧剧情。
     """
-    return "hide" if as_str(value).lower() == "hide" else "dim"
+    mode = as_str(value).lower()
+    if mode in ("hide", "dim", "normal"):
+        return mode
+    return "dim"
 
 
 def get_first_value(row: dict[str, Any], column_names: list[str]) -> Any:
@@ -1472,10 +1475,10 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
                 errors.append(f"StoryLine PortraitSide 非法: {story_id} 第{i}行 -> {portrait_side}")
 
             hide_value = as_str(row.get("Hide")).lower()
-            if hide_value not in ("", "hide"):
+            if hide_value not in ("", "hide", "dim", "normal"):
                 errors.append(
                     f"StoryLine Hide 非法: {story_id} 第{i}行 -> {hide_value}；"
-                    "只允许留空或填写 hide"
+                    "只允许留空或填写 hide、dim、normal"
                 )
 
             background_path = as_str(row.get("BackgroundPath"))

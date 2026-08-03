@@ -7,6 +7,8 @@ signal followup_story_requested(story: StoryData, resume_treatment: bool)
 const JUDGEMENT_RESULT_SCENE: PackedScene = preload(
 	"res://Scene/JudgementResult/JudgementResult.tscn"
 )
+const PORTRAIT_NORMAL_COLOR := Color(1.0, 1.0, 1.0, 1.0)
+const PORTRAIT_DIM_COLOR := Color(0.55, 0.55, 0.55, 0.72)
 
 # =========================================================
 # Story.gd
@@ -20,8 +22,9 @@ const JUDGEMENT_RESULT_SCENE: PackedScene = preload(
 # - StoryLine 负责：类型、说话人、文本、背景、立绘
 # - dialogue 类型会优先根据 StoryLine.portrait_side 手动指定左、中、右立绘位置
 # - portrait_side 为 auto 或空时，才根据 speaker 自动分配左右立绘位置
-# - inactive_portrait_mode 为 dim 时，当前说话人在本句结束后继续留在画面
+# - inactive_portrait_mode 为 dim 时，当前说话人在本句结束后继续留在画面并压暗
 # - inactive_portrait_mode 为 hide 时，从本句推进到下一句时当前说话人退出画面
+# - inactive_portrait_mode 为 normal 时，当前说话人在本句结束后继续保持正常亮度
 #
 # 本版本修复：
 # - 打字机效果不再通过 substr() 逐字修改 RichTextLabel.text
@@ -614,9 +617,9 @@ func _show_story_pulse_hand(hand_side: String) -> void:
 
 
 func advance() -> void:
-	# 推进下一句之前，先处理当前句说话人的退场设置。
-	# 例如 LineIndex 2 的陈皮填写 hide，则从第 2 句推进到第 3 句时陈皮退出画面。
-	_hide_current_line_speaker_if_needed()
+	# 推进下一句之前，先应用当前句说话人的结束状态。
+	# 例如填写 hide / dim / normal，分别表示退场 / 压暗保留 / 正常亮度保留。
+	_apply_current_line_speaker_portrait_state()
 
 	current_line_index += 1
 
@@ -715,10 +718,11 @@ func _show_speaker_portrait(line_data: StoryLine) -> void:
 
 	# 当前说话人的立绘正常显示。
 	active_rect.texture = portrait
-	active_rect.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	active_rect.modulate = PORTRAIT_NORMAL_COLOR
 	active_rect.show()
 
-	# 其他两个位置已有立绘时保留并压暗。
+	# 其他位置沿用各自上一句结束时设置的状态。
+	# 不能在这里统一压暗，否则 normal 会在下一句开始时被覆盖。
 	var portrait_rects: Array[TextureRect] = [
 		left_portrait_rect,
 		mid_portrait_rect,
@@ -730,13 +734,12 @@ func _show_speaker_portrait(line_data: StoryLine) -> void:
 			continue
 
 		if portrait_rect.texture != null:
-			portrait_rect.modulate = Color(0.55, 0.55, 0.55, 0.72)
 			portrait_rect.show()
 		else:
 			portrait_rect.hide()
 
 
-func _hide_current_line_speaker_if_needed() -> void:
+func _apply_current_line_speaker_portrait_state() -> void:
 	if current_line_index < 0 or current_line_index >= current_lines.size():
 		return
 
@@ -744,15 +747,12 @@ func _hide_current_line_speaker_if_needed() -> void:
 	if line_data == null or line_data.speaker.is_empty():
 		return
 
-	if _get_inactive_portrait_mode(line_data) != "hide":
-		return
-
 	# 当前说话人没有已经分配的站位时，不处理任何立绘槽。
 	if not speaker_side_map.has(line_data.speaker):
 		return
 
 	var side := String(speaker_side_map[line_data.speaker])
-	var portrait_rect: TextureRect
+	var portrait_rect: TextureRect = left_portrait_rect
 
 	match side:
 		"mid":
@@ -762,10 +762,23 @@ func _hide_current_line_speaker_if_needed() -> void:
 		_:
 			portrait_rect = left_portrait_rect
 
-	# 清空槽位，防止下一句把已经退场的人物重新作为非当前人物显示。
-	# speaker_portrait_map 仍保留人物立绘，因此该人物以后再次说话时可以回来。
-	portrait_rect.texture = null
-	portrait_rect.hide()
+	var mode := _get_inactive_portrait_mode(line_data)
+
+	match mode:
+		"hide":
+			# 清空槽位，防止下一句把已经退场的人物重新显示。
+			# speaker_portrait_map 仍保留人物立绘，因此该人物以后再次说话时可以回来。
+			portrait_rect.texture = null
+			portrait_rect.hide()
+		"normal":
+			if portrait_rect.texture != null:
+				portrait_rect.modulate = PORTRAIT_NORMAL_COLOR
+				portrait_rect.show()
+		_:
+			# 空值和未知旧值都按 dim 处理，保持向后兼容。
+			if portrait_rect.texture != null:
+				portrait_rect.modulate = PORTRAIT_DIM_COLOR
+				portrait_rect.show()
 
 
 func _get_speaker_side(speaker: String) -> String:
@@ -806,8 +819,8 @@ func _get_inactive_portrait_mode(line_data: StoryLine) -> String:
 	if _object_has_property(line_data, "inactive_portrait_mode"):
 		inactive_portrait_mode = String(line_data.get("inactive_portrait_mode")).strip_edges().to_lower()
 
-	if inactive_portrait_mode == "hide":
-		return "hide"
+	if inactive_portrait_mode in ["hide", "dim", "normal"]:
+		return inactive_portrait_mode
 
 	return "dim"
 

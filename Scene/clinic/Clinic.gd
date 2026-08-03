@@ -172,11 +172,11 @@ var npc_dialogue_visible: bool = false
 # 2. 用来防止旧的 10 秒计时器误隐藏新的 NPC 台词。
 var npc_dialogue_display_token: int = 0
 
-# 判定结果窗口关闭后，是否正在等待当前 NPC 的治疗结果台词展示完毕。
+# 提交处方后，是否正在等待当前 NPC 的治疗结果台词播放完毕。
 # 说明：
-# 1. true 时，隐藏台词或 10 秒结束后才刷新下一位病人。
-# 2. 避免 JudgementResult 关闭后立刻刷新，导致治疗后立绘和台词看不到。
-var waiting_next_patient_after_result: bool = false
+# 1. true 时，玩家点击隐藏台词或 10 秒结束后才弹出 JudgementResult。
+# 2. 确保 random NPC 的治疗成功 / 失败反馈先于判定结果显示。
+var waiting_judgement_after_treatment_dialogue: bool = false
 
 # Main 为 Story 场景创建的隐藏业务后端会在 add_child() 前把此项设为 true。
 # 后端模式只保留 NpcManager、处方与判定逻辑，不启动诊室计时和诊室 UI 信号。
@@ -597,11 +597,14 @@ func _hide_npc_dialogue() -> void:
 	npc_dialogue_visible = false
 	npc_dialogue_label.visible = false
 
-	# 如果当前是在判定结果关闭后的治疗结果展示阶段，
-	# 玩家点击隐藏台词后，直接刷新到下一位病人。
-	if waiting_next_patient_after_result:
-		waiting_next_patient_after_result = false
-		_go_to_next_patient_after_judgement()
+	# 提交处方后的治疗结果台词结束后，再显示 JudgementResult。
+	# 玩家点击隐藏和 10 秒自动隐藏都会走到这里。
+	if waiting_judgement_after_treatment_dialogue:
+		waiting_judgement_after_treatment_dialogue = false
+		_show_judgement_result_window(
+			last_formula_judge_result,
+			last_formula_judge_summary_text
+		)
 
 # =========================================================
 # 刷新当前病人显示
@@ -624,6 +627,7 @@ func refresh_clinic_view() -> void:
 	last_formula_judge_result = null
 	last_formula_judge_summary_text = ""
 	last_newly_unlocked_entry_titles.clear()
+	waiting_judgement_after_treatment_dialogue = false
 
 	current_display_region_name = DEFAULT_DISPLAY_REGION
 
@@ -960,7 +964,7 @@ func submit_prescription() -> bool:
 # =========================================================
 
 func _show_judgement_result_window(judge_result = null, summary_text: String = "") -> void:
-	# 提交成功后，弹出专门的 JudgementResult 场景。
+	# 当前 NPC 的治疗成功 / 失败台词播放完毕后，弹出 JudgementResult。
 	# 玩家点击任意位置关闭该场景后，再刷新到下一名病人。
 	if judgement_result_window != null and is_instance_valid(judgement_result_window):
 		judgement_result_window.queue_free()
@@ -1119,36 +1123,36 @@ func _on_judgement_result_window_closed() -> void:
 	if not is_inside_tree():
 		return
 
-	# 不再立刻刷新下一位病人。
-	# 先让玩家看到当前 NPC 的治疗后 / 治疗失败立绘和台词。
-	_show_current_patient_result_before_next()
+	# 治疗结果台词已经在 JudgementResult 之前播放完毕。
+	# 关闭判定结果后，直接进入下一位病人。
+	_go_to_next_patient_after_judgement()
 
 
-func _show_current_patient_result_before_next() -> void:
+func _show_current_patient_result_before_judgement() -> void:
 	if current_npc == null:
-		_go_to_next_patient_after_judgement()
+		_show_judgement_result_window(
+			last_formula_judge_result,
+			last_formula_judge_summary_text
+		)
 		return
 
-	waiting_next_patient_after_result = true
+	waiting_judgement_after_treatment_dialogue = true
 
-	# JudgementResult 弹窗期间，底层台词的 10 秒计时可能已经结束。
-	# 这里重新显示当前 NPC 的判定后状态。
+	# submit_prescription() 已经写入 is_treated / treatment_failed。
+	# 因此这里会显示对应的治疗后立绘，以及成功或失败台词。
 	_update_npc_portrait()
 	_update_npc_name()
-	_set_npc_dialogue_label_text(current_npc.get_dialogue())
 
-	var current_token := npc_dialogue_display_token
+	var treatment_dialogue := current_npc.get_dialogue()
+	_set_npc_dialogue_label_text(treatment_dialogue)
 
-	await get_tree().create_timer(NPC_DIALOGUE_AUTO_HIDE_SECONDS).timeout
-
-	if not waiting_next_patient_after_result:
-		return
-
-	if current_token != npc_dialogue_display_token:
-		return
-
-	waiting_next_patient_after_result = false
-	_go_to_next_patient_after_judgement()
+	# 没有可显示台词或场景未绑定台词节点时，不阻塞判定结果。
+	if treatment_dialogue.strip_edges() == "" or npc_dialogue_label == null:
+		waiting_judgement_after_treatment_dialogue = false
+		_show_judgement_result_window(
+			last_formula_judge_result,
+			last_formula_judge_summary_text
+		)
 
 
 func _go_to_next_patient_after_judgement() -> void:
@@ -1159,7 +1163,7 @@ func _go_to_next_patient_after_judgement() -> void:
 	var current_npc_type := current_npc.npc_type.strip_edges().to_lower()
 
 	# random NPC 保持原有日常刷新逻辑：
-	# 判定结果台词展示结束后，直接随机抽取下一位病人。
+	# JudgementResult 关闭后，直接随机抽取下一位病人。
 	if current_npc_type != "story":
 		_replace_with_random_patient()
 		return
@@ -1300,15 +1304,15 @@ func _on_prescription_info_requested(text: String) -> void:
 
 func _on_prescription_submit_requested() -> void:
 	# 接收开方窗口的提交请求。
-	# 只有处方成功判定后，才关闭治疗窗口并弹出 JudgementResult。
-	# 玩家点击任意位置关闭 JudgementResult 后，再刷新到下一名随机病人。
+	# 只有处方成功判定后，才关闭治疗窗口。
+	# random NPC 会先播放治疗成功 / 失败台词，再弹出 JudgementResult。
 	if not submit_prescription():
 		return
 
 	if window_controller != null:
 		window_controller.close_treatment_windows_after_submit()
 
-	_show_judgement_result_window(last_formula_judge_result, last_formula_judge_summary_text)
+	_show_current_patient_result_before_judgement()
 
 
 func _on_end_today_pressed() -> void:
@@ -1425,7 +1429,7 @@ func prepare_story_npc_treatment(npc_id: String, day: int) -> bool:
 	last_formula_judge_result = null
 	last_formula_judge_summary_text = ""
 	last_newly_unlocked_entry_titles.clear()
-	waiting_next_patient_after_result = false
+	waiting_judgement_after_treatment_dialogue = false
 	_reset_pulse_keyboard_state()
 	return true
 
