@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_3"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wang_fu_hu_wei/wang_fu_hu_wei.png" id="portrait_4"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_gong_wang/chu_gong_wang.png" id="portrait_5"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi_before.png" id="portrait_6"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
@@ -91,7 +92,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "拜见王爷，有什么我能帮上忙的？"
+text = "草民拜见王爷，有什么我能帮上忙的？"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_012"]
 script = ExtResource("1_storyline")
@@ -99,7 +100,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "楚恭王"
-text = "犬子前几天突然病了，卧床不起。精神萎靡，食欲不振。小王请了好几位大夫，给开了好多方子，都不见好转。"
+text = "犬子前几天突然病了，卧床不起。精神萎靡，食欲不振。小王请了好几位大夫，给开了好多方子，都不见好转。眼见着人一天比一天瘦，在这么下去怕是要坏事了…"
 portrait = ExtResource("portrait_5")
 [sub_resource type="Resource" id="StoryLine_013"]
 script = ExtResource("1_storyline")
@@ -108,6 +109,22 @@ portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "楚恭王"
 text = "听闻蕲州李先生医术高明，特请先生来给犬子医治。"
+portrait = ExtResource("portrait_5")
+[sub_resource type="Resource" id="StoryLine_014"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "世子"
+text = "咳咳咳，父王…"
+portrait = ExtResource("portrait_6")
+[sub_resource type="Resource" id="StoryLine_015"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "楚恭王"
+text = "先生，小王就这么一个儿子，请您救救孩子吧。"
 portrait = ExtResource("portrait_5")
 
 [resource]
@@ -122,4 +139,4 @@ unlock_entry_id = ""
 play_once = true
 return_scene = "night"
 clinic_npc_id = "shi_zi"
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011"), SubResource("StoryLine_012"), SubResource("StoryLine_013")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011"), SubResource("StoryLine_012"), SubResource("StoryLine_013"), SubResource("StoryLine_014"), SubResource("StoryLine_015")])

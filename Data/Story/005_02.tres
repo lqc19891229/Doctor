@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi_after.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_gong_wang/chu_gong_wang.png" id="portrait_3"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "世子"
+text = "父王，我觉得好多了"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "世子所患的时脾虚湿盛之证，只要按方每日吃药，病情就无大碍了。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "楚恭王"
+text = "先生真是华佗再世，小王无以为报"
+portrait = ExtResource("portrait_3")
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "005_02"
+trigger_type = "story_npc_cured"
+trigger_scene = "night"
+trigger_npc_id = "shi_zi"
+trigger_day = 2
+required_reputation_points = 0
+unlock_entry_id = ""
+play_once = true
+return_scene = "night"
+clinic_npc_id = ""
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003")])
