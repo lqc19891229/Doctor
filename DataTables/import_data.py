@@ -98,6 +98,7 @@ STORY_IMPORT_HEADERS = [
     "EntryId",
     "NpcID",
     "TriggerNpcID",
+    "ClinicNpcPortraitPath",
     "PlayOnce",
     "ReturnScene",
     "SortIndex",
@@ -1443,6 +1444,13 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
             elif normalize_npc_type(clinic_npc_row.get("NpcType")) != "story":
                 errors.append(f"Story NpcID 不是 story NPC: {story_id} -> {clinic_npc_id}")
 
+        clinic_npc_portrait_path = as_str(row.get("ClinicNpcPortraitPath"))
+        if not is_valid_resource_path(clinic_npc_portrait_path):
+            errors.append(
+                f"Story ClinicNpcPortraitPath 非法: "
+                f"{story_id} -> {clinic_npc_portrait_path}"
+            )
+
         trigger_npc_id = (
             as_str(row.get("TriggerNpcID"))
             or as_str(row.get("TriggerNpcId"))
@@ -1962,6 +1970,9 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             or as_str(story_row.get("ClinicNpcId"))
             or as_str(story_row.get("NpcID"))
         )
+        clinic_npc_portrait_path = as_str(
+            story_row.get("ClinicNpcPortraitPath")
+        )
 
         ext_lines = [
             f'[ext_resource type="Script" path="{STORY_LINE_SCRIPT_PATH}" id="1_storyline"]',
@@ -1983,6 +1994,11 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             resource_path_to_id[clean_path] = ext_id
             ext_lines.append(f'[ext_resource type="Texture2D" path="{clean_path}" id="{ext_id}"]')
             return ext_id
+
+        clinic_npc_portrait_ext_id = add_texture_resource(
+            clinic_npc_portrait_path,
+            "clinic_npc_portrait",
+        )
 
         sub_lines: list[str] = []
         sub_ids: list[str] = []
@@ -2040,6 +2056,11 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             f'return_scene = {format_godot_string(return_scene)}',
             f'clinic_npc_id = {format_godot_string(clinic_npc_id)}',
         ]
+        if clinic_npc_portrait_ext_id:
+            resource_lines.append(
+                f'clinic_npc_portrait = '
+                f'{format_ext_resource_value(clinic_npc_portrait_ext_id)}'
+            )
         resource_lines.append(f'lines = Array[ExtResource("1_storyline")]([{line_array}])')
 
         story_content_parts = [

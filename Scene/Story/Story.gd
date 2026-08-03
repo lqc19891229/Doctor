@@ -353,10 +353,52 @@ func _show_treatment_options() -> void:
 	if treatment_backend.has_method("get_story_treatment_npc_name"):
 		npc_name = str(treatment_backend.call("get_story_treatment_npc_name")).strip_edges()
 
+	# 诊疗选项界面的立绘由当前 StoryData 单独配置。
+	# 每次进入或恢复诊疗选项时都重新应用，因此长按回车跳过失败剧情后也能正确恢复。
+	_apply_treatment_portrait_from_story_data()
+
 	speaker_label.text = npc_name if npc_name != "" else "诊疗"
 	dialogue_label.text = "请选择诊疗项目。"
 	dialogue_label.visible_characters = -1
 	treatment_option_container.show()
+
+
+func _apply_treatment_portrait_from_story_data() -> void:
+	if story_data == null:
+		return
+
+	var portrait: Texture2D = story_data.clinic_npc_portrait
+	if portrait == null:
+		# 没有手动配置时保持原有行为，不强制清除剧情立绘。
+		return
+
+	var portrait_side := story_data.clinic_npc_portrait_side.strip_edges().to_lower()
+	if portrait_side not in ["left", "mid", "right"]:
+		portrait_side = "right"
+
+	# 进入诊疗选项界面后，清除上一段剧情遗留的槽位内容，
+	# 只显示当前 StoryData 手动配置的诊疗立绘。
+	var portrait_rects: Array[TextureRect] = [
+		left_portrait_rect,
+		mid_portrait_rect,
+		right_portrait_rect,
+	]
+	for portrait_rect in portrait_rects:
+		portrait_rect.texture = null
+		portrait_rect.hide()
+
+	var target_rect: TextureRect = right_portrait_rect
+	match portrait_side:
+		"left":
+			target_rect = left_portrait_rect
+		"mid":
+			target_rect = mid_portrait_rect
+		_:
+			target_rect = right_portrait_rect
+
+	target_rect.texture = portrait
+	target_rect.modulate = PORTRAIT_NORMAL_COLOR
+	target_rect.show()
 
 
 func _show_treatment_message(message: String) -> void:

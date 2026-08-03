@@ -44,5 +44,14 @@ var return_scene: String = "clinic"
 # 对应 NPC 资源需要放在 res://Data/Npc 下，且 NpcData.npc_type = "story"。
 @export var clinic_npc_id: String = ""
 
+# Story NPC 诊疗界面使用的立绘。
+# 该字段与普通剧情台词的 portrait 相互独立，方便在诊疗选项界面手动指定人物立绘。
+# 留空时不主动修改当前画面的立绘状态。
+@export var clinic_npc_portrait: Texture2D
+
+# Story NPC 诊疗界面的立绘位置。
+@export_enum("left", "mid", "right")
+var clinic_npc_portrait_side: String = "right"
+
 # 台词列表
 @export var lines: Array[StoryLine] = []
