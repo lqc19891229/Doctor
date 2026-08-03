@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqvs1eysr3mgi"
-path="res://.godot/imported/00eed067-5bbe-4fbb-be98-1fbe838538aa.png-0c5df3ff20c800cd32ce440805b83b37.ctex"
+uid="uid://6qanlpafvj1h"
+path="res://.godot/imported/wu_zhi_lan.png-620774bc474155c536f0e7109f28cde5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/StoryNpc/chen_pi/00eed067-5bbe-4fbb-be98-1fbe838538aa.png"
-dest_files=["res://.godot/imported/00eed067-5bbe-4fbb-be98-1fbe838538aa.png-0c5df3ff20c800cd32ce440805b83b37.ctex"]
+source_file="res://Assets/Portrait/StoryNpc/wu_zhi_lan/wu_zhi_lan.png"
+dest_files=["res://.godot/imported/wu_zhi_lan.png-620774bc474155c536f0e7109f28cde5.ctex"]
 
 [params]
 
