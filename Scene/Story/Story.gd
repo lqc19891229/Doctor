@@ -145,6 +145,29 @@ func _process(delta: float) -> void:
 		_finish_typing()
 
 
+func _input(event: InputEvent) -> void:
+	# 剧情鼠标点击需要在 UI Control 消费事件前处理。
+	# 键盘和诊疗快捷键仍由 _unhandled_input() 负责。
+	if is_finished:
+		return
+
+	if waiting_for_treatment_backend:
+		return
+
+	# 诊疗模式下不能用全局鼠标推进剧情，避免点击把脉、开方等按钮时误触。
+	if is_treatment_mode:
+		return
+
+	if event is InputEventMouseButton:
+		var mouse_event := event as InputEventMouseButton
+		if (
+			mouse_event.pressed
+			and mouse_event.button_index == MOUSE_BUTTON_LEFT
+		):
+			_advance_or_show_full_text()
+			get_viewport().set_input_as_handled()
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if is_finished:
 		return
@@ -164,13 +187,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			_handle_enter_key_event(key_event)
 			get_viewport().set_input_as_handled()
 			return
-
-	# 鼠标左键、空格仍然可以直接推进剧情。
-	if event is InputEventMouseButton:
-		if not event.pressed or event.button_index != MOUSE_BUTTON_LEFT:
-			return
-		_advance_or_show_full_text()
-		return
 
 	if event.is_action_pressed("ui_accept"):
 		_advance_or_show_full_text()
@@ -955,14 +971,30 @@ func _reset_text_labels() -> void:
 func _finish_story() -> void:
 	_reset_enter_hold_state()
 
-	# 治疗失败剧情结束后不离开 Story，直接恢复同一名 NPC 的诊疗选项。
-	if resume_treatment_after_story:
+	# 只要当前是“治疗失败剧情”，结束或跳过后都必须恢复诊疗。
+	# 不再单独依赖 resume_treatment_after_story，防止多次失败时状态丢失。
+	var is_treatment_failed_story := false
+
+	if story_data != null:
+		var current_trigger_type := (
+			story_data.trigger_type
+			.strip_edges()
+			.to_lower()
+		)
+
+		is_treatment_failed_story = (
+			current_trigger_type
+			== StoryData.TRIGGER_TYPE_STORY_NPC_TREATMENT_FAILED
+		)
+
+	if resume_treatment_after_story or is_treatment_failed_story:
 		resume_treatment_after_story = false
 		_show_treatment_options()
 		return
 
-	# 普通剧情配置了 clinic_npc_id 时，台词结束后请求 Main 创建隐藏 Clinic 后端。
+	# 普通剧情配置 clinic_npc_id 后，请求 Main 创建隐藏 Clinic 后端。
 	var clinic_npc_id := ""
+
 	if story_data != null:
 		clinic_npc_id = story_data.clinic_npc_id.strip_edges()
 
@@ -972,7 +1004,10 @@ func _finish_story() -> void:
 		is_typing = false
 		continue_label.hide()
 		treatment_option_container.hide()
-		emit_signal("story_treatment_requested", treatment_npc_id)
+		emit_signal(
+			"story_treatment_requested",
+			treatment_npc_id
+		)
 		return
 
 	is_finished = true
