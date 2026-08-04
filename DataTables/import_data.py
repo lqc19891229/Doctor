@@ -103,6 +103,10 @@ STORY_IMPORT_HEADERS = [
     "ReturnScene",
     "SortIndex",
 ]
+# 新列保持可选，旧剧情工作簿无需立刻补列也能继续导入。
+STORY_OPTIONAL_IMPORT_HEADERS = [
+    "TreatmentFailureOutcome",
+]
 STORY_LINE_CONTENT_HEADERS = [
     "LineIndex",
     "LineType",
@@ -327,7 +331,13 @@ def load_story_xlsx_data(source_dir: Path) -> tuple[list[dict[str, Any]], list[d
                 source_name,
             )
             imported_story_rows = [
-                {header: row.get(header, "") for header in STORY_IMPORT_HEADERS}
+                {
+                    header: row.get(header, "")
+                    for header in [
+                        *STORY_IMPORT_HEADERS,
+                        *STORY_OPTIONAL_IMPORT_HEADERS,
+                    ]
+                }
                 for row in imported_story_rows
                 if as_str(row.get("StoryID"))
             ]
@@ -468,6 +478,13 @@ def _upsert_story_rows(ws, imported_rows: list[dict[str, Any]]) -> None:
     if missing:
         raise ValueError(f"Excel 的 {ws.title} sheet 缺少列：{missing}")
 
+    # Data.xlsx 的 Story sheet 会自动补上新可选列。
+    # 旧工作簿不需要手动迁移，也不会因为缺列而中断导入。
+    for optional_header in STORY_OPTIONAL_IMPORT_HEADERS:
+        if optional_header not in headers:
+            headers.append(optional_header)
+            ws.cell(row=1, column=len(headers)).value = optional_header
+
     story_id_col = headers.index("StoryID") + 1
     merged_row_by_id: dict[str, dict[str, Any]] = {}
 
@@ -486,11 +503,19 @@ def _upsert_story_rows(ws, imported_rows: list[dict[str, Any]]) -> None:
     for row in imported_rows:
         story_id = as_str(row.get("StoryID"))
         if story_id:
-            merged_row_by_id[story_id] = {
+            old_row = merged_row_by_id.get(story_id, {})
+            merged_row = {
                 header: row.get(header, "")
                 for header in headers
                 if header
             }
+
+            # 旧剧情工作簿没有新可选列时，保留 Data.xlsx 中已有配置。
+            for optional_header in STORY_OPTIONAL_IMPORT_HEADERS:
+                if not as_str(merged_row.get(optional_header)):
+                    merged_row[optional_header] = old_row.get(optional_header, "")
+
+            merged_row_by_id[story_id] = merged_row
 
     compact_rows = sorted(
         merged_row_by_id.values(),
@@ -714,6 +739,24 @@ def get_first_value(row: dict[str, Any], column_names: list[str]) -> Any:
             if as_str(value):
                 return value
     return ""
+
+
+def normalize_treatment_failure_outcome(value: Any) -> str:
+    """
+    统一 story NPC 治疗失败剧情的结局类型。
+    留空默认 return_scene，兼容旧剧情资源。
+    """
+    text = as_str(value).lower()
+    mapping = {
+        "game_over": "game_over",
+        "gameover": "game_over",
+        "游戏结束": "game_over",
+        "return_scene": "return_scene",
+        "returnscene": "return_scene",
+        "返回场景": "return_scene",
+        "": "return_scene",
+    }
+    return mapping.get(text, text)
 
 
 def normalize_npc_type(value: Any) -> str:
@@ -1432,6 +1475,18 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         if return_scene and return_scene not in ("clinic", "night", "map"):
             errors.append(f"Story ReturnScene 非法: {story_id} -> {return_scene}")
 
+        treatment_failure_outcome = normalize_treatment_failure_outcome(
+            row.get("TreatmentFailureOutcome")
+        )
+        if (
+            trigger_type == "story_npc_treatment_failed"
+            and treatment_failure_outcome not in ("game_over", "return_scene")
+        ):
+            errors.append(
+                f"Story TreatmentFailureOutcome 非法: "
+                f"{story_id} -> {treatment_failure_outcome}"
+            )
+
         clinic_npc_id = (
             as_str(row.get("NpcID"))
             or as_str(row.get("ClinicNpcID"))
@@ -1965,6 +2020,9 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
         unlock_entry_id = as_str(story_row.get("EntryId"))
         play_once = as_bool(story_row.get("PlayOnce"), True)
         return_scene = as_str(story_row.get("ReturnScene")).lower() or trigger_scene
+        treatment_failure_outcome = normalize_treatment_failure_outcome(
+            story_row.get("TreatmentFailureOutcome")
+        )
         clinic_npc_id = (
             as_str(story_row.get("ClinicNpcID"))
             or as_str(story_row.get("ClinicNpcId"))
@@ -2054,6 +2112,10 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             f'unlock_entry_id = {format_godot_string(unlock_entry_id)}',
             f'play_once = {"true" if play_once else "false"}',
             f'return_scene = {format_godot_string(return_scene)}',
+            (
+                f'treatment_failure_outcome = '
+                f'{format_godot_string(treatment_failure_outcome)}'
+            ),
             f'clinic_npc_id = {format_godot_string(clinic_npc_id)}',
         ]
         if clinic_npc_portrait_ext_id:
