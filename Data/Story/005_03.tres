@@ -1,13 +1,12 @@
-[gd_resource type="Resource" script_class="StoryData" format=3 uid="uid://bcwkrlpx6x508"]
+[gd_resource type="Resource" script_class="StoryData" format=3 uid="uid://lwt5j4fss823"]
 
 [ext_resource type="Script" uid="uid://norr1xwbdche" path="res://System/Story/StoryLine.gd" id="1_storyline"]
 [ext_resource type="Script" uid="uid://5hg5tfa6de3p" path="res://System/Story/StoryData.gd" id="2_storydata"]
 [ext_resource type="Texture2D" uid="uid://b0e681bcroyla" path="res://Assets/Background/clinic/spring.png" id="background_3"]
-[ext_resource type="Texture2D" uid="uid://m2o7d5bafmek" path="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi_before.png" id="clinic_npc_portrait_1"]
 [ext_resource type="Texture2D" uid="uid://dyknyyego1i3u" path="res://Assets/Portrait/StoryNpc/chu_gong_wang/chu_gong_wang.png" id="portrait_4"]
 [ext_resource type="Texture2D" uid="uid://btivew4tmgbst" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_5"]
 
-[sub_resource type="Resource" id="Resource_630iy"]
+[sub_resource type="Resource" id="Resource_y6fwt"]
 metadata/__load_path__ = "res://Assets/Portrait/StoryNpc/shi_zi/shi_zi.png"
 
 [sub_resource type="Resource" id="StoryLine_001"]
@@ -15,7 +14,7 @@ script = ExtResource("1_storyline")
 speaker = "世子"
 text = "咳咳咳，啊…"
 background = ExtResource("background_3")
-portrait = SubResource("Resource_630iy")
+portrait = SubResource("Resource_y6fwt")
 portrait_side = "right"
 
 [sub_resource type="Resource" id="StoryLine_002"]
@@ -53,7 +52,5 @@ trigger_type = "story_npc_failed_over"
 trigger_npc_id = "shi_zi"
 trigger_scene = "night"
 trigger_day = 2
-play_once = false
 return_scene = "night"
-clinic_npc_portrait = ExtResource("clinic_npc_portrait_1")
 lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005")])

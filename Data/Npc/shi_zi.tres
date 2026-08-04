@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="NpcData" format=3 uid="uid://cejd0v23qd85w"]
+[gd_resource type="Resource" script_class="NpcData" format=3 uid="uid://otfy4xqrtykd"]
 
 [ext_resource type="Script" uid="uid://cgp57bles5qo1" path="res://System/Npc/NpcData.gd" id="1"]
-[ext_resource type="Resource" path="res://Data/Disease/xin_qi_xu.tres" id="1_evcrg"]
+[ext_resource type="Resource" uid="uid://byl1vbirqljag" path="res://Data/Disease/xin_qi_xu.tres" id="1_evcrg"]
 [ext_resource type="Texture2D" uid="uid://50v5alenge5a" path="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi_after.png" id="portrait_after_1"]
 [ext_resource type="Texture2D" uid="uid://m2o7d5bafmek" path="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi_before.png" id="portrait_before_1"]
 
