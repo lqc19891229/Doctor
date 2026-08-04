@@ -5,6 +5,9 @@ const TRIGGER_TYPE_SCENE_ENTER := "scene_enter"
 const TRIGGER_TYPE_STORY_NPC_CURED := "story_npc_cured"
 const TRIGGER_TYPE_STORY_NPC_TREATMENT_FAILED := "story_npc_treatment_failed"
 
+const TREATMENT_FAILURE_OUTCOME_GAME_OVER := "game_over"
+const TREATMENT_FAILURE_OUTCOME_RETURN_SCENE := "return_scene"
+
 # 剧情唯一 ID，用来记录是否已经播放过
 @export var story_id: String = ""
 
@@ -38,6 +41,12 @@ var trigger_scene: String = "clinic"
 # 剧情结束后返回目标
 @export_enum("clinic", "night", "map")
 var return_scene: String = "clinic"
+
+# 仅用于 story_npc_treatment_failed 类型剧情：
+# - game_over：失败剧情结束后结束本局并返回主菜单。
+# - return_scene：失败剧情结束后直接返回 return_scene 指定的场景。
+@export_enum("game_over", "return_scene")
+var treatment_failure_outcome: String = TREATMENT_FAILURE_OUTCOME_RETURN_SCENE
 
 # 本段剧情台词播放完后，如果需要直接在 Story 场景中诊疗 story NPC，
 # 填写该 NPC 的 npc_id。表现层留在 Story，诊疗数据仍由 NpcManager → Clinic 处理。
