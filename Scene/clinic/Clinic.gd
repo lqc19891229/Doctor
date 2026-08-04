@@ -68,7 +68,7 @@ const RANDOM_NPC_PORTRAIT_ENTRANCE_START_SCALE := Vector2(0.92, 0.92)
 
 # ---------- 诊室季节背景 ----------
 # 复用 Clinic 场景中现有的 Background 节点，无需新增节点。
-@onready var clinic_background: TextureRect = find_child("Background", true, false) as TextureRect
+@onready var clinic_background: TextureRect = $Background/BackgroundImage
 
 # ---------- 心得显示 ----------
 #  这个 Label 只负责显示 UnlockManager 中保存的心得数量。
