@@ -44,6 +44,10 @@ const TopBarControllerScript := preload("res://System/Unlock/TopBarController.gd
 # NPC 台词自动隐藏时间，单位：秒
 const NPC_DIALOGUE_AUTO_HIDE_SECONDS := 10.0
 
+# random NPC 立绘入场动画
+const RANDOM_NPC_PORTRAIT_ENTRANCE_DURATION := 1.5
+const RANDOM_NPC_PORTRAIT_ENTRANCE_START_SCALE := Vector2(0.92, 0.92)
+
 
 # =========================================================
 # 场景节点引用
@@ -184,6 +188,9 @@ var story_treatment_backend_mode: bool = false
 
 # Story 中的开方窗口无法显示 Clinic 的 InfoWindow，因此缓存最近一次提示供 Story 读取。
 var last_info_text: String = ""
+
+# 当前 random NPC 立绘入场动画；切换病人时先停止旧动画，避免 Tween 相互叠加。
+var portrait_entrance_tween: Tween = null
 
 
 # =========================================================
@@ -518,6 +525,46 @@ func _update_npc_portrait() -> void:
 	portrait_rect.visible = true
 
 
+func _play_random_npc_portrait_entrance() -> void:
+	if portrait_rect == null:
+		return
+
+	# 快速切换病人时先停止上一段动画，避免它继续影响新立绘。
+	if portrait_entrance_tween != null and portrait_entrance_tween.is_valid():
+		portrait_entrance_tween.kill()
+	portrait_entrance_tween = null
+	portrait_rect.scale = Vector2.ONE
+	portrait_rect.modulate.a = 1.0
+
+	# 剧情 NPC 不使用 Clinic 中 random NPC 的入场表现。
+	if current_npc == null or current_npc.npc_type.strip_edges().to_lower() == "story":
+		return
+
+	if portrait_rect.texture == null or not portrait_rect.visible:
+		return
+
+	portrait_rect.pivot_offset = portrait_rect.size * 0.5
+	portrait_rect.scale = RANDOM_NPC_PORTRAIT_ENTRANCE_START_SCALE
+	portrait_rect.modulate.a = 0.0
+
+	portrait_entrance_tween = create_tween()
+	portrait_entrance_tween.set_parallel(true)
+	portrait_entrance_tween.set_trans(Tween.TRANS_QUAD)
+	portrait_entrance_tween.set_ease(Tween.EASE_OUT)
+	portrait_entrance_tween.tween_property(
+		portrait_rect,
+		"scale",
+		Vector2.ONE,
+		RANDOM_NPC_PORTRAIT_ENTRANCE_DURATION
+	)
+	portrait_entrance_tween.tween_property(
+		portrait_rect,
+		"modulate:a",
+		1.0,
+		RANDOM_NPC_PORTRAIT_ENTRANCE_DURATION
+	)
+
+
 # =========================================================
 # 刷新当前 NPC 姓名
 # =========================================================
@@ -647,6 +694,7 @@ func refresh_clinic_view() -> void:
 
 	_update_npc_portrait()
 	_update_npc_name()
+	_play_random_npc_portrait_entrance()
 
 	# ✔ 关键修改：唯一台词入口
 	_set_npc_dialogue_label_text(current_npc.get_dialogue())
@@ -684,6 +732,7 @@ func refresh_current_patient() -> void:
 
 	_update_npc_portrait()
 	_update_npc_name()
+	_play_random_npc_portrait_entrance()
 
 	# ✔ 关键修改点
 	_set_npc_dialogue_label_text(current_npc.get_dialogue())
