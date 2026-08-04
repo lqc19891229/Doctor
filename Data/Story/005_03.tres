@@ -23,5 +23,6 @@ trigger_scene = "night"
 trigger_day = 2
 play_once = false
 return_scene = "night"
+treatment_failure_outcome = "return_scene"
 clinic_npc_portrait = ExtResource("clinic_npc_portrait_1")
 lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001")])
