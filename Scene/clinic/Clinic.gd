@@ -40,12 +40,18 @@ const JUDGEMENT_RESULT_SCENE_PATH := "res://Scene/JudgementResult/JudgementResul
 # 通用顶部栏控制器脚本
 const TopBarControllerScript := preload("res://System/Unlock/TopBarController.gd")
 
+# 诊室四季背景
+const CLINIC_SPRING_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/spring.png")
+const CLINIC_SUMMER_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/summer.png")
+const CLINIC_AUTUMN_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/autumn.png")
+const CLINIC_WINTER_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/winter.png")
+
 
 # NPC 台词自动隐藏时间，单位：秒
 const NPC_DIALOGUE_AUTO_HIDE_SECONDS := 10.0
 
 # random NPC 立绘入场动画
-const RANDOM_NPC_PORTRAIT_ENTRANCE_DURATION := 1.5
+const RANDOM_NPC_PORTRAIT_ENTRANCE_DURATION := 1.0
 const RANDOM_NPC_PORTRAIT_ENTRANCE_START_SCALE := Vector2(0.92, 0.92)
 
 
@@ -59,6 +65,10 @@ const RANDOM_NPC_PORTRAIT_ENTRANCE_START_SCALE := Vector2(0.92, 0.92)
 # 2. TimeLabel 显示“当前时辰”
 @onready var day_label: Label = find_child("DayLabel", true, false) as Label
 @onready var time_label: Label = find_child("TimeLabel", true, false) as Label
+
+# ---------- 诊室季节背景 ----------
+# 复用 Clinic 场景中现有的 Background 节点，无需新增节点。
+@onready var clinic_background: TextureRect = find_child("Background", true, false) as TextureRect
 
 # ---------- 心得显示 ----------
 #  这个 Label 只负责显示 UnlockManager 中保存的心得数量。
@@ -276,6 +286,7 @@ func _validate_scene_node_bindings() -> void:
 		return
 
 	var required_nodes := {
+		"Background": clinic_background,
 		"DayLabel": day_label,
 		"TimeLabel": time_label,
 		"ThoughtsPoint": thoughts_point_label,
@@ -370,6 +381,32 @@ func _update_reputation_point_ui(force_refresh: bool = false) -> void:
 
 func _on_game_time_changed() -> void:
 	_update_time_ui()
+
+
+# =========================================================
+# 根据当前节气刷新诊室背景
+# =========================================================
+
+func _update_clinic_background() -> void:
+	if clinic_background == null:
+		push_warning("Clinic.gd 未找到 TextureRect 类型的 Background 节点，无法切换季节背景。")
+		return
+
+	# current_day 每一天对应一个节气；每 24 天循环到下一年的立春。
+	var solar_term_index: int = (maxi(current_day, 1) - 1) % 24
+
+	if solar_term_index < 6:
+		# 立春、雨水、惊蛰、春分、清明、谷雨
+		clinic_background.texture = CLINIC_SPRING_BACKGROUND
+	elif solar_term_index < 12:
+		# 立夏、小满、芒种、夏至、小暑、大暑
+		clinic_background.texture = CLINIC_SUMMER_BACKGROUND
+	elif solar_term_index < 18:
+		# 立秋、处暑、白露、秋分、寒露、霜降
+		clinic_background.texture = CLINIC_AUTUMN_BACKGROUND
+	else:
+		# 立冬、小雪、大雪、冬至、小寒、大寒
+		clinic_background.texture = CLINIC_WINTER_BACKGROUND
 
 
 # =========================================================
@@ -694,7 +731,7 @@ func refresh_clinic_view() -> void:
 
 	_update_npc_portrait()
 	_update_npc_name()
-	_play_random_npc_portrait_entrance()
+	_play_random_npc_portrait_entrance.call_deferred()
 
 	# ✔ 关键修改：唯一台词入口
 	_set_npc_dialogue_label_text(current_npc.get_dialogue())
@@ -732,7 +769,7 @@ func refresh_current_patient() -> void:
 
 	_update_npc_portrait()
 	_update_npc_name()
-	_play_random_npc_portrait_entrance()
+	_play_random_npc_portrait_entrance.call_deferred()
 
 	# ✔ 关键修改点
 	_set_npc_dialogue_label_text(current_npc.get_dialogue())
@@ -1375,6 +1412,7 @@ func _on_end_today_pressed() -> void:
 
 func set_day(day: int) -> void:
 	current_day = day
+	_update_clinic_background()
 
 	# DayLabel / TimeLabel 统一从 GameTimeManager 刷新
 	_update_time_ui()
@@ -1628,6 +1666,9 @@ func start_story_from_clinic(story_path: String, return_target: String = "clinic
 func start_new_day(day: int) -> void:
 	# 记录当前天数。
 	current_day = day
+
+	# 按当天对应的节气切换诊室四季背景。
+	_update_clinic_background()
 
 	# 每天开始时，允许 Clinic 结束信号重新发出。
 	# 否则第一天结束后，第二天可能无法再次进入夜晚流程。
