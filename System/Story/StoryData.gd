@@ -3,7 +3,8 @@ class_name StoryData
 
 const TRIGGER_TYPE_SCENE_ENTER := "scene_enter"
 const TRIGGER_TYPE_STORY_NPC_CURED := "story_npc_cured"
-const TRIGGER_TYPE_STORY_NPC_TREATMENT_FAILED := "story_npc_treatment_failed"
+const TRIGGER_TYPE_STORY_NPC_FAILED_BACK := "story_npc_failed_back"
+const TRIGGER_TYPE_STORY_NPC_FAILED_OVER := "story_npc_failed_over"
 
 # 剧情唯一 ID，用来记录是否已经播放过
 @export var story_id: String = ""
@@ -11,11 +12,12 @@ const TRIGGER_TYPE_STORY_NPC_TREATMENT_FAILED := "story_npc_treatment_failed"
 # 剧情触发类型：
 # - scene_enter：进入指定场景时检查，兼容现有按场景 / 天数 / 名望触发的剧情。
 # - story_npc_cured：指定的 story NPC 被治愈后检查。
-# - story_npc_treatment_failed：指定的 story NPC 治疗失败后检查。
-@export_enum("scene_enter", "story_npc_cured", "story_npc_treatment_failed")
+# - story_npc_failed_back：指定的 story NPC 治疗失败，剧情结束后返回 return_scene。
+# - story_npc_failed_over：指定的 story NPC 治疗失败，剧情结束后 Game Over。
+@export_enum("scene_enter", "story_npc_cured", "story_npc_failed_back", "story_npc_failed_over")
 var trigger_type: String = TRIGGER_TYPE_SCENE_ENTER
 
-# 当 trigger_type 为 story_npc_cured / story_npc_treatment_failed 时，
+# 当 trigger_type 为 story_npc_cured / story_npc_failed_back / story_npc_failed_over 时，
 # 填写对应 story NPC 的 npc_id。
 @export var trigger_npc_id: String = ""
 

@@ -599,6 +599,11 @@ func _connect_story_scene_signals(story_node: Node) -> void:
 		if not story_node.is_connected("followup_story_requested", followup_callable):
 			story_node.connect("followup_story_requested", followup_callable)
 
+	var game_over_callable := Callable(self, "_on_story_game_over_requested")
+	if story_node.has_signal("game_over_requested"):
+		if not story_node.is_connected("game_over_requested", game_over_callable):
+			story_node.connect("game_over_requested", game_over_callable)
+
 
 func _on_story_treatment_requested(npc_id: String) -> void:
 	_clear_story_treatment_backend()
@@ -649,8 +654,8 @@ func _on_followup_story_requested(
 	if next_story == null:
 		return
 
-	# 失败剧情结束后要回诊疗选项，因此不改最终返回目标。
-	# 治愈后的剧情则由它自己的 return_scene 决定后续去向。
+	# 不需要恢复诊疗的后续剧情，结束后按它自己的 return_scene 返回。
+	# story_npc_failed_over 会在剧情结束时发送独立的 Game Over 信号。
 	if not resume_treatment:
 		var next_return_target := next_story.return_scene.strip_edges()
 		if next_return_target != "":
@@ -662,7 +667,14 @@ func _on_followup_story_requested(
 			current_story_scene.call("play_followup_story", next_story, true)
 		return
 
-	SaveManager.save_game()
+	var is_game_over_story := (
+		next_story.trigger_type.strip_edges().to_lower()
+		== StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER
+	)
+
+	# Game Over 不覆盖玩家最后一个可读取的存档点。
+	if not is_game_over_story:
+		SaveManager.save_game()
 
 	if current_story_scene != null and current_story_scene.has_method("play_followup_story"):
 		current_story_scene.call(
@@ -670,6 +682,20 @@ func _on_followup_story_requested(
 			next_story,
 			resume_treatment
 		)
+
+
+func _on_story_game_over_requested() -> void:
+	StoryManager.clear_story()
+	pending_story_return_target = ""
+
+	if story_paused_clinic_clock:
+		if GameTime != null and GameTime.has_method("cancel_story_pause_state"):
+			GameTime.cancel_story_pause_state()
+	story_paused_clinic_clock = false
+
+	# 当前项目没有独立 GameOver 场景；结束本局后回到开始菜单。
+	# 原存档保留，玩家仍可从最后一个保存点读取。
+	_show_main_menu()
 
 
 func _on_story_finished() -> void:

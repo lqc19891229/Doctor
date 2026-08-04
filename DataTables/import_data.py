@@ -1420,7 +1420,8 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         if trigger_type not in (
             "scene_enter",
             "story_npc_cured",
-            "story_npc_treatment_failed",
+            "story_npc_failed_back",
+            "story_npc_failed_over",
         ):
             errors.append(f"Story TriggerType 非法: {story_id} -> {trigger_type}")
 
@@ -1457,7 +1458,8 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         )
         is_treatment_result_story = trigger_type in (
             "story_npc_cured",
-            "story_npc_treatment_failed",
+            "story_npc_failed_back",
+            "story_npc_failed_over",
         )
         if is_treatment_result_story and not trigger_npc_id:
             errors.append(f"Story 治疗结果剧情缺少 TriggerNpcID: {story_id}")

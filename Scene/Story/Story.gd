@@ -3,6 +3,7 @@ extends Control
 signal story_finished
 signal story_treatment_requested(npc_id: String)
 signal followup_story_requested(story: StoryData, resume_treatment: bool)
+signal game_over_requested
 
 const JUDGEMENT_RESULT_SCENE: PackedScene = preload(
 	"res://Scene/JudgementResult/JudgementResult.tscn"
@@ -578,10 +579,12 @@ func _on_story_judgement_result_closed() -> void:
 			next_story = raw_next_story as StoryData
 
 	if next_story != null:
+		# 治疗结果剧情结束后的行为由它自己的 TriggerType 决定。
+		# 失败剧情不再自动回到诊疗选项。
 		emit_signal(
 			"followup_story_requested",
 			next_story,
-			not last_treatment_success
+			false
 		)
 		return
 
@@ -971,23 +974,26 @@ func _reset_text_labels() -> void:
 func _finish_story() -> void:
 	_reset_enter_hold_state()
 
-	# 只要当前是“治疗失败剧情”，结束或跳过后都必须恢复诊疗。
-	# 不再单独依赖 resume_treatment_after_story，防止多次失败时状态丢失。
-	var is_treatment_failed_story := false
-
+	var current_trigger_type := ""
 	if story_data != null:
-		var current_trigger_type := (
+		current_trigger_type = (
 			story_data.trigger_type
 			.strip_edges()
 			.to_lower()
 		)
 
-		is_treatment_failed_story = (
-			current_trigger_type
-			== StoryData.TRIGGER_TYPE_STORY_NPC_TREATMENT_FAILED
-		)
+	match current_trigger_type:
+		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_BACK:
+			# Main 已经读取本段失败剧情的 return_scene，直接结束剧情即可返回。
+			is_finished = true
+			emit_signal("story_finished")
+			return
+		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER:
+			is_finished = true
+			emit_signal("game_over_requested")
+			return
 
-	if resume_treatment_after_story or is_treatment_failed_story:
+	if resume_treatment_after_story:
 		resume_treatment_after_story = false
 		_show_treatment_options()
 		return
