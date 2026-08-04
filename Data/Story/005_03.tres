@@ -1,66 +1,59 @@
-[gd_resource type="Resource" script_class="StoryData" format=3]
+[gd_resource type="Resource" script_class="StoryData" format=3 uid="uid://bcwkrlpx6x508"]
 
-[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
-[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi_before.png" id="clinic_npc_portrait_1"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi.png" id="portrait_2"]
-[ext_resource type="Texture2D" path="res://Assets/Background/clinic/spring.png" id="background_3"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_gong_wang/chu_gong_wang.png" id="portrait_4"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_5"]
+[ext_resource type="Script" uid="uid://norr1xwbdche" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" uid="uid://5hg5tfa6de3p" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" uid="uid://b0e681bcroyla" path="res://Assets/Background/clinic/spring.png" id="background_3"]
+[ext_resource type="Texture2D" uid="uid://m2o7d5bafmek" path="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi_before.png" id="clinic_npc_portrait_1"]
+[ext_resource type="Texture2D" uid="uid://dyknyyego1i3u" path="res://Assets/Portrait/StoryNpc/chu_gong_wang/chu_gong_wang.png" id="portrait_4"]
+[ext_resource type="Texture2D" uid="uid://btivew4tmgbst" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_5"]
+
+[sub_resource type="Resource" id="Resource_630iy"]
+metadata/__load_path__ = "res://Assets/Portrait/StoryNpc/shi_zi/shi_zi.png"
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "right"
-inactive_portrait_mode = "dim"
 speaker = "世子"
 text = "咳咳咳，啊…"
-portrait = ExtResource("portrait_2")
 background = ExtResource("background_3")
+portrait = SubResource("Resource_630iy")
+portrait_side = "right"
+
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "mid"
-inactive_portrait_mode = "dim"
 speaker = "楚恭王"
 text = "我的儿，你怎么了！"
 portrait = ExtResource("portrait_4")
+portrait_side = "mid"
+
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
-inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "哎呀，这个…王爷你听我解释…"
 portrait = ExtResource("portrait_5")
+portrait_side = "left"
+
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "mid"
-inactive_portrait_mode = "dim"
 speaker = "楚恭王"
 text = "来人！把这个挨千刀的江湖骗子给我叉出去剁了！"
 portrait = ExtResource("portrait_4")
+portrait_side = "mid"
+
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
-inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "不好！啊啊啊啊！！！"
 portrait = ExtResource("portrait_5")
+portrait_side = "left"
 
 [resource]
 script = ExtResource("2_storydata")
 story_id = "005_03"
 trigger_type = "story_npc_failed_over"
-trigger_scene = "night"
 trigger_npc_id = "shi_zi"
+trigger_scene = "night"
 trigger_day = 2
-required_reputation_points = 0
-unlock_entry_id = ""
 play_once = false
 return_scene = "night"
-clinic_npc_id = ""
 clinic_npc_portrait = ExtResource("clinic_npc_portrait_1")
 lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005")])
