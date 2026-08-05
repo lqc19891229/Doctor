@@ -57,7 +57,9 @@ func has_save(slot_index: int = -1) -> bool:
 		return false
 
 	var save_path: String = get_save_path(slot_index)
-	_recover_interrupted_save(save_path)
+	if not _recover_interrupted_save(save_path):
+		push_warning("检查存档失败：无法恢复上次中断的存档事务：" + save_path)
+		return false
 
 	if FileAccess.file_exists(save_path):
 		return true
@@ -260,7 +262,9 @@ func load_game(slot_index: int = -1) -> bool:
 		return false
 
 	var save_path: String = get_save_path(slot_index)
-	_recover_interrupted_save(save_path)
+	if not _recover_interrupted_save(save_path):
+		print("读档失败：无法恢复上次中断的存档事务：", save_path)
+		return false
 
 	# 兼容旧版单存档：如果 1 号槽没有新存档，但旧路径存在，则读取旧存档。
 	if not FileAccess.file_exists(save_path):
@@ -409,7 +413,9 @@ func delete_save(slot_index: int = -1) -> bool:
 		return false
 
 	var slot_save_path: String = get_save_path(slot_index)
-	_recover_interrupted_save(slot_save_path)
+	if not _recover_interrupted_save(slot_save_path):
+		print("删除存档失败：无法恢复上次中断的存档事务：", slot_save_path)
+		return false
 	var save_path: String = slot_save_path
 
 	if not FileAccess.file_exists(save_path):
@@ -448,7 +454,12 @@ func get_save_meta(slot_index: int) -> Dictionary:
 		}
 
 	var save_path: String = get_save_path(slot_index)
-	_recover_interrupted_save(save_path)
+	if not _recover_interrupted_save(save_path):
+		return {
+			"slot_index": slot_index,
+			"exists": false,
+			"display_name": "存档恢复失败"
+		}
 
 	# 兼容旧版单存档：只在 1 号槽读取旧路径摘要。
 	if not FileAccess.file_exists(save_path):

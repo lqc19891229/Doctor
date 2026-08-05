@@ -713,7 +713,6 @@ func _on_story_finished() -> void:
 	# 只有走到正式结束信号，才把当前剧情记为已播放并保存。
 	StoryManager.mark_current_story_played()
 	StoryManager.clear_story()
-	_save_game_with_warning("剧情结束")
 
 	var target := pending_story_return_target
 	pending_story_return_target = ""
@@ -728,28 +727,28 @@ func _on_story_finished() -> void:
 
 			if GameTime != null and GameTime.is_day():
 				GameTime.finish_day()
-				_save_game_with_warning("剧情结束并进入夜晚")
 
 		story_paused_clinic_clock = false
+		_save_game_with_warning("剧情结束并进入夜晚")
 		_enter_night()
 		return
+
+	story_paused_clinic_clock = false
+	_save_game_with_warning("剧情结束")
 
 	if target == "clinic":
 		# 回 Clinic 时不在 Main 里直接 resume。
 		# 因为 _enter_clinic() 会实例化 Clinic，
 		# Clinic._ready() 会调用 GameTime.start_clinic_time()，
 		# 而 start_clinic_time() 已经会识别剧情暂停状态并恢复计时。
-		story_paused_clinic_clock = false
 		_enter_clinic()
 		return
 
 	if target == "map":
-		story_paused_clinic_clock = false
 		_enter_map()
 		return
 
 	# 兜底：未知返回目标默认回 Clinic。
-	story_paused_clinic_clock = false
 	_enter_clinic()
 
 
