@@ -18,6 +18,8 @@ extends Node
 const SAVE_VERSION: int = 1
 const SAVE_SLOT_COUNT: int = 3
 const SAVE_PATH_TEMPLATE: String = "user://save_slot_%d.json"
+const SAVE_TEMP_SUFFIX: String = ".tmp"
+const SAVE_BACKUP_SUFFIX: String = ".bak"
 
 # 旧版单存档路径，仅用于兼容读取旧存档。
 const LEGACY_SAVE_PATH: String = "user://save_game.json"
@@ -54,7 +56,10 @@ func has_save(slot_index: int = -1) -> bool:
 	if not is_valid_slot(slot_index):
 		return false
 
-	if FileAccess.file_exists(get_save_path(slot_index)):
+	var save_path: String = get_save_path(slot_index)
+	_recover_interrupted_save(save_path)
+
+	if FileAccess.file_exists(save_path):
 		return true
 
 	# 兼容旧版单存档：只在 1 号槽判断旧路径。
@@ -94,23 +99,36 @@ func save_game(slot_index: int = -1) -> bool:
 	}
 
 	var save_path: String = get_save_path(slot_index)
-
-	# 打开文件，WRITE 表示写入模式
-	var file: FileAccess = FileAccess.open(save_path, FileAccess.WRITE)
-
-	# 如果文件打开失败，直接返回
-	if file == null:
-		print("存档失败：无法打开存档文件：", save_path)
+	if not _recover_interrupted_save(save_path):
+		print("存档失败：无法恢复上次中断的存档事务：", save_path)
 		return false
 
-	# 将 Dictionary 转成 JSON 字符串
+	# 将 Dictionary 转成 JSON 字符串。
 	var json_text: String = JSON.stringify(save_data, "\t")
+	var temp_path: String = save_path + SAVE_TEMP_SUFFIX
 
-	# 写入文件
+	# 先写临时文件，正式存档在完整写入前始终保持不变。
+	var file: FileAccess = FileAccess.open(temp_path, FileAccess.WRITE)
+
+	# 如果临时文件打开失败，直接返回。
+	if file == null:
+		print("存档失败：无法打开临时存档文件：", temp_path)
+		return false
+
+	# 写入并立即刷新到磁盘，再检查本次文件操作是否出错。
 	file.store_string(json_text)
-
-	# 关闭文件
+	file.flush()
+	var write_error: Error = file.get_error()
 	file.close()
+
+	if write_error != OK:
+		_remove_file_if_exists(temp_path)
+		print("存档失败：临时存档写入错误：", temp_path, "，错误码：", write_error)
+		return false
+
+	# 临时文件写完后再替换正式存档；替换失败时恢复旧档。
+	if not _commit_temp_save(save_path, temp_path):
+		return false
 
 	print("存档完成：槽位 %d，第 %d 天，阶段：%s" % [
 		slot_index,
@@ -119,6 +137,115 @@ func save_game(slot_index: int = -1) -> bool:
 	])
 
 	return true
+
+
+func _commit_temp_save(save_path: String, temp_path: String) -> bool:
+	var backup_path: String = save_path + SAVE_BACKUP_SUFFIX
+	var save_absolute: String = ProjectSettings.globalize_path(save_path)
+	var temp_absolute: String = ProjectSettings.globalize_path(temp_path)
+	var backup_absolute: String = ProjectSettings.globalize_path(backup_path)
+	var had_previous_save: bool = FileAccess.file_exists(save_path)
+
+	# 先把旧档移动成备份，让临时文件移动时的目标路径保持不存在。
+	if had_previous_save:
+		var backup_error: Error = DirAccess.rename_absolute(save_absolute, backup_absolute)
+		if backup_error != OK:
+			_remove_file_if_exists(temp_path)
+			print("存档失败：无法备份旧存档：", save_path, "，错误码：", backup_error)
+			return false
+
+	var replace_error: Error = DirAccess.rename_absolute(temp_absolute, save_absolute)
+	if replace_error != OK:
+		# 正式替换失败时，优先把旧档恢复回原路径。
+		if had_previous_save and FileAccess.file_exists(backup_path):
+			var restore_error: Error = DirAccess.rename_absolute(backup_absolute, save_absolute)
+			if restore_error != OK:
+				push_error("存档替换和旧档恢复都失败。旧档仍保留在：%s，恢复错误码：%d" % [
+					backup_path,
+					restore_error
+				])
+
+		_remove_file_if_exists(temp_path)
+		print("存档失败：无法替换正式存档：", save_path, "，错误码：", replace_error)
+		return false
+
+	# 新存档已经就位，旧备份可以清理。清理失败不影响本次存档有效性，
+	# 下次访问该槽位时会再次清理。
+	if had_previous_save and not _remove_file_if_exists(backup_path):
+		push_warning("新存档已写入，但旧备份暂时无法删除：" + backup_path)
+
+	return true
+
+
+func _recover_interrupted_save(save_path: String) -> bool:
+	var temp_path: String = save_path + SAVE_TEMP_SUFFIX
+	var backup_path: String = save_path + SAVE_BACKUP_SUFFIX
+
+	# 正式存档存在时，以正式存档为准，清理上次事务遗留文件。
+	if FileAccess.file_exists(save_path):
+		var temp_removed: bool = _remove_file_if_exists(temp_path)
+		var backup_removed: bool = _remove_file_if_exists(backup_path)
+		return temp_removed and backup_removed
+
+	# 正式存档不存在但备份存在，说明上次可能中断在“旧档改名”之后。
+	# 此时优先恢复旧档，不冒险使用尚未确认完整的临时文件。
+	if FileAccess.file_exists(backup_path):
+		var restore_error: Error = DirAccess.rename_absolute(
+			ProjectSettings.globalize_path(backup_path),
+			ProjectSettings.globalize_path(save_path)
+		)
+		if restore_error != OK:
+			push_error("无法恢复中断事务留下的旧存档：%s，错误码：%d" % [
+				backup_path,
+				restore_error
+			])
+			return false
+
+		_remove_file_if_exists(temp_path)
+		return true
+
+	# 第一次保存时如果在临时文件写完后中断，验证 JSON 完整性后再接管为正式存档。
+	if FileAccess.file_exists(temp_path):
+		if _is_valid_save_file(temp_path):
+			var promote_error: Error = DirAccess.rename_absolute(
+				ProjectSettings.globalize_path(temp_path),
+				ProjectSettings.globalize_path(save_path)
+			)
+			if promote_error == OK:
+				return true
+
+			push_error("无法恢复中断事务留下的临时存档：%s，错误码：%d" % [
+				temp_path,
+				promote_error
+			])
+			return false
+
+		return _remove_file_if_exists(temp_path)
+
+	return true
+
+
+func _is_valid_save_file(save_path: String) -> bool:
+	var file: FileAccess = FileAccess.open(save_path, FileAccess.READ)
+	if file == null:
+		return false
+
+	var json_text: String = file.get_as_text()
+	file.close()
+
+	var json: JSON = JSON.new()
+	if json.parse(json_text) != OK:
+		return false
+
+	return typeof(json.data) == TYPE_DICTIONARY
+
+
+func _remove_file_if_exists(path: String) -> bool:
+	if not FileAccess.file_exists(path):
+		return true
+
+	var remove_error: Error = DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	return remove_error == OK
 
 
 # =========================================================
@@ -133,6 +260,7 @@ func load_game(slot_index: int = -1) -> bool:
 		return false
 
 	var save_path: String = get_save_path(slot_index)
+	_recover_interrupted_save(save_path)
 
 	# 兼容旧版单存档：如果 1 号槽没有新存档，但旧路径存在，则读取旧存档。
 	if not FileAccess.file_exists(save_path):
@@ -280,7 +408,9 @@ func delete_save(slot_index: int = -1) -> bool:
 		print("删除存档失败：无效槽位 %d" % slot_index)
 		return false
 
-	var save_path: String = get_save_path(slot_index)
+	var slot_save_path: String = get_save_path(slot_index)
+	_recover_interrupted_save(slot_save_path)
+	var save_path: String = slot_save_path
 
 	if not FileAccess.file_exists(save_path):
 		# 兼容旧版单存档：只允许 1 号槽删除旧路径。
@@ -295,6 +425,11 @@ func delete_save(slot_index: int = -1) -> bool:
 	if err != OK:
 		print("删除存档失败：槽位 %d" % slot_index)
 		return false
+
+	# 删除新格式槽位时，同时清理可能遗留的事务文件。
+	if save_path == slot_save_path:
+		_remove_file_if_exists(slot_save_path + SAVE_TEMP_SUFFIX)
+		_remove_file_if_exists(slot_save_path + SAVE_BACKUP_SUFFIX)
 
 	print("已删除存档：槽位 %d" % slot_index)
 	return true
@@ -313,6 +448,7 @@ func get_save_meta(slot_index: int) -> Dictionary:
 		}
 
 	var save_path: String = get_save_path(slot_index)
+	_recover_interrupted_save(save_path)
 
 	# 兼容旧版单存档：只在 1 号槽读取旧路径摘要。
 	if not FileAccess.file_exists(save_path):

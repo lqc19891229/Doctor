@@ -35,7 +35,7 @@ class_name Main
 
 
 # 预加载场景
-const CLINIC_SCENE: PackedScene = preload("res://Scene/Clinic/clinic.tscn")
+const CLINIC_SCENE: PackedScene = preload("res://Scene/clinic/clinic.tscn")
 const NIGHT_SCENE: PackedScene = preload("res://Scene/Night/Night.tscn")
 const STORY_SCENE: PackedScene = preload("res://Scene/Story/Story.tscn")
 const MAP_SCENE_PATH: String = "res://Scene/Map/Map.tscn"
@@ -282,9 +282,6 @@ func _start_new_game_in_slot_without_confirm(slot_index: int) -> void:
 
 	SaveManager.current_slot_index = slot_index
 
-	# 新游戏会覆盖当前槽位旧存档。
-	SaveManager.delete_save(slot_index)
-
 	GameTime.start_new_game()
 	Unlock.reset_progress()
 
@@ -293,7 +290,15 @@ func _start_new_game_in_slot_without_confirm(slot_index: int) -> void:
 	# StoryManager 内存里可能还残留 played_story_ids。
 	StoryManager.load_save_data({})
 
-	SaveManager.save_game(slot_index)
+	# SaveManager 会用临时文件安全替换旧存档。
+	# 不要提前删除旧档；新档写入失败时，玩家仍然可以读取原存档。
+	var save_success: bool = SaveManager.save_game(slot_index)
+	if not save_success:
+		push_warning("新游戏存档写入失败，已保留槽位 %d 的原存档。" % slot_index)
+		save_slot_popup_mode = "new_game"
+		_refresh_save_slot_popup()
+		save_slot_popup.visible = true
+		return
 
 	_hide_main_menu()
 	_enter_clinic()
@@ -554,7 +559,7 @@ func _play_story(story_path: String, _legacy_return_target: String = "") -> void
 		story_paused_clinic_clock = GameTime.pause_clinic_clock_for_story()
 
 	# 只暂存剧情数据，不让 StoryManager 自己切换场景。
-	# set_story() 内部会把 story_id 记录到 played_story_ids。
+	# 此时不记录已播放；只有剧情真正结束后才会写入 played_story_ids。
 	var story_set_success: bool = StoryManager.set_story(story_data)
 
 	if not story_set_success:
@@ -566,7 +571,7 @@ func _play_story(story_path: String, _legacy_return_target: String = "") -> void
 			story_paused_clinic_clock = false
 		return
 
-	SaveManager.save_game()
+	_save_game_with_warning("进入剧情前")
 
 	# 剧情作为覆盖层播放。原 Clinic / Night / Map 实例暂时隐藏，
 	# 这样 Story 中打开诊疗窗口时，画面始终停留在 Story 场景。
@@ -661,6 +666,10 @@ func _on_followup_story_requested(
 		if next_return_target != "":
 			pending_story_return_target = next_return_target
 
+	# 收到后续剧情请求，说明上一段剧情已经完整播放完毕。
+	# 先记录上一段，再把 current_story 切换成下一段。
+	StoryManager.mark_current_story_played()
+
 	if not StoryManager.set_story(next_story):
 		push_warning("后续剧情设置失败：%s" % next_story.story_id)
 		if resume_treatment and current_story_scene != null:
@@ -674,7 +683,7 @@ func _on_followup_story_requested(
 
 	# Game Over 不覆盖玩家最后一个可读取的存档点。
 	if not is_game_over_story:
-		SaveManager.save_game()
+		_save_game_with_warning("切换后续剧情")
 
 	if current_story_scene != null and current_story_scene.has_method("play_followup_story"):
 		current_story_scene.call(
@@ -685,6 +694,8 @@ func _on_followup_story_requested(
 
 
 func _on_story_game_over_requested() -> void:
+	# Game Over 剧情已经完整播放，但不保存到磁盘，保留玩家最后一个可读取的存档点。
+	StoryManager.mark_current_story_played()
 	StoryManager.clear_story()
 	pending_story_return_target = ""
 
@@ -699,7 +710,10 @@ func _on_story_game_over_requested() -> void:
 
 
 func _on_story_finished() -> void:
+	# 只有走到正式结束信号，才把当前剧情记为已播放并保存。
+	StoryManager.mark_current_story_played()
 	StoryManager.clear_story()
+	_save_game_with_warning("剧情结束")
 
 	var target := pending_story_return_target
 	pending_story_return_target = ""
@@ -714,7 +728,7 @@ func _on_story_finished() -> void:
 
 			if GameTime != null and GameTime.is_day():
 				GameTime.finish_day()
-				SaveManager.save_game()
+				_save_game_with_warning("剧情结束并进入夜晚")
 
 		story_paused_clinic_clock = false
 		_enter_night()
@@ -747,7 +761,7 @@ func _on_story_finished() -> void:
 # =========================================================
 func _on_clinic_finished() -> void:
 	GameTime.finish_day()
-	SaveManager.save_game()
+	_save_game_with_warning("白天结束")
 
 	print("Clinic 已结束，切换到 Night 场景")
 	_enter_night()
@@ -761,10 +775,18 @@ func _on_clinic_finished() -> void:
 # =========================================================
 func _on_night_finished() -> void:
 	GameTime.finish_night()
-	SaveManager.save_game()
+	_save_game_with_warning("夜晚结束")
 
 	print("夜晚结束，进入第 %d 天" % GameTime.current_day)
 	_enter_clinic()
+
+
+func _save_game_with_warning(context: String) -> bool:
+	var save_success: bool = SaveManager.save_game()
+	if not save_success:
+		push_warning("%s：自动存档失败。" % context)
+
+	return save_success
 
 
 # =========================================================

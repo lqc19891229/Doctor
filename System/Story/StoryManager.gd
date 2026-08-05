@@ -158,10 +158,6 @@ func set_story(story: StoryData, return_scene: String = "") -> bool:
 	if raw_clinic_npc_id != null:
 		pending_clinic_npc_id = String(raw_clinic_npc_id).strip_edges()
 
-	# 设置剧情时，顺便记录已播放。
-	# 这样可以防止同一个剧情重复触发。
-	_mark_story_played(story)
-
 	return true
 
 
@@ -401,6 +397,12 @@ func mark_story_played_by_id(story_id: String) -> void:
 		return
 
 	played_story_ids[story_id] = true
+
+
+func mark_current_story_played() -> void:
+	# 只有剧情确实结束，或已经完成并准备切换到后续剧情时，才由 Main 调用。
+	# set_story() 只负责暂存数据，避免玩家在剧情中途退出后被误判为已经播放。
+	_mark_story_played(current_story)
 
 
 func _is_story_trigger_matched(
