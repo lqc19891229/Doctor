@@ -1131,6 +1131,85 @@ def load_excel_data(excel_path: Path) -> dict[str, list[dict[str, Any]]]:
     }
 
 
+def resolve_disease_id(
+    disease_value: Any,
+    disease_map: dict[str, dict[str, Any]],
+    disease_name_to_id: dict[str, str],
+) -> str:
+    """把 Npc.Disease 中填写的疾病 ID 或疾病名称统一转换为 DiseaseID。"""
+    disease_text = as_str(disease_value)
+    if not disease_text:
+        return ""
+    if disease_text in disease_map:
+        return disease_text
+    return as_str(disease_name_to_id.get(disease_text))
+
+
+def _add_entry_lookup_alias(
+    entry_text_to_ids: dict[str, set[str]],
+    alias: Any,
+    entry_id: str,
+) -> None:
+    """给图鉴条目增加一个可搜索文本；set 用于保留名称冲突信息。"""
+    alias_text = as_str(alias)
+    if alias_text and entry_id:
+        entry_text_to_ids.setdefault(alias_text, set()).add(entry_id)
+
+
+def build_entry_text_to_ids(
+    herb_map: dict[str, dict[str, Any]],
+    disease_map: dict[str, dict[str, Any]],
+    formula_map: dict[str, dict[str, Any]],
+    theory_map: dict[str, dict[str, Any]],
+) -> dict[str, set[str]]:
+    """
+    建立剧情 EntryId 的反查索引。
+
+    支持填写条目 ID、数据 ID、中文名称或自定义 Title。若同一文字匹配到
+    多个条目，则保留全部候选并交给 validate_data 报错，避免静默解锁错误条目。
+    """
+    entry_text_to_ids: dict[str, set[str]] = {}
+    entry_sources = (
+        (herb_map, "HerbName"),
+        (disease_map, "DiseaseName"),
+        (formula_map, "FormulaName"),
+        (theory_map, "TheoryName"),
+    )
+
+    for item_map, name_column in entry_sources:
+        for item_id, row in item_map.items():
+            entry_id = (
+                as_str(row.get("EntryID"))
+                or as_str(row.get("EntryId"))
+                or item_id
+            )
+            title = as_str(row.get("Title")) or as_str(row.get(name_column))
+            for alias in (entry_id, item_id, row.get(name_column), title):
+                _add_entry_lookup_alias(entry_text_to_ids, alias, entry_id)
+
+    return entry_text_to_ids
+
+
+def get_entry_id_candidates(
+    entry_value: Any,
+    entry_text_to_ids: dict[str, set[str]],
+) -> list[str]:
+    """返回剧情 EntryId 文本匹配到的全部候选条目 ID。"""
+    entry_text = as_str(entry_value)
+    if not entry_text:
+        return []
+    return sorted(entry_text_to_ids.get(entry_text, set()))
+
+
+def resolve_entry_id(
+    entry_value: Any,
+    entry_text_to_ids: dict[str, set[str]],
+) -> str:
+    """仅当 EntryId 文本唯一匹配时返回真正的图鉴条目 ID。"""
+    candidates = get_entry_id_candidates(entry_value, entry_text_to_ids)
+    return candidates[0] if len(candidates) == 1 else ""
+
+
 def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
     """
     功能：根据原始表数据建立各种索引映射。
@@ -1198,7 +1277,7 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
         if theory_id:
             theory_map[theory_id] = row
 
-    # 建立 NpcID -> 行数据 映射。NPC 的 disease 不从 Excel 导入，运行时再随机分配。
+    # 建立 NpcID -> 行数据映射；Disease 列会在导出时按 ID 或名称解析。
     for row in raw_data[SHEET_NPC]:
         npc_id = as_str(row.get("NpcID"))
         if npc_id:
@@ -1220,6 +1299,14 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
         rows.sort(key=lambda item: as_int(item.get("LineIndex"), 0))
 
     story_speaker_npc_id_map = build_story_speaker_npc_id_map(npc_map, story_line_map)
+
+    # 剧情 EntryId 允许直接填写 ID，也允许填写药材、疾病、方剂或理论名称。
+    entry_text_to_ids = build_entry_text_to_ids(
+        herb_map,
+        disease_map,
+        formula_map,
+        theory_map,
+    )
 
     # 将方剂组成按 FormulaID 分组，便于后续一次性生成整个方剂资源
     for row in raw_data[SHEET_FORMULA_INGREDIENT]:
@@ -1248,6 +1335,7 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
         "story_map": story_map,
         "story_line_map": story_line_map,
         "story_speaker_npc_id_map": story_speaker_npc_id_map,
+        "entry_text_to_ids": entry_text_to_ids,
     }
 
 
@@ -1333,6 +1421,7 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
     story_map = indexed_data["story_map"]
     story_line_map = indexed_data["story_line_map"]
     story_speaker_npc_id_map = indexed_data["story_speaker_npc_id_map"]
+    entry_text_to_ids = indexed_data["entry_text_to_ids"]
 
     for book_id, row in book_map.items():
         book_name = as_str(row.get("BookName"))
@@ -1403,6 +1492,15 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         if age < 0:
             errors.append(f"Npc 年龄非法: {npc_id} -> {row.get('Age')}")
 
+        disease_text = as_str(row.get("Disease"))
+        disease_id = resolve_disease_id(
+            disease_text,
+            disease_map,
+            disease_name_to_id,
+        )
+        if disease_text and not disease_id:
+            errors.append(f"Npc 疾病名称或 ID 不存在: {npc_id} -> {disease_text}")
+
         portrait_before_path = get_npc_portrait_before_path(npc_id, npc_type)
         portrait_after_path = get_npc_portrait_after_path(npc_id, npc_type)
         if not is_valid_resource_path(portrait_before_path):
@@ -1470,6 +1568,17 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
             elif normalize_npc_type(trigger_npc_row.get("NpcType")) != "story":
                 errors.append(
                     f"Story TriggerNpcID 不是 story NPC: {story_id} -> {trigger_npc_id}"
+                )
+
+        entry_text = as_str(row.get("EntryId"))
+        if entry_text:
+            entry_candidates = get_entry_id_candidates(entry_text, entry_text_to_ids)
+            if not entry_candidates:
+                errors.append(f"Story EntryId 无法匹配图鉴条目: {story_id} -> {entry_text}")
+            elif len(entry_candidates) > 1:
+                errors.append(
+                    f"Story EntryId 匹配到多个图鉴条目: {story_id} -> {entry_text} -> "
+                    f"{', '.join(entry_candidates)}；请改填唯一的条目 ID"
                 )
 
     for story_id, rows in story_line_map.items():
@@ -1950,6 +2059,7 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
     story_map = indexed_data["story_map"]
     story_line_map = indexed_data["story_line_map"]
     story_speaker_npc_id_map = indexed_data["story_speaker_npc_id_map"]
+    entry_text_to_ids = indexed_data["entry_text_to_ids"]
 
     ensure_dir(STORY_OUTPUT_DIR)
 
@@ -1964,7 +2074,10 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
         )
         trigger_day = as_int(story_row.get("TriggerDay"), 0)
         required_reputation_points = as_int(story_row.get("Reputation"), 0)
-        unlock_entry_id = as_str(story_row.get("EntryId"))
+        unlock_entry_id = resolve_entry_id(
+            story_row.get("EntryId"),
+            entry_text_to_ids,
+        )
         play_once = as_bool(story_row.get("PlayOnce"), True)
         return_scene = as_str(story_row.get("ReturnScene")).lower() or trigger_scene
         clinic_npc_id = (
@@ -2082,9 +2195,11 @@ def build_npc_resources(indexed_data: dict[str, Any]) -> None:
     """
     功能：根据 Npc 表生成 NPC 基础资源。
     输出：res://Data/Npc/{NpcID}.tres
-    说明：NPC 的 disease 不从 Excel 写入，由运行时从已解锁疾病中随机分配。
+    说明：Disease 可填写 DiseaseID 或疾病名称；留空时保持原有运行时分配逻辑。
     """
     npc_map = indexed_data["npc_map"]
+    disease_map = indexed_data["disease_map"]
+    disease_name_to_id = indexed_data["disease_name_to_id"]
 
     ensure_dir(NPC_OUTPUT_DIR)
 
@@ -2099,13 +2214,26 @@ def build_npc_resources(indexed_data: dict[str, Any]) -> None:
         dialogue_treatment_failed = as_str(row.get("dialogueTreatmentFailed"))
         portrait_before_path = get_npc_portrait_before_path(npc_id, npc_type)
         portrait_after_path = get_npc_portrait_after_path(npc_id, npc_type)
+        disease_id = resolve_disease_id(
+            row.get("Disease"),
+            disease_map,
+            disease_name_to_id,
+        )
 
         ext_lines = [
             f'[ext_resource type="Script" path="{NPC_DATA_SCRIPT_PATH}" id="1"]',
         ]
 
+        disease_ext_id = ""
         portrait_before_ext_id = ""
         portrait_after_ext_id = ""
+
+        if disease_id:
+            disease_ext_id = "disease_1"
+            disease_path = f"res://Data/Disease/{safe_filename(disease_id)}.tres"
+            ext_lines.append(
+                f'[ext_resource type="Resource" path="{disease_path}" id="{disease_ext_id}"]'
+            )
 
         if portrait_before_path:
             portrait_before_ext_id = "portrait_before_1"
@@ -2131,6 +2259,8 @@ def build_npc_resources(indexed_data: dict[str, Any]) -> None:
             f'dialogue_treatment_failed = {format_godot_string(dialogue_treatment_failed)}',
         ]
 
+        if disease_ext_id:
+            resource_lines.append(f'disease = {format_ext_resource_value(disease_ext_id)}')
         if portrait_before_ext_id:
             resource_lines.append(f'portrait_before_treatment = {format_ext_resource_value(portrait_before_ext_id)}')
         if portrait_after_ext_id:
