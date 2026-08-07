@@ -6,6 +6,12 @@ signal story_requested(story_path: String, return_target: String)
 
 const TopBarControllerScript := preload("res://System/Unlock/TopBarController.gd")
 
+# 夜晚四季背景；季节划分与 Clinic.gd 保持一致。
+const NIGHT_SPRING_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/spring_night.png")
+const NIGHT_SUMMER_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/summer_night.png")
+const NIGHT_AUTUMN_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/autumn_night.png")
+const NIGHT_WINTER_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/winter_night.png")
+
 @onready var read_book_window: Window = find_child("ReadBook", true, false) as Window
 
 @onready var read_book_button: Button = find_child("ReadBookButton", true, false) as Button
@@ -15,6 +21,9 @@ const TopBarControllerScript := preload("res://System/Unlock/TopBarController.gd
 @onready var time_label: Label = find_child("TimeLabel", true, false) as Label
 @onready var thoughts_point_label: Label = find_child("ThoughtsPoint", true, false) as Label
 @onready var reputation_point_label: Label = find_child("ReputationPoint", true, false) as Label
+
+# 复用 Night.tscn 中现有的背景节点，无需调整场景结构。
+@onready var night_background: TextureRect = $Background/BackgroundImage
 
 var topbar_controller = null
 
@@ -43,11 +52,38 @@ func _validate_scene_node_bindings() -> void:
 	_check_node_binding(time_label, "TimeLabel")
 	_check_node_binding(thoughts_point_label, "ThoughtsPoint")
 	_check_node_binding(reputation_point_label, "ReputationPoint")
+	_check_node_binding(night_background, "BackgroundImage")
 
 
 func _check_node_binding(node: Node, node_name: String) -> void:
 	if node == null:
 		push_warning("Night.gd 找不到节点：%s，请检查 Night.tscn 节点名是否一致" % node_name)
+
+
+# =========================
+# 根据当前节气刷新夜晚背景
+# =========================
+
+func _update_night_background(day: int) -> void:
+	if night_background == null:
+		push_warning("Night.gd 未找到 TextureRect 类型的 BackgroundImage 节点，无法切换季节背景。")
+		return
+
+	# 每一天对应一个节气，每 24 天重新从春季开始循环。
+	var solar_term_index: int = (maxi(day, 1) - 1) % 24
+
+	if solar_term_index < 6:
+		# 第 1～6 天：春季
+		night_background.texture = NIGHT_SPRING_BACKGROUND
+	elif solar_term_index < 12:
+		# 第 7～12 天：夏季
+		night_background.texture = NIGHT_SUMMER_BACKGROUND
+	elif solar_term_index < 18:
+		# 第 13～18 天：秋季
+		night_background.texture = NIGHT_AUTUMN_BACKGROUND
+	else:
+		# 第 19～24 天：冬季
+		night_background.texture = NIGHT_WINTER_BACKGROUND
 
 
 # =========================
@@ -249,6 +285,7 @@ func _has_unread_entries() -> bool:
 func start_night(day: int) -> void:
 	# 由 Main._enter_night() 在连接好 story_requested 后调用。
 	# 不在 _ready() 中触发剧情，避免信号尚未连接导致剧情请求丢失。
+	_update_night_background(day)
 	if topbar_controller != null:
 		topbar_controller.set_fallback_day(day)
 	_refresh_topbar(true)
