@@ -908,40 +908,70 @@ func unlock_all_entries_for_test() -> Dictionary:
 		"theory_count": 0
 	}
 
-	if BookEntryDB == null:
-		return result
+	# 条目层：全部解锁并统一标记为已读。
+	if BookEntryDB != null:
+		var all_entries: Array[BookEntryData] = BookEntryDB.get_all_entries()
 
-	var all_entries: Array[BookEntryData] = BookEntryDB.get_all_entries()
+		for entry in all_entries:
+			if entry == null:
+				continue
 
-	for entry in all_entries:
-		if entry == null:
-			continue
+			var entry_id := entry.entry_id.strip_edges()
+			if entry_id == "":
+				continue
 
-		result["entry_count"] += 1
-		unlock_entry(entry.entry_id)
+			unlock_entry(entry_id)
+			mark_entry_as_read(entry_id)
+			result["entry_count"] += 1
 
-		if entry is HerbBookEntryData:
-			var herb_entry := entry as HerbBookEntryData
-			unlock_herb(herb_entry.herb_id)
+			if entry is TheoryBookEntryData:
+				result["theory_count"] += 1
+
+	# Data 层：直接遍历各数据库，保证没有对应医书条目的实体也会解锁。
+	if HerbDB != null and HerbDB.has_method("get_all_herbs"):
+		var all_herbs: Array[HerbData] = HerbDB.get_all_herbs()
+
+		for herb in all_herbs:
+			if herb == null:
+				continue
+
+			var herb_id := herb.herb_id.strip_edges()
+			if herb_id == "":
+				continue
+
+			unlock_herb(herb_id)
 			result["herb_count"] += 1
-			continue
 
-		mark_entry_as_read(entry.entry_id)
+	if FormulaDB != null and FormulaDB.has_method("get_all_formulas"):
+		var all_formulas: Array[FormulaData] = FormulaDB.get_all_formulas()
 
-		if entry is FormulaBookEntryData:
-			var formula_entry := entry as FormulaBookEntryData
-			unlock_formula(formula_entry.formula_id)
+		for formula in all_formulas:
+			if formula == null:
+				continue
+
+			var formula_id := formula.formula_id.strip_edges()
+			if formula_id == "":
+				continue
+
+			unlock_formula(formula_id)
 			result["formula_count"] += 1
-			continue
 
-		if entry is DiseaseBookEntryData:
-			var disease_entry := entry as DiseaseBookEntryData
-			unlock_disease(disease_entry.disease_id)
+	if DiseaseDB != null and DiseaseDB.has_method("get_all_diseases"):
+		var all_diseases: Array[DiseaseData] = DiseaseDB.get_all_diseases()
+
+		for disease in all_diseases:
+			if disease == null:
+				continue
+
+			var disease_id := disease.disease_id.strip_edges()
+			if disease_id == "":
+				continue
+
+			unlock_disease(disease_id)
 			result["disease_count"] += 1
-			continue
 
-		if entry is TheoryBookEntryData:
-			result["theory_count"] += 1
+	# 补齐实体之间的依赖关系及行医记考状态。
+	refresh_unlocks_by_dependencies()
 
 	if BookDB != null:
 		var all_books: Array[BookData] = BookDB.get_all_books()
@@ -955,7 +985,7 @@ func unlock_all_entries_for_test() -> Dictionary:
 
 			book_read_days[book.book_id] = herb_unlock_order.size()
 
-	print("[UnlockManager] 测试解锁全部条目：", result)
+	print("[UnlockManager] 测试解锁并标记已读，已同步 Data 层：", result)
 	return result
 
 
