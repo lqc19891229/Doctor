@@ -9,6 +9,11 @@ const TRIGGER_TYPE_STORY_NPC_FAILED_OVER := "story_npc_failed_over"
 # 剧情唯一 ID，用来记录是否已经播放过
 @export var story_id: String = ""
 
+# 前置剧情 ID。
+# 留空表示没有前置剧情。
+# 填写后，必须先完整播放该剧情，当前剧情才允许触发。
+@export var trigger_story_id: String = ""
+
 # 剧情触发类型：
 # - scene_enter：进入指定场景时检查，兼容现有按场景 / 天数 / 名望触发的剧情。
 # - story_npc_cured：指定的 story NPC 被治愈后检查。
@@ -25,7 +30,10 @@ var trigger_type: String = TRIGGER_TYPE_SCENE_ENTER
 @export_enum("clinic", "night", "map")
 var trigger_scene: String = "clinic"
 
-# 触发条件：第几天触发，0 表示不限制天数
+# 剧情触发天数：
+# - trigger_story_id 为空：表示游戏第几天开始允许触发。
+# - trigger_story_id 非空：表示前置剧情完整播放结束后第几天允许触发。
+# - 0 表示不增加额外天数。
 @export var trigger_day: int = 0
 
 # 触发条件：需要达到的最低名望，0 表示不限制名望

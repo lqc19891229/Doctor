@@ -95,6 +95,7 @@ STORY_IMPORT_HEADERS = [
     "TriggerScene",
     "TriggerDay",
     "Reputation",
+    "TriggerStoryID",
     "EntryId",
     "NpcID",
     "TriggerNpcID",
@@ -1514,6 +1515,15 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         if story_id not in story_line_map:
             errors.append(f"Story 缺少 StoryLine 数据: {story_id}")
 
+        trigger_story_id = as_str(row.get("TriggerStoryID"))
+        if trigger_story_id:
+            if trigger_story_id == story_id:
+                errors.append(f"Story 不能把自己设为前置剧情: {story_id}")
+            elif trigger_story_id not in story_map:
+                errors.append(
+                    f"Story TriggerStoryID 不存在: {story_id} -> {trigger_story_id}"
+                )
+
         trigger_type = as_str(row.get("TriggerType")).lower() or "scene_enter"
         if trigger_type not in (
             "scene_enter",
@@ -2068,10 +2078,14 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
         story_name = as_str(story_row.get("StoryName"))
         trigger_type = as_str(story_row.get("TriggerType")).lower() or "scene_enter"
         trigger_scene = as_str(story_row.get("TriggerScene")).lower() or "clinic"
+        trigger_story_id = as_str(story_row.get("TriggerStoryID"))
         trigger_npc_id = (
             as_str(story_row.get("TriggerNpcID"))
             or as_str(story_row.get("TriggerNpcId"))
         )
+        # TriggerStoryID 非空时，TriggerDay 是前置剧情完成后的相对天数。
+        # 前置剧情完成日只有运行时才知道，因此导入阶段保留 Excel 原始数值，
+        # 由 StoryManager 使用 played_story_days 计算实际触发日。
         trigger_day = as_int(story_row.get("TriggerDay"), 0)
         required_reputation_points = as_int(story_row.get("Reputation"), 0)
         unlock_entry_id = resolve_entry_id(
@@ -2161,6 +2175,7 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             "[resource]",
             'script = ExtResource("2_storydata")',
             f'story_id = {format_godot_string(story_id)}',
+            f'trigger_story_id = {format_godot_string(trigger_story_id)}',
             f'trigger_type = {format_godot_string(trigger_type)}',
             f'trigger_scene = {format_godot_string(trigger_scene)}',
             f'trigger_npc_id = {format_godot_string(trigger_npc_id)}',

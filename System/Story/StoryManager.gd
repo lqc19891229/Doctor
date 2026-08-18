@@ -50,6 +50,11 @@ var has_played_clinic_intro: bool = false
 # played_story_ids["clinic_day_1_intro"] = true
 var played_story_ids: Dictionary = {}
 
+# 剧情第一次完整播放结束时的游戏天数。
+# key = story_id
+# value = 完成剧情时的 current_day
+var played_story_days: Dictionary = {}
+
 # 已经治愈过的 story NPC。
 # key = npc_id
 # value = true
@@ -385,18 +390,24 @@ func register_story_path(story_path: String) -> void:
 
 func has_played_story(story_id: String) -> bool:
 	# 外部可用这个函数检查某个剧情是否已经播放过。
-	if story_id.is_empty():
+	var clean_story_id := story_id.strip_edges()
+	if clean_story_id == "":
 		return false
 
-	return played_story_ids.has(story_id)
+	return played_story_ids.has(clean_story_id)
 
 
 func mark_story_played_by_id(story_id: String) -> void:
 	# 外部可手动标记某个剧情已经播放。
-	if story_id.is_empty():
+	var clean_story_id := story_id.strip_edges()
+	if clean_story_id == "":
 		return
 
-	played_story_ids[story_id] = true
+	played_story_ids[clean_story_id] = true
+
+	# 只记录第一次完整播放结束时的天数，避免重复调用改变相对计时起点。
+	if not played_story_days.has(clean_story_id):
+		played_story_days[clean_story_id] = int(GameTime.current_day)
 
 
 func mark_current_story_played() -> void:
@@ -425,6 +436,23 @@ func _is_story_trigger_matched(
 	# 如果是只播放一次，并且已经播放过，则不再触发。
 	if story.play_once and played_story_ids.has(story_id):
 		return false
+
+	# 如果配置了前置剧情，则必须先完整播放对应剧情。
+	# trigger_story_id 为空时，不限制前置剧情。
+	var trigger_story_id := story.trigger_story_id.strip_edges()
+	var trigger_story_played_day := 0
+	if trigger_story_id != "":
+		# 防止剧情错误地把自己设置为前置剧情。
+		if trigger_story_id == story_id:
+			push_warning("剧情不能把自己设置为前置剧情：" + story_id)
+			return false
+
+		if not has_played_story(trigger_story_id):
+			return false
+
+		# 旧存档可能没有 played_story_days。
+		# 这时按第 0 天处理，避免旧存档中的后续剧情永久无法触发。
+		trigger_story_played_day = int(played_story_days.get(trigger_story_id, 0))
 
 	# 触发类型必须匹配。
 	# 旧剧情资源没有显式填写 trigger_type 时，会使用 StoryData 的 scene_enter 默认值。
@@ -464,12 +492,18 @@ func _is_story_trigger_matched(
 	if story_trigger_scene != "" and story_trigger_scene != trigger_scene:
 		return false
 
-	# 暂时保留 trigger_day：
-	# - trigger_day <= 0 表示不限制天数
-	# - trigger_day > 0 表示必须当前天数达到后才允许触发
-	# 这样可以兼容你现有按天触发的旧剧情，同时叠加名望解锁条件。
-	if story.trigger_day > 0 and current_day < story.trigger_day:
-		return false
+	# trigger_day 规则：
+	# - 没有 trigger_story_id：按游戏绝对天数判断。
+	# - 有 trigger_story_id：按前置剧情完成日后的相对天数判断。
+	# - trigger_day <= 0：不增加额外天数。
+	if story.trigger_day > 0:
+		var required_trigger_day := story.trigger_day
+
+		if trigger_story_id != "":
+			required_trigger_day = trigger_story_played_day + story.trigger_day
+
+		if current_day < required_trigger_day:
+			return false
 
 	# 名望剧情规则：
 	# - required_reputation_points <= 0：不需要名望解锁，按场景和播放状态正常触发。
@@ -508,22 +542,20 @@ func _mark_story_played(story: StoryData) -> void:
 		return
 
 	# 读取剧情 ID。
-	var story_id: String = story.get("story_id")
+	var story_id := story.story_id.strip_edges()
 
 	# 没有 ID 的剧情不记录。
-	if story_id.is_empty():
+	if story_id == "":
 		return
 
-	# 读取是否只播放一次。
-	var play_once: bool = true
+	# 记录剧情已经完整播放。
+	# play_once = false 的剧情也需要记录，才能作为其他剧情的前置条件；
+	# 是否阻止重复播放仍由 _is_story_trigger_matched() 中的 play_once 判断控制。
+	played_story_ids[story_id] = true
 
-	var raw_play_once = story.get("play_once")
-	if raw_play_once != null:
-		play_once = raw_play_once
-
-	# 只有一次性剧情才记录。
-	if play_once:
-		played_story_ids[story_id] = true
+	# 只记录第一次完整播放结束时的天数，避免重复剧情改变相对计时起点。
+	if not played_story_days.has(story_id):
+		played_story_days[story_id] = int(GameTime.current_day)
 
 
 # =========================================================
@@ -534,6 +566,7 @@ func get_save_data() -> Dictionary:
 	# duplicate(true) 表示深拷贝，避免外部误改 StoryManager 内部数据。
 	return {
 		"played_story_ids": played_story_ids.duplicate(true),
+		"played_story_days": played_story_days.duplicate(true),
 		"has_played_clinic_intro": has_played_clinic_intro,
 		"cured_story_npc_ids": cured_story_npc_ids.duplicate(true),
 		"pending_clinic_npc_id": pending_clinic_npc_id
@@ -546,6 +579,7 @@ func get_save_data() -> Dictionary:
 func load_save_data(data: Dictionary) -> void:
 	# 先清空，避免读档时残留上一次运行的数据。
 	played_story_ids.clear()
+	played_story_days.clear()
 	cured_story_npc_ids.clear()
 	pending_clinic_npc_id = ""
 	current_story = null
@@ -554,6 +588,11 @@ func load_save_data(data: Dictionary) -> void:
 	# 恢复已播放剧情 ID。
 	if data.has("played_story_ids") and typeof(data["played_story_ids"]) == TYPE_DICTIONARY:
 		played_story_ids = data["played_story_ids"].duplicate(true)
+
+	# 恢复剧情第一次完整播放结束时的游戏天数。
+	# 旧存档没有该字段时保持为空，触发检查会按第 0 天兼容处理。
+	if data.has("played_story_days") and typeof(data["played_story_days"]) == TYPE_DICTIONARY:
+		played_story_days = data["played_story_days"].duplicate(true)
 
 	# 恢复已经治愈过的 story NPC。
 	if data.has("cured_story_npc_ids") and typeof(data["cured_story_npc_ids"]) == TYPE_DICTIONARY:
