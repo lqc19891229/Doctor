@@ -79,12 +79,31 @@ func get_experience_points() -> int:
 	return experience_points
 
 
+# 改变累计心得。
+# - 正数：增加心得，并检查是否有新达到门槛的医书条目。
+# - 负数：扣除心得，但最低保持为 0；已经解锁的条目不会被锁回。
+# - 0：不做任何处理。
+#
+# 返回值：
+# - 仅在增加心得时，返回本次新解锁的医书条目标题。
+# - 扣除心得或变化量为 0 时，返回空数组。
+func change_experience_points(amount: int) -> Array[String]:
+	if amount == 0:
+		return []
+
+	experience_points = maxi(0, experience_points + amount)
+
+	if amount > 0:
+		return refresh_auto_unlocks_by_experience()
+
+	return []
+
+
 func add_experience_point(amount: int = 1) -> Array[String]:
 	if amount <= 0:
 		return []
 
-	experience_points += amount
-	return refresh_auto_unlocks_by_experience()
+	return change_experience_points(amount)
 
 
 func has_experience_point() -> bool:

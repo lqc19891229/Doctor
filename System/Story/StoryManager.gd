@@ -387,6 +387,54 @@ func get_return_scene(data: StoryData = null) -> String:
 	return ""
 
 
+# 结算一段已经完整播放结束的剧情所配置的名望与心得变化。
+#
+# 说明：
+# - 这里只负责结算传入的 StoryData，不负责判断治疗成功或失败。
+# - 调用方必须在剧情真正播放完成时调用，不能在剧情刚开始或治疗结果刚产生时调用。
+# - StoryData 中的正数表示奖励，负数表示惩罚，0 表示不变化。
+# - 本函数不主动存档；调用方可在剧情完成流程结束后统一保存。
+#
+# 返回值：
+# - reputation_change：本次配置的名望变化量。
+# - experience_change：本次配置的心得变化量。
+# - newly_unlocked_stories：名望增加后新解锁的剧情数据。
+# - newly_unlocked_entry_titles：心得增加后新解锁的医书条目标题。
+func apply_story_point_changes(story: StoryData) -> Dictionary:
+	var result := {
+		"reputation_change": 0,
+		"experience_change": 0,
+		"newly_unlocked_stories": [],
+		"newly_unlocked_entry_titles": []
+	}
+
+	if story == null:
+		return result
+
+	var reputation_change := int(story.reputation_points_change)
+	var experience_change := int(story.experience_points_change)
+	result["reputation_change"] = reputation_change
+	result["experience_change"] = experience_change
+
+	if Unlock == null:
+		push_warning("StoryManager：Unlock 不存在，无法结算剧情配置的名望与心得变化。")
+		return result
+
+	if reputation_change != 0:
+		if Unlock.has_method("add_reputation_points"):
+			result["newly_unlocked_stories"] = Unlock.add_reputation_points(reputation_change)
+		else:
+			push_warning("StoryManager：Unlock 缺少 add_reputation_points()。")
+
+	if experience_change != 0:
+		if Unlock.has_method("change_experience_points"):
+			result["newly_unlocked_entry_titles"] = Unlock.change_experience_points(experience_change)
+		else:
+			push_warning("StoryManager：Unlock 缺少 change_experience_points()。")
+
+	return result
+
+
 func clear_story() -> void:
 	# 清空当前剧情缓存。
 	# 不要清空 has_played_clinic_intro，否则回到 Clinic 后会重复播放教学剧情。

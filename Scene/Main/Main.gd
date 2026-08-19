@@ -589,6 +589,11 @@ func _connect_story_scene_signals(story_node: Node) -> void:
 	if story_node == null:
 		return
 
+	var playback_completed_callable := Callable(self, "_on_story_playback_completed")
+	if story_node.has_signal("story_playback_completed"):
+		if not story_node.is_connected("story_playback_completed", playback_completed_callable):
+			story_node.connect("story_playback_completed", playback_completed_callable)
+
 	var finished_callable := Callable(self, "_on_story_finished")
 	if story_node.has_signal("story_finished"):
 		if not story_node.is_connected("story_finished", finished_callable):
@@ -608,6 +613,35 @@ func _connect_story_scene_signals(story_node: Node) -> void:
 	if story_node.has_signal("game_over_requested"):
 		if not story_node.is_connected("game_over_requested", game_over_callable):
 			story_node.connect("game_over_requested", game_over_callable)
+
+
+func _on_story_playback_completed(completed_story: StoryData) -> void:
+	# Story 只会在每段剧情台词真正播放完（或玩家跳过到结尾）时上报一次。
+	# 治疗判定阶段不经过这里，因此 story NPC 的奖励与惩罚不会提前结算。
+	if completed_story == null:
+		return
+
+	if StoryManager == null or not StoryManager.has_method("apply_story_point_changes"):
+		push_warning("StoryManager 缺少 apply_story_point_changes()，无法结算剧情名望与心得。")
+		return
+
+	var raw_result = StoryManager.apply_story_point_changes(completed_story)
+	if typeof(raw_result) != TYPE_DICTIONARY:
+		push_warning("StoryManager.apply_story_point_changes() 返回了无效结果。")
+		return
+
+	var point_change_result: Dictionary = raw_result
+	var reputation_change := int(point_change_result.get("reputation_change", 0))
+	var experience_change := int(point_change_result.get("experience_change", 0))
+	if reputation_change == 0 and experience_change == 0:
+		return
+
+	# Game Over 剧情保持原有规则：只改变当前内存状态，不覆盖最后一个可读取存档点。
+	var trigger_type := completed_story.trigger_type.strip_edges().to_lower()
+	if trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER:
+		return
+
+	_save_game_with_warning("剧情播放完成并结算名望与心得")
 
 
 func _on_story_treatment_requested(npc_id: String) -> void:

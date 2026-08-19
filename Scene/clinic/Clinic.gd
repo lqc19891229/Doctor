@@ -960,14 +960,24 @@ func submit_prescription() -> bool:
 	last_formula_judge_summary_text = summary_text
 	last_newly_unlocked_entry_titles.clear()
 
-	# 提交判定后根据评级改变名望。
+	# random NPC 继续沿用治疗判定时的固定奖励与惩罚。
+	# story NPC 的名望和心得不在这里结算，改由后续 StoryData 配置，
+	# 并在对应剧情完整播放结束时统一结算。
+	var uses_fixed_treatment_rewards := (
+		current_npc.npc_type.strip_edges().to_lower() != "story"
+	)
+
+	# random NPC 提交判定后根据评级改变名望。
 	# 妙手回春：名望 +10；治疗成功：名望不变；治疗失败：名望 -10。
 	# was_already_submitted 用于防止同一名病人重复提交刷名望。
 	#
 	# 说明：
 	# - Unlock.add_reputation_points() 会根据当前名望静默检查并解锁剧情。
 	# - Clinic 不展示剧情解锁提示，剧情播放仍交给 StoryManager 在触发时机处理。
-	var reputation_reward := _get_reputation_reward_by_judge_result(result)
+	var reputation_reward := 0
+	if uses_fixed_treatment_rewards:
+		reputation_reward = _get_reputation_reward_by_judge_result(result)
+
 	if reputation_reward != 0 and not was_already_submitted:
 		if Unlock != null and Unlock.has_method("add_reputation_points"):
 			Unlock.add_reputation_points(reputation_reward)
@@ -994,12 +1004,12 @@ func submit_prescription() -> bool:
 		if raw_result_grade != null:
 			result_grade = str(raw_result_grade).strip_edges()
 
-	if result_grade == "治疗成功" and not was_already_submitted:
+	if uses_fixed_treatment_rewards and result_grade == "治疗成功" and not was_already_submitted:
 		summary_text += "\n治疗成功：名望、心得不变"
-	elif result_grade == "治疗成功" and was_already_submitted:
+	elif uses_fixed_treatment_rewards and result_grade == "治疗成功" and was_already_submitted:
 		summary_text += "\n本病人已提交过处方，名望、心得不变。"
 
-	# 妙手回春时获得 1 点心得，并立刻按累计心得自动解锁条目。
+	# random NPC 达成妙手回春时获得 1 点心得，并立刻按累计心得自动解锁条目。
 	# was_already_submitted 用于防止同一名病人重复提交刷心得。
 	var is_miaoshouhuichun := false
 	if result != null and result.has_method("is_miaoshouhuichun"):
@@ -1007,7 +1017,7 @@ func submit_prescription() -> bool:
 	else:
 		is_miaoshouhuichun = result.grade == "妙手回春" and result.score == 100
 
-	if is_miaoshouhuichun and not was_already_submitted:
+	if uses_fixed_treatment_rewards and is_miaoshouhuichun and not was_already_submitted:
 		var newly_unlocked_titles: Array[String] = []
 		if Unlock != null and Unlock.has_method("add_experience_point"):
 			newly_unlocked_titles = Unlock.add_experience_point(1)
@@ -1026,7 +1036,7 @@ func submit_prescription() -> bool:
 		# 获得心得和自动解锁后立即存档，避免切场景或退出时丢失。
 		if SaveManager != null and SaveManager.has_method("save_game"):
 			SaveManager.save_game()
-	elif is_miaoshouhuichun and was_already_submitted:
+	elif uses_fixed_treatment_rewards and is_miaoshouhuichun and was_already_submitted:
 		_update_thoughts_point_ui(true)
 		summary_text += "\n本病人已提交过处方，不重复获得心得。"
 		summary_text += "\n当前累计心得：%d" % Unlock.get_experience_points()
@@ -1586,7 +1596,8 @@ func show_story_pulse_hand(target_pulse_window: Node, hand_side: String) -> Dict
 
 
 func submit_story_prescription() -> Dictionary:
-	# 使用与普通 Clinic 完全相同的提交与奖励逻辑，但不打开 Clinic 自己的结果窗口。
+	# 使用与普通 Clinic 相同的处方判定逻辑，但不打开 Clinic 自己的结果窗口。
+	# submit_prescription() 会识别 story NPC，因此不会在治疗判定时结算固定奖励或惩罚。
 	if not submit_prescription():
 		return {
 			"ok": false,
@@ -1629,7 +1640,7 @@ func finish_story_treatment_attempt(success: bool, trigger_scene: String) -> Sto
 			)
 
 		# 失败后继续治疗同一名 story NPC。
-		# diagnosis_submitted 保持 true，防止重复提交刷名望；只清空待重开的处方。
+		# diagnosis_submitted 保持 true，只清空下一次诊疗需要重开的处方。
 		current_npc.is_treated = false
 		current_npc.treatment_failed = false
 		current_prescription.clear()

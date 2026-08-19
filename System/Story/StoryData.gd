@@ -56,6 +56,14 @@ var trigger_scene: String = "clinic"
 @export_enum("clinic", "night", "map")
 var return_scene: String = "clinic"
 
+# 本段剧情完整播放结束后结算的名望变化。
+# 正数表示奖励，负数表示惩罚，0 表示不变化。
+@export var reputation_points_change: int = 0
+
+# 本段剧情完整播放结束后结算的心得变化。
+# 正数表示奖励，负数表示惩罚，0 表示不变化。
+@export var experience_points_change: int = 0
+
 # 本段剧情台词播放完后，如果需要直接在 Story 场景中诊疗 story NPC，
 # 填写该 NPC 的 npc_id。表现层留在 Story，诊疗数据仍由 NpcManager → Clinic 处理。
 # 对应 NPC 资源需要放在 res://Data/Npc 下，且 NpcData.npc_type = "story"。

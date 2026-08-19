@@ -1,6 +1,7 @@
 extends Control
 
 signal story_finished
+signal story_playback_completed(completed_story: StoryData)
 signal story_treatment_requested(npc_id: String)
 signal followup_story_requested(story: StoryData, resume_treatment: bool)
 signal game_over_requested
@@ -79,6 +80,7 @@ var visible_character_count: int = 0
 var type_timer: float = 0.0
 var is_typing: bool = false
 var is_finished: bool = false
+var story_completion_reported: bool = false
 
 var enter_hold_active: bool = false
 var enter_hold_time: float = 0.0
@@ -278,6 +280,7 @@ func play_story(
 	type_timer = 0.0
 	is_typing = false
 	is_finished = false
+	story_completion_reported = false
 	is_treatment_mode = false
 	waiting_for_treatment_backend = false
 	resume_treatment_after_story = resume_treatment_when_finished
@@ -975,8 +978,18 @@ func _reset_text_labels() -> void:
 	subtitle_label.visible_characters = 0
 
 
+func _report_story_playback_completed() -> void:
+	# 每次 play_story() 只上报一次，避免连按、跳过或后续分支造成重复结算。
+	if story_completion_reported:
+		return
+
+	story_completion_reported = true
+	emit_signal("story_playback_completed", story_data)
+
+
 func _finish_story() -> void:
 	_reset_enter_hold_state()
+	_report_story_playback_completed()
 
 	var current_trigger_type := ""
 	if story_data != null:

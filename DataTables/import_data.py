@@ -85,24 +85,49 @@ SHEET_STORY_ALIASES = ["Story", "Stroy", "story", "stroy"]
 SHEET_STORY_LINE = "StoryLine"
 SHEET_STORY_LINE_ALIASES = ["StoryLine", "storyline"]
 
-# 独立剧情工作簿的标准列。
+# 独立剧情工作簿的必需列。
 # 新模板把剧情触发条件放在 Story sheet，把逐句台词放在 StoryLine sheet；
 # StoryLine 不再重复填写 StoryID / StoryName，由同文件的 Story 行自动继承。
-STORY_IMPORT_HEADERS = [
+STORY_REQUIRED_IMPORT_HEADERS = [
     "StoryID",
     "StoryName",
     "TriggerType",
     "TriggerScene",
     "TriggerDay",
-    "Reputation",
+    "TriggerReputation",
     "TriggerStoryID",
-    "EntryId",
+    "TriggerEntryId",
     "NpcID",
     "TriggerNpcID",
     "TriggerCureCount",
     "ClinicNpcPortraitPath",
     "PlayOnce",
     "ReturnScene",
+    "SortIndex",
+]
+
+# Story sheet 的完整内存字段。
+# - TriggerReputation：触发剧情所需的最低名望。
+# - TriggerEntryId：触发剧情前必须解锁的医书条目。
+# - Reputation：剧情完整播放结束后的名望变化。
+# - Experience：剧情完整播放结束后的心得变化。
+STORY_IMPORT_HEADERS = [
+    "StoryID",
+    "StoryName",
+    "TriggerType",
+    "TriggerScene",
+    "ReturnScene",
+    "TriggerDay",
+    "TriggerReputation",
+    "TriggerStoryID",
+    "TriggerEntryId",
+    "NpcID",
+    "TriggerNpcID",
+    "TriggerCureCount",
+    "ClinicNpcPortraitPath",
+    "Reputation",
+    "Experience",
+    "PlayOnce",
     "SortIndex",
 ]
 STORY_LINE_CONTENT_HEADERS = [
@@ -240,13 +265,54 @@ def _apply_cell_style(cell, style_data: dict[str, Any] | None) -> None:
     cell.number_format = style_data["number_format"]
 
 
+def _normalize_story_sheet_headers(raw_headers: list[Any]) -> list[str]:
+    """
+    规范化 Story sheet 表头，并兼容旧版列名。
+
+    规则：
+    - 新版 TriggerReputation 用作 required_reputation_points。
+    - 新版 Reputation 用作 reputation_points_change。
+    - 旧版没有 TriggerReputation 时，第一个 Reputation 视为触发门槛，
+      第二个 Reputation 视为剧情结算变化量。
+    - 旧版 EntryId 会转换成 TriggerEntryId。
+    - 同时兼容 RequiredReputation / ReputationChange / ExperienceChange。
+    """
+    raw_header_names = [as_str(raw_header) for raw_header in raw_headers]
+    has_explicit_trigger_reputation = any(
+        header in ("TriggerReputation", "RequiredReputation")
+        for header in raw_header_names
+    )
+
+    normalized_headers: list[str] = []
+    reputation_column_count = 0
+
+    for header in raw_header_names:
+        if header in ("TriggerReputation", "RequiredReputation"):
+            header = "TriggerReputation"
+        elif header == "Reputation":
+            reputation_column_count += 1
+            if not has_explicit_trigger_reputation and reputation_column_count == 1:
+                header = "TriggerReputation"
+        elif header == "ReputationChange":
+            header = "Reputation"
+        elif header == "ExperienceChange":
+            header = "Experience"
+        elif header in ("EntryId", "TriggerEntryID"):
+            header = "TriggerEntryId"
+
+        normalized_headers.append(header)
+
+    return normalized_headers
+
+
 def _read_story_sheet_rows(ws, required_headers: list[str], source_name: str) -> list[dict[str, Any]]:
     """读取剧情工作簿中的一个 sheet，同时保留单元格样式和行高。"""
     sheet_rows = list(ws.iter_rows())
     if not sheet_rows:
         return []
 
-    headers = [as_str(cell.value) for cell in sheet_rows[0]]
+    raw_headers = [cell.value for cell in sheet_rows[0]]
+    headers = _normalize_story_sheet_headers(raw_headers)
     missing = [name for name in required_headers if name not in headers]
     if missing:
         raise ValueError(f"剧情文件 {source_name} 的 {ws.title} sheet 缺少列：{missing}")
@@ -325,7 +391,7 @@ def load_story_xlsx_data(source_dir: Path) -> tuple[list[dict[str, Any]], list[d
         if story_sheet_name in wb.sheetnames and line_sheet_name in wb.sheetnames:
             imported_story_rows = _read_story_sheet_rows(
                 wb[story_sheet_name],
-                STORY_IMPORT_HEADERS,
+                STORY_REQUIRED_IMPORT_HEADERS,
                 source_name,
             )
             imported_story_rows = [
@@ -465,8 +531,8 @@ def _upsert_story_rows(ws, imported_rows: list[dict[str, Any]]) -> None:
     if not imported_rows:
         return
 
-    headers = [as_str(cell.value) for cell in ws[1]]
-    missing = [header for header in STORY_IMPORT_HEADERS if header not in headers]
+    headers = _normalize_story_sheet_headers([cell.value for cell in ws[1]])
+    missing = [header for header in STORY_REQUIRED_IMPORT_HEADERS if header not in headers]
     if missing:
         raise ValueError(f"Excel 的 {ws.title} sheet 缺少列：{missing}")
 
@@ -1047,7 +1113,7 @@ def resolve_sheet_name(wb, preferred_name: str, aliases: list[str] | None = None
             return found
     return preferred_name
 
-def build_row_dicts(ws) -> list[dict[str, Any]]:
+def build_row_dicts(ws, use_story_header_rules: bool = False) -> list[dict[str, Any]]:
     """
     功能：将一个 Excel sheet 读取为字典列表。
     作用：
@@ -1058,7 +1124,10 @@ def build_row_dicts(ws) -> list[dict[str, Any]]:
     if not rows:
         return []
 
-    headers = [as_str(cell) for cell in rows[0]]
+    if use_story_header_rules:
+        headers = _normalize_story_sheet_headers(list(rows[0]))
+    else:
+        headers = [as_str(cell) for cell in rows[0]]
     result: list[dict[str, Any]] = []
 
     for row in rows[1:]:
@@ -1128,7 +1197,7 @@ def load_excel_data(excel_path: Path) -> dict[str, list[dict[str, Any]]]:
         SHEET_FORMULA_INGREDIENT: build_row_dicts(wb[SHEET_FORMULA_INGREDIENT]),
         SHEET_THEORY: build_row_dicts(wb[SHEET_THEORY]),
         SHEET_NPC: build_row_dicts(wb[npc_sheet_name]),
-        SHEET_STORY: build_row_dicts(wb[story_sheet_name]),
+        SHEET_STORY: build_row_dicts(wb[story_sheet_name], use_story_header_rules=True),
         SHEET_STORY_LINE: build_row_dicts(wb[story_line_sheet_name]),
     }
 
@@ -1165,7 +1234,7 @@ def build_entry_text_to_ids(
     theory_map: dict[str, dict[str, Any]],
 ) -> dict[str, set[str]]:
     """
-    建立剧情 EntryId 的反查索引。
+    建立剧情 TriggerEntryId 的反查索引。
 
     支持填写条目 ID、数据 ID、中文名称或自定义 Title。若同一文字匹配到
     多个条目，则保留全部候选并交给 validate_data 报错，避免静默解锁错误条目。
@@ -1196,7 +1265,7 @@ def get_entry_id_candidates(
     entry_value: Any,
     entry_text_to_ids: dict[str, set[str]],
 ) -> list[str]:
-    """返回剧情 EntryId 文本匹配到的全部候选条目 ID。"""
+    """返回剧情 TriggerEntryId 文本匹配到的全部候选条目 ID。"""
     entry_text = as_str(entry_value)
     if not entry_text:
         return []
@@ -1207,7 +1276,7 @@ def resolve_entry_id(
     entry_value: Any,
     entry_text_to_ids: dict[str, set[str]],
 ) -> str:
-    """仅当 EntryId 文本唯一匹配时返回真正的图鉴条目 ID。"""
+    """仅当 TriggerEntryId 文本唯一匹配时返回真正的图鉴条目 ID。"""
     candidates = get_entry_id_candidates(entry_value, entry_text_to_ids)
     return candidates[0] if len(candidates) == 1 else ""
 
@@ -1302,7 +1371,7 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
 
     story_speaker_npc_id_map = build_story_speaker_npc_id_map(npc_map, story_line_map)
 
-    # 剧情 EntryId 允许直接填写 ID，也允许填写药材、疾病、方剂或理论名称。
+    # 剧情 TriggerEntryId 允许直接填写 ID，也允许填写药材、疾病、方剂或理论名称。
     entry_text_to_ids = build_entry_text_to_ids(
         herb_map,
         disease_map,
@@ -1590,14 +1659,17 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
                 f"{story_id} -> {row.get('TriggerCureCount')}"
             )
 
-        entry_text = as_str(row.get("EntryId"))
+        entry_text = as_str(row.get("TriggerEntryId"))
         if entry_text:
             entry_candidates = get_entry_id_candidates(entry_text, entry_text_to_ids)
             if not entry_candidates:
-                errors.append(f"Story EntryId 无法匹配图鉴条目: {story_id} -> {entry_text}")
+                errors.append(
+                    f"Story TriggerEntryId 无法匹配图鉴条目: {story_id} -> {entry_text}"
+                )
             elif len(entry_candidates) > 1:
                 errors.append(
-                    f"Story EntryId 匹配到多个图鉴条目: {story_id} -> {entry_text} -> "
+                    f"Story TriggerEntryId 匹配到多个图鉴条目: "
+                    f"{story_id} -> {entry_text} -> "
                     f"{', '.join(entry_candidates)}；请改填唯一的条目 ID"
                 )
 
@@ -2098,9 +2170,11 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
         # 前置剧情完成日只有运行时才知道，因此导入阶段保留 Excel 原始数值，
         # 由 StoryManager 使用 played_story_days 计算实际触发日。
         trigger_day = as_int(story_row.get("TriggerDay"), 0)
-        required_reputation_points = as_int(story_row.get("Reputation"), 0)
+        required_reputation_points = as_int(story_row.get("TriggerReputation"), 0)
+        reputation_points_change = as_int(story_row.get("Reputation"), 0)
+        experience_points_change = as_int(story_row.get("Experience"), 0)
         unlock_entry_id = resolve_entry_id(
-            story_row.get("EntryId"),
+            story_row.get("TriggerEntryId"),
             entry_text_to_ids,
         )
         play_once = as_bool(story_row.get("PlayOnce"), True)
@@ -2193,6 +2267,8 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             f'trigger_cure_count = {trigger_cure_count}',
             f'trigger_day = {trigger_day}',
             f'required_reputation_points = {required_reputation_points}',
+            f'reputation_points_change = {reputation_points_change}',
+            f'experience_points_change = {experience_points_change}',
             f'unlock_entry_id = {format_godot_string(unlock_entry_id)}',
             f'play_once = {"true" if play_once else "false"}',
             f'return_scene = {format_godot_string(return_scene)}',
