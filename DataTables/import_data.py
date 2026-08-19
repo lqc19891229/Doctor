@@ -1529,6 +1529,7 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         if trigger_type not in (
             "scene_enter",
             "story_npc_cured",
+            "story_npc_failed_retry",
             "story_npc_failed_back",
             "story_npc_failed_over",
         ):
@@ -1567,6 +1568,7 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         )
         is_treatment_result_story = trigger_type in (
             "story_npc_cured",
+            "story_npc_failed_retry",
             "story_npc_failed_back",
             "story_npc_failed_over",
         )

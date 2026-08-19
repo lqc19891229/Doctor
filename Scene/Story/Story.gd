@@ -579,12 +579,16 @@ func _on_story_judgement_result_closed() -> void:
 			next_story = raw_next_story as StoryData
 
 	if next_story != null:
-		# 治疗结果剧情结束后的行为由它自己的 TriggerType 决定。
-		# 失败剧情不再自动回到诊疗选项。
+		# failed_retry 类型在结果剧情播放结束后重新回到当前 story NPC 的诊疗界面。
+		# 其他结果剧情仍按原有逻辑结束本次诊疗。
+		var resume_treatment := (
+			next_story.trigger_type.strip_edges().to_lower()
+			== StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_RETRY
+		)
 		emit_signal(
 			"followup_story_requested",
 			next_story,
-			false
+			resume_treatment
 		)
 		return
 

@@ -238,6 +238,15 @@ func find_story_npc_treatment_failed_story(
 	if clean_npc_id == "":
 		return null
 
+	var failed_retry_story := _find_matching_story(
+		trigger_scene,
+		current_day,
+		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_RETRY,
+		clean_npc_id
+	)
+	if failed_retry_story != null:
+		return failed_retry_story
+
 	var failed_back_story := _find_matching_story(
 		trigger_scene,
 		current_day,
@@ -283,7 +292,8 @@ func report_story_npc_treatment_failed(
 	trigger_scene: String = "clinic"
 ) -> StoryData:
 	# 治疗失败后不记录“已失败”状态。
-	# 失败剧情结束后的行为由 story_npc_failed_back / story_npc_failed_over 决定。
+	# 失败剧情结束后的行为由 story_npc_failed_retry /
+	# story_npc_failed_back / story_npc_failed_over 决定。
 	# 若失败剧情需要再次触发，请在 Story 表中把 PlayOnce 设为 false。
 	var clean_npc_id := npc_id.strip_edges()
 	if clean_npc_id == "":
@@ -488,6 +498,7 @@ func _is_story_trigger_matched(
 	# story NPC 诊疗结果类型必须填写 trigger_npc_id，并与本次 NPC 完全匹配。
 	if (
 		story_trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_CURED
+		or story_trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_RETRY
 		or story_trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_BACK
 		or story_trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER
 	):
