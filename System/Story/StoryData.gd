@@ -26,6 +26,10 @@ var trigger_type: String = TRIGGER_TYPE_SCENE_ENTER
 # 填写对应 story NPC 的 npc_id。
 @export var trigger_npc_id: String = ""
 
+# 当 trigger_type 为 story_npc_cured 时，表示该 NPC 第几次被治愈后触发。
+# 默认值 1 兼容现有剧情；非 story_npc_cured 类型不会检查这个字段。
+@export_range(1, 999, 1) var trigger_cure_count: int = 1
+
 # 剧情触发场景，例如 clinic / night / map
 @export_enum("clinic", "night", "map")
 var trigger_scene: String = "clinic"

@@ -99,6 +99,7 @@ STORY_IMPORT_HEADERS = [
     "EntryId",
     "NpcID",
     "TriggerNpcID",
+    "TriggerCureCount",
     "ClinicNpcPortraitPath",
     "PlayOnce",
     "ReturnScene",
@@ -1580,6 +1581,13 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
                     f"Story TriggerNpcID 不是 story NPC: {story_id} -> {trigger_npc_id}"
                 )
 
+        trigger_cure_count = as_int(row.get("TriggerCureCount"), 1)
+        if trigger_type == "story_npc_cured" and trigger_cure_count <= 0:
+            errors.append(
+                f"Story TriggerCureCount 必须大于等于 1: "
+                f"{story_id} -> {row.get('TriggerCureCount')}"
+            )
+
         entry_text = as_str(row.get("EntryId"))
         if entry_text:
             entry_candidates = get_entry_id_candidates(entry_text, entry_text_to_ids)
@@ -2083,6 +2091,7 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             as_str(story_row.get("TriggerNpcID"))
             or as_str(story_row.get("TriggerNpcId"))
         )
+        trigger_cure_count = max(1, as_int(story_row.get("TriggerCureCount"), 1))
         # TriggerStoryID 非空时，TriggerDay 是前置剧情完成后的相对天数。
         # 前置剧情完成日只有运行时才知道，因此导入阶段保留 Excel 原始数值，
         # 由 StoryManager 使用 played_story_days 计算实际触发日。
@@ -2179,6 +2188,7 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             f'trigger_type = {format_godot_string(trigger_type)}',
             f'trigger_scene = {format_godot_string(trigger_scene)}',
             f'trigger_npc_id = {format_godot_string(trigger_npc_id)}',
+            f'trigger_cure_count = {trigger_cure_count}',
             f'trigger_day = {trigger_day}',
             f'required_reputation_points = {required_reputation_points}',
             f'unlock_entry_id = {format_godot_string(unlock_entry_id)}',

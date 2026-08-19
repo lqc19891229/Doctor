@@ -104,9 +104,11 @@ text = "李东璧十四岁考中秀才，可之后九年三次乡试落榜，本
 [resource]
 script = ExtResource("2_storydata")
 story_id = "001"
+trigger_story_id = ""
 trigger_type = "scene_enter"
 trigger_scene = "clinic"
 trigger_npc_id = ""
+trigger_cure_count = 1
 trigger_day = 1
 required_reputation_points = 0
 unlock_entry_id = ""

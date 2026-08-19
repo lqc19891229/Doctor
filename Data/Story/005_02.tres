@@ -36,10 +36,12 @@ portrait = ExtResource("portrait_4")
 [resource]
 script = ExtResource("2_storydata")
 story_id = "005_02"
+trigger_story_id = ""
 trigger_type = "story_npc_cured"
 trigger_scene = "night"
 trigger_npc_id = "shi_zi"
-trigger_day = 2
+trigger_cure_count = 1
+trigger_day = 0
 required_reputation_points = 0
 unlock_entry_id = ""
 play_once = true

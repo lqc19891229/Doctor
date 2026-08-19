@@ -60,18 +60,18 @@ const SHICHEN_LIST: Array[String] = [
 # 日期显示设置
 # 只影响日期文本，不影响白天 / 夜晚 / 十二时辰逻辑
 #
-# current_day = 1    嘉靖十九年立春
-# current_day = 2    嘉靖十九年雨水
-# current_day = 3    嘉靖十九年惊蛰
+# current_day = 1    嘉靖二十年立春
+# current_day = 2    嘉靖二十年雨水
+# current_day = 3    嘉靖二十年惊蛰
 # ...
-# current_day = 24   嘉靖十九年大寒
-# current_day = 25   嘉靖二十年立春
+# current_day = 24   嘉靖二十年大寒
+# current_day = 25   嘉靖二十一年立春
 # ...
 # 嘉靖四十五年大寒之后进入万历元年立春
 # =========================================================
 
 const START_ERA_NAME: String = "嘉靖"
-const START_ERA_YEAR: int = 19
+const START_ERA_YEAR: int = 20
 const START_ERA_LAST_YEAR: int = 45
 
 const NEXT_ERA_NAME: String = "万历"

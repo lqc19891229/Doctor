@@ -18,9 +18,11 @@ background = ExtResource("background_2")
 [resource]
 script = ExtResource("2_storydata")
 story_id = "003"
+trigger_story_id = ""
 trigger_type = "scene_enter"
 trigger_scene = "clinic"
 trigger_npc_id = ""
+trigger_cure_count = 1
 trigger_day = 2
 required_reputation_points = 0
 unlock_entry_id = ""

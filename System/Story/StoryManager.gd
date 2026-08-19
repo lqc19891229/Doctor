@@ -55,13 +55,11 @@ var played_story_ids: Dictionary = {}
 # value = 完成剧情时的 current_day
 var played_story_days: Dictionary = {}
 
-# 已经治愈过的 story NPC。
+# story NPC 的累计治愈次数。
 # key = npc_id
-# value = true
-#
-# 当前版本以 npc_id 作为一次性治疗事件标识。
-# 如果以后同一个 NPC 会承担多次不同诊疗任务，建议再扩展为独立的 case_id。
-var cured_story_npc_ids: Dictionary = {}
+# value = 已成功治疗次数
+# 每次成功治疗都会加 1，并按 StoryData.trigger_cure_count 匹配后续剧情。
+var cured_story_npc_counts: Dictionary = {}
 
 
 # 剧情资源根目录。
@@ -204,18 +202,27 @@ func find_trigger_story(trigger_scene: String, current_day: int) -> StoryData:
 func find_story_npc_cured_story(
 	npc_id: String,
 	trigger_scene: String,
-	current_day: int
+	current_day: int,
+	cure_count: int = 0
 ) -> StoryData:
-	# 指定 story NPC 被治愈后，寻找与该 NPC 匹配的后续剧情。
+	# 指定 story NPC 被治愈后，按本次累计治愈次数寻找对应后续剧情。
 	var clean_npc_id := npc_id.strip_edges()
 	if clean_npc_id == "":
+		return null
+
+	# 兼容外部直接调用：未传次数时使用当前已记录的累计次数。
+	var event_cure_count := cure_count
+	if event_cure_count <= 0:
+		event_cure_count = get_story_npc_cure_count(clean_npc_id)
+	if event_cure_count <= 0:
 		return null
 
 	return _find_matching_story(
 		trigger_scene,
 		current_day,
 		StoryData.TRIGGER_TYPE_STORY_NPC_CURED,
-		clean_npc_id
+		clean_npc_id,
+		event_cure_count
 	)
 
 
@@ -254,17 +261,20 @@ func report_story_npc_cured(
 	trigger_scene: String = "clinic"
 ) -> StoryData:
 	# Clinic 在 story NPC 治疗成功、治疗结果台词播放完毕后调用。
-	# 同一个 npc_id 只上报一次，避免重复提交或重复回调导致剧情重复触发。
+	# 同一个 npc_id 可以多次成功治疗；每次调用都视为一次新的成功治疗事件。
 	var clean_npc_id := npc_id.strip_edges()
 	if clean_npc_id == "":
 		return null
 
-	if cured_story_npc_ids.has(clean_npc_id):
-		return null
+	var cure_count := get_story_npc_cure_count(clean_npc_id) + 1
+	cured_story_npc_counts[clean_npc_id] = cure_count
 
-	cured_story_npc_ids[clean_npc_id] = true
-
-	return find_story_npc_cured_story(clean_npc_id, trigger_scene, current_day)
+	return find_story_npc_cured_story(
+		clean_npc_id,
+		trigger_scene,
+		current_day,
+		cure_count
+	)
 
 
 func report_story_npc_treatment_failed(
@@ -287,18 +297,24 @@ func report_story_npc_treatment_failed(
 
 
 func has_cured_story_npc(npc_id: String) -> bool:
+	return get_story_npc_cure_count(npc_id) > 0
+
+
+func get_story_npc_cure_count(npc_id: String) -> int:
+	# 返回指定 story NPC 的累计成功治疗次数。
 	var clean_npc_id := npc_id.strip_edges()
 	if clean_npc_id == "":
-		return false
+		return 0
 
-	return cured_story_npc_ids.has(clean_npc_id)
+	return maxi(0, int(cured_story_npc_counts.get(clean_npc_id, 0)))
 
 
 func _find_matching_story(
 	trigger_scene: String,
 	current_day: int,
 	trigger_type: String,
-	trigger_npc_id: String
+	trigger_npc_id: String,
+	trigger_cure_count: int = 0
 ) -> StoryData:
 	# 如果列表为空，尝试重新扫描一次，避免初始化顺序导致未登记。
 	if registered_story_paths.is_empty():
@@ -326,7 +342,8 @@ func _find_matching_story(
 			trigger_scene,
 			current_day,
 			trigger_type,
-			trigger_npc_id
+			trigger_npc_id,
+			trigger_cure_count
 		):
 			return story
 
@@ -421,7 +438,8 @@ func _is_story_trigger_matched(
 	trigger_scene: String,
 	current_day: int,
 	requested_trigger_type: String,
-	requested_trigger_npc_id: String
+	requested_trigger_npc_id: String,
+	requested_trigger_cure_count: int
 ) -> bool:
 	# 检查 StoryData 是否为空。
 	if story == null:
@@ -485,6 +503,13 @@ func _is_story_trigger_matched(
 
 		if required_npc_id != event_npc_id:
 			return false
+
+		# 治愈剧情还必须与本次累计治愈次数完全匹配。
+		# 旧 .tres 没有显式配置时，StoryData 默认值为 1。
+		if story_trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_CURED:
+			var required_cure_count := maxi(1, story.trigger_cure_count)
+			if requested_trigger_cure_count != required_cure_count:
+				return false
 
 	# 如果配置了触发场景，则必须和当前场景一致。
 	# trigger_scene 仍然保留，因为它控制剧情在哪个场景播放。
@@ -568,9 +593,21 @@ func get_save_data() -> Dictionary:
 		"played_story_ids": played_story_ids.duplicate(true),
 		"played_story_days": played_story_days.duplicate(true),
 		"has_played_clinic_intro": has_played_clinic_intro,
-		"cured_story_npc_ids": cured_story_npc_ids.duplicate(true),
+		"cured_story_npc_counts": cured_story_npc_counts.duplicate(true),
+		# 保留旧字段，方便旧版本代码读取新存档；新版本读档优先使用上面的次数字段。
+		"cured_story_npc_ids": _build_legacy_cured_story_npc_ids(),
 		"pending_clinic_npc_id": pending_clinic_npc_id
 	}
+
+
+func _build_legacy_cured_story_npc_ids() -> Dictionary:
+	# 旧存档格式只记录是否治愈过，这里根据次数生成兼容数据。
+	var result: Dictionary = {}
+	for raw_npc_id in cured_story_npc_counts.keys():
+		var clean_npc_id := String(raw_npc_id).strip_edges()
+		if clean_npc_id != "" and int(cured_story_npc_counts[raw_npc_id]) > 0:
+			result[clean_npc_id] = true
+	return result
 
 
 # =========================================================
@@ -580,7 +617,7 @@ func load_save_data(data: Dictionary) -> void:
 	# 先清空，避免读档时残留上一次运行的数据。
 	played_story_ids.clear()
 	played_story_days.clear()
-	cured_story_npc_ids.clear()
+	cured_story_npc_counts.clear()
 	pending_clinic_npc_id = ""
 	current_story = null
 	return_scene_override = ""
@@ -594,9 +631,21 @@ func load_save_data(data: Dictionary) -> void:
 	if data.has("played_story_days") and typeof(data["played_story_days"]) == TYPE_DICTIONARY:
 		played_story_days = data["played_story_days"].duplicate(true)
 
-	# 恢复已经治愈过的 story NPC。
-	if data.has("cured_story_npc_ids") and typeof(data["cured_story_npc_ids"]) == TYPE_DICTIONARY:
-		cured_story_npc_ids = data["cured_story_npc_ids"].duplicate(true)
+	# 优先恢复新版累计治愈次数。
+	if data.has("cured_story_npc_counts") and typeof(data["cured_story_npc_counts"]) == TYPE_DICTIONARY:
+		var saved_counts: Dictionary = data["cured_story_npc_counts"]
+		for raw_npc_id in saved_counts.keys():
+			var clean_npc_id := String(raw_npc_id).strip_edges()
+			var saved_count := maxi(0, int(saved_counts[raw_npc_id]))
+			if clean_npc_id != "" and saved_count > 0:
+				cured_story_npc_counts[clean_npc_id] = saved_count
+	# 兼容旧存档：旧格式中的 true 表示已经成功治疗过 1 次。
+	elif data.has("cured_story_npc_ids") and typeof(data["cured_story_npc_ids"]) == TYPE_DICTIONARY:
+		var legacy_cured_ids: Dictionary = data["cured_story_npc_ids"]
+		for raw_npc_id in legacy_cured_ids.keys():
+			var clean_npc_id := String(raw_npc_id).strip_edges()
+			if clean_npc_id != "" and bool(legacy_cured_ids[raw_npc_id]):
+				cured_story_npc_counts[clean_npc_id] = 1
 
 	# 恢复剧情结束后等待 Clinic 消费的 story NPC。
 	# 这样在剧情期间退出并读档时，不会丢失剧情指定的病人。
