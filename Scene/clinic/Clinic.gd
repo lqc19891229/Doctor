@@ -1269,30 +1269,8 @@ func _show_current_patient_result_before_judgement() -> void:
 
 
 func _go_to_next_patient_after_judgement() -> void:
-	if current_npc == null:
-		_replace_with_random_patient()
-		return
-
-	var current_npc_type := current_npc.npc_type.strip_edges().to_lower()
-
-	# random NPC 保持原有日常刷新逻辑：
-	# JudgementResult 关闭后，直接随机抽取下一位病人。
-	if current_npc_type != "story":
-		_replace_with_random_patient()
-		return
-
-	# story NPC 必须治愈后才能推动剧情。
-	# 治疗失败时保留当前病人，不刷新 random NPC，也不触发后续剧情。
-	if not current_npc.is_treated:
-		_set_info_text("剧情病人【%s】尚未治愈，请重新诊疗。" % current_npc.npc_name)
-		return
-
-	# story NPC 治愈后，先检查是否存在 story_npc_cured 类型的后续剧情。
-	# 如果成功发出剧情请求，Main 会接管场景切换，此处不能再刷新 random NPC。
-	if _try_start_story_npc_cured_story(current_npc):
-		return
-
-	# 治愈后没有后续剧情，恢复日常 random NPC。
+	# 普通 Clinic 只处理日常 random NPC。
+	# story NPC 的治疗判定与结果剧情全部由 Story 场景中的隐藏 Clinic 后端处理。
 	_replace_with_random_patient()
 
 
@@ -1310,30 +1288,6 @@ func _replace_with_random_patient() -> void:
 		return
 
 	refresh_clinic_view()
-
-
-func _try_start_story_npc_cured_story(npc: NpcData) -> bool:
-	if npc == null:
-		return false
-
-	if StoryManager == null:
-		push_warning("Clinic 无法访问 StoryManager，不能上报 story NPC 治愈事件。")
-		return false
-
-	if not StoryManager.has_method("report_story_npc_cured"):
-		push_warning("StoryManager 缺少 report_story_npc_cured()。")
-		return false
-
-	var next_story: StoryData = StoryManager.report_story_npc_cured(
-		npc.npc_id,
-		current_day,
-		"clinic"
-	)
-
-	if next_story == null:
-		return false
-
-	return _request_story_data(next_story)
 
 
 # =========================================================
@@ -1510,7 +1464,11 @@ func _on_unlock_all_entries_requested() -> void:
 # 3. Story.tscn 中实例化的四个窗口只负责表现。
 # =========================================================
 
-func prepare_story_npc_treatment(npc_id: String, day: int) -> bool:
+func prepare_story_npc_treatment(
+	npc_id: String,
+	treatment_disease: DiseaseData,
+	day: int
+) -> bool:
 	current_day = day
 	last_info_text = ""
 
@@ -1519,11 +1477,18 @@ func prepare_story_npc_treatment(npc_id: String, day: int) -> bool:
 		_set_info_text("剧情没有配置 clinic_npc_id。")
 		return false
 
+	if treatment_disease == null:
+		_set_info_text("发起诊疗的剧情没有配置 Disease。")
+		return false
+
 	if npc_manager == null or not npc_manager.has_method("replace_with_story_npc"):
 		_set_info_text("Clinic 找不到可用的 NpcManager story NPC 接口。")
 		return false
 
-	var npc: NpcData = npc_manager.replace_with_story_npc(clean_npc_id)
+	var npc: NpcData = npc_manager.replace_with_story_npc(
+		clean_npc_id,
+		treatment_disease
+	)
 	if npc == null:
 		_set_info_text("story NPC 加载失败：%s" % clean_npc_id)
 		return false
@@ -1647,7 +1612,6 @@ func finish_story_treatment_attempt(
 	if success:
 		if StoryManager != null and StoryManager.has_method("report_story_npc_cured"):
 			next_story = StoryManager.report_story_npc_cured(
-				current_npc.npc_id,
 				current_day,
 				clean_trigger_scene,
 				clean_treatment_story_id
@@ -1655,7 +1619,6 @@ func finish_story_treatment_attempt(
 	else:
 		if StoryManager != null and StoryManager.has_method("report_story_npc_treatment_failed"):
 			next_story = StoryManager.report_story_npc_treatment_failed(
-				current_npc.npc_id,
 				current_day,
 				clean_trigger_scene,
 				clean_treatment_story_id
@@ -1722,37 +1685,6 @@ func start_new_day(day: int) -> void:
 	# 没有剧情指定的 story NPC，也没有入口剧情时，
 	# 才生成当天的日常 random NPC。
 	_replace_with_random_patient()
-
-
-func _apply_pending_story_npc_from_story_manager() -> bool:
-	# 旧流程兼容接口，不再由 start_new_day() 调用。
-	# 新流程中的 clinic_npc_id 统一由 Main 创建隐藏 Clinic 后端，
-	# 再在 Story 场景里完成诊疗，避免 story NPC 出现在 Clinic 表现层。
-	if StoryManager == null:
-		return false
-
-	if not StoryManager.has_method("consume_pending_clinic_npc_id"):
-		return false
-
-	var pending_npc_id: String = StoryManager.consume_pending_clinic_npc_id()
-	if pending_npc_id.strip_edges() == "":
-		return false
-
-	if npc_manager == null:
-		push_warning("剧情指定了 story NPC，但 Clinic 找不到 NpcManager：%s" % pending_npc_id)
-		return false
-
-	if not npc_manager.has_method("replace_with_story_npc"):
-		push_warning("NpcManager 缺少 replace_with_story_npc()，无法切换剧情 NPC：%s" % pending_npc_id)
-		return false
-
-	var npc: NpcData = npc_manager.replace_with_story_npc(pending_npc_id)
-	if npc == null:
-		push_warning("剧情指定的 story NPC 加载失败：%s" % pending_npc_id)
-		return false
-
-	refresh_clinic_view()
-	return true
 
 
 func _try_start_auto_story(trigger_scene: String, day: int) -> bool:

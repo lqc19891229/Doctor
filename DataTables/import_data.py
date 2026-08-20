@@ -98,8 +98,7 @@ STORY_REQUIRED_IMPORT_HEADERS = [
     "TriggerStoryID",
     "TriggerEntryId",
     "NpcID",
-    "TriggerNpcID",
-    "TriggerCureCount",
+    "Disease",
     "ClinicNpcPortraitPath",
     "PlayOnce",
     "ReturnScene",
@@ -122,8 +121,7 @@ STORY_IMPORT_HEADERS = [
     "TriggerStoryID",
     "TriggerEntryId",
     "NpcID",
-    "TriggerNpcID",
-    "TriggerCureCount",
+    "Disease",
     "ClinicNpcPortraitPath",
     "Reputation",
     "Experience",
@@ -1207,7 +1205,7 @@ def resolve_disease_id(
     disease_map: dict[str, dict[str, Any]],
     disease_name_to_id: dict[str, str],
 ) -> str:
-    """把 Npc.Disease 中填写的疾病 ID 或疾病名称统一转换为 DiseaseID。"""
+    """把 Npc / Story 的 Disease 中填写的 ID 或名称统一转换为 DiseaseID。"""
     disease_text = as_str(disease_value)
     if not disease_text:
         return ""
@@ -1569,7 +1567,12 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
             disease_map,
             disease_name_to_id,
         )
-        if disease_text and not disease_id:
+        if npc_type == "story" and disease_text:
+            errors.append(
+                f"Story NPC 不应配置固定疾病，请把 Disease 移到发起诊疗的 Story: "
+                f"{npc_id} -> {disease_text}"
+            )
+        elif disease_text and not disease_id:
             errors.append(f"Npc 疾病名称或 ID 不存在: {npc_id} -> {disease_text}")
 
         portrait_before_path = get_npc_portrait_before_path(npc_id, npc_type)
@@ -1588,7 +1591,7 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         trigger_story_id = as_str(row.get("TriggerStoryID"))
         if trigger_story_id:
             if trigger_story_id == story_id:
-                errors.append(f"Story 不能把自己设为前置剧情: {story_id}")
+                errors.append(f"Story 不能把自己设为关联剧情: {story_id}")
             elif trigger_story_id not in story_map:
                 errors.append(
                     f"Story TriggerStoryID 不存在: {story_id} -> {trigger_story_id}"
@@ -1624,6 +1627,26 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
             elif normalize_npc_type(clinic_npc_row.get("NpcType")) != "story":
                 errors.append(f"Story NpcID 不是 story NPC: {story_id} -> {clinic_npc_id}")
 
+        clinic_disease_text = as_str(row.get("Disease"))
+        clinic_disease_id = resolve_disease_id(
+            clinic_disease_text,
+            disease_map,
+            disease_name_to_id,
+        )
+        if clinic_npc_id:
+            if not clinic_disease_text:
+                errors.append(f"发起诊疗的 Story 缺少 Disease: {story_id}")
+            elif not clinic_disease_id:
+                errors.append(
+                    f"Story Disease 名称或 ID 不存在: "
+                    f"{story_id} -> {clinic_disease_text}"
+                )
+        elif clinic_disease_text:
+            errors.append(
+                f"Story 配置了 Disease 但没有配置 NpcID: "
+                f"{story_id} -> {clinic_disease_text}"
+            )
+
         clinic_npc_portrait_path = as_str(row.get("ClinicNpcPortraitPath"))
         if not is_valid_resource_path(clinic_npc_portrait_path):
             errors.append(
@@ -1631,32 +1654,44 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
                 f"{story_id} -> {clinic_npc_portrait_path}"
             )
 
-        trigger_npc_id = (
-            as_str(row.get("TriggerNpcID"))
-            or as_str(row.get("TriggerNpcId"))
-        )
         is_treatment_result_story = trigger_type in (
             "story_npc_cured",
             "story_npc_failed_retry",
             "story_npc_failed_back",
             "story_npc_failed_over",
         )
-        if is_treatment_result_story and not trigger_npc_id:
-            errors.append(f"Story 治疗结果剧情缺少 TriggerNpcID: {story_id}")
-        elif trigger_npc_id:
-            trigger_npc_row = npc_map.get(trigger_npc_id)
-            if trigger_npc_row is None:
-                errors.append(f"Story TriggerNpcID 不存在: {story_id} -> {trigger_npc_id}")
-            elif normalize_npc_type(trigger_npc_row.get("NpcType")) != "story":
-                errors.append(
-                    f"Story TriggerNpcID 不是 story NPC: {story_id} -> {trigger_npc_id}"
-                )
-
-        trigger_cure_count = as_int(row.get("TriggerCureCount"), 1)
-        if trigger_type == "story_npc_cured" and trigger_cure_count <= 0:
+        if is_treatment_result_story and not trigger_story_id:
             errors.append(
-                f"Story TriggerCureCount 必须大于等于 1: "
-                f"{story_id} -> {row.get('TriggerCureCount')}"
+                f"Story 治疗结果剧情缺少 TriggerStoryID: {story_id}"
+            )
+        elif is_treatment_result_story:
+            source_story_row = story_map.get(trigger_story_id)
+            if source_story_row is not None:
+                source_npc_id = (
+                    as_str(source_story_row.get("NpcID"))
+                    or as_str(source_story_row.get("ClinicNpcID"))
+                    or as_str(source_story_row.get("ClinicNpcId"))
+                )
+                if not source_npc_id:
+                    errors.append(
+                        f"Story 治疗结果剧情的 TriggerStoryID "
+                        f"没有配置治疗 NpcID: {story_id} -> {trigger_story_id}"
+                    )
+                source_disease_text = as_str(source_story_row.get("Disease"))
+                source_disease_id = resolve_disease_id(
+                    source_disease_text,
+                    disease_map,
+                    disease_name_to_id,
+                )
+                if not source_disease_id:
+                    errors.append(
+                        f"Story 治疗结果剧情的 TriggerStoryID "
+                        f"没有配置有效 Disease: {story_id} -> {trigger_story_id}"
+                    )
+
+        if is_treatment_result_story and as_int(row.get("TriggerDay"), 0) != 0:
+            errors.append(
+                f"Story 治疗结果剧情 TriggerDay 必须为 0: {story_id}"
             )
 
         entry_text = as_str(row.get("TriggerEntryId"))
@@ -2152,6 +2187,8 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
     story_line_map = indexed_data["story_line_map"]
     story_speaker_npc_id_map = indexed_data["story_speaker_npc_id_map"]
     entry_text_to_ids = indexed_data["entry_text_to_ids"]
+    disease_map = indexed_data["disease_map"]
+    disease_name_to_id = indexed_data["disease_name_to_id"]
 
     ensure_dir(STORY_OUTPUT_DIR)
 
@@ -2161,14 +2198,8 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
         trigger_type = as_str(story_row.get("TriggerType")).lower() or "scene_enter"
         trigger_scene = as_str(story_row.get("TriggerScene")).lower() or "clinic"
         trigger_story_id = as_str(story_row.get("TriggerStoryID"))
-        trigger_npc_id = (
-            as_str(story_row.get("TriggerNpcID"))
-            or as_str(story_row.get("TriggerNpcId"))
-        )
-        trigger_cure_count = max(1, as_int(story_row.get("TriggerCureCount"), 1))
-        # TriggerStoryID 非空时，TriggerDay 是前置剧情完成后的相对天数。
-        # 前置剧情完成日只有运行时才知道，因此导入阶段保留 Excel 原始数值，
-        # 由 StoryManager 使用 played_story_days 计算实际触发日。
+        # 普通剧情的 TriggerStoryID 是前置剧情，TriggerDay 是完成后的相对天数。
+        # 治疗结果剧情的 TriggerStoryID 绑定治疗主剧情，TriggerDay 必须为 0。
         trigger_day = as_int(story_row.get("TriggerDay"), 0)
         required_reputation_points = as_int(story_row.get("TriggerReputation"), 0)
         reputation_points_change = as_int(story_row.get("Reputation"), 0)
@@ -2184,6 +2215,11 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             or as_str(story_row.get("ClinicNpcId"))
             or as_str(story_row.get("NpcID"))
         )
+        clinic_disease_id = resolve_disease_id(
+            story_row.get("Disease"),
+            disease_map,
+            disease_name_to_id,
+        )
         clinic_npc_portrait_path = as_str(
             story_row.get("ClinicNpcPortraitPath")
         )
@@ -2192,6 +2228,17 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             f'[ext_resource type="Script" path="{STORY_LINE_SCRIPT_PATH}" id="1_storyline"]',
             f'[ext_resource type="Script" path="{STORY_DATA_SCRIPT_PATH}" id="2_storydata"]',
         ]
+
+        clinic_disease_ext_id = ""
+        if clinic_disease_id:
+            clinic_disease_ext_id = "clinic_disease_1"
+            clinic_disease_path = (
+                f"res://Data/Disease/{safe_filename(clinic_disease_id)}.tres"
+            )
+            ext_lines.append(
+                f'[ext_resource type="Resource" path="{clinic_disease_path}" '
+                f'id="{clinic_disease_ext_id}"]'
+            )
 
         resource_path_to_id: dict[str, str] = {}
         next_ext_index = 1
@@ -2263,8 +2310,6 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             f'trigger_story_id = {format_godot_string(trigger_story_id)}',
             f'trigger_type = {format_godot_string(trigger_type)}',
             f'trigger_scene = {format_godot_string(trigger_scene)}',
-            f'trigger_npc_id = {format_godot_string(trigger_npc_id)}',
-            f'trigger_cure_count = {trigger_cure_count}',
             f'trigger_day = {trigger_day}',
             f'required_reputation_points = {required_reputation_points}',
             f'reputation_points_change = {reputation_points_change}',
@@ -2274,6 +2319,10 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             f'return_scene = {format_godot_string(return_scene)}',
             f'clinic_npc_id = {format_godot_string(clinic_npc_id)}',
         ]
+        if clinic_disease_ext_id:
+            resource_lines.append(
+                f'clinic_disease = {format_ext_resource_value(clinic_disease_ext_id)}'
+            )
         if clinic_npc_portrait_ext_id:
             resource_lines.append(
                 f'clinic_npc_portrait = '
@@ -2298,7 +2347,8 @@ def build_npc_resources(indexed_data: dict[str, Any]) -> None:
     """
     功能：根据 Npc 表生成 NPC 基础资源。
     输出：res://Data/Npc/{NpcID}.tres
-    说明：Disease 可填写 DiseaseID 或疾病名称；留空时保持原有运行时分配逻辑。
+    说明：random NPC 的 Disease 可填写 DiseaseID 或疾病名称；
+    StoryNPC 的疾病必须改在发起诊疗的 Story 中填写。
     """
     npc_map = indexed_data["npc_map"]
     disease_map = indexed_data["disease_map"]
@@ -2317,11 +2367,13 @@ def build_npc_resources(indexed_data: dict[str, Any]) -> None:
         dialogue_treatment_failed = as_str(row.get("dialogueTreatmentFailed"))
         portrait_before_path = get_npc_portrait_before_path(npc_id, npc_type)
         portrait_after_path = get_npc_portrait_after_path(npc_id, npc_type)
-        disease_id = resolve_disease_id(
-            row.get("Disease"),
-            disease_map,
-            disease_name_to_id,
-        )
+        disease_id = ""
+        if npc_type != "story":
+            disease_id = resolve_disease_id(
+                row.get("Disease"),
+                disease_map,
+                disease_name_to_id,
+            )
 
         ext_lines = [
             f'[ext_resource type="Script" path="{NPC_DATA_SCRIPT_PATH}" id="1"]',

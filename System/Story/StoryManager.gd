@@ -187,51 +187,46 @@ func find_trigger_story(trigger_scene: String, current_day: int) -> StoryData:
 	return _find_matching_story(
 		trigger_scene,
 		current_day,
-		StoryData.TRIGGER_TYPE_SCENE_ENTER,
-		""
+		StoryData.TRIGGER_TYPE_SCENE_ENTER
 	)
 
 
 func find_story_npc_cured_story(
-	npc_id: String,
 	trigger_scene: String,
 	current_day: int,
-	treatment_story_id: String = ""
+	treatment_story_id: String
 ) -> StoryData:
-	# Story 场景内治疗优先按发起治疗的主剧情 ID 匹配成功剧情。
-	# 没有治疗来源 ID 时，保留旧 Clinic 流程按 NPC 匹配的兼容入口。
-	var clean_npc_id := npc_id.strip_edges()
-	if clean_npc_id == "":
+	# 治疗成功剧情只按发起治疗的主剧情 ID 匹配。
+	var clean_treatment_story_id := treatment_story_id.strip_edges()
+	if clean_treatment_story_id == "":
+		push_warning("治疗成功事件缺少来源剧情 ID。")
 		return null
 
 	return _find_matching_story(
 		trigger_scene,
 		current_day,
 		StoryData.TRIGGER_TYPE_STORY_NPC_CURED,
-		clean_npc_id,
-		treatment_story_id.strip_edges()
+		clean_treatment_story_id
 	)
 
 
 func find_story_npc_treatment_failed_story(
-	npc_id: String,
 	trigger_scene: String,
 	current_day: int,
-	treatment_story_id: String = ""
+	treatment_story_id: String
 ) -> StoryData:
-	# Story 场景内治疗优先按发起治疗的主剧情 ID 匹配失败剧情。
+	# 治疗失败剧情只按发起治疗的主剧情 ID 匹配。
 	# 同一个主剧情、场景与条件只应配置一种失败类型。
 	# 失败事件本身不写入一次性状态；是否能够再次播放由 StoryData.play_once 控制。
-	var clean_npc_id := npc_id.strip_edges()
-	if clean_npc_id == "":
-		return null
 	var clean_treatment_story_id := treatment_story_id.strip_edges()
+	if clean_treatment_story_id == "":
+		push_warning("治疗失败事件缺少来源剧情 ID。")
+		return null
 
 	var failed_retry_story := _find_matching_story(
 		trigger_scene,
 		current_day,
 		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_RETRY,
-		clean_npc_id,
 		clean_treatment_story_id
 	)
 	if failed_retry_story != null:
@@ -241,7 +236,6 @@ func find_story_npc_treatment_failed_story(
 		trigger_scene,
 		current_day,
 		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_BACK,
-		clean_npc_id,
 		clean_treatment_story_id
 	)
 	if failed_back_story != null:
@@ -251,25 +245,18 @@ func find_story_npc_treatment_failed_story(
 		trigger_scene,
 		current_day,
 		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER,
-		clean_npc_id,
 		clean_treatment_story_id
 	)
 
 
 func report_story_npc_cured(
-	npc_id: String,
 	current_day: int,
 	trigger_scene: String = "clinic",
 	treatment_story_id: String = ""
 ) -> StoryData:
 	# Clinic 在 story NPC 治疗成功、治疗结果窗口关闭后调用。
 	# 不再记录 NPC 累计治愈次数，结果剧情由治疗主剧情 ID 决定。
-	var clean_npc_id := npc_id.strip_edges()
-	if clean_npc_id == "":
-		return null
-
 	return find_story_npc_cured_story(
-		clean_npc_id,
 		trigger_scene,
 		current_day,
 		treatment_story_id
@@ -277,7 +264,6 @@ func report_story_npc_cured(
 
 
 func report_story_npc_treatment_failed(
-	npc_id: String,
 	current_day: int,
 	trigger_scene: String = "clinic",
 	treatment_story_id: String = ""
@@ -286,12 +272,7 @@ func report_story_npc_treatment_failed(
 	# 失败剧情结束后的行为由 story_npc_failed_retry /
 	# story_npc_failed_back / story_npc_failed_over 决定。
 	# 若失败剧情需要再次触发，请在 Story 表中把 PlayOnce 设为 false。
-	var clean_npc_id := npc_id.strip_edges()
-	if clean_npc_id == "":
-		return null
-
 	return find_story_npc_treatment_failed_story(
-		clean_npc_id,
 		trigger_scene,
 		current_day,
 		treatment_story_id
@@ -302,7 +283,6 @@ func _find_matching_story(
 	trigger_scene: String,
 	current_day: int,
 	trigger_type: String,
-	trigger_npc_id: String,
 	requested_treatment_story_id: String = ""
 ) -> StoryData:
 	# 如果列表为空，尝试重新扫描一次，避免初始化顺序导致未登记。
@@ -331,7 +311,6 @@ func _find_matching_story(
 			trigger_scene,
 			current_day,
 			trigger_type,
-			trigger_npc_id,
 			requested_treatment_story_id
 		):
 			return story
@@ -475,7 +454,6 @@ func _is_story_trigger_matched(
 	trigger_scene: String,
 	current_day: int,
 	requested_trigger_type: String,
-	requested_trigger_npc_id: String,
 	requested_treatment_story_id: String
 ) -> bool:
 	# 检查 StoryData 是否为空。
@@ -523,7 +501,11 @@ func _is_story_trigger_matched(
 		push_warning("剧情不能把自己设置为关联剧情：" + story_id)
 		return false
 
-	if is_treatment_result_type and event_treatment_story_id != "":
+	if is_treatment_result_type:
+		if event_treatment_story_id == "":
+			push_warning("治疗结果事件缺少来源剧情 ID。")
+			return false
+
 		if trigger_story_id == "":
 			push_warning("治疗结果剧情缺少 trigger_story_id：" + story_id)
 			return false
@@ -542,22 +524,6 @@ func _is_story_trigger_matched(
 		# 旧存档可能没有 played_story_days。
 		# 这时按第 0 天处理，避免旧存档中的后续剧情永久无法触发。
 		trigger_story_played_day = int(played_story_days.get(trigger_story_id, 0))
-
-	# 没有治疗来源 ID 时才启用旧 TriggerNpcID 兼容匹配。
-	# 新的 Story 场景内治疗只检查上面的 trigger_story_id，不检查 NPC。
-	if is_treatment_result_type and event_treatment_story_id == "":
-		var required_npc_id := story.trigger_npc_id.strip_edges()
-		var event_npc_id := requested_trigger_npc_id.strip_edges()
-
-		if required_npc_id == "":
-			push_warning("%s 剧情缺少 trigger_npc_id：%s" % [
-				story_trigger_type,
-				story_id
-			])
-			return false
-
-		if required_npc_id != event_npc_id:
-			return false
 
 	# 如果配置了触发场景，则必须和当前场景一致。
 	# trigger_scene 仍然保留，因为它控制剧情在哪个场景播放。

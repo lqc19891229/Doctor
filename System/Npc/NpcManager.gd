@@ -156,7 +156,11 @@ func next_npc() -> void:
 # NPC 实例化
 # ============================================================
 
-func _make_runtime_npc(source_npc: NpcData, forced_type: String = "") -> NpcData:
+func _make_runtime_npc(
+	source_npc: NpcData,
+	forced_type: String = "",
+	story_disease: DiseaseData = null
+) -> NpcData:
 	if source_npc == null:
 		return null
 
@@ -173,6 +177,10 @@ func _make_runtime_npc(source_npc: NpcData, forced_type: String = "") -> NpcData
 	# 注意：这里会覆盖 random NPC .tres 里原本可能填写的 disease。
 	if npc.npc_type == "random":
 		_assign_random_unlocked_disease(npc)
+	elif npc.npc_type == "story":
+		# StoryNPC 资源只保存身份、立绘和台词。
+		# 本次疾病必须由“发起诊疗的剧情”传入，不能沿用模板上的固定疾病。
+		npc.disease = story_disease
 
 	# 疾病绑定完成后，再初始化本次诊疗状态和本次固定台词。
 	if npc.has_method("setup_clinic_visit"):
@@ -297,17 +305,23 @@ func get_story_npc_template(npc_id: String) -> NpcData:
 	return story_npc_by_id[clean_id] as NpcData
 
 
-func generate_story_npc(npc_id: String) -> NpcData:
+func generate_story_npc(
+	npc_id: String,
+	story_disease: DiseaseData = null
+) -> NpcData:
 	var source_npc := get_story_npc_template(npc_id)
 	if source_npc == null:
 		push_warning("找不到 story NPC：%s。请检查 Data/Npc 下是否存在 npc_type = story 且 npc_id 匹配的资源。" % npc_id)
 		return null
 
-	return _make_runtime_npc(source_npc, "story")
+	return _make_runtime_npc(source_npc, "story", story_disease)
 
 
-func spawn_story_npc(npc_id: String) -> NpcData:
-	var npc := generate_story_npc(npc_id)
+func spawn_story_npc(
+	npc_id: String,
+	story_disease: DiseaseData = null
+) -> NpcData:
+	var npc := generate_story_npc(npc_id, story_disease)
 	if npc == null:
 		return null
 
@@ -322,7 +336,10 @@ func spawn_story_npc(npc_id: String) -> NpcData:
 	return npc
 
 
-func replace_with_story_npc(npc_id: String) -> NpcData:
+func replace_with_story_npc(
+	npc_id: String,
+	story_disease: DiseaseData = null
+) -> NpcData:
 	npc_list.clear()
 	current_index = 0
-	return spawn_story_npc(npc_id)
+	return spawn_story_npc(npc_id, story_disease)

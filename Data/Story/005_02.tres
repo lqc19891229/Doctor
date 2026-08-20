@@ -83,11 +83,9 @@ text = "名声+1000"
 [resource]
 script = ExtResource("2_storydata")
 story_id = "005_02"
-trigger_story_id = ""
+trigger_story_id = "005_01"
 trigger_type = "story_npc_cured"
 trigger_scene = "night"
-trigger_npc_id = "shi_zi"
-trigger_cure_count = 1
 trigger_day = 0
 required_reputation_points = 0
 reputation_points_change = 1000

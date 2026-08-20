@@ -13,7 +13,7 @@ const TRIGGER_TYPE_STORY_NPC_FAILED_OVER := "story_npc_failed_over"
 # 关联剧情 ID。
 # - scene_enter：作为普通前置剧情；必须先完整播放该剧情，当前剧情才允许触发。
 # - story_npc_cured / story_npc_failed_*：绑定发起本次治疗的主剧情。
-# 治疗结果剧情使用该字段后，不再依赖 trigger_npc_id。
+# 治疗结果剧情必须填写该字段。
 @export var trigger_story_id: String = ""
 
 # 剧情触发类型：
@@ -24,11 +24,6 @@ const TRIGGER_TYPE_STORY_NPC_FAILED_OVER := "story_npc_failed_over"
 # - story_npc_failed_over：指定的 story NPC 治疗失败，剧情结束后 Game Over。
 @export_enum("scene_enter", "story_npc_cured", "story_npc_failed_retry", "story_npc_failed_back", "story_npc_failed_over")
 var trigger_type: String = TRIGGER_TYPE_SCENE_ENTER
-
-# 旧治疗结果配置兼容字段。
-# 当治疗结果剧情没有填写 trigger_story_id 时，才按该 story NPC 的 npc_id 匹配。
-# 新剧情统一使用 trigger_story_id 绑定治疗主剧情，此字段留空。
-@export var trigger_npc_id: String = ""
 
 # 剧情触发场景，例如 clinic / night / map
 @export_enum("clinic", "night", "map")
@@ -66,6 +61,11 @@ var return_scene: String = "clinic"
 # 填写该 NPC 的 npc_id。表现层留在 Story，诊疗数据仍由 NpcManager → Clinic 处理。
 # 对应 NPC 资源需要放在 res://Data/Npc 下，且 NpcData.npc_type = "story"。
 @export var clinic_npc_id: String = ""
+
+# 本段剧情发起诊疗时使用的疾病。
+# 疾病属于“本次剧情诊疗”，不再固定绑定在 StoryNPC 的 NpcData 资源上。
+# 同一个 StoryNPC 因此可以在不同的发起诊疗剧情中配置不同疾病。
+@export var clinic_disease: DiseaseData
 
 # Story NPC 诊疗界面使用的立绘。
 # 该字段与普通剧情台词的 portrait 相互独立，方便在诊疗选项界面手动指定人物立绘。

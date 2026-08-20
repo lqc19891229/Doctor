@@ -644,7 +644,7 @@ func _on_story_playback_completed(completed_story: StoryData) -> void:
 	_save_game_with_warning("剧情播放完成并结算名望与心得")
 
 
-func _on_story_treatment_requested(npc_id: String) -> void:
+func _on_story_treatment_requested(npc_id: String, disease: DiseaseData) -> void:
 	_clear_story_treatment_backend()
 
 	story_treatment_backend = CLINIC_SCENE.instantiate()
@@ -658,6 +658,7 @@ func _on_story_treatment_requested(npc_id: String) -> void:
 	var prepared: bool = bool(story_treatment_backend.call(
 		"prepare_story_npc_treatment",
 		npc_id,
+		disease,
 		GameTime.current_day
 	))
 	if not prepared:

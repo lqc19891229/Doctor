@@ -2,7 +2,7 @@ extends Control
 
 signal story_finished
 signal story_playback_completed(completed_story: StoryData)
-signal story_treatment_requested(npc_id: String)
+signal story_treatment_requested(npc_id: String, disease: DiseaseData)
 signal followup_story_requested(story: StoryData, resume_treatment: bool)
 signal game_over_requested
 
@@ -1023,9 +1023,11 @@ func _finish_story() -> void:
 
 	# 普通剧情配置 clinic_npc_id 后，请求 Main 创建隐藏 Clinic 后端。
 	var clinic_npc_id := ""
+	var clinic_disease: DiseaseData = null
 
 	if story_data != null:
 		clinic_npc_id = story_data.clinic_npc_id.strip_edges()
+		clinic_disease = story_data.clinic_disease
 
 	if clinic_npc_id != "":
 		treatment_npc_id = clinic_npc_id
@@ -1035,7 +1037,8 @@ func _finish_story() -> void:
 		treatment_option_container.hide()
 		emit_signal(
 			"story_treatment_requested",
-			treatment_npc_id
+			treatment_npc_id,
+			clinic_disease
 		)
 		return
 
