@@ -1,11 +1,38 @@
-[gd_resource type="Resource" script_class="DiseaseData" format=3 uid="uid://xhp2d1vtim0a"]
+[gd_resource type="Resource" script_class="DiseaseData" load_steps=2 format=3]
 
-[ext_resource type="Script" uid="uid://dccfyx4mej452" path="res://System/Disease/DiseaseData.gd" id="1"]
+[ext_resource type="Script" path="res://System/Disease/DiseaseData.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
 disease_id = "xin_yang_xu"
 disease_name = "心阳虚"
+detail_text = "心阳虚\n\n【病机】心阳不足，温煦、鼓动无力，虚寒内生。\n\n【症状】心悸怔忡，心慌不安；胸闷气短、遇寒加重；畏寒怕冷、四肢不温；面色㿠白，精神疲乏，自汗。\n\n【脉象】\n左寸（心）：波峰低，波速慢\n\n【标准方】桂枝甘草汤"
 recommended_formula_id = "gui_zhi_gan_cao_tang"
+exterior_qi = 1.0
+exterior_blood = 1.0
+exterior_cold_hot = 1.0
+exterior_wet_dry = 1.0
 heart_qi = 0.5
+heart_blood = 1.0
 heart_cold_hot = 0.5
+heart_wet_dry = 1.0
+liver_qi = 1.0
+liver_blood = 1.0
+liver_cold_hot = 1.0
+liver_wet_dry = 1.0
+spleen_qi = 1.0
+spleen_blood = 1.0
+spleen_cold_hot = 1.0
+spleen_wet_dry = 1.0
+lung_qi = 1.0
+lung_blood = 1.0
+lung_cold_hot = 1.0
+lung_wet_dry = 1.0
+kidney_yin_qi = 1.0
+kidney_yin_blood = 1.0
+kidney_yin_cold_hot = 1.0
+kidney_yin_wet_dry = 1.0
+kidney_yang_qi = 1.0
+kidney_yang_blood = 1.0
+kidney_yang_cold_hot = 1.0
+kidney_yang_wet_dry = 1.0
