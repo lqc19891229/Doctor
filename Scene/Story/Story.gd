@@ -101,6 +101,9 @@ var next_speaker_side: String = "left"
 # Story 画面中的诊疗状态。业务数据由 Main 注入的隐藏 Clinic 后端持有。
 var treatment_backend: Node = null
 var treatment_npc_id: String = ""
+# 发起本次治疗的主剧情 ID。
+# 播放成功/失败结果剧情时 story_data 会改变，因此必须单独保存并在失败重试后继续沿用。
+var treatment_source_story_id: String = ""
 var treatment_trigger_scene: String = "clinic"
 var is_treatment_mode: bool = false
 var waiting_for_treatment_backend: bool = false
@@ -336,9 +339,11 @@ func start_story_npc_treatment(backend: Node, npc_id: String) -> void:
 
 	treatment_backend = backend
 	treatment_npc_id = npc_id.strip_edges()
+	treatment_source_story_id = ""
 	waiting_for_treatment_backend = false
 
 	if story_data != null:
+		treatment_source_story_id = story_data.story_id.strip_edges()
 		treatment_trigger_scene = story_data.trigger_scene.strip_edges()
 	if treatment_trigger_scene == "":
 		treatment_trigger_scene = "clinic"
@@ -576,7 +581,8 @@ func _on_story_judgement_result_closed() -> void:
 		var raw_next_story = treatment_backend.call(
 			"finish_story_treatment_attempt",
 			last_treatment_success,
-			treatment_trigger_scene
+			treatment_trigger_scene,
+			treatment_source_story_id
 		)
 		if raw_next_story is StoryData:
 			next_story = raw_next_story as StoryData

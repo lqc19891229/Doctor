@@ -1330,10 +1330,6 @@ func _try_start_story_npc_cured_story(npc: NpcData) -> bool:
 		"clinic"
 	)
 
-	# 无论是否存在后续剧情，都立即保存“该 story NPC 已治愈”的进度。
-	if SaveManager != null and SaveManager.has_method("save_game"):
-		SaveManager.save_game()
-
 	if next_story == null:
 		return false
 
@@ -1633,13 +1629,18 @@ func submit_story_prescription() -> Dictionary:
 	}
 
 
-func finish_story_treatment_attempt(success: bool, trigger_scene: String) -> StoryData:
+func finish_story_treatment_attempt(
+	success: bool,
+	trigger_scene: String,
+	treatment_story_id: String = ""
+) -> StoryData:
 	if current_npc == null:
 		return null
 
 	var clean_trigger_scene := trigger_scene.strip_edges()
 	if clean_trigger_scene == "":
 		clean_trigger_scene = "clinic"
+	var clean_treatment_story_id := treatment_story_id.strip_edges()
 
 	var next_story: StoryData = null
 
@@ -1648,14 +1649,16 @@ func finish_story_treatment_attempt(success: bool, trigger_scene: String) -> Sto
 			next_story = StoryManager.report_story_npc_cured(
 				current_npc.npc_id,
 				current_day,
-				clean_trigger_scene
+				clean_trigger_scene,
+				clean_treatment_story_id
 			)
 	else:
 		if StoryManager != null and StoryManager.has_method("report_story_npc_treatment_failed"):
 			next_story = StoryManager.report_story_npc_treatment_failed(
 				current_npc.npc_id,
 				current_day,
-				clean_trigger_scene
+				clean_trigger_scene,
+				clean_treatment_story_id
 			)
 
 		# 失败后继续治疗同一名 story NPC。

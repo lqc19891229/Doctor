@@ -10,9 +10,10 @@ const TRIGGER_TYPE_STORY_NPC_FAILED_OVER := "story_npc_failed_over"
 # 剧情唯一 ID，用来记录是否已经播放过
 @export var story_id: String = ""
 
-# 前置剧情 ID。
-# 留空表示没有前置剧情。
-# 填写后，必须先完整播放该剧情，当前剧情才允许触发。
+# 关联剧情 ID。
+# - scene_enter：作为普通前置剧情；必须先完整播放该剧情，当前剧情才允许触发。
+# - story_npc_cured / story_npc_failed_*：绑定发起本次治疗的主剧情。
+# 治疗结果剧情使用该字段后，不再依赖 trigger_npc_id。
 @export var trigger_story_id: String = ""
 
 # 剧情触发类型：
@@ -24,14 +25,10 @@ const TRIGGER_TYPE_STORY_NPC_FAILED_OVER := "story_npc_failed_over"
 @export_enum("scene_enter", "story_npc_cured", "story_npc_failed_retry", "story_npc_failed_back", "story_npc_failed_over")
 var trigger_type: String = TRIGGER_TYPE_SCENE_ENTER
 
-# 当 trigger_type 为 story_npc_cured / story_npc_failed_retry /
-# story_npc_failed_back / story_npc_failed_over 时，
-# 填写对应 story NPC 的 npc_id。
+# 旧治疗结果配置兼容字段。
+# 当治疗结果剧情没有填写 trigger_story_id 时，才按该 story NPC 的 npc_id 匹配。
+# 新剧情统一使用 trigger_story_id 绑定治疗主剧情，此字段留空。
 @export var trigger_npc_id: String = ""
-
-# 当 trigger_type 为 story_npc_cured 时，表示该 NPC 第几次被治愈后触发。
-# 默认值 1 兼容现有剧情；非 story_npc_cured 类型不会检查这个字段。
-@export_range(1, 999, 1) var trigger_cure_count: int = 1
 
 # 剧情触发场景，例如 clinic / night / map
 @export_enum("clinic", "night", "map")
@@ -39,7 +36,8 @@ var trigger_scene: String = "clinic"
 
 # 剧情触发天数：
 # - trigger_story_id 为空：表示游戏第几天开始允许触发。
-# - trigger_story_id 非空：表示前置剧情完整播放结束后第几天允许触发。
+# - scene_enter 且 trigger_story_id 非空：表示前置剧情完整播放结束后第几天允许触发。
+# - 治疗结果剧情：必须填写 0，治疗结束后立即按 trigger_story_id 匹配。
 # - 0 表示不增加额外天数。
 @export var trigger_day: int = 0
 
