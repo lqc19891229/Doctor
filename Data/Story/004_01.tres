@@ -1,0 +1,78 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/gu_wen/gu_wen_before.png" id="clinic_npc_portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/gu_wen/gu_wen.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Background/004/004.png" id="background_3"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_yan_wen/li_yan_wen.png" id="portrait_4"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_5"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "顾问"
+text = "言闻兄别来无恙啊。"
+portrait = ExtResource("portrait_2")
+background = ExtResource("background_3")
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "李言闻"
+text = "哎哟，是日岩兄啊，失迎失迎。"
+portrait = ExtResource("portrait_4")
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "顾问"
+text = "东璧近来如何啊？"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "李言闻"
+text = "和我学了一年多医术，现在啊已经能自己出诊了。你还别说，这小子还真是块学医的材料。"
+portrait = ExtResource("portrait_4")
+[sub_resource type="Resource" id="StoryLine_005"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "顾先生，学生有礼了。"
+portrait = ExtResource("portrait_5")
+[sub_resource type="Resource" id="StoryLine_006"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "顾问"
+text = "正好我这几日不怎么舒服，东璧你给我看看。"
+portrait = ExtResource("portrait_2")
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "004_01"
+trigger_story_id = ""
+trigger_type = "scene_enter"
+trigger_scene = "night"
+trigger_npc_id = ""
+trigger_cure_count = 1
+trigger_day = 3
+required_reputation_points = 0
+reputation_points_change = 0
+experience_points_change = 0
+unlock_entry_id = ""
+play_once = true
+return_scene = "night"
+clinic_npc_id = "gu_wen"
+clinic_npc_portrait = ExtResource("clinic_npc_portrait_1")
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006")])

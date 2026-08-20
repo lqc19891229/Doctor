@@ -174,6 +174,11 @@ var last_formula_judge_summary_text: String = ""
 # 2. JudgementResult 会读取这个列表，并在 RichTextLabel 中给出解锁提示。
 var last_newly_unlocked_entry_titles: Array[String] = []
 
+# 最近一次提交处方后，实际发生的 random NPC 固定奖励变化。
+# story NPC 的奖励由 StoryData 在剧情播放完成时结算，不写入这里。
+var last_reputation_change: int = 0
+var last_experience_change: int = 0
+
 # 当前打开的判定结果窗口
 var judgement_result_window: Control = null
 
@@ -711,6 +716,8 @@ func refresh_clinic_view() -> void:
 	last_formula_judge_result = null
 	last_formula_judge_summary_text = ""
 	last_newly_unlocked_entry_titles.clear()
+	last_reputation_change = 0
+	last_experience_change = 0
 	waiting_judgement_after_treatment_dialogue = false
 
 	current_display_region_name = DEFAULT_DISPLAY_REGION
@@ -959,6 +966,8 @@ func submit_prescription() -> bool:
 	last_formula_judge_result = result
 	last_formula_judge_summary_text = summary_text
 	last_newly_unlocked_entry_titles.clear()
+	last_reputation_change = 0
+	last_experience_change = 0
 
 	# random NPC 继续沿用治疗判定时的固定奖励与惩罚。
 	# story NPC 的名望和心得不在这里结算，改由后续 StoryData 配置，
@@ -981,6 +990,7 @@ func submit_prescription() -> bool:
 	if reputation_reward != 0 and not was_already_submitted:
 		if Unlock != null and Unlock.has_method("add_reputation_points"):
 			Unlock.add_reputation_points(reputation_reward)
+			last_reputation_change = reputation_reward
 			_update_reputation_point_ui(true)
 
 			if reputation_reward > 0:
@@ -1021,6 +1031,7 @@ func submit_prescription() -> bool:
 		var newly_unlocked_titles: Array[String] = []
 		if Unlock != null and Unlock.has_method("add_experience_point"):
 			newly_unlocked_titles = Unlock.add_experience_point(1)
+			last_experience_change = 1
 
 		_update_thoughts_point_ui(true)
 		summary_text += "\n获得心得：+1"
@@ -1159,7 +1170,13 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 		"grade": grade,
 		"total_score": total_score,
 		"summary_text": summary_text,
-		"newly_unlocked_entry_titles": last_newly_unlocked_entry_titles.duplicate()
+		"newly_unlocked_entry_titles": last_newly_unlocked_entry_titles.duplicate(),
+		"show_reward_change": (
+			current_npc != null
+			and current_npc.npc_type.strip_edges().to_lower() != "story"
+		),
+		"reputation_change": last_reputation_change,
+		"experience_change": last_experience_change
 	}
 
 
@@ -1526,6 +1543,8 @@ func prepare_story_npc_treatment(npc_id: String, day: int) -> bool:
 	last_formula_judge_result = null
 	last_formula_judge_summary_text = ""
 	last_newly_unlocked_entry_titles.clear()
+	last_reputation_change = 0
+	last_experience_change = 0
 	waiting_judgement_after_treatment_dialogue = false
 	_reset_pulse_keyboard_state()
 	return true
@@ -1648,6 +1667,8 @@ func finish_story_treatment_attempt(success: bool, trigger_scene: String) -> Sto
 		last_formula_judge_result = null
 		last_formula_judge_summary_text = ""
 		last_newly_unlocked_entry_titles.clear()
+		last_reputation_change = 0
+		last_experience_change = 0
 
 	if SaveManager != null and SaveManager.has_method("save_game"):
 		SaveManager.save_game()

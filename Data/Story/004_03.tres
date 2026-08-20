@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Background/004/004.png" id="background_2"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "不对，我需要好好想想这是什么病，该开什么方。"
+portrait = ExtResource("portrait_1")
+background = ExtResource("background_2")
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "004_03"
+trigger_story_id = ""
+trigger_type = "story_npc_failed_retry"
+trigger_scene = "night"
+trigger_npc_id = "gu_wen"
+trigger_cure_count = 1
+trigger_day = 0
+required_reputation_points = 0
+reputation_points_change = 0
+experience_points_change = 0
+unlock_entry_id = ""
+play_once = false
+return_scene = "night"
+clinic_npc_id = ""
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001")])

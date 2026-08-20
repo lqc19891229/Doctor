@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" path="res://Assets/Background/003/003_04.png" id="background_2"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_3"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_gong_wang/chu_gong_wang.png" id="portrait_4"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chen_pi/chen_pi.png" id="portrait_5"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
@@ -27,11 +28,57 @@ portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "mid"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "楚恭王"
-text = "先生真是华佗再世，小王无以为报"
+text = "先生真是华佗再世，小王无以为报。这一千两白银是我的一点心意，感谢先生救命之恩。"
 portrait = ExtResource("portrait_4")
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "草民行医只取诊费十文，这一千两小人不能收。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_005"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "陈皮"
+text = "少掌柜的那可是一千两白银啊！"
+portrait = ExtResource("portrait_5")
+[sub_resource type="Resource" id="StoryLine_006"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "世子乃人中龙凤，可天下人只要来看病，草民眼里看到的就只有病人。十文是诊费，绝非世子命价。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_007"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "楚恭王"
+text = "……先生好风骨，本王平日见的那些儒生满口仁义，可见了真金白银没几个不迷糊的。有您这样的大夫是天下苍生之福啊。"
+portrait = ExtResource("portrait_4")
+[sub_resource type="Resource" id="StoryLine_008"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "楚恭王"
+text = "先生的恩情本王记下了，日后有能帮到先生的地方尽管开口。"
+portrait = ExtResource("portrait_4")
+[sub_resource type="Resource" id="StoryLine_009"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = "名声+1000"
 
 [resource]
 script = ExtResource("2_storydata")
@@ -43,10 +90,10 @@ trigger_npc_id = "shi_zi"
 trigger_cure_count = 1
 trigger_day = 0
 required_reputation_points = 0
-reputation_points_change = 0
-experience_points_change = 0
+reputation_points_change = 1000
+experience_points_change = 5
 unlock_entry_id = ""
 play_once = true
 return_scene = "night"
 clinic_npc_id = ""
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009")])

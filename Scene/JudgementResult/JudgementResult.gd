@@ -22,6 +22,9 @@ func show_result(data: Dictionary) -> void:
 	var player_disease_name: String = str(data.get("player_disease_name", ""))
 	var player_prescription_text: String = str(data.get("player_prescription_text", ""))
 	var newly_unlocked_entry_titles: Array[String] = _get_string_array(data.get("newly_unlocked_entry_titles", []))
+	var show_reward_change: bool = bool(data.get("show_reward_change", false))
+	var reputation_change: int = int(data.get("reputation_change", 0))
+	var experience_change: int = int(data.get("experience_change", 0))
 
 	# 清空之前内容
 	result_text.clear()
@@ -34,6 +37,11 @@ func show_result(data: Dictionary) -> void:
 	# 下半部分：玩家输入
 	result_text.append_text("断病：%s\n" % player_disease_name)
 	result_text.append_text("开方：\n%s\n" % player_prescription_text)
+
+	if show_reward_change:
+		result_text.append_text("\n[b]本次治疗奖励：[/b]\n")
+		result_text.append_text("名望变化：%s\n" % _format_change(reputation_change))
+		result_text.append_text("心得变化：%s\n" % _format_change(experience_change))
 
 	if not newly_unlocked_entry_titles.is_empty():
 		result_text.append_text("\n[b]心得新悟：[/b]解锁新条目：%s\n" % "、".join(newly_unlocked_entry_titles))
@@ -68,6 +76,12 @@ func _get_string_array(value) -> Array[String]:
 				result.append(text)
 
 	return result
+
+
+func _format_change(value: int) -> String:
+	if value > 0:
+		return "+%d" % value
+	return str(value)
 
 
 func _placeholder(text: String) -> String:
