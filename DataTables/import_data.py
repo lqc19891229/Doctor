@@ -808,36 +808,37 @@ def is_valid_resource_path(path_text: Any) -> bool:
 
 def get_npc_portrait_base_dir(npc_type: str) -> str:
     """
-    功能：根据 NPC 类型返回立绘所在目录。
-    random -> res://Assets/Portrait/RandomNpc
-    story  -> res://Assets/Portrait/StoryNpc
+    功能：返回需要自动写入 NpcData 的治疗前后立绘目录。
+    规则：
+    1. random NPC 使用 res://Assets/Portrait/RandomNpc。
+    2. story NPC 不在 NpcData 中写入治疗前后立绘，诊疗立绘改由 Story.ClinicNpcPortraitPath 配置。
     """
-    if npc_type == "story":
-        return "res://Assets/Portrait/StoryNpc"
-    return "res://Assets/Portrait/RandomNpc"
+    if npc_type == "random":
+        return "res://Assets/Portrait/RandomNpc"
+    return ""
 
 
 def get_npc_portrait_before_path(npc_id: str, npc_type: str) -> str:
     """
-    功能：根据 NpcID 和 NpcType 自动生成治疗前立绘路径。
+    功能：自动生成 random NPC 的治疗前立绘路径。
     random -> res://Assets/Portrait/RandomNpc/{NpcID}_before.png
-    story  -> res://Assets/Portrait/StoryNpc/{NpcID}/{NpcID}_before.png
+    story  -> 不写入，返回空字符串。
     """
     base_dir = get_npc_portrait_base_dir(npc_type)
-    if npc_type == "story":
-        return f"{base_dir}/{npc_id}/{npc_id}_before.png"
+    if not base_dir:
+        return ""
     return f"{base_dir}/{npc_id}_before.png"
 
 
 def get_npc_portrait_after_path(npc_id: str, npc_type: str) -> str:
     """
-    功能：根据 NpcID 和 NpcType 自动生成治疗后立绘路径。
+    功能：自动生成 random NPC 的治疗后立绘路径。
     random -> res://Assets/Portrait/RandomNpc/{NpcID}_after.png
-    story  -> res://Assets/Portrait/StoryNpc/{NpcID}/{NpcID}_after.png
+    story  -> 不写入，返回空字符串。
     """
     base_dir = get_npc_portrait_base_dir(npc_type)
-    if npc_type == "story":
-        return f"{base_dir}/{npc_id}/{npc_id}_after.png"
+    if not base_dir:
+        return ""
     return f"{base_dir}/{npc_id}_after.png"
 
 
@@ -1561,12 +1562,15 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         if age < 0:
             errors.append(f"Npc 年龄非法: {npc_id} -> {row.get('Age')}")
 
-        portrait_before_path = get_npc_portrait_before_path(npc_id, npc_type)
-        portrait_after_path = get_npc_portrait_after_path(npc_id, npc_type)
-        if not is_valid_resource_path(portrait_before_path):
-            errors.append(f"Npc 治疗前立绘路径非法: {npc_id} -> {portrait_before_path}")
-        if not is_valid_resource_path(portrait_after_path):
-            errors.append(f"Npc 治疗后立绘路径非法: {npc_id} -> {portrait_after_path}")
+        # 只有 random NPC 才由 NpcData 自动写入治疗前后立绘。
+        # story NPC 的诊疗立绘由对应 Story 的 ClinicNpcPortraitPath 配置。
+        if npc_type == "random":
+            portrait_before_path = get_npc_portrait_before_path(npc_id, npc_type)
+            portrait_after_path = get_npc_portrait_after_path(npc_id, npc_type)
+            if not is_valid_resource_path(portrait_before_path):
+                errors.append(f"Npc 治疗前立绘路径非法: {npc_id} -> {portrait_before_path}")
+            if not is_valid_resource_path(portrait_after_path):
+                errors.append(f"Npc 治疗后立绘路径非法: {npc_id} -> {portrait_after_path}")
 
     for story_id, row in story_map.items():
         if not as_str(row.get("StoryName")):
@@ -2337,6 +2341,8 @@ def build_npc_resources(indexed_data: dict[str, Any]) -> None:
     1. NPC 基础资源不再配置固定疾病。
     2. random NPC 的疾病由运行时随机分配。
     3. StoryNPC 的疾病由发起诊疗的 Story.Disease 配置。
+    4. 只有 random NPC 写入 portrait_before_treatment / portrait_after_treatment。
+    5. StoryNPC 不写入治疗前后立绘，诊疗画面统一由 Story.ClinicNpcPortraitPath 配置。
     """
     npc_map = indexed_data["npc_map"]
 
@@ -2351,8 +2357,13 @@ def build_npc_resources(indexed_data: dict[str, Any]) -> None:
         dialogue_suffix = as_str(row.get("DialogueSuffix"))
         dialogue_after_treatment = as_str(row.get("DialogueAfterTreatment"))
         dialogue_treatment_failed = as_str(row.get("dialogueTreatmentFailed"))
-        portrait_before_path = get_npc_portrait_before_path(npc_id, npc_type)
-        portrait_after_path = get_npc_portrait_after_path(npc_id, npc_type)
+        # random NPC 保留原有治疗前后立绘自动写入逻辑。
+        # story NPC 不在 NpcData 中写入治疗前后立绘；诊疗立绘由 Story.ClinicNpcPortraitPath 负责。
+        portrait_before_path = ""
+        portrait_after_path = ""
+        if npc_type == "random":
+            portrait_before_path = get_npc_portrait_before_path(npc_id, npc_type)
+            portrait_after_path = get_npc_portrait_after_path(npc_id, npc_type)
 
         ext_lines = [
             f'[ext_resource type="Script" path="{NPC_DATA_SCRIPT_PATH}" id="1"]',
