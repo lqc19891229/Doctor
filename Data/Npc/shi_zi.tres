@@ -1,19 +1,14 @@
-[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="NpcData" format=3 uid="uid://cejd0v23qd85w"]
 
-[ext_resource type="Script" path="res://System/Npc/NpcData.gd" id="1"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi_before.png" id="portrait_before_1"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi_after.png" id="portrait_after_1"]
+[ext_resource type="Script" uid="uid://cgp57bles5qo1" path="res://System/Npc/NpcData.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://50v5alenge5a" path="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi_after.png" id="portrait_after_1"]
+[ext_resource type="Texture2D" uid="uid://m2o7d5bafmek" path="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi_before.png" id="portrait_before_1"]
 
 [resource]
 script = ExtResource("1")
 npc_id = "shi_zi"
 npc_type = "story"
 npc_name = "世子"
-gender = "男"
 age = 21
-dialogue_prefix = ""
-dialogue_suffix = ""
-dialogue_after_treatment = ""
-dialogue_treatment_failed = ""
 portrait_before_treatment = ExtResource("portrait_before_1")
 portrait_after_treatment = ExtResource("portrait_after_1")

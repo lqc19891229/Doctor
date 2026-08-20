@@ -665,10 +665,6 @@ func _on_story_treatment_requested(npc_id: String, disease: DiseaseData) -> void
 		_cancel_story_treatment("story NPC 诊疗后端准备失败：%s" % npc_id)
 		return
 
-	# clinic_npc_id 已经由隐藏 Clinic 后端接管，不能留到最终返回 Clinic 后再次消费。
-	if StoryManager != null and StoryManager.has_method("consume_pending_clinic_npc_id"):
-		StoryManager.consume_pending_clinic_npc_id()
-
 	if current_story_scene != null and current_story_scene.has_method("start_story_npc_treatment"):
 		current_story_scene.call(
 			"start_story_npc_treatment",

@@ -30,11 +30,6 @@ var current_story: StoryData = null
 # 正式流程里主要作为记录使用，真正返回由 Main.gd 控制。
 var return_scene_override: String = ""
 
-# 当前剧情台词结束后，需要交给隐藏 Clinic 后端接诊的 story NPC。
-# 这里不会在 clear_story() 中清空，而是等 Main 创建诊疗后端时消费。
-var pending_clinic_npc_id: String = ""
-
-
 # 是否已经播放过 Clinic 第一次进入剧情。
 # 注意：
 # 这是旧逻辑兼容变量。
@@ -147,12 +142,6 @@ func set_story(story: StoryData, return_scene: String = "") -> bool:
 
 	current_story = story
 	return_scene_override = return_scene
-
-	# 如果剧情配置了 clinic_npc_id，则台词结束后在 Story 场景进入该 NPC 的诊疗阶段。
-	pending_clinic_npc_id = ""
-	var raw_clinic_npc_id = story.get("clinic_npc_id")
-	if raw_clinic_npc_id != null:
-		pending_clinic_npc_id = String(raw_clinic_npc_id).strip_edges()
 
 	return true
 
@@ -397,16 +386,8 @@ func clear_story() -> void:
 	# 清空当前剧情缓存。
 	# 不要清空 has_played_clinic_intro，否则回到 Clinic 后会重复播放教学剧情。
 	# 不要清空 played_story_ids，否则所有一次性剧情都会再次触发。
-	# 不要在这里清空 pending_clinic_npc_id，它需要等 Clinic 重新进入后消费。
 	current_story = null
 	return_scene_override = ""
-
-
-func consume_pending_clinic_npc_id() -> String:
-	# Main 创建 Story 诊疗后端后调用。读取后立刻清空，避免最终回 Clinic 时再次套用。
-	var result := pending_clinic_npc_id.strip_edges()
-	pending_clinic_npc_id = ""
-	return result
 
 
 func register_story_path(story_path: String) -> void:
@@ -606,8 +587,7 @@ func get_save_data() -> Dictionary:
 	return {
 		"played_story_ids": played_story_ids.duplicate(true),
 		"played_story_days": played_story_days.duplicate(true),
-		"has_played_clinic_intro": has_played_clinic_intro,
-		"pending_clinic_npc_id": pending_clinic_npc_id
+		"has_played_clinic_intro": has_played_clinic_intro
 	}
 
 
@@ -618,7 +598,6 @@ func load_save_data(data: Dictionary) -> void:
 	# 先清空，避免读档时残留上一次运行的数据。
 	played_story_ids.clear()
 	played_story_days.clear()
-	pending_clinic_npc_id = ""
 	current_story = null
 	return_scene_override = ""
 
@@ -630,11 +609,6 @@ func load_save_data(data: Dictionary) -> void:
 	# 旧存档没有该字段时保持为空，触发检查会按第 0 天兼容处理。
 	if data.has("played_story_days") and typeof(data["played_story_days"]) == TYPE_DICTIONARY:
 		played_story_days = data["played_story_days"].duplicate(true)
-
-	# 恢复剧情结束后等待 Clinic 消费的 story NPC。
-	# 这样在剧情期间退出并读档时，不会丢失剧情指定的病人。
-	if data.has("pending_clinic_npc_id"):
-		pending_clinic_npc_id = String(data["pending_clinic_npc_id"]).strip_edges()
 
 	# 恢复旧逻辑兼容变量。
 	if data.has("has_played_clinic_intro"):

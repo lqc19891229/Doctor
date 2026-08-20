@@ -1205,7 +1205,7 @@ def resolve_disease_id(
     disease_map: dict[str, dict[str, Any]],
     disease_name_to_id: dict[str, str],
 ) -> str:
-    """把 Npc / Story 的 Disease 中填写的 ID 或名称统一转换为 DiseaseID。"""
+    """把 Story 的 Disease 中填写的 ID 或名称统一转换为 DiseaseID。"""
     disease_text = as_str(disease_value)
     if not disease_text:
         return ""
@@ -1346,7 +1346,7 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
         if theory_id:
             theory_map[theory_id] = row
 
-    # 建立 NpcID -> 行数据映射；Disease 列会在导出时按 ID 或名称解析。
+    # 建立 NpcID -> 行数据映射。NPC 基础表不再配置固定 Disease。
     for row in raw_data[SHEET_NPC]:
         npc_id = as_str(row.get("NpcID"))
         if npc_id:
@@ -1560,20 +1560,6 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         age = as_int(row.get("Age"), -1)
         if age < 0:
             errors.append(f"Npc 年龄非法: {npc_id} -> {row.get('Age')}")
-
-        disease_text = as_str(row.get("Disease"))
-        disease_id = resolve_disease_id(
-            disease_text,
-            disease_map,
-            disease_name_to_id,
-        )
-        if npc_type == "story" and disease_text:
-            errors.append(
-                f"Story NPC 不应配置固定疾病，请把 Disease 移到发起诊疗的 Story: "
-                f"{npc_id} -> {disease_text}"
-            )
-        elif disease_text and not disease_id:
-            errors.append(f"Npc 疾病名称或 ID 不存在: {npc_id} -> {disease_text}")
 
         portrait_before_path = get_npc_portrait_before_path(npc_id, npc_type)
         portrait_after_path = get_npc_portrait_after_path(npc_id, npc_type)
@@ -2347,12 +2333,12 @@ def build_npc_resources(indexed_data: dict[str, Any]) -> None:
     """
     功能：根据 Npc 表生成 NPC 基础资源。
     输出：res://Data/Npc/{NpcID}.tres
-    说明：random NPC 的 Disease 可填写 DiseaseID 或疾病名称；
-    StoryNPC 的疾病必须改在发起诊疗的 Story 中填写。
+    说明：
+    1. NPC 基础资源不再配置固定疾病。
+    2. random NPC 的疾病由运行时随机分配。
+    3. StoryNPC 的疾病由发起诊疗的 Story.Disease 配置。
     """
     npc_map = indexed_data["npc_map"]
-    disease_map = indexed_data["disease_map"]
-    disease_name_to_id = indexed_data["disease_name_to_id"]
 
     ensure_dir(NPC_OUTPUT_DIR)
 
@@ -2367,36 +2353,27 @@ def build_npc_resources(indexed_data: dict[str, Any]) -> None:
         dialogue_treatment_failed = as_str(row.get("dialogueTreatmentFailed"))
         portrait_before_path = get_npc_portrait_before_path(npc_id, npc_type)
         portrait_after_path = get_npc_portrait_after_path(npc_id, npc_type)
-        disease_id = ""
-        if npc_type != "story":
-            disease_id = resolve_disease_id(
-                row.get("Disease"),
-                disease_map,
-                disease_name_to_id,
-            )
 
         ext_lines = [
             f'[ext_resource type="Script" path="{NPC_DATA_SCRIPT_PATH}" id="1"]',
         ]
 
-        disease_ext_id = ""
         portrait_before_ext_id = ""
         portrait_after_ext_id = ""
 
-        if disease_id:
-            disease_ext_id = "disease_1"
-            disease_path = f"res://Data/Disease/{safe_filename(disease_id)}.tres"
-            ext_lines.append(
-                f'[ext_resource type="Resource" path="{disease_path}" id="{disease_ext_id}"]'
-            )
-
         if portrait_before_path:
             portrait_before_ext_id = "portrait_before_1"
-            ext_lines.append(f'[ext_resource type="Texture2D" path="{portrait_before_path}" id="{portrait_before_ext_id}"]')
+            ext_lines.append(
+                f'[ext_resource type="Texture2D" path="{portrait_before_path}" '
+                f'id="{portrait_before_ext_id}"]'
+            )
 
         if portrait_after_path:
             portrait_after_ext_id = "portrait_after_1"
-            ext_lines.append(f'[ext_resource type="Texture2D" path="{portrait_after_path}" id="{portrait_after_ext_id}"]')
+            ext_lines.append(
+                f'[ext_resource type="Texture2D" path="{portrait_after_path}" '
+                f'id="{portrait_after_ext_id}"]'
+            )
 
         load_steps = len(ext_lines) + 1
 
@@ -2414,15 +2391,20 @@ def build_npc_resources(indexed_data: dict[str, Any]) -> None:
             f'dialogue_treatment_failed = {format_godot_string(dialogue_treatment_failed)}',
         ]
 
-        if disease_ext_id:
-            resource_lines.append(f'disease = {format_ext_resource_value(disease_ext_id)}')
         if portrait_before_ext_id:
-            resource_lines.append(f'portrait_before_treatment = {format_ext_resource_value(portrait_before_ext_id)}')
+            resource_lines.append(
+                f'portrait_before_treatment = '
+                f'{format_ext_resource_value(portrait_before_ext_id)}'
+            )
         if portrait_after_ext_id:
-            resource_lines.append(f'portrait_after_treatment = {format_ext_resource_value(portrait_after_ext_id)}')
+            resource_lines.append(
+                f'portrait_after_treatment = '
+                f'{format_ext_resource_value(portrait_after_ext_id)}'
+            )
 
         npc_content_parts = [
-            f'[gd_resource type="Resource" script_class="NpcData" load_steps={load_steps} format=3]',
+            f'[gd_resource type="Resource" script_class="NpcData" '
+            f'load_steps={load_steps} format=3]',
             "",
             *ext_lines,
             "",
@@ -2430,7 +2412,10 @@ def build_npc_resources(indexed_data: dict[str, Any]) -> None:
             "",
         ]
 
-        write_text_file(NPC_OUTPUT_DIR / f"{safe_filename(npc_id)}.tres", "\n".join(npc_content_parts))
+        write_text_file(
+            NPC_OUTPUT_DIR / f"{safe_filename(npc_id)}.tres",
+            "\n".join(npc_content_parts),
+        )
 
 
 def clear_output_dirs() -> None:
