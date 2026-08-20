@@ -1,5 +1,7 @@
 extends Control
 
+signal result_closed
+
 @onready var title_label: Label = $Panel/VBoxContainer/Title
 @onready var result_text: RichTextLabel = $Panel/VBoxContainer/RichTextLabel
 @onready var rating_image: TextureRect = $Panel/VBoxContainer/RatingImage  # 新增节点
@@ -99,6 +101,14 @@ func _input(event: InputEvent) -> void:
 
 
 func close_result() -> void:
+	# 防止同一帧重复点击造成重复发送关闭事件。
+	if not visible:
+		return
+
 	visible = false
 	get_tree().paused = false
+
+	# 业务流程使用显式信号推进，不再依赖 tree_exited / queue_free 时机。
+	result_closed.emit()
+
 	queue_free()

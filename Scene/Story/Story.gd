@@ -553,11 +553,23 @@ func _show_story_judgement_result(result_data: Dictionary) -> void:
 		_on_story_judgement_result_closed()
 		return
 
-	if not judgement_result_window.tree_exited.is_connected(_on_story_judgement_result_closed):
-		judgement_result_window.tree_exited.connect(
-			_on_story_judgement_result_closed,
-			Object.CONNECT_ONE_SHOT
-		)
+	var close_callable := Callable(self, "_on_story_judgement_result_closed")
+
+	# JudgementResult 主动发送 result_closed，避免把剧情推进绑定到节点销毁时机。
+	# 保留 tree_exited 兜底，兼容临时使用旧版 JudgementResult.gd 的情况。
+	if judgement_result_window.has_signal("result_closed"):
+		if not judgement_result_window.is_connected("result_closed", close_callable):
+			judgement_result_window.connect(
+				"result_closed",
+				close_callable,
+				Object.CONNECT_ONE_SHOT
+			)
+	else:
+		if not judgement_result_window.tree_exited.is_connected(close_callable):
+			judgement_result_window.tree_exited.connect(
+				close_callable,
+				Object.CONNECT_ONE_SHOT
+			)
 
 	if judgement_result_window.has_method("show_result"):
 		judgement_result_window.call("show_result", result_data)

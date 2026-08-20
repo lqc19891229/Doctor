@@ -1102,11 +1102,23 @@ func _show_judgement_result_window(judge_result = null, summary_text: String = "
 
 	add_child(judgement_result_window)
 
-	if not judgement_result_window.tree_exited.is_connected(_on_judgement_result_window_closed):
-		judgement_result_window.tree_exited.connect(
-			_on_judgement_result_window_closed,
-			Object.CONNECT_ONE_SHOT
-		)
+	var close_callable := Callable(self, "_on_judgement_result_window_closed")
+
+	# 与 Story 诊疗统一：优先使用 JudgementResult 的显式关闭信号。
+	# 保留 tree_exited 兜底，兼容临时使用旧版 JudgementResult.gd 的情况。
+	if judgement_result_window.has_signal("result_closed"):
+		if not judgement_result_window.is_connected("result_closed", close_callable):
+			judgement_result_window.connect(
+				"result_closed",
+				close_callable,
+				Object.CONNECT_ONE_SHOT
+			)
+	else:
+		if not judgement_result_window.tree_exited.is_connected(close_callable):
+			judgement_result_window.tree_exited.connect(
+				close_callable,
+				Object.CONNECT_ONE_SHOT
+			)
 
 	var result_data := _build_judgement_result_data(judge_result, summary_text)
 
@@ -1625,9 +1637,10 @@ func finish_story_treatment_attempt(
 			)
 
 		# 失败后继续治疗同一名 story NPC。
-		# diagnosis_submitted 保持 true，只清空下一次诊疗需要重开的处方。
+		# 重试视为一轮新的诊疗，清除上一轮的提交状态和处方。
 		current_npc.is_treated = false
 		current_npc.treatment_failed = false
+		diagnosis_submitted = false
 		current_prescription.clear()
 		current_prescription.clear_disease()
 		last_formula_judge_result = null
