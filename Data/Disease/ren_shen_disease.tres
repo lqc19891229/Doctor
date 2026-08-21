@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1")
-disease_id = "ren_shen"
+disease_id = "ren_shen_disease"
 disease_name = "妊娠"
 detail_text = "妊娠\n\n【病机】气血下聚冲任以养胎元，母体气血为胎元之本。胎之成，成于肾；胎之养，养于脾。\n\n【症状】恶心呕吐，食入即吐、厌油腻、头晕倦怠；\n\n\n【脉象】\n左尺（肾阴）：波线粗\n右尺（肾阳）：波峰高\n右关（脾）：波宽宽\n\n【标准方】泰山磐石散"
 recommended_formula_id = "tai_shan_pan_shi_san"
