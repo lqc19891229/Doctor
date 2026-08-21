@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1toplwmslqph"
-path="res://.godot/imported/c91ccb44-775a-4c2e-bcc2-471152940ea9.png-26c6b188311a483a099402a47b396cbd.ctex"
+uid="uid://c4yi2qe3bpiyq"
+path="res://.godot/imported/jia_quan.png-eebf271f0bd53b71a525e15b42f45913.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/StoryNpc/jia_quan/c91ccb44-775a-4c2e-bcc2-471152940ea9.png"
-dest_files=["res://.godot/imported/c91ccb44-775a-4c2e-bcc2-471152940ea9.png-26c6b188311a483a099402a47b396cbd.ctex"]
+source_file="res://Assets/Portrait/StoryNpc/jia_quan/jia_quan.png"
+dest_files=["res://.godot/imported/jia_quan.png-eebf271f0bd53b71a525e15b42f45913.ctex"]
 
 [params]
 

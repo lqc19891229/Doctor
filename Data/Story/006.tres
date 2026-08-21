@@ -2,33 +2,124 @@
 
 [ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
 [ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
-[ext_resource type="Texture2D" path="res://Assets/Background/" id="background_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/jia_quan/jia_quan.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Background/006/006.png" id="background_2"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_3"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chen_pi/chen_pi.png" id="portrait_4"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
-text = ""
-background = ExtResource("background_1")
+speaker = "贾荃"
+text = "生意兴隆啊老板，嘿嘿嘿。"
+portrait = ExtResource("portrait_1")
+background = ExtResource("background_2")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-text = ""
+speaker = "李东璧"
+text = "敢问您是？(哎呀我的妈，吓我一跳，这人什么时候进来的...)"
+portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_003"]
-script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "mid"
-inactive_portrait_mode = "dim"
-text = ""
-[sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
-text = ""
+speaker = "贾荃"
+text = "在下贾荃，是做药材生意的，在湖广省小有一点名气，嘿嘿嘿。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "久闻久闻，今日来小馆是所为何事呀？"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_005"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "贾荃"
+text = "呃，呵呵，今日是想找李神医谈一桩好生意。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_006"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "哦？愿闻其详。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_007"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "贾荃"
+text = "小可上个月进了一批人参，想请李兄在医馆帮忙出货。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_008"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "而是小馆平时接待的病患多是平常百姓，人参这种名贵药材用量是不多的。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_009"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "贾荃"
+text = "李兄此言差矣，人参是补药，是病就得补。像那种头疼脑热的小病您也给加一点，这量不就有了嘛。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_010"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "按病开方岂能胡乱加药？"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_011"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "贾荃"
+text = "不白加，每斤人参我给您一两白银的提成，怎么样，是桩好生意吧。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_012"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "您还是请回吧，陈皮，送客。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_013"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "陈皮"
+text = "贾老板，您这边请。"
+portrait = ExtResource("portrait_4")
+[sub_resource type="Resource" id="StoryLine_014"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "贾荃"
+text = "哼，真是不知好歹。"
+portrait = ExtResource("portrait_1")
 
 [resource]
 script = ExtResource("2_storydata")
@@ -44,4 +135,4 @@ unlock_entry_id = "ren_shen"
 play_once = true
 return_scene = "clinic"
 clinic_npc_id = ""
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011"), SubResource("StoryLine_012"), SubResource("StoryLine_013"), SubResource("StoryLine_014")])
