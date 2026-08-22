@@ -6,7 +6,8 @@
 oversampling_override = 1.0
 title = "信息测试窗口"
 initial_position = 2
-size = Vector2i(700, 530)
+size = Vector2i(900, 720)
+min_size = Vector2i(820, 650)
 script = ExtResource("1_q65oy")
 
 [node name="Panel" type="Panel" parent="." unique_id=1169367534]
@@ -18,18 +19,25 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=594532630]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
 
 [node name="InfoLabel" type="Label" parent="Panel/VBoxContainer" unique_id=706014656]
-custom_minimum_size = Vector2(500, 450)
+custom_minimum_size = Vector2(500, 180)
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
 autowrap_mode = 3
 
 [node name="ButtonRow" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=492678922]
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_constants/separation = 8
 
 [node name="PrevButton" type="Button" parent="Panel/VBoxContainer/ButtonRow" unique_id=1616406077]
 custom_minimum_size = Vector2(50, 50)
@@ -51,3 +59,113 @@ text = "结束当天"
 [node name="UnlockAllEntriesButton" type="Button" parent="Panel/VBoxContainer/ButtonRow" unique_id=1046239577]
 layout_mode = 2
 text = "解锁条目"
+
+[node name="ExtendedTestSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=1331944508]
+layout_mode = 2
+
+[node name="ExtendedTestPanel" type="VBoxContainer" parent="Panel/VBoxContainer" unique_id=1473572405]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="ExtendedTestTitle" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel" unique_id=1020170002]
+layout_mode = 2
+text = "开发测试功能"
+horizontal_alignment = 1
+
+[node name="ExtendedTestGrid" type="GridContainer" parent="Panel/VBoxContainer/ExtendedTestPanel" unique_id=1604738744]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="DayLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=745778350]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 2
+text = "当前日期序号"
+
+[node name="DaySpinBox" type="SpinBox" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=1376367288]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 9999.0
+value = 1.0
+allow_greater = true
+
+[node name="SetDayButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=632780042]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "修改日期"
+
+[node name="StoryLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=917134802]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 2
+text = "前置剧情"
+
+[node name="StoryOptionButton" type="OptionButton" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=817132345]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarkStoryPlayedButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=206462594]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "标记剧情已播放"
+
+[node name="ReputationLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=789430128]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 2
+text = "名望核心数值"
+
+[node name="ReputationSpinBox" type="SpinBox" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=1217953106]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 999999.0
+allow_greater = true
+
+[node name="SetReputationButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=1323102034]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "修改名望"
+
+[node name="ExperienceLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=825883676]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 2
+text = "心得核心数值"
+
+[node name="ExperienceSpinBox" type="SpinBox" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=1557900495]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 999999.0
+allow_greater = true
+
+[node name="SetExperienceButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=1942609671]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "修改心得"
+
+[node name="ReadUnlockedLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=2043549041]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 2
+text = "夜晚读书"
+
+[node name="ReadUnlockedHint" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=845168111]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "读取全部已解锁且尚未阅读的条目"
+autowrap_mode = 3
+
+[node name="ReadAllUnlockedButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=1874671160]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "一键阅读"
+
+[node name="TestStatusLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel" unique_id=465451194]
+custom_minimum_size = Vector2(760, 32)
+layout_mode = 2
+text = "当前测试状态"
+autowrap_mode = 3

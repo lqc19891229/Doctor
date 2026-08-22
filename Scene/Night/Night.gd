@@ -13,6 +13,8 @@ const NIGHT_AUTUMN_BACKGROUND: Texture2D = preload("res://Assets/Background/clin
 const NIGHT_WINTER_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/winter_night.png")
 
 @onready var read_book_window: Window = find_child("ReadBook", true, false) as Window
+@onready var info_window: Window = $InfoWindow
+@onready var info_label: Label = $InfoWindow/Panel/VBoxContainer/InfoLabel
 
 @onready var read_book_button: Button = find_child("ReadBookButton", true, false) as Button
 @onready var next_day_button: Button = find_child("NextDayButton", true, false) as Button
@@ -29,7 +31,6 @@ var topbar_controller = null
 
 # 玩家提示窗口（Control 版 PlayerHintWindow，需作为 Night.tscn 的子节点存在）
 var player_hint_window: Node = null
-
 
 func _ready() -> void:
 	_validate_scene_node_bindings()
@@ -53,6 +54,8 @@ func _validate_scene_node_bindings() -> void:
 	_check_node_binding(thoughts_point_label, "ThoughtsPoint")
 	_check_node_binding(reputation_point_label, "ReputationPoint")
 	_check_node_binding(night_background, "BackgroundImage")
+	_check_node_binding(info_window, "InfoWindow")
+	_check_node_binding(info_label, "InfoWindow/InfoLabel")
 
 
 func _check_node_binding(node: Node, node_name: String) -> void:
@@ -130,6 +133,61 @@ func _show_player_hint(message: String) -> void:
 		player_hint_window.call("show_hint", message)
 	else:
 		push_warning(message)
+
+
+# =========================
+# 开发测试窗口
+# InfoWindow 已在 Night.tscn 中固定实例化，信号也由场景文件连接。
+# =========================
+
+func open_info_window() -> void:
+	if not OS.is_debug_build():
+		return
+
+	if info_window == null:
+		push_warning("Night.gd 找不到 Night.tscn 中固定实例化的 InfoWindow。")
+		return
+
+	if info_window.has_method("open_window"):
+		info_window.call("open_window")
+	else:
+		info_window.popup_centered()
+
+
+func _set_info_window_text(message: String) -> void:
+	if info_label != null:
+		info_label.text = message
+	elif OS.is_debug_build():
+		print(message)
+
+
+func _on_info_window_end_today_requested() -> void:
+	# 在 Night 中，“结束当天”作为测试用的“立即结束夜晚”。
+	# 故意跳过未读条目检查，方便快速测试跨天流程。
+	night_finished.emit()
+
+
+func _on_info_window_unlock_all_entries_requested() -> void:
+	if Unlock == null or not Unlock.has_method("unlock_all_entries_for_test"):
+		_set_info_window_text("测试功能不可用：Unlock 缺少 unlock_all_entries_for_test()。")
+		return
+
+	var result: Dictionary = Unlock.call("unlock_all_entries_for_test")
+	_set_info_window_text("测试功能：已解锁全部条目\n条目：%d\n药材：%d\n方剂：%d\n疾病：%d\n医理：%d" % [
+		result.get("entry_count", 0),
+		result.get("herb_count", 0),
+		result.get("formula_count", 0),
+		result.get("disease_count", 0),
+		result.get("theory_count", 0)
+	])
+
+	_refresh_topbar(true)
+	if read_book_window != null and read_book_window.has_method("_refresh_book_list"):
+		read_book_window.call("_refresh_book_list")
+
+
+func _on_info_window_npc_action_requested() -> void:
+	_set_info_window_text("Night 场景没有当前病人；切换或生成病人的测试功能仅在 Clinic 可用。")
 
 
 # =========================
@@ -237,6 +295,27 @@ func _on_read_book_window_closed() -> void:
 
 func _on_player_data_changed() -> void:
 	_refresh_topbar()
+
+
+# =========================
+# 开发测试快捷键
+# Ctrl + T：打开 InfoWindow
+# =========================
+
+func _input(event: InputEvent) -> void:
+	if not OS.is_debug_build() or not is_visible_in_tree():
+		return
+
+	if not (event is InputEventKey):
+		return
+
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return
+
+	if key_event.ctrl_pressed and key_event.keycode == KEY_T:
+		open_info_window()
+		get_viewport().set_input_as_handled()
 
 
 # =========================

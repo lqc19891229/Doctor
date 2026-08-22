@@ -2,7 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://daannkka0fcs" path="res://Scene/ReadBook/ReadBook.tscn" id="1_s8hsq"]
 [ext_resource type="Script" uid="uid://b5g5rkphktrrq" path="res://Scene/Night/Night.gd" id="1_sax03"]
-[ext_resource type="PackedScene" uid="uid://53a2hc6l2p5q" path="res://Scene/PlayerHint/PlayerHintWindow.tscn" id="3_3ehag"]
+[ext_resource type="PackedScene" uid="uid://cbsehhhrv63ek" path="res://Scene/PlayerHint/PlayerHintWindow.tscn" id="3_3ehag"]
+[ext_resource type="PackedScene" uid="uid://drw157phi8l3n" path="res://Scene/Test/InfoWindow.tscn" id="4_info"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sax03"]
 
@@ -24,8 +25,11 @@ script = ExtResource("1_sax03")
 [node name="ReadBook" parent="." unique_id=1553429074 instance=ExtResource("1_s8hsq")]
 visible = false
 
+[node name="InfoWindow" parent="." unique_id=182963632 instance=ExtResource("4_info")]
+visible = false
+
 [node name="PlayerHintWindow" parent="." unique_id=198736852 instance=ExtResource("3_3ehag")]
-oversampling_override = 1.0
+layout_mode = 1
 
 [node name="Background" type="Control" parent="." unique_id=110989754]
 layout_mode = 1
@@ -130,3 +134,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "进入明天"
+
+[connection signal="end_today_requested" from="InfoWindow" to="." method="_on_info_window_end_today_requested"]
+[connection signal="next_npc_requested" from="InfoWindow" to="." method="_on_info_window_npc_action_requested"]
+[connection signal="prev_npc_requested" from="InfoWindow" to="." method="_on_info_window_npc_action_requested"]
+[connection signal="spawn_npc_requested" from="InfoWindow" to="." method="_on_info_window_npc_action_requested"]
+[connection signal="unlock_all_entries_requested" from="InfoWindow" to="." method="_on_info_window_unlock_all_entries_requested"]
