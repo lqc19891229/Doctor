@@ -573,12 +573,24 @@ func _play_story(story_path: String, _legacy_return_target: String = "") -> void
 
 	_save_game_with_warning("进入剧情前")
 
+	# Clinic / Night 即将被隐藏。先取得它当前实际显示的季节背景，
+	# 再注入 Story；Texture2D 资源引用不会因为来源场景隐藏而失效。
+	var current_background_texture := _get_current_scene_background_texture()
+
 	# 剧情作为覆盖层播放。原 Clinic / Night / Map 实例暂时隐藏，
 	# 这样 Story 中打开诊疗窗口时，画面始终停留在 Story 场景。
 	_set_scene_visible(current_scene, false)
 	_clear_story_overlay()
 
 	current_story_scene = STORY_SCENE.instantiate()
+	# 必须在 add_child() 前注入背景：Story._ready() 会在进入场景树时立即播放剧情。
+	if current_story_scene.has_method("set_current_scene_background_texture"):
+		current_story_scene.call(
+			"set_current_scene_background_texture",
+			current_background_texture
+		)
+	elif current_background_texture != null:
+		push_warning("Story 缺少 set_current_scene_background_texture()，无法使用当前场景背景。")
 	_connect_story_scene_signals(current_story_scene)
 	story_scene_root.add_child(current_story_scene)
 
@@ -834,6 +846,22 @@ func _set_scene_visible(scene_node: Node, should_be_visible: bool) -> void:
 
 	if scene_node is CanvasItem:
 		(scene_node as CanvasItem).visible = should_be_visible
+
+
+func _get_current_scene_background_texture() -> Texture2D:
+	# Clinic / Night 通过统一接口返回已经按当前天数切换完成的实际背景。
+	# Map 等其他场景以后也可以实现同名方法，无需继续修改 Main。
+	if current_scene == null or not is_instance_valid(current_scene):
+		return null
+
+	if not current_scene.has_method("get_current_background_texture"):
+		return null
+
+	var raw_texture = current_scene.call("get_current_background_texture")
+	if raw_texture is Texture2D:
+		return raw_texture as Texture2D
+
+	return null
 
 
 func _clear_story_treatment_backend() -> void:

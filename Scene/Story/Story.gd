@@ -19,7 +19,7 @@ const PORTRAIT_DIM_COLOR := Color(0.55, 0.55, 0.55, 0.72)
 #
 # 当前版本规则：
 # - 每段新剧情开始时，由 StoryData.background_mode 决定显示 default_background，
-#   或隐藏 Story 背景以露出下层当前保留的 Clinic / Night / Map 场景
+#   或显示 Main 在隐藏 Clinic / Night / Map 前传入的当前场景背景贴图
 # - StoryLine.background 可在任意一句中指定图片并覆盖当前场景
 # - 当前台词没有设置背景时，继续沿用上一句的背景状态
 # - StoryLine 负责：类型、说话人、文本、背景、立绘
@@ -116,6 +116,15 @@ var judgement_result_window: Control = null
 
 var pulse_keyboard_override_active: bool = false
 var last_pulse_input_signature: String = ""
+
+# Main 会在把 Story 加入场景树之前注入来源场景当前实际显示的背景。
+# 因此 Clinic / Night 即使随后被隐藏，Story 仍能显示正确的季节贴图。
+var current_scene_background_texture: Texture2D = null
+
+
+func set_current_scene_background_texture(texture: Texture2D) -> void:
+	# 这里只保存资源引用，不访问 @onready 节点；允许 Main 在 add_child() 前调用。
+	current_scene_background_texture = texture
 
 
 func _ready() -> void:
@@ -985,14 +994,19 @@ func _finish_typing() -> void:
 
 func _reset_story_background() -> void:
 	# default：保持原有行为，显示 Story 场景配置的默认背景。
-	# current_scene：隐藏 Story 自己的背景，直接露出下层仍在运行的场景。
+	# current_scene：显示 Main 在隐藏来源场景前传入的当前季节背景。
 	var background_mode := StoryData.BACKGROUND_MODE_DEFAULT
 	if story_data != null:
 		background_mode = story_data.background_mode.strip_edges().to_lower()
 
 	if background_mode == StoryData.BACKGROUND_MODE_CURRENT_SCENE:
-		background_rect.texture = null
-		background_rect.hide()
+		if current_scene_background_texture != null:
+			background_rect.texture = current_scene_background_texture
+		else:
+			# 独立运行 Story 或来源场景未实现背景接口时，至少保留原有默认背景兜底。
+			background_rect.texture = default_background
+			push_warning("Story 使用 current_scene，但没有收到当前场景背景贴图。")
+		background_rect.show()
 		return
 
 	background_rect.texture = default_background
@@ -1001,7 +1015,7 @@ func _reset_story_background() -> void:
 
 func _apply_line_background(line_data: StoryLine) -> void:
 	# 只在当前台词明确设置了背景时切换。
-	# 留空时保留上一句正在显示的背景，或继续显示下层当前场景。
+	# 留空时保留上一句正在显示的背景，或继续显示传入的当前场景背景贴图。
 	if line_data != null and line_data.background != null:
 		background_rect.texture = line_data.background
 		background_rect.show()

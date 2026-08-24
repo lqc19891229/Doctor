@@ -414,6 +414,13 @@ func _update_clinic_background() -> void:
 		clinic_background.texture = CLINIC_WINTER_BACKGROUND
 
 
+func get_current_background_texture() -> Texture2D:
+	# Main 在隐藏 Clinic 并播放 Story 前读取当前实际显示的季节背景。
+	if clinic_background == null:
+		return null
+	return clinic_background.texture
+
+
 # =========================================================
 # GameTimeManager：Clinic 时间结束回调
 # =========================================================

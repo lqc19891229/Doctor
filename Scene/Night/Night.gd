@@ -89,6 +89,13 @@ func _update_night_background(day: int) -> void:
 		night_background.texture = NIGHT_WINTER_BACKGROUND
 
 
+func get_current_background_texture() -> Texture2D:
+	# Main 在隐藏 Night 并播放 Story 前读取当前实际显示的季节背景。
+	if night_background == null:
+		return null
+	return night_background.texture
+
+
 # =========================
 # 初始化按钮
 # =========================
