@@ -7,6 +7,9 @@ const TRIGGER_TYPE_STORY_NPC_FAILED_RETRY := "story_npc_failed_retry"
 const TRIGGER_TYPE_STORY_NPC_FAILED_BACK := "story_npc_failed_back"
 const TRIGGER_TYPE_STORY_NPC_FAILED_OVER := "story_npc_failed_over"
 
+const BACKGROUND_MODE_DEFAULT := "default"
+const BACKGROUND_MODE_CURRENT_SCENE := "current_scene"
+
 # 剧情唯一 ID，用来记录是否已经播放过
 @export var story_id: String = ""
 
@@ -45,6 +48,13 @@ var trigger_scene: String = "clinic"
 # 是否只播放一次
 @export var play_once: bool = true
 
+# 每段新剧情开始时使用的背景模式：
+# - default：显示 Story 场景中配置的 default_background。
+# - current_scene：隐藏 Story 自己的背景，显示下层当前保留的 Clinic / Night / Map 场景。
+# StoryLine.background 仍可在任意一句中指定图片，并从该句开始覆盖当前场景。
+@export_enum("default", "current_scene")
+var background_mode: String = BACKGROUND_MODE_DEFAULT
+
 # 剧情结束后返回目标
 @export_enum("clinic", "night", "map")
 var return_scene: String = "clinic"
@@ -74,7 +84,7 @@ var return_scene: String = "clinic"
 
 # Story NPC 诊疗界面的立绘位置。
 @export_enum("left", "mid", "right")
-var clinic_npc_portrait_side: String = "right"
+var clinic_npc_portrait_side: String = "mid"
 
 # 台词列表
 @export var lines: Array[StoryLine] = []

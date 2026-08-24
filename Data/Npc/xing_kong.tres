@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Npc/NpcData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+npc_id = "xing_kong"
+npc_type = "story"
+npc_name = "性空"
+gender = "男"
+age = 46
+dialogue_prefix = ""
+dialogue_suffix = ""
+dialogue_after_treatment = ""
+dialogue_treatment_failed = ""

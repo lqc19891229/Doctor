@@ -140,6 +140,10 @@ STORY_LINE_CONTENT_HEADERS = [
 ]
 STORY_LINE_IMPORT_HEADERS = ["StoryID", "StoryName", *STORY_LINE_CONTENT_HEADERS]
 
+# StoryLine.BackgroundPath 的特殊值。
+# 填写该值时不按贴图路径解析，而是把所属 StoryData 的背景模式设为 current_scene。
+STORY_BACKGROUND_MODE_CURRENT_SCENE = "current_scene"
+
 # 只在剧情 xlsx -> Data.xlsx 的内存数据中使用，不会写入 Excel 或 .tres。
 # 用于携带来源单元格的格式及来源行高。
 STORY_CELL_STYLES_KEY = "__story_cell_styles__"
@@ -767,6 +771,16 @@ def normalize_inactive_portrait_mode(value: Any) -> str:
     if mode in ("hide", "dim", "normal"):
         return mode
     return "dim"
+
+
+def is_story_current_scene_background(value: Any) -> bool:
+    """
+    判断 StoryLine.BackgroundPath 是否要求显示当前下层场景。
+
+    该特殊值属于 StoryData 级设置，不会作为 Texture2D 路径写入 StoryLine。
+    忽略大小写和首尾空格，最终生成的 .tres 统一写为 current_scene。
+    """
+    return as_str(value).lower() == STORY_BACKGROUND_MODE_CURRENT_SCENE
 
 
 def get_first_value(row: dict[str, Any], column_names: list[str]) -> Any:
@@ -1718,7 +1732,10 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
                 )
 
             background_path = as_str(row.get("BackgroundPath"))
-            if not is_valid_resource_path(background_path):
+            if (
+                not is_story_current_scene_background(background_path)
+                and not is_valid_resource_path(background_path)
+            ):
                 errors.append(
                     f"StoryLine BackgroundPath 非法: {story_id} 第{i}行 -> {background_path}"
                 )
@@ -2184,6 +2201,10 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
 
     for story_id, story_row in story_map.items():
         story_lines = story_line_map.get(story_id, [])
+        use_current_scene_background = any(
+            is_story_current_scene_background(line_row.get("BackgroundPath"))
+            for line_row in story_lines
+        )
         story_name = as_str(story_row.get("StoryName"))
         trigger_type = as_str(story_row.get("TriggerType")).lower() or "scene_enter"
         trigger_scene = as_str(story_row.get("TriggerScene")).lower() or "clinic"
@@ -2267,10 +2288,13 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
                 story_speaker_npc_id_map,
             )
             portrait_ext_id = add_texture_resource(portrait_path, "portrait")
-            background_ext_id = add_texture_resource(
-                as_str(line_row.get("BackgroundPath")),
-                "background",
-            )
+            background_path = as_str(line_row.get("BackgroundPath"))
+            background_ext_id = ""
+            if not is_story_current_scene_background(background_path):
+                background_ext_id = add_texture_resource(
+                    background_path,
+                    "background",
+                )
 
             portrait_side = as_str(line_row.get("PortraitSide")) or "auto"
             inactive_portrait_mode = normalize_inactive_portrait_mode(line_row.get("Hide"))
@@ -2306,9 +2330,16 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             f'experience_points_change = {experience_points_change}',
             f'unlock_entry_id = {format_godot_string(unlock_entry_id)}',
             f'play_once = {"true" if play_once else "false"}',
+        ]
+        if use_current_scene_background:
+            resource_lines.append(
+                f'background_mode = '
+                f'{format_godot_string(STORY_BACKGROUND_MODE_CURRENT_SCENE)}'
+            )
+        resource_lines.extend([
             f'return_scene = {format_godot_string(return_scene)}',
             f'clinic_npc_id = {format_godot_string(clinic_npc_id)}',
-        ]
+        ])
         if clinic_disease_ext_id:
             resource_lines.append(
                 f'clinic_disease = {format_ext_resource_value(clinic_disease_ext_id)}'

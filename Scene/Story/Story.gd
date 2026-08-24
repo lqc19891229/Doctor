@@ -18,9 +18,10 @@ const PORTRAIT_DIM_COLOR := Color(0.55, 0.55, 0.55, 0.72)
 # 负责读取 StoryData，并逐句播放 StoryLine。
 #
 # 当前版本规则：
-# - 背景图只由 StoryLine.background 控制
-# - 当前台词没有设置背景时，继续沿用上一句背景
-# - 每段新剧情开始时，先重置为 default_background
+# - 每段新剧情开始时，由 StoryData.background_mode 决定显示 default_background，
+#   或隐藏 Story 背景以露出下层当前保留的 Clinic / Night / Map 场景
+# - StoryLine.background 可在任意一句中指定图片并覆盖当前场景
+# - 当前台词没有设置背景时，继续沿用上一句的背景状态
 # - StoryLine 负责：类型、说话人、文本、背景、立绘
 # - dialogue 类型会优先根据 StoryLine.portrait_side 手动指定左、中、右立绘位置
 # - portrait_side 为 auto 或空时，才根据 speaker 自动分配左右立绘位置
@@ -960,15 +961,27 @@ func _finish_typing() -> void:
 
 
 func _reset_story_background() -> void:
-	# 每段新剧情开始时重置背景。
+	# default：保持原有行为，显示 Story 场景配置的默认背景。
+	# current_scene：隐藏 Story 自己的背景，直接露出下层仍在运行的场景。
+	var background_mode := StoryData.BACKGROUND_MODE_DEFAULT
+	if story_data != null:
+		background_mode = story_data.background_mode.strip_edges().to_lower()
+
+	if background_mode == StoryData.BACKGROUND_MODE_CURRENT_SCENE:
+		background_rect.texture = null
+		background_rect.hide()
+		return
+
 	background_rect.texture = default_background
+	background_rect.show()
 
 
 func _apply_line_background(line_data: StoryLine) -> void:
 	# 只在当前台词明确设置了背景时切换。
-	# 留空时保留上一句正在显示的背景。
+	# 留空时保留上一句正在显示的背景，或继续显示下层当前场景。
 	if line_data != null and line_data.background != null:
 		background_rect.texture = line_data.background
+		background_rect.show()
 
 
 func _setup_default_view() -> void:

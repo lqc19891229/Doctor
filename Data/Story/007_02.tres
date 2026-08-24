@@ -1,0 +1,105 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Background/007/007.png" id="background_2"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/lei_wan_jun/lei_wan_jun.png" id="portrait_3"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "雷兄，你这肝阳上亢的老毛病，除了吃药，还得注意控制情绪，切莫扰动肝火。"
+portrait = ExtResource("portrait_1")
+background = ExtResource("background_2")
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "雷万钧"
+text = "哎呀，这都被你看出来啦。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "雷万钧"
+text = "昨日我带着兄弟们和州府的征粮官去收粮，这帮狗腿子淋间踢斛下手那叫一个狠，气的我直接骂娘。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "什么叫\"淋尖踢斛\"呀？"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_005"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "雷万钧"
+text = "贤弟你有所不知，百姓交粮时，要把粮食倒进斛里，堆得高出斛口，堆成尖尖的，这叫\"淋尖\"。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_006"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "雷万钧"
+text = "官吏踢斛，被震落洒在斛外的粮食，不算入百姓缴纳的赋税，直接入了这帮狗腿子的口袋。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_007"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "啊…这也太过分了…"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_008"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "雷万钧"
+text = "现在这淋尖踢斛已经是各处不成文的规矩了，但昨天那帮混蛋踢的太狠了，直接抢得了。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_009"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "百姓的日子是越来越不好过了，我去给你抓药，雷兄稍候。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_010"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "雷万钧"
+text = "有劳贤弟。"
+portrait = ExtResource("portrait_3")
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "007_02"
+trigger_story_id = "007_01"
+trigger_type = "story_npc_cured"
+trigger_scene = "night"
+trigger_day = 0
+required_reputation_points = 0
+reputation_points_change = 0
+experience_points_change = 0
+unlock_entry_id = ""
+play_once = true
+return_scene = "night"
+clinic_npc_id = ""
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010")])
