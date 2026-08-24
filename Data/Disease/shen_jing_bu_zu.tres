@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DiseaseData" format=3 uid="uid://c0vmjri0v6wi2"]
+[gd_resource type="Resource" script_class="DiseaseData" format=3 uid="uid://drll788v8oden"]
 
 [ext_resource type="Script" uid="uid://dccfyx4mej452" path="res://System/Disease/DiseaseData.gd" id="1"]
 

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StoryData" format=3 uid="uid://bu43bd264hfb"]
+[gd_resource type="Resource" script_class="StoryData" format=3 uid="uid://b78rqgnsva8et"]
 
 [ext_resource type="Script" uid="uid://norr1xwbdche" path="res://System/Story/StoryLine.gd" id="1_storyline"]
 [ext_resource type="Script" uid="uid://5hg5tfa6de3p" path="res://System/Story/StoryData.gd" id="2_storydata"]

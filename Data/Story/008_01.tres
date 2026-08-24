@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="StoryData" format=3 uid="uid://x6b3vm78vkbw"]
+[gd_resource type="Resource" script_class="StoryData" format=3 uid="uid://djo3qu3aaqqka"]
 
 [ext_resource type="Script" uid="uid://norr1xwbdche" path="res://System/Story/StoryLine.gd" id="1_storyline"]
 [ext_resource type="Script" uid="uid://5hg5tfa6de3p" path="res://System/Story/StoryData.gd" id="2_storydata"]
-[ext_resource type="Resource" uid="uid://c0vmjri0v6wi2" path="res://Data/Disease/shen_jing_bu_zu.tres" id="clinic_disease_1"]
+[ext_resource type="Resource" uid="uid://drll788v8oden" path="res://Data/Disease/shen_jing_bu_zu.tres" id="clinic_disease_1"]
 [ext_resource type="Texture2D" uid="uid://ci6j754v0v1ux" path="res://Assets/Portrait/StoryNpc/xing_kong/xing_kong_sick.png" id="clinic_npc_portrait_1"]
 [ext_resource type="Texture2D" uid="uid://btivew4tmgbst" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_2"]
 
