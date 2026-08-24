@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8nle3agbcu53"
-path="res://.godot/imported/xing_kong_before.png-2f7dba1f9448c58f3624b39d2ae05c64.ctex"
+uid="uid://bv6dnddme23lx"
+path="res://.godot/imported/shi_zi_sick.png-636a8020aba9daa20b04d8203f4c2527.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/StoryNpc/xing_kong/xing_kong_before.png"
-dest_files=["res://.godot/imported/xing_kong_before.png-2f7dba1f9448c58f3624b39d2ae05c64.ctex"]
+source_file="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi_sick.png"
+dest_files=["res://.godot/imported/shi_zi_sick.png-636a8020aba9daa20b04d8203f4c2527.ctex"]
 
 [params]
 

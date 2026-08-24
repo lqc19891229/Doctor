@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://domj2vqaq7flq"
-path="res://.godot/imported/gu_wen_before.png-8d8421afed0686dc80fc3c08558c262d.ctex"
+uid="uid://ci6j754v0v1ux"
+path="res://.godot/imported/xing_kong_sick.png-c120e3f77aa336579d7e4b228f012dea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/StoryNpc/gu_wen/gu_wen_before.png"
-dest_files=["res://.godot/imported/gu_wen_before.png-8d8421afed0686dc80fc3c08558c262d.ctex"]
+source_file="res://Assets/Portrait/StoryNpc/xing_kong/xing_kong_sick.png"
+dest_files=["res://.godot/imported/xing_kong_sick.png-c120e3f77aa336579d7e4b228f012dea.ctex"]
 
 [params]
 

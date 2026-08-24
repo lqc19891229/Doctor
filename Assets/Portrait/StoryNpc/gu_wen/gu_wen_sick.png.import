@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m2o7d5bafmek"
-path="res://.godot/imported/shi_zi_before.png-455c1c265bd7029c38d9218a3fa9c942.ctex"
+uid="uid://bnow7h745w83o"
+path="res://.godot/imported/gu_wen_sick.png-64448d72c33c8c0381ea30ea9fc84f33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi_before.png"
-dest_files=["res://.godot/imported/shi_zi_before.png-455c1c265bd7029c38d9218a3fa9c942.ctex"]
+source_file="res://Assets/Portrait/StoryNpc/gu_wen/gu_wen_sick.png"
+dest_files=["res://.godot/imported/gu_wen_sick.png-64448d72c33c8c0381ea30ea9fc84f33.ctex"]
 
 [params]
 

@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Resource" path="res://Data/Disease/tan_huo_rao_xin.tres" id="clinic_disease_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/jia_quan/jia_quan.png" id="clinic_npc_portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/lu_zhong/lu_zhong.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_3"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/jia_quan/jia_quan.png" id="portrait_4"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "陆忠"
+text = "大夫大夫！救命啊大夫！我家老爷要不行了！"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "出什么事了？"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "贾荃"
+text = ""
+portrait = ExtResource("portrait_4")
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+text = ""
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "009_01"
+trigger_story_id = ""
+trigger_type = "scene_enter"
+trigger_scene = "clinic"
+trigger_day = 0
+required_reputation_points = 0
+reputation_points_change = 0
+experience_points_change = 0
+unlock_entry_id = "tan_huo_rao_xin"
+play_once = true
+background_mode = "current_scene"
+return_scene = "clinic"
+clinic_npc_id = "jia_quan"
+clinic_disease = ExtResource("clinic_disease_1")
+clinic_npc_portrait = ExtResource("clinic_npc_portrait_1")
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004")])
