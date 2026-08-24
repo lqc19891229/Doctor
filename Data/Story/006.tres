@@ -70,7 +70,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "而是小馆平时接待的病患多是平常百姓，人参这种名贵药材用量是不多的。"
+text = "小馆平时接待的病患多是平常百姓，人参这种名贵药材用量是不多的。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_009"]
 script = ExtResource("1_storyline")

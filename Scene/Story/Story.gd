@@ -33,6 +33,8 @@ const PORTRAIT_DIM_COLOR := Color(0.55, 0.55, 0.55, 0.72)
 # - 打字机效果不再通过 substr() 逐字修改 RichTextLabel.text
 # - 改为先写入完整文本，再用 visible_characters 控制显示数量
 # - 避免 DialogueLabel 高度在打字过程中不断变化，导致 SpeakerLabel 被容器重排后轻微下移
+# - 进入 story NPC 治疗成功/失败结果剧情前，只清除诊疗阶段遗留的物理立绘槽
+#   不清除 speaker_side_map / speaker_portrait_map，保留正常 StoryLine 人物映射逻辑
 # =========================================================
 
 # 当前测试用剧情数据。
@@ -304,8 +306,29 @@ func play_story(
 
 
 func play_followup_story(data: StoryData, resume_treatment: bool) -> void:
-	# 诊疗结果剧情仍在同一个 Story 实例中播放，保留最后的背景和人物站位。
+	# 治疗成功 / 失败结果剧情仍在同一个 Story 实例中播放。
+	#
+	# 这里仅清除诊疗阶段遗留在 Left / Mid / Right 上的实际 TextureRect 内容，
+	# 不清除 speaker_side_map / speaker_portrait_map / next_speaker_side。
+	# 因此：
+	# - 不会把 clinic_npc_portrait 遗留到 004_01 等结果剧情里；
+	# - StoryLine 原本的 speaker 站位映射、portrait 复用规则仍然有效；
+	# - preserve_stage 仍为 true，所以背景继续保留上一阶段状态。
+	_clear_physical_portrait_slots()
 	play_story(data, true, resume_treatment)
+
+
+func _clear_physical_portrait_slots() -> void:
+	var portrait_rects: Array[TextureRect] = [
+		left_portrait_rect,
+		mid_portrait_rect,
+		right_portrait_rect,
+	]
+
+	for portrait_rect in portrait_rects:
+		portrait_rect.texture = null
+		portrait_rect.modulate = PORTRAIT_NORMAL_COLOR
+		portrait_rect.hide()
 
 
 # =========================================================
