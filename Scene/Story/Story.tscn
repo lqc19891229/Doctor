@@ -46,7 +46,7 @@ content_margin_left = 32.0
 content_margin_top = 24.0
 content_margin_right = 32.0
 content_margin_bottom = 24.0
-bg_color = Color(0, 0, 0, 0.42)
+bg_color = Color(0, 0, 0, 0.8)
 corner_radius_top_left = 14
 corner_radius_top_right = 14
 corner_radius_bottom_right = 14
@@ -61,6 +61,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_story_script")
+background_fade_duration = 0.8
 
 [node name="BackgroundRect" type="TextureRect" parent="." unique_id=541257213]
 layout_mode = 1
@@ -72,16 +73,6 @@ grow_vertical = 2
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 6
-
-[node name="DarkMask" type="ColorRect" parent="." unique_id=1167324796]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0.18)
 
 [node name="CharacterLayer" type="Control" parent="." unique_id=451120394]
 layout_mode = 1
@@ -291,15 +282,6 @@ theme_override_font_sizes/font_size = 20
 text = "点击 / 空格 /  继续，长按回车跳过剧情"
 horizontal_alignment = 2
 
-[node name="PulseWindow" parent="." unique_id=207002010 instance=ExtResource("2_pulse")]
-visible = false
-
-[node name="PrescriptionWindow" parent="." unique_id=207002011 instance=ExtResource("3_prescription")]
-visible = false
-
-[node name="ClinicalLogWindow" parent="." unique_id=207002012 instance=ExtResource("4_clinical_log")]
-visible = false
-
 [node name="JudgementResultHost" type="Control" parent="." unique_id=207002013]
 layout_mode = 1
 anchors_preset = 15
@@ -312,3 +294,22 @@ mouse_filter = 2
 [node name="JudgementResult" parent="JudgementResultHost" unique_id=207002014 instance=ExtResource("5_judgement")]
 visible = false
 layout_mode = 1
+
+[node name="DarkMask" type="ColorRect" parent="." unique_id=1167324796]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="PulseWindow" parent="." unique_id=207002010 instance=ExtResource("2_pulse")]
+visible = false
+
+[node name="PrescriptionWindow" parent="." unique_id=207002011 instance=ExtResource("3_prescription")]
+visible = false
+
+[node name="ClinicalLogWindow" parent="." unique_id=207002012 instance=ExtResource("4_clinical_log")]
+visible = false

@@ -47,6 +47,11 @@ const PORTRAIT_DIM_COLOR := Color(0.55, 0.55, 0.55, 0.72)
 # 打字机速度，数值越大显示越快。
 @export var type_speed: float = 40.0
 
+# 背景单次渐出或渐入的持续时间。
+# 完整换图过程为：旧背景渐出 -> 切换贴图 -> 新背景渐入，
+# 因此总时长约为该数值的两倍。
+@export_range(0.05, 2.0, 0.05) var background_fade_duration: float = 0.45
+
 # 长按回车跳过整段剧情需要持续按住的秒数。
 @export var enter_skip_hold_seconds: float = 1.0
 
@@ -117,6 +122,18 @@ var judgement_result_window: Control = null
 var pulse_keyboard_override_active: bool = false
 var last_pulse_input_signature: String = ""
 
+# 当前正在执行的背景渐变。
+# 保存引用后，可以在玩家快速推进、连续切换背景时终止旧动画，避免多个 Tween 互相覆盖。
+var background_fade_tween: Tween = null
+
+# 当前是否正在等待一句台词所配置的新背景完成渐出与渐入。
+# 过渡期间暂停剧情推进，避免对话框和立绘抢在新背景之前刷新。
+var is_background_transitioning: bool = false
+
+# DarkMask 在 Story.tscn 中原本用于压暗背景。
+# 运行时记录它的初始透明度，背景渐入完成后恢复到该值。
+var dark_mask_normal_alpha: float = 0.18
+
 # Main 会在把 Story 加入场景树之前注入来源场景当前实际显示的背景。
 # 因此 Clinic / Night 即使随后被隐藏，Story 仍能显示正确的季节贴图。
 var current_scene_background_texture: Texture2D = null
@@ -128,6 +145,8 @@ func set_current_scene_background_texture(texture: Texture2D) -> void:
 
 
 func _ready() -> void:
+	dark_mask_normal_alpha = dark_mask.color.a
+
 	_setup_default_view()
 	_connect_treatment_signals()
 
@@ -169,6 +188,12 @@ func _input(event: InputEvent) -> void:
 	if is_finished:
 		return
 
+	if is_background_transitioning:
+		# 背景过渡期间吞掉鼠标事件，防止连续点击推进下一句，
+		# 也避免事件继续传递给 Story 下方暂时隐藏的场景。
+		get_viewport().set_input_as_handled()
+		return
+
 	if waiting_for_treatment_backend:
 		return
 
@@ -188,6 +213,9 @@ func _input(event: InputEvent) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_finished:
+		return
+
+	if is_background_transitioning:
 		return
 
 	if waiting_for_treatment_backend:
@@ -232,7 +260,12 @@ func _handle_enter_key_event(key_event: InputEventKey) -> void:
 
 
 func _update_enter_hold_skip(delta: float) -> void:
-	if is_finished or is_treatment_mode or waiting_for_treatment_backend:
+	if (
+		is_finished
+		or is_background_transitioning
+		or is_treatment_mode
+		or waiting_for_treatment_backend
+	):
 		_reset_enter_hold_state()
 		return
 
@@ -256,6 +289,9 @@ func _reset_enter_hold_state() -> void:
 
 
 func _advance_or_show_full_text() -> void:
+	if is_background_transitioning:
+		return
+
 	if is_typing:
 		_show_full_text()
 	else:
@@ -263,7 +299,7 @@ func _advance_or_show_full_text() -> void:
 
 
 func _skip_current_story() -> void:
-	if is_finished:
+	if is_finished or is_background_transitioning:
 		return
 
 	is_typing = false
@@ -295,6 +331,7 @@ func play_story(
 	type_timer = 0.0
 	is_typing = false
 	is_finished = false
+	is_background_transitioning = false
 	story_completion_reported = false
 	is_treatment_mode = false
 	waiting_for_treatment_backend = false
@@ -388,7 +425,7 @@ func cancel_story_treatment(message: String) -> void:
 	waiting_for_treatment_backend = false
 	is_treatment_mode = false
 	push_warning(message)
-	emit_signal("story_finished")
+	_finish_story_with_fade(&"story_finished")
 
 
 func _show_treatment_options() -> void:
@@ -647,8 +684,7 @@ func _on_story_judgement_result_closed() -> void:
 		return
 
 	if last_treatment_success:
-		is_finished = true
-		emit_signal("story_finished")
+		_finish_story_with_fade(&"story_finished")
 		return
 
 	# 没有配置失败剧情时，直接回到同一名 story NPC 的诊疗选项。
@@ -736,6 +772,9 @@ func _show_story_pulse_hand(hand_side: String) -> void:
 
 
 func advance() -> void:
+	if is_background_transitioning:
+		return
+
 	# 推进下一句之前，先应用当前句说话人的结束状态。
 	# 例如填写 hide / dim / normal，分别表示退场 / 压暗保留 / 正常亮度保留。
 	_apply_current_line_speaker_portrait_state()
@@ -752,16 +791,39 @@ func advance() -> void:
 
 
 func _show_line(line_data: StoryLine) -> void:
-	# 当前台词设置了背景时进行切换；
-	# 没有设置时继续沿用上一句背景。
-	_apply_line_background(line_data)
+	continue_label.hide()
+
+	# 只有当前句明确指定了不同背景时才等待过渡。
+	# 普通台词和重复使用同一背景的台词仍然立即显示。
+	var should_wait_for_background := (
+		line_data != null
+		and line_data.background != null
+		and background_rect.texture != line_data.background
+	)
+
+	if should_wait_for_background:
+		is_background_transitioning = true
+		is_typing = false
+		_reset_enter_hold_state()
+
+		# 过渡期间隐藏旧台词块和旧立绘，但保留立绘贴图与人物站位数据。
+		# 新背景完成渐入后，_show_dialogue_line() 会按原规则恢复需要显示的立绘。
+		dialogue_block.hide()
+		subtitle_block.hide()
+		_hide_all_portraits()
+
+		await _apply_line_background(line_data)
+
+		# Story 如果在等待期间已被外部移出场景树，不再继续刷新 UI。
+		if not is_inside_tree():
+			return
+
+		is_background_transitioning = false
 
 	current_full_text = line_data.text
 	visible_character_count = 0
 	type_timer = 0.0
 	is_typing = true
-
-	continue_label.hide()
 
 	if line_data.line_type == "subtitle":
 		_show_subtitle_line(line_data)
@@ -995,30 +1057,153 @@ func _finish_typing() -> void:
 func _reset_story_background() -> void:
 	# default：保持原有行为，显示 Story 场景配置的默认背景。
 	# current_scene：显示 Main 在隐藏来源场景前传入的当前季节背景。
+	var target_texture: Texture2D = default_background
 	var background_mode := StoryData.BACKGROUND_MODE_DEFAULT
 	if story_data != null:
 		background_mode = story_data.background_mode.strip_edges().to_lower()
 
 	if background_mode == StoryData.BACKGROUND_MODE_CURRENT_SCENE:
 		if current_scene_background_texture != null:
-			background_rect.texture = current_scene_background_texture
+			target_texture = current_scene_background_texture
 		else:
 			# 独立运行 Story 或来源场景未实现背景接口时，至少保留原有默认背景兜底。
-			background_rect.texture = default_background
 			push_warning("Story 使用 current_scene，但没有收到当前场景背景贴图。")
-		background_rect.show()
-		return
 
-	background_rect.texture = default_background
-	background_rect.show()
+	# 如果第一句已经明确配置背景，直接以它作为开场背景。
+	# 这样不会先渐入默认背景，然后又立刻切换到第一句背景。
+	if not current_lines.is_empty():
+		var first_line: StoryLine = current_lines[0]
+		if first_line != null and first_line.background != null:
+			target_texture = first_line.background
+
+	_show_background_from_black(target_texture)
 
 
 func _apply_line_background(line_data: StoryLine) -> void:
 	# 只在当前台词明确设置了背景时切换。
 	# 留空时保留上一句正在显示的背景，或继续显示传入的当前场景背景贴图。
 	if line_data != null and line_data.background != null:
-		background_rect.texture = line_data.background
+		await _change_background_with_fade(line_data.background)
+
+
+func _stop_background_fade() -> void:
+	# 快速推进剧情时，先终止上一段尚未完成的渐变，
+	# 再从 DarkMask 当前的透明度开始新的渐变。
+	if background_fade_tween != null and background_fade_tween.is_valid():
+		background_fade_tween.kill()
+
+	background_fade_tween = null
+
+
+func _set_background_texture(texture: Texture2D) -> void:
+	background_rect.texture = texture
+	background_rect.show()
+
+
+func _show_background_from_black(texture: Texture2D) -> void:
+	# 新剧情开始时先显示纯黑遮罩，再逐渐恢复为场景原本的压暗程度。
+	_stop_background_fade()
+	_set_background_texture(texture)
+
+	var mask_color := dark_mask.color
+	mask_color.a = 1.0
+	dark_mask.color = mask_color
+
+	background_fade_tween = create_tween()
+	background_fade_tween.set_trans(Tween.TRANS_SINE)
+	background_fade_tween.set_ease(Tween.EASE_IN_OUT)
+	background_fade_tween.tween_property(
+		dark_mask,
+		"color:a",
+		dark_mask_normal_alpha,
+		background_fade_duration
+	)
+
+
+func _change_background_with_fade(new_texture: Texture2D) -> void:
+	if new_texture == null:
+		return
+
+	# 相同背景不重复播放渐变。
+	# 第一行背景已在 _reset_story_background() 中预先应用，因此也会走到这里直接返回。
+	if background_rect.texture == new_texture:
 		background_rect.show()
+		return
+
+	_stop_background_fade()
+
+	var fade_tween := create_tween()
+	background_fade_tween = fade_tween
+	fade_tween.set_trans(Tween.TRANS_SINE)
+	fade_tween.set_ease(Tween.EASE_IN_OUT)
+
+	# 旧背景渐出到黑色。
+	fade_tween.tween_property(
+		dark_mask,
+		"color:a",
+		1.0,
+		background_fade_duration
+	)
+
+	# 完全变黑后替换背景贴图。
+	fade_tween.tween_callback(
+		_set_background_texture.bind(new_texture)
+	)
+
+	# 新背景从黑色渐入，并恢复原本的 0.18 压暗透明度。
+	fade_tween.tween_property(
+		dark_mask,
+		"color:a",
+		dark_mask_normal_alpha,
+		background_fade_duration
+	)
+
+	await fade_tween.finished
+
+	if background_fade_tween == fade_tween:
+		background_fade_tween = null
+
+
+func _fade_story_background_out() -> void:
+	# 剧情结束时终止尚未完成的开场渐入或中途换图动画，
+	# 再从 DarkMask 当前透明度渐变到纯黑。
+	_stop_background_fade()
+
+	var fade_tween := create_tween()
+	background_fade_tween = fade_tween
+	fade_tween.set_trans(Tween.TRANS_SINE)
+	fade_tween.set_ease(Tween.EASE_IN_OUT)
+	fade_tween.tween_property(
+		dark_mask,
+		"color:a",
+		1.0,
+		background_fade_duration
+	)
+
+	await fade_tween.finished
+
+	if background_fade_tween == fade_tween:
+		background_fade_tween = null
+
+
+func _finish_story_with_fade(completion_signal: StringName) -> void:
+	# is_finished 会立即阻止玩家在淡出期间继续点击或按键，
+	# completion_signal 则必须等背景完全淡出后才发送给 Main。
+	if is_finished:
+		return
+
+	is_finished = true
+	is_typing = false
+	_reset_enter_hold_state()
+	continue_label.hide()
+
+	await _fade_story_background_out()
+
+	# 淡出期间如果 Story 已经被外部移出场景树，就不再发送结束信号。
+	if not is_inside_tree():
+		return
+
+	emit_signal(completion_signal)
 
 
 func _setup_default_view() -> void:
@@ -1069,13 +1254,12 @@ func _finish_story() -> void:
 
 	match current_trigger_type:
 		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_BACK:
-			# Main 已经读取本段失败剧情的 return_scene，直接结束剧情即可返回。
-			is_finished = true
-			emit_signal("story_finished")
+			# Main 已经读取本段失败剧情的 return_scene；
+			# 等背景淡出后再结束剧情并返回。
+			_finish_story_with_fade(&"story_finished")
 			return
 		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER:
-			is_finished = true
-			emit_signal("game_over_requested")
+			_finish_story_with_fade(&"game_over_requested")
 			return
 
 	if resume_treatment_after_story:
@@ -1104,5 +1288,4 @@ func _finish_story() -> void:
 		)
 		return
 
-	is_finished = true
-	emit_signal("story_finished")
+	_finish_story_with_fade(&"story_finished")

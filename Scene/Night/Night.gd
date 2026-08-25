@@ -12,6 +12,10 @@ const NIGHT_SUMMER_BACKGROUND: Texture2D = preload("res://Assets/Background/clin
 const NIGHT_AUTUMN_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/autumn_night.png")
 const NIGHT_WINTER_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/winter_night.png")
 
+# 背景单次渐出或渐入的持续时间。
+# 完整换图过程约为该数值的两倍。
+@export_range(0.05, 2.0, 0.05) var background_fade_duration: float = 0.45
+
 @onready var read_book_window: Window = find_child("ReadBook", true, false) as Window
 @onready var info_window: Window = $InfoWindow
 @onready var info_label: Label = $InfoWindow/Panel/VBoxContainer/InfoLabel
@@ -27,6 +31,11 @@ const NIGHT_WINTER_BACKGROUND: Texture2D = preload("res://Assets/Background/clin
 # 复用 Night.tscn 中现有的背景节点，无需调整场景结构。
 @onready var night_background: TextureRect = $Background/BackgroundImage
 
+# 背景渐变状态。
+var background_fade_tween: Tween = null
+var background_fade_mask: ColorRect = null
+var night_background_target_texture: Texture2D = null
+
 var topbar_controller = null
 
 # 玩家提示窗口（Control 版 PlayerHintWindow，需作为 Night.tscn 的子节点存在）
@@ -34,6 +43,7 @@ var player_hint_window: Node = null
 
 func _ready() -> void:
 	_validate_scene_node_bindings()
+	_setup_night_background_fade_mask()
 	_setup_buttons()
 	_setup_player_hint_dialog()
 	_setup_read_book_window()
@@ -74,23 +84,149 @@ func _update_night_background(day: int) -> void:
 
 	# 每一天对应一个节气，每 24 天重新从春季开始循环。
 	var solar_term_index: int = (maxi(day, 1) - 1) % 24
+	var target_texture: Texture2D = NIGHT_SPRING_BACKGROUND
 
 	if solar_term_index < 6:
 		# 第 1～6 天：春季
-		night_background.texture = NIGHT_SPRING_BACKGROUND
+		target_texture = NIGHT_SPRING_BACKGROUND
 	elif solar_term_index < 12:
 		# 第 7～12 天：夏季
-		night_background.texture = NIGHT_SUMMER_BACKGROUND
+		target_texture = NIGHT_SUMMER_BACKGROUND
 	elif solar_term_index < 18:
 		# 第 13～18 天：秋季
-		night_background.texture = NIGHT_AUTUMN_BACKGROUND
+		target_texture = NIGHT_AUTUMN_BACKGROUND
 	else:
 		# 第 19～24 天：冬季
-		night_background.texture = NIGHT_WINTER_BACKGROUND
+		target_texture = NIGHT_WINTER_BACKGROUND
+
+	night_background_target_texture = target_texture
+	_change_night_background_with_fade(target_texture)
+
+
+func _stop_night_background_fade() -> void:
+	if background_fade_tween != null and background_fade_tween.is_valid():
+		background_fade_tween.kill()
+
+	background_fade_tween = null
+
+
+func _set_night_background_texture(texture: Texture2D) -> void:
+	night_background.texture = texture
+	night_background.show()
+
+
+func _setup_night_background_fade_mask() -> void:
+	if background_fade_mask != null:
+		return
+
+	if night_background == null:
+		return
+
+	var background_parent := night_background.get_parent() as Control
+	if background_parent == null:
+		push_warning("Night.gd 无法为 BackgroundImage 创建背景渐变遮罩。")
+		return
+
+	background_fade_mask = ColorRect.new()
+	background_fade_mask.name = "BackgroundFadeMask"
+	background_fade_mask.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	background_fade_mask.color = Color(0.0, 0.0, 0.0, 1.0)
+
+	background_parent.add_child(background_fade_mask)
+	background_parent.move_child(
+		background_fade_mask,
+		night_background.get_index() + 1
+	)
+	background_fade_mask.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+
+
+func _set_night_background_mask_alpha(alpha: float) -> void:
+	if background_fade_mask == null:
+		return
+
+	var mask_color := background_fade_mask.color
+	mask_color.a = alpha
+	background_fade_mask.color = mask_color
+
+
+func _fade_night_background_in() -> void:
+	if background_fade_mask == null:
+		return
+
+	background_fade_tween = create_tween()
+	background_fade_tween.set_trans(Tween.TRANS_SINE)
+	background_fade_tween.set_ease(Tween.EASE_IN_OUT)
+	background_fade_tween.tween_property(
+		background_fade_mask,
+		"color:a",
+		0.0,
+		background_fade_duration
+	)
+
+
+func _change_night_background_with_fade(new_texture: Texture2D) -> void:
+	if new_texture == null:
+		return
+
+	# 初次进入 Night 时没有旧背景，直接设置贴图并从黑色渐入。
+	if night_background.texture == null:
+		_stop_night_background_fade()
+		_set_night_background_texture(new_texture)
+		_set_night_background_mask_alpha(1.0)
+		_fade_night_background_in()
+		return
+
+	# 相同贴图不重新播放动画，也不终止当前尚未完成的渐入。
+	if night_background.texture == new_texture:
+		night_background.show()
+		if (
+			background_fade_mask != null
+			and background_fade_mask.color.a > 0.0
+			and (
+				background_fade_tween == null
+				or not background_fade_tween.is_valid()
+			)
+		):
+			_fade_night_background_in()
+		return
+
+	_stop_night_background_fade()
+
+	if background_fade_mask == null:
+		_set_night_background_texture(new_texture)
+		return
+
+	background_fade_tween = create_tween()
+	background_fade_tween.set_trans(Tween.TRANS_SINE)
+	background_fade_tween.set_ease(Tween.EASE_IN_OUT)
+
+	# 旧背景渐出到黑色。
+	background_fade_tween.tween_property(
+		background_fade_mask,
+		"color:a",
+		1.0,
+		background_fade_duration
+	)
+
+	# 完全变黑后替换季节背景。
+	background_fade_tween.tween_callback(
+		_set_night_background_texture.bind(new_texture)
+	)
+
+	# 新背景从黑色渐入。
+	background_fade_tween.tween_property(
+		background_fade_mask,
+		"color:a",
+		0.0,
+		background_fade_duration
+	)
 
 
 func get_current_background_texture() -> Texture2D:
-	# Main 在隐藏 Night 并播放 Story 前读取当前实际显示的季节背景。
+	# Main 在隐藏 Night 并播放 Story 前优先读取当前请求显示的季节背景。
+	# 即使背景仍处于渐变中，Story 也能取得正确的新贴图。
+	if night_background_target_texture != null:
+		return night_background_target_texture
 	if night_background == null:
 		return null
 	return night_background.texture

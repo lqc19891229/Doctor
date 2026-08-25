@@ -46,13 +46,18 @@ const CLINIC_SUMMER_BACKGROUND: Texture2D = preload("res://Assets/Background/cli
 const CLINIC_AUTUMN_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/autumn.png")
 const CLINIC_WINTER_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/winter.png")
 
+# 背景单次渐出或渐入的持续时间。
+# 完整换图过程约为该数值的两倍。
+@export_range(0.05, 2.0, 0.05) var background_fade_duration: float = 0.45
+
 
 # NPC 台词自动隐藏时间，单位：秒
 const NPC_DIALOGUE_AUTO_HIDE_SECONDS := 10.0
 
 # random NPC 立绘入场动画
 const RANDOM_NPC_PORTRAIT_ENTRANCE_DURATION := 1.0
-const RANDOM_NPC_PORTRAIT_ENTRANCE_START_SCALE := Vector2(0.92, 0.92)
+# 门口位于立绘最终位置左侧；负数越大，入场起点越靠近画面左边。
+const RANDOM_NPC_PORTRAIT_ENTRANCE_OFFSET := Vector2(-200.0, 0.0)
 
 
 # =========================================================
@@ -69,6 +74,11 @@ const RANDOM_NPC_PORTRAIT_ENTRANCE_START_SCALE := Vector2(0.92, 0.92)
 # ---------- 诊室季节背景 ----------
 # 复用 Clinic 场景中现有的 Background 节点，无需新增节点。
 @onready var clinic_background: TextureRect = $Background/BackgroundImage
+
+# 背景渐变状态。
+var background_fade_tween: Tween = null
+var background_fade_mask: ColorRect = null
+var clinic_background_target_texture: Texture2D = null
 
 # ---------- 心得显示 ----------
 #  这个 Label 只负责显示 UnlockManager 中保存的心得数量。
@@ -207,6 +217,11 @@ var last_info_text: String = ""
 # 当前 random NPC 立绘入场动画；切换病人时先停止旧动画，避免 Tween 相互叠加。
 var portrait_entrance_tween: Tween = null
 
+# Portrait 节点在 Clinic.tscn 中配置的固定显示位置。
+# 单独缓存终点，避免快速切换病人并中断 Tween 时产生累计位置偏移。
+var portrait_rest_position: Vector2 = Vector2.ZERO
+var portrait_rest_position_initialized: bool = false
+
 
 # =========================================================
 # 生命周期
@@ -220,6 +235,7 @@ func _ready() -> void:
 		visible = false
 		return
 
+	_setup_clinic_background_fade_mask()
 	_setup_topbar_controller()
 	_setup_time_system()
 
@@ -399,23 +415,150 @@ func _update_clinic_background() -> void:
 
 	# current_day 每一天对应一个节气；每 24 天循环到下一年的立春。
 	var solar_term_index: int = (maxi(current_day, 1) - 1) % 24
+	var target_texture: Texture2D = CLINIC_SPRING_BACKGROUND
 
 	if solar_term_index < 6:
 		# 立春、雨水、惊蛰、春分、清明、谷雨
-		clinic_background.texture = CLINIC_SPRING_BACKGROUND
+		target_texture = CLINIC_SPRING_BACKGROUND
 	elif solar_term_index < 12:
 		# 立夏、小满、芒种、夏至、小暑、大暑
-		clinic_background.texture = CLINIC_SUMMER_BACKGROUND
+		target_texture = CLINIC_SUMMER_BACKGROUND
 	elif solar_term_index < 18:
 		# 立秋、处暑、白露、秋分、寒露、霜降
-		clinic_background.texture = CLINIC_AUTUMN_BACKGROUND
+		target_texture = CLINIC_AUTUMN_BACKGROUND
 	else:
 		# 立冬、小雪、大雪、冬至、小寒、大寒
-		clinic_background.texture = CLINIC_WINTER_BACKGROUND
+		target_texture = CLINIC_WINTER_BACKGROUND
+
+	clinic_background_target_texture = target_texture
+	_change_clinic_background_with_fade(target_texture)
+
+
+func _stop_clinic_background_fade() -> void:
+	if background_fade_tween != null and background_fade_tween.is_valid():
+		background_fade_tween.kill()
+
+	background_fade_tween = null
+
+
+func _set_clinic_background_texture(texture: Texture2D) -> void:
+	clinic_background.texture = texture
+	clinic_background.show()
+
+
+func _setup_clinic_background_fade_mask() -> void:
+	if background_fade_mask != null:
+		return
+
+	if clinic_background == null:
+		return
+
+	var background_parent := clinic_background.get_parent() as Control
+	if background_parent == null:
+		push_warning("Clinic.gd 无法为 BackgroundImage 创建背景渐变遮罩。")
+		return
+
+	background_fade_mask = ColorRect.new()
+	background_fade_mask.name = "BackgroundFadeMask"
+	background_fade_mask.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	background_fade_mask.color = Color(0.0, 0.0, 0.0, 1.0)
+
+	background_parent.add_child(background_fade_mask)
+	background_parent.move_child(
+		background_fade_mask,
+		clinic_background.get_index() + 1
+	)
+	background_fade_mask.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+
+
+func _set_clinic_background_mask_alpha(alpha: float) -> void:
+	if background_fade_mask == null:
+		return
+
+	var mask_color := background_fade_mask.color
+	mask_color.a = alpha
+	background_fade_mask.color = mask_color
+
+
+func _fade_clinic_background_in() -> void:
+	if background_fade_mask == null:
+		return
+
+	background_fade_tween = create_tween()
+	background_fade_tween.set_trans(Tween.TRANS_SINE)
+	background_fade_tween.set_ease(Tween.EASE_IN_OUT)
+	background_fade_tween.tween_property(
+		background_fade_mask,
+		"color:a",
+		0.0,
+		background_fade_duration
+	)
+
+
+func _change_clinic_background_with_fade(new_texture: Texture2D) -> void:
+	if new_texture == null:
+		return
+
+	# 初次进入 Clinic 时没有旧背景，直接设置贴图并从黑色渐入。
+	if clinic_background.texture == null:
+		_stop_clinic_background_fade()
+		_set_clinic_background_texture(new_texture)
+		_set_clinic_background_mask_alpha(1.0)
+		_fade_clinic_background_in()
+		return
+
+	# set_day() 和 start_new_day() 可能连续刷新同一张背景。
+	# 相同贴图不重新播放动画，也不终止当前尚未完成的渐入。
+	if clinic_background.texture == new_texture:
+		clinic_background.show()
+		if (
+			background_fade_mask != null
+			and background_fade_mask.color.a > 0.0
+			and (
+				background_fade_tween == null
+				or not background_fade_tween.is_valid()
+			)
+		):
+			_fade_clinic_background_in()
+		return
+
+	_stop_clinic_background_fade()
+
+	if background_fade_mask == null:
+		_set_clinic_background_texture(new_texture)
+		return
+
+	background_fade_tween = create_tween()
+	background_fade_tween.set_trans(Tween.TRANS_SINE)
+	background_fade_tween.set_ease(Tween.EASE_IN_OUT)
+
+	# 旧背景渐出到黑色。
+	background_fade_tween.tween_property(
+		background_fade_mask,
+		"color:a",
+		1.0,
+		background_fade_duration
+	)
+
+	# 完全变黑后替换季节背景。
+	background_fade_tween.tween_callback(
+		_set_clinic_background_texture.bind(new_texture)
+	)
+
+	# 新背景从黑色渐入。
+	background_fade_tween.tween_property(
+		background_fade_mask,
+		"color:a",
+		0.0,
+		background_fade_duration
+	)
 
 
 func get_current_background_texture() -> Texture2D:
-	# Main 在隐藏 Clinic 并播放 Story 前读取当前实际显示的季节背景。
+	# Main 在隐藏 Clinic 并播放 Story 前优先读取当前请求显示的季节背景。
+	# 即使背景仍处于渐变中，Story 也能取得正确的新贴图。
+	if clinic_background_target_texture != null:
+		return clinic_background_target_texture
 	if clinic_background == null:
 		return null
 	return clinic_background.texture
@@ -578,10 +721,17 @@ func _play_random_npc_portrait_entrance() -> void:
 	if portrait_rect == null:
 		return
 
+	# 本函数通过 call_deferred() 调用，此时 Control 已经完成一次布局，
+	# 可以安全记录 Clinic.tscn 中配置的立绘最终位置。
+	if not portrait_rest_position_initialized:
+		portrait_rest_position = portrait_rect.position
+		portrait_rest_position_initialized = true
+
 	# 快速切换病人时先停止上一段动画，避免它继续影响新立绘。
 	if portrait_entrance_tween != null and portrait_entrance_tween.is_valid():
 		portrait_entrance_tween.kill()
 	portrait_entrance_tween = null
+	portrait_rect.position = portrait_rest_position
 	portrait_rect.scale = Vector2.ONE
 	portrait_rect.modulate.a = 1.0
 
@@ -592,8 +742,12 @@ func _play_random_npc_portrait_entrance() -> void:
 	if portrait_rect.texture == null or not portrait_rect.visible:
 		return
 
-	portrait_rect.pivot_offset = portrait_rect.size * 0.5
-	portrait_rect.scale = RANDOM_NPC_PORTRAIT_ENTRANCE_START_SCALE
+	# 从左侧门口附近开始，保持原始尺寸，只改变位置与透明度。
+	portrait_rect.position = (
+		portrait_rest_position
+		+ RANDOM_NPC_PORTRAIT_ENTRANCE_OFFSET
+	)
+	portrait_rect.scale = Vector2.ONE
 	portrait_rect.modulate.a = 0.0
 
 	portrait_entrance_tween = create_tween()
@@ -602,8 +756,8 @@ func _play_random_npc_portrait_entrance() -> void:
 	portrait_entrance_tween.set_ease(Tween.EASE_OUT)
 	portrait_entrance_tween.tween_property(
 		portrait_rect,
-		"scale",
-		Vector2.ONE,
+		"position",
+		portrait_rest_position,
 		RANDOM_NPC_PORTRAIT_ENTRANCE_DURATION
 	)
 	portrait_entrance_tween.tween_property(
