@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" path="res://Assets/Background/005/005_02.png" id="background_4"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_5"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wang_fu_hu_wei/wang_fu_hu_wei.png" id="portrait_6"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_gong_wang/chu_gong_wang.png" id="portrait_7"]
-[ext_resource type="Texture2D" path="res://Assets/Background/005/005_03.png" id="background_8"]
+[ext_resource type="Texture2D" path="res://Assets/Background/005/005_03.png" id="background_7"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_gong_wang/chu_gong_wang.png" id="portrait_8"]
 [ext_resource type="Texture2D" path="res://Assets/Background/005/005_04.png" id="background_9"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
@@ -83,15 +83,15 @@ line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
 text = "一夜舟车劳顿，李东璧到了楚恭王府。"
+background = ExtResource("background_7")
 [sub_resource type="Resource" id="StoryLine_010"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
-speaker = "楚恭王"
+speaker = "楚王"
 text = "您就是李神医啊，比我想得要年轻许多。请先生来，是小王有事相求。"
-portrait = ExtResource("portrait_7")
-background = ExtResource("background_8")
+portrait = ExtResource("portrait_8")
 [sub_resource type="Resource" id="StoryLine_011"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
@@ -105,18 +105,18 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
-speaker = "楚恭王"
+speaker = "楚王"
 text = "犬子前几天突然病了，卧床不起。精神萎靡，食欲不振。小王请了好几位大夫，给开了好多方子，都不见好转。眼见着人一天比一天瘦，在这么下去怕是要坏事了…"
-portrait = ExtResource("portrait_7")
+portrait = ExtResource("portrait_8")
 background = ExtResource("background_9")
 [sub_resource type="Resource" id="StoryLine_013"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
-speaker = "楚恭王"
+speaker = "楚王"
 text = "听闻蕲州李先生医术高明，特请先生来给犬子医治。"
-portrait = ExtResource("portrait_7")
+portrait = ExtResource("portrait_8")
 [sub_resource type="Resource" id="StoryLine_014"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
@@ -130,9 +130,9 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "hide"
-speaker = "楚恭王"
+speaker = "楚王"
 text = "先生，小王就这么一个儿子，请您救救孩子吧。"
-portrait = ExtResource("portrait_7")
+portrait = ExtResource("portrait_8")
 
 [resource]
 script = ExtResource("2_storydata")

@@ -21,7 +21,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
-speaker = "楚恭王"
+speaker = "楚王"
 text = "我的儿，你怎么了！"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_003"]
@@ -37,7 +37,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
-speaker = "楚恭王"
+speaker = "楚王"
 text = "来人！把这个挨千刀的江湖骗子给我叉出去剁了！"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_005"]

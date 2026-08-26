@@ -30,7 +30,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
-speaker = "楚恭王"
+speaker = "楚王"
 text = "先生真是华佗再世，小王无以为报。这一千两白银是我的一点心意，感谢先生救命之恩。"
 portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_004"]
@@ -62,7 +62,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
-speaker = "楚恭王"
+speaker = "楚王"
 text = "……先生好风骨，本王平日见的那些儒生满口仁义，可见了真金白银没几个不迷糊的。有您这样的大夫是天下苍生之福啊。"
 portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_008"]
@@ -70,7 +70,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
-speaker = "楚恭王"
+speaker = "楚王"
 text = "先生的恩情本王记下了，日后有能帮到先生的地方尽管开口。"
 portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_009"]
