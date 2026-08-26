@@ -27,7 +27,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "雷万钧"
-text = "这次省内各州县的赈灾药材都要从咱们蕲州调拨，我们负责护送，全省各处跑，路上染了点风寒。"
+text = "这次省内各州县的赈灾药材都要从咱们蕲州调拨，我奉命押送，全省各处跑，路上染了点风寒。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
@@ -75,7 +75,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "雷万钧"
-text = "他娘的，没有王法了！这州府衙门肯定是不能去了，我去一趟武昌府布政司，把这事报上去。"
+text = "他娘的，没有王法了！这州府衙门肯定是不能去了，我到武昌府布政司，把这事报上去。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_010"]
 script = ExtResource("1_storyline")

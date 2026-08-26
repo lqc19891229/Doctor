@@ -59,7 +59,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "王府护卫"
-text = "奉楚恭王敕令，请先生去王府走一趟。"
+text = "奉楚王敕令，请先生去王府走一趟。"
 portrait = ExtResource("portrait_6")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")

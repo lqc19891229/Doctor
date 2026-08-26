@@ -51,7 +51,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "吴世良"
-text = "昨日衙门采购的赈灾药材已到了咱们蕲州，这次除了惠民药局，还要各医馆药铺配合诊治发放。"
+text = "昨日，赈灾药材已采办完备，这次除了惠民药局，还要各医馆药铺配合诊治发放。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
