@@ -753,6 +753,9 @@ func _on_story_game_over_requested() -> void:
 
 
 func _on_story_finished() -> void:
+	# clear_story() 会清空 current_story，因此必须先保留刚刚完整播放结束的剧情数据。
+	var finished_story: StoryData = StoryManager.current_story
+
 	# 只有走到正式结束信号，才把当前剧情记为已播放并保存。
 	StoryManager.mark_current_story_played()
 	StoryManager.clear_story()
@@ -760,6 +763,17 @@ func _on_story_finished() -> void:
 	var target := pending_story_return_target
 	pending_story_return_target = ""
 	_clear_story_overlay()
+
+	# night_end 不是普通的“剧情结束后返回某场景”，而是“剧情结束后完成跨天”。
+	# 因此不使用额外的 advance_day_after_story 状态变量。
+	if (
+		finished_story != null
+		and finished_story.trigger_type.strip_edges().to_lower()
+		== StoryData.TRIGGER_TYPE_NIGHT_END
+	):
+		story_paused_clinic_clock = false
+		_finish_night_and_enter_next_day()
+		return
 
 	if target == "night":
 		# 如果剧情是从 Clinic 白天触发，但剧情结束后直接进入 Night，
@@ -816,6 +830,18 @@ func _on_clinic_finished() -> void:
 # 天数 +1
 # =========================================================
 func _on_night_finished() -> void:
+	# 玩家点击“休息，进入明天”后，先检查当前天是否存在夜晚结束剧情。
+	# 此时还没有调用 finish_night()，所以 trigger_day 对应的是“正在结束的这一天”。
+	var night_end_story: StoryData = StoryManager.find_night_end_story(GameTime.current_day)
+
+	if night_end_story != null:
+		_play_story(night_end_story.resource_path)
+		return
+
+	_finish_night_and_enter_next_day()
+
+
+func _finish_night_and_enter_next_day() -> void:
 	GameTime.finish_night()
 	_save_game_with_warning("夜晚结束")
 

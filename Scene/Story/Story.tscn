@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bplfruj5kbkii"]
 
 [ext_resource type="Script" uid="uid://eg24ntnjfeh" path="res://Scene/Story/Story.gd" id="1_story_script"]
+[ext_resource type="Texture2D" uid="uid://br2c7r5myy0ls" path="res://Assets/Portrait/StoryNpc/hei_yi_ren/hei_yi_ren.png" id="2_pd8gs"]
 [ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="2_pulse"]
 [ext_resource type="PackedScene" uid="uid://c1kldxjoeyc78" path="res://Scene/Prescription/PrescriptionWindow.tscn" id="3_prescription"]
 [ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/clinicalLogWindow/ClinicalLogWindow.tscn" id="4_clinical_log"]
@@ -97,6 +98,7 @@ offset_bottom = 330.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("2_pd8gs")
 expand_mode = 1
 stretch_mode = 5
 

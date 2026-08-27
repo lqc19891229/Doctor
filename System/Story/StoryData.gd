@@ -2,6 +2,7 @@ extends Resource
 class_name StoryData
 
 const TRIGGER_TYPE_SCENE_ENTER := "scene_enter"
+const TRIGGER_TYPE_NIGHT_END := "night_end"
 const TRIGGER_TYPE_STORY_NPC_CURED := "story_npc_cured"
 const TRIGGER_TYPE_STORY_NPC_FAILED_RETRY := "story_npc_failed_retry"
 const TRIGGER_TYPE_STORY_NPC_FAILED_BACK := "story_npc_failed_back"
@@ -21,11 +22,12 @@ const BACKGROUND_MODE_CURRENT_SCENE := "current_scene"
 
 # 剧情触发类型：
 # - scene_enter：进入指定场景时检查，兼容现有按场景 / 天数 / 名望触发的剧情。
+# - night_end：Night 场景点击“休息，进入明天”时检查；剧情完整结束后再推进到下一天。
 # - story_npc_cured：指定的 story NPC 被治愈后检查。
 # - story_npc_failed_retry：指定的 story NPC 治疗失败，剧情结束后重新回到该 NPC 的诊疗界面。
 # - story_npc_failed_back：指定的 story NPC 治疗失败，剧情结束后返回 return_scene。
 # - story_npc_failed_over：指定的 story NPC 治疗失败，剧情结束后 Game Over。
-@export_enum("scene_enter", "story_npc_cured", "story_npc_failed_retry", "story_npc_failed_back", "story_npc_failed_over")
+@export_enum("scene_enter", "night_end", "story_npc_cured", "story_npc_failed_retry", "story_npc_failed_back", "story_npc_failed_over")
 var trigger_type: String = TRIGGER_TYPE_SCENE_ENTER
 
 # 剧情触发场景，例如 clinic / night / map

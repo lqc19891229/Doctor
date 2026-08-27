@@ -1604,6 +1604,7 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         trigger_type = as_str(row.get("TriggerType")).lower() or "scene_enter"
         if trigger_type not in (
             "scene_enter",
+            "night_end",
             "story_npc_cured",
             "story_npc_failed_retry",
             "story_npc_failed_back",
@@ -1614,6 +1615,14 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         trigger_scene = as_str(row.get("TriggerScene")).lower() or "clinic"
         if trigger_scene not in ("clinic", "night", "map"):
             errors.append(f"Story TriggerScene 非法: {story_id} -> {trigger_scene}")
+
+        # night_end 只允许用于 Night 场景点击“休息，进入明天”的剧情。
+        # 这样可以在导出阶段提前发现 Excel 配置错误。
+        if trigger_type == "night_end" and trigger_scene != "night":
+            errors.append(
+                f"Story night_end 剧情的 TriggerScene 必须为 night: "
+                f"{story_id} -> {trigger_scene}"
+            )
 
         return_scene = as_str(row.get("ReturnScene")).lower()
         if return_scene and return_scene not in ("clinic", "night", "map"):

@@ -180,6 +180,16 @@ func find_trigger_story(trigger_scene: String, current_day: int) -> StoryData:
 	)
 
 
+func find_night_end_story(current_day: int) -> StoryData:
+	# Night 场景点击“休息，进入明天”时调用。
+	# 只检查 night_end 类型剧情，不会和进入 Night 时的 scene_enter 剧情混在一起。
+	return _find_matching_story(
+		"night",
+		current_day,
+		StoryData.TRIGGER_TYPE_NIGHT_END
+	)
+
+
 func find_story_npc_cured_story(
 	trigger_scene: String,
 	current_day: int,
