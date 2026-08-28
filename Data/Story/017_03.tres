@@ -12,11 +12,17 @@ inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "不对，我需要好好想想这是什么病，该开什么方。"
 portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = ""
 
 [resource]
 script = ExtResource("2_storydata")
-story_id = "015_03"
-trigger_story_id = "015_01"
+story_id = "017_03"
+trigger_story_id = "017_01"
 trigger_type = "story_npc_failed_retry"
 trigger_scene = "clinic"
 trigger_day = 0
@@ -28,4 +34,4 @@ play_once = false
 background_mode = "current_scene"
 return_scene = "clinic"
 clinic_npc_id = ""
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002")])

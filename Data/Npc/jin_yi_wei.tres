@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1")
-npc_id = "yang_su_niang"
+npc_id = "jin_yi_wei"
 npc_type = "story"
-npc_name = "杨素娘"
-gender = "女"
-age = 40
+npc_name = "锦衣卫"
+gender = "男"
+age = 41
 dialogue_prefix = ""
 dialogue_suffix = ""
 dialogue_after_treatment = ""

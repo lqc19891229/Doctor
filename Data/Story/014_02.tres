@@ -59,7 +59,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "沈修文"
-text = "但我得提醒您一句，赈灾药材朝廷很重视，不只是一两个州府的事，更不是你我能管的事。"
+text = "但我得提醒您一句，赈灾药材不只是一两个州府的事，更不是你我能管的事。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")
@@ -80,8 +80,8 @@ portrait = ExtResource("portrait_2")
 
 [resource]
 script = ExtResource("2_storydata")
-story_id = "015_02"
-trigger_story_id = "015_01"
+story_id = "014_02"
+trigger_story_id = "014_01"
 trigger_type = "story_npc_cured"
 trigger_scene = "clinic"
 trigger_day = 0

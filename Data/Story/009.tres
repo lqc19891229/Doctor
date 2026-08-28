@@ -1,0 +1,145 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/ya_yi/ya_yi.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wu_shi_liang/wu_shi_liang.png" id="portrait_3"]
+[ext_resource type="Texture2D" path="res://Assets/Background/009/009_01.png" id="background_4"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/yang_shan_quan/yang_shan_quan.png" id="portrait_5"]
+[ext_resource type="Texture2D" path="res://Assets/Background/009/009_02.png" id="background_6"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_yan_wen/li_yan_wen.png" id="portrait_7"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wu_zhi_lan/wu_zhi_lan.png" id="portrait_8"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chen_pi/chen_pi.png" id="portrait_9"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "hide"
+speaker = "衙役"
+text = "李大夫，知州大人请您去州衙有事商议。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "hide"
+speaker = "李东璧"
+text = "我知道了，我这就去。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "吴世良"
+text = "今日召诸位来，是朝廷有旨意下达。"
+portrait = ExtResource("portrait_3")
+background = ExtResource("background_4")
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "吴世良"
+text = "浙江省淳安建德两县突发水灾，周边各地已有瘟疫出现，朝廷为防止疫情扩散，特令周边州府发放赈灾药材。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_005"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "吴世良"
+text = "昨日，赈灾药材已采办完备，这次除了惠民药局，还要各医馆药铺配合诊治发放。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_006"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "hide"
+speaker = "吴世良"
+text = "一会儿诸位就去库房画押登记，明日起官府会发放榜文通知百姓就近领取药材。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_007"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "杨善泉"
+text = "诸位到我这画押，排好队一个一个来，写好收货地址，我们会专门派人运送。"
+portrait = ExtResource("portrait_5")
+background = ExtResource("background_6")
+[sub_resource type="Resource" id="StoryLine_008"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "hide"
+speaker = "杨善泉"
+text = "李大夫您在这画押，上面催得紧，我们赶着出货呢。"
+portrait = ExtResource("portrait_5")
+[sub_resource type="Resource" id="StoryLine_009"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "hide"
+speaker = "李东璧"
+text = "好的好的。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_012"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "李言闻"
+text = "东璧回来了啦，什么事儿啊一大早就被叫去了？"
+portrait = ExtResource("portrait_7")
+[sub_resource type="Resource" id="StoryLine_013"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "朝廷调拨了赈灾药材，这次不光惠民药局，咱们这些医馆药铺也要一起帮忙发放。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_014"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "吴芷兰"
+text = "这几日我去菜市街买菜得时候，看到不少流民在城东，大灾之后必有大疫，朝廷这次赈灾太及时了。"
+portrait = ExtResource("portrait_8")
+[sub_resource type="Resource" id="StoryLine_015"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "陈皮，跟我去后院收拾收拾库房，一会儿药材就要送来了，得赶紧腾出地方。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_016"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "陈皮"
+text = "好嘞。"
+portrait = ExtResource("portrait_9")
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "009"
+trigger_story_id = "008_02"
+trigger_type = "scene_enter"
+trigger_scene = "clinic"
+trigger_day = 5
+required_reputation_points = 0
+reputation_points_change = 0
+experience_points_change = 0
+unlock_entry_id = ""
+play_once = true
+background_mode = "current_scene"
+return_scene = "clinic"
+clinic_npc_id = ""
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_012"), SubResource("StoryLine_013"), SubResource("StoryLine_014"), SubResource("StoryLine_015"), SubResource("StoryLine_016")])

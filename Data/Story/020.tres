@@ -1,0 +1,157 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/hei_yi_ren/hei_yi_ren.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Background/020/020_01.png" id="background_3"]
+[ext_resource type="Texture2D" path="res://Assets/Background/020/020_02.png" id="background_4"]
+[ext_resource type="Texture2D" path="res://Assets/Background/020/020_03.png" id="background_5"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/lei_wan_jun/lei_wan_jun.png" id="portrait_6"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wang_fu_hu_wei/wang_fu_hu_wei.png" id="portrait_7"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/zhao_shun/zhao_shun_hei.png" id="portrait_8"]
+[ext_resource type="Texture2D" path="res://Assets/Background/020/020.png" id="background_9"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_gong_wang/chu_gong_wang.png" id="portrait_10"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/jin_yi_wei/jin_yi_wei.png" id="portrait_11"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = "咯噔"
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "谁！"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "黑衣人"
+text = "李大夫，我来送你上路啦。"
+portrait = ExtResource("portrait_2")
+background = ExtResource("background_3")
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "！！！"
+portrait = ExtResource("portrait_1")
+background = ExtResource("background_4")
+[sub_resource type="Resource" id="StoryLine_005"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = "砰！"
+background = ExtResource("background_5")
+[sub_resource type="Resource" id="StoryLine_006"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "黑衣人"
+text = "哎哟！"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_007"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "hide"
+speaker = "李东璧"
+text = "！！！"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_008"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "hide"
+speaker = "雷万钧"
+text = "贤弟，你没事吧。"
+portrait = ExtResource("portrait_6")
+[sub_resource type="Resource" id="StoryLine_009"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "王府护卫"
+text = "把他绑起来。"
+portrait = ExtResource("portrait_7")
+[sub_resource type="Resource" id="StoryLine_010"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "hide"
+speaker = "赵顺"
+text = "误会啊大人，误会。"
+portrait = ExtResource("portrait_8")
+[sub_resource type="Resource" id="StoryLine_011"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = "一行人来到王府"
+background = ExtResource("background_9")
+[sub_resource type="Resource" id="StoryLine_012"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "王府护卫"
+text = "启禀王爷，人都带来了。"
+portrait = ExtResource("portrait_7")
+[sub_resource type="Resource" id="StoryLine_013"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "楚王"
+text = "这几位是朝廷派来查赈灾药材案的钦差。"
+portrait = ExtResource("portrait_10")
+[sub_resource type="Resource" id="StoryLine_014"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "锦衣卫"
+text = "你就是李东璧？"
+portrait = ExtResource("portrait_11")
+[sub_resource type="Resource" id="StoryLine_015"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "正是草民。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_016"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = "李东璧将前前后后发生的事情一五一十告予钦差"
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "020"
+trigger_story_id = "019"
+trigger_type = "night_end"
+trigger_scene = "night"
+trigger_day = 1
+required_reputation_points = 0
+reputation_points_change = 0
+experience_points_change = 0
+unlock_entry_id = ""
+play_once = true
+background_mode = "current_scene"
+return_scene = "night"
+clinic_npc_id = ""
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011"), SubResource("StoryLine_012"), SubResource("StoryLine_013"), SubResource("StoryLine_014"), SubResource("StoryLine_015"), SubResource("StoryLine_016")])

@@ -2,64 +2,88 @@
 
 [ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
 [ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_yan_wen/li_yan_wen.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/lei_wan_jun/lei_wan_jun.png" id="portrait_1"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_2"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "right"
+line_type = "subtitle"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "李言闻"
-text = "坏了坏了，孙大夫被抓了。"
+speaker = "雷万钧"
+text = "贤弟，好久不见啊，今天来抓点药顺便来看看你。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "出什么事了？"
+text = "雷兄哪里不舒服？"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "mid"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "李言闻"
-text = "孙大夫也发现赈灾药材有问题，去县衙找吴世良，谁知被安了个私换药材的罪，打了二十板子关进大狱里了。"
+speaker = "雷万钧"
+text = "这次省内各州县的赈灾药材都要从咱们蕲州调拨，我奉命押送，全省各处跑，路上染了点风寒。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "mid"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
-speaker = "李言闻"
-text = "这个吴世良，平日里看着人模狗样的，真不是个东西啊。"
-portrait = ExtResource("portrait_1")
+speaker = "李东璧"
+text = "全省都从蕲州调拨？"
+portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "李东璧"
-text = "我们得上报布政司，给孙大夫讨回公道。"
-portrait = ExtResource("portrait_2")
+speaker = "雷万钧"
+text = "是啊，这次的药材统一由蕲州采办存放，哪里缺药就从咱们这调拨。"
+portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "mid"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
-speaker = "李言闻"
-text = "儿啊，我看咱们还是别趟浑水了，多一事不如少一事，明哲保身吧。这不是咱们平民百姓管得了的。"
-portrait = ExtResource("portrait_1")
+speaker = "李东璧"
+text = "有件事儿你知道吗？这次的赈灾药材被人动了手脚，以次充好，根本治不了病。"
+portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
+speaker = "雷万钧"
+text = "什么？有这事儿？"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_008"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "…..."
+text = "药剂局的孙大夫去找吴世良理论，被关进大牢，知情的大夫们都不敢声张。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_009"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "雷万钧"
+text = "他娘的，没有王法了！这州府衙门肯定是不能去了，我到武昌府按察司，把这事报上去。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_010"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "雷兄这一趟要多加小心啊。"
 portrait = ExtResource("portrait_2")
 
 [resource]
@@ -67,7 +91,7 @@ script = ExtResource("2_storydata")
 story_id = "013"
 trigger_story_id = "012"
 trigger_type = "scene_enter"
-trigger_scene = "night"
+trigger_scene = "clinic"
 trigger_day = 1
 required_reputation_points = 0
 reputation_points_change = 0
@@ -75,6 +99,6 @@ experience_points_change = 0
 unlock_entry_id = ""
 play_once = true
 background_mode = "current_scene"
-return_scene = "night"
+return_scene = "clinic"
 clinic_npc_id = ""
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010")])

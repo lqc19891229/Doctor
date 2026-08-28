@@ -2,97 +2,89 @@
 
 [ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
 [ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/lei_wan_jun/lei_wan_jun.png" id="portrait_1"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/shen_xiu_wen/shen_xiu_wen.png" id="portrait_2"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
-line_type = "subtitle"
-portrait_side = "left"
+line_type = "dialogue"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
-speaker = "雷万钧"
-text = "贤弟，好久不见啊，今天来抓点药顺便来看看你。"
+speaker = "李东璧"
+text = "是沈先生啊，病好点了吗"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "李东璧"
-text = "雷兄哪里不舒服？"
+speaker = "沈修文"
+text = "小生时日不多了。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
-speaker = "雷万钧"
-text = "这次省内各州县的赈灾药材都要从咱们蕲州调拨，我奉命押送，全省各处跑，路上染了点风寒。"
+speaker = "李东璧"
+text = "啊？您的病没那么严重，只要按时吃药好好休息肯定会好起来的。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "李东璧"
-text = "全省都从蕲州调拨？"
+speaker = "沈修文"
+text = "治的了病，治不了命。今天来是有样东西要交给李大夫。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
-speaker = "雷万钧"
-text = "是啊，这次的药材统一由蕲州采办存放，哪里缺药就从咱们这调拨。"
+speaker = "李东璧"
+text = "这是？"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "李东璧"
-text = "有件事儿你知道吗？这次的赈灾药材被人动了手脚，以次充好，根本治不了病。"
+speaker = "沈修文"
+text = "这是吴世良让我写的账册抄本，交给您应该能派上用场。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
-speaker = "雷万钧"
-text = "什么？有这事儿？"
+speaker = "李东璧"
+text = "…...."
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "李东璧"
-text = "药剂局的孙大夫去找吴世良理论，被关进大牢，知情的大夫们都不敢声张。"
+speaker = "沈修文"
+text = "说实话我很羡慕李大夫，所学的本事能有处施展，唉…小生就此别过。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_009"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
-inactive_portrait_mode = "dim"
-speaker = "雷万钧"
-text = "他娘的，没有王法了！这州府衙门肯定是不能去了，我到武昌府布政司，把这事报上去。"
-portrait = ExtResource("portrait_1")
-[sub_resource type="Resource" id="StoryLine_010"]
-script = ExtResource("1_storyline")
-line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "雷兄这一趟要多加小心啊。"
-portrait = ExtResource("portrait_2")
+text = "…...."
+portrait = ExtResource("portrait_1")
 
 [resource]
 script = ExtResource("2_storydata")
-story_id = "014"
-trigger_story_id = "013"
+story_id = "016"
+trigger_story_id = "015"
 trigger_type = "scene_enter"
 trigger_scene = "clinic"
-trigger_day = 1
+trigger_day = 2
 required_reputation_points = 0
 reputation_points_change = 0
 experience_points_change = 0
@@ -101,4 +93,4 @@ play_once = true
 background_mode = "current_scene"
 return_scene = "clinic"
 clinic_npc_id = ""
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009")])

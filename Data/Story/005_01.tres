@@ -82,7 +82,7 @@ script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
-text = "一夜舟车劳顿，李东璧到了楚恭王府。"
+text = "一夜舟车劳顿，李东璧到了楚王府。"
 background = ExtResource("background_7")
 [sub_resource type="Resource" id="StoryLine_010"]
 script = ExtResource("1_storyline")

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
 [ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_yan_wen/li_yan_wen.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wu_zhi_lan/wu_zhi_lan.png" id="portrait_1"]
 [ext_resource type="Texture2D" path="res://Assets/Background/011/011.png" id="background_2"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/ya_yi/ya_yi.png" id="portrait_3"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_yan_wen/li_yan_wen.png" id="portrait_3"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_4"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
@@ -12,50 +12,66 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
-speaker = "李言闻"
-text = "数都对，有劳几位了，进来喝点水吧。"
+speaker = "吴芷兰"
+text = "爹，药熬好了。"
 portrait = ExtResource("portrait_1")
 background = ExtResource("background_2")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
-inactive_portrait_mode = "hide"
-speaker = "衙役"
-text = "还有公务在身，就不劳烦李太医啦，兄弟们，走了！"
+inactive_portrait_mode = "dim"
+speaker = "李言闻"
+text = "忙活了一天，药材发的差不多了，咱们家也把药给吃上。我看看这次开的是什么方子。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "李言闻"
+text = "嗯…有藿香，有紫苏，应该是藿香正气散的方子。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "李言闻"
+text = "嗯？…味道不对啊，这药里怎么掺了面粉？厚朴是用树皮充数的。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "爹，货都到齐了吗。"
+text = "我尝尝…藿香用的是梗，气味微薄。"
 portrait = ExtResource("portrait_4")
-[sub_resource type="Resource" id="StoryLine_004"]
-script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "right"
-inactive_portrait_mode = "dim"
-speaker = "李言闻"
-text = "嗯，我都点数过了，这次还是小包装，省得我们自己称了，不错不错。"
-portrait = ExtResource("portrait_1")
-[sub_resource type="Resource" id="StoryLine_005"]
-script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "right"
-inactive_portrait_mode = "dim"
-speaker = "李言闻"
-text = "明日我带着芷兰他们发药，医馆的活计你好生照看。"
-portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
+speaker = "李言闻"
+text = "这…连赈灾药材都敢动手脚…"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_007"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "知道了爹。"
+text = "赈灾药材事关重大，我们得上报官府。"
 portrait = ExtResource("portrait_4")
+[sub_resource type="Resource" id="StoryLine_008"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李言闻"
+text = "明日我去药剂局跟孙大夫商量商量。"
+portrait = ExtResource("portrait_3")
 
 [resource]
 script = ExtResource("2_storydata")
@@ -71,4 +87,4 @@ unlock_entry_id = ""
 play_once = true
 return_scene = "night"
 clinic_npc_id = ""
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008")])

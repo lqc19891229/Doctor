@@ -10,7 +10,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "虽然这不是个正经和尚，但还是得好好想想他得的是什么病。"
+text = "不对，我需要好好想想这是什么病，该开什么方。"
 portrait = ExtResource("portrait_1")
 
 [resource]
