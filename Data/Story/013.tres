@@ -75,7 +75,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "雷万钧"
-text = "他娘的，没有王法了！这州府衙门肯定是不能去了，我到武昌府按察司，把这事报上去。"
+text = "他娘的，没有王法了！这州府衙门肯定是不能去了，我到武昌府湖广按察司，把这事报上去。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_010"]
 script = ExtResource("1_storyline")

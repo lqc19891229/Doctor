@@ -22,7 +22,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "忙活了一天，药材发的差不多了，咱们家也把药给吃上。我看看这次开的是什么方子。"
+text = "忙活了一天，药材发得差不多了，咱们家也该把药喝了。我看看这次开的是什么方子。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
@@ -38,7 +38,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "嗯？…味道不对啊，这药里怎么掺了面粉？厚朴是用树皮充数的。"
+text = "嗯？…味道不对啊，这药里怎么掺了面粉？厚朴里也混了杂树皮充数。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")

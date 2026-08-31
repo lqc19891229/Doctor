@@ -3,7 +3,9 @@
 [ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
 [ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_1"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/shen_xiu_wen/shen_xiu_wen.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/xing_kong/xing_kong_after.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/ban_xia/ban_xia.png" id="portrait_3"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chen_pi/chen_pi.png" id="portrait_4"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
@@ -11,15 +13,15 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "先生这是心脾两虚之症，思虑过度暗耗心血导致心血不足，脾气虚弱。给您开一服归脾汤，您可要注意休息啊。"
+text = "师傅所患的乃是肾精不足之症，嗯…是房事过劳所致…"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "沈修文"
-text = "李神医名不虚传，这阵子确实是公务繁忙，做钱谷师爷这一行，一刻也不得闲啊。"
+speaker = "性空"
+text = "哎哟，施主啊，这可不敢乱说啊，我可是出家人啊，怎么会干那种事呢。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
@@ -27,15 +29,15 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "先生是操劳赈灾药材的采办之事？"
+text = "…"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "沈修文"
-text = "这是衙门公务，在下不方便说，也劝李大夫不要打听衙门的事。"
+speaker = "性空"
+text = "一定是我晚上念经太过用功，着凉了。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
@@ -43,45 +45,61 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "是在下唐突了。"
+text = "是是是，师傅说的对，也不是没有这个可能。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
-inactive_portrait_mode = "dim"
-speaker = "沈修文"
-text = "无妨，您和令尊医术高明，赈灾药材用的是什么，想必你们心里有数。"
+inactive_portrait_mode = "hide"
+speaker = "性空"
+text = "嗯，以后可别乱说啊，这小郎中真是…"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
-speaker = "沈修文"
-text = "但我得提醒您一句，赈灾药材不只是一两个州府的事，更不是你我能管的事。"
-portrait = ExtResource("portrait_2")
+speaker = "半夏"
+text = "哇，这就是传说中的花和尚吗？"
+portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "......"
+text = "…"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_009"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "沈修文"
-text = "先生医术闻名全省，在下十分钦佩，不要浪费了老天给您的才华。在下告辞。"
-portrait = ExtResource("portrait_2")
+speaker = "陈皮"
+text = "他是花和尚，你是花痴，正好凑一对儿。"
+portrait = ExtResource("portrait_4")
+[sub_resource type="Resource" id="StoryLine_010"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "半夏"
+text = "找打！"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_011"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "陈皮"
+text = "哎哟！"
+portrait = ExtResource("portrait_4")
 
 [resource]
 script = ExtResource("2_storydata")
-story_id = "014_02"
-trigger_story_id = "014_01"
+story_id = "022_02"
+trigger_story_id = "008_01"
 trigger_type = "story_npc_cured"
 trigger_scene = "clinic"
 trigger_day = 0
@@ -93,4 +111,4 @@ play_once = true
 background_mode = "current_scene"
 return_scene = "clinic"
 clinic_npc_id = ""
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011")])

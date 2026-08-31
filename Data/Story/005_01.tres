@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_5"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wang_fu_hu_wei/wang_fu_hu_wei.png" id="portrait_6"]
 [ext_resource type="Texture2D" path="res://Assets/Background/005/005_03.png" id="background_7"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_gong_wang/chu_gong_wang.png" id="portrait_8"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_wang/chu_wang.png" id="portrait_8"]
 [ext_resource type="Texture2D" path="res://Assets/Background/005/005_04.png" id="background_9"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
@@ -59,7 +59,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "王府护卫"
-text = "奉楚王敕令，请先生去王府走一趟。"
+text = "奉楚王谕令，请先生去王府走一趟。"
 portrait = ExtResource("portrait_6")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
@@ -67,7 +67,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "hide"
 speaker = "李东璧"
-text = "是什么人病了要我去看病吗？"
+text = "是什么人病了？要我去看病吗？"
 portrait = ExtResource("portrait_5")
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")
@@ -106,7 +106,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "楚王"
-text = "犬子前几天突然病了，卧床不起。精神萎靡，食欲不振。小王请了好几位大夫，给开了好多方子，都不见好转。眼见着人一天比一天瘦，在这么下去怕是要坏事了…"
+text = "犬子前几天突然病了，卧床不起。精神萎靡，食欲不振。小王请了好几位大夫，给开了好多方子，都不见好转。眼见着人一天比一天瘦，再这么下去怕是要坏事了…"
 portrait = ExtResource("portrait_8")
 background = ExtResource("background_9")
 [sub_resource type="Resource" id="StoryLine_013"]
@@ -138,7 +138,7 @@ portrait = ExtResource("portrait_8")
 script = ExtResource("2_storydata")
 story_id = "005_01"
 trigger_story_id = ""
-trigger_type = "scene_enter"
+trigger_type = "night_end"
 trigger_scene = "night"
 trigger_day = 0
 required_reputation_points = 0

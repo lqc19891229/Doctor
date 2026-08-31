@@ -38,7 +38,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "久闻久闻，今日来小馆是所为何事呀？"
+text = "久闻久闻，不知今日来小馆所为何事？"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")

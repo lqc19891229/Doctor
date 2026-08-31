@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/shi_zi/shi_zi_after.png" id="portrait_1"]
 [ext_resource type="Texture2D" path="res://Assets/Background/005/005_04.png" id="background_2"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_3"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_gong_wang/chu_gong_wang.png" id="portrait_4"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_wang/chu_wang.png" id="portrait_4"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chen_pi/chen_pi.png" id="portrait_5"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
@@ -23,7 +23,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "世子所患的时脾虚湿盛之证，只要按方每日吃药，病情就无大碍了。"
+text = "世子所患的是脾虚湿盛之证，只要按方每日吃药，病情就无大碍了。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
@@ -55,7 +55,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "世子乃人中龙凤，可天下人只要来看病，草民眼里看到的就只有病人。十文是诊费，绝非世子命价。"
+text = "世子乃人中龙凤，但无论何人前来看病，草民眼里看到的都只有病人。十文是诊费，绝非世子命价。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")

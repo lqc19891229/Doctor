@@ -11,7 +11,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "杨大使所患的是肾气不固之症，要注意修养，最近是遇到什么事受了惊吗？"
+text = "杨大使所患的是肾气不固之症，要注意休养，最近是遇到什么事受了惊吗？"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")

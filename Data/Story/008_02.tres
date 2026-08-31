@@ -45,7 +45,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "别乱说，快去吧他吐的收拾收拾，还有病患要看病呢。"
+text = "别乱说，快去把他吐的地方收拾收拾，还有病患要看病呢。"
 portrait = ExtResource("portrait_2")
 
 [resource]

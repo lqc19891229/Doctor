@@ -397,14 +397,6 @@ func _update_reputation_point_ui(force_refresh: bool = false) -> void:
 
 
 # =========================================================
-# GameTimeManager：时间变化回调（兼容旧连接；新逻辑由 TopBarController 负责监听）
-# =========================================================
-
-func _on_game_time_changed() -> void:
-	_update_time_ui()
-
-
-# =========================================================
 # 根据当前节气刷新诊室背景
 # =========================================================
 
@@ -917,35 +909,6 @@ func refresh_clinic_view() -> void:
 
 
 # =========================================================
-# 刷新当前NPC（切换/按钮）
-# =========================================================
-
-func refresh_current_patient() -> void:
-	current_npc = npc_manager.get_current_npc()
-
-	if not _ensure_current_npc_valid(true):
-		_update_npc_portrait()
-		_update_npc_name()
-
-		# ✔ 迁移后统一入口
-		if current_npc != null:
-			_set_npc_dialogue_label_text(current_npc.get_dialogue())
-		else:
-			_set_npc_dialogue_label_text("")
-
-		return
-
-	_update_npc_portrait()
-	_update_npc_name()
-	_play_random_npc_portrait_entrance.call_deferred()
-
-	# ✔ 关键修改点
-	_set_npc_dialogue_label_text(current_npc.get_dialogue())
-
-	show_region(current_display_region_name)
-
-
-# =========================================================
 # 显示单个脉象区域
 # =========================================================
 
@@ -1032,15 +995,6 @@ func _update_pulse_keyboard_display() -> void:
 func _reset_pulse_keyboard_state() -> void:
 	pulse_keyboard_override_active = false
 	last_pulse_input_signature = ""
-
-
-# =========================================================
-# 清空脉象显示
-# =========================================================
-
-func _clear_pulse() -> void:
-	if pulse_window != null:
-		pulse_window.clear_display()
 
 
 # =========================================================
@@ -1692,33 +1646,6 @@ func get_story_treatment_npc_name() -> String:
 
 func get_story_treatment_prescription():
 	return current_prescription
-
-
-func show_story_pulse_region(target_pulse_window: Node, display_region_name: String) -> Dictionary:
-	if current_npc == null or current_npc.disease == null:
-		return {
-			"ok": false,
-			"text": "当前没有可诊疗的剧情病人。"
-		}
-
-	if target_pulse_window == null or not target_pulse_window.has_method("show_region"):
-		return {
-			"ok": false,
-			"text": "Story 的 PulseWindow 不可用。"
-		}
-
-	var raw_result = target_pulse_window.call(
-		"show_region",
-		display_region_name,
-		current_npc.disease
-	)
-	if typeof(raw_result) == TYPE_DICTIONARY:
-		return raw_result
-
-	return {
-		"ok": false,
-		"text": "Story 的 PulseWindow 返回了无效数据。"
-	}
 
 
 func show_story_pulse_hand(target_pulse_window: Node, hand_side: String) -> Dictionary:

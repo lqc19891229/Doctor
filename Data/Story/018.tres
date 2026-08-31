@@ -18,7 +18,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "陈皮"
-text = "少掌柜的，惠民药局的药料库期货啦。"
+text = "少掌柜的，惠民药局的药料库起火啦。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
@@ -34,7 +34,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "这火烧的蹊跷。"
+text = "这火烧得蹊跷。"
 portrait = ExtResource("portrait_2")
 background = ExtResource("background_3")
 [sub_resource type="Resource" id="StoryLine_005"]

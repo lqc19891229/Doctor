@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bi2y2ss5odqfn"
-path="res://.godot/imported/jin_yi_wei.png-5816dc5a18ab98897597afe26bb52c78.ctex"
+uid="uid://bkx0qkib5fogx"
+path="res://.godot/imported/015_01.png-4e1b8b471d5f7751478a145784807611.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/StoryNpc/jin_yi_wei/jin_yi_wei.png"
-dest_files=["res://.godot/imported/jin_yi_wei.png-5816dc5a18ab98897597afe26bb52c78.ctex"]
+source_file="res://Assets/Background/015/015_01.png"
+dest_files=["res://.godot/imported/015_01.png-4e1b8b471d5f7751478a145784807611.ctex"]
 
 [params]
 

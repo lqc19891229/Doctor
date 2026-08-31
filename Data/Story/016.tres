@@ -35,7 +35,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "沈修文"
-text = "治的了病，治不了命。今天来是有样东西要交给李大夫。"
+text = "治得了病，治不了命。今天来是有样东西要交给李大夫。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
@@ -75,7 +75,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "…...."
+text = "沈先生…...."
 portrait = ExtResource("portrait_1")
 
 [resource]
@@ -84,7 +84,7 @@ story_id = "016"
 trigger_story_id = "015"
 trigger_type = "scene_enter"
 trigger_scene = "clinic"
-trigger_day = 2
+trigger_day = 3
 required_reputation_points = 0
 reputation_points_change = 0
 experience_points_change = 0

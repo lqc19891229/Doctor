@@ -62,13 +62,6 @@ var _is_refreshing_dependency_unlocks: bool = false
 
 
 # =========================================================
-# 四、整本书阅读进度（神农百草经）
-# =========================================================
-
-var book_read_days: Dictionary = {}
-
-
-# =========================================================
 # 五、心得点数（累计值）
 # =========================================================
 
@@ -104,14 +97,6 @@ func add_experience_point(amount: int = 1) -> Array[String]:
 		return []
 
 	return change_experience_points(amount)
-
-
-func has_experience_point() -> bool:
-	return experience_points > 0
-
-
-func consume_experience_point() -> bool:
-	return true
 
 
 # =========================================================
@@ -605,56 +590,6 @@ func is_formula_unlocked_in_clinical_log(formula_id: String) -> bool:
 
 
 # =========================================================
-# 八、神农百草经阅读推进
-# =========================================================
-
-func get_book_read_days(book_id: String) -> int:
-	return int(book_read_days.get(book_id, 0))
-
-
-func add_book_read_day(book_id: String) -> void:
-	book_read_days[book_id] = get_book_read_days(book_id) + 1
-
-
-func can_continue_herb_book_reading(book: BookData) -> bool:
-	if book == null:
-		return false
-
-	if not book.is_herb_book():
-		return false
-
-	if has_unread_unlocked_disease_or_formula_entries():
-		return false
-
-	var herb_unlock_order := book.get_herb_unlock_order()
-	return get_book_read_days(book.book_id) < herb_unlock_order.size()
-
-
-func read_book_by_day(book: BookData) -> void:
-	if book == null:
-		return
-
-	var herb_unlock_order := book.get_herb_unlock_order()
-	if herb_unlock_order.is_empty():
-		return
-
-	if has_unread_unlocked_disease_or_formula_entries():
-		return
-
-	add_book_read_day(book.book_id)
-
-	var index := get_book_read_days(book.book_id) - 1
-	if index < 0 or index >= herb_unlock_order.size():
-		return
-
-	var herb_id := String(herb_unlock_order[index]).strip_edges()
-	if herb_id == "":
-		return
-
-	unlock_herb(herb_id)
-	unlock_entry(herb_id)
-	
-# =========================================================
 # 十、分类型判断逻辑
 # =========================================================
 
@@ -992,18 +927,6 @@ func unlock_all_entries_for_test() -> Dictionary:
 	# 补齐实体之间的依赖关系及行医记考状态。
 	refresh_unlocks_by_dependencies()
 
-	if BookDB != null:
-		var all_books: Array[BookData] = BookDB.get_all_books()
-		for book in all_books:
-			if book == null:
-				continue
-
-			var herb_unlock_order := book.get_herb_unlock_order()
-			if herb_unlock_order.is_empty():
-				continue
-
-			book_read_days[book.book_id] = herb_unlock_order.size()
-
 	print("[UnlockManager] 测试解锁并标记已读，已同步 Data 层：", result)
 	return result
 
@@ -1021,7 +944,6 @@ func reset_progress() -> void:
 	clinical_log_unlocked_herb_ids.clear()
 	clinical_log_unlocked_disease_ids.clear()
 	clinical_log_unlocked_formula_ids.clear()
-	book_read_days.clear()
 	unlocked_story_ids.clear()
 	_is_refreshing_dependency_unlocks = false
 
@@ -1039,7 +961,6 @@ func get_save_data() -> Dictionary:
 		"clinical_log_unlocked_herb_ids": clinical_log_unlocked_herb_ids,
 		"clinical_log_unlocked_disease_ids": clinical_log_unlocked_disease_ids,
 		"clinical_log_unlocked_formula_ids": clinical_log_unlocked_formula_ids,
-		"book_read_days": book_read_days,
 		"experience_points": experience_points,
 		"reputation_points": reputation_points,
 		"unlocked_story_ids": unlocked_story_ids
@@ -1057,7 +978,6 @@ func load_save_data(data: Dictionary) -> void:
 	clinical_log_unlocked_herb_ids = _load_bool_dictionary(data.get("clinical_log_unlocked_herb_ids", {}))
 	clinical_log_unlocked_disease_ids = _load_bool_dictionary(data.get("clinical_log_unlocked_disease_ids", {}))
 	clinical_log_unlocked_formula_ids = _load_bool_dictionary(data.get("clinical_log_unlocked_formula_ids", {}))
-	book_read_days = _load_int_dictionary(data.get("book_read_days", {}))
 	unlocked_story_ids = _load_bool_dictionary(data.get("unlocked_story_ids", {}))
 
 	experience_points = int(data.get("experience_points", 0))
@@ -1080,21 +1000,5 @@ func _load_bool_dictionary(source) -> Dictionary:
 			continue
 
 		result[clean_key] = bool(source[key])
-
-	return result
-
-
-func _load_int_dictionary(source) -> Dictionary:
-	var result := {}
-
-	if typeof(source) != TYPE_DICTIONARY:
-		return result
-
-	for key in source.keys():
-		var clean_key := String(key).strip_edges()
-		if clean_key == "":
-			continue
-
-		result[clean_key] = int(source[key])
 
 	return result

@@ -11,8 +11,8 @@
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wang_fu_hu_wei/wang_fu_hu_wei.png" id="portrait_7"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/zhao_shun/zhao_shun_hei.png" id="portrait_8"]
 [ext_resource type="Texture2D" path="res://Assets/Background/020/020.png" id="background_9"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_gong_wang/chu_gong_wang.png" id="portrait_10"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/jin_yi_wei/jin_yi_wei.png" id="portrait_11"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_wang/chu_wang.png" id="portrait_10"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/lu_ding/lu_ding.png" id="portrait_11"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
@@ -121,8 +121,8 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
-speaker = "锦衣卫"
-text = "你就是李东璧？"
+speaker = "陆丁"
+text = "在下北镇抚司陆丁，你就是李东璧？"
 portrait = ExtResource("portrait_11")
 [sub_resource type="Resource" id="StoryLine_015"]
 script = ExtResource("1_storyline")
@@ -137,7 +137,7 @@ script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
-text = "李东璧将前前后后发生的事情一五一十告予钦差"
+text = "李东璧将前前后后发生的事情一五一十地禀明钦差"
 
 [resource]
 script = ExtResource("2_storydata")

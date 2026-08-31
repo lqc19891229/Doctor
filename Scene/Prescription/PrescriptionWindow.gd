@@ -439,10 +439,6 @@ func _normalize_herb_search_text(value: String) -> String:
 		.replace(" ", "")
 
 
-func _get_herb_id_initials(herb_id: String) -> String:
-	return _get_id_initials(herb_id)
-
-
 func _get_id_initials(value: String) -> String:
 	var parts := value.to_lower().split("_", false)
 	var initials := ""
@@ -1165,11 +1161,6 @@ func _on_close_requested() -> void:
 # =========================================================
 func load_all_diseases() -> void:
 	all_diseases.clear()
-
-	if not Engine.has_singleton("DiseaseDB"):
-		# DiseaseDB 如果是 Autoload，通常可以直接访问。
-		# 这里保留直接调用，避免项目中未注册为 singleton 时静态检查报错。
-		pass
 
 	if typeof(DiseaseDB) == TYPE_NIL:
 		emit_signal("info_requested", "疾病数据库未初始化")

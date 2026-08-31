@@ -39,7 +39,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "东壁啊，白天教你的都听明白了吗？"
+text = "东璧啊，白天教你的都听明白了吗？"
 portrait = ExtResource("portrait_4")
 background = ExtResource("background_5")
 [sub_resource type="Resource" id="StoryLine_005"]

@@ -45,7 +45,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "顾问"
-text = "人生在世不止考取科举一条路，你能找到一条适合自己的路，为师很欣慰。"
+text = "人生在世不止科举取仕一条路，你能找到一条适合自己的路，为师很欣慰。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")

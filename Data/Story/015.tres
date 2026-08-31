@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_1"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/lei_wan_jun/lei_wan_jun.png" id="portrait_2"]
 [ext_resource type="Texture2D" path="res://Assets/Background/015/015_01.png" id="background_3"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_gong_wang/chu_gong_wang.png" id="portrait_4"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_wang/chu_wang.png" id="portrait_4"]
 [ext_resource type="Texture2D" path="res://Assets/Background/015/015_02.png" id="background_5"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
@@ -140,7 +140,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "楚王"
-text = "先生是犬子的救命恩人，有什么本王能帮上忙的一定尽力而为。"
+text = "先生是犬子的救命恩人，若有本王能帮上忙的，一定尽力而为。"
 portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_018"]
 script = ExtResource("1_storyline")
@@ -178,7 +178,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "草民自幼读四书五经，诸子百家，文章未成，宦术未精，所学唯有为生民立命而已，若以我一命换千万民生，吾往矣。"
+text = "草民自幼读四书五经，诸子百家，文章未成，功名未就，所学所求只有为生民立命，若以我一命换千万民生，吾往矣。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_023"]
 script = ExtResource("1_storyline")
@@ -186,7 +186,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "楚王"
-text = "先生所言让本王惭愧啊…我会修书一封密奏皇上赈灾药材之事，先生也切莫再和别人提及此事，万事小心。"
+text = "先生所言让本王惭愧啊…待我会写一道密奏，向皇上禀明赈灾药材之事。先生也切莫再和别人提及此事。"
 portrait = ExtResource("portrait_4")
 
 [resource]

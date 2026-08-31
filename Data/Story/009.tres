@@ -51,7 +51,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "吴世良"
-text = "昨日，赈灾药材已采办完备，这次除了惠民药局，还要各医馆药铺配合诊治发放。"
+text = "昨日，赈灾药材已采办完备，这次除了惠民药局，还要各医馆药铺配合诊治病患、发放药材。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
@@ -59,7 +59,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "hide"
 speaker = "吴世良"
-text = "一会儿诸位就去库房画押登记，明日起官府会发放榜文通知百姓就近领取药材。"
+text = "一会儿诸位就去库房画押登记，明日起官府会张贴榜文，通知百姓就近领取药材。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
@@ -76,7 +76,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "hide"
 speaker = "杨善泉"
-text = "李大夫您在这画押，上面催得紧，我们赶着出货呢。"
+text = "李大夫您在这画押，上面催得紧，我们赶着发运呢。"
 portrait = ExtResource("portrait_5")
 [sub_resource type="Resource" id="StoryLine_009"]
 script = ExtResource("1_storyline")
@@ -86,15 +86,15 @@ inactive_portrait_mode = "hide"
 speaker = "李东璧"
 text = "好的好的。"
 portrait = ExtResource("portrait_2")
-[sub_resource type="Resource" id="StoryLine_012"]
+[sub_resource type="Resource" id="StoryLine_010"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "东璧回来了啦，什么事儿啊一大早就被叫去了？"
+text = "东璧回来啦，什么事儿啊，一大早就被叫去了？"
 portrait = ExtResource("portrait_7")
-[sub_resource type="Resource" id="StoryLine_013"]
+[sub_resource type="Resource" id="StoryLine_011"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
@@ -102,15 +102,15 @@ inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "朝廷调拨了赈灾药材，这次不光惠民药局，咱们这些医馆药铺也要一起帮忙发放。"
 portrait = ExtResource("portrait_2")
-[sub_resource type="Resource" id="StoryLine_014"]
+[sub_resource type="Resource" id="StoryLine_012"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "吴芷兰"
-text = "这几日我去菜市街买菜得时候，看到不少流民在城东，大灾之后必有大疫，朝廷这次赈灾太及时了。"
+text = "这几日我去菜市街买菜的时候，看到不少流民在城东，大灾之后必有大疫，朝廷这次赈灾太及时了。"
 portrait = ExtResource("portrait_8")
-[sub_resource type="Resource" id="StoryLine_015"]
+[sub_resource type="Resource" id="StoryLine_013"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
@@ -118,7 +118,7 @@ inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "陈皮，跟我去后院收拾收拾库房，一会儿药材就要送来了，得赶紧腾出地方。"
 portrait = ExtResource("portrait_2")
-[sub_resource type="Resource" id="StoryLine_016"]
+[sub_resource type="Resource" id="StoryLine_014"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
@@ -134,7 +134,7 @@ trigger_story_id = "008_02"
 trigger_type = "scene_enter"
 trigger_scene = "clinic"
 trigger_day = 5
-required_reputation_points = 0
+required_reputation_points = 107
 reputation_points_change = 0
 experience_points_change = 0
 unlock_entry_id = ""
@@ -142,4 +142,4 @@ play_once = true
 background_mode = "current_scene"
 return_scene = "clinic"
 clinic_npc_id = ""
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_012"), SubResource("StoryLine_013"), SubResource("StoryLine_014"), SubResource("StoryLine_015"), SubResource("StoryLine_016")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011"), SubResource("StoryLine_012"), SubResource("StoryLine_013"), SubResource("StoryLine_014")])

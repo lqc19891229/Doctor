@@ -27,7 +27,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "孙大夫也发现赈灾药材有问题，去县衙找吴世良，谁知被安了个私换药材的罪，打了二十板子关进大狱里了。"
+text = "孙大夫也发现赈灾药材有问题，去县衙找吴世良，谁知被扣了个私换药材的罪名，打了二十板子关进大狱里了。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
@@ -43,7 +43,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "我们得上报布政司，给孙大夫讨回公道。"
+text = "我们得给孙大夫讨回公道。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
@@ -51,7 +51,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "儿啊，我看咱们还是别趟浑水了，多一事不如少一事，明哲保身吧。这不是咱们平民百姓管得了的。"
+text = "儿啊，我看咱们还是别蹚浑水了，多一事不如少一事，明哲保身吧。这不是咱们平民百姓管得了的。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
