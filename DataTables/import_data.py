@@ -1680,6 +1680,17 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         elif is_treatment_result_story:
             source_story_row = story_map.get(trigger_story_id)
             if source_story_row is not None:
+                source_trigger_scene = (
+                    as_str(source_story_row.get("TriggerScene")).lower()
+                    or "clinic"
+                )
+                if trigger_scene != source_trigger_scene:
+                    errors.append(
+                        f"Story 治疗结果剧情的 TriggerScene 必须与发起诊疗的主剧情一致: "
+                        f"{story_id} -> {trigger_scene}; "
+                        f"{trigger_story_id} -> {source_trigger_scene}"
+                    )
+
                 source_npc_id = (
                     as_str(source_story_row.get("NpcID"))
                     or as_str(source_story_row.get("ClinicNpcID"))

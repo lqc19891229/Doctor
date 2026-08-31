@@ -78,7 +78,7 @@ script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
-text = "名声+1000"
+text = "名望+1000"
 
 [resource]
 script = ExtResource("2_storydata")

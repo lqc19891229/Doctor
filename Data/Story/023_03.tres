@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Background/023/023.png" id="background_2"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "不对不对，我在干什么呀，冷静冷静，再好好想想。"
+portrait = ExtResource("portrait_1")
+background = ExtResource("background_2")
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "023_03"
+trigger_story_id = "023_01"
+trigger_type = "story_npc_failed_retry"
+trigger_scene = "clinic"
+trigger_day = 0
+required_reputation_points = 0
+reputation_points_change = 0
+experience_points_change = 0
+unlock_entry_id = ""
+play_once = true
+return_scene = "clinic"
+clinic_npc_id = ""
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001")])

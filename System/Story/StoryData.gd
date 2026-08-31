@@ -36,8 +36,9 @@ var trigger_scene: String = "clinic"
 
 # 剧情触发天数：
 # - trigger_story_id 为空：表示游戏第几天开始允许触发。
-# - scene_enter 且 trigger_story_id 非空：表示前置剧情完整播放结束后第几天允许触发。
+# - scene_enter / night_end 且 trigger_story_id 非空：表示前置剧情完整播放结束后第几天允许触发。
 # - 治疗结果剧情：必须填写 0，治疗结束后立即按 trigger_story_id 匹配。
+#   TriggerScene 必须与发起诊疗的主剧情一致；night_end 主剧情对应 night。
 # - 0 表示不增加额外天数。
 @export var trigger_day: int = 0
 

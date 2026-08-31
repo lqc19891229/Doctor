@@ -53,6 +53,10 @@ var pending_story_return_target: String = ""
 # 本次剧情是否暂停了 Clinic 计时
 var story_paused_clinic_clock: bool = false
 
+# 是否应在当前整条剧情链结束后完成跨天。
+# night_end 主剧情可能切换成治疗成功 / 失败结果剧情，不能只检查最后一段剧情的 trigger_type。
+var advance_day_after_story: bool = false
+
 # 存档槽弹窗模式：
 # "load" = 读取存档
 # "new_game" = 新游戏选择槽位
@@ -107,6 +111,7 @@ func _connect_menu_buttons() -> void:
 # 显示开始菜单
 # =========================================================
 func _show_main_menu() -> void:
+	advance_day_after_story = false
 	_clear_story_overlay()
 	_clear_current_scene()
 	main_menu_layer.visible = true
@@ -741,6 +746,7 @@ func _on_story_game_over_requested() -> void:
 	StoryManager.mark_current_story_played()
 	StoryManager.clear_story()
 	pending_story_return_target = ""
+	advance_day_after_story = false
 
 	if story_paused_clinic_clock:
 		if GameTime != null and GameTime.has_method("cancel_story_pause_state"):
@@ -753,9 +759,6 @@ func _on_story_game_over_requested() -> void:
 
 
 func _on_story_finished() -> void:
-	# clear_story() 会清空 current_story，因此必须先保留刚刚完整播放结束的剧情数据。
-	var finished_story: StoryData = StoryManager.current_story
-
 	# 只有走到正式结束信号，才把当前剧情记为已播放并保存。
 	StoryManager.mark_current_story_played()
 	StoryManager.clear_story()
@@ -764,13 +767,10 @@ func _on_story_finished() -> void:
 	pending_story_return_target = ""
 	_clear_story_overlay()
 
-	# night_end 不是普通的“剧情结束后返回某场景”，而是“剧情结束后完成跨天”。
-	# 因此不使用额外的 advance_day_after_story 状态变量。
-	if (
-		finished_story != null
-		and finished_story.trigger_type.strip_edges().to_lower()
-		== StoryData.TRIGGER_TYPE_NIGHT_END
-	):
+	# night_end 主剧情可以进入诊疗，并继续切换成治疗结果剧情。
+	# 使用整条剧情链状态，确保最后一段不再是 night_end 时仍然能够正常跨天。
+	if advance_day_after_story:
+		advance_day_after_story = false
 		story_paused_clinic_clock = false
 		_finish_night_and_enter_next_day()
 		return
@@ -835,13 +835,21 @@ func _on_night_finished() -> void:
 	var night_end_story: StoryData = StoryManager.find_night_end_story(GameTime.current_day)
 
 	if night_end_story != null:
+		# 必须在播放前设置，后续治疗结果剧情会替换 StoryManager.current_story。
+		advance_day_after_story = true
 		_play_story(night_end_story.resource_path)
+
+		# 剧情资源加载或设置失败时不能卡在 Night，直接按原流程进入下一天。
+		if advance_day_after_story and current_story_scene == null:
+			advance_day_after_story = false
+			_finish_night_and_enter_next_day()
 		return
 
 	_finish_night_and_enter_next_day()
 
 
 func _finish_night_and_enter_next_day() -> void:
+	advance_day_after_story = false
 	GameTime.finish_night()
 	_save_game_with_warning("夜晚结束")
 
