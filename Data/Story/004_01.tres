@@ -11,7 +11,7 @@
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "顾问"
 text = "言闻兄别来无恙啊。"
@@ -28,7 +28,7 @@ portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "顾问"
 text = "东璧近来如何啊？"
@@ -39,12 +39,12 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "和我学了一年多医术，现在啊已经能自己出诊了。你还别说，这小子还真是块学医的材料。"
+text = "和我学了一年多医术，现在啊已经能自己出诊了。你还别说，这小子学得还挺快。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "顾先生，学生有礼了。"
@@ -52,7 +52,7 @@ portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "顾问"
 text = "正好我这几日不怎么舒服，东璧你给我看看。"

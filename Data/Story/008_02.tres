@@ -11,7 +11,7 @@
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
-inactive_portrait_mode = "hide"
+inactive_portrait_mode = "dim"
 speaker = "贾荃"
 text = "哎哟，我的头好晕啊。"
 portrait = ExtResource("portrait_1")

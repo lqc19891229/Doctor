@@ -20,7 +20,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "陈皮"
-text = "老爷，少爷，榜上没找到少爷的名字。"
+text = "老爷，榜上没找到少爷的名字。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
@@ -36,7 +36,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "你再仔细看看。"
+text = "你们再仔细看看。"
 portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
@@ -44,7 +44,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "陈皮"
-text = "老爷，我看了好几遍了，确实没有少爷的名字…..."
+text = "我看了好几遍了，确实没有少爷的名字..."
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
@@ -52,7 +52,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "考了三次都没中举，爹，看来我不是读书的材料。"
+text = "考了三次都没中举，爹，看来我不是读书的材料..."
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
@@ -60,7 +60,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "这说的是什么话，你看隔壁村那个老范，考了大半辈子童试，年过半百才中了秀才，后来又中了举人，你这才哪儿到哪儿。"
+text = "这说的是什么话，你看隔壁村那个老范，考了大半辈子童试，年过半百才中秀才，后来又中了举人，你这才哪儿到哪儿。"
 portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")
@@ -99,7 +99,7 @@ script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
-text = "李东璧十四岁考中秀才，可之后九年间三次参加乡试均告落榜，本就无心科举的李东璧决定开始随父亲学医。"
+text = "李东璧十四岁考中秀才，可之后九年间三次参加乡试均告落榜，本就无心科举的李东璧决定开始随父亲学医"
 
 [resource]
 script = ExtResource("2_storydata")
