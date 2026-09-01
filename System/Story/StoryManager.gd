@@ -183,7 +183,7 @@ func find_trigger_story(trigger_scene: String, current_day: int) -> StoryData:
 func find_night_end_story(current_day: int) -> StoryData:
 	# Night 场景点击“休息，进入明天”时调用。
 	# 只检查 night_end 类型剧情，不会和进入 Night 时的 scene_enter 剧情混在一起。
-	# 若剧情发起 story NPC 诊疗，Main 会在整条诊疗及结果剧情结束后再完成跨天。
+	# night_end 只负责触发时机，剧情结束后的目标场景由 StoryData.return_scene 决定。
 	return _find_matching_story(
 		"night",
 		current_day,
