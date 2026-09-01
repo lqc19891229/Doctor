@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
-line_type = "subtitle"
+line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
@@ -34,10 +34,10 @@ portrait = ExtResource("portrait_2")
 [resource]
 script = ExtResource("2_storydata")
 story_id = "024_01"
-trigger_story_id = ""
+trigger_story_id = "023_02"
 trigger_type = "scene_enter"
 trigger_scene = "clinic"
-trigger_day = 0
+trigger_day = 1
 required_reputation_points = 0
 reputation_points_change = 0
 experience_points_change = 0

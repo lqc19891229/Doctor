@@ -305,8 +305,54 @@ func _skip_current_story() -> void:
 		return
 
 	is_typing = false
+	continue_label.hide()
+
+	# 如果这段剧情结束后会继续进入 / 返回 story NPC 诊疗界面，
+	# 跳过时也必须先同步到剧情最后一个有效背景。
+	# 否则直接调用 _finish_story() 会让诊疗界面停留在玩家长按回车时的背景。
+	if _story_continues_to_treatment():
+		var final_background := _get_final_story_background()
+		if final_background != null and background_rect.texture != final_background:
+			is_background_transitioning = true
+			dialogue_block.hide()
+			subtitle_block.hide()
+			treatment_option_container.hide()
+			_clear_physical_portrait_slots()
+
+			await _change_background_with_fade(final_background)
+
+			# Story 如果在等待背景切换时已经被移出场景树，就不再继续结束流程。
+			if not is_inside_tree():
+				return
+
+			is_background_transitioning = false
+
 	current_line_index = current_lines.size()
 	_finish_story()
+
+
+func _story_continues_to_treatment() -> bool:
+	# 失败重试结果剧情播放结束后，会恢复刚才的诊疗界面。
+	if resume_treatment_after_story:
+		return true
+
+	# 普通剧情配置了 clinic_npc_id 时，播放结束后会进入新的 story NPC 诊疗。
+	if story_data == null:
+		return false
+
+	return not story_data.clinic_npc_id.strip_edges().is_empty()
+
+
+func _get_final_story_background() -> Texture2D:
+	# 背景字段允许留空，留空表示沿用上一张图。
+	# 因此不能只读取最后一句，而要取得整段剧情最后一个非空背景。
+	var final_background: Texture2D = background_rect.texture
+
+	for line_data in current_lines:
+		if line_data != null and line_data.background != null:
+			final_background = line_data.background
+
+	return final_background
 
 
 func play_story(

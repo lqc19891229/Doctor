@@ -84,7 +84,7 @@ portrait = ExtResource("portrait_3")
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
-inactive_portrait_mode = "dim"
+inactive_portrait_mode = "hide"
 speaker = "半夏"
 text = "少掌柜的你有什么注意呀？快说快说！"
 portrait = ExtResource("portrait_4")
@@ -140,7 +140,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "金姨妈"
-text = "若是这样，不如趁那小子不知情，便宜与了那小子…."
+text = "若是这样，不如趁那小子不知情，便宜与了他去…."
 portrait = ExtResource("portrait_5")
 
 [resource]

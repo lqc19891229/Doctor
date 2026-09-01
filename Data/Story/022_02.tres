@@ -45,7 +45,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "柳敬亭"
-text = "诶嘿嘿，小兄弟过奖了，我只是说些王侯将相，才子佳人，来听书的客官喜欢什么，我就讲什么。"
+text = "诶嘿嘿，小兄弟过奖了，我只是说些王侯将相，才子佳人的故事，来听书的客官喜欢什么，我就讲什么。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
@@ -53,7 +53,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "陈皮"
-text = "先生您现在就在这讲一段吧。"
+text = "先生，您现在就在这讲一段吧。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
@@ -151,6 +151,14 @@ inactive_portrait_mode = "dim"
 speaker = "陈皮"
 text = "哈哈哈，还有这种方子。"
 portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_019"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "哈哈哈，这道士说的也不无道理。"
+portrait = ExtResource("portrait_2")
 
 [resource]
 script = ExtResource("2_storydata")
@@ -167,4 +175,4 @@ play_once = true
 background_mode = "current_scene"
 return_scene = "clinic"
 clinic_npc_id = ""
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011"), SubResource("StoryLine_012"), SubResource("StoryLine_013"), SubResource("StoryLine_014"), SubResource("StoryLine_015"), SubResource("StoryLine_016"), SubResource("StoryLine_017"), SubResource("StoryLine_018")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011"), SubResource("StoryLine_012"), SubResource("StoryLine_013"), SubResource("StoryLine_014"), SubResource("StoryLine_015"), SubResource("StoryLine_016"), SubResource("StoryLine_017"), SubResource("StoryLine_018"), SubResource("StoryLine_019")])

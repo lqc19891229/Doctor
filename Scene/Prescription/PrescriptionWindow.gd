@@ -39,6 +39,9 @@ const ROLE_CHEN := "臣"
 const ROLE_ZUO := "佐"
 const ROLE_SHI := "使"
 
+# 解锁后才开放“搜索并套用预制方剂”功能的医书条目。
+const FORMULA_FILL_FEATURE_ENTRY_ID := "yu_zhi_fang_ji"
+
 
 # =========================================================
 # 场景节点引用
@@ -135,6 +138,7 @@ var all_diseases: Array = []
 func _ready() -> void:
 	_setup_unit_option()
 	_connect_signals()
+	_setup_focus_navigation()
 	_setup_player_hint_dialog()
 	_set_selected_role(ROLE_JUN)
 	load_all_diseases()
@@ -211,6 +215,10 @@ func _connect_signals() -> void:
 	if close_requested != null and not close_requested.is_connected(_on_close_requested):
 		close_requested.connect(_on_close_requested)
 
+	# 每次开方窗口显示时，都把默认键盘焦点放回疾病搜索框。
+	if not visibility_changed.is_connected(_on_window_visibility_changed):
+		visibility_changed.connect(_on_window_visibility_changed)
+
 	_safe_connect_item_selected(jun_list, _on_jun_list_item_selected)
 	_safe_connect_item_selected(chen_list, _on_chen_list_item_selected)
 	_safe_connect_item_selected(zuo_list, _on_zuo_list_item_selected)
@@ -245,6 +253,71 @@ func _safe_connect_item_clicked(list_node: ItemList, callable_fn: Callable) -> v
 func _safe_connect_gui_input(control_node: Control, callable_fn: Callable) -> void:
 	if control_node != null and not control_node.gui_input.is_connected(callable_fn):
 		control_node.gui_input.connect(callable_fn)
+
+
+# =========================================================
+# Tab 焦点顺序
+# DiseaseSearch -> 君 -> 臣 -> 佐 -> 使 -> HerbSearch -> DiseaseSearch
+# Shift+Tab 自动按相反方向循环。
+# =========================================================
+func _setup_focus_navigation() -> void:
+	var focus_chain: Array[Control] = [
+		disease_search,
+		jun_list,
+		chen_list,
+		zuo_list,
+		shi_list,
+		herb_search,
+	]
+
+	for index in range(focus_chain.size()):
+		var current_control: Control = focus_chain[index]
+		var next_control: Control = focus_chain[
+			(index + 1) % focus_chain.size()
+		]
+		var previous_control: Control = focus_chain[
+			(index - 1 + focus_chain.size()) % focus_chain.size()
+		]
+
+		current_control.focus_mode = Control.FOCUS_ALL
+		current_control.focus_next = current_control.get_path_to(next_control)
+		current_control.focus_previous = current_control.get_path_to(previous_control)
+
+	_connect_role_focus(jun_list, ROLE_JUN)
+	_connect_role_focus(chen_list, ROLE_CHEN)
+	_connect_role_focus(zuo_list, ROLE_ZUO)
+	_connect_role_focus(shi_list, ROLE_SHI)
+
+
+func _connect_role_focus(list_node: Control, role_name: String) -> void:
+	if list_node == null:
+		return
+
+	var focus_callable := Callable(self, "_on_role_focus_entered").bind(role_name)
+	if not list_node.focus_entered.is_connected(focus_callable):
+		list_node.focus_entered.connect(focus_callable)
+
+
+func _on_role_focus_entered(role_name: String) -> void:
+	# Tab 切换到某个配伍区时，同步更新加药目标和面板高亮。
+	_set_selected_role(role_name)
+
+
+func _on_window_visibility_changed() -> void:
+	if not visible:
+		return
+
+	# Window 刚显示时，焦点可能仍在打开窗口的按钮上。
+	# 延迟到下一帧再聚焦，避免被窗口显示流程覆盖。
+	call_deferred("_focus_default_control")
+
+
+func _focus_default_control() -> void:
+	if not visible or disease_search == null:
+		return
+
+	disease_search.grab_focus()
+	disease_search.caret_column = disease_search.text.length()
 
 
 # =========================================================
@@ -322,6 +395,10 @@ func _refresh_herb_list() -> void:
 	if herb_database == null:
 		emit_signal("info_requested", "药材数据库未初始化")
 		return
+
+	# 方剂结果与普通药材共用 HerbList，但用“【方剂】”前缀明确区分。
+	# 只有功能条目和具体方剂条目都已经解锁时，才会生成对应按钮。
+	_add_matching_formula_buttons()
 
 	var herbs = herb_database.get_all_herbs()
 	for herb in herbs:
@@ -428,8 +505,9 @@ func _is_herb_match_search(herb) -> bool:
 	):
 		return true
 
-	# 新增：输入方剂中文名 / 拼音 / 拼音首字母时，显示该方剂包含的药材
-	return _is_herb_in_matching_formula(str(herb.herb_id))
+	# 方剂匹配结果由独立的“【方剂】”按钮显示，
+	# 不再把整张方剂拆成若干普通药材搜索结果。
+	return false
 
 
 func _normalize_herb_search_text(value: String) -> String:
@@ -448,30 +526,6 @@ func _get_id_initials(value: String) -> String:
 			initials += part.substr(0, 1)
 
 	return initials
-
-
-func _is_herb_in_matching_formula(herb_id: String) -> bool:
-	if herb_id.strip_edges() == "":
-		return false
-
-	if formula_database == null:
-		return false
-
-	if not formula_database.has_method("get_all_formulas"):
-		return false
-
-	var formulas = formula_database.get_all_formulas()
-	for formula in formulas:
-		if formula == null:
-			continue
-
-		if not _is_formula_match_search(formula):
-			continue
-
-		if formula.has_method("has_herb_id") and formula.has_herb_id(herb_id):
-			return true
-
-	return false
 
 
 func _is_formula_match_search(formula) -> bool:
@@ -495,6 +549,157 @@ func _is_formula_match_search(formula) -> bool:
 		formula_name.contains(herb_search_keyword)
 		or formula_id_full_pinyin.contains(herb_search_keyword)
 		or formula_id_initials.contains(herb_search_keyword)
+	)
+
+
+func _is_formula_fill_feature_unlocked() -> bool:
+	if Unlock == null or not Unlock.has_method("is_entry_unlocked"):
+		return false
+
+	return Unlock.is_entry_unlocked(FORMULA_FILL_FEATURE_ENTRY_ID)
+
+
+func _is_formula_entry_unlocked(formula) -> bool:
+	if formula == null:
+		return false
+
+	if Unlock == null or not Unlock.has_method("is_entry_unlocked"):
+		return false
+
+	var formula_id := str(formula.formula_id).strip_edges()
+	if formula_id == "":
+		return false
+
+	# 当前项目中的方剂条目 entry_id 与 formula_id 使用同一个 ID。
+	# 因此条目尚未解锁时，不显示对应的预制方剂。
+	return Unlock.is_entry_unlocked(formula_id)
+
+
+func _add_matching_formula_buttons() -> void:
+	if herb_list == null:
+		return
+
+	# 没有输入关键词时仍只显示普通药材，避免打开窗口就列出全部方剂。
+	if herb_search_keyword == "":
+		return
+
+	if not _is_formula_fill_feature_unlocked():
+		return
+
+	if formula_database == null or not formula_database.has_method("get_all_formulas"):
+		return
+
+	var formulas = formula_database.get_all_formulas()
+	for formula in formulas:
+		if formula == null:
+			continue
+
+		if not _is_formula_entry_unlocked(formula):
+			continue
+
+		if not _is_formula_match_search(formula):
+			continue
+
+		var formula_button := Button.new()
+		formula_button.text = "【方剂】%s" % str(formula.formula_name)
+		formula_button.custom_minimum_size = Vector2(180, 44)
+		formula_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		formula_button.focus_mode = Control.FOCUS_NONE
+		formula_button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
+		formula_button.set_meta("formula_id", str(formula.formula_id))
+
+		if formula.has_method("get_display_text"):
+			formula_button.tooltip_text = str(formula.get_display_text())
+
+		formula_button.pressed.connect(
+			_on_formula_button_pressed.bind(formula)
+		)
+		herb_list.add_child(formula_button)
+
+
+func _on_formula_button_pressed(formula) -> void:
+	if not _is_formula_fill_feature_unlocked():
+		emit_signal("info_requested", "尚未解锁预制方剂功能。")
+		_refresh_herb_list()
+		return
+
+	if not _is_formula_entry_unlocked(formula):
+		emit_signal("info_requested", "该方剂条目尚未解锁。")
+		_refresh_herb_list()
+		return
+
+	if current_prescription == null:
+		emit_signal("info_requested", "当前处方未初始化")
+		return
+
+	if herb_database == null:
+		emit_signal("info_requested", "药材数据库未初始化")
+		return
+
+	if formula == null or not formula.has_method("get_group_by_role"):
+		emit_signal("info_requested", "方剂数据无效，无法填入处方。")
+		return
+
+	# 先完整校验并整理所有药材，再清空当前四区。
+	# 这样某味药材资源缺失或剂量无效时，不会破坏玩家已经填写的处方。
+	var fill_items: Array[Dictionary] = []
+	for role_name in [ROLE_JUN, ROLE_CHEN, ROLE_ZUO, ROLE_SHI]:
+		var ingredient_group = formula.get_group_by_role(role_name)
+
+		for ingredient in ingredient_group:
+			if ingredient == null:
+				emit_signal("info_requested", "方剂数据存在空药材，无法填入处方。")
+				return
+
+			var herb_id := str(ingredient.get_herb_id()).strip_edges()
+			var amount := float(ingredient.amount)
+			var unit := str(ingredient.unit).strip_edges()
+			var herb = herb_database.get_herb_by_id(herb_id)
+
+			if herb_id == "" or herb == null:
+				emit_signal(
+					"info_requested",
+					"方剂中的药材资源缺失：%s" % herb_id
+				)
+				return
+
+			if amount <= 0.0 or not HerbUnit.is_valid_unit(unit):
+				emit_signal(
+					"info_requested",
+					"方剂中的药材剂量无效：%s" % str(herb.herb_name)
+				)
+				return
+
+			fill_items.append({
+				"herb": herb,
+				"amount": amount,
+				"unit": unit,
+				"role": role_name,
+			})
+
+	if fill_items.is_empty():
+		emit_signal("info_requested", "该方剂没有可填入的药材。")
+		return
+
+	# Prescription.clear() 只清空四区药材，不会清除已经选择的疾病诊断。
+	current_prescription.clear()
+
+	for item in fill_items:
+		current_prescription.add_herb(
+			item["herb"],
+			float(item["amount"]),
+			str(item["unit"]),
+			str(item["role"])
+		)
+
+	selected_herb_id = ""
+	selected_herb_button = null
+	_set_selected_role(ROLE_JUN)
+	_refresh_prescription_list()
+
+	emit_signal(
+		"info_requested",
+		"已按预制方剂填入：%s" % str(formula.formula_name)
 	)
 
 

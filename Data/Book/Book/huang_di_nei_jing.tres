@@ -13,4 +13,4 @@ sort_index = 1
 visible_by_default = true
 read_once = false
 allow_daytime_open = true
-unlock_entry_ids = Array[String](["ba_mai", "kai_fang", "xing_yi_ji_kao"])
+unlock_entry_ids = Array[String](["ba_mai", "kai_fang", "xing_yi_ji_kao", "yu_zhi_fang_ji"])
