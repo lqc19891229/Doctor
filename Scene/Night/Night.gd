@@ -23,10 +23,13 @@ const NIGHT_WINTER_BACKGROUND: Texture2D = preload("res://Assets/Background/clin
 @onready var read_book_button: Button = find_child("ReadBookButton", true, false) as Button
 @onready var next_day_button: Button = find_child("NextDayButton", true, false) as Button
 
-@onready var day_label: Label = find_child("DayLabel", true, false) as Label
-@onready var time_label: Label = find_child("TimeLabel", true, false) as Label
-@onready var thoughts_point_label: Label = find_child("ThoughtsPoint", true, false) as Label
-@onready var reputation_point_label: Label = find_child("ReputationPoint", true, false) as Label
+# 顶部栏节点必须使用精确路径。
+# InfoWindow 中也存在名为 DayLabel 的测试节点；使用递归 find_child() 会误绑定到
+# 隐藏的测试窗口，导致屏幕左上角真正的日期一直停留在默认文字“天数”。
+@onready var day_label: Label = $VBoxContainer/TopBar/HBoxContainer/DayLabel
+@onready var time_label: Label = $VBoxContainer/TopBar/HBoxContainer/TimeLabel
+@onready var thoughts_point_label: Label = $VBoxContainer/TopBar/HBoxContainer/ThoughtsPoint
+@onready var reputation_point_label: Label = $VBoxContainer/TopBar/HBoxContainer/ReputationPoint
 
 # 复用 Night.tscn 中现有的背景节点，无需调整场景结构。
 @onready var night_background: TextureRect = $Background/BackgroundImage
