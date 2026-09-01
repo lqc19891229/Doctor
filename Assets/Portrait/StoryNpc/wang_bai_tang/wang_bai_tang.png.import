@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4glhxlrknjfr"
-path="res://.godot/imported/xie_fei_yan_after.png-06fa771bb91f6266d6b184d8736f2d81.ctex"
+uid="uid://cnc1iw2w8aiu4"
+path="res://.godot/imported/wang_bai_tang.png-34970217b9b512959c3224899ba9637d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/RandomNpc/xie_fei_yan_after.png"
-dest_files=["res://.godot/imported/xie_fei_yan_after.png-06fa771bb91f6266d6b184d8736f2d81.ctex"]
+source_file="res://Assets/Portrait/StoryNpc/wang_bai_tang/wang_bai_tang.png"
+dest_files=["res://.godot/imported/wang_bai_tang.png-34970217b9b512959c3224899ba9637d.ctex"]
 
 [params]
 

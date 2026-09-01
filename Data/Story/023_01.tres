@@ -2,52 +2,75 @@
 
 [ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
 [ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
-[ext_resource type="Resource" path="res://Data/Disease/ren_shen_disease.tres" id="clinic_disease_1"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wu_zhi_lan/wu_zhi_lan_sick.png" id="clinic_npc_portrait_1"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/ban_xia/ban_xia.png" id="portrait_2"]
+[ext_resource type="Resource" path="res://Data/Disease/fei_qi_xu.tres" id="clinic_disease_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/xie_fei_yan/xie_fei_yan_sick.png" id="clinic_npc_portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/jin_yi_ma/jin_yi_ma.png" id="portrait_2"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_3"]
-[ext_resource type="Texture2D" path="res://Assets/Background/023/023.png" id="background_4"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/ban_xia/ban_xia.png" id="portrait_4"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "半夏"
-text = "少掌柜的，夫人在屋里晕倒了，您快来看看啊！"
+speaker = "金姨妈"
+text = "李大夫，您快给我女儿瞧瞧吧，这孩子整日茶饭不进，愁眉苦脸咳个不停。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
-speaker = "李东璧"
-text = "芷兰！！！"
-portrait = ExtResource("portrait_3")
+speaker = "谢飞燕"
+text = "…"
+portrait = ExtResource("clinic_npc_portrait_1")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
-speaker = "吴芷兰"
-text = "…..."
-portrait = ExtResource("clinic_npc_portrait_1")
-background = ExtResource("background_4")
+speaker = "李东璧"
+text = "这是您女儿？"
+portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "吴芷兰"
-text = "相公，我最近头晕目眩，时不时的还恶心想吐，不知是怎么了…"
-portrait = ExtResource("clinic_npc_portrait_1")
+speaker = "金姨妈"
+text = "哎呀，可不是嘛，这孩子随我学艺两年又半载，犹善歌舞，是咱柳月坊的花魁。"
+portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
+speaker = "金姨妈"
+text = "可你看她现在这个样子，还怎么接待客人啊。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_006"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "夫人一定是操持家务太过劳累，我给你把把脉。"
+text = "姑娘你坐下，我给你把把脉。哎，半夏你在这干什么？"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_007"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "半夏"
+text = "我替夫人来看着你。"
+portrait = ExtResource("portrait_4")
+[sub_resource type="Resource" id="StoryLine_008"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "…"
 portrait = ExtResource("portrait_3")
 
 [resource]
@@ -60,11 +83,11 @@ trigger_day = 0
 required_reputation_points = 0
 reputation_points_change = 0
 experience_points_change = 0
-unlock_entry_id = "ren_shen_disease"
+unlock_entry_id = "fei_qi_xu"
 play_once = true
 background_mode = "current_scene"
 return_scene = "clinic"
-clinic_npc_id = "wu_zhi_lan"
+clinic_npc_id = "xie_fei_yan"
 clinic_disease = ExtResource("clinic_disease_1")
 clinic_npc_portrait = ExtResource("clinic_npc_portrait_1")
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008")])

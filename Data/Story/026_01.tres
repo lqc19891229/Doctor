@@ -1,0 +1,70 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Resource" path="res://Data/Disease/ren_shen_disease.tres" id="clinic_disease_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wu_zhi_lan/wu_zhi_lan_sick.png" id="clinic_npc_portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/ban_xia/ban_xia.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_3"]
+[ext_resource type="Texture2D" path="res://Assets/Background/023/023.png" id="background_4"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "半夏"
+text = "少掌柜的，夫人在屋里晕倒了，您快来看看啊！"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "芷兰！！！"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "吴芷兰"
+text = "…..."
+portrait = ExtResource("clinic_npc_portrait_1")
+background = ExtResource("background_4")
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "吴芷兰"
+text = "相公，我最近头晕目眩，时不时的还恶心想吐，不知是怎么了…"
+portrait = ExtResource("clinic_npc_portrait_1")
+[sub_resource type="Resource" id="StoryLine_005"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "夫人一定是操持家务太过劳累，我给你把把脉。"
+portrait = ExtResource("portrait_3")
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "026_01"
+trigger_story_id = ""
+trigger_type = "scene_enter"
+trigger_scene = "clinic"
+trigger_day = 0
+required_reputation_points = 0
+reputation_points_change = 0
+experience_points_change = 0
+unlock_entry_id = "ren_shen_disease"
+play_once = true
+background_mode = "current_scene"
+return_scene = "clinic"
+clinic_npc_id = "wu_zhi_lan"
+clinic_disease = ExtResource("clinic_disease_1")
+clinic_npc_portrait = ExtResource("clinic_npc_portrait_1")
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005")])

@@ -15,8 +15,8 @@ portrait = ExtResource("portrait_1")
 
 [resource]
 script = ExtResource("2_storydata")
-story_id = "022_03"
-trigger_story_id = "022_01"
+story_id = "024_03"
+trigger_story_id = "024_01"
 trigger_type = "story_npc_failed_retry"
 trigger_scene = "clinic"
 trigger_day = 0

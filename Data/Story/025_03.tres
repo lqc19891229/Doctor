@@ -10,13 +10,13 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "不对，我需要好好想想这是什么病，该开什么方。"
+text = "虽然这不是个正经和尚，但还是得好好想想他得的是什么病。"
 portrait = ExtResource("portrait_1")
 
 [resource]
 script = ExtResource("2_storydata")
-story_id = "022_03"
-trigger_story_id = "022_01"
+story_id = "025_03"
+trigger_story_id = "025_01"
 trigger_type = "story_npc_failed_retry"
 trigger_scene = "clinic"
 trigger_day = 0
