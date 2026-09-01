@@ -22,7 +22,7 @@ const BACKGROUND_MODE_CURRENT_SCENE := "current_scene"
 
 # 剧情触发类型：
 # - scene_enter：进入指定场景时检查，兼容现有按场景 / 天数 / 名望触发的剧情。
-# - night_end：Night 场景点击“休息，进入明天”时检查；剧情完整结束后再推进到下一天。
+# - night_end：Night 场景点击“休息，进入明天”时检查；剧情结束后的目标由 return_scene 决定。
 # - story_npc_cured：指定的 story NPC 被治愈后检查。
 # - story_npc_failed_retry：指定的 story NPC 治疗失败，剧情结束后重新回到该 NPC 的诊疗界面。
 # - story_npc_failed_back：指定的 story NPC 治疗失败，剧情结束后返回 return_scene。
