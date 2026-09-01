@@ -1,9 +1,11 @@
 extends Control
 
+@warning_ignore("unused_signal")
 signal story_finished
 signal story_playback_completed(completed_story: StoryData)
 signal story_treatment_requested(npc_id: String, disease: DiseaseData)
 signal followup_story_requested(story: StoryData, resume_treatment: bool)
+@warning_ignore("unused_signal")
 signal game_over_requested
 
 const JUDGEMENT_RESULT_SCENE: PackedScene = preload(
@@ -795,19 +797,20 @@ func _show_line(line_data: StoryLine) -> void:
 
 	# 只有当前句明确指定了不同背景时才等待过渡。
 	# 普通台词和重复使用同一背景的台词仍然立即显示。
-	var should_wait_for_background := (
+	var changed_background := (
 		line_data != null
 		and line_data.background != null
 		and background_rect.texture != line_data.background
 	)
 
-	if should_wait_for_background:
+	if changed_background:
 		is_background_transitioning = true
 		is_typing = false
 		_reset_enter_hold_state()
 
-		# 过渡期间隐藏旧台词块和旧立绘，但保留立绘贴图与人物站位数据。
-		# 新背景完成渐入后，_show_dialogue_line() 会按原规则恢复需要显示的立绘。
+		# 换背景时旧台词块和所有立绘一起退场。
+		# 这里只隐藏物理立绘槽，不清除贴图、人物站位和 speaker_portrait_map，
+		# 因此后续没有换背景的普通 dialogue 仍可让人物再次出现。
 		dialogue_block.hide()
 		subtitle_block.hide()
 		_hide_all_portraits()
@@ -828,10 +831,15 @@ func _show_line(line_data: StoryLine) -> void:
 	if line_data.line_type == "subtitle":
 		_show_subtitle_line(line_data)
 	else:
-		_show_dialogue_line(line_data)
+		# 当前句如果刚刚进行了背景切换，则像 subtitle 一样保持所有立绘隐藏。
+		# 后续普通 dialogue 再按原规则恢复人物立绘。
+		_show_dialogue_line(line_data, changed_background)
 
 
-func _show_dialogue_line(line_data: StoryLine) -> void:
+func _show_dialogue_line(
+	line_data: StoryLine,
+	keep_portraits_hidden: bool = false
+) -> void:
 	# 显示人物对话块。
 	dialogue_block.show()
 	subtitle_block.hide()
@@ -849,10 +857,15 @@ func _show_dialogue_line(line_data: StoryLine) -> void:
 	# 避免隐藏的 subtitle_label 保留上一次的可见字符状态。
 	subtitle_label.visible_characters = 0
 
-	# 根据 speaker 显示左、中、右立绘。
-	_show_speaker_portrait(line_data)
+	# 当前句发生了背景切换时，背景完成渐入后仍保持立绘隐藏。
+	# 没有切换背景的普通 dialogue 才按原规则显示说话人立绘。
+	if keep_portraits_hidden:
+		_hide_all_portraits()
+	else:
+		_show_speaker_portrait(line_data)
 
 
+@warning_ignore("unused_parameter")
 func _show_subtitle_line(line_data: StoryLine) -> void:
 	# 显示背景字幕块。
 	subtitle_block.show()
