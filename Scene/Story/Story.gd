@@ -808,12 +808,12 @@ func _show_line(line_data: StoryLine) -> void:
 		is_typing = false
 		_reset_enter_hold_state()
 
-		# 换背景时旧台词块和所有立绘一起退场。
-		# 这里只隐藏物理立绘槽，不清除贴图、人物站位和 speaker_portrait_map，
-		# 因此后续没有换背景的普通 dialogue 仍可让人物再次出现。
+		# 换背景时先隐藏旧台词，并彻底清空左、中、右三个物理立绘槽。
+		# 保留人物站位和 speaker_portrait_map，背景切换完成后可从当前句
+		# 重新建立新背景中的人物画面，不会把上一背景的旧立绘带回来。
 		dialogue_block.hide()
 		subtitle_block.hide()
-		_hide_all_portraits()
+		_clear_physical_portrait_slots()
 
 		await _apply_line_background(line_data)
 
@@ -831,15 +831,11 @@ func _show_line(line_data: StoryLine) -> void:
 	if line_data.line_type == "subtitle":
 		_show_subtitle_line(line_data)
 	else:
-		# 当前句如果刚刚进行了背景切换，则像 subtitle 一样保持所有立绘隐藏。
-		# 后续普通 dialogue 再按原规则恢复人物立绘。
-		_show_dialogue_line(line_data, changed_background)
+		# 背景切换完成后，正常显示当前句台词和当前说话人的立绘。
+		_show_dialogue_line(line_data)
 
 
-func _show_dialogue_line(
-	line_data: StoryLine,
-	keep_portraits_hidden: bool = false
-) -> void:
+func _show_dialogue_line(line_data: StoryLine) -> void:
 	# 显示人物对话块。
 	dialogue_block.show()
 	subtitle_block.hide()
@@ -857,12 +853,8 @@ func _show_dialogue_line(
 	# 避免隐藏的 subtitle_label 保留上一次的可见字符状态。
 	subtitle_label.visible_characters = 0
 
-	# 当前句发生了背景切换时，背景完成渐入后仍保持立绘隐藏。
-	# 没有切换背景的普通 dialogue 才按原规则显示说话人立绘。
-	if keep_portraits_hidden:
-		_hide_all_portraits()
-	else:
-		_show_speaker_portrait(line_data)
+	# 到这里时背景切换（如有）已经完成，因此正常显示当前说话人立绘。
+	_show_speaker_portrait(line_data)
 
 
 @warning_ignore("unused_parameter")
