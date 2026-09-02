@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "不对，我需要好好想想这是什么病，该开什么方。"

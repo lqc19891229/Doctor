@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "杨大使所患的是肾气不固之症，要注意休养，最近是遇到什么事受了惊吗？"
@@ -24,7 +24,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "沈师爷怎么了？"
@@ -40,7 +40,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "！！！"
@@ -51,12 +51,12 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "杨善泉"
-text = "他们开始灭口了...下一个就该轮到..."
+text = "他们开始灭口了...下一个就该轮到我了..."
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "......"

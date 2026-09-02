@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "先生这是心脾两虚之症，思虑过度暗耗心血导致心血不足，脾气虚弱。给您开一服归脾汤，您可要注意休息啊。"
@@ -24,7 +24,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "先生是操劳赈灾药材的采办之事？"
@@ -40,7 +40,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "是在下唐突了。"
@@ -64,7 +64,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "......"

@@ -23,7 +23,7 @@ background = ExtResource("background_2")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "陈皮"
 text = "大半夜的谁啊，谁在敲门啊？"
@@ -31,7 +31,7 @@ portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "陈皮"
 text = "啊！！！我的妈呀！！"
@@ -40,7 +40,7 @@ background = ExtResource("background_4")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "出什么事儿了？"
@@ -48,7 +48,7 @@ portrait = ExtResource("portrait_5")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "啊！"
@@ -64,7 +64,7 @@ portrait = ExtResource("portrait_6")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "是什么人病了？要我去看病吗？"
@@ -106,7 +106,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "楚王"
-text = "犬子前几天突然病了，卧床不起。精神萎靡，食欲不振。小王请了好几位大夫，给开了好多方子，都不见好转。眼见着人一天比一天瘦，再这么下去怕是要坏事了…"
+text = "犬子前些日子突然病倒了，卧床不起。精神萎靡，食欲不振。小王请了好几位大夫，给开了好多方子，都不见好转。眼见着人一天比一天瘦，再这么下去怕是要坏事了…"
 portrait = ExtResource("portrait_8")
 background = ExtResource("background_9")
 [sub_resource type="Resource" id="StoryLine_013"]

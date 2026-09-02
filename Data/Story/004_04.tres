@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
 [ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_1"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/shen_xiu_wen/shen_xiu_wen.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/gu_wen/gu_wen.png" id="portrait_2"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
@@ -11,15 +11,15 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "是沈先生啊，病好点了吗"
+text = "哎呀，是老师来了，学生失迎。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "沈修文"
-text = "小生时日不多了。"
+speaker = "顾问"
+text = "东璧啊，朝廷来了调令，命我去福建赴任。临走来看看你和你爹。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
@@ -27,15 +27,15 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "啊？您的病没那么严重，只要按时吃药好好休息肯定会好起来的。"
+text = "老师请坐，我去给您泡壶茶。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "沈修文"
-text = "治得了病，治不了命。今天来是有样东西要交给李大夫。"
+speaker = "顾问"
+text = "嗯，最近如何，学医有什么进展吗？"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
@@ -43,48 +43,56 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "这是？"
+text = "学生行医时发现，医家经典所记载的药材方子，遗漏错误之处不可枚举。一方之误，害及数人，一药之讹，误尽苍生。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_006"]
-script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
-inactive_portrait_mode = "dim"
-speaker = "沈修文"
-text = "这是吴世良让我写的账册抄本，交给您应该能派上用场。"
-portrait = ExtResource("portrait_2")
-[sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "…...."
+text = "学生想核对典籍，亲自验证药材方剂的功效，重新编写一部能为后人所用的医书。"
 portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_007"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "顾问"
+text = "嗯，好啊东璧，你这想法甚好。"
+portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "沈修文"
-text = "说实话我很羡慕李大夫，所学的本事能有处施展，唉…小生就此别过。"
+speaker = "顾问"
+text = "宋儒张载有四句教：\"为天地立心，为生民立命，为往圣继绝学，为万世开太平\"。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_009"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "顾问"
+text = "若是能著成此书，真可谓是为生民立命，为往圣继绝学了啊。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_010"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "沈先生…...."
+text = "为生民立命，为往圣继绝学…学生记下了。"
 portrait = ExtResource("portrait_1")
 
 [resource]
 script = ExtResource("2_storydata")
-story_id = "016"
-trigger_story_id = "015"
+story_id = "004_04"
+trigger_story_id = "004_02"
 trigger_type = "scene_enter"
 trigger_scene = "clinic"
-trigger_day = 3
+trigger_day = 10
 required_reputation_points = 0
 reputation_points_change = 0
 experience_points_change = 0
@@ -93,4 +101,4 @@ play_once = true
 background_mode = "current_scene"
 return_scene = "clinic"
 clinic_npc_id = ""
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010")])

@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "不对不对，我在干什么呀，冷静冷静，再好好想想。"

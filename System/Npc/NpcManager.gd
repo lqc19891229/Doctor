@@ -201,7 +201,31 @@ func _assign_random_unlocked_disease(npc: NpcData) -> void:
 		npc.disease = null
 		return
 
-	npc.disease = unlocked_diseases[randi() % unlocked_diseases.size()]
+	var available_diseases: Array[DiseaseData] = []
+
+	for disease in unlocked_diseases:
+		if disease == null:
+			continue
+
+		# 妊娠只允许分配给 18 至 50 岁的女性 random NPC。
+		# 其他疾病不进行性别或年龄限制。
+		if disease.disease_id.strip_edges() == "ren_shen_disease":
+			if npc.gender.strip_edges() != "女":
+				continue
+			if npc.age < 18 or npc.age > 50:
+				continue
+
+		available_diseases.append(disease)
+
+	if available_diseases.is_empty():
+		push_warning(
+			"NpcManager: 没有适合 NPC %s（%s，%d岁）的已解锁疾病。"
+			% [npc.npc_name, npc.gender, npc.age]
+		)
+		npc.disease = null
+		return
+
+	npc.disease = available_diseases[randi() % available_diseases.size()]
 
 
 func _get_unlocked_disease_pool() -> Array[DiseaseData]:

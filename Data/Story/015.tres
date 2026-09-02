@@ -17,7 +17,7 @@ text = "咚咚咚…"
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "谁？"
@@ -33,7 +33,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "雷兄，怎么样，事情有眉目了吗？"
@@ -49,7 +49,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "看来这事远比我们想的复杂…"
@@ -65,7 +65,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "我想到了一个能帮上忙的人。"
@@ -81,7 +81,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_010"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "楚王。"
@@ -97,7 +97,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_012"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "之前医治过世子，应该能说得上话。"

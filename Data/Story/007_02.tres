@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "雷兄，你这肝阳上亢的老毛病，除了吃药，还得注意控制情绪，切莫扰动肝火。"
@@ -32,7 +32,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "什么叫\"淋尖踢斛\"呀？"
@@ -56,7 +56,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "啊…这也太过分了…"
@@ -72,7 +72,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_009"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "百姓的日子是越来越不好过了，我去给你抓药，雷兄稍候。"

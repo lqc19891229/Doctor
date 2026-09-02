@@ -171,6 +171,10 @@ var current_day: int = 1
 # 防止 Clinic 结束信号重复发出
 var clinic_finished_emitted: bool = false
 
+# Clinic 白天时间是否已经结束，正在等待玩家完成当前最后一位病人。
+# 时间到后不再刷新 random NPC；关闭当前病人的判定结果后才进入夜晚。
+var clinic_time_expired_waiting_for_current_patient: bool = false
+
 # 最近一次处方判定结果
 # 说明：
 # 1. submit_prescription() 负责生成判定结果。
@@ -561,7 +565,30 @@ func get_current_background_texture() -> Texture2D:
 # =========================================================
 
 func _on_clinic_time_finished() -> void:
-	finish_clinic_for_today()
+	# GameTimeManager 在发出此信号前已经停止 Clinic 计时。
+	# 如果当前还有可诊疗的病人，只标记为“最后一位”，不立刻切换到夜晚。
+	if clinic_finished_emitted:
+		return
+
+	if current_npc == null or current_npc.disease == null:
+		finish_clinic_for_today()
+		return
+
+	clinic_time_expired_waiting_for_current_patient = true
+	_set_info_text("今日接诊时间已结束，请完成当前病人的诊疗。完成后将自动进入夜晚。")
+	print("Clinic 时间结束：等待玩家完成当前最后一位病人。")
+
+	# 兼容旧提交入口：如果处方已经判定，但结果展示流程尚未启动，
+	# 主动继续治疗台词与 JudgementResult 流程，避免停在 Clinic。
+	if (
+		diagnosis_submitted
+		and not waiting_judgement_after_treatment_dialogue
+		and (
+			judgement_result_window == null
+			or not is_instance_valid(judgement_result_window)
+		)
+	):
+		_show_current_patient_result_before_judgement()
 
 
 # =========================================================
@@ -1396,12 +1423,22 @@ func _show_current_patient_result_before_judgement() -> void:
 
 
 func _go_to_next_patient_after_judgement() -> void:
+	# 白天时间已经结束时，当前病人就是最后一位。
+	# 玩家关闭判定结果后直接结束 Clinic，不再生成下一名 random NPC。
+	if clinic_time_expired_waiting_for_current_patient:
+		finish_clinic_for_today()
+		return
+
 	# 普通 Clinic 只处理日常 random NPC。
 	# story NPC 的治疗判定与结果剧情全部由 Story 场景中的隐藏 Clinic 后端处理。
 	_replace_with_random_patient()
 
 
 func _replace_with_random_patient() -> void:
+	if clinic_time_expired_waiting_for_current_patient:
+		_set_info_text("今日接诊时间已结束，请先完成当前最后一位病人的诊疗。")
+		return
+
 	if npc_manager == null:
 		push_warning("Clinic 找不到 NpcManager，无法刷新 random NPC。")
 		return
@@ -1431,6 +1468,7 @@ func finish_clinic_for_today() -> void:
 		return
 
 	clinic_finished_emitted = true
+	clinic_time_expired_waiting_for_current_patient = false
 
 	# Clinic 结束时停止 GameTimeManager 里的 Clinic 计时器
 	if GameTime.has_method("stop_clinic_clock"):
@@ -1444,16 +1482,28 @@ func finish_clinic_for_today() -> void:
 # =========================================================
 
 func _on_prev_button_pressed() -> void:
+	if clinic_time_expired_waiting_for_current_patient:
+		_set_info_text("今日接诊时间已结束，不能更换最后一位病人。")
+		return
+
 	npc_manager.prev_npc()
 	refresh_clinic_view()
 
 
 func _on_next_button_pressed() -> void:
+	if clinic_time_expired_waiting_for_current_patient:
+		_set_info_text("今日接诊时间已结束，不能更换最后一位病人。")
+		return
+
 	npc_manager.next_npc()
 	refresh_clinic_view()
 
 
 func _on_spawn_npc_button_pressed() -> void:
+	if clinic_time_expired_waiting_for_current_patient:
+		_set_info_text("今日接诊时间已结束，不能生成新的病人。")
+		return
+
 	if npc_manager.has_method("replace_with_random_npc"):
 		npc_manager.replace_with_random_npc()
 	else:
@@ -1769,9 +1819,10 @@ func start_new_day(day: int) -> void:
 	# 按当天对应的节气切换诊室四季背景。
 	_update_clinic_background()
 
-	# 每天开始时，允许 Clinic 结束信号重新发出。
+	# 每天开始时，允许 Clinic 结束信号重新发出，并清除上一天的等待状态。
 	# 否则第一天结束后，第二天可能无法再次进入夜晚流程。
 	clinic_finished_emitted = false
+	clinic_time_expired_waiting_for_current_patient = false
 
 	# 刷新时间、心得和名望显示。
 	_update_time_ui()

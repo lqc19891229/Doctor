@@ -18,12 +18,12 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "陈皮"
-text = "少掌柜的，惠民药局的药料库起火啦。"
+text = "少掌柜的，惠民药局的药料库起火啦！"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "走，去帮忙。"
@@ -31,7 +31,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "这火烧得蹊跷。"
@@ -48,7 +48,7 @@ portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "……是杨善泉。"

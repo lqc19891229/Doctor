@@ -11,7 +11,7 @@
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "麻桂相须，增强发汗散寒之力，专治表实无汗。麻杏相使，宣降相配，专治寒邪闭肺之喘逆…"
@@ -28,7 +28,7 @@ portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "来了来了。"
@@ -36,7 +36,7 @@ portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
 text = "东璧啊，白天教你的都听明白了吗？"
@@ -53,7 +53,7 @@ portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
 text = "学医最要紧的是积累，吃完晚饭去把这些天教你的内容再看一遍，明日一早你随我一起出诊。"

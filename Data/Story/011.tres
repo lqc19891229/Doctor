@@ -51,7 +51,7 @@ portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
 text = "这…连赈灾药材都敢动手脚…"
@@ -67,7 +67,7 @@ portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
 text = "明日我去药剂局跟孙大夫商量商量。"

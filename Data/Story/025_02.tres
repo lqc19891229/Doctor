@@ -10,7 +10,7 @@
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "师傅所患的乃是肾精不足之症，嗯…是房事过劳所致…"
@@ -26,7 +26,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "…"
@@ -42,7 +42,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "是是是，师傅说的对，也不是没有这个可能。"
@@ -58,7 +58,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "mid"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "半夏"
 text = "哇，这就是传说中的花和尚吗？"
@@ -66,7 +66,7 @@ portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "…"
@@ -82,7 +82,7 @@ portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_010"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "mid"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "半夏"
 text = "找打！"

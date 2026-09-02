@@ -11,15 +11,15 @@
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "半夏"
-text = "少掌柜的，夫人在屋里晕倒了，您快来看看啊！"
+text = "少掌柜的，少夫人在屋里晕倒了，您快来看看啊！"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "right"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "芷兰！！！"
@@ -44,7 +44,7 @@ portrait = ExtResource("clinic_npc_portrait_1")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "夫人一定是操持家务太过劳累，我给你把把脉。"

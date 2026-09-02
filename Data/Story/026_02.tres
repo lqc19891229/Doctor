@@ -10,16 +10,16 @@
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "mid"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "半夏"
-text = "呜呜呜，夫人到底是得了什么病啊。"
+text = "呜呜呜，少夫人到底是得了什么病啊。"
 portrait = ExtResource("portrait_1")
 background = ExtResource("background_2")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "芷兰…我们有孩子了…"
@@ -35,7 +35,7 @@ portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "现在还看不出来，男孩儿女孩儿都一样，我们要当爹当娘了。"
@@ -43,7 +43,7 @@ portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "mid"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "半夏"
 text = "哇，恭喜恭喜，真是菩萨保佑，我去把这喜事告诉老爷去！"

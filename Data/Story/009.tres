@@ -73,7 +73,7 @@ background = ExtResource("background_6")
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "杨善泉"
 text = "李大夫您在这画押，上面催得紧，我们赶着发运呢。"
@@ -81,7 +81,7 @@ portrait = ExtResource("portrait_5")
 [sub_resource type="Resource" id="StoryLine_009"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "mid"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "好的好的。"

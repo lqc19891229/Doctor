@@ -29,7 +29,7 @@ text = "蕲州所需赈灾药材由太医院调拨，重新发放。"
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "到头来这吴世良就是个背锅顶罪的。"
@@ -45,7 +45,7 @@ portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "mid"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "楚王"
 text = "李先生。"
@@ -53,7 +53,7 @@ portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "楚王殿下。"
@@ -61,7 +61,7 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "mid"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "楚王"
 text = "这次我上奏皇上，除了赈灾药材一案，还将先生举荐给朝廷。正好太医院院判一职空缺，特批先生赴任。"
@@ -69,15 +69,15 @@ portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_009"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "多谢王爷提拔，可草民才疏学浅，更不通为官之道，实在是力不从心。"
+text = "多谢王爷提拔，可草民荆楚鄙人，幼多羸疾，质成钝椎，实在是力不从心。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_010"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "mid"
+portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "楚王"
 text = "……既然如此，那本王就不强人所难了。"

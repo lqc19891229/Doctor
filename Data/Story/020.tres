@@ -122,7 +122,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "陆丁"
-text = "在下北镇抚司陆丁，你就是李东璧？"
+text = "北镇抚司陆丁，你就是李东璧？"
 portrait = ExtResource("portrait_11")
 [sub_resource type="Resource" id="StoryLine_015"]
 script = ExtResource("1_storyline")
