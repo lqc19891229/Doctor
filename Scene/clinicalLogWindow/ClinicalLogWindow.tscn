@@ -14,8 +14,9 @@ bg_color = Color(0.14509805, 0.17254902, 0.18431373, 1)
 [node name="ClinicalLogWindow" type="Window" unique_id=1159353037]
 oversampling_override = 1.0
 title = "行医记考"
-position = Vector2i(0, 36)
-size = Vector2i(900, 1000)
+position = Vector2i(1010, 36)
+size = Vector2i(900, 950)
+unresizable = true
 script = ExtResource("1_68hx3")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=1381153526]
@@ -108,6 +109,7 @@ scroll_following = true
 script = ExtResource("4_56jji")
 right_padding_chars = 1
 top_padding_lines = 1
+fixed_rows_per_column = 23
 
 [node name="PageControls" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right" unique_id=1947916876]
 layout_mode = 1
@@ -194,6 +196,7 @@ scroll_following = true
 script = ExtResource("4_56jji")
 right_padding_chars = 1
 top_padding_lines = 1
+fixed_rows_per_column = 23
 
 [node name="PageControls" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right" unique_id=343576366]
 layout_mode = 1
@@ -280,6 +283,7 @@ scroll_following = true
 script = ExtResource("4_56jji")
 right_padding_chars = 1
 top_padding_lines = 1
+fixed_rows_per_column = 23
 
 [node name="PageControls" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right" unique_id=140220135]
 layout_mode = 1

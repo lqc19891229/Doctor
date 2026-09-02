@@ -5,9 +5,10 @@
 
 [node name="PulseWindow" type="Window" unique_id=1028787152]
 oversampling_override = 1.0
-title = "脉诊"
+title = "把脉"
 position = Vector2i(0, 36)
-size = Vector2i(1000, 1000)
+size = Vector2i(1000, 950)
+unresizable = true
 script = ExtResource("1_in46w")
 
 [node name="LayerTabs" type="TabContainer" parent="." unique_id=1959220331]
@@ -16,7 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 1
+current_tab = 2
 tab_0/hidden = true
 tab_1/hidden = true
 tab_2/hidden = true
@@ -45,6 +46,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="右手脉象" type="Control" parent="LayerTabs" unique_id=416110597]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -98,7 +100,6 @@ size_flags_vertical = 3
 script = ExtResource("2_drawer")
 
 [node name="左手脉象" type="Control" parent="LayerTabs" unique_id=642620651]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
