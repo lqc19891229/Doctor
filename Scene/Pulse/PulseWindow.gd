@@ -19,6 +19,15 @@ signal region_selected(display_region_name: String)
 
 
 # =========================================================
+# 窗口位置锁定
+#
+# 默认值与 PulseWindow.tscn 当前的位置 Vector2i(0, 36) 一致。
+# 如需改变固定位置，可以直接在检查器里修改此参数。
+# =========================================================
+@export var fixed_window_position: Vector2i = Vector2i(0, 36)
+
+
+# =========================================================
 # 单个显示名 -> 疾病内部区域名 / PulseDrawer 区域 ID
 # =========================================================
 const REGION_CONFIG := {
@@ -115,15 +124,30 @@ const LEFT_HAND_DISEASE_NAMES: Array[String] = [
 # 生命周期
 # =========================================================
 func _ready() -> void:
+	# 初始化时放到固定位置
+	position = fixed_window_position
+
 	# 关闭窗口时只隐藏窗口，不销毁窗口
 	if not close_requested.is_connected(_on_close_requested):
 		close_requested.connect(_on_close_requested)
 
 
 # =========================================================
+# 窗口位置锁定
+# =========================================================
+func _process(_delta: float) -> void:
+	# 窗口显示期间，阻止玩家拖动标题栏改变窗口位置
+	if visible and position != fixed_window_position:
+		position = fixed_window_position
+
+
+# =========================================================
 # 打开窗口
 # =========================================================
 func open_window() -> void:
+	# 每次打开时恢复固定位置
+	position = fixed_window_position
+
 	# 先显示窗口
 	show()
 

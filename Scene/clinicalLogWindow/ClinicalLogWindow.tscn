@@ -43,11 +43,16 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 23
 current_tab = 0
+tab_0/title = "疾病"
+tab_1/title = "方剂"
+tab_2/title = "药材"
 
 [node name="DiseasePage" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1471360721]
 layout_mode = 2
 metadata/_tab_index = 0
+metadata/_tab_name = "疾病"
 
 [node name="Left" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage" unique_id=770913058]
 layout_mode = 2
@@ -138,6 +143,7 @@ text = "下一页"
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+metadata/_tab_name = "方剂"
 
 [node name="Left" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage" unique_id=557561604]
 layout_mode = 2
@@ -225,6 +231,7 @@ text = "下一页"
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+metadata/_tab_name = "药材"
 
 [node name="Left" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage" unique_id=881073121]
 layout_mode = 2
