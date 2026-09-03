@@ -45,6 +45,11 @@ var topbar_controller = null
 # 玩家提示窗口（Control 版 PlayerHintWindow，需作为 Night.tscn 的子节点存在）
 var player_hint_window: Node = null
 
+# 进入夜晚时若存在当日银钱结算，必须先等玩家关闭结算窗口，
+# 再检查 trigger_scene = "night" 的自动剧情，避免剧情把结算窗口立刻盖掉。
+var waiting_finance_report_close: bool = false
+var pending_night_auto_story_day: int = 0
+
 func _ready() -> void:
 	_validate_scene_node_bindings()
 	_setup_night_background_fade_mask()
@@ -272,6 +277,15 @@ func _setup_player_hint_dialog() -> void:
 	if player_hint_window.has_method("hide"):
 		player_hint_window.hide()
 
+	# PlayerHintWindow 当前是 Control；监听显示状态即可兼容内部“确定 / 关闭”
+	# 的具体实现，不要求 PlayerHintWindow 额外增加自定义关闭信号。
+	var visibility_callable := Callable(self, "_on_player_hint_visibility_changed")
+	if (
+		player_hint_window.has_signal("visibility_changed")
+		and not player_hint_window.is_connected("visibility_changed", visibility_callable)
+	):
+		player_hint_window.connect("visibility_changed", visibility_callable)
+
 
 func _show_player_hint(message: String) -> void:
 	if player_hint_window == null or not is_instance_valid(player_hint_window):
@@ -284,15 +298,47 @@ func _show_player_hint(message: String) -> void:
 
 
 
-func _show_finance_report_for_day(day: int) -> void:
+func _is_player_hint_visible() -> bool:
+	if player_hint_window == null or not is_instance_valid(player_hint_window):
+		return false
+
+	if player_hint_window is CanvasItem:
+		return (player_hint_window as CanvasItem).visible
+
+	if player_hint_window is Window:
+		return (player_hint_window as Window).visible
+
+	return false
+
+
+func _show_finance_report_for_day(day: int) -> bool:
 	if Unlock == null or not Unlock.has_method("build_finance_report_text"):
-		return
+		return false
 
 	var report_text: String = Unlock.build_finance_report_text(day)
 	if report_text.is_empty():
-		return
+		return false
 
 	_show_player_hint(report_text)
+	return _is_player_hint_visible()
+
+
+func _on_player_hint_visibility_changed() -> void:
+	if not waiting_finance_report_close:
+		return
+
+	# visibility_changed 在 show() 时也会触发；只在真正隐藏后继续夜晚入口流程。
+	if _is_player_hint_visible():
+		return
+
+	var day := pending_night_auto_story_day
+	waiting_finance_report_close = false
+	pending_night_auto_story_day = 0
+
+	if day > 0:
+		# 延后一拍，确保提示窗口自己的关闭逻辑完全执行结束后再切剧情。
+		call_deferred("_try_start_auto_story", "night", day)
+
 
 # =========================
 # 开发测试窗口
@@ -531,7 +577,16 @@ func start_night(day: int) -> void:
 
 	# 白天结算已经由 Main 在切入 Night 前完成。
 	# Night 负责把当日收入 / 支出 / 净变化展示给玩家。
-	_show_finance_report_for_day(day)
+	waiting_finance_report_close = false
+	pending_night_auto_story_day = 0
+
+	var finance_report_visible := _show_finance_report_for_day(day)
+	if finance_report_visible:
+		# 有结算报告时先停在这里；玩家关闭 PlayerHintWindow 后，
+		# _on_player_hint_visibility_changed() 再继续检查夜晚自动剧情。
+		waiting_finance_report_close = true
+		pending_night_auto_story_day = day
+		return
 
 	_try_start_auto_story("night", day)
 

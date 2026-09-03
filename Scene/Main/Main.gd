@@ -779,6 +779,7 @@ func _on_story_finished() -> void:
 				GameTime.cancel_story_pause_state()
 
 			if GameTime != null and GameTime.is_day():
+				_settle_current_day_finances_if_needed()
 				GameTime.finish_day()
 
 		story_paused_clinic_clock = false
@@ -812,12 +813,25 @@ func _on_story_finished() -> void:
 
 
 # =========================================================
+# 当天银钱结算
+# =========================================================
+func _settle_current_day_finances_if_needed() -> void:
+	# 收入在白天接诊时已经实时记入 Unlock；
+	# 进入 Night 前统一扣除工钱 / 食费并生成当天结算报告。
+	if Unlock != null and Unlock.has_method("settle_day_finances"):
+		Unlock.settle_day_finances(GameTime.current_day)
+
+
+# =========================================================
 # Clinic 当天结束
 # 白天结束：
 # 第 1 天 白天 → 第 1 天 黑夜
 # 不增加天数
 # =========================================================
 func _on_clinic_finished() -> void:
+	# 必须先结算再 finish_day()，这样 Night 才能取得当天报告，
+	# 且白天结束时的自动存档会保存已经扣除支出后的银钱。
+	_settle_current_day_finances_if_needed()
 	GameTime.finish_day()
 	_save_game_with_warning("白天结束")
 
