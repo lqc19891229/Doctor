@@ -350,7 +350,22 @@ func _continue_after_finance_report() -> void:
 	pending_night_auto_story_day = 0
 
 	if day > 0:
-		call_deferred("_try_start_auto_story", "night", day)
+		# 先让 PlayerHintWindow.hide() 真正绘制到屏幕，
+		# 再开始 StoryManager 的夜晚剧情检查。
+		# 剧情资源较多时，即使后续同步扫描需要一些时间，
+		# 玩家也会先立即看到结算窗口消失。
+		call_deferred("_start_night_story_after_hint_closed", day)
+
+
+func _start_night_story_after_hint_closed(day: int) -> void:
+	# 等到下一帧。当前点击触发的 hide() 会先完成一次实际渲染，
+	# 避免后续剧情扫描阻塞时表现成“点击后窗口很久才关闭”。
+	await get_tree().process_frame
+
+	if not is_inside_tree():
+		return
+
+	_try_start_auto_story("night", day)
 
 
 func _on_player_hint_confirmed() -> void:

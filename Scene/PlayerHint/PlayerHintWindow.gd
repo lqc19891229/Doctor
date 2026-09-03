@@ -47,19 +47,27 @@ func close_hint() -> void:
 	confirmed.emit()
 
 
-func _gui_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
+	# 使用全局输入而不是根 Control 的 _gui_input()。
+	# 这样即使点击落在 PanelContainer / Label 等子 Control 上，
+	# PlayerHintWindow 仍然能够收到关闭点击。
 	if not visible or not _can_close_from_input:
 		return
 
 	if event is InputEventMouseButton:
-		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			accept_event()
+		var mouse_event := event as InputEventMouseButton
+		if (
+			mouse_event.pressed
+			and mouse_event.button_index == MOUSE_BUTTON_LEFT
+		):
+			get_viewport().set_input_as_handled()
 			close_hint()
 			return
 
 	if event is InputEventScreenTouch:
-		if event.pressed:
-			accept_event()
+		var touch_event := event as InputEventScreenTouch
+		if touch_event.pressed:
+			get_viewport().set_input_as_handled()
 			close_hint()
 			return
 

@@ -1089,22 +1089,33 @@ func _get_reputation_reward_by_judge_result(result) -> int:
 
 
 # =========================================================
-# 计算当前处方的药材利润
+# 计算当前处方的药材价格汇总
 # =========================================================
+# 一次遍历同时得到：
+# - cost_wen：这张处方全部药材的进货成本和
+# - sell_wen：这张处方全部药材的售价和
+# - profit_wen：售价和 - 成本和
+#
 # 价格直接读取 HerbDB 中对应的 HerbData：
 # - purchase_price：进价，金额单位为“文”
 # - sell_price：售价，金额单位为“文”
 # - price_unit：上述价格对应的剂量单位（fen / qian / liang / jin）
 #
 # 处方剂量与价格单位都统一经 HerbUnit 转成“分”后换算，因此 PriceUnit 不必固定为钱。
-func _calculate_current_prescription_profit_wen() -> int:
+func _calculate_current_prescription_price_summary_wen() -> Dictionary:
+	var empty_result := {
+		"cost_wen": 0,
+		"sell_wen": 0,
+		"profit_wen": 0
+	}
+
 	if current_prescription == null:
-		return 0
+		return empty_result
 
 	if herb_database == null or not herb_database.has_method("get_herb_by_id"):
 		if OS.is_debug_build():
-			push_warning("HerbDB 不可用，无法计算处方药材利润。")
-		return 0
+			push_warning("HerbDB 不可用，无法计算处方药材价格。")
+		return empty_result
 
 	var total_cost_wen := 0.0
 	var total_sell_wen := 0.0
@@ -1125,7 +1136,7 @@ func _calculate_current_prescription_profit_wen() -> int:
 			var herb: HerbData = herb_database.get_herb_by_id(herb_id)
 			if herb == null:
 				if OS.is_debug_build():
-					push_warning("未找到 HerbData，利润按 0 处理：" + herb_id)
+					push_warning("未找到 HerbData，药材价格按 0 处理：" + herb_id)
 				continue
 
 			var price_unit := herb.price_unit.strip_edges()
@@ -1136,16 +1147,28 @@ func _calculate_current_prescription_profit_wen() -> int:
 			var one_price_unit_in_fen: float = HerbUnit.to_fen(1.0, price_unit)
 			if one_price_unit_in_fen <= 0.0:
 				if OS.is_debug_build():
-					push_warning("药材 PriceUnit 无法识别，利润按 0 处理：%s -> %s" % [herb_id, price_unit])
+					push_warning("药材 PriceUnit 无法识别，药材价格按 0 处理：%s -> %s" % [herb_id, price_unit])
 				continue
 
 			var amount_in_price_unit: float = amount_in_fen / one_price_unit_in_fen
 			total_cost_wen += amount_in_price_unit * herb.purchase_price
 			total_sell_wen += amount_in_price_unit * herb.sell_price
 
-	# 金钱最终以“文”为整数。
-	# 分别四舍五入总成本与总售价后再相减，与价格表 Formula 页的利润口径一致。
-	return roundi(total_sell_wen) - roundi(total_cost_wen)
+	# 与现有价格表口径保持一致：总成本、总售价分别四舍五入后再计算利润。
+	var rounded_cost_wen := roundi(total_cost_wen)
+	var rounded_sell_wen := roundi(total_sell_wen)
+
+	return {
+		"cost_wen": rounded_cost_wen,
+		"sell_wen": rounded_sell_wen,
+		"profit_wen": rounded_sell_wen - rounded_cost_wen
+	}
+
+
+# 保留旧接口，避免其它临时代码仍调用时失效。
+func _calculate_current_prescription_profit_wen() -> int:
+	var price_summary := _calculate_current_prescription_price_summary_wen()
+	return int(price_summary.get("profit_wen", 0))
 
 # =========================================================
 # 提交处方并判定
@@ -1187,29 +1210,47 @@ func submit_prescription() -> bool:
 	var uses_fixed_treatment_rewards := npc_type_key != "story"
 	var is_random_npc := npc_type_key == "random"
 
-	# 金钱收入只结算 random NPC，并且同一名病人只结算第一次提交。
-	# 诊费为固定值；药材利润按“实际处方售价 - 实际处方成本”计算。
+	# random NPC 的诊费仍然固定收入。
+	# 药材账目改为“销售额 / 进货成本”分开记录：
+	# - 妙手回春 / 治疗成功：收入记药材售价总和，支出记药材进货成本总和。
+	# - 治疗失败：药材销售收入为 0，支出仍记本张处方全部药材进货成本。
+	#
+	# 这样成功治疗的最终净效果仍然等于原来的“售价 - 成本”，
+	# 但日结窗口可以分别看到真实销售额和进货成本。
+	# 同一名病人只允许第一次提交产生金钱变化。
 	if is_random_npc and not was_already_submitted:
-		var prescription_profit_wen := _calculate_current_prescription_profit_wen()
-		if Unlock != null and Unlock.has_method("record_random_npc_treatment_income"):
-			var income_result: Dictionary = Unlock.record_random_npc_treatment_income(
+		var price_summary := _calculate_current_prescription_price_summary_wen()
+		var prescription_cost_wen := int(price_summary.get("cost_wen", 0))
+		var prescription_sell_wen := int(price_summary.get("sell_wen", 0))
+		var treatment_success := bool(result.success)
+
+		if Unlock != null and Unlock.has_method("record_random_npc_treatment_finance"):
+			var finance_result: Dictionary = Unlock.record_random_npc_treatment_finance(
 				current_day,
-				prescription_profit_wen
+				treatment_success,
+				prescription_sell_wen,
+				prescription_cost_wen
 			)
-			var consultation_fee_wen := int(income_result.get("consultation_fee_wen", 0))
-			var total_income_wen := int(income_result.get("total_income_wen", 0))
+
+			var consultation_fee_wen := int(finance_result.get("consultation_fee_wen", 0))
+			var medicine_sales_wen := int(finance_result.get("medicine_sales_wen", 0))
+			var medicine_purchase_cost_wen := int(finance_result.get("medicine_purchase_cost_wen", 0))
+			var total_income_wen := int(finance_result.get("total_income_wen", 0))
+
 			summary_text += "\n诊费：+%d文" % consultation_fee_wen
-			if prescription_profit_wen >= 0:
-				summary_text += "\n药材利润：+%d文" % prescription_profit_wen
+
+			if medicine_sales_wen > 0:
+				summary_text += "\n药材销售：+%d文" % medicine_sales_wen
 			else:
-				summary_text += "\n药材利润：%d文" % prescription_profit_wen
-			if total_income_wen >= 0:
-				summary_text += "\n本病人收入：+%d文" % total_income_wen
-			else:
-				summary_text += "\n本病人收入：%d文" % total_income_wen
+				summary_text += "\n药材销售：0文"
+
+			summary_text += "\n药材进货成本：-%d文（计入今日支出）" % medicine_purchase_cost_wen
+			summary_text += "\n本病人收入合计：+%d文" % total_income_wen
+
 			_update_money_point_ui(true)
 
-			# 每位病人结算后保存一次账本，防止中途退出丢失当日收入。
+			# 每位病人提交后保存账本：
+			# 收入保存诊费与实际药材销售额；成本留到正常白天结束时统一扣除。
 			if SaveManager != null and SaveManager.has_method("save_game"):
 				SaveManager.save_game()
 

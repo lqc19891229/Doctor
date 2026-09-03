@@ -132,10 +132,25 @@ const FOOD_COST_INTERVAL_SOLAR_TERMS: int = 2
 var money_wen: int = STARTING_MONEY_WEN
 
 # 当前白天账本。
+const FINANCE_ACCOUNTING_VERSION_GROSS: int = 2
+
 var finance_ledger_day: int = 1
+# 2 = 当前“销售额 / 进货成本”分开记账。
+# 1 = 旧版“药材利润 + 失败成本”账本，仅用于兼容旧存档的当前未结算日。
+var finance_ledger_accounting_version: int = FINANCE_ACCOUNTING_VERSION_GROSS
+
 var daily_random_npc_count: int = 0
 var daily_consultation_income_wen: int = 0
+
+# 当前正式账本：
+# 成功治疗时 medicine_sales 记实际售价总和；
+# 无论成功或失败，medicine_purchase_cost 都记本张处方的进货成本。
+var daily_medicine_sales_wen: int = 0
+var daily_medicine_purchase_cost_wen: int = 0
+
+# 旧存档兼容字段。新账本不再使用它们进行正式结算。
 var daily_medicine_profit_wen: int = 0
+var daily_failed_medicine_cost_wen: int = 0
 
 # 最近一次已经完成夜间结算的天数。
 # 用于防止切场景 / 读档时重复扣工钱和食费。
@@ -187,9 +202,13 @@ func format_money_change(amount_wen: int) -> String:
 
 func _reset_daily_finance_ledger(day: int) -> void:
 	finance_ledger_day = maxi(day, 1)
+	finance_ledger_accounting_version = FINANCE_ACCOUNTING_VERSION_GROSS
 	daily_random_npc_count = 0
 	daily_consultation_income_wen = 0
+	daily_medicine_sales_wen = 0
+	daily_medicine_purchase_cost_wen = 0
 	daily_medicine_profit_wen = 0
+	daily_failed_medicine_cost_wen = 0
 
 
 func _ensure_daily_finance_ledger(day: int) -> void:
@@ -201,22 +220,84 @@ func _ensure_daily_finance_ledger(day: int) -> void:
 
 
 # 每名 random NPC 第一次提交处方时调用一次。
-# prescription_profit_wen = 实际处方售价 - 药材成本。
-func record_random_npc_treatment_income(day: int, prescription_profit_wen: int) -> Dictionary:
+#
+# treatment_success:
+# - true：妙手回春 / 治疗成功，药材售价总和计入收入。
+# - false：治疗失败，药材销售收入为 0。
+#
+# prescription_sell_wen：本张处方按售价计算出的总和。
+# prescription_cost_wen：本张处方按进价计算出的总和。
+#
+# 无论成功还是失败，药材进货成本都会进入当天支出；
+# 但仍延续现有规则，在“正常白天结束”时统一扣除。
+func record_random_npc_treatment_finance(
+	day: int,
+	treatment_success: bool,
+	prescription_sell_wen: int,
+	prescription_cost_wen: int
+) -> Dictionary:
 	_ensure_daily_finance_ledger(day)
 
 	var consultation_fee := RANDOM_NPC_CONSULTATION_FEE_WEN
-	var medicine_profit := prescription_profit_wen
-	var total_income := consultation_fee + medicine_profit
+	var medicine_sales := maxi(prescription_sell_wen, 0) if treatment_success else 0
+	var medicine_purchase_cost := maxi(prescription_cost_wen, 0)
 
 	daily_random_npc_count += 1
 	daily_consultation_income_wen += consultation_fee
-	daily_medicine_profit_wen += medicine_profit
+
+	# 新账本直接记录销售额和进货成本。
+	if finance_ledger_accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS:
+		daily_medicine_sales_wen += medicine_sales
+		daily_medicine_purchase_cost_wen += medicine_purchase_cost
+
+		# 白天实时入账收入；所有支出在正常白天结束时统一扣除。
+		var total_income := consultation_fee + medicine_sales
+		money_wen += total_income
+
+		return {
+			"consultation_fee_wen": consultation_fee,
+			"medicine_sales_wen": medicine_sales,
+			"medicine_purchase_cost_wen": medicine_purchase_cost,
+			"total_income_wen": total_income,
+			"money_wen": money_wen
+		}
+
+	# 兼容旧存档：旧版当前日无法从“利润”反推出此前所有处方的销售额和成本。
+	# 因此只在这一未结算日继续沿用旧口径，下一天自动切换到新版总账。
+	var legacy_profit := (medicine_sales - medicine_purchase_cost) if treatment_success else 0
+	var legacy_failed_cost := 0 if treatment_success else medicine_purchase_cost
+	daily_medicine_profit_wen += legacy_profit
+	daily_failed_medicine_cost_wen += legacy_failed_cost
+
+	var legacy_total_income := consultation_fee + legacy_profit
+	money_wen += legacy_total_income
+
+	return {
+		"consultation_fee_wen": consultation_fee,
+		"medicine_sales_wen": medicine_sales,
+		"medicine_purchase_cost_wen": medicine_purchase_cost,
+		"total_income_wen": legacy_total_income,
+		"money_wen": money_wen
+	}
+
+
+# 兼容非常旧的调用入口。
+# 旧接口只提供“利润”，无法拆出售价和成本，因此仍按旧账本口径处理。
+func record_random_npc_treatment_income(day: int, prescription_profit_wen: int) -> Dictionary:
+	_ensure_daily_finance_ledger(day)
+	finance_ledger_accounting_version = 1
+
+	var consultation_fee := RANDOM_NPC_CONSULTATION_FEE_WEN
+	var total_income := consultation_fee + prescription_profit_wen
+
+	daily_random_npc_count += 1
+	daily_consultation_income_wen += consultation_fee
+	daily_medicine_profit_wen += prescription_profit_wen
 	money_wen += total_income
 
 	return {
 		"consultation_fee_wen": consultation_fee,
-		"medicine_profit_wen": medicine_profit,
+		"medicine_profit_wen": prescription_profit_wen,
 		"total_income_wen": total_income,
 		"money_wen": money_wen
 	}
@@ -239,8 +320,32 @@ func settle_day_finances(day: int) -> Dictionary:
 	if safe_day % FOOD_COST_INTERVAL_SOLAR_TERMS == 0:
 		food_cost = FOOD_COST_WEN
 
-	var total_income := daily_consultation_income_wen + daily_medicine_profit_wen
-	var total_expense := chen_pi_wage + ban_xia_wage + food_cost
+	var is_gross_accounting := (
+		finance_ledger_accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS
+	)
+
+	var medicine_sales := daily_medicine_sales_wen if is_gross_accounting else 0
+	var medicine_purchase_cost := (
+		daily_medicine_purchase_cost_wen
+		if is_gross_accounting
+		else daily_failed_medicine_cost_wen
+	)
+
+	var total_income := (
+		daily_consultation_income_wen
+		+ (
+			medicine_sales
+			if is_gross_accounting
+			else daily_medicine_profit_wen
+		)
+	)
+
+	var total_expense := (
+		chen_pi_wage
+		+ ban_xia_wage
+		+ food_cost
+		+ medicine_purchase_cost
+	)
 	var net_change := total_income - total_expense
 
 	money_wen -= total_expense
@@ -248,9 +353,14 @@ func settle_day_finances(day: int) -> Dictionary:
 	last_finance_settled_day = safe_day
 	last_finance_report = {
 		"day": safe_day,
+		"accounting_version": finance_ledger_accounting_version,
 		"random_npc_count": daily_random_npc_count,
 		"consultation_income_wen": daily_consultation_income_wen,
+		"medicine_sales_wen": medicine_sales,
+		"medicine_purchase_cost_wen": medicine_purchase_cost,
+		# 保留旧字段，便于旧代码/旧存档兼容。
 		"medicine_profit_wen": daily_medicine_profit_wen,
+		"failed_medicine_cost_wen": daily_failed_medicine_cost_wen,
 		"total_income_wen": total_income,
 		"chen_pi_wage_wen": chen_pi_wage,
 		"ban_xia_wage_wen": ban_xia_wage,
@@ -274,8 +384,8 @@ func build_finance_report_text(day: int) -> String:
 	if report.is_empty():
 		return ""
 
+	var accounting_version := int(report.get("accounting_version", 1))
 	var consultation_income := int(report.get("consultation_income_wen", 0))
-	var medicine_profit := int(report.get("medicine_profit_wen", 0))
 	var total_income := int(report.get("total_income_wen", 0))
 	var chen_pi_wage := int(report.get("chen_pi_wage_wen", 0))
 	var ban_xia_wage := int(report.get("ban_xia_wage_wen", 0))
@@ -288,10 +398,27 @@ func build_finance_report_text(day: int) -> String:
 	lines.append("")
 	lines.append("收入")
 	lines.append("诊费：%s" % format_money_change(consultation_income))
-	lines.append("药材利润：%s" % format_money_change(medicine_profit))
+
+	if accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS:
+		var medicine_sales := int(report.get("medicine_sales_wen", 0))
+		lines.append("药材销售：%s" % format_money_change(medicine_sales))
+	else:
+		# 仅用于无法还原销售额/成本拆分的旧存档当天。
+		var medicine_profit := int(report.get("medicine_profit_wen", 0))
+		lines.append("药材利润（旧账）：%s" % format_money_change(medicine_profit))
+
 	lines.append("收入合计：%s" % format_money_change(total_income))
 	lines.append("")
 	lines.append("支出")
+
+	if accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS:
+		var medicine_purchase_cost := int(report.get("medicine_purchase_cost_wen", 0))
+		lines.append("药材进货成本：%s" % format_money_change(-medicine_purchase_cost))
+	else:
+		var failed_medicine_cost := int(report.get("failed_medicine_cost_wen", 0))
+		if failed_medicine_cost > 0:
+			lines.append("治疗失败药材成本（旧账）：%s" % format_money_change(-failed_medicine_cost))
+
 	lines.append("陈皮工钱：%s" % format_money_change(-chen_pi_wage))
 	lines.append("半夏工钱：%s" % format_money_change(-ban_xia_wage))
 	if food_cost > 0:
@@ -1177,9 +1304,14 @@ func get_save_data() -> Dictionary:
 		"reputation_points": reputation_points,
 		"money_wen": money_wen,
 		"finance_ledger_day": finance_ledger_day,
+		"finance_ledger_accounting_version": finance_ledger_accounting_version,
 		"daily_random_npc_count": daily_random_npc_count,
 		"daily_consultation_income_wen": daily_consultation_income_wen,
+		"daily_medicine_sales_wen": daily_medicine_sales_wen,
+		"daily_medicine_purchase_cost_wen": daily_medicine_purchase_cost_wen,
+		# 旧字段继续保存，便于回滚/兼容旧档。
 		"daily_medicine_profit_wen": daily_medicine_profit_wen,
+		"daily_failed_medicine_cost_wen": daily_failed_medicine_cost_wen,
 		"last_finance_settled_day": last_finance_settled_day,
 		"last_finance_report": last_finance_report,
 		"unlocked_story_ids": unlocked_story_ids
@@ -1204,9 +1336,19 @@ func load_save_data(data: Dictionary) -> void:
 
 	money_wen = int(data.get("money_wen", STARTING_MONEY_WEN))
 	finance_ledger_day = maxi(int(data.get("finance_ledger_day", 1)), 1)
+
+	# 没有版本字段说明这是旧账本；当前未结算日继续按旧口径完成，
+	# 到下一天 _reset_daily_finance_ledger() 会自动启用新版毛收入/成本账本。
+	finance_ledger_accounting_version = int(
+		data.get("finance_ledger_accounting_version", 1)
+	)
+
 	daily_random_npc_count = int(data.get("daily_random_npc_count", 0))
 	daily_consultation_income_wen = int(data.get("daily_consultation_income_wen", 0))
+	daily_medicine_sales_wen = int(data.get("daily_medicine_sales_wen", 0))
+	daily_medicine_purchase_cost_wen = int(data.get("daily_medicine_purchase_cost_wen", 0))
 	daily_medicine_profit_wen = int(data.get("daily_medicine_profit_wen", 0))
+	daily_failed_medicine_cost_wen = int(data.get("daily_failed_medicine_cost_wen", 0))
 	last_finance_settled_day = int(data.get("last_finance_settled_day", 0))
 
 	var loaded_finance_report = data.get("last_finance_report", {})
