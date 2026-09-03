@@ -42,8 +42,9 @@ var night_background_target_texture: Texture2D = null
 
 var topbar_controller = null
 
-# 玩家提示窗口（Control 版 PlayerHintWindow，需作为 Night.tscn 的子节点存在）
-var player_hint_window: Node = null
+# 玩家提示窗口。Night.tscn 中它是根节点的直接子节点，使用精确路径，
+# 避免未来其它子窗口也出现同名节点时递归 find_child() 绑定错对象。
+@onready var player_hint_window: Node = $PlayerHintWindow
 
 # 进入夜晚时若存在当日银钱结算，必须先等玩家关闭结算窗口，
 # 再检查 trigger_scene = "night" 的自动剧情，避免剧情把结算窗口立刻盖掉。
@@ -265,20 +266,26 @@ func _setup_buttons() -> void:
 # =========================
 
 func _setup_player_hint_dialog() -> void:
-	if player_hint_window != null and is_instance_valid(player_hint_window):
+	if player_hint_window == null or not is_instance_valid(player_hint_window):
+		push_warning("Night.gd 找不到根节点直属 PlayerHintWindow，请检查 Night.tscn。")
 		return
 
-	player_hint_window = find_child("PlayerHintWindow", true, false)
-
-	if player_hint_window == null:
-		push_warning("Night.gd 找不到 PlayerHintWindow，请检查 Night.tscn 是否已经添加 PlayerHintWindow.tscn")
-		return
+	# 结算提示必须盖在夜晚背景 / TopBar / 按钮之上。
+	if player_hint_window is CanvasItem:
+		(player_hint_window as CanvasItem).z_index = 1000
 
 	if player_hint_window.has_method("hide"):
 		player_hint_window.hide()
 
-	# PlayerHintWindow 当前是 Control；监听显示状态即可兼容内部“确定 / 关闭”
-	# 的具体实现，不要求 PlayerHintWindow 额外增加自定义关闭信号。
+	# PlayerHintWindow 自带 confirmed 信号，优先使用显式关闭事件推进流程。
+	# visibility_changed 保留为兜底：若其它代码直接 hide()，仍然能够继续夜晚剧情。
+	var confirmed_callable := Callable(self, "_on_player_hint_confirmed")
+	if (
+		player_hint_window.has_signal("confirmed")
+		and not player_hint_window.is_connected("confirmed", confirmed_callable)
+	):
+		player_hint_window.connect("confirmed", confirmed_callable)
+
 	var visibility_callable := Callable(self, "_on_player_hint_visibility_changed")
 	if (
 		player_hint_window.has_signal("visibility_changed")
@@ -312,23 +319,30 @@ func _is_player_hint_visible() -> bool:
 
 
 func _show_finance_report_for_day(day: int) -> bool:
-	if Unlock == null or not Unlock.has_method("build_finance_report_text"):
+	if Unlock == null:
+		push_warning("Night 无法访问 Unlock，不能生成银钱结算。")
+		return false
+
+	# Main 正常路径已经结算。这里再做一次幂等兜底：
+	# 读夜晚存档、剧情特殊跳转、调试跳转等路径漏掉 Main 结算时，Night 仍能自己补齐。
+	if Unlock.has_method("settle_day_finances"):
+		Unlock.settle_day_finances(day)
+
+	if not Unlock.has_method("build_finance_report_text"):
+		push_warning("Unlock 缺少 build_finance_report_text()，不能显示银钱结算。")
 		return false
 
 	var report_text: String = Unlock.build_finance_report_text(day)
 	if report_text.is_empty():
+		push_warning("Night 未取得第 %d 天银钱结算报告。" % day)
 		return false
 
 	_show_player_hint(report_text)
 	return _is_player_hint_visible()
 
 
-func _on_player_hint_visibility_changed() -> void:
+func _continue_after_finance_report() -> void:
 	if not waiting_finance_report_close:
-		return
-
-	# visibility_changed 在 show() 时也会触发；只在真正隐藏后继续夜晚入口流程。
-	if _is_player_hint_visible():
 		return
 
 	var day := pending_night_auto_story_day
@@ -336,8 +350,22 @@ func _on_player_hint_visibility_changed() -> void:
 	pending_night_auto_story_day = 0
 
 	if day > 0:
-		# 延后一拍，确保提示窗口自己的关闭逻辑完全执行结束后再切剧情。
 		call_deferred("_try_start_auto_story", "night", day)
+
+
+func _on_player_hint_confirmed() -> void:
+	_continue_after_finance_report()
+
+
+func _on_player_hint_visibility_changed() -> void:
+	if not waiting_finance_report_close:
+		return
+
+	# show() 也会触发 visibility_changed；只有隐藏时才作为 confirmed 的兜底。
+	if _is_player_hint_visible():
+		return
+
+	_continue_after_finance_report()
 
 
 # =========================
@@ -567,27 +595,44 @@ func _has_unread_entries() -> bool:
 # 夜晚进入入口 / 自动剧情触发
 # =========================
 
-func start_night(day: int) -> void:
+func start_night(day: int, show_finance_report: bool = true) -> void:
 	# 由 Main._enter_night() 在连接好 story_requested 后调用。
-	# 不在 _ready() 中触发剧情，避免信号尚未连接导致剧情请求丢失。
 	_update_night_background(day)
 	if topbar_controller != null:
 		topbar_controller.set_fallback_day(day)
 	_refresh_topbar(true)
 
-	# 白天结算已经由 Main 在切入 Night 前完成。
-	# Night 负责把当日收入 / 支出 / 净变化展示给玩家。
 	waiting_finance_report_close = false
 	pending_night_auto_story_day = 0
 
-	var finance_report_visible := _show_finance_report_for_day(day)
-	if finance_report_visible:
-		# 有结算报告时先停在这里；玩家关闭 PlayerHintWindow 后，
-		# _on_player_hint_visibility_changed() 再继续检查夜晚自动剧情。
-		waiting_finance_report_close = true
-		pending_night_auto_story_day = day
+	# 剧情结束返回 Night 时，Main 会传 show_finance_report = false。
+	# 只跳过结算窗口展示；当天财务结算本身已经由 Main / Unlock 完成。
+	if not show_finance_report:
+		call_deferred("_try_start_auto_story", "night", day)
 		return
 
+	pending_night_auto_story_day = day
+
+	# 关键：不要在导致 Clinic 结束的同一个鼠标事件里立即 show_hint()。
+	# 最后一位病人的 JudgementResult 是在 _input() 中关闭的；若这里同步弹窗，
+	# 同一点击事件随后进入 GUI 阶段时会把刚出现的 PlayerHintWindow 也一起关掉。
+	# 延后一拍后再显示，确保结算窗口至少真实渲染一帧。
+	call_deferred("_show_finance_report_after_scene_enter", day)
+
+
+func _show_finance_report_after_scene_enter(day: int) -> void:
+	if not is_inside_tree():
+		return
+
+	waiting_finance_report_close = true
+	pending_night_auto_story_day = day
+
+	if _show_finance_report_for_day(day):
+		return
+
+	# 没有报告时不要卡死夜晚入口。
+	waiting_finance_report_close = false
+	pending_night_auto_story_day = 0
 	_try_start_auto_story("night", day)
 
 

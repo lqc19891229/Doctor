@@ -50,7 +50,7 @@ text = "断病"
 [node name="DiseaseSearch" type="LineEdit" parent="PrescriptionLayout/DiseaseSelectRow" unique_id=407987413]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "搜索疾病"
+placeholder_text = "搜索疾病"
 clear_button_enabled = true
 
 [node name="DiseaseListScroll" type="ScrollContainer" parent="PrescriptionLayout/DiseaseSelectRow" unique_id=261389170]
@@ -182,7 +182,7 @@ size_flags_horizontal = 3
 [node name="HerbSearch" type="LineEdit" parent="PrescriptionLayout/HerbSelectRow/HerbSearchColumn" unique_id=1590971093]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "搜索药材"
+placeholder_text = "搜索药材"
 clear_button_enabled = true
 
 [node name="HerbListScroll" type="ScrollContainer" parent="PrescriptionLayout/HerbSelectRow/HerbSearchColumn" unique_id=205035393]

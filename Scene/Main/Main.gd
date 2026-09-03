@@ -444,7 +444,7 @@ func _enter_clinic() -> void:
 # =========================================================
 # 进入 Night
 # =========================================================
-func _enter_night() -> void:
+func _enter_night(show_finance_report: bool = true) -> void:
 	_clear_current_scene()
 
 	# 实例化夜晚主场景
@@ -468,9 +468,10 @@ func _enter_night() -> void:
 	else:
 		print("current_scene 没有 story_requested 信号")
 
-	# 启动夜晚入口逻辑，包括自动检查 trigger_scene = "night" 的剧情。
+	# 启动夜晚入口逻辑。
+	# 正常白天结束进入 Night 时显示银钱结算；剧情结束返回 Night 时可关闭结算展示。
 	if current_scene.has_method("start_night"):
-		current_scene.call("start_night", GameTime.current_day)
+		current_scene.call("start_night", GameTime.current_day, show_finance_report)
 	else:
 		print("Night 没有 start_night 方法")
 
@@ -772,19 +773,20 @@ func _on_story_finished() -> void:
 	_clear_story_overlay()
 
 	if target == "night":
-		# 如果剧情是从 Clinic 白天触发，但剧情结束后直接进入 Night，
-		# 就不要恢复 Clinic 计时，而是正常结束白天。
+		# 剧情结束返回 Night：只切换昼夜阶段，不做当天支出结算。
+		# 陈皮 / 半夏工钱与食费只允许在“正常白天结束”
+		# (_on_clinic_finished) 时统一结算。
+		# 白天接诊时已经实时入账的诊费与药材利润保持不变。
 		if story_paused_clinic_clock:
 			if GameTime != null and GameTime.has_method("cancel_story_pause_state"):
 				GameTime.cancel_story_pause_state()
 
 			if GameTime != null and GameTime.is_day():
-				_settle_current_day_finances_if_needed()
 				GameTime.finish_day()
 
 		story_paused_clinic_clock = false
-		_save_game_with_warning("剧情结束并进入夜晚")
-		_enter_night()
+		_save_game_with_warning("剧情结束并进入夜晚（不做日结支出）")
+		_enter_night(false)
 		return
 
 	story_paused_clinic_clock = false
@@ -822,6 +824,7 @@ func _settle_current_day_finances_if_needed() -> void:
 		Unlock.settle_day_finances(GameTime.current_day)
 
 
+
 # =========================================================
 # Clinic 当天结束
 # 白天结束：
@@ -829,8 +832,7 @@ func _settle_current_day_finances_if_needed() -> void:
 # 不增加天数
 # =========================================================
 func _on_clinic_finished() -> void:
-	# 必须先结算再 finish_day()，这样 Night 才能取得当天报告，
-	# 且白天结束时的自动存档会保存已经扣除支出后的银钱。
+	# 正常白天结束：先结算，再进入 Night；Night 默认显示结算窗口。
 	_settle_current_day_finances_if_needed()
 	GameTime.finish_day()
 	_save_game_with_warning("白天结束")

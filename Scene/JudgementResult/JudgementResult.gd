@@ -4,7 +4,7 @@ signal result_closed
 
 @onready var title_label: Label = $Panel/VBoxContainer/Title
 @onready var result_text: RichTextLabel = $Panel/VBoxContainer/RichTextLabel
-@onready var rating_image: TextureRect = $Panel/VBoxContainer/RatingImage  # 新增节点
+@onready var rating_image: TextureRect = $Panel/VBoxContainer/RatingImage
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -28,15 +28,10 @@ func show_result(data: Dictionary) -> void:
 	var reputation_change: int = int(data.get("reputation_change", 0))
 	var experience_change: int = int(data.get("experience_change", 0))
 
-	# 清空之前内容
 	result_text.clear()
-
-	# 上半部分：标准方信息
 	result_text.append_text("病人疾病：%s\n" % disease_name)
 	result_text.append_text("标准方：%s\n" % standard_formula_name)
 	result_text.append_text("方剂配伍：\n%s\n\n" % standard_formula_text)
-
-	# 下半部分：玩家输入
 	result_text.append_text("断病：%s\n" % player_disease_name)
 	result_text.append_text("开方：\n%s\n" % player_prescription_text)
 
@@ -48,12 +43,6 @@ func show_result(data: Dictionary) -> void:
 	if not newly_unlocked_entry_titles.is_empty():
 		result_text.append_text("\n[b]心得新悟：[/b]解锁新条目：%s\n" % "、".join(newly_unlocked_entry_titles))
 
-	# -------------------------------
-	# 显示评级图片
-	# 新评级规则：
-	# 100 分：妙手回春
-	# 60~99 分：治疗成功
-	# 0~59 分：治疗失败
 	var grade := str(data.get("grade", "")).strip_edges()
 	match grade:
 		"妙手回春":
@@ -97,18 +86,21 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if event is InputEventMouseButton and event.pressed:
+		# 关闭结果窗的点击不允许继续穿透到本帧新创建的 Night UI。
+		get_viewport().set_input_as_handled()
+		close_result()
+		return
+
+	if event is InputEventScreenTouch and event.pressed:
+		get_viewport().set_input_as_handled()
 		close_result()
 
 
 func close_result() -> void:
-	# 防止同一帧重复点击造成重复发送关闭事件。
 	if not visible:
 		return
 
 	visible = false
 	get_tree().paused = false
-
-	# 业务流程使用显式信号推进，不再依赖 tree_exited / queue_free 时机。
 	result_closed.emit()
-
 	queue_free()

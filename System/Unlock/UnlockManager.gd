@@ -155,7 +155,21 @@ func format_money(amount_wen: int) -> String:
 	var absolute_amount: int = absi(amount_wen)
 	var liang: int = absolute_amount / WEN_PER_LIANG
 	var wen: int = absolute_amount % WEN_PER_LIANG
-	var text := "%d两 %d文" % [liang, wen]
+
+	# 金额显示时省略数值为 0 的单位：
+	# 500 文 -> 500文
+	# 2000 文 -> 2两
+	# 2474 文 -> 2两 474文
+	# 0 文 -> 0文
+	var parts: Array[String] = []
+	if liang > 0:
+		parts.append("%d两" % liang)
+	if wen > 0:
+		parts.append("%d文" % wen)
+	if parts.is_empty():
+		parts.append("0文")
+
+	var text := " ".join(parts)
 
 	if amount_wen < 0:
 		return "欠 " + text
@@ -260,7 +274,6 @@ func build_finance_report_text(day: int) -> String:
 	if report.is_empty():
 		return ""
 
-	var random_count := int(report.get("random_npc_count", 0))
 	var consultation_income := int(report.get("consultation_income_wen", 0))
 	var medicine_profit := int(report.get("medicine_profit_wen", 0))
 	var total_income := int(report.get("total_income_wen", 0))
@@ -269,16 +282,12 @@ func build_finance_report_text(day: int) -> String:
 	var food_cost := int(report.get("food_cost_wen", 0))
 	var total_expense := int(report.get("total_expense_wen", 0))
 	var net_change := int(report.get("net_change_wen", 0))
-	var money_after := int(report.get("money_after_wen", money_wen))
 
 	var lines: Array[String] = []
 	lines.append("今日银钱结算")
 	lines.append("")
 	lines.append("收入")
-	lines.append("诊费：%s（random NPC %d 人）" % [
-		format_money_change(consultation_income),
-		random_count
-	])
+	lines.append("诊费：%s" % format_money_change(consultation_income))
 	lines.append("药材利润：%s" % format_money_change(medicine_profit))
 	lines.append("收入合计：%s" % format_money_change(total_income))
 	lines.append("")
@@ -292,7 +301,6 @@ func build_finance_report_text(day: int) -> String:
 	lines.append("支出合计：%s" % format_money_change(-total_expense))
 	lines.append("")
 	lines.append("本日变化：%s" % format_money_change(net_change))
-	lines.append("现有银钱：%s" % format_money(money_after))
 	return "\n".join(lines)
 
 
