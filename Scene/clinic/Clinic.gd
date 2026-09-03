@@ -194,6 +194,11 @@ var last_newly_unlocked_entry_titles: Array[String] = []
 var last_reputation_change: int = 0
 var last_experience_change: int = 0
 
+# 最近一次 random NPC 提交处方后产生的“治疗收入”。
+# 口径与当前收入账本一致：诊费 + 实际药材销售收入。
+# 治疗失败虽然仍有诊费收入，但 JudgementResult 按显示规则不展示奖励区。
+var last_treatment_income_wen: int = 0
+
 # 当前打开的判定结果窗口
 var judgement_result_window: Control = null
 
@@ -907,6 +912,7 @@ func refresh_clinic_view() -> void:
 	last_newly_unlocked_entry_titles.clear()
 	last_reputation_change = 0
 	last_experience_change = 0
+	last_treatment_income_wen = 0
 	waiting_judgement_after_treatment_dialogue = false
 
 	current_display_region_name = DEFAULT_DISPLAY_REGION
@@ -1237,6 +1243,9 @@ func submit_prescription() -> bool:
 			var medicine_purchase_cost_wen := int(finance_result.get("medicine_purchase_cost_wen", 0))
 			var total_income_wen := int(finance_result.get("total_income_wen", 0))
 
+			# 缓存给 JudgementResult 使用。
+			last_treatment_income_wen = total_income_wen
+
 			summary_text += "\n诊费：+%d文" % consultation_fee_wen
 
 			if medicine_sales_wen > 0:
@@ -1466,7 +1475,8 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 			and current_npc.npc_type.strip_edges().to_lower() != "story"
 		),
 		"reputation_change": last_reputation_change,
-		"experience_change": last_experience_change
+		"experience_change": last_experience_change,
+		"treatment_income_wen": last_treatment_income_wen
 	}
 
 

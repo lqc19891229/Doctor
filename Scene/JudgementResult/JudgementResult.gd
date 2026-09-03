@@ -26,7 +26,9 @@ func show_result(data: Dictionary) -> void:
 	var newly_unlocked_entry_titles: Array[String] = _get_string_array(data.get("newly_unlocked_entry_titles", []))
 	var show_reward_change: bool = bool(data.get("show_reward_change", false))
 	var reputation_change: int = int(data.get("reputation_change", 0))
-	var experience_change: int = int(data.get("experience_change", 0))
+	var treatment_income_wen: int = int(data.get("treatment_income_wen", 0))
+	var grade := str(data.get("grade", "")).strip_edges()
+	var treatment_failed := grade == "治疗失败"
 
 	result_text.clear()
 	result_text.append_text("病人疾病：%s\n" % disease_name)
@@ -35,15 +37,16 @@ func show_result(data: Dictionary) -> void:
 	result_text.append_text("断病：%s\n" % player_disease_name)
 	result_text.append_text("开方：\n%s\n" % player_prescription_text)
 
-	if show_reward_change:
-		result_text.append_text("\n[b]本次治疗奖励：[/b]\n")
-		result_text.append_text("名望变化：%s\n" % _format_change(reputation_change))
-		result_text.append_text("心得变化：%s\n" % _format_change(experience_change))
+	# 治疗失败时整个“本次治疗奖励”区域不显示。
+	# 治疗成功 / 妙手回春时，在名望下方显示本次治疗收入。
+	if show_reward_change and not treatment_failed:
+		result_text.append_text("\n本次治疗奖励：\n")
+		result_text.append_text("名望%s\n" % _format_change(reputation_change))
+		result_text.append_text("治疗收入%s\n" % _format_money_change(treatment_income_wen))
 
 	if not newly_unlocked_entry_titles.is_empty():
-		result_text.append_text("\n[b]心得新悟：[/b]解锁新条目：%s\n" % "、".join(newly_unlocked_entry_titles))
+		result_text.append_text("\n解锁新条目：%s\n" % "、".join(newly_unlocked_entry_titles))
 
-	var grade := str(data.get("grade", "")).strip_edges()
 	match grade:
 		"妙手回春":
 			rating_image.texture = preload("res://Assets/Rating/rating_miaoshouhuichun.png")
@@ -70,9 +73,21 @@ func _get_string_array(value) -> Array[String]:
 
 
 func _format_change(value: int) -> String:
-	if value > 0:
+	# 奖励区使用“名望+数值”的形式。
+	if value >= 0:
 		return "+%d" % value
 	return str(value)
+
+
+func _format_money_change(value: int) -> String:
+	# 与银钱系统当前“两 / 文”显示格式保持一致。
+	if Unlock != null and Unlock.has_method("format_money_change"):
+		return String(Unlock.format_money_change(value))
+
+	# 兜底：正常项目中 Unlock 应始终存在。
+	if value >= 0:
+		return "+%d文" % value
+	return "%d文" % value
 
 
 func _placeholder(text: String) -> String:
