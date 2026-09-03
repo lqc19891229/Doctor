@@ -413,18 +413,19 @@ func build_finance_report_text(day: int) -> String:
 
 	if accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS:
 		var medicine_purchase_cost := int(report.get("medicine_purchase_cost_wen", 0))
-		lines.append("药材进货成本：%s" % format_money_change(-medicine_purchase_cost))
+		if medicine_purchase_cost > 0:
+			lines.append("药材进货成本：%s" % format_money_change(-medicine_purchase_cost))
 	else:
 		var failed_medicine_cost := int(report.get("failed_medicine_cost_wen", 0))
 		if failed_medicine_cost > 0:
 			lines.append("治疗失败药材成本（旧账）：%s" % format_money_change(-failed_medicine_cost))
 
-	lines.append("陈皮工钱：%s" % format_money_change(-chen_pi_wage))
-	lines.append("半夏工钱：%s" % format_money_change(-ban_xia_wage))
+	if chen_pi_wage > 0:
+		lines.append("陈皮工钱：%s" % format_money_change(-chen_pi_wage))
+	if ban_xia_wage > 0:
+		lines.append("半夏工钱：%s" % format_money_change(-ban_xia_wage))
 	if food_cost > 0:
-		lines.append("食费：%s（每两个节气）" % format_money_change(-food_cost))
-	else:
-		lines.append("食费：本节气不支付")
+		lines.append("食费：%s" % format_money_change(-food_cost))
 	lines.append("支出合计：%s" % format_money_change(-total_expense))
 	lines.append("")
 	lines.append("本日变化：%s" % format_money_change(net_change))

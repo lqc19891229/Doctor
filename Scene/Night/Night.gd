@@ -681,6 +681,14 @@ func _find_registered_story_path(target_story: StoryData) -> String:
 	if target_story == null:
 		return ""
 
+	# 缓存版 StoryManager 可以直接返回剧情路径，
+	# 避免 Night 找到剧情后又把所有 .tres 再同步 load() 一遍。
+	if StoryManager != null and StoryManager.has_method("get_story_path"):
+		var cached_path := String(StoryManager.get_story_path(target_story))
+		if not cached_path.is_empty():
+			return cached_path
+
+	# 兼容仍使用旧 StoryManager 的项目版本。
 	var story_paths = StoryManager.get("registered_story_paths")
 	if typeof(story_paths) != TYPE_ARRAY:
 		push_warning("StoryManager 缺少 registered_story_paths。")
@@ -699,11 +707,9 @@ func _find_registered_story_path(target_story: StoryData) -> String:
 
 		var story := loaded_story as StoryData
 
-		# 同一路径资源通常会被缓存，优先用实例比较。
 		if story == target_story:
 			return story_path
 
-		# 实例比较失败时，用 story_id 兜底。
 		var target_story_id: String = target_story.get("story_id")
 		var current_story_id: String = story.get("story_id")
 		if not target_story_id.is_empty() and target_story_id == current_story_id:
