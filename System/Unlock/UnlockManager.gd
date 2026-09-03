@@ -217,6 +217,16 @@ func refresh_story_unlocks_by_reputation() -> Array[Dictionary]:
 		if story_id == "":
 			continue
 
+		# 两种 day_reputation_*_over 都在进入场景时检查“当前天数 + 当前名望”，
+		# 不写入永久解锁记录，也不显示普通的“新剧情解锁”提示。
+		# 这样即使名望之后下降，也不会因为曾经解锁过而错误触发终局。
+		var trigger_type := story.trigger_type.strip_edges().to_lower()
+		if (
+			trigger_type == StoryData.TRIGGER_TYPE_DAY_REPUTATION_OVER
+			or trigger_type == StoryData.TRIGGER_TYPE_DAY_REPUTATION_BELOW_OVER
+		):
+			continue
+
 		# 已解锁过的剧情不重复解锁，也不会重复返回提示。
 		if is_story_unlocked(story_id):
 			continue

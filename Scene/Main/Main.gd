@@ -571,7 +571,9 @@ func _play_story(story_path: String, _legacy_return_target: String = "") -> void
 			story_paused_clinic_clock = false
 		return
 
-	_save_game_with_warning("进入剧情前")
+	# 两种 Game Over 剧情都不覆盖最后一个可读取的存档点。
+	if not _is_game_over_story(story_data):
+		_save_game_with_warning("进入剧情前")
 
 	# Clinic / Night 即将被隐藏。先取得它当前实际显示的季节背景，
 	# 再注入 Story；Texture2D 资源引用不会因为来源场景隐藏而失效。
@@ -649,8 +651,7 @@ func _on_story_playback_completed(completed_story: StoryData) -> void:
 		return
 
 	# Game Over 剧情保持原有规则：只改变当前内存状态，不覆盖最后一个可读取存档点。
-	var trigger_type := completed_story.trigger_type.strip_edges().to_lower()
-	if trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER:
+	if _is_game_over_story(completed_story):
 		return
 
 	_save_game_with_warning("剧情播放完成并结算名望与心得")
@@ -703,7 +704,7 @@ func _on_followup_story_requested(
 		return
 
 	# 不需要恢复诊疗的后续剧情，结束后按它自己的 return_scene 返回。
-	# story_npc_failed_over 会在剧情结束时发送独立的 Game Over 信号。
+	# Game Over 类型会在剧情结束时发送独立的 Game Over 信号。
 	if not resume_treatment:
 		var next_return_target := next_story.return_scene.strip_edges()
 		if next_return_target != "":
@@ -719,10 +720,7 @@ func _on_followup_story_requested(
 			current_story_scene.call("play_followup_story", next_story, true)
 		return
 
-	var is_game_over_story := (
-		next_story.trigger_type.strip_edges().to_lower()
-		== StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER
-	)
+	var is_game_over_story := _is_game_over_story(next_story)
 
 	# Game Over 不覆盖玩家最后一个可读取的存档点。
 	if not is_game_over_story:
@@ -750,6 +748,18 @@ func _on_story_game_over_requested() -> void:
 	# 当前项目没有独立 GameOver 场景；结束本局后回到开始菜单。
 	# 原存档保留，玩家仍可从最后一个保存点读取。
 	_show_main_menu()
+
+
+func _is_game_over_story(story: StoryData) -> bool:
+	if story == null:
+		return false
+
+	var trigger_type := story.trigger_type.strip_edges().to_lower()
+	return (
+		trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER
+		or trigger_type == StoryData.TRIGGER_TYPE_DAY_REPUTATION_OVER
+		or trigger_type == StoryData.TRIGGER_TYPE_DAY_REPUTATION_BELOW_OVER
+	)
 
 
 func _on_story_finished() -> void:

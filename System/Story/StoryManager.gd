@@ -171,8 +171,27 @@ func start_story_file(story_path: String, return_scene: String = "") -> bool:
 
 
 func find_trigger_story(trigger_scene: String, current_day: int) -> StoryData:
-	# 兼容原有调用：进入场景时只检查 scene_enter 类型剧情。
-	# story_npc_cured 类型剧情不会在每天进入 Clinic / Night 时提前播放。
+	# 进入场景时，先检查“天数 + 名望”结束剧情。
+	# 结束剧情优先级高于普通 scene_enter，避免满足终局条件后先播放其他自动剧情。
+	var game_over_story := _find_matching_story(
+		trigger_scene,
+		current_day,
+		StoryData.TRIGGER_TYPE_DAY_REPUTATION_OVER
+	)
+	if game_over_story != null:
+		return game_over_story
+
+	# 再检查“天数达到 + 当前名望低于门槛”的失败结束剧情。
+	var low_reputation_game_over_story := _find_matching_story(
+		trigger_scene,
+		current_day,
+		StoryData.TRIGGER_TYPE_DAY_REPUTATION_BELOW_OVER
+	)
+	if low_reputation_game_over_story != null:
+		return low_reputation_game_over_story
+
+	# 兼容原有调用：随后检查 scene_enter 类型剧情。
+	# NPC 治疗结果类型不会在每天进入 Clinic / Night 时提前播放。
 	return _find_matching_story(
 		trigger_scene,
 		current_day,
@@ -475,6 +494,16 @@ func _is_story_trigger_matched(
 	if story_trigger_type != clean_requested_trigger_type:
 		return false
 
+	var is_day_reputation_over := (
+		story_trigger_type == StoryData.TRIGGER_TYPE_DAY_REPUTATION_OVER
+	)
+	var is_day_reputation_below_over := (
+		story_trigger_type == StoryData.TRIGGER_TYPE_DAY_REPUTATION_BELOW_OVER
+	)
+	var is_day_reputation_game_over := (
+		is_day_reputation_over or is_day_reputation_below_over
+	)
+
 	var is_treatment_result_type := (
 		story_trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_CURED
 		or story_trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_RETRY
@@ -492,6 +521,20 @@ func _is_story_trigger_matched(
 	if trigger_story_id == story_id:
 		push_warning("剧情不能把自己设置为关联剧情：" + story_id)
 		return false
+
+	# “天数 + 名望”结束剧情是独立的全局条件，不允许依赖前置剧情或 NPC 治疗结果。
+	if is_day_reputation_game_over:
+		if trigger_story_id != "":
+			push_warning(story_trigger_type + " 不能填写 trigger_story_id：" + story_id)
+			return false
+
+		if story.trigger_day <= 0:
+			push_warning(story_trigger_type + " 的 trigger_day 必须大于 0：" + story_id)
+			return false
+
+		if story.required_reputation_points <= 0:
+			push_warning(story_trigger_type + " 的 required_reputation_points 必须大于 0：" + story_id)
+			return false
 
 	if is_treatment_result_type:
 		if event_treatment_story_id == "":
@@ -538,17 +581,32 @@ func _is_story_trigger_matched(
 
 	# 名望剧情规则：
 	# - required_reputation_points <= 0：不需要名望解锁，按场景和播放状态正常触发。
-	# - required_reputation_points > 0：必须先由 UnlockManager 解锁，StoryManager 才允许播放。
-	# 这样“解锁”和“播放”分开：UnlockManager 管名望解锁，StoryManager 管播放。
+	# - 两种 day_reputation_*_over：检查触发当下的实际名望，不能只检查曾经解锁过的记录。
+	# - 其他类型：保持原有规则，必须先由 UnlockManager 解锁。
 	if story.required_reputation_points > 0:
 		if Unlock == null:
 			return false
 
-		if not Unlock.has_method("is_story_unlocked"):
-			return false
+		if is_day_reputation_over:
+			if not Unlock.has_method("has_reputation_points"):
+				return false
 
-		if not Unlock.is_story_unlocked(story_id):
-			return false
+			if not Unlock.has_reputation_points(story.required_reputation_points):
+				return false
+		elif is_day_reputation_below_over:
+			if not Unlock.has_method("has_reputation_points"):
+				return false
+
+			# has_reputation_points() 为 true 表示当前名望已经达到门槛，
+			# 因此只有返回 false（当前名望严格小于门槛）时才允许触发。
+			if Unlock.has_reputation_points(story.required_reputation_points):
+				return false
+		else:
+			if not Unlock.has_method("is_story_unlocked"):
+				return false
+
+			if not Unlock.is_story_unlocked(story_id):
+				return false
 
 	# unlock_entry_id 现在作为剧情触发前置条件使用。
 	# - unlock_entry_id 为空：不限制医书条目。

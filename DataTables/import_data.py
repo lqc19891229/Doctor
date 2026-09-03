@@ -1605,6 +1605,8 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         if trigger_type not in (
             "scene_enter",
             "night_end",
+            "day_reputation_over",
+            "day_reputation_below_over",
             "story_npc_cured",
             "story_npc_failed_retry",
             "story_npc_failed_back",
@@ -1623,6 +1625,28 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
                 f"Story night_end 剧情的 TriggerScene 必须为 night: "
                 f"{story_id} -> {trigger_scene}"
             )
+
+        # 两种 day_reputation_*_over 都是独立的“天数 + 当前名望”终局剧情。
+        # 它们使用绝对天数，不允许绑定前置剧情，也必须设置有效的名望门槛。
+        if trigger_type in (
+            "day_reputation_over",
+            "day_reputation_below_over",
+        ):
+            trigger_day = as_int(row.get("TriggerDay"), 0)
+            trigger_reputation = as_int(row.get("TriggerReputation"), 0)
+
+            if trigger_story_id:
+                errors.append(
+                    f"Story {trigger_type} 不能填写 TriggerStoryID: {story_id}"
+                )
+            if trigger_day <= 0:
+                errors.append(
+                    f"Story {trigger_type} 的 TriggerDay 必须大于 0: {story_id}"
+                )
+            if trigger_reputation <= 0:
+                errors.append(
+                    f"Story {trigger_type} 的 TriggerReputation 必须大于 0: {story_id}"
+                )
 
         return_scene = as_str(row.get("ReturnScene")).lower()
         if return_scene and return_scene not in ("clinic", "night", "map"):

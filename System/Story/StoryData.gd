@@ -3,6 +3,8 @@ class_name StoryData
 
 const TRIGGER_TYPE_SCENE_ENTER := "scene_enter"
 const TRIGGER_TYPE_NIGHT_END := "night_end"
+const TRIGGER_TYPE_DAY_REPUTATION_OVER := "day_reputation_over"
+const TRIGGER_TYPE_DAY_REPUTATION_BELOW_OVER := "day_reputation_below_over"
 const TRIGGER_TYPE_STORY_NPC_CURED := "story_npc_cured"
 const TRIGGER_TYPE_STORY_NPC_FAILED_RETRY := "story_npc_failed_retry"
 const TRIGGER_TYPE_STORY_NPC_FAILED_BACK := "story_npc_failed_back"
@@ -23,11 +25,13 @@ const BACKGROUND_MODE_CURRENT_SCENE := "current_scene"
 # 剧情触发类型：
 # - scene_enter：进入指定场景时检查，兼容现有按场景 / 天数 / 名望触发的剧情。
 # - night_end：Night 场景点击“休息，进入明天”时检查；剧情结束后的目标由 return_scene 决定。
+# - day_reputation_over：进入指定场景时检查；达到 trigger_day 和最低名望后播放，结束后回到主菜单并结束本局。
+# - day_reputation_below_over：进入指定场景时检查；达到 trigger_day 且名望低于门槛时播放，结束后回到主菜单并结束本局。
 # - story_npc_cured：指定的 story NPC 被治愈后检查。
 # - story_npc_failed_retry：指定的 story NPC 治疗失败，剧情结束后重新回到该 NPC 的诊疗界面。
 # - story_npc_failed_back：指定的 story NPC 治疗失败，剧情结束后返回 return_scene。
 # - story_npc_failed_over：指定的 story NPC 治疗失败，剧情结束后 Game Over。
-@export_enum("scene_enter", "night_end", "story_npc_cured", "story_npc_failed_retry", "story_npc_failed_back", "story_npc_failed_over")
+@export_enum("scene_enter", "night_end", "day_reputation_over", "day_reputation_below_over", "story_npc_cured", "story_npc_failed_retry", "story_npc_failed_back", "story_npc_failed_over")
 var trigger_type: String = TRIGGER_TYPE_SCENE_ENTER
 
 # 剧情触发场景，例如 clinic / night / map
@@ -37,12 +41,16 @@ var trigger_scene: String = "clinic"
 # 剧情触发天数：
 # - trigger_story_id 为空：表示游戏第几天开始允许触发。
 # - scene_enter / night_end 且 trigger_story_id 非空：表示前置剧情完整播放结束后第几天允许触发。
+# - day_reputation_over / day_reputation_below_over：必须填写大于 0 的绝对天数，并保持 trigger_story_id 为空。
 # - 治疗结果剧情：必须填写 0，治疗结束后立即按 trigger_story_id 匹配。
 #   TriggerScene 必须与发起诊疗的主剧情一致；night_end 主剧情对应 night。
 # - 0 表示不增加额外天数。
 @export var trigger_day: int = 0
 
-# 触发条件：需要达到的最低名望，0 表示不限制名望
+# 触发条件：需要达到的最低名望，0 表示不限制名望。
+# day_reputation_over：当前名望大于等于该数值时满足条件。
+# day_reputation_below_over：当前名望严格小于该数值时满足条件。
+# 两种结束类型都必须填写大于 0 的数值。
 @export var required_reputation_points: int = 0
 
 # 剧情解锁时，是否顺便解锁某个医书条目，不需要解锁医书条目就留空。
@@ -58,7 +66,9 @@ var trigger_scene: String = "clinic"
 @export_enum("default", "current_scene")
 var background_mode: String = BACKGROUND_MODE_DEFAULT
 
-# 剧情结束后返回目标
+# 剧情结束后返回目标。
+# day_reputation_over、day_reputation_below_over 与 story_npc_failed_over
+# 会忽略该字段，直接回到 Main 开始菜单。
 @export_enum("clinic", "night", "map")
 var return_scene: String = "clinic"
 

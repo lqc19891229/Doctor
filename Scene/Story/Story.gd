@@ -1309,7 +1309,7 @@ func _finish_story() -> void:
 			# 等背景淡出后再结束剧情并返回。
 			_finish_story_with_fade(&"story_finished")
 			return
-		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER:
+		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER, StoryData.TRIGGER_TYPE_DAY_REPUTATION_OVER, StoryData.TRIGGER_TYPE_DAY_REPUTATION_BELOW_OVER:
 			_finish_story_with_fade(&"game_over_requested")
 			return
 
