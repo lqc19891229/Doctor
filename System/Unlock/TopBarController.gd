@@ -11,6 +11,7 @@ class_name TopBarController
 # 3. 心得显示
 # 4. 名望显示
 # 5. 根据名望显示对应称号
+# 6. 银钱显示（两 + 文）
 #
 # 使用方式：
 # var topbar := TopBarController.new()
@@ -28,12 +29,14 @@ var day_label: Label = null
 var time_label: Label = null
 var thoughts_point_label: Label = null
 var reputation_point_label: Label = null
+var money_point_label: Label = null
 
 var fallback_day: int = 1
 var time_text_override: String = ""
 
 var last_displayed_thoughts_point: int = -1
 var last_displayed_reputation_point: int = -999999
+var last_displayed_money_wen: int = -999999999
 
 
 func setup(
@@ -41,12 +44,14 @@ func setup(
 	_time_label: Label,
 	_thoughts_point_label: Label,
 	_reputation_point_label: Label,
-	_time_text_override: String = ""
+	_time_text_override: String = "",
+	_money_point_label: Label = null
 ) -> void:
 	day_label = _day_label
 	time_label = _time_label
 	thoughts_point_label = _thoughts_point_label
 	reputation_point_label = _reputation_point_label
+	money_point_label = _money_point_label
 	time_text_override = _time_text_override
 
 	_bind_game_time_signal()
@@ -76,6 +81,7 @@ func refresh_all(force_refresh: bool = false) -> void:
 func refresh_points(force_refresh: bool = false) -> void:
 	refresh_thoughts_point(force_refresh)
 	refresh_reputation_point(force_refresh)
+	refresh_money_point(force_refresh)
 
 
 func refresh_time() -> void:
@@ -125,6 +131,31 @@ func refresh_reputation_point(force_refresh: bool = false) -> void:
 	_prepare_point_label(reputation_point_label)
 	reputation_point_label.text = "名望：%d　%s" % [current_points, get_reputation_title(current_points)]
 
+
+func refresh_money_point(force_refresh: bool = false) -> void:
+	if money_point_label == null:
+		return
+
+	var current_money_wen := 0
+	if Unlock != null and Unlock.has_method("get_money_wen"):
+		current_money_wen = Unlock.get_money_wen()
+
+	if not force_refresh and current_money_wen == last_displayed_money_wen:
+		return
+
+	last_displayed_money_wen = current_money_wen
+	_prepare_point_label(money_point_label)
+
+	if Unlock != null and Unlock.has_method("format_money"):
+		money_point_label.text = "银钱：%s" % Unlock.format_money(current_money_wen)
+	else:
+		var absolute_amount: int = absi(current_money_wen)
+		var liang: int = absolute_amount / 1000
+		var wen: int = absolute_amount % 1000
+		if current_money_wen < 0:
+			money_point_label.text = "银钱：欠 %d两 %d文" % [liang, wen]
+		else:
+			money_point_label.text = "银钱：%d两 %d文" % [liang, wen]
 
 func get_reputation_title(reputation: int) -> String:
 	if reputation <= 100:

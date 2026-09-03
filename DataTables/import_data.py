@@ -1941,6 +1941,12 @@ def build_herb_resources(indexed_data: dict[str, Any]) -> None:
         taste_list = split_multi_value(row.get("Taste"))
         meridian_list = split_multi_value(row.get("Meridians"))
 
+        # 药材价格直接写入 HerbData，不再额外生成 HerbPriceDatabase.gd。
+        # 金额单位为“文”；PriceUnit 表示该价格对应的剂量单位。
+        purchase_price = as_float(row.get("PurchasePrice"), 0.0)
+        sell_price = as_float(row.get("SellPrice"), 0.0)
+        price_unit = normalize_unit(row.get("PriceUnit")) or "qian"
+
         herb_content = f'''[gd_resource type="Resource" script_class="HerbData" load_steps=2 format=3]
 
 [ext_resource type="Script" path="{HERB_DATA_SCRIPT_PATH}" id="1"]
@@ -1952,6 +1958,9 @@ herb_name = {format_godot_string(herb_name)}
 nature = {format_godot_string(nature)}
 taste = {format_godot_string_array(taste_list)}
 meridians = {format_godot_string_array(meridian_list)}
+purchase_price = {purchase_price}
+sell_price = {sell_price}
+price_unit = {format_godot_string(price_unit)}
 '''
         write_text_file(HERB_OUTPUT_DIR / f"{safe_filename(herb_id)}.tres", herb_content)
 
@@ -1974,6 +1983,8 @@ unlock_required_experience_points = {unlock_required_experience_points}
 herb_id = {format_godot_string(herb_id)}
 '''
         write_text_file(HERB_BOOK_ENTRY_OUTPUT_DIR / f"{safe_filename(entry_id)}.tres", entry_content)
+
+
 
 
 def build_disease_resources(indexed_data: dict[str, Any]) -> None:

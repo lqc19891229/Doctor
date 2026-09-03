@@ -165,7 +165,13 @@ layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 2.0
 theme_override_font_sizes/font_size = 25
-text = "名望：0"
+text = "名望：0　初窥门径"
+
+[node name="MoneyPoint" type="Label" parent="VBoxContainer/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 25
+text = "银钱：0两 0文"
 
 [node name="ThoughtsPoint" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=571981417]
 layout_mode = 2

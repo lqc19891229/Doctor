@@ -63,7 +63,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "谢飞燕"
-text = "李郎待我是真心诚意，我俩满心欢喜想着赎身之后拜堂成亲，可谁曾想干娘竟如此对我…"
+text = "王郎待我真心诚意，我俩满心欢喜想着赎身之后拜堂成亲，可谁曾想干娘竟如此对我…"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")

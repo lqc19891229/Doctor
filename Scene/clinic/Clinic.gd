@@ -84,6 +84,7 @@ var clinic_background_target_texture: Texture2D = null
 #  这个 Label 只负责显示 UnlockManager 中保存的心得数量。
 @onready var thoughts_point_label: Label = find_child("ThoughtsPoint", true, false) as Label
 @onready var reputation_point_label: Label = find_child("ReputationPoint", true, false) as Label
+@onready var money_point_label: Label = find_child("MoneyPoint", true, false) as Label
 
 # ---------- 当前 NPC 立绘 ----------
 # 说明：
@@ -316,6 +317,7 @@ func _validate_scene_node_bindings() -> void:
 		"TimeLabel": time_label,
 		"ThoughtsPoint": thoughts_point_label,
 		"ReputationPoint": reputation_point_label,
+		"MoneyPoint": money_point_label,
 		"Portrait": portrait_rect,
 		"NpcNameLabel": npc_name_label,
 		"NpcDialogueLabel": npc_dialogue_label,
@@ -347,7 +349,9 @@ func _setup_topbar_controller() -> void:
 		day_label,
 		time_label,
 		thoughts_point_label,
-		reputation_point_label
+		reputation_point_label,
+		"",
+		money_point_label
 	)
 	topbar_controller.set_fallback_day(current_day)
 
@@ -398,6 +402,11 @@ func _update_thoughts_point_ui(force_refresh: bool = false) -> void:
 func _update_reputation_point_ui(force_refresh: bool = false) -> void:
 	if topbar_controller != null:
 		topbar_controller.refresh_reputation_point(force_refresh)
+
+
+func _update_money_point_ui(force_refresh: bool = false) -> void:
+	if topbar_controller != null and topbar_controller.has_method("refresh_money_point"):
+		topbar_controller.refresh_money_point(force_refresh)
 
 
 # =========================================================
@@ -1078,6 +1087,66 @@ func _get_reputation_reward_by_judge_result(result) -> int:
 			return 0
 
 
+
+# =========================================================
+# 计算当前处方的药材利润
+# =========================================================
+# 价格直接读取 HerbDB 中对应的 HerbData：
+# - purchase_price：进价，金额单位为“文”
+# - sell_price：售价，金额单位为“文”
+# - price_unit：上述价格对应的剂量单位（fen / qian / liang / jin）
+#
+# 处方剂量与价格单位都统一经 HerbUnit 转成“分”后换算，因此 PriceUnit 不必固定为钱。
+func _calculate_current_prescription_profit_wen() -> int:
+	if current_prescription == null:
+		return 0
+
+	if herb_database == null or not herb_database.has_method("get_herb_by_id"):
+		if OS.is_debug_build():
+			push_warning("HerbDB 不可用，无法计算处方药材利润。")
+		return 0
+
+	var total_cost_wen := 0.0
+	var total_sell_wen := 0.0
+	var roles: Array[String] = ["君", "臣", "佐", "使"]
+
+	for role in roles:
+		var herb_items = current_prescription.get_herbs_by_role(role)
+		for item in herb_items:
+			var herb_id := str(item.get("herb_id", "")).strip_edges()
+			if herb_id == "":
+				continue
+
+			var amount := float(item.get("amount", 0.0))
+			var unit := str(item.get("unit", "qian")).strip_edges()
+			if amount <= 0.0:
+				continue
+
+			var herb: HerbData = herb_database.get_herb_by_id(herb_id)
+			if herb == null:
+				if OS.is_debug_build():
+					push_warning("未找到 HerbData，利润按 0 处理：" + herb_id)
+				continue
+
+			var price_unit := herb.price_unit.strip_edges()
+			if price_unit == "":
+				price_unit = "qian"
+
+			var amount_in_fen: float = HerbUnit.to_fen(amount, unit)
+			var one_price_unit_in_fen: float = HerbUnit.to_fen(1.0, price_unit)
+			if one_price_unit_in_fen <= 0.0:
+				if OS.is_debug_build():
+					push_warning("药材 PriceUnit 无法识别，利润按 0 处理：%s -> %s" % [herb_id, price_unit])
+				continue
+
+			var amount_in_price_unit: float = amount_in_fen / one_price_unit_in_fen
+			total_cost_wen += amount_in_price_unit * herb.purchase_price
+			total_sell_wen += amount_in_price_unit * herb.sell_price
+
+	# 金钱最终以“文”为整数。
+	# 分别四舍五入总成本与总售价后再相减，与价格表 Formula 页的利润口径一致。
+	return roundi(total_sell_wen) - roundi(total_cost_wen)
+
 # =========================================================
 # 提交处方并判定
 # =========================================================
@@ -1114,9 +1183,35 @@ func submit_prescription() -> bool:
 	# random NPC 继续沿用治疗判定时的固定奖励与惩罚。
 	# story NPC 的名望和心得不在这里结算，改由后续 StoryData 配置，
 	# 并在对应剧情完整播放结束时统一结算。
-	var uses_fixed_treatment_rewards := (
-		current_npc.npc_type.strip_edges().to_lower() != "story"
-	)
+	var npc_type_key := current_npc.npc_type.strip_edges().to_lower()
+	var uses_fixed_treatment_rewards := npc_type_key != "story"
+	var is_random_npc := npc_type_key == "random"
+
+	# 金钱收入只结算 random NPC，并且同一名病人只结算第一次提交。
+	# 诊费为固定值；药材利润按“实际处方售价 - 实际处方成本”计算。
+	if is_random_npc and not was_already_submitted:
+		var prescription_profit_wen := _calculate_current_prescription_profit_wen()
+		if Unlock != null and Unlock.has_method("record_random_npc_treatment_income"):
+			var income_result: Dictionary = Unlock.record_random_npc_treatment_income(
+				current_day,
+				prescription_profit_wen
+			)
+			var consultation_fee_wen := int(income_result.get("consultation_fee_wen", 0))
+			var total_income_wen := int(income_result.get("total_income_wen", 0))
+			summary_text += "\n诊费：+%d文" % consultation_fee_wen
+			if prescription_profit_wen >= 0:
+				summary_text += "\n药材利润：+%d文" % prescription_profit_wen
+			else:
+				summary_text += "\n药材利润：%d文" % prescription_profit_wen
+			if total_income_wen >= 0:
+				summary_text += "\n本病人收入：+%d文" % total_income_wen
+			else:
+				summary_text += "\n本病人收入：%d文" % total_income_wen
+			_update_money_point_ui(true)
+
+			# 每位病人结算后保存一次账本，防止中途退出丢失当日收入。
+			if SaveManager != null and SaveManager.has_method("save_game"):
+				SaveManager.save_game()
 
 	# random NPC 提交判定后根据评级改变名望。
 	# 妙手回春：名望 +10；治疗成功：名望不变；治疗失败：名望 -10。

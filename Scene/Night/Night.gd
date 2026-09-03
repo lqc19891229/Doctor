@@ -30,6 +30,7 @@ const NIGHT_WINTER_BACKGROUND: Texture2D = preload("res://Assets/Background/clin
 @onready var time_label: Label = $VBoxContainer/TopBar/HBoxContainer/TimeLabel
 @onready var thoughts_point_label: Label = $VBoxContainer/TopBar/HBoxContainer/ThoughtsPoint
 @onready var reputation_point_label: Label = $VBoxContainer/TopBar/HBoxContainer/ReputationPoint
+@onready var money_point_label: Label = $VBoxContainer/TopBar/HBoxContainer/MoneyPoint
 
 # 复用 Night.tscn 中现有的背景节点，无需调整场景结构。
 @onready var night_background: TextureRect = $Background/BackgroundImage
@@ -66,6 +67,7 @@ func _validate_scene_node_bindings() -> void:
 	_check_node_binding(time_label, "TimeLabel")
 	_check_node_binding(thoughts_point_label, "ThoughtsPoint")
 	_check_node_binding(reputation_point_label, "ReputationPoint")
+	_check_node_binding(money_point_label, "MoneyPoint")
 	_check_node_binding(night_background, "BackgroundImage")
 	_check_node_binding(info_window, "InfoWindow")
 	_check_node_binding(info_label, "InfoWindow/InfoLabel")
@@ -281,6 +283,17 @@ func _show_player_hint(message: String) -> void:
 		push_warning(message)
 
 
+
+func _show_finance_report_for_day(day: int) -> void:
+	if Unlock == null or not Unlock.has_method("build_finance_report_text"):
+		return
+
+	var report_text: String = Unlock.build_finance_report_text(day)
+	if report_text.is_empty():
+		return
+
+	_show_player_hint(report_text)
+
 # =========================
 # 开发测试窗口
 # InfoWindow 已在 Night.tscn 中固定实例化，信号也由场景文件连接。
@@ -375,7 +388,8 @@ func _setup_topbar_controller() -> void:
 		time_label,
 		thoughts_point_label,
 		reputation_point_label,
-		"夜晚"
+		"夜晚",
+		money_point_label
 	)
 
 
@@ -514,6 +528,11 @@ func start_night(day: int) -> void:
 	if topbar_controller != null:
 		topbar_controller.set_fallback_day(day)
 	_refresh_topbar(true)
+
+	# 白天结算已经由 Main 在切入 Night 前完成。
+	# Night 负责把当日收入 / 支出 / 净变化展示给玩家。
+	_show_finance_report_for_day(day)
+
 	_try_start_auto_story("night", day)
 
 

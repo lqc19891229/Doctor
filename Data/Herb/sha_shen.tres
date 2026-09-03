@@ -9,3 +9,6 @@ herb_name = "沙参"
 nature = "寒"
 taste = Array[String](["甘"])
 meridians = Array[String](["脾", "肺"])
+purchase_price = 6.0
+sell_price = 11.0
+price_unit = "qian"

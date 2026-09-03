@@ -108,6 +108,195 @@ var reputation_points: int = 0
 
 
 # =========================================================
+# 七、银钱系统（第一版）
+# =========================================================
+# 内部统一使用“文”记账，TopBar 再换算成“两 + 文”显示。
+# 第一版暂定：
+# - 1 两 = 1000 文
+# - random NPC 诊费 = 500 文 / 人
+# - 陈皮工钱 = 500 文 / 节气
+# - 半夏工钱 = 500 文 / 节气
+# - 食费 = 2000 文 / 2 个节气
+#
+# 如果后续要调整平衡，只需改下面常量即可。
+const WEN_PER_LIANG: int = 1000
+const STARTING_MONEY_WEN: int = 0
+const RANDOM_NPC_CONSULTATION_FEE_WEN: int = 500
+const CHEN_PI_WAGE_PER_SOLAR_TERM_WEN: int = 500
+const BAN_XIA_WAGE_PER_SOLAR_TERM_WEN: int = 500
+const FOOD_COST_WEN: int = 2000
+const FOOD_COST_INTERVAL_SOLAR_TERMS: int = 2
+
+# 当前持有银钱，单位：文。
+# 允许出现负数；负数在 TopBar 中显示为“欠 X两 Y文”。
+var money_wen: int = STARTING_MONEY_WEN
+
+# 当前白天账本。
+var finance_ledger_day: int = 1
+var daily_random_npc_count: int = 0
+var daily_consultation_income_wen: int = 0
+var daily_medicine_profit_wen: int = 0
+
+# 最近一次已经完成夜间结算的天数。
+# 用于防止切场景 / 读档时重复扣工钱和食费。
+var last_finance_settled_day: int = 0
+var last_finance_report: Dictionary = {}
+
+
+func get_money_wen() -> int:
+	return money_wen
+
+
+func get_random_npc_consultation_fee_wen() -> int:
+	return RANDOM_NPC_CONSULTATION_FEE_WEN
+
+
+func format_money(amount_wen: int) -> String:
+	var absolute_amount: int = absi(amount_wen)
+	var liang: int = absolute_amount / WEN_PER_LIANG
+	var wen: int = absolute_amount % WEN_PER_LIANG
+	var text := "%d两 %d文" % [liang, wen]
+
+	if amount_wen < 0:
+		return "欠 " + text
+
+	return text
+
+
+func format_money_change(amount_wen: int) -> String:
+	if amount_wen > 0:
+		return "+" + format_money(amount_wen)
+	if amount_wen < 0:
+		return "-" + format_money(-amount_wen)
+	return "0文"
+
+
+func _reset_daily_finance_ledger(day: int) -> void:
+	finance_ledger_day = maxi(day, 1)
+	daily_random_npc_count = 0
+	daily_consultation_income_wen = 0
+	daily_medicine_profit_wen = 0
+
+
+func _ensure_daily_finance_ledger(day: int) -> void:
+	var safe_day := maxi(day, 1)
+	if finance_ledger_day == safe_day:
+		return
+
+	_reset_daily_finance_ledger(safe_day)
+
+
+# 每名 random NPC 第一次提交处方时调用一次。
+# prescription_profit_wen = 实际处方售价 - 药材成本。
+func record_random_npc_treatment_income(day: int, prescription_profit_wen: int) -> Dictionary:
+	_ensure_daily_finance_ledger(day)
+
+	var consultation_fee := RANDOM_NPC_CONSULTATION_FEE_WEN
+	var medicine_profit := prescription_profit_wen
+	var total_income := consultation_fee + medicine_profit
+
+	daily_random_npc_count += 1
+	daily_consultation_income_wen += consultation_fee
+	daily_medicine_profit_wen += medicine_profit
+	money_wen += total_income
+
+	return {
+		"consultation_fee_wen": consultation_fee,
+		"medicine_profit_wen": medicine_profit,
+		"total_income_wen": total_income,
+		"money_wen": money_wen
+	}
+
+
+# 白天结束、进入 Night 之前调用。
+# 收入已在白天接诊时实时入账；这里负责扣除固定支出并生成当日账单。
+func settle_day_finances(day: int) -> Dictionary:
+	var safe_day := maxi(day, 1)
+
+	# 同一天已经结算过时直接返回原报告，绝不重复扣款。
+	if last_finance_settled_day == safe_day and not last_finance_report.is_empty():
+		return last_finance_report.duplicate(true)
+
+	_ensure_daily_finance_ledger(safe_day)
+
+	var chen_pi_wage := CHEN_PI_WAGE_PER_SOLAR_TERM_WEN
+	var ban_xia_wage := BAN_XIA_WAGE_PER_SOLAR_TERM_WEN
+	var food_cost := 0
+	if safe_day % FOOD_COST_INTERVAL_SOLAR_TERMS == 0:
+		food_cost = FOOD_COST_WEN
+
+	var total_income := daily_consultation_income_wen + daily_medicine_profit_wen
+	var total_expense := chen_pi_wage + ban_xia_wage + food_cost
+	var net_change := total_income - total_expense
+
+	money_wen -= total_expense
+
+	last_finance_settled_day = safe_day
+	last_finance_report = {
+		"day": safe_day,
+		"random_npc_count": daily_random_npc_count,
+		"consultation_income_wen": daily_consultation_income_wen,
+		"medicine_profit_wen": daily_medicine_profit_wen,
+		"total_income_wen": total_income,
+		"chen_pi_wage_wen": chen_pi_wage,
+		"ban_xia_wage_wen": ban_xia_wage,
+		"food_cost_wen": food_cost,
+		"total_expense_wen": total_expense,
+		"net_change_wen": net_change,
+		"money_after_wen": money_wen
+	}
+
+	return last_finance_report.duplicate(true)
+
+
+func get_last_finance_report_for_day(day: int) -> Dictionary:
+	if last_finance_settled_day != maxi(day, 1):
+		return {}
+	return last_finance_report.duplicate(true)
+
+
+func build_finance_report_text(day: int) -> String:
+	var report := get_last_finance_report_for_day(day)
+	if report.is_empty():
+		return ""
+
+	var random_count := int(report.get("random_npc_count", 0))
+	var consultation_income := int(report.get("consultation_income_wen", 0))
+	var medicine_profit := int(report.get("medicine_profit_wen", 0))
+	var total_income := int(report.get("total_income_wen", 0))
+	var chen_pi_wage := int(report.get("chen_pi_wage_wen", 0))
+	var ban_xia_wage := int(report.get("ban_xia_wage_wen", 0))
+	var food_cost := int(report.get("food_cost_wen", 0))
+	var total_expense := int(report.get("total_expense_wen", 0))
+	var net_change := int(report.get("net_change_wen", 0))
+	var money_after := int(report.get("money_after_wen", money_wen))
+
+	var lines: Array[String] = []
+	lines.append("今日银钱结算")
+	lines.append("")
+	lines.append("收入")
+	lines.append("诊费：%s（random NPC %d 人）" % [
+		format_money_change(consultation_income),
+		random_count
+	])
+	lines.append("药材利润：%s" % format_money_change(medicine_profit))
+	lines.append("收入合计：%s" % format_money_change(total_income))
+	lines.append("")
+	lines.append("支出")
+	lines.append("陈皮工钱：%s" % format_money_change(-chen_pi_wage))
+	lines.append("半夏工钱：%s" % format_money_change(-ban_xia_wage))
+	if food_cost > 0:
+		lines.append("食费：%s（每两个节气）" % format_money_change(-food_cost))
+	else:
+		lines.append("食费：本节气不支付")
+	lines.append("支出合计：%s" % format_money_change(-total_expense))
+	lines.append("")
+	lines.append("本日变化：%s" % format_money_change(net_change))
+	lines.append("现有银钱：%s" % format_money(money_after))
+	return "\n".join(lines)
+
+
+# =========================================================
 # 七、名望剧情解锁状态
 #
 # 剧情解锁条件现在写在每个剧情 .tres 对应的 StoryData 里。
@@ -960,6 +1149,11 @@ func reset_progress() -> void:
 	experience_points = 0
 	reputation_points = 0
 
+	money_wen = STARTING_MONEY_WEN
+	_reset_daily_finance_ledger(1)
+	last_finance_settled_day = 0
+	last_finance_report.clear()
+
 
 func get_save_data() -> Dictionary:
 	return {
@@ -973,6 +1167,13 @@ func get_save_data() -> Dictionary:
 		"clinical_log_unlocked_formula_ids": clinical_log_unlocked_formula_ids,
 		"experience_points": experience_points,
 		"reputation_points": reputation_points,
+		"money_wen": money_wen,
+		"finance_ledger_day": finance_ledger_day,
+		"daily_random_npc_count": daily_random_npc_count,
+		"daily_consultation_income_wen": daily_consultation_income_wen,
+		"daily_medicine_profit_wen": daily_medicine_profit_wen,
+		"last_finance_settled_day": last_finance_settled_day,
+		"last_finance_report": last_finance_report,
 		"unlocked_story_ids": unlocked_story_ids
 	}
 
@@ -992,6 +1193,19 @@ func load_save_data(data: Dictionary) -> void:
 
 	experience_points = int(data.get("experience_points", 0))
 	reputation_points = int(data.get("reputation_points", 0))
+
+	money_wen = int(data.get("money_wen", STARTING_MONEY_WEN))
+	finance_ledger_day = maxi(int(data.get("finance_ledger_day", 1)), 1)
+	daily_random_npc_count = int(data.get("daily_random_npc_count", 0))
+	daily_consultation_income_wen = int(data.get("daily_consultation_income_wen", 0))
+	daily_medicine_profit_wen = int(data.get("daily_medicine_profit_wen", 0))
+	last_finance_settled_day = int(data.get("last_finance_settled_day", 0))
+
+	var loaded_finance_report = data.get("last_finance_report", {})
+	if typeof(loaded_finance_report) == TYPE_DICTIONARY:
+		last_finance_report = loaded_finance_report.duplicate(true)
+	else:
+		last_finance_report = {}
 
 	refresh_auto_unlocks_by_experience()
 	refresh_unlocks_by_dependencies()
