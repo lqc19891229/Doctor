@@ -113,17 +113,30 @@ var reputation_points: int = 0
 # 内部统一使用“文”记账，TopBar 再换算成“两 + 文”显示。
 # 第一版暂定：
 # - 1 两 = 1000 文
-# - random NPC 诊费 = 500 文 / 人
-# - 陈皮工钱 = 500 文 / 节气
-# - 半夏工钱 = 500 文 / 节气
+# - random NPC 诊费随当前名望变化：
+#   0～100：10文
+#   101～300：50文
+#   301～600：200文
+#   601～2000：500文
+#   2001以上：1000文
+# - 陈皮工钱 = 500 文 / 2 个节气
+# - 半夏工钱 = 500 文 / 2 个节气
 # - 食费 = 2000 文 / 2 个节气
 #
 # 如果后续要调整平衡，只需改下面常量即可。
 const WEN_PER_LIANG: int = 1000
 const STARTING_MONEY_WEN: int = 0
-const RANDOM_NPC_CONSULTATION_FEE_WEN: int = 500
+
+# random NPC 诊费档位，单位：文。
+const CONSULTATION_FEE_BEGINNER_WEN: int = 10
+const CONSULTATION_FEE_MINOR_SUCCESS_WEN: int = 50
+const CONSULTATION_FEE_PROFICIENT_WEN: int = 200
+const CONSULTATION_FEE_MASTER_WEN: int = 500
+const CONSULTATION_FEE_TRANSCENDENT_WEN: int = 1000
+
 const CHEN_PI_WAGE_PER_SOLAR_TERM_WEN: int = 500
 const BAN_XIA_WAGE_PER_SOLAR_TERM_WEN: int = 500
+const WAGE_INTERVAL_SOLAR_TERMS: int = 2
 const FOOD_COST_WEN: int = 2000
 const FOOD_COST_INTERVAL_SOLAR_TERMS: int = 2
 
@@ -163,7 +176,23 @@ func get_money_wen() -> int:
 
 
 func get_random_npc_consultation_fee_wen() -> int:
-	return RANDOM_NPC_CONSULTATION_FEE_WEN
+	# 诊费直接由当前累计名望决定，区间与 TopBar 医术名号一致。
+	# 负名望按最低档处理。
+	var current_reputation := maxi(reputation_points, 0)
+
+	if current_reputation <= 100:
+		return CONSULTATION_FEE_BEGINNER_WEN
+
+	if current_reputation <= 300:
+		return CONSULTATION_FEE_MINOR_SUCCESS_WEN
+
+	if current_reputation <= 600:
+		return CONSULTATION_FEE_PROFICIENT_WEN
+
+	if current_reputation <= 2000:
+		return CONSULTATION_FEE_MASTER_WEN
+
+	return CONSULTATION_FEE_TRANSCENDENT_WEN
 
 
 func format_money(amount_wen: int) -> String:
@@ -238,7 +267,9 @@ func record_random_npc_treatment_finance(
 ) -> Dictionary:
 	_ensure_daily_finance_ledger(day)
 
-	var consultation_fee := RANDOM_NPC_CONSULTATION_FEE_WEN
+	# 使用提交处方这一刻的当前名望计算诊费。
+	# 本次治疗随后产生的名望变化，从下一位病人开始影响诊费。
+	var consultation_fee := get_random_npc_consultation_fee_wen()
 	var medicine_sales := maxi(prescription_sell_wen, 0) if treatment_success else 0
 	var medicine_purchase_cost := maxi(prescription_cost_wen, 0)
 
@@ -287,7 +318,9 @@ func record_random_npc_treatment_income(day: int, prescription_profit_wen: int) 
 	_ensure_daily_finance_ledger(day)
 	finance_ledger_accounting_version = 1
 
-	var consultation_fee := RANDOM_NPC_CONSULTATION_FEE_WEN
+	# 使用提交处方这一刻的当前名望计算诊费。
+	# 本次治疗随后产生的名望变化，从下一位病人开始影响诊费。
+	var consultation_fee := get_random_npc_consultation_fee_wen()
 	var total_income := consultation_fee + prescription_profit_wen
 
 	daily_random_npc_count += 1
@@ -314,8 +347,14 @@ func settle_day_finances(day: int) -> Dictionary:
 
 	_ensure_daily_finance_ledger(safe_day)
 
-	var chen_pi_wage := CHEN_PI_WAGE_PER_SOLAR_TERM_WEN
-	var ban_xia_wage := BAN_XIA_WAGE_PER_SOLAR_TERM_WEN
+	# 陈皮、半夏工钱都改为每两个节气支付一次。
+	# 第 2、4、6……个节气支付；其它节气为 0，不显示也不扣款。
+	var chen_pi_wage := 0
+	var ban_xia_wage := 0
+	if safe_day % WAGE_INTERVAL_SOLAR_TERMS == 0:
+		chen_pi_wage = CHEN_PI_WAGE_PER_SOLAR_TERM_WEN
+		ban_xia_wage = BAN_XIA_WAGE_PER_SOLAR_TERM_WEN
+
 	var food_cost := 0
 	if safe_day % FOOD_COST_INTERVAL_SOLAR_TERMS == 0:
 		food_cost = FOOD_COST_WEN
