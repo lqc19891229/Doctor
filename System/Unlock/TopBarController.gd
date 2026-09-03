@@ -10,6 +10,7 @@ class_name TopBarController
 # 2. 当前时辰 / 固定时间文本显示
 # 3. 心得显示
 # 4. 名望显示
+# 5. 根据名望显示对应称号
 #
 # 使用方式：
 # var topbar := TopBarController.new()
@@ -122,7 +123,20 @@ func refresh_reputation_point(force_refresh: bool = false) -> void:
 
 	last_displayed_reputation_point = current_points
 	_prepare_point_label(reputation_point_label)
-	reputation_point_label.text = "名望：%d" % current_points
+	reputation_point_label.text = "名望：%d　%s" % [current_points, get_reputation_title(current_points)]
+
+
+func get_reputation_title(reputation: int) -> String:
+	if reputation <= 100:
+		return "初窥门径"
+	elif reputation <= 300:
+		return "略有小成"
+	elif reputation <= 600:
+		return "融会贯通"
+	elif reputation <= 2000:
+		return "炉火纯青"
+	else:
+		return "出神入化"
 
 
 func _prepare_point_label(label: Label) -> void:

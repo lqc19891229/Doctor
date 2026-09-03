@@ -25,7 +25,7 @@ bg_color = Color(0.33434814, 0.20553544, 0.026825193, 0.9490196)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h552d"]
 
 [sub_resource type="GDScript" id="GDScript_desk_hotspots"]
-script/source = "extends Control\n\n@onready var _pulse_button: Button = get_node(\"../VBoxContainer/ButtonRow/OpenPulseWindowButton\")\n@onready var _prescription_button: Button = get_node(\"../VBoxContainer/ButtonRow/OpenPrescriptionWindowButton\")\n@onready var _clinical_log_button: Button = get_node(\"../VBoxContainer/ButtonRow/Openclinical_logWindowButton\")\n\nfunc _ready() -> void:\n\t$PulseHotspot.pressed.connect(_forward_pulse_pressed)\n\t$PrescriptionHotspot.pressed.connect(_forward_prescription_pressed)\n\t$ClinicalLogHotspot.pressed.connect(_forward_clinical_log_pressed)\n\nfunc _forward_pulse_pressed() -> void:\n\t_pulse_button.pressed.emit()\n\nfunc _forward_prescription_pressed() -> void:\n\t_prescription_button.pressed.emit()\n\nfunc _forward_clinical_log_pressed() -> void:\n\t_clinical_log_button.pressed.emit()\n"
+script/source = "extends Control\n\nconst TABLE_SOURCE_SIZE := Vector2(1672.0, 841.0)\nconst PULSE_SOURCE_RECT := Rect2(185.0, 545.0, 325.0, 185.0)\nconst PRESCRIPTION_SOURCE_RECT := Rect2(589.0, 589.0, 388.0, 135.0)\nconst CLINICAL_LOG_SOURCE_RECT := Rect2(1139.0, 548.0, 323.0, 194.0)\n\n@onready var _table_image: TextureRect = get_node(\"../Background/TableImage\")\n@onready var _pulse_button: Button = get_node(\"../VBoxContainer/ButtonRow/OpenPulseWindowButton\")\n@onready var _prescription_button: Button = get_node(\"../VBoxContainer/ButtonRow/OpenPrescriptionWindowButton\")\n@onready var _clinical_log_button: Button = get_node(\"../VBoxContainer/ButtonRow/Openclinical_logWindowButton\")\n\nfunc _ready() -> void:\n\t$PulseHotspot.pressed.connect(_forward_pulse_pressed)\n\t$PrescriptionHotspot.pressed.connect(_forward_prescription_pressed)\n\t$ClinicalLogHotspot.pressed.connect(_forward_clinical_log_pressed)\n\t_table_image.resized.connect(_sync_hotspots_to_table)\n\tcall_deferred(\"_sync_hotspots_to_table\")\n\nfunc _sync_hotspots_to_table() -> void:\n\tvar table_rect := _table_image.get_global_rect()\n\tvar local_origin := get_global_rect().position\n\tvar table_scale := table_rect.size / TABLE_SOURCE_SIZE\n\t_apply_source_rect($PulseHotspot, PULSE_SOURCE_RECT, table_rect.position, local_origin, table_scale)\n\t_apply_source_rect($PrescriptionHotspot, PRESCRIPTION_SOURCE_RECT, table_rect.position, local_origin, table_scale)\n\t_apply_source_rect($ClinicalLogHotspot, CLINICAL_LOG_SOURCE_RECT, table_rect.position, local_origin, table_scale)\n\nfunc _apply_source_rect(hotspot: Control, source_rect: Rect2, table_position: Vector2, local_origin: Vector2, table_scale: Vector2) -> void:\n\thotspot.position = table_position - local_origin + source_rect.position * table_scale\n\thotspot.size = source_rect.size * table_scale\n\nfunc _forward_pulse_pressed() -> void:\n\t_pulse_button.pressed.emit()\n\nfunc _forward_prescription_pressed() -> void:\n\t_prescription_button.pressed.emit()\n\nfunc _forward_clinical_log_pressed() -> void:\n\t_clinical_log_button.pressed.emit()\n"
 
 [sub_resource type="GDScript" id="GDScript_shape_hotspot"]
 script/source = "extends Button\n\n@export var hit_polygon: PackedVector2Array = PackedVector2Array()\n\nvar _mouse_over := false\nvar _mouse_down := false\n\nfunc _ready() -> void:\n\tmouse_entered.connect(_on_mouse_entered)\n\tmouse_exited.connect(_on_mouse_exited)\n\tbutton_down.connect(_on_button_down)\n\tbutton_up.connect(_on_button_up)\n\nfunc _has_point(point: Vector2) -> bool:\n\tif hit_polygon.size() < 3:\n\t\treturn Rect2(Vector2.ZERO, size).has_point(point)\n\tvar normalized_point := Vector2(\n\t\tpoint.x / max(size.x, 1.0),\n\t\tpoint.y / max(size.y, 1.0)\n\t)\n\treturn Geometry2D.is_point_in_polygon(normalized_point, hit_polygon)\n\nfunc _draw() -> void:\n\tif not _mouse_over or hit_polygon.size() < 3:\n\t\treturn\n\tvar points := PackedVector2Array()\n\tfor normalized_point in hit_polygon:\n\t\tpoints.append(Vector2(normalized_point.x * size.x, normalized_point.y * size.y))\n\tvar fill_color := Color(1.0, 0.72, 0.2, 0.20 if _mouse_down else 0.10)\n\tvar border_color := Color(1.0, 0.84, 0.38, 1.0 if _mouse_down else 0.88)\n\tdraw_colored_polygon(points, fill_color)\n\tvar outline := points.duplicate()\n\toutline.append(points[0])\n\tdraw_polyline(outline, border_color, 3.0 if _mouse_down else 2.0, true)\n\nfunc _on_mouse_entered() -> void:\n\t_mouse_over = true\n\tqueue_redraw()\n\nfunc _on_mouse_exited() -> void:\n\t_mouse_over = false\n\t_mouse_down = false\n\tqueue_redraw()\n\nfunc _on_button_down() -> void:\n\t_mouse_down = true\n\tqueue_redraw()\n\nfunc _on_button_up() -> void:\n\t_mouse_down = false\n\tqueue_redraw()\n"
@@ -221,15 +221,9 @@ mouse_filter = 2
 script = SubResource("GDScript_desk_hotspots")
 
 [node name="PulseHotspot" type="Button" parent="DeskHotspots"]
-layout_mode = 1
-anchor_left = 0.1106
-anchor_right = 0.305
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -296.0
-offset_bottom = -111.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_right = 1.0
+offset_bottom = 1.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_l04vw")
@@ -240,18 +234,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_l04vw")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_l04vw")
 tooltip_text = "把脉"
 script = SubResource("GDScript_shape_hotspot")
-hit_polygon = PackedVector2Array(0.532, 0.016, 0.588, 0.016, 0.647, 0.027, 0.703, 0.048, 0.753, 0.086, 0.796, 0.134, 0.833, 0.194, 0.86, 0.253, 0.879, 0.317, 0.884, 0.366, 0.953, 0.242, 0.953, 0.323, 0.985, 0.366, 0.983, 0.452, 0.951, 0.505, 0.919, 0.613, 0.903, 0.677, 0.857, 0.731, 0.833, 0.86, 0.799, 0.973, 0.044, 0.984, 0.012, 0.941, 0.012, 0.796, 0.057, 0.747, 0.057, 0.581, 0.167, 0.522, 0.169, 0.478, 0.18, 0.414, 0.193, 0.355, 0.212, 0.296, 0.236, 0.242, 0.265, 0.188, 0.3, 0.14, 0.34, 0.097, 0.383, 0.059, 0.431, 0.032, 0.481, 0.016)
+hit_polygon = PackedVector2Array(0.5692, 0.0108, 0.6462, 0.0054, 0.7138, 0.0162, 0.7723, 0.0432, 0.8185, 0.0919, 0.8523, 0.1622, 0.8738, 0.2378, 0.88, 0.3027, 0.9108, 0.227, 0.9108, 0.3243, 0.9508, 0.373, 0.9477, 0.4541, 0.9015, 0.5514, 0.8769, 0.6973, 0.8277, 0.7514, 0.7969, 0.9243, 0.7754, 0.9784, 0.0431, 0.9892, 0.0092, 0.9568, 0.0092, 0.827, 0.0554, 0.773, 0.0554, 0.627, 0.1692, 0.573, 0.1815, 0.541, 0.1846, 0.492, 0.2, 0.432, 0.2308, 0.368, 0.2708, 0.308, 0.3169, 0.243, 0.3692, 0.184, 0.4246, 0.124, 0.48, 0.0703, 0.5354, 0.0324)
 
 [node name="PrescriptionHotspot" type="Button" parent="DeskHotspots"]
-layout_mode = 1
-anchor_left = 0.3523
-anchor_top = 1.0
-anchor_right = 0.5843
-anchor_bottom = 1.0
-offset_top = -252.0
-offset_bottom = -117.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_right = 1.0
+offset_bottom = 1.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_l04vw")
@@ -265,15 +253,9 @@ script = SubResource("GDScript_shape_hotspot")
 hit_polygon = PackedVector2Array(0.103, 0.022, 0.925, 0.022, 0.988, 0.949, 0.013, 0.964)
 
 [node name="ClinicalLogHotspot" type="Button" parent="DeskHotspots"]
-layout_mode = 1
-anchor_left = 0.6806
-anchor_top = 1.0
-anchor_right = 0.874
-anchor_bottom = 1.0
-offset_top = -293.0
-offset_bottom = -99.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_right = 1.0
+offset_bottom = 1.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_l04vw")
@@ -284,7 +266,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_l04vw")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_l04vw")
 tooltip_text = "行医记考"
 script = SubResource("GDScript_shape_hotspot")
-hit_polygon = PackedVector2Array(0.025, 0.005, 0.707, 0.005, 0.984, 0.415, 0.984, 0.974, 0.133, 0.974, 0.106, 0.933, 0.087, 0.887, 0.066, 0.841, 0.047, 0.795, 0.025, 0.749, 0.0066, 0.703, 0.0119, 0.615, 0.0146, 0.533, 0.0146, 0.446, 0.0173, 0.359, 0.02, 0.267, 0.0146, 0.179)
+hit_polygon = PackedVector2Array(0, 0, 0.5913, 0, 0.9938, 0.5876, 0.9938, 0.9897, 0.2322, 0.9897, 0.2043, 0.933, 0.1796, 0.8711, 0.1548, 0.8041, 0.13, 0.7423, 0.1053, 0.6753, 0.0805, 0.6082, 0.0588, 0.5412, 0.0372, 0.4742, 0.0186, 0.4124, 0, 0.3711, 0.0062, 0.299, 0, 0.232, 0.0062, 0.1598, 0, 0.0928)
 
 [node name="PrescriptionWindow" parent="." unique_id=901784337 instance=ExtResource("5_h552d")]
 visible = false
