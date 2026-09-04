@@ -42,6 +42,9 @@ const ROLE_SHI := "使"
 # 搜索框停止输入后再执行过滤，避免每个字符都触发布局刷新。
 const SEARCH_DEBOUNCE_SECONDS := 0.10
 
+# 解锁后才开放“搜索并套用预制方剂”功能的医书条目。
+const FORMULA_FILL_FEATURE_ENTRY_ID := "yu_zhi_fang_ji"
+
 
 # =========================================================
 # 场景节点引用
@@ -140,6 +143,7 @@ var _suppress_search_signal: bool = false
 var _herb_button_by_id: Dictionary = {}
 var _herb_search_record_by_id: Dictionary = {}
 var _formula_search_records: Array = []
+var _formula_button_by_id: Dictionary = {}
 var _cached_herb_db_instance_id: int = 0
 var _cached_formula_db_instance_id: int = 0
 
@@ -411,9 +415,10 @@ func _ensure_herb_button_cache() -> void:
 
 
 func _clear_herb_button_cache() -> void:
-	if herb_list != null:
-		for child in herb_list.get_children():
-			child.queue_free()
+	# 只销毁药材按钮；预制方剂按钮由独立缓存管理，避免互相误删。
+	for button_value in _herb_button_by_id.values():
+		if button_value is Button and is_instance_valid(button_value):
+			button_value.queue_free()
 
 	_herb_button_by_id.clear()
 	_herb_search_record_by_id.clear()
@@ -421,8 +426,16 @@ func _clear_herb_button_cache() -> void:
 	selected_herb_button = null
 
 
+func _clear_formula_button_cache() -> void:
+	for button_value in _formula_button_by_id.values():
+		if button_value is Button and is_instance_valid(button_value):
+			button_value.queue_free()
+	_formula_button_by_id.clear()
+
+
 func _ensure_formula_search_cache() -> void:
 	if formula_database == null or not formula_database.has_method("get_all_formulas"):
+		_clear_formula_button_cache()
 		_formula_search_records.clear()
 		_cached_formula_db_instance_id = 0
 		return
@@ -431,6 +444,7 @@ func _ensure_formula_search_cache() -> void:
 	if not _formula_search_records.is_empty() and db_instance_id == _cached_formula_db_instance_id:
 		return
 
+	_clear_formula_button_cache()
 	_formula_search_records.clear()
 	_cached_formula_db_instance_id = db_instance_id
 
@@ -439,13 +453,33 @@ func _ensure_formula_search_cache() -> void:
 		if formula == null:
 			continue
 
-		var formula_id_raw := str(formula.formula_id).to_lower()
+		var formula_id := str(formula.formula_id).strip_edges()
+		if formula_id == "":
+			continue
+		var formula_id_raw := formula_id.to_lower()
+
 		_formula_search_records.append({
 			"formula": formula,
+			"formula_id": formula_id,
 			"name": _normalize_herb_search_text(str(formula.formula_name)),
 			"pinyin": _normalize_herb_search_text(formula_id_raw),
 			"initials": _get_id_initials(formula_id_raw)
 		})
+
+		# 预制方剂按钮也只创建一次；搜索时仅切换 visible。
+		var formula_button := Button.new()
+		formula_button.text = "【方剂】%s" % str(formula.formula_name)
+		formula_button.custom_minimum_size = Vector2(180, 44)
+		formula_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		formula_button.focus_mode = Control.FOCUS_NONE
+		formula_button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
+		formula_button.set_meta("formula_id", formula_id)
+		if formula.has_method("get_display_text"):
+			formula_button.tooltip_text = str(formula.get_display_text())
+		formula_button.pressed.connect(_on_formula_button_pressed.bind(formula))
+		herb_list.add_child(formula_button)
+		formula_button.hide()
+		_formula_button_by_id[formula_id] = formula_button
 
 
 func _on_herb_search_text_changed(new_text: String) -> void:
@@ -495,8 +529,8 @@ func _apply_herb_filter() -> void:
 	selected_herb_id = ""
 	selected_herb_button = null
 
-	var matching_formula_herb_ids := _get_matching_formula_herb_ids()
-
+	# 普通药材只按药材自身名称 / 拼音 / 首字母匹配。
+	# 方剂命中不再拆成组成药材，恢复独立的【方剂】按钮。
 	for herb_id_value in _herb_button_by_id.keys():
 		var herb_id := str(herb_id_value)
 		var button_value = _herb_button_by_id.get(herb_id, null)
@@ -514,48 +548,135 @@ func _apply_herb_filter() -> void:
 				str(record.get("name", "")).contains(herb_search_keyword)
 				or str(record.get("pinyin", "")).contains(herb_search_keyword)
 				or str(record.get("initials", "")).contains(herb_search_keyword)
-				or matching_formula_herb_ids.has(herb_id)
 			)
 
 		button.visible = should_show
 
+	_apply_formula_filter()
 
-func _get_matching_formula_herb_ids() -> Dictionary:
-	var result := {}
+
+func _is_formula_fill_feature_unlocked() -> bool:
+	if Unlock == null or not Unlock.has_method("is_entry_unlocked"):
+		return false
+	return bool(Unlock.is_entry_unlocked(FORMULA_FILL_FEATURE_ENTRY_ID))
+
+
+func _is_formula_entry_unlocked(formula) -> bool:
+	if formula == null:
+		return false
+	if Unlock == null or not Unlock.has_method("is_entry_unlocked"):
+		return false
+
+	var formula_id := str(formula.formula_id).strip_edges()
+	if formula_id == "":
+		return false
+	return bool(Unlock.is_entry_unlocked(formula_id))
+
+
+func _formula_record_matches(record: Dictionary) -> bool:
 	if herb_search_keyword == "":
-		return result
-	if _formula_search_records.is_empty():
-		return result
+		return false
+	return (
+		str(record.get("name", "")).contains(herb_search_keyword)
+		or str(record.get("pinyin", "")).contains(herb_search_keyword)
+		or str(record.get("initials", "")).contains(herb_search_keyword)
+	)
 
-	var matching_formulas: Array = []
+
+func _apply_formula_filter() -> void:
+	# 无关键词时不显示全部预制方剂；与优化前行为一致。
+	var feature_unlocked := _is_formula_fill_feature_unlocked()
+
 	for record_value in _formula_search_records:
 		if typeof(record_value) != TYPE_DICTIONARY:
 			continue
-
-		var record = record_value
-		if (
-			str(record.get("name", "")).contains(herb_search_keyword)
-			or str(record.get("pinyin", "")).contains(herb_search_keyword)
-			or str(record.get("initials", "")).contains(herb_search_keyword)
-		):
-			var formula = record.get("formula")
-			if formula != null:
-				matching_formulas.append(formula)
-
-	if matching_formulas.is_empty():
-		return result
-
-	# 只有命中方剂搜索时才检查其组成药材。
-	# 相比旧逻辑“每味药 × 全部方剂”，这里最多是“命中方剂 × 药材总数”。
-	for formula in matching_formulas:
-		if not formula.has_method("has_herb_id"):
+		var record: Dictionary = record_value
+		var formula = record.get("formula", null)
+		var formula_id := str(record.get("formula_id", ""))
+		var button_value = _formula_button_by_id.get(formula_id, null)
+		if not (button_value is Button):
 			continue
-		for herb_id_value in _herb_button_by_id.keys():
-			var herb_id := str(herb_id_value)
-			if formula.has_herb_id(herb_id):
-				result[herb_id] = true
 
-	return result
+		var should_show := false
+		if feature_unlocked and formula != null and _is_formula_entry_unlocked(formula):
+			should_show = _formula_record_matches(record)
+
+		button_value.visible = should_show
+
+
+func _on_formula_button_pressed(formula) -> void:
+	if not _is_formula_fill_feature_unlocked():
+		emit_signal("info_requested", "尚未解锁预制方剂功能。")
+		_apply_herb_filter()
+		return
+
+	if not _is_formula_entry_unlocked(formula):
+		emit_signal("info_requested", "该方剂条目尚未解锁。")
+		_apply_herb_filter()
+		return
+
+	if current_prescription == null:
+		emit_signal("info_requested", "当前处方未初始化")
+		return
+
+	if herb_database == null:
+		emit_signal("info_requested", "药材数据库未初始化")
+		return
+
+	if formula == null or not formula.has_method("get_group_by_role"):
+		emit_signal("info_requested", "方剂数据无效，无法填入处方。")
+		return
+
+	# 先完整校验所有组成药材，再修改玩家当前处方，避免半途中断破坏旧处方。
+	var fill_items: Array = []
+	for role_name in [ROLE_JUN, ROLE_CHEN, ROLE_ZUO, ROLE_SHI]:
+		var ingredient_group = formula.get_group_by_role(role_name)
+
+		for ingredient in ingredient_group:
+			if ingredient == null:
+				emit_signal("info_requested", "方剂数据存在空药材，无法填入处方。")
+				return
+
+			var herb_id := str(ingredient.get_herb_id()).strip_edges()
+			var amount := float(ingredient.amount)
+			var unit := str(ingredient.unit).strip_edges()
+			var herb = herb_database.get_herb_by_id(herb_id)
+
+			if herb_id == "" or herb == null:
+				emit_signal("info_requested", "方剂中的药材资源缺失：%s" % herb_id)
+				return
+
+			if amount <= 0.0 or not HerbUnit.is_valid_unit(unit):
+				emit_signal("info_requested", "方剂中的药材剂量无效：%s" % str(herb.herb_name))
+				return
+
+			fill_items.append({
+				"herb": herb,
+				"amount": amount,
+				"unit": unit,
+				"role": role_name
+			})
+
+	if fill_items.is_empty():
+		emit_signal("info_requested", "该方剂没有可填入的药材。")
+		return
+
+	# clear() 只清空四区药材，不清除已经选中的疾病。
+	current_prescription.clear()
+	for item in fill_items:
+		current_prescription.add_herb(
+			item["herb"],
+			float(item["amount"]),
+			str(item["unit"]),
+			str(item["role"])
+		)
+
+	selected_herb_id = ""
+	selected_herb_button = null
+	_set_selected_role(ROLE_JUN)
+	_refresh_prescription_list()
+
+	emit_signal("info_requested", "已按预制方剂填入：%s" % str(formula.formula_name))
 
 
 func _normalize_herb_search_text(value: String) -> String:
