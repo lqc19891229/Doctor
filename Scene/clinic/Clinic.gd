@@ -242,6 +242,10 @@ var portrait_rest_position_initialized: bool = false
 # =========================================================
 
 func _ready() -> void:
+	# Clinic 平时不需要常驻 _process()。
+	# 只有 PulseWindow 打开期间临时启用，用于可靠读取多键组合。
+	set_process(false)
+
 	_validate_scene_node_bindings()
 
 	if story_treatment_backend_mode:
@@ -263,7 +267,8 @@ func _ready() -> void:
 	_connect_signals()
 
 	# TopBar 已由 GameTime / Unlock 信号驱动。
-	# 键盘把脉也改为 InputEvent 驱动，Clinic 不再需要常驻 _process()。
+	# Clinic 平时保持 set_process(false)。把脉窗口打开时才临时启用轮询，
+	# 这样既能可靠识别 Q/A/Z、W/S/X 多键同时按住，也没有日常每帧开销。
 
 	# 病人不再在 _ready() 中自动生成。
 	# Main 会在连接好 story_requested 信号后调用 start_new_day()，
@@ -284,6 +289,20 @@ func _ready() -> void:
 	# 注意：不要在 _ready() 里自动触发剧情。
 	# Main 还没有连接 story_requested 信号时，_ready() 发出的信号会丢失。
 	# 自动剧情统一放到 start_new_day()，由 Main 连接好信号后调用。
+
+
+func _process(_delta: float) -> void:
+	# PulseWindow 是独立 Window，键盘焦点进入子窗口后，父级 Clinic._input()
+	# 不保证能收到 Q/A/Z/W/S/X；因此窗口打开期间直接读取 InputMap 当前状态。
+	if story_treatment_backend_mode:
+		set_process(false)
+		return
+
+	if pulse_window == null or not pulse_window.visible:
+		set_process(false)
+		return
+
+	_update_pulse_keyboard_display()
 
 
 func _validate_scene_node_bindings() -> void:
@@ -1687,10 +1706,15 @@ func _on_pulse_panel_region_selected(display_region_name: String) -> void:
 
 
 func _on_window_controller_pulse_window_opened() -> void:
-	last_pulse_input_signature = ""
+	_reset_pulse_keyboard_state()
+	# 只在把脉窗口可见期间启用轮询。
+	set_process(true)
+	# 立即刷新一次；后续只有输入签名变化时才真正更新 PulseWindow。
+	_update_pulse_keyboard_display()
 
 
 func _on_window_controller_pulse_window_closed() -> void:
+	set_process(false)
 	_reset_pulse_keyboard_state()
 
 
@@ -1742,24 +1766,6 @@ func set_day(day: int) -> void:
 func _input(event: InputEvent) -> void:
 	if story_treatment_backend_mode:
 		return
-
-	# 键盘把脉改成事件驱动：
-	# 仅 Q/A/Z/W/S/X 对应的 InputMap 动作发生按下/松开时才重新计算组合，
-	# 不再每帧轮询六个动作。
-	if pulse_window != null and pulse_window.visible and event is InputEventKey:
-		var pulse_actions: Array[StringName] = [
-			&"pulse_right_cun",
-			&"pulse_right_guan",
-			&"pulse_right_chi",
-			&"pulse_left_cun",
-			&"pulse_left_guan",
-			&"pulse_left_chi",
-		]
-		for action_name in pulse_actions:
-			if event.is_action(action_name):
-				# 延迟到本轮输入状态更新完成后读取 Input.is_action_pressed()。
-				call_deferred("_update_pulse_keyboard_display")
-				break
 
 	# 判定结果窗口显示期间，不处理底层 Clinic 的台词点击。
 	# 避免点击 JudgementResult 时误触底层台词隐藏逻辑。
