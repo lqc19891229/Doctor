@@ -2040,7 +2040,7 @@ func _request_story_data(story: StoryData) -> bool:
 	# 这样可以继续兼容 Main.gd 当前的 story_requested(story_path, return_target) 逻辑。
 	var story_path := _find_registered_story_path(story)
 	if story_path.is_empty():
-		push_warning("找到可触发剧情，但没有找到对应资源路径。请检查 StoryManager.registered_story_paths。")
+		push_warning("找到可触发剧情，但 StoryManager 没有返回对应资源路径。请检查剧情缓存索引。")
 		return false
 
 	# 优先使用 StoryData 自己配置的 return_scene。
@@ -2055,39 +2055,13 @@ func _request_story_data(story: StoryData) -> bool:
 
 
 func _find_registered_story_path(target_story: StoryData) -> String:
-	# 从 StoryManager.registered_story_paths 中反查剧情资源路径。
-	# 这样自动触发仍然由 StoryManager 管理剧情列表。
 	if target_story == null:
 		return ""
 
-	# 如果 StoryManager 还没有 registered_story_paths，说明使用的不是新版 StoryManager。
-	var story_paths = StoryManager.get("registered_story_paths")
-	if typeof(story_paths) != TYPE_ARRAY:
-		push_warning("StoryManager 缺少 registered_story_paths。")
+	# StoryManager 已在启动时建立 StoryData -> 路径索引。
+	# 这里直接 O(1) 查询，不再遍历 registered_story_paths，也不再重复 load() 剧情资源。
+	if StoryManager == null or not StoryManager.has_method("get_story_path"):
+		push_warning("StoryManager 缺少 get_story_path()。")
 		return ""
 
-	for story_path in story_paths:
-		if typeof(story_path) != TYPE_STRING:
-			continue
-
-		var loaded_story: Resource = load(story_path)
-		if loaded_story == null:
-			continue
-
-		if not loaded_story is StoryData:
-			continue
-
-		var story := loaded_story as StoryData
-
-		# Godot 资源通常会被缓存，同一路径加载到的是同一个资源实例。
-		# 这里先用实例比较，最直接。
-		if story == target_story:
-			return story_path
-
-		# 如果实例比较失败，就用 story_id 再兜底比较。
-		var target_story_id: String = target_story.get("story_id")
-		var current_story_id: String = story.get("story_id")
-		if not target_story_id.is_empty() and target_story_id == current_story_id:
-			return story_path
-
-	return ""
+	return String(StoryManager.get_story_path(target_story))

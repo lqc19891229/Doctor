@@ -666,7 +666,7 @@ func _try_start_auto_story(trigger_scene: String, day: int) -> bool:
 
 	var story_path := _find_registered_story_path(story)
 	if story_path.is_empty():
-		push_warning("找到可触发夜晚剧情，但没有找到对应资源路径。请检查 StoryManager.registered_story_paths。")
+		push_warning("找到可触发夜晚剧情，但 StoryManager 没有返回对应资源路径。请检查剧情缓存索引。")
 		return false
 
 	var return_target := "night"
@@ -681,38 +681,10 @@ func _find_registered_story_path(target_story: StoryData) -> String:
 	if target_story == null:
 		return ""
 
-	# 缓存版 StoryManager 可以直接返回剧情路径，
-	# 避免 Night 找到剧情后又把所有 .tres 再同步 load() 一遍。
-	if StoryManager != null and StoryManager.has_method("get_story_path"):
-		var cached_path := String(StoryManager.get_story_path(target_story))
-		if not cached_path.is_empty():
-			return cached_path
-
-	# 兼容仍使用旧 StoryManager 的项目版本。
-	var story_paths = StoryManager.get("registered_story_paths")
-	if typeof(story_paths) != TYPE_ARRAY:
-		push_warning("StoryManager 缺少 registered_story_paths。")
+	# StoryManager 已在启动时建立 StoryData -> 路径索引。
+	# 这里直接 O(1) 查询，不再遍历 registered_story_paths，也不再重复 load() 剧情资源。
+	if StoryManager == null or not StoryManager.has_method("get_story_path"):
+		push_warning("StoryManager 缺少 get_story_path()。")
 		return ""
 
-	for story_path in story_paths:
-		if typeof(story_path) != TYPE_STRING:
-			continue
-
-		var loaded_story: Resource = load(story_path)
-		if loaded_story == null:
-			continue
-
-		if not loaded_story is StoryData:
-			continue
-
-		var story := loaded_story as StoryData
-
-		if story == target_story:
-			return story_path
-
-		var target_story_id: String = target_story.get("story_id")
-		var current_story_id: String = story.get("story_id")
-		if not target_story_id.is_empty() and target_story_id == current_story_id:
-			return story_path
-
-	return ""
+	return String(StoryManager.get_story_path(target_story))
