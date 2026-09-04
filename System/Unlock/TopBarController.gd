@@ -55,6 +55,7 @@ func setup(
 	time_text_override = _time_text_override
 
 	_bind_game_time_signal()
+	_bind_unlock_signals()
 	refresh_all(true)
 
 
@@ -178,6 +179,38 @@ func _prepare_point_label(label: Label) -> void:
 	label.custom_minimum_size = DEFAULT_LABEL_SIZE
 	label.size_flags_horizontal = Control.SIZE_SHRINK_END
 	label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+
+
+func _bind_unlock_signals() -> void:
+	if Unlock == null:
+		return
+
+	if Unlock.has_signal("experience_points_changed"):
+		var experience_callback := Callable(self, "_on_experience_points_changed")
+		if not Unlock.is_connected("experience_points_changed", experience_callback):
+			Unlock.connect("experience_points_changed", experience_callback)
+
+	if Unlock.has_signal("reputation_points_changed"):
+		var reputation_callback := Callable(self, "_on_reputation_points_changed")
+		if not Unlock.is_connected("reputation_points_changed", reputation_callback):
+			Unlock.connect("reputation_points_changed", reputation_callback)
+
+	if Unlock.has_signal("money_wen_changed"):
+		var money_callback := Callable(self, "_on_money_wen_changed")
+		if not Unlock.is_connected("money_wen_changed", money_callback):
+			Unlock.connect("money_wen_changed", money_callback)
+
+
+func _on_experience_points_changed(_value: int) -> void:
+	refresh_thoughts_point(false)
+
+
+func _on_reputation_points_changed(_value: int) -> void:
+	refresh_reputation_point(false)
+
+
+func _on_money_wen_changed(_value: int) -> void:
+	refresh_money_point(false)
 
 
 func _bind_game_time_signal() -> void:

@@ -40,27 +40,26 @@ var selected_entry: BookEntryData = null
 # 记录上一次显示的心得数量。
 var last_displayed_experience_points: int = -999
 
+# UnlockManager 的医书状态版本。版本未变化时，不重建 22 本书的列表。
+var last_readbook_state_version: int = -1
+var book_list_dirty: bool = true
+
 
 func _ready() -> void:
 	# 使用 Window 自带右上角 X 关闭按钮。
 	if not close_requested.is_connected(_on_window_close_requested):
 		close_requested.connect(_on_window_close_requested)
 
+	_connect_ui_signals()
 	_update_day_label()
 	_update_thoughts_point_ui()
 
-	_connect_ui_signals()
-
-	Unlock.refresh_auto_unlocks_by_experience()
-	Unlock.refresh_unlocks_by_dependencies()
-	_refresh_book_list()
+	# ReadBook 默认是隐藏子窗口；不要在 Night 创建时提前构建整套书籍列表。
+	# 第一次真正打开窗口时再按状态版本懒加载。
+	book_list_dirty = true
 	_clear_entry_and_detail()
 
 	info_label.text = "请选择要查看的医书。当前累计心得：%d" % Unlock.get_experience_points()
-
-
-func _process(_delta: float) -> void:
-	_sync_thoughts_point_if_changed()
 
 
 # =========================
@@ -68,9 +67,10 @@ func _process(_delta: float) -> void:
 # =========================
 
 func open_window() -> void:
-	Unlock.refresh_auto_unlocks_by_experience()
-	Unlock.refresh_unlocks_by_dependencies()
-	_refresh_book_list()
+	# 天数 / 心得文本很轻，打开时直接同步；书籍列表只有状态版本变化才重建。
+	_update_day_label()
+	_update_thoughts_point_ui()
+	_refresh_book_list_if_dirty()
 	_clear_entry_and_detail()
 	show()
 	_focus_book_list_on_open()
@@ -149,14 +149,37 @@ func _update_thoughts_point_ui() -> void:
 
 
 # =========================
-# 心得变化时自动刷新
+# ReadBook dirty / version
 # =========================
 
-func _sync_thoughts_point_if_changed() -> void:
-	var current_points := Unlock.get_experience_points()
+func mark_data_dirty() -> void:
+	book_list_dirty = true
 
-	if thoughts_point_label == null or current_points != last_displayed_experience_points:
-		_update_thoughts_point_ui()
+
+func _get_readbook_state_version() -> int:
+	if Unlock != null and Unlock.has_method("get_readbook_state_version"):
+		return int(Unlock.get_readbook_state_version())
+
+	# 兼容旧 UnlockManager：没有版本接口时每次打开都刷新一次。
+	return -1
+
+
+func _refresh_book_list_if_dirty(force_refresh: bool = false) -> void:
+	var current_version := _get_readbook_state_version()
+
+	if current_version < 0:
+		_refresh_book_list()
+		return
+
+	if not force_refresh and not book_list_dirty and current_version == last_readbook_state_version:
+		return
+
+	_refresh_book_list()
+	last_readbook_state_version = current_version
+	book_list_dirty = false
+
+	if OS.is_debug_build():
+		print("[ReadBook] 书籍列表已刷新：状态版本=", current_version, "，可见书籍=", books.size())
 
 
 # =========================
@@ -200,6 +223,10 @@ func _refresh_book_list() -> void:
 
 	if selected_index >= 0:
 		book_list.select(selected_index)
+	elif selected_book_id != "":
+		# 读入其它存档后，上一份存档选中的书可能已不可见。
+		selected_book = null
+		selected_entry = null
 
 
 # =========================
@@ -426,7 +453,10 @@ func _show_entry_by_index(index: int) -> void:
 	_update_thoughts_point_ui()
 
 	if was_unread:
-		_refresh_book_list()
+		# read_entry() 可能进一步解锁药材 -> 方剂 -> 疾病，因此版本会变化。
+		# 这里只在这次真实状态变化后重建一次书籍栏。
+		mark_data_dirty()
+		_refresh_book_list_if_dirty()
 		_reselect_current_book_in_list()
 		_refresh_entry_list_titles_keep_selection(current_entry_id)
 		info_label.text = "已查看条目。

@@ -32,15 +32,6 @@ signal submit_requested()
 
 
 # =========================================================
-# 窗口位置锁定
-#
-# 默认值与 PrescriptionWindow.tscn 当前位置一致。
-# 如需改变固定位置，可以直接在检查器里修改此参数。
-# =========================================================
-@export var fixed_window_position: Vector2i = Vector2i(0, 36)
-
-
-# =========================================================
 # 常量定义
 # =========================================================
 const ROLE_JUN := "君"
@@ -48,8 +39,8 @@ const ROLE_CHEN := "臣"
 const ROLE_ZUO := "佐"
 const ROLE_SHI := "使"
 
-# 解锁后才开放“搜索并套用预制方剂”功能的医书条目。
-const FORMULA_FILL_FEATURE_ENTRY_ID := "yu_zhi_fang_ji"
+# 搜索框停止输入后再执行过滤，避免每个字符都触发布局刷新。
+const SEARCH_DEBOUNCE_SECONDS := 0.10
 
 
 # =========================================================
@@ -140,30 +131,34 @@ var selected_disease_name: String = ""
 # 疾病数据列表
 var all_diseases: Array = []
 
+# 搜索 debounce。
+var _herb_search_timer: Timer = null
+var _disease_search_timer: Timer = null
+var _suppress_search_signal: bool = false
+
+# 药材按钮 / 搜索字段缓存。按钮只创建一次，搜索时仅切换 visible。
+var _herb_button_by_id: Dictionary = {}
+var _herb_search_record_by_id: Dictionary = {}
+var _formula_search_records: Array[Dictionary] = []
+var _cached_herb_db_instance_id: int = 0
+var _cached_formula_db_instance_id: int = 0
+
+# 疾病按钮 / 搜索字段缓存。
+var _disease_button_by_id: Dictionary = {}
+var _disease_search_record_by_id: Dictionary = {}
+var _cached_disease_db_instance_id: int = 0
+
 
 # =========================================================
 # 生命周期
 # =========================================================
 func _ready() -> void:
-	# 初始化时放到固定位置
-	position = fixed_window_position
-
 	_setup_unit_option()
+	_setup_search_debounce_timers()
 	_connect_signals()
-	_setup_focus_navigation()
 	_setup_player_hint_dialog()
 	_set_selected_role(ROLE_JUN)
 	load_all_diseases()
-
-
-# =========================================================
-# 窗口位置锁定
-# =========================================================
-func _process(_delta: float) -> void:
-	# 窗口显示期间，阻止玩家拖动标题栏改变窗口位置
-	if visible and position != fixed_window_position:
-		position = fixed_window_position
-
 
 # =========================================================
 # 对外初始化接口
@@ -188,11 +183,17 @@ func setup(herb_db, prescription, formula_db = null) -> void:
 
 	selected_herb_id = ""
 	selected_herb_button = null
+
+	# 数据库模板长期不变，按钮与搜索字段只在数据库实例变化时重建。
+	_ensure_herb_button_cache()
+	_ensure_formula_search_cache()
+	_ensure_disease_button_cache()
+
 	_sync_selected_disease_from_prescription()
 	_set_selected_role(ROLE_JUN)
 
-	_refresh_herb_list()
-	_refresh_disease_list(disease_search_keyword)
+	_apply_herb_filter()
+	_apply_disease_filter()
 	_refresh_prescription_list()
 
 
@@ -209,6 +210,27 @@ func _setup_unit_option() -> void:
 	unit_option.add_item("两")
 	unit_option.add_item("斤")
 	unit_option.select(1)
+
+
+# =========================================================
+# 初始化：搜索 debounce Timer
+# =========================================================
+func _setup_search_debounce_timers() -> void:
+	if _herb_search_timer == null:
+		_herb_search_timer = Timer.new()
+		_herb_search_timer.name = "HerbSearchDebounceTimer"
+		_herb_search_timer.one_shot = true
+		_herb_search_timer.wait_time = SEARCH_DEBOUNCE_SECONDS
+		add_child(_herb_search_timer)
+		_herb_search_timer.timeout.connect(_apply_herb_filter)
+
+	if _disease_search_timer == null:
+		_disease_search_timer = Timer.new()
+		_disease_search_timer.name = "DiseaseSearchDebounceTimer"
+		_disease_search_timer.one_shot = true
+		_disease_search_timer.wait_time = SEARCH_DEBOUNCE_SECONDS
+		add_child(_disease_search_timer)
+		_disease_search_timer.timeout.connect(_apply_disease_filter)
 
 
 # =========================================================
@@ -236,10 +258,6 @@ func _connect_signals() -> void:
 
 	if close_requested != null and not close_requested.is_connected(_on_close_requested):
 		close_requested.connect(_on_close_requested)
-
-	# 每次开方窗口显示时，都把默认键盘焦点放回疾病搜索框。
-	if not visibility_changed.is_connected(_on_window_visibility_changed):
-		visibility_changed.connect(_on_window_visibility_changed)
 
 	_safe_connect_item_selected(jun_list, _on_jun_list_item_selected)
 	_safe_connect_item_selected(chen_list, _on_chen_list_item_selected)
@@ -275,71 +293,6 @@ func _safe_connect_item_clicked(list_node: ItemList, callable_fn: Callable) -> v
 func _safe_connect_gui_input(control_node: Control, callable_fn: Callable) -> void:
 	if control_node != null and not control_node.gui_input.is_connected(callable_fn):
 		control_node.gui_input.connect(callable_fn)
-
-
-# =========================================================
-# Tab 焦点顺序
-# DiseaseSearch -> 君 -> 臣 -> 佐 -> 使 -> HerbSearch -> DiseaseSearch
-# Shift+Tab 自动按相反方向循环。
-# =========================================================
-func _setup_focus_navigation() -> void:
-	var focus_chain: Array[Control] = [
-		disease_search,
-		jun_list,
-		chen_list,
-		zuo_list,
-		shi_list,
-		herb_search,
-	]
-
-	for index in range(focus_chain.size()):
-		var current_control: Control = focus_chain[index]
-		var next_control: Control = focus_chain[
-			(index + 1) % focus_chain.size()
-		]
-		var previous_control: Control = focus_chain[
-			(index - 1 + focus_chain.size()) % focus_chain.size()
-		]
-
-		current_control.focus_mode = Control.FOCUS_ALL
-		current_control.focus_next = current_control.get_path_to(next_control)
-		current_control.focus_previous = current_control.get_path_to(previous_control)
-
-	_connect_role_focus(jun_list, ROLE_JUN)
-	_connect_role_focus(chen_list, ROLE_CHEN)
-	_connect_role_focus(zuo_list, ROLE_ZUO)
-	_connect_role_focus(shi_list, ROLE_SHI)
-
-
-func _connect_role_focus(list_node: Control, role_name: String) -> void:
-	if list_node == null:
-		return
-
-	var focus_callable := Callable(self, "_on_role_focus_entered").bind(role_name)
-	if not list_node.focus_entered.is_connected(focus_callable):
-		list_node.focus_entered.connect(focus_callable)
-
-
-func _on_role_focus_entered(role_name: String) -> void:
-	# Tab 切换到某个配伍区时，同步更新加药目标和面板高亮。
-	_set_selected_role(role_name)
-
-
-func _on_window_visibility_changed() -> void:
-	if not visible:
-		return
-
-	# Window 刚显示时，焦点可能仍在打开窗口的按钮上。
-	# 延迟到下一帧再聚焦，避免被窗口显示流程覆盖。
-	call_deferred("_focus_default_control")
-
-
-func _focus_default_control() -> void:
-	if not visible or disease_search == null:
-		return
-
-	disease_search.grab_focus()
-	disease_search.caret_column = disease_search.text.length()
 
 
 # =========================================================
@@ -399,137 +352,207 @@ func _get_selected_unit_key() -> String:
 
 
 # =========================================================
-# 药材列表刷新
-# GridContainer 版本
-# 一行多个药材按钮，满了自动换行
+# 药材按钮缓存 / 搜索
 # =========================================================
 func _refresh_herb_list() -> void:
-	if herb_list == null:
+	# 兼容旧调用：不再销毁/创建按钮，只确保缓存存在并应用当前过滤条件。
+	_ensure_herb_button_cache()
+	_ensure_formula_search_cache()
+	_apply_herb_filter()
+
+
+func _ensure_herb_button_cache() -> void:
+	if herb_list == null or herb_database == null:
+		return
+	if not herb_database.has_method("get_all_herbs"):
+		emit_signal("info_requested", "药材数据库缺少 get_all_herbs()")
 		return
 
-	# 清空旧按钮
-	for child in herb_list.get_children():
-		child.queue_free()
-
-	selected_herb_id = ""
-	selected_herb_button = null
-
-	if herb_database == null:
-		emit_signal("info_requested", "药材数据库未初始化")
+	var db_instance_id: int = herb_database.get_instance_id()
+	if not _herb_button_by_id.is_empty() and db_instance_id == _cached_herb_db_instance_id:
 		return
 
-	# 方剂结果与普通药材共用 HerbList，但用“【方剂】”前缀明确区分。
-	# 只有功能条目和具体方剂条目都已经解锁时，才会生成对应按钮。
-	_add_matching_formula_buttons()
+	_clear_herb_button_cache()
+	_cached_herb_db_instance_id = db_instance_id
 
 	var herbs = herb_database.get_all_herbs()
 	for herb in herbs:
 		if herb == null:
 			continue
 
-		# 只显示已解锁药材
-		if not Unlock.is_herb_unlocked(herb.herb_id):
+		var herb_id := str(herb.herb_id).strip_edges()
+		if herb_id == "":
 			continue
 
-		# 只显示搜索匹配的药材
-		if not _is_herb_match_search(herb):
-			continue
+		var herb_name := str(herb.herb_name).strip_edges()
+		var herb_id_raw := herb_id.to_lower()
+
+		_herb_search_record_by_id[herb_id] = {
+			"name": _normalize_herb_search_text(herb_name),
+			"pinyin": _normalize_herb_search_text(herb_id_raw),
+			"initials": _get_id_initials(herb_id_raw),
+		}
 
 		var herb_button := Button.new()
-		herb_button.text = herb.herb_name
+		herb_button.text = herb_name
 		herb_button.custom_minimum_size = Vector2(120, 44)
 		herb_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		herb_button.focus_mode = Control.FOCUS_NONE
-		# 允许鼠标左右键输入事件透传到 gui_input
 		herb_button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
-
-		# 保存 herb_id，后面点击时直接读取
-		herb_button.set_meta("herb_id", herb.herb_id)
-
-		# 初始未选中样式
+		herb_button.set_meta("herb_id", herb_id)
 		_set_herb_button_selected_style(herb_button, false)
 
-		# 左键：增加一单位
 		herb_button.pressed.connect(_on_herb_grid_button_pressed.bind(herb_button))
-		# 右键：减少一单位
 		herb_button.gui_input.connect(_on_herb_grid_button_gui_input.bind(herb_button))
 
 		herb_list.add_child(herb_button)
+		herb_button.hide()
+		_herb_button_by_id[herb_id] = herb_button
 
 
+func _clear_herb_button_cache() -> void:
+	if herb_list != null:
+		for child in herb_list.get_children():
+			child.queue_free()
 
-# =========================================================
-# 药材搜索
-# =========================================================
+	_herb_button_by_id.clear()
+	_herb_search_record_by_id.clear()
+	selected_herb_id = ""
+	selected_herb_button = null
+
+
+func _ensure_formula_search_cache() -> void:
+	if formula_database == null or not formula_database.has_method("get_all_formulas"):
+		_formula_search_records.clear()
+		_cached_formula_db_instance_id = 0
+		return
+
+	var db_instance_id: int = formula_database.get_instance_id()
+	if not _formula_search_records.is_empty() and db_instance_id == _cached_formula_db_instance_id:
+		return
+
+	_formula_search_records.clear()
+	_cached_formula_db_instance_id = db_instance_id
+
+	var formulas = formula_database.get_all_formulas()
+	for formula in formulas:
+		if formula == null:
+			continue
+
+		var formula_id_raw := str(formula.formula_id).to_lower()
+		_formula_search_records.append({
+			"formula": formula,
+			"name": _normalize_herb_search_text(str(formula.formula_name)),
+			"pinyin": _normalize_herb_search_text(formula_id_raw),
+			"initials": _get_id_initials(formula_id_raw),
+		})
+
+
 func _on_herb_search_text_changed(new_text: String) -> void:
-	# 搜索输入统一做规范化：
-	# 1. 中文保持原样，可搜“白术”，也可搜“桂枝汤”
-	# 2. 拼音去掉 _, -, 空格，可用“baizhu”搜到“bai_zhu”，也可用“guizhitang”搜到“gui_zhi_tang”
-	# 3. 后续匹配时额外生成拼音首字母，可用“bz”搜到“bai_zhu”，也可用“gzt”搜到“gui_zhi_tang”
-	herb_search_keyword = _normalize_herb_search_text(new_text)
+	if _suppress_search_signal:
+		return
 
-	# 搜索内容变化后，重新刷新药材按钮列表
-	_refresh_herb_list()
+	herb_search_keyword = _normalize_herb_search_text(new_text)
+	if _herb_search_timer == null:
+		_apply_herb_filter()
+		return
+
+	_herb_search_timer.start(SEARCH_DEBOUNCE_SECONDS)
 
 
 func _on_herb_search_gui_input(event: InputEvent) -> void:
-	# 只处理键盘事件，鼠标点击、拖拽等事件直接忽略
 	if not (event is InputEventKey):
 		return
 
 	var key_event := event as InputEventKey
-
-	# 只处理按下瞬间，避免按键释放时重复触发
 	if not key_event.pressed:
 		return
-
-	# 只响应 Esc 键
 	if key_event.keycode != KEY_ESCAPE:
 		return
-
-	# 搜索栏为空时不拦截 Esc，避免影响窗口其它快捷逻辑
 	if herb_search == null or herb_search.text == "":
 		return
 
-	# 清空搜索栏；clear() 会自动触发 text_changed，从而刷新药材列表
 	herb_search.clear()
-
-	# 清空后继续聚焦搜索栏，方便玩家马上输入下一个药材名
 	herb_search.grab_focus()
 
-	# 阻止 Esc 继续传递，避免误触发其它界面逻辑
+	# Esc 清空是明确操作，立即应用，不必再等待 debounce。
+	if _herb_search_timer != null:
+		_herb_search_timer.stop()
+	herb_search_keyword = ""
+	_apply_herb_filter()
 	get_viewport().set_input_as_handled()
 
 
-func _is_herb_match_search(herb) -> bool:
-	# 没输入关键词时，显示全部已解锁药材
+func _apply_herb_filter() -> void:
+	if herb_list == null or herb_database == null:
+		return
+
+	_ensure_herb_button_cache()
+	_ensure_formula_search_cache()
+
+	if selected_herb_button != null and is_instance_valid(selected_herb_button):
+		_set_herb_button_selected_style(selected_herb_button, false)
+	selected_herb_id = ""
+	selected_herb_button = null
+
+	var matching_formula_herb_ids := _get_matching_formula_herb_ids()
+
+	for herb_id_value in _herb_button_by_id.keys():
+		var herb_id := str(herb_id_value)
+		var button := _herb_button_by_id.get(herb_id) as Button
+		if button == null:
+			continue
+
+		var should_show := Unlock.is_herb_unlocked(herb_id)
+		if should_show and herb_search_keyword != "":
+			var record_value = _herb_search_record_by_id.get(herb_id, {})
+			var record: Dictionary = record_value if typeof(record_value) == TYPE_DICTIONARY else {}
+			should_show = (
+				str(record.get("name", "")).contains(herb_search_keyword)
+				or str(record.get("pinyin", "")).contains(herb_search_keyword)
+				or str(record.get("initials", "")).contains(herb_search_keyword)
+				or matching_formula_herb_ids.has(herb_id)
+			)
+
+		button.visible = should_show
+
+
+func _get_matching_formula_herb_ids() -> Dictionary:
+	var result := {}
 	if herb_search_keyword == "":
-		return true
+		return result
+	if _formula_search_records.is_empty():
+		return result
 
-	if herb == null:
-		return false
+	var matching_formulas: Array = []
+	for record_value in _formula_search_records:
+		if typeof(record_value) != TYPE_DICTIONARY:
+			continue
 
-	# 中文名匹配：例如“白术”
-	var herb_name := _normalize_herb_search_text(str(herb.herb_name))
+		var record: Dictionary = record_value
+		if (
+			str(record.get("name", "")).contains(herb_search_keyword)
+			or str(record.get("pinyin", "")).contains(herb_search_keyword)
+			or str(record.get("initials", "")).contains(herb_search_keyword)
+		):
+			var formula = record.get("formula")
+			if formula != null:
+				matching_formulas.append(formula)
 
-	# 完整拼音匹配：例如 herb_id 是“bai_zhu”，输入“baizhu”也能命中
-	var herb_id_raw := str(herb.herb_id).to_lower()
-	var herb_id_full_pinyin := _normalize_herb_search_text(herb_id_raw)
+	if matching_formulas.is_empty():
+		return result
 
-	# 拼音首字母匹配：例如 herb_id 是“bai_zhu”，输入“bz”也能命中
-	var herb_id_initials := _get_id_initials(herb_id_raw)
+	# 只有命中方剂搜索时才检查其组成药材。
+	# 相比旧逻辑“每味药 × 全部方剂”，这里最多是“命中方剂 × 药材总数”。
+	for formula in matching_formulas:
+		if not formula.has_method("has_herb_id"):
+			continue
+		for herb_id_value in _herb_button_by_id.keys():
+			var herb_id := str(herb_id_value)
+			if formula.has_herb_id(herb_id):
+				result[herb_id] = true
 
-	# 保留原本的药材搜索能力
-	if (
-		herb_name.contains(herb_search_keyword)
-		or herb_id_full_pinyin.contains(herb_search_keyword)
-		or herb_id_initials.contains(herb_search_keyword)
-	):
-		return true
-
-	# 方剂匹配结果由独立的“【方剂】”按钮显示，
-	# 不再把整张方剂拆成若干普通药材搜索结果。
-	return false
+	return result
 
 
 func _normalize_herb_search_text(value: String) -> String:
@@ -548,181 +571,6 @@ func _get_id_initials(value: String) -> String:
 			initials += part.substr(0, 1)
 
 	return initials
-
-
-func _is_formula_match_search(formula) -> bool:
-	if herb_search_keyword == "":
-		return false
-
-	if formula == null:
-		return false
-
-	# 方剂中文名匹配：例如“桂枝汤”
-	var formula_name := _normalize_herb_search_text(str(formula.formula_name))
-
-	# 方剂拼音匹配：例如 formula_id 是“gui_zhi_tang”，输入“guizhitang”也能命中
-	var formula_id_raw := str(formula.formula_id).to_lower()
-	var formula_id_full_pinyin := _normalize_herb_search_text(formula_id_raw)
-
-	# 方剂拼音首字母匹配：例如 formula_id 是“gui_zhi_tang”，输入“gzt”也能命中
-	var formula_id_initials := _get_id_initials(formula_id_raw)
-
-	return (
-		formula_name.contains(herb_search_keyword)
-		or formula_id_full_pinyin.contains(herb_search_keyword)
-		or formula_id_initials.contains(herb_search_keyword)
-	)
-
-
-func _is_formula_fill_feature_unlocked() -> bool:
-	if Unlock == null or not Unlock.has_method("is_entry_unlocked"):
-		return false
-
-	return Unlock.is_entry_unlocked(FORMULA_FILL_FEATURE_ENTRY_ID)
-
-
-func _is_formula_entry_unlocked(formula) -> bool:
-	if formula == null:
-		return false
-
-	if Unlock == null or not Unlock.has_method("is_entry_unlocked"):
-		return false
-
-	var formula_id := str(formula.formula_id).strip_edges()
-	if formula_id == "":
-		return false
-
-	# 当前项目中的方剂条目 entry_id 与 formula_id 使用同一个 ID。
-	# 因此条目尚未解锁时，不显示对应的预制方剂。
-	return Unlock.is_entry_unlocked(formula_id)
-
-
-func _add_matching_formula_buttons() -> void:
-	if herb_list == null:
-		return
-
-	# 没有输入关键词时仍只显示普通药材，避免打开窗口就列出全部方剂。
-	if herb_search_keyword == "":
-		return
-
-	if not _is_formula_fill_feature_unlocked():
-		return
-
-	if formula_database == null or not formula_database.has_method("get_all_formulas"):
-		return
-
-	var formulas = formula_database.get_all_formulas()
-	for formula in formulas:
-		if formula == null:
-			continue
-
-		if not _is_formula_entry_unlocked(formula):
-			continue
-
-		if not _is_formula_match_search(formula):
-			continue
-
-		var formula_button := Button.new()
-		formula_button.text = "【方剂】%s" % str(formula.formula_name)
-		formula_button.custom_minimum_size = Vector2(180, 44)
-		formula_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		formula_button.focus_mode = Control.FOCUS_NONE
-		formula_button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
-		formula_button.set_meta("formula_id", str(formula.formula_id))
-
-		if formula.has_method("get_display_text"):
-			formula_button.tooltip_text = str(formula.get_display_text())
-
-		formula_button.pressed.connect(
-			_on_formula_button_pressed.bind(formula)
-		)
-		herb_list.add_child(formula_button)
-
-
-func _on_formula_button_pressed(formula) -> void:
-	if not _is_formula_fill_feature_unlocked():
-		emit_signal("info_requested", "尚未解锁预制方剂功能。")
-		_refresh_herb_list()
-		return
-
-	if not _is_formula_entry_unlocked(formula):
-		emit_signal("info_requested", "该方剂条目尚未解锁。")
-		_refresh_herb_list()
-		return
-
-	if current_prescription == null:
-		emit_signal("info_requested", "当前处方未初始化")
-		return
-
-	if herb_database == null:
-		emit_signal("info_requested", "药材数据库未初始化")
-		return
-
-	if formula == null or not formula.has_method("get_group_by_role"):
-		emit_signal("info_requested", "方剂数据无效，无法填入处方。")
-		return
-
-	# 先完整校验并整理所有药材，再清空当前四区。
-	# 这样某味药材资源缺失或剂量无效时，不会破坏玩家已经填写的处方。
-	var fill_items: Array[Dictionary] = []
-	for role_name in [ROLE_JUN, ROLE_CHEN, ROLE_ZUO, ROLE_SHI]:
-		var ingredient_group = formula.get_group_by_role(role_name)
-
-		for ingredient in ingredient_group:
-			if ingredient == null:
-				emit_signal("info_requested", "方剂数据存在空药材，无法填入处方。")
-				return
-
-			var herb_id := str(ingredient.get_herb_id()).strip_edges()
-			var amount := float(ingredient.amount)
-			var unit := str(ingredient.unit).strip_edges()
-			var herb = herb_database.get_herb_by_id(herb_id)
-
-			if herb_id == "" or herb == null:
-				emit_signal(
-					"info_requested",
-					"方剂中的药材资源缺失：%s" % herb_id
-				)
-				return
-
-			if amount <= 0.0 or not HerbUnit.is_valid_unit(unit):
-				emit_signal(
-					"info_requested",
-					"方剂中的药材剂量无效：%s" % str(herb.herb_name)
-				)
-				return
-
-			fill_items.append({
-				"herb": herb,
-				"amount": amount,
-				"unit": unit,
-				"role": role_name,
-			})
-
-	if fill_items.is_empty():
-		emit_signal("info_requested", "该方剂没有可填入的药材。")
-		return
-
-	# Prescription.clear() 只清空四区药材，不会清除已经选择的疾病诊断。
-	current_prescription.clear()
-
-	for item in fill_items:
-		current_prescription.add_herb(
-			item["herb"],
-			float(item["amount"]),
-			str(item["unit"]),
-			str(item["role"])
-		)
-
-	selected_herb_id = ""
-	selected_herb_button = null
-	_set_selected_role(ROLE_JUN)
-	_refresh_prescription_list()
-
-	emit_signal(
-		"info_requested",
-		"已按预制方剂填入：%s" % str(formula.formula_name)
-	)
 
 
 # =========================================================
@@ -1225,7 +1073,7 @@ func _on_chen_list_gui_input(event: InputEvent) -> void:
 
 
 func _on_zuo_list_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		_set_selected_role(ROLE_ZUO)
 
 
@@ -1398,17 +1246,29 @@ func load_all_diseases() -> void:
 		return
 
 	all_diseases = DiseaseDB.get_all_diseases()
-	_refresh_disease_list("")
+	_ensure_disease_button_cache()
+	_apply_disease_filter()
 
 
 func _refresh_disease_list(filter_text: String = "") -> void:
+	# 兼容旧调用：不再重建 Button，只更新搜索词和 visible。
+	disease_search_keyword = _normalize_disease_search_text(filter_text)
+	_ensure_disease_button_cache()
+	_apply_disease_filter()
+
+
+func _ensure_disease_button_cache() -> void:
 	if disease_list == null:
 		return
+	if typeof(DiseaseDB) == TYPE_NIL:
+		return
 
-	for child in disease_list.get_children():
-		child.queue_free()
+	var db_instance_id: int = DiseaseDB.get_instance_id()
+	if not _disease_button_by_id.is_empty() and db_instance_id == _cached_disease_db_instance_id:
+		return
 
-	disease_search_keyword = _normalize_disease_search_text(filter_text)
+	_clear_disease_button_cache()
+	_cached_disease_db_instance_id = db_instance_id
 
 	for disease in all_diseases:
 		var disease_name := _get_disease_name(disease)
@@ -1417,13 +1277,12 @@ func _refresh_disease_list(filter_text: String = "") -> void:
 		if disease_name == "" or disease_id == "":
 			continue
 
-		# 只显示已经解锁的疾病。
-		# 疾病条目未阅读 / 未解锁时，不允许出现在断病区域。
-		if not Unlock.is_disease_unlocked(disease_id):
-			continue
-
-		if not _is_disease_match_search(disease_name, disease_id):
-			continue
+		var disease_id_raw := disease_id.to_lower()
+		_disease_search_record_by_id[disease_id] = {
+			"name": _normalize_disease_search_text(disease_name),
+			"pinyin": _normalize_disease_search_text(disease_id_raw),
+			"initials": _get_disease_id_initials(disease_id_raw),
+		}
 
 		var btn := Button.new()
 		btn.text = disease_name
@@ -1434,11 +1293,31 @@ func _refresh_disease_list(filter_text: String = "") -> void:
 		btn.set_meta("disease_id", disease_id)
 		btn.set_meta("disease_name", disease_name)
 		btn.pressed.connect(_on_disease_selected.bind(disease_name, disease_id))
+
 		disease_list.add_child(btn)
+		btn.hide()
+		_disease_button_by_id[disease_id] = btn
+
+
+func _clear_disease_button_cache() -> void:
+	if disease_list != null:
+		for child in disease_list.get_children():
+			child.queue_free()
+
+	_disease_button_by_id.clear()
+	_disease_search_record_by_id.clear()
 
 
 func _on_disease_search_text_changed(new_text: String) -> void:
-	_refresh_disease_list(new_text)
+	if _suppress_search_signal:
+		return
+
+	disease_search_keyword = _normalize_disease_search_text(new_text)
+	if _disease_search_timer == null:
+		_apply_disease_filter()
+		return
+
+	_disease_search_timer.start(SEARCH_DEBOUNCE_SECONDS)
 
 
 func _on_disease_search_gui_input(event: InputEvent) -> void:
@@ -1448,16 +1327,44 @@ func _on_disease_search_gui_input(event: InputEvent) -> void:
 	var key_event := event as InputEventKey
 	if not key_event.pressed:
 		return
-
 	if key_event.keycode != KEY_ESCAPE:
 		return
-
 	if disease_search == null or disease_search.text == "":
 		return
 
 	disease_search.clear()
 	disease_search.grab_focus()
+
+	if _disease_search_timer != null:
+		_disease_search_timer.stop()
+	disease_search_keyword = ""
+	_apply_disease_filter()
 	get_viewport().set_input_as_handled()
+
+
+func _apply_disease_filter() -> void:
+	if disease_list == null:
+		return
+
+	_ensure_disease_button_cache()
+
+	for disease_id_value in _disease_button_by_id.keys():
+		var disease_id := str(disease_id_value)
+		var button := _disease_button_by_id.get(disease_id) as Button
+		if button == null:
+			continue
+
+		var should_show := Unlock.is_disease_unlocked(disease_id)
+		if should_show and disease_search_keyword != "":
+			var record_value = _disease_search_record_by_id.get(disease_id, {})
+			var record: Dictionary = record_value if typeof(record_value) == TYPE_DICTIONARY else {}
+			should_show = (
+				str(record.get("name", "")).contains(disease_search_keyword)
+				or str(record.get("pinyin", "")).contains(disease_search_keyword)
+				or str(record.get("initials", "")).contains(disease_search_keyword)
+			)
+
+		button.visible = should_show
 
 
 func _on_disease_selected(disease_name: String, disease_id: String = "") -> void:
@@ -1480,10 +1387,15 @@ func _on_disease_selected(disease_name: String, disease_id: String = "") -> void
 	_set_current_prescription_disease(disease_id, disease_name)
 
 	if disease_search != null:
+		_suppress_search_signal = true
 		disease_search.text = disease_name
 		disease_search.caret_column = disease_search.text.length()
+		_suppress_search_signal = false
 
-	_refresh_disease_list(disease_name)
+	if _disease_search_timer != null:
+		_disease_search_timer.stop()
+	disease_search_keyword = _normalize_disease_search_text(disease_name)
+	_apply_disease_filter()
 	emit_signal("info_requested", "已选择疾病诊断：%s" % disease_name)
 
 
@@ -1498,9 +1410,13 @@ func _clear_selected_disease() -> void:
 		_set_current_prescription_disease("", "")
 
 	if disease_search != null:
+		_suppress_search_signal = true
 		disease_search.clear()
+		_suppress_search_signal = false
 
-	_refresh_disease_list("")
+	if _disease_search_timer != null:
+		_disease_search_timer.stop()
+	_apply_disease_filter()
 
 
 func _sync_selected_disease_from_prescription() -> void:
@@ -1521,11 +1437,13 @@ func _sync_selected_disease_from_prescription() -> void:
 
 	selected_disease_id = prescription_disease_id
 	selected_disease_name = prescription_disease_name
-	disease_search_keyword = prescription_disease_name
+	disease_search_keyword = _normalize_disease_search_text(prescription_disease_name)
 
 	if disease_search != null:
+		_suppress_search_signal = true
 		disease_search.text = prescription_disease_name
 		disease_search.caret_column = disease_search.text.length()
+		_suppress_search_signal = false
 
 
 func _set_current_prescription_disease(disease_id: String, disease_name: String) -> void:

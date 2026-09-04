@@ -430,8 +430,8 @@ func _on_info_window_unlock_all_entries_requested() -> void:
 	])
 
 	_refresh_topbar(true)
-	if read_book_window != null and read_book_window.has_method("_refresh_book_list"):
-		read_book_window.call("_refresh_book_list")
+	if read_book_window != null and read_book_window.has_method("mark_data_dirty"):
+		read_book_window.call("mark_data_dirty")
 
 
 func _on_info_window_npc_action_requested() -> void:
@@ -508,17 +508,8 @@ func open_read_book_window() -> void:
 		push_warning("Night.gd 无法打开读书窗口：read_book_window 为空")
 		return
 
-	# 每次打开前刷新一次窗口内显示，避免心得数量或书籍状态是旧的。
-	if read_book_window.has_method("_update_day_label"):
-		read_book_window.call("_update_day_label")
-
-	if read_book_window.has_method("_update_thoughts_point_ui"):
-		read_book_window.call("_update_thoughts_point_ui")
-
-	if read_book_window.has_method("_refresh_book_list"):
-		read_book_window.call("_refresh_book_list")
-
-	# 和其他 Window 一样，由 ReadBook.gd 自己 open_window()，不再 popup_centered。
+	# ReadBook.open_window() 自己根据 UnlockManager 的状态版本决定是否需要重建列表。
+	# Night 不再提前重复刷新天数 / 心得 / 书籍列表。
 	if read_book_window.has_method("open_window"):
 		read_book_window.call("open_window")
 	else:

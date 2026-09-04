@@ -1,6 +1,11 @@
 extends Node
 class_name UnlockManager
 
+# 顶部栏使用这些信号按需刷新，避免 Clinic / Night 每帧轮询数值。
+signal experience_points_changed(value: int)
+signal reputation_points_changed(value: int)
+signal money_wen_changed(value: int)
+
 # =========================================================
 # 解锁管理器
 #
@@ -86,6 +91,24 @@ var _experience_unlock_cursor: int = 0
 # 读档后统一重建一次，兼容旧存档。
 var _unread_readable_count: int = 0
 var _unread_readable_count_ready: bool = false
+
+# ReadBook UI 只需要知道“医书可见/未读状态是否变化”，不需要每次打开都全量重算。
+# 这个版本号只存在于运行时，不写入存档。
+var _readbook_state_version: int = 0
+
+
+func get_readbook_state_version() -> int:
+	return _readbook_state_version
+
+
+func _touch_readbook_state() -> void:
+	_readbook_state_version += 1
+
+
+func _emit_all_player_stat_signals() -> void:
+	experience_points_changed.emit(experience_points)
+	reputation_points_changed.emit(reputation_points)
+	money_wen_changed.emit(money_wen)
 
 
 func _ready() -> void:
@@ -272,7 +295,11 @@ func change_experience_points(amount: int) -> Array[String]:
 	if amount == 0:
 		return []
 
+	var previous_points := experience_points
 	experience_points = maxi(0, experience_points + amount)
+
+	if experience_points != previous_points:
+		experience_points_changed.emit(experience_points)
 
 	if amount > 0:
 		return refresh_auto_unlocks_by_experience()
@@ -442,6 +469,7 @@ func record_random_npc_treatment_finance(
 		# 白天实时入账收入；所有支出在正常白天结束时统一扣除。
 		var total_income := consultation_fee + medicine_sales
 		money_wen += total_income
+		money_wen_changed.emit(money_wen)
 
 		return {
 			"consultation_fee_wen": consultation_fee,
@@ -460,6 +488,7 @@ func record_random_npc_treatment_finance(
 
 	var legacy_total_income := consultation_fee + legacy_profit
 	money_wen += legacy_total_income
+	money_wen_changed.emit(money_wen)
 
 	return {
 		"consultation_fee_wen": consultation_fee,
@@ -483,6 +512,7 @@ func record_random_npc_treatment_income(day: int, prescription_profit_wen: int) 
 	daily_consultation_income_wen += consultation_fee
 	daily_medicine_profit_wen += prescription_profit_wen
 	money_wen += total_income
+	money_wen_changed.emit(money_wen)
 
 	return {
 		"consultation_fee_wen": consultation_fee,
@@ -544,6 +574,7 @@ func settle_day_finances(day: int) -> Dictionary:
 	var net_change := total_income - total_expense
 
 	money_wen -= total_expense
+	money_wen_changed.emit(money_wen)
 
 	last_finance_settled_day = safe_day
 	last_finance_report = {
@@ -671,6 +702,7 @@ func add_reputation_points(amount: int = 1) -> Array[Dictionary]:
 		return []
 
 	reputation_points += amount
+	reputation_points_changed.emit(reputation_points)
 	return refresh_story_unlocks_by_reputation()
 
 
@@ -880,6 +912,7 @@ func unlock_entry(entry_id: String) -> void:
 		was_readable = can_read_entry(id)
 
 	unlocked_entry_ids[id] = true
+	_touch_readbook_state()
 
 	if (
 		_unread_readable_count_ready
@@ -914,6 +947,7 @@ func mark_entry_as_read(entry_id: String) -> void:
 		_unread_readable_count = maxi(0, _unread_readable_count - 1)
 
 	read_entry_ids[id] = true
+	_touch_readbook_state()
 
 
 func unlock_herb(herb_id: String) -> void:
@@ -939,6 +973,7 @@ func unlock_herb(herb_id: String) -> void:
 
 	unlocked_herb_ids[id] = true
 	clinical_log_unlocked_herb_ids[id] = true
+	_touch_readbook_state()
 
 	# 只检查“包含这味新药材”的方剂，不再扫描全部方剂。
 	_refresh_formulas_affected_by_herb(id)
@@ -981,6 +1016,7 @@ func unlock_disease(disease_id: String) -> void:
 
 	unlocked_disease_ids[id] = true
 	clinical_log_unlocked_disease_ids[id] = true
+	_touch_readbook_state()
 	_unlock_matching_book_entries("disease", id)
 
 	_update_preexisting_entry_readability(preexisting_entry_was_readable)
@@ -1013,6 +1049,7 @@ func unlock_formula(formula_id: String) -> void:
 
 	unlocked_formula_ids[id] = true
 	clinical_log_unlocked_formula_ids[id] = true
+	_touch_readbook_state()
 	_unlock_matching_book_entries("formula", id)
 
 	_update_preexisting_entry_readability(preexisting_entry_was_readable)
@@ -1716,6 +1753,7 @@ func reset_progress() -> void:
 	_experience_unlock_cursor = 0
 	_unread_readable_count = 0
 	_unread_readable_count_ready = true
+	_touch_readbook_state()
 
 	experience_points = 0
 	reputation_points = 0
@@ -1724,6 +1762,7 @@ func reset_progress() -> void:
 	_reset_daily_finance_ledger(1)
 	last_finance_settled_day = 0
 	last_finance_report.clear()
+	_emit_all_player_stat_signals()
 
 	# 新游戏也立即应用 0 点心得即可解锁的初始条目。
 	# 这样 Night 不需要再承担“跨天前补做一次全量刷新”的职责。
@@ -1790,6 +1829,7 @@ func load_save_data(data: Dictionary) -> void:
 	daily_medicine_profit_wen = int(data.get("daily_medicine_profit_wen", 0))
 	daily_failed_medicine_cost_wen = int(data.get("daily_failed_medicine_cost_wen", 0))
 	last_finance_settled_day = int(data.get("last_finance_settled_day", 0))
+	_emit_all_player_stat_signals()
 
 	var loaded_finance_report = data.get("last_finance_report", {})
 	if typeof(loaded_finance_report) == TYPE_DICTIONARY:
@@ -1806,6 +1846,7 @@ func load_save_data(data: Dictionary) -> void:
 	refresh_unlocks_by_dependencies()
 	refresh_story_unlocks_by_reputation()
 	_rebuild_unread_readable_count()
+	_touch_readbook_state()
 
 
 func _load_bool_dictionary(source) -> Dictionary:
