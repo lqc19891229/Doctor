@@ -139,7 +139,7 @@ var _suppress_search_signal: bool = false
 # 药材按钮 / 搜索字段缓存。按钮只创建一次，搜索时仅切换 visible。
 var _herb_button_by_id: Dictionary = {}
 var _herb_search_record_by_id: Dictionary = {}
-var _formula_search_records: Array[Dictionary] = []
+var _formula_search_records: Array = []
 var _cached_herb_db_instance_id: int = 0
 var _cached_formula_db_instance_id: int = 0
 
@@ -222,7 +222,7 @@ func _setup_search_debounce_timers() -> void:
 		_herb_search_timer.one_shot = true
 		_herb_search_timer.wait_time = SEARCH_DEBOUNCE_SECONDS
 		add_child(_herb_search_timer)
-		_herb_search_timer.timeout.connect(_apply_herb_filter)
+		_herb_search_timer.timeout.connect(Callable(self, "_apply_herb_filter"))
 
 	if _disease_search_timer == null:
 		_disease_search_timer = Timer.new()
@@ -230,7 +230,7 @@ func _setup_search_debounce_timers() -> void:
 		_disease_search_timer.one_shot = true
 		_disease_search_timer.wait_time = SEARCH_DEBOUNCE_SECONDS
 		add_child(_disease_search_timer)
-		_disease_search_timer.timeout.connect(_apply_disease_filter)
+		_disease_search_timer.timeout.connect(Callable(self, "_apply_disease_filter"))
 
 
 # =========================================================
@@ -368,7 +368,7 @@ func _ensure_herb_button_cache() -> void:
 		emit_signal("info_requested", "药材数据库缺少 get_all_herbs()")
 		return
 
-	var db_instance_id: int = herb_database.get_instance_id()
+	var db_instance_id: int = int(herb_database.get_instance_id())
 	if not _herb_button_by_id.is_empty() and db_instance_id == _cached_herb_db_instance_id:
 		return
 
@@ -390,7 +390,7 @@ func _ensure_herb_button_cache() -> void:
 		_herb_search_record_by_id[herb_id] = {
 			"name": _normalize_herb_search_text(herb_name),
 			"pinyin": _normalize_herb_search_text(herb_id_raw),
-			"initials": _get_id_initials(herb_id_raw),
+			"initials": _get_id_initials(herb_id_raw)
 		}
 
 		var herb_button := Button.new()
@@ -427,7 +427,7 @@ func _ensure_formula_search_cache() -> void:
 		_cached_formula_db_instance_id = 0
 		return
 
-	var db_instance_id: int = formula_database.get_instance_id()
+	var db_instance_id: int = int(formula_database.get_instance_id())
 	if not _formula_search_records.is_empty() and db_instance_id == _cached_formula_db_instance_id:
 		return
 
@@ -444,7 +444,7 @@ func _ensure_formula_search_cache() -> void:
 			"formula": formula,
 			"name": _normalize_herb_search_text(str(formula.formula_name)),
 			"pinyin": _normalize_herb_search_text(formula_id_raw),
-			"initials": _get_id_initials(formula_id_raw),
+			"initials": _get_id_initials(formula_id_raw)
 		})
 
 
@@ -499,14 +499,17 @@ func _apply_herb_filter() -> void:
 
 	for herb_id_value in _herb_button_by_id.keys():
 		var herb_id := str(herb_id_value)
-		var button := _herb_button_by_id.get(herb_id) as Button
-		if button == null:
+		var button_value = _herb_button_by_id.get(herb_id, null)
+		if not (button_value is Button):
 			continue
+		var button = button_value
 
-		var should_show := Unlock.is_herb_unlocked(herb_id)
+		var should_show = bool(Unlock.is_herb_unlocked(herb_id))
 		if should_show and herb_search_keyword != "":
+			var record = {}
 			var record_value = _herb_search_record_by_id.get(herb_id, {})
-			var record: Dictionary = record_value if typeof(record_value) == TYPE_DICTIONARY else {}
+			if typeof(record_value) == TYPE_DICTIONARY:
+				record = record_value
 			should_show = (
 				str(record.get("name", "")).contains(herb_search_keyword)
 				or str(record.get("pinyin", "")).contains(herb_search_keyword)
@@ -529,7 +532,7 @@ func _get_matching_formula_herb_ids() -> Dictionary:
 		if typeof(record_value) != TYPE_DICTIONARY:
 			continue
 
-		var record: Dictionary = record_value
+		var record = record_value
 		if (
 			str(record.get("name", "")).contains(herb_search_keyword)
 			or str(record.get("pinyin", "")).contains(herb_search_keyword)
@@ -1263,7 +1266,7 @@ func _ensure_disease_button_cache() -> void:
 	if typeof(DiseaseDB) == TYPE_NIL:
 		return
 
-	var db_instance_id: int = DiseaseDB.get_instance_id()
+	var db_instance_id: int = int(DiseaseDB.get_instance_id())
 	if not _disease_button_by_id.is_empty() and db_instance_id == _cached_disease_db_instance_id:
 		return
 
@@ -1281,7 +1284,7 @@ func _ensure_disease_button_cache() -> void:
 		_disease_search_record_by_id[disease_id] = {
 			"name": _normalize_disease_search_text(disease_name),
 			"pinyin": _normalize_disease_search_text(disease_id_raw),
-			"initials": _get_disease_id_initials(disease_id_raw),
+			"initials": _get_disease_id_initials(disease_id_raw)
 		}
 
 		var btn := Button.new()
@@ -1350,14 +1353,17 @@ func _apply_disease_filter() -> void:
 
 	for disease_id_value in _disease_button_by_id.keys():
 		var disease_id := str(disease_id_value)
-		var button := _disease_button_by_id.get(disease_id) as Button
-		if button == null:
+		var button_value = _disease_button_by_id.get(disease_id, null)
+		if not (button_value is Button):
 			continue
+		var button = button_value
 
-		var should_show := Unlock.is_disease_unlocked(disease_id)
+		var should_show = bool(Unlock.is_disease_unlocked(disease_id))
 		if should_show and disease_search_keyword != "":
+			var record = {}
 			var record_value = _disease_search_record_by_id.get(disease_id, {})
-			var record: Dictionary = record_value if typeof(record_value) == TYPE_DICTIONARY else {}
+			if typeof(record_value) == TYPE_DICTIONARY:
+				record = record_value
 			should_show = (
 				str(record.get("name", "")).contains(disease_search_keyword)
 				or str(record.get("pinyin", "")).contains(disease_search_keyword)
