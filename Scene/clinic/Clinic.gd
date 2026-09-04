@@ -370,9 +370,9 @@ func _setup_topbar_controller() -> void:
 # =========================================================
 
 func _setup_time_system() -> void:
-	# 每次进入 Clinic，都重置为辰时，并由 GameTimeManager 开始自动计时
-	if GameTime.has_method("start_clinic_time"):
-		GameTime.start_clinic_time()
+	# 这里只负责一次性连接 GameTime 信号。
+	# Clinic 现在是常驻场景；每天真正开始计时统一放到 start_new_day()，
+	# 否则 _ready() 只执行一次会导致第二天以后计时器不再启动。
 
 	# 监听 GameTimeManager 发出的 Clinic 时间结束信号
 	# 例如：辰、巳、午、未、申结束后自动进入夜读
@@ -1985,15 +1985,82 @@ func start_story_from_clinic(story_path: String, return_target: String = "clinic
 
 	emit_signal("story_requested", story_path, return_target)
 
+func prepare_for_scene_hide() -> void:
+	# 常驻场景被隐藏时，确保 Window / Popup 不会独立留在屏幕上。
+	var transient_nodes: Array[Node] = [
+		pulse_window,
+		prescription_window,
+		clinical_log_window,
+		info_window
+	]
+	for transient_node in transient_nodes:
+		if transient_node != null and is_instance_valid(transient_node):
+			transient_node.hide()
+
+	if judgement_result_window != null and is_instance_valid(judgement_result_window):
+		judgement_result_window.hide()
+
+
+func _reset_transient_state_for_new_day() -> void:
+	# 常驻 Clinic 在跨天后仍保留节点实例，因此主动清理上一天的临时 UI/诊疗状态。
+	if portrait_entrance_tween != null and portrait_entrance_tween.is_valid():
+		portrait_entrance_tween.kill()
+	portrait_entrance_tween = null
+
+	if judgement_result_window != null and is_instance_valid(judgement_result_window):
+		judgement_result_window.queue_free()
+	judgement_result_window = null
+
+	var tree := get_tree()
+	if tree != null and tree.paused:
+		tree.paused = false
+
+	var transient_nodes: Array[Node] = [
+		pulse_window,
+		prescription_window,
+		clinical_log_window,
+		info_window
+	]
+	for transient_node in transient_nodes:
+		if transient_node != null and is_instance_valid(transient_node):
+			transient_node.hide()
+
+	current_npc = null
+	current_prescription.clear()
+	current_prescription.clear_disease()
+	diagnosis_submitted = false
+	last_formula_judge_result = null
+	last_formula_judge_summary_text = ""
+	last_newly_unlocked_entry_titles.clear()
+	last_reputation_change = 0
+	last_experience_change = 0
+	last_treatment_income_wen = 0
+	last_submission_can_show_reward = false
+	waiting_judgement_after_treatment_dialogue = false
+	current_display_region_name = DEFAULT_DISPLAY_REGION
+	_reset_pulse_keyboard_state()
+
+	npc_dialogue_display_token += 1
+	npc_dialogue_visible = false
+	_set_npc_dialogue_label_text("")
+	_update_npc_portrait()
+	_update_npc_name()
+
+
 func start_new_day(day: int) -> void:
 	# 记录当前天数。
 	current_day = day
+
+	_reset_transient_state_for_new_day()
+
+	# 每次真正进入白天都重新启动 Clinic 时钟。
+	if GameTime.has_method("start_clinic_time"):
+		GameTime.start_clinic_time()
 
 	# 按当天对应的节气切换诊室四季背景。
 	_update_clinic_background()
 
 	# 每天开始时，允许 Clinic 结束信号重新发出，并清除上一天的等待状态。
-	# 否则第一天结束后，第二天可能无法再次进入夜晚流程。
 	clinic_finished_emitted = false
 	clinic_time_expired_waiting_for_current_patient = false
 

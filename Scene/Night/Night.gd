@@ -604,8 +604,40 @@ func _has_unread_entries() -> bool:
 # 夜晚进入入口 / 自动剧情触发
 # =========================
 
+func prepare_for_scene_hide() -> void:
+	# ReadBook / InfoWindow 等可能是原生子窗口；场景隐藏时显式关闭。
+	var transient_nodes: Array[Node] = [
+		read_book_window,
+		info_window,
+		player_hint_window
+	]
+	for transient_node in transient_nodes:
+		if transient_node != null and is_instance_valid(transient_node):
+			transient_node.hide()
+
+
+func _reset_transient_state_for_night_entry() -> void:
+	# Night 现在是常驻场景；重新进入前关闭上一晚可能残留的子窗口。
+	var tree := get_tree()
+	if tree != null and tree.paused:
+		tree.paused = false
+
+	var transient_nodes: Array[Node] = [
+		read_book_window,
+		info_window,
+		player_hint_window
+	]
+	for transient_node in transient_nodes:
+		if transient_node != null and is_instance_valid(transient_node):
+			transient_node.hide()
+
+	waiting_finance_report_close = false
+	pending_night_auto_story_day = 0
+
+
 func start_night(day: int, show_finance_report: bool = true) -> void:
 	# 由 Main._enter_night() 在连接好 story_requested 后调用。
+	_reset_transient_state_for_night_entry()
 	_update_night_background(day)
 	if topbar_controller != null:
 		topbar_controller.set_fallback_day(day)

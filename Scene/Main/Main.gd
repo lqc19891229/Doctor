@@ -46,6 +46,11 @@ var current_scene: Node = null
 var current_story_scene: Node = null
 var story_treatment_backend: Node = null
 
+# Clinic / Night 改为常驻实例：每种场景整局最多实例化一次。
+# 切换昼夜时只隐藏并禁用处理，不再 queue_free + instantiate。
+var clinic_scene_instance: Node = null
+var night_scene_instance: Node = null
+
 # 剧情结束后要回到的目标。
 # 使用逻辑名，不使用场景路径，避免 Story 直接替换 Main。
 var pending_story_return_target: String = ""
@@ -407,11 +412,15 @@ func _on_quit_game_button_pressed() -> void:
 func _enter_clinic() -> void:
 	_clear_current_scene()
 
-	# 实例化诊室场景
-	current_scene = CLINIC_SCENE.instantiate()
-	current_scene_root.add_child(current_scene)
+	var was_cached := clinic_scene_instance != null and is_instance_valid(clinic_scene_instance)
+	current_scene = _get_or_create_clinic_scene()
+	if current_scene == null:
+		push_error("Clinic 场景实例创建失败。")
+		return
 
-	# 连接 clinic_finished 信号
+	_set_scene_active(current_scene, true)
+
+	# 连接 clinic_finished 信号。常驻场景只会实际连接一次。
 	if current_scene.has_signal("clinic_finished"):
 		if not current_scene.is_connected("clinic_finished", Callable(self, "_on_clinic_finished")):
 			current_scene.connect("clinic_finished", Callable(self, "_on_clinic_finished"))
@@ -419,8 +428,7 @@ func _enter_clinic() -> void:
 	else:
 		print("current_scene 没有 clinic_finished 信号")
 
-	# 连接剧情请求信号。
-	# 注意：必须在 start_new_day() 之前连接，否则 Clinic 进入当天自动剧情时信号会丢失。
+	# 必须在 start_new_day() 之前连接，避免入口自动剧情请求丢失。
 	if current_scene.has_signal("story_requested"):
 		if not current_scene.is_connected("story_requested", Callable(self, "_on_story_requested")):
 			current_scene.connect("story_requested", Callable(self, "_on_story_requested"))
@@ -428,16 +436,19 @@ func _enter_clinic() -> void:
 	else:
 		print("current_scene 没有 story_requested 信号")
 
-	# 刷新左上角天数显示
 	if current_scene.has_method("set_day"):
 		current_scene.call("set_day", GameTime.current_day)
 		print("已刷新诊室天数：", GameTime.current_day)
 	else:
 		print("Clinic 没有 set_day 方法")
 
-	# 开始新的一天逻辑
+	# 每次重新进入 Clinic 都走每日入口；Clinic.start_new_day() 负责清理上一天
+	# 的临时 UI / 病人状态并重新启动白天计时。
 	if current_scene.has_method("start_new_day"):
 		current_scene.call("start_new_day", GameTime.current_day)
+
+	if OS.is_debug_build() and was_cached:
+		print("[Main] 复用 Clinic 常驻实例")
 
 	print("已进入 Clinic 场景，第 %d 天" % GameTime.current_day)
 
@@ -448,11 +459,15 @@ func _enter_clinic() -> void:
 func _enter_night(show_finance_report: bool = true) -> void:
 	_clear_current_scene()
 
-	# 实例化夜晚主场景
-	current_scene = NIGHT_SCENE.instantiate()
-	current_scene_root.add_child(current_scene)
+	var was_cached := night_scene_instance != null and is_instance_valid(night_scene_instance)
+	current_scene = _get_or_create_night_scene()
+	if current_scene == null:
+		push_error("Night 场景实例创建失败。")
+		return
 
-	# 连接 night_finished 信号
+	_set_scene_active(current_scene, true)
+
+	# 连接 night_finished 信号。常驻场景只会实际连接一次。
 	if current_scene.has_signal("night_finished"):
 		if not current_scene.is_connected("night_finished", Callable(self, "_on_night_finished")):
 			current_scene.connect("night_finished", Callable(self, "_on_night_finished"))
@@ -460,8 +475,7 @@ func _enter_night(show_finance_report: bool = true) -> void:
 	else:
 		print("current_scene 没有 night_finished 信号")
 
-	# 连接夜晚剧情请求信号。
-	# 注意：必须在 start_night() 之前连接，否则 Night 进入夜晚时自动剧情信号会丢失。
+	# 必须在 start_night() 之前连接，避免入口自动剧情请求丢失。
 	if current_scene.has_signal("story_requested"):
 		if not current_scene.is_connected("story_requested", Callable(self, "_on_story_requested")):
 			current_scene.connect("story_requested", Callable(self, "_on_story_requested"))
@@ -469,12 +483,13 @@ func _enter_night(show_finance_report: bool = true) -> void:
 	else:
 		print("current_scene 没有 story_requested 信号")
 
-	# 启动夜晚入口逻辑。
-	# 正常白天结束进入 Night 时显示银钱结算；剧情结束返回 Night 时可关闭结算展示。
 	if current_scene.has_method("start_night"):
 		current_scene.call("start_night", GameTime.current_day, show_finance_report)
 	else:
 		print("Night 没有 start_night 方法")
+
+	if OS.is_debug_build() and was_cached:
+		print("[Main] 复用 Night 常驻实例")
 
 	print("已进入 Night 场景，第 %d 天" % GameTime.current_day)
 
@@ -522,7 +537,14 @@ func _play_story(story_path: String, _legacy_return_target: String = "") -> void
 		push_warning("剧情路径为空")
 		return
 
-	var loaded_story := load(story_path)
+	# StoryManager 已在启动时缓存所有剧情资源；优先直接取缓存，
+	# 避免 Main 在真正播放时再进行一次同步 load()。
+	var loaded_story = null
+	if StoryManager != null and StoryManager.has_method("get_cached_story_by_path"):
+		loaded_story = StoryManager.get_cached_story_by_path(story_path)
+	else:
+		loaded_story = load(story_path)
+
 	if loaded_story == null:
 		push_warning("剧情文件加载失败：" + story_path)
 		return
@@ -871,28 +893,90 @@ func _finish_night_and_enter_next_day() -> void:
 
 
 func _save_game_with_warning(context: String) -> bool:
-	var save_success: bool = SaveManager.save_game()
+	# 阶段自动存档优先提交到后台线程。
+	# 旧 SaveManager 仍可通过同步 save_game() 兜底，便于脚本逐步替换。
+	var save_success := false
+	if SaveManager != null and SaveManager.has_method("save_game_async"):
+		save_success = bool(SaveManager.call("save_game_async", -1, context))
+	else:
+		save_success = SaveManager.save_game()
+
 	if not save_success:
-		push_warning("%s：自动存档失败。" % context)
+		push_warning("%s：自动存档任务提交失败。" % context)
 
 	return save_success
 
 
 # =========================================================
-# 清理旧子场景
+# Clinic / Night 常驻场景管理
 # =========================================================
+func _get_or_create_clinic_scene() -> Node:
+	if clinic_scene_instance != null and is_instance_valid(clinic_scene_instance):
+		return clinic_scene_instance
+
+	clinic_scene_instance = CLINIC_SCENE.instantiate()
+	current_scene_root.add_child(clinic_scene_instance)
+	_set_scene_active(clinic_scene_instance, false)
+
+	if OS.is_debug_build():
+		print("[Main] Clinic 常驻实例创建完成")
+
+	return clinic_scene_instance
+
+
+func _get_or_create_night_scene() -> Node:
+	if night_scene_instance != null and is_instance_valid(night_scene_instance):
+		return night_scene_instance
+
+	night_scene_instance = NIGHT_SCENE.instantiate()
+	current_scene_root.add_child(night_scene_instance)
+	_set_scene_active(night_scene_instance, false)
+
+	if OS.is_debug_build():
+		print("[Main] Night 常驻实例创建完成")
+
+	return night_scene_instance
+
+
+# 旧名字保留，避免其它 Main 内部调用需要大范围改写。
+# Clinic / Night 不再销毁；Map 等临时场景仍按旧行为释放。
 func _clear_current_scene() -> void:
-	if current_scene != null and is_instance_valid(current_scene):
-		current_scene.queue_free()
+	if current_scene == null or not is_instance_valid(current_scene):
 		current_scene = null
+		return
+
+	if current_scene == clinic_scene_instance or current_scene == night_scene_instance:
+		_set_scene_active(current_scene, false)
+	else:
+		current_scene.queue_free()
+
+	current_scene = null
 
 
-func _set_scene_visible(scene_node: Node, should_be_visible: bool) -> void:
+func _set_scene_active(scene_node: Node, should_be_active: bool) -> void:
 	if scene_node == null or not is_instance_valid(scene_node):
 		return
 
+	# Window 节点可能作为原生子窗口独立显示，单纯隐藏父 Control 不一定足够。
+	# 场景脚本有清理钩子时，先让它关闭自己的临时窗口。
+	if not should_be_active and scene_node.has_method("prepare_for_scene_hide"):
+		scene_node.call("prepare_for_scene_hide")
+
 	if scene_node is CanvasItem:
-		(scene_node as CanvasItem).visible = should_be_visible
+		(scene_node as CanvasItem).visible = should_be_active
+
+	# PROCESS_MODE_DISABLED 会连同使用 INHERIT 的子节点一起停止 _process/_input。
+	# 重新进入时恢复 INHERIT。
+	scene_node.process_mode = (
+		Node.PROCESS_MODE_INHERIT
+		if should_be_active
+		else Node.PROCESS_MODE_DISABLED
+	)
+
+
+func _set_scene_visible(scene_node: Node, should_be_visible: bool) -> void:
+	# Story 覆盖播放期间不仅隐藏底层场景，同时停止它的处理。
+	_set_scene_active(scene_node, should_be_visible)
 
 
 func _get_current_scene_background_texture() -> Texture2D:

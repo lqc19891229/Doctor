@@ -24,9 +24,31 @@ const SAVE_BACKUP_SUFFIX: String = ".bak"
 # 旧版单存档路径，仅用于兼容读取旧存档。
 const LEGACY_SAVE_PATH: String = "user://save_game.json"
 
+# 后台存档工作器：只处理纯数据序列化和文件 I/O。
+const SaveWorkerScript = preload("res://System/Save/SaveWorker.gd")
+
 # 当前正在使用的槽位。
 # 不传 slot_index 时，save_game / load_game / has_save / delete_save 默认使用这个槽位。
 var current_slot_index: int = 1
+
+# =========================================================
+# 后台自动存档状态
+# =========================================================
+# save_game() 继续保留“同步落盘”语义，供需要立刻确认磁盘状态的旧代码使用。
+# Main 的阶段自动存档改走 save_game_async()，避免把 JSON / flush 卡在切场景关键帧。
+var _save_thread: Thread = null
+var _active_save_worker: RefCounted = null
+var _active_async_request: Dictionary = {}
+var _pending_async_requests: Array[Dictionary] = []
+
+
+func _process(_delta: float) -> void:
+	_poll_async_save()
+
+
+func _exit_tree() -> void:
+	# Thread 销毁前必须 wait_to_finish()；退出游戏时确保最后一次存档真正落盘。
+	flush_async_saves()
 
 
 # =========================================================
@@ -50,6 +72,9 @@ func get_save_path(slot_index: int = -1) -> String:
 # 判断是否存在存档
 # =========================================================
 func has_save(slot_index: int = -1) -> bool:
+	# 查询磁盘状态前先收尾后台任务，避免菜单看到旧档。
+	flush_async_saves()
+
 	if slot_index <= 0:
 		slot_index = current_slot_index
 
@@ -75,6 +100,11 @@ func has_save(slot_index: int = -1) -> bool:
 # 保存游戏
 # =========================================================
 func save_game(slot_index: int = -1) -> bool:
+	# 同步接口保持兼容：调用方返回时，数据已经真实写入磁盘。
+	# 为避免和后台自动存档争用同一 .tmp / .bak，先等待后台队列清空。
+	if not flush_async_saves():
+		push_warning("同步存档前发现后台存档失败，将继续尝试写入当前快照。")
+
 	if slot_index <= 0:
 		slot_index = current_slot_index
 
@@ -83,62 +113,231 @@ func save_game(slot_index: int = -1) -> bool:
 		return false
 
 	current_slot_index = slot_index
+	var request := _make_save_request(slot_index, "同步存档")
+	var worker: RefCounted = SaveWorkerScript.new()
+	var result = worker.call("write_request", request)
 
-	# 组装要保存的数据
-	# meta：存档摘要，给存档选择界面显示用
-	# time：保存天数和白天/黑夜
-	# progress：保存医书阅读、药材、疾病、方剂等解锁进度
-	# story：保存剧情播放状态
+	if typeof(result) != TYPE_DICTIONARY:
+		push_error("存档失败：SaveWorker 返回了无效结果。")
+		return false
+
+	var result_dict: Dictionary = result
+	_handle_async_save_result(result_dict, false)
+	return bool(result_dict.get("ok", false))
+
+
+# 非阻塞自动存档：
+# 1. 主线程只创建一份纯数据快照；
+# 2. JSON.stringify、FileAccess、flush、.tmp/.bak 原子替换全部在 Thread 中执行；
+# 3. 同一槽位短时间连续请求时，只保留“当前正在写的一份 + 最新等待的一份”。
+func save_game_async(slot_index: int = -1, context: String = "自动存档") -> bool:
+	if slot_index <= 0:
+		slot_index = current_slot_index
+
+	if not is_valid_slot(slot_index):
+		push_warning("自动存档失败：无效槽位 %d" % slot_index)
+		return false
+
+	current_slot_index = slot_index
+
+	# 如果上一线程已经结束但还没等到下一帧 _process() 回收，先无阻塞回收。
+	_poll_async_save()
+
+	var request := _make_save_request(slot_index, context)
+
+	if _save_thread != null and _save_thread.is_started():
+		_queue_latest_async_request(request)
+		return true
+
+	return _start_async_save_request(request)
+
+
+func is_async_save_busy() -> bool:
+	return (
+		(_save_thread != null and _save_thread.is_started())
+		or not _pending_async_requests.is_empty()
+	)
+
+
+# 需要“此函数返回后磁盘一定是最新状态”的场景调用：
+# - 读档
+# - 删除存档
+# - 存档槽位菜单读取摘要
+# - 同步 save_game()
+# - 游戏退出
+func flush_async_saves() -> bool:
+	var all_ok := true
+
+	if _save_thread != null and _save_thread.is_started():
+		var active_result = _save_thread.wait_to_finish()
+		_save_thread = null
+		_active_save_worker = null
+		_active_async_request.clear()
+
+		if typeof(active_result) == TYPE_DICTIONARY:
+			var active_result_dict: Dictionary = active_result
+			_handle_async_save_result(active_result_dict, true)
+			all_ok = all_ok and bool(active_result_dict.get("ok", false))
+		else:
+			push_error("后台存档线程返回了无效结果。")
+			all_ok = false
+
+	# flush 本身就是一个显式同步点；剩余快照直接顺序写完，避免再启动线程后立刻等待。
+	while not _pending_async_requests.is_empty():
+		var request: Dictionary = _pending_async_requests.pop_front()
+		var worker: RefCounted = SaveWorkerScript.new()
+		var pending_result = worker.call("write_request", request)
+
+		if typeof(pending_result) != TYPE_DICTIONARY:
+			push_error("等待中的后台存档返回了无效结果。")
+			all_ok = false
+			continue
+
+		var pending_result_dict: Dictionary = pending_result
+		_handle_async_save_result(pending_result_dict, true)
+		all_ok = all_ok and bool(pending_result_dict.get("ok", false))
+
+	return all_ok
+
+
+func _make_save_request(slot_index: int, context: String) -> Dictionary:
+	# 这里是唯一允许接触 Autoload / Node 状态的部分，始终在主线程运行。
+	# duplicate(true) 把所有 Dictionary / Array 递归复制，后台线程不再共享运行时容器。
+	var progress_data: Dictionary = Unlock.get_save_data().duplicate(true)
+	var story_data: Dictionary = StoryManager.get_save_data().duplicate(true)
+	var phase := String(GameTime.current_phase)
+	var day := int(GameTime.current_day)
+
 	var save_data: Dictionary = {
 		"version": SAVE_VERSION,
-		"meta": _make_save_meta(slot_index),
+		"meta": _make_save_meta(slot_index).duplicate(true),
 		"time": {
-			"current_day": GameTime.current_day,
-			"current_phase": GameTime.current_phase
+			"current_day": day,
+			"current_phase": phase
 		},
-		"progress": Unlock.get_save_data(),
-		"story": StoryManager.get_save_data()
+		"progress": progress_data,
+		"story": story_data
 	}
 
-	var save_path: String = get_save_path(slot_index)
-	if not _recover_interrupted_save(save_path):
-		print("存档失败：无法恢复上次中断的存档事务：", save_path)
+	var save_path := get_save_path(slot_index)
+	var temp_path := save_path + SAVE_TEMP_SUFFIX
+	var backup_path := save_path + SAVE_BACKUP_SUFFIX
+
+	return {
+		"slot_index": slot_index,
+		"context": context,
+		"day": day,
+		"phase": phase,
+		"save_data": save_data,
+		"save_path": save_path,
+		"temp_path": temp_path,
+		"backup_path": backup_path,
+		# 路径转换也在主线程完成，后台只使用已经准备好的字符串。
+		"save_absolute": ProjectSettings.globalize_path(save_path),
+		"temp_absolute": ProjectSettings.globalize_path(temp_path),
+		"backup_absolute": ProjectSettings.globalize_path(backup_path)
+	}
+
+
+func _queue_latest_async_request(request: Dictionary) -> void:
+	var slot_index := int(request.get("slot_index", -1))
+
+	# 同一个槽位如果已经有等待中的请求，旧快照没有继续写盘的价值，直接替换成最新状态。
+	for index in range(_pending_async_requests.size() - 1, -1, -1):
+		if int(_pending_async_requests[index].get("slot_index", -1)) == slot_index:
+			_pending_async_requests[index] = request
+			return
+
+	_pending_async_requests.append(request)
+
+
+func _start_async_save_request(request: Dictionary) -> bool:
+	if _save_thread != null and _save_thread.is_started():
+		_queue_latest_async_request(request)
+		return true
+
+	_save_thread = Thread.new()
+	_active_save_worker = SaveWorkerScript.new()
+	_active_async_request = request
+
+	var callable := Callable(_active_save_worker, "write_request").bind(request)
+	var start_error := _save_thread.start(callable, Thread.PRIORITY_LOW)
+
+	if start_error == OK:
+		return true
+
+	# 极少数系统若无法创建线程，回退同步写入，优先保证存档可靠性。
+	push_warning("无法启动后台存档线程，回退为同步存档。错误码：%d" % start_error)
+	_save_thread = null
+	_active_save_worker = null
+	_active_async_request.clear()
+
+	var fallback_worker: RefCounted = SaveWorkerScript.new()
+	var fallback_result = fallback_worker.call("write_request", request)
+	if typeof(fallback_result) != TYPE_DICTIONARY:
+		push_error("同步回退存档返回了无效结果。")
 		return false
 
-	# 将 Dictionary 转成 JSON 字符串。
-	var json_text: String = JSON.stringify(save_data, "\t")
-	var temp_path: String = save_path + SAVE_TEMP_SUFFIX
+	var fallback_result_dict: Dictionary = fallback_result
+	_handle_async_save_result(fallback_result_dict, false)
+	return bool(fallback_result_dict.get("ok", false))
 
-	# 先写临时文件，正式存档在完整写入前始终保持不变。
-	var file: FileAccess = FileAccess.open(temp_path, FileAccess.WRITE)
 
-	# 如果临时文件打开失败，直接返回。
-	if file == null:
-		print("存档失败：无法打开临时存档文件：", temp_path)
-		return false
+func _poll_async_save() -> void:
+	if _save_thread == null or not _save_thread.is_started():
+		# 正常情况下 pending 都会由上一任务完成时接力启动；
+		# 这里也做兜底，处理线程创建失败后的剩余队列。
+		if not _pending_async_requests.is_empty():
+			_start_next_queued_async_save()
+		return
 
-	# 写入并立即刷新到磁盘，再检查本次文件操作是否出错。
-	file.store_string(json_text)
-	file.flush()
-	var write_error: Error = file.get_error()
-	file.close()
+	# is_alive() == false 时 wait_to_finish() 不会阻塞主线程。
+	if _save_thread.is_alive():
+		return
 
-	if write_error != OK:
-		_remove_file_if_exists(temp_path)
-		print("存档失败：临时存档写入错误：", temp_path, "，错误码：", write_error)
-		return false
+	var result = _save_thread.wait_to_finish()
+	_save_thread = null
+	_active_save_worker = null
+	_active_async_request.clear()
 
-	# 临时文件写完后再替换正式存档；替换失败时恢复旧档。
-	if not _commit_temp_save(save_path, temp_path):
-		return false
+	if typeof(result) == TYPE_DICTIONARY:
+		var result_dict: Dictionary = result
+		_handle_async_save_result(result_dict, true)
+	else:
+		push_error("后台存档线程返回了无效结果。")
 
-	print("存档完成：槽位 %d，第 %d 天，阶段：%s" % [
-		slot_index,
-		GameTime.current_day,
-		GameTime.current_phase
-	])
+	_start_next_queued_async_save()
 
-	return true
+
+func _start_next_queued_async_save() -> void:
+	if _pending_async_requests.is_empty():
+		return
+
+	var next_request: Dictionary = _pending_async_requests.pop_front()
+	_start_async_save_request(next_request)
+
+
+func _handle_async_save_result(result: Dictionary, was_async: bool) -> void:
+	var slot_index := int(result.get("slot_index", -1))
+	var day := int(result.get("day", 1))
+	var phase := String(result.get("phase", ""))
+	var context := String(result.get("context", ""))
+
+	if bool(result.get("ok", false)):
+		if OS.is_debug_build():
+			var mode_text := "后台" if was_async else "同步"
+			print("[%s存档] 完成：槽位 %d，第 %d 天，阶段：%s%s" % [
+				mode_text,
+				slot_index,
+				day,
+				phase,
+				("，" + context) if not context.is_empty() else ""
+			])
+		return
+
+	var error_text := String(result.get("error", "未知错误"))
+	var context_prefix := (context + "：") if not context.is_empty() else ""
+	push_error("%s存档失败（槽位 %d）：%s" % [context_prefix, slot_index, error_text])
 
 
 func _commit_temp_save(save_path: String, temp_path: String) -> bool:
@@ -254,6 +453,10 @@ func _remove_file_if_exists(path: String) -> bool:
 # 读取游戏
 # =========================================================
 func load_game(slot_index: int = -1) -> bool:
+	# 读档前必须保证最后一次后台自动存档已经提交。
+	if not flush_async_saves():
+		push_warning("读档前有后台存档失败，将继续尝试读取磁盘上最后一个有效存档。")
+
 	if slot_index <= 0:
 		slot_index = current_slot_index
 
@@ -405,6 +608,9 @@ func _load_story_data(save_data: Dictionary) -> void:
 # 以后做“重新开始游戏”按钮时会用到
 # =========================================================
 func delete_save(slot_index: int = -1) -> bool:
+	# 删除前先结束可能正在写同一槽位的后台任务，避免文件竞争。
+	flush_async_saves()
+
 	if slot_index <= 0:
 		slot_index = current_slot_index
 
@@ -446,6 +652,9 @@ func delete_save(slot_index: int = -1) -> bool:
 # 给存档选择界面显示用
 # =========================================================
 func get_save_meta(slot_index: int) -> Dictionary:
+	# 存档菜单需要读取真实磁盘摘要；进入菜单时允许在这里同步收尾。
+	flush_async_saves()
+
 	if not is_valid_slot(slot_index):
 		return {
 			"slot_index": slot_index,
