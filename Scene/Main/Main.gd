@@ -38,6 +38,7 @@ class_name Main
 const CLINIC_SCENE: PackedScene = preload("res://Scene/clinic/clinic.tscn")
 const NIGHT_SCENE: PackedScene = preload("res://Scene/Night/Night.tscn")
 const STORY_SCENE: PackedScene = preload("res://Scene/Story/Story.tscn")
+const STORY_TREATMENT_SERVICE_SCRIPT = preload("res://System/Treatment/StoryTreatmentService.gd")
 const MAP_SCENE_PATH: String = "res://Scene/Map/Map.tscn"
 
 
@@ -687,12 +688,13 @@ func _on_story_treatment_requested(npc_id: String, disease: DiseaseData) -> void
 
 	_clear_story_treatment_backend()
 
-	story_treatment_backend = CLINIC_SCENE.instantiate()
-	story_treatment_backend.set("story_treatment_backend_mode", true)
+	# 剧情诊疗不再实例化完整的 Clinic.tscn。
+	# 只创建轻量 StoryTreatmentService，避免重复构建整套诊室 UI / Window / 控制器。
+	story_treatment_backend = STORY_TREATMENT_SERVICE_SCRIPT.new()
 	story_treatment_backend_root.add_child(story_treatment_backend)
 
 	if not story_treatment_backend.has_method("prepare_story_npc_treatment"):
-		_cancel_story_treatment("Clinic 缺少 prepare_story_npc_treatment()。")
+		_cancel_story_treatment("StoryTreatmentService 缺少 prepare_story_npc_treatment()。")
 		return
 
 	var prepared: bool = bool(story_treatment_backend.call(
@@ -702,7 +704,7 @@ func _on_story_treatment_requested(npc_id: String, disease: DiseaseData) -> void
 		GameTime.current_day
 	))
 	if not prepared:
-		_cancel_story_treatment("story NPC 诊疗后端准备失败：%s" % npc_id)
+		_cancel_story_treatment("StoryTreatmentService 准备失败：%s" % npc_id)
 		return
 
 	if current_story_scene != null and current_story_scene.has_method("start_story_npc_treatment"):
