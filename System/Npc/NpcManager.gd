@@ -30,6 +30,21 @@ var current_index: int = 0
 # NPC 资源根目录。支持子文件夹递归扫描。
 const NPC_DIR := "res://Data/Npc"
 
+# ============================================================
+# 共享 NPC 模板缓存
+#
+# Clinic 每次重新实例化时都会创建新的 NpcManager。
+# 旧逻辑会让每个实例重新扫描 Data/Npc 并 load 全部资源。
+# 这里使用脚本级 static 缓存：
+# - 本次游戏进程中只扫描 / load 一次 NPC 模板；
+# - 后续 NpcManager 实例直接复用模板资源引用；
+# - npc_list 仍然属于每个 NpcManager 自己，互不共享；
+# - 真正进入诊疗的 NPC 仍然 duplicate(true)，不会修改模板。
+# ============================================================
+static var _shared_catalog_ready: bool = false
+static var _shared_random_npc_pool: Array[NpcData] = []
+static var _shared_story_npc_by_id: Dictionary = {}
+
 
 # ============================================================
 # 生命周期初始化
@@ -44,20 +59,59 @@ func _ready() -> void:
 # 数据加载
 # ============================================================
 
-# 函数功能：
-# 从 res://Data/Npc 目录递归加载所有 NPC 资源。
-# 资源按 NpcData.npc_type 分为 random 与 story 两类。
-func load_all_npcs() -> void:
+# 默认只保证共享 NPC 模板缓存已经准备好。
+# force_reload = true 仅用于开发阶段手动刷新 Data/Npc 后重建缓存。
+func load_all_npcs(force_reload: bool = false) -> void:
+	# 运行时 NPC 永远属于当前 NpcManager 实例。
 	npc_list.clear()
-	random_npc_pool.clear()
-	story_npc_by_id.clear()
 	current_index = 0
 
+	var rebuilt_now := force_reload or not _shared_catalog_ready
+	if rebuilt_now:
+		_rebuild_shared_npc_catalog()
+	else:
+		_attach_shared_npc_catalog()
+
+	if OS.is_debug_build():
+		print(
+			"[NpcManager] NPC 模板缓存：random=",
+			random_npc_pool.size(),
+			"，story=",
+			story_npc_by_id.size(),
+			"，来源=",
+			("重新扫描" if rebuilt_now else "共享缓存")
+		)
+
+
+func _rebuild_shared_npc_catalog() -> void:
+	# 必须先换成新的容器，不能 clear 当前共享容器；
+	# 否则其他仍存活的 NpcManager 会瞬间失去模板。
+	random_npc_pool = []
+	story_npc_by_id = {}
+
+	var started_usec := Time.get_ticks_usec()
 	_scan_npc_dir(NPC_DIR)
 
-	print("加载 random NPC 数量：", random_npc_pool.size())
-	print("加载 story NPC 数量：", story_npc_by_id.size())
-	print("当前运行时 NPC 列表数量：", npc_list.size())
+	_shared_random_npc_pool = random_npc_pool
+	_shared_story_npc_by_id = story_npc_by_id
+	_shared_catalog_ready = true
+
+	if OS.is_debug_build():
+		var elapsed_ms := float(Time.get_ticks_usec() - started_usec) / 1000.0
+		print(
+			"[NpcManager] NPC 模板首次缓存完成：random=",
+			_shared_random_npc_pool.size(),
+			"，story=",
+			_shared_story_npc_by_id.size(),
+			"，耗时 ",
+			"%.2f" % elapsed_ms,
+			" ms"
+		)
+
+
+func _attach_shared_npc_catalog() -> void:
+	random_npc_pool = _shared_random_npc_pool
+	story_npc_by_id = _shared_story_npc_by_id
 
 
 func _scan_npc_dir(dir_path: String) -> void:
