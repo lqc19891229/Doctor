@@ -1302,7 +1302,7 @@ func _finish_story() -> void:
 	_reset_enter_hold_state()
 	_report_story_playback_completed()
 
-	# “结束游戏”现在是明确的播放后动作，不再由 TriggerType 隐式决定。
+	# “播放后 = endgame”表示结束本局，不再由 TriggerType 隐式决定。
 	if story_data != null and story_data.should_end_game():
 		_finish_story_with_fade(&"game_over_requested")
 		return

@@ -10,7 +10,8 @@ extends Node
 # - 治疗成功 / 失败通过一次性的 context 传入，不保存为长期状态。
 # - 同时满足多条剧情时按 SortIndex（小 -> 大）排序，再按 StoryID 排序。
 # - 剧情完整播放后由 apply_story_value_changes() 结算金钱 / 名望 / 心得。
-# - 返回场景、结束游戏、生成治疗 NPC 仍由 Story.gd / Main.gd 执行动作。
+# - “播放后”统一使用 after_play：clinic / night / map / endgame。
+# - 生成治疗 NPC 仍由 Story.gd / Main.gd 执行。
 # =========================================================
 
 var current_story: StoryData = null
@@ -135,17 +136,15 @@ func find_trigger_story(trigger_scene: String, current_day: int) -> StoryData:
 	})
 
 
-# 保留旧调用接口。
-# 新结构里不再存在 night_end 触发类型；新剧情统一在进入 ConditionScene 时检查。
-# 这里仅用于尚未重新导出的旧 night_end .tres，避免过渡期间旧剧情失效。
+# Night 点击“休息，进入明天”时调用。
+# night_end 现在是“触发场景”的一个特殊值，而不是 TriggerType。
 func find_night_end_story(current_day: int) -> StoryData:
 	return _find_matching_story({
-		"scene": "night",
+		"scene": StoryData.TRIGGER_SCENE_NIGHT_END,
 		"day": current_day,
 		"treatment_result": "",
 		"treatment_story_id": "",
 		"check_point": "night_end",
-		"legacy_only": true,
 	})
 
 
@@ -255,11 +254,7 @@ func _is_story_condition_matched(story: StoryData, context: Dictionary) -> bool:
 	if story.play_once and played_story_ids.has(story_id):
 		return false
 
-	# 只对旧 .tres 使用 TriggerType 做兼容筛选。
-	# 新 import_data.py 不再写 trigger_type，因此新剧情完全不会依赖它。
-	if bool(context.get("legacy_only", false)) and not story.uses_legacy_trigger_schema():
-		return false
-
+	# 旧 .tres 仍可通过兼容字段读取；新资源不会写 trigger_type。
 	if story.uses_legacy_trigger_schema():
 		if not _legacy_check_point_matches(story, context):
 			return false
@@ -429,8 +424,8 @@ func get_return_scene(data: StoryData = null) -> String:
 	if not return_scene_override.is_empty():
 		return return_scene_override
 
-	if data != null and not data.return_scene.is_empty():
-		return data.return_scene
+	if data != null:
+		return data.get_return_scene()
 
 	return ""
 

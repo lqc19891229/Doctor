@@ -85,34 +85,9 @@ SHEET_STORY_ALIASES = ["Story", "Stroy", "story", "stroy"]
 SHEET_STORY_LINE = "StoryLine"
 SHEET_STORY_LINE_ALIASES = ["StoryLine", "storyline"]
 
-# 独立剧情工作簿的必需列。
-# 新模板把剧情触发条件放在 Story sheet，把逐句台词放在 StoryLine sheet；
-# StoryLine 不再重复填写 StoryID / StoryName，由同文件的 Story 行自动继承。
+# 独立剧情工作簿 Story sheet 的最终 20 列。
+# Excel 对策划使用中文表头，读取后统一映射到下面这些内部字段。
 STORY_REQUIRED_IMPORT_HEADERS = [
-    "StoryID",
-    "StoryName",
-    "ConditionScene",
-    "ConditionDay",
-    "ConditionStoryID",
-    "ConditionEntryId",
-    "NpcID",
-    "Disease",
-    "ClinicNpcPortraitPath",
-    "PlayOnce",
-    "ReturnScene",
-    "SortIndex",
-]
-
-# Story sheet 新结构：
-# - Conditions：ConditionScene / Day / Money / Reputation / Entry / Story / TreatmentResult
-# - Actions：ReturnScene / EndGame / NpcID / Disease / Portrait / Money / Reputation / Experience
-# - Settings：PlayOnce / SortIndex
-#
-# STORY_LEGACY_TRIGGER_TYPE_KEY 只在导入旧剧情工作簿时暂存旧 TriggerType，
-# 不会写入 Data.xlsx，也不会写入 .tres。
-STORY_LEGACY_TRIGGER_TYPE_KEY = "__legacy_trigger_type__"
-
-STORY_IMPORT_HEADERS = [
     "StoryID",
     "StoryName",
     "ConditionScene",
@@ -124,8 +99,7 @@ STORY_IMPORT_HEADERS = [
     "ConditionEntryId",
     "ConditionStoryID",
     "ConditionTreatmentResult",
-    "ReturnScene",
-    "EndGame",
+    "AfterPlay",
     "NpcID",
     "Disease",
     "ClinicNpcPortraitPath",
@@ -134,7 +108,18 @@ STORY_IMPORT_HEADERS = [
     "Experience",
     "PlayOnce",
     "SortIndex",
+]
+
+# 旧工作簿兼容字段只存在于内存，不写入新的 Data.xlsx / .tres。
+STORY_LEGACY_TRIGGER_TYPE_KEY = "__legacy_trigger_type__"
+STORY_LEGACY_RETURN_SCENE_KEY = "__legacy_return_scene__"
+STORY_LEGACY_END_GAME_KEY = "__legacy_end_game__"
+
+STORY_IMPORT_HEADERS = [
+    *STORY_REQUIRED_IMPORT_HEADERS,
     STORY_LEGACY_TRIGGER_TYPE_KEY,
+    STORY_LEGACY_RETURN_SCENE_KEY,
+    STORY_LEGACY_END_GAME_KEY,
 ]
 STORY_LINE_CONTENT_HEADERS = [
     "LineIndex",
@@ -275,25 +260,69 @@ def _apply_cell_style(cell, style_data: dict[str, Any] | None) -> None:
     cell.number_format = style_data["number_format"]
 
 
+def normalize_story_compare_op(value: Any) -> str:
+    """
+    Excel 中给策划显示 ≥ / ≤；运行时统一使用 gte / lte。
+    同时兼容 >= / <= / gte / lte，未知值原样保留给 validate_data 报错。
+    """
+    text = as_str(value).strip()
+    mapping = {
+        "≥": "gte",
+        ">=": "gte",
+        "gte": "gte",
+        "≤": "lte",
+        "<=": "lte",
+        "lte": "lte",
+    }
+    return mapping.get(text.lower(), text.lower())
+
+
 def _normalize_story_sheet_headers(raw_headers: list[Any]) -> list[str]:
     """
-    规范化 Story sheet 表头。
+    把 Story sheet 表头统一成内部字段。
 
-    新表头直接使用 Condition* / Action 字段。
-    同时兼容旧版 Trigger* 表头，旧 TriggerType 只暂存在
-    STORY_LEGACY_TRIGGER_TYPE_KEY 中，用于一次性迁移语义。
+    最终策划表使用中文 20 列：
+    剧情ID / 剧情名 / 触发场景 / 触发天数 / 金钱判定 / 触发金钱 /
+    名望判定 / 触发名望 / 触发条目 / 触发剧情ID / 触发治疗结果 /
+    播放后 / 人物ID / 疾病 / 人物立绘路径 / 奖励金钱 / 奖励名望 /
+    奖励心得 / PlayOnce / SortIndex。
+
+    同时保留旧英文 Trigger* 工作簿的一次性迁移能力。
     """
     raw_header_names = [as_str(raw_header) for raw_header in raw_headers]
     has_legacy_trigger_type = "TriggerType" in raw_header_names
     has_explicit_condition_reputation = any(
-        header in ("ConditionReputation", "TriggerReputation", "RequiredReputation")
+        header in (
+            "ConditionReputation",
+            "TriggerReputation",
+            "RequiredReputation",
+            "触发名望",
+        )
         for header in raw_header_names
     )
 
-    normalized_headers: list[str] = []
-    reputation_column_count = 0
-
     direct_mapping = {
+        # 最终中文表头
+        "剧情ID": "StoryID",
+        "剧情名": "StoryName",
+        "触发场景": "ConditionScene",
+        "触发天数": "ConditionDay",
+        "金钱判定": "ConditionMoneyOp",
+        "触发金钱": "ConditionMoney",
+        "名望判定": "ConditionReputationOp",
+        "触发名望": "ConditionReputation",
+        "触发条目": "ConditionEntryId",
+        "触发剧情ID": "ConditionStoryID",
+        "触发治疗结果": "ConditionTreatmentResult",
+        "播放后": "AfterPlay",
+        "人物ID": "NpcID",
+        "疾病": "Disease",
+        "人物立绘路径": "ClinicNpcPortraitPath",
+        "奖励金钱": "Money",
+        "奖励名望": "Reputation",
+        "奖励心得": "Experience",
+
+        # 旧 / 过渡版英文表头
         "TriggerType": STORY_LEGACY_TRIGGER_TYPE_KEY,
         "TriggerScene": "ConditionScene",
         "TriggerDay": "ConditionDay",
@@ -307,16 +336,21 @@ def _normalize_story_sheet_headers(raw_headers: list[Any]) -> list[str]:
         "TriggerEntryID": "ConditionEntryId",
         "ConditionEntryID": "ConditionEntryId",
         "EntryId": "ConditionEntryId",
+        "ReturnScene": STORY_LEGACY_RETURN_SCENE_KEY,
+        "EndGame": STORY_LEGACY_END_GAME_KEY,
         "MoneyChange": "Money",
         "ReputationChange": "Reputation",
         "ExperienceChange": "Experience",
     }
 
+    normalized_headers: list[str] = []
+    reputation_column_count = 0
+
     for header in raw_header_names:
         if header == "Reputation":
             reputation_column_count += 1
             # 极旧模板没有 TriggerReputation，但有 TriggerType：
-            # 第一个 Reputation 当触发名望，第二个才是播放后变化。
+            # 第一个 Reputation 当触发名望，第二个才是奖励名望。
             if (
                 has_legacy_trigger_type
                 and not has_explicit_condition_reputation
@@ -337,84 +371,104 @@ def normalize_story_row_values(
     row: dict[str, Any],
     story_lookup: dict[str, dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    """
-    把一条 Story 行统一成新结构。
-
-    对旧 TriggerType 的迁移：
-    - scene_enter / night_end -> 只保留 ConditionScene 等条件；
-    - story_npc_cured -> ConditionTreatmentResult=cured；
-    - story_npc_failed_* -> ConditionTreatmentResult=failed；
-    - *_over -> EndGame=true；
-    - failed_retry -> 把来源主剧情的 NpcID / Disease / 立绘复制为播放后动作。
-    """
+    """把一条 Story 行统一成最终内部结构。"""
     normalized = dict(row)
     legacy_type = as_str(normalized.get(STORY_LEGACY_TRIGGER_TYPE_KEY)).lower()
 
     normalized["ConditionScene"] = as_str(normalized.get("ConditionScene")).lower()
-    normalized["ReturnScene"] = as_str(normalized.get("ReturnScene")).lower()
-    normalized["ConditionMoneyOp"] = as_str(normalized.get("ConditionMoneyOp")).lower()
-    normalized["ConditionReputationOp"] = as_str(
+    normalized["ConditionMoneyOp"] = normalize_story_compare_op(
+        normalized.get("ConditionMoneyOp")
+    )
+    normalized["ConditionReputationOp"] = normalize_story_compare_op(
         normalized.get("ConditionReputationOp")
-    ).lower()
+    )
     normalized["ConditionTreatmentResult"] = as_str(
         normalized.get("ConditionTreatmentResult")
     ).lower()
+    normalized["AfterPlay"] = as_str(normalized.get("AfterPlay")).lower()
 
-    # 新表允许阈值为 0，因此是否启用条件由 Op 判断。
-    # 旧 TriggerMoney / TriggerReputation 的 0 原本表示“不限制”，迁移时清空。
-    if legacy_type and as_str(normalized.get("ConditionMoney")):
-        if as_int(normalized.get("ConditionMoney"), 0) == 0:
-            normalized["ConditionMoney"] = ""
-            normalized["ConditionMoneyOp"] = ""
-    if legacy_type and as_str(normalized.get("ConditionReputation")):
-        if as_int(normalized.get("ConditionReputation"), 0) == 0:
-            normalized["ConditionReputation"] = ""
-            normalized["ConditionReputationOp"] = ""
-
-    if (
-        as_str(normalized.get("ConditionMoney"))
-        and not normalized["ConditionMoneyOp"]
+    # 旧 ReturnScene / EndGame 迁移到单一“播放后”字段。
+    legacy_return_scene = as_str(
+        normalized.get(STORY_LEGACY_RETURN_SCENE_KEY)
+    ).lower()
+    if not normalized["AfterPlay"] and legacy_return_scene in (
+        "clinic",
+        "night",
+        "map",
     ):
-        normalized["ConditionMoneyOp"] = "gte"
+        normalized["AfterPlay"] = legacy_return_scene
 
-    if (
-        as_str(normalized.get("ConditionReputation"))
-        and not normalized["ConditionReputationOp"]
-    ):
-        normalized["ConditionReputationOp"] = "gte"
+    if as_bool(normalized.get(STORY_LEGACY_END_GAME_KEY), False):
+        normalized["AfterPlay"] = "endgame"
 
-    if legacy_type == "day_reputation_below_over":
+    if legacy_type:
+        # night_end 现在并入“触发场景”。
+        if legacy_type == "night_end":
+            normalized["ConditionScene"] = "night_end"
+
+        # 旧数值门槛默认是 >=；0 原本表示“不限制”。
+        if as_str(normalized.get("ConditionMoney")):
+            if as_int(normalized.get("ConditionMoney"), 0) == 0:
+                normalized["ConditionMoney"] = ""
+                normalized["ConditionMoneyOp"] = ""
+            elif not normalized["ConditionMoneyOp"]:
+                normalized["ConditionMoneyOp"] = "gte"
+
         if as_str(normalized.get("ConditionReputation")):
-            # 旧语义是严格 <；新语义只有 <=，整数名望下减 1 保持行为一致。
-            normalized["ConditionReputation"] = (
-                as_int(normalized.get("ConditionReputation"), 0) - 1
+            if as_int(normalized.get("ConditionReputation"), 0) == 0:
+                normalized["ConditionReputation"] = ""
+                normalized["ConditionReputationOp"] = ""
+            elif not normalized["ConditionReputationOp"]:
+                normalized["ConditionReputationOp"] = "gte"
+
+        if legacy_type == "day_reputation_below_over":
+            if as_str(normalized.get("ConditionReputation")):
+                # 旧语义是严格 <；整数名望下改成 <= threshold - 1。
+                normalized["ConditionReputation"] = (
+                    as_int(normalized.get("ConditionReputation"), 0) - 1
+                )
+                normalized["ConditionReputationOp"] = "lte"
+
+        if legacy_type == "story_npc_cured":
+            normalized["ConditionTreatmentResult"] = "cured"
+        elif legacy_type in (
+            "story_npc_failed_retry",
+            "story_npc_failed_back",
+            "story_npc_failed_over",
+        ):
+            normalized["ConditionTreatmentResult"] = "failed"
+
+        if legacy_type in (
+            "day_reputation_over",
+            "day_reputation_below_over",
+            "story_npc_failed_over",
+        ):
+            normalized["AfterPlay"] = "endgame"
+
+        # 旧治疗结果剧情沿用来源主剧情的触发场景。
+        # 这样原本由 night_end 发起的治疗在迁移后会统一绑定到 night_end，
+        # 不会因为旧结果剧情仍写 night 而失配。
+        if (
+            legacy_type in (
+                "story_npc_cured",
+                "story_npc_failed_retry",
+                "story_npc_failed_back",
+                "story_npc_failed_over",
             )
-            normalized["ConditionReputationOp"] = "lte"
+            and story_lookup is not None
+        ):
+            source_story_id = as_str(normalized.get("ConditionStoryID"))
+            source = story_lookup.get(source_story_id)
+            if source is not None:
+                source_scene = as_str(source.get("ConditionScene")).lower()
+                if source_scene:
+                    normalized["ConditionScene"] = source_scene
 
-    if legacy_type == "story_npc_cured":
-        normalized["ConditionTreatmentResult"] = "cured"
-    elif legacy_type in (
-        "story_npc_failed_retry",
-        "story_npc_failed_back",
-        "story_npc_failed_over",
-    ):
-        normalized["ConditionTreatmentResult"] = "failed"
-
-    if legacy_type in (
-        "day_reputation_over",
-        "day_reputation_below_over",
-        "story_npc_failed_over",
-    ):
-        normalized["EndGame"] = True
-
-    # failed_retry 不再是类型：迁移成“失败条件 + 再生成同一患者”的动作。
-    if legacy_type == "story_npc_failed_retry" and story_lookup is not None:
-        source_story_id = as_str(normalized.get("ConditionStoryID"))
-        source = story_lookup.get(source_story_id)
-        if source is not None:
-            for field_name in ("NpcID", "Disease", "ClinicNpcPortraitPath"):
-                if not as_str(normalized.get(field_name)):
-                    normalized[field_name] = source.get(field_name, "")
+                # failed_retry 迁移成“失败条件 + 再生成同一患者”的动作。
+                if legacy_type == "story_npc_failed_retry":
+                    for field_name in ("NpcID", "Disease", "ClinicNpcPortraitPath"):
+                        if not as_str(normalized.get(field_name)):
+                            normalized[field_name] = source.get(field_name, "")
 
     return normalized
 
@@ -426,8 +480,26 @@ def _read_story_sheet_rows(ws, required_headers: list[str], source_name: str) ->
         return []
 
     raw_headers = [cell.value for cell in sheet_rows[0]]
+    raw_header_names = [as_str(value) for value in raw_headers]
     headers = _normalize_story_sheet_headers(raw_headers)
-    missing = [name for name in required_headers if name not in headers]
+
+    # 最终中文 20 列严格校验；旧 Trigger* 工作簿只做迁移所需的最低校验。
+    effective_required_headers = required_headers
+    if required_headers == STORY_REQUIRED_IMPORT_HEADERS and "TriggerType" in raw_header_names:
+        effective_required_headers = [
+            "StoryID",
+            "StoryName",
+            "ConditionScene",
+            "ConditionDay",
+            "ConditionStoryID",
+            "ConditionEntryId",
+            "NpcID",
+            "Disease",
+            "ClinicNpcPortraitPath",
+            "PlayOnce",
+        ]
+
+    missing = [name for name in effective_required_headers if name not in headers]
     if missing:
         raise ValueError(f"剧情文件 {source_name} 的 {ws.title} sheet 缺少列：{missing}")
 
@@ -1741,30 +1813,39 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
                 )
 
         condition_scene = as_str(row.get("ConditionScene")).lower()
-        if condition_scene and condition_scene not in ("clinic", "night", "map"):
+        if condition_scene and condition_scene not in (
+            "clinic",
+            "night",
+            "map",
+            "night_end",
+        ):
             errors.append(
-                f"Story ConditionScene 非法: {story_id} -> {condition_scene}"
+                f"Story 触发场景非法: {story_id} -> {condition_scene}"
             )
 
-        money_op = as_str(row.get("ConditionMoneyOp")).lower()
+        money_op = normalize_story_compare_op(row.get("ConditionMoneyOp"))
+        money_value_text = as_str(row.get("ConditionMoney"))
         if money_op not in ("", "gte", "lte"):
             errors.append(
-                f"Story ConditionMoneyOp 非法: {story_id} -> {money_op}"
+                f"Story 金钱判定非法: {story_id} -> {row.get('ConditionMoneyOp')}；只允许 ≥ 或 ≤"
             )
-        if money_op and not as_str(row.get("ConditionMoney")):
-            errors.append(
-                f"Story 填写了 ConditionMoneyOp 但缺少 ConditionMoney: {story_id}"
-            )
+        if money_op and not money_value_text:
+            errors.append(f"Story 填写了金钱判定但缺少触发金钱: {story_id}")
+        if money_value_text and not money_op:
+            errors.append(f"Story 填写了触发金钱但缺少金钱判定: {story_id}")
 
-        reputation_op = as_str(row.get("ConditionReputationOp")).lower()
+        reputation_op = normalize_story_compare_op(
+            row.get("ConditionReputationOp")
+        )
+        reputation_value_text = as_str(row.get("ConditionReputation"))
         if reputation_op not in ("", "gte", "lte"):
             errors.append(
-                f"Story ConditionReputationOp 非法: {story_id} -> {reputation_op}"
+                f"Story 名望判定非法: {story_id} -> {row.get('ConditionReputationOp')}；只允许 ≥ 或 ≤"
             )
-        if reputation_op and not as_str(row.get("ConditionReputation")):
-            errors.append(
-                f"Story 填写了 ConditionReputationOp 但缺少 ConditionReputation: {story_id}"
-            )
+        if reputation_op and not reputation_value_text:
+            errors.append(f"Story 填写了名望判定但缺少触发名望: {story_id}")
+        if reputation_value_text and not reputation_op:
+            errors.append(f"Story 填写了触发名望但缺少名望判定: {story_id}")
 
         treatment_result = as_str(row.get("ConditionTreatmentResult")).lower()
         if treatment_result not in ("", "cured", "failed"):
@@ -1778,9 +1859,14 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
                 f"Story 治疗结果剧情缺少 ConditionStoryID: {story_id}"
             )
 
-        return_scene = as_str(row.get("ReturnScene")).lower()
-        if return_scene and return_scene not in ("clinic", "night", "map"):
-            errors.append(f"Story ReturnScene 非法: {story_id} -> {return_scene}")
+        after_play = as_str(row.get("AfterPlay")).lower()
+        if after_play and after_play not in (
+            "clinic",
+            "night",
+            "map",
+            "endgame",
+        ):
+            errors.append(f"Story 播放后非法: {story_id} -> {after_play}")
 
         clinic_npc_id = (
             as_str(row.get("NpcID"))
@@ -2354,8 +2440,9 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
     """
     根据 Story / StoryLine 生成剧情 .tres。
 
-    新资源只写 Conditions / Actions / Settings，
-    不再输出 trigger_type / trigger_scene / required_reputation_points 等旧字段。
+    新资源只写 Conditions / Actions / Settings。
+    night_end 写入 condition_scene；endgame 写入 after_play。
+    不再输出 TriggerType / ReturnScene / EndGame 等旧字段。
     """
     story_map = indexed_data["story_map"]
     story_line_map = indexed_data["story_line_map"]
@@ -2378,11 +2465,13 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
 
         condition_scene = as_str(story_row.get("ConditionScene")).lower()
         condition_day = as_int(story_row.get("ConditionDay"), 0)
-        condition_money_op = as_str(story_row.get("ConditionMoneyOp")).lower()
+        condition_money_op = normalize_story_compare_op(
+            story_row.get("ConditionMoneyOp")
+        )
         condition_money = as_int(story_row.get("ConditionMoney"), 0)
-        condition_reputation_op = as_str(
+        condition_reputation_op = normalize_story_compare_op(
             story_row.get("ConditionReputationOp")
-        ).lower()
+        )
         condition_reputation = as_int(
             story_row.get("ConditionReputation"), 0
         )
@@ -2395,8 +2484,7 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             entry_text_to_ids,
         )
 
-        return_scene = as_str(story_row.get("ReturnScene")).lower()
-        end_game = as_bool(story_row.get("EndGame"), False)
+        after_play = as_str(story_row.get("AfterPlay")).lower()
         money_change = as_int(story_row.get("Money"), 0)
         reputation_points_change = as_int(story_row.get("Reputation"), 0)
         experience_points_change = as_int(story_row.get("Experience"), 0)
@@ -2525,8 +2613,7 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             f'condition_entry_id = {format_godot_string(condition_entry_id)}',
             f'condition_story_id = {format_godot_string(condition_story_id)}',
             f'condition_treatment_result = {format_godot_string(condition_treatment_result)}',
-            f'return_scene = {format_godot_string(return_scene)}',
-            f'end_game = {"true" if end_game else "false"}',
+            f'after_play = {format_godot_string(after_play)}',
             f'clinic_npc_id = {format_godot_string(clinic_npc_id)}',
             f'money_change = {money_change}',
             f'reputation_points_change = {reputation_points_change}',

@@ -513,7 +513,7 @@ func _enter_map() -> void:
 func _on_story_requested(story_path: String, return_target: String = "") -> void:
 	# Main 不再根据剧情路径判断是否重复播放。
 	# 是否能播放，统一交给 StoryData.story_id + StoryManager 判断。
-	# return_target 只保留为旧信号兼容参数；实际返回目标读取 StoryData.return_scene。
+	# return_target 只保留为旧信号兼容参数；实际行为读取 StoryData.after_play。
 	_play_story(story_path, return_target)
 
 
@@ -546,11 +546,17 @@ func _play_story(story_path: String, _legacy_return_target: String = "") -> void
 		print("剧情已播放，跳过：", story_id)
 		return
 
-	# 返回目标由当前正在播放的 StoryData 决定。
-	pending_story_return_target = story_data.return_scene
-	if pending_story_return_target.is_empty():
-		pending_story_return_target = story_data.get_condition_scene()
-	if pending_story_return_target.is_empty():
+	# “播放后”决定剧情结束目标。endgame 不需要返回场景。
+	pending_story_return_target = story_data.get_return_scene()
+	if pending_story_return_target.is_empty() and not story_data.should_end_game():
+		var trigger_scene := story_data.get_condition_scene()
+		# night_end 是触发时机，默认返回仍然是 Night。
+		if trigger_scene == StoryData.TRIGGER_SCENE_NIGHT_END:
+			pending_story_return_target = "night"
+		elif trigger_scene in ["clinic", "night", "map"]:
+			pending_story_return_target = trigger_scene
+
+	if pending_story_return_target.is_empty() and not story_data.should_end_game():
 		pending_story_return_target = "clinic"
 
 	story_paused_clinic_clock = false
@@ -702,10 +708,10 @@ func _on_followup_story_requested(
 	if next_story == null:
 		return
 
-	# 不需要恢复诊疗的后续剧情，结束后按它自己的 return_scene 返回。
-	# Game Over 类型会在剧情结束时发送独立的 Game Over 信号。
+	# 不需要恢复诊疗的后续剧情，结束后按它自己的“播放后”配置返回。
+	# endgame 会在剧情结束时发送独立的 Game Over 信号。
 	if not resume_treatment:
-		var next_return_target := next_story.return_scene.strip_edges()
+		var next_return_target := next_story.get_return_scene()
 		if next_return_target != "":
 			pending_story_return_target = next_return_target
 
@@ -749,7 +755,7 @@ func _is_game_over_story(story: StoryData) -> bool:
 	if story == null:
 		return false
 
-	# Game Over 是明确动作，不再由 TriggerType 推断。
+	# “播放后 = endgame”表示结束本局。
 	return story.should_end_game()
 
 
@@ -789,7 +795,7 @@ func _on_story_finished() -> void:
 	story_paused_clinic_clock = false
 
 	if target == "clinic":
-		# return_scene 决定剧情结束后的目标场景。
+		# “播放后”决定剧情结束后的目标场景。
 		# 如果当前处于 Night，进入 Clinic 前先正常结束夜晚并推进到下一天；
 		# 如果本来就在白天，则只返回 Clinic，不写盘。
 		if GameTime != null and not GameTime.is_day():
@@ -841,8 +847,8 @@ func _on_clinic_finished() -> void:
 # 天数 +1
 # =========================================================
 func _on_night_finished() -> void:
-	# 新结构不再定义 night_end 类型；新剧情统一在进入 ConditionScene 时检查。
-	# 这里仅保留旧 night_end .tres 的兼容入口，重新导表后通常会直接返回 null。
+	# night_end 现在是“触发场景”的一个特殊值。
+	# 只在玩家点击“休息，进入明天”这一刻检查，不会和普通 night 入口混在一起。
 	var pending_story: StoryData = StoryManager.find_night_end_story(GameTime.current_day)
 
 	if pending_story != null:
