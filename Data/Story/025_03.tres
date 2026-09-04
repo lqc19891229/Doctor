@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
 [ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_1"]
+[ext_resource type="Resource" path="res://Data/Disease/shen_jing_bu_zu.tres" id="clinic_disease_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/xing_kong/xing_kong_sick.png" id="clinic_npc_portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_2"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
@@ -11,21 +13,29 @@ portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "虽然这不是个正经和尚，但还是得好好想想他得的是什么病。"
-portrait = ExtResource("portrait_1")
+portrait = ExtResource("portrait_2")
 
 [resource]
 script = ExtResource("2_storydata")
 story_id = "025_03"
-trigger_story_id = "025_01"
-trigger_type = "story_npc_failed_retry"
-trigger_scene = "clinic"
-trigger_day = 0
-required_reputation_points = 0
+story_name = "025治疗失败"
+condition_scene = ""
+condition_day = 0
+condition_money_op = ""
+condition_money = 0
+condition_reputation_op = ""
+condition_reputation = 0
+condition_entry_id = ""
+condition_story_id = "025_01"
+condition_treatment_result = "failed"
+after_play = "clinic"
+clinic_npc_id = "xing_kong"
+money_change = 0
 reputation_points_change = 0
 experience_points_change = 0
-unlock_entry_id = ""
 play_once = false
+sort_index = 0
 background_mode = "current_scene"
-return_scene = "clinic"
-clinic_npc_id = ""
+clinic_disease = ExtResource("clinic_disease_1")
+clinic_npc_portrait = ExtResource("clinic_npc_portrait_1")
 lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001")])
