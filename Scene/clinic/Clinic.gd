@@ -1274,7 +1274,10 @@ func submit_prescription() -> bool:
 			# JudgementResult 的“治疗收入”包含本次实际收到的谢仪礼。
 			last_treatment_income_wen = patient_total_income_wen
 
-			summary_text += "\n诊费：+%d文" % consultation_fee_wen
+			if consultation_fee_wen > 0:
+				summary_text += "\n诊费：+%d文" % consultation_fee_wen
+			else:
+				summary_text += "\n诊费：0文"
 
 			if medicine_sales_wen > 0:
 				summary_text += "\n药材销售：+%d文" % medicine_sales_wen
@@ -1289,10 +1292,7 @@ func submit_prescription() -> bool:
 
 			_update_money_point_ui(true)
 
-			# 每位病人提交后保存账本：
-			# 收入保存诊费与实际药材销售额；成本留到正常白天结束时统一扣除。
-			if SaveManager != null and SaveManager.has_method("save_game"):
-				SaveManager.save_game()
+			# 账本变化只保留在内存，正常白天结束时统一写盘。
 
 	# random NPC 提交判定后根据评级改变名望。
 	# 妙手回春：名望 +10；治疗成功：名望不变；治疗失败：名望 -10。
@@ -1319,8 +1319,7 @@ func submit_prescription() -> bool:
 			if Unlock.has_method("get_reputation_points"):
 				summary_text += "\n当前名望：%d" % Unlock.get_reputation_points()
 
-			if SaveManager != null and SaveManager.has_method("save_game"):
-				SaveManager.save_game()
+			# 名望变化只保留在内存，正常白天结束时统一写盘。
 	elif reputation_reward != 0 and was_already_submitted:
 		summary_text += "\n本病人已提交过处方，不重复改变名望。"
 		if Unlock != null and Unlock.has_method("get_reputation_points"):
@@ -1362,9 +1361,7 @@ func submit_prescription() -> bool:
 		if clinical_log_window != null and clinical_log_window.has_method("refresh_view"):
 			clinical_log_window.refresh_view()
 
-		# 获得心得和自动解锁后立即存档，避免切场景或退出时丢失。
-		if SaveManager != null and SaveManager.has_method("save_game"):
-			SaveManager.save_game()
+		# 心得和自动解锁只保留在内存，正常白天结束时统一写盘。
 	elif uses_fixed_treatment_rewards and is_miaoshouhuichun and was_already_submitted:
 		_update_thoughts_point_ui(true)
 		summary_text += "\n本病人已提交过处方，不重复获得心得。"
@@ -1965,9 +1962,7 @@ func finish_story_treatment_attempt(
 		last_reputation_change = 0
 		last_experience_change = 0
 
-	if SaveManager != null and SaveManager.has_method("save_game"):
-		SaveManager.save_game()
-
+	# story NPC 治疗结果只保留在内存，由后续昼夜阶段结束统一写盘。
 	return next_story
 
 

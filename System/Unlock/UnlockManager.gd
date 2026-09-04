@@ -412,8 +412,8 @@ func _ensure_daily_finance_ledger(day: int) -> void:
 # 每名 random NPC 第一次提交处方时调用一次。
 #
 # treatment_success:
-# - true：妙手回春 / 治疗成功，药材售价总和计入收入。
-# - false：治疗失败，药材销售收入为 0。
+# - true：妙手回春 / 治疗成功，收取诊费，药材售价总和计入收入。
+# - false：治疗失败，诊费为 0，药材销售收入也为 0。
 #
 # prescription_sell_wen：本张处方按售价计算出的总和。
 # prescription_cost_wen：本张处方按进价计算出的总和。
@@ -428,9 +428,11 @@ func record_random_npc_treatment_finance(
 ) -> Dictionary:
 	_ensure_daily_finance_ledger(day)
 
-	# 使用提交处方这一刻的当前名望计算诊费。
+	# 只有治疗成功 / 妙手回春才收诊费。
+	# 治疗失败时诊费为 0。
+	# 成功时使用提交处方这一刻的当前名望计算诊费；
 	# 本次治疗随后产生的名望变化，从下一位病人开始影响诊费。
-	var consultation_fee := get_random_npc_consultation_fee_wen()
+	var consultation_fee := get_random_npc_consultation_fee_wen() if treatment_success else 0
 	var medicine_sales := maxi(prescription_sell_wen, 0) if treatment_success else 0
 	var medicine_purchase_cost := maxi(prescription_cost_wen, 0)
 

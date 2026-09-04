@@ -53,11 +53,6 @@ var pending_story_return_target: String = ""
 # 本次剧情是否暂停了 Clinic 计时
 var story_paused_clinic_clock: bool = false
 
-# 当前是否处于 story NPC 的完整诊疗剧情链中。
-# 诊疗链结束之前，剧情播放记录、名望和心得只保留在内存，
-# 不写入存档；只有整条诊疗链正式结束后才统一保存。
-var story_treatment_chain_active: bool = false
-
 # 存档槽弹窗模式：
 # "load" = 读取存档
 # "new_game" = 新游戏选择槽位
@@ -134,10 +129,10 @@ func _hide_main_menu() -> void:
 # =========================================================
 # 新游戏按钮
 # 规则：
-# 1. 删除旧存档
+# 1. 选择存档槽；若确认覆盖已有槽位，则先删除旧存档
 # 2. 重置时间
 # 3. 重置解锁进度
-# 4. 创建新存档
+# 4. 不立即写盘，等待第一次昼夜阶段结束
 # 5. 进入第 1 天白天诊室
 # =========================================================
 func _on_new_game_button_pressed() -> void:
@@ -241,7 +236,7 @@ func _refresh_save_slot_popup() -> void:
 			else:
 				button.text = "新游戏槽位 %d\n空存档" % slot_index
 
-			# 新游戏模式下，空槽位也必须可以点击，用于创建新存档。
+			# 新游戏模式下，空槽位也必须可以点击，用于开始新游戏。
 			button.disabled = false
 
 
@@ -285,6 +280,17 @@ func _start_new_game_in_slot_without_confirm(slot_index: int) -> void:
 		print("新游戏失败：无效槽位 %d" % slot_index)
 		return
 
+	# 新游戏本身不写盘。若玩家确认覆盖已有槽位，先清除旧档，
+	# 后续只会在“白天结束进入 Night”或“Night 结束进入下一天”时生成新存档。
+	if SaveManager.has_save(slot_index):
+		var delete_success: bool = SaveManager.delete_save(slot_index)
+		if not delete_success:
+			push_warning("新游戏失败：无法清除槽位 %d 的旧存档。" % slot_index)
+			save_slot_popup_mode = "new_game"
+			_refresh_save_slot_popup()
+			save_slot_popup.visible = true
+			return
+
 	SaveManager.current_slot_index = slot_index
 
 	GameTime.start_new_game()
@@ -294,16 +300,6 @@ func _start_new_game_in_slot_without_confirm(slot_index: int) -> void:
 	# 否则如果从旧流程回到主菜单再点新游戏，
 	# StoryManager 内存里可能还残留 played_story_ids。
 	StoryManager.load_save_data({})
-
-	# SaveManager 会用临时文件安全替换旧存档。
-	# 不要提前删除旧档；新档写入失败时，玩家仍然可以读取原存档。
-	var save_success: bool = SaveManager.save_game(slot_index)
-	if not save_success:
-		push_warning("新游戏存档写入失败，已保留槽位 %d 的原存档。" % slot_index)
-		save_slot_popup_mode = "new_game"
-		_refresh_save_slot_popup()
-		save_slot_popup.visible = true
-		return
 
 	_hide_main_menu()
 	_enter_clinic()
@@ -577,9 +573,7 @@ func _play_story(story_path: String, _legacy_return_target: String = "") -> void
 			story_paused_clinic_clock = false
 		return
 
-	# 两种 Game Over 剧情都不覆盖最后一个可读取的存档点。
-	if not _is_game_over_story(story_data):
-		_save_game_with_warning("进入剧情前")
+	# 剧情进入只更新内存状态，不在这里写盘。
 
 	# Clinic / Night 即将被隐藏。先取得它当前实际显示的季节背景，
 	# 再注入 Story；Texture2D 资源引用不会因为来源场景隐藏而失效。
@@ -641,11 +635,6 @@ func _on_story_playback_completed(completed_story: StoryData) -> void:
 	if completed_story == null:
 		return
 
-	# 只要这段剧情会进入 story NPC 诊疗，从这里开始就视为一条完整诊疗链。
-	# 必须在点数结算前开启，因为发起诊疗的主剧情本身可能没有任何点数变化。
-	if completed_story.clinic_npc_id.strip_edges() != "":
-		story_treatment_chain_active = true
-
 	if StoryManager == null or not StoryManager.has_method("apply_story_point_changes"):
 		push_warning("StoryManager 缺少 apply_story_point_changes()，无法结算剧情名望与心得。")
 		return
@@ -661,22 +650,11 @@ func _on_story_playback_completed(completed_story: StoryData) -> void:
 	if reputation_change == 0 and experience_change == 0:
 		return
 
-	# Game Over 剧情保持原有规则：只改变当前内存状态，不覆盖最后一个可读取存档点。
-	if _is_game_over_story(completed_story):
-		return
-
-	# story NPC 诊疗链进行中时，只修改内存，不中途落盘。
-	# 最终由 _on_story_finished() 在整条链结束后统一保存。
-	if story_treatment_chain_active:
-		return
-
-	_save_game_with_warning("剧情播放完成并结算名望与心得")
+	# 剧情名望与心得变化只保留在内存，等待下一次昼夜阶段结束统一写盘。
 
 
 func _on_story_treatment_requested(npc_id: String, disease: DiseaseData) -> void:
-	# 兜底：即使某段剧情没有正确配置 clinic_npc_id，只要实际发起了 story NPC 诊疗，
-	# 也必须进入诊疗链事务，禁止后续过程中的中途存档。
-	story_treatment_chain_active = true
+	# story NPC 诊疗过程只修改内存，不在诊疗中途写盘。
 
 	_clear_story_treatment_backend()
 
@@ -740,13 +718,7 @@ func _on_followup_story_requested(
 			current_story_scene.call("play_followup_story", next_story, true)
 		return
 
-	var is_game_over_story := _is_game_over_story(next_story)
-
-	# Game Over 不覆盖玩家最后一个可读取的存档点。
-	# story NPC 诊疗链中也不在切换 followup 时中途落盘，
-	# 防止来源剧情已写入 played_story_ids、但后续剧情状态未保存而造成断链。
-	if not is_game_over_story and not story_treatment_chain_active:
-		_save_game_with_warning("切换后续剧情")
+	# 连续剧情切换只更新内存，不在 followup 切换时写盘。
 
 	if current_story_scene != null and current_story_scene.has_method("play_followup_story"):
 		current_story_scene.call(
@@ -761,7 +733,6 @@ func _on_story_game_over_requested() -> void:
 	StoryManager.mark_current_story_played()
 	StoryManager.clear_story()
 	pending_story_return_target = ""
-	story_treatment_chain_active = false
 
 	if story_paused_clinic_clock:
 		if GameTime != null and GameTime.has_method("cancel_story_pause_state"):
@@ -786,13 +757,10 @@ func _is_game_over_story(story: StoryData) -> bool:
 
 
 func _on_story_finished() -> void:
-	# 只有走到正式结束信号，才把当前剧情记为已播放并保存。
+	# 只有走到正式结束信号，才把当前剧情记为已播放。
+	# 剧情状态继续保留在内存，只有昼夜阶段真正结束时才写盘。
 	StoryManager.mark_current_story_played()
 	StoryManager.clear_story()
-
-	# 如果此前处于 story NPC 诊疗链，到这里说明整条链已经正式完成。
-	# 下面原有的返回场景存档就是这次诊疗事务的最终提交。
-	story_treatment_chain_active = false
 
 	var target := pending_story_return_target
 	pending_story_return_target = ""
@@ -803,15 +771,21 @@ func _on_story_finished() -> void:
 		# 陈皮 / 半夏工钱与食费只允许在“正常白天结束”
 		# (_on_clinic_finished) 时统一结算。
 		# 白天接诊时已经实时入账的诊费与药材利润保持不变。
+		var did_finish_day: bool = false
 		if story_paused_clinic_clock:
 			if GameTime != null and GameTime.has_method("cancel_story_pause_state"):
 				GameTime.cancel_story_pause_state()
 
 			if GameTime != null and GameTime.is_day():
 				GameTime.finish_day()
+				did_finish_day = true
 
 		story_paused_clinic_clock = false
-		_save_game_with_warning("剧情结束并进入夜晚（不做日结支出）")
+
+		# 只有本次确实完成“白天 → Night”阶段切换才写盘。
+		if did_finish_day:
+			_save_game_with_warning("白天结束（剧情返回 Night，不做日结支出）")
+
 		_enter_night(false)
 		return
 
@@ -820,17 +794,13 @@ func _on_story_finished() -> void:
 	if target == "clinic":
 		# return_scene 决定剧情结束后的目标场景。
 		# 如果当前处于 Night，进入 Clinic 前先正常结束夜晚并推进到下一天；
-		# 如果本来就在白天，则保留剧情暂停状态，由新 Clinic 恢复计时。
+		# 如果本来就在白天，则只返回 Clinic，不写盘。
 		if GameTime != null and not GameTime.is_day():
 			GameTime.finish_night()
-			_save_game_with_warning("剧情结束并进入下一天诊室")
-		else:
-			_save_game_with_warning("剧情结束并返回诊室")
+			_save_game_with_warning("夜晚结束（剧情返回下一天诊室）")
 
 		_enter_clinic()
 		return
-
-	_save_game_with_warning("剧情结束")
 
 	if target == "map":
 		_enter_map()

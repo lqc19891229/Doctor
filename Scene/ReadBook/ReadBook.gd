@@ -420,7 +420,7 @@ func _show_entry_by_index(index: int) -> void:
 	# 药材会在此时同步解锁；方剂和疾病通常已由依赖关系提前解锁。
 	if was_unread:
 		Unlock.read_entry(selected_entry)
-		_save_and_notify_player_data_changed()
+		_notify_player_data_changed()
 
 	_set_detail_text(_build_entry_text(selected_entry))
 	_update_thoughts_point_ui()
@@ -464,10 +464,8 @@ func _refresh_entry_list_titles_keep_selection(entry_id: String) -> void:
 		entry_list.select(selected_index)
 
 
-func _save_and_notify_player_data_changed() -> void:
-	if SaveManager != null and SaveManager.has_method("save_game"):
-		SaveManager.save_game()
-
+func _notify_player_data_changed() -> void:
+	# 阅读状态与解锁变化先保留在内存，等 Night 正式结束时统一写盘。
 	player_data_changed.emit()
 
 

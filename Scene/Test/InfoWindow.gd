@@ -290,7 +290,6 @@ func _on_set_day_button_pressed() -> void:
 	if GameTime.has_signal("time_changed"):
 		GameTime.emit_signal("time_changed")
 
-	_save_test_changes()
 	_notify_host_data_changed()
 	_refresh_test_controls()
 
@@ -345,7 +344,6 @@ func _on_mark_story_played_button_pressed() -> void:
 		_show_test_result("标记剧情失败：StoryManager 缺少已播放记录接口。")
 		return
 
-	_save_test_changes()
 	_notify_host_data_changed()
 	_reload_story_options()
 	_refresh_test_status()
@@ -382,7 +380,6 @@ func _on_set_reputation_button_pressed() -> void:
 		_show_test_result("修改名望失败：Unlock 缺少名望修改接口。")
 		return
 
-	_save_test_changes()
 	_notify_host_data_changed()
 	_refresh_test_controls()
 	_show_test_result("名望核心数值已修改为 %d。" % _get_current_reputation())
@@ -426,7 +423,6 @@ func _on_set_experience_button_pressed() -> void:
 	if Unlock.has_method("refresh_unlocks_by_dependencies"):
 		Unlock.call("refresh_unlocks_by_dependencies")
 
-	_save_test_changes()
 	_notify_host_data_changed()
 	_refresh_test_controls()
 	_show_test_result("心得核心数值已修改为 %d。" % _get_current_experience())
@@ -500,7 +496,6 @@ func _on_read_all_unlocked_button_pressed() -> void:
 		if current_pass_count == 0:
 			break
 
-	_save_test_changes()
 	_notify_host_data_changed()
 	_refresh_test_controls()
 
@@ -531,10 +526,7 @@ func close_window() -> void:
 	hide()
 
 
-func _save_test_changes() -> void:
-	if SaveManager != null and SaveManager.has_method("save_game"):
-		SaveManager.call("save_game")
-
+# Debug 修改只作用于当前内存状态；下一次昼夜阶段结束时统一写盘。
 
 func _notify_host_data_changed() -> void:
 	test_data_changed.emit()
