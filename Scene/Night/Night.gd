@@ -583,14 +583,8 @@ func _has_unread_entries() -> bool:
 	if Unlock == null:
 		return false
 
-	# 先刷新所有可能在当前夜晚新解锁的条目，避免旧存档或延迟刷新漏检。
-	if Unlock.has_method("refresh_auto_unlocks_by_experience"):
-		Unlock.refresh_auto_unlocks_by_experience()
-
-	if Unlock.has_method("refresh_unlocks_by_dependencies"):
-		Unlock.refresh_unlocks_by_dependencies()
-
-	# 正式检查药材、方剂、疾病、理论四类未读条目。
+	# UnlockManager 现在在“心得变化 / 药材解锁 / 方剂解锁”发生时即时增量更新。
+	# 这里不再在玩家点击“休息”时执行全量刷新，避免把数据扫描集中到跨天按钮这一帧。
 	if Unlock.has_method("has_unread_readable_entries"):
 		return Unlock.has_unread_readable_entries()
 
