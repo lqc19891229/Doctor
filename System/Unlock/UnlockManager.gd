@@ -121,7 +121,13 @@ var reputation_points: int = 0
 #   2001以上：1000文
 # - 陈皮工钱 = 500 文 / 2 个节气
 # - 半夏工钱 = 500 文 / 2 个节气
-# - 食费 = 2000 文 / 2 个节气
+# - 食费 = 1000 文 / 每个节气
+# - 买入煤炭：
+#   立春 / 立夏 / 立秋 = 200 文
+#   立冬 = 1200 文
+# - 购置衣服：
+#   立春 / 立秋 = 300 文
+#   立冬 = 2000 文
 #
 # 如果后续要调整平衡，只需改下面常量即可。
 const WEN_PER_LIANG: int = 1000
@@ -137,8 +143,35 @@ const CONSULTATION_FEE_TRANSCENDENT_WEN: int = 1000
 const CHEN_PI_WAGE_PER_SOLAR_TERM_WEN: int = 500
 const BAN_XIA_WAGE_PER_SOLAR_TERM_WEN: int = 500
 const WAGE_INTERVAL_SOLAR_TERMS: int = 2
-const FOOD_COST_WEN: int = 2000
-const FOOD_COST_INTERVAL_SOLAR_TERMS: int = 2
+
+# 每个节气固定食费：1两 = 1000文。
+const FOOD_COST_WEN: int = 1000
+
+# 每年 24 个节气。GameTime 中 current_day = 1 从立春开始，
+# 所以按 current_day 对 24 取循环即可得到当前节气位置。
+const SOLAR_TERMS_PER_YEAR: int = 24
+const SOLAR_TERM_LICHUN_INDEX: int = 1
+const SOLAR_TERM_LIXIA_INDEX: int = 7
+const SOLAR_TERM_LIQIU_INDEX: int = 13
+const SOLAR_TERM_LIDONG_INDEX: int = 19
+
+# 煤炭开支，单位：文。
+const COAL_COST_SPRING_SUMMER_AUTUMN_WEN: int = 200
+const COAL_COST_LIDONG_WEN: int = 1200
+
+# 衣服开支，单位：文。
+const CLOTHING_COST_SPRING_AUTUMN_WEN: int = 300
+const CLOTHING_COST_LIDONG_WEN: int = 2000
+
+# 随礼支出：
+# 每个节气在正常日结时独立进行一次判定，10% 概率触发。
+# 触发后从下列金额中等概率随机选择一个。
+const GIFT_EXPENSE_TRIGGER_CHANCE: float = 0.10
+const GIFT_EXPENSE_AMOUNTS_WEN: Array[int] = [
+	666,
+	888,
+	1888
+]
 
 # 当前持有银钱，单位：文。
 # 允许出现负数；负数在 TopBar 中显示为“欠 X两 Y文”。
@@ -227,6 +260,43 @@ func format_money_change(amount_wen: int) -> String:
 	if amount_wen < 0:
 		return "-" + format_money(-amount_wen)
 	return "0文"
+
+
+# 把全局 current_day 换算成当前年份内的第几个节气：
+# 1=立春，7=立夏，13=立秋，19=立冬，24=大寒。
+func _get_solar_term_cycle_index(day: int) -> int:
+	var safe_day := maxi(day, 1)
+	return ((safe_day - 1) % SOLAR_TERMS_PER_YEAR) + 1
+
+
+func _get_coal_cost_wen(day: int) -> int:
+	match _get_solar_term_cycle_index(day):
+		SOLAR_TERM_LICHUN_INDEX, SOLAR_TERM_LIXIA_INDEX, SOLAR_TERM_LIQIU_INDEX:
+			return COAL_COST_SPRING_SUMMER_AUTUMN_WEN
+		SOLAR_TERM_LIDONG_INDEX:
+			return COAL_COST_LIDONG_WEN
+		_:
+			return 0
+
+
+func _get_clothing_cost_wen(day: int) -> int:
+	match _get_solar_term_cycle_index(day):
+		SOLAR_TERM_LICHUN_INDEX, SOLAR_TERM_LIQIU_INDEX:
+			return CLOTHING_COST_SPRING_AUTUMN_WEN
+		SOLAR_TERM_LIDONG_INDEX:
+			return CLOTHING_COST_LIDONG_WEN
+		_:
+			return 0
+
+
+func _roll_gift_expense_wen() -> int:
+	# 每个节气只在正常日结首次执行到这里时判定一次。
+	# settle_day_finances() 顶部已有“同一天只结算一次”的保护，
+	# 所以不会因为重复切场景而重新抽取或重复扣款。
+	if randf() >= GIFT_EXPENSE_TRIGGER_CHANCE:
+		return 0
+
+	return int(GIFT_EXPENSE_AMOUNTS_WEN.pick_random())
 
 
 func _reset_daily_finance_ledger(day: int) -> void:
@@ -355,9 +425,15 @@ func settle_day_finances(day: int) -> Dictionary:
 		chen_pi_wage = CHEN_PI_WAGE_PER_SOLAR_TERM_WEN
 		ban_xia_wage = BAN_XIA_WAGE_PER_SOLAR_TERM_WEN
 
-	var food_cost := 0
-	if safe_day % FOOD_COST_INTERVAL_SOLAR_TERMS == 0:
-		food_cost = FOOD_COST_WEN
+	# 食费每个节气都支付 1 两。
+	var food_cost := FOOD_COST_WEN
+
+	# 季节性固定开支。
+	var coal_cost := _get_coal_cost_wen(safe_day)
+	var clothing_cost := _get_clothing_cost_wen(safe_day)
+
+	# 随礼：每个节气 10% 概率触发；未触发时为 0。
+	var gift_expense := _roll_gift_expense_wen()
 
 	var is_gross_accounting := (
 		finance_ledger_accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS
@@ -383,6 +459,9 @@ func settle_day_finances(day: int) -> Dictionary:
 		chen_pi_wage
 		+ ban_xia_wage
 		+ food_cost
+		+ coal_cost
+		+ clothing_cost
+		+ gift_expense
 		+ medicine_purchase_cost
 	)
 	var net_change := total_income - total_expense
@@ -404,6 +483,9 @@ func settle_day_finances(day: int) -> Dictionary:
 		"chen_pi_wage_wen": chen_pi_wage,
 		"ban_xia_wage_wen": ban_xia_wage,
 		"food_cost_wen": food_cost,
+		"coal_cost_wen": coal_cost,
+		"clothing_cost_wen": clothing_cost,
+		"gift_expense_wen": gift_expense,
 		"total_expense_wen": total_expense,
 		"net_change_wen": net_change,
 		"money_after_wen": money_wen
@@ -429,6 +511,9 @@ func build_finance_report_text(day: int) -> String:
 	var chen_pi_wage := int(report.get("chen_pi_wage_wen", 0))
 	var ban_xia_wage := int(report.get("ban_xia_wage_wen", 0))
 	var food_cost := int(report.get("food_cost_wen", 0))
+	var coal_cost := int(report.get("coal_cost_wen", 0))
+	var clothing_cost := int(report.get("clothing_cost_wen", 0))
+	var gift_expense := int(report.get("gift_expense_wen", 0))
 	var total_expense := int(report.get("total_expense_wen", 0))
 	var net_change := int(report.get("net_change_wen", 0))
 
@@ -465,6 +550,12 @@ func build_finance_report_text(day: int) -> String:
 		lines.append("半夏工钱：%s" % format_money_change(-ban_xia_wage))
 	if food_cost > 0:
 		lines.append("食费：%s" % format_money_change(-food_cost))
+	if coal_cost > 0:
+		lines.append("买入煤炭：%s" % format_money_change(-coal_cost))
+	if clothing_cost > 0:
+		lines.append("购置衣服：%s" % format_money_change(-clothing_cost))
+	if gift_expense > 0:
+		lines.append("随礼：%s" % format_money_change(-gift_expense))
 	lines.append("支出合计：%s" % format_money_change(-total_expense))
 	lines.append("")
 	lines.append("本日变化：%s" % format_money_change(net_change))
