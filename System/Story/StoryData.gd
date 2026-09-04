@@ -1,6 +1,28 @@
 extends Resource
 class_name StoryData
 
+# =========================================================
+# StoryData
+#
+# 剧情数据拆成三部分：
+# 1. 触发条件 Conditions：所有已填写条件使用 AND 判断。
+# 2. 播放后动作 Actions：剧情完整播放后执行。
+# 3. 基础设置 Settings：PlayOnce / SortIndex。
+#
+# TriggerType 已不再参与新剧情的运行逻辑。
+# 文件末尾保留旧字段，仅用于尚未重新导出的旧 .tres 兼容。
+# =========================================================
+
+const COMPARE_GTE := "gte"
+const COMPARE_LTE := "lte"
+
+const TREATMENT_RESULT_CURED := "cured"
+const TREATMENT_RESULT_FAILED := "failed"
+
+const BACKGROUND_MODE_DEFAULT := "default"
+const BACKGROUND_MODE_CURRENT_SCENE := "current_scene"
+
+# 旧 TriggerType 常量只用于兼容旧 .tres，不参与新结构判断。
 const TRIGGER_TYPE_SCENE_ENTER := "scene_enter"
 const TRIGGER_TYPE_NIGHT_END := "night_end"
 const TRIGGER_TYPE_DAY_REPUTATION_OVER := "day_reputation_over"
@@ -10,94 +32,236 @@ const TRIGGER_TYPE_STORY_NPC_FAILED_RETRY := "story_npc_failed_retry"
 const TRIGGER_TYPE_STORY_NPC_FAILED_BACK := "story_npc_failed_back"
 const TRIGGER_TYPE_STORY_NPC_FAILED_OVER := "story_npc_failed_over"
 
-const BACKGROUND_MODE_DEFAULT := "default"
-const BACKGROUND_MODE_CURRENT_SCENE := "current_scene"
 
-# 剧情唯一 ID，用来记录是否已经播放过
+# =========================================================
+# 标识
+# =========================================================
+@export_category("Identity")
+
+# 剧情唯一 ID。
 @export var story_id: String = ""
 
-# 关联剧情 ID。
-# - scene_enter：作为普通前置剧情；必须先完整播放该剧情，当前剧情才允许触发。
-# - story_npc_cured / story_npc_failed_*：绑定发起本次治疗的主剧情。
-# 治疗结果剧情必须填写该字段。
-@export var trigger_story_id: String = ""
+# 策划表中的剧情名称，仅用于识别和调试。
+@export var story_name: String = ""
 
-# 剧情触发类型：
-# - scene_enter：进入指定场景时检查，兼容现有按场景 / 天数 / 名望触发的剧情。
-# - night_end：Night 场景点击“休息，进入明天”时检查；剧情结束后的目标由 return_scene 决定。
-# - day_reputation_over：进入指定场景时检查；达到 trigger_day 和最低名望后播放，结束后回到主菜单并结束本局。
-# - day_reputation_below_over：进入指定场景时检查；达到 trigger_day 且名望低于门槛时播放，结束后回到主菜单并结束本局。
-# - story_npc_cured：指定的 story NPC 被治愈后检查。
-# - story_npc_failed_retry：指定的 story NPC 治疗失败，剧情结束后重新回到该 NPC 的诊疗界面。
-# - story_npc_failed_back：指定的 story NPC 治疗失败，剧情结束后返回 return_scene。
-# - story_npc_failed_over：指定的 story NPC 治疗失败，剧情结束后 Game Over。
-@export_enum("scene_enter", "night_end", "day_reputation_over", "day_reputation_below_over", "story_npc_cured", "story_npc_failed_retry", "story_npc_failed_back", "story_npc_failed_over")
-var trigger_type: String = TRIGGER_TYPE_SCENE_ENTER
 
-# 剧情触发场景，例如 clinic / night / map
-@export_enum("clinic", "night", "map")
-var trigger_scene: String = "clinic"
+# =========================================================
+# 一、触发条件
+# 所有非空条件必须同时满足。
+# =========================================================
+@export_category("Conditions")
 
-# 剧情触发天数：
-# - trigger_story_id 为空：表示游戏第几天开始允许触发。
-# - scene_enter / night_end 且 trigger_story_id 非空：表示前置剧情完整播放结束后第几天允许触发。
-# - day_reputation_over / day_reputation_below_over：必须填写大于 0 的绝对天数，并保持 trigger_story_id 为空。
-# - 治疗结果剧情：必须填写 0，治疗结束后立即按 trigger_story_id 匹配。
-#   TriggerScene 必须与发起诊疗的主剧情一致；night_end 主剧情对应 night。
-# - 0 表示不增加额外天数。
-@export var trigger_day: int = 0
+# 当前所在场景。留空表示不限制场景。
+@export_enum("", "clinic", "night", "map")
+var condition_scene: String = ""
 
-# 触发条件：需要达到的最低名望，0 表示不限制名望。
-# day_reputation_over：当前名望大于等于该数值时满足条件。
-# day_reputation_below_over：当前名望严格小于该数值时满足条件。
-# 两种结束类型都必须填写大于 0 的数值。
-@export var required_reputation_points: int = 0
+# 天数条件：
+# - 没有 ConditionStoryID：按游戏绝对天数判断，current_day >= condition_day。
+# - 有 ConditionStoryID 且不是治疗结果剧情：按前置剧情完成后的相对天数判断。
+# - 治疗结果剧情：按当前游戏绝对天数判断。
+# <= 0 表示不限制天数。
+@export var condition_day: int = 0
 
-# 剧情解锁时，是否顺便解锁某个医书条目，不需要解锁医书条目就留空。
-@export var unlock_entry_id: String = ""
+# 金钱条件。Op 留空表示不限制；金额单位统一为“文”。
+@export_enum("", "gte", "lte")
+var condition_money_op: String = ""
+@export var condition_money: int = 0
 
-# 是否只播放一次
-@export var play_once: bool = true
+# 名望条件。Op 留空表示不限制。
+@export_enum("", "gte", "lte")
+var condition_reputation_op: String = ""
+@export var condition_reputation: int = 0
 
-# 每段新剧情开始时使用的背景模式：
-# - default：显示 Story 场景中配置的 default_background。
-# - current_scene：隐藏 Story 自己的背景，显示下层当前保留的 Clinic / Night / Map 场景。
-# StoryLine.background 仍可在任意一句中指定图片，并从该句开始覆盖当前场景。
-@export_enum("default", "current_scene")
-var background_mode: String = BACKGROUND_MODE_DEFAULT
+# 必须已经解锁的医书 / 图鉴条目 ID。留空表示不限制。
+@export var condition_entry_id: String = ""
 
-# 剧情结束后返回目标。
-# day_reputation_over、day_reputation_below_over 与 story_npc_failed_over
-# 会忽略该字段，直接回到 Main 开始菜单。
-@export_enum("clinic", "night", "map")
-var return_scene: String = "clinic"
+# 普通剧情：必须已经完整播放过的前置剧情 ID。
+# 治疗结果剧情：表示本次治疗由哪个主剧情发起。
+@export var condition_story_id: String = ""
 
-# 本段剧情完整播放结束后结算的名望变化。
-# 正数表示奖励，负数表示惩罚，0 表示不变化。
-@export var reputation_points_change: int = 0
+# 本次临时治疗结果条件。只在治疗结束的那次检查中有效，不保存长期状态。
+@export_enum("", "cured", "failed")
+var condition_treatment_result: String = ""
 
-# 本段剧情完整播放结束后结算的心得变化。
-# 正数表示奖励，负数表示惩罚，0 表示不变化。
-@export var experience_points_change: int = 0
 
-# 本段剧情台词播放完后，如果需要直接在 Story 场景中诊疗 story NPC，
-# 填写该 NPC 的 npc_id。表现层留在 Story，诊疗数据仍由 NpcManager → Clinic 处理。
-# 对应 NPC 资源需要放在 res://Data/Npc 下，且 NpcData.npc_type = "story"。
+# =========================================================
+# 二、剧情播放后的动作
+# =========================================================
+@export_category("Actions")
+
+# 剧情结束后返回目标。留空时由当前流程兜底。
+@export_enum("", "clinic", "night", "map")
+var return_scene: String = ""
+
+# true：剧情完整播放后结束本局并返回主菜单。
+@export var end_game: bool = false
+
+# 剧情播放完后生成并进入需要治疗的 story NPC。
+# NpcID / Disease / ClinicNpcPortraitPath 都属于同一个“生成治疗 NPC”动作。
 @export var clinic_npc_id: String = ""
-
-# 本段剧情发起诊疗时使用的疾病。
-# 疾病属于“本次剧情诊疗”，不再固定绑定在 StoryNPC 的 NpcData 资源上。
-# 同一个 StoryNPC 因此可以在不同的发起诊疗剧情中配置不同疾病。
 @export var clinic_disease: DiseaseData
-
-# Story NPC 诊疗界面使用的立绘。
-# 该字段与普通剧情台词的 portrait 相互独立，方便在诊疗选项界面手动指定人物立绘。
-# 留空时不主动修改当前画面的立绘状态。
 @export var clinic_npc_portrait: Texture2D
 
-# Story NPC 诊疗界面的立绘位置。
+# Story NPC 诊疗界面的立绘位置。Excel 暂不配置，默认中间。
 @export_enum("left", "mid", "right")
 var clinic_npc_portrait_side: String = "mid"
 
-# 台词列表
+# 数值动作：正数增加，负数扣除，0 不变化。
+# money_change 的单位为“文”。
+@export var money_change: int = 0
+@export var reputation_points_change: int = 0
+@export var experience_points_change: int = 0
+
+
+# =========================================================
+# 三、基础设置
+# =========================================================
+@export_category("Settings")
+
+# true：完整播放过一次后不再自动触发。
+@export var play_once: bool = true
+
+# 同一检查时刻有多条剧情同时满足条件时，数值越小优先级越高。
+@export var sort_index: int = 0
+
+
+# =========================================================
+# 演出数据
+# =========================================================
+@export_category("Presentation")
+
+@export_enum("default", "current_scene")
+var background_mode: String = BACKGROUND_MODE_DEFAULT
+
 @export var lines: Array[StoryLine] = []
+
+
+# =========================================================
+# 旧资源兼容字段
+#
+# 新 import_data.py 不再写入这些字段。
+# @export_storage 允许旧 .tres 继续被 Godot 读取，但不会显示在 Inspector。
+# StoryManager 只会在检测到旧 trigger_type 时读取这些字段进行兼容。
+# =========================================================
+@export_storage var trigger_story_id: String = ""
+@export_storage var trigger_type: String = ""
+@export_storage var trigger_scene: String = ""
+@export_storage var trigger_day: int = 0
+@export_storage var trigger_money: int = 0
+@export_storage var required_reputation_points: int = 0
+@export_storage var unlock_entry_id: String = ""
+
+
+func uses_legacy_trigger_schema() -> bool:
+	return trigger_type.strip_edges() != ""
+
+
+func get_condition_scene() -> String:
+	var value := condition_scene.strip_edges().to_lower()
+	if value == "" and uses_legacy_trigger_schema():
+		value = trigger_scene.strip_edges().to_lower()
+	return value
+
+
+func get_condition_day() -> int:
+	if condition_day != 0:
+		return condition_day
+	if uses_legacy_trigger_schema():
+		return trigger_day
+	return 0
+
+
+func get_condition_money_op() -> String:
+	var value := condition_money_op.strip_edges().to_lower()
+	if value != "":
+		return value
+	if uses_legacy_trigger_schema() and trigger_money != 0:
+		return COMPARE_GTE
+	return ""
+
+
+func get_condition_money() -> int:
+	if condition_money_op.strip_edges() != "":
+		return condition_money
+	if uses_legacy_trigger_schema() and trigger_money != 0:
+		return trigger_money
+	return condition_money
+
+
+func get_condition_reputation_op() -> String:
+	var value := condition_reputation_op.strip_edges().to_lower()
+	if value != "":
+		return value
+
+	if uses_legacy_trigger_schema() and required_reputation_points > 0:
+		if trigger_type.strip_edges().to_lower() == TRIGGER_TYPE_DAY_REPUTATION_BELOW_OVER:
+			return COMPARE_LTE
+		return COMPARE_GTE
+
+	return ""
+
+
+func get_condition_reputation() -> int:
+	if condition_reputation_op.strip_edges() != "":
+		return condition_reputation
+
+	if uses_legacy_trigger_schema() and required_reputation_points > 0:
+		# 旧 below 的语义是“当前名望严格小于门槛”。
+		# 新结构只有 <=，因此减 1 保持整数名望下的原行为。
+		if trigger_type.strip_edges().to_lower() == TRIGGER_TYPE_DAY_REPUTATION_BELOW_OVER:
+			return required_reputation_points - 1
+		return required_reputation_points
+
+	return condition_reputation
+
+
+func get_condition_entry_id() -> String:
+	var value := condition_entry_id.strip_edges()
+	if value == "" and uses_legacy_trigger_schema():
+		value = unlock_entry_id.strip_edges()
+	return value
+
+
+func get_condition_story_id() -> String:
+	var value := condition_story_id.strip_edges()
+	if value == "" and uses_legacy_trigger_schema():
+		value = trigger_story_id.strip_edges()
+	return value
+
+
+func get_condition_treatment_result() -> String:
+	var value := condition_treatment_result.strip_edges().to_lower()
+	if value != "":
+		return value
+
+	if not uses_legacy_trigger_schema():
+		return ""
+
+	match trigger_type.strip_edges().to_lower():
+		TRIGGER_TYPE_STORY_NPC_CURED:
+			return TREATMENT_RESULT_CURED
+		TRIGGER_TYPE_STORY_NPC_FAILED_RETRY, TRIGGER_TYPE_STORY_NPC_FAILED_BACK, TRIGGER_TYPE_STORY_NPC_FAILED_OVER:
+			return TREATMENT_RESULT_FAILED
+		_:
+			return ""
+
+
+func should_end_game() -> bool:
+	if end_game:
+		return true
+
+	if not uses_legacy_trigger_schema():
+		return false
+
+	return trigger_type.strip_edges().to_lower() in [
+		TRIGGER_TYPE_DAY_REPUTATION_OVER,
+		TRIGGER_TYPE_DAY_REPUTATION_BELOW_OVER,
+		TRIGGER_TYPE_STORY_NPC_FAILED_OVER,
+	]
+
+
+func is_legacy_failed_retry() -> bool:
+	return (
+		uses_legacy_trigger_schema()
+		and trigger_type.strip_edges().to_lower() == TRIGGER_TYPE_STORY_NPC_FAILED_RETRY
+	)

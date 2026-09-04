@@ -462,7 +462,16 @@ func start_story_npc_treatment(backend: Node, npc_id: String) -> void:
 
 	if story_data != null:
 		treatment_source_story_id = story_data.story_id.strip_edges()
-		treatment_trigger_scene = story_data.trigger_scene.strip_edges()
+		treatment_trigger_scene = story_data.get_condition_scene()
+
+		# 如果“治疗失败剧情”通过 NpcID / Disease 动作重新生成同一名患者，
+		# 后续治疗结果仍然要继续绑定最初发起治疗的主剧情。
+		# 新结构不再用 failed_retry TriggerType，而是用“失败条件 + 生成 NPC 动作”表达重试。
+		var treatment_result_condition := story_data.get_condition_treatment_result()
+		var source_story_condition := story_data.get_condition_story_id()
+		if treatment_result_condition != "" and source_story_condition != "":
+			treatment_source_story_id = source_story_condition
+
 	if treatment_trigger_scene == "":
 		treatment_trigger_scene = "clinic"
 
@@ -718,12 +727,10 @@ func _on_story_judgement_result_closed() -> void:
 			next_story = raw_next_story as StoryData
 
 	if next_story != null:
-		# failed_retry 类型在结果剧情播放结束后重新回到当前 story NPC 的诊疗界面。
-		# 其他结果剧情仍按原有逻辑结束本次诊疗。
-		var resume_treatment := (
-			next_story.trigger_type.strip_edges().to_lower()
-			== StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_RETRY
-		)
+		# 新结构中“失败后重试”由结果剧情自己的 NpcID / Disease / 立绘动作表达，
+		# 不再通过 TriggerType 决定行为。
+		# 这里只保留旧 .tres 的 failed_retry 兼容。
+		var resume_treatment := next_story.is_legacy_failed_retry()
 		emit_signal(
 			"followup_story_requested",
 			next_story,
@@ -1295,30 +1302,18 @@ func _finish_story() -> void:
 	_reset_enter_hold_state()
 	_report_story_playback_completed()
 
-	var current_trigger_type := ""
-	if story_data != null:
-		current_trigger_type = (
-			story_data.trigger_type
-			.strip_edges()
-			.to_lower()
-		)
+	# “结束游戏”现在是明确的播放后动作，不再由 TriggerType 隐式决定。
+	if story_data != null and story_data.should_end_game():
+		_finish_story_with_fade(&"game_over_requested")
+		return
 
-	match current_trigger_type:
-		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_BACK:
-			# Main 已经读取本段失败剧情的 return_scene；
-			# 等背景淡出后再结束剧情并返回。
-			_finish_story_with_fade(&"story_finished")
-			return
-		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER, StoryData.TRIGGER_TYPE_DAY_REPUTATION_OVER, StoryData.TRIGGER_TYPE_DAY_REPUTATION_BELOW_OVER:
-			_finish_story_with_fade(&"game_over_requested")
-			return
-
+	# 只用于旧 failed_retry .tres 的兼容。
 	if resume_treatment_after_story:
 		resume_treatment_after_story = false
 		_show_treatment_options()
 		return
 
-	# 普通剧情配置 clinic_npc_id 后，请求 Main 创建隐藏 Clinic 后端。
+	# 配置 NpcID 后，剧情完整播放结束再生成并进入 story NPC 诊疗。
 	var clinic_npc_id := ""
 	var clinic_disease: DiseaseData = null
 

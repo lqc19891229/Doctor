@@ -91,12 +91,10 @@ SHEET_STORY_LINE_ALIASES = ["StoryLine", "storyline"]
 STORY_REQUIRED_IMPORT_HEADERS = [
     "StoryID",
     "StoryName",
-    "TriggerType",
-    "TriggerScene",
-    "TriggerDay",
-    "TriggerReputation",
-    "TriggerStoryID",
-    "TriggerEntryId",
+    "ConditionScene",
+    "ConditionDay",
+    "ConditionStoryID",
+    "ConditionEntryId",
     "NpcID",
     "Disease",
     "ClinicNpcPortraitPath",
@@ -105,28 +103,38 @@ STORY_REQUIRED_IMPORT_HEADERS = [
     "SortIndex",
 ]
 
-# Story sheet 的完整内存字段。
-# - TriggerReputation：触发剧情所需的最低名望。
-# - TriggerEntryId：触发剧情前必须解锁的医书条目。
-# - Reputation：剧情完整播放结束后的名望变化。
-# - Experience：剧情完整播放结束后的心得变化。
+# Story sheet 新结构：
+# - Conditions：ConditionScene / Day / Money / Reputation / Entry / Story / TreatmentResult
+# - Actions：ReturnScene / EndGame / NpcID / Disease / Portrait / Money / Reputation / Experience
+# - Settings：PlayOnce / SortIndex
+#
+# STORY_LEGACY_TRIGGER_TYPE_KEY 只在导入旧剧情工作簿时暂存旧 TriggerType，
+# 不会写入 Data.xlsx，也不会写入 .tres。
+STORY_LEGACY_TRIGGER_TYPE_KEY = "__legacy_trigger_type__"
+
 STORY_IMPORT_HEADERS = [
     "StoryID",
     "StoryName",
-    "TriggerType",
-    "TriggerScene",
+    "ConditionScene",
+    "ConditionDay",
+    "ConditionMoneyOp",
+    "ConditionMoney",
+    "ConditionReputationOp",
+    "ConditionReputation",
+    "ConditionEntryId",
+    "ConditionStoryID",
+    "ConditionTreatmentResult",
     "ReturnScene",
-    "TriggerDay",
-    "TriggerReputation",
-    "TriggerStoryID",
-    "TriggerEntryId",
+    "EndGame",
     "NpcID",
     "Disease",
     "ClinicNpcPortraitPath",
+    "Money",
     "Reputation",
     "Experience",
     "PlayOnce",
     "SortIndex",
+    STORY_LEGACY_TRIGGER_TYPE_KEY,
 ]
 STORY_LINE_CONTENT_HEADERS = [
     "LineIndex",
@@ -269,42 +277,146 @@ def _apply_cell_style(cell, style_data: dict[str, Any] | None) -> None:
 
 def _normalize_story_sheet_headers(raw_headers: list[Any]) -> list[str]:
     """
-    规范化 Story sheet 表头，并兼容旧版列名。
+    规范化 Story sheet 表头。
 
-    规则：
-    - 新版 TriggerReputation 用作 required_reputation_points。
-    - 新版 Reputation 用作 reputation_points_change。
-    - 旧版没有 TriggerReputation 时，第一个 Reputation 视为触发门槛，
-      第二个 Reputation 视为剧情结算变化量。
-    - 旧版 EntryId 会转换成 TriggerEntryId。
-    - 同时兼容 RequiredReputation / ReputationChange / ExperienceChange。
+    新表头直接使用 Condition* / Action 字段。
+    同时兼容旧版 Trigger* 表头，旧 TriggerType 只暂存在
+    STORY_LEGACY_TRIGGER_TYPE_KEY 中，用于一次性迁移语义。
     """
     raw_header_names = [as_str(raw_header) for raw_header in raw_headers]
-    has_explicit_trigger_reputation = any(
-        header in ("TriggerReputation", "RequiredReputation")
+    has_legacy_trigger_type = "TriggerType" in raw_header_names
+    has_explicit_condition_reputation = any(
+        header in ("ConditionReputation", "TriggerReputation", "RequiredReputation")
         for header in raw_header_names
     )
 
     normalized_headers: list[str] = []
     reputation_column_count = 0
 
+    direct_mapping = {
+        "TriggerType": STORY_LEGACY_TRIGGER_TYPE_KEY,
+        "TriggerScene": "ConditionScene",
+        "TriggerDay": "ConditionDay",
+        "TriggerMoney": "ConditionMoney",
+        "TriggerReputation": "ConditionReputation",
+        "RequiredReputation": "ConditionReputation",
+        "TriggerStoryID": "ConditionStoryID",
+        "TriggerStoryId": "ConditionStoryID",
+        "ConditionStoryId": "ConditionStoryID",
+        "TriggerEntryId": "ConditionEntryId",
+        "TriggerEntryID": "ConditionEntryId",
+        "ConditionEntryID": "ConditionEntryId",
+        "EntryId": "ConditionEntryId",
+        "MoneyChange": "Money",
+        "ReputationChange": "Reputation",
+        "ExperienceChange": "Experience",
+    }
+
     for header in raw_header_names:
-        if header in ("TriggerReputation", "RequiredReputation"):
-            header = "TriggerReputation"
-        elif header == "Reputation":
+        if header == "Reputation":
             reputation_column_count += 1
-            if not has_explicit_trigger_reputation and reputation_column_count == 1:
-                header = "TriggerReputation"
-        elif header == "ReputationChange":
-            header = "Reputation"
-        elif header == "ExperienceChange":
-            header = "Experience"
-        elif header in ("EntryId", "TriggerEntryID"):
-            header = "TriggerEntryId"
+            # 极旧模板没有 TriggerReputation，但有 TriggerType：
+            # 第一个 Reputation 当触发名望，第二个才是播放后变化。
+            if (
+                has_legacy_trigger_type
+                and not has_explicit_condition_reputation
+                and reputation_column_count == 1
+            ):
+                header = "ConditionReputation"
+            else:
+                header = "Reputation"
+        else:
+            header = direct_mapping.get(header, header)
 
         normalized_headers.append(header)
 
     return normalized_headers
+
+
+def normalize_story_row_values(
+    row: dict[str, Any],
+    story_lookup: dict[str, dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """
+    把一条 Story 行统一成新结构。
+
+    对旧 TriggerType 的迁移：
+    - scene_enter / night_end -> 只保留 ConditionScene 等条件；
+    - story_npc_cured -> ConditionTreatmentResult=cured；
+    - story_npc_failed_* -> ConditionTreatmentResult=failed；
+    - *_over -> EndGame=true；
+    - failed_retry -> 把来源主剧情的 NpcID / Disease / 立绘复制为播放后动作。
+    """
+    normalized = dict(row)
+    legacy_type = as_str(normalized.get(STORY_LEGACY_TRIGGER_TYPE_KEY)).lower()
+
+    normalized["ConditionScene"] = as_str(normalized.get("ConditionScene")).lower()
+    normalized["ReturnScene"] = as_str(normalized.get("ReturnScene")).lower()
+    normalized["ConditionMoneyOp"] = as_str(normalized.get("ConditionMoneyOp")).lower()
+    normalized["ConditionReputationOp"] = as_str(
+        normalized.get("ConditionReputationOp")
+    ).lower()
+    normalized["ConditionTreatmentResult"] = as_str(
+        normalized.get("ConditionTreatmentResult")
+    ).lower()
+
+    # 新表允许阈值为 0，因此是否启用条件由 Op 判断。
+    # 旧 TriggerMoney / TriggerReputation 的 0 原本表示“不限制”，迁移时清空。
+    if legacy_type and as_str(normalized.get("ConditionMoney")):
+        if as_int(normalized.get("ConditionMoney"), 0) == 0:
+            normalized["ConditionMoney"] = ""
+            normalized["ConditionMoneyOp"] = ""
+    if legacy_type and as_str(normalized.get("ConditionReputation")):
+        if as_int(normalized.get("ConditionReputation"), 0) == 0:
+            normalized["ConditionReputation"] = ""
+            normalized["ConditionReputationOp"] = ""
+
+    if (
+        as_str(normalized.get("ConditionMoney"))
+        and not normalized["ConditionMoneyOp"]
+    ):
+        normalized["ConditionMoneyOp"] = "gte"
+
+    if (
+        as_str(normalized.get("ConditionReputation"))
+        and not normalized["ConditionReputationOp"]
+    ):
+        normalized["ConditionReputationOp"] = "gte"
+
+    if legacy_type == "day_reputation_below_over":
+        if as_str(normalized.get("ConditionReputation")):
+            # 旧语义是严格 <；新语义只有 <=，整数名望下减 1 保持行为一致。
+            normalized["ConditionReputation"] = (
+                as_int(normalized.get("ConditionReputation"), 0) - 1
+            )
+            normalized["ConditionReputationOp"] = "lte"
+
+    if legacy_type == "story_npc_cured":
+        normalized["ConditionTreatmentResult"] = "cured"
+    elif legacy_type in (
+        "story_npc_failed_retry",
+        "story_npc_failed_back",
+        "story_npc_failed_over",
+    ):
+        normalized["ConditionTreatmentResult"] = "failed"
+
+    if legacy_type in (
+        "day_reputation_over",
+        "day_reputation_below_over",
+        "story_npc_failed_over",
+    ):
+        normalized["EndGame"] = True
+
+    # failed_retry 不再是类型：迁移成“失败条件 + 再生成同一患者”的动作。
+    if legacy_type == "story_npc_failed_retry" and story_lookup is not None:
+        source_story_id = as_str(normalized.get("ConditionStoryID"))
+        source = story_lookup.get(source_story_id)
+        if source is not None:
+            for field_name in ("NpcID", "Disease", "ClinicNpcPortraitPath"):
+                if not as_str(normalized.get(field_name)):
+                    normalized[field_name] = source.get(field_name, "")
+
+    return normalized
 
 
 def _read_story_sheet_rows(ws, required_headers: list[str], source_name: str) -> list[dict[str, Any]]:
@@ -485,6 +597,18 @@ def load_story_xlsx_data(source_dir: Path) -> tuple[list[dict[str, Any]], list[d
             legacy_row[STORY_ROW_HEIGHT_KEY] = row.get(STORY_ROW_HEIGHT_KEY)
             story_line_rows.append(legacy_row)
 
+    # 先完成旧 TriggerType -> 新 Conditions / Actions 的语义迁移。
+    story_rows = [normalize_story_row_values(row) for row in story_rows]
+    imported_story_lookup = {
+        as_str(row.get("StoryID")): row
+        for row in story_rows
+        if as_str(row.get("StoryID"))
+    }
+    story_rows = [
+        normalize_story_row_values(row, imported_story_lookup)
+        for row in story_rows
+    ]
+
     # Data.xlsx 中按 StoryID 连续排列；SortIndex 只作为剧情配置数据保留，
     # 不再影响表格中的物理行顺序。
     story_rows.sort(key=lambda row: as_str(row.get("StoryID")))
@@ -527,8 +651,8 @@ def _upsert_story_rows(ws, imported_rows: list[dict[str, Any]]) -> None:
     """
     按 StoryID 合并新旧剧情，再从第 2 行连续重写。
 
-    不能用 ws.max_row + 1 追加：Excel 中只有样式的空白行也会计入 max_row，
-    会造成明明第 2 行为空，数据却从第 26 行开始写入。
+    导入旧 failed_retry 工作簿时，会在这里利用 Data.xlsx 中已存在的来源主剧情，
+    自动补齐 NpcID / Disease / ClinicNpcPortraitPath 动作。
     """
     if not imported_rows:
         return
@@ -541,23 +665,35 @@ def _upsert_story_rows(ws, imported_rows: list[dict[str, Any]]) -> None:
     story_id_col = headers.index("StoryID") + 1
     merged_row_by_id: dict[str, dict[str, Any]] = {}
 
-    # 先收集 Data.xlsx 中已经存在的正式剧情。
     for row_index in range(2, ws.max_row + 1):
         story_id = as_str(ws.cell(row=row_index, column=story_id_col).value)
         if not story_id:
             continue
-        merged_row_by_id[story_id] = {
+        existing_row = {
             header: ws.cell(row=row_index, column=col_index).value
             for col_index, header in enumerate(headers, start=1)
             if header
         }
+        merged_row_by_id[story_id] = normalize_story_row_values(existing_row)
 
-    # 同 StoryID 的新数据覆盖旧数据；新 StoryID 自动加入。
-    for row in imported_rows:
+    # 先把新行做一次基础迁移，再建立“旧 + 新”联合查询表。
+    prepared_imported_rows = [
+        normalize_story_row_values(row)
+        for row in imported_rows
+    ]
+    combined_lookup = dict(merged_row_by_id)
+    for row in prepared_imported_rows:
         story_id = as_str(row.get("StoryID"))
         if story_id:
+            combined_lookup[story_id] = row
+
+    # 第二次迁移用于把 failed_retry 的来源 NPC 动作补齐。
+    for row in prepared_imported_rows:
+        normalized_row = normalize_story_row_values(row, combined_lookup)
+        story_id = as_str(normalized_row.get("StoryID"))
+        if story_id:
             merged_row_by_id[story_id] = {
-                header: row.get(header, "")
+                header: normalized_row.get(header, "")
                 for header in headers
                 if header
             }
@@ -567,12 +703,10 @@ def _upsert_story_rows(ws, imported_rows: list[dict[str, Any]]) -> None:
         key=lambda row: as_str(row.get("StoryID")),
     )
 
-    # 清除包括第 26 行等旧位置中的内容，但不破坏单元格格式。
     for row_index in range(2, ws.max_row + 1):
         for col_index in range(1, len(headers) + 1):
             ws.cell(row=row_index, column=col_index).value = None
 
-    # 所有剧情统一从第 2 行连续写回。
     for row_index, row in enumerate(compact_rows, start=2):
         for col_index, header in enumerate(headers, start=1):
             if header:
@@ -1367,11 +1501,16 @@ def build_index(raw_data: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
         if npc_id:
             npc_map[npc_id] = row
 
-    # 建立 StoryID -> Story 元数据映射
+    # 建立 StoryID -> Story 元数据映射，并统一成新 Conditions / Actions 结构。
     for row in raw_data.get(SHEET_STORY, []):
-        story_id = as_str(row.get("StoryID"))
+        normalized_story_row = normalize_story_row_values(row)
+        story_id = as_str(normalized_story_row.get("StoryID"))
         if story_id:
-            story_map[story_id] = row
+            story_map[story_id] = normalized_story_row
+
+    # 第二遍用于兼容旧 failed_retry：从来源主剧情复制“重新生成患者”的动作。
+    for story_id, row in list(story_map.items()):
+        story_map[story_id] = normalize_story_row_values(row, story_map)
 
     # 将 StoryLine 按 StoryID 分组，便于后续按剧情生成资源
     for row in raw_data.get(SHEET_STORY_LINE, []):
@@ -1592,61 +1731,52 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         if story_id not in story_line_map:
             errors.append(f"Story 缺少 StoryLine 数据: {story_id}")
 
-        trigger_story_id = as_str(row.get("TriggerStoryID"))
-        if trigger_story_id:
-            if trigger_story_id == story_id:
-                errors.append(f"Story 不能把自己设为关联剧情: {story_id}")
-            elif trigger_story_id not in story_map:
+        condition_story_id = as_str(row.get("ConditionStoryID"))
+        if condition_story_id:
+            if condition_story_id == story_id:
+                errors.append(f"Story 不能把自己设为 ConditionStoryID: {story_id}")
+            elif condition_story_id not in story_map:
                 errors.append(
-                    f"Story TriggerStoryID 不存在: {story_id} -> {trigger_story_id}"
+                    f"Story ConditionStoryID 不存在: {story_id} -> {condition_story_id}"
                 )
 
-        trigger_type = as_str(row.get("TriggerType")).lower() or "scene_enter"
-        if trigger_type not in (
-            "scene_enter",
-            "night_end",
-            "day_reputation_over",
-            "day_reputation_below_over",
-            "story_npc_cured",
-            "story_npc_failed_retry",
-            "story_npc_failed_back",
-            "story_npc_failed_over",
-        ):
-            errors.append(f"Story TriggerType 非法: {story_id} -> {trigger_type}")
-
-        trigger_scene = as_str(row.get("TriggerScene")).lower() or "clinic"
-        if trigger_scene not in ("clinic", "night", "map"):
-            errors.append(f"Story TriggerScene 非法: {story_id} -> {trigger_scene}")
-
-        # night_end 只允许用于 Night 场景点击“休息，进入明天”的剧情。
-        # 这样可以在导出阶段提前发现 Excel 配置错误。
-        if trigger_type == "night_end" and trigger_scene != "night":
+        condition_scene = as_str(row.get("ConditionScene")).lower()
+        if condition_scene and condition_scene not in ("clinic", "night", "map"):
             errors.append(
-                f"Story night_end 剧情的 TriggerScene 必须为 night: "
-                f"{story_id} -> {trigger_scene}"
+                f"Story ConditionScene 非法: {story_id} -> {condition_scene}"
             )
 
-        # 两种 day_reputation_*_over 都是独立的“天数 + 当前名望”终局剧情。
-        # 它们使用绝对天数，不允许绑定前置剧情，也必须设置有效的名望门槛。
-        if trigger_type in (
-            "day_reputation_over",
-            "day_reputation_below_over",
-        ):
-            trigger_day = as_int(row.get("TriggerDay"), 0)
-            trigger_reputation = as_int(row.get("TriggerReputation"), 0)
+        money_op = as_str(row.get("ConditionMoneyOp")).lower()
+        if money_op not in ("", "gte", "lte"):
+            errors.append(
+                f"Story ConditionMoneyOp 非法: {story_id} -> {money_op}"
+            )
+        if money_op and not as_str(row.get("ConditionMoney")):
+            errors.append(
+                f"Story 填写了 ConditionMoneyOp 但缺少 ConditionMoney: {story_id}"
+            )
 
-            if trigger_story_id:
-                errors.append(
-                    f"Story {trigger_type} 不能填写 TriggerStoryID: {story_id}"
-                )
-            if trigger_day <= 0:
-                errors.append(
-                    f"Story {trigger_type} 的 TriggerDay 必须大于 0: {story_id}"
-                )
-            if trigger_reputation <= 0:
-                errors.append(
-                    f"Story {trigger_type} 的 TriggerReputation 必须大于 0: {story_id}"
-                )
+        reputation_op = as_str(row.get("ConditionReputationOp")).lower()
+        if reputation_op not in ("", "gte", "lte"):
+            errors.append(
+                f"Story ConditionReputationOp 非法: {story_id} -> {reputation_op}"
+            )
+        if reputation_op and not as_str(row.get("ConditionReputation")):
+            errors.append(
+                f"Story 填写了 ConditionReputationOp 但缺少 ConditionReputation: {story_id}"
+            )
+
+        treatment_result = as_str(row.get("ConditionTreatmentResult")).lower()
+        if treatment_result not in ("", "cured", "failed"):
+            errors.append(
+                f"Story ConditionTreatmentResult 非法: {story_id} -> {treatment_result}"
+            )
+
+        # 治疗结果是一次性上下文，必须绑定发起治疗的主剧情。
+        if treatment_result and not condition_story_id:
+            errors.append(
+                f"Story 治疗结果剧情缺少 ConditionStoryID: {story_id}"
+            )
 
         return_scene = as_str(row.get("ReturnScene")).lower()
         if return_scene and return_scene not in ("clinic", "night", "map"):
@@ -1672,7 +1802,7 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
         )
         if clinic_npc_id:
             if not clinic_disease_text:
-                errors.append(f"发起诊疗的 Story 缺少 Disease: {story_id}")
+                errors.append(f"生成治疗 NPC 的 Story 缺少 Disease: {story_id}")
             elif not clinic_disease_id:
                 errors.append(
                     f"Story Disease 名称或 ID 不存在: "
@@ -1691,40 +1821,25 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
                 f"{story_id} -> {clinic_npc_portrait_path}"
             )
 
-        is_treatment_result_story = trigger_type in (
-            "story_npc_cured",
-            "story_npc_failed_retry",
-            "story_npc_failed_back",
-            "story_npc_failed_over",
-        )
-        if is_treatment_result_story and not trigger_story_id:
-            errors.append(
-                f"Story 治疗结果剧情缺少 TriggerStoryID: {story_id}"
-            )
-        elif is_treatment_result_story:
-            source_story_row = story_map.get(trigger_story_id)
+        # 治疗成功 / 失败结果剧情要求来源主剧情确实能发起治疗。
+        if treatment_result and condition_story_id:
+            source_story_row = story_map.get(condition_story_id)
             if source_story_row is not None:
-                source_trigger_scene = (
-                    as_str(source_story_row.get("TriggerScene")).lower()
-                    or "clinic"
-                )
-                if trigger_scene != source_trigger_scene:
+                source_scene = as_str(source_story_row.get("ConditionScene")).lower()
+                if condition_scene and source_scene and condition_scene != source_scene:
                     errors.append(
-                        f"Story 治疗结果剧情的 TriggerScene 必须与发起诊疗的主剧情一致: "
-                        f"{story_id} -> {trigger_scene}; "
-                        f"{trigger_story_id} -> {source_trigger_scene}"
+                        f"Story 治疗结果剧情的 ConditionScene 必须与来源主剧情一致: "
+                        f"{story_id} -> {condition_scene}; "
+                        f"{condition_story_id} -> {source_scene}"
                     )
 
-                source_npc_id = (
-                    as_str(source_story_row.get("NpcID"))
-                    or as_str(source_story_row.get("ClinicNpcID"))
-                    or as_str(source_story_row.get("ClinicNpcId"))
-                )
+                source_npc_id = as_str(source_story_row.get("NpcID"))
                 if not source_npc_id:
                     errors.append(
-                        f"Story 治疗结果剧情的 TriggerStoryID "
-                        f"没有配置治疗 NpcID: {story_id} -> {trigger_story_id}"
+                        f"Story 治疗结果剧情的 ConditionStoryID "
+                        f"没有配置治疗 NpcID: {story_id} -> {condition_story_id}"
                     )
+
                 source_disease_text = as_str(source_story_row.get("Disease"))
                 source_disease_id = resolve_disease_id(
                     source_disease_text,
@@ -1733,25 +1848,20 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
                 )
                 if not source_disease_id:
                     errors.append(
-                        f"Story 治疗结果剧情的 TriggerStoryID "
-                        f"没有配置有效 Disease: {story_id} -> {trigger_story_id}"
+                        f"Story 治疗结果剧情的 ConditionStoryID "
+                        f"没有配置有效 Disease: {story_id} -> {condition_story_id}"
                     )
 
-        if is_treatment_result_story and as_int(row.get("TriggerDay"), 0) != 0:
-            errors.append(
-                f"Story 治疗结果剧情 TriggerDay 必须为 0: {story_id}"
-            )
-
-        entry_text = as_str(row.get("TriggerEntryId"))
+        entry_text = as_str(row.get("ConditionEntryId"))
         if entry_text:
             entry_candidates = get_entry_id_candidates(entry_text, entry_text_to_ids)
             if not entry_candidates:
                 errors.append(
-                    f"Story TriggerEntryId 无法匹配图鉴条目: {story_id} -> {entry_text}"
+                    f"Story ConditionEntryId 无法匹配图鉴条目: {story_id} -> {entry_text}"
                 )
             elif len(entry_candidates) > 1:
                 errors.append(
-                    f"Story TriggerEntryId 匹配到多个图鉴条目: "
+                    f"Story ConditionEntryId 匹配到多个图鉴条目: "
                     f"{story_id} -> {entry_text} -> "
                     f"{', '.join(entry_candidates)}；请改填唯一的条目 ID"
                 )
@@ -2242,8 +2352,10 @@ def format_ext_resource_value(ext_id: str) -> str:
 
 def build_story_resources(indexed_data: dict[str, Any]) -> None:
     """
-    功能：根据 Story / StoryLine 表生成剧情 .tres。
-    输出：res://Data/Story/{StoryID}.tres
+    根据 Story / StoryLine 生成剧情 .tres。
+
+    新资源只写 Conditions / Actions / Settings，
+    不再输出 trigger_type / trigger_scene / required_reputation_points 等旧字段。
     """
     story_map = indexed_data["story_map"]
     story_line_map = indexed_data["story_line_map"]
@@ -2255,31 +2367,47 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
     ensure_dir(STORY_OUTPUT_DIR)
 
     for story_id, story_row in story_map.items():
+        story_row = normalize_story_row_values(story_row, story_map)
         story_lines = story_line_map.get(story_id, [])
         use_current_scene_background = any(
             is_story_current_scene_background(line_row.get("BackgroundPath"))
             for line_row in story_lines
         )
+
         story_name = as_str(story_row.get("StoryName"))
-        trigger_type = as_str(story_row.get("TriggerType")).lower() or "scene_enter"
-        trigger_scene = as_str(story_row.get("TriggerScene")).lower() or "clinic"
-        trigger_story_id = as_str(story_row.get("TriggerStoryID"))
-        # 普通剧情的 TriggerStoryID 是前置剧情，TriggerDay 是完成后的相对天数。
-        # 治疗结果剧情的 TriggerStoryID 绑定治疗主剧情，TriggerDay 必须为 0。
-        trigger_day = as_int(story_row.get("TriggerDay"), 0)
-        required_reputation_points = as_int(story_row.get("TriggerReputation"), 0)
-        reputation_points_change = as_int(story_row.get("Reputation"), 0)
-        experience_points_change = as_int(story_row.get("Experience"), 0)
-        unlock_entry_id = resolve_entry_id(
-            story_row.get("TriggerEntryId"),
+
+        condition_scene = as_str(story_row.get("ConditionScene")).lower()
+        condition_day = as_int(story_row.get("ConditionDay"), 0)
+        condition_money_op = as_str(story_row.get("ConditionMoneyOp")).lower()
+        condition_money = as_int(story_row.get("ConditionMoney"), 0)
+        condition_reputation_op = as_str(
+            story_row.get("ConditionReputationOp")
+        ).lower()
+        condition_reputation = as_int(
+            story_row.get("ConditionReputation"), 0
+        )
+        condition_story_id = as_str(story_row.get("ConditionStoryID"))
+        condition_treatment_result = as_str(
+            story_row.get("ConditionTreatmentResult")
+        ).lower()
+        condition_entry_id = resolve_entry_id(
+            story_row.get("ConditionEntryId"),
             entry_text_to_ids,
         )
+
+        return_scene = as_str(story_row.get("ReturnScene")).lower()
+        end_game = as_bool(story_row.get("EndGame"), False)
+        money_change = as_int(story_row.get("Money"), 0)
+        reputation_points_change = as_int(story_row.get("Reputation"), 0)
+        experience_points_change = as_int(story_row.get("Experience"), 0)
+
         play_once = as_bool(story_row.get("PlayOnce"), True)
-        return_scene = as_str(story_row.get("ReturnScene")).lower() or trigger_scene
+        sort_index = as_int(story_row.get("SortIndex"), 0)
+
         clinic_npc_id = (
-            as_str(story_row.get("ClinicNpcID"))
+            as_str(story_row.get("NpcID"))
+            or as_str(story_row.get("ClinicNpcID"))
             or as_str(story_row.get("ClinicNpcId"))
-            or as_str(story_row.get("NpcID"))
         )
         clinic_disease_id = resolve_disease_id(
             story_row.get("Disease"),
@@ -2319,7 +2447,9 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             ext_id = f"{prefix}_{next_ext_index}"
             next_ext_index += 1
             resource_path_to_id[clean_path] = ext_id
-            ext_lines.append(f'[ext_resource type="Texture2D" path="{clean_path}" id="{ext_id}"]')
+            ext_lines.append(
+                f'[ext_resource type="Texture2D" path="{clean_path}" id="{ext_id}"]'
+            )
             return ext_id
 
         clinic_npc_portrait_ext_id = add_texture_resource(
@@ -2336,7 +2466,7 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
 
             line_type = as_str(line_row.get("LineType")) or "dialogue"
             speaker = as_str(line_row.get("Speaker"))
-            text = as_str(line_row.get("Text"))
+            line_text = as_str(line_row.get("Text"))
             portrait_path = resolve_story_portrait_path(
                 line_row.get("PortraitPath"),
                 speaker,
@@ -2352,7 +2482,9 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
                 )
 
             portrait_side = as_str(line_row.get("PortraitSide")) or "auto"
-            inactive_portrait_mode = normalize_inactive_portrait_mode(line_row.get("Hide"))
+            inactive_portrait_mode = normalize_inactive_portrait_mode(
+                line_row.get("Hide")
+            )
 
             block_lines = [
                 f'[sub_resource type="Resource" id="{sub_id}"]',
@@ -2363,38 +2495,52 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             ]
             if speaker:
                 block_lines.append(f'speaker = {format_godot_string(speaker)}')
-            block_lines.append(f'text = {format_godot_string(text)}')
+            block_lines.append(f'text = {format_godot_string(line_text)}')
             if portrait_ext_id:
-                block_lines.append(f'portrait = {format_ext_resource_value(portrait_ext_id)}')
+                block_lines.append(
+                    f'portrait = {format_ext_resource_value(portrait_ext_id)}'
+                )
             if background_ext_id:
-                block_lines.append(f'background = {format_ext_resource_value(background_ext_id)}')
+                block_lines.append(
+                    f'background = {format_ext_resource_value(background_ext_id)}'
+                )
             sub_lines.append("\n".join(block_lines))
 
-        line_array = ", ".join(f'SubResource("{sub_id}")' for sub_id in sub_ids)
+        line_array = ", ".join(
+            f'SubResource("{sub_id}")'
+            for sub_id in sub_ids
+        )
 
         resource_lines = [
             "[resource]",
             'script = ExtResource("2_storydata")',
             f'story_id = {format_godot_string(story_id)}',
-            f'trigger_story_id = {format_godot_string(trigger_story_id)}',
-            f'trigger_type = {format_godot_string(trigger_type)}',
-            f'trigger_scene = {format_godot_string(trigger_scene)}',
-            f'trigger_day = {trigger_day}',
-            f'required_reputation_points = {required_reputation_points}',
+            f'story_name = {format_godot_string(story_name)}',
+            f'condition_scene = {format_godot_string(condition_scene)}',
+            f'condition_day = {condition_day}',
+            f'condition_money_op = {format_godot_string(condition_money_op)}',
+            f'condition_money = {condition_money}',
+            f'condition_reputation_op = {format_godot_string(condition_reputation_op)}',
+            f'condition_reputation = {condition_reputation}',
+            f'condition_entry_id = {format_godot_string(condition_entry_id)}',
+            f'condition_story_id = {format_godot_string(condition_story_id)}',
+            f'condition_treatment_result = {format_godot_string(condition_treatment_result)}',
+            f'return_scene = {format_godot_string(return_scene)}',
+            f'end_game = {"true" if end_game else "false"}',
+            f'clinic_npc_id = {format_godot_string(clinic_npc_id)}',
+            f'money_change = {money_change}',
             f'reputation_points_change = {reputation_points_change}',
             f'experience_points_change = {experience_points_change}',
-            f'unlock_entry_id = {format_godot_string(unlock_entry_id)}',
             f'play_once = {"true" if play_once else "false"}',
+            f'sort_index = {sort_index}',
         ]
+
         if use_current_scene_background:
             resource_lines.append(
                 f'background_mode = '
                 f'{format_godot_string(STORY_BACKGROUND_MODE_CURRENT_SCENE)}'
             )
-        resource_lines.extend([
-            f'return_scene = {format_godot_string(return_scene)}',
-            f'clinic_npc_id = {format_godot_string(clinic_npc_id)}',
-        ])
+
         if clinic_disease_ext_id:
             resource_lines.append(
                 f'clinic_disease = {format_ext_resource_value(clinic_disease_ext_id)}'
@@ -2404,7 +2550,10 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
                 f'clinic_npc_portrait = '
                 f'{format_ext_resource_value(clinic_npc_portrait_ext_id)}'
             )
-        resource_lines.append(f'lines = Array[ExtResource("1_storyline")]([{line_array}])')
+
+        resource_lines.append(
+            f'lines = Array[ExtResource("1_storyline")]([{line_array}])'
+        )
 
         story_content_parts = [
             '[gd_resource type="Resource" script_class="StoryData" format=3]',
@@ -2416,7 +2565,10 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             *resource_lines,
             "",
         ]
-        write_text_file(STORY_OUTPUT_DIR / f"{safe_filename(story_id)}.tres", "\n".join(story_content_parts))
+        write_text_file(
+            STORY_OUTPUT_DIR / f"{safe_filename(story_id)}.tres",
+            "\n".join(story_content_parts),
+        )
 
 
 def build_npc_resources(indexed_data: dict[str, Any]) -> None:

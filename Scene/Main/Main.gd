@@ -549,7 +549,7 @@ func _play_story(story_path: String, _legacy_return_target: String = "") -> void
 	# 返回目标由当前正在播放的 StoryData 决定。
 	pending_story_return_target = story_data.return_scene
 	if pending_story_return_target.is_empty():
-		pending_story_return_target = story_data.trigger_scene
+		pending_story_return_target = story_data.get_condition_scene()
 	if pending_story_return_target.is_empty():
 		pending_story_return_target = "clinic"
 
@@ -630,27 +630,28 @@ func _connect_story_scene_signals(story_node: Node) -> void:
 
 
 func _on_story_playback_completed(completed_story: StoryData) -> void:
-	# Story 只会在每段剧情台词真正播放完（或玩家跳过到结尾）时上报一次。
-	# 治疗判定阶段不经过这里，因此 story NPC 的奖励与惩罚不会提前结算。
+	# 每段剧情台词真正播放完（或跳过到结尾）后，统一执行数值动作。
+	# 治疗判定阶段不经过这里，因此金钱 / 名望 / 心得不会提前结算。
 	if completed_story == null:
 		return
 
-	if StoryManager == null or not StoryManager.has_method("apply_story_point_changes"):
-		push_warning("StoryManager 缺少 apply_story_point_changes()，无法结算剧情名望与心得。")
+	if StoryManager == null or not StoryManager.has_method("apply_story_value_changes"):
+		push_warning("StoryManager 缺少 apply_story_value_changes()，无法结算剧情数值动作。")
 		return
 
-	var raw_result = StoryManager.apply_story_point_changes(completed_story)
+	var raw_result = StoryManager.apply_story_value_changes(completed_story)
 	if typeof(raw_result) != TYPE_DICTIONARY:
-		push_warning("StoryManager.apply_story_point_changes() 返回了无效结果。")
+		push_warning("StoryManager.apply_story_value_changes() 返回了无效结果。")
 		return
 
-	var point_change_result: Dictionary = raw_result
-	var reputation_change := int(point_change_result.get("reputation_change", 0))
-	var experience_change := int(point_change_result.get("experience_change", 0))
-	if reputation_change == 0 and experience_change == 0:
+	var value_change_result: Dictionary = raw_result
+	var money_change := int(value_change_result.get("money_change", 0))
+	var reputation_change := int(value_change_result.get("reputation_change", 0))
+	var experience_change := int(value_change_result.get("experience_change", 0))
+	if money_change == 0 and reputation_change == 0 and experience_change == 0:
 		return
 
-	# 剧情名望与心得变化只保留在内存，等待下一次昼夜阶段结束统一写盘。
+	# 数值变化只保留在内存，等待下一次昼夜阶段结束统一写盘。
 
 
 func _on_story_treatment_requested(npc_id: String, disease: DiseaseData) -> void:
@@ -748,12 +749,8 @@ func _is_game_over_story(story: StoryData) -> bool:
 	if story == null:
 		return false
 
-	var trigger_type := story.trigger_type.strip_edges().to_lower()
-	return (
-		trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER
-		or trigger_type == StoryData.TRIGGER_TYPE_DAY_REPUTATION_OVER
-		or trigger_type == StoryData.TRIGGER_TYPE_DAY_REPUTATION_BELOW_OVER
-	)
+	# Game Over 是明确动作，不再由 TriggerType 推断。
+	return story.should_end_game()
 
 
 func _on_story_finished() -> void:
@@ -844,14 +841,12 @@ func _on_clinic_finished() -> void:
 # 天数 +1
 # =========================================================
 func _on_night_finished() -> void:
-	# 玩家点击“休息，进入明天”后，先检查当前天是否存在夜晚结束剧情。
-	# 此时还没有调用 finish_night()，所以 trigger_day 对应的是“正在结束的这一天”。
-	var night_end_story: StoryData = StoryManager.find_night_end_story(GameTime.current_day)
+	# 新结构不再定义 night_end 类型；新剧情统一在进入 ConditionScene 时检查。
+	# 这里仅保留旧 night_end .tres 的兼容入口，重新导表后通常会直接返回 null。
+	var pending_story: StoryData = StoryManager.find_night_end_story(GameTime.current_day)
 
-	if night_end_story != null:
-		# night_end 只决定这段剧情在点击“休息”时触发。
-		# 剧情结束后前往哪个场景，统一由 StoryData.return_scene 决定。
-		_play_story(night_end_story.resource_path)
+	if pending_story != null:
+		_play_story(pending_story.resource_path)
 
 		# 剧情资源加载或设置失败时不能卡在 Night，直接按原流程进入下一天。
 		if current_story_scene == null:

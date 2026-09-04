@@ -2,109 +2,45 @@ extends Node
 
 # =========================================================
 # StoryManager.gd
-# 剧情系统管理器。
-# 作为 Autoload 使用。
 #
-# 正式流程规则：
-# - StoryManager 只保存剧情数据，不直接切换场景。
-# - 场景切换统一交给 Main.gd 管理。
-# - 这样不会破坏 Main → Clinic → NightStudy 的主流程。
-#
-# 新增规则：
-# - 剧情触发条件写在 StoryData 里。
-# - StoryManager 负责统一检查触发条件。
-# - Clinic / NightStudy 等场景只上报当前状态。
-#
-# 当前版本：
-# - 启动时自动扫描 res://Data/Story/ 下所有 .tres 剧情资源。
-# - 不再需要手动把每个剧情路径写进 registered_story_paths。
+# 新剧情规则：
+# - 不再用 TriggerType 决定剧情种类。
+# - 所有剧情统一由 StoryData Conditions 判断。
+# - 条件全部为 AND；空条件表示不限制。
+# - 治疗成功 / 失败通过一次性的 context 传入，不保存为长期状态。
+# - 同时满足多条剧情时按 SortIndex（小 -> 大）排序，再按 StoryID 排序。
+# - 剧情完整播放后由 apply_story_value_changes() 结算金钱 / 名望 / 心得。
+# - 返回场景、结束游戏、生成治疗 NPC 仍由 Story.gd / Main.gd 执行动作。
 # =========================================================
 
-
-# 当前准备播放的剧情。
-# Story.tscn 进入后会优先读取这里的数据。
 var current_story: StoryData = null
-
-
-# 剧情结束后的返回场景标记。
-# 正式流程里主要作为记录使用，真正返回由 Main.gd 控制。
 var return_scene_override: String = ""
 
-# 是否已经播放过 Clinic 第一次进入剧情。
-# 注意：
-# 这是旧逻辑兼容变量。
-# 后续建议逐渐改成 played_story_ids 通用记录。
+# 旧逻辑兼容变量。
 var has_played_clinic_intro: bool = false
 
-
-# 已播放过的剧情 ID。
-# key = story_id
-# value = true
-#
-# 例：
-# played_story_ids["clinic_day_1_intro"] = true
+# 已完整播放剧情。
 var played_story_ids: Dictionary = {}
 
 # 剧情第一次完整播放结束时的游戏天数。
-# key = story_id
-# value = 完成剧情时的 current_day
 var played_story_days: Dictionary = {}
 
-# 剧情资源根目录。
-# 会自动扫描这个目录下所有 .tres 文件，包括子目录。
 const STORY_DIR: String = "res://Data/Story"
-
-
-# 所有可被自动触发检查的剧情资源路径。
-# 启动时会由 refresh_registered_story_paths() 自动填充。
 var registered_story_paths: Array[String] = []
 
 
 func _ready() -> void:
-	# Autoload 初始化时自动登记所有剧情资源。
 	refresh_registered_story_paths()
 
 
 func refresh_registered_story_paths() -> void:
-	# 重新扫描剧情目录。
-	# 如果运行时生成了新的 .tres，也可以手动调用这个函数刷新列表。
 	registered_story_paths.clear()
-
 	_scan_story_dir(STORY_DIR)
-
-	# 排序保证触发顺序稳定。
-	# 同一天、同场景有多个剧情满足条件时，会优先检查路径排序靠前的剧情。
 	registered_story_paths.sort()
 
 	print("已登记剧情数量：", registered_story_paths.size())
 	for story_path in registered_story_paths:
 		print("登记剧情：", story_path)
-
-
-func get_all_stories() -> Array[StoryData]:
-	# 给 UnlockManager 使用。
-	# UnlockManager 不再维护写死的 STORY_UNLOCKS 字典，
-	# 而是通过这里读取所有剧情 .tres，检查每个 StoryData 自己配置的名望解锁条件。
-	var result: Array[StoryData] = []
-
-	# 如果列表为空，尝试重新扫描一次，避免 Autoload 初始化顺序导致未登记。
-	if registered_story_paths.is_empty():
-		refresh_registered_story_paths()
-
-	for story_path in registered_story_paths:
-		var loaded_story: Resource = load(story_path)
-
-		if loaded_story == null:
-			push_warning("剧情资源加载失败：" + story_path)
-			continue
-
-		if not loaded_story is StoryData:
-			push_warning("加载的资源不是 StoryData：" + story_path)
-			continue
-
-		result.append(loaded_story as StoryData)
-
-	return result
 
 
 func _scan_story_dir(dir_path: String) -> void:
@@ -125,89 +61,92 @@ func _scan_story_dir(dir_path: String) -> void:
 
 		if dir.current_is_dir():
 			_scan_story_dir(full_path)
-		else:
-			if file_name.ends_with(".tres"):
-				register_story_path(full_path)
+		elif file_name.ends_with(".tres"):
+			register_story_path(full_path)
 
 		file_name = dir.get_next()
 
 	dir.list_dir_end()
 
 
+# Cached 版本会覆盖这个入口，统一复用下面所有条件判断。
+func _load_story_resource(story_path: String) -> StoryData:
+	var loaded_story: Resource = load(story_path)
+	if loaded_story == null:
+		push_warning("剧情资源加载失败：" + story_path)
+		return null
+
+	if not loaded_story is StoryData:
+		push_warning("加载的资源不是 StoryData：" + story_path)
+		return null
+
+	return loaded_story as StoryData
+
+
+func get_all_stories() -> Array[StoryData]:
+	var result: Array[StoryData] = []
+
+	if registered_story_paths.is_empty():
+		refresh_registered_story_paths()
+
+	for story_path in registered_story_paths:
+		var story := _load_story_resource(story_path)
+		if story != null:
+			result.append(story)
+
+	return result
+
+
 func set_story(story: StoryData, return_scene: String = "") -> bool:
-	# 保存剧情数据。
 	if story == null:
 		push_warning("StoryManager.set_story 收到空 StoryData。")
 		return false
 
 	current_story = story
 	return_scene_override = return_scene
-
 	return true
 
 
 func start_story_file(story_path: String, return_scene: String = "") -> bool:
-	# 检查剧情路径是否为空。
-	if story_path.is_empty():
+	var clean_path := story_path.strip_edges()
+	if clean_path == "":
 		push_warning("StoryManager.start_story_file 收到空路径。")
 		return false
 
-	# 加载剧情资源。
-	var loaded_story: Resource = load(story_path)
-
-	# 检查资源是否存在。
-	if loaded_story == null:
-		push_warning("剧情资源加载失败：" + story_path)
+	var story := _load_story_resource(clean_path)
+	if story == null:
 		return false
 
-	# 检查资源类型是否正确。
-	if not loaded_story is StoryData:
-		push_warning("加载的资源不是 StoryData：" + story_path)
-		return false
-
-	# 只保存剧情，不切换场景。
-	# Main.gd 会在保存成功后进入 Story.tscn。
-	return set_story(loaded_story as StoryData, return_scene)
+	return set_story(story, return_scene)
 
 
+# =========================================================
+# 统一剧情检查入口
+# =========================================================
+
+# 场景进入时调用。
 func find_trigger_story(trigger_scene: String, current_day: int) -> StoryData:
-	# 进入场景时，先检查“天数 + 名望”结束剧情。
-	# 结束剧情优先级高于普通 scene_enter，避免满足终局条件后先播放其他自动剧情。
-	var game_over_story := _find_matching_story(
-		trigger_scene,
-		current_day,
-		StoryData.TRIGGER_TYPE_DAY_REPUTATION_OVER
-	)
-	if game_over_story != null:
-		return game_over_story
-
-	# 再检查“天数达到 + 当前名望低于门槛”的失败结束剧情。
-	var low_reputation_game_over_story := _find_matching_story(
-		trigger_scene,
-		current_day,
-		StoryData.TRIGGER_TYPE_DAY_REPUTATION_BELOW_OVER
-	)
-	if low_reputation_game_over_story != null:
-		return low_reputation_game_over_story
-
-	# 兼容原有调用：随后检查 scene_enter 类型剧情。
-	# NPC 治疗结果类型不会在每天进入 Clinic / Night 时提前播放。
-	return _find_matching_story(
-		trigger_scene,
-		current_day,
-		StoryData.TRIGGER_TYPE_SCENE_ENTER
-	)
+	return _find_matching_story({
+		"scene": trigger_scene.strip_edges().to_lower(),
+		"day": current_day,
+		"treatment_result": "",
+		"treatment_story_id": "",
+		"check_point": "scene_enter",
+	})
 
 
+# 保留旧调用接口。
+# 新结构里不再存在 night_end 触发类型；新剧情统一在进入 ConditionScene 时检查。
+# 这里仅用于尚未重新导出的旧 night_end .tres，避免过渡期间旧剧情失效。
 func find_night_end_story(current_day: int) -> StoryData:
-	# Night 场景点击“休息，进入明天”时调用。
-	# 只检查 night_end 类型剧情，不会和进入 Night 时的 scene_enter 剧情混在一起。
-	# night_end 只负责触发时机，剧情结束后的目标场景由 StoryData.return_scene 决定。
-	return _find_matching_story(
-		"night",
-		current_day,
-		StoryData.TRIGGER_TYPE_NIGHT_END
-	)
+	return _find_matching_story({
+		"scene": "night",
+		"day": current_day,
+		"treatment_result": "",
+		"treatment_story_id": "",
+		"check_point": "night_end",
+		"legacy_only": true,
+	})
 
 
 func find_story_npc_cured_story(
@@ -215,18 +154,18 @@ func find_story_npc_cured_story(
 	current_day: int,
 	treatment_story_id: String
 ) -> StoryData:
-	# 治疗成功剧情只按发起治疗的主剧情 ID 匹配。
 	var clean_treatment_story_id := treatment_story_id.strip_edges()
 	if clean_treatment_story_id == "":
 		push_warning("治疗成功事件缺少来源剧情 ID。")
 		return null
 
-	return _find_matching_story(
-		trigger_scene,
-		current_day,
-		StoryData.TRIGGER_TYPE_STORY_NPC_CURED,
-		clean_treatment_story_id
-	)
+	return _find_matching_story({
+		"scene": trigger_scene.strip_edges().to_lower(),
+		"day": current_day,
+		"treatment_result": StoryData.TREATMENT_RESULT_CURED,
+		"treatment_story_id": clean_treatment_story_id,
+		"check_point": "treatment",
+	})
 
 
 func find_story_npc_treatment_failed_story(
@@ -234,38 +173,18 @@ func find_story_npc_treatment_failed_story(
 	current_day: int,
 	treatment_story_id: String
 ) -> StoryData:
-	# 治疗失败剧情只按发起治疗的主剧情 ID 匹配。
-	# 同一个主剧情、场景与条件只应配置一种失败类型。
-	# 失败事件本身不写入一次性状态；是否能够再次播放由 StoryData.play_once 控制。
 	var clean_treatment_story_id := treatment_story_id.strip_edges()
 	if clean_treatment_story_id == "":
 		push_warning("治疗失败事件缺少来源剧情 ID。")
 		return null
 
-	var failed_retry_story := _find_matching_story(
-		trigger_scene,
-		current_day,
-		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_RETRY,
-		clean_treatment_story_id
-	)
-	if failed_retry_story != null:
-		return failed_retry_story
-
-	var failed_back_story := _find_matching_story(
-		trigger_scene,
-		current_day,
-		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_BACK,
-		clean_treatment_story_id
-	)
-	if failed_back_story != null:
-		return failed_back_story
-
-	return _find_matching_story(
-		trigger_scene,
-		current_day,
-		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER,
-		clean_treatment_story_id
-	)
+	return _find_matching_story({
+		"scene": trigger_scene.strip_edges().to_lower(),
+		"day": current_day,
+		"treatment_result": StoryData.TREATMENT_RESULT_FAILED,
+		"treatment_story_id": clean_treatment_story_id,
+		"check_point": "treatment",
+	})
 
 
 func report_story_npc_cured(
@@ -273,8 +192,6 @@ func report_story_npc_cured(
 	trigger_scene: String = "clinic",
 	treatment_story_id: String = ""
 ) -> StoryData:
-	# Clinic 在 story NPC 治疗成功、治疗结果窗口关闭后调用。
-	# 不再记录 NPC 累计治愈次数，结果剧情由治疗主剧情 ID 决定。
 	return find_story_npc_cured_story(
 		trigger_scene,
 		current_day,
@@ -287,10 +204,6 @@ func report_story_npc_treatment_failed(
 	trigger_scene: String = "clinic",
 	treatment_story_id: String = ""
 ) -> StoryData:
-	# 治疗失败后不记录“已失败”状态。
-	# 失败剧情结束后的行为由 story_npc_failed_retry /
-	# story_npc_failed_back / story_npc_failed_over 决定。
-	# 若失败剧情需要再次触发，请在 Story 表中把 PlayOnce 设为 false。
 	return find_story_npc_treatment_failed_story(
 		trigger_scene,
 		current_day,
@@ -298,104 +211,261 @@ func report_story_npc_treatment_failed(
 	)
 
 
-func _find_matching_story(
-	trigger_scene: String,
-	current_day: int,
-	trigger_type: String,
-	requested_treatment_story_id: String = ""
-) -> StoryData:
-	# 如果列表为空，尝试重新扫描一次，避免初始化顺序导致未登记。
+func _find_matching_story(context: Dictionary) -> StoryData:
 	if registered_story_paths.is_empty():
 		refresh_registered_story_paths()
 
-	# 在所有登记过的剧情里，寻找第一个满足触发条件的剧情。
+	var candidates: Array[StoryData] = []
+
 	for story_path in registered_story_paths:
-		var loaded_story: Resource = load(story_path)
-
-		# 跳过加载失败的剧情资源。
-		if loaded_story == null:
-			push_warning("剧情资源加载失败：" + story_path)
+		var story := _load_story_resource(story_path)
+		if story == null:
 			continue
 
-		# 跳过类型错误的资源。
-		if not loaded_story is StoryData:
-			push_warning("加载的资源不是 StoryData：" + story_path)
-			continue
+		if _is_story_condition_matched(story, context):
+			candidates.append(story)
 
-		var story: StoryData = loaded_story as StoryData
+	if candidates.is_empty():
+		return null
 
-		# 检查这个剧情是否满足触发条件。
-		if _is_story_trigger_matched(
-			story,
-			trigger_scene,
-			current_day,
-			trigger_type,
-			requested_treatment_story_id
-		):
-			return story
-
-	return null
+	candidates.sort_custom(Callable(self, "_story_sort_before"))
+	return candidates[0]
 
 
-func try_set_trigger_story(trigger_scene: String, current_day: int) -> bool:
-	# 查找当前场景、当前天数是否有可触发剧情。
-	var story: StoryData = find_trigger_story(trigger_scene, current_day)
+func _story_sort_before(a: StoryData, b: StoryData) -> bool:
+	if a.sort_index != b.sort_index:
+		return a.sort_index < b.sort_index
 
-	# 没有找到可触发剧情。
+	# 同优先级时，让结束本局的剧情先于普通剧情，兼容原有终局优先规则。
+	if a.should_end_game() != b.should_end_game():
+		return a.should_end_game()
+
+	return a.story_id.strip_edges() < b.story_id.strip_edges()
+
+
+func _is_story_condition_matched(story: StoryData, context: Dictionary) -> bool:
 	if story == null:
 		return false
 
-	# 优先读取 StoryData 自己配置的 return_scene。
-	var return_scene: String = get_return_scene(story)
+	var story_id := story.story_id.strip_edges()
+	if story_id == "":
+		push_warning("自动触发剧情缺少 story_id。")
+		return false
 
-	# 设置当前剧情。
-	return set_story(story, return_scene)
+	if story.play_once and played_story_ids.has(story_id):
+		return false
+
+	# 只对旧 .tres 使用 TriggerType 做兼容筛选。
+	# 新 import_data.py 不再写 trigger_type，因此新剧情完全不会依赖它。
+	if bool(context.get("legacy_only", false)) and not story.uses_legacy_trigger_schema():
+		return false
+
+	if story.uses_legacy_trigger_schema():
+		if not _legacy_check_point_matches(story, context):
+			return false
+
+	var current_scene := String(context.get("scene", "")).strip_edges().to_lower()
+	var current_day := int(context.get("day", 0))
+	var event_treatment_result := String(context.get("treatment_result", "")).strip_edges().to_lower()
+	var event_treatment_story_id := String(context.get("treatment_story_id", "")).strip_edges()
+
+	# 场景条件。
+	var required_scene := story.get_condition_scene()
+	if required_scene != "" and required_scene != current_scene:
+		return false
+
+	# 治疗结果条件。
+	var required_treatment_result := story.get_condition_treatment_result()
+	if required_treatment_result != event_treatment_result:
+		# 两边都为空才算匹配；有任意一边不同都不能触发。
+		return false
+
+	# 前置剧情 / 治疗来源剧情。
+	var required_story_id := story.get_condition_story_id()
+	var prerequisite_played_day := 0
+	if required_story_id == story_id:
+		push_warning("剧情不能把自己设置为 ConditionStoryID：" + story_id)
+		return false
+
+	if required_story_id != "":
+		if required_treatment_result != "":
+			# 治疗结果剧情中，ConditionStoryID 表示发起本次治疗的主剧情。
+			if event_treatment_story_id == "" or event_treatment_story_id != required_story_id:
+				return false
+		else:
+			# 普通剧情中，ConditionStoryID 表示必须已经完整播放的前置剧情。
+			if not has_played_story(required_story_id):
+				return false
+			prerequisite_played_day = int(played_story_days.get(required_story_id, 0))
+
+	# 天数条件。
+	var required_day := story.get_condition_day()
+	if required_day > 0:
+		var target_day := required_day
+
+		# 普通前置剧情继续保留“完成前置剧情后 N 天”的原有能力。
+		# 治疗结果是一次性即时上下文，因此其 Day 仍按绝对天数判断。
+		if required_story_id != "" and required_treatment_result == "":
+			target_day = prerequisite_played_day + required_day
+
+		if current_day < target_day:
+			return false
+
+	# 金钱条件。
+	var money_op := story.get_condition_money_op()
+	if money_op != "":
+		var current_money_result := _get_current_money_wen()
+		if not bool(current_money_result.get("ok", false)):
+			return false
+
+		if not _compare_numeric(
+			int(current_money_result.get("value", 0)),
+			story.get_condition_money(),
+			money_op,
+			"ConditionMoney",
+			story_id
+		):
+			return false
+
+	# 名望条件。
+	var reputation_op := story.get_condition_reputation_op()
+	if reputation_op != "":
+		var current_reputation_result := _get_current_reputation()
+		if not bool(current_reputation_result.get("ok", false)):
+			return false
+
+		if not _compare_numeric(
+			int(current_reputation_result.get("value", 0)),
+			story.get_condition_reputation(),
+			reputation_op,
+			"ConditionReputation",
+			story_id
+		):
+			return false
+
+	# 条目条件。
+	var required_entry_id := story.get_condition_entry_id()
+	if required_entry_id != "":
+		if Unlock == null or not Unlock.has_method("is_entry_unlocked"):
+			return false
+
+		if not Unlock.is_entry_unlocked(required_entry_id):
+			return false
+
+	return true
+
+
+func _legacy_check_point_matches(story: StoryData, context: Dictionary) -> bool:
+	var legacy_type := story.trigger_type.strip_edges().to_lower()
+	var check_point := String(context.get("check_point", "scene_enter")).strip_edges().to_lower()
+	var treatment_result := String(context.get("treatment_result", "")).strip_edges().to_lower()
+
+	match legacy_type:
+		StoryData.TRIGGER_TYPE_NIGHT_END:
+			return check_point == "night_end"
+		StoryData.TRIGGER_TYPE_STORY_NPC_CURED:
+			return check_point == "treatment" and treatment_result == StoryData.TREATMENT_RESULT_CURED
+		StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_RETRY, StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_BACK, StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER:
+			return check_point == "treatment" and treatment_result == StoryData.TREATMENT_RESULT_FAILED
+		_:
+			# scene_enter 与旧 day_reputation_* 都是在进入场景时检查。
+			return check_point == "scene_enter"
+
+
+func _compare_numeric(
+	current_value: int,
+	target_value: int,
+	op: String,
+	field_name: String,
+	story_id: String
+) -> bool:
+	match op.strip_edges().to_lower():
+		StoryData.COMPARE_GTE:
+			return current_value >= target_value
+		StoryData.COMPARE_LTE:
+			return current_value <= target_value
+		_:
+			push_warning("Story %s 的 %s 比较方式非法：%s" % [story_id, field_name, op])
+			return false
+
+
+func _get_current_money_wen() -> Dictionary:
+	if Unlock == null:
+		return {"ok": false, "value": 0}
+
+	if Unlock.has_method("get_money_wen"):
+		return {"ok": true, "value": int(Unlock.get_money_wen())}
+
+	if _object_has_property(Unlock, "money_wen"):
+		return {"ok": true, "value": int(Unlock.get("money_wen"))}
+
+	push_warning("StoryManager：Unlock 缺少金钱读取接口 get_money_wen / money_wen。")
+	return {"ok": false, "value": 0}
+
+
+func _get_current_reputation() -> Dictionary:
+	if Unlock == null:
+		return {"ok": false, "value": 0}
+
+	if Unlock.has_method("get_reputation_points"):
+		return {"ok": true, "value": int(Unlock.get_reputation_points())}
+
+	if _object_has_property(Unlock, "reputation_points"):
+		return {"ok": true, "value": int(Unlock.get("reputation_points"))}
+
+	push_warning("StoryManager：Unlock 缺少名望读取接口 get_reputation_points / reputation_points。")
+	return {"ok": false, "value": 0}
+
+
+func try_set_trigger_story(trigger_scene: String, current_day: int) -> bool:
+	var story := find_trigger_story(trigger_scene, current_day)
+	if story == null:
+		return false
+
+	return set_story(story, get_return_scene(story))
 
 
 func get_return_scene(data: StoryData = null) -> String:
-	# 优先使用外部传入的返回场景。
 	if not return_scene_override.is_empty():
 		return return_scene_override
 
-	# 如果外部没传，就使用 StoryData 自己设置的返回场景。
 	if data != null and not data.return_scene.is_empty():
 		return data.return_scene
 
 	return ""
 
 
-# 结算一段已经完整播放结束的剧情所配置的名望与心得变化。
-#
-# 说明：
-# - 这里只负责结算传入的 StoryData，不负责判断治疗成功或失败。
-# - 调用方必须在剧情真正播放完成时调用，不能在剧情刚开始或治疗结果刚产生时调用。
-# - StoryData 中的正数表示奖励，负数表示惩罚，0 表示不变化。
-# - 本函数不主动存档；调用方可在剧情完成流程结束后统一保存。
-#
-# 返回值：
-# - reputation_change：本次配置的名望变化量。
-# - experience_change：本次配置的心得变化量。
-# - newly_unlocked_stories：名望增加后新解锁的剧情数据。
-# - newly_unlocked_entry_titles：心得增加后新解锁的医书条目标题。
-func apply_story_point_changes(story: StoryData) -> Dictionary:
+# =========================================================
+# 剧情播放后的数值动作
+# =========================================================
+
+func apply_story_value_changes(story: StoryData) -> Dictionary:
 	var result := {
+		"money_change": 0,
 		"reputation_change": 0,
 		"experience_change": 0,
 		"newly_unlocked_stories": [],
-		"newly_unlocked_entry_titles": []
+		"newly_unlocked_entry_titles": [],
 	}
 
 	if story == null:
 		return result
 
+	var money_change := int(story.money_change)
 	var reputation_change := int(story.reputation_points_change)
 	var experience_change := int(story.experience_points_change)
+
+	result["money_change"] = money_change
 	result["reputation_change"] = reputation_change
 	result["experience_change"] = experience_change
 
 	if Unlock == null:
-		push_warning("StoryManager：Unlock 不存在，无法结算剧情配置的名望与心得变化。")
+		if money_change != 0 or reputation_change != 0 or experience_change != 0:
+			push_warning("StoryManager：Unlock 不存在，无法结算剧情数值动作。")
 		return result
+
+	if money_change != 0:
+		_apply_money_change(money_change)
 
 	if reputation_change != 0:
 		if Unlock.has_method("add_reputation_points"):
@@ -412,274 +482,114 @@ func apply_story_point_changes(story: StoryData) -> Dictionary:
 	return result
 
 
+# 兼容旧 Main.gd / 其他调用方。
+func apply_story_point_changes(story: StoryData) -> Dictionary:
+	return apply_story_value_changes(story)
+
+
+func _apply_money_change(amount: int) -> void:
+	if amount == 0 or Unlock == null:
+		return
+
+	# 如果以后 UnlockManager 增加统一接口，这里会自动优先使用。
+	if Unlock.has_method("change_money_wen"):
+		Unlock.call("change_money_wen", amount)
+		return
+
+	if _object_has_property(Unlock, "money_wen"):
+		var current_money := int(Unlock.get("money_wen"))
+		Unlock.set("money_wen", current_money + amount)
+		return
+
+	push_warning("StoryManager：Unlock 缺少 change_money_wen() 或 money_wen，无法结算剧情金钱。")
+
+
+func _object_has_property(target: Object, property_name: String) -> bool:
+	if target == null:
+		return false
+
+	for property_info in target.get_property_list():
+		if String(property_info.get("name", "")) == property_name:
+			return true
+
+	return false
+
+
+# =========================================================
+# 剧情播放状态
+# =========================================================
+
 func clear_story() -> void:
-	# 清空当前剧情缓存。
-	# 不要清空 has_played_clinic_intro，否则回到 Clinic 后会重复播放教学剧情。
-	# 不要清空 played_story_ids，否则所有一次性剧情都会再次触发。
 	current_story = null
 	return_scene_override = ""
 
 
 func register_story_path(story_path: String) -> void:
-	# 运行时登记剧情路径。
-	# 自动扫描和外部动态添加剧情都会用这个函数。
-	if story_path.is_empty():
+	var clean_path := story_path.strip_edges()
+	if clean_path == "" or registered_story_paths.has(clean_path):
 		return
 
-	if registered_story_paths.has(story_path):
-		return
-
-	registered_story_paths.append(story_path)
+	registered_story_paths.append(clean_path)
 
 
 func has_played_story(story_id: String) -> bool:
-	# 外部可用这个函数检查某个剧情是否已经播放过。
 	var clean_story_id := story_id.strip_edges()
 	if clean_story_id == "":
 		return false
-
 	return played_story_ids.has(clean_story_id)
 
 
 func mark_story_played_by_id(story_id: String) -> void:
-	# 外部可手动标记某个剧情已经播放。
 	var clean_story_id := story_id.strip_edges()
 	if clean_story_id == "":
 		return
 
 	played_story_ids[clean_story_id] = true
-
-	# 只记录第一次完整播放结束时的天数，避免重复调用改变相对计时起点。
 	if not played_story_days.has(clean_story_id):
 		played_story_days[clean_story_id] = int(GameTime.current_day)
 
 
 func mark_current_story_played() -> void:
-	# 只有剧情确实结束，或已经完成并准备切换到后续剧情时，才由 Main 调用。
-	# set_story() 只负责暂存数据，避免玩家在剧情中途退出后被误判为已经播放。
 	_mark_story_played(current_story)
 
 
-func _is_story_trigger_matched(
-	story: StoryData,
-	trigger_scene: String,
-	current_day: int,
-	requested_trigger_type: String,
-	requested_treatment_story_id: String
-) -> bool:
-	# 检查 StoryData 是否为空。
-	if story == null:
-		return false
-
-	# 自动触发剧情必须有 story_id，否则无法记录已播放 / 已解锁状态。
-	var story_id := story.story_id.strip_edges()
-	if story_id == "":
-		push_warning("自动触发剧情缺少 story_id。")
-		return false
-
-	# 如果是只播放一次，并且已经播放过，则不再触发。
-	if story.play_once and played_story_ids.has(story_id):
-		return false
-
-	# 触发类型必须匹配。
-	# 旧剧情资源没有显式填写 trigger_type 时，会使用 StoryData 的 scene_enter 默认值。
-	var story_trigger_type := story.trigger_type.strip_edges().to_lower()
-	if story_trigger_type == "":
-		story_trigger_type = StoryData.TRIGGER_TYPE_SCENE_ENTER
-
-	var clean_requested_trigger_type := requested_trigger_type.strip_edges().to_lower()
-	if clean_requested_trigger_type == "":
-		clean_requested_trigger_type = StoryData.TRIGGER_TYPE_SCENE_ENTER
-
-	if story_trigger_type != clean_requested_trigger_type:
-		return false
-
-	var is_day_reputation_over := (
-		story_trigger_type == StoryData.TRIGGER_TYPE_DAY_REPUTATION_OVER
-	)
-	var is_day_reputation_below_over := (
-		story_trigger_type == StoryData.TRIGGER_TYPE_DAY_REPUTATION_BELOW_OVER
-	)
-	var is_day_reputation_game_over := (
-		is_day_reputation_over or is_day_reputation_below_over
-	)
-
-	var is_treatment_result_type := (
-		story_trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_CURED
-		or story_trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_RETRY
-		or story_trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_BACK
-		or story_trigger_type == StoryData.TRIGGER_TYPE_STORY_NPC_FAILED_OVER
-	)
-
-	# trigger_story_id 有两种用途：
-	# - 治疗结果剧情：绑定发起本次治疗的主剧情，不要求主剧情已经登记为播放完成。
-	# - 其他剧情：保持原有的普通前置剧情功能，例如 006_01 以前置 005_02 触发。
-	var trigger_story_id := story.trigger_story_id.strip_edges()
-	var event_treatment_story_id := requested_treatment_story_id.strip_edges()
-	var trigger_story_played_day := 0
-
-	if trigger_story_id == story_id:
-		push_warning("剧情不能把自己设置为关联剧情：" + story_id)
-		return false
-
-	# “天数 + 名望”结束剧情是独立的全局条件，不允许依赖前置剧情或 NPC 治疗结果。
-	if is_day_reputation_game_over:
-		if trigger_story_id != "":
-			push_warning(story_trigger_type + " 不能填写 trigger_story_id：" + story_id)
-			return false
-
-		if story.trigger_day <= 0:
-			push_warning(story_trigger_type + " 的 trigger_day 必须大于 0：" + story_id)
-			return false
-
-		if story.required_reputation_points <= 0:
-			push_warning(story_trigger_type + " 的 required_reputation_points 必须大于 0：" + story_id)
-			return false
-
-	if is_treatment_result_type:
-		if event_treatment_story_id == "":
-			push_warning("治疗结果事件缺少来源剧情 ID。")
-			return false
-
-		if trigger_story_id == "":
-			push_warning("治疗结果剧情缺少 trigger_story_id：" + story_id)
-			return false
-
-		if trigger_story_id != event_treatment_story_id:
-			return false
-
-		# 治疗结果必须立即匹配，不支持延迟若干天后播放。
-		if story.trigger_day > 0:
-			push_warning("治疗结果剧情的 trigger_day 必须为 0：" + story_id)
-			return false
-	elif trigger_story_id != "":
-		if not has_played_story(trigger_story_id):
-			return false
-
-		# 旧存档可能没有 played_story_days。
-		# 这时按第 0 天处理，避免旧存档中的后续剧情永久无法触发。
-		trigger_story_played_day = int(played_story_days.get(trigger_story_id, 0))
-
-	# 如果配置了触发场景，则必须和当前场景一致。
-	# trigger_scene 仍然保留，因为它控制剧情在哪个场景播放。
-	var story_trigger_scene := story.trigger_scene.strip_edges()
-	if story_trigger_scene != "" and story_trigger_scene != trigger_scene:
-		return false
-
-	# trigger_day 规则：
-	# - 没有 trigger_story_id：按游戏绝对天数判断。
-	# - 有 trigger_story_id：按前置剧情完成日后的相对天数判断。
-	# - trigger_day <= 0：不增加额外天数。
-	if story.trigger_day > 0:
-		var required_trigger_day := story.trigger_day
-
-		if trigger_story_id != "":
-			required_trigger_day = trigger_story_played_day + story.trigger_day
-
-		if current_day < required_trigger_day:
-			return false
-
-	# 名望剧情规则：
-	# - required_reputation_points <= 0：不需要名望解锁，按场景和播放状态正常触发。
-	# - 两种 day_reputation_*_over：检查触发当下的实际名望，不能只检查曾经解锁过的记录。
-	# - 其他类型：保持原有规则，必须先由 UnlockManager 解锁。
-	if story.required_reputation_points > 0:
-		if Unlock == null:
-			return false
-
-		if is_day_reputation_over:
-			if not Unlock.has_method("has_reputation_points"):
-				return false
-
-			if not Unlock.has_reputation_points(story.required_reputation_points):
-				return false
-		elif is_day_reputation_below_over:
-			if not Unlock.has_method("has_reputation_points"):
-				return false
-
-			# has_reputation_points() 为 true 表示当前名望已经达到门槛，
-			# 因此只有返回 false（当前名望严格小于门槛）时才允许触发。
-			if Unlock.has_reputation_points(story.required_reputation_points):
-				return false
-		else:
-			if not Unlock.has_method("is_story_unlocked"):
-				return false
-
-			if not Unlock.is_story_unlocked(story_id):
-				return false
-
-	# unlock_entry_id 现在作为剧情触发前置条件使用。
-	# - unlock_entry_id 为空：不限制医书条目。
-	# - unlock_entry_id 非空：必须先解锁对应医书条目，剧情才允许触发。
-	# 注意：这里不负责解锁条目，只负责检查条目是否已经解锁。
-	var required_entry_id := story.unlock_entry_id.strip_edges()
-	if required_entry_id != "":
-		if Unlock == null:
-			return false
-
-		if not Unlock.has_method("is_entry_unlocked"):
-			return false
-
-		if not Unlock.is_entry_unlocked(required_entry_id):
-			return false
-
-	return true
-
 func _mark_story_played(story: StoryData) -> void:
-	# 空剧情不处理。
 	if story == null:
 		return
 
-	# 读取剧情 ID。
 	var story_id := story.story_id.strip_edges()
-
-	# 没有 ID 的剧情不记录。
 	if story_id == "":
 		return
 
-	# 记录剧情已经完整播放。
-	# play_once = false 的剧情也需要记录，才能作为其他剧情的前置条件；
-	# 是否阻止重复播放仍由 _is_story_trigger_matched() 中的 play_once 判断控制。
 	played_story_ids[story_id] = true
-
-	# 只记录第一次完整播放结束时的天数，避免重复剧情改变相对计时起点。
 	if not played_story_days.has(story_id):
 		played_story_days[story_id] = int(GameTime.current_day)
 
 
 # =========================================================
-# 保存剧情播放状态
+# 存档
 # =========================================================
+
 func get_save_data() -> Dictionary:
-	# 返回当前剧情进度。
-	# duplicate(true) 表示深拷贝，避免外部误改 StoryManager 内部数据。
 	return {
 		"played_story_ids": played_story_ids.duplicate(true),
 		"played_story_days": played_story_days.duplicate(true),
-		"has_played_clinic_intro": has_played_clinic_intro
+		"has_played_clinic_intro": has_played_clinic_intro,
 	}
 
 
-# =========================================================
-# 读取剧情播放状态
-# =========================================================
 func load_save_data(data: Dictionary) -> void:
-	# 先清空，避免读档时残留上一次运行的数据。
 	played_story_ids.clear()
 	played_story_days.clear()
 	current_story = null
 	return_scene_override = ""
 
-	# 恢复已播放剧情 ID。
 	if data.has("played_story_ids") and typeof(data["played_story_ids"]) == TYPE_DICTIONARY:
 		played_story_ids = data["played_story_ids"].duplicate(true)
 
-	# 恢复剧情第一次完整播放结束时的游戏天数。
-	# 旧存档没有该字段时保持为空，触发检查会按第 0 天兼容处理。
 	if data.has("played_story_days") and typeof(data["played_story_days"]) == TYPE_DICTIONARY:
 		played_story_days = data["played_story_days"].duplicate(true)
 
-	# 恢复旧逻辑兼容变量。
 	if data.has("has_played_clinic_intro"):
 		has_played_clinic_intro = bool(data["has_played_clinic_intro"])
 	else:
