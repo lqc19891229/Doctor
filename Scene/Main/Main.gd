@@ -53,6 +53,11 @@ var pending_story_return_target: String = ""
 # 本次剧情是否暂停了 Clinic 计时
 var story_paused_clinic_clock: bool = false
 
+# 当前是否处于 story NPC 的完整诊疗剧情链中。
+# 诊疗链结束之前，剧情播放记录、名望和心得只保留在内存，
+# 不写入存档；只有整条诊疗链正式结束后才统一保存。
+var story_treatment_chain_active: bool = false
+
 # 存档槽弹窗模式：
 # "load" = 读取存档
 # "new_game" = 新游戏选择槽位
@@ -636,6 +641,11 @@ func _on_story_playback_completed(completed_story: StoryData) -> void:
 	if completed_story == null:
 		return
 
+	# 只要这段剧情会进入 story NPC 诊疗，从这里开始就视为一条完整诊疗链。
+	# 必须在点数结算前开启，因为发起诊疗的主剧情本身可能没有任何点数变化。
+	if completed_story.clinic_npc_id.strip_edges() != "":
+		story_treatment_chain_active = true
+
 	if StoryManager == null or not StoryManager.has_method("apply_story_point_changes"):
 		push_warning("StoryManager 缺少 apply_story_point_changes()，无法结算剧情名望与心得。")
 		return
@@ -655,10 +665,19 @@ func _on_story_playback_completed(completed_story: StoryData) -> void:
 	if _is_game_over_story(completed_story):
 		return
 
+	# story NPC 诊疗链进行中时，只修改内存，不中途落盘。
+	# 最终由 _on_story_finished() 在整条链结束后统一保存。
+	if story_treatment_chain_active:
+		return
+
 	_save_game_with_warning("剧情播放完成并结算名望与心得")
 
 
 func _on_story_treatment_requested(npc_id: String, disease: DiseaseData) -> void:
+	# 兜底：即使某段剧情没有正确配置 clinic_npc_id，只要实际发起了 story NPC 诊疗，
+	# 也必须进入诊疗链事务，禁止后续过程中的中途存档。
+	story_treatment_chain_active = true
+
 	_clear_story_treatment_backend()
 
 	story_treatment_backend = CLINIC_SCENE.instantiate()
@@ -724,7 +743,9 @@ func _on_followup_story_requested(
 	var is_game_over_story := _is_game_over_story(next_story)
 
 	# Game Over 不覆盖玩家最后一个可读取的存档点。
-	if not is_game_over_story:
+	# story NPC 诊疗链中也不在切换 followup 时中途落盘，
+	# 防止来源剧情已写入 played_story_ids、但后续剧情状态未保存而造成断链。
+	if not is_game_over_story and not story_treatment_chain_active:
 		_save_game_with_warning("切换后续剧情")
 
 	if current_story_scene != null and current_story_scene.has_method("play_followup_story"):
@@ -740,6 +761,7 @@ func _on_story_game_over_requested() -> void:
 	StoryManager.mark_current_story_played()
 	StoryManager.clear_story()
 	pending_story_return_target = ""
+	story_treatment_chain_active = false
 
 	if story_paused_clinic_clock:
 		if GameTime != null and GameTime.has_method("cancel_story_pause_state"):
@@ -767,6 +789,10 @@ func _on_story_finished() -> void:
 	# 只有走到正式结束信号，才把当前剧情记为已播放并保存。
 	StoryManager.mark_current_story_played()
 	StoryManager.clear_story()
+
+	# 如果此前处于 story NPC 诊疗链，到这里说明整条链已经正式完成。
+	# 下面原有的返回场景存档就是这次诊疗事务的最终提交。
+	story_treatment_chain_active = false
 
 	var target := pending_story_return_target
 	pending_story_return_target = ""

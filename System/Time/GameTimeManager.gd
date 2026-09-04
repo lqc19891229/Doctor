@@ -115,7 +115,7 @@ const CLINIC_START_SHICHEN_INDEX: int = 4
 # Clinic 到申时结束
 const CLINIC_END_SHICHEN_INDEX: int = 8
 
-# 现实 60 秒 = 游戏内 1 个时辰
+# 现实 30 秒 = 游戏内 1 个时辰
 const CLINIC_SECONDS_PER_SHICHEN: float = 30.0
 
 

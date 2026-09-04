@@ -163,6 +163,10 @@ const COAL_COST_LIDONG_WEN: int = 1200
 const CLOTHING_COST_SPRING_AUTUMN_WEN: int = 300
 const CLOTHING_COST_LIDONG_WEN: int = 2000
 
+# 田租收入：
+# 每年立冬收入 20 两；1 两 = 1000 文。
+const LAND_RENT_INCOME_LIDONG_WEN: int = 20000
+
 # 随礼支出：
 # 每个节气在正常日结时独立进行一次判定，10% 概率触发。
 # 触发后从下列金额中等概率随机选择一个。
@@ -287,6 +291,13 @@ func _get_clothing_cost_wen(day: int) -> int:
 			return CLOTHING_COST_LIDONG_WEN
 		_:
 			return 0
+
+
+func _get_land_rent_income_wen(day: int) -> int:
+	# 每年立冬（24 节气循环中的第 19 个节气）收一次田租。
+	if _get_solar_term_cycle_index(day) == SOLAR_TERM_LIDONG_INDEX:
+		return LAND_RENT_INCOME_LIDONG_WEN
+	return 0
 
 
 func _roll_gift_expense_wen() -> int:
@@ -435,6 +446,9 @@ func settle_day_finances(day: int) -> Dictionary:
 	# 随礼：每个节气 10% 概率触发；未触发时为 0。
 	var gift_expense := _roll_gift_expense_wen()
 
+	# 每年立冬固定收取田租 20 两。
+	var land_rent_income := _get_land_rent_income_wen(safe_day)
+
 	var is_gross_accounting := (
 		finance_ledger_accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS
 	)
@@ -453,6 +467,7 @@ func settle_day_finances(day: int) -> Dictionary:
 			if is_gross_accounting
 			else daily_medicine_profit_wen
 		)
+		+ land_rent_income
 	)
 
 	var total_expense := (
@@ -466,6 +481,9 @@ func settle_day_finances(day: int) -> Dictionary:
 	)
 	var net_change := total_income - total_expense
 
+	# 诊费和药材销售在白天已经实时入账；
+	# 田租只在立冬日结时入账一次。
+	money_wen += land_rent_income
 	money_wen -= total_expense
 
 	last_finance_settled_day = safe_day
@@ -479,6 +497,7 @@ func settle_day_finances(day: int) -> Dictionary:
 		# 保留旧字段，便于旧代码/旧存档兼容。
 		"medicine_profit_wen": daily_medicine_profit_wen,
 		"failed_medicine_cost_wen": daily_failed_medicine_cost_wen,
+		"land_rent_income_wen": land_rent_income,
 		"total_income_wen": total_income,
 		"chen_pi_wage_wen": chen_pi_wage,
 		"ban_xia_wage_wen": ban_xia_wage,
@@ -507,6 +526,7 @@ func build_finance_report_text(day: int) -> String:
 
 	var accounting_version := int(report.get("accounting_version", 1))
 	var consultation_income := int(report.get("consultation_income_wen", 0))
+	var land_rent_income := int(report.get("land_rent_income_wen", 0))
 	var total_income := int(report.get("total_income_wen", 0))
 	var chen_pi_wage := int(report.get("chen_pi_wage_wen", 0))
 	var ban_xia_wage := int(report.get("ban_xia_wage_wen", 0))
@@ -530,6 +550,9 @@ func build_finance_report_text(day: int) -> String:
 		# 仅用于无法还原销售额/成本拆分的旧存档当天。
 		var medicine_profit := int(report.get("medicine_profit_wen", 0))
 		lines.append("药材利润（旧账）：%s" % format_money_change(medicine_profit))
+
+	if land_rent_income > 0:
+		lines.append("田租：%s" % format_money_change(land_rent_income))
 
 	lines.append("收入合计：%s" % format_money_change(total_income))
 	lines.append("")

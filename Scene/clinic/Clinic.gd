@@ -199,6 +199,10 @@ var last_experience_change: int = 0
 # 治疗失败虽然仍有诊费收入，但 JudgementResult 按显示规则不展示奖励区。
 var last_treatment_income_wen: int = 0
 
+# 最近一次提交是否允许显示“本次治疗奖励”。
+# 同一名病人只有第一次提交可以产生并显示奖励；重复提交只更新判定结果。
+var last_submission_can_show_reward: bool = false
+
 # 当前打开的判定结果窗口
 var judgement_result_window: Control = null
 
@@ -913,6 +917,7 @@ func refresh_clinic_view() -> void:
 	last_reputation_change = 0
 	last_experience_change = 0
 	last_treatment_income_wen = 0
+	last_submission_can_show_reward = false
 	waiting_judgement_after_treatment_dialogue = false
 
 	current_display_region_name = DEFAULT_DISPLAY_REGION
@@ -1199,6 +1204,11 @@ func submit_prescription() -> bool:
 		return false
 
 	var was_already_submitted := diagnosis_submitted
+
+	# 同一名病人只有第一次提交允许产生并显示奖励。
+	# 重复提交仍然重新判定处方，但不会沿用上一次的收入/奖励显示。
+	last_submission_can_show_reward = not was_already_submitted
+
 	var result := formula_judge.judge_formula(current_prescription, standard_formula, current_npc.disease)
 	diagnosis_submitted = true
 
@@ -1208,6 +1218,7 @@ func submit_prescription() -> bool:
 	last_newly_unlocked_entry_titles.clear()
 	last_reputation_change = 0
 	last_experience_change = 0
+	last_treatment_income_wen = 0
 
 	# random NPC 继续沿用治疗判定时的固定奖励与惩罚。
 	# story NPC 的名望和心得不在这里结算，改由后续 StoryData 配置，
@@ -1473,6 +1484,7 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 		"show_reward_change": (
 			current_npc != null
 			and current_npc.npc_type.strip_edges().to_lower() != "story"
+			and last_submission_can_show_reward
 		),
 		"reputation_change": last_reputation_change,
 		"experience_change": last_experience_change,
@@ -1829,6 +1841,8 @@ func prepare_story_npc_treatment(
 	last_newly_unlocked_entry_titles.clear()
 	last_reputation_change = 0
 	last_experience_change = 0
+	last_treatment_income_wen = 0
+	last_submission_can_show_reward = false
 	waiting_judgement_after_treatment_dialogue = false
 	_reset_pulse_keyboard_state()
 	return true
@@ -1932,9 +1946,12 @@ func finish_story_treatment_attempt(
 		last_newly_unlocked_entry_titles.clear()
 		last_reputation_change = 0
 		last_experience_change = 0
+		last_treatment_income_wen = 0
+		last_submission_can_show_reward = false
 
-	if SaveManager != null and SaveManager.has_method("save_game"):
-		SaveManager.save_game()
+	# story NPC 诊疗属于一条完整剧情事务。
+	# 这里不能中途保存，否则来源剧情的 played 状态、后续剧情与奖励可能出现不一致。
+	# 最终存档统一交给 Main._on_story_finished()。
 
 	return next_story
 
