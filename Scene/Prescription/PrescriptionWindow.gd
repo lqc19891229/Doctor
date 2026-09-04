@@ -1076,7 +1076,7 @@ func _on_chen_list_gui_input(event: InputEvent) -> void:
 
 
 func _on_zuo_list_gui_input(event: InputEvent) -> void:
-if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		_set_selected_role(ROLE_ZUO)
 
 
