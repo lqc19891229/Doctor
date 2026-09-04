@@ -1218,7 +1218,6 @@ func submit_prescription() -> bool:
 	last_newly_unlocked_entry_titles.clear()
 	last_reputation_change = 0
 	last_experience_change = 0
-	last_treatment_income_wen = 0
 
 	# random NPC 继续沿用治疗判定时的固定奖励与惩罚。
 	# story NPC 的名望和心得不在这里结算，改由后续 StoryData 配置，
@@ -1254,8 +1253,26 @@ func submit_prescription() -> bool:
 			var medicine_purchase_cost_wen := int(finance_result.get("medicine_purchase_cost_wen", 0))
 			var total_income_wen := int(finance_result.get("total_income_wen", 0))
 
-			# 缓存给 JudgementResult 使用。
-			last_treatment_income_wen = total_income_wen
+			# 妙手回春时额外判定“病家谢仪礼”：
+			# 20% 概率触发，金额从 188 / 288 / 388 文中等概率随机。
+			var patient_thank_gift_wen := 0
+			var finance_grade := ""
+			var raw_finance_grade = result.get("grade")
+			if raw_finance_grade != null:
+				finance_grade = str(raw_finance_grade).strip_edges()
+
+			if (
+				finance_grade == "妙手回春"
+				and Unlock.has_method("record_patient_thank_gift_income")
+			):
+				patient_thank_gift_wen = int(
+					Unlock.record_patient_thank_gift_income(current_day)
+				)
+
+			var patient_total_income_wen := total_income_wen + patient_thank_gift_wen
+
+			# JudgementResult 的“治疗收入”包含本次实际收到的谢仪礼。
+			last_treatment_income_wen = patient_total_income_wen
 
 			summary_text += "\n诊费：+%d文" % consultation_fee_wen
 
@@ -1264,8 +1281,11 @@ func submit_prescription() -> bool:
 			else:
 				summary_text += "\n药材销售：0文"
 
+			if patient_thank_gift_wen > 0:
+				summary_text += "\n病家谢仪礼：+%d文" % patient_thank_gift_wen
+
 			summary_text += "\n药材进货成本：-%d文（计入今日支出）" % medicine_purchase_cost_wen
-			summary_text += "\n本病人收入合计：+%d文" % total_income_wen
+			summary_text += "\n本病人收入合计：+%d文" % patient_total_income_wen
 
 			_update_money_point_ui(true)
 
@@ -1841,8 +1861,6 @@ func prepare_story_npc_treatment(
 	last_newly_unlocked_entry_titles.clear()
 	last_reputation_change = 0
 	last_experience_change = 0
-	last_treatment_income_wen = 0
-	last_submission_can_show_reward = false
 	waiting_judgement_after_treatment_dialogue = false
 	_reset_pulse_keyboard_state()
 	return true
@@ -1946,12 +1964,9 @@ func finish_story_treatment_attempt(
 		last_newly_unlocked_entry_titles.clear()
 		last_reputation_change = 0
 		last_experience_change = 0
-		last_treatment_income_wen = 0
-		last_submission_can_show_reward = false
 
-	# story NPC 诊疗属于一条完整剧情事务。
-	# 这里不能中途保存，否则来源剧情的 played 状态、后续剧情与奖励可能出现不一致。
-	# 最终存档统一交给 Main._on_story_finished()。
+	if SaveManager != null and SaveManager.has_method("save_game"):
+		SaveManager.save_game()
 
 	return next_story
 

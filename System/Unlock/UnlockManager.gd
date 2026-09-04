@@ -151,9 +151,18 @@ const FOOD_COST_WEN: int = 1000
 # 所以按 current_day 对 24 取循环即可得到当前节气位置。
 const SOLAR_TERMS_PER_YEAR: int = 24
 const SOLAR_TERM_LICHUN_INDEX: int = 1
+const SOLAR_TERM_CHUNFEN_INDEX: int = 4
+const SOLAR_TERM_QINGMING_INDEX: int = 5
 const SOLAR_TERM_LIXIA_INDEX: int = 7
+const SOLAR_TERM_XIAOMAN_INDEX: int = 8
+const SOLAR_TERM_MANGZHONG_INDEX: int = 9
+const SOLAR_TERM_XIAZHI_INDEX: int = 10
+const SOLAR_TERM_XIAOSHU_INDEX: int = 11
 const SOLAR_TERM_LIQIU_INDEX: int = 13
+const SOLAR_TERM_CHUSHU_INDEX: int = 14
+const SOLAR_TERM_QIUFEN_INDEX: int = 16
 const SOLAR_TERM_LIDONG_INDEX: int = 19
+const SOLAR_TERM_DAHAN_INDEX: int = 24
 
 # 煤炭开支，单位：文。
 const COAL_COST_SPRING_SUMMER_AUTUMN_WEN: int = 200
@@ -166,6 +175,31 @@ const CLOTHING_COST_LIDONG_WEN: int = 2000
 # 田租收入：
 # 每年立冬收入 20 两；1 两 = 1000 文。
 const LAND_RENT_INCOME_LIDONG_WEN: int = 20000
+
+# 病家谢仪礼：
+# random NPC 达成“妙手回春”时，20% 概率获得一份额外谢仪。
+const PATIENT_THANK_GIFT_TRIGGER_CHANCE: float = 0.20
+const PATIENT_THANK_GIFT_AMOUNTS_WEN: Array[int] = [
+	188,
+	288,
+	388
+]
+
+# 医馆修缮：春分 / 秋分 / 大寒，各有 30% 概率触发。
+const CLINIC_REPAIR_TRIGGER_CHANCE: float = 0.30
+
+# 药材霉损：小满 / 芒种 / 夏至 / 小暑，各有 30% 概率触发。
+const HERB_SPOILAGE_TRIGGER_CHANCE: float = 0.30
+
+# 扫墓祭祖：清明 / 处暑，各有 30% 概率触发。
+const ANCESTOR_RITES_TRIGGER_CHANCE: float = 0.30
+
+# 上面三类随机支出触发后，都从 1 / 2 / 3 两中等概率抽取。
+const RANDOM_EVENT_EXPENSE_AMOUNTS_WEN: Array[int] = [
+	1000,
+	2000,
+	3000
+]
 
 # 随礼支出：
 # 每个节气在正常日结时独立进行一次判定，10% 概率触发。
@@ -191,6 +225,7 @@ var finance_ledger_accounting_version: int = FINANCE_ACCOUNTING_VERSION_GROSS
 
 var daily_random_npc_count: int = 0
 var daily_consultation_income_wen: int = 0
+var daily_patient_thank_gift_income_wen: int = 0
 
 # 当前正式账本：
 # 成功治疗时 medicine_sales 记实际售价总和；
@@ -310,11 +345,56 @@ func _roll_gift_expense_wen() -> int:
 	return int(GIFT_EXPENSE_AMOUNTS_WEN.pick_random())
 
 
+func _roll_patient_thank_gift_wen() -> int:
+	if randf() >= PATIENT_THANK_GIFT_TRIGGER_CHANCE:
+		return 0
+	return int(PATIENT_THANK_GIFT_AMOUNTS_WEN.pick_random())
+
+
+func record_patient_thank_gift_income(day: int) -> int:
+	# 只应由 Clinic 在 random NPC 首次提交且评级为“妙手回春”时调用。
+	# 每次调用独立进行一次 20% 判定。
+	_ensure_daily_finance_ledger(day)
+
+	var amount := _roll_patient_thank_gift_wen()
+	if amount <= 0:
+		return 0
+
+	daily_patient_thank_gift_income_wen += amount
+	money_wen += amount
+	return amount
+
+
+func _roll_clinic_repair_expense_wen(day: int) -> int:
+	match _get_solar_term_cycle_index(day):
+		SOLAR_TERM_CHUNFEN_INDEX, SOLAR_TERM_QIUFEN_INDEX, SOLAR_TERM_DAHAN_INDEX:
+			if randf() < CLINIC_REPAIR_TRIGGER_CHANCE:
+				return int(RANDOM_EVENT_EXPENSE_AMOUNTS_WEN.pick_random())
+	return 0
+
+
+func _roll_herb_spoilage_expense_wen(day: int) -> int:
+	match _get_solar_term_cycle_index(day):
+		SOLAR_TERM_XIAOMAN_INDEX, SOLAR_TERM_MANGZHONG_INDEX, SOLAR_TERM_XIAZHI_INDEX, SOLAR_TERM_XIAOSHU_INDEX:
+			if randf() < HERB_SPOILAGE_TRIGGER_CHANCE:
+				return int(RANDOM_EVENT_EXPENSE_AMOUNTS_WEN.pick_random())
+	return 0
+
+
+func _roll_ancestor_rites_expense_wen(day: int) -> int:
+	match _get_solar_term_cycle_index(day):
+		SOLAR_TERM_QINGMING_INDEX, SOLAR_TERM_CHUSHU_INDEX:
+			if randf() < ANCESTOR_RITES_TRIGGER_CHANCE:
+				return int(RANDOM_EVENT_EXPENSE_AMOUNTS_WEN.pick_random())
+	return 0
+
+
 func _reset_daily_finance_ledger(day: int) -> void:
 	finance_ledger_day = maxi(day, 1)
 	finance_ledger_accounting_version = FINANCE_ACCOUNTING_VERSION_GROSS
 	daily_random_npc_count = 0
 	daily_consultation_income_wen = 0
+	daily_patient_thank_gift_income_wen = 0
 	daily_medicine_sales_wen = 0
 	daily_medicine_purchase_cost_wen = 0
 	daily_medicine_profit_wen = 0
@@ -449,6 +529,12 @@ func settle_day_finances(day: int) -> Dictionary:
 	# 每年立冬固定收取田租 20 两。
 	var land_rent_income := _get_land_rent_income_wen(safe_day)
 
+	# 节气随机支出。只有对应节气才会进入概率判定。
+	# settle_day_finances() 同一天只执行一次，所以不会重复抽取。
+	var clinic_repair_expense := _roll_clinic_repair_expense_wen(safe_day)
+	var herb_spoilage_expense := _roll_herb_spoilage_expense_wen(safe_day)
+	var ancestor_rites_expense := _roll_ancestor_rites_expense_wen(safe_day)
+
 	var is_gross_accounting := (
 		finance_ledger_accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS
 	)
@@ -467,6 +553,7 @@ func settle_day_finances(day: int) -> Dictionary:
 			if is_gross_accounting
 			else daily_medicine_profit_wen
 		)
+		+ daily_patient_thank_gift_income_wen
 		+ land_rent_income
 	)
 
@@ -476,6 +563,9 @@ func settle_day_finances(day: int) -> Dictionary:
 		+ food_cost
 		+ coal_cost
 		+ clothing_cost
+		+ clinic_repair_expense
+		+ herb_spoilage_expense
+		+ ancestor_rites_expense
 		+ gift_expense
 		+ medicine_purchase_cost
 	)
@@ -492,6 +582,7 @@ func settle_day_finances(day: int) -> Dictionary:
 		"accounting_version": finance_ledger_accounting_version,
 		"random_npc_count": daily_random_npc_count,
 		"consultation_income_wen": daily_consultation_income_wen,
+		"patient_thank_gift_income_wen": daily_patient_thank_gift_income_wen,
 		"medicine_sales_wen": medicine_sales,
 		"medicine_purchase_cost_wen": medicine_purchase_cost,
 		# 保留旧字段，便于旧代码/旧存档兼容。
@@ -504,6 +595,9 @@ func settle_day_finances(day: int) -> Dictionary:
 		"food_cost_wen": food_cost,
 		"coal_cost_wen": coal_cost,
 		"clothing_cost_wen": clothing_cost,
+		"clinic_repair_expense_wen": clinic_repair_expense,
+		"herb_spoilage_expense_wen": herb_spoilage_expense,
+		"ancestor_rites_expense_wen": ancestor_rites_expense,
 		"gift_expense_wen": gift_expense,
 		"total_expense_wen": total_expense,
 		"net_change_wen": net_change,
@@ -526,6 +620,7 @@ func build_finance_report_text(day: int) -> String:
 
 	var accounting_version := int(report.get("accounting_version", 1))
 	var consultation_income := int(report.get("consultation_income_wen", 0))
+	var patient_thank_gift_income := int(report.get("patient_thank_gift_income_wen", 0))
 	var land_rent_income := int(report.get("land_rent_income_wen", 0))
 	var total_income := int(report.get("total_income_wen", 0))
 	var chen_pi_wage := int(report.get("chen_pi_wage_wen", 0))
@@ -533,6 +628,9 @@ func build_finance_report_text(day: int) -> String:
 	var food_cost := int(report.get("food_cost_wen", 0))
 	var coal_cost := int(report.get("coal_cost_wen", 0))
 	var clothing_cost := int(report.get("clothing_cost_wen", 0))
+	var clinic_repair_expense := int(report.get("clinic_repair_expense_wen", 0))
+	var herb_spoilage_expense := int(report.get("herb_spoilage_expense_wen", 0))
+	var ancestor_rites_expense := int(report.get("ancestor_rites_expense_wen", 0))
 	var gift_expense := int(report.get("gift_expense_wen", 0))
 	var total_expense := int(report.get("total_expense_wen", 0))
 	var net_change := int(report.get("net_change_wen", 0))
@@ -550,6 +648,9 @@ func build_finance_report_text(day: int) -> String:
 		# 仅用于无法还原销售额/成本拆分的旧存档当天。
 		var medicine_profit := int(report.get("medicine_profit_wen", 0))
 		lines.append("药材利润（旧账）：%s" % format_money_change(medicine_profit))
+
+	if patient_thank_gift_income > 0:
+		lines.append("病家谢仪礼：%s" % format_money_change(patient_thank_gift_income))
 
 	if land_rent_income > 0:
 		lines.append("田租：%s" % format_money_change(land_rent_income))
@@ -577,6 +678,12 @@ func build_finance_report_text(day: int) -> String:
 		lines.append("买入煤炭：%s" % format_money_change(-coal_cost))
 	if clothing_cost > 0:
 		lines.append("购置衣服：%s" % format_money_change(-clothing_cost))
+	if clinic_repair_expense > 0:
+		lines.append("医馆修缮：%s" % format_money_change(-clinic_repair_expense))
+	if herb_spoilage_expense > 0:
+		lines.append("药材霉损：%s" % format_money_change(-herb_spoilage_expense))
+	if ancestor_rites_expense > 0:
+		lines.append("扫墓祭祖：%s" % format_money_change(-ancestor_rites_expense))
 	if gift_expense > 0:
 		lines.append("随礼：%s" % format_money_change(-gift_expense))
 	lines.append("支出合计：%s" % format_money_change(-total_expense))
@@ -1461,6 +1568,7 @@ func get_save_data() -> Dictionary:
 		"finance_ledger_accounting_version": finance_ledger_accounting_version,
 		"daily_random_npc_count": daily_random_npc_count,
 		"daily_consultation_income_wen": daily_consultation_income_wen,
+		"daily_patient_thank_gift_income_wen": daily_patient_thank_gift_income_wen,
 		"daily_medicine_sales_wen": daily_medicine_sales_wen,
 		"daily_medicine_purchase_cost_wen": daily_medicine_purchase_cost_wen,
 		# 旧字段继续保存，便于回滚/兼容旧档。
@@ -1499,6 +1607,7 @@ func load_save_data(data: Dictionary) -> void:
 
 	daily_random_npc_count = int(data.get("daily_random_npc_count", 0))
 	daily_consultation_income_wen = int(data.get("daily_consultation_income_wen", 0))
+	daily_patient_thank_gift_income_wen = int(data.get("daily_patient_thank_gift_income_wen", 0))
 	daily_medicine_sales_wen = int(data.get("daily_medicine_sales_wen", 0))
 	daily_medicine_purchase_cost_wen = int(data.get("daily_medicine_purchase_cost_wen", 0))
 	daily_medicine_profit_wen = int(data.get("daily_medicine_profit_wen", 0))
