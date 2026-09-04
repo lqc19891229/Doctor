@@ -131,7 +131,7 @@ var reputation_points: int = 0
 #
 # 如果后续要调整平衡，只需改下面常量即可。
 const WEN_PER_LIANG: int = 1000
-const STARTING_MONEY_WEN: int = 0
+const STARTING_MONEY_WEN: int = 50000
 
 # random NPC 诊费档位，单位：文。
 const CONSULTATION_FEE_BEGINNER_WEN: int = 10
