@@ -19,7 +19,7 @@ script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
-text = "主犯吴世良，赵顺等即刻斩首。湖广巡抚陈仕贤等，连坐失察，官降两级。"
+text = "主犯吴世良、赵顺等即刻斩首。湖广巡抚陈仕贤等，连坐失察，官降两级。"
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
 line_type = "subtitle"
@@ -32,7 +32,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "到头来这吴世良就是个背锅顶罪的。"
+text = "到头来这吴世良不过是个被推出来顶罪的罢了。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")

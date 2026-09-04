@@ -75,7 +75,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "hide"
 speaker = "雷万钧"
-text = "贤弟，你没事吧。"
+text = "贤弟，你没事吧。王爷听说沈修文和杨善泉都被灭口了，猜想下一个就是你，便派我们在暗中保护。"
 portrait = ExtResource("portrait_6")
 [sub_resource type="Resource" id="StoryLine_009"]
 script = ExtResource("1_storyline")

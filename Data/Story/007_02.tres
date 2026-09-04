@@ -27,7 +27,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "雷万钧"
-text = "昨日我带着兄弟们和州府的征粮官去收粮，这帮狗腿子淋尖踢斛下脚那叫一个狠，气的我直接骂娘。"
+text = "昨日我带着兄弟们和州府的征粮官去收粮，这帮狗腿子淋尖踢斛下脚那叫一个狠，气的我当场骂娘。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
@@ -67,7 +67,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "雷万钧"
-text = "现在这淋尖踢斛已经是各处不成文的规矩了，但昨天那帮混蛋踢的太狠，简直成明抢了。"
+text = "现在这淋尖踢斛已经是各处不成文的规矩了，但昨天那帮混蛋踢得太狠，简直成明抢了。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_009"]
 script = ExtResource("1_storyline")

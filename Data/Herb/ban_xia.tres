@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="HerbData" format=3 uid="uid://c0gs5rqnq2wxx"]
+[gd_resource type="Resource" script_class="HerbData" load_steps=2 format=3]
 
-[ext_resource type="Script" uid="uid://0gwonig4qo0s" path="res://System/Herb/HerbData.gd" id="1"]
+[ext_resource type="Script" path="res://System/Herb/HerbData.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
@@ -11,3 +11,4 @@ taste = Array[String](["辛"])
 meridians = Array[String](["脾", "肺"])
 purchase_price = 5.0
 sell_price = 9.0
+price_unit = "qian"

@@ -11,7 +11,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "是沈先生啊，病好点了吗"
+text = "是沈先生啊，病好点了吗？"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")

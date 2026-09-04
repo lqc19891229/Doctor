@@ -30,7 +30,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "爹，货都到齐了吗。"
+text = "爹，货都到齐了吗？"
 portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
@@ -38,7 +38,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "嗯，我都点数过了，这次还是小包装，省得我们自己称了，不错不错。"
+text = "嗯，我都点数过了，这次是按份分装的，倒省得咱们再称量，不错不错。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")

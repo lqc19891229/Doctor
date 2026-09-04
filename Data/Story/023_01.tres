@@ -38,7 +38,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "金姨妈"
-text = "哎呀，可不是嘛，这孩子随我学艺两年又半载，犹善歌舞，是咱柳月坊的花魁。"
+text = "哎呀，可不是嘛，这孩子随我学艺两年又半载，尤善歌舞，是咱柳月坊的花魁。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")

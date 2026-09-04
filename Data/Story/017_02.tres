@@ -56,6 +56,14 @@ portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "杨善泉"
+text = "这一批药材入库验收、各地调拨都是我经的手，多少药、什么成色、送到哪里，账上都有我的画押。他们想把这笔账做干净，就不会留我这个活口。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_008"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
@@ -77,4 +85,4 @@ play_once = true
 background_mode = "current_scene"
 return_scene = "clinic"
 clinic_npc_id = ""
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008")])

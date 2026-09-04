@@ -186,7 +186,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "楚王"
-text = "先生所言让本王惭愧啊…待我会写一道密奏，向皇上禀明赈灾药材之事。先生也切莫再和别人提及此事。"
+text = "先生所言让本王惭愧啊…待本王修一道密疏，向圣上禀明此事。先生也切莫再向他人提及。"
 portrait = ExtResource("portrait_4")
 
 [resource]

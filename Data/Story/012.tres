@@ -27,7 +27,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "孙大夫也发现赈灾药材有问题，去县衙找吴世良，谁知被扣了个私换药材的罪名，打了二十板子关进大狱里了。"
+text = "孙大夫也发现赈灾药材有问题，去州衙找吴世良，谁知被扣了个私换药材的罪名，打了二十板子关进大狱里了。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")

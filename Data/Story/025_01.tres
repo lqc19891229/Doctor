@@ -12,7 +12,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "性空"
-text = "阿弥陀佛，贫僧法号性空，《中论》曰：\"众因缘生发，我说即是空，亦为是假名，亦是中道义。\"正所谓缘起性空是也。"
+text = "阿弥陀佛，贫僧法号性空，《中论》曰：\"众因缘生法，我说即是空，亦为是假名，亦是中道义。\"正所谓缘起性空是也。"
 portrait = ExtResource("clinic_npc_portrait_1")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
@@ -20,7 +20,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "师傅请坐，今日来小馆是？(这和尚身上好大的酒味啊...)"
+text = "师父请坐，今日来小馆是？(这和尚身上好大的酒味啊...)"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")

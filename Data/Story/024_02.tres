@@ -47,7 +47,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "吴芷兰"
-text = "前些天你来看病，你前脚刚走，李公子就来这问你的病情，很是担心你。"
+text = "前些天你来看病，你前脚刚走，王公子就来这问你的病情，很是担心你。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
@@ -79,7 +79,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "hide"
 speaker = "半夏"
-text = "少夫人你有什么注意呀？快说快说！"
+text = "少夫人你有什么主意呀？快说快说！"
 portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_010"]
 script = ExtResource("1_storyline")
@@ -87,7 +87,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "吴芷兰"
-text = "明日你带让金姨妈来，如此这般…."
+text = "明日你让金姨妈来一趟，如此这般…."
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_011"]
 script = ExtResource("1_storyline")

@@ -15,7 +15,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "姑娘这病是肺气虚，平日注意避风避寒，开副补肺汤调养调养。早上练练六字诀中的呬字决，舒畅胸中气机。"
+text = "姑娘这病是肺气虚，平日注意避风避寒，开副补肺汤调养调养。早上练练六字诀中的呬字诀，舒畅胸中气机。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
@@ -135,7 +135,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "吴芷兰"
-text = "相公我们想办法帮帮他们吧。"
+text = "相公咱想办法帮帮他们吧。"
 portrait = ExtResource("portrait_6")
 [sub_resource type="Resource" id="StoryLine_017"]
 script = ExtResource("1_storyline")

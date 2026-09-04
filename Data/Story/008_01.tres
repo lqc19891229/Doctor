@@ -53,13 +53,13 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "贾荃"
-text = "我有一单大买卖，天大的买卖！呕~"
+text = "我有一桩大买卖，天大的买卖！呕~"
 portrait = ExtResource("clinic_npc_portrait_1")
 
 [resource]
 script = ExtResource("2_storydata")
 story_id = "008_01"
-trigger_story_id = ""
+trigger_story_id = "006"
 trigger_type = "scene_enter"
 trigger_scene = "clinic"
 trigger_day = 0

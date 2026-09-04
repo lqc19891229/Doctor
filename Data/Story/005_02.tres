@@ -14,7 +14,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "世子"
-text = "父王，我觉得好多了"
+text = "父王，我觉得好多了。"
 portrait = ExtResource("portrait_1")
 background = ExtResource("background_2")
 [sub_resource type="Resource" id="StoryLine_002"]
@@ -39,7 +39,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "草民行医只取诊费十文，这一千两小人不能收。"
+text = "一千两太多了，草民不能收。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
@@ -47,7 +47,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "陈皮"
-text = "少掌柜的那可是一千两白银啊！"
+text = "少掌柜的，那可是一千两白银啊！"
 portrait = ExtResource("portrait_5")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
@@ -55,7 +55,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "世子乃人中龙凤，但无论何人前来看病，草民眼里看到的都只有病人。十文是诊费，绝非世子命价。"
+text = "世子乃人中龙凤，可草民眼里看到的只有一位需要医治病人，王爷只需付200文诊费即可。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")

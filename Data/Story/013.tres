@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
-line_type = "subtitle"
+line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "雷万钧"

@@ -20,7 +20,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "敢问您是？(哎呀我的妈，吓我一跳，这人什么时候进来的...)"
+text = "敢问您是？(这人什么时候进来的...)"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
