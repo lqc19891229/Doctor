@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdktg72vwwrl1"
-path="res://.godot/imported/TopBar.png-91807e61ab3564418e7760bfd7bb884d.ctex"
+uid="uid://dk6g14xid3iwu"
+path="res://.godot/imported/tong_qian.png-4c64a09cb1543cda2de347d8dbab03ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background/TopBar.png"
-dest_files=["res://.godot/imported/TopBar.png-91807e61ab3564418e7760bfd7bb884d.ctex"]
+source_file="res://Assets/Icon/tong_qian.png"
+dest_files=["res://.godot/imported/tong_qian.png-4c64a09cb1543cda2de347d8dbab03ef.ctex"]
 
 [params]
 

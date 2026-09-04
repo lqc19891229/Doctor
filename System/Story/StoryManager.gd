@@ -12,6 +12,7 @@ extends Node
 # - 剧情完整播放后由 apply_story_value_changes() 结算金钱 / 名望 / 心得。
 # - “播放后”统一使用 after_play：clinic / night / map / endgame。
 # - 生成治疗 NPC 仍由 Story.gd / Main.gd 执行。
+# - 性能：剧情资源启动时缓存一次；运行时按场景/治疗结果索引查询。
 # =========================================================
 
 var current_story: StoryData = null
@@ -29,19 +30,47 @@ var played_story_days: Dictionary = {}
 const STORY_DIR: String = "res://Data/Story"
 var registered_story_paths: Array[String] = []
 
+# =========================================================
+# 运行时剧情缓存 / 索引
+#
+# 原则：
+# 1. 文件系统扫描与 Resource load 只在缓存构建时发生。
+# 2. 运行时剧情检查只访问内存中的 StoryData。
+# 3. 按“ConditionScene + TreatmentResult”缩小候选集合。
+# 4. 每个候选集合在缓存构建时预排序，运行时不再 sort_custom()。
+# =========================================================
+var _story_cache_by_path: Dictionary = {}
+var _story_path_by_id: Dictionary = {}
+var _story_path_by_instance_id: Dictionary = {}
+var _story_by_id: Dictionary = {}
+var _story_candidates_by_scene_result: Dictionary = {}
+var _global_story_candidates_by_result: Dictionary = {}
+var _story_cache_ready: bool = false
+
 
 func _ready() -> void:
 	refresh_registered_story_paths()
 
 
 func refresh_registered_story_paths() -> void:
+	var started_ms := Time.get_ticks_msec()
+
+	_story_cache_ready = false
 	registered_story_paths.clear()
 	_scan_story_dir(STORY_DIR)
 	registered_story_paths.sort()
+	_rebuild_story_cache_and_indexes()
 
-	print("已登记剧情数量：", registered_story_paths.size())
-	for story_path in registered_story_paths:
-		print("登记剧情：", story_path)
+	if OS.is_debug_build():
+		print(
+			"[StoryManager] 剧情缓存完成：",
+			_story_cache_by_path.size(),
+			" 个，索引桶 ",
+			_story_candidates_by_scene_result.size() + _global_story_candidates_by_result.size(),
+			" 个，耗时 ",
+			Time.get_ticks_msec() - started_ms,
+			" ms"
+		)
 
 
 func _scan_story_dir(dir_path: String) -> void:
@@ -70,32 +99,195 @@ func _scan_story_dir(dir_path: String) -> void:
 	dir.list_dir_end()
 
 
-# Cached 版本会覆盖这个入口，统一复用下面所有条件判断。
-func _load_story_resource(story_path: String) -> StoryData:
-	var loaded_story: Resource = load(story_path)
+func _rebuild_story_cache_and_indexes() -> void:
+	_story_cache_by_path.clear()
+	_story_path_by_id.clear()
+	_story_path_by_instance_id.clear()
+	_story_by_id.clear()
+	_story_candidates_by_scene_result.clear()
+	_global_story_candidates_by_result.clear()
+
+	# 第一遍：只做一次 Resource load，并建立 Path / ID 映射。
+	for story_path in registered_story_paths:
+		var story := _load_story_from_disk(story_path)
+		if story == null:
+			continue
+
+		_story_cache_by_path[story_path] = story
+		_story_path_by_instance_id[story.get_instance_id()] = story_path
+
+		var story_id := story.story_id.strip_edges()
+		if story_id == "":
+			continue
+
+		if _story_path_by_id.has(story_id):
+			push_warning(
+				"发现重复 StoryID：%s。路径 %s 将继续保留排序靠前的原记录。"
+				% [story_id, story_path]
+			)
+			continue
+
+		_story_path_by_id[story_id] = story_path
+		_story_by_id[story_id] = story
+
+	# 第二遍：按固定条件建立候选索引。
+	for story_path in registered_story_paths:
+		var story = _story_cache_by_path.get(story_path)
+		if story is StoryData:
+			_index_story_candidate(story as StoryData)
+
+	_sort_story_candidate_indexes()
+	_story_cache_ready = true
+
+
+func _load_story_from_disk(story_path: String) -> StoryData:
+	var clean_path := story_path.strip_edges()
+	if clean_path == "":
+		return null
+
+	var loaded_story: Resource = load(clean_path)
 	if loaded_story == null:
-		push_warning("剧情资源加载失败：" + story_path)
+		push_warning("剧情资源加载失败：" + clean_path)
 		return null
 
 	if not loaded_story is StoryData:
-		push_warning("加载的资源不是 StoryData：" + story_path)
+		push_warning("加载的资源不是 StoryData：" + clean_path)
 		return null
 
 	return loaded_story as StoryData
 
 
-func get_all_stories() -> Array[StoryData]:
-	var result: Array[StoryData] = []
+func _load_story_resource(story_path: String) -> StoryData:
+	var clean_path := story_path.strip_edges()
+	if clean_path == "":
+		return null
+
+	if _story_cache_by_path.has(clean_path):
+		var cached = _story_cache_by_path[clean_path]
+		if cached is StoryData:
+			return cached as StoryData
+
+	# 兼容运行时手动传入、但没有登记到 Data/Story 的剧情路径。
+	# 这种路径只按需 load 一次并缓存，不自动加入触发索引。
+	var story := _load_story_from_disk(clean_path)
+	if story == null:
+		return null
+
+	_story_cache_by_path[clean_path] = story
+	_story_path_by_instance_id[story.get_instance_id()] = clean_path
+
+	var story_id := story.story_id.strip_edges()
+	if story_id != "" and not _story_path_by_id.has(story_id):
+		_story_path_by_id[story_id] = clean_path
+		_story_by_id[story_id] = story
+
+	return story
+
+
+func _ensure_story_cache() -> void:
+	if _story_cache_ready:
+		return
 
 	if registered_story_paths.is_empty():
 		refresh_registered_story_paths()
+		return
 
+	_rebuild_story_cache_and_indexes()
+
+
+func _make_story_candidate_key(scene: String, treatment_result: String) -> String:
+	return scene.strip_edges().to_lower() + "|" + treatment_result.strip_edges().to_lower()
+
+
+func _index_story_candidate(story: StoryData) -> void:
+	if story == null:
+		return
+
+	var required_scene := story.get_condition_scene()
+	var required_treatment_result := story.get_condition_treatment_result()
+
+	if required_scene == "":
+		var global_bucket: Array = _global_story_candidates_by_result.get(
+			required_treatment_result,
+			[]
+		)
+		global_bucket.append(story)
+		_global_story_candidates_by_result[required_treatment_result] = global_bucket
+		return
+
+	var key := _make_story_candidate_key(required_scene, required_treatment_result)
+	var scene_bucket: Array = _story_candidates_by_scene_result.get(key, [])
+	scene_bucket.append(story)
+	_story_candidates_by_scene_result[key] = scene_bucket
+
+
+func _sort_story_candidate_indexes() -> void:
+	for key in _story_candidates_by_scene_result.keys():
+		var bucket: Array = _story_candidates_by_scene_result[key]
+		bucket.sort_custom(Callable(self, "_story_sort_before"))
+		_story_candidates_by_scene_result[key] = bucket
+
+	for key in _global_story_candidates_by_result.keys():
+		var bucket: Array = _global_story_candidates_by_result[key]
+		bucket.sort_custom(Callable(self, "_story_sort_before"))
+		_global_story_candidates_by_result[key] = bucket
+
+
+func get_story_by_id(story_id: String) -> StoryData:
+	_ensure_story_cache()
+
+	var clean_story_id := story_id.strip_edges()
+	if clean_story_id == "":
+		return null
+
+	var story = _story_by_id.get(clean_story_id)
+	if story is StoryData:
+		return story as StoryData
+
+	return null
+
+
+func get_story_path(target_story: StoryData) -> String:
+	if target_story == null:
+		return ""
+
+	_ensure_story_cache()
+
+	var instance_id := target_story.get_instance_id()
+	if _story_path_by_instance_id.has(instance_id):
+		return String(_story_path_by_instance_id[instance_id])
+
+	var story_id := target_story.story_id.strip_edges()
+	if story_id != "" and _story_path_by_id.has(story_id):
+		return String(_story_path_by_id[story_id])
+
+	return ""
+
+
+func get_cached_story_by_path(story_path: String) -> StoryData:
+	_ensure_story_cache()
+	return _load_story_resource(story_path)
+
+
+func get_all_stories() -> Array[StoryData]:
+	_ensure_story_cache()
+
+	var result: Array[StoryData] = []
 	for story_path in registered_story_paths:
-		var story := _load_story_resource(story_path)
-		if story != null:
-			result.append(story)
+		var story = _story_cache_by_path.get(story_path)
+		if story is StoryData:
+			result.append(story as StoryData)
 
 	return result
+
+
+func get_story_cache_stats() -> Dictionary:
+	_ensure_story_cache()
+	return {
+		"story_count": _story_cache_by_path.size(),
+		"scene_result_bucket_count": _story_candidates_by_scene_result.size(),
+		"global_result_bucket_count": _global_story_candidates_by_result.size(),
+	}
 
 
 func set_story(story: StoryData, return_scene: String = "") -> bool:
@@ -211,24 +403,51 @@ func report_story_npc_treatment_failed(
 
 
 func _find_matching_story(context: Dictionary) -> StoryData:
-	if registered_story_paths.is_empty():
-		refresh_registered_story_paths()
+	_ensure_story_cache()
 
-	var candidates: Array[StoryData] = []
+	var current_scene := String(context.get("scene", "")).strip_edges().to_lower()
+	var treatment_result := String(
+		context.get("treatment_result", "")
+	).strip_edges().to_lower()
 
-	for story_path in registered_story_paths:
-		var story := _load_story_resource(story_path)
-		if story == null:
-			continue
+	# 只取与当前场景 / 治疗结果有关的剧情。
+	# ConditionScene 为空的剧情属于全局候选，因此单独维护一个已排序桶。
+	var scene_key := _make_story_candidate_key(current_scene, treatment_result)
+	var scene_candidates: Array = _story_candidates_by_scene_result.get(scene_key, [])
+	var global_candidates: Array = _global_story_candidates_by_result.get(
+		treatment_result,
+		[]
+	)
 
-		if _is_story_condition_matched(story, context):
-			candidates.append(story)
+	# 两个桶都已经预排序。这里做一次无分配的有序归并扫描，
+	# 找到第一个真正满足动态条件的剧情就直接返回。
+	var scene_index := 0
+	var global_index := 0
 
-	if candidates.is_empty():
-		return null
+	while scene_index < scene_candidates.size() or global_index < global_candidates.size():
+		var story: StoryData = null
 
-	candidates.sort_custom(Callable(self, "_story_sort_before"))
-	return candidates[0]
+		if scene_index >= scene_candidates.size():
+			story = global_candidates[global_index] as StoryData
+			global_index += 1
+		elif global_index >= global_candidates.size():
+			story = scene_candidates[scene_index] as StoryData
+			scene_index += 1
+		else:
+			var scene_story := scene_candidates[scene_index] as StoryData
+			var global_story := global_candidates[global_index] as StoryData
+
+			if _story_sort_before(scene_story, global_story):
+				story = scene_story
+				scene_index += 1
+			else:
+				story = global_story
+				global_index += 1
+
+		if story != null and _is_story_condition_matched(story, context):
+			return story
+
+	return null
 
 
 func _story_sort_before(a: StoryData, b: StoryData) -> bool:
@@ -525,6 +744,12 @@ func register_story_path(story_path: String) -> void:
 		return
 
 	registered_story_paths.append(clean_path)
+
+	# 正常启动扫描期间缓存还未 ready，不需要每添加一个路径就重建。
+	# 如果运行时有外部代码动态登记剧情，则让下一次查询统一重建一次索引。
+	if _story_cache_ready:
+		registered_story_paths.sort()
+		_story_cache_ready = false
 
 
 func has_played_story(story_id: String) -> bool:

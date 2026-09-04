@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://d3fc1n20xbhxf" path="res://Scene/clinic/Clinic.gd" id="1_y7fei"]
 [ext_resource type="Script" uid="uid://cse2gud2bttup" path="res://System/Npc/NpcManager.gd" id="2_l04vw"]
-[ext_resource type="Texture2D" uid="uid://cdktg72vwwrl1" path="res://Assets/Background/TopBar.png" id="3_bkkyg"]
 [ext_resource type="Texture2D" uid="uid://bc7sj00ahbgcm" path="res://Assets/Background/clinic_table.png" id="4_k4yeq"]
 [ext_resource type="PackedScene" uid="uid://c1kldxjoeyc78" path="res://Scene/Prescription/PrescriptionWindow.tscn" id="5_h552d"]
 [ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/clinicalLogWindow/ClinicalLogWindow.tscn" id="5_ruh48"]
@@ -222,7 +221,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_bkkyg")
 expand_mode = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar" unique_id=369088393]
