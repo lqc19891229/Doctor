@@ -55,7 +55,7 @@ const TRIGGER_TYPE_STORY_NPC_FAILED_OVER := "story_npc_failed_over"
 # clinic / night / map 表示进入对应场景时检查。
 # night_end 表示玩家在 Night 点击“休息，进入明天”时检查。
 # 留空表示不限制触发场景。
-@export_enum("", "clinic", "night", "map", "night_end")
+@export_custom(PROPERTY_HINT_ENUM_SUGGESTION, "clinic,night,map,night_end")
 var condition_scene: String = ""
 
 # 天数条件：
@@ -67,11 +67,11 @@ var condition_scene: String = ""
 
 # Excel 中显示 ≥ / ≤；import_data.py 会转换成 gte / lte。
 # Op 留空表示不启用该条件，数值本身可以为 0。
-@export_enum("", "gte", "lte")
+@export_custom(PROPERTY_HINT_ENUM_SUGGESTION, "gte,lte")
 var condition_money_op: String = ""
 @export var condition_money: int = 0
 
-@export_enum("", "gte", "lte")
+@export_custom(PROPERTY_HINT_ENUM_SUGGESTION, "gte,lte")
 var condition_reputation_op: String = ""
 @export var condition_reputation: int = 0
 
@@ -83,7 +83,7 @@ var condition_reputation_op: String = ""
 @export var condition_story_id: String = ""
 
 # cured / failed 只在一次治疗结果检查中存在，不保存为长期状态。
-@export_enum("", "cured", "failed")
+@export_custom(PROPERTY_HINT_ENUM_SUGGESTION, "cured,failed")
 var condition_treatment_result: String = ""
 
 
@@ -95,7 +95,7 @@ var condition_treatment_result: String = ""
 # clinic / night / map：剧情结束后前往对应场景。
 # endgame：剧情结束本局并返回主菜单。
 # 留空：使用当前流程的默认返回目标。
-@export_enum("", "clinic", "night", "map", "endgame")
+@export_custom(PROPERTY_HINT_ENUM_SUGGESTION, "clinic,night,map,endgame")
 var after_play: String = ""
 
 # 配置 NpcID 后，剧情完整播放后生成并进入 story NPC 诊疗。
