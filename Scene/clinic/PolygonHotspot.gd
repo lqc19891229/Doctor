@@ -8,9 +8,9 @@ enum HotspotAction {
 }
 
 
-# clinic_table.png 的原始尺寸。
-# CollisionPolygon2D 的顶点统一按这个坐标系保存。
-const REFERENCE_TABLE_SIZE := Vector2(1672.0, 841.0)
+# Polygon 顶点绘制时的 TableImage 基准尺寸。
+# 当前这些顶点按 1920×841 的 TableImage 局部坐标保存。
+const REFERENCE_TABLE_SIZE := Vector2(1920.0, 841.0)
 
 
 @export var action: HotspotAction = HotspotAction.PULSE
