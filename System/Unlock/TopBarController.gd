@@ -117,7 +117,7 @@ func refresh_reputation_point(force_refresh: bool = false) -> void:
 
 	last_displayed_reputation_point = current_points
 	_prepare_point_label(reputation_point_label)
-	reputation_point_label.text = "名望：%d　%s" % [current_points, get_reputation_title(current_points)]
+	reputation_point_label.text = get_reputation_display_text(current_points)
 
 
 func refresh_money_point(force_refresh: bool = false) -> void:
@@ -203,6 +203,30 @@ func get_reputation_title(reputation: int) -> String:
 		return "炉火纯青"
 	else:
 		return "出神入化"
+
+
+func get_reputation_display_text(reputation: int) -> String:
+	var title := get_reputation_title(reputation)
+	var target := get_reputation_target(reputation)
+
+	# 最高等级已经没有下一阶段目标。
+	if target <= 0:
+		return "名望：%d　%s" % [reputation, title]
+
+	return "名望：%d/%d　%s" % [reputation, target, title]
+
+
+func get_reputation_target(reputation: int) -> int:
+	if reputation <= 100:
+		return 100
+	elif reputation <= 300:
+		return 300
+	elif reputation <= 600:
+		return 600
+	elif reputation <= 2000:
+		return 2000
+	else:
+		return -1
 
 
 func _prepare_point_label(label: Label) -> void:
