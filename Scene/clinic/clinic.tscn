@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bvvfhbe8p7oly" path="res://Assets/UI/F2.png" id="7_8hef0"]
 [ext_resource type="Script" uid="uid://dysun4xflegyp" path="res://Scene/clinic/ClinicWindowController.gd" id="8_436d3"]
 [ext_resource type="Texture2D" uid="uid://bxi0kf4jsiwo6" path="res://Assets/UI/F3.png" id="8_m31mf"]
+[ext_resource type="Script" uid="uid://d06u1pfx3kdqv" path="res://Scene/clinic/PolygonHotspot.gd" id="9_qtjht"]
 [ext_resource type="Texture2D" uid="uid://bun4qmh7amvw2" path="res://Assets/UI/silver_ingot.png" id="9_silver_ingot"]
 [ext_resource type="Texture2D" uid="uid://drj3b721nd3p5" path="res://Assets/UI/copper_coin.png" id="10_copper_coin"]
 
@@ -35,62 +36,6 @@ bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h552d"]
 bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
-
-[sub_resource type="GDScript" id="GDScript_desk_hotspots"]
-
-[sub_resource type="GDScript" id="GDScript_shape_hotspot"]
-script/source = "extends Button
-
-@export var hit_polygon: PackedVector2Array = PackedVector2Array()
-
-var _mouse_over := false
-var _mouse_down := false
-
-func _ready() -> void:
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
-	button_down.connect(_on_button_down)
-	button_up.connect(_on_button_up)
-
-func _has_point(point: Vector2) -> bool:
-	if hit_polygon.size() < 3:
-		return Rect2(Vector2.ZERO, size).has_point(point)
-	var normalized_point := Vector2(
-		point.x / max(size.x, 1.0),
-		point.y / max(size.y, 1.0)
-	)
-	return Geometry2D.is_point_in_polygon(normalized_point, hit_polygon)
-
-func _draw() -> void:
-	if not _mouse_over or hit_polygon.size() < 3:
-		return
-	var points := PackedVector2Array()
-	for normalized_point in hit_polygon:
-		points.append(Vector2(normalized_point.x * size.x, normalized_point.y * size.y))
-	var fill_color := Color(1.0, 0.72, 0.2, 0.20 if _mouse_down else 0.10)
-	var border_color := Color(1.0, 0.84, 0.38, 1.0 if _mouse_down else 0.88)
-	draw_colored_polygon(points, fill_color)
-	var outline := points.duplicate()
-	outline.append(points[0])
-	draw_polyline(outline, border_color, 3.0 if _mouse_down else 2.0, true)
-
-func _on_mouse_entered() -> void:
-	_mouse_over = true
-	queue_redraw()
-
-func _on_mouse_exited() -> void:
-	_mouse_over = false
-	_mouse_down = false
-	queue_redraw()
-
-func _on_button_down() -> void:
-	_mouse_down = true
-	queue_redraw()
-
-func _on_button_up() -> void:
-	_mouse_down = false
-	queue_redraw()
-"
 
 [node name="Clinic" type="Control" unique_id=360139135]
 layout_mode = 3
@@ -361,53 +306,39 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = SubResource("GDScript_desk_hotspots")
 
-[node name="PulseHotspot" type="Button" parent="DeskHotspots" unique_id=306553873]
-layout_mode = 0
-offset_right = 1.0
-offset_bottom = 1.0
-tooltip_text = "把脉"
-focus_mode = 0
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_l04vw")
-script = SubResource("GDScript_shape_hotspot")
+[node name="PulseHotspot" type="Area2D" parent="DeskHotspots" unique_id=1690967363]
+script = ExtResource("9_qtjht")
 
-[node name="PrescriptionHotspot" type="Button" parent="DeskHotspots" unique_id=386614199]
-layout_mode = 0
-offset_right = 1.0
-offset_bottom = 1.0
-tooltip_text = "开方"
-focus_mode = 0
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_l04vw")
-script = SubResource("GDScript_shape_hotspot")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DeskHotspots/PulseHotspot" unique_id=1445782703]
+polygon = PackedVector2Array(300, 899, 409, 905, 428, 902, 532, 834, 539, 823, 538, 810, 523, 798, 507, 792, 471, 787, 439, 787, 419, 791, 407, 797, 298, 857, 280, 873, 277, 885, 282, 893)
 
-[node name="ClinicalLogHotspot" type="Button" parent="DeskHotspots" unique_id=403423536]
-layout_mode = 0
-offset_right = 1.0
-offset_bottom = 1.0
-tooltip_text = "行医记考"
-focus_mode = 0
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_l04vw")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_l04vw")
-script = SubResource("GDScript_shape_hotspot")
-hit_polygon = PackedVector2Array(0, 0, 0.5913, 0, 0.9938, 0.5876, 0.9938, 0.9897, 0.2322, 0.9897, 0.2043, 0.933, 0.1796, 0.8711, 0.1548, 0.8041, 0.13, 0.7423, 0.1053, 0.6753, 0.0805, 0.6082, 0.0588, 0.5412, 0.0372, 0.4742, 0.0186, 0.4124, 0, 0.3711, 0.0062, 0.299, 0, 0.232, 0.0062, 0.1598, 0, 0.0928)
+[node name="Polygon2D" type="Polygon2D" parent="DeskHotspots/PulseHotspot" unique_id=764630205]
+visible = false
+z_index = 10
+color = Color(1.0627335, 0.9528078, 0.4920603, 1)
+
+[node name="PrescriptionHotspot" type="Area2D" parent="DeskHotspots" unique_id=1144574896]
+script = ExtResource("9_qtjht")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DeskHotspots/PrescriptionHotspot" unique_id=1171669217]
+polygon = PackedVector2Array(754, 828, 674, 959, 1121, 957, 1093, 829)
+
+[node name="Polygon2D" type="Polygon2D" parent="DeskHotspots/PrescriptionHotspot" unique_id=1520027889]
+visible = false
+z_index = 10
+color = Color(1.0627335, 0.9528078, 0.4920603, 1)
+
+[node name="ClinicalLogHotspot" type="Area2D" parent="DeskHotspots" unique_id=1603995879]
+script = ExtResource("9_qtjht")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DeskHotspots/ClinicalLogHotspot" unique_id=1475135723]
+polygon = PackedVector2Array(1671, 976, 1676, 903, 1530, 787, 1316, 789, 1311, 865, 1391, 980)
+
+[node name="Polygon2D" type="Polygon2D" parent="DeskHotspots/ClinicalLogHotspot" unique_id=1381166044]
+visible = false
+z_index = 10
+color = Color(1.0627335, 0.9528078, 0.4920603, 1)
 
 [node name="PrescriptionWindow" parent="." unique_id=901784337 instance=ExtResource("5_h552d")]
 visible = false

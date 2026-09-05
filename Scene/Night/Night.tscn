@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cbsehhhrv63ek" path="res://Scene/PlayerHint/PlayerHintWindow.tscn" id="3_3ehag"]
 [ext_resource type="PackedScene" uid="uid://drw157phi8l3n" path="res://Scene/Test/InfoWindow.tscn" id="4_info"]
 [ext_resource type="Texture2D" uid="uid://cdktg72vwwrl1" path="res://Assets/UI/TopBar.png" id="5_5x4ej"]
+[ext_resource type="Texture2D" uid="uid://8bdhvq1nyqj0" path="res://Assets/Background/clinic/spring_night.png" id="5_sslgd"]
 [ext_resource type="Texture2D" uid="uid://bun4qmh7amvw2" path="res://Assets/UI/silver_ingot.png" id="6_silver_ingot"]
 [ext_resource type="Texture2D" uid="uid://drj3b721nd3p5" path="res://Assets/UI/copper_coin.png" id="7_copper_coin"]
 
@@ -48,6 +49,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("5_sslgd")
 expand_mode = 1
 stretch_mode = 6
 
