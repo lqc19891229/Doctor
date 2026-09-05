@@ -334,9 +334,25 @@ var reputation_points: int = 0
 #   融会贯通：301~600 名望 = 200 文 / 人
 #   炉火纯青：601~2000 名望 = 500 文 / 人
 #   出神入化：2001+ 名望 = 1000 文 / 人
-# - 陈皮工钱 = 500 文 / 2 个节气
-# - 半夏工钱 = 500 文 / 2 个节气
-# - 食费 = 2000 文 / 2 个节气
+# - 陈皮、半夏工钱合计 = 1000 文 / 2 个节气
+# - 食费 = 1000 文 / 每个节气
+# - 人情随礼：每个节气 30% 概率发生，金额随机为
+#   188 / 288 / 588 / 688 / 888 / 1888 / 2888 文
+# - 煤炭：
+#   立春 / 立夏 / 立秋 = 300 文
+#   立冬 = 1200 文
+# - 布匹棉衣：
+#   立春 / 立夏 / 立秋 = 800 文
+#   立冬 = 2000 文
+# - 修缮房屋：
+#   春分 / 秋分 / 大寒时各有 30% 概率发生，
+#   金额随机为 1000 / 2000 / 3000 文
+# - 扫墓祭祖：
+#   清明 / 处暑必定发生，
+#   金额随机为 1000 / 2000 / 3000 文
+# - 药材发霉：
+#   小满 / 芒种 / 夏至 / 小暑时各有 30% 概率发生，
+#   金额随机为 1000 / 2000 / 3000 / 4000 / 5000 文
 #
 # 如果后续要调整平衡，只需改下面常量即可。
 const WEN_PER_LIANG: int = 1000
@@ -346,11 +362,39 @@ const CONSULTATION_FEE_BEGINNER_WEN: int = 50
 const CONSULTATION_FEE_PROFICIENT_WEN: int = 200
 const CONSULTATION_FEE_MASTER_WEN: int = 500
 const CONSULTATION_FEE_TRANSCENDENT_WEN: int = 1000
+
 const CHEN_PI_WAGE_PER_SOLAR_TERM_WEN: int = 500
 const BAN_XIA_WAGE_PER_SOLAR_TERM_WEN: int = 500
 const WAGE_INTERVAL_SOLAR_TERMS: int = 2
-const FOOD_COST_WEN: int = 2000
-const FOOD_COST_INTERVAL_SOLAR_TERMS: int = 2
+
+const FOOD_COST_WEN: int = 1000
+const FOOD_COST_INTERVAL_SOLAR_TERMS: int = 1
+
+const RANDOM_EXPENSE_PROBABILITY: float = 0.30
+const HUMAN_GIFT_COST_OPTIONS_WEN = [188, 288, 588, 688, 888, 1888, 2888]
+const HOUSE_REPAIR_COST_OPTIONS_WEN = [1000, 2000, 3000]
+const ANCESTOR_WORSHIP_COST_OPTIONS_WEN = [1000, 2000, 3000]
+const MOLDY_HERB_COST_OPTIONS_WEN = [1000, 2000, 3000, 4000, 5000]
+
+const COAL_STANDARD_COST_WEN: int = 300
+const COAL_WINTER_COST_WEN: int = 1200
+const CLOTHING_STANDARD_COST_WEN: int = 800
+const CLOTHING_WINTER_COST_WEN: int = 2000
+
+const SOLAR_TERM_COUNT: int = 24
+const SOLAR_TERM_LI_CHUN: int = 1
+const SOLAR_TERM_CHUN_FEN: int = 4
+const SOLAR_TERM_QING_MING: int = 5
+const SOLAR_TERM_LI_XIA: int = 7
+const SOLAR_TERM_XIAO_MAN: int = 8
+const SOLAR_TERM_MANG_ZHONG: int = 9
+const SOLAR_TERM_XIA_ZHI: int = 10
+const SOLAR_TERM_XIAO_SHU: int = 11
+const SOLAR_TERM_LI_QIU: int = 13
+const SOLAR_TERM_CHU_SHU: int = 14
+const SOLAR_TERM_QIU_FEN: int = 16
+const SOLAR_TERM_LI_DONG: int = 19
+const SOLAR_TERM_DA_HAN: int = 24
 
 # 当前持有银钱，单位：文。
 # 允许出现负数；负数在 TopBar 中显示为“欠 X两 Y文”。
@@ -378,7 +422,7 @@ var daily_medicine_profit_wen: int = 0
 var daily_failed_medicine_cost_wen: int = 0
 
 # 最近一次已经完成夜间结算的天数。
-# 用于防止切场景 / 读档时重复扣工钱和食费。
+# 用于防止切场景 / 读档时重复生成随机支出或重复扣款。
 var last_finance_settled_day: int = 0
 var last_finance_report: Dictionary = {}
 
@@ -542,28 +586,117 @@ func record_random_npc_treatment_income(day: int, prescription_profit_wen: int) 
 	}
 
 
+# 将当前总天数换算为当年的二十四节气序号。
+# current_day=1 为立春，25 会重新回到下一年的立春。
+func _get_solar_term_index(day: int) -> int:
+	var safe_day := maxi(day, 1)
+	return ((safe_day - 1) % SOLAR_TERM_COUNT) + 1
+
+
+func _pick_random_expense(options: Array) -> int:
+	if options.is_empty():
+		return 0
+
+	var index := randi_range(0, options.size() - 1)
+	return int(options[index])
+
+
+func _roll_random_expense(probability: float, options: Array) -> int:
+	if randf() >= clampf(probability, 0.0, 1.0):
+		return 0
+
+	return _pick_random_expense(options)
+
+
+func _get_coal_cost_for_solar_term(solar_term_index: int) -> int:
+	match solar_term_index:
+		SOLAR_TERM_LI_CHUN, SOLAR_TERM_LI_XIA, SOLAR_TERM_LI_QIU:
+			return COAL_STANDARD_COST_WEN
+		SOLAR_TERM_LI_DONG:
+			return COAL_WINTER_COST_WEN
+		_:
+			return 0
+
+
+func _get_clothing_cost_for_solar_term(solar_term_index: int) -> int:
+	match solar_term_index:
+		SOLAR_TERM_LI_CHUN, SOLAR_TERM_LI_XIA, SOLAR_TERM_LI_QIU:
+			return CLOTHING_STANDARD_COST_WEN
+		SOLAR_TERM_LI_DONG:
+			return CLOTHING_WINTER_COST_WEN
+		_:
+			return 0
+
+
+func _get_house_repair_cost_for_solar_term(solar_term_index: int) -> int:
+	match solar_term_index:
+		SOLAR_TERM_CHUN_FEN, SOLAR_TERM_QIU_FEN, SOLAR_TERM_DA_HAN:
+			return _roll_random_expense(
+				RANDOM_EXPENSE_PROBABILITY,
+				HOUSE_REPAIR_COST_OPTIONS_WEN
+			)
+		_:
+			return 0
+
+
+func _get_ancestor_worship_cost_for_solar_term(solar_term_index: int) -> int:
+	match solar_term_index:
+		SOLAR_TERM_QING_MING, SOLAR_TERM_CHU_SHU:
+			return _pick_random_expense(ANCESTOR_WORSHIP_COST_OPTIONS_WEN)
+		_:
+			return 0
+
+
+func _get_moldy_herb_cost_for_solar_term(solar_term_index: int) -> int:
+	match solar_term_index:
+		SOLAR_TERM_XIAO_MAN, SOLAR_TERM_MANG_ZHONG, SOLAR_TERM_XIA_ZHI, SOLAR_TERM_XIAO_SHU:
+			return _roll_random_expense(
+				RANDOM_EXPENSE_PROBABILITY,
+				MOLDY_HERB_COST_OPTIONS_WEN
+			)
+		_:
+			return 0
+
+
 # 白天结束、进入 Night 之前调用。
-# 收入已在白天接诊时实时入账；这里负责扣除固定支出并生成当日账单。
+# 收入已在白天接诊时实时入账；这里负责生成并扣除本节气全部支出。
 func settle_day_finances(day: int) -> Dictionary:
 	var safe_day := maxi(day, 1)
 
-	# 同一天已经结算过时直接返回原报告，绝不重复扣款。
+	# 同一天已经结算过时直接返回原报告。
+	# 随机支出也不会被重新抽取。
 	if last_finance_settled_day == safe_day and not last_finance_report.is_empty():
 		return last_finance_report.duplicate(true)
 
 	_ensure_daily_finance_ledger(safe_day)
 
-	# 陈皮、半夏工钱都改为每两个节气支付一次。
-	# 第 2、4、6……个节气支付；其它节气为 0，不显示也不扣款。
+	var solar_term_index := _get_solar_term_index(safe_day)
+
+	# 陈皮、半夏工钱：每两个节气支付一次，合计 1000 文。
+	# 继续保留两个旧字段，避免其它现有代码或旧存档读取时报错。
 	var chen_pi_wage := 0
 	var ban_xia_wage := 0
 	if safe_day % WAGE_INTERVAL_SOLAR_TERMS == 0:
 		chen_pi_wage = CHEN_PI_WAGE_PER_SOLAR_TERM_WEN
 		ban_xia_wage = BAN_XIA_WAGE_PER_SOLAR_TERM_WEN
 
+	# 食费：每个节气固定 1000 文。
 	var food_cost := 0
 	if safe_day % FOOD_COST_INTERVAL_SOLAR_TERMS == 0:
 		food_cost = FOOD_COST_WEN
+
+	# 每个节气都有 30% 概率发生一次人情随礼。
+	var human_gift_cost := _roll_random_expense(
+		RANDOM_EXPENSE_PROBABILITY,
+		HUMAN_GIFT_COST_OPTIONS_WEN
+	)
+
+	# 指定节气支出。
+	var coal_cost := _get_coal_cost_for_solar_term(solar_term_index)
+	var clothing_cost := _get_clothing_cost_for_solar_term(solar_term_index)
+	var house_repair_cost := _get_house_repair_cost_for_solar_term(solar_term_index)
+	var ancestor_worship_cost := _get_ancestor_worship_cost_for_solar_term(solar_term_index)
+	var moldy_herb_cost := _get_moldy_herb_cost_for_solar_term(solar_term_index)
 
 	var is_gross_accounting := (
 		finance_ledger_accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS
@@ -589,6 +722,12 @@ func settle_day_finances(day: int) -> Dictionary:
 		chen_pi_wage
 		+ ban_xia_wage
 		+ food_cost
+		+ human_gift_cost
+		+ coal_cost
+		+ clothing_cost
+		+ house_repair_cost
+		+ ancestor_worship_cost
+		+ moldy_herb_cost
 		+ medicine_purchase_cost
 	)
 	var net_change := total_income - total_expense
@@ -599,6 +738,7 @@ func settle_day_finances(day: int) -> Dictionary:
 	last_finance_settled_day = safe_day
 	last_finance_report = {
 		"day": safe_day,
+		"solar_term_index": solar_term_index,
 		"accounting_version": finance_ledger_accounting_version,
 		"random_npc_count": daily_random_npc_count,
 		"consultation_income_wen": daily_consultation_income_wen,
@@ -610,7 +750,14 @@ func settle_day_finances(day: int) -> Dictionary:
 		"total_income_wen": total_income,
 		"chen_pi_wage_wen": chen_pi_wage,
 		"ban_xia_wage_wen": ban_xia_wage,
+		"staff_wage_wen": chen_pi_wage + ban_xia_wage,
 		"food_cost_wen": food_cost,
+		"human_gift_cost_wen": human_gift_cost,
+		"coal_cost_wen": coal_cost,
+		"clothing_cost_wen": clothing_cost,
+		"house_repair_cost_wen": house_repair_cost,
+		"ancestor_worship_cost_wen": ancestor_worship_cost,
+		"moldy_herb_cost_wen": moldy_herb_cost,
 		"total_expense_wen": total_expense,
 		"net_change_wen": net_change,
 		"money_after_wen": money_wen
@@ -633,9 +780,20 @@ func build_finance_report_text(day: int) -> String:
 	var accounting_version := int(report.get("accounting_version", 1))
 	var consultation_income := int(report.get("consultation_income_wen", 0))
 	var total_income := int(report.get("total_income_wen", 0))
-	var chen_pi_wage := int(report.get("chen_pi_wage_wen", 0))
-	var ban_xia_wage := int(report.get("ban_xia_wage_wen", 0))
+	var staff_wage := int(
+		report.get(
+			"staff_wage_wen",
+			int(report.get("chen_pi_wage_wen", 0))
+			+ int(report.get("ban_xia_wage_wen", 0))
+		)
+	)
 	var food_cost := int(report.get("food_cost_wen", 0))
+	var human_gift_cost := int(report.get("human_gift_cost_wen", 0))
+	var coal_cost := int(report.get("coal_cost_wen", 0))
+	var clothing_cost := int(report.get("clothing_cost_wen", 0))
+	var house_repair_cost := int(report.get("house_repair_cost_wen", 0))
+	var ancestor_worship_cost := int(report.get("ancestor_worship_cost_wen", 0))
+	var moldy_herb_cost := int(report.get("moldy_herb_cost_wen", 0))
 	var total_expense := int(report.get("total_expense_wen", 0))
 	var net_change := int(report.get("net_change_wen", 0))
 
@@ -666,16 +824,28 @@ func build_finance_report_text(day: int) -> String:
 		if failed_medicine_cost > 0:
 			lines.append("治疗失败药材成本（旧账）：%s" % format_money_change(-failed_medicine_cost))
 
-	if chen_pi_wage > 0:
-		lines.append("陈皮工钱：%s" % format_money_change(-chen_pi_wage))
-	if ban_xia_wage > 0:
-		lines.append("半夏工钱：%s" % format_money_change(-ban_xia_wage))
+	if staff_wage > 0:
+		lines.append("陈皮半夏工钱：%s" % format_money_change(-staff_wage))
 	if food_cost > 0:
-		lines.append("食费：%s" % format_money_change(-food_cost))
+		lines.append("食物：%s" % format_money_change(-food_cost))
+	if human_gift_cost > 0:
+		lines.append("人情随礼：%s" % format_money_change(-human_gift_cost))
+	if coal_cost > 0:
+		lines.append("煤炭：%s" % format_money_change(-coal_cost))
+	if clothing_cost > 0:
+		lines.append("布匹棉衣：%s" % format_money_change(-clothing_cost))
+	if house_repair_cost > 0:
+		lines.append("修缮房屋：%s" % format_money_change(-house_repair_cost))
+	if ancestor_worship_cost > 0:
+		lines.append("扫墓祭祖：%s" % format_money_change(-ancestor_worship_cost))
+	if moldy_herb_cost > 0:
+		lines.append("药材发霉：%s" % format_money_change(-moldy_herb_cost))
+
 	lines.append("支出合计：%s" % format_money_change(-total_expense))
 	lines.append("")
 	lines.append("本日变化：%s" % format_money_change(net_change))
-	return "\n".join(lines)
+	return "
+".join(lines)
 
 
 # =========================================================
