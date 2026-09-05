@@ -702,20 +702,18 @@ func apply_story_point_changes(story: StoryData) -> Dictionary:
 
 
 func _apply_money_change(amount: int) -> void:
-	if amount == 0 or Unlock == null:
+	if amount == 0:
 		return
 
-	# 如果以后 UnlockManager 增加统一接口，这里会自动优先使用。
-	if Unlock.has_method("change_money_wen"):
-		Unlock.call("change_money_wen", amount)
+	if Unlock == null:
+		push_warning("StoryManager：Unlock 不存在，无法结算剧情金钱。")
 		return
 
-	if _object_has_property(Unlock, "money_wen"):
-		var current_money := int(Unlock.get("money_wen"))
-		Unlock.set("money_wen", current_money + amount)
+	if not Unlock.has_method("change_money_wen"):
+		push_warning("StoryManager：Unlock 缺少 change_money_wen()，无法结算剧情金钱。")
 		return
 
-	push_warning("StoryManager：Unlock 缺少 change_money_wen() 或 money_wen，无法结算剧情金钱。")
+	Unlock.change_money_wen(amount)
 
 
 func _object_has_property(target: Object, property_name: String) -> bool:

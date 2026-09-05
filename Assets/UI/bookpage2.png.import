@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdktg72vwwrl1"
-path="res://.godot/imported/TopBar.png-077d6e9d5037a4b6889c43b3a8da021d.ctex"
+uid="uid://bhc7eic56v8dc"
+path="res://.godot/imported/bookpage2.png-f71c5a830ca0cb971380f5999937bda7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icon/TopBar.png"
-dest_files=["res://.godot/imported/TopBar.png-077d6e9d5037a4b6889c43b3a8da021d.ctex"]
+source_file="res://Assets/UI/bookpage2.png"
+dest_files=["res://.godot/imported/bookpage2.png-f71c5a830ca0cb971380f5999937bda7.ctex"]
 
 [params]
 
