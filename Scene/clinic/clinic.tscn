@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="6_k4yeq"]
 [ext_resource type="PackedScene" uid="uid://drw157phi8l3n" path="res://Scene/Test/InfoWindow.tscn" id="6_y7fei"]
 [ext_resource type="Script" uid="uid://dysun4xflegyp" path="res://Scene/clinic/ClinicWindowController.gd" id="8_436d3"]
-[ext_resource type="Texture2D" path="res://Assets/UI/silver_ingot.png" id="9_silver_ingot"]
-[ext_resource type="Texture2D" path="res://Assets/UI/copper_coin.png" id="10_copper_coin"]
+[ext_resource type="Texture2D" uid="uid://bun4qmh7amvw2" path="res://Assets/UI/silver_ingot.png" id="9_silver_ingot"]
+[ext_resource type="Texture2D" uid="uid://drj3b721nd3p5" path="res://Assets/UI/copper_coin.png" id="10_copper_coin"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4yeq"]
 bg_color = Color(0.18039216, 0.10980392, 0.05490196, 0.9490196)
@@ -264,20 +264,20 @@ size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 25
 text = "银钱：0两 0文"
 
-[node name="MoneyContainer" type="HBoxContainer" parent="VBoxContainer/TopBar/HBoxContainer"]
+[node name="MoneyContainer" type="HBoxContainer" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1727319860]
 layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 1
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 4.0
 theme_override_constants/separation = 4
 
-[node name="DebtLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer"]
+[node name="DebtLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer" unique_id=685171041]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "欠"
 vertical_alignment = 1
 
-[node name="SilverIcon" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer"]
+[node name="SilverIcon" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer" unique_id=100593002]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_filter = 2
@@ -285,13 +285,13 @@ texture = ExtResource("9_silver_ingot")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LiangLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer"]
+[node name="LiangLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer" unique_id=207054282]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "0两"
 vertical_alignment = 1
 
-[node name="CopperIcon" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer"]
+[node name="CopperIcon" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer" unique_id=109453948]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_filter = 2
@@ -299,7 +299,7 @@ texture = ExtResource("10_copper_coin")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="WenLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer"]
+[node name="WenLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer" unique_id=962271678]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "0文"
