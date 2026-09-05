@@ -1,15 +1,24 @@
 extends Area2D
 
 
+enum HotspotAction {
+	PULSE,
+	PRESCRIPTION,
+	CLINICAL_LOG
+}
+
+
+@export var action: HotspotAction = HotspotAction.PULSE
+
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon2D
 @onready var highlight_polygon: Polygon2D = $Polygon2D
 
 
 func _ready() -> void:
-	# 让高亮区域直接使用 CollisionPolygon2D 的轮廓
+	# 高亮直接复制碰撞轮廓
 	highlight_polygon.polygon = collision_polygon.polygon
 
-	# 黄色半透明
+	# 黄色半透明高亮
 	highlight_polygon.color = Color(1.0, 0.78, 0.18, 0.20)
 
 	# 默认隐藏
@@ -40,10 +49,10 @@ func _on_input_event(
 		and event.button_index == MOUSE_BUTTON_LEFT
 		and event.pressed
 	):
-		_open_clinical_log_window()
+		_activate()
 
 
-func _open_clinical_log_window() -> void:
+func _activate() -> void:
 	var clinic := _find_clinic_root()
 
 	if clinic == null:
@@ -55,8 +64,18 @@ func _open_clinical_log_window() -> void:
 		false
 	)
 
-	if controller != null:
-		controller.open_clinical_log_window()
+	if controller == null:
+		return
+
+	match action:
+		HotspotAction.PULSE:
+			controller.open_pulse_window()
+
+		HotspotAction.PRESCRIPTION:
+			controller.open_prescription_window()
+
+		HotspotAction.CLINICAL_LOG:
+			controller.open_clinical_log_window()
 
 
 func _find_clinic_root() -> Node:

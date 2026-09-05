@@ -139,6 +139,52 @@ texture = ExtResource("8_m31mf")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="DeskHotspots" type="Control" parent="Background/TableImage" unique_id=1548322560]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -239.0
+offset_bottom = -239.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PulseHotspot" type="Area2D" parent="Background/TableImage/DeskHotspots" unique_id=1690967363]
+script = ExtResource("9_qtjht")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/TableImage/DeskHotspots/PulseHotspot" unique_id=1445782703]
+polygon = PackedVector2Array(300, 899, 409, 905, 428, 902, 532, 834, 539, 823, 538, 810, 523, 798, 507, 792, 471, 787, 439, 787, 419, 791, 407, 797, 298, 857, 280, 873, 277, 885, 282, 893)
+
+[node name="Polygon2D" type="Polygon2D" parent="Background/TableImage/DeskHotspots/PulseHotspot" unique_id=764630205]
+visible = false
+z_index = 10
+color = Color(1.0627335, 0.9528078, 0.4920603, 1)
+
+[node name="PrescriptionHotspot" type="Area2D" parent="Background/TableImage/DeskHotspots" unique_id=1144574896]
+script = ExtResource("9_qtjht")
+action = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/TableImage/DeskHotspots/PrescriptionHotspot" unique_id=1171669217]
+polygon = PackedVector2Array(754, 828, 674, 959, 1121, 957, 1093, 829)
+
+[node name="Polygon2D" type="Polygon2D" parent="Background/TableImage/DeskHotspots/PrescriptionHotspot" unique_id=1520027889]
+visible = false
+z_index = 10
+color = Color(1.0627335, 0.9528078, 0.4920603, 1)
+
+[node name="ClinicalLogHotspot" type="Area2D" parent="Background/TableImage/DeskHotspots" unique_id=1603995879]
+script = ExtResource("9_qtjht")
+action = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/TableImage/DeskHotspots/ClinicalLogHotspot" unique_id=1475135723]
+polygon = PackedVector2Array(1671, 976, 1676, 903, 1530, 787, 1316, 789, 1311, 865, 1391, 980)
+
+[node name="Polygon2D" type="Polygon2D" parent="Background/TableImage/DeskHotspots/ClinicalLogHotspot" unique_id=1381166044]
+visible = false
+z_index = 10
+color = Color(1.0627335, 0.9528078, 0.4920603, 1)
+
 [node name="NpcNameLabel" type="Label" parent="Background" unique_id=2033521846]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 0
@@ -297,48 +343,6 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_h552d")
 text = "行医记考(F3)"
-
-[node name="DeskHotspots" type="Control" parent="." unique_id=1548322560]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="PulseHotspot" type="Area2D" parent="DeskHotspots" unique_id=1690967363]
-script = ExtResource("9_qtjht")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DeskHotspots/PulseHotspot" unique_id=1445782703]
-polygon = PackedVector2Array(300, 899, 409, 905, 428, 902, 532, 834, 539, 823, 538, 810, 523, 798, 507, 792, 471, 787, 439, 787, 419, 791, 407, 797, 298, 857, 280, 873, 277, 885, 282, 893)
-
-[node name="Polygon2D" type="Polygon2D" parent="DeskHotspots/PulseHotspot" unique_id=764630205]
-visible = false
-z_index = 10
-color = Color(1.0627335, 0.9528078, 0.4920603, 1)
-
-[node name="PrescriptionHotspot" type="Area2D" parent="DeskHotspots" unique_id=1144574896]
-script = ExtResource("9_qtjht")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DeskHotspots/PrescriptionHotspot" unique_id=1171669217]
-polygon = PackedVector2Array(754, 828, 674, 959, 1121, 957, 1093, 829)
-
-[node name="Polygon2D" type="Polygon2D" parent="DeskHotspots/PrescriptionHotspot" unique_id=1520027889]
-visible = false
-z_index = 10
-color = Color(1.0627335, 0.9528078, 0.4920603, 1)
-
-[node name="ClinicalLogHotspot" type="Area2D" parent="DeskHotspots" unique_id=1603995879]
-script = ExtResource("9_qtjht")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DeskHotspots/ClinicalLogHotspot" unique_id=1475135723]
-polygon = PackedVector2Array(1671, 976, 1676, 903, 1530, 787, 1316, 789, 1311, 865, 1391, 980)
-
-[node name="Polygon2D" type="Polygon2D" parent="DeskHotspots/ClinicalLogHotspot" unique_id=1381166044]
-visible = false
-z_index = 10
-color = Color(1.0627335, 0.9528078, 0.4920603, 1)
 
 [node name="PrescriptionWindow" parent="." unique_id=901784337 instance=ExtResource("5_h552d")]
 visible = false
