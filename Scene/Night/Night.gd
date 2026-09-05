@@ -28,7 +28,6 @@ const NIGHT_WINTER_BACKGROUND: Texture2D = preload("res://Assets/Background/clin
 # 隐藏的测试窗口，导致屏幕左上角真正的日期一直停留在默认文字“天数”。
 @onready var day_label: Label = $VBoxContainer/TopBar/HBoxContainer/DayLabel
 @onready var time_label: Label = $VBoxContainer/TopBar/HBoxContainer/TimeLabel
-@onready var thoughts_point_label: Label = $VBoxContainer/TopBar/HBoxContainer/ThoughtsPoint
 @onready var reputation_point_label: Label = $VBoxContainer/TopBar/HBoxContainer/ReputationPoint
 @onready var money_point_label: Label = $VBoxContainer/TopBar/HBoxContainer/MoneyPoint
 
@@ -71,7 +70,6 @@ func _validate_scene_node_bindings() -> void:
 	_check_node_binding(next_day_button, "NextDayButton")
 	_check_node_binding(day_label, "DayLabel")
 	_check_node_binding(time_label, "TimeLabel")
-	_check_node_binding(thoughts_point_label, "ThoughtsPoint")
 	_check_node_binding(reputation_point_label, "ReputationPoint")
 	_check_node_binding(money_point_label, "MoneyPoint")
 	_check_node_binding(night_background, "BackgroundImage")
@@ -455,7 +453,7 @@ func _setup_read_book_window() -> void:
 		if not read_book_window.is_connected("window_closed", Callable(self, "_on_read_book_window_closed")):
 			read_book_window.connect("window_closed", Callable(self, "_on_read_book_window_closed"))
 
-	# 读书消耗心得 / 解锁数据变化后，刷新 Night 外层 UI。
+	# 读书或解锁数据变化后，刷新 Night 外层 UI。
 	if read_book_window.has_signal("player_data_changed"):
 		if not read_book_window.is_connected("player_data_changed", Callable(self, "_on_player_data_changed")):
 			read_book_window.connect("player_data_changed", Callable(self, "_on_player_data_changed"))
@@ -475,7 +473,6 @@ func _setup_topbar_controller() -> void:
 	topbar_controller.setup(
 		day_label,
 		time_label,
-		thoughts_point_label,
 		reputation_point_label,
 		"夜晚",
 		money_point_label
@@ -509,7 +506,7 @@ func open_read_book_window() -> void:
 		return
 
 	# ReadBook.open_window() 自己根据 UnlockManager 的状态版本决定是否需要重建列表。
-	# Night 不再提前重复刷新天数 / 心得 / 书籍列表。
+	# Night 不再提前重复刷新天数 / 书籍列表。
 	if read_book_window.has_method("open_window"):
 		read_book_window.call("open_window")
 	else:
@@ -574,7 +571,7 @@ func _has_unread_entries() -> bool:
 	if Unlock == null:
 		return false
 
-	# UnlockManager 现在在“心得变化 / 药材解锁 / 方剂解锁”发生时即时增量更新。
+	# UnlockManager 现在会在后台进度或条目依赖状态变化时即时增量更新。
 	# 这里不再在玩家点击“休息”时执行全量刷新，避免把数据扫描集中到跨天按钮这一帧。
 	if Unlock.has_method("has_unread_readable_entries"):
 		return Unlock.has_unread_readable_entries()

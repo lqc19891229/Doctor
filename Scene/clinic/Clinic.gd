@@ -80,9 +80,7 @@ var background_fade_tween: Tween = null
 var background_fade_mask: ColorRect = null
 var clinic_background_target_texture: Texture2D = null
 
-# ---------- 心得显示 ----------
-#  这个 Label 只负责显示 UnlockManager 中保存的心得数量。
-@onready var thoughts_point_label: Label = find_child("ThoughtsPoint", true, false) as Label
+# ---------- 顶部数值显示 ----------
 @onready var reputation_point_label: Label = find_child("ReputationPoint", true, false) as Label
 @onready var money_point_label: Label = find_child("MoneyPoint", true, false) as Label
 
@@ -183,7 +181,7 @@ var clinic_time_expired_waiting_for_current_patient: bool = false
 var last_formula_judge_result = null
 var last_formula_judge_summary_text: String = ""
 
-# 最近一次提交处方后，本次心得更新新解锁的行医记考条目标题
+# 最近一次提交处方后，本次后台进度更新新解锁的行医记考条目标题
 # 说明：
 # 1. 只记录本次提交产生的新解锁条目。
 # 2. JudgementResult 会读取这个列表，并在 RichTextLabel 中给出解锁提示。
@@ -328,7 +326,6 @@ func _validate_scene_node_bindings() -> void:
 		"Background": clinic_background,
 		"DayLabel": day_label,
 		"TimeLabel": time_label,
-		"ThoughtsPoint": thoughts_point_label,
 		"ReputationPoint": reputation_point_label,
 		"MoneyPoint": money_point_label,
 		"Portrait": portrait_rect,
@@ -361,7 +358,6 @@ func _setup_topbar_controller() -> void:
 	topbar_controller.setup(
 		day_label,
 		time_label,
-		thoughts_point_label,
 		reputation_point_label,
 		"",
 		money_point_label
@@ -407,9 +403,6 @@ func _update_time_ui() -> void:
 		topbar_controller.refresh_time()
 
 
-func _update_thoughts_point_ui(force_refresh: bool = false) -> void:
-	if topbar_controller != null:
-		topbar_controller.refresh_thoughts_point(force_refresh)
 
 
 func _update_reputation_point_ui(force_refresh: bool = false) -> void:
@@ -955,7 +948,6 @@ func refresh_clinic_view() -> void:
 	if clinical_log_window != null and clinical_log_window.has_method("refresh_view"):
 		clinical_log_window.refresh_view()
 
-	_update_thoughts_point_ui(true)
 	_update_reputation_point_ui(true)
 
 
@@ -1224,7 +1216,7 @@ func submit_prescription() -> bool:
 	last_experience_change = 0
 
 	# random NPC 继续沿用治疗判定时的固定奖励与惩罚。
-	# story NPC 的名望和心得不在这里结算，改由后续 StoryData 配置，
+	# story NPC 的名望和后台进度不在这里结算，改由后续 StoryData 配置，
 	# 并在对应剧情完整播放结束时统一结算。
 	var npc_type_key := current_npc.npc_type.strip_edges().to_lower()
 	var uses_fixed_treatment_rewards := npc_type_key != "story"
@@ -1336,12 +1328,12 @@ func submit_prescription() -> bool:
 			result_grade = str(raw_result_grade).strip_edges()
 
 	if uses_fixed_treatment_rewards and result_grade == "治疗成功" and not was_already_submitted:
-		summary_text += "\n治疗成功：名望、心得不变"
+		summary_text += "\n治疗成功：名望不变"
 	elif uses_fixed_treatment_rewards and result_grade == "治疗成功" and was_already_submitted:
-		summary_text += "\n本病人已提交过处方，名望、心得不变。"
+		summary_text += "\n本病人已提交过处方，名望不变。"
 
-	# random NPC 达成妙手回春时获得 1 点心得，并立刻按累计心得自动解锁条目。
-	# was_already_submitted 用于防止同一名病人重复提交刷心得。
+	# random NPC 达成妙手回春时后台增加 1 点 experience_points，并立即检查条目解锁。
+	# was_already_submitted 用于防止同一名病人重复提交刷后台进度。
 	var is_miaoshouhuichun := false
 	if result != null and result.has_method("is_miaoshouhuichun"):
 		is_miaoshouhuichun = result.is_miaoshouhuichun()
@@ -1354,10 +1346,6 @@ func submit_prescription() -> bool:
 			newly_unlocked_titles = Unlock.add_experience_point(1)
 			last_experience_change = 1
 
-		_update_thoughts_point_ui(true)
-		summary_text += "\n获得心得：+1"
-		summary_text += "\n当前累计心得：%d" % Unlock.get_experience_points()
-
 		if not newly_unlocked_titles.is_empty():
 			last_newly_unlocked_entry_titles.assign(newly_unlocked_titles)
 			summary_text += "\n新解锁条目：%s" % "、".join(newly_unlocked_titles)
@@ -1365,11 +1353,7 @@ func submit_prescription() -> bool:
 		if clinical_log_window != null and clinical_log_window.has_method("refresh_view"):
 			clinical_log_window.refresh_view()
 
-		# 心得和自动解锁只保留在内存，正常白天结束时统一写盘。
-	elif uses_fixed_treatment_rewards and is_miaoshouhuichun and was_already_submitted:
-		_update_thoughts_point_ui(true)
-		summary_text += "\n本病人已提交过处方，不重复获得心得。"
-		summary_text += "\n当前累计心得：%d" % Unlock.get_experience_points()
+		# 后台进度和自动解锁只保留在内存，正常白天结束时统一写盘。
 
 	# 只有判定成功才视为治愈，切换到治疗后立绘和治疗后台词。
 	# 治疗失败则保持治疗前立绘，但显示治疗失败台词。
@@ -1754,7 +1738,6 @@ func set_day(day: int) -> void:
 
 	# DayLabel / TimeLabel 统一从 GameTimeManager 刷新
 	_update_time_ui()
-	_update_thoughts_point_ui(true)
 	_update_reputation_point_ui(true)
 
 
@@ -2074,9 +2057,8 @@ func start_new_day(day: int) -> void:
 	clinic_finished_emitted = false
 	clinic_time_expired_waiting_for_current_patient = false
 
-	# 刷新时间、心得和名望显示。
+	# 刷新时间和名望显示。
 	_update_time_ui()
-	_update_thoughts_point_ui(true)
 	_update_reputation_point_ui(true)
 
 	# 自动剧情触发入口.

@@ -21,9 +21,8 @@ signal player_data_changed
 # 右侧：书页背景
 @onready var detail_book_page: TextureRect = $MarginContainer/VBoxRoot/ContentRow/DetailPanel/DetailBookPage
 
-# 可选：如果 ReadBook 窗口里还保留了 TopBar，就自动刷新；没有也不报错。
+# 可选：如果 ReadBook 窗口里还保留了 TopBar，就自动刷新天数；没有也不报错。
 @onready var day_label: Label = get_node_or_null("MarginContainer/VBoxRoot/TopBar/DayLabel") as Label
-@onready var thoughts_point_label: Label = _get_thoughts_point_label()
 
 
 # =========================
@@ -37,9 +36,6 @@ var readable_entries: Array[BookEntryData] = []
 var selected_book: BookData = null
 var selected_entry: BookEntryData = null
 
-# 记录上一次显示的心得数量。
-var last_displayed_experience_points: int = -999
-
 # UnlockManager 的医书状态版本。版本未变化时，不重建 22 本书的列表。
 var last_readbook_state_version: int = -1
 var book_list_dirty: bool = true
@@ -52,14 +48,13 @@ func _ready() -> void:
 
 	_connect_ui_signals()
 	_update_day_label()
-	_update_thoughts_point_ui()
 
 	# ReadBook 默认是隐藏子窗口；不要在 Night 创建时提前构建整套书籍列表。
 	# 第一次真正打开窗口时再按状态版本懒加载。
 	book_list_dirty = true
 	_clear_entry_and_detail()
 
-	info_label.text = "请选择要查看的医书。当前累计心得：%d" % Unlock.get_experience_points()
+	info_label.text = "请选择要查看的医书。"
 
 
 # =========================
@@ -67,9 +62,8 @@ func _ready() -> void:
 # =========================
 
 func open_window() -> void:
-	# 天数 / 心得文本很轻，打开时直接同步；书籍列表只有状态版本变化才重建。
+	# 天数文本很轻，打开时直接同步；书籍列表只有状态版本变化才重建。
 	_update_day_label()
-	_update_thoughts_point_ui()
 	_refresh_book_list_if_dirty()
 	_clear_entry_and_detail()
 	show()
@@ -112,40 +106,6 @@ func _update_day_label() -> void:
 
 	day_label.text = GameTime.get_day_text()
 
-
-# =========================
-# 获取顶部心得 Label
-# =========================
-
-func _get_thoughts_point_label() -> Label:
-	var label := get_node_or_null("MarginContainer/VBoxRoot/TopBar/ThoughtsPoint") as Label
-	if label != null:
-		return label
-
-	return find_child("ThoughtsPoint", true, false) as Label
-
-
-# =========================
-# 刷新顶部心得显示
-# =========================
-
-func _update_thoughts_point_ui() -> void:
-	if thoughts_point_label == null:
-		thoughts_point_label = _get_thoughts_point_label()
-
-	var current_points := Unlock.get_experience_points()
-	last_displayed_experience_points = current_points
-
-	# ReadBook 作为窗口时可以没有 TopBar；没有就只刷新 InfoLabel，不报错。
-	if thoughts_point_label == null:
-		return
-
-	thoughts_point_label.visible = true
-	thoughts_point_label.show()
-	thoughts_point_label.custom_minimum_size = Vector2(120, 24)
-	thoughts_point_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	thoughts_point_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	thoughts_point_label.text = "累计心得：%d" % current_points
 
 
 # =========================
@@ -288,7 +248,6 @@ func _set_detail_text(value: String) -> void:
 # =========================
 
 func _refresh_entry_list_for_selected_book() -> void:
-	_update_thoughts_point_ui()
 	_clear_entry_and_detail()
 
 	if selected_book == null:
@@ -301,29 +260,21 @@ func _refresh_entry_list_for_selected_book() -> void:
 		_add_entry_list_item(entry)
 
 	if readable_entries.is_empty():
-		info_label.text = "《%s》当前没有已解锁条目。
-当前累计心得：%d" % [
-			selected_book.book_name,
-			Unlock.get_experience_points()
-		]
+		info_label.text = "《%s》当前没有已解锁条目。" % selected_book.book_name
 		_set_detail_text("")
 		return
 
 	var new_entry_count = Unlock.get_unread_readable_entry_count_by_book(selected_book.book_id)
 	if new_entry_count > 0:
-		info_label.text = "《%s》共有 %d 个已解锁条目，其中 %d 个尚未查看。
-当前累计心得：%d" % [
+		info_label.text = "《%s》共有 %d 个已解锁条目，其中 %d 个尚未查看。" % [
 			selected_book.book_name,
 			readable_entries.size(),
-			new_entry_count,
-			Unlock.get_experience_points()
+			new_entry_count
 		]
 	else:
-		info_label.text = "《%s》共有 %d 个已解锁条目。
-当前累计心得：%d" % [
+		info_label.text = "《%s》共有 %d 个已解锁条目。" % [
 			selected_book.book_name,
-			readable_entries.size(),
-			Unlock.get_experience_points()
+			readable_entries.size()
 		]
 
 	# 只显示条目列表，不自动选中 / 阅读第一个条目。
@@ -435,9 +386,7 @@ func _show_entry_by_index(index: int) -> void:
 
 	# 只允许查看已经满足对应解锁条件，或已经读过的条目。
 	if not Unlock.is_entry_unlocked(current_entry_id) and not Unlock.is_entry_read(current_entry_id):
-		_update_thoughts_point_ui()
-		info_label.text = "该条目尚未解锁，请先满足对应的解锁条件。
-当前累计心得：%d" % Unlock.get_experience_points()
+		info_label.text = "该条目尚未解锁，请先满足对应的解锁条件。"
 		_set_detail_text("")
 		return
 
@@ -450,7 +399,6 @@ func _show_entry_by_index(index: int) -> void:
 		_notify_player_data_changed()
 
 	_set_detail_text(_build_entry_text(selected_entry))
-	_update_thoughts_point_ui()
 
 	if was_unread:
 		# read_entry() 可能进一步解锁药材 -> 方剂 -> 疾病，因此版本会变化。
@@ -459,8 +407,7 @@ func _show_entry_by_index(index: int) -> void:
 		_refresh_book_list_if_dirty()
 		_reselect_current_book_in_list()
 		_refresh_entry_list_titles_keep_selection(current_entry_id)
-		info_label.text = "已查看条目。
-当前累计心得：%d" % Unlock.get_experience_points()
+		info_label.text = "已查看条目。"
 
 
 func _reselect_current_book_in_list() -> void:

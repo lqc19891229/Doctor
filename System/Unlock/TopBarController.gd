@@ -8,15 +8,14 @@ class_name TopBarController
 # 负责：
 # 1. 日期显示
 # 2. 当前时辰 / 固定时间文本显示
-# 3. 心得显示
-# 4. 名望显示
-# 5. 根据名望显示对应称号
-# 6. 银钱显示（两 + 文）
+# 3. 名望显示
+# 4. 根据名望显示对应称号
+# 5. 银钱显示（两 + 文）
 #
 # 使用方式：
 # var topbar := TopBarController.new()
 # add_child(topbar)
-# topbar.setup(day_label, time_label, thoughts_point_label, reputation_point_label)
+# topbar.setup(day_label, time_label, reputation_point_label)
 # topbar.refresh_all(true)
 #
 # 如夜晚场景需要固定显示“夜晚”：
@@ -27,7 +26,6 @@ const DEFAULT_LABEL_SIZE := Vector2(120, 24)
 
 var day_label: Label = null
 var time_label: Label = null
-var thoughts_point_label: Label = null
 var reputation_point_label: Label = null
 var money_point_label: Label = null
 
@@ -41,7 +39,6 @@ var money_wen_label: Label = null
 var fallback_day: int = 1
 var time_text_override: String = ""
 
-var last_displayed_thoughts_point: int = -1
 var last_displayed_reputation_point: int = -999999
 var last_displayed_money_wen: int = -999999999
 
@@ -49,14 +46,12 @@ var last_displayed_money_wen: int = -999999999
 func setup(
 	_day_label: Label,
 	_time_label: Label,
-	_thoughts_point_label: Label,
 	_reputation_point_label: Label,
 	_time_text_override: String = "",
 	_money_point_label: Label = null
 ) -> void:
 	day_label = _day_label
 	time_label = _time_label
-	thoughts_point_label = _thoughts_point_label
 	reputation_point_label = _reputation_point_label
 	money_point_label = _money_point_label
 	time_text_override = _time_text_override
@@ -88,7 +83,6 @@ func refresh_all(force_refresh: bool = false) -> void:
 
 
 func refresh_points(force_refresh: bool = false) -> void:
-	refresh_thoughts_point(force_refresh)
 	refresh_reputation_point(force_refresh)
 	refresh_money_point(force_refresh)
 
@@ -108,21 +102,6 @@ func refresh_time() -> void:
 		else:
 			time_label.text = "辰时"
 
-
-func refresh_thoughts_point(force_refresh: bool = false) -> void:
-	if thoughts_point_label == null:
-		return
-
-	var current_points := 0
-	if Unlock != null and Unlock.has_method("get_experience_points"):
-		current_points = Unlock.get_experience_points()
-
-	if not force_refresh and current_points == last_displayed_thoughts_point:
-		return
-
-	last_displayed_thoughts_point = current_points
-	_prepare_point_label(thoughts_point_label)
-	thoughts_point_label.text = "心得：%d" % current_points
 
 
 func refresh_reputation_point(force_refresh: bool = false) -> void:
@@ -240,10 +219,6 @@ func _bind_unlock_signals() -> void:
 	if Unlock == null:
 		return
 
-	if Unlock.has_signal("experience_points_changed"):
-		var experience_callback := Callable(self, "_on_experience_points_changed")
-		if not Unlock.is_connected("experience_points_changed", experience_callback):
-			Unlock.connect("experience_points_changed", experience_callback)
 
 	if Unlock.has_signal("reputation_points_changed"):
 		var reputation_callback := Callable(self, "_on_reputation_points_changed")
@@ -256,8 +231,6 @@ func _bind_unlock_signals() -> void:
 			Unlock.connect("money_wen_changed", money_callback)
 
 
-func _on_experience_points_changed(_value: int) -> void:
-	refresh_thoughts_point(false)
 
 
 func _on_reputation_points_changed(_value: int) -> void:
