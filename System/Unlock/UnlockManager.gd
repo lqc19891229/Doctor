@@ -328,7 +328,12 @@ var reputation_points: int = 0
 # 内部统一使用“文”记账，TopBar 再换算成“两 + 文”显示。
 # 第一版暂定：
 # - 1 两 = 1000 文
-# - random NPC 诊费 = 500 文 / 人
+# - random NPC 诊费根据当前名望分档：
+#   初窥门径：0~100 名望 = 20 文 / 人
+#   略有小成：101~300 名望 = 50 文 / 人
+#   融会贯通：301~600 名望 = 200 文 / 人
+#   炉火纯青：601~2000 名望 = 500 文 / 人
+#   出神入化：2001+ 名望 = 1000 文 / 人
 # - 陈皮工钱 = 500 文 / 2 个节气
 # - 半夏工钱 = 500 文 / 2 个节气
 # - 食费 = 2000 文 / 2 个节气
@@ -336,7 +341,11 @@ var reputation_points: int = 0
 # 如果后续要调整平衡，只需改下面常量即可。
 const WEN_PER_LIANG: int = 1000
 const STARTING_MONEY_WEN: int = 50000
-const RANDOM_NPC_CONSULTATION_FEE_WEN: int = 500
+const CONSULTATION_FEE_INITIAL_WEN: int = 20
+const CONSULTATION_FEE_BEGINNER_WEN: int = 50
+const CONSULTATION_FEE_PROFICIENT_WEN: int = 200
+const CONSULTATION_FEE_MASTER_WEN: int = 500
+const CONSULTATION_FEE_TRANSCENDENT_WEN: int = 1000
 const CHEN_PI_WAGE_PER_SOLAR_TERM_WEN: int = 500
 const BAN_XIA_WAGE_PER_SOLAR_TERM_WEN: int = 500
 const WAGE_INTERVAL_SOLAR_TERMS: int = 2
@@ -379,7 +388,18 @@ func get_money_wen() -> int:
 
 
 func get_random_npc_consultation_fee_wen() -> int:
-	return RANDOM_NPC_CONSULTATION_FEE_WEN
+	var reputation := maxi(reputation_points, 0)
+
+	if reputation <= 100:
+		return CONSULTATION_FEE_INITIAL_WEN
+	if reputation <= 300:
+		return CONSULTATION_FEE_BEGINNER_WEN
+	if reputation <= 600:
+		return CONSULTATION_FEE_PROFICIENT_WEN
+	if reputation <= 2000:
+		return CONSULTATION_FEE_MASTER_WEN
+
+	return CONSULTATION_FEE_TRANSCENDENT_WEN
 
 
 func format_money(amount_wen: int) -> String:
@@ -454,7 +474,7 @@ func record_random_npc_treatment_finance(
 ) -> Dictionary:
 	_ensure_daily_finance_ledger(day)
 
-	var consultation_fee := RANDOM_NPC_CONSULTATION_FEE_WEN
+	var consultation_fee := get_random_npc_consultation_fee_wen()
 	var medicine_sales := maxi(prescription_sell_wen, 0) if treatment_success else 0
 	var medicine_purchase_cost := maxi(prescription_cost_wen, 0)
 
@@ -505,7 +525,7 @@ func record_random_npc_treatment_income(day: int, prescription_profit_wen: int) 
 	_ensure_daily_finance_ledger(day)
 	finance_ledger_accounting_version = 1
 
-	var consultation_fee := RANDOM_NPC_CONSULTATION_FEE_WEN
+	var consultation_fee := get_random_npc_consultation_fee_wen()
 	var total_income := consultation_fee + prescription_profit_wen
 
 	daily_random_npc_count += 1
