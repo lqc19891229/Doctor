@@ -46,6 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 script = ExtResource("1_y7fei")
 
 [node name="Background" type="Panel" parent="." unique_id=1223342041]
@@ -57,6 +58,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 28.0
+mouse_filter = 2
 
 [node name="BackgroundImage" type="TextureRect" parent="Background" unique_id=341227285]
 layout_mode = 1
@@ -74,6 +76,7 @@ offset_left = 280.0
 offset_top = 220.0
 offset_right = 850.0
 offset_bottom = 980.0
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 4
 
@@ -86,6 +89,7 @@ anchor_bottom = 1.0
 offset_top = -841.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 texture = ExtResource("4_k4yeq")
 
 [node name="PulseHintIcon" type="TextureRect" parent="Background/TableImage" unique_id=2143011001]
@@ -144,8 +148,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -239.0
-offset_bottom = -239.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -154,7 +156,9 @@ mouse_filter = 2
 script = ExtResource("9_qtjht")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/TableImage/DeskHotspots/PulseHotspot" unique_id=1445782703]
-polygon = PackedVector2Array(300, 899, 409, 905, 428, 902, 532, 834, 539, 823, 538, 810, 523, 798, 507, 792, 471, 787, 439, 787, 419, 791, 407, 797, 298, 857, 280, 873, 277, 885, 282, 893)
+position = Vector2(-1348.127, -3788.5596)
+scale = Vector2(5.7058377, 7.3836)
+polygon = PackedVector2Array(289.37503, 602.6273, 309.35455, 603.43994, 313.035, 602.22107, 330.2104, 593.14685, 330.91144, 591.3862, 329.15884, 589.0838, 323.2, 587.59406, 316.8907, 587.3232, 310.40613, 587.7295, 307.4267, 588.8129, 290.07605, 596.2619, 285.69458, 598.6997, 284.99353, 600.4604, 286.39563, 601.9502)
 
 [node name="Polygon2D" type="Polygon2D" parent="Background/TableImage/DeskHotspots/PulseHotspot" unique_id=764630205]
 visible = false
@@ -166,7 +170,9 @@ script = ExtResource("9_qtjht")
 action = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/TableImage/DeskHotspots/PrescriptionHotspot" unique_id=1171669217]
-polygon = PackedVector2Array(754, 828, 674, 959, 1121, 957, 1093, 829)
+position = Vector2(362.0387, 91.276146)
+scale = Vector2(0.6605619, 0.855431)
+polygon = PackedVector2Array(593.37555, 581.83984, 475.29425, 733.81006, 1153.5046, 734.979, 1105.061, 581.83984)
 
 [node name="Polygon2D" type="Polygon2D" parent="Background/TableImage/DeskHotspots/PrescriptionHotspot" unique_id=1520027889]
 visible = false
@@ -178,7 +184,9 @@ script = ExtResource("9_qtjht")
 action = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/TableImage/DeskHotspots/ClinicalLogHotspot" unique_id=1475135723]
-polygon = PackedVector2Array(1671, 976, 1676, 903, 1530, 787, 1316, 789, 1311, 865, 1391, 980)
+position = Vector2(582.9976, -275.76123)
+scale = Vector2(0.6877988, 1.2977468)
+polygon = PackedVector2Array(1581.8613, 780.3997, 1589.1309, 724.1484, 1375.4058, 634.7627, 1064.2682, 636.30383, 1058.4525, 695.6374, 1173.3116, 784.25256)
 
 [node name="Polygon2D" type="Polygon2D" parent="Background/TableImage/DeskHotspots/ClinicalLogHotspot" unique_id=1381166044]
 visible = false
@@ -215,6 +223,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="TopBar" type="Panel" parent="VBoxContainer" unique_id=186874863]
 layout_mode = 2
@@ -314,6 +323,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 27.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_h552d")
 
 [node name="ButtonRow" type="HBoxContainer" parent="VBoxContainer" unique_id=906841336]
