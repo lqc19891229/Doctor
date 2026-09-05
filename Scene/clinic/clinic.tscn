@@ -44,57 +44,68 @@ const PULSE_SOURCE_RECT := Rect2(185.0, 545.0, 325.0, 185.0)
 const PRESCRIPTION_SOURCE_RECT := Rect2(589.0, 589.0, 388.0, 135.0)
 const CLINICAL_LOG_SOURCE_RECT := Rect2(1139.0, 548.0, 323.0, 194.0)
 
-const HINT_ICON_SOURCE_SIZE := Vector2(72.0, 72.0)
-const PULSE_HINT_SOURCE_POSITION := Vector2(110.0, 505.0)
-const PRESCRIPTION_HINT_SOURCE_POSITION := Vector2(705.0, 520.0)
-const CLINICAL_LOG_HINT_SOURCE_POSITION := Vector2(1120.0, 500.0)
-
 @onready var _table_image: TextureRect = get_node(\"../Background/TableImage\")
 @onready var _pulse_button: Button = get_node(\"../VBoxContainer/ButtonRow/OpenPulseWindowButton\")
 @onready var _prescription_button: Button = get_node(\"../VBoxContainer/ButtonRow/OpenPrescriptionWindowButton\")
 @onready var _clinical_log_button: Button = get_node(\"../VBoxContainer/ButtonRow/Openclinical_logWindowButton\")
 
-@onready var _pulse_hint_icon: TextureRect = $PulseHintIcon
-@onready var _prescription_hint_icon: TextureRect = $PrescriptionHintIcon
-@onready var _clinical_log_hint_icon: TextureRect = $ClinicalLogHintIcon
-
 func _ready() -> void:
 	$PulseHotspot.pressed.connect(_forward_pulse_pressed)
 	$PrescriptionHotspot.pressed.connect(_forward_prescription_pressed)
 	$ClinicalLogHotspot.pressed.connect(_forward_clinical_log_pressed)
+
 	_table_image.resized.connect(_sync_hotspots_to_table)
 	call_deferred(\"_sync_hotspots_to_table\")
+
 
 func _sync_hotspots_to_table() -> void:
 	var table_rect := _table_image.get_global_rect()
 	var local_origin := get_global_rect().position
 	var table_scale := table_rect.size / TABLE_SOURCE_SIZE
-	var icon_scale := min(table_scale.x, table_scale.y)
 
-	_apply_source_rect($PulseHotspot, PULSE_SOURCE_RECT, table_rect.position, local_origin, table_scale)
-	_apply_source_rect($PrescriptionHotspot, PRESCRIPTION_SOURCE_RECT, table_rect.position, local_origin, table_scale)
-	_apply_source_rect($ClinicalLogHotspot, CLINICAL_LOG_SOURCE_RECT, table_rect.position, local_origin, table_scale)
+	_apply_source_rect(
+		$PulseHotspot,
+		PULSE_SOURCE_RECT,
+		table_rect.position,
+		local_origin,
+		table_scale
+	)
 
-	_apply_hint_icon(_pulse_hint_icon, PULSE_HINT_SOURCE_POSITION, table_rect.position, local_origin, table_scale, icon_scale)
-	_apply_hint_icon(_prescription_hint_icon, PRESCRIPTION_HINT_SOURCE_POSITION, table_rect.position, local_origin, table_scale, icon_scale)
-	_apply_hint_icon(_clinical_log_hint_icon, CLINICAL_LOG_HINT_SOURCE_POSITION, table_rect.position, local_origin, table_scale, icon_scale)
+	_apply_source_rect(
+		$PrescriptionHotspot,
+		PRESCRIPTION_SOURCE_RECT,
+		table_rect.position,
+		local_origin,
+		table_scale
+	)
 
-func _apply_source_rect(hotspot: Control, source_rect: Rect2, table_position: Vector2, local_origin: Vector2, table_scale: Vector2) -> void:
+	_apply_source_rect(
+		$ClinicalLogHotspot,
+		CLINICAL_LOG_SOURCE_RECT,
+		table_rect.position,
+		local_origin,
+		table_scale
+	)
+
+
+func _apply_source_rect(
+	hotspot: Control,
+	source_rect: Rect2,
+	table_position: Vector2,
+	local_origin: Vector2,
+	table_scale: Vector2
+) -> void:
 	hotspot.position = table_position - local_origin + source_rect.position * table_scale
 	hotspot.size = source_rect.size * table_scale
 
-func _apply_hint_icon(icon: Control, source_position: Vector2, table_position: Vector2, local_origin: Vector2, table_scale: Vector2, icon_scale: float) -> void:
-	if icon == null:
-		return
-
-	icon.position = table_position - local_origin + source_position * table_scale
-	icon.size = HINT_ICON_SOURCE_SIZE * icon_scale
 
 func _forward_pulse_pressed() -> void:
 	_pulse_button.pressed.emit()
 
+
 func _forward_prescription_pressed() -> void:
 	_prescription_button.pressed.emit()
+
 
 func _forward_clinical_log_pressed() -> void:
 	_clinical_log_button.pressed.emit()
@@ -425,10 +436,10 @@ hit_polygon = PackedVector2Array(0, 0, 0.5913, 0, 0.9938, 0.5876, 0.9938, 0.9897
 [node name="PulseHintIcon" type="TextureRect" parent="DeskHotspots" unique_id=2143011001]
 z_index = 1
 layout_mode = 0
-offset_left = 383.0
-offset_top = 797.0
-offset_right = 447.0
-offset_bottom = 861.0
+offset_left = 377.0
+offset_top = 804.0
+offset_right = 441.0
+offset_bottom = 868.0
 mouse_filter = 2
 texture = ExtResource("6_gqttm")
 expand_mode = 1
@@ -437,9 +448,9 @@ stretch_mode = 5
 [node name="PrescriptionHintIcon" type="TextureRect" parent="DeskHotspots" unique_id=2143011002]
 z_index = 1
 layout_mode = 0
-offset_left = 874.0
+offset_left = 881.0
 offset_top = 849.0
-offset_right = 938.0
+offset_right = 945.0
 offset_bottom = 913.0
 mouse_filter = 2
 texture = ExtResource("7_8hef0")
@@ -449,10 +460,10 @@ stretch_mode = 5
 [node name="ClinicalLogHintIcon" type="TextureRect" parent="DeskHotspots" unique_id=2143011003]
 z_index = 1
 layout_mode = 0
-offset_left = 1461.0
-offset_top = 805.0
-offset_right = 1525.0
-offset_bottom = 869.0
+offset_left = 1488.0
+offset_top = 815.0
+offset_right = 1552.0
+offset_bottom = 879.0
 mouse_filter = 2
 texture = ExtResource("8_m31mf")
 expand_mode = 1
