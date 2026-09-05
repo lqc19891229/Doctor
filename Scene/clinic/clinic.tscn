@@ -37,79 +37,6 @@ bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
 bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
 
 [sub_resource type="GDScript" id="GDScript_desk_hotspots"]
-script/source = "extends Control
-
-const TABLE_SOURCE_SIZE := Vector2(1672.0, 841.0)
-const PULSE_SOURCE_RECT := Rect2(185.0, 545.0, 325.0, 185.0)
-const PRESCRIPTION_SOURCE_RECT := Rect2(589.0, 589.0, 388.0, 135.0)
-const CLINICAL_LOG_SOURCE_RECT := Rect2(1139.0, 548.0, 323.0, 194.0)
-
-@onready var _table_image: TextureRect = get_node(\"../Background/TableImage\")
-@onready var _pulse_button: Button = get_node(\"../VBoxContainer/ButtonRow/OpenPulseWindowButton\")
-@onready var _prescription_button: Button = get_node(\"../VBoxContainer/ButtonRow/OpenPrescriptionWindowButton\")
-@onready var _clinical_log_button: Button = get_node(\"../VBoxContainer/ButtonRow/Openclinical_logWindowButton\")
-
-func _ready() -> void:
-	$PulseHotspot.pressed.connect(_forward_pulse_pressed)
-	$PrescriptionHotspot.pressed.connect(_forward_prescription_pressed)
-	$ClinicalLogHotspot.pressed.connect(_forward_clinical_log_pressed)
-
-	_table_image.resized.connect(_sync_hotspots_to_table)
-	call_deferred(\"_sync_hotspots_to_table\")
-
-
-func _sync_hotspots_to_table() -> void:
-	var table_rect := _table_image.get_global_rect()
-	var local_origin := get_global_rect().position
-	var table_scale := table_rect.size / TABLE_SOURCE_SIZE
-
-	_apply_source_rect(
-		$PulseHotspot,
-		PULSE_SOURCE_RECT,
-		table_rect.position,
-		local_origin,
-		table_scale
-	)
-
-	_apply_source_rect(
-		$PrescriptionHotspot,
-		PRESCRIPTION_SOURCE_RECT,
-		table_rect.position,
-		local_origin,
-		table_scale
-	)
-
-	_apply_source_rect(
-		$ClinicalLogHotspot,
-		CLINICAL_LOG_SOURCE_RECT,
-		table_rect.position,
-		local_origin,
-		table_scale
-	)
-
-
-func _apply_source_rect(
-	hotspot: Control,
-	source_rect: Rect2,
-	table_position: Vector2,
-	local_origin: Vector2,
-	table_scale: Vector2
-) -> void:
-	hotspot.position = table_position - local_origin + source_rect.position * table_scale
-	hotspot.size = source_rect.size * table_scale
-
-
-func _forward_pulse_pressed() -> void:
-	_pulse_button.pressed.emit()
-
-
-func _forward_prescription_pressed() -> void:
-	_prescription_button.pressed.emit()
-
-
-func _forward_clinical_log_pressed() -> void:
-	_clinical_log_button.pressed.emit()
-"
 
 [sub_resource type="GDScript" id="GDScript_shape_hotspot"]
 script/source = "extends Button
@@ -450,7 +377,6 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_l04vw")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_l04vw")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_l04vw")
 script = SubResource("GDScript_shape_hotspot")
-hit_polygon = PackedVector2Array(0.5692, 0.0108, 0.6462, 0.0054, 0.7138, 0.0162, 0.7723, 0.0432, 0.8185, 0.0919, 0.8523, 0.1622, 0.8738, 0.2378, 0.88, 0.3027, 0.9108, 0.227, 0.9108, 0.3243, 0.9508, 0.373, 0.9477, 0.4541, 0.9015, 0.5514, 0.8769, 0.6973, 0.8277, 0.7514, 0.7969, 0.9243, 0.7754, 0.9784, 0.0431, 0.9892, 0.0092, 0.9568, 0.0092, 0.827, 0.0554, 0.773, 0.0554, 0.627, 0.1692, 0.573, 0.1815, 0.541, 0.1846, 0.492, 0.2, 0.432, 0.2308, 0.368, 0.2708, 0.308, 0.3169, 0.243, 0.3692, 0.184, 0.4246, 0.124, 0.48, 0.0703, 0.5354, 0.0324)
 
 [node name="PrescriptionHotspot" type="Button" parent="DeskHotspots" unique_id=386614199]
 layout_mode = 0
@@ -466,7 +392,6 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_l04vw")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_l04vw")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_l04vw")
 script = SubResource("GDScript_shape_hotspot")
-hit_polygon = PackedVector2Array(0.103, 0.022, 0.925, 0.022, 0.988, 0.949, 0.013, 0.964)
 
 [node name="ClinicalLogHotspot" type="Button" parent="DeskHotspots" unique_id=403423536]
 layout_mode = 0
