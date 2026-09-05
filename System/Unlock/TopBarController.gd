@@ -31,6 +31,13 @@ var thoughts_point_label: Label = null
 var reputation_point_label: Label = null
 var money_point_label: Label = null
 
+# Clinic 场景可选的图标式银钱显示。
+# 保留 MoneyPoint Label 作为兼容入口，因此无需修改 Clinic.gd。
+var money_container: HBoxContainer = null
+var money_debt_label: Label = null
+var money_liang_label: Label = null
+var money_wen_label: Label = null
+
 var fallback_day: int = 1
 var time_text_override: String = ""
 
@@ -54,6 +61,7 @@ func setup(
 	money_point_label = _money_point_label
 	time_text_override = _time_text_override
 
+	_setup_money_display()
 	_bind_game_time_signal()
 	_bind_unlock_signals()
 	refresh_all(true)
@@ -134,7 +142,7 @@ func refresh_reputation_point(force_refresh: bool = false) -> void:
 
 
 func refresh_money_point(force_refresh: bool = false) -> void:
-	if money_point_label == null:
+	if money_point_label == null and money_container == null:
 		return
 
 	var current_money_wen := 0
@@ -145,18 +153,65 @@ func refresh_money_point(force_refresh: bool = false) -> void:
 		return
 
 	last_displayed_money_wen = current_money_wen
-	_prepare_point_label(money_point_label)
 
+	var absolute_amount: int = absi(current_money_wen)
+	var liang: int = absolute_amount / 1000
+	var wen: int = absolute_amount % 1000
+
+	# 优先使用 Clinic 场景中的银元宝 / 铜钱图标布局。
+	if money_container != null and money_liang_label != null and money_wen_label != null:
+		money_container.visible = true
+		if money_point_label != null:
+			money_point_label.visible = false
+
+		if money_debt_label != null:
+			money_debt_label.visible = current_money_wen < 0
+			money_debt_label.text = "欠"
+
+		money_liang_label.text = "%d两" % liang
+		money_wen_label.text = "%d文" % wen
+		return
+
+	# 其他尚未改造的场景继续使用原来的纯文字显示。
+	if money_point_label == null:
+		return
+
+	_prepare_point_label(money_point_label)
 	if Unlock != null and Unlock.has_method("format_money"):
 		money_point_label.text = "银钱：%s" % Unlock.format_money(current_money_wen)
+	elif current_money_wen < 0:
+		money_point_label.text = "银钱：欠 %d两 %d文" % [liang, wen]
 	else:
-		var absolute_amount: int = absi(current_money_wen)
-		var liang: int = absolute_amount / 1000
-		var wen: int = absolute_amount % 1000
-		if current_money_wen < 0:
-			money_point_label.text = "银钱：欠 %d两 %d文" % [liang, wen]
-		else:
-			money_point_label.text = "银钱：%d两 %d文" % [liang, wen]
+		money_point_label.text = "银钱：%d两 %d文" % [liang, wen]
+
+func _setup_money_display() -> void:
+	money_container = null
+	money_debt_label = null
+	money_liang_label = null
+	money_wen_label = null
+
+	if money_point_label == null:
+		return
+
+	var parent_node := money_point_label.get_parent()
+	if parent_node == null:
+		return
+
+	money_container = parent_node.get_node_or_null("MoneyContainer") as HBoxContainer
+	if money_container == null:
+		return
+
+	money_debt_label = money_container.get_node_or_null("DebtLabel") as Label
+	money_liang_label = money_container.get_node_or_null("LiangLabel") as Label
+	money_wen_label = money_container.get_node_or_null("WenLabel") as Label
+
+	# 只要场景提供了完整的 MoneyContainer，就隐藏旧文字 Label。
+	if money_liang_label != null and money_wen_label != null:
+		money_point_label.visible = false
+		money_container.visible = true
+	else:
+		money_container = null
+
 
 func get_reputation_title(reputation: int) -> String:
 	if reputation <= 100:

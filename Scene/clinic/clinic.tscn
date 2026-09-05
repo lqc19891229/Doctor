@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="6_k4yeq"]
 [ext_resource type="PackedScene" uid="uid://drw157phi8l3n" path="res://Scene/Test/InfoWindow.tscn" id="6_y7fei"]
 [ext_resource type="Script" uid="uid://dysun4xflegyp" path="res://Scene/clinic/ClinicWindowController.gd" id="8_436d3"]
+[ext_resource type="Texture2D" path="res://Assets/UI/silver_ingot.png" id="9_silver_ingot"]
+[ext_resource type="Texture2D" path="res://Assets/UI/copper_coin.png" id="10_copper_coin"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4yeq"]
 bg_color = Color(0.18039216, 0.10980392, 0.05490196, 0.9490196)
@@ -256,10 +258,52 @@ theme_override_font_sizes/font_size = 25
 text = "名望：0　初窥门径"
 
 [node name="MoneyPoint" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1857329256]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 25
 text = "银钱：0两 0文"
+
+[node name="MoneyContainer" type="HBoxContainer" parent="VBoxContainer/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+theme_override_constants/separation = 4
+
+[node name="DebtLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "欠"
+vertical_alignment = 1
+
+[node name="SilverIcon" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("9_silver_ingot")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LiangLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "0两"
+vertical_alignment = 1
+
+[node name="CopperIcon" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("10_copper_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WenLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "0文"
+vertical_alignment = 1
 
 [node name="ThoughtsPoint" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=571981417]
 layout_mode = 2

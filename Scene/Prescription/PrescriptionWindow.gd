@@ -561,16 +561,16 @@ func _is_formula_fill_feature_unlocked() -> bool:
 	return bool(Unlock.is_entry_unlocked(FORMULA_FILL_FEATURE_ENTRY_ID))
 
 
-func _is_formula_entry_unlocked(formula) -> bool:
+func _is_formula_unlocked(formula) -> bool:
 	if formula == null:
 		return false
-	if Unlock == null or not Unlock.has_method("is_entry_unlocked"):
+	if Unlock == null or not Unlock.has_method("is_formula_unlocked"):
 		return false
 
 	var formula_id := str(formula.formula_id).strip_edges()
 	if formula_id == "":
 		return false
-	return bool(Unlock.is_entry_unlocked(formula_id))
+	return bool(Unlock.is_formula_unlocked(formula_id))
 
 
 func _formula_record_matches(record: Dictionary) -> bool:
@@ -598,7 +598,7 @@ func _apply_formula_filter() -> void:
 			continue
 
 		var should_show := false
-		if feature_unlocked and formula != null and _is_formula_entry_unlocked(formula):
+		if feature_unlocked and formula != null and _is_formula_unlocked(formula):
 			should_show = _formula_record_matches(record)
 
 		button_value.visible = should_show
@@ -610,8 +610,8 @@ func _on_formula_button_pressed(formula) -> void:
 		_apply_herb_filter()
 		return
 
-	if not _is_formula_entry_unlocked(formula):
-		emit_signal("info_requested", "该方剂条目尚未解锁。")
+	if not _is_formula_unlocked(formula):
+		emit_signal("info_requested", "该方剂尚未解锁。")
 		_apply_herb_filter()
 		return
 
