@@ -70,6 +70,17 @@ func _ready() -> void:
 	_refresh_test_controls()
 
 
+# Esc 关闭信息窗口。
+# 使用 ui_cancel 兼容 Godot 默认 Esc 映射；只有窗口可见时才处理。
+func _unhandled_key_input(event: InputEvent) -> void:
+	if not visible:
+		return
+
+	if event.is_action_pressed("ui_cancel"):
+		close_window()
+		get_viewport().set_input_as_handled()
+
+
 # =========================================================
 # 初始化信号
 # =========================================================
