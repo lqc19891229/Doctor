@@ -54,7 +54,6 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("5_sslgd")
 expand_mode = 1
-stretch_mode = 0
 
 [node name="ReadBookHotspot" type="Area2D" parent="Background/BackgroundImage" unique_id=1318607749]
 script = ExtResource("2_night_hotspot")
