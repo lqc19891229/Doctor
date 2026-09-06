@@ -13,18 +13,18 @@ enum HotspotAction {
 
 
 func _ready() -> void:
-	# 以你手工绘制的 CollisionPolygon2D 为唯一正确轮廓。
+	# 关键：这个 Area2D 不再做任何运行时位置/缩放修正。
+	# 你在编辑器里画的 CollisionPolygon2D 就是最终坐标。
+	position = Vector2.ZERO
+	rotation = 0.0
+	scale = Vector2.ONE
+
+	# CollisionPolygon2D 是唯一轮廓来源。
 	highlight_polygon.polygon = collision_polygon.polygon
 	highlight_polygon.transform = collision_polygon.transform
 	highlight_polygon.color = Color(1.0, 0.78, 0.18, 0.20)
 	highlight_polygon.z_index = 10
 	highlight_polygon.visible = debug_always_show
-
-	# 重要：
-	# 不再根据 BackgroundImage 尺寸对 Area2D 做 position / scale 二次变换。
-	# 你在编辑器里画出的 CollisionPolygon2D 坐标就是最终运行时坐标。
-	position = Vector2.ZERO
-	scale = Vector2.ONE
 
 	input_pickable = true
 
@@ -80,7 +80,6 @@ func _find_night_root() -> Node:
 	while node != null:
 		if node.name == "Night":
 			return node
-
 		node = node.get_parent()
 
 	return null
