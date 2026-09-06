@@ -46,15 +46,15 @@ func _sync_to_background_image() -> void:
 	if background_image == null:
 		return
 
-	var control_size := background_image.size
+	var control_size: Vector2 = background_image.size
 	if control_size.x <= 0.0 or control_size.y <= 0.0:
 		return
 
-	var texture := background_image.texture
+	var texture: Texture2D = background_image.texture
 	if texture == null:
 		return
 
-	var texture_size := texture.get_size()
+	var texture_size: Vector2 = texture.get_size()
 	if texture_size.x <= 0.0 or texture_size.y <= 0.0:
 		return
 
@@ -65,13 +65,13 @@ func _sync_to_background_image() -> void:
 	#
 	# Hotspot 的坐标是在原始背景图片坐标中绘制的，
 	# 因此必须使用完全相同的 scale + offset 才不会在改变宽高比后偏移。
-	var cover_scale := max(
+	var cover_scale: float = maxf(
 		control_size.x / texture_size.x,
 		control_size.y / texture_size.y
 	)
 
-	var displayed_size := texture_size * cover_scale
-	var crop_offset := (control_size - displayed_size) * 0.5
+	var displayed_size: Vector2 = texture_size * cover_scale
+	var crop_offset: Vector2 = (control_size - displayed_size) * 0.5
 
 	position = crop_offset
 	scale = Vector2(cover_scale, cover_scale)
