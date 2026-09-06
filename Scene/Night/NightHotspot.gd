@@ -7,22 +7,19 @@ enum HotspotAction {
 }
 
 
-# Night 背景与当前 Hotspot 顶点按 1920×1080 的局部坐标绘制。
-const REFERENCE_BACKGROUND_SIZE := Vector2(1920.0, 1080.0)
-
-
 @export var action: HotspotAction = HotspotAction.READ_BOOK
 
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon2D
 @onready var highlight_polygon: Polygon2D = $Polygon2D
 
-var hotspot_container: Control = null
+# Hotspot 的父节点就是 Night 的 BackgroundImage(TextureRect)。
+var background_image: TextureRect = null
 
 
 func _ready() -> void:
-	# 和 Clinic 的 PolygonHotspot 一样：高亮直接复用碰撞轮廓。
-	# Night 的 NextDayHotspot 的 CollisionPolygon2D 还带有 position/scale，
-	# 因此这里同时复制 transform，确保高亮与碰撞区完全重合。
+	# 高亮直接复用碰撞轮廓。
+	# NextDayHotspot 的碰撞节点本身带 position / scale，
+	# 所以 transform 也一起复制，保证高亮与碰撞完全重合。
 	highlight_polygon.polygon = collision_polygon.polygon
 	highlight_polygon.transform = collision_polygon.transform
 	highlight_polygon.color = Color(1.0, 0.78, 0.18, 0.20)
@@ -31,11 +28,11 @@ func _ready() -> void:
 
 	input_pickable = true
 
-	hotspot_container = get_parent() as Control
-	if hotspot_container != null:
-		if not hotspot_container.resized.is_connected(_sync_to_background_size):
-			hotspot_container.resized.connect(_sync_to_background_size)
-		_sync_to_background_size()
+	background_image = get_parent() as TextureRect
+	if background_image != null:
+		if not background_image.resized.is_connected(_sync_to_background_image):
+			background_image.resized.connect(_sync_to_background_image)
+		_sync_to_background_image()
 
 	if not mouse_entered.is_connected(_on_mouse_entered):
 		mouse_entered.connect(_on_mouse_entered)
@@ -45,18 +42,39 @@ func _ready() -> void:
 		input_event.connect(_on_input_event)
 
 
-func _sync_to_background_size() -> void:
-	if hotspot_container == null:
+func _sync_to_background_image() -> void:
+	if background_image == null:
 		return
 
-	if hotspot_container.size.x <= 0.0 or hotspot_container.size.y <= 0.0:
+	var control_size := background_image.size
+	if control_size.x <= 0.0 or control_size.y <= 0.0:
 		return
 
-	# 与 Clinic 的 Hotspot 一样，窗口尺寸变化时同步缩放碰撞区和高亮区。
-	scale = Vector2(
-		hotspot_container.size.x / REFERENCE_BACKGROUND_SIZE.x,
-		hotspot_container.size.y / REFERENCE_BACKGROUND_SIZE.y
+	var texture := background_image.texture
+	if texture == null:
+		return
+
+	var texture_size := texture.get_size()
+	if texture_size.x <= 0.0 or texture_size.y <= 0.0:
+		return
+
+	# BackgroundImage 当前使用 TextureRect.STRETCH_KEEP_ASPECT_COVERED。
+	# 这种模式不是把图片分别拉伸到控件宽高，而是：
+	# 1. 按同一个比例等比放大，直到完全覆盖控件。
+	# 2. 超出控件的部分从两边居中裁掉。
+	#
+	# Hotspot 的坐标是在原始背景图片坐标中绘制的，
+	# 因此必须使用完全相同的 scale + offset 才不会在改变宽高比后偏移。
+	var cover_scale := max(
+		control_size.x / texture_size.x,
+		control_size.y / texture_size.y
 	)
+
+	var displayed_size := texture_size * cover_scale
+	var crop_offset := (control_size - displayed_size) * 0.5
+
+	position = crop_offset
+	scale = Vector2(cover_scale, cover_scale)
 
 
 func _on_mouse_entered() -> void:
@@ -91,7 +109,7 @@ func _activate() -> void:
 				night.call("open_read_book_window")
 
 		HotspotAction.NEXT_DAY:
-			# 复用原本按钮的逻辑，仍然保留“有未读条目时不能进入下一天”的检查。
+			# 复用原来的按钮逻辑，保留未读条目检查。
 			if night.has_method("_on_next_day_button_pressed"):
 				night.call("_on_next_day_button_pressed")
 

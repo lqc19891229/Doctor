@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://daannkka0fcs" path="res://Scene/ReadBook/ReadBook.tscn" id="1_s8hsq"]
 [ext_resource type="Script" uid="uid://b5g5rkphktrrq" path="res://Scene/Night/Night.gd" id="1_sax03"]
-[ext_resource type="Script" path="res://Scene/Night/NightHotspot.gd" id="2_night_hotspot"]
+[ext_resource type="Script" uid="uid://dgbnc226go4fl" path="res://Scene/Night/NightHotspot.gd" id="2_night_hotspot"]
 [ext_resource type="PackedScene" uid="uid://cbsehhhrv63ek" path="res://Scene/PlayerHint/PlayerHintWindow.tscn" id="3_3ehag"]
 [ext_resource type="PackedScene" uid="uid://drw157phi8l3n" path="res://Scene/Test/InfoWindow.tscn" id="4_info"]
 [ext_resource type="Texture2D" uid="uid://cdktg72vwwrl1" path="res://Assets/UI/TopBar.png" id="5_5x4ej"]
@@ -37,12 +37,12 @@ layout_mode = 1
 
 [node name="Background" type="Control" parent="." unique_id=110989754]
 layout_mode = 1
-mouse_filter = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="BackgroundImage" type="TextureRect" parent="Background" unique_id=397061248]
 layout_mode = 1
@@ -58,7 +58,6 @@ stretch_mode = 6
 
 [node name="ReadBookHotspot" type="Area2D" parent="Background/BackgroundImage" unique_id=1318607749]
 script = ExtResource("2_night_hotspot")
-action = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/BackgroundImage/ReadBookHotspot" unique_id=1492729497]
 polygon = PackedVector2Array(346, 710, 487, 688, 546, 738, 711, 709, 823, 785, 841, 812, 857, 808, 915, 866, 940, 879, 931, 888, 933, 899, 834, 929, 818, 927, 800, 926, 780, 917, 755, 904, 710, 937, 556, 926, 415, 911, 394, 898, 279, 910, 241, 816, 243, 795, 336, 784)
@@ -66,7 +65,7 @@ polygon = PackedVector2Array(346, 710, 487, 688, 546, 738, 711, 709, 823, 785, 8
 [node name="Polygon2D" type="Polygon2D" parent="Background/BackgroundImage/ReadBookHotspot" unique_id=451168183]
 visible = false
 z_index = 10
-color = Color(1, 0.78, 0.18, 0.2)
+color = Color(1.0627335, 0.9528078, 0.4920603, 1)
 
 [node name="NextDayHotspot" type="Area2D" parent="Background/BackgroundImage" unique_id=228788729]
 script = ExtResource("2_night_hotspot")
@@ -80,16 +79,16 @@ polygon = PackedVector2Array(1622.1301, 678.51575, 1614.772, 688.2795, 1607.4138
 [node name="Polygon2D" type="Polygon2D" parent="Background/BackgroundImage/NextDayHotspot" unique_id=974573520]
 visible = false
 z_index = 10
-color = Color(1, 0.78, 0.18, 0.2)
+color = Color(1.0627335, 0.9528078, 0.4920603, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1038758942]
 layout_mode = 1
-mouse_filter = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="TopBar" type="Panel" parent="VBoxContainer" unique_id=779306227]
 layout_mode = 2
@@ -187,9 +186,9 @@ vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="VBoxContainer" unique_id=1045108170]
 layout_mode = 2
-mouse_filter = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 27.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rstq2")
 
 [node name="ButtonRow" type="HBoxContainer" parent="VBoxContainer" unique_id=1689106686]
