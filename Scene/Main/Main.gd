@@ -21,9 +21,14 @@ class_name Main
 # 开始菜单根节点
 @onready var main_menu_layer: CanvasLayer = $MainMenuLayer
 
-# 三个菜单按钮
+# 游戏内暂停菜单 / 设置菜单
+@onready var pause_menu_layer: CanvasLayer = $PauseMenuLayer
+@onready var settings_layer: CanvasLayer = $SettingsLayer
+
+# 开始菜单按钮
 @onready var new_game_button: Button = $MainMenuLayer/MenuPanel/VBoxContainer/NewGameButton
 @onready var load_game_button: Button = $MainMenuLayer/MenuPanel/VBoxContainer/LoadGameButton
+@onready var settings_button: Button = $MainMenuLayer/MenuPanel/VBoxContainer/SettingsButton
 @onready var quit_game_button: Button = $MainMenuLayer/MenuPanel/VBoxContainer/QuitGameButton
 
 # 读取存档弹窗
@@ -69,15 +74,27 @@ var save_slot_popup_mode: String = "load"
 var overwrite_confirm_dialog: ConfirmationDialog = null
 var pending_overwrite_slot_index: int = -1
 
+# Pause Menu 中“返回主菜单 / 退出游戏”的确认框。
+# 使用代码动态创建，避免再增加单独场景。
+var return_to_menu_confirm_dialog: ConfirmationDialog = null
+var quit_game_confirm_dialog: ConfirmationDialog = null
+
 
 func _ready() -> void:
-	# 创建覆盖存档确认框
+	# 创建确认框
 	_setup_overwrite_confirm_dialog()
+	_setup_pause_confirm_dialogs()
 
-	# 连接开始菜单按钮
+	# 连接开始菜单，以及 Pause / Settings 的信号。
 	_connect_menu_buttons()
+	_connect_overlay_menu_signals()
 
-	# 进入游戏时先显示菜单，不直接进入诊室
+	# 初始状态不显示游戏内覆盖菜单。
+	_hide_pause_menu_visual_only()
+	_close_settings_menu(false)
+	_set_pause_menu_input_enabled(true)
+
+	# 进入游戏时先显示菜单，不直接进入诊室。
 	_show_main_menu()
 
 	print("Main 初始化完成，等待玩家选择")
@@ -92,6 +109,9 @@ func _connect_menu_buttons() -> void:
 
 	if not load_game_button.pressed.is_connected(_on_load_game_button_pressed):
 		load_game_button.pressed.connect(_on_load_game_button_pressed)
+
+	if not settings_button.pressed.is_connected(_on_settings_button_pressed):
+		settings_button.pressed.connect(_on_settings_button_pressed)
 
 	if not quit_game_button.pressed.is_connected(_on_quit_game_button_pressed):
 		quit_game_button.pressed.connect(_on_quit_game_button_pressed)
@@ -110,9 +130,44 @@ func _connect_menu_buttons() -> void:
 
 
 # =========================================================
+# 连接 Pause / Settings 信号
+# =========================================================
+func _connect_overlay_menu_signals() -> void:
+	if pause_menu_layer != null:
+		var pause_signal_map: Dictionary = {
+			"toggle_requested": Callable(self, "_on_pause_toggle_requested"),
+			"resume_requested": Callable(self, "_on_pause_resume_requested"),
+			"settings_requested": Callable(self, "_on_pause_settings_requested"),
+			"main_menu_requested": Callable(self, "_on_pause_main_menu_requested"),
+			"quit_requested": Callable(self, "_on_pause_quit_requested")
+		}
+
+		for signal_name_value in pause_signal_map.keys():
+			var signal_name := String(signal_name_value)
+			var signal_callable: Callable = pause_signal_map[signal_name_value]
+			if pause_menu_layer.has_signal(signal_name):
+				if not pause_menu_layer.is_connected(signal_name, signal_callable):
+					pause_menu_layer.connect(signal_name, signal_callable)
+
+	if settings_layer != null and settings_layer.has_signal("closed"):
+		var settings_closed_callable := Callable(self, "_on_settings_closed")
+		if not settings_layer.is_connected("closed", settings_closed_callable):
+			settings_layer.connect("closed", settings_closed_callable)
+
+
+# =========================================================
 # 显示开始菜单
 # =========================================================
 func _show_main_menu() -> void:
+	# 标题菜单永远处于非暂停状态。
+	var tree := get_tree()
+	if tree != null:
+		tree.paused = false
+
+	_hide_pause_menu_visual_only()
+	_close_settings_menu(false)
+	_set_pause_menu_input_enabled(true)
+
 	_clear_story_overlay()
 	_clear_current_scene()
 	main_menu_layer.visible = true
@@ -154,6 +209,13 @@ func _on_new_game_button_pressed() -> void:
 # =========================================================
 func _on_load_game_button_pressed() -> void:
 	_open_load_game_slot_popup()
+
+
+# =========================================================
+# 设置按钮
+# =========================================================
+func _on_settings_button_pressed() -> void:
+	_open_settings_menu()
 
 
 # =========================================================
@@ -404,6 +466,227 @@ func _on_overwrite_confirm_dialog_canceled() -> void:
 # 退出游戏按钮
 # =========================================================
 func _on_quit_game_button_pressed() -> void:
+	_quit_game_safely()
+
+
+# =========================================================
+# Pause Menu / Settings
+# =========================================================
+func _on_pause_toggle_requested() -> void:
+	# Settings 自己处理 ESC；打开时 PauseMenu 不应再切换。
+	if settings_layer != null and settings_layer.visible:
+		return
+
+	# 标题菜单阶段不打开 Pause Menu。
+	# 如果当前正在选择存档，ESC 只负责关闭存档选择层。
+	if main_menu_layer.visible:
+		if save_slot_popup != null and save_slot_popup.visible:
+			_close_save_slot_popup()
+		return
+
+	if pause_menu_layer.visible:
+		_close_pause_menu()
+	else:
+		_open_pause_menu()
+
+
+func _open_pause_menu() -> void:
+	if main_menu_layer.visible:
+		return
+
+	if pause_menu_layer != null and pause_menu_layer.has_method("show_menu"):
+		pause_menu_layer.call("show_menu")
+	else:
+		pause_menu_layer.visible = true
+
+	var tree := get_tree()
+	if tree != null:
+		tree.paused = true
+
+
+func _close_pause_menu() -> void:
+	var tree := get_tree()
+	if tree != null:
+		tree.paused = false
+
+	_hide_pause_menu_visual_only()
+	_set_pause_menu_input_enabled(true)
+
+
+func _hide_pause_menu_visual_only() -> void:
+	if pause_menu_layer == null:
+		return
+
+	if pause_menu_layer.has_method("hide_menu"):
+		pause_menu_layer.call("hide_menu")
+	else:
+		pause_menu_layer.visible = false
+
+
+func _set_pause_menu_input_enabled(enabled: bool) -> void:
+	if pause_menu_layer != null and pause_menu_layer.has_method("set_input_enabled"):
+		pause_menu_layer.call("set_input_enabled", enabled)
+
+
+func _on_pause_resume_requested() -> void:
+	_close_pause_menu()
+
+
+func _on_pause_settings_requested() -> void:
+	_open_settings_menu()
+
+
+func _open_settings_menu() -> void:
+	if settings_layer == null:
+		return
+
+	# SettingsLayer 自己在暂停状态下也能运行。
+	# 暂时禁用 PauseMenu 的 ESC 监听，避免两个覆盖层同时响应。
+	_set_pause_menu_input_enabled(false)
+
+	if settings_layer.has_method("open_panel"):
+		settings_layer.call("open_panel")
+	else:
+		settings_layer.visible = true
+
+
+func _close_settings_menu(emit_closed_signal: bool = true) -> void:
+	if settings_layer == null:
+		return
+
+	if settings_layer.has_method("close_panel"):
+		settings_layer.call("close_panel", emit_closed_signal)
+	else:
+		settings_layer.visible = false
+		if emit_closed_signal and settings_layer.has_signal("closed"):
+			settings_layer.emit_signal("closed")
+
+
+func _on_settings_closed() -> void:
+	_set_pause_menu_input_enabled(true)
+
+
+func _on_pause_main_menu_requested() -> void:
+	if return_to_menu_confirm_dialog == null:
+		_return_to_main_menu_from_game()
+		return
+
+	_set_pause_menu_input_enabled(false)
+	return_to_menu_confirm_dialog.popup_centered()
+
+
+func _on_pause_quit_requested() -> void:
+	if quit_game_confirm_dialog == null:
+		_quit_game_safely()
+		return
+
+	_set_pause_menu_input_enabled(false)
+	quit_game_confirm_dialog.popup_centered()
+
+
+func _setup_pause_confirm_dialogs() -> void:
+	if return_to_menu_confirm_dialog == null:
+		return_to_menu_confirm_dialog = ConfirmationDialog.new()
+		return_to_menu_confirm_dialog.title = "返回主菜单"
+		return_to_menu_confirm_dialog.dialog_text = (
+			"当前阶段尚未完成。\n"
+			+ "返回主菜单后，将从最近一次自动存档继续。\n\n"
+			+ "是否返回主菜单？"
+		)
+		return_to_menu_confirm_dialog.process_mode = Node.PROCESS_MODE_ALWAYS
+		add_child(return_to_menu_confirm_dialog)
+
+		if return_to_menu_confirm_dialog.get_ok_button() != null:
+			return_to_menu_confirm_dialog.get_ok_button().text = "返回主菜单"
+		if return_to_menu_confirm_dialog.get_cancel_button() != null:
+			return_to_menu_confirm_dialog.get_cancel_button().text = "取消"
+
+		var return_confirm_callable := Callable(self, "_on_return_to_menu_confirmed")
+		if not return_to_menu_confirm_dialog.confirmed.is_connected(return_confirm_callable):
+			return_to_menu_confirm_dialog.confirmed.connect(return_confirm_callable)
+
+		var return_cancel_callable := Callable(self, "_on_pause_confirm_canceled")
+		if return_to_menu_confirm_dialog.has_signal("canceled"):
+			if not return_to_menu_confirm_dialog.canceled.is_connected(return_cancel_callable):
+				return_to_menu_confirm_dialog.canceled.connect(return_cancel_callable)
+		if return_to_menu_confirm_dialog.has_signal("close_requested"):
+			if not return_to_menu_confirm_dialog.close_requested.is_connected(return_cancel_callable):
+				return_to_menu_confirm_dialog.close_requested.connect(return_cancel_callable)
+
+	if quit_game_confirm_dialog == null:
+		quit_game_confirm_dialog = ConfirmationDialog.new()
+		quit_game_confirm_dialog.title = "退出游戏"
+		quit_game_confirm_dialog.dialog_text = (
+			"当前阶段尚未完成。\n"
+			+ "退出游戏后，本阶段未保存的进度将丢失。\n\n"
+			+ "是否退出游戏？"
+		)
+		quit_game_confirm_dialog.process_mode = Node.PROCESS_MODE_ALWAYS
+		add_child(quit_game_confirm_dialog)
+
+		if quit_game_confirm_dialog.get_ok_button() != null:
+			quit_game_confirm_dialog.get_ok_button().text = "退出游戏"
+		if quit_game_confirm_dialog.get_cancel_button() != null:
+			quit_game_confirm_dialog.get_cancel_button().text = "取消"
+
+		var quit_confirm_callable := Callable(self, "_on_quit_game_confirmed")
+		if not quit_game_confirm_dialog.confirmed.is_connected(quit_confirm_callable):
+			quit_game_confirm_dialog.confirmed.connect(quit_confirm_callable)
+
+		var quit_cancel_callable := Callable(self, "_on_pause_confirm_canceled")
+		if quit_game_confirm_dialog.has_signal("canceled"):
+			if not quit_game_confirm_dialog.canceled.is_connected(quit_cancel_callable):
+				quit_game_confirm_dialog.canceled.connect(quit_cancel_callable)
+		if quit_game_confirm_dialog.has_signal("close_requested"):
+			if not quit_game_confirm_dialog.close_requested.is_connected(quit_cancel_callable):
+				quit_game_confirm_dialog.close_requested.connect(quit_cancel_callable)
+
+
+func _on_return_to_menu_confirmed() -> void:
+	_return_to_main_menu_from_game()
+
+
+func _on_quit_game_confirmed() -> void:
+	_quit_game_safely()
+
+
+func _on_pause_confirm_canceled() -> void:
+	_set_pause_menu_input_enabled(true)
+
+
+func _return_to_main_menu_from_game() -> void:
+	# 先解除 SceneTree pause，保证标题菜单和后续输入恢复正常。
+	var tree := get_tree()
+	if tree != null:
+		tree.paused = false
+
+	_close_settings_menu(false)
+	_hide_pause_menu_visual_only()
+	_set_pause_menu_input_enabled(true)
+
+	# 放弃当前阶段的内存进度。存档文件保持最近一次阶段自动存档。
+	# GameTime 是 Autoload，必须主动停止 Clinic 时钟，否则即使场景隐藏也会继续计时。
+	if GameTime != null:
+		if GameTime.has_method("stop_clinic_clock"):
+			GameTime.stop_clinic_clock()
+		elif GameTime.has_method("cancel_story_pause_state"):
+			GameTime.cancel_story_pause_state()
+
+	story_paused_clinic_clock = false
+	pending_story_return_target = ""
+
+	if StoryManager != null and StoryManager.has_method("clear_story"):
+		StoryManager.clear_story()
+
+	_show_main_menu()
+
+
+func _quit_game_safely() -> void:
+	# SaveManager 自己的 _exit_tree() 也会 flush；
+	# 这里主动收尾一次，确保退出路径语义明确。
+	if SaveManager != null and SaveManager.has_method("flush_async_saves"):
+		SaveManager.flush_async_saves()
+
 	get_tree().quit()
 
 
