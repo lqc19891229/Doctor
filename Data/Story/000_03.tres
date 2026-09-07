@@ -1,0 +1,111 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_jian_zhong/li_jian_zhong.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi_old.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wu_zhi_lan/wu_zhi_lan_old.png" id="portrait_3"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李建中"
+text = "爹，今天和书商谈的怎么样？"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "那书商说，刻板发行需要两千两银子…"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李建中"
+text = "两千两？要这么多银子！"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "唉，要是不能出版，我看这书怕是没有多少年头就要失传了…"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_005"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李建中"
+text = "儿子没用，不能给父亲分忧…"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_006"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "这是哪儿的话，你可是咱家最有出息的了。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_007"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "你为官清廉，是官场清流，全家都以你为荣。这书的事儿，咱们再想想办法。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_008"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "吴芷兰"
+text = "老头子，你的恩师顾老先生和当今文坛第一人王世贞是世交，若能请他给你的书写一个序，天下学子必慕名而来，到时候肯定有书商愿意出版此书。"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_009"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "哎呀，还得是你啊老婆子，这主意好，这主意好。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_010"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "李建中"
+text = "儿子明日就去太仓拜访王老先生！"
+portrait = ExtResource("portrait_1")
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "000_03"
+story_name = "如何出书"
+condition_scene = "night"
+condition_day = 1
+condition_money_op = ""
+condition_money = 0
+condition_reputation_op = ""
+condition_reputation = 0
+condition_entry_id = ""
+condition_story_id = "000_02"
+condition_treatment_result = ""
+after_play = "night"
+clinic_npc_id = ""
+money_change = 0
+reputation_points_change = 0
+experience_points_change = 0
+play_once = true
+sort_index = 0
+background_mode = "current_scene"
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010")])

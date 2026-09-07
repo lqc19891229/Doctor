@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" path="res://Assets/Background/000/000.png" id="background_1"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = "万历二十一年李东壁病逝，终年76岁…"
+background = ExtResource("background_1")
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = "万历二十四年，这部耗尽他一生心血的医书终于刻板发行…"
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = "时珍，荆楚鄙人也。幼多羸疾，质成钝椎。僭纂述之权，岁历三十稔，书考八百余家，稿凡三易，复者芟之，阙者缉之，讹者绳之。旧本一千五百二十八种，今增药三百七十四种，分为一十六部，著成五十二卷，僭名曰本草纲目。"
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "000_05"
+story_name = "结局"
+condition_scene = "night"
+condition_day = 0
+condition_money_op = "gte"
+condition_money = 1000
+condition_reputation_op = ""
+condition_reputation = 0
+condition_entry_id = ""
+condition_story_id = "000_04"
+condition_treatment_result = ""
+after_play = "endgame"
+clinic_npc_id = ""
+money_change = 0
+reputation_points_change = 0
+experience_points_change = 0
+play_once = true
+sort_index = 0
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003")])

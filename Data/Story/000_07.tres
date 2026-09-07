@@ -1,0 +1,62 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/ya_yi/ya_yi.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Background/000/002.png" id="background_3"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "衙役"
+text = "李东璧，有人告你医术不精，招摇撞骗，跟我们去衙门走一趟吧。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "冤枉啊！冤枉！"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "衙役"
+text = "少废话，快走！"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = "李东璧因行医时过失杀人，被杖四十，永世不得为医。"
+background = ExtResource("background_3")
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "000_07"
+story_name = "名望过低"
+condition_scene = "clinic"
+condition_day = 0
+condition_money_op = ""
+condition_money = 0
+condition_reputation_op = "lte"
+condition_reputation = -200
+condition_entry_id = ""
+condition_story_id = ""
+condition_treatment_result = ""
+after_play = "endgame"
+clinic_npc_id = ""
+money_change = 0
+reputation_points_change = 0
+experience_points_change = 0
+play_once = false
+sort_index = 0
+background_mode = "current_scene"
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004")])
