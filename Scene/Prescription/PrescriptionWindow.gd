@@ -468,7 +468,7 @@ func _ensure_formula_search_cache() -> void:
 
 		# 预制方剂按钮也只创建一次；搜索时仅切换 visible。
 		var formula_button := Button.new()
-		formula_button.text = "【方剂】%s" % str(formula.formula_name)
+		formula_button.text = str(formula.formula_name)
 		formula_button.custom_minimum_size = Vector2(180, 44)
 		formula_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		formula_button.focus_mode = Control.FOCUS_NONE
@@ -530,7 +530,7 @@ func _apply_herb_filter() -> void:
 	selected_herb_button = null
 
 	# 普通药材只按药材自身名称 / 拼音 / 首字母匹配。
-	# 方剂命中不再拆成组成药材，恢复独立的【方剂】按钮。
+	# 方剂命中不再拆成组成药材，使用独立的方剂按钮。
 	for herb_id_value in _herb_button_by_id.keys():
 		var herb_id := str(herb_id_value)
 		var button_value = _herb_button_by_id.get(herb_id, null)
@@ -546,8 +546,8 @@ func _apply_herb_filter() -> void:
 				record = record_value
 			should_show = (
 				str(record.get("name", "")).contains(herb_search_keyword)
-				or str(record.get("pinyin", "")).contains(herb_search_keyword)
-				or str(record.get("initials", "")).contains(herb_search_keyword)
+				or str(record.get("pinyin", "")).begins_with(herb_search_keyword)
+				or str(record.get("initials", "")).begins_with(herb_search_keyword)
 			)
 
 		button.visible = should_show
@@ -578,8 +578,8 @@ func _formula_record_matches(record: Dictionary) -> bool:
 		return false
 	return (
 		str(record.get("name", "")).contains(herb_search_keyword)
-		or str(record.get("pinyin", "")).contains(herb_search_keyword)
-		or str(record.get("initials", "")).contains(herb_search_keyword)
+		or str(record.get("pinyin", "")).begins_with(herb_search_keyword)
+		or str(record.get("initials", "")).begins_with(herb_search_keyword)
 	)
 
 
