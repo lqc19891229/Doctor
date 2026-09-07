@@ -367,6 +367,12 @@ const CHEN_PI_WAGE_PER_SOLAR_TERM_WEN: int = 500
 const BAN_XIA_WAGE_PER_SOLAR_TERM_WEN: int = 500
 const WAGE_INTERVAL_SOLAR_TERMS: int = 2
 
+# 李建中俸禄：
+# 《本草纲目》完书剧情（000_01）后，每两个节气领取20两。
+# 1两 = 1000文，因此20两 = 20000文。
+const LI_JIAN_ZHONG_SALARY_WEN: int = 20000
+const LI_JIAN_ZHONG_SALARY_INTERVAL_SOLAR_TERMS: int = 2
+
 const FOOD_COST_WEN: int = 1000
 const FOOD_COST_INTERVAL_SOLAR_TERMS: int = 1
 
@@ -694,6 +700,13 @@ func settle_day_finances(day: int) -> Dictionary:
 		chen_pi_wage = CHEN_PI_WAGE_PER_SOLAR_TERM_WEN
 		ban_xia_wage = BAN_XIA_WAGE_PER_SOLAR_TERM_WEN
 
+	# 李建中俸禄：
+	# 完成 000_01《完书》剧情后，每两个节气收入20两。
+	var li_jian_zhong_salary := 0
+	if unlocked_story_ids.has("000_01"):
+		if safe_day % LI_JIAN_ZHONG_SALARY_INTERVAL_SOLAR_TERMS == 0:
+			li_jian_zhong_salary = LI_JIAN_ZHONG_SALARY_WEN
+
 	# 食费：每个节气固定 1000 文。
 	var food_cost := 0
 	if safe_day % FOOD_COST_INTERVAL_SOLAR_TERMS == 0:
@@ -730,6 +743,7 @@ func settle_day_finances(day: int) -> Dictionary:
 			if is_gross_accounting
 			else daily_medicine_profit_wen
 		)
+		+ li_jian_zhong_salary
 	)
 
 	var total_expense := (
@@ -765,6 +779,7 @@ func settle_day_finances(day: int) -> Dictionary:
 		"chen_pi_wage_wen": chen_pi_wage,
 		"ban_xia_wage_wen": ban_xia_wage,
 		"staff_wage_wen": chen_pi_wage + ban_xia_wage,
+		"li_jian_zhong_salary_wen": li_jian_zhong_salary,
 		"food_cost_wen": food_cost,
 		"human_gift_cost_wen": human_gift_cost,
 		"coal_cost_wen": coal_cost,
@@ -824,6 +839,10 @@ func build_finance_report_text(day: int) -> String:
 		# 仅用于无法还原销售额/成本拆分的旧存档当天。
 		var medicine_profit := int(report.get("medicine_profit_wen", 0))
 		lines.append("药材利润（旧账）：%s" % format_money_change(medicine_profit))
+
+	var li_jian_zhong_salary := int(report.get("li_jian_zhong_salary_wen", 0))
+	if li_jian_zhong_salary > 0:
+		lines.append("李建中俸禄：%s" % format_money_change(li_jian_zhong_salary))
 
 	lines.append("收入合计：%s" % format_money_change(total_income))
 	lines.append("")
