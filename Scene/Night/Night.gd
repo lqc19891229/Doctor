@@ -540,7 +540,7 @@ func _on_player_data_changed() -> void:
 # =========================
 
 func _input(event: InputEvent) -> void:
-	if not OS.is_debug_build() or not is_visible_in_tree():
+	if not is_visible_in_tree():
 		return
 
 	if not (event is InputEventKey):
@@ -548,6 +548,19 @@ func _input(event: InputEvent) -> void:
 
 	var key_event := event as InputEventKey
 	if not key_event.pressed or key_event.echo:
+		return
+
+	if key_event.keycode == KEY_F1:
+		_on_read_book_button_pressed()
+		get_viewport().set_input_as_handled()
+		return
+
+	if key_event.keycode == KEY_F2:
+		_on_next_day_button_pressed()
+		get_viewport().set_input_as_handled()
+		return
+
+	if not OS.is_debug_build():
 		return
 
 	if key_event.ctrl_pressed and key_event.keycode == KEY_T:
