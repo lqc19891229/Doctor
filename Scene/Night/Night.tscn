@@ -7,8 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://drw157phi8l3n" path="res://Scene/Test/InfoWindow.tscn" id="4_info"]
 [ext_resource type="Texture2D" uid="uid://cdktg72vwwrl1" path="res://Assets/UI/TopBar.png" id="5_5x4ej"]
 [ext_resource type="Texture2D" uid="uid://8bdhvq1nyqj0" path="res://Assets/Background/clinic/spring_night.png" id="5_sslgd"]
+[ext_resource type="Texture2D" uid="uid://b8f6aogxyufp3" path="res://Assets/Background/clinic/night_table.png" id="6_ca75w"]
 [ext_resource type="Texture2D" uid="uid://bun4qmh7amvw2" path="res://Assets/UI/silver_ingot.png" id="6_silver_ingot"]
 [ext_resource type="Texture2D" uid="uid://drj3b721nd3p5" path="res://Assets/UI/copper_coin.png" id="7_copper_coin"]
+[ext_resource type="Texture2D" uid="uid://cj4x1r4vgs5al" path="res://Assets/UI/F1.png" id="8_78dng"]
+[ext_resource type="Texture2D" uid="uid://bvvfhbe8p7oly" path="res://Assets/UI/F2.png" id="9_05eug"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sax03"]
 
@@ -55,28 +58,88 @@ mouse_filter = 2
 texture = ExtResource("5_sslgd")
 expand_mode = 1
 
-[node name="ReadBookHotspot" type="Area2D" parent="Background/BackgroundImage" unique_id=1318607749]
+[node name="TableImage" type="TextureRect" parent="Background" unique_id=1994943495]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -841.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("6_ca75w")
+expand_mode = 1
+
+[node name="DeskHotspots" type="Control" parent="Background/TableImage" unique_id=1492947465]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ReadBookHotspot" type="Area2D" parent="Background/TableImage/DeskHotspots" unique_id=1318607749]
+position = Vector2(0, -239)
 script = ExtResource("2_night_hotspot")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/BackgroundImage/ReadBookHotspot" unique_id=859332895]
-polygon = PackedVector2Array(350, 709, 485, 687, 545, 736, 709, 708, 827, 788, 827, 804, 859, 808, 893, 847, 939, 880, 929, 887, 936, 901, 824, 928, 813, 923, 795, 927, 783, 916, 769, 917, 767, 905, 749, 904, 710, 937, 405, 910, 400, 894, 273, 910, 243, 816, 243, 795, 337, 783, 331, 758, 331, 737, 347, 729)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/TableImage/DeskHotspots/ReadBookHotspot" unique_id=859332895]
+polygon = PackedVector2Array(180, 872, 271, 860, 249, 840, 245, 806, 274, 803, 273, 778, 447, 747, 558, 832, 590, 802, 743, 774, 800, 815, 910, 747, 1113, 768, 1113, 797, 1154, 802, 1154, 829, 1072, 879, 1116, 941, 1090, 963, 885, 979, 498, 979, 369, 954, 249, 974, 182, 898)
 
-[node name="Polygon2D" type="Polygon2D" parent="Background/BackgroundImage/ReadBookHotspot" unique_id=451168183]
+[node name="Polygon2D" type="Polygon2D" parent="Background/TableImage/DeskHotspots/ReadBookHotspot" unique_id=451168183]
 visible = false
 z_index = 10
 color = Color(1.0627335, 0.9528078, 0.4920603, 1)
 
-[node name="NextDayHotspot" type="Area2D" parent="Background/BackgroundImage" unique_id=228788729]
+[node name="NextDayHotspot" type="Area2D" parent="Background/TableImage/DeskHotspots" unique_id=228788729]
+position = Vector2(0, -239)
 script = ExtResource("2_night_hotspot")
 action = 1
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/BackgroundImage/NextDayHotspot" unique_id=994244777]
-polygon = PackedVector2Array(1443, 701, 1448, 669, 1454, 689, 1455, 701, 1464, 701, 1469, 696, 1491, 690, 1515, 688, 1537, 690, 1556, 694, 1565, 699, 1568, 703, 1566, 708, 1559, 726, 1549, 735, 1534, 740, 1528, 740, 1529, 751, 1545, 758, 1549, 766, 1543, 772, 1531, 776, 1505, 777, 1492, 774, 1481, 768, 1480, 760, 1490, 754, 1496, 752, 1500, 750, 1499, 741, 1485, 736, 1478, 730, 1472, 729, 1453, 718, 1446, 719, 1436, 709)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/TableImage/DeskHotspots/NextDayHotspot" unique_id=994244777]
+position = Vector2(578.18427, 292.14655)
+scale = Vector2(0.7072676, 0.6872109)
+polygon = PackedVector2Array(1337.2815, 690.9865, 1372.6287, 610.9528, 1395.251, 683.71075, 1464.5317, 664.79364, 1509.7761, 660.42816, 1569.1597, 669.1591, 1598.8516, 686.62103, 1594.6099, 706.9932, 1571.9875, 743.37213, 1535.2263, 760.83405, 1526.7429, 779.75116, 1564.918, 803.0336, 1555.0208, 821.95074, 1519.6736, 833.592, 1470.1873, 836.50226, 1437.6677, 824.861, 1422.115, 811.7646, 1426.3567, 797.2131, 1458.8762, 785.5717, 1465.9456, 763.74445, 1424.9426, 743.37213, 1391.0093, 736.0964, 1368.387, 722.99994)
 
-[node name="Polygon2D" type="Polygon2D" parent="Background/BackgroundImage/NextDayHotspot" unique_id=974573520]
+[node name="Polygon2D" type="Polygon2D" parent="Background/TableImage/DeskHotspots/NextDayHotspot" unique_id=974573520]
 visible = false
 z_index = 10
 color = Color(1.0627335, 0.9528078, 0.4920603, 1)
+
+[node name="ReadBookHintIcon" type="TextureRect" parent="Background/TableImage" unique_id=117087499]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.372
+anchor_top = 0.79700005
+anchor_right = 0.372
+anchor_bottom = 0.79700005
+offset_left = -31.23999
+offset_top = -32.27704
+offset_right = 32.76001
+offset_bottom = 31.722961
+mouse_filter = 2
+texture = ExtResource("8_78dng")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NextDayHintIcon" type="TextureRect" parent="Background/TableImage" unique_id=2053040424]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.855
+anchor_top = 0.55600005
+anchor_right = 0.855
+anchor_bottom = 0.55600005
+offset_left = -32.600098
+offset_top = -31.596039
+offset_right = 31.399902
+offset_bottom = 32.40396
+mouse_filter = 2
+texture = ExtResource("9_05eug")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1038758942]
 layout_mode = 1

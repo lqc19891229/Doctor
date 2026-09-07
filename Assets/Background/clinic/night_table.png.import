@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc7sj00ahbgcm"
-path="res://.godot/imported/clinic_table.png-f314f97c49b125919771d6b73279710c.ctex"
+uid="uid://b8f6aogxyufp3"
+path="res://.godot/imported/night_table.png-63532ad712955f7662ec66991a5424e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background/clinic_table.png"
-dest_files=["res://.godot/imported/clinic_table.png-f314f97c49b125919771d6b73279710c.ctex"]
+source_file="res://Assets/Background/clinic/night_table.png"
+dest_files=["res://.godot/imported/night_table.png-63532ad712955f7662ec66991a5424e3.ctex"]
 
 [params]
 
