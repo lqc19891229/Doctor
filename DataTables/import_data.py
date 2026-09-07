@@ -399,7 +399,7 @@ def normalize_story_row_values(
         normalized["AfterPlay"] = legacy_return_scene
 
     if as_bool(normalized.get(STORY_LEGACY_END_GAME_KEY), False):
-        normalized["AfterPlay"] = "endgame"
+        normalized["AfterPlay"] = "gameover"
 
     if legacy_type:
         # night_end 现在并入“触发场景”。
@@ -443,7 +443,7 @@ def normalize_story_row_values(
             "day_reputation_below_over",
             "story_npc_failed_over",
         ):
-            normalized["AfterPlay"] = "endgame"
+            normalized["AfterPlay"] = "gameover"
 
         # 旧治疗结果剧情沿用来源主剧情的触发场景。
         # 这样原本由 night_end 发起的治疗在迁移后会统一绑定到 night_end，
@@ -1864,6 +1864,7 @@ def validate_data(indexed_data: dict[str, Any]) -> list[str]:
             "clinic",
             "night",
             "map",
+            "gameover",
             "endgame",
         ):
             errors.append(f"Story 播放后非法: {story_id} -> {after_play}")
@@ -2441,7 +2442,7 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
     根据 Story / StoryLine 生成剧情 .tres。
 
     新资源只写 Conditions / Actions / Settings。
-    night_end 写入 condition_scene；endgame 写入 after_play。
+    night_end 写入 condition_scene；gameover / endgame 写入 after_play。
     不再输出 TriggerType / ReturnScene / EndGame 等旧字段。
     """
     story_map = indexed_data["story_map"]

@@ -7,6 +7,8 @@ signal story_treatment_requested(npc_id: String, disease: DiseaseData)
 signal followup_story_requested(story: StoryData, resume_treatment: bool)
 @warning_ignore("unused_signal")
 signal game_over_requested
+@warning_ignore("unused_signal")
+signal endgame_requested
 
 const JUDGEMENT_RESULT_SCENE: PackedScene = preload(
 	"res://Scene/JudgementResult/JudgementResult.tscn"
@@ -1302,9 +1304,14 @@ func _finish_story() -> void:
 	_reset_enter_hold_state()
 	_report_story_playback_completed()
 
-	# “播放后 = endgame”表示结束本局，不再由 TriggerType 隐式决定。
-	if story_data != null and story_data.should_end_game():
+	# “播放后 = gameover”表示失败结局，直接结束本局。
+	if story_data != null and story_data.should_game_over():
 		_finish_story_with_fade(&"game_over_requested")
+		return
+
+	# “播放后 = endgame”只用于最终通关，剧情淡出后进入片尾动画。
+	if story_data != null and story_data.should_end_game():
+		_finish_story_with_fade(&"endgame_requested")
 		return
 
 	# 只用于旧 failed_retry .tres 的兼容。

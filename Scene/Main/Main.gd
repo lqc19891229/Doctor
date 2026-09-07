@@ -43,6 +43,9 @@ class_name Main
 const CLINIC_SCENE: PackedScene = preload("res://Scene/clinic/clinic.tscn")
 const NIGHT_SCENE: PackedScene = preload("res://Scene/Night/Night.tscn")
 const STORY_SCENE: PackedScene = preload("res://Scene/Story/Story.tscn")
+const ENDING_CREDITS_SCENE: PackedScene = preload(
+	"res://Scene/Ending/Ending_credits.tscn"
+)
 const STORY_TREATMENT_SERVICE_SCRIPT = preload("res://System/Treatment/StoryTreatmentService.gd")
 const MAP_SCENE_PATH: String = "res://Scene/Map/Map.tscn"
 
@@ -852,9 +855,13 @@ func _play_story(story_path: String, _legacy_return_target: String = "") -> void
 		print("剧情已播放，跳过：", story_id)
 		return
 
-	# “播放后”决定剧情结束目标。endgame 不需要返回场景。
+	# “播放后”决定剧情结束目标。gameover / endgame 都不需要返回游戏场景。
 	pending_story_return_target = story_data.get_return_scene()
-	if pending_story_return_target.is_empty() and not story_data.should_end_game():
+	var is_terminal_story := (
+		story_data.should_game_over()
+		or story_data.should_end_game()
+	)
+	if pending_story_return_target.is_empty() and not is_terminal_story:
 		var trigger_scene := story_data.get_condition_scene()
 		# night_end 是触发时机，默认返回仍然是 Night。
 		if trigger_scene == StoryData.TRIGGER_SCENE_NIGHT_END:
@@ -862,7 +869,7 @@ func _play_story(story_path: String, _legacy_return_target: String = "") -> void
 		elif trigger_scene in ["clinic", "night", "map"]:
 			pending_story_return_target = trigger_scene
 
-	if pending_story_return_target.is_empty() and not story_data.should_end_game():
+	if pending_story_return_target.is_empty() and not is_terminal_story:
 		pending_story_return_target = "clinic"
 
 	story_paused_clinic_clock = false
@@ -940,6 +947,11 @@ func _connect_story_scene_signals(story_node: Node) -> void:
 		if not story_node.is_connected("game_over_requested", game_over_callable):
 			story_node.connect("game_over_requested", game_over_callable)
 
+	var endgame_callable := Callable(self, "_on_story_endgame_requested")
+	if story_node.has_signal("endgame_requested"):
+		if not story_node.is_connected("endgame_requested", endgame_callable):
+			story_node.connect("endgame_requested", endgame_callable)
+
 
 func _on_story_playback_completed(completed_story: StoryData) -> void:
 	# 每段剧情台词真正播放完（或跳过到结尾）后，统一执行数值动作。
@@ -1016,7 +1028,7 @@ func _on_followup_story_requested(
 		return
 
 	# 不需要恢复诊疗的后续剧情，结束后按它自己的“播放后”配置返回。
-	# endgame 会在剧情结束时发送独立的 Game Over 信号。
+	# gameover / endgame 会在剧情结束时发送各自的终止信号。
 	if not resume_treatment:
 		var next_return_target := next_story.get_return_scene()
 		if next_return_target != "":
@@ -1053,17 +1065,41 @@ func _on_story_game_over_requested() -> void:
 			GameTime.cancel_story_pause_state()
 	story_paused_clinic_clock = false
 
-	# 当前项目没有独立 GameOver 场景；结束本局后回到开始菜单。
+	# gameover 不播放片尾，直接回到开始菜单。
 	# 原存档保留，玩家仍可从最后一个保存点读取。
 	_show_main_menu()
+
+
+func _on_story_endgame_requested() -> void:
+	# 最终通关剧情已经完整播放；与 gameover 一样不覆盖玩家最后一个存档点。
+	StoryManager.mark_current_story_played()
+	StoryManager.clear_story()
+	pending_story_return_target = ""
+
+	if story_paused_clinic_clock:
+		if GameTime != null and GameTime.has_method("cancel_story_pause_state"):
+			GameTime.cancel_story_pause_state()
+	story_paused_clinic_clock = false
+
+	var tree := get_tree()
+	if tree == null:
+		return
+
+	tree.paused = false
+
+	# endgame 专用于最终通关：剧情淡出后进入工作人员片尾。
+	var error := tree.change_scene_to_packed(ENDING_CREDITS_SCENE)
+	if error != OK:
+		push_error("进入片尾场景失败，错误代码：%s" % error)
+		_show_main_menu()
 
 
 func _is_game_over_story(story: StoryData) -> bool:
 	if story == null:
 		return false
 
-	# “播放后 = endgame”表示结束本局。
-	return story.should_end_game()
+	# “播放后 = gameover”表示失败结局。
+	return story.should_game_over()
 
 
 func _on_story_finished() -> void:

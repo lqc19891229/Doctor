@@ -5,7 +5,7 @@ extends Control
 ## 整张古书长卷从左向右匀速移动。
 ##
 ## 使用方法：
-## 1. 把 ending_credits.tscn 和 ending_credits.gd 放到同一目录。
+## 1. 把 Ending_credits.tscn 和 Ending_credits.gd 放到同一目录。
 ## 2. 直接运行该场景。
 ## 3. 在 Inspector 中可设置 cover_texture、scroll_speed、return_scene。
 ## 4. 修改下面的 CREDITS 数据即可替换工作人员名单。
@@ -118,10 +118,9 @@ func _reset_position() -> void:
 
 
 func _build_scroll() -> void:
+	# 立即清理旧页面，保证本函数保持同步；_ready() 后可以立刻用新的 _content_width 复位。
 	for child in scroll_content.get_children():
-		child.queue_free()
-
-	await get_tree().process_frame
+		child.free()
 
 	var pages := 1 + CREDITS.size()
 	_content_width = horizontal_margin * 2.0 + page_width * pages
@@ -129,12 +128,16 @@ func _build_scroll() -> void:
 	scroll_content.size = Vector2(_content_width, size.y)
 
 	_create_paper_background()
-	_create_cover_page(horizontal_margin)
 
-	var x := horizontal_margin + page_width
-	for page_data in CREDITS:
-		_create_credit_page(x, page_data)
+	# 长卷从左侧向右滚动时，本地 x 越大的页面越先进入屏幕。
+	# 因此把封面放在最右侧，再把工作人员页按阅读顺序反向铺到左侧，
+	# 实际播放顺序就是：封面 -> 制作人员 -> 协力 -> 感谢游玩。
+	var x := horizontal_margin
+	for page_index in range(CREDITS.size() - 1, -1, -1):
+		_create_credit_page(x, CREDITS[page_index])
 		x += page_width
+
+	_create_cover_page(x)
 
 
 func _create_paper_background() -> void:

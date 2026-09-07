@@ -11,7 +11,7 @@ class_name StoryData
 #
 # Excel 策划表使用中文表头；运行时仍使用稳定的英文内部字段。
 # night_end 作为“触发场景”的一个特殊值。
-# endgame 作为“播放后”的一个特殊值。
+# gameover / endgame 作为“播放后”的特殊值。
 # =========================================================
 
 const COMPARE_GTE := "gte"
@@ -21,6 +21,7 @@ const TREATMENT_RESULT_CURED := "cured"
 const TREATMENT_RESULT_FAILED := "failed"
 
 const TRIGGER_SCENE_NIGHT_END := "night_end"
+const AFTER_PLAY_GAMEOVER := "gameover"
 const AFTER_PLAY_ENDGAME := "endgame"
 
 const BACKGROUND_MODE_DEFAULT := "default"
@@ -93,9 +94,10 @@ var condition_treatment_result: String = ""
 @export_category("Actions")
 
 # clinic / night / map：剧情结束后前往对应场景。
-# endgame：剧情结束本局并返回主菜单。
+# gameover：失败结局，结束本局并直接返回主菜单。
+# endgame：最终通关，播放片尾动画后返回主菜单。
 # 留空：使用当前流程的默认返回目标。
-@export_custom(PROPERTY_HINT_ENUM_SUGGESTION, "clinic,night,map,endgame")
+@export_custom(PROPERTY_HINT_ENUM_SUGGESTION, "clinic,night,map,gameover,endgame")
 var after_play: String = ""
 
 # 配置 NpcID 后，剧情完整播放后生成并进入 story NPC 诊疗。
@@ -259,7 +261,7 @@ func get_after_play() -> String:
 
 	# 兼容旧资源中单独的 EndGame / ReturnScene。
 	if end_game:
-		return AFTER_PLAY_ENDGAME
+		return AFTER_PLAY_GAMEOVER
 
 	if uses_legacy_trigger_schema():
 		var legacy_type := trigger_type.strip_edges().to_lower()
@@ -268,7 +270,7 @@ func get_after_play() -> String:
 			TRIGGER_TYPE_DAY_REPUTATION_BELOW_OVER,
 			TRIGGER_TYPE_STORY_NPC_FAILED_OVER,
 		]:
-			return AFTER_PLAY_ENDGAME
+			return AFTER_PLAY_GAMEOVER
 
 	var legacy_return_scene := return_scene.strip_edges().to_lower()
 	if legacy_return_scene in ["clinic", "night", "map"]:
@@ -282,6 +284,10 @@ func get_return_scene() -> String:
 	if value in ["clinic", "night", "map"]:
 		return value
 	return ""
+
+
+func should_game_over() -> bool:
+	return get_after_play() == AFTER_PLAY_GAMEOVER
 
 
 func should_end_game() -> bool:
