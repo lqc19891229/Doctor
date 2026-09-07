@@ -125,7 +125,7 @@ const CLINIC_SECONDS_PER_SHICHEN: float = 30.0
 
 # 当前时间序号
 # 这里只保留 current_day 变量名，方便兼容现有代码
-# 实际显示时按“节气”解释：1 = 嘉靖十九年立春，2 = 嘉靖十九年雨水
+# 实际显示时按“节气”解释：1 = 嘉靖二十年立春，2 = 嘉靖二十年雨水
 var current_day: int = 1
 
 # 当前阶段
@@ -269,7 +269,7 @@ func cancel_story_pause_state() -> void:
 
 # =========================================================
 # Clinic 自动计时逻辑
-# 每 60 秒推进 1 个时辰
+# 每 30 秒推进 1 个时辰
 # =========================================================
 func _update_clinic_clock(delta: float) -> void:
 	# 没有进入 Clinic 时，不计时
@@ -283,15 +283,16 @@ func _update_clinic_clock(delta: float) -> void:
 	# 累加现实经过时间
 	clinic_time_accumulator += delta
 
-	# 未满 60 秒，不推进
+	# 未满一个时辰，不推进。
 	if clinic_time_accumulator < CLINIC_SECONDS_PER_SHICHEN:
 		return
 
-	# 扣除 60 秒，而不是直接归零
-	# 这样低帧率时不会丢时间
-	clinic_time_accumulator -= CLINIC_SECONDS_PER_SHICHEN
-
-	advance_clinic_shichen()
+	# 使用 while 补齐低帧率、窗口卡顿等情况下积累的多个时辰。
+	# 例如单帧 delta 导致累计 65 秒时，应推进 2 个时辰并保留剩余 5 秒，
+	# 而不是分到后续多帧才逐步追赶。
+	while clinic_clock_running and clinic_time_accumulator >= CLINIC_SECONDS_PER_SHICHEN:
+		clinic_time_accumulator -= CLINIC_SECONDS_PER_SHICHEN
+		advance_clinic_shichen()
 
 
 # =========================================================
@@ -385,7 +386,14 @@ func era_year_to_chinese(value: int) -> String:
 
 
 func number_to_chinese(value: int) -> String:
-	var chinese_numbers: Array[String] = [
+	# 当前主要用于纪年显示。旧实现只支持 0~99，
+	# 100 会显示成“十十”，110 以上还可能数组越界。
+	# 这里完整支持 0~9999；更大的异常值安全回退为阿拉伯数字，
+	# 避免因为显示文本导致运行时错误。
+	if value < 0:
+		return "负" + number_to_chinese(-value)
+
+	var chinese_digits: Array[String] = [
 		"零",
 		"一",
 		"二",
@@ -395,26 +403,44 @@ func number_to_chinese(value: int) -> String:
 		"六",
 		"七",
 		"八",
-		"九",
-		"十"
+		"九"
 	]
 
-	if value <= 10:
-		return chinese_numbers[value]
+	if value < 10:
+		return chinese_digits[value]
 
-	if value < 20:
-		return "十%s" % chinese_numbers[value - 10]
+	if value > 9999:
+		return str(value)
 
-	var ten_digit: int = int(value / 10)
-	var one_digit: int = value % 10
+	var units: Array[String] = ["千", "百", "十", ""]
+	var divisors: Array[int] = [1000, 100, 10, 1]
+	var result := ""
+	var remaining := value
+	var has_started := false
+	var pending_zero := false
 
-	if one_digit == 0:
-		return "%s十" % chinese_numbers[ten_digit]
+	for i in range(divisors.size()):
+		var divisor := divisors[i]
+		var digit: int = int(remaining / divisor)
+		remaining %= divisor
 
-	return "%s十%s" % [
-		chinese_numbers[ten_digit],
-		chinese_numbers[one_digit]
-	]
+		if digit == 0:
+			if has_started and remaining > 0:
+				pending_zero = true
+			continue
+
+		if pending_zero:
+			result += "零"
+			pending_zero = false
+
+		# 10~19 写作“十、十一……十九”，不写“一十”。
+		if not (divisor == 10 and digit == 1 and not has_started):
+			result += chinese_digits[digit]
+
+		result += units[i]
+		has_started = true
+
+	return result
 
 
 func get_shichen_text() -> String:
