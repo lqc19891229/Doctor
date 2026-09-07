@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://5kw50n6ckjh0"]
 
 [ext_resource type="Script" uid="uid://ceraw4tmmepvk" path="res://Scene/Main/Main.gd" id="1_o28sc"]
-[ext_resource type="Script" path="res://Scene/Main/PauseMenu.gd" id="2_pause_menu"]
-[ext_resource type="Script" path="res://Scene/Main/SettingsPanel.gd" id="3_settings_panel"]
+[ext_resource type="Script" uid="uid://cwo5oi636sg24" path="res://Scene/Main/PauseMenu.gd" id="2_pause_menu"]
+[ext_resource type="Script" uid="uid://b3t705armu5q7" path="res://Scene/Main/SettingsPanel.gd" id="3_settings_panel"]
 
 [node name="Main" type="Node" unique_id=899515328]
 script = ExtResource("1_o28sc")
@@ -76,7 +76,7 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
 text = "读取存档"
 
-[node name="SettingsButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer" unique_id=1772277013]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
@@ -186,20 +186,20 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "取消"
 
-[node name="PauseMenuLayer" type="CanvasLayer" parent="."]
-visible = false
+[node name="PauseMenuLayer" type="CanvasLayer" parent="." unique_id=790300192]
 layer = 100
+visible = false
 script = ExtResource("2_pause_menu")
 
-[node name="DarkBackground" type="ColorRect" parent="PauseMenuLayer"]
+[node name="DarkBackground" type="ColorRect" parent="PauseMenuLayer" unique_id=878691681]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.55)
+color = Color(0, 0, 0, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="PauseMenuLayer/DarkBackground"]
+[node name="CenterContainer" type="CenterContainer" parent="PauseMenuLayer/DarkBackground" unique_id=1443368335]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -207,65 +207,64 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="PauseMenuLayer/DarkBackground/CenterContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenuLayer/DarkBackground/CenterContainer" unique_id=2093096630]
 custom_minimum_size = Vector2(420, 500)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer" unique_id=664722709]
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer" unique_id=1224333227]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="TitleLabel" type="Label" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=825037659]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
 text = "暂停"
 horizontal_alignment = 1
 
-[node name="ResumeButton" type="Button" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1268286723]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "继续游戏"
 
-[node name="SettingsButton" type="Button" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1198081317]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "设置"
 
-[node name="MainMenuButton" type="Button" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=768174303]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "返回主菜单"
 
-[node name="QuitButton" type="Button" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1322671440]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "退出游戏"
 
-[node name="SettingsLayer" type="CanvasLayer" parent="."]
-visible = false
+[node name="SettingsLayer" type="CanvasLayer" parent="." unique_id=691791985]
 layer = 110
 script = ExtResource("3_settings_panel")
 
-[node name="DarkBackground" type="ColorRect" parent="SettingsLayer"]
+[node name="DarkBackground" type="ColorRect" parent="SettingsLayer" unique_id=276553050]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.7)
+color = Color(0, 0, 0, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="SettingsLayer/DarkBackground"]
+[node name="CenterContainer" type="CenterContainer" parent="SettingsLayer/DarkBackground" unique_id=2078944752]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -273,77 +272,71 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="SettingsLayer/DarkBackground/CenterContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="SettingsLayer/DarkBackground/CenterContainer" unique_id=1885101944]
 custom_minimum_size = Vector2(600, 680)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer" unique_id=197116510]
 layout_mode = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer" unique_id=1946838455]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="TitleLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1703268219]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
 text = "设置"
 horizontal_alignment = 1
 
-[node name="MasterLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MasterLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1181533387]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "主音量"
 
-[node name="MasterVolumeSlider" type="HSlider" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MasterVolumeSlider" type="HSlider" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1842939586]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-max_value = 100.0
-step = 1.0
 value = 100.0
 
-[node name="MusicLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MusicLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1614647754]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "音乐音量"
 
-[node name="MusicVolumeSlider" type="HSlider" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MusicVolumeSlider" type="HSlider" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1976408704]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-max_value = 100.0
-step = 1.0
 value = 80.0
 
-[node name="SfxLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SfxLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=58389724]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "音效音量"
 
-[node name="SfxVolumeSlider" type="HSlider" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SfxVolumeSlider" type="HSlider" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2067475588]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-max_value = 100.0
-step = 1.0
 value = 80.0
 
-[node name="AudioBusHint" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="AudioBusHint" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=634292725]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Music / SFX 总线尚未创建时，对应滑块会自动禁用。"
-autowrap_mode = 2
 horizontal_alignment = 1
+autowrap_mode = 2
 
-[node name="FullscreenCheckBox" type="CheckBox" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="FullscreenCheckBox" type="CheckBox" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1796179758]
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "全屏"
 
-[node name="BackButton" type="Button" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="BackButton" type="Button" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=550295947]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
