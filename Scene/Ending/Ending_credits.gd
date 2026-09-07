@@ -164,7 +164,7 @@ func _create_paper_background() -> void:
 	bottom_line.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	paper.add_child(bottom_line)
 
-# 简单纸张旧化纹理：用半透明细线模拟，不需要外部贴图。
+	# 简单纸张旧化纹理：用半透明细线模拟，不需要外部贴图。
 	for i in range(18):
 		var stain := ColorRect.new()
 
