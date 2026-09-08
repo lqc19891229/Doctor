@@ -1,66 +1,107 @@
 extends Node
 
-var current_music_path:String = ""
-var current_place:String = ""
-var current_season:String = ""
+var current_music_path: String = ""
+var current_place: String = ""
+var current_season: String = ""
 
-var bgm_player:AudioStreamPlayer
-var fade_time:float = 1.5
-var fade_tween:Tween
+var bgm_player: AudioStreamPlayer
+var fade_time: float = 1.5
+var fade_tween: Tween
 
 
 func _ready():
 	bgm_player = AudioStreamPlayer.new()
 	bgm_player.name = "BGM_Player"
+	bgm_player.bus = "BGM"
 	add_child(bgm_player)
 	bgm_player.volume_db = -10
 
 
-# 播放场景音乐
-# 目录:
+# 场景音乐
+# Clinic:
 # Assets/Audio/BGM/Clinic/Spring
-# Assets/Audio/BGM/Night/Winter
+# Assets/Audio/BGM/Clinic/Summer
+# Assets/Audio/BGM/Clinic/Autumn
+# Assets/Audio/BGM/Clinic/Winter
+#
+# Night:
+# Assets/Audio/BGM/Night
 
-func play_scene_music(place:String):
+func play_scene_music(place: String):
 
 	current_place = place
-	current_season = GameTime.season
 
-	var folder = "res://Assets/Audio/BGM/" + place + "/" + current_season
+	if place == "Clinic":
+		current_season = GameTime.season
+		var folder = "res://Assets/Audio/BGM/Clinic/" + current_season
+		var path = find_music(folder)
 
-	var path = find_music(folder)
+		if path == "":
+			print("MusicManager: 找不到Clinic音乐:", folder)
+			return
 
-	if path == "":
-		print("MusicManager: 找不到音乐:", folder)
-		return
-
-	play_music(path)
+		play_music(path)
 
 
+	elif place == "Night":
 
-func find_music(folder:String)->String:
+		var folder = "res://Assets/Audio/BGM/Night"
+		var path = find_music(folder)
+
+		if path == "":
+			print("MusicManager: 找不到Night音乐:", folder)
+			return
+
+		play_music(path)
+
+
+	else:
+
+		var folder = "res://Assets/Audio/BGM/" + place
+		var path = find_music(folder)
+
+		if path == "":
+			print("MusicManager: 找不到场景音乐:", folder)
+			return
+
+		play_music(path)
+
+
+
+# 从目录随机选择音乐
+
+func find_music(folder: String) -> String:
 
 	var dir = DirAccess.open(folder)
 
 	if dir == null:
 		return ""
 
+	var musics = []
+
 	for file in dir.get_files():
 
-		if file.ends_with(".ogg") or file.ends_with(".mp3") or file.ends_with(".wav"):
-			return folder + "/" + file
+		if file.ends_with(".ogg") \
+		or file.ends_with(".mp3") \
+		or file.ends_with(".wav"):
 
-	return ""
+			musics.append(folder + "/" + file)
+
+
+	if musics.is_empty():
+		return ""
+
+	return musics.pick_random()
 
 
 
+# 剧情音乐
 # StoryData:
 # music:"sad"
 #
-# 对应:
 # Assets/Audio/BGM/Story/sad.ogg
 
-func play_story_music(id:String):
+func play_story_music(id: String):
 
 	var path = "res://Assets/Audio/BGM/Story/" + id + ".ogg"
 
@@ -72,7 +113,7 @@ func play_story_music(id:String):
 
 
 
-func play_music(path:String):
+func play_music(path: String):
 
 	if current_music_path == path:
 		return
@@ -87,9 +128,11 @@ func play_music(path:String):
 	if fade_tween:
 		fade_tween.kill()
 
+
 	if bgm_player.playing:
 
 		fade_tween = create_tween()
+
 		fade_tween.tween_property(
 			bgm_player,
 			"volume_db",
@@ -115,6 +158,8 @@ func play_music(path:String):
 	)
 
 
+
+# 剧情结束恢复场景音乐
 
 func restore_scene_music():
 

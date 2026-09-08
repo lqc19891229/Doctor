@@ -131,6 +131,11 @@ var clinic_npc_portrait_side: String = "mid"
 # =========================================================
 @export_category("Presentation")
 
+# 剧情BGM
+# 留空：保持当前场景音乐
+# 填写例如 "sad" 时播放：Assets/Audio/BGM/Story/sad.ogg
+@export var music: String = ""
+
 @export_enum("default", "current_scene")
 var background_mode: String = BACKGROUND_MODE_DEFAULT
 

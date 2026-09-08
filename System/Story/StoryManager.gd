@@ -297,6 +297,11 @@ func set_story(story: StoryData, return_scene: String = "") -> bool:
 
 	current_story = story
 	return_scene_override = return_scene
+
+	# 剧情开始时切换剧情BGM
+	# StoryData 增加 music 字段后自动读取
+	_play_story_music_if_needed(story)
+
 	return true
 
 
@@ -728,10 +733,40 @@ func _object_has_property(target: Object, property_name: String) -> bool:
 
 
 # =========================================================
+# 剧情音乐
+# =========================================================
+
+func _play_story_music_if_needed(story: StoryData) -> void:
+	if story == null:
+		return
+
+	if not _object_has_property(story, "music"):
+		return
+
+	var music_id: String = str(story.music).strip_edges()
+
+	if music_id == "":
+		return
+
+	if Engine.has_singleton("MusicManager"):
+		MusicManager.play_story_music(music_id)
+
+
+
+func restore_scene_music_after_story() -> void:
+	if Engine.has_singleton("MusicManager"):
+		MusicManager.restore_scene_music()
+
+
+
+# =========================================================
 # 剧情播放状态
 # =========================================================
 
 func clear_story() -> void:
+	# 剧情结束恢复原场景音乐
+	restore_scene_music_after_story()
+
 	current_story = null
 	return_scene_override = ""
 
