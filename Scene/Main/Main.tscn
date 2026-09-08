@@ -254,6 +254,7 @@ text = "退出游戏"
 
 [node name="SettingsLayer" type="CanvasLayer" parent="." unique_id=691791985]
 layer = 110
+visible = false
 script = ExtResource("3_settings_panel")
 
 [node name="DarkBackground" type="ColorRect" parent="SettingsLayer" unique_id=276553050]
