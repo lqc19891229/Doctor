@@ -4,6 +4,12 @@ var current_music_path: String = ""
 var current_place: String = ""
 var current_season: String = ""
 
+# 当前音乐类型：scene = 场景BGM，story = 剧情BGM
+var current_music_mode: String = ""
+
+# 当前场景BGM目录。场景音乐播放完后，会从这里随机选择下一首。
+var current_scene_folder: String = ""
+
 var bgm_player: AudioStreamPlayer
 var fade_time: float = 1.5
 var fade_tween: Tween
@@ -20,6 +26,10 @@ func _ready():
 
 	add_child(bgm_player)
 	bgm_player.volume_db = -10
+
+	# 场景BGM自然播放结束后，自动随机播放下一首。
+	if not bgm_player.finished.is_connected(_on_bgm_finished):
+		bgm_player.finished.connect(_on_bgm_finished)
 
 
 # 场景音乐
@@ -45,6 +55,8 @@ func play_scene_music(place: String):
 			print("MusicManager: 找不到Clinic音乐:", folder)
 			return
 
+		current_scene_folder = folder
+		current_music_mode = "scene"
 		play_music(path)
 
 
@@ -57,6 +69,8 @@ func play_scene_music(place: String):
 			print("MusicManager: 找不到Night音乐:", folder)
 			return
 
+		current_scene_folder = folder
+		current_music_mode = "scene"
 		play_music(path)
 
 
@@ -69,13 +83,16 @@ func play_scene_music(place: String):
 			print("MusicManager: 找不到场景音乐:", folder)
 			return
 
+		current_scene_folder = folder
+		current_music_mode = "scene"
 		play_music(path)
 
 
 
-# 从目录随机选择音乐
+# 从目录随机选择音乐。
+# 有多首时可排除上一首，避免连续重复。
 
-func find_music(folder: String) -> String:
+func find_music(folder: String, exclude_path: String = "") -> String:
 
 	var dir = DirAccess.open(folder)
 
@@ -98,7 +115,32 @@ func find_music(folder: String) -> String:
 	if musics.is_empty():
 		return ""
 
+	# 有多首时，不连续重复上一首。
+	if exclude_path != "" and musics.size() > 1:
+		musics.erase(exclude_path)
+
 	return musics.pick_random()
+
+
+
+# 场景BGM自然播放结束后随机播放下一首。
+# 如果目录里只有一首，就重新播放这一首，实现连续循环。
+
+func _on_bgm_finished() -> void:
+
+	if current_music_mode != "scene":
+		return
+
+	if current_scene_folder == "":
+		return
+
+	var next_path = find_music(current_scene_folder, current_music_path)
+
+	if next_path == "":
+		print("MusicManager: 找不到下一首场景音乐:", current_scene_folder)
+		return
+
+	play_music(next_path, true)
 
 
 
@@ -119,6 +161,7 @@ func play_story_music(id: String):
 		var path = "res://Assets/Music/BGM/Story/" + id + ext
 
 		if FileAccess.file_exists(path):
+			current_music_mode = "story"
 			play_music(path)
 			return
 
@@ -126,9 +169,11 @@ func play_story_music(id: String):
 
 
 
-func play_music(path: String):
+func play_music(path: String, force_restart: bool = false):
 
-	if current_music_path == path:
+	# 普通切换时，相同音乐不重复启动。
+	# 场景目录只有一首时，force_restart=true 允许自然结束后重新播放。
+	if current_music_path == path and not force_restart:
 		return
 
 	var music = load(path)
@@ -196,3 +241,5 @@ func stop_music():
 	bgm_player.stop()
 
 	current_music_path = ""
+	current_music_mode = ""
+	current_scene_folder = ""
