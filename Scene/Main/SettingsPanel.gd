@@ -7,7 +7,7 @@ const SECTION_AUDIO: String = "audio"
 const SECTION_DISPLAY: String = "display"
 
 const MASTER_BUS: String = "Master"
-const MUSIC_BUS: String = "Music"
+const MUSIC_BUS: String = "BGM"
 const SFX_BUS: String = "SFX"
 
 @onready var master_volume_slider: HSlider = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MasterVolumeSlider
@@ -126,7 +126,7 @@ func _refresh_optional_audio_bus_state() -> void:
 	sfx_volume_slider.editable = sfx_available
 
 	music_label.tooltip_text = (
-		"当前项目尚未创建 Music 音频总线。创建后该滑块会自动生效。"
+		"当前项目尚未创建 BGM 音频总线。创建后该滑块会自动生效。"
 		if not music_available
 		else ""
 	)

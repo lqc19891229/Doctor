@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://brf2blpetnvs1"]
 
-[ext_resource type="Script" uid="uid://d3fc1n20xbhxf" path="res://Scene/clinic/Clinic.gd" id="1_y7fei"]
+[ext_resource type="Script" uid="uid://d3fc1n20xbhxf" path="res://Scene/Clinic/Clinic.gd" id="1_y7fei"]
 [ext_resource type="Script" uid="uid://cse2gud2bttup" path="res://System/Npc/NpcManager.gd" id="2_l04vw"]
 [ext_resource type="Texture2D" uid="uid://cdktg72vwwrl1" path="res://Assets/UI/TopBar.png" id="3_h03xl"]
-[ext_resource type="Texture2D" uid="uid://bc7sj00ahbgcm" path="res://Assets/Background/clinic_table.png" id="4_k4yeq"]
+[ext_resource type="Texture2D" uid="uid://bc7sj00ahbgcm" path="res://Assets/Background/clinic/clinic_table.png" id="4_k4yeq"]
 [ext_resource type="PackedScene" uid="uid://c1kldxjoeyc78" path="res://Scene/Prescription/PrescriptionWindow.tscn" id="5_h552d"]
-[ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/clinicalLogWindow/ClinicalLogWindow.tscn" id="5_ruh48"]
+[ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/ClinicalLogWindow/ClinicalLogWindow.tscn" id="5_ruh48"]
 [ext_resource type="Texture2D" uid="uid://cj4x1r4vgs5al" path="res://Assets/UI/F1.png" id="6_gqttm"]
 [ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="6_k4yeq"]
 [ext_resource type="PackedScene" uid="uid://drw157phi8l3n" path="res://Scene/Test/InfoWindow.tscn" id="6_y7fei"]
 [ext_resource type="Texture2D" uid="uid://bvvfhbe8p7oly" path="res://Assets/UI/F2.png" id="7_8hef0"]
-[ext_resource type="Script" uid="uid://dysun4xflegyp" path="res://Scene/clinic/ClinicWindowController.gd" id="8_436d3"]
+[ext_resource type="Script" uid="uid://dysun4xflegyp" path="res://Scene/Clinic/ClinicWindowController.gd" id="8_436d3"]
 [ext_resource type="Texture2D" uid="uid://bxi0kf4jsiwo6" path="res://Assets/UI/F3.png" id="8_m31mf"]
-[ext_resource type="Script" uid="uid://d06u1pfx3kdqv" path="res://Scene/clinic/PolygonHotspot.gd" id="9_qtjht"]
+[ext_resource type="Script" uid="uid://d06u1pfx3kdqv" path="res://Scene/Clinic/PolygonHotspot.gd" id="9_qtjht"]
 [ext_resource type="Texture2D" uid="uid://bun4qmh7amvw2" path="res://Assets/UI/silver_ingot.png" id="9_silver_ingot"]
 [ext_resource type="Texture2D" uid="uid://drj3b721nd3p5" path="res://Assets/UI/copper_coin.png" id="10_copper_coin"]
 
@@ -244,7 +244,9 @@ grow_vertical = 2
 [node name="DayLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1631137196]
 physics_interpolation_mode = 1
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 1
+size_flags_stretch_ratio = 5.0
 theme_override_font_sizes/font_size = 25
 theme_override_styles/focus = SubResource("StyleBoxEmpty_l04vw")
 text = "天数"
