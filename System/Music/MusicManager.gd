@@ -12,7 +12,12 @@ var fade_tween: Tween
 func _ready():
 	bgm_player = AudioStreamPlayer.new()
 	bgm_player.name = "BGM_Player"
-	bgm_player.bus = "BGM"
+
+	# 使用 Godot Audio Bus 管理BGM音量。
+	# 如果项目中尚未创建 BGM Bus，则自动使用 Master。
+	if AudioServer.get_bus_index("BGM") >= 0:
+		bgm_player.bus = "BGM"
+
 	add_child(bgm_player)
 	bgm_player.volume_db = -10
 
@@ -81,9 +86,7 @@ func find_music(folder: String) -> String:
 
 	for file in dir.get_files():
 
-		if file.ends_with(".ogg") \
-		or file.ends_with(".mp3") \
-		or file.ends_with(".wav"):
+		if file.to_lower().ends_with(".mp3"):
 
 			musics.append(folder + "/" + file)
 
@@ -103,7 +106,10 @@ func find_music(folder: String) -> String:
 
 func play_story_music(id: String):
 
-	var path = "res://Assets/Audio/BGM/Story/" + id + ".ogg"
+	if id == "":
+		return
+
+	var path = "res://Assets/Audio/BGM/Story/" + id + ".mp3"
 
 	if not FileAccess.file_exists(path):
 		print("MusicManager: 剧情音乐不存在:", path)
