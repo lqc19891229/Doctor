@@ -22,7 +22,7 @@ func _ready() -> void:
 
 	add_child(ambient_player)
 
-	ambient_player.volume_db = -20
+	ambient_player.volume_db = -50
 
 	if not ambient_player.finished.is_connected(_on_ambient_finished):
 		ambient_player.finished.connect(_on_ambient_finished)
@@ -98,7 +98,7 @@ func play_ambient(path: String) -> void:
 		fade_tween.tween_property(
 			ambient_player,
 			"volume_db",
-			-50,
+			0,
 			fade_time
 		)
 
@@ -115,7 +115,7 @@ func play_ambient(path: String) -> void:
 	fade_tween.tween_property(
 		ambient_player,
 		"volume_db",
-		-20,
+		-8,
 		fade_time
 	)
 
