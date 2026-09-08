@@ -1251,6 +1251,10 @@ func _fade_story_background_out() -> void:
 
 
 func _finish_story_with_fade(completion_signal: StringName) -> void:
+	# 剧情结束后重新由当前场景决定BGM。
+	# 不恢复剧情开始前的音乐，避免剧情前后BGM强绑定。
+	MusicManager.resume_scene_music()
+
 	# is_finished 会立即阻止玩家在淡出期间继续点击或按键，
 	# completion_signal 则必须等背景完全淡出后才发送给 Main。
 	if is_finished:

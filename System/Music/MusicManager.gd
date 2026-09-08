@@ -3,7 +3,6 @@ extends Node
 var current_music_path: String = ""
 var current_place: String = ""
 var current_season: String = ""
-var saved_scene_music_path: String = ""
 
 var bgm_player: AudioStreamPlayer
 var fade_time: float = 1.5
@@ -87,7 +86,11 @@ func find_music(folder: String) -> String:
 
 	for file in dir.get_files():
 
-		if file.to_lower().ends_with(".mp3"):
+		if (
+			file.to_lower().ends_with(".mp3")
+			or file.to_lower().ends_with(".ogg")
+			or file.to_lower().ends_with(".wav")
+		):
 
 			musics.append(folder + "/" + file)
 
@@ -169,18 +172,14 @@ func play_music(path: String):
 
 
 
-# 剧情结束恢复场景音乐
+# 剧情结束后重新根据当前场景状态播放场景音乐。
+# 不保存剧情开始前的BGM。
+# 例如：
+# Clinic/Spring/a.mp3
+# -> Story/sad.mp3
+# -> 剧情结束重新选择 Clinic/Spring 音乐。
 
-func save_scene_music():
-
-	saved_scene_music_path = current_music_path
-
-
-func restore_scene_music():
-
-	if saved_scene_music_path != "":
-		play_music(saved_scene_music_path)
-		return
+func resume_scene_music():
 
 	if current_place == "":
 		return
