@@ -130,9 +130,11 @@ func _save_settings() -> void:
 func _refresh_optional_audio_bus_state() -> void:
 	var music_available := AudioServer.get_bus_index(MUSIC_BUS) >= 0
 	var sfx_available := AudioServer.get_bus_index(SFX_BUS) >= 0
+	var ambient_available := AudioServer.get_bus_index(AMBIENT_BUS) >= 0
 
 	music_volume_slider.editable = music_available
 	sfx_volume_slider.editable = sfx_available
+	ambient_volume_slider.editable = ambient_available
 
 	music_label.tooltip_text = (
 		"当前项目尚未创建 BGM 音频总线。创建后该滑块会自动生效。"
