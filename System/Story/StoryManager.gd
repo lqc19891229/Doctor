@@ -753,20 +753,14 @@ func _play_story_music_if_needed(story: StoryData) -> void:
 
 
 
-func restore_scene_music_after_story() -> void:
-	if is_instance_valid(MusicManager):
-		MusicManager.restore_scene_music()
-
-
-
 # =========================================================
 # 剧情播放状态
 # =========================================================
 
 func clear_story() -> void:
-	# 剧情结束恢复原场景音乐
-	restore_scene_music_after_story()
-
+	# 这里只清理剧情状态。
+	# 剧情结束后实际进入哪个场景由 Main.gd 决定，
+	# 对应的场景 BGM 也由 Main.gd 的场景入口统一播放。
 	current_story = null
 	return_scene_override = ""
 

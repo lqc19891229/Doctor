@@ -349,6 +349,32 @@ func get_day_text() -> String:
 	return get_day_text_by_index(current_day)
 
 
+# =========================================================
+# 当前季节
+# 按二十四节气划分：
+# 立春～谷雨 = Spring
+# 立夏～大暑 = Summer
+# 立秋～霜降 = Autumn
+# 立冬～大寒 = Winter
+# 返回值直接对应 Clinic BGM 的四季目录名。
+# =========================================================
+func get_season() -> String:
+	var safe_day: int = current_day
+	if safe_day < 1:
+		safe_day = 1
+
+	var solar_term_index: int = (safe_day - 1) % SOLAR_TERM_LIST.size()
+
+	if solar_term_index <= 5:
+		return "Spring"
+	elif solar_term_index <= 11:
+		return "Summer"
+	elif solar_term_index <= 17:
+		return "Autumn"
+	else:
+		return "Winter"
+
+
 func get_day_text_by_index(day_index: int) -> String:
 	if day_index < 1:
 		day_index = 1

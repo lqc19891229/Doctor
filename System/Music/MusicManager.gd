@@ -37,7 +37,7 @@ func play_scene_music(place: String):
 	current_place = place
 
 	if place == "Clinic":
-		current_season = GameTime.season
+		current_season = GameTime.get_season()
 		var folder = "res://Assets/Audio/BGM/Clinic/" + current_season
 		var path = find_music(folder)
 

@@ -729,6 +729,11 @@ func _enter_clinic() -> void:
 	else:
 		print("Clinic 没有 set_day 方法")
 
+	# 先播放 Clinic 场景音乐，再执行 start_new_day()。
+	# start_new_day() 可能同步触发入口剧情；这样剧情 BGM 可以正确覆盖场景 BGM。
+	if is_instance_valid(MusicManager):
+		MusicManager.play_scene_music("Clinic")
+
 	# 每次重新进入 Clinic 都走每日入口；Clinic.start_new_day() 负责清理上一天
 	# 的临时 UI / 病人状态并重新启动白天计时。
 	if current_scene.has_method("start_new_day"):
@@ -769,6 +774,11 @@ func _enter_night(show_finance_report: bool = true) -> void:
 			print("Main 已连接 Night story_requested 信号")
 	else:
 		print("current_scene 没有 story_requested 信号")
+
+	# 先播放 Night 场景音乐，再执行 start_night()。
+	# start_night() 可能同步触发入口剧情；这样剧情 BGM 可以正确覆盖场景 BGM。
+	if is_instance_valid(MusicManager):
+		MusicManager.play_scene_music("Night")
 
 	if current_scene.has_method("start_night"):
 		current_scene.call("start_night", GameTime.current_day, show_finance_report)
