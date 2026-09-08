@@ -9,13 +9,16 @@ const SECTION_DISPLAY: String = "display"
 const MASTER_BUS: String = "Master"
 const MUSIC_BUS: String = "BGM"
 const SFX_BUS: String = "SFX"
+const AMBIENT_BUS: String = "Ambient"
 
 @onready var master_volume_slider: HSlider = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MasterVolumeSlider
 @onready var music_volume_slider: HSlider = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MusicVolumeSlider
 @onready var sfx_volume_slider: HSlider = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SfxVolumeSlider
+@onready var ambient_volume_slider: HSlider = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AmbientVolumeSlider
 @onready var fullscreen_check_box: CheckBox = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FullscreenCheckBox
 @onready var music_label: Label = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MusicLabel
 @onready var sfx_label: Label = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SfxLabel
+@onready var ambient_label: Label = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AmbientLabel
 @onready var back_button: Button = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BackButton
 
 var config: ConfigFile = ConfigFile.new()
@@ -41,6 +44,9 @@ func _connect_signals() -> void:
 
 	if not sfx_volume_slider.value_changed.is_connected(_on_sfx_volume_changed):
 		sfx_volume_slider.value_changed.connect(_on_sfx_volume_changed)
+
+	if not ambient_volume_slider.value_changed.is_connected(_on_ambient_volume_changed):
+		ambient_volume_slider.value_changed.connect(_on_ambient_volume_changed)
 
 	if not fullscreen_check_box.toggled.is_connected(_on_fullscreen_toggled):
 		fullscreen_check_box.toggled.connect(_on_fullscreen_toggled)
@@ -97,11 +103,13 @@ func _load_settings() -> void:
 	master_volume_slider.value = clampf(master_value, 0.0, 100.0)
 	music_volume_slider.value = clampf(music_value, 0.0, 100.0)
 	sfx_volume_slider.value = clampf(sfx_value, 0.0, 100.0)
+	ambient_volume_slider.value = clampf(float(config.get_value(SECTION_AUDIO, "ambient_volume", 80.0)), 0.0, 100.0)
 	fullscreen_check_box.button_pressed = fullscreen_value
 
 	_apply_bus_volume(MASTER_BUS, master_volume_slider.value)
 	_apply_bus_volume(MUSIC_BUS, music_volume_slider.value)
 	_apply_bus_volume(SFX_BUS, sfx_volume_slider.value)
+	_apply_bus_volume(AMBIENT_BUS, ambient_volume_slider.value)
 	_apply_fullscreen(fullscreen_value)
 
 	loading_settings = false
@@ -111,6 +119,7 @@ func _save_settings() -> void:
 	config.set_value(SECTION_AUDIO, "master_volume", master_volume_slider.value)
 	config.set_value(SECTION_AUDIO, "music_volume", music_volume_slider.value)
 	config.set_value(SECTION_AUDIO, "sfx_volume", sfx_volume_slider.value)
+	config.set_value(SECTION_AUDIO, "ambient_volume", ambient_volume_slider.value)
 	config.set_value(SECTION_DISPLAY, "fullscreen", fullscreen_check_box.button_pressed)
 
 	var save_error := config.save(CONFIG_PATH)
@@ -177,6 +186,12 @@ func _on_sfx_volume_changed(value: float) -> void:
 	if loading_settings:
 		return
 	_apply_bus_volume(SFX_BUS, value)
+
+
+func _on_ambient_volume_changed(value: float) -> void:
+	if loading_settings:
+		return
+	_apply_bus_volume(AMBIENT_BUS, value)
 
 
 func _on_fullscreen_toggled(enabled: bool) -> void:
