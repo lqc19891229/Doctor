@@ -129,6 +129,7 @@ STORY_LINE_CONTENT_HEADERS = [
     "PortraitPath",
     "Hide",
     "BackgroundPath",
+    "Music",
     "Text",
 ]
 STORY_LINE_IMPORT_HEADERS = ["StoryID", "StoryName", *STORY_LINE_CONTENT_HEADERS]
@@ -2574,6 +2575,7 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             inactive_portrait_mode = normalize_inactive_portrait_mode(
                 line_row.get("Hide")
             )
+            music = as_str(line_row.get("Music"))
 
             block_lines = [
                 f'[sub_resource type="Resource" id="{sub_id}"]',
@@ -2584,6 +2586,9 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             ]
             if speaker:
                 block_lines.append(f'speaker = {format_godot_string(speaker)}')
+            if music:
+                block_lines.append(f'music = {format_godot_string(music)}')
+
             block_lines.append(f'text = {format_godot_string(line_text)}')
             if portrait_ext_id:
                 block_lines.append(

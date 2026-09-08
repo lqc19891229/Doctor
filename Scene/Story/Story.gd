@@ -850,6 +850,10 @@ func advance() -> void:
 func _show_line(line_data: StoryLine) -> void:
 	continue_label.hide()
 
+	# StoryLine.Music 控制剧情BGM切换
+	if line_data != null and line_data.music != "":
+		MusicManager.play_story_music(line_data.music)
+
 	# 只有当前句明确指定了不同背景时才等待过渡。
 	# 普通台词和重复使用同一背景的台词仍然立即显示。
 	var changed_background := (

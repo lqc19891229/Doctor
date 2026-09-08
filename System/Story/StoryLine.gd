@@ -36,3 +36,16 @@ class_name StoryLine
 # hide = 从本句推进到下一句时退出画面；人物以后再次说话时仍可重新显示。
 # normal = 推进到下一句后继续留在画面，并保持正常显示亮度。
 @export_enum("dim", "hide", "normal") var inactive_portrait_mode: String = "dim"
+
+# 当前这句剧情指定的BGM。
+#
+# 留空：
+# 不改变当前音乐。
+#
+# 示例：
+# music = "sad"
+#
+# 对应：
+# Assets/Audio/BGM/Story/sad.ogg
+
+@export var music: String = ""
