@@ -26,7 +26,7 @@ const PORTRAIT_DIM_COLOR := Color(0.55, 0.55, 0.55, 0.72)
 #   或显示 Main 在隐藏 Clinic / Night / Map 前传入的当前场景背景贴图
 # - StoryLine.background 可在任意一句中指定图片并覆盖当前场景
 # - 当前台词没有设置背景时，继续沿用上一句的背景状态
-# - StoryLine 负责：类型、说话人、文本、背景、立绘
+# - StoryLine 负责：类型、说话人、文本、背景、立绘、BGM
 # - dialogue 类型会优先根据 StoryLine.portrait_side 手动指定左、中、右立绘位置
 # - portrait_side 为 auto 或空时，才根据 speaker 自动分配左右立绘位置
 # - inactive_portrait_mode 为 dim 时，当前说话人在本句结束后继续留在画面并压暗

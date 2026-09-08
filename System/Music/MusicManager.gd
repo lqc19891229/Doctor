@@ -3,6 +3,7 @@ extends Node
 var current_music_path: String = ""
 var current_place: String = ""
 var current_season: String = ""
+var saved_scene_music_path: String = ""
 
 var bgm_player: AudioStreamPlayer
 var fade_time: float = 1.5
@@ -109,13 +110,16 @@ func play_story_music(id: String):
 	if id == "":
 		return
 
-	var path = "res://Assets/Audio/BGM/Story/" + id + ".mp3"
+	var extensions = [".ogg", ".mp3", ".wav"]
 
-	if not FileAccess.file_exists(path):
-		print("MusicManager: 剧情音乐不存在:", path)
-		return
+	for ext in extensions:
+		var path = "res://Assets/Audio/BGM/Story/" + id + ext
 
-	play_music(path)
+		if FileAccess.file_exists(path):
+			play_music(path)
+			return
+
+	print("MusicManager: 剧情音乐不存在:", id)
 
 
 
@@ -167,7 +171,16 @@ func play_music(path: String):
 
 # 剧情结束恢复场景音乐
 
+func save_scene_music():
+
+	saved_scene_music_path = current_music_path
+
+
 func restore_scene_music():
+
+	if saved_scene_music_path != "":
+		play_music(saved_scene_music_path)
+		return
 
 	if current_place == "":
 		return

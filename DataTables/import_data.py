@@ -2494,11 +2494,6 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
         play_once = as_bool(story_row.get("PlayOnce"), True)
         sort_index = as_int(story_row.get("SortIndex"), 0)
 
-        # 剧情开始播放的BGM
-        # Excel Story sheet 增加 Music 列后导入
-        # 例如：sad -> Assets/Audio/BGM/Story/sad.ogg
-        story_music = as_str(story_row.get("Music"))
-
         clinic_npc_id = (
             as_str(story_row.get("NpcID"))
             or as_str(story_row.get("ClinicNpcID"))
@@ -2632,11 +2627,6 @@ def build_story_resources(indexed_data: dict[str, Any]) -> None:
             f'play_once = {"true" if play_once else "false"}',
             f'sort_index = {sort_index}',
         ]
-
-        if story_music:
-            resource_lines.append(
-                f'music = {format_godot_string(story_music)}'
-            )
 
         if use_current_scene_background:
             resource_lines.append(

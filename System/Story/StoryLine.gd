@@ -4,7 +4,8 @@ class_name StoryLine
 # =========================================================
 # StoryLine
 # 一句剧情内容的数据。
-# 背景不放在这里，整段剧情背景由 StoryData.background 控制。
+# 背景和BGM均可由剧情行控制。
+# StoryData只负责剧情整体配置，不保存单句演出音乐。
 # =========================================================
 
 # 当前这一句的表现类型。
@@ -46,6 +47,8 @@ class_name StoryLine
 # music = "sad"
 #
 # 对应：
-# Assets/Audio/BGM/Story/sad.ogg
+# Assets/Audio/BGM/Story/sad.mp3 / sad.ogg
+#
+# BGM配置只存在StoryLine，不写入StoryData。
 
 @export var music: String = ""
