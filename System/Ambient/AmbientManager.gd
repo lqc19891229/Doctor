@@ -35,7 +35,7 @@ func play_scene_ambient(place: String) -> void:
 	current_season = GameTime.get_season()
 
 	var folder = (
-		"res://Assets/Audio/Ambient/"
+		"res://Assets/Ambient/"
 		+ place
 		+ "/"
 		+ current_season
@@ -127,7 +127,7 @@ func _on_ambient_finished() -> void:
 		return
 
 	var folder = (
-		"res://Assets/Audio/Ambient/"
+		"res://Assets/Ambient/"
 		+ current_place
 		+ "/"
 		+ current_season
