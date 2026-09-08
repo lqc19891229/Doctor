@@ -18,6 +18,10 @@ config/name="Doctor"
 run/main_scene="uid://5kw50n6ckjh0"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
+[audio]
+
+buses/default_bus_layout="uid://ba0u20txyksl6"
+
 [autoload]
 
 FormulaDB="*uid://bu22qb68brdh"
@@ -30,6 +34,7 @@ GameTime="*uid://dg7u7ov4nidsb"
 SaveManager="*uid://bneb5ndife64f"
 StoryManager="*uid://bn72sps8x3c2o"
 MusicManager="*uid://wsf1o8q26bm5"
+AmbientManager="*uid://1owxd0hrdwxa"
 
 [display]
 
