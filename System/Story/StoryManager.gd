@@ -748,13 +748,13 @@ func _play_story_music_if_needed(story: StoryData) -> void:
 	if music_id == "":
 		return
 
-	if Engine.has_singleton("MusicManager"):
+	if is_instance_valid(MusicManager):
 		MusicManager.play_story_music(music_id)
 
 
 
 func restore_scene_music_after_story() -> void:
-	if Engine.has_singleton("MusicManager"):
+	if is_instance_valid(MusicManager):
 		MusicManager.restore_scene_music()
 
 
