@@ -24,13 +24,13 @@ func _ready():
 
 # 场景音乐
 # Clinic:
-# Assets/Audio/BGM/Clinic/Spring
-# Assets/Audio/BGM/Clinic/Summer
-# Assets/Audio/BGM/Clinic/Autumn
-# Assets/Audio/BGM/Clinic/Winter
+# Assets/Music/BGM/Clinic/Spring
+# Assets/Music/BGM/Clinic/Summer
+# Assets/Music/BGM/Clinic/Autumn
+# Assets/Music/BGM/Clinic/Winter
 #
 # Night:
-# Assets/Audio/BGM/Night
+# Assets/Music/BGM/Night
 
 func play_scene_music(place: String):
 
@@ -38,7 +38,7 @@ func play_scene_music(place: String):
 
 	if place == "Clinic":
 		current_season = GameTime.get_season()
-		var folder = "res://Assets/Audio/BGM/Clinic/" + current_season
+		var folder = "res://Assets/Music/BGM/Clinic/" + current_season
 		var path = find_music(folder)
 
 		if path == "":
@@ -50,7 +50,7 @@ func play_scene_music(place: String):
 
 	elif place == "Night":
 
-		var folder = "res://Assets/Audio/BGM/Night"
+		var folder = "res://Assets/Music/BGM/Night"
 		var path = find_music(folder)
 
 		if path == "":
@@ -62,7 +62,7 @@ func play_scene_music(place: String):
 
 	else:
 
-		var folder = "res://Assets/Audio/BGM/" + place
+		var folder = "res://Assets/Music/BGM/" + place
 		var path = find_music(folder)
 
 		if path == "":
@@ -106,7 +106,7 @@ func find_music(folder: String) -> String:
 # StoryData:
 # music:"sad"
 #
-# Assets/Audio/BGM/Story/sad.ogg
+# Assets/Music/BGM/Story/sad.ogg
 
 func play_story_music(id: String):
 
@@ -116,7 +116,7 @@ func play_story_music(id: String):
 	var extensions = [".ogg", ".mp3", ".wav"]
 
 	for ext in extensions:
-		var path = "res://Assets/Audio/BGM/Story/" + id + ext
+		var path = "res://Assets/Music/BGM/Story/" + id + ext
 
 		if FileAccess.file_exists(path):
 			play_music(path)
