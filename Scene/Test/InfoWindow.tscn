@@ -148,6 +148,25 @@ custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 text = "修改心得"
 
+[node name="MoneyLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 2
+text = "银钱（文）"
+
+[node name="MoneySpinBox" type="SpinBox" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -999999999.0
+max_value = 999999999.0
+allow_greater = true
+allow_less = true
+
+[node name="SetMoneyButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "修改银钱"
+
 [node name="ReadUnlockedLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=2043549041]
 custom_minimum_size = Vector2(135, 0)
 layout_mode = 2

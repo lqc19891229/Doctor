@@ -9,6 +9,7 @@ bg_color = Color(0, 0, 0, 1)
 bg_color = Color(0.18039216, 0.10980392, 0.05490196, 0.9490196)
 
 [node name="JudgementResult" type="Control" unique_id=1881355118]
+z_index = 100
 custom_minimum_size = Vector2(800, 900)
 layout_mode = 3
 anchors_preset = 8

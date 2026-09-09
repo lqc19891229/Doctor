@@ -9,7 +9,7 @@ class_name InfoWindow
 # 1. 承载病人切换相关按钮
 # 2. 不直接操作 NpcManager
 # 3. 通过信号把“按钮请求”发送给 Clinic
-# 4. 提供仅用于开发测试的日期、剧情、名望、心得和夜读快捷功能
+# 4. 提供仅用于开发测试的日期、剧情、名望、心得、银钱和夜读快捷功能
 # =========================================================
 
 
@@ -57,6 +57,8 @@ signal test_data_changed
 @onready var set_reputation_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/SetReputationButton
 @onready var experience_spin_box: SpinBox = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/ExperienceSpinBox
 @onready var set_experience_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/SetExperienceButton
+@onready var money_spin_box: SpinBox = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/MoneySpinBox
+@onready var set_money_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/SetMoneyButton
 @onready var read_all_unlocked_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/ReadAllUnlockedButton
 @onready var test_status_label: Label = $Panel/VBoxContainer/ExtendedTestPanel/TestStatusLabel
 
@@ -114,7 +116,7 @@ func _connect_signals() -> void:
 	if unlock_all_entries_button != null and not unlock_all_entries_button.pressed.is_connected(_on_unlock_all_entries_button_pressed):
 		unlock_all_entries_button.pressed.connect(_on_unlock_all_entries_button_pressed)
 
-	# 连接场景中固定存在的五个扩展测试按钮。
+	# 连接场景中固定存在的扩展测试按钮。
 	if set_day_button != null and not set_day_button.pressed.is_connected(_on_set_day_button_pressed):
 		set_day_button.pressed.connect(_on_set_day_button_pressed)
 
@@ -126,6 +128,9 @@ func _connect_signals() -> void:
 
 	if set_experience_button != null and not set_experience_button.pressed.is_connected(_on_set_experience_button_pressed):
 		set_experience_button.pressed.connect(_on_set_experience_button_pressed)
+
+	if set_money_button != null and not set_money_button.pressed.is_connected(_on_set_money_button_pressed):
+		set_money_button.pressed.connect(_on_set_money_button_pressed)
 
 	if read_all_unlocked_button != null and not read_all_unlocked_button.pressed.is_connected(_on_read_all_unlocked_button_pressed):
 		read_all_unlocked_button.pressed.connect(_on_read_all_unlocked_button_pressed)
@@ -147,6 +152,9 @@ func _refresh_test_controls() -> void:
 
 	if experience_spin_box != null:
 		experience_spin_box.value = _get_current_experience()
+
+	if money_spin_box != null:
+		money_spin_box.value = _get_current_money_wen()
 
 	_reload_story_options()
 	_refresh_test_status()
@@ -227,17 +235,19 @@ func _refresh_test_status() -> void:
 		unread_count = int(Unlock.call("get_unread_readable_entry_count"))
 
 	if unread_count >= 0:
-		test_status_label.text = "当前：第 %d 日｜名望 %d｜心得 %d｜可读未读条目 %d" % [
+		test_status_label.text = "当前：第 %d 日｜名望 %d｜心得 %d｜银钱 %s｜可读未读条目 %d" % [
 			day,
 			_get_current_reputation(),
 			_get_current_experience(),
+			_format_money(_get_current_money_wen()),
 			unread_count
 		]
 	else:
-		test_status_label.text = "当前：第 %d 日｜名望 %d｜心得 %d" % [
+		test_status_label.text = "当前：第 %d 日｜名望 %d｜心得 %d｜银钱 %s" % [
 			day,
 			_get_current_reputation(),
-			_get_current_experience()
+			_get_current_experience(),
+			_format_money(_get_current_money_wen())
 		]
 
 
@@ -440,6 +450,50 @@ func _on_set_experience_button_pressed() -> void:
 
 
 # =========================================================
+# 扩展测试功能：修改银钱
+# 单位统一使用“文”；允许负数，负数表示欠款。
+# =========================================================
+
+func _on_set_money_button_pressed() -> void:
+	if money_spin_box == null:
+		_show_test_result("修改银钱失败：银钱输入框不存在。")
+		return
+
+	if Unlock == null:
+		_show_test_result("修改银钱失败：Unlock 不可用。")
+		return
+
+	var target_money_wen := int(money_spin_box.value)
+	var current_money_wen := _get_current_money_wen()
+	var changed := false
+
+	# 优先走正式接口，确保 money_wen_changed 正常发出，
+	# Clinic / Night 顶部栏会沿用现有监听逻辑立即刷新。
+	if Unlock.has_method("change_money_wen"):
+		Unlock.call("change_money_wen", target_money_wen - current_money_wen)
+		changed = true
+	elif _object_has_property(Unlock, &"money_wen"):
+		# 兼容没有 change_money_wen() 的旧版本。
+		Unlock.set(&"money_wen", target_money_wen)
+		if Unlock.has_signal("money_wen_changed"):
+			Unlock.emit_signal("money_wen_changed", target_money_wen)
+		changed = true
+
+	if not changed:
+		_show_test_result("修改银钱失败：Unlock 缺少银钱修改接口。")
+		return
+
+	_notify_host_data_changed()
+	_refresh_test_controls()
+	_show_test_result(
+		"银钱已修改为 %s（%d 文）。" % [
+			_format_money(_get_current_money_wen()),
+			_get_current_money_wen()
+		]
+	)
+
+
+# =========================================================
 # 扩展测试功能：一键阅读全部已解锁条目
 # =========================================================
 
@@ -599,6 +653,34 @@ func _get_current_experience() -> int:
 		return int(Unlock.get(&"experience_points"))
 
 	return 0
+
+
+func _get_current_money_wen() -> int:
+	if Unlock == null:
+		return 0
+
+	if Unlock.has_method("get_money_wen"):
+		return int(Unlock.call("get_money_wen"))
+
+	if _object_has_property(Unlock, &"money_wen"):
+		return int(Unlock.get(&"money_wen"))
+
+	return 0
+
+
+func _format_money(amount_wen: int) -> String:
+	if Unlock != null and Unlock.has_method("format_money"):
+		return str(Unlock.call("format_money", amount_wen))
+
+	var absolute_amount := absi(amount_wen)
+	var liang := absolute_amount / 1000
+	var wen := absolute_amount % 1000
+	var text := "%d两 %d文" % [liang, wen]
+
+	if amount_wen < 0:
+		return "欠 " + text
+
+	return text
 
 
 func _is_entry_unlocked(entry_id: String) -> bool:
