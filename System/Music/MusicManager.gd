@@ -16,8 +16,13 @@ var fade_tween: Tween
 
 
 func _ready():
+	# 全局音乐始终运行。
+	# JudgementResult 暂停 SceneTree 时，BGM 仍继续播放。
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 	bgm_player = AudioStreamPlayer.new()
 	bgm_player.name = "BGM_Player"
+	bgm_player.process_mode = Node.PROCESS_MODE_ALWAYS
 
 	# 使用 Godot Audio Bus 管理BGM音量。
 	# 如果项目中尚未创建 BGM Bus，则自动使用 Master。
