@@ -167,6 +167,14 @@ func _show_main_menu() -> void:
 	if tree != null:
 		tree.paused = false
 
+	# 回到主菜单时统一停止游戏场景的全局 BGM 与环境音，
+	# 避免 Clinic / Night 音频继续在标题界面播放。
+	if is_instance_valid(MusicManager):
+		MusicManager.stop_music()
+
+	if is_instance_valid(AmbientManager):
+		AmbientManager.stop_ambient()
+
 	_hide_pause_menu_visual_only()
 	_close_settings_menu(false)
 	_set_pause_menu_input_enabled(true)

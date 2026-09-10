@@ -373,6 +373,12 @@ const WAGE_INTERVAL_SOLAR_TERMS: int = 2
 const LI_JIAN_ZHONG_SALARY_WEN: int = 20000
 const LI_JIAN_ZHONG_SALARY_INTERVAL_SOLAR_TERMS: int = 2
 
+# 病家谢仪礼：
+# random NPC 获得“妙手回春”评价时，由 Clinic 调用发放。
+# 20% 概率获得 188 / 288 / 388 文，并在白天实时到账。
+const PATIENT_THANK_GIFT_PROBABILITY: float = 0.20
+const PATIENT_THANK_GIFT_OPTIONS_WEN = [188, 288, 388]
+
 const FOOD_COST_WEN: int = 1000
 const FOOD_COST_INTERVAL_SOLAR_TERMS: int = 1
 
@@ -416,6 +422,7 @@ var finance_ledger_accounting_version: int = FINANCE_ACCOUNTING_VERSION_GROSS
 
 var daily_random_npc_count: int = 0
 var daily_consultation_income_wen: int = 0
+var daily_patient_thank_gift_income_wen: int = 0
 
 # 当前正式账本：
 # 成功治疗时 medicine_sales 记实际售价总和；
@@ -500,6 +507,7 @@ func _reset_daily_finance_ledger(day: int) -> void:
 	finance_ledger_accounting_version = FINANCE_ACCOUNTING_VERSION_GROSS
 	daily_random_npc_count = 0
 	daily_consultation_income_wen = 0
+	daily_patient_thank_gift_income_wen = 0
 	daily_medicine_sales_wen = 0
 	daily_medicine_purchase_cost_wen = 0
 	daily_medicine_profit_wen = 0
@@ -581,6 +589,29 @@ func record_random_npc_treatment_finance(
 		"total_income_wen": legacy_total_income,
 		"money_wen": money_wen
 	}
+
+
+# 病家谢仪礼。
+# Clinic 仅在 random NPC 获得“妙手回春”评价时调用。
+# 命中 20% 概率后随机发放 188 / 288 / 388 文。
+# 谢仪属于白天实时收入：这里立即加钱，同时记入当天账本供夜间报表统计。
+func record_patient_thank_gift_income(day: int) -> int:
+	_ensure_daily_finance_ledger(day)
+
+	if randf() >= PATIENT_THANK_GIFT_PROBABILITY:
+		return 0
+
+	if PATIENT_THANK_GIFT_OPTIONS_WEN.is_empty():
+		return 0
+
+	var gift_index := randi_range(0, PATIENT_THANK_GIFT_OPTIONS_WEN.size() - 1)
+	var gift_wen := int(PATIENT_THANK_GIFT_OPTIONS_WEN[gift_index])
+
+	daily_patient_thank_gift_income_wen += gift_wen
+	money_wen += gift_wen
+	money_wen_changed.emit(money_wen)
+
+	return gift_wen
 
 
 # 兼容非常旧的调用入口。
@@ -743,6 +774,7 @@ func settle_day_finances(day: int) -> Dictionary:
 			if is_gross_accounting
 			else daily_medicine_profit_wen
 		)
+		+ daily_patient_thank_gift_income_wen
 		+ li_jian_zhong_salary
 	)
 
@@ -760,7 +792,7 @@ func settle_day_finances(day: int) -> Dictionary:
 	)
 	var net_change := total_income - total_expense
 
-	# 诊费与药材销售收入已在白天实时入账；
+	# 诊费、药材销售和病家谢仪礼都已在白天实时入账；
 	# 李建中俸禄是在日结时才实际到账，因此这里只补入俸禄并扣除当天支出。
 	money_wen += li_jian_zhong_salary
 	money_wen -= total_expense
@@ -773,6 +805,7 @@ func settle_day_finances(day: int) -> Dictionary:
 		"accounting_version": finance_ledger_accounting_version,
 		"random_npc_count": daily_random_npc_count,
 		"consultation_income_wen": daily_consultation_income_wen,
+		"patient_thank_gift_income_wen": daily_patient_thank_gift_income_wen,
 		"medicine_sales_wen": medicine_sales,
 		"medicine_purchase_cost_wen": medicine_purchase_cost,
 		# 保留旧字段，便于旧代码/旧存档兼容。
@@ -811,6 +844,9 @@ func build_finance_report_text(day: int) -> String:
 
 	var accounting_version := int(report.get("accounting_version", 1))
 	var consultation_income := int(report.get("consultation_income_wen", 0))
+	var patient_thank_gift_income := int(
+		report.get("patient_thank_gift_income_wen", 0)
+	)
 	var total_income := int(report.get("total_income_wen", 0))
 	var staff_wage := int(
 		report.get(
@@ -842,6 +878,12 @@ func build_finance_report_text(day: int) -> String:
 		# 仅用于无法还原销售额/成本拆分的旧存档当天。
 		var medicine_profit := int(report.get("medicine_profit_wen", 0))
 		lines.append("药材利润（旧账）：%s" % format_money_change(medicine_profit))
+
+	if patient_thank_gift_income > 0:
+		lines.append(
+			"病家谢仪礼：%s"
+			% format_money_change(patient_thank_gift_income)
+		)
 
 	var li_jian_zhong_salary := int(report.get("li_jian_zhong_salary_wen", 0))
 	if li_jian_zhong_salary > 0:
@@ -2012,6 +2054,7 @@ func get_save_data() -> Dictionary:
 		"finance_ledger_accounting_version": finance_ledger_accounting_version,
 		"daily_random_npc_count": daily_random_npc_count,
 		"daily_consultation_income_wen": daily_consultation_income_wen,
+		"daily_patient_thank_gift_income_wen": daily_patient_thank_gift_income_wen,
 		"daily_medicine_sales_wen": daily_medicine_sales_wen,
 		"daily_medicine_purchase_cost_wen": daily_medicine_purchase_cost_wen,
 		# 旧字段继续保存，便于回滚/兼容旧档。
@@ -2050,6 +2093,9 @@ func load_save_data(data: Dictionary) -> void:
 
 	daily_random_npc_count = int(data.get("daily_random_npc_count", 0))
 	daily_consultation_income_wen = int(data.get("daily_consultation_income_wen", 0))
+	daily_patient_thank_gift_income_wen = int(
+		data.get("daily_patient_thank_gift_income_wen", 0)
+	)
 	daily_medicine_sales_wen = int(data.get("daily_medicine_sales_wen", 0))
 	daily_medicine_purchase_cost_wen = int(data.get("daily_medicine_purchase_cost_wen", 0))
 	daily_medicine_profit_wen = int(data.get("daily_medicine_profit_wen", 0))
