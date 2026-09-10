@@ -14,8 +14,13 @@ var fade_tween: Tween
 
 
 func _ready() -> void:
+	# 即使 SceneTree 被暂停，环境音管理器仍继续运行
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 	ambient_player = AudioStreamPlayer.new()
 	ambient_player.name = "Ambient_Player"
+	# 治疗判定窗口暂停游戏时，环境音仍继续播放
+	ambient_player.process_mode = Node.PROCESS_MODE_ALWAYS
 
 	if AudioServer.get_bus_index("Ambient") >= 0:
 		ambient_player.bus = "Ambient"
