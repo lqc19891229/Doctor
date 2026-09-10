@@ -11,7 +11,7 @@ script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
-text = "李东璧去各地实地考察，采集样本，参考800多种书籍，花费27年，历经三次改写，至万历六年终于完成著作。全书共52卷，载药1892种，方剂11096首，插图图1109幅，约190万字。"
+text = "李东璧去各地实地考察，采集样本，参考800多种书籍，花费27年，历经三次改写，至万历六年终于完成著作。全书共52卷，载药1892种，方剂11096首，插图1109幅，约190万字。"
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"

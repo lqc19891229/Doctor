@@ -18,7 +18,7 @@ portrait = ExtResource("portrait_2")
 [resource]
 script = ExtResource("2_storydata")
 story_id = "017_03"
-story_name = "018治疗失败"
+story_name = "017治疗失败"
 condition_scene = ""
 condition_day = 0
 condition_money_op = ""

@@ -13,7 +13,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "师傅所患的乃是肾精不足之症，嗯…是房事过劳所致…"
+text = "师父所患的乃是肾精不足之症，嗯…是房事过劳所致…"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
@@ -45,7 +45,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "是是是，师父说的对，也不是没有这个可能。"
+text = "是是是，师父说得对，也不是没有这个可能。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
@@ -117,7 +117,7 @@ condition_story_id = "025_01"
 condition_treatment_result = "cured"
 after_play = "clinic"
 clinic_npc_id = ""
-money_change = 0
+money_change = 2000
 reputation_points_change = 0
 experience_points_change = 0
 play_once = true

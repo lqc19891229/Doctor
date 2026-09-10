@@ -39,7 +39,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "和我学了一年多医术，现在啊已经能自己出诊了。你还别说，这小子学得挺快，医馆让他打理我也清闲许多。"
+text = "和我学了一年多医术，现在啊已经能自己出诊了。你还别说，这小子学得挺快，医馆让他打理，我也清闲许多。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")

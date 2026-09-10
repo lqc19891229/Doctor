@@ -33,7 +33,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "胡承龙"
-text = "哎呀，老先生大作真是让在下佩服，真是古今医书之集大成者锕。"
+text = "哎呀，老先生大作真是让在下佩服，真是古今医书之集大成者啊。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
@@ -57,7 +57,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "胡承龙"
-text = "您的书确实是医家至宝，可当今世人爱看的是英雄演义，爱情故事，就算发行了恐怕也是卖不出去的。"
+text = "您的书确实是医家至宝，可当今世人爱看的是英雄演义，才子佳人，就算发行了恐怕也是卖不出去的。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")

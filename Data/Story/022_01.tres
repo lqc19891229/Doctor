@@ -12,7 +12,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "柳敬亭"
-text = "咳咳咳，咳咳，大夫，我这嗓子不知怎得，又疼又痒，咳得多，都哑了。"
+text = "咳咳咳，咳咳，大夫，我这嗓子嗓子也不知怎么了，又疼又痒，咳得嗓子都哑了。"
 portrait = ExtResource("clinic_npc_portrait_1")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")

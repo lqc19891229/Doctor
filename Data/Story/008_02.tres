@@ -29,7 +29,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "hide"
 speaker = "陆忠"
-text = "真是太谢谢先生了，老爷我们走吧。"
+text = "真是太谢谢先生了，老爷，我们走吧。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")

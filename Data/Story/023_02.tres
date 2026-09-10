@@ -111,7 +111,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "王百堂"
-text = "原想着凑够五百两白银，给她赎身。可她那老鸨坐地起价一千两，这让我们上哪去凑这么多银子啊…"
+text = "原想着凑够五百两银子，给她赎身。可那老鸨坐地起价，张口就要一千两，这让我们上哪去凑这么多银子啊…"
 portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_014"]
 script = ExtResource("1_storyline")

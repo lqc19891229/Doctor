@@ -13,7 +13,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "数都对，有劳几位了，进来喝点水吧。"
+text = "数目都对，有劳几位了，进来喝点水吧。"
 portrait = ExtResource("portrait_1")
 background = ExtResource("background_2")
 [sub_resource type="Resource" id="StoryLine_002"]

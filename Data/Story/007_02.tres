@@ -27,7 +27,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "雷万钧"
-text = "昨日我带着兄弟们和州府的征粮官去收粮，这帮狗腿子淋尖踢斛下脚那叫一个狠，气的我当场骂娘。"
+text = "昨日我带着兄弟们和州府的征粮官去收粮，这帮狗腿子淋尖踢斛下脚那叫一个狠，气得我当场骂娘。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")

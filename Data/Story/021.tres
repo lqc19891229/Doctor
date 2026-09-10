@@ -82,12 +82,6 @@ inactive_portrait_mode = "dim"
 speaker = "楚王"
 text = "……既然如此，那本王就不强人所难了。"
 portrait = ExtResource("portrait_4")
-[sub_resource type="Resource" id="StoryLine_011"]
-script = ExtResource("1_storyline")
-line_type = "subtitle"
-portrait_side = "auto"
-inactive_portrait_mode = "dim"
-text = "名望+1000"
 
 [resource]
 script = ExtResource("2_storydata")
@@ -109,4 +103,4 @@ reputation_points_change = 0
 experience_points_change = 0
 play_once = true
 sort_index = 0
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010")])

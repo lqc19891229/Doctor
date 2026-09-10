@@ -12,7 +12,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李建中"
-text = "爹，今天和书商谈的怎么样？"
+text = "爹，今天和书商谈得怎么样？"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")

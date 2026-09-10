@@ -76,7 +76,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "学医哪里比得上做官有前途啊，你爹我行医一辈子，辛苦又赚不到钱不说，医得不好了还要受人白眼。"
+text = "学医哪里比得上做官有前途啊，你爹我行医一辈子，辛苦又赚不到钱不说，医得不好还要受人白眼。"
 portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_010"]
 script = ExtResource("1_storyline")

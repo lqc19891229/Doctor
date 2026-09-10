@@ -43,7 +43,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "学生行医读书时发现，自《神农本草经》之后，历代本草书增补改订的药材、方子，遗漏错误之处不可枚举。一方之误，害及数人，一药之讹，误尽苍生。"
+text = "学生行医读书时发现，自《神农本草经》之后，历代本草著作屡经增补改订，其中药材、方子的遗漏、讹误不可枚举。一方之误，害及数人，一药之讹，误尽苍生。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")

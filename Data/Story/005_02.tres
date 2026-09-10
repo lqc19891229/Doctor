@@ -55,7 +55,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "世子乃人中龙凤，可草民眼里看到的只有一位需要医治病人，王爷只需付200文诊费即可。"
+text = "世子乃人中龙凤，可草民眼里看到的只有一位需要医治的病人，王爷只需付200文诊费即可。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")

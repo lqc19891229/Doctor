@@ -191,7 +191,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "这个我会，是\"忍冬。"
+text = "这个我会，是\"忍冬\"。"
 portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_023"]
 script = ExtResource("1_storyline")
