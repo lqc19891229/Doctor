@@ -703,7 +703,7 @@ func settle_day_finances(day: int) -> Dictionary:
 	# 李建中俸禄：
 	# 完成 000_01《完书》剧情后，每两个节气收入20两。
 	var li_jian_zhong_salary := 0
-	if unlocked_story_ids.has("000_01"):
+	if StoryManager.has_played_story("000_01"):
 		if safe_day % LI_JIAN_ZHONG_SALARY_INTERVAL_SOLAR_TERMS == 0:
 			li_jian_zhong_salary = LI_JIAN_ZHONG_SALARY_WEN
 
@@ -760,6 +760,9 @@ func settle_day_finances(day: int) -> Dictionary:
 	)
 	var net_change := total_income - total_expense
 
+	# 诊费与药材销售收入已在白天实时入账；
+	# 李建中俸禄是在日结时才实际到账，因此这里只补入俸禄并扣除当天支出。
+	money_wen += li_jian_zhong_salary
 	money_wen -= total_expense
 	money_wen_changed.emit(money_wen)
 

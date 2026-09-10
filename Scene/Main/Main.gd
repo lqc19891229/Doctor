@@ -1131,9 +1131,8 @@ func _on_story_finished() -> void:
 	_clear_story_overlay()
 
 	if target == "night":
-		# 剧情结束返回 Night：只切换昼夜阶段，不做当天支出结算。
-		# 陈皮 / 半夏工钱与食费只允许在“正常白天结束”
-		# (_on_clinic_finished) 时统一结算。
+		# 剧情结束返回 Night：如果本次确实结束白天，
+		# 必须先完成当天财务结算，再切换到 Night。
 		# 白天接诊时已经实时入账的诊费与药材利润保持不变。
 		var did_finish_day: bool = false
 		if story_paused_clinic_clock:
@@ -1141,6 +1140,7 @@ func _on_story_finished() -> void:
 				GameTime.cancel_story_pause_state()
 
 			if GameTime != null and GameTime.is_day():
+				_settle_current_day_finances_if_needed()
 				GameTime.finish_day()
 				did_finish_day = true
 
@@ -1148,7 +1148,7 @@ func _on_story_finished() -> void:
 
 		# 只有本次确实完成“白天 → Night”阶段切换才写盘。
 		if did_finish_day:
-			_save_game_with_warning("白天结束（剧情返回 Night，不做日结支出）")
+			_save_game_with_warning("白天结束（剧情返回 Night）")
 
 		_enter_night(false)
 		return
