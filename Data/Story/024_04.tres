@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wang_bai_tang/wang_bai_tang.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_2"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "王百堂"
+text = "恩公！小生拜见恩公。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "是你啊，快请起。你和谢姑娘怎么样了？"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "王百堂"
+text = "承蒙恩公出手相助，我二人已结为夫妻，在城外安顿下来，今日特来拜谢。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "王百堂"
+text = "听闻恩公酷好青囊之书，先父也是一生行医，家中有不少先父留下的笔记心得，今日便赠予恩公。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_005"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "哎呀，这可太好了，真是求之不得啊。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_006"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = "心得+5"
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "024_04"
+story_name = "王百堂来访"
+condition_scene = "clinic"
+condition_day = 1
+condition_money_op = ""
+condition_money = 0
+condition_reputation_op = ""
+condition_reputation = 0
+condition_entry_id = ""
+condition_story_id = "008_02"
+condition_treatment_result = ""
+after_play = "clinic"
+clinic_npc_id = ""
+money_change = 0
+reputation_points_change = 0
+experience_points_change = 5
+play_once = true
+sort_index = 0
+background_mode = "current_scene"
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006")])
