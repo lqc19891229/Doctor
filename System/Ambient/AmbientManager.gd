@@ -103,7 +103,7 @@ func play_ambient(path: String) -> void:
 		fade_tween.tween_property(
 			ambient_player,
 			"volume_db",
-			0,
+			-50,
 			fade_time
 		)
 

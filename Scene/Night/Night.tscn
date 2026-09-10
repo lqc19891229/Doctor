@@ -248,6 +248,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rstq2")
 
 [node name="ButtonRow" type="HBoxContainer" parent="VBoxContainer" unique_id=1689106686]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
