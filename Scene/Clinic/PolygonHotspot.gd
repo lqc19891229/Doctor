@@ -22,8 +22,9 @@ var hotspot_container: Control = null
 
 
 func _ready() -> void:
-	# 高亮直接复用碰撞轮廓，只需要在编辑器里维护一套点。
-	highlight_polygon.polygon = collision_polygon.polygon
+	# CollisionPolygon2D 是唯一轮廓数据源。
+	# 高亮区始终从碰撞区同步 polygon 与 transform，避免两者发生偏移。
+	_sync_highlight_polygon()
 	highlight_polygon.color = Color(1.0, 0.78, 0.18, 0.20)
 	highlight_polygon.visible = false
 
@@ -35,9 +36,29 @@ func _ready() -> void:
 			hotspot_container.resized.connect(_sync_to_table_size)
 		_sync_to_table_size()
 
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
-	input_event.connect(_on_input_event)
+	if not mouse_entered.is_connected(_on_mouse_entered):
+		mouse_entered.connect(_on_mouse_entered)
+	if not mouse_exited.is_connected(_on_mouse_exited):
+		mouse_exited.connect(_on_mouse_exited)
+	if not input_event.is_connected(_on_input_event):
+		input_event.connect(_on_input_event)
+
+	set_process(true)
+
+
+func _process(_delta: float) -> void:
+	# 调试运行时如果直接调整 CollisionPolygon2D，
+	# 正在显示的高亮也会立即跟随，不再保留 _ready() 时的旧轮廓。
+	if highlight_polygon.visible:
+		_sync_highlight_polygon()
+
+
+func _sync_highlight_polygon() -> void:
+	if collision_polygon == null or highlight_polygon == null:
+		return
+
+	highlight_polygon.polygon = collision_polygon.polygon
+	highlight_polygon.transform = collision_polygon.transform
 
 
 func _sync_to_table_size() -> void:
@@ -53,8 +74,14 @@ func _sync_to_table_size() -> void:
 		hotspot_container.size.y / REFERENCE_TABLE_SIZE.y
 	)
 
+	# 尺寸变化后再次同步，确保高亮与碰撞区保持完全一致。
+	_sync_highlight_polygon()
+
 
 func _on_mouse_entered() -> void:
+	# 每次准备显示前都重新读取 CollisionPolygon2D，
+	# 防止运行时调整碰撞区后高亮仍使用旧数据。
+	_sync_highlight_polygon()
 	highlight_polygon.visible = true
 
 

@@ -5,8 +5,13 @@ enum HotspotAction {
 	NEXT_DAY
 }
 
-# 与 clinic/TableImage 完全相同的参考尺寸。
-const REFERENCE_TABLE_SIZE := Vector2(1920.0, 841.0)
+# CollisionPolygon2D 是在 Night.tscn 的 DeskHotspots 局部坐标中校准的。
+# 在 1920×1080 设计分辨率下，DeskHotspots 的实际尺寸是 1915×891：
+# x: 1920 - 2 - 3 = 1915
+# y: 841 + 45 + 5 = 891
+# 因此这里必须使用 DeskHotspots 的设计尺寸作为缩放基准，
+# 不能再用 TableImage 的 1920×841，否则运行时会额外产生约 5.9% 的 Y 缩放，造成偏移。
+const REFERENCE_HOTSPOT_SIZE := Vector2(1915.0, 891.0)
 
 @export var action: HotspotAction = HotspotAction.READ_BOOK
 @export var debug_always_show: bool = false
@@ -19,8 +24,7 @@ var hotspot_container: Control = null
 
 func _ready() -> void:
 	# CollisionPolygon2D 是唯一轮廓来源。
-	highlight_polygon.polygon = collision_polygon.polygon
-	highlight_polygon.transform = collision_polygon.transform
+	_sync_highlight_from_collision()
 	highlight_polygon.color = Color(1.0, 0.78, 0.18, 0.20)
 	highlight_polygon.z_index = 10
 	highlight_polygon.visible = debug_always_show
@@ -51,15 +55,22 @@ func _sync_to_table_size() -> void:
 	if current_size.x <= 0.0 or current_size.y <= 0.0:
 		return
 
-	# Hotspot 坐标统一以 TableImage 的 1920×841 为参考。
-	position = Vector2.ZERO
+	# Polygon 是按 DeskHotspots 在设计分辨率下的实际局部尺寸绘制的。
+	# 只对窗口尺寸变化产生的差值做缩放；1920×1080 下这里应严格得到 (1, 1)。
 	scale = Vector2(
-		current_size.x / REFERENCE_TABLE_SIZE.x,
-		current_size.y / REFERENCE_TABLE_SIZE.y
+		current_size.x / REFERENCE_HOTSPOT_SIZE.x,
+		current_size.y / REFERENCE_HOTSPOT_SIZE.y
 	)
 
 
+func _sync_highlight_from_collision() -> void:
+	highlight_polygon.polygon = collision_polygon.polygon
+	highlight_polygon.transform = collision_polygon.transform
+
+
 func _on_mouse_entered() -> void:
+	# 每次显示前再同步一次，避免编辑 CollisionPolygon2D 后高亮仍保留旧变换。
+	_sync_highlight_from_collision()
 	highlight_polygon.visible = true
 
 
