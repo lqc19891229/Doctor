@@ -5,13 +5,20 @@ extends Control
 # 诊室主控制脚本（接入 Main 流程版）
 #
 # 主要职责：
-# 1. 管理当前病人数据刷新
-# 2. 管理脉象键盘把脉逻辑
-# 3. 持有当前处方数据，并接收 PrescriptionWindow 的信号
-# 4. 提交处方并与标准方比较
-# 5. 向 Main 发出“当天接诊结束”信号
-# 6. 接入 GameTimeManager 的 Clinic 自动计时显示
-# 7. 请求剧情播放
+# 1. 管理日常 random NPC 的生成、刷新与诊疗状态
+# 2. 管理脉象窗口及 Q/A/Z、W/S/X 多键把脉逻辑
+# 3. 持有当前处方，并接收 PrescriptionWindow 的提交请求
+# 4. 调用 FormulaJudge 完成处方判定，并组织判定结果展示数据
+# 5. 结算 random NPC 首次提交产生的诊费、药材销售、药材成本与固定名望/心得变化
+# 6. 管理治疗结果台词、JudgementResult 以及“最后一位病人”结束流程
+# 7. 接入 GameTimeManager、TopBar 与四季诊室背景
+# 8. 向 Main 发出“当天接诊结束”和“请求播放剧情”信号
+# 9. 保留一组旧版 story NPC 诊疗后端接口；当前主流程已由 StoryTreatmentService 承担剧情诊疗
+#
+# random NPC 当前财务规则：
+# - 妙手回春 / 治疗成功：按名望收诊费，并计入实际药材销售收入
+# - 治疗失败：诊费 = 0，药材销售 = 0
+# - 无论成功或失败，本张处方的药材进货成本都会计入今日支出
 # =========================================================
 
 
@@ -193,9 +200,10 @@ var last_newly_unlocked_entry_titles: Array[String] = []
 var last_reputation_change: int = 0
 var last_experience_change: int = 0
 
-# 最近一次 random NPC 提交处方后产生的“治疗收入”。
-# 口径与当前收入账本一致：诊费 + 实际药材销售收入。
-# 治疗失败虽然仍有诊费收入，但 JudgementResult 按显示规则不展示奖励区。
+# 最近一次 random NPC 首次提交后产生的“治疗收入”（只统计收入，不扣药材成本）。
+# 口径：诊费 + 实际药材销售收入 + 病家谢仪礼（仅“妙手回春”有概率触发）。
+# 治疗失败时：诊费 = 0、药材销售 = 0、谢仪礼 = 0，因此治疗收入为 0；
+# 本张处方的药材进货成本仍会单独计入今日支出。
 var last_treatment_income_wen: int = 0
 
 # 最近一次提交是否允许显示“本次治疗奖励”。
@@ -220,8 +228,9 @@ var npc_dialogue_display_token: int = 0
 # 2. 确保 random NPC 的治疗成功 / 失败反馈先于判定结果显示。
 var waiting_judgement_after_treatment_dialogue: bool = false
 
-# Main 为 Story 场景创建的隐藏业务后端会在 add_child() 前把此项设为 true。
-# 后端模式只保留 NpcManager、处方与判定逻辑，不启动诊室计时和诊室 UI 信号。
+# 旧版“隐藏 Clinic 作为剧情诊疗后端”的兼容开关。
+# 设为 true 时只保留 NpcManager、处方与判定逻辑，不启动诊室计时和诊室 UI 信号。
+# 当前 Main 已使用 StoryTreatmentService 作为剧情 NPC 的轻量后端，正常主流程不会依赖此模式。
 var story_treatment_backend_mode: bool = false
 
 # Story 中的开方窗口无法显示 Clinic 的 InfoWindow，因此缓存最近一次提示供 Story 读取。
@@ -375,8 +384,10 @@ func _setup_time_system() -> void:
 	# Clinic 现在是常驻场景；每天真正开始计时统一放到 start_new_day()，
 	# 否则 _ready() 只执行一次会导致第二天以后计时器不再启动。
 
-	# 监听 GameTimeManager 发出的 Clinic 时间结束信号
-	# 例如：辰、巳、午、未、申结束后自动进入夜读
+	# 监听 GameTimeManager 发出的 Clinic 时间结束信号。
+	# 时间结束时不会无条件立即进入 Night：
+	# - 当前没有有效病人：直接结束 Clinic；
+	# - 当前仍有病人：把该病人视为最后一位，完成诊疗并关闭 JudgementResult 后再结束 Clinic。
 	if GameTime.has_signal("clinic_time_finished"):
 		if not GameTime.clinic_time_finished.is_connected(_on_clinic_time_finished):
 			GameTime.clinic_time_finished.connect(_on_clinic_time_finished)
@@ -439,7 +450,7 @@ func _get_clinic_background_texture(season: String) -> Texture2D:
 		"Summer":
 			return CLINIC_SUMMER_BACKGROUND
 		"Rainy":
-			# 雨季素材尚未放入项目时临时沿用 Summer，保证脚本可以直接覆盖运行。
+			# 雨季背景按路径动态加载；资源缺失或加载失败时退回 Summer，避免因单张素材缺失阻塞诊室。
 			if ResourceLoader.exists(CLINIC_RAINY_BACKGROUND_PATH):
 				var rainy_texture := load(CLINIC_RAINY_BACKGROUND_PATH) as Texture2D
 				if rainy_texture != null:
@@ -933,7 +944,7 @@ func refresh_clinic_view() -> void:
 		_update_npc_portrait()
 		_update_npc_name()
 
-		# ✔ 关键修改：台词完全来自NpcData
+		# 台词统一由 NpcData.get_dialogue() 提供；即使疾病无效，也尽量保留病人自身台词。
 		if current_npc != null:
 			_set_npc_dialogue_label_text(current_npc.get_dialogue())
 		else:
@@ -945,7 +956,7 @@ func refresh_clinic_view() -> void:
 	_update_npc_name()
 	_play_random_npc_portrait_entrance.call_deferred()
 
-	# ✔ 关键修改：唯一台词入口
+	# 正常病人的台词统一通过 NpcData.get_dialogue() 获取，再由本脚本负责显示与自动隐藏。
 	_set_npc_dialogue_label_text(current_npc.get_dialogue())
 
 	show_region(current_display_region_name)
@@ -1223,21 +1234,22 @@ func submit_prescription() -> bool:
 	last_reputation_change = 0
 	last_experience_change = 0
 
-	# random NPC 继续沿用治疗判定时的固定奖励与惩罚。
-	# story NPC 的名望和后台进度不在这里结算，改由后续 StoryData 配置，
-	# 并在对应剧情完整播放结束时统一结算。
+	# 当前 NpcData.npc_type 只有 random / story 两类。
+	# random NPC 在首次提交时使用 Clinic 固定的名望与心得规则；
+	# story NPC 不在这里结算名望、心得或银钱，由剧情系统在 StoryData 播放完成后统一处理。
 	var npc_type_key := current_npc.npc_type.strip_edges().to_lower()
 	var uses_fixed_treatment_rewards := npc_type_key != "story"
 	var is_random_npc := npc_type_key == "random"
 
-	# random NPC 的诊费仍然固定收入。
-	# 药材账目改为“销售额 / 进货成本”分开记录：
-	# - 妙手回春 / 治疗成功：收入记药材售价总和，支出记药材进货成本总和。
-	# - 治疗失败：药材销售收入为 0，支出仍记本张处方全部药材进货成本。
+	
+	# random NPC 财务只在同一名病人的第一次提交时入账：
+	# - 妙手回春 / 治疗成功：按当前名望收取诊费，药材售价总和计入销售收入；
+	# - 治疗失败：诊费为 0，药材销售收入也为 0；
+	# - 无论成功或失败：本张处方全部药材进货成本都计入今日支出；
+	# - 妙手回春：后面还可能额外获得“病家谢仪礼”。
 	#
-	# 这样成功治疗的最终净效果仍然等于原来的“售价 - 成本”，
-	# 但日结窗口可以分别看到真实销售额和进货成本。
-	# 同一名病人只允许第一次提交产生金钱变化。
+	# 收入在白天实时入账；药材进货成本等支出在正常白天结束时由 Unlock 统一日结。
+	# 重复提交仍会重新判定处方，但不会再次产生任何金钱变化。
 	if is_random_npc and not was_already_submitted:
 		var price_summary := _calculate_current_prescription_price_summary_wen()
 		var prescription_cost_wen := int(price_summary.get("cost_wen", 0))
@@ -1275,7 +1287,8 @@ func submit_prescription() -> bool:
 
 			var patient_total_income_wen := total_income_wen + patient_thank_gift_wen
 
-			# JudgementResult 的“治疗收入”包含本次实际收到的谢仪礼。
+			# JudgementResult 的“治疗收入”口径与本次实际收入一致：
+			# 诊费 + 药材销售 + 病家谢仪礼；不在这里扣除药材进货成本。
 			last_treatment_income_wen = patient_total_income_wen
 
 			if consultation_fee_wen > 0:
@@ -1441,7 +1454,9 @@ func _show_judgement_result_window(judge_result = null, summary_text: String = "
 
 
 func _build_judgement_result_data(judge_result = null, summary_text: String = "") -> Dictionary:
-	# JudgementResult 只负责显示，这里把当前病人、标准方和玩家输入整理成文本。
+	# JudgementResult 只负责显示，这里统一整理当前病人、标准方、玩家输入和本次奖励数据。
+	# show_reward_change 只表示“本次是否为可结算的首次 random NPC 提交”；
+	# JudgementResult 还会根据 grade == “治疗失败”隐藏整个奖励区。
 	var npc_name := ""
 	var disease_name := ""
 	var standard_formula_name := ""
@@ -1629,8 +1644,8 @@ func _replace_with_random_patient() -> void:
 # 结束当天接诊
 # 作用：
 # 1. 停止 Clinic 自动计时
-# 2. 告诉 Main：Clinic 已完成当前阶段
-# 3. 后面 Main 收到后可切到 Bookshelf / 夜晚流程
+# 2. 只发出 clinic_finished，不在 Clinic 内直接做日结或切换场景
+# 3. Main 收到后负责当日财务结算、推进白天结束状态、保存并进入 Night
 # =========================================================
 
 func finish_clinic_for_today() -> void:
@@ -1683,7 +1698,9 @@ func _on_spawn_npc_button_pressed() -> void:
 
 
 func _on_submit_button_pressed() -> void:
-	# 兼容旧提交按钮。当前主要由 PrescriptionWindow 的 submit_requested 信号触发。
+	# 旧提交按钮兼容入口。当前正式流程使用 PrescriptionWindow.submit_requested，
+	# 并由 _on_prescription_submit_requested() 继续关闭诊疗窗口、播放结果台词和打开 JudgementResult。
+	# 此旧入口这里只保留“提交并判定”本身，不代表完整的当前诊疗结束流程。
 	submit_prescription()
 
 
@@ -1809,11 +1826,12 @@ func _on_unlock_all_entries_requested() -> void:
 
 
 # =========================================================
-# Story 场景诊疗后端接口
+# 旧版 Story 场景诊疗后端接口（兼容保留）
 # 说明：
-# 1. 这些接口只提供数据和判定，不负责 Story 的画面。
-# 2. story NPC 仍由 NpcManager 加载，处方仍由 Clinic 持有并提交。
-# 3. Story.tscn 中实例化的四个窗口只负责表现。
+# 1. 这一组接口来自“隐藏 Clinic 作为 story NPC 业务后端”的旧流程。
+# 2. 当前 Main 主流程已经使用 StoryTreatmentService，不再实例化 Clinic.tscn 作为剧情诊疗后端。
+# 3. 因此本段不属于当前剧情诊疗的主执行路径；暂时保留可避免旧调用立即失效。
+# 4. 若后续确认仓库内已无调用，可再单独清理；本次只补注释，不删除代码。
 # =========================================================
 
 func prepare_story_npc_treatment(
@@ -1969,16 +1987,16 @@ func finish_story_treatment_attempt(
 # =========================================================
 # 剧情系统入口
 # 说明：
-# 1. Clinic 只负责在合适时机请求剧情。
-# 2. 剧情是否满足触发条件，统一交给 StoryManager 判断。
-# 3. Clinic 仍然通过 story_requested 通知 Main 切换到 Story.tscn。
-# 4. 为了兼容你现在的 Main.gd，这里仍然传 story_path，不传空路径。
+# 1. Clinic 只负责在合适时机查找剧情并发出播放请求，不直接切换 Story 场景。
+# 2. 是否满足触发条件统一由 StoryManager + StoryData 判断。
+# 3. story_requested 仍保留 return_target 参数用于旧接口兼容；当前 Main 实际按 StoryData.after_play / get_return_scene() 决定播放后去向。
+# 4. story_path 仍必须传给 Main，用于从 StoryManager 缓存取得对应 StoryData。
 # =========================================================
 
 func start_story_from_clinic(story_path: String, return_target: String = "clinic") -> void:
 	# story_path 示例：res://Data/Story/teaching_test.tres
 	# Clinic 不直接切换 Story 场景，只向 Main 发出请求。
-	# return_target 使用逻辑名，例如："clinic" / "night"。
+	# return_target 是旧信号兼容参数；当前 Main 不以它作为最终播放后去向。
 	if story_path.is_empty():
 		push_warning("Clinic.start_story_from_clinic 收到空剧情路径。")
 		return
@@ -2069,7 +2087,7 @@ func start_new_day(day: int) -> void:
 	_update_time_ui()
 	_update_reputation_point_ui(true)
 
-	# 自动剧情触发入口.
+	# 自动剧情触发入口。
 	# 具体触发条件不再写死在 Clinic.gd，改由 StoryData + StoryManager 决定。
 	if _try_start_auto_story("clinic", current_day):
 		return
@@ -2085,8 +2103,7 @@ func _try_start_auto_story(trigger_scene: String, day: int) -> bool:
 		push_warning("Clinic 无法访问 StoryManager。")
 		return false
 
-	# 需要使用之前修改过的 StoryManager.gd。
-	# 其中必须包含 find_trigger_story(trigger_scene, current_day)。
+	# 依赖 StoryManager.find_trigger_story(trigger_scene, day) 统一查找当前时机可触发的剧情。
 	if not StoryManager.has_method("find_trigger_story"):
 		push_warning("StoryManager 缺少 find_trigger_story()，无法自动检查剧情触发条件。")
 		return false
@@ -2110,8 +2127,9 @@ func _request_story_data(story: StoryData) -> bool:
 		push_warning("找到可触发剧情，但 StoryManager 没有返回对应资源路径。请检查剧情缓存索引。")
 		return false
 
-	# 优先使用 StoryData 自己配置的 return_scene。
-	# 如果没有配置，就默认返回 clinic。
+	# 以下 return_target 仅用于旧 story_requested 信号兼容。
+	# 当前 Main 会重新读取 StoryData.get_return_scene() / after_play 决定真实返回目标，
+	# 因此这里的 legacy return_scene 不应再被视为当前剧情流转的权威来源。
 	var return_target := "clinic"
 	if story.return_scene != "":
 		return_target = story.return_scene

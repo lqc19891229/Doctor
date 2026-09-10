@@ -193,7 +193,12 @@ func _setup_money_display() -> void:
 
 
 func get_reputation_title(reputation: int) -> String:
-	if reputation <= 100:
+	# 负名望单独使用负面称号；-50 仍属于“略有微词”。
+	if reputation < -50:
+		return "臭名昭著"
+	elif reputation < 0:
+		return "略有微词"
+	elif reputation <= 100:
 		return "初窥门径"
 	elif reputation <= 300:
 		return "略有小成"
@@ -217,7 +222,10 @@ func get_reputation_display_text(reputation: int) -> String:
 
 
 func get_reputation_target(reputation: int) -> int:
-	if reputation <= 100:
+	# 负名望没有正向阶段目标，顶部栏只显示当前名望与负面称号。
+	if reputation < 0:
+		return -1
+	elif reputation <= 100:
 		return 100
 	elif reputation <= 300:
 		return 300
