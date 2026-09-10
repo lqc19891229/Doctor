@@ -5,7 +5,7 @@
 [ext_resource type="Resource" path="res://Data/Disease/ren_shen_disease.tres" id="clinic_disease_1"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wu_zhi_lan/wu_zhi_lan_sick.png" id="clinic_npc_portrait_1"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_2"]
-[ext_resource type="Texture2D" path="res://Assets/Background/023/023.png" id="background_3"]
+[ext_resource type="Texture2D" path="res://Assets/Background/026/026.png" id="background_3"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
