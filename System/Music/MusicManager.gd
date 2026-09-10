@@ -38,40 +38,44 @@ func _ready():
 
 
 # 场景音乐
-# Clinic:
-# Assets/Music/BGM/Clinic/Spring
-# Assets/Music/BGM/Clinic/Summer
-# Assets/Music/BGM/Clinic/Autumn
-# Assets/Music/BGM/Clinic/Winter
+# Clinic / Night 均按季节目录读取：
+# Assets/Music/BGM/<Place>/Spring
+# Assets/Music/BGM/<Place>/Summer
+# Assets/Music/BGM/<Place>/Rainy
+# Assets/Music/BGM/<Place>/Autumn
+# Assets/Music/BGM/<Place>/Winter
 #
-# Night:
-# Assets/Music/BGM/Night
+# Rainy 目录尚未准备好时临时回退到 Summer。
+# Night 同时兼容旧的 Assets/Music/BGM/Night 平级目录。
 
 func play_scene_music(place: String):
 
 	current_place = place
 
-	if place == "Clinic":
+	if place == "Clinic" or place == "Night":
 		current_season = GameTime.get_season()
-		var folder = "res://Assets/Music/BGM/Clinic/" + current_season
-		var path = find_music(folder)
+
+		var folder: String = "res://Assets/Music/BGM/" + place + "/" + current_season
+		var path: String = find_music(folder)
+
+		# 雨季音乐尚未放入时临时使用夏季音乐，保证当前项目可以直接运行。
+		if path == "" and current_season == "Rainy":
+			var summer_folder: String = "res://Assets/Music/BGM/" + place + "/Summer"
+			var summer_path: String = find_music(summer_folder)
+			if summer_path != "":
+				folder = summer_folder
+				path = summer_path
+
+		# 兼容此前 Night 使用不分季节的平级目录结构。
+		if path == "" and place == "Night":
+			var legacy_night_folder: String = "res://Assets/Music/BGM/Night"
+			var legacy_night_path: String = find_music(legacy_night_folder)
+			if legacy_night_path != "":
+				folder = legacy_night_folder
+				path = legacy_night_path
 
 		if path == "":
-			print("MusicManager: 找不到Clinic音乐:", folder)
-			return
-
-		current_scene_folder = folder
-		current_music_mode = "scene"
-		play_music(path)
-
-
-	elif place == "Night":
-
-		var folder = "res://Assets/Music/BGM/Night"
-		var path = find_music(folder)
-
-		if path == "":
-			print("MusicManager: 找不到Night音乐:", folder)
+			print("MusicManager: 找不到场景音乐:", folder)
 			return
 
 		current_scene_folder = folder

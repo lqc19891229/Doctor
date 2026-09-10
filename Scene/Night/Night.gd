@@ -6,11 +6,12 @@ signal story_requested(story_path: String, return_target: String)
 
 const TopBarControllerScript := preload("res://System/Unlock/TopBarController.gd")
 
-# 夜晚四季背景；季节划分与 Clinic.gd 保持一致。
+# 夜晚季节背景；季节划分与 Clinic.gd 保持一致。
 const NIGHT_SPRING_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/spring_night.png")
 const NIGHT_SUMMER_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/summer_night.png")
 const NIGHT_AUTUMN_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/autumn_night.png")
 const NIGHT_WINTER_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/winter_night.png")
+const NIGHT_RAINY_BACKGROUND_PATH: String = "res://Assets/Background/clinic/rainy_night.png"
 
 # 背景单次渐出或渐入的持续时间。
 # 完整换图过程约为该数值的两倍。
@@ -91,25 +92,32 @@ func _update_night_background(day: int) -> void:
 		push_warning("Night.gd 未找到 TextureRect 类型的 BackgroundImage 节点，无法切换季节背景。")
 		return
 
-	# 每一天对应一个节气，每 24 天重新从春季开始循环。
-	var solar_term_index: int = (maxi(day, 1) - 1) % 24
-	var target_texture: Texture2D = NIGHT_SPRING_BACKGROUND
-
-	if solar_term_index < 6:
-		# 第 1～6 天：春季
-		target_texture = NIGHT_SPRING_BACKGROUND
-	elif solar_term_index < 12:
-		# 第 7～12 天：夏季
-		target_texture = NIGHT_SUMMER_BACKGROUND
-	elif solar_term_index < 18:
-		# 第 13～18 天：秋季
-		target_texture = NIGHT_AUTUMN_BACKGROUND
-	else:
-		# 第 19～24 天：冬季
-		target_texture = NIGHT_WINTER_BACKGROUND
+	var season: String = GameTime.get_season_by_day(day)
+	var target_texture: Texture2D = _get_night_background_texture(season)
 
 	night_background_target_texture = target_texture
 	_change_night_background_with_fade(target_texture)
+
+
+func _get_night_background_texture(season: String) -> Texture2D:
+	match season:
+		"Spring":
+			return NIGHT_SPRING_BACKGROUND
+		"Summer":
+			return NIGHT_SUMMER_BACKGROUND
+		"Rainy":
+			# 雨季素材尚未放入项目时临时沿用 Summer，保证脚本可以直接覆盖运行。
+			if ResourceLoader.exists(NIGHT_RAINY_BACKGROUND_PATH):
+				var rainy_texture := load(NIGHT_RAINY_BACKGROUND_PATH) as Texture2D
+				if rainy_texture != null:
+					return rainy_texture
+			return NIGHT_SUMMER_BACKGROUND
+		"Autumn":
+			return NIGHT_AUTUMN_BACKGROUND
+		"Winter":
+			return NIGHT_WINTER_BACKGROUND
+		_:
+			return NIGHT_SPRING_BACKGROUND
 
 
 func _stop_night_background_fade() -> void:

@@ -40,11 +40,12 @@ const JUDGEMENT_RESULT_SCENE_PATH := "res://Scene/JudgementResult/JudgementResul
 # 通用顶部栏控制器脚本
 const TopBarControllerScript := preload("res://System/Unlock/TopBarController.gd")
 
-# 诊室四季背景
+# 诊室季节背景
 const CLINIC_SPRING_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/spring.png")
 const CLINIC_SUMMER_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/summer.png")
 const CLINIC_AUTUMN_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/autumn.png")
 const CLINIC_WINTER_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/winter.png")
+const CLINIC_RAINY_BACKGROUND_PATH: String = "res://Assets/Background/clinic/rainy.png"
 
 # 背景单次渐出或渐入的持续时间。
 # 完整换图过程约为该数值的两倍。
@@ -424,25 +425,32 @@ func _update_clinic_background() -> void:
 		push_warning("Clinic.gd 未找到 TextureRect 类型的 Background 节点，无法切换季节背景。")
 		return
 
-	# current_day 每一天对应一个节气；每 24 天循环到下一年的立春。
-	var solar_term_index: int = (maxi(current_day, 1) - 1) % 24
-	var target_texture: Texture2D = CLINIC_SPRING_BACKGROUND
-
-	if solar_term_index < 6:
-		# 立春、雨水、惊蛰、春分、清明、谷雨
-		target_texture = CLINIC_SPRING_BACKGROUND
-	elif solar_term_index < 12:
-		# 立夏、小满、芒种、夏至、小暑、大暑
-		target_texture = CLINIC_SUMMER_BACKGROUND
-	elif solar_term_index < 18:
-		# 立秋、处暑、白露、秋分、寒露、霜降
-		target_texture = CLINIC_AUTUMN_BACKGROUND
-	else:
-		# 立冬、小雪、大雪、冬至、小寒、大寒
-		target_texture = CLINIC_WINTER_BACKGROUND
+	var season: String = GameTime.get_season_by_day(current_day)
+	var target_texture: Texture2D = _get_clinic_background_texture(season)
 
 	clinic_background_target_texture = target_texture
 	_change_clinic_background_with_fade(target_texture)
+
+
+func _get_clinic_background_texture(season: String) -> Texture2D:
+	match season:
+		"Spring":
+			return CLINIC_SPRING_BACKGROUND
+		"Summer":
+			return CLINIC_SUMMER_BACKGROUND
+		"Rainy":
+			# 雨季素材尚未放入项目时临时沿用 Summer，保证脚本可以直接覆盖运行。
+			if ResourceLoader.exists(CLINIC_RAINY_BACKGROUND_PATH):
+				var rainy_texture := load(CLINIC_RAINY_BACKGROUND_PATH) as Texture2D
+				if rainy_texture != null:
+					return rainy_texture
+			return CLINIC_SUMMER_BACKGROUND
+		"Autumn":
+			return CLINIC_AUTUMN_BACKGROUND
+		"Winter":
+			return CLINIC_WINTER_BACKGROUND
+		_:
+			return CLINIC_SPRING_BACKGROUND
 
 
 func _stop_clinic_background_fade() -> void:
