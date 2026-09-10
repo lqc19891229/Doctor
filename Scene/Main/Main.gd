@@ -40,7 +40,7 @@ class_name Main
 
 
 # 预加载场景
-const CLINIC_SCENE: PackedScene = preload("res://Scene/clinic/clinic.tscn")
+const CLINIC_SCENE: PackedScene = preload("res://Scene/Clinic/Clinic.tscn")
 const NIGHT_SCENE: PackedScene = preload("res://Scene/Night/Night.tscn")
 const STORY_SCENE: PackedScene = preload("res://Scene/Story/Story.tscn")
 const ENDING_CREDITS_SCENE: PackedScene = preload(
