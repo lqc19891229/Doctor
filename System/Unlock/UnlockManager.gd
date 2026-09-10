@@ -86,6 +86,9 @@ var _book_entry_ids_by_disease_id: Dictionary = {}
 var _experience_unlock_entries: Array[BookEntryData] = []
 var _experience_unlock_cursor: int = 0
 
+# 经济系统使用独立随机数生成器，避免 NPC 抽取等其他随机逻辑改变经济随机序列。
+var economy_rng := RandomNumberGenerator.new()
+
 # 夜晚“是否存在未读可阅读条目”改为 O(1)。
 # 正常运行时由 unlock_entry / mark_entry_as_read 增量维护；
 # 读档后统一重建一次，兼容旧存档。
@@ -112,6 +115,7 @@ func _emit_all_player_stat_signals() -> void:
 
 
 func _ready() -> void:
+	economy_rng.randomize()
 	_ensure_unlock_indexes()
 	_rebuild_unread_readable_count()
 
@@ -598,13 +602,13 @@ func record_random_npc_treatment_finance(
 func record_patient_thank_gift_income(day: int) -> int:
 	_ensure_daily_finance_ledger(day)
 
-	if randf() >= PATIENT_THANK_GIFT_PROBABILITY:
+	if economy_rng.randf() >= PATIENT_THANK_GIFT_PROBABILITY:
 		return 0
 
 	if PATIENT_THANK_GIFT_OPTIONS_WEN.is_empty():
 		return 0
 
-	var gift_index := randi_range(0, PATIENT_THANK_GIFT_OPTIONS_WEN.size() - 1)
+	var gift_index := economy_rng.randi_range(0, PATIENT_THANK_GIFT_OPTIONS_WEN.size() - 1)
 	var gift_wen := int(PATIENT_THANK_GIFT_OPTIONS_WEN[gift_index])
 
 	daily_patient_thank_gift_income_wen += gift_wen
@@ -648,12 +652,12 @@ func _pick_random_expense(options: Array) -> int:
 	if options.is_empty():
 		return 0
 
-	var index := randi_range(0, options.size() - 1)
+	var index := economy_rng.randi_range(0, options.size() - 1)
 	return int(options[index])
 
 
 func _roll_random_expense(probability: float, options: Array) -> int:
-	if randf() >= clampf(probability, 0.0, 1.0):
+	if economy_rng.randf() >= clampf(probability, 0.0, 1.0):
 		return 0
 
 	return _pick_random_expense(options)

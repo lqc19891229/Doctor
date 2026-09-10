@@ -73,9 +73,13 @@ expand_mode = 1
 
 [node name="DeskHotspots" type="Control" parent="Background/TableImage" unique_id=1492947465]
 layout_mode = 1
-anchors_preset = 15
+anchor_top = -0.054
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 0.41400146
+offset_right = -3.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -84,7 +88,8 @@ mouse_filter = 2
 script = ExtResource("2_night_hotspot")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/TableImage/DeskHotspots/ReadBookHotspot" unique_id=859332895]
-polygon = PackedVector2Array(180, 633, 271, 621, 249, 601, 245, 567, 274, 564, 273, 539, 447, 508, 558, 593, 590, 563, 743, 535, 800, 576, 910, 508, 1113, 529, 1113, 558, 1154, 563, 1154, 590, 1072, 640, 1116, 702, 1090, 724, 885, 740, 498, 740, 369, 715, 249, 735, 182, 659)
+position = Vector2(629, 625)
+polygon = PackedVector2Array(-434, 27, -342, 12, -368, -25, -365, -50, -338, -63, -339, -90, -177, -122, -72, -20, -8, -63, 148, -95, 243, -65, 318, -127, 518, -95, 517, -68, 558, -59, 559, -27, 470, 36, 496, 105, 471, 141, 237, 161, -154, 145, -261, 126, -366, 144, -437, 49)
 
 [node name="Polygon2D" type="Polygon2D" parent="Background/TableImage/DeskHotspots/ReadBookHotspot" unique_id=451168183]
 visible = false
@@ -96,7 +101,9 @@ script = ExtResource("2_night_hotspot")
 action = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/TableImage/DeskHotspots/NextDayHotspot" unique_id=994244777]
-polygon = PackedVector2Array(1524, 528, 1549, 473, 1565, 523, 1614, 510, 1646, 507, 1688, 513, 1709, 525, 1706, 539, 1690, 564, 1664, 576, 1658, 589, 1685, 605, 1678, 618, 1653, 626, 1618, 628, 1595, 620, 1584, 611, 1587, 601, 1610, 593, 1615, 578, 1586, 564, 1562, 559, 1546, 550)
+position = Vector2(248.72176, -14.617825)
+scale = Vector2(0.84766454, 1.0342737)
+polygon = PackedVector2Array(1523.3364, 530.43774, 1546.3329, 464.69098, 1566.9857, 519.80225, 1610.014, 504.33234, 1660.7233, 504.33234, 1696.1017, 508.19977, 1726.7631, 517.8684, 1726.7631, 536.2388, 1714.9702, 567.17834, 1687.8467, 579.7475, 1665.4403, 587.4824, 1672.516, 605.8528, 1694.9224, 613.58765, 1692.5638, 632.9249, 1654.8268, 642.5935, 1620.0728, 641.6269, 1591.7596, 633.89197, 1587.0409, 615.5216, 1615.3539, 600.0518, 1620.6276, 582.64813, 1590.58, 572.9797, 1553.4086, 558.47656, 1530.4147, 550.7418)
 
 [node name="Polygon2D" type="Polygon2D" parent="Background/TableImage/DeskHotspots/NextDayHotspot" unique_id=974573520]
 visible = false

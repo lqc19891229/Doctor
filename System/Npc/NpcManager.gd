@@ -27,6 +27,9 @@ var npc_list: Array[NpcData] = []
 # 当前查看索引。
 var current_index: int = 0
 
+# NPC 系统使用独立随机数生成器，避免与经济系统及其他全局随机逻辑互相影响。
+var npc_rng := RandomNumberGenerator.new()
+
 # NPC 资源根目录。支持子文件夹递归扫描。
 const NPC_DIR := "res://Data/Npc"
 
@@ -51,7 +54,7 @@ static var _shared_story_npc_by_id: Dictionary = {}
 # ============================================================
 
 func _ready() -> void:
-	randomize()
+	npc_rng.randomize()
 	load_all_npcs()
 
 
@@ -279,7 +282,8 @@ func _assign_random_unlocked_disease(npc: NpcData) -> void:
 		npc.disease = null
 		return
 
-	npc.disease = available_diseases[randi() % available_diseases.size()]
+	var disease_index := npc_rng.randi_range(0, available_diseases.size() - 1)
+	npc.disease = available_diseases[disease_index]
 
 
 func _get_unlocked_disease_pool() -> Array[DiseaseData]:
@@ -326,7 +330,8 @@ func get_random_npc_template() -> NpcData:
 	if random_npc_pool.is_empty():
 		return null
 
-	return random_npc_pool[randi() % random_npc_pool.size()]
+	var npc_index := npc_rng.randi_range(0, random_npc_pool.size() - 1)
+	return random_npc_pool[npc_index]
 
 
 func generate_random_npc() -> NpcData:
