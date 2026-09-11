@@ -5,7 +5,7 @@ signal tutorial_finished
 
 @export var screenshots: Array[Texture2D] = []
 @export var titles: PackedStringArray = []
-@export_multiline var descriptions: PackedStringArray = []
+@export var descriptions: PackedStringArray = []
 @export var close_on_finish: bool = true
 
 @onready var screenshot: TextureRect = $SlideFrame/Screenshot
