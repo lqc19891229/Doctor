@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/lei_wan_jun/lei_wan_jun.png" id="portrait_6"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wang_fu_hu_wei/wang_fu_hu_wei.png" id="portrait_7"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/zhao_shun/zhao_shun_hei.png" id="portrait_8"]
-[ext_resource type="Texture2D" path="res://Assets/Background/020/020.png" id="background_9"]
+[ext_resource type="Texture2D" path="res://Assets/Background/020/020_04.png" id="background_9"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chu_wang/chu_wang.png" id="portrait_10"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/lu_ding/lu_ding.png" id="portrait_11"]
 

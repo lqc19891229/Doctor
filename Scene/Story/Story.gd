@@ -187,6 +187,13 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	# Story NPC 诊疗阶段：
+	# 当独立 Window 关闭后，键盘焦点可能回到 Story 主 Viewport。
+	# 只要把脉 / 开方 / 行医记考还有任意窗口可见，
+	# Esc 就必须继续优先关闭最上层窗口，不能提前落到 PauseMenu。
+	if _try_handle_treatment_window_escape(event):
+		return
+
 	# 剧情鼠标点击需要在 UI Control 消费事件前处理。
 	# 键盘和诊疗快捷键仍由 _unhandled_input() 负责。
 	if is_finished:
@@ -213,6 +220,84 @@ func _input(event: InputEvent) -> void:
 		):
 			_advance_or_show_full_text()
 			get_viewport().set_input_as_handled()
+
+
+# =========================================================
+# Story NPC 诊疗窗口 Esc 统一兜底
+# =========================================================
+
+func _try_handle_treatment_window_escape(event: InputEvent) -> bool:
+	# 只在 Story NPC 诊疗模式下介入。
+	# 普通剧情阶段的 Esc 行为完全保持原样。
+	if not is_treatment_mode:
+		return false
+
+	if not (event is InputEventKey):
+		return false
+
+	var key_event := event as InputEventKey
+
+	if not key_event.pressed or key_event.echo:
+		return false
+
+	if key_event.keycode != KEY_ESCAPE:
+		return false
+
+	if (
+		key_event.alt_pressed
+		or key_event.ctrl_pressed
+		or key_event.meta_pressed
+		or key_event.shift_pressed
+	):
+		return false
+
+	var top_window := _get_topmost_visible_treatment_window()
+
+	# 三个诊疗窗口都已经关闭：
+	# 不吃掉 Esc，让 Main / PauseMenu 正常接管。
+	if top_window == null:
+		return false
+
+	# 还有诊疗窗口可见：
+	# 关闭当前最上层窗口，并终止本次 Esc 的继续传播。
+	if top_window.has_method("close_window"):
+		top_window.call("close_window")
+	else:
+		top_window.hide()
+
+	get_viewport().set_input_as_handled()
+	return true
+
+
+func _get_topmost_visible_treatment_window() -> Window:
+	var top_window: Window = null
+	var top_index: int = -1
+
+	var treatment_windows: Array[Window] = []
+
+	if pulse_window != null:
+		treatment_windows.append(pulse_window)
+
+	if prescription_window != null:
+		treatment_windows.append(prescription_window)
+
+	if clinical_log_window != null:
+		treatment_windows.append(clinical_log_window)
+
+	for window_node in treatment_windows:
+		if not window_node.visible:
+			continue
+
+		# _show_window_front() 每次都会把新打开/重新打开的窗口
+		# 移到父节点最后，因此 get_index() 最大的可见窗口
+		# 就是当前最上层的诊疗窗口。
+		var child_index := window_node.get_index()
+
+		if top_window == null or child_index > top_index:
+			top_window = window_node
+			top_index = child_index
+
+	return top_window
 
 
 func _unhandled_input(event: InputEvent) -> void:

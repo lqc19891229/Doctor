@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://rfnj1k2mnruh"]
 
-[ext_resource type="Script" uid="uid://bvc6jjyjfrq11" path="res://Scene/clinicalLogWindow/ClinicalLogWindow.gd" id="1_68hx3"]
-[ext_resource type="Texture2D" uid="uid://cm2x84snbdm3l" path="res://Assets/Background/bookpage.png" id="2_rb34b"]
+[ext_resource type="Script" uid="uid://bvc6jjyjfrq11" path="res://Scene/ClinicalLogWindow/ClinicalLogWindow.gd" id="1_68hx3"]
+[ext_resource type="Texture2D" uid="uid://cm2x84snbdm3l" path="res://Assets/UI/bookpage.png" id="2_rb34b"]
 [ext_resource type="FontFile" uid="uid://bas0ewdnmpdaq" path="res://Assets/Fonts/SourceHanSerifSC-Regular.otf" id="3_yklnm"]
-[ext_resource type="Script" uid="uid://jjpaynmj2itt" path="res://Scene/clinicalLogWindow/ClassicalVerticalRichTextLabel.gd" id="4_56jji"]
+[ext_resource type="Script" uid="uid://jjpaynmj2itt" path="res://Scene/ClinicalLogWindow/ClassicalVerticalRichTextLabel.gd" id="4_56jji"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_68hx3"]
 bg_color = Color(0.17297474, 0.20503098, 0.3470843, 1)
@@ -15,7 +15,7 @@ bg_color = Color(0.14509805, 0.17254902, 0.18431373, 1)
 oversampling_override = 1.0
 title = "行医记考"
 position = Vector2i(1010, 36)
-size = Vector2i(900, 950)
+size = Vector2i(900, 1000)
 unresizable = true
 script = ExtResource("1_68hx3")
 

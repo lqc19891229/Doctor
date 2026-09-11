@@ -45,6 +45,9 @@ const SEARCH_DEBOUNCE_SECONDS := 0.10
 # 解锁后才开放“搜索并套用预制方剂”功能的医书条目。
 const FORMULA_FILL_FEATURE_ENTRY_ID := "yu_zhi_fang_ji"
 
+# 开方窗口固定位置，和场景中的初始坐标保持一致。
+@export var fixed_window_position: Vector2i = Vector2i(0, 36)
+
 
 # =========================================================
 # 场景节点引用
@@ -157,12 +160,24 @@ var _cached_disease_db_instance_id: int = 0
 # 生命周期
 # =========================================================
 func _ready() -> void:
+	# 初始化时恢复固定位置。
+	position = fixed_window_position
+
 	_setup_unit_option()
 	_setup_search_debounce_timers()
 	_connect_signals()
 	_setup_player_hint_dialog()
 	_set_selected_role(ROLE_JUN)
 	load_all_diseases()
+
+# =========================================================
+# 窗口位置锁定
+# =========================================================
+func _process(_delta: float) -> void:
+	# 窗口显示期间，阻止玩家拖动标题栏改变窗口位置。
+	if visible and position != fixed_window_position:
+		position = fixed_window_position
+
 
 # =========================================================
 # 对外初始化接口
@@ -1236,11 +1251,47 @@ const ROLE_SHORTCUT_KP_SHI := KEY_KP_4
 
 
 func _input(event: InputEvent) -> void:
+	if _try_handle_escape(event):
+		return
+
 	if _try_handle_role_shortcut(event):
 		return
 
 	if _try_handle_clinic_window_shortcut(event):
 		return
+
+
+func _try_handle_escape(event: InputEvent) -> bool:
+	if not visible:
+		return false
+
+	if not (event is InputEventKey):
+		return false
+
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return false
+
+	if key_event.keycode != KEY_ESCAPE:
+		return false
+
+	# 第一优先级：
+	# 光标在药材搜索栏，并且搜索栏有内容时，Esc 只清空搜索。
+	if herb_search != null and herb_search.has_focus() and herb_search.text != "":
+		_on_herb_search_gui_input(event)
+		return true
+
+	# 光标在疾病搜索栏，并且搜索栏有内容时，Esc 只清空搜索。
+	if disease_search != null and disease_search.has_focus() and disease_search.text != "":
+		_on_disease_search_gui_input(event)
+		return true
+
+	# 第二优先级：
+	# 搜索栏为空，或当前焦点不在搜索栏时，Esc 关闭整个开方窗口。
+	# 本次 Esc 在这里结束，不继续传给 Main 的 PauseMenu。
+	close_window()
+	get_viewport().set_input_as_handled()
+	return true
 
 
 func _try_handle_role_shortcut(event: InputEvent) -> bool:
@@ -1288,37 +1339,90 @@ func _try_handle_clinic_window_shortcut(event: InputEvent) -> bool:
 	if key_event.alt_pressed or key_event.ctrl_pressed or key_event.meta_pressed or key_event.shift_pressed:
 		return false
 
-	var window_controller := _find_clinic_window_controller()
-	if window_controller == null:
+	var shortcut_target := _find_window_shortcut_target()
+	if shortcut_target == null:
 		return false
+
+	var handled := false
 
 	match key_event.keycode:
 		CLINIC_SHORTCUT_OPEN_PULSE:
-			if window_controller.has_method("open_pulse_window"):
-				window_controller.open_pulse_window()
-			else:
-				return false
+			handled = _open_shortcut_window(shortcut_target, "pulse")
+
 		CLINIC_SHORTCUT_OPEN_PRESCRIPTION:
-			if window_controller.has_method("open_prescription_window"):
-				window_controller.open_prescription_window()
-			else:
-				return false
+			handled = _open_shortcut_window(shortcut_target, "prescription")
+
 		CLINIC_SHORTCUT_OPEN_CLINICAL_LOG:
-			if window_controller.has_method("open_clinical_log_window"):
-				window_controller.open_clinical_log_window()
-			else:
-				return false
+			handled = _open_shortcut_window(shortcut_target, "clinical_log")
+
 		_:
 			return false
+
+	if not handled:
+		return false
 
 	get_viewport().set_input_as_handled()
 	return true
 
 
-func _find_clinic_window_controller() -> Node:
+func _open_shortcut_window(shortcut_target: Node, window_type: String) -> bool:
+	if shortcut_target == null:
+		return false
+
+	match window_type:
+		"pulse":
+			# Clinic 使用 ClinicWindowController 的公开接口。
+			if shortcut_target.has_method("open_pulse_window"):
+				shortcut_target.call("open_pulse_window")
+				return true
+
+			# Story 治疗模式直接复用 Story.gd 已有按钮回调。
+			if shortcut_target.has_method("_on_pulse_button_pressed"):
+				shortcut_target.call("_on_pulse_button_pressed")
+				return true
+
+		"prescription":
+			if shortcut_target.has_method("open_prescription_window"):
+				shortcut_target.call("open_prescription_window")
+				return true
+
+			if shortcut_target.has_method("_on_prescription_button_pressed"):
+				shortcut_target.call("_on_prescription_button_pressed")
+				return true
+
+		"clinical_log":
+			if shortcut_target.has_method("open_clinical_log_window"):
+				shortcut_target.call("open_clinical_log_window")
+				return true
+
+			if shortcut_target.has_method("_on_clinical_log_button_pressed"):
+				shortcut_target.call("_on_clinical_log_button_pressed")
+				return true
+
+	return false
+
+
+func _find_window_shortcut_target() -> Node:
 	var node := get_parent()
+
 	while node != null:
-		var controller := node.find_child("ClinicWindowController", true, false)
+		# Story 优先：
+		# Story 与 Clinic 会同时常驻 Main。旧代码一路递归 find_child，
+		# 最后会从 Main 找到隐藏 Clinic 的 ClinicWindowController，
+		# 导致 Story 窗口把 F1/F2/F3 错发给 Clinic。
+		#
+		# 只要当前祖先就是 Story 治疗界面，就立刻返回 Story，
+		# 不再继续向 Main 搜索。
+		if (
+			node.has_method("_on_pulse_button_pressed")
+			and node.has_method("_on_prescription_button_pressed")
+			and node.has_method("_on_clinical_log_button_pressed")
+		):
+			return node
+
+		# Clinic 只允许查找“当前祖先的直接子节点”控制器，
+		# 禁止递归搜索其它常驻场景，避免再次串到错误的 Clinic 实例。
+		var controller := node.get_node_or_null("ClinicWindowController")
 		if controller != null:
 			return controller
 

@@ -21,7 +21,7 @@ default_font_size = 24
 oversampling_override = 1.0
 title = "断病开方"
 position = Vector2i(0, 36)
-size = Vector2i(1000, 950)
+size = Vector2i(1000, 1000)
 unresizable = true
 script = ExtResource("1_e60oy")
 

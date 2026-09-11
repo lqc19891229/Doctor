@@ -11,6 +11,7 @@ class_name ClinicWindowController
 # 3. 窗口 close_requested 关闭窗口
 # 4. 窗口置顶
 # 5. 提交处方后关闭诊疗窗口
+# 6. 多个诊疗窗口同时打开时，Esc 优先逐层关闭窗口
 #
 # 不负责：
 # 1. 当前 NPC
@@ -113,6 +114,92 @@ func _connect_signals() -> void:
 func _safe_connect_pressed(button: BaseButton, callable_fn: Callable) -> void:
 	if button != null and not button.pressed.is_connected(callable_fn):
 		button.pressed.connect(callable_fn)
+
+
+# =========================================================
+# Esc：多个诊疗窗口同时打开时的主界面兜底
+# =========================================================
+#
+# 独立 Window 有焦点时，Esc 由各窗口自身处理：
+# - 搜索栏有焦点且有文字：清空搜索
+# - 否则：关闭当前窗口
+#
+# 当最上层 Window 关闭后，键盘焦点可能回到主 Viewport。
+# 此时如果还有其它诊疗窗口 visible，必须继续优先关闭窗口，
+# 不能让同一个层级的 Esc 直接落到 PauseMenu。
+#
+# 只有三个诊疗窗口全部关闭后，这里才不处理 Esc，
+# 让 Main/PauseMenu 的 _unhandled_input() 正常打开暂停菜单。
+# =========================================================
+
+func _input(event: InputEvent) -> void:
+	if _try_close_topmost_treatment_window_with_escape(event):
+		return
+
+
+func _try_close_topmost_treatment_window_with_escape(event: InputEvent) -> bool:
+	if not (event is InputEventKey):
+		return false
+
+	var key_event := event as InputEventKey
+
+	if not key_event.pressed or key_event.echo:
+		return false
+
+	if key_event.keycode != KEY_ESCAPE:
+		return false
+
+	if key_event.alt_pressed or key_event.ctrl_pressed or key_event.meta_pressed or key_event.shift_pressed:
+		return false
+
+	var top_window := _get_topmost_visible_treatment_window()
+	if top_window == null:
+		# 没有诊疗窗口时绝对不要吃掉 Esc，
+		# 让 PauseMenu 正常接管。
+		return false
+
+	if top_window == pulse_window:
+		close_pulse_window()
+	elif top_window == prescription_window:
+		close_prescription_window()
+	elif top_window == clinical_log_window:
+		close_clinical_log_window()
+	else:
+		top_window.hide()
+
+	get_viewport().set_input_as_handled()
+	return true
+
+
+func _get_topmost_visible_treatment_window() -> Window:
+	var top_window: Window = null
+	var top_index: int = -1
+
+	var treatment_windows: Array[Window] = []
+
+	if pulse_window != null:
+		treatment_windows.append(pulse_window)
+
+	if prescription_window != null:
+		treatment_windows.append(prescription_window)
+
+	if clinical_log_window != null:
+		treatment_windows.append(clinical_log_window)
+
+	for window_node in treatment_windows:
+		if not window_node.visible:
+			continue
+
+		# ClinicWindowController._show_window_front() 每次打开窗口时，
+		# 都会把窗口移动到父节点最后，因此 get_index() 最大的可见窗口
+		# 就是最近一次置顶的诊疗窗口。
+		var child_index := window_node.get_index()
+
+		if top_window == null or child_index > top_index:
+			top_window = window_node
+			top_index = child_index
+
+	return top_window
 
 
 # =========================================================
