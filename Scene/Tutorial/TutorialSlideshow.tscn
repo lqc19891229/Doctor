@@ -80,9 +80,9 @@ text = "跳过教程"
 
 [node name="SlideFrame" type="Panel" parent="."]
 layout_mode = 1
-anchor_left = 0.06
+anchor_left = 0.17
 anchor_top = 0.095
-anchor_right = 0.94
+anchor_right = 0.83
 anchor_bottom = 0.69
 theme_override_styles/panel = SubResource("StyleBox_slide")
 
@@ -169,7 +169,6 @@ theme_override_colors/default_color = Color(0.13, 0.09, 0.055, 1)
 theme_override_fonts/normal_font = ExtResource("2_font")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-fit_content = true
 scroll_active = false
 text = "教程说明"
 
