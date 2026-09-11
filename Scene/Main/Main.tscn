@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://5kw50n6ckjh0"]
 
 [ext_resource type="Script" uid="uid://ceraw4tmmepvk" path="res://Scene/Main/Main.gd" id="1_o28sc"]
+[ext_resource type="Texture2D" uid="uid://cphe7ubix3qcg" path="res://Assets/Background/Main.png" id="2_6m34w"]
 [ext_resource type="Script" uid="uid://cwo5oi636sg24" path="res://Scene/Main/PauseMenu.gd" id="2_pause_menu"]
 [ext_resource type="Script" uid="uid://b3t705armu5q7" path="res://Scene/Main/SettingsPanel.gd" id="3_settings_panel"]
 
@@ -21,6 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_6m34w")
 
 [node name="TitleContainer" type="Control" parent="MainMenuLayer" unique_id=2016345439]
 layout_mode = 3
@@ -314,12 +316,12 @@ custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 value = 80.0
 
-[node name="AmbientLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="AmbientLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=509876459]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "环境音量"
 
-[node name="AmbientVolumeSlider" type="HSlider" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="AmbientVolumeSlider" type="HSlider" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1903315977]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 value = 80.0
