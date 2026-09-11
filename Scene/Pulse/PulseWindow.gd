@@ -130,6 +130,8 @@ func _ready() -> void:
 	# 关闭窗口时只隐藏窗口，不销毁窗口
 	if not close_requested.is_connected(_on_close_requested):
 		close_requested.connect(_on_close_requested)
+	if not visibility_changed.is_connected(_on_visibility_changed):
+		visibility_changed.connect(_on_visibility_changed)
 
 
 # =========================================================
@@ -163,6 +165,7 @@ func open_window() -> void:
 # 关闭窗口
 # =========================================================
 func close_window() -> void:
+	SfxManager.stop_heartbeat()
 	hide()
 
 
@@ -266,7 +269,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_close_requested() -> void:
+	SfxManager.stop_heartbeat()
 	hide()
+
+
+func _on_visibility_changed() -> void:
+	if not visible:
+		SfxManager.stop_heartbeat()
 
 
 # =========================================================

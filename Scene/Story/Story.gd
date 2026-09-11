@@ -569,6 +569,7 @@ func _on_pulse_button_pressed() -> void:
 	if not is_treatment_mode:
 		return
 
+	SfxManager.stop_heartbeat()
 	_show_window_front(pulse_window)
 	if pulse_window.has_method("open_window"):
 		pulse_window.call("open_window")
@@ -618,6 +619,7 @@ func _show_window_front(window_node: Window) -> void:
 
 
 func _close_treatment_windows() -> void:
+	SfxManager.stop_heartbeat()
 	for window_node in [pulse_window, prescription_window, clinical_log_window]:
 		if window_node == null:
 			continue
@@ -805,14 +807,17 @@ func _update_story_pulse_keyboard_display() -> void:
 
 	if right_pressed_count == 3 and left_pressed_count == 0:
 		pulse_keyboard_override_active = true
+		SfxManager.start_heartbeat()
 		_show_story_pulse_hand("right")
 		return
 
 	if left_pressed_count == 3 and right_pressed_count == 0:
 		pulse_keyboard_override_active = true
+		SfxManager.start_heartbeat()
 		_show_story_pulse_hand("left")
 		return
 
+	SfxManager.stop_heartbeat()
 	if pulse_keyboard_override_active or total_pressed_count != 0:
 		pulse_keyboard_override_active = false
 		if pulse_window.has_method("show_hint_tab"):

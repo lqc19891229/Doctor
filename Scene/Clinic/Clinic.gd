@@ -1040,14 +1040,17 @@ func _update_pulse_keyboard_display() -> void:
 
 	if right_pressed_count == 3 and left_pressed_count == 0:
 		pulse_keyboard_override_active = true
+		SfxManager.start_heartbeat()
 		show_hand_group("right")
 		return
 
 	if left_pressed_count == 3 and right_pressed_count == 0:
 		pulse_keyboard_override_active = true
+		SfxManager.start_heartbeat()
 		show_hand_group("left")
 		return
 
+	SfxManager.stop_heartbeat()
 	if pulse_keyboard_override_active or total_pressed_count != 0:
 		pulse_keyboard_override_active = false
 		if pulse_window != null and pulse_window.has_method("show_hint_tab"):
@@ -1055,6 +1058,7 @@ func _update_pulse_keyboard_display() -> void:
 
 
 func _reset_pulse_keyboard_state() -> void:
+	SfxManager.stop_heartbeat()
 	pulse_keyboard_override_active = false
 	last_pulse_input_signature = ""
 
