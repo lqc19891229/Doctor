@@ -172,7 +172,6 @@ bbcode_enabled = true
 fit_content = true
 scroll_active = false
 text = "教程说明"
-horizontal_alignment = 1
 
 [node name="KeyboardHint" type="Label" parent="."]
 layout_mode = 1
