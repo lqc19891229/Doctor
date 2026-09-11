@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7tda6l1gj4b8"
-path="res://.godot/imported/lin_qiao_niao_after.png-d2ddee25fc2c8e591adc178f463aad16.ctex"
+uid="uid://u5x0s8chngch"
+path="res://.godot/imported/lin_qiao_niang_before.png-55e1c152ae8e34457705f189b3986545.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/RandomNpc/lin_qiao_niao_after.png"
-dest_files=["res://.godot/imported/lin_qiao_niao_after.png-d2ddee25fc2c8e591adc178f463aad16.ctex"]
+source_file="res://Assets/Portrait/RandomNpc/lin_qiao_niang_before.png"
+dest_files=["res://.godot/imported/lin_qiao_niang_before.png-55e1c152ae8e34457705f189b3986545.ctex"]
 
 [params]
 

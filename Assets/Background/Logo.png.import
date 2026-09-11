@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cu4i7rha4ked7"
-path="res://.godot/imported/lin_qiao_niao_before.png-8b15cb808fffeb943dc9d7841dbc7afc.ctex"
+uid="uid://de88r06hcei8i"
+path="res://.godot/imported/Logo.png-960d60c902e81d0648b976b5431e465a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/RandomNpc/lin_qiao_niao_before.png"
-dest_files=["res://.godot/imported/lin_qiao_niao_before.png-8b15cb808fffeb943dc9d7841dbc7afc.ctex"]
+source_file="res://Assets/Background/Logo.png"
+dest_files=["res://.godot/imported/Logo.png-960d60c902e81d0648b976b5431e465a.ctex"]
 
 [params]
 
