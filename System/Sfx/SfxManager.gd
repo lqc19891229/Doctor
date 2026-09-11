@@ -5,13 +5,15 @@ extends Node
 #
 # 指定音效：
 #
-# Clinic：
+# Clinic / Story：
 # - 按住 Q+A+Z / W+S+X：hear_tbeat
-# - Openclinical_logWindowButton：turn_page
+# - 打开行医记考：turn_page
 #
 # Night：
-# - ReadBookButton：turn_page
-# - NextDayButton：male_yawning
+# - 打开读书窗口：turn_page
+# - 确认进入下一天：male_yawning
+#
+# 普通音效由实际业务动作显式调用，不再依赖隐藏按钮的 pressed 信号。
 # =========================================================
 
 
@@ -29,16 +31,6 @@ const TURN_PAGE_STREAM: AudioStream = preload(
 const MALE_YAWNING_STREAM: AudioStream = preload(
 	"res://Assets/Sfx/male_yawning.mp3"
 )
-
-# =========================================================
-# 按钮节点名称 -> 音效
-# =========================================================
-const BUTTON_SFX_BY_NAME: Dictionary = {
-	&"Openclinical_logWindowButton": TURN_PAGE_STREAM,
-	&"ReadBookButton": TURN_PAGE_STREAM,
-	&"NextDayButton": MALE_YAWNING_STREAM
-}
-
 
 # 多个播放器可以避免快速点击时互相截断。
 const BUTTON_PLAYER_COUNT: int = 4
@@ -59,17 +51,6 @@ func _ready() -> void:
 
 	_create_button_players()
 	_create_heartbeat_player()
-
-	var tree := get_tree()
-	if tree == null:
-		return
-
-	# 监听之后动态进入场景树的按钮。
-	if not tree.node_added.is_connected(_on_node_added):
-		tree.node_added.connect(_on_node_added)
-
-	# 注册当前已经存在的按钮。
-	_register_buttons_in_subtree(tree.root)
 
 
 # =========================================================
@@ -111,57 +92,6 @@ func _create_heartbeat_player() -> void:
 
 
 # =========================================================
-# 按钮注册
-# =========================================================
-func _on_node_added(node: Node) -> void:
-	if node is BaseButton:
-		_register_button(node as BaseButton)
-
-
-func _register_buttons_in_subtree(root: Node) -> void:
-	if root == null:
-		return
-
-	if root is BaseButton:
-		_register_button(root as BaseButton)
-
-	for child in root.get_children():
-		_register_buttons_in_subtree(child)
-
-
-func _register_button(button: BaseButton) -> void:
-	if button == null:
-		return
-
-	# 只注册配置表中的按钮。
-	if not BUTTON_SFX_BY_NAME.has(button.name):
-		return
-
-	var callback := Callable(
-		self,
-		"_on_button_pressed"
-	).bind(button)
-
-	if not button.pressed.is_connected(callback):
-		button.pressed.connect(callback)
-
-
-# =========================================================
-# 按钮按下
-# =========================================================
-func _on_button_pressed(button: BaseButton) -> void:
-	if button == null:
-		return
-
-	var stream := BUTTON_SFX_BY_NAME.get(
-		button.name,
-		null
-	) as AudioStream
-
-	play_sfx(stream)
-
-
-# =========================================================
 # 播放普通音效
 # =========================================================
 func play_sfx(stream: AudioStream) -> void:
@@ -175,6 +105,14 @@ func play_sfx(stream: AudioStream) -> void:
 
 	player.stream = stream
 	player.play()
+
+
+func play_turn_page() -> void:
+	play_sfx(TURN_PAGE_STREAM)
+
+
+func play_male_yawning() -> void:
+	play_sfx(MALE_YAWNING_STREAM)
 
 
 func _get_available_button_player() -> AudioStreamPlayer:

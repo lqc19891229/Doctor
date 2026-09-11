@@ -687,6 +687,9 @@ func _on_clinical_log_button_pressed() -> void:
 	if not is_treatment_mode:
 		return
 
+	# Story NPC 治疗时，无论入口来自按钮还是 F3，都在打开行医记考时播放翻页声。
+	SfxManager.play_turn_page()
+
 	_show_window_front(clinical_log_window)
 	if clinical_log_window.has_method("open_window"):
 		clinical_log_window.call("open_window")

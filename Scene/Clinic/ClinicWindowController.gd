@@ -324,6 +324,9 @@ func open_clinical_log_window() -> void:
 		push_warning("ClinicalLogWindow 没找到，请检查节点名字和挂载位置")
 		return
 
+	# 无论入口来自按钮、桌面热点还是 F3，都统一在真正打开窗口时播放翻页声。
+	SfxManager.play_turn_page()
+
 	_show_window_front(clinical_log_window)
 
 	if clinical_log_window.has_method("open_window"):

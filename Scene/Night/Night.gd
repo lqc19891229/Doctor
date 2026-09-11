@@ -513,6 +513,9 @@ func open_read_book_window() -> void:
 		push_warning("Night.gd 无法打开读书窗口：read_book_window 为空")
 		return
 
+	# 无论入口来自按钮、桌面热点还是 F1，都统一在真正打开读书窗口时播放翻页声。
+	SfxManager.play_turn_page()
+
 	# ReadBook.open_window() 自己根据 UnlockManager 的状态版本决定是否需要重建列表。
 	# Night 不再提前重复刷新天数 / 书籍列表。
 	if read_book_window.has_method("open_window"):
@@ -584,6 +587,10 @@ func _on_next_day_button_pressed() -> void:
 	if _has_unread_entries():
 		_show_player_hint("尚有未读条目，请先阅读后再休息。")
 		return
+
+	# 只有真正允许进入下一天时才播放打哈欠音效。
+	# 如果被“尚有未读条目”拦截，则不会播放。
+	SfxManager.play_male_yawning()
 
 	night_finished.emit()
 
