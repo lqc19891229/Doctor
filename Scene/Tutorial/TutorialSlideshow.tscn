@@ -1,0 +1,222 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://Scene/Tutorial/TutorialSlideshow.gd" id="1_script"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/SourceHanSerifSC-Regular.otf" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_slide"]
+bg_color = Color(0.075, 0.065, 0.052, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.58, 0.46, 0.3, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_caption"]
+bg_color = Color(0.89, 0.83, 0.69, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.35, 0.25, 0.15, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="TutorialSlideshow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+script = ExtResource("1_script")
+titles = PackedStringArray("白天行医", "观察病情", "切脉辨证", "理解脉象", "查阅行医记考", "断病开方", "君臣佐使", "夜晚读书", "开始行医")
+descriptions = PackedStringArray("白天会有病人来到医馆。正确治疗病人，可以获得银钱、名望和行医心得。", "仔细阅读病人的描述，从症状、年龄和身体状态中寻找判断疾病的线索。", "点击把脉按钮，按住 Q、A、Z、W、S、X，可以查看不同部位的脉象。", "波峰高低反映气，线条粗细反映血，波速反映寒热，波宽反映湿燥。", "忘记疾病、药材或方剂时，可以打开行医记考，查阅已经掌握的内容。", "打开处方窗口后，先选择疾病，再选择药材、剂量以及对应的配伍区域。", "君药治疗主症，臣药协助君药，佐药制约或兼治，使药负责调和与引经。", "白天结束后进入夜晚。阅读新获得的医书条目，可以解锁药材、方剂和疾病。", "白天行医，夜晚读书，在有限的时间里积累银钱与名望，推动故事走向结局。")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.055, 0.045, 0.033, 1)
+
+[node name="HeaderLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 24.0
+offset_bottom = 88.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.9, 0.82, 0.64, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 38
+text = "《医者》玩法说明"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkipButton" type="Button" parent="."]
+custom_minimum_size = Vector2(136, 52)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -176.0
+offset_top = 28.0
+offset_right = -40.0
+offset_bottom = 80.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 22
+text = "跳过教程"
+
+[node name="SlideFrame" type="Panel" parent="."]
+layout_mode = 1
+anchor_left = 0.06
+anchor_top = 0.095
+anchor_right = 0.94
+anchor_bottom = 0.69
+theme_override_styles/panel = SubResource("StyleBox_slide")
+
+[node name="Screenshot" type="TextureRect" parent="SlideFrame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Placeholder" type="ColorRect" parent="SlideFrame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.18, 0.155, 0.115, 1)
+
+[node name="PlaceholderLabel" type="Label" parent="SlideFrame/Placeholder"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.78, 0.7, 0.55, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 30
+text = "游戏截图占位区域\n\n请在检查器的 Screenshots 属性中按顺序添加图片"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CaptionPanel" type="Panel" parent="."]
+layout_mode = 1
+anchor_left = 0.06
+anchor_top = 0.715
+anchor_right = 0.94
+anchor_bottom = 0.885
+theme_override_styles/panel = SubResource("StyleBox_caption")
+
+[node name="TitleLabel" type="Label" parent="CaptionPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 36.0
+offset_top = 18.0
+offset_right = -36.0
+offset_bottom = 66.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.16, 0.105, 0.06, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 30
+text = "玩法说明"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CaptionPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 54.0
+offset_top = 68.0
+offset_right = -54.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.13, 0.09, 0.055, 1)
+theme_override_fonts/normal_font = ExtResource("2_font")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+text = "教程说明"
+horizontal_alignment = 1
+
+[node name="KeyboardHint" type="Label" parent="."]
+layout_mode = 1
+anchor_left = 0.06
+anchor_top = 0.905
+anchor_right = 0.4
+anchor_bottom = 0.98
+theme_override_colors/font_color = Color(0.67, 0.61, 0.5, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 19
+text = "← / → 翻页　Enter 下一页　Esc 跳过"
+vertical_alignment = 1
+
+[node name="PageLabel" type="Label" parent="."]
+layout_mode = 1
+anchor_left = 0.44
+anchor_top = 0.915
+anchor_right = 0.56
+anchor_bottom = 0.975
+theme_override_colors/font_color = Color(0.85, 0.77, 0.61, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 22
+text = "1 / 9"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PreviousButton" type="Button" parent="."]
+custom_minimum_size = Vector2(170, 60)
+layout_mode = 1
+anchor_left = 0.67
+anchor_top = 0.91
+anchor_right = 0.78
+anchor_bottom = 0.975
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "上一页"
+
+[node name="NextButton" type="Button" parent="."]
+custom_minimum_size = Vector2(170, 60)
+layout_mode = 1
+anchor_left = 0.81
+anchor_top = 0.91
+anchor_right = 0.94
+anchor_bottom = 0.975
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "下一页"
