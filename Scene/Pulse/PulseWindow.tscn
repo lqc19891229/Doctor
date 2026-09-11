@@ -36,12 +36,16 @@ grow_vertical = 2
 [node name="KeyHintLabel" type="Label" parent="LayerTabs/按键提示/KeyHintPanel" unique_id=1711602170]
 custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
-text = "按键提示：
+theme_override_font_sizes/font_size = 30
+text = "
+
+按键提示：
+
 
 右手脉象：Q+A+Z
+
 左手脉象：W+S+X"
 horizontal_alignment = 1
-vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="右手脉象" type="Control" parent="LayerTabs" unique_id=416110597]
