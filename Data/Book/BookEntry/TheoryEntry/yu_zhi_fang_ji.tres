@@ -7,5 +7,5 @@ script = ExtResource("1")
 entry_id = "yu_zhi_fang_ji"
 book_id = "huang_di_nei_jing"
 title = "预制方剂"
-detail_text = "现在你可以预制方剂，开方时搜索并选取方剂名可以填写该方剂的所有药材。"
+detail_text = "现在你可以预制方剂，开方时搜索并选取方剂名，可自动填入该方剂包含的的所有药材及剂量。"
 unlock_required_experience_points = 0
