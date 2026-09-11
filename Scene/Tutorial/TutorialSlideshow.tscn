@@ -1,0 +1,226 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://Scene/Tutorial/TutorialSlideshow.gd" id="1_script"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/SourceHanSerifSC-Regular.otf" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_highlight"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.96, 0.73, 0.22, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.7)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_callout"]
+bg_color = Color(0.92, 0.86, 0.72, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.32, 0.22, 0.12, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.65)
+shadow_size = 12
+
+[node name="TutorialSlideshow" type="Control"]
+editor_description = "全屏截图聚光灯教程 V2：四块遮罩、高亮框、箭头和自动避让说明框。"
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+script = ExtResource("1_script")
+titles = PackedStringArray("白天行医", "观察病情", "切脉辨证", "理解脉象", "查阅行医记考", "断病开方", "君臣佐使", "夜晚读书", "开始行医")
+descriptions = PackedStringArray("白天会有病人来到医馆。正确治疗病人，可以获得银钱、名望和行医心得。", "仔细阅读病人的描述，从症状、年龄和身体状态中寻找判断疾病的线索。", "点击把脉按钮，按住 Q、A、Z、W、S、X，可以查看不同部位的脉象。", "波峰高低反映气，线条粗细反映血，波速反映寒热，波宽反映湿燥。", "忘记疾病、药材或方剂时，可以打开行医记考，查阅已经掌握的内容。", "打开处方窗口后，先选择疾病，再选择药材、剂量以及对应的配伍区域。", "君药治疗主症，臣药协助君药，佐药制约或兼治，使药负责调和与引经。", "白天结束后进入夜晚。阅读新获得的医书条目，可以解锁药材、方剂和疾病。", "白天行医，夜晚读书，在有限的时间里积累银钱与名望，推动故事走向结局。")
+focus_rects = Array[Rect2]([Rect2(0.04, 0.08, 0.92, 0.8), Rect2(0.35, 0.24, 0.3, 0.56), Rect2(0.73, 0.7, 0.2, 0.17), Rect2(0.12, 0.12, 0.58, 0.6), Rect2(0.73, 0.7, 0.2, 0.17), Rect2(0.05, 0.07, 0.9, 0.82), Rect2(0.42, 0.34, 0.52, 0.46), Rect2(0.7, 0.69, 0.24, 0.18), Rect2(0.04, 0.07, 0.92, 0.82)])
+callout_sides = PackedStringArray("bottom", "right", "left", "right", "left", "bottom", "left", "left", "top")
+
+[node name="Placeholder" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.15, 0.125, 0.09, 1)
+
+[node name="PlaceholderLabel" type="Label" parent="Placeholder"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.76, 0.67, 0.5, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 34
+text = "全屏游戏截图占位区域\n\n请选择根节点，在 Screenshots 数组中添加截图"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Screenshot" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ShadeLayer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ShadeTop" type="ColorRect" parent="ShadeLayer"]
+layout_mode = 0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.72)
+
+[node name="ShadeBottom" type="ColorRect" parent="ShadeLayer"]
+layout_mode = 0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.72)
+
+[node name="ShadeLeft" type="ColorRect" parent="ShadeLayer"]
+layout_mode = 0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.72)
+
+[node name="ShadeRight" type="ColorRect" parent="ShadeLayer"]
+layout_mode = 0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.72)
+
+[node name="HighlightBorder" type="Panel" parent="."]
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_highlight")
+
+[node name="CalloutPanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(520, 210)
+offset_right = 520.0
+offset_bottom = 210.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_callout")
+
+[node name="TitleLabel" type="Label" parent="CalloutPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 30.0
+offset_top = 20.0
+offset_right = -30.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.17, 0.1, 0.045, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 30
+text = "玩法说明"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CalloutPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = 76.0
+offset_right = -34.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.14, 0.085, 0.04, 1)
+theme_override_fonts/normal_font = ExtResource("2_font")
+theme_override_font_sizes/normal_font_size = 23
+bbcode_enabled = true
+scroll_active = false
+text = "教程说明"
+
+[node name="CalloutArrow" type="Label" parent="."]
+offset_right = 58.0
+offset_bottom = 58.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.96, 0.73, 0.22, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 46
+text = "◀"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkipButton" type="Button" parent="."]
+custom_minimum_size = Vector2(136, 52)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -164.0
+offset_top = 24.0
+offset_right = -28.0
+offset_bottom = 76.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 21
+text = "跳过教程"
+
+[node name="BottomBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -86.0
+offset_right = 300.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PreviousButton" type="Button" parent="BottomBar"]
+custom_minimum_size = Vector2(170, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 23
+text = "上一页"
+
+[node name="PageLabel" type="Label" parent="BottomBar"]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.91, 0.72, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 22
+text = "1 / 9"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="BottomBar"]
+custom_minimum_size = Vector2(170, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 23
+text = "下一页"
