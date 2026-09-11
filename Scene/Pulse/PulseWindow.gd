@@ -131,6 +131,11 @@ func _ready() -> void:
 	if not close_requested.is_connected(_on_close_requested):
 		close_requested.connect(_on_close_requested)
 
+	# 不论窗口通过按钮、Esc、右上角还是场景切换隐藏，
+	# 都确保心跳立即停止。
+	if not visibility_changed.is_connected(_on_visibility_changed):
+		visibility_changed.connect(_on_visibility_changed)
+
 
 # =========================================================
 # 窗口位置锁定
@@ -163,6 +168,7 @@ func open_window() -> void:
 # 关闭窗口
 # =========================================================
 func close_window() -> void:
+	SfxManager.stop_heartbeat()
 	hide()
 
 
@@ -266,7 +272,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_close_requested() -> void:
+	SfxManager.stop_heartbeat()
 	hide()
+
+
+func _on_visibility_changed() -> void:
+	if not visible:
+		SfxManager.stop_heartbeat()
 
 
 # =========================================================

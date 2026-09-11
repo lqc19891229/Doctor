@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6vm151h62rc2"
-path="res://.godot/imported/qin_san_niang_beefore.png-64a744da8be73a368109d955c0113605.ctex"
+uid="uid://ij6xh2882fne"
+path="res://.godot/imported/ma_chang_feng_after.png-6cba8b9d0413eb935025c5591c37a919.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/RandomNpc/qin_san_niang_beefore.png"
-dest_files=["res://.godot/imported/qin_san_niang_beefore.png-64a744da8be73a368109d955c0113605.ctex"]
+source_file="res://Assets/Portrait/RandomNpc/ma_chang_feng_after.png"
+dest_files=["res://.godot/imported/ma_chang_feng_after.png-6cba8b9d0413eb935025c5591c37a919.ctex"]
 
 [params]
 

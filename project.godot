@@ -35,6 +35,7 @@ SaveManager="*uid://bneb5ndife64f"
 StoryManager="*uid://bn72sps8x3c2o"
 MusicManager="*uid://wsf1o8q26bm5"
 AmbientManager="*uid://1owxd0hrdwxa"
+SfxManager="*uid://cp0r0yjix6bdh"
 
 [display]
 
