@@ -483,6 +483,22 @@ func _on_quit_game_button_pressed() -> void:
 # =========================================================
 # Pause Menu / Settings
 # =========================================================
+func open_pause_menu_from_subwindow() -> void:
+	# Clinic 的独立 Window 会先收到自己的输入事件。
+	# 子窗口中的 Esc 必须直接“打开”暂停菜单，而不是 toggle，
+	# 避免同一次 Esc 在不同 Viewport 传播时把刚打开的菜单再次关闭。
+	if settings_layer != null and settings_layer.visible:
+		return
+
+	if main_menu_layer.visible:
+		return
+
+	if pause_menu_layer != null and pause_menu_layer.visible:
+		return
+
+	_open_pause_menu()
+
+
 func _on_pause_toggle_requested() -> void:
 	# Settings 自己处理 ESC；打开时 PauseMenu 不应再切换。
 	if settings_layer != null and settings_layer.visible:
