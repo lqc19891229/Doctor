@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://wauqheeppv0i"
-path="res://.godot/imported/turn_page.mp3-9f7a964eada0849a7ab53b2e03244827.mp3str"
+path="res://.godot/imported/turn_page.mp3-a13aa13cdebaaa4aeb347db671e7ac45.mp3str"
 
 [deps]
 
-source_file="res://Assets/turn_page.mp3"
-dest_files=["res://.godot/imported/turn_page.mp3-9f7a964eada0849a7ab53b2e03244827.mp3str"]
+source_file="res://Assets/Sfx/turn_page.mp3"
+dest_files=["res://.godot/imported/turn_page.mp3-a13aa13cdebaaa4aeb347db671e7ac45.mp3str"]
 
 [params]
 
