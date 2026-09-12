@@ -19,6 +19,7 @@ script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
+music = "res://Assets/Music/020/圍剿夜襲.mp3"
 text = "咯噔"
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")

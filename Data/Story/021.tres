@@ -12,6 +12,7 @@ script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
+music = "res://Assets/Music/Story/021/问斩.mp3"
 text = "蕲州赈灾药材贪污案惊动朝廷，锦衣卫奉旨查办，地方涉案官员数十人，贪污银钱近万两。"
 background = ExtResource("background_1")
 [sub_resource type="Resource" id="StoryLine_002"]

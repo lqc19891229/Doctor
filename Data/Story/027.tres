@@ -20,6 +20,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
+music = "res://Assets/Music/Story/027/元宵夜樂.mp3"
 text = "今天是上元佳节，咱们全家去城里逛逛，听说今年的灯节格外热闹。"
 portrait = ExtResource("portrait_1")
 background = ExtResource("background_2")
