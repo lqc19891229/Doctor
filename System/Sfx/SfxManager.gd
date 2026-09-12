@@ -32,6 +32,10 @@ const MALE_YAWNING_STREAM: AudioStream = preload(
 	"res://Assets/Sfx/male_yawning.mp3"
 )
 
+const ROOSTER_CROWS_STREAM: AudioStream = preload(
+	"res://Assets/Sfx/rooster_crows.mp3"
+)
+
 # 多个播放器可以避免快速点击时互相截断。
 const BUTTON_PLAYER_COUNT: int = 4
 
@@ -113,6 +117,10 @@ func play_turn_page() -> void:
 
 func play_male_yawning() -> void:
 	play_sfx(MALE_YAWNING_STREAM)
+
+
+func play_rooster_crows() -> void:
+	play_sfx(ROOSTER_CROWS_STREAM)
 
 
 func _get_available_button_player() -> AudioStreamPlayer:

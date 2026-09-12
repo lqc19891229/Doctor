@@ -17,6 +17,10 @@ const NIGHT_RAINY_BACKGROUND_PATH: String = "res://Assets/Background/clinic/rain
 # 完整换图过程约为该数值的两倍。
 @export_range(0.05, 2.0, 0.05) var background_fade_duration: float = 0.45
 
+# 玩家确认休息后先渐黑，再在完全黑屏中停留一段时间，最后进入下一天。
+@export_range(0.1, 2.0, 0.05) var sleep_fade_to_black_duration: float = 0.65
+@export_range(0.5, 5.0, 0.1) var sleep_black_duration: float = 1.0
+
 @onready var read_book_window: Window = find_child("ReadBook", true, false) as Window
 @onready var info_window: Window = $InfoWindow
 @onready var info_label: Label = $InfoWindow/Panel/VBoxContainer/InfoLabel
@@ -40,6 +44,11 @@ var background_fade_tween: Tween = null
 var background_fade_mask: ColorRect = null
 var night_background_target_texture: Texture2D = null
 
+# 跨天睡眠黑屏。Night 为常驻场景，因此运行时创建一次并反复复用。
+var sleep_blackout: ColorRect = null
+var sleep_blackout_tween: Tween = null
+var sleep_transition_active: bool = false
+
 var topbar_controller = null
 
 # 玩家提示窗口。Night.tscn 中它是根节点的直接子节点，使用精确路径，
@@ -54,6 +63,7 @@ var pending_night_auto_story_day: int = 0
 func _ready() -> void:
 	_validate_scene_node_bindings()
 	_setup_night_background_fade_mask()
+	_setup_sleep_blackout()
 	_setup_buttons()
 	_setup_player_hint_dialog()
 	_setup_read_book_window()
@@ -155,6 +165,21 @@ func _setup_night_background_fade_mask() -> void:
 		night_background.get_index() + 1
 	)
 	background_fade_mask.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+
+
+func _setup_sleep_blackout() -> void:
+	if sleep_blackout != null:
+		return
+
+	sleep_blackout = ColorRect.new()
+	sleep_blackout.name = "SleepBlackout"
+	sleep_blackout.color = Color(0.0, 0.0, 0.0, 0.0)
+	sleep_blackout.mouse_filter = Control.MOUSE_FILTER_STOP
+	sleep_blackout.z_index = 4096
+
+	add_child(sleep_blackout)
+	sleep_blackout.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	sleep_blackout.hide()
 
 
 func _set_night_background_mask_alpha(alpha: float) -> void:
@@ -554,6 +579,10 @@ func _input(event: InputEvent) -> void:
 	if not is_visible_in_tree():
 		return
 
+	# 跨天黑屏期间不再响应任何 Night 快捷键，避免 F2 重复触发。
+	if sleep_transition_active:
+		return
+
 	if not (event is InputEventKey):
 		return
 
@@ -584,15 +613,68 @@ func _input(event: InputEvent) -> void:
 # =========================
 
 func _on_next_day_button_pressed() -> void:
+	if sleep_transition_active:
+		return
+
 	if _has_unread_entries():
 		_show_player_hint("尚有未读条目，请先阅读后再休息。")
 		return
+
+	sleep_transition_active = true
+
+	if next_day_button != null:
+		next_day_button.disabled = true
 
 	# 只有真正允许进入下一天时才播放打哈欠音效。
 	# 如果被“尚有未读条目”拦截，则不会播放。
 	SfxManager.play_male_yawning()
 
+	# 按下休息后先渐进变黑，而不是瞬间黑屏。
+	if sleep_blackout != null:
+		if sleep_blackout_tween != null and sleep_blackout_tween.is_valid():
+			sleep_blackout_tween.kill()
+
+		sleep_blackout.color = Color(0.0, 0.0, 0.0, 0.0)
+		sleep_blackout.show()
+
+		sleep_blackout_tween = create_tween()
+		sleep_blackout_tween.set_trans(Tween.TRANS_SINE)
+		sleep_blackout_tween.set_ease(Tween.EASE_IN_OUT)
+		sleep_blackout_tween.tween_property(
+			sleep_blackout,
+			"color:a",
+			1.0,
+			sleep_fade_to_black_duration
+		)
+
+		await sleep_blackout_tween.finished
+
+	if not is_inside_tree():
+		return
+
+	# 完全黑屏后继续保持一段时间，让哈欠声与“睡过一夜”的停顿自然结束。
+	await get_tree().create_timer(sleep_black_duration).timeout
+
+	if not is_inside_tree():
+		return
+
+	# Main 收到信号后负责处理 night_end 剧情或真正推进到下一天。
 	night_finished.emit()
+
+	# Night 是常驻缓存场景。无论 Main 随后进入剧情还是 Clinic，
+	# 都必须把本场景的临时黑屏状态复原，供下一晚继续使用。
+	if sleep_blackout_tween != null and sleep_blackout_tween.is_valid():
+		sleep_blackout_tween.kill()
+	sleep_blackout_tween = null
+
+	if sleep_blackout != null:
+		sleep_blackout.color = Color(0.0, 0.0, 0.0, 0.0)
+		sleep_blackout.hide()
+
+	sleep_transition_active = false
+
+	if next_day_button != null:
+		next_day_button.disabled = false
 
 
 func _has_unread_entries() -> bool:
@@ -649,6 +731,17 @@ func _reset_transient_state_for_night_entry() -> void:
 
 	waiting_finance_report_close = false
 	pending_night_auto_story_day = 0
+
+	# 常驻 Night 重新进入时，清理上一晚的跨天临时状态。
+	sleep_transition_active = false
+	if sleep_blackout_tween != null and sleep_blackout_tween.is_valid():
+		sleep_blackout_tween.kill()
+	sleep_blackout_tween = null
+	if sleep_blackout != null:
+		sleep_blackout.color = Color(0.0, 0.0, 0.0, 0.0)
+		sleep_blackout.hide()
+	if next_day_button != null:
+		next_day_button.disabled = false
 
 
 func start_night(day: int, show_finance_report: bool = true) -> void:

@@ -82,8 +82,25 @@ var pending_overwrite_slot_index: int = -1
 var return_to_menu_confirm_dialog: ConfirmationDialog = null
 var quit_game_confirm_dialog: ConfirmationDialog = null
 
+# Clinic / Night 切换时使用的全屏黑色遮罩。
+# 遮罩属于 Main，而不是 Clinic / Night，因此切换常驻场景时不会出现一帧闪亮。
+# Night → Clinic：Night 自己负责渐黑；Main 负责 Clinic 从黑色渐亮。
+@export_range(0.1, 2.0, 0.05) var morning_fade_in_duration: float = 0.8
+
+# Clinic → Night：先把 Clinic 渐黑，再切换 Night，最后让 Night 从黑色渐亮。
+@export_range(0.1, 2.0, 0.05) var evening_fade_to_black_duration: float = 0.65
+@export_range(0.1, 2.0, 0.05) var evening_fade_in_duration: float = 0.8
+
+var morning_fade_layer: CanvasLayer = null
+var morning_fade_rect: ColorRect = null
+var morning_fade_tween: Tween = null
+var clinic_to_night_transition_active: bool = false
+
 
 func _ready() -> void:
+	# 创建跨天进入 Clinic 时使用的全屏渐亮遮罩。
+	_setup_morning_fade_overlay()
+
 	# 创建确认框
 	_setup_overwrite_confirm_dialog()
 	_setup_pause_confirm_dialogs()
@@ -702,9 +719,146 @@ func _quit_game_safely() -> void:
 
 
 # =========================================================
+# 跨天进入 Clinic 的渐亮遮罩
+# =========================================================
+func _setup_morning_fade_overlay() -> void:
+	if morning_fade_layer != null:
+		return
+
+	morning_fade_layer = CanvasLayer.new()
+	morning_fade_layer.name = "MorningFadeLayer"
+	morning_fade_layer.layer = 10000
+	morning_fade_layer.process_mode = Node.PROCESS_MODE_ALWAYS
+	add_child(morning_fade_layer)
+
+	morning_fade_rect = ColorRect.new()
+	morning_fade_rect.name = "MorningFadeRect"
+	morning_fade_rect.color = Color(0.0, 0.0, 0.0, 0.0)
+	morning_fade_rect.mouse_filter = Control.MOUSE_FILTER_STOP
+	morning_fade_layer.add_child(morning_fade_rect)
+	morning_fade_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	morning_fade_layer.hide()
+
+
+func _prepare_morning_fade_from_black() -> void:
+	if morning_fade_layer == null or morning_fade_rect == null:
+		_setup_morning_fade_overlay()
+
+	if morning_fade_tween != null and morning_fade_tween.is_valid():
+		morning_fade_tween.kill()
+	morning_fade_tween = null
+
+	if morning_fade_layer == null or morning_fade_rect == null:
+		return
+
+	# 必须在隐藏 Night、显示 Clinic 之前先盖住全屏，防止切换瞬间闪亮。
+	morning_fade_rect.color = Color(0.0, 0.0, 0.0, 1.0)
+	morning_fade_layer.show()
+
+
+func _start_morning_fade_in() -> void:
+	if morning_fade_layer == null or morning_fade_rect == null:
+		return
+
+	if morning_fade_tween != null and morning_fade_tween.is_valid():
+		morning_fade_tween.kill()
+
+	morning_fade_tween = create_tween()
+	morning_fade_tween.set_trans(Tween.TRANS_SINE)
+	morning_fade_tween.set_ease(Tween.EASE_IN_OUT)
+	morning_fade_tween.tween_property(
+		morning_fade_rect,
+		"color:a",
+		0.0,
+		morning_fade_in_duration
+	)
+	morning_fade_tween.tween_callback(_finish_morning_fade_in)
+
+
+func _finish_morning_fade_in() -> void:
+	morning_fade_tween = null
+	if morning_fade_rect != null:
+		morning_fade_rect.color = Color(0.0, 0.0, 0.0, 0.0)
+	if morning_fade_layer != null:
+		morning_fade_layer.hide()
+
+
+# =========================================================
+# Clinic → Night 的渐黑 / 渐亮
+# =========================================================
+func _fade_clinic_to_black() -> void:
+	if morning_fade_layer == null or morning_fade_rect == null:
+		_setup_morning_fade_overlay()
+
+	if morning_fade_layer == null or morning_fade_rect == null:
+		return
+
+	if morning_fade_tween != null and morning_fade_tween.is_valid():
+		morning_fade_tween.kill()
+
+	morning_fade_rect.color = Color(0.0, 0.0, 0.0, 0.0)
+	morning_fade_layer.show()
+
+	var fade_tween := create_tween()
+	morning_fade_tween = fade_tween
+	fade_tween.set_trans(Tween.TRANS_SINE)
+	fade_tween.set_ease(Tween.EASE_IN_OUT)
+	fade_tween.tween_property(
+		morning_fade_rect,
+		"color:a",
+		1.0,
+		evening_fade_to_black_duration
+	)
+
+	await fade_tween.finished
+
+	if morning_fade_tween == fade_tween:
+		morning_fade_tween = null
+
+
+func _start_evening_fade_in() -> void:
+	if morning_fade_layer == null or morning_fade_rect == null:
+		clinic_to_night_transition_active = false
+		return
+
+	if morning_fade_tween != null and morning_fade_tween.is_valid():
+		morning_fade_tween.kill()
+
+	# 切到 Night 时遮罩已经保持全黑；此处只负责慢慢揭开 Night。
+	morning_fade_rect.color = Color(0.0, 0.0, 0.0, 1.0)
+	morning_fade_layer.show()
+
+	morning_fade_tween = create_tween()
+	morning_fade_tween.set_trans(Tween.TRANS_SINE)
+	morning_fade_tween.set_ease(Tween.EASE_IN_OUT)
+	morning_fade_tween.tween_property(
+		morning_fade_rect,
+		"color:a",
+		0.0,
+		evening_fade_in_duration
+	)
+	morning_fade_tween.tween_callback(_finish_evening_fade_in)
+
+
+func _finish_evening_fade_in() -> void:
+	morning_fade_tween = null
+	if morning_fade_rect != null:
+		morning_fade_rect.color = Color(0.0, 0.0, 0.0, 0.0)
+	if morning_fade_layer != null:
+		morning_fade_layer.hide()
+
+	clinic_to_night_transition_active = false
+
+
+# =========================================================
 # 进入 Clinic
 # =========================================================
-func _enter_clinic() -> void:
+func _enter_clinic(play_morning_sfx: bool = false) -> void:
+	# 从 Night 真正跨天进入 Clinic 时，先用 Main 级遮罩保持全黑。
+	# Night 自己的黑屏随后即使被隐藏，屏幕也不会突然亮起来。
+	if play_morning_sfx:
+		_prepare_morning_fade_from_black()
+
 	_clear_current_scene()
 
 	var was_cached := clinic_scene_instance != null and is_instance_valid(clinic_scene_instance)
@@ -746,10 +900,19 @@ func _enter_clinic() -> void:
 	if is_instance_valid(AmbientManager):
 		AmbientManager.play_scene_ambient("Clinic")
 
+	# 只有真正从 Night 睡到第二天时才播放晨间公鸡叫。
+	# 新游戏、读取白天存档、剧情白天返回 Clinic 等路径均保持安静。
+	if play_morning_sfx and is_instance_valid(SfxManager):
+		SfxManager.play_rooster_crows()
+
 	# 每次重新进入 Clinic 都走每日入口；Clinic.start_new_day() 负责清理上一天
 	# 的临时 UI / 病人状态并重新启动白天计时。
 	if current_scene.has_method("start_new_day"):
 		current_scene.call("start_new_day", GameTime.current_day)
+
+	# Clinic 已经完整初始化后，再把 Main 级黑色遮罩慢慢淡出。
+	if play_morning_sfx:
+		_start_morning_fade_in()
 
 	if OS.is_debug_build() and was_cached:
 		print("[Main] 复用 Clinic 常驻实例")
@@ -760,12 +923,23 @@ func _enter_clinic() -> void:
 # =========================================================
 # 进入 Night
 # =========================================================
-func _enter_night(show_finance_report: bool = true) -> void:
+func _enter_night(
+	show_finance_report: bool = true,
+	play_evening_fade_in: bool = false
+) -> void:
+	# Clinic 正常结束进入 Night 时，此刻 Main 级遮罩已经全黑。
+	# 切换完成后再慢慢淡出遮罩，避免 Night 瞬间亮起。
+	if play_evening_fade_in:
+		_prepare_morning_fade_from_black()
+
 	_clear_current_scene()
 
 	var was_cached := night_scene_instance != null and is_instance_valid(night_scene_instance)
 	current_scene = _get_or_create_night_scene()
 	if current_scene == null:
+		# 过渡失败时不要把玩家永久留在黑屏状态。
+		if play_evening_fade_in:
+			_finish_evening_fade_in()
 		push_error("Night 场景实例创建失败。")
 		return
 
@@ -800,6 +974,10 @@ func _enter_night(show_finance_report: bool = true) -> void:
 		current_scene.call("start_night", GameTime.current_day, show_finance_report)
 	else:
 		print("Night 没有 start_night 方法")
+
+	# Night 初始化完成后，再从全黑慢慢渐亮。
+	if play_evening_fade_in:
+		_start_evening_fade_in()
 
 	if OS.is_debug_build() and was_cached:
 		print("[Main] 复用 Night 常驻实例")
@@ -1167,11 +1345,13 @@ func _on_story_finished() -> void:
 		# “播放后”决定剧情结束后的目标场景。
 		# 如果当前处于 Night，进入 Clinic 前先正常结束夜晚并推进到下一天；
 		# 如果本来就在白天，则只返回 Clinic，不写盘。
+		var entered_new_day_from_night: bool = false
 		if GameTime != null and not GameTime.is_day():
 			GameTime.finish_night()
 			_save_game_with_warning("夜晚结束（剧情返回下一天诊室）")
+			entered_new_day_from_night = true
 
-		_enter_clinic()
+		_enter_clinic(entered_new_day_from_night)
 		return
 
 	if target == "map":
@@ -1200,13 +1380,24 @@ func _settle_current_day_finances_if_needed() -> void:
 # 不增加天数
 # =========================================================
 func _on_clinic_finished() -> void:
-	# 正常白天结束：先结算，再进入 Night；Night 默认显示结算窗口。
+	if clinic_to_night_transition_active:
+		return
+
+	clinic_to_night_transition_active = true
+
+	# 先让 Clinic 画面渐黑。黑幕同时拦截鼠标，避免过渡期间继续操作。
+	await _fade_clinic_to_black()
+
+	if not is_inside_tree():
+		return
+
+	# 完全黑屏后再执行原有的白天结算和场景切换。
 	_settle_current_day_finances_if_needed()
 	GameTime.finish_day()
 	_save_game_with_warning("白天结束")
 
-	print("Clinic 已结束，切换到 Night 场景")
-	_enter_night()
+	print("Clinic 已结束，渐黑后切换到 Night 场景")
+	_enter_night(true, true)
 
 
 # =========================================================
@@ -1236,7 +1427,7 @@ func _finish_night_and_enter_next_day() -> void:
 	_save_game_with_warning("夜晚结束")
 
 	print("夜晚结束，进入第 %d 天" % GameTime.current_day)
-	_enter_clinic()
+	_enter_clinic(true)
 
 
 func _save_game_with_warning(context: String) -> bool:
