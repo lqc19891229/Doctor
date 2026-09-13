@@ -1113,7 +1113,6 @@ func _on_submit_button_pressed() -> void:
 		return
 
 	emit_signal("submit_requested")
-	_clear_selected_disease()
 
 
 func _setup_player_hint_dialog() -> void:

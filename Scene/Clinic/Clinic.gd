@@ -1215,6 +1215,14 @@ func submit_prescription() -> bool:
 		_set_info_text("当前病人没有绑定疾病，无法提交处方")
 		return false
 
+	if current_prescription == null:
+		_set_info_text("当前处方未初始化，无法提交")
+		return false
+
+	if not current_prescription.has_disease():
+		_set_info_text("请先选择疾病诊断")
+		return false
+
 	if current_prescription.is_empty():
 		_set_info_text("当前处方为空，请先开方")
 		return false
