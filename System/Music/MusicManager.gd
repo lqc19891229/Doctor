@@ -151,27 +151,44 @@ func _on_bgm_finished() -> void:
 
 
 # 剧情音乐
-# StoryData:
-# music:"sad"
-#
-# Assets/Music/BGM/Story/sad.ogg
+# 支持两种配置方式：
+# 1. 完整资源路径：
+#    res://Assets/Music/Story/027/元宵夜樂.mp3
+# 2. 旧的音乐名 / ID：
+#    山水行旅
+#    -> 自动查找 res://Assets/Music/Story/山水行旅.ogg/.mp3/.wav
 
-func play_story_music(id: String):
+func play_story_music(music_value: String) -> void:
 
-	if id == "":
+	var value := music_value.strip_edges()
+
+	if value == "":
 		return
 
-	var extensions = [".ogg", ".mp3", ".wav"]
+	# Excel / StoryLine 当前会直接写入完整 res:// 路径。
+	# 这种情况下不再拼接目录和扩展名，直接按配置播放。
+	if value.begins_with("res://") or value.begins_with("user://"):
+
+		if FileAccess.file_exists(value):
+			current_music_mode = "story"
+			play_music(value)
+			return
+
+		print("MusicManager: 剧情音乐不存在:", value)
+		return
+
+	# 兼容旧数据：只填写音乐名 / ID。
+	var extensions: Array[String] = [".ogg", ".mp3", ".wav"]
 
 	for ext in extensions:
-		var path = "res://Assets/Music/BGM/Story/" + id + ext
+		var path: String = "res://Assets/Music/Story/" + value + ext
 
 		if FileAccess.file_exists(path):
 			current_music_mode = "story"
 			play_music(path)
 			return
 
-	print("MusicManager: 剧情音乐不存在:", id)
+	print("MusicManager: 剧情音乐不存在:", value)
 
 
 

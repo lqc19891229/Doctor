@@ -28,6 +28,16 @@ grow_vertical = 2
 [node name="VBoxRoot" type="VBoxContainer" parent="MarginContainer" unique_id=646348250]
 layout_mode = 2
 
+[node name="SearchEdit" type="LineEdit" parent="MarginContainer/VBoxRoot"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+tooltip_text = "搜索全部可阅读医书中的已解锁条目。"
+theme_override_colors/font_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_colors/font_placeholder_color = Color(0.75, 0.7, 0.6, 1)
+theme_override_font_sizes/font_size = 23
+placeholder_text = "搜索全部已解锁条目..."
+clear_button_enabled = true
+
 [node name="ContentRow" type="HBoxContainer" parent="MarginContainer/VBoxRoot" unique_id=745767981]
 layout_mode = 2
 size_flags_vertical = 3
@@ -63,7 +73,7 @@ layout_mode = 2
 [node name="EntryTitle" type="Label" parent="MarginContainer/VBoxRoot/ContentRow/EntryPanel/EntryVBox" unique_id=2049629444]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_akuei")
-text = "条目列表"
+text = "条目列表 / 搜索结果"
 
 [node name="EntryList" type="ItemList" parent="MarginContainer/VBoxRoot/ContentRow/EntryPanel/EntryVBox" unique_id=397650445]
 layout_mode = 2

@@ -12,7 +12,8 @@ signal player_data_changed
 # 左侧：书籍列表
 @onready var book_list: ItemList = $MarginContainer/VBoxRoot/ContentRow/BookPanel/BookVBox/BookList
 
-# 中间：条目列表
+# 中间：条目搜索 / 列表
+@onready var search_edit: LineEdit = $MarginContainer/VBoxRoot/SearchEdit
 @onready var entry_list: ItemList = $MarginContainer/VBoxRoot/ContentRow/EntryPanel/EntryVBox/EntryList
 
 # 右侧：正文窗口
@@ -29,9 +30,24 @@ signal player_data_changed
 # 运行时数据
 # =========================
 
+# 所有当前可在 ReadBook 中显示的医书。
+# 全局搜索时 books 会变成筛选后的书籍列表，因此另外保留完整集合。
+var all_visible_books: Array[BookData] = []
+
+# 当前左侧 BookList 实际显示的医书。
 var books: Array[BookData] = []
 var book_new_entry_counts: Array[int] = []
+
+# 当前选中医书的全部可阅读条目。
 var readable_entries: Array[BookEntryData] = []
+
+# 当前全局搜索匹配到的条目总数。
+var global_search_match_count: int = 0
+
+# 当前 EntryList 实际显示的条目。
+# 搜索后 ItemList 的索引不再等同于 readable_entries 的索引，
+# 因此必须单独保存显示结果，避免点击搜索结果时打开错误条目。
+var displayed_entries: Array[BookEntryData] = []
 
 var selected_book: BookData = null
 var selected_entry: BookEntryData = null
@@ -62,9 +78,23 @@ func _ready() -> void:
 # =========================
 
 func open_window() -> void:
-	# 天数文本很轻，打开时直接同步；书籍列表只有状态版本变化才重建。
+	# 每次重新打开读书窗口时清空上一次全局搜索。
+	# 阻止 text_changed 在窗口尚未完成刷新时提前触发筛选。
+	if search_edit != null:
+		search_edit.set_block_signals(true)
+		search_edit.clear()
+		search_edit.set_block_signals(false)
+
 	_update_day_label()
 	_refresh_book_list_if_dirty()
+
+	# 即使解锁状态版本没有变化，也要根据已经清空的搜索词
+	# 重新构建左侧列表，避免保留上次关闭窗口前的搜索结果。
+	var preferred_book_id := ""
+	if selected_book != null:
+		preferred_book_id = selected_book.book_id.strip_edges()
+	_rebuild_book_list_for_search(preferred_book_id)
+
 	_clear_entry_and_detail()
 	show()
 	_focus_book_list_on_open()
@@ -94,6 +124,9 @@ func _connect_ui_signals() -> void:
 
 	if not entry_list.item_selected.is_connected(_on_entry_selected):
 		entry_list.item_selected.connect(_on_entry_selected)
+
+	if search_edit != null and not search_edit.text_changed.is_connected(_on_search_text_changed):
+		search_edit.text_changed.connect(_on_search_text_changed)
 
 
 # =========================
@@ -151,11 +184,7 @@ func _refresh_book_list() -> void:
 	if selected_book != null:
 		selected_book_id = selected_book.book_id.strip_edges()
 
-	book_list.clear()
-	books.clear()
-	book_new_entry_counts.clear()
-
-	var selected_index := -1
+	all_visible_books.clear()
 
 	for book in BookDB.get_all_books():
 		if book == null:
@@ -164,29 +193,103 @@ func _refresh_book_list() -> void:
 		if not Unlock.is_book_visible_in_readbook(book):
 			continue
 
+		all_visible_books.append(book)
+
+	var preferred_index := _rebuild_book_list_for_search(selected_book_id)
+
+	# 如果读入其它存档后，上一份存档选中的书已经完全不可见，
+	# 清掉旧选择。仅仅因为搜索过滤而暂时不显示，不在这里清空。
+	if selected_book_id != "":
+		var still_visible := false
+		for book in all_visible_books:
+			if book != null and book.book_id.strip_edges() == selected_book_id:
+				still_visible = true
+				break
+
+		if not still_visible:
+			selected_book = null
+			selected_entry = null
+		elif preferred_index >= 0:
+			book_list.select(preferred_index)
+
+
+func _count_matching_entries_in_book(book: BookData) -> int:
+	if book == null:
+		return 0
+
+	var query := _get_search_query()
+	if query == "":
+		return 0
+
+	var match_count := 0
+	var entries: Array[BookEntryData] = Unlock.get_readable_entries_by_book(book.book_id)
+
+	for entry in entries:
+		if _entry_matches_search(entry):
+			match_count += 1
+
+	return match_count
+
+
+func _rebuild_book_list_for_search(preferred_book_id: String = "") -> int:
+	book_list.clear()
+	books.clear()
+	book_new_entry_counts.clear()
+	global_search_match_count = 0
+
+	var query := _get_search_query()
+	var preferred_index := -1
+
+	for book in all_visible_books:
+		if book == null:
+			continue
+
+		var match_count := 0
+		if query != "":
+			match_count = _count_matching_entries_in_book(book)
+			if match_count <= 0:
+				continue
+			global_search_match_count += match_count
+
 		var new_entry_count = Unlock.get_unread_readable_entry_count_by_book(book.book_id)
 		var display_name := book.book_name
+
+		if query != "":
+			display_name += "  【匹配%d】" % match_count
+
 		if new_entry_count > 0:
 			display_name += "  【新%d】" % new_entry_count
 
 		books.append(book)
 		book_new_entry_counts.append(new_entry_count)
 		book_list.add_item(display_name)
+
 		var item_index := book_list.item_count - 1
 
 		if new_entry_count > 0:
-			book_list.set_item_custom_fg_color(item_index, Color(1.0, 0.82, 0.32, 1.0))
-			book_list.set_item_tooltip(item_index, "有 %d 个新解锁条目可以查看" % new_entry_count)
+			book_list.set_item_custom_fg_color(
+				item_index,
+				Color(1.0, 0.82, 0.32, 1.0)
+			)
 
-		if selected_book_id != "" and book.book_id.strip_edges() == selected_book_id:
-			selected_index = item_index
+		if query != "":
+			book_list.set_item_tooltip(
+				item_index,
+				"找到 %d 个匹配条目" % match_count
+			)
+		elif new_entry_count > 0:
+			book_list.set_item_tooltip(
+				item_index,
+				"有 %d 个新解锁条目可以查看" % new_entry_count
+			)
 
-	if selected_index >= 0:
-		book_list.select(selected_index)
-	elif selected_book_id != "":
-		# 读入其它存档后，上一份存档选中的书可能已不可见。
-		selected_book = null
-		selected_entry = null
+		if preferred_book_id != "" and book.book_id.strip_edges() == preferred_book_id:
+			preferred_index = item_index
+
+	if preferred_index >= 0:
+		book_list.select(preferred_index)
+
+	return preferred_index
 
 
 # =========================
@@ -196,6 +299,7 @@ func _refresh_book_list() -> void:
 func _clear_entry_and_detail() -> void:
 	entry_list.clear()
 	readable_entries.clear()
+	displayed_entries.clear()
 	selected_entry = null
 	_set_detail_text("")
 
@@ -256,12 +360,81 @@ func _refresh_entry_list_for_selected_book() -> void:
 	readable_entries = Unlock.get_readable_entries_by_book(selected_book.book_id)
 	_sort_unread_entries_to_top()
 
+	_refresh_entry_list_view()
+	_update_entry_info_label()
+
+	# 只显示条目列表，不自动选中 / 阅读第一个条目。
+	# 玩家需要手动点击条目后，才会触发 _show_entry_by_index() 并标记已读。
+	entry_list.deselect_all()
+	selected_entry = null
+	_set_detail_text("")
+
+
+# =========================
+# 全局条目搜索
+# =========================
+
+func _get_search_query() -> String:
+	if search_edit == null:
+		return ""
+
+	return search_edit.text.strip_edges()
+
+
+func _entry_matches_search(entry: BookEntryData) -> bool:
+	if entry == null:
+		return false
+
+	var query := _get_search_query()
+	if query == "":
+		return true
+
+	# findn() 为大小写不敏感搜索；中文标题可直接匹配。
+	return entry.title.findn(query) >= 0
+
+
+func _refresh_entry_list_view(select_entry_id: String = "") -> void:
+	entry_list.clear()
+	displayed_entries.clear()
+
+	var selected_index := -1
+
 	for entry in readable_entries:
+		if not _entry_matches_search(entry):
+			continue
+
+		displayed_entries.append(entry)
 		_add_entry_list_item(entry)
+
+		if (
+			select_entry_id != ""
+			and entry != null
+			and entry.entry_id.strip_edges() == select_entry_id
+		):
+			selected_index = displayed_entries.size() - 1
+			selected_entry = entry
+
+	if selected_index >= 0:
+		entry_list.select(selected_index)
+
+
+func _update_entry_info_label() -> void:
+	if selected_book == null:
+		return
+
+	var raw_query := _get_search_query()
+
+	if raw_query != "":
+		info_label.text = "搜索“%s”：共找到 %d 个已解锁条目；当前《%s》有 %d 个匹配。" % [
+			raw_query,
+			global_search_match_count,
+			selected_book.book_name,
+			displayed_entries.size()
+		]
+		return
 
 	if readable_entries.is_empty():
 		info_label.text = "《%s》当前没有已解锁条目。" % selected_book.book_name
-		_set_detail_text("")
 		return
 
 	var new_entry_count = Unlock.get_unread_readable_entry_count_by_book(selected_book.book_id)
@@ -277,12 +450,37 @@ func _refresh_entry_list_for_selected_book() -> void:
 			readable_entries.size()
 		]
 
-	# 只显示条目列表，不自动选中 / 阅读第一个条目。
-	# 玩家需要手动点击条目后，才会触发 _show_entry_by_index() 并标记已读。
-	entry_list.deselect_all()
+
+func _on_search_text_changed(_new_text: String) -> void:
+	var preferred_book_id := ""
+	if selected_book != null:
+		preferred_book_id = selected_book.book_id.strip_edges()
+
 	selected_entry = null
 	_set_detail_text("")
 
+	var preferred_index := _rebuild_book_list_for_search(preferred_book_id)
+
+	if books.is_empty():
+		selected_book = null
+		_clear_entry_and_detail()
+
+		var query := _get_search_query()
+		if query == "":
+			info_label.text = "当前没有可查看的医书。"
+		else:
+			info_label.text = "没有找到包含“%s”的已解锁条目。" % query
+		return
+
+	# 当前书仍有匹配结果时继续停留；
+	# 否则自动切换到第一本包含匹配条目的医书。
+	var target_index := preferred_index
+	if target_index < 0:
+		target_index = 0
+		book_list.select(target_index)
+
+	selected_book = books[target_index]
+	_refresh_entry_list_for_selected_book()
 
 # =========================
 # 拼装正文文本
@@ -373,10 +571,10 @@ func _on_entry_selected(index: int) -> void:
 # =========================
 
 func _show_entry_by_index(index: int) -> void:
-	if index < 0 or index >= readable_entries.size():
+	if index < 0 or index >= displayed_entries.size():
 		return
 
-	selected_entry = readable_entries[index]
+	selected_entry = displayed_entries[index]
 	if selected_entry == null:
 		return
 
@@ -426,20 +624,7 @@ func _reselect_current_book_in_list() -> void:
 
 func _refresh_entry_list_titles_keep_selection(entry_id: String) -> void:
 	_sort_unread_entries_to_top()
-	entry_list.clear()
-
-	var selected_index := -1
-	for i in range(readable_entries.size()):
-		var entry := readable_entries[i]
-		_add_entry_list_item(entry)
-
-		if entry != null and entry.entry_id.strip_edges() == entry_id:
-			selected_index = i
-			selected_entry = entry
-
-	if selected_index >= 0:
-		entry_list.select(selected_index)
-
+	_refresh_entry_list_view(entry_id)
 
 func _notify_player_data_changed() -> void:
 	# 阅读状态与解锁变化先保留在内存，等 Night 正式结束时统一写盘。
