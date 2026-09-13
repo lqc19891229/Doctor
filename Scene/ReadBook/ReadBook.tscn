@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bhc7eic56v8dc" path="res://Assets/Background/bookpage2.png" id="2_5x4ej"]
 [ext_resource type="FontFile" uid="uid://bas0ewdnmpdaq" path="res://Assets/Fonts/SourceHanSerifSC-Regular.otf" id="3_vb6lf"]
 [ext_resource type="Script" uid="uid://jjpaynmj2itt" path="res://Scene/clinicalLogWindow/ClassicalVerticalRichTextLabel.gd" id="4_rstq2"]
+[ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="5_pulse"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qn5vy"]
 bg_color = Color(0.41960785, 0.27058825, 0.15686275, 1)
@@ -114,6 +115,21 @@ top_padding_lines = 1
 fixed_rows_per_column = 23
 fixed_columns_per_page = 12
 
-[node name="InfoLabel" type="Label" parent="MarginContainer/VBoxRoot" unique_id=352818861]
+[node name="BottomRow" type="HBoxContainer" parent="MarginContainer/VBoxRoot"]
 layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="MarginContainer/VBoxRoot/BottomRow" unique_id=352818861]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "请选择今晚要阅读的医书。"
+
+[node name="PulsePracticeButton" type="Button" parent="MarginContainer/VBoxRoot/BottomRow"]
+custom_minimum_size = Vector2(170, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+tooltip_text = "请先在条目列表中选择一个已解锁的疾病。"
+text = "查看脉象"
+disabled = true
+
+[node name="PulsePracticeWindow" parent="." instance=ExtResource("5_pulse")]
+visible = false

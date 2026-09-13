@@ -8,7 +8,9 @@ signal player_data_changed
 # 节点引用
 # =========================
 
-@onready var info_label: Label = $MarginContainer/VBoxRoot/InfoLabel
+@onready var info_label: Label = $MarginContainer/VBoxRoot/BottomRow/InfoLabel
+@onready var pulse_practice_button: Button = $MarginContainer/VBoxRoot/BottomRow/PulsePracticeButton
+@onready var pulse_practice_window: PulseWindow = $PulsePracticeWindow
 # 左侧：书籍列表
 @onready var book_list: ItemList = $MarginContainer/VBoxRoot/ContentRow/BookPanel/BookVBox/BookList
 
@@ -101,6 +103,9 @@ func open_window() -> void:
 
 
 func close_window() -> void:
+	if pulse_practice_window != null and pulse_practice_window.visible:
+		pulse_practice_window.close_window()
+
 	hide()
 	window_closed.emit()
 
@@ -127,6 +132,9 @@ func _connect_ui_signals() -> void:
 
 	if search_edit != null and not search_edit.text_changed.is_connected(_on_search_text_changed):
 		search_edit.text_changed.connect(_on_search_text_changed)
+
+	if pulse_practice_button != null and not pulse_practice_button.pressed.is_connected(_on_pulse_practice_button_pressed):
+		pulse_practice_button.pressed.connect(_on_pulse_practice_button_pressed)
 
 
 # =========================
@@ -302,6 +310,7 @@ func _clear_entry_and_detail() -> void:
 	displayed_entries.clear()
 	selected_entry = null
 	_set_detail_text("")
+	_update_pulse_practice_button()
 
 
 # =========================
@@ -416,6 +425,8 @@ func _refresh_entry_list_view(select_entry_id: String = "") -> void:
 
 	if selected_index >= 0:
 		entry_list.select(selected_index)
+
+	_update_pulse_practice_button()
 
 
 func _update_entry_info_label() -> void:
@@ -597,6 +608,7 @@ func _show_entry_by_index(index: int) -> void:
 		_notify_player_data_changed()
 
 	_set_detail_text(_build_entry_text(selected_entry))
+	_update_pulse_practice_button()
 
 	if was_unread:
 		# read_entry() 可能进一步解锁药材 -> 方剂 -> 疾病，因此版本会变化。
@@ -625,6 +637,82 @@ func _reselect_current_book_in_list() -> void:
 func _refresh_entry_list_titles_keep_selection(entry_id: String) -> void:
 	_sort_unread_entries_to_top()
 	_refresh_entry_list_view(entry_id)
+
+# =========================
+# 夜晚脉象练习
+# =========================
+
+func _get_selected_disease_data() -> DiseaseData:
+	if selected_entry == null:
+		return null
+
+	if not (selected_entry is DiseaseBookEntryData):
+		return null
+
+	var disease_entry := selected_entry as DiseaseBookEntryData
+	if disease_entry == null:
+		return null
+
+	var disease_id := disease_entry.disease_id.strip_edges()
+	if disease_id == "":
+		return null
+
+	return DiseaseDB.get_disease_by_id(disease_id)
+
+
+func _update_pulse_practice_button() -> void:
+	if pulse_practice_button == null:
+		return
+
+	var disease := _get_selected_disease_data()
+
+	if disease == null:
+		pulse_practice_button.disabled = true
+		pulse_practice_button.text = "查看脉象"
+		pulse_practice_button.tooltip_text = "请先在条目列表中选择一个已解锁的疾病。"
+		return
+
+	pulse_practice_button.disabled = false
+	pulse_practice_button.text = "查看脉象"
+	pulse_practice_button.tooltip_text = "查看《%s》的左右手脉象，用于夜晚练习。" % disease.disease_name
+
+
+func _on_pulse_practice_button_pressed() -> void:
+	var disease := _get_selected_disease_data()
+	if disease == null:
+		info_label.text = "请先选择一个疾病条目，再查看脉象。"
+		_update_pulse_practice_button()
+		return
+
+	if pulse_practice_window == null:
+		info_label.text = "脉象练习窗口不存在。"
+		return
+
+	# 使用 ReadBook 自己的 PulseWindow 实例，不影响白天诊所的把脉窗口。
+	pulse_practice_window.title = "脉象练习 - %s" % disease.disease_name
+	pulse_practice_window.open_window()
+
+	# PulseWindow.open_window() 会 deferred 回到“按键提示”页。
+	# 所以这里也 deferred，在它之后切换为练习模式并显示右手脉象。
+	call_deferred("_show_pulse_practice_disease", disease)
+
+
+func _show_pulse_practice_disease(disease: DiseaseData) -> void:
+	if pulse_practice_window == null or disease == null:
+		return
+
+	var tabs := pulse_practice_window.get_node_or_null("LayerTabs") as TabContainer
+	if tabs != null:
+		# ReadBook 练习不需要 Clinic 的按键提示页。
+		# 把左右手标签显示出来，让玩家可以直接点击切换复习。
+		tabs.set_tab_hidden(0, true)
+		tabs.set_tab_hidden(1, false)
+		tabs.set_tab_hidden(2, false)
+
+	# show_hand_group 会一次刷新左右两手的数据；
+	# 默认先显示右手，玩家随后可点击“左手脉象”标签切换。
+	pulse_practice_window.show_hand_group("right", disease)
+
 
 func _notify_player_data_changed() -> void:
 	# 阅读状态与解锁变化先保留在内存，等 Night 正式结束时统一写盘。
