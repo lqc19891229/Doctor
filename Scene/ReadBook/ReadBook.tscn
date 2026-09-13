@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://daannkka0fcs"]
 
 [ext_resource type="Script" uid="uid://5mp4fabm540j" path="res://Scene/ReadBook/ReadBook.gd" id="1_uep66"]
-[ext_resource type="Texture2D" uid="uid://bhc7eic56v8dc" path="res://Assets/Background/bookpage2.png" id="2_5x4ej"]
+[ext_resource type="Texture2D" uid="uid://bhc7eic56v8dc" path="res://Assets/UI/bookpage2.png" id="2_5x4ej"]
 [ext_resource type="FontFile" uid="uid://bas0ewdnmpdaq" path="res://Assets/Fonts/SourceHanSerifSC-Regular.otf" id="3_vb6lf"]
-[ext_resource type="Script" uid="uid://jjpaynmj2itt" path="res://Scene/clinicalLogWindow/ClassicalVerticalRichTextLabel.gd" id="4_rstq2"]
+[ext_resource type="Script" uid="uid://jjpaynmj2itt" path="res://Scene/ClinicalLogWindow/ClassicalVerticalRichTextLabel.gd" id="4_rstq2"]
 [ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="5_pulse"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qn5vy"]
@@ -29,7 +29,7 @@ grow_vertical = 2
 [node name="VBoxRoot" type="VBoxContainer" parent="MarginContainer" unique_id=646348250]
 layout_mode = 2
 
-[node name="SearchEdit" type="LineEdit" parent="MarginContainer/VBoxRoot"]
+[node name="SearchEdit" type="LineEdit" parent="MarginContainer/VBoxRoot" unique_id=635280191]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 tooltip_text = "搜索全部可阅读医书中的已解锁条目。"
@@ -52,6 +52,7 @@ layout_mode = 2
 
 [node name="BookTitle" type="Label" parent="MarginContainer/VBoxRoot/ContentRow/BookPanel/BookVBox" unique_id=2120342913]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_qn5vy")
 text = "医书列表"
 
@@ -73,8 +74,9 @@ layout_mode = 2
 
 [node name="EntryTitle" type="Label" parent="MarginContainer/VBoxRoot/ContentRow/EntryPanel/EntryVBox" unique_id=2049629444]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_akuei")
-text = "条目列表 / 搜索结果"
+text = "条目列表"
 
 [node name="EntryList" type="ItemList" parent="MarginContainer/VBoxRoot/ContentRow/EntryPanel/EntryVBox" unique_id=397650445]
 layout_mode = 2
@@ -115,21 +117,22 @@ top_padding_lines = 1
 fixed_rows_per_column = 23
 fixed_columns_per_page = 12
 
-[node name="BottomRow" type="HBoxContainer" parent="MarginContainer/VBoxRoot"]
+[node name="BottomRow" type="HBoxContainer" parent="MarginContainer/VBoxRoot" unique_id=152842520]
 layout_mode = 2
 
 [node name="InfoLabel" type="Label" parent="MarginContainer/VBoxRoot/BottomRow" unique_id=352818861]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
 text = "请选择今晚要阅读的医书。"
 
-[node name="PulsePracticeButton" type="Button" parent="MarginContainer/VBoxRoot/BottomRow"]
+[node name="PulsePracticeButton" type="Button" parent="MarginContainer/VBoxRoot/BottomRow" unique_id=1280132523]
 custom_minimum_size = Vector2(170, 48)
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
 tooltip_text = "请先在条目列表中选择一个已解锁的疾病。"
-text = "查看脉象"
+theme_override_font_sizes/font_size = 22
 disabled = true
+text = "查看脉象"
 
-[node name="PulsePracticeWindow" parent="." instance=ExtResource("5_pulse")]
+[node name="PulsePracticeWindow" parent="." unique_id=1426200903 instance=ExtResource("5_pulse")]
 visible = false

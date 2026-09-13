@@ -1,0 +1,142 @@
+Tutorial 幻灯片新手引导使用说明
+================================
+
+需要复制到项目：
+
+Scene/Tutorial/Tutorial.gd
+Scene/Tutorial/Tutorial.tscn
+Scene/Tutorial/TutorialSlideData.gd
+
+推荐截图目录：
+
+Assets/Tutorial/
+
+例如：
+Assets/Tutorial/001_clinic.png
+Assets/Tutorial/002_pulse.png
+Assets/Tutorial/003_disease.png
+Assets/Tutorial/004_prescription.png
+Assets/Tutorial/005_night.png
+Assets/Tutorial/006_readbook.png
+
+
+一、如何添加教程页
+----------------
+
+1. 用 Godot 打开：
+   Scene/Tutorial/Tutorial.tscn
+
+2. 选中根节点 Tutorial。
+
+3. 在 Inspector 找到：
+   Slides
+
+4. 调整数组 Size，例如 10。
+
+5. 每一个元素选择：
+   New TutorialSlideData
+
+6. 展开该 Resource，填写：
+
+   Screenshot
+   Title
+   Description
+   Key Text
+   Show Highlight
+   Highlight Rect
+
+
+二、Highlight Rect 怎么填写
+---------------------------
+
+Highlight Rect 使用 0~1 相对坐标。
+
+例如：
+
+Rect2(0.7, 0.05, 0.2, 0.1)
+
+含义：
+
+X      70%
+Y       5%
+宽度   20%
+高度   10%
+
+如果这一页只想显示截图和文字，不需要高亮：
+
+Show Highlight = Off
+
+
+三、教程控制
+------------
+
+鼠标：
+上一页
+下一页
+跳过教程
+
+键盘：
+←      上一页
+→      下一页
+Space  下一页
+Enter  下一页
+Esc    结束教程（可通过 escape_to_finish 关闭）
+
+
+四、教程结束后进入游戏
+----------------------
+
+选中 Tutorial 根节点，在 Inspector：
+
+Exit Scene Path
+
+填写你希望教程结束后进入的场景，例如：
+
+res://Scene/Main/Main.tscn
+
+如果留空：
+Tutorial 只会发出 tutorial_finished 信号，然后隐藏自己。
+
+
+五、重要建议
+------------
+
+教程截图尽量使用与游戏一致的宽高比。
+当前项目是 1920 × 1080，所以推荐截图也使用 1920 × 1080。
+
+这样 Highlight Rect 的高亮位置最准确。
+
+
+六、推荐第一页配置示例
+---------------------
+
+Title:
+欢迎来到医馆
+
+Description:
+白天你需要接诊病人，通过问诊、把脉和辨证判断病证，并选择合适的方剂进行治疗。
+
+Key Text:
+（留空）
+
+Show Highlight:
+Off
+
+
+七、推荐脉诊页配置示例
+---------------------
+
+Title:
+打开脉诊
+
+Description:
+诊疗过程中可以按 F1 打开把脉窗口，观察病人的左右手脉象。
+
+Key Text:
+F1
+
+Show Highlight:
+On
+
+Highlight Rect:
+根据你截图中的 F1 / 脉诊区域调整。
