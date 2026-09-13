@@ -200,6 +200,11 @@ func setup(herb_db, prescription, formula_db = null) -> void:
 	else:
 		formula_database = FormulaDB
 
+	# setup() 可能会在窗口复用时再次调用。
+	# 先恢复上一次选中药材按钮的显示，避免旧按钮残留黄色高亮。
+	if selected_herb_button != null and is_instance_valid(selected_herb_button):
+		_set_herb_button_selected_style(selected_herb_button, false)
+
 	selected_herb_id = ""
 	selected_herb_button = null
 
@@ -544,8 +549,38 @@ func _apply_herb_filter() -> void:
 	selected_herb_id = ""
 	selected_herb_button = null
 
-	# 普通药材只按药材自身名称 / 拼音 / 首字母匹配。
-	# 方剂命中不再拆成组成药材，使用独立的方剂按钮。
+	# 先收集“当前搜索词命中的方剂”中包含的全部药材 ID。
+	# 这样输入方剂名时，会同时显示：
+	# 1. 方剂按钮
+	# 2. 该方剂包含的全部已解锁药材按钮
+	var formula_herb_ids: Dictionary = {}
+	if herb_search_keyword != "" and _is_formula_fill_feature_unlocked():
+		for record_value in _formula_search_records:
+			if typeof(record_value) != TYPE_DICTIONARY:
+				continue
+
+			var formula_record: Dictionary = record_value
+			var formula = formula_record.get("formula", null)
+			if formula == null or not _is_formula_unlocked(formula):
+				continue
+			if not _formula_record_matches(formula_record):
+				continue
+			if not formula.has_method("get_all_ingredients"):
+				continue
+
+			for ingredient in formula.get_all_ingredients():
+				if ingredient == null:
+					continue
+
+				if not ingredient.has_method("get_herb_id"):
+					continue
+				var ingredient_herb_id := str(ingredient.get_herb_id()).strip_edges()
+
+				if ingredient_herb_id != "":
+					formula_herb_ids[ingredient_herb_id] = true
+
+	# 普通药材仍按自身名称 / 拼音 / 首字母匹配；
+	# 若药材属于命中的方剂，也强制显示。
 	for herb_id_value in _herb_button_by_id.keys():
 		var herb_id := str(herb_id_value)
 		var button_value = _herb_button_by_id.get(herb_id, null)
@@ -559,11 +594,14 @@ func _apply_herb_filter() -> void:
 			var record_value = _herb_search_record_by_id.get(herb_id, {})
 			if typeof(record_value) == TYPE_DICTIONARY:
 				record = record_value
-			should_show = (
+
+			var matches_herb_search := (
 				str(record.get("name", "")).contains(herb_search_keyword)
 				or str(record.get("pinyin", "")).begins_with(herb_search_keyword)
 				or str(record.get("initials", "")).begins_with(herb_search_keyword)
 			)
+			var belongs_to_matched_formula := bool(formula_herb_ids.get(herb_id, false))
+			should_show = matches_herb_search or belongs_to_matched_formula
 
 		button.visible = should_show
 
