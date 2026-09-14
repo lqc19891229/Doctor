@@ -3,38 +3,15 @@ class_name TutorialWindow
 
 ## A reusable, full-screen tutorial overlay.
 ##
-## The scene ships with four project-specific pages, but every page array is
-## exported so the same window can be reused by Clinic, Night or a future scene.
+## Each tutorial page is stored as one TutorialSlideData resource, so its title,
+## description, caption and image always stay together.
 
 signal page_changed(page_index: int, page_count: int)
 signal finished
 signal closed(completed: bool)
 
 @export_category("Tutorial pages")
-@export var page_titles: PackedStringArray = [
-	"坐堂问诊",
-	"诊脉辨证",
-	"开具处方",
-	"夜读医书",
-]
-@export var page_descriptions: PackedStringArray = [
-	"白天在诊室接待病人。先了解病情，再依次进行诊脉、记录与开方。",
-	"点击诊脉入口查看六部脉象。结合病人的叙述与脉象，判断可能的证候。",
-	"在处方窗口选择药材与用量。提交前可以返回检查，确认后系统会评估疗效。",
-	"结束白天后进入夜晚。阅读已解锁医书，可以补全病证、方剂与药材知识。",
-]
-@export var page_captions: PackedStringArray = [
-	"诊室总览",
-	"诊桌与诊脉入口",
-	"开方与确认",
-	"夜晚与医书",
-]
-@export var page_images: Array[Texture2D] = [
-	preload("res://Assets/Background/clinic/spring.png"),
-	preload("res://Assets/Background/clinic/clinic_table.png"),
-	preload("res://Assets/UI/bookpage.png"),
-	preload("res://Assets/Background/clinic/night_table.png"),
-]
+@export var slides: Array[TutorialSlideData] = []
 
 @export_category("Behaviour")
 @export var pause_game_while_visible: bool = true
@@ -95,18 +72,38 @@ func close_tutorial(completed: bool = false) -> void:
 	closed.emit(completed)
 
 
+## Replaces all pages with another tutorial set.
+## Useful when the same TutorialWindow is shared by Clinic, Book, Prescription,
+## or any other scene.
+func set_slides(new_slides: Array[TutorialSlideData]) -> void:
+	slides = new_slides
+	current_page = 0
+	_refresh_page()
+
+
+## Compatibility helper for code that still uses the old four-array API.
+## New code should prefer set_slides().
 func set_pages(
 	titles: PackedStringArray,
 	descriptions: PackedStringArray,
 	images: Array[Texture2D],
 	captions: PackedStringArray = PackedStringArray()
 ) -> void:
-	page_titles = titles
-	page_descriptions = descriptions
-	page_images = images
-	page_captions = captions
-	current_page = 0
-	_refresh_page()
+	var new_slides: Array[TutorialSlideData] = []
+	var page_count := titles.size()
+	page_count = maxi(page_count, descriptions.size())
+	page_count = maxi(page_count, captions.size())
+	page_count = maxi(page_count, images.size())
+
+	for page_index in range(page_count):
+		var slide := TutorialSlideData.new()
+		slide.title = titles[page_index] if page_index < titles.size() else "游戏说明"
+		slide.description = descriptions[page_index] if page_index < descriptions.size() else ""
+		slide.caption = captions[page_index] if page_index < captions.size() else ""
+		slide.image = images[page_index] if page_index < images.size() else null
+		new_slides.append(slide)
+
+	set_slides(new_slides)
 
 
 func go_to_page(page_index: int) -> void:
@@ -128,11 +125,7 @@ func _connect_signals() -> void:
 
 
 func _get_page_count() -> int:
-	var page_count := page_titles.size()
-	page_count = maxi(page_count, page_descriptions.size())
-	page_count = maxi(page_count, page_captions.size())
-	page_count = maxi(page_count, page_images.size())
-	return page_count
+	return slides.size()
 
 
 func _refresh_page() -> void:
@@ -150,21 +143,26 @@ func _refresh_page() -> void:
 		image_caption.text = ""
 		step_label.text = ""
 		title_label.text = "暂无说明"
-		description_label.text = "请在 Inspector 中配置 Tutorial pages。"
+		description_label.text = "请在 Inspector 的 Slides 中添加 TutorialSlideData。"
 		page_indicator.text = "0 / 0"
 		next_button.text = "完成"
 		return
 
 	current_page = clampi(current_page, 0, page_count - 1)
-	page_image.texture = page_images[current_page] if current_page < page_images.size() else null
-	image_caption.text = page_captions[current_page] if current_page < page_captions.size() else ""
+	var slide: TutorialSlideData = slides[current_page]
+
+	if slide == null:
+		page_image.texture = null
+		image_caption.text = ""
+		title_label.text = "游戏说明"
+		description_label.text = "当前教程页未设置 TutorialSlideData。"
+	else:
+		page_image.texture = slide.image
+		image_caption.text = slide.caption
+		title_label.text = slide.title
+		description_label.text = slide.description
+
 	step_label.text = "第 %d 步" % (current_page + 1)
-	title_label.text = page_titles[current_page] if current_page < page_titles.size() else "游戏说明"
-	description_label.text = (
-		page_descriptions[current_page]
-		if current_page < page_descriptions.size()
-		else ""
-	)
 	page_indicator.text = "%d / %d" % [current_page + 1, page_count]
 	next_button.text = "完成" if current_page == page_count - 1 else "下一步"
 	page_changed.emit(current_page, page_count)
