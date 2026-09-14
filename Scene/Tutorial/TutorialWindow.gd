@@ -4,7 +4,7 @@ class_name TutorialWindow
 ## A reusable, full-screen tutorial overlay.
 ##
 ## Each tutorial page is stored as one TutorialSlideData resource, so its title,
-## description, caption and image always stay together.
+## description and image always stay together.
 
 signal page_changed(page_index: int, page_count: int)
 signal finished
@@ -19,8 +19,6 @@ signal closed(completed: bool)
 @export var wrap_pages: bool = false
 
 @onready var page_image: TextureRect = %PageImage
-@onready var image_caption: Label = %ImageCaption
-@onready var step_label: Label = %StepLabel
 @onready var title_label: Label = %TitleLabel
 @onready var description_label: Label = %DescriptionLabel
 @onready var page_indicator: Label = %PageIndicator
@@ -81,25 +79,24 @@ func set_slides(new_slides: Array[TutorialSlideData]) -> void:
 	_refresh_page()
 
 
-## Compatibility helper for code that still uses the old four-array API.
-## New code should prefer set_slides().
+## Compatibility helper for code that still uses the old array API.
+## The optional fourth argument is accepted only so older callers do not break;
+## captions are no longer displayed or stored. New code should prefer set_slides().
 func set_pages(
 	titles: PackedStringArray,
 	descriptions: PackedStringArray,
 	images: Array[Texture2D],
-	captions: PackedStringArray = PackedStringArray()
+	_legacy_captions: PackedStringArray = PackedStringArray()
 ) -> void:
 	var new_slides: Array[TutorialSlideData] = []
 	var page_count := titles.size()
 	page_count = maxi(page_count, descriptions.size())
-	page_count = maxi(page_count, captions.size())
 	page_count = maxi(page_count, images.size())
 
 	for page_index in range(page_count):
 		var slide := TutorialSlideData.new()
 		slide.title = titles[page_index] if page_index < titles.size() else "游戏说明"
 		slide.description = descriptions[page_index] if page_index < descriptions.size() else ""
-		slide.caption = captions[page_index] if page_index < captions.size() else ""
 		slide.image = images[page_index] if page_index < images.size() else null
 		new_slides.append(slide)
 
@@ -140,8 +137,6 @@ func _refresh_page() -> void:
 
 	if not has_pages:
 		page_image.texture = null
-		image_caption.text = ""
-		step_label.text = ""
 		title_label.text = "暂无说明"
 		description_label.text = "请在 Inspector 的 Slides 中添加 TutorialSlideData。"
 		page_indicator.text = "0 / 0"
@@ -153,16 +148,13 @@ func _refresh_page() -> void:
 
 	if slide == null:
 		page_image.texture = null
-		image_caption.text = ""
 		title_label.text = "游戏说明"
 		description_label.text = "当前教程页未设置 TutorialSlideData。"
 	else:
 		page_image.texture = slide.image
-		image_caption.text = slide.caption
 		title_label.text = slide.title
 		description_label.text = slide.description
 
-	step_label.text = "第 %d 步" % (current_page + 1)
 	page_indicator.text = "%d / %d" % [current_page + 1, page_count]
 	next_button.text = "完成" if current_page == page_count - 1 else "下一步"
 	page_changed.emit(current_page, page_count)

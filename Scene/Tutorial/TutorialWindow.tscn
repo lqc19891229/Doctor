@@ -3,37 +3,33 @@
 [ext_resource type="Script" uid="uid://bsl5lohjo71v" path="res://Scene/Tutorial/TutorialWindow.gd" id="1_script"]
 [ext_resource type="FontFile" uid="uid://bas0ewdnmpdaq" path="res://Assets/Fonts/SourceHanSerifSC-Regular.otf" id="2_font"]
 [ext_resource type="Script" uid="uid://dyml45imq64mo" path="res://Scene/Tutorial/TutorialSlideData.gd" id="3_slide_data"]
-[ext_resource type="Texture2D" uid="uid://b0e681bcroyla" path="res://Assets/Background/clinic/spring.png" id="4_slide_image_1"]
+[ext_resource type="Texture2D" uid="uid://cxfowng2ce4de" path="res://Assets/Tutorial/night.png" id="3_t4jru"]
 [ext_resource type="Texture2D" uid="uid://bc7sj00ahbgcm" path="res://Assets/Background/clinic/clinic_table.png" id="5_slide_image_2"]
 [ext_resource type="Texture2D" uid="uid://cm2x84snbdm3l" path="res://Assets/UI/bookpage.png" id="6_slide_image_3"]
 [ext_resource type="Texture2D" uid="uid://b8f6aogxyufp3" path="res://Assets/Background/clinic/night_table.png" id="7_slide_image_4"]
 
 [sub_resource type="Resource" id="TutorialSlide_1"]
 script = ExtResource("3_slide_data")
-title = "坐堂问诊"
+title = "夜间"
 description = "白天在诊室接待病人。先了解病情，再依次进行诊脉、记录与开方。"
-caption = "诊室总览"
-image = ExtResource("4_slide_image_1")
+image = ExtResource("3_t4jru")
 
 [sub_resource type="Resource" id="TutorialSlide_2"]
 script = ExtResource("3_slide_data")
 title = "诊脉辨证"
 description = "点击诊脉入口查看六部脉象。结合病人的叙述与脉象，判断可能的证候。"
-caption = "诊桌与诊脉入口"
 image = ExtResource("5_slide_image_2")
 
 [sub_resource type="Resource" id="TutorialSlide_3"]
 script = ExtResource("3_slide_data")
 title = "开具处方"
 description = "在处方窗口选择药材与用量。提交前可以返回检查，确认后系统会评估疗效。"
-caption = "开方与确认"
 image = ExtResource("6_slide_image_3")
 
 [sub_resource type="Resource" id="TutorialSlide_4"]
 script = ExtResource("3_slide_data")
 title = "夜读医书"
 description = "结束白天后进入夜晚。阅读已解锁医书，可以补全病证、方剂与药材知识。"
-caption = "夜晚与医书"
 image = ExtResource("7_slide_image_4")
 
 [sub_resource type="StyleBoxFlat" id="StyleWindow"]
@@ -142,7 +138,7 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[node name="TutorialWindow" type="Control" unique_id=1244730793]
+[node name="TutorialWindow" type="Control" unique_id=2105242267]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -154,7 +150,7 @@ mouse_filter = 1
 script = ExtResource("1_script")
 slides = Array[ExtResource("3_slide_data")]([SubResource("TutorialSlide_1"), SubResource("TutorialSlide_2"), SubResource("TutorialSlide_3"), SubResource("TutorialSlide_4")])
 
-[node name="DimBackground" type="ColorRect" parent="." unique_id=1645463074]
+[node name="DimBackground" type="ColorRect" parent="." unique_id=292098951]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -163,7 +159,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.018, 0.021, 0.018, 0.78)
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=823230513]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1100066923]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -171,27 +167,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="WindowPanel" type="PanelContainer" parent="CenterContainer" unique_id=403569407]
+[node name="WindowPanel" type="PanelContainer" parent="CenterContainer" unique_id=1393167286]
 custom_minimum_size = Vector2(1540, 780)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleWindow")
 
-[node name="OuterMargin" type="MarginContainer" parent="CenterContainer/WindowPanel" unique_id=216118107]
+[node name="OuterMargin" type="MarginContainer" parent="CenterContainer/WindowPanel" unique_id=496999107]
 layout_mode = 2
 theme_override_constants/margin_left = 28
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 28
 theme_override_constants/margin_bottom = 28
 
-[node name="RootVBox" type="VBoxContainer" parent="CenterContainer/WindowPanel/OuterMargin" unique_id=702247247]
+[node name="RootVBox" type="VBoxContainer" parent="CenterContainer/WindowPanel/OuterMargin" unique_id=2016074369]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Header" type="HBoxContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox" unique_id=1540590564]
+[node name="Header" type="HBoxContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox" unique_id=1659220219]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 
-[node name="WindowTitle" type="Label" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Header" unique_id=1782467605]
+[node name="WindowTitle" type="Label" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Header" unique_id=945240731]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.88, 0.79, 0.58, 1)
 theme_override_fonts/font = ExtResource("2_font")
@@ -199,11 +195,11 @@ theme_override_font_sizes/font_size = 38
 text = "游戏说明"
 vertical_alignment = 1
 
-[node name="HeaderSpacer" type="Control" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Header" unique_id=293885360]
+[node name="HeaderSpacer" type="Control" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Header" unique_id=380890019]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CloseButton" type="Button" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Header" unique_id=394525570]
+[node name="CloseButton" type="Button" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Header" unique_id=387584019]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(56, 48)
 layout_mode = 2
@@ -216,32 +212,32 @@ theme_override_styles/pressed = SubResource("StyleButtonPressed")
 theme_override_styles/hover = SubResource("StyleButtonHover")
 text = "×"
 
-[node name="HeaderSeparator" type="HSeparator" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox" unique_id=1038735533]
+[node name="HeaderSeparator" type="HSeparator" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox" unique_id=1650958635]
 layout_mode = 2
 
-[node name="Content" type="HBoxContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox" unique_id=1159789442]
+[node name="Content" type="HBoxContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox" unique_id=1146433736]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="ImagePanel" type="PanelContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content" unique_id=94477609]
+[node name="ImagePanel" type="PanelContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content" unique_id=1608973433]
 custom_minimum_size = Vector2(980, 620)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleImage")
 
-[node name="ImageMargin" type="MarginContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/ImagePanel" unique_id=478877101]
+[node name="ImageMargin" type="MarginContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/ImagePanel" unique_id=2025279637]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="ImageArea" type="Control" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/ImagePanel/ImageMargin" unique_id=1040300249]
+[node name="ImageArea" type="Control" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/ImagePanel/ImageMargin" unique_id=572143669]
 clip_contents = true
 layout_mode = 2
 
-[node name="PageImage" type="TextureRect" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/ImagePanel/ImageMargin/ImageArea" unique_id=784118713]
+[node name="PageImage" type="TextureRect" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/ImagePanel/ImageMargin/ImageArea" unique_id=729693046]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -253,58 +249,23 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 6
 
-[node name="CaptionShade" type="ColorRect" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/ImagePanel/ImageMargin/ImageArea" unique_id=1469714830]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -76.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-color = Color(0.025, 0.029, 0.025, 0.82)
-
-[node name="ImageCaption" type="Label" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/ImagePanel/ImageMargin/ImageArea/CaptionShade" unique_id=849732448]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 24.0
-offset_right = -24.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.89, 0.84, 0.7, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 25
-vertical_alignment = 1
-
-[node name="TextPanel" type="PanelContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content" unique_id=469740022]
+[node name="TextPanel" type="PanelContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content" unique_id=1353612378]
 custom_minimum_size = Vector2(440, 620)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleText")
 
-[node name="TextMargin" type="MarginContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel" unique_id=2046983402]
+[node name="TextMargin" type="MarginContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel" unique_id=2104106691]
 layout_mode = 2
 theme_override_constants/margin_left = 38
 theme_override_constants/margin_top = 42
 theme_override_constants/margin_right = 38
 theme_override_constants/margin_bottom = 32
 
-[node name="TextVBox" type="VBoxContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin" unique_id=551968796]
+[node name="TextVBox" type="VBoxContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin" unique_id=881676569]
 layout_mode = 2
 theme_override_constants/separation = 18
 
-[node name="StepLabel" type="Label" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox" unique_id=1239091057]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.43, 0.32, 0.17, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 22
-text = "第 1 步"
-
-[node name="TitleLabel" type="Label" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox" unique_id=1766638896]
+[node name="TitleLabel" type="Label" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox" unique_id=1306691442]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.13, 0.15, 0.12, 1)
@@ -313,10 +274,10 @@ theme_override_font_sizes/font_size = 36
 text = "坐堂问诊"
 autowrap_mode = 3
 
-[node name="TitleSeparator" type="HSeparator" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox" unique_id=1568445551]
+[node name="TitleSeparator" type="HSeparator" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox" unique_id=1763274008]
 layout_mode = 2
 
-[node name="DescriptionLabel" type="Label" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox" unique_id=1606310353]
+[node name="DescriptionLabel" type="Label" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox" unique_id=1562232342]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -327,7 +288,7 @@ text = "白天在诊室接待病人。先了解病情，再依次进行诊脉、
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="KeyboardHint" type="Label" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox" unique_id=1427452041]
+[node name="KeyboardHint" type="Label" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox" unique_id=2004421132]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.36, 0.34, 0.29, 0.8)
 theme_override_fonts/font = ExtResource("2_font")
@@ -335,12 +296,12 @@ theme_override_font_sizes/font_size = 17
 text = "← / → 翻页    Esc 关闭"
 horizontal_alignment = 1
 
-[node name="Navigation" type="HBoxContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox" unique_id=1457440403]
+[node name="Navigation" type="HBoxContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox" unique_id=1480369125]
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="PreviousButton" type="Button" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox/Navigation" unique_id=1929876752]
+[node name="PreviousButton" type="Button" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox/Navigation" unique_id=63656737]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -355,7 +316,7 @@ theme_override_styles/hover = SubResource("StyleButtonHover")
 theme_override_styles/disabled = SubResource("StyleButtonDisabled")
 text = "上一步"
 
-[node name="PageIndicator" type="Label" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox/Navigation" unique_id=390815676]
+[node name="PageIndicator" type="Label" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox/Navigation" unique_id=1003053413]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
@@ -367,7 +328,7 @@ text = "1 / 4"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NextButton" type="Button" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox/Navigation" unique_id=1184122276]
+[node name="NextButton" type="Button" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox/Navigation" unique_id=629996661]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
