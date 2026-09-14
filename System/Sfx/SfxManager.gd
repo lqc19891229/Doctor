@@ -8,6 +8,7 @@ extends Node
 # Clinic / Story：
 # - 按住 Q+A+Z / W+S+X：hear_tbeat
 # - 打开行医记考：turn_page
+# - Clinic 接诊时间到：drum
 #
 # Night：
 # - 打开读书窗口：turn_page
@@ -34,6 +35,10 @@ const MALE_YAWNING_STREAM: AudioStream = preload(
 
 const ROOSTER_CROWS_STREAM: AudioStream = preload(
 	"res://Assets/Sfx/rooster_crows.mp3"
+)
+
+const DRUM_STREAM: AudioStream = preload(
+	"res://Assets/Sfx/drum.mp3"
 )
 
 # 多个播放器可以避免快速点击时互相截断。
@@ -121,6 +126,10 @@ func play_male_yawning() -> void:
 
 func play_rooster_crows() -> void:
 	play_sfx(ROOSTER_CROWS_STREAM)
+
+
+func play_clinic_closing_drum() -> void:
+	play_sfx(DRUM_STREAM)
 
 
 func _get_available_button_player() -> AudioStreamPlayer:

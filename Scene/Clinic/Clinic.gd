@@ -646,10 +646,15 @@ func get_current_background_texture() -> Texture2D:
 
 func _on_clinic_time_finished() -> void:
 	# GameTimeManager 在发出此信号前已经停止 Clinic 计时。
-	# 如果当前还有可诊疗的病人，只标记为“最后一位”，不立刻切换到夜晚。
+	# 鼓声代表“今日接诊时间已到”，因此在时间结束信号触发时立即播放，
+	# 不等待当前最后一位病人完成，也不等待 Clinic 真正进入 Night。
 	if clinic_finished_emitted:
 		return
 
+	if SfxManager != null and SfxManager.has_method("play_clinic_closing_drum"):
+		SfxManager.play_clinic_closing_drum()
+
+	# 如果当前还有可诊疗的病人，只标记为“最后一位”，不立刻切换到夜晚。
 	if current_npc == null or current_npc.disease == null:
 		finish_clinic_for_today()
 		return
