@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ceraw4tmmepvk" path="res://Scene/Main/Main.gd" id="1_o28sc"]
 [ext_resource type="Texture2D" uid="uid://cphe7ubix3qcg" path="res://Assets/Background/Main.png" id="2_6m34w"]
+[ext_resource type="AudioStream" uid="uid://ccbbslfx68egi" path="res://Assets/Music/Story/山水行旅.mp3" id="2_l12wf"]
 [ext_resource type="Script" uid="uid://cwo5oi636sg24" path="res://Scene/Main/PauseMenu.gd" id="2_pause_menu"]
 [ext_resource type="Texture2D" uid="uid://de88r06hcei8i" path="res://Assets/Background/Logo.png" id="3_66shk"]
 [ext_resource type="Script" uid="uid://b3t705armu5q7" path="res://Scene/Main/SettingsPanel.gd" id="3_settings_panel"]
@@ -16,6 +17,9 @@ script = ExtResource("1_o28sc")
 [node name="StorySceneRoot" type="Node" parent="." unique_id=207003002]
 
 [node name="MainMenuLayer" type="CanvasLayer" parent="." unique_id=1999044094]
+
+[node name="Music" type="AudioStreamPlayer" parent="MainMenuLayer" unique_id=2030919026]
+stream = ExtResource("2_l12wf")
 
 [node name="TextureRect" type="TextureRect" parent="MainMenuLayer" unique_id=667132309]
 anchors_preset = 15
