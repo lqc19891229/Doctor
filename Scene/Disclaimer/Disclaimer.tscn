@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://csqcgaycx77f2"]
 
-[ext_resource type="Script" path="res://Scene/Disclaimer/Disclaimer.gd" id="1_script"]
-[ext_resource type="FontFile" path="res://Assets/Fonts/SourceHanSerifSC-Regular.otf" id="2_font"]
+[ext_resource type="Script" uid="uid://duowkvrru6abh" path="res://Scene/Disclaimer/Disclaimer.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://bas0ewdnmpdaq" path="res://Assets/Fonts/SourceHanSerifSC-Regular.otf" id="2_font"]
 
-[node name="Disclaimer" type="Control"]
+[node name="Disclaimer" type="Control" unique_id=1667207953]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +13,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_script")
 
-[node name="BlackBackground" type="ColorRect" parent="."]
+[node name="BlackBackground" type="ColorRect" parent="." unique_id=1925232208]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.012, 0.012, 0.012, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1405750708]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +32,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ContentMargin" type="MarginContainer" parent="CenterContainer"]
+[node name="ContentMargin" type="MarginContainer" parent="CenterContainer" unique_id=1008342041]
 custom_minimum_size = Vector2(1260, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 80
@@ -40,12 +40,12 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 64
 
-[node name="StatementContainer" type="VBoxContainer" parent="CenterContainer/ContentMargin"]
+[node name="StatementContainer" type="VBoxContainer" parent="CenterContainer/ContentMargin" unique_id=634546655]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 34
 
-[node name="Title" type="Label" parent="CenterContainer/ContentMargin/StatementContainer"]
+[node name="Title" type="Label" parent="CenterContainer/ContentMargin/StatementContainer" unique_id=1485278689]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.92, 0.88, 0.76, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
@@ -56,13 +56,13 @@ theme_override_font_sizes/font_size = 42
 text = "内容声明"
 horizontal_alignment = 1
 
-[node name="Divider" type="ColorRect" parent="CenterContainer/ContentMargin/StatementContainer"]
+[node name="Divider" type="ColorRect" parent="CenterContainer/ContentMargin/StatementContainer" unique_id=939444966]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 mouse_filter = 2
 color = Color(0.48, 0.42, 0.3, 0.8)
 
-[node name="Body" type="Label" parent="CenterContainer/ContentMargin/StatementContainer"]
+[node name="Body" type="Label" parent="CenterContainer/ContentMargin/StatementContainer" unique_id=1101996995]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.84, 0.82, 0.76, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
@@ -71,8 +71,9 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 27
-text = "本游戏为虚构作品，仅供娱乐。游戏中涉及的医学知识、诊断及治疗内容可能并不准确，不可作为现实中的医疗依据，请勿据此自行诊断、用药或治疗。\n\n如有健康问题，请咨询专业医生，并以正规医疗机构的建议为准。游戏中的人物、事件及剧情均属虚构，如有雷同，纯属巧合。"
+text = "本游戏为虚构作品，仅供娱乐。游戏中涉及的医学知识、诊断及治疗内容可能并不准确，不可作为现实中的医疗依据，请勿据此自行诊断、用药或治疗。
+
+如有健康问题，请咨询专业医生，并以正规医疗机构的建议为准。游戏中的人物、事件及剧情均属虚构，如有雷同，纯属巧合。"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
-

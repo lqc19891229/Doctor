@@ -57,11 +57,11 @@ const CLINIC_RAINY_BACKGROUND_PATH: String = "res://Assets/Background/clinic/rai
 # Clinic 营业时辰图标：辰、巳、午、未、申。
 # 顺序与 GameTime.current_shichen_index 的 4~8 完全对应。
 const CLINIC_TIME_ICONS: Array[Texture2D] = [
-	preload("res://Assets/UI/Time/clinic/chen_sunrise.png"),
-	preload("res://Assets/UI/Time/clinic/si_morning.png"),
-	preload("res://Assets/UI/Time/clinic/wu_noon.png"),
-	preload("res://Assets/UI/Time/clinic/wei_afternoon.png"),
-	preload("res://Assets/UI/Time/clinic/shen_sunset.png")
+	preload("res://Assets/UI/chen_sunrise.png"),
+	preload("res://Assets/UI/si_morning.png"),
+	preload("res://Assets/UI/wu_noon.png"),
+	preload("res://Assets/UI/wei_afternoon.png"),
+	preload("res://Assets/UI/shen_sunset.png")
 ]
 
 # 背景单次渐出或渐入的持续时间。

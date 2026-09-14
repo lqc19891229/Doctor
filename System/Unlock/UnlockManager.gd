@@ -926,8 +926,8 @@ func build_finance_report_text(day: int) -> String:
 	lines.append("支出合计：%s" % format_money_change(-total_expense))
 	lines.append("")
 	lines.append("本日变化：%s" % format_money_change(net_change))
-	return "
-".join(lines)
+	return "\n".join(lines)
+
 
 
 # =========================================================
