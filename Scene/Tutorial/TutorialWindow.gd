@@ -70,6 +70,11 @@ func open_tutorial(start_page: int = 0) -> void:
 		return
 
 	current_page = clampi(start_page, 0, page_count - 1)
+	if visible:
+		_refresh_page()
+		next_button.grab_focus()
+		return
+
 	_tree_was_paused = get_tree().paused
 	if pause_game_while_visible:
 		get_tree().paused = true
@@ -200,7 +205,7 @@ func _on_close_pressed() -> void:
 	close_tutorial(false)
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if not visible:
 		return
 	if event is InputEventKey and (event as InputEventKey).echo:
