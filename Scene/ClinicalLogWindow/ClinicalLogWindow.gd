@@ -23,7 +23,7 @@ class_name ClinicalLogWindow
 # 默认值与 ClinicalLogWindow.tscn 当前位置一致。
 # 如需改变固定位置，可以直接在检查器里修改此参数。
 # =========================================================
-@export var fixed_window_position: Vector2i = Vector2i(1010, 36)
+@export var fixed_window_position: Vector2i = Vector2i(1010, 66)
 
 
 # =========================================================

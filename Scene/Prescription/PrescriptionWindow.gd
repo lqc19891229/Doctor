@@ -49,7 +49,7 @@ const SORT_INDEX_FALLBACK := 2147483647
 const FORMULA_FILL_FEATURE_ENTRY_ID := "yu_zhi_fang_ji"
 
 # 开方窗口固定位置，和场景中的初始坐标保持一致。
-@export var fixed_window_position: Vector2i = Vector2i(0, 36)
+@export var fixed_window_position: Vector2i = Vector2i(5, 66)
 
 
 # =========================================================

@@ -24,7 +24,7 @@ signal region_selected(display_region_name: String)
 # 默认值与 PulseWindow.tscn 当前的位置 Vector2i(0, 36) 一致。
 # 如需改变固定位置，可以直接在检查器里修改此参数。
 # =========================================================
-@export var fixed_window_position: Vector2i = Vector2i(0, 36)
+@export var fixed_window_position: Vector2i = Vector2i(5, 66)
 
 
 # =========================================================
