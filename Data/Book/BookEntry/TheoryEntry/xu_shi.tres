@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TheoryBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/TheoryBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "xu_shi"
+book_id = "huang_di_nei_jing"
+title = "虚实"
+detail_text = "【虚实】\n\n虚实是中医八纲辨证中用来判断人体正气强弱和病邪盛衰的两项纲领。虚证多由人体正气不足、脏腑功能衰退，或气血阴阳亏损所致；实证多由外邪侵袭，或痰饮、瘀血、食积等病理产物壅盛所致。这里的虚实并不单指身体强壮或虚弱，而是对正邪双方力量和病理状态的综合判断。\n\n虚证：常见精神疲倦、身体乏力、面色少华、声音低弱、气短、自汗或盗汗、疼痛喜按、舌质淡嫩或少苔、脉象细弱无力等表现。其具体症状会因气、血、阴、阳亏虚的不同而有所变化。\n\n实证：常见起病较急、精神烦躁、声音洪亮、呼吸气粗、腹胀拒按、疼痛明显、痰涎壅盛、便秘或小便不利、舌苔厚腻、脉象有力等表现。其具体症状会随寒热性质以及病邪种类的不同而有所变化。\n\n虚证又可分为气虚、血虚、阴虚和阳虚等类型，实证则可见气滞、血瘀、痰湿、食积等不同情况。虚实也可能同时存在，称为虚实夹杂；病程中还可能出现由实转虚或因虚致实。医者需要结合表里、寒热以及望、闻、问、切所得信息进行判断，不可只凭一个症状确定虚实。辨明正邪盛衰后，虚证通常以补虚扶正为基本方向，实证通常以祛邪泻实为基本方向。"
+unlock_required_experience_points = 10

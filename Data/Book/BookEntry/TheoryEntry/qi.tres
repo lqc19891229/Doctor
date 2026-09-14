@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TheoryBookEntryData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://System/Book/BookEntry/TheoryBookEntryData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+entry_id = "qi"
+book_id = "huang_di_nei_jing"
+title = "气"
+detail_text = "【气】\n\n气是中医生命理论中的基本概念，既指构成人体和维持生命活动的精微物质，也指脏腑经络所表现出的功能活动。人体之气主要由先天之精、水谷精微和自然界清气化生，并依靠肺、脾、肾等脏腑共同维持。\n\n气具有推动、温煦、防御、固摄和气化等作用。它能够推动血液和津液运行，温暖脏腑形体，抵御外邪，固摄血液、汗液和二便，并促进饮食物及水液的转化。根据来源、分布和功能的不同，气还可分为元气、宗气、营气和卫气等。\n\n气的生成不足或功能减退，可形成气虚，常见乏力、气短、声音低弱、自汗等表现；气机运行不畅可形成气滞，出现胀满或疼痛；气机上逆、下陷或闭塞时，还可分别形成气逆、气陷和气闭。判断气的状态，需要结合脏腑功能、气血津液及全身表现综合分析。"
+unlock_required_experience_points = 40
