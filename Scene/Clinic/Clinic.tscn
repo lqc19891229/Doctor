@@ -265,9 +265,8 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_436d3")
 text = "时辰"
 
 [node name="TimeIcon" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer/TimeDisplay" unique_id=1351442177]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-size_flags_vertical = 4
 tooltip_text = "当前时辰"
 mouse_filter = 0
 expand_mode = 1
