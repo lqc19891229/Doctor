@@ -54,6 +54,16 @@ const CLINIC_AUTUMN_BACKGROUND: Texture2D = preload("res://Assets/Background/cli
 const CLINIC_WINTER_BACKGROUND: Texture2D = preload("res://Assets/Background/clinic/winter.png")
 const CLINIC_RAINY_BACKGROUND_PATH: String = "res://Assets/Background/clinic/rainy.png"
 
+# Clinic 营业时辰图标：辰、巳、午、未、申。
+# 顺序与 GameTime.current_shichen_index 的 4~8 完全对应。
+const CLINIC_TIME_ICONS: Array[Texture2D] = [
+	preload("res://Assets/UI/Time/clinic/chen_sunrise.png"),
+	preload("res://Assets/UI/Time/clinic/si_morning.png"),
+	preload("res://Assets/UI/Time/clinic/wu_noon.png"),
+	preload("res://Assets/UI/Time/clinic/wei_afternoon.png"),
+	preload("res://Assets/UI/Time/clinic/shen_sunset.png")
+]
+
 # 背景单次渐出或渐入的持续时间。
 # 完整换图过程约为该数值的两倍。
 @export_range(0.05, 2.0, 0.05) var background_fade_duration: float = 0.45
@@ -78,6 +88,7 @@ const RANDOM_NPC_PORTRAIT_ENTRANCE_OFFSET := Vector2(-200.0, 0.0)
 # 2. TimeLabel 显示“当前时辰”
 @onready var day_label: Label = find_child("DayLabel", true, false) as Label
 @onready var time_label: Label = find_child("TimeLabel", true, false) as Label
+@onready var time_icon: TextureRect = find_child("TimeIcon", true, false) as TextureRect
 
 # ---------- 诊室季节背景 ----------
 # 复用 Clinic 场景中现有的 Background 节点，无需新增节点。
@@ -336,6 +347,7 @@ func _validate_scene_node_bindings() -> void:
 		"Background": clinic_background,
 		"DayLabel": day_label,
 		"TimeLabel": time_label,
+		"TimeIcon": time_icon,
 		"ReputationPoint": reputation_point_label,
 		"MoneyPoint": money_point_label,
 		"Portrait": portrait_rect,
@@ -384,6 +396,11 @@ func _setup_time_system() -> void:
 	# Clinic 现在是常驻场景；每天真正开始计时统一放到 start_new_day()，
 	# 否则 _ready() 只执行一次会导致第二天以后计时器不再启动。
 
+	# 时辰变化时同步刷新太阳位置图标；时间文字由 TopBarController 负责。
+	if GameTime.has_signal("time_changed"):
+		if not GameTime.time_changed.is_connected(_on_clinic_time_changed):
+			GameTime.time_changed.connect(_on_clinic_time_changed)
+
 	# 监听 GameTimeManager 发出的 Clinic 时间结束信号。
 	# 时间结束时不会无条件立即进入 Night：
 	# - 当前没有有效病人：直接结束 Clinic；
@@ -413,6 +430,35 @@ func _update_time_ui() -> void:
 	if topbar_controller != null:
 		topbar_controller.set_fallback_day(current_day)
 		topbar_controller.refresh_time()
+
+	_update_time_icon()
+
+
+func _on_clinic_time_changed() -> void:
+	_update_time_icon()
+
+
+func _update_time_icon() -> void:
+	if time_icon == null:
+		return
+
+	# Clinic 之外或夜晚阶段不显示白天太阳轨迹。
+	if not GameTime.is_day():
+		time_icon.visible = false
+		return
+
+	var icon_index: int = (
+		GameTime.current_shichen_index
+		- GameTime.CLINIC_START_SHICHEN_INDEX
+	)
+
+	if icon_index < 0 or icon_index >= CLINIC_TIME_ICONS.size():
+		time_icon.visible = false
+		return
+
+	time_icon.texture = CLINIC_TIME_ICONS[icon_index]
+	time_icon.tooltip_text = GameTime.get_shichen_text()
+	time_icon.visible = true
 
 
 
