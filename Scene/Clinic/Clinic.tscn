@@ -15,7 +15,6 @@
 [ext_resource type="Script" uid="uid://d06u1pfx3kdqv" path="res://Scene/Clinic/PolygonHotspot.gd" id="9_qtjht"]
 [ext_resource type="Texture2D" uid="uid://bun4qmh7amvw2" path="res://Assets/UI/silver_ingot.png" id="9_silver_ingot"]
 [ext_resource type="Texture2D" uid="uid://drj3b721nd3p5" path="res://Assets/UI/copper_coin.png" id="10_copper_coin"]
-[ext_resource type="Texture2D" path="res://Assets/UI/Time/clinic/chen_sunrise.png" id="11_time_chen"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4yeq"]
 bg_color = Color(0.18039216, 0.10980392, 0.05490196, 0.9490196)
@@ -252,10 +251,9 @@ theme_override_font_sizes/font_size = 25
 theme_override_styles/focus = SubResource("StyleBoxEmpty_l04vw")
 text = "天数"
 
-[node name="TimeDisplay" type="HBoxContainer" parent="VBoxContainer/TopBar/HBoxContainer"]
+[node name="TimeDisplay" type="HBoxContainer" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1763355432]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 1
 size_flags_stretch_ratio = 29.0
 theme_override_constants/separation = 8
 
@@ -266,15 +264,14 @@ theme_override_font_sizes/font_size = 25
 theme_override_styles/focus = SubResource("StyleBoxEmpty_436d3")
 text = "时辰"
 
-[node name="TimeIcon" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer/TimeDisplay"]
+[node name="TimeIcon" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer/TimeDisplay" unique_id=1351442177]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_vertical = 4
-mouse_filter = 2
-texture = ExtResource("11_time_chen")
+tooltip_text = "当前时辰"
+mouse_filter = 0
 expand_mode = 1
 stretch_mode = 5
-tooltip_text = "当前时辰"
 
 [node name="ReputationPoint" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=55916187]
 layout_mode = 2

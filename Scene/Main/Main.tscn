@@ -69,25 +69,25 @@ grow_vertical = 2
 [node name="NewGameButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer" unique_id=477426475]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 35
 text = "新游戏"
 
 [node name="LoadGameButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer" unique_id=503802410]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 35
 text = "读取存档"
 
 [node name="SettingsButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer" unique_id=1772277013]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 35
 text = "设置"
 
 [node name="QuitGameButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer" unique_id=934317025]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 35
 text = "退出游戏"
 
 [node name="SaveSlotPopup" type="Panel" parent="MainMenuLayer" unique_id=1660799706]
@@ -139,7 +139,7 @@ text = "关闭"
 
 [node name="OverwriteConfirmPopup" type="Panel" parent="MainMenuLayer" unique_id=970771500]
 visible = false
-custom_minimum_size = Vector2(350, 250)
+custom_minimum_size = Vector2(500, 250)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -157,7 +157,7 @@ offset_left = -162.5
 offset_right = 162.5
 offset_bottom = 35.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 30
 text = "该槽位已有存档，是否覆盖？"
 vertical_alignment = 1
 
@@ -180,12 +180,12 @@ layout_mode = 2
 
 [node name="ConfirmButton" type="Button" parent="MainMenuLayer/OverwriteConfirmPopup/HBoxContainer/VBoxContainer" unique_id=1172634342]
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 35
 text = "确认"
 
 [node name="CancelButton" type="Button" parent="MainMenuLayer/OverwriteConfirmPopup/HBoxContainer/VBoxContainer" unique_id=1301435808]
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 35
 text = "取消"
 
 [node name="PauseMenuLayer" type="CanvasLayer" parent="." unique_id=790300192]
