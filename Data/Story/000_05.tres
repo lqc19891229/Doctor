@@ -9,6 +9,7 @@ script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
+music = "res://Assets/Music/Story/寻幽探胜.mp3"
 text = "万历二十一年李东璧病逝，终年76岁…"
 background = ExtResource("background_1")
 [sub_resource type="Resource" id="StoryLine_002"]
