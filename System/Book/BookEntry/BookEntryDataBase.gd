@@ -58,6 +58,7 @@ func load_all_entries() -> void:
 
 	# 递归扫描目录
 	_load_entries_recursive(entry_data_path)
+	_sort_entries()
 
 	print("[BookEntryDataBase] 已加载条目数量：", entry_map.size())
 
@@ -146,7 +147,31 @@ func _register_entry(entry: BookEntryData, full_path: String) -> void:
 
 
 # =========================================================
-# 七、查询接口
+# 七、排序
+# =========================================================
+
+func _sort_entries() -> void:
+	# 每本医书中的条目独立排序。
+	for book_id in entries_by_book.keys():
+		var entries: Array = entries_by_book[book_id]
+		entries.sort_custom(_is_entry_before)
+
+	# 按类型查询时也保持相同的稳定顺序。
+	for entry_type in entries_by_type.keys():
+		var entries: Array = entries_by_type[entry_type]
+		entries.sort_custom(_is_entry_before)
+
+
+func _is_entry_before(a: BookEntryData, b: BookEntryData) -> bool:
+	if a.sort_index != b.sort_index:
+		return a.sort_index < b.sort_index
+
+	# sort_index 相同时使用 entry_id 作为稳定的次级排序条件。
+	return a.entry_id.naturalnocasecmp_to(b.entry_id) < 0
+
+
+# =========================================================
+# 八、查询接口
 # =========================================================
 
 func get_entry(entry_id: String) -> BookEntryData:

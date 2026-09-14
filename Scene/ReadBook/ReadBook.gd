@@ -367,7 +367,7 @@ func _refresh_entry_list_for_selected_book() -> void:
 		return
 
 	readable_entries = Unlock.get_readable_entries_by_book(selected_book.book_id)
-	_sort_unread_entries_to_top()
+	_sort_entries_by_index()
 
 	_refresh_entry_list_view()
 	_update_entry_info_label()
@@ -519,19 +519,15 @@ func _is_unread_readable_entry(entry: BookEntryData) -> bool:
 	return Unlock.can_read_entry(entry_id) and not Unlock.is_entry_read(entry_id)
 
 
-func _sort_unread_entries_to_top() -> void:
-	var unread_entries: Array[BookEntryData] = []
-	var read_or_normal_entries: Array[BookEntryData] = []
+func _sort_entries_by_index() -> void:
+	readable_entries.sort_custom(
+		func(a: BookEntryData, b: BookEntryData) -> bool:
+			if a.sort_index != b.sort_index:
+				return a.sort_index < b.sort_index
 
-	for entry in readable_entries:
-		if _is_unread_readable_entry(entry):
-			unread_entries.append(entry)
-		else:
-			read_or_normal_entries.append(entry)
-
-	readable_entries.clear()
-	readable_entries.append_array(unread_entries)
-	readable_entries.append_array(read_or_normal_entries)
+			# sort_index 相同时使用 entry_id 保证显示顺序稳定。
+			return a.entry_id.naturalnocasecmp_to(b.entry_id) < 0
+	)
 
 
 func _add_entry_list_item(entry: BookEntryData) -> void:
@@ -635,7 +631,7 @@ func _reselect_current_book_in_list() -> void:
 
 
 func _refresh_entry_list_titles_keep_selection(entry_id: String) -> void:
-	_sort_unread_entries_to_top()
+	_sort_entries_by_index()
 	_refresh_entry_list_view(entry_id)
 
 # =========================

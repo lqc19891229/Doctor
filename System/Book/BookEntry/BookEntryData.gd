@@ -15,6 +15,10 @@ class_name BookEntryData
 # 条目标题
 @export var title: String = ""
 
+# 条目在所属医书中的显示顺序
+# 数值越小越靠前；不同医书之间互不影响
+@export var sort_index: int = 0
+
 # 正文
 @export_multiline var detail_text: String = ""
 
