@@ -20,6 +20,7 @@ class_name Main
 
 # 开始菜单根节点
 @onready var main_menu_layer: CanvasLayer = $MainMenuLayer
+@onready var main_menu_music_player: AudioStreamPlayer = $MainMenuLayer/Music
 
 # 游戏内暂停菜单 / 设置菜单
 @onready var pause_menu_layer: CanvasLayer = $PauseMenuLayer
@@ -192,6 +193,8 @@ func _show_main_menu() -> void:
 	if is_instance_valid(AmbientManager):
 		AmbientManager.stop_ambient()
 
+	_play_main_menu_music()
+
 	_hide_pause_menu_visual_only()
 	_close_settings_menu(false)
 	_set_pause_menu_input_enabled(true)
@@ -210,9 +213,45 @@ func _show_main_menu() -> void:
 # 隐藏开始菜单
 # =========================================================
 func _hide_main_menu() -> void:
+	_stop_main_menu_music()
 	main_menu_layer.visible = false
 	_close_save_slot_popup()
 	_close_overwrite_confirm_dialog()
+
+
+# =========================================================
+# 主菜单音乐
+# =========================================================
+func _play_main_menu_music() -> void:
+	if main_menu_music_player == null:
+		return
+
+	if main_menu_music_player.stream == null:
+		push_warning("MainMenuLayer/Music 没有配置音乐资源。")
+		return
+
+	# 主菜单音乐也走 BGM 总线，保持与游戏内音乐音量设置一致。
+	if AudioServer.get_bus_index("BGM") >= 0:
+		main_menu_music_player.bus = &"BGM"
+
+	# 使用资源副本开启循环，不修改原始导入资源。
+	# 当前 Main.tscn 配置的是山水行旅.mp3。
+	if main_menu_music_player.stream is AudioStreamMP3:
+		var loop_stream := main_menu_music_player.stream.duplicate() as AudioStreamMP3
+		if loop_stream != null:
+			loop_stream.loop = true
+			main_menu_music_player.stream = loop_stream
+
+	if not main_menu_music_player.playing:
+		main_menu_music_player.play()
+
+
+func _stop_main_menu_music() -> void:
+	if main_menu_music_player == null:
+		return
+
+	if main_menu_music_player.playing:
+		main_menu_music_player.stop()
 
 
 # =========================================================
