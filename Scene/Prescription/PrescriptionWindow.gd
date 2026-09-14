@@ -42,6 +42,9 @@ const ROLE_SHI := "使"
 # 搜索框停止输入后再执行过滤，避免每个字符都触发布局刷新。
 const SEARCH_DEBOUNCE_SECONDS := 0.10
 
+# 没有对应医书条目的数据统一排在最后。
+const SORT_INDEX_FALLBACK := 2147483647
+
 # 解锁后才开放“搜索并套用预制方剂”功能的医书条目。
 const FORMULA_FILL_FEATURE_ENTRY_ID := "yu_zhi_fang_ji"
 
@@ -376,6 +379,36 @@ func _get_selected_unit_key() -> String:
 
 
 # =========================================================
+# 医书条目排序
+# =========================================================
+func _build_book_entry_sort_map(
+	entry_type: String,
+	data_id_property: String
+) -> Dictionary:
+	var result: Dictionary = {}
+
+	if BookEntryDB == null:
+		return result
+
+	if not BookEntryDB.has_method("get_entries_by_type"):
+		return result
+
+	var entries: Array[BookEntryData] = BookEntryDB.get_entries_by_type(entry_type)
+
+	for entry in entries:
+		if entry == null:
+			continue
+
+		var data_id := str(entry.get(data_id_property)).strip_edges()
+		if data_id == "":
+			continue
+
+		result[data_id] = entry.sort_index
+
+	return result
+
+
+# =========================================================
 # 药材按钮缓存 / 搜索
 # =========================================================
 func _refresh_herb_list() -> void:
@@ -400,6 +433,21 @@ func _ensure_herb_button_cache() -> void:
 	_cached_herb_db_instance_id = db_instance_id
 
 	var herbs = herb_database.get_all_herbs()
+	var herb_sort_map := _build_book_entry_sort_map("herb", "herb_id")
+
+	herbs.sort_custom(
+		func(a, b) -> bool:
+			var a_id := str(a.herb_id).strip_edges()
+			var b_id := str(b.herb_id).strip_edges()
+			var a_sort := int(herb_sort_map.get(a_id, SORT_INDEX_FALLBACK))
+			var b_sort := int(herb_sort_map.get(b_id, SORT_INDEX_FALLBACK))
+
+			if a_sort != b_sort:
+				return a_sort < b_sort
+
+			return a_id.naturalnocasecmp_to(b_id) < 0
+	)
+
 	for herb in herbs:
 		if herb == null:
 			continue
@@ -469,6 +517,21 @@ func _ensure_formula_search_cache() -> void:
 	_cached_formula_db_instance_id = db_instance_id
 
 	var formulas = formula_database.get_all_formulas()
+	var formula_sort_map := _build_book_entry_sort_map("formula", "formula_id")
+
+	formulas.sort_custom(
+		func(a, b) -> bool:
+			var a_id := str(a.formula_id).strip_edges()
+			var b_id := str(b.formula_id).strip_edges()
+			var a_sort := int(formula_sort_map.get(a_id, SORT_INDEX_FALLBACK))
+			var b_sort := int(formula_sort_map.get(b_id, SORT_INDEX_FALLBACK))
+
+			if a_sort != b_sort:
+				return a_sort < b_sort
+
+			return a_id.naturalnocasecmp_to(b_id) < 0
+	)
+
 	for formula in formulas:
 		if formula == null:
 			continue
@@ -1511,6 +1574,21 @@ func load_all_diseases() -> void:
 		return
 
 	all_diseases = DiseaseDB.get_all_diseases()
+	var disease_sort_map := _build_book_entry_sort_map("disease", "disease_id")
+
+	all_diseases.sort_custom(
+		func(a, b) -> bool:
+			var a_id := _get_disease_id(a)
+			var b_id := _get_disease_id(b)
+			var a_sort := int(disease_sort_map.get(a_id, SORT_INDEX_FALLBACK))
+			var b_sort := int(disease_sort_map.get(b_id, SORT_INDEX_FALLBACK))
+
+			if a_sort != b_sort:
+				return a_sort < b_sort
+
+			return a_id.naturalnocasecmp_to(b_id) < 0
+	)
+
 	_ensure_disease_button_cache()
 	_apply_disease_filter()
 

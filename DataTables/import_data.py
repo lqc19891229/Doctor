@@ -1192,6 +1192,17 @@ def get_unlock_required_experience_points(row: dict[str, Any]) -> int:
     return as_int(row.get("Experience"), -1)
 
 
+def get_book_entry_sort_index(row: dict[str, Any]) -> int:
+    """
+    功能：读取医书条目的显示顺序。
+    作用：
+    1. 从 Herb / Disease / Formula / Theory sheet 的 sort_index 列读取数值。
+    2. 空值或非法值默认使用 0，与 BookEntryData.sort_index 的默认值保持一致。
+    3. 兼容 Excel 将整数保存成 1.0 这类浮点数的情况。
+    """
+    return as_int(row.get("sort_index"), 0)
+
+
 def as_bool(value: Any, default: bool = True) -> bool:
     """
     功能：将 Excel 单元格内容转换为布尔值。
@@ -2164,6 +2175,7 @@ price_unit = {format_godot_string(price_unit)}
 
         entry_id = as_str(row.get("EntryID")) or herb_id
         title = as_str(row.get("Title")) or herb_name
+        sort_index = get_book_entry_sort_index(row)
         detail_text = build_herb_detail_text(row)
         unlock_required_experience_points = get_unlock_required_experience_points(row)
 
@@ -2176,6 +2188,7 @@ script = ExtResource("1")
 entry_id = {format_godot_string(entry_id)}
 book_id = {format_godot_string(row.get("BookID"))}
 title = {format_godot_string(title)}
+sort_index = {sort_index}
 detail_text = {format_godot_string(detail_text)}
 unlock_required_experience_points = {unlock_required_experience_points}
 herb_id = {format_godot_string(herb_id)}
@@ -2254,6 +2267,7 @@ kidney_yang_wet_dry = {as_float(pulse_row.get("KZH"), 1.0)}
 
         entry_id = as_str(disease_row.get("EntryID")) or disease_id
         title = as_str(disease_row.get("Title")) or disease_name
+        sort_index = get_book_entry_sort_index(disease_row)
 
         entry_content = f'''[gd_resource type="Resource" script_class="DiseaseBookEntryData" load_steps=2 format=3]
 
@@ -2264,6 +2278,7 @@ script = ExtResource("1")
 entry_id = {format_godot_string(entry_id)}
 book_id = {format_godot_string(disease_row.get("BookID"))}
 title = {format_godot_string(title)}
+sort_index = {sort_index}
 detail_text = {format_godot_string(disease_row.get("DetailText"))}
 disease_id = {format_godot_string(disease_id)}
 '''
@@ -2385,6 +2400,7 @@ required = {"true" if required else "false"}'''
 
         entry_id = as_str(formula_row.get("EntryID")) or formula_id
         title = as_str(formula_row.get("Title")) or formula_name
+        sort_index = get_book_entry_sort_index(formula_row)
 
         entry_content = f'''[gd_resource type="Resource" script_class="FormulaBookEntryData" load_steps=2 format=3]
 
@@ -2395,6 +2411,7 @@ script = ExtResource("1")
 entry_id = {format_godot_string(entry_id)}
 book_id = {format_godot_string(formula_row.get("BookID"))}
 title = {format_godot_string(title)}
+sort_index = {sort_index}
 detail_text = {format_godot_string(formula_row.get("DetailText"))}
 formula_id = {format_godot_string(formula_id)}
 '''
@@ -2416,6 +2433,7 @@ def build_theory_resources(indexed_data: dict[str, Any]) -> None:
         theory_name = as_str(row.get("TheoryName"))
         entry_id = as_str(row.get("EntryID")) or theory_id
         title = as_str(row.get("Title")) or theory_name
+        sort_index = get_book_entry_sort_index(row)
         unlock_required_experience_points = get_unlock_required_experience_points(row)
 
         entry_content = f'''[gd_resource type="Resource" script_class="TheoryBookEntryData" load_steps=2 format=3]
@@ -2427,6 +2445,7 @@ script = ExtResource("1")
 entry_id = {format_godot_string(entry_id)}
 book_id = {format_godot_string(row.get("BookID"))}
 title = {format_godot_string(title)}
+sort_index = {sort_index}
 detail_text = {format_godot_string(row.get("DetailText"))}
 unlock_required_experience_points = {unlock_required_experience_points}
 '''
