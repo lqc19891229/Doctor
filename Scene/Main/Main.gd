@@ -44,6 +44,9 @@ class_name Main
 const CLINIC_SCENE: PackedScene = preload("res://Scene/Clinic/Clinic.tscn")
 const NIGHT_SCENE: PackedScene = preload("res://Scene/Night/Night.tscn")
 const STORY_SCENE: PackedScene = preload("res://Scene/Story/Story.tscn")
+const TUTORIAL_WINDOW_SCENE: PackedScene = preload(
+	"res://Scene/Tutorial/TutorialWindow.tscn"
+)
 const ENDING_CREDITS_SCENE: PackedScene = preload(
 	"res://Scene/Ending/Ending_credits.tscn"
 )
@@ -55,6 +58,11 @@ const MAP_SCENE_PATH: String = "res://Scene/Map/Map.tscn"
 var current_scene: Node = null
 var current_story_scene: Node = null
 var story_treatment_backend: Node = null
+
+# 教程窗口由 Main 动态创建并常驻，避免修改 Main.tscn。
+# CanvasLayer 保证教程显示在 Clinic / Night 之上。
+var tutorial_layer: CanvasLayer = null
+var tutorial_window: Node = null
 
 # Clinic / Night 改为常驻实例：每种场景整局最多实例化一次。
 # 切换昼夜时只隐藏并禁用处理，不再 queue_free + instantiate。
@@ -1345,9 +1353,57 @@ func _is_game_over_story(story: StoryData) -> bool:
 	return story.should_game_over()
 
 
+func _get_or_create_tutorial_window() -> Node:
+	if tutorial_window != null and is_instance_valid(tutorial_window):
+		return tutorial_window
+
+	if tutorial_layer == null or not is_instance_valid(tutorial_layer):
+		tutorial_layer = CanvasLayer.new()
+		tutorial_layer.name = "TutorialLayer"
+		tutorial_layer.layer = 9000
+		tutorial_layer.process_mode = Node.PROCESS_MODE_ALWAYS
+		add_child(tutorial_layer)
+
+	tutorial_window = TUTORIAL_WINDOW_SCENE.instantiate()
+	if tutorial_window == null:
+		push_warning("Main 无法创建 TutorialWindow。")
+		return null
+
+	tutorial_layer.add_child(tutorial_window)
+	return tutorial_window
+
+
+func _open_tutorial_after_story(story_id: String) -> void:
+	var clean_story_id := story_id.strip_edges()
+	if clean_story_id != "002" and clean_story_id != "003":
+		return
+
+	var window := _get_or_create_tutorial_window()
+	if window == null:
+		return
+
+	match clean_story_id:
+		"002":
+			if window.has_method("open_night_tutorial"):
+				window.call("open_night_tutorial")
+			else:
+				push_warning("TutorialWindow 缺少 open_night_tutorial()。")
+
+		"003":
+			if window.has_method("open_day_tutorial"):
+				window.call("open_day_tutorial")
+			else:
+				push_warning("TutorialWindow 缺少 open_day_tutorial()。")
+
+
 func _on_story_finished() -> void:
 	# 只有走到正式结束信号，才把当前剧情记为已播放。
 	# 剧情状态继续保留在内存，只有昼夜阶段真正结束时才写盘。
+	# 必须在 clear_story() 前记录剧情 ID，供返回场景后判断是否打开教程。
+	var completed_story_id := ""
+	if StoryManager != null and StoryManager.current_story != null:
+		completed_story_id = String(StoryManager.current_story.story_id).strip_edges()
+
 	StoryManager.mark_current_story_played()
 	StoryManager.clear_story()
 
@@ -1376,6 +1432,7 @@ func _on_story_finished() -> void:
 			_save_game_with_warning("白天结束（剧情返回 Night）")
 
 		_enter_night(false)
+		_open_tutorial_after_story.call_deferred(completed_story_id)
 		return
 
 	story_paused_clinic_clock = false
@@ -1391,6 +1448,7 @@ func _on_story_finished() -> void:
 			entered_new_day_from_night = true
 
 		_enter_clinic(entered_new_day_from_night)
+		_open_tutorial_after_story.call_deferred(completed_story_id)
 		return
 
 	if target == "map":
@@ -1399,6 +1457,7 @@ func _on_story_finished() -> void:
 
 	# 兜底：未知返回目标默认回 Clinic。
 	_enter_clinic()
+	_open_tutorial_after_story.call_deferred(completed_story_id)
 
 
 # =========================================================
