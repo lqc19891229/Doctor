@@ -1389,7 +1389,7 @@ func submit_prescription() -> bool:
 
 	# random NPC 达成妙手回春时：
 	# 1. 后台增加 1 点 experience_points，并立即检查心得条目解锁；
-	# 2. 独立累计一次“妙手回春开方”，第 5 次解锁预制方剂功能。
+	# 2. 按本次标准方的 formula_id 独立累计，第 5 次解锁该方剂的一键预制。
 	# was_already_submitted 用于防止同一名病人重复提交刷后台进度。
 	var is_miaoshouhuichun := false
 	if result != null and result.has_method("is_miaoshouhuichun"):
@@ -1400,11 +1400,40 @@ func submit_prescription() -> bool:
 	if uses_fixed_treatment_rewards and is_miaoshouhuichun and not was_already_submitted:
 		var newly_unlocked_titles: Array[String] = []
 
-		# 独立记录预制方剂解锁进度。第 1～4 次不向玩家显示进度。
-		if Unlock != null and Unlock.has_method("record_miaoshouhuichun_prescription"):
-			var preset_unlock_result: Dictionary = Unlock.record_miaoshouhuichun_prescription()
+		# 按本次匹配到的标准方独立记录预制方剂熟练度。
+		# 第 1～4 次静默累计；第 5 次只解锁这个 formula_id 的一键预制。
+		var mastered_formula_id := ""
+		var mastered_formula_name := ""
+
+		if result != null:
+			var raw_matched_formula_id = result.get("matched_formula_id")
+			if raw_matched_formula_id != null:
+				mastered_formula_id = str(raw_matched_formula_id).strip_edges()
+
+			var raw_matched_formula_name = result.get("matched_formula_name")
+			if raw_matched_formula_name != null:
+				mastered_formula_name = str(raw_matched_formula_name).strip_edges()
+
+		# 正常情况下 JudgeResult 已经写入 matched_formula_id / matched_formula_name。
+		# 这里再用本次 standard_formula 做兜底，避免旧 JudgeResult 资源导致计数丢失。
+		if mastered_formula_id == "" and standard_formula != null:
+			mastered_formula_id = standard_formula.formula_id.strip_edges()
+		if mastered_formula_name == "" and standard_formula != null:
+			mastered_formula_name = standard_formula.formula_name.strip_edges()
+
+		if (
+			mastered_formula_id != ""
+			and Unlock != null
+			and Unlock.has_method("record_miaoshouhuichun_prescription")
+		):
+			var preset_unlock_result: Dictionary = Unlock.record_miaoshouhuichun_prescription(
+				mastered_formula_id
+			)
 			if bool(preset_unlock_result.get("just_unlocked", false)):
-				newly_unlocked_titles.append("预制方剂")
+				if mastered_formula_name != "":
+					newly_unlocked_titles.append("预制方剂：%s" % mastered_formula_name)
+				else:
+					newly_unlocked_titles.append("预制方剂")
 
 		# 保留原有规则：每次有效的妙手回春仍然增加 1 点心得。
 		if Unlock != null and Unlock.has_method("add_experience_point"):

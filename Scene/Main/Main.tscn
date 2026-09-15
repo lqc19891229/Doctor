@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://de88r06hcei8i" path="res://Assets/Background/Logo.png" id="3_66shk"]
 [ext_resource type="Script" uid="uid://b3t705armu5q7" path="res://Scene/Main/SettingsPanel.gd" id="3_settings_panel"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l12wf"]
+
 [node name="Main" type="Node" unique_id=899515328]
 script = ExtResource("1_o28sc")
 
@@ -54,6 +56,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_l12wf")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenuLayer/MenuPanel" unique_id=979900440]
 custom_minimum_size = Vector2(300, 360)
@@ -142,54 +145,72 @@ theme_override_font_sizes/font_size = 25
 text = "关闭"
 
 [node name="OverwriteConfirmPopup" type="Panel" parent="MainMenuLayer" unique_id=970771500]
-visible = false
-custom_minimum_size = Vector2(500, 250)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MessageLabel" type="Label" parent="MainMenuLayer/OverwriteConfirmPopup" unique_id=1406092506]
-layout_mode = 1
+custom_minimum_size = Vector2(750, 400)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -162.5
-offset_right = 162.5
-offset_bottom = 35.0
+offset_left = -375.0
+offset_top = 150.0
+offset_right = 375.0
+offset_bottom = 550.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 30
-text = "该槽位已有存档，是否覆盖？"
+
+[node name="TitleLabel" type="Label" parent="MainMenuLayer/OverwriteConfirmPopup" unique_id=525077842]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 12.0
+offset_bottom = 52.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 26
+text = "确认覆盖"
+horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="MainMenuLayer/OverwriteConfirmPopup" unique_id=1406092506]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 55.0
+offset_right = -30.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 26
+text = "该槽位已有存档，是否覆盖？"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainMenuLayer/OverwriteConfirmPopup" unique_id=1222469541]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -29.0
-offset_top = -45.0
-offset_right = 29.0
-offset_bottom = 45.0
+anchor_bottom = 1.0
+offset_left = -375.0
+offset_top = -57.0
+offset_right = 375.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuLayer/OverwriteConfirmPopup/HBoxContainer" unique_id=1452701065]
+[node name="ConfirmButton" type="Button" parent="MainMenuLayer/OverwriteConfirmPopup/HBoxContainer" unique_id=1172634342]
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "确认覆盖"
 
-[node name="ConfirmButton" type="Button" parent="MainMenuLayer/OverwriteConfirmPopup/HBoxContainer/VBoxContainer" unique_id=1172634342]
+[node name="CancelButton" type="Button" parent="MainMenuLayer/OverwriteConfirmPopup/HBoxContainer" unique_id=1301435808]
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "确认"
-
-[node name="CancelButton" type="Button" parent="MainMenuLayer/OverwriteConfirmPopup/HBoxContainer/VBoxContainer" unique_id=1301435808]
-layout_mode = 2
-theme_override_font_sizes/font_size = 35
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
 text = "取消"
 
 [node name="PauseMenuLayer" type="CanvasLayer" parent="." unique_id=790300192]
@@ -260,7 +281,6 @@ text = "退出游戏"
 
 [node name="SettingsLayer" type="CanvasLayer" parent="." unique_id=691791985]
 layer = 110
-visible = false
 script = ExtResource("3_settings_panel")
 
 [node name="DarkBackground" type="ColorRect" parent="SettingsLayer" unique_id=276553050]
@@ -339,13 +359,6 @@ text = "音效音量"
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 value = 80.0
-
-[node name="AudioBusHint" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=634292725]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Music / SFX 总线尚未创建时，对应滑块会自动禁用。"
-horizontal_alignment = 1
-autowrap_mode = 2
 
 [node name="FullscreenCheckBox" type="CheckBox" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1796179758]
 custom_minimum_size = Vector2(0, 54)

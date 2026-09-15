@@ -44,7 +44,7 @@ metadata/_custom_type_script = "uid://dyml45imq64mo"
 [sub_resource type="Resource" id="Resource_3ilc3"]
 script = ExtResource("3_slide_data")
 title = "脉象"
-description = "选择疾病条目时，点击右下角按钮可以观察该疾病的脉象。"
+description = "选择疾病条目时，点击右下角“查看脉象”按钮，可以观察该疾病的脉象。"
 image = ExtResource("4_0xbrs")
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 
@@ -344,7 +344,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="TextPanel" type="PanelContainer" parent="CenterContainer/WindowPanel/OuterMargin/RootVBox/Content" unique_id=1353612378]
 custom_minimum_size = Vector2(440, 620)

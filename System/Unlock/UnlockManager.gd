@@ -285,9 +285,13 @@ const PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT: int = 5
 
 var experience_points: int = 0
 
-# 仅记录 random NPC 首次提交并获得“妙手回春”的有效次数。
-# 此进度独立于心得、名望和诊疗收入，只用于解锁预制方剂功能。
+# 所有有效“妙手回春”的总次数。
+# 保留这个总数字段用于统计及兼容现有存档结构；不再直接决定预制方剂解锁。
 var miaoshouhuichun_prescription_count: int = 0
+
+# 每个标准方独立累计“妙手回春”次数。
+# key = formula_id，value = 该方剂在疾病治疗中获得“妙手回春”的有效次数。
+var miaoshouhuichun_formula_counts: Dictionary = {}
 
 
 func get_experience_points() -> int:
@@ -325,30 +329,71 @@ func add_experience_point(amount: int = 1) -> Array[String]:
 	return change_experience_points(amount)
 
 
-# 记录一次有效的“妙手回春”开方。
-# 第 1～4 次只静默累计；第 5 次解锁预制方剂条目。
-func record_miaoshouhuichun_prescription() -> Dictionary:
+# 记录一次指定标准方的有效“妙手回春”。
+# 每个 formula_id 独立累计：第 1～4 次静默累计，第 5 次解锁该方剂的一键预制。
+# PRESET_FORMULA_ENTRY_ID 只作为“已经掌握过预制方剂”的说明条目，
+# 不再作为所有方剂共用的一键预制开关。
+func record_miaoshouhuichun_prescription(formula_id: String = "") -> Dictionary:
+	var clean_formula_id := formula_id.strip_edges()
+	if clean_formula_id == "":
+		return {
+			"formula_id": "",
+			"count": 0,
+			"required": PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT,
+			"just_unlocked": false
+		}
+
+	# 总次数继续保留用于统计。
 	miaoshouhuichun_prescription_count += 1
 
-	var just_unlocked := false
-	if (
-		miaoshouhuichun_prescription_count >= PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT
-		and not is_entry_unlocked(PRESET_FORMULA_ENTRY_ID)
-	):
+	var previous_count := maxi(
+		int(miaoshouhuichun_formula_counts.get(clean_formula_id, 0)),
+		0
+	)
+	var new_count := previous_count + 1
+	miaoshouhuichun_formula_counts[clean_formula_id] = new_count
+
+	var just_unlocked := (
+		previous_count < PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT
+		and new_count >= PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT
+	)
+
+	# 第一次有任意方剂达到 5 次时，仍解锁原来的“预制方剂”说明条目，
+	# 但其它方剂不会因此自动获得一键预制权限。
+	if just_unlocked and not is_entry_unlocked(PRESET_FORMULA_ENTRY_ID):
 		unlock_entry(PRESET_FORMULA_ENTRY_ID)
-		just_unlocked = true
 
 	return {
-		"count": miaoshouhuichun_prescription_count,
+		"formula_id": clean_formula_id,
+		"count": new_count,
 		"required": PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT,
 		"just_unlocked": just_unlocked
 	}
 
 
-func get_miaoshouhuichun_prescription_count() -> int:
-	return miaoshouhuichun_prescription_count
+# 不传 formula_id 时返回历史总次数；传入 formula_id 时返回该方剂自己的次数。
+func get_miaoshouhuichun_prescription_count(formula_id: String = "") -> int:
+	var clean_formula_id := formula_id.strip_edges()
+	if clean_formula_id == "":
+		return miaoshouhuichun_prescription_count
+
+	return maxi(int(miaoshouhuichun_formula_counts.get(clean_formula_id, 0)), 0)
 
 
+# 指定方剂是否已经达到 5 次“妙手回春”，从而允许一键预制。
+func is_preset_formula_unlocked(formula_id: String) -> bool:
+	var clean_formula_id := formula_id.strip_edges()
+	if clean_formula_id == "":
+		return false
+
+	return (
+		get_miaoshouhuichun_prescription_count(clean_formula_id)
+		>= PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT
+	)
+
+
+# 保留旧接口，避免项目其它脚本因接口消失报错。
+# 这里只表示玩家是否曾经掌握过至少一个预制方剂，不用于判断具体方剂。
 func is_preset_formula_feature_unlocked() -> bool:
 	return is_entry_unlocked(PRESET_FORMULA_ENTRY_ID)
 
@@ -2064,6 +2109,7 @@ func reset_progress() -> void:
 
 	experience_points = 0
 	miaoshouhuichun_prescription_count = 0
+	miaoshouhuichun_formula_counts.clear()
 	reputation_points = 0
 
 	money_wen = STARTING_MONEY_WEN
@@ -2089,6 +2135,7 @@ func get_save_data() -> Dictionary:
 		"clinical_log_unlocked_formula_ids": clinical_log_unlocked_formula_ids,
 		"experience_points": experience_points,
 		"miaoshouhuichun_prescription_count": miaoshouhuichun_prescription_count,
+		"miaoshouhuichun_formula_counts": miaoshouhuichun_formula_counts,
 		"reputation_points": reputation_points,
 		"money_wen": money_wen,
 		"finance_ledger_day": finance_ledger_day,
@@ -2125,11 +2172,14 @@ func load_save_data(data: Dictionary) -> void:
 		int(data.get("miaoshouhuichun_prescription_count", 0)),
 		0
 	)
+	miaoshouhuichun_formula_counts = _load_nonnegative_int_dictionary(
+		data.get("miaoshouhuichun_formula_counts", {})
+	)
 	reputation_points = int(data.get("reputation_points", 0))
 
-	# 兼容次数已经达标、但解锁条目尚未写入的存档。
-	if miaoshouhuichun_prescription_count >= PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT:
-		unlock_entry(PRESET_FORMULA_ENTRY_ID)
+	# 旧存档没有按 formula_id 记录次数，无法可靠还原到具体方剂。
+	# 因此旧的全局次数继续保留作统计，但不会把所有方剂直接视为已掌握。
+	# 新版存档只根据 miaoshouhuichun_formula_counts 判断具体预制方剂权限。
 
 	money_wen = int(data.get("money_wen", STARTING_MONEY_WEN))
 	finance_ledger_day = maxi(int(data.get("finance_ledger_day", 1)), 1)
@@ -2182,5 +2232,21 @@ func _load_bool_dictionary(source) -> Dictionary:
 			continue
 
 		result[clean_key] = bool(source[key])
+
+	return result
+
+
+func _load_nonnegative_int_dictionary(source) -> Dictionary:
+	var result := {}
+
+	if typeof(source) != TYPE_DICTIONARY:
+		return result
+
+	for key in source.keys():
+		var clean_key := String(key).strip_edges()
+		if clean_key == "":
+			continue
+
+		result[clean_key] = maxi(int(source[key]), 0)
 
 	return result

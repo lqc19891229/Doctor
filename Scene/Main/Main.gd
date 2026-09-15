@@ -39,6 +39,12 @@ class_name Main
 @onready var save_slot_3_button: Button = $MainMenuLayer/SaveSlotPopup/VBoxContainer/Slot3Button
 @onready var save_slot_close_button: Button = $MainMenuLayer/SaveSlotPopup/VBoxContainer/CloseButton
 
+# 覆盖已有存档确认框（场景节点）
+@onready var overwrite_confirm_popup: Panel = $MainMenuLayer/OverwriteConfirmPopup
+@onready var overwrite_confirm_message_label: Label = $MainMenuLayer/OverwriteConfirmPopup/MessageLabel
+@onready var overwrite_confirm_button: Button = $MainMenuLayer/OverwriteConfirmPopup/HBoxContainer/ConfirmButton
+@onready var overwrite_cancel_button: Button = $MainMenuLayer/OverwriteConfirmPopup/HBoxContainer/CancelButton
+
 
 # 预加载场景
 const CLINIC_SCENE: PackedScene = preload("res://Scene/Clinic/Clinic.tscn")
@@ -82,8 +88,7 @@ var story_paused_clinic_clock: bool = false
 var save_slot_popup_mode: String = "load"
 
 # 新游戏覆盖已有存档时使用的确认框。
-# 这里用代码动态创建 ConfirmationDialog，不需要额外修改 Main.tscn。
-var overwrite_confirm_dialog: ConfirmationDialog = null
+# UI 直接使用 Main.tscn 中的 OverwriteConfirmPopup 节点，便于在编辑器里调整样式。
 var pending_overwrite_slot_index: int = -1
 
 # Pause Menu 中“返回主菜单 / 退出游戏”的确认框。
@@ -110,8 +115,8 @@ func _ready() -> void:
 	# 创建跨天进入 Clinic 时使用的全屏渐亮遮罩。
 	_setup_morning_fade_overlay()
 
-	# 创建确认框
-	_setup_overwrite_confirm_dialog()
+	# 创建 Pause Menu 使用的确认框。
+	# “覆盖已有存档”确认框已经作为 Main.tscn 节点存在，不再动态创建。
 	_setup_pause_confirm_dialogs()
 
 	# 连接开始菜单，以及 Pause / Settings 的信号。
@@ -156,6 +161,12 @@ func _connect_menu_buttons() -> void:
 
 	if not save_slot_close_button.pressed.is_connected(_on_save_slot_close_button_pressed):
 		save_slot_close_button.pressed.connect(_on_save_slot_close_button_pressed)
+
+	if not overwrite_confirm_button.pressed.is_connected(_on_overwrite_confirm_dialog_confirmed):
+		overwrite_confirm_button.pressed.connect(_on_overwrite_confirm_dialog_confirmed)
+
+	if not overwrite_cancel_button.pressed.is_connected(_on_overwrite_confirm_dialog_canceled):
+		overwrite_cancel_button.pressed.connect(_on_overwrite_confirm_dialog_canceled)
 
 
 # =========================================================
@@ -453,35 +464,6 @@ func _start_new_game_in_slot_without_confirm(slot_index: int) -> void:
 # =========================================================
 # 覆盖已有存档确认框
 # =========================================================
-func _setup_overwrite_confirm_dialog() -> void:
-	if overwrite_confirm_dialog != null:
-		return
-
-	overwrite_confirm_dialog = ConfirmationDialog.new()
-	overwrite_confirm_dialog.title = "确认覆盖"
-	overwrite_confirm_dialog.dialog_text = "该槽位已有存档，是否覆盖？"
-	overwrite_confirm_dialog.visible = false
-
-	add_child(overwrite_confirm_dialog)
-
-	if overwrite_confirm_dialog.get_ok_button() != null:
-		overwrite_confirm_dialog.get_ok_button().text = "确认覆盖"
-
-	if overwrite_confirm_dialog.get_cancel_button() != null:
-		overwrite_confirm_dialog.get_cancel_button().text = "取消"
-
-	if not overwrite_confirm_dialog.confirmed.is_connected(_on_overwrite_confirm_dialog_confirmed):
-		overwrite_confirm_dialog.confirmed.connect(_on_overwrite_confirm_dialog_confirmed)
-
-	if overwrite_confirm_dialog.has_signal("canceled"):
-		if not overwrite_confirm_dialog.canceled.is_connected(_on_overwrite_confirm_dialog_canceled):
-			overwrite_confirm_dialog.canceled.connect(_on_overwrite_confirm_dialog_canceled)
-
-	if overwrite_confirm_dialog.has_signal("close_requested"):
-		if not overwrite_confirm_dialog.close_requested.is_connected(_on_overwrite_confirm_dialog_canceled):
-			overwrite_confirm_dialog.close_requested.connect(_on_overwrite_confirm_dialog_canceled)
-
-
 func _open_overwrite_confirm_dialog(slot_index: int) -> void:
 	if not SaveManager.is_valid_slot(slot_index):
 		print("打开覆盖确认失败：无效槽位 %d" % slot_index)
@@ -496,23 +478,24 @@ func _open_overwrite_confirm_dialog(slot_index: int) -> void:
 	var save_time: String = String(meta.get("save_time", ""))
 
 	if save_time.is_empty():
-		overwrite_confirm_dialog.dialog_text = "槽位 %d 已有存档：\n%s\n是否覆盖？" % [
+		overwrite_confirm_message_label.text = "槽位 %d 已有存档：\n%s\n是否覆盖？" % [
 			slot_index,
 			display_name
 		]
 	else:
-		overwrite_confirm_dialog.dialog_text = "槽位 %d 已有存档：\n%s\n%s\n是否覆盖？" % [
+		overwrite_confirm_message_label.text = "槽位 %d 已有存档：\n%s\n%s\n是否覆盖？" % [
 			slot_index,
 			display_name,
 			save_time
 		]
 
-	overwrite_confirm_dialog.popup_centered()
+	overwrite_confirm_popup.visible = true
+	overwrite_confirm_button.grab_focus()
 
 
 func _close_overwrite_confirm_dialog() -> void:
-	if overwrite_confirm_dialog != null:
-		overwrite_confirm_dialog.hide()
+	if overwrite_confirm_popup != null:
+		overwrite_confirm_popup.visible = false
 
 	pending_overwrite_slot_index = -1
 

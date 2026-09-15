@@ -45,8 +45,9 @@ const SEARCH_DEBOUNCE_SECONDS := 0.10
 # 没有对应医书条目的数据统一排在最后。
 const SORT_INDEX_FALLBACK := 2147483647
 
-# 解锁后才开放“搜索并套用预制方剂”功能的医书条目。
-const FORMULA_FILL_FEATURE_ENTRY_ID := "yu_zhi_fang_ji"
+# 方剂搜索与预制套方分开控制：
+# - 方剂本身已解锁：搜索方名时即可显示该方剂包含的药材。
+# - 同一方剂累计 5 次“妙手回春”：才开放该方剂的一键预制套方。
 
 # 开方窗口固定位置，和场景中的初始坐标保持一致。
 @export var fixed_window_position: Vector2i = Vector2i(5, 66)
@@ -605,12 +606,11 @@ func _apply_herb_filter() -> void:
 	selected_herb_id = ""
 	selected_herb_button = null
 
-	# 先收集“当前搜索词命中的方剂”中包含的全部药材 ID。
-	# 这样输入方剂名时，会同时显示：
-	# 1. 方剂按钮
-	# 2. 该方剂包含的全部已解锁药材按钮
+	# 先收集“当前搜索词命中的已解锁方剂”中包含的全部药材 ID。
+	# 方剂本身一旦解锁，输入方剂名就显示其组成药材；
+	# 对应方剂累计 5 次“妙手回春”后，才额外显示可一键套用的方剂按钮。
 	var formula_herb_ids: Dictionary = {}
-	if herb_search_keyword != "" and _is_formula_fill_feature_unlocked():
+	if herb_search_keyword != "":
 		for record_value in _formula_search_records:
 			if typeof(record_value) != TYPE_DICTIONARY:
 				continue
@@ -664,10 +664,17 @@ func _apply_herb_filter() -> void:
 	_apply_formula_filter()
 
 
-func _is_formula_fill_feature_unlocked() -> bool:
-	if Unlock == null or not Unlock.has_method("is_entry_unlocked"):
+func _is_formula_preset_unlocked(formula) -> bool:
+	if formula == null:
 		return false
-	return bool(Unlock.is_entry_unlocked(FORMULA_FILL_FEATURE_ENTRY_ID))
+	if Unlock == null or not Unlock.has_method("is_preset_formula_unlocked"):
+		return false
+
+	var formula_id := str(formula.formula_id).strip_edges()
+	if formula_id == "":
+		return false
+
+	return bool(Unlock.is_preset_formula_unlocked(formula_id))
 
 
 func _is_formula_unlocked(formula) -> bool:
@@ -693,9 +700,8 @@ func _formula_record_matches(record: Dictionary) -> bool:
 
 
 func _apply_formula_filter() -> void:
-	# 无关键词时不显示全部预制方剂；与优化前行为一致。
-	var feature_unlocked := _is_formula_fill_feature_unlocked()
-
+	# 无关键词时不显示全部预制方剂。
+	# 每个方剂独立检查是否已累计 5 次“妙手回春”。
 	for record_value in _formula_search_records:
 		if typeof(record_value) != TYPE_DICTIONARY:
 			continue
@@ -707,20 +713,24 @@ func _apply_formula_filter() -> void:
 			continue
 
 		var should_show := false
-		if feature_unlocked and formula != null and _is_formula_unlocked(formula):
+		if (
+			formula != null
+			and _is_formula_unlocked(formula)
+			and _is_formula_preset_unlocked(formula)
+		):
 			should_show = _formula_record_matches(record)
 
 		button_value.visible = should_show
 
 
 func _on_formula_button_pressed(formula) -> void:
-	if not _is_formula_fill_feature_unlocked():
-		emit_signal("info_requested", "尚未解锁预制方剂功能。")
+	if not _is_formula_unlocked(formula):
+		emit_signal("info_requested", "该方剂尚未解锁。")
 		_apply_herb_filter()
 		return
 
-	if not _is_formula_unlocked(formula):
-		emit_signal("info_requested", "该方剂尚未解锁。")
+	if not _is_formula_preset_unlocked(formula):
+		emit_signal("info_requested", "该方剂尚未累计 5 次妙手回春，不能使用预制方剂。")
 		_apply_herb_filter()
 		return
 
