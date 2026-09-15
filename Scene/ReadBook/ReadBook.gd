@@ -4,6 +4,8 @@ class_name ReadBook
 signal window_closed
 signal player_data_changed
 
+const FIXED_WINDOW_POSITION := Vector2i(50, 66)
+
 # =========================
 # 节点引用
 # =========================
@@ -60,6 +62,11 @@ var book_list_dirty: bool = true
 
 
 func _ready() -> void:
+	# ReadBook 始终固定在屏幕坐标 (50, 66)。
+	position = FIXED_WINDOW_POSITION
+	if not position_changed.is_connected(_on_window_position_changed):
+		position_changed.connect(_on_window_position_changed)
+
 	# 使用 Window 自带右上角 X 关闭按钮。
 	if not close_requested.is_connected(_on_window_close_requested):
 		close_requested.connect(_on_window_close_requested)
@@ -80,6 +87,9 @@ func _ready() -> void:
 # =========================
 
 func open_window() -> void:
+	# 每次打开都恢复固定位置，避免上次窗口状态影响坐标。
+	position = FIXED_WINDOW_POSITION
+
 	# 每次重新打开读书窗口时清空上一次全局搜索。
 	# 阻止 text_changed 在窗口尚未完成刷新时提前触发筛选。
 	if search_edit != null:
@@ -100,6 +110,12 @@ func open_window() -> void:
 	_clear_entry_and_detail()
 	show()
 	_focus_book_list_on_open()
+
+
+func _on_window_position_changed() -> void:
+	# 如果用户拖动窗口或系统尝试调整位置，立即恢复固定坐标。
+	if position != FIXED_WINDOW_POSITION:
+		position = FIXED_WINDOW_POSITION
 
 
 func close_window() -> void:
