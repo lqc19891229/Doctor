@@ -1,0 +1,103 @@
+[gd_resource type="Resource" script_class="StoryData" format=3]
+
+[ext_resource type="Script" path="res://System/Story/StoryLine.gd" id="1_storyline"]
+[ext_resource type="Script" path="res://System/Story/StoryData.gd" id="2_storydata"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/zeng_he/zeng_he.png" id="portrait_2"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/zeng_ti_ming/zeng_ti_ming.png" id="portrait_3"]
+
+[sub_resource type="Resource" id="StoryLine_001"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "贵公子所患的是痰迷心窍之症，开副涤痰汤调理一下。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "曾和"
+text = "好好的怎么就得了这怪病呢？"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_003"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "是不是读书压力太大了呀？"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_004"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "曾题名"
+text = "…"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_005"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "曾和"
+text = "他就一门心思读书，其他的什么都不用他管，能有什么压力？"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_006"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "曾和"
+text = "再说了天下那么多读书人，怎么就他得了这怪病？"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_007"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "曾题名"
+text = "…"
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_008"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "很多人表面看着正常，其实病得都不轻呢。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_009"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "曾和"
+text = "胡扯，我看你就是没病说成有病，"
+portrait = ExtResource("portrait_2")
+
+[resource]
+script = ExtResource("2_storydata")
+story_id = "028_02"
+story_name = "028治疗成功"
+condition_scene = ""
+condition_day = 0
+condition_money_op = ""
+condition_money = 0
+condition_reputation_op = ""
+condition_reputation = 0
+condition_entry_id = ""
+condition_story_id = "028_01"
+condition_treatment_result = "cured"
+after_play = "clinic"
+clinic_npc_id = ""
+money_change = 0
+reputation_points_change = 0
+experience_points_change = 0
+play_once = true
+sort_index = 0
+background_mode = "current_scene"
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009")])
