@@ -1732,12 +1732,42 @@ func finish_clinic_for_today() -> void:
 	clinic_finished_emitted = true
 	clinic_time_expired_waiting_for_current_patient = false
 
+	# Clinic 当天真正结束时，清除开方窗口中的疾病 / 药材搜索残留。
+	# PrescriptionWindow 是常驻节点，只 hide() 不会自动清空 LineEdit 和搜索关键词。
+	if (
+		prescription_window != null
+		and is_instance_valid(prescription_window)
+		and prescription_window.has_method("clear_search_state")
+	):
+		prescription_window.clear_search_state()
+
+	# 同时清除行医记考中的疾病 / 方剂 / 药材搜索栏。
+	# ClinicalLogWindow 也是常驻节点，跨天前需要主动清空搜索文字。
+	_clear_clinical_log_search_state()
+
 	# Clinic 结束时停止 GameTimeManager 里的 Clinic 计时器
 	if GameTime.has_method("stop_clinic_clock"):
 		GameTime.stop_clinic_clock()
 
 	print("Clinic 发出 clinic_finished")
 	emit_signal("clinic_finished")
+
+func _clear_clinical_log_search_state() -> void:
+	if clinical_log_window == null or not is_instance_valid(clinical_log_window):
+		return
+
+	# 行医记考有三个独立搜索栏。直接 clear() 会触发各自的 text_changed，
+	# 从而立即恢复疾病 / 方剂 / 药材的完整列表。
+	var search_bars: Array[LineEdit] = [
+		clinical_log_window.disease_search_bar,
+		clinical_log_window.formula_search_bar,
+		clinical_log_window.herb_search_bar,
+	]
+
+	for search_bar in search_bars:
+		if search_bar != null:
+			search_bar.clear()
+
 
 # =========================================================
 # 病人切换按钮

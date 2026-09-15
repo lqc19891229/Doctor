@@ -226,6 +226,38 @@ func setup(herb_db, prescription, formula_db = null) -> void:
 
 
 # =========================================================
+# 对外接口：清空搜索状态
+# 用于 Clinic 当天结束时清除疾病 / 药材搜索残留。
+# =========================================================
+func clear_search_state() -> void:
+	# 停止尚未执行的搜索 debounce，避免清空后旧关键词再次触发过滤。
+	if _herb_search_timer != null:
+		_herb_search_timer.stop()
+
+	if _disease_search_timer != null:
+		_disease_search_timer.stop()
+
+	# 同时清空内部关键词与两个 LineEdit。
+	herb_search_keyword = ""
+	disease_search_keyword = ""
+
+	# 修改 LineEdit 时暂时屏蔽 text_changed，避免重复启动 debounce。
+	_suppress_search_signal = true
+
+	if herb_search != null:
+		herb_search.clear()
+
+	if disease_search != null:
+		disease_search.clear()
+
+	_suppress_search_signal = false
+
+	# 立即恢复完整的已解锁疾病 / 药材列表。
+	_apply_herb_filter()
+	_apply_disease_filter()
+
+
+# =========================================================
 # 初始化：单位下拉
 # =========================================================
 func _setup_unit_option() -> void:
