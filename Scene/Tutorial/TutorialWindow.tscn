@@ -22,45 +22,45 @@
 [sub_resource type="Resource" id="TutorialSlide_1"]
 script = ExtResource("3_slide_data")
 title = "夜间"
-description = "夜间点击书籍(F1)、油灯(F2)进行读书或休息进入下一天"
+description = "夜间点击书籍(F1)、油灯(F2)进行读书或休息进入下一天。"
 image = ExtResource("3_t4jru")
 
 [sub_resource type="Resource" id="TutorialSlide_2"]
 script = ExtResource("3_slide_data")
 title = "读书"
-description = "在读书窗口中可以阅读医学典籍，《黄帝内经》记载中医基础理论，作为参考"
+description = "在读书窗口中可以阅读医学典籍，《黄帝内经》记载中医基础理论，作为参考。"
 image = ExtResource("4_b3wpr")
 
 [sub_resource type="Resource" id="TutorialSlide_3"]
 script = ExtResource("3_slide_data")
 title = "药材"
-description = "《神农本草经》记载药材的相关信息，作为参考"
+description = "《神农本草经》记载药材的相关信息，作为参考。"
 image = ExtResource("5_jp6bf")
 
 [sub_resource type="Resource" id="TutorialSlide_4"]
 script = ExtResource("3_slide_data")
 title = "疾病"
-description = "《诸病源候论》记载疾病的相关信息，游戏中通过脉象来判断疾病，通过标准方治疗疾病"
+description = "《诸病源候论》记载疾病的相关信息，游戏中通过脉象来判断疾病，通过标准方治疗疾病。"
 image = ExtResource("4_0xbrs")
 
 [sub_resource type="Resource" id="Resource_i02uo"]
 script = ExtResource("3_slide_data")
 title = "方剂"
-description = "其他医书记载各类方剂，白天在开方窗口填入方剂的组成药材来给病人开药"
+description = "其他医书记载各类方剂，白天在开方窗口填入方剂的组成药材来给病人开药。"
 image = ExtResource("7_nj7cn")
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 
 [sub_resource type="Resource" id="Resource_3ilc3"]
 script = ExtResource("3_slide_data")
 title = "脉象"
-description = "选择疾病条目时，点击右下角“查看脉象”按钮，可以观察该疾病的脉象。"
+description = "在《诸病源候论》中选择疾病条目时，点击右下角“查看脉象”按钮，可以观察该疾病的脉象。"
 image = ExtResource("7_b3wpr")
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 
 [sub_resource type="Resource" id="Resource_yosn8"]
 script = ExtResource("3_slide_data")
 title = "脉象"
-description = "健康的脉象是不高不低，不粗不细，不宽不窄，一次呼吸脉搏跳动四到五次"
+description = "健康的脉象是不高不低，不粗不细，不宽不窄，一次呼吸脉搏跳动四到五次。"
 image = ExtResource("5_spwkb")
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 
@@ -98,28 +98,28 @@ metadata/_custom_type_script = "uid://dyml45imq64mo"
 [sub_resource type="Resource" id="Resource_32e8r"]
 script = ExtResource("3_slide_data")
 title = "接诊"
-description = "白天在医馆接诊病人，把脉(F1)确定疾病，翻阅行医记考(F3)确定方剂，给病人断病开方(F2)"
+description = "白天在医馆接诊病人，把脉(F1)确定疾病，翻阅行医记考(F3)确定方剂，给病人断病开方(F2)。"
 image = ExtResource("9_p66ju")
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 
 [sub_resource type="Resource" id="Resource_kif1q"]
 script = ExtResource("3_slide_data")
 title = "把脉"
-description = "在把脉窗口按住QAZ显示右手脉象，按住WSX显示左手脉象"
+description = "在把脉窗口按住QAZ显示右手脉象，按住WSX显示左手脉象。"
 image = ExtResource("10_3ilc3")
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 
 [sub_resource type="Resource" id="Resource_7ieny"]
 script = ExtResource("3_slide_data")
 title = "行医记考"
-description = "在行医记考窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母查询"
+description = "在行医记考窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母查询。"
 image = ExtResource("11_yosn8")
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 
 [sub_resource type="Resource" id="Resource_fe0ni"]
 script = ExtResource("3_slide_data")
 title = "断病开方"
-description = "在断病开放窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母筛选对应条目"
+description = "在断病开放窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母筛选对应条目。"
 image = ExtResource("12_b3wpr")
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 
@@ -133,7 +133,7 @@ metadata/_custom_type_script = "uid://dyml45imq64mo"
 [sub_resource type="Resource" id="Resource_t8c5g"]
 script = ExtResource("3_slide_data")
 title = "方剂"
-description = "在搜索栏输入方剂名可筛选出该方剂所包含的药材条目。当达成一定次数的妙手回春评价后，会出现预制方剂条目，点击后会自动填入方剂所包含的所有药材及剂量"
+description = "在搜索栏输入方剂名可筛选出该方剂所包含的药材条目。当达成一定次数的妙手回春评价后，会出现预制方剂条目，点击后会自动填入方剂所包含的所有药材及剂量。"
 image = ExtResource("17_nj7cn")
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 

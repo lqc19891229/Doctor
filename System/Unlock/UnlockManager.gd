@@ -457,7 +457,7 @@ const WAGE_INTERVAL_SOLAR_TERMS: int = 2
 const LI_JIAN_ZHONG_SALARY_WEN: int = 20000
 const LI_JIAN_ZHONG_SALARY_INTERVAL_SOLAR_TERMS: int = 2
 
-# 病家谢仪礼：
+# 病家谢礼：
 # random NPC 获得“妙手回春”评价时，由 Clinic 调用发放。
 # 20% 概率获得 188 / 288 / 388 文，并在白天实时到账。
 const PATIENT_THANK_GIFT_PROBABILITY: float = 0.20
@@ -675,10 +675,10 @@ func record_random_npc_treatment_finance(
 	}
 
 
-# 病家谢仪礼。
+# 病家谢礼。
 # Clinic 仅在 random NPC 获得“妙手回春”评价时调用。
 # 命中 20% 概率后随机发放 188 / 288 / 388 文。
-# 谢仪属于白天实时收入：这里立即加钱，同时记入当天账本供夜间报表统计。
+# 谢礼属于白天实时收入：这里立即加钱，同时记入当天账本供夜间报表统计。
 func record_patient_thank_gift_income(day: int) -> int:
 	_ensure_daily_finance_ledger(day)
 
@@ -876,7 +876,7 @@ func settle_day_finances(day: int) -> Dictionary:
 	)
 	var net_change := total_income - total_expense
 
-	# 诊费、药材销售和病家谢仪礼都已在白天实时入账；
+	# 诊费、药材销售和病家谢礼都已在白天实时入账；
 	# 李建中俸禄是在日结时才实际到账，因此这里只补入俸禄并扣除当天支出。
 	money_wen += li_jian_zhong_salary
 	money_wen -= total_expense
@@ -965,7 +965,7 @@ func build_finance_report_text(day: int) -> String:
 
 	if patient_thank_gift_income > 0:
 		lines.append(
-			"病家谢仪礼：%s"
+			"病家谢礼：%s"
 			% format_money_change(patient_thank_gift_income)
 		)
 
