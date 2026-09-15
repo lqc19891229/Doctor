@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5b5und5oiebk"
-path="res://.godot/imported/night_table1.png-3108d9eeb3b8306a71f8f1994d15be27.ctex"
+uid="uid://7yvr2pewsnwt"
+path="res://.godot/imported/zeng_he.png-8a56b8f618899069efdba6617479df42.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background/clinic/night_table1.png"
-dest_files=["res://.godot/imported/night_table1.png-3108d9eeb3b8306a71f8f1994d15be27.ctex"]
+source_file="res://Assets/Portrait/StoryNpc/zeng_he/zeng_he.png"
+dest_files=["res://.godot/imported/zeng_he.png-8a56b8f618899069efdba6617479df42.ctex"]
 
 [params]
 
