@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5j1r2f3ui82i"
-path="res://.godot/imported/readbook4.png-17794c6afbd32e5cd00d6a747c12d76e.ctex"
+uid="uid://co3wayeaf0mug"
+path="res://.godot/imported/Prescription2.png-5151ffc3592579fdc6f8e5a2708a11d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tutorial/readbook4.png"
-dest_files=["res://.godot/imported/readbook4.png-17794c6afbd32e5cd00d6a747c12d76e.ctex"]
+source_file="res://Assets/Tutorial/Prescription2.png"
+dest_files=["res://.godot/imported/Prescription2.png-5151ffc3592579fdc6f8e5a2708a11d3.ctex"]
 
 [params]
 

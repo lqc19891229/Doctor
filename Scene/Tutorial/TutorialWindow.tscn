@@ -4,15 +4,20 @@
 [ext_resource type="FontFile" uid="uid://bas0ewdnmpdaq" path="res://Assets/Fonts/SourceHanSerifSC-Regular.otf" id="2_font"]
 [ext_resource type="Script" uid="uid://dyml45imq64mo" path="res://Scene/Tutorial/TutorialSlideData.gd" id="3_slide_data"]
 [ext_resource type="Texture2D" uid="uid://cxfowng2ce4de" path="res://Assets/Tutorial/night.png" id="3_t4jru"]
-[ext_resource type="Texture2D" uid="uid://cqjppsv8kqrj5" path="res://Assets/Tutorial/readbook3.png" id="4_0xbrs"]
+[ext_resource type="Texture2D" uid="uid://cyixrkde5sfop" path="res://Assets/Tutorial/readbook3.png" id="4_0xbrs"]
+[ext_resource type="Texture2D" uid="uid://dtgd1p440eue" path="res://Assets/Tutorial/readbook.png" id="4_b3wpr"]
+[ext_resource type="Texture2D" uid="uid://degd6jb87077a" path="res://Assets/Tutorial/readbook2.png" id="5_jp6bf"]
 [ext_resource type="Texture2D" uid="uid://cp8t1q72x0w1s" path="res://Assets/Tutorial/pulse1.png" id="5_spwkb"]
 [ext_resource type="Texture2D" uid="uid://cxaemutj3tbfr" path="res://Assets/Tutorial/pulse2.png" id="6_64xyy"]
+[ext_resource type="Texture2D" uid="uid://mvd7hfk72dmy" path="res://Assets/Tutorial/readbook5.png" id="7_b3wpr"]
 [ext_resource type="Texture2D" uid="uid://dlqm7kf0g3cq3" path="res://Assets/Tutorial/pulse4.png" id="7_go6xm"]
+[ext_resource type="Texture2D" uid="uid://c5j1r2f3ui82i" path="res://Assets/Tutorial/readbook4.png" id="7_nj7cn"]
 [ext_resource type="Texture2D" uid="uid://ujwinw3k434u" path="res://Assets/Tutorial/pulse6.png" id="8_p66ju"]
 [ext_resource type="Texture2D" uid="uid://jawwya15dfyt" path="res://Assets/Tutorial/clinic.png" id="9_p66ju"]
 [ext_resource type="Texture2D" uid="uid://cwg8riqxhnlnh" path="res://Assets/Tutorial/pulse.png" id="10_3ilc3"]
 [ext_resource type="Texture2D" uid="uid://b0bgr32lhi3fm" path="res://Assets/Tutorial/ClinicalLog.png" id="11_yosn8"]
 [ext_resource type="Texture2D" uid="uid://djuj1cmh2jwx3" path="res://Assets/Tutorial/Prescription.png" id="12_b3wpr"]
+[ext_resource type="Texture2D" uid="uid://co3wayeaf0mug" path="res://Assets/Tutorial/Prescription2.png" id="17_nj7cn"]
 
 [sub_resource type="Resource" id="TutorialSlide_1"]
 script = ExtResource("3_slide_data")
@@ -24,28 +29,32 @@ image = ExtResource("3_t4jru")
 script = ExtResource("3_slide_data")
 title = "读书"
 description = "在读书窗口中可以阅读医学典籍，黄帝内经记载中医基础理论，作为参考"
+image = ExtResource("4_b3wpr")
 
 [sub_resource type="Resource" id="TutorialSlide_3"]
 script = ExtResource("3_slide_data")
 title = "药材"
 description = "神农本草经记载药材的相关信息，作为参考"
+image = ExtResource("5_jp6bf")
 
 [sub_resource type="Resource" id="TutorialSlide_4"]
 script = ExtResource("3_slide_data")
 title = "疾病"
 description = "诸病源候论记载疾病的相关信息，游戏中通过脉象来判断疾病，通过标准方治疗疾病"
+image = ExtResource("4_0xbrs")
 
 [sub_resource type="Resource" id="Resource_i02uo"]
 script = ExtResource("3_slide_data")
 title = "方剂"
 description = "其他医书记载各类方剂，白天在开方窗口填入方剂的组成药材来给病人开药"
+image = ExtResource("7_nj7cn")
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 
 [sub_resource type="Resource" id="Resource_3ilc3"]
 script = ExtResource("3_slide_data")
 title = "脉象"
 description = "选择疾病条目时，点击右下角“查看脉象”按钮，可以观察该疾病的脉象。"
-image = ExtResource("4_0xbrs")
+image = ExtResource("7_b3wpr")
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 
 [sub_resource type="Resource" id="Resource_yosn8"]
@@ -117,7 +126,7 @@ metadata/_custom_type_script = "uid://dyml45imq64mo"
 [sub_resource type="Resource" id="Resource_fh8en"]
 script = ExtResource("3_slide_data")
 title = "开方"
-description = "选择君臣佐使区域，再点击药材加入，可选择单位剂量控制每次点击加入的药量。"
+description = "选择君臣佐使区域，左键再点击药材加入，右键点击减少。右键点击君臣佐使区域已加入的药材，可以删除。选择单位剂量控制每次点击加入的药量。"
 image = ExtResource("12_b3wpr")
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 
@@ -125,7 +134,7 @@ metadata/_custom_type_script = "uid://dyml45imq64mo"
 script = ExtResource("3_slide_data")
 title = "方剂"
 description = "在搜索栏输入方剂名可筛选出该方剂所包含的药材条目。当达成一定次数的妙手回春评价后，会出现预制方剂条目，点击后会自动填入方剂所包含的所有药材及剂量"
-image = ExtResource("12_b3wpr")
+image = ExtResource("17_nj7cn")
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 
 [sub_resource type="StyleBoxFlat" id="StyleWindow"]
