@@ -1418,7 +1418,9 @@ func submit_prescription() -> bool:
 	elif uses_fixed_treatment_rewards and result_grade == "治疗成功" and was_already_submitted:
 		summary_text += "\n本病人已提交过处方，名望不变。"
 
-	# random NPC 达成妙手回春时后台增加 1 点 experience_points，并立即检查条目解锁。
+	# random NPC 达成妙手回春时：
+	# 1. 后台增加 1 点 experience_points，并立即检查心得条目解锁；
+	# 2. 独立累计一次“妙手回春开方”，第 5 次解锁预制方剂功能。
 	# was_already_submitted 用于防止同一名病人重复提交刷后台进度。
 	var is_miaoshouhuichun := false
 	if result != null and result.has_method("is_miaoshouhuichun"):
@@ -1428,13 +1430,24 @@ func submit_prescription() -> bool:
 
 	if uses_fixed_treatment_rewards and is_miaoshouhuichun and not was_already_submitted:
 		var newly_unlocked_titles: Array[String] = []
+
+		# 独立记录预制方剂解锁进度。第 1～4 次不向玩家显示进度。
+		if Unlock != null and Unlock.has_method("record_miaoshouhuichun_prescription"):
+			var preset_unlock_result: Dictionary = Unlock.record_miaoshouhuichun_prescription()
+			if bool(preset_unlock_result.get("just_unlocked", false)):
+				newly_unlocked_titles.append("预制方剂")
+
+		# 保留原有规则：每次有效的妙手回春仍然增加 1 点心得。
 		if Unlock != null and Unlock.has_method("add_experience_point"):
-			newly_unlocked_titles = Unlock.add_experience_point(1)
+			var experience_unlock_titles: Array[String] = Unlock.add_experience_point(1)
 			last_experience_change = 1
+
+			for unlocked_title in experience_unlock_titles:
+				if not newly_unlocked_titles.has(unlocked_title):
+					newly_unlocked_titles.append(unlocked_title)
 
 		if not newly_unlocked_titles.is_empty():
 			last_newly_unlocked_entry_titles.assign(newly_unlocked_titles)
-			summary_text += "\n新解锁条目：%s" % "、".join(newly_unlocked_titles)
 
 		if clinical_log_window != null and clinical_log_window.has_method("refresh_view"):
 			clinical_log_window.refresh_view()

@@ -280,7 +280,14 @@ func _get_index_values(index: Dictionary, key: String) -> Array:
 # 五、心得点数（累计值）
 # =========================================================
 
+const PRESET_FORMULA_ENTRY_ID: String = "yu_zhi_fang_ji"
+const PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT: int = 5
+
 var experience_points: int = 0
+
+# 仅记录 random NPC 首次提交并获得“妙手回春”的有效次数。
+# 此进度独立于心得、名望和诊疗收入，只用于解锁预制方剂功能。
+var miaoshouhuichun_prescription_count: int = 0
 
 
 func get_experience_points() -> int:
@@ -316,6 +323,34 @@ func add_experience_point(amount: int = 1) -> Array[String]:
 		return []
 
 	return change_experience_points(amount)
+
+
+# 记录一次有效的“妙手回春”开方。
+# 第 1～4 次只静默累计；第 5 次解锁预制方剂条目。
+func record_miaoshouhuichun_prescription() -> Dictionary:
+	miaoshouhuichun_prescription_count += 1
+
+	var just_unlocked := false
+	if (
+		miaoshouhuichun_prescription_count >= PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT
+		and not is_entry_unlocked(PRESET_FORMULA_ENTRY_ID)
+	):
+		unlock_entry(PRESET_FORMULA_ENTRY_ID)
+		just_unlocked = true
+
+	return {
+		"count": miaoshouhuichun_prescription_count,
+		"required": PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT,
+		"just_unlocked": just_unlocked
+	}
+
+
+func get_miaoshouhuichun_prescription_count() -> int:
+	return miaoshouhuichun_prescription_count
+
+
+func is_preset_formula_feature_unlocked() -> bool:
+	return is_entry_unlocked(PRESET_FORMULA_ENTRY_ID)
 
 
 # =========================================================
@@ -2028,6 +2063,7 @@ func reset_progress() -> void:
 	_touch_readbook_state()
 
 	experience_points = 0
+	miaoshouhuichun_prescription_count = 0
 	reputation_points = 0
 
 	money_wen = STARTING_MONEY_WEN
@@ -2052,6 +2088,7 @@ func get_save_data() -> Dictionary:
 		"clinical_log_unlocked_disease_ids": clinical_log_unlocked_disease_ids,
 		"clinical_log_unlocked_formula_ids": clinical_log_unlocked_formula_ids,
 		"experience_points": experience_points,
+		"miaoshouhuichun_prescription_count": miaoshouhuichun_prescription_count,
 		"reputation_points": reputation_points,
 		"money_wen": money_wen,
 		"finance_ledger_day": finance_ledger_day,
@@ -2084,7 +2121,15 @@ func load_save_data(data: Dictionary) -> void:
 	unlocked_story_ids = _load_bool_dictionary(data.get("unlocked_story_ids", {}))
 
 	experience_points = int(data.get("experience_points", 0))
+	miaoshouhuichun_prescription_count = maxi(
+		int(data.get("miaoshouhuichun_prescription_count", 0)),
+		0
+	)
 	reputation_points = int(data.get("reputation_points", 0))
+
+	# 兼容次数已经达标、但解锁条目尚未写入的存档。
+	if miaoshouhuichun_prescription_count >= PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT:
+		unlock_entry(PRESET_FORMULA_ENTRY_ID)
 
 	money_wen = int(data.get("money_wen", STARTING_MONEY_WEN))
 	finance_ledger_day = maxi(int(data.get("finance_ledger_day", 1)), 1)
