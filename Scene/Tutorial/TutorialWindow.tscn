@@ -4,33 +4,83 @@
 [ext_resource type="FontFile" uid="uid://bas0ewdnmpdaq" path="res://Assets/Fonts/SourceHanSerifSC-Regular.otf" id="2_font"]
 [ext_resource type="Script" uid="uid://dyml45imq64mo" path="res://Scene/Tutorial/TutorialSlideData.gd" id="3_slide_data"]
 [ext_resource type="Texture2D" uid="uid://cxfowng2ce4de" path="res://Assets/Tutorial/night.png" id="3_t4jru"]
-[ext_resource type="Texture2D" uid="uid://bc7sj00ahbgcm" path="res://Assets/Background/clinic/clinic_table.png" id="5_slide_image_2"]
-[ext_resource type="Texture2D" uid="uid://cm2x84snbdm3l" path="res://Assets/UI/bookpage.png" id="6_slide_image_3"]
-[ext_resource type="Texture2D" uid="uid://b8f6aogxyufp3" path="res://Assets/Background/clinic/night_table.png" id="7_slide_image_4"]
+[ext_resource type="Texture2D" uid="uid://cqjppsv8kqrj5" path="res://Assets/Tutorial/readbook3.png" id="4_0xbrs"]
+[ext_resource type="Texture2D" uid="uid://cp8t1q72x0w1s" path="res://Assets/Tutorial/pulse1.png" id="5_spwkb"]
+[ext_resource type="Texture2D" uid="uid://cxaemutj3tbfr" path="res://Assets/Tutorial/pulse2.png" id="6_64xyy"]
+[ext_resource type="Texture2D" uid="uid://dlqm7kf0g3cq3" path="res://Assets/Tutorial/pulse4.png" id="7_go6xm"]
+[ext_resource type="Texture2D" uid="uid://ujwinw3k434u" path="res://Assets/Tutorial/pulse6.png" id="8_p66ju"]
 
 [sub_resource type="Resource" id="TutorialSlide_1"]
 script = ExtResource("3_slide_data")
 title = "夜间"
-description = "白天在诊室接待病人。先了解病情，再依次进行诊脉、记录与开方。"
+description = "夜间点击书籍(F1)、油灯(F2)进行读书或休息进入下一天"
 image = ExtResource("3_t4jru")
 
 [sub_resource type="Resource" id="TutorialSlide_2"]
 script = ExtResource("3_slide_data")
-title = "诊脉辨证"
-description = "点击诊脉入口查看六部脉象。结合病人的叙述与脉象，判断可能的证候。"
-image = ExtResource("5_slide_image_2")
+title = "读书"
+description = "在读书窗口中可以阅读医学典籍，黄帝内经记载中医基础理论，作为参考"
 
 [sub_resource type="Resource" id="TutorialSlide_3"]
 script = ExtResource("3_slide_data")
-title = "开具处方"
-description = "在处方窗口选择药材与用量。提交前可以返回检查，确认后系统会评估疗效。"
-image = ExtResource("6_slide_image_3")
+title = "药材"
+description = "神农本草经记载药材的相关信息，作为参考"
 
 [sub_resource type="Resource" id="TutorialSlide_4"]
 script = ExtResource("3_slide_data")
-title = "夜读医书"
-description = "结束白天后进入夜晚。阅读已解锁医书，可以补全病证、方剂与药材知识。"
-image = ExtResource("7_slide_image_4")
+title = "疾病"
+description = "诸病源候论记载疾病的相关信息，游戏中通过脉象来判断疾病，通过标准方治疗疾病"
+
+[sub_resource type="Resource" id="Resource_i02uo"]
+script = ExtResource("3_slide_data")
+title = "方剂"
+description = "其他医书记载各类方剂，白天在开方窗口填入方剂的组成药材来给病人开药"
+metadata/_custom_type_script = "uid://dyml45imq64mo"
+
+[sub_resource type="Resource" id="Resource_3ilc3"]
+script = ExtResource("3_slide_data")
+title = "脉象"
+description = "选择疾病条目时，点击右下角按钮可以观察该疾病的脉象。"
+image = ExtResource("4_0xbrs")
+metadata/_custom_type_script = "uid://dyml45imq64mo"
+
+[sub_resource type="Resource" id="Resource_yosn8"]
+script = ExtResource("3_slide_data")
+title = "脉象"
+description = "健康的脉象是不高不低，不粗不细，不宽不窄，一次呼吸脉搏跳动四到五次"
+image = ExtResource("5_spwkb")
+metadata/_custom_type_script = "uid://dyml45imq64mo"
+
+[sub_resource type="Resource" id="Resource_b3wpr"]
+script = ExtResource("3_slide_data")
+title = "气"
+description = "波峰的高低反映气的强弱；
+波峰越高气滞程度越高，波峰越低气虚程度越高。"
+image = ExtResource("6_64xyy")
+metadata/_custom_type_script = "uid://dyml45imq64mo"
+
+[sub_resource type="Resource" id="Resource_jp6bf"]
+script = ExtResource("3_slide_data")
+title = "血"
+description = "波线的粗细反映血的状态；
+波线越粗血瘀程度越高，波线越细血虚程度越高。"
+image = ExtResource("7_go6xm")
+metadata/_custom_type_script = "uid://dyml45imq64mo"
+
+[sub_resource type="Resource" id="Resource_nj7cn"]
+script = ExtResource("3_slide_data")
+title = "湿燥"
+description = "波宽的宽窄反映湿燥程度；
+波宽越宽越湿，波宽越窄越燥。"
+image = ExtResource("8_p66ju")
+metadata/_custom_type_script = "uid://dyml45imq64mo"
+
+[sub_resource type="Resource" id="Resource_57orn"]
+script = ExtResource("3_slide_data")
+title = "寒热"
+description = "每次呼吸波峰经过指尖的次数反映寒热程度；
+次数越多越热，次数越少越寒。"
+metadata/_custom_type_script = "uid://dyml45imq64mo"
 
 [sub_resource type="StyleBoxFlat" id="StyleWindow"]
 content_margin_left = 4.0
@@ -148,7 +198,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_script")
-slides = Array[ExtResource("3_slide_data")]([SubResource("TutorialSlide_1"), SubResource("TutorialSlide_2"), SubResource("TutorialSlide_3"), SubResource("TutorialSlide_4")])
+slides = Array[ExtResource("3_slide_data")]([SubResource("TutorialSlide_1"), SubResource("TutorialSlide_2"), SubResource("TutorialSlide_3"), SubResource("TutorialSlide_4"), SubResource("Resource_i02uo"), SubResource("Resource_3ilc3"), SubResource("Resource_yosn8"), SubResource("Resource_b3wpr"), SubResource("Resource_jp6bf"), SubResource("Resource_nj7cn"), SubResource("Resource_57orn")])
 
 [node name="DimBackground" type="ColorRect" parent="." unique_id=292098951]
 layout_mode = 1
