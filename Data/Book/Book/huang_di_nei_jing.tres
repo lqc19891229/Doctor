@@ -13,4 +13,4 @@ sort_index = 1
 visible_by_default = true
 read_once = false
 allow_daytime_open = true
-unlock_entry_ids = Array[String](["ba_mai", "kai_fang", "xing_yi_ji_kao", "yu_zhi_fang_ji", "si_zhen", "ba_gang_bian_zheng", "yin_yang", "biao_li", "han_re", "xu_shi", "wu_xing", "zang_xiang", "gan", "xin", "pi", "fei", "shen", "qi", "xue", "jin", "ye", "wai_gan_liu_xie", "feng_xie", "han_xie", "shu_xie", "shi_xie", "zao_xie", "re_xie", "qi_qing_nei_shang", "xi", "nu", "you", "si", "bei", "kong", "jing"])
+unlock_entry_ids = Array[String](["si_zhen", "ba_gang_bian_zheng", "yin_yang", "biao_li", "han_re", "xu_shi", "wu_xing", "zang_xiang", "gan", "xin", "pi", "fei", "shen", "qi", "xue", "jin", "ye", "wai_gan_liu_xie", "feng_xie", "han_xie", "shu_xie", "shi_xie", "zao_xie", "re_xie", "qi_qing_nei_shang", "xi", "nu", "you", "si", "bei", "kong", "jing"])
