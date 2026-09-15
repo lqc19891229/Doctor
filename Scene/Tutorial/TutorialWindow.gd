@@ -10,8 +10,18 @@ signal page_changed(page_index: int, page_count: int)
 signal finished
 signal closed(completed: bool)
 
-@export_category("Tutorial pages")
+enum TutorialSet {
+	NIGHT,
+	DAY,
+}
+
+# 保留原有属性名 slides，避免已经在场景中配置好的夜间教学页丢失。
+@export_category("夜间教学")
 @export var slides: Array[TutorialSlideData] = []
+
+# 白天教学使用独立数组；之后接入触发机制时调用 open_day_tutorial()。
+@export_category("白天教学")
+@export var day_slides: Array[TutorialSlideData] = []
 
 @export_category("Behaviour")
 @export var pause_game_while_visible: bool = true
@@ -27,21 +37,31 @@ signal closed(completed: bool)
 @onready var close_button: Button = %CloseButton
 
 var current_page: int = 0
+var current_tutorial_set: int = TutorialSet.NIGHT
 var _tree_was_paused: bool = false
+var _active_slides: Array[TutorialSlideData] = []
 
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	mouse_filter = Control.MOUSE_FILTER_STOP
+	_active_slides = slides
 	_connect_signals()
 	_refresh_page()
 	hide()
 
 
 func open_tutorial(start_page: int = 0) -> void:
+	# 兼容原有调用：open_tutorial() 始终打开原来的夜间教学。
+	current_tutorial_set = TutorialSet.NIGHT
+	_active_slides = slides
+	_open_active_tutorial(start_page)
+
+
+func _open_active_tutorial(start_page: int = 0) -> void:
 	var page_count := _get_page_count()
 	if page_count <= 0:
-		push_warning("TutorialWindow has no tutorial pages.")
+		push_warning("TutorialWindow 当前选择的教学没有页面。")
 		return
 
 	current_page = clampi(start_page, 0, page_count - 1)
@@ -60,6 +80,18 @@ func open_tutorial(start_page: int = 0) -> void:
 	next_button.grab_focus()
 
 
+## 打开夜间教学。保留 open_tutorial() 作为兼容入口时，默认同样使用夜间教学。
+func open_night_tutorial(start_page: int = 0) -> void:
+	open_tutorial(start_page)
+
+
+## 打开白天教学。
+func open_day_tutorial(start_page: int = 0) -> void:
+	current_tutorial_set = TutorialSet.DAY
+	_active_slides = day_slides
+	_open_active_tutorial(start_page)
+
+
 func close_tutorial(completed: bool = false) -> void:
 	if not visible:
 		return
@@ -70,13 +102,22 @@ func close_tutorial(completed: bool = false) -> void:
 	closed.emit(completed)
 
 
-## Replaces all pages with another tutorial set.
-## Useful when the same TutorialWindow is shared by Clinic, Book, Prescription,
-## or any other scene.
+## 兼容原有调用：替换夜间教学页，并将当前教学切回夜间。
 func set_slides(new_slides: Array[TutorialSlideData]) -> void:
 	slides = new_slides
+	current_tutorial_set = TutorialSet.NIGHT
+	_active_slides = slides
 	current_page = 0
 	_refresh_page()
+
+
+## 替换白天教学页；不会自动打开窗口。
+func set_day_slides(new_slides: Array[TutorialSlideData]) -> void:
+	day_slides = new_slides
+	if current_tutorial_set == TutorialSet.DAY:
+		_active_slides = day_slides
+		current_page = 0
+		_refresh_page()
 
 
 ## Compatibility helper for code that still uses the old array API.
@@ -122,7 +163,7 @@ func _connect_signals() -> void:
 
 
 func _get_page_count() -> int:
-	return slides.size()
+	return _active_slides.size()
 
 
 func _refresh_page() -> void:
@@ -138,13 +179,16 @@ func _refresh_page() -> void:
 	if not has_pages:
 		page_image.texture = null
 		title_label.text = "暂无说明"
-		description_label.text = "请在 Inspector 的 Slides 中添加 TutorialSlideData。"
+		if current_tutorial_set == TutorialSet.DAY:
+			description_label.text = "请在 Inspector 的 Day Slides 中添加 TutorialSlideData。"
+		else:
+			description_label.text = "请在 Inspector 的 Slides 中添加 TutorialSlideData。"
 		page_indicator.text = "0 / 0"
 		next_button.text = "完成"
 		return
 
 	current_page = clampi(current_page, 0, page_count - 1)
-	var slide: TutorialSlideData = slides[current_page]
+	var slide: TutorialSlideData = _active_slides[current_page]
 
 	if slide == null:
 		page_image.texture = null

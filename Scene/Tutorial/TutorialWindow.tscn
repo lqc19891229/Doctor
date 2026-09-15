@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://cxaemutj3tbfr" path="res://Assets/Tutorial/pulse2.png" id="6_64xyy"]
 [ext_resource type="Texture2D" uid="uid://dlqm7kf0g3cq3" path="res://Assets/Tutorial/pulse4.png" id="7_go6xm"]
 [ext_resource type="Texture2D" uid="uid://ujwinw3k434u" path="res://Assets/Tutorial/pulse6.png" id="8_p66ju"]
+[ext_resource type="Texture2D" uid="uid://jawwya15dfyt" path="res://Assets/Tutorial/clinic.png" id="9_p66ju"]
+[ext_resource type="Texture2D" uid="uid://cwg8riqxhnlnh" path="res://Assets/Tutorial/pulse.png" id="10_3ilc3"]
+[ext_resource type="Texture2D" uid="uid://b0bgr32lhi3fm" path="res://Assets/Tutorial/ClinicalLog.png" id="11_yosn8"]
+[ext_resource type="Texture2D" uid="uid://djuj1cmh2jwx3" path="res://Assets/Tutorial/Prescription.png" id="12_b3wpr"]
 
 [sub_resource type="Resource" id="TutorialSlide_1"]
 script = ExtResource("3_slide_data")
@@ -80,6 +84,48 @@ script = ExtResource("3_slide_data")
 title = "寒热"
 description = "每次呼吸波峰经过指尖的次数反映寒热程度；
 次数越多越热，次数越少越寒。"
+metadata/_custom_type_script = "uid://dyml45imq64mo"
+
+[sub_resource type="Resource" id="Resource_32e8r"]
+script = ExtResource("3_slide_data")
+title = "接诊"
+description = "白天在医馆接诊病人，把脉(F1)确定疾病，翻阅行医记考(F3)确定方剂，给病人断病开方(F2)"
+image = ExtResource("9_p66ju")
+metadata/_custom_type_script = "uid://dyml45imq64mo"
+
+[sub_resource type="Resource" id="Resource_kif1q"]
+script = ExtResource("3_slide_data")
+title = "把脉"
+description = "在把脉窗口按住QAZ显示右手脉象，按住WSX显示左手脉象"
+image = ExtResource("10_3ilc3")
+metadata/_custom_type_script = "uid://dyml45imq64mo"
+
+[sub_resource type="Resource" id="Resource_7ieny"]
+script = ExtResource("3_slide_data")
+title = "行医记考"
+description = "在行医记考窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母查询"
+image = ExtResource("11_yosn8")
+metadata/_custom_type_script = "uid://dyml45imq64mo"
+
+[sub_resource type="Resource" id="Resource_fe0ni"]
+script = ExtResource("3_slide_data")
+title = "断病开方"
+description = "在断病开放窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母筛选对应条目"
+image = ExtResource("12_b3wpr")
+metadata/_custom_type_script = "uid://dyml45imq64mo"
+
+[sub_resource type="Resource" id="Resource_fh8en"]
+script = ExtResource("3_slide_data")
+title = "开方"
+description = "选择君臣佐使区域，再点击药材加入，可选择单位剂量控制每次点击加入的药量。"
+image = ExtResource("12_b3wpr")
+metadata/_custom_type_script = "uid://dyml45imq64mo"
+
+[sub_resource type="Resource" id="Resource_t8c5g"]
+script = ExtResource("3_slide_data")
+title = "方剂"
+description = "在搜索栏输入方剂名可筛选出该方剂所包含的药材条目。当达成一定次数的妙手回春评价后，会出现预制方剂条目，点击后会自动填入方剂所包含的所有药材及剂量"
+image = ExtResource("12_b3wpr")
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 
 [sub_resource type="StyleBoxFlat" id="StyleWindow"]
@@ -199,6 +245,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_script")
 slides = Array[ExtResource("3_slide_data")]([SubResource("TutorialSlide_1"), SubResource("TutorialSlide_2"), SubResource("TutorialSlide_3"), SubResource("TutorialSlide_4"), SubResource("Resource_i02uo"), SubResource("Resource_3ilc3"), SubResource("Resource_yosn8"), SubResource("Resource_b3wpr"), SubResource("Resource_jp6bf"), SubResource("Resource_nj7cn"), SubResource("Resource_57orn")])
+day_slides = Array[ExtResource("3_slide_data")]([SubResource("Resource_32e8r"), SubResource("Resource_kif1q"), SubResource("Resource_7ieny"), SubResource("Resource_fe0ni"), SubResource("Resource_fh8en"), SubResource("Resource_t8c5g")])
 
 [node name="DimBackground" type="ColorRect" parent="." unique_id=292098951]
 layout_mode = 1
