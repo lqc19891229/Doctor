@@ -53,6 +53,8 @@ signal test_data_changed
 @onready var set_day_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/SetDayButton
 @onready var story_option_button: OptionButton = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/StoryOptionButton
 @onready var mark_story_played_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/MarkStoryPlayedButton
+@onready var unlock_to_current_story_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/UnlockToCurrentStoryButton
+@onready var mark_all_stories_played_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/MarkAllStoriesPlayedButton
 @onready var reputation_spin_box: SpinBox = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/ReputationSpinBox
 @onready var set_reputation_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/SetReputationButton
 @onready var experience_spin_box: SpinBox = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/ExperienceSpinBox
@@ -122,6 +124,12 @@ func _connect_signals() -> void:
 
 	if mark_story_played_button != null and not mark_story_played_button.pressed.is_connected(_on_mark_story_played_button_pressed):
 		mark_story_played_button.pressed.connect(_on_mark_story_played_button_pressed)
+
+	if unlock_to_current_story_button != null and not unlock_to_current_story_button.pressed.is_connected(_on_unlock_to_current_story_button_pressed):
+		unlock_to_current_story_button.pressed.connect(_on_unlock_to_current_story_button_pressed)
+
+	if mark_all_stories_played_button != null and not mark_all_stories_played_button.pressed.is_connected(_on_mark_all_stories_played_button_pressed):
+		mark_all_stories_played_button.pressed.connect(_on_mark_all_stories_played_button_pressed)
 
 	if set_reputation_button != null and not set_reputation_button.pressed.is_connected(_on_set_reputation_button_pressed):
 		set_reputation_button.pressed.connect(_on_set_reputation_button_pressed)
@@ -369,6 +377,138 @@ func _on_mark_story_played_button_pressed() -> void:
 	_reload_story_options()
 	_refresh_test_status()
 	_show_test_result("前置剧情已标记为播放完成：%s。" % story_id)
+
+
+# =========================================================
+# 扩展测试功能：解锁到当前剧情
+# 选择目标剧情后，将列表中它之前的剧情全部标记为已播放，
+# 但保留目标剧情本身为未播放，便于立即测试目标剧情。
+# =========================================================
+
+func _on_unlock_to_current_story_button_pressed() -> void:
+	if story_option_button == null or story_option_button.disabled:
+		_show_test_result("解锁剧情失败：没有可选剧情。")
+		return
+
+	if StoryManager == null:
+		_show_test_result("解锁剧情失败：StoryManager 不可用。")
+		return
+
+	var selected_index := story_option_button.selected
+	if selected_index < 0 or selected_index >= story_option_button.item_count:
+		_show_test_result("解锁剧情失败：请先选择目标剧情。")
+		return
+
+	var target_story_id := str(
+		story_option_button.get_item_metadata(selected_index)
+	).strip_edges()
+	if target_story_id == "":
+		_show_test_result("解锁剧情失败：选中的剧情没有 story_id。")
+		return
+
+	var marked_count := 0
+	for item_index in range(selected_index):
+		var story_id := str(
+			story_option_button.get_item_metadata(item_index)
+		).strip_edges()
+		if story_id == "" or _is_story_played_for_test(story_id):
+			continue
+
+		if _mark_story_played_for_test(story_id):
+			marked_count += 1
+
+	_notify_host_data_changed()
+	_reload_story_options()
+	_refresh_test_status()
+
+	if marked_count <= 0:
+		_show_test_result("目标剧情之前没有需要补标记的剧情：%s。" % target_story_id)
+	else:
+		_show_test_result(
+			"已标记目标剧情之前的 %d 条剧情；目标剧情仍保持未播放：%s。" % [
+				marked_count,
+				target_story_id
+			]
+		)
+
+
+# =========================================================
+# 扩展测试功能：批量将全部剧情标记为已播放
+# =========================================================
+
+func _on_mark_all_stories_played_button_pressed() -> void:
+	if StoryManager == null:
+		_show_test_result("批量标记剧情失败：StoryManager 不可用。")
+		return
+
+	if not StoryManager.has_method("get_all_stories"):
+		_show_test_result("批量标记剧情失败：无法获取剧情列表。")
+		return
+
+	var all_stories = StoryManager.call("get_all_stories")
+	if typeof(all_stories) != TYPE_ARRAY:
+		_show_test_result("批量标记剧情失败：剧情列表无效。")
+		return
+
+	var marked_count := 0
+	for story in all_stories:
+		if story == null:
+			continue
+
+		var story_id := str(
+			_get_object_property(story, &"story_id", "")
+		).strip_edges()
+		if story_id == "" or _is_story_played_for_test(story_id):
+			continue
+
+		if _mark_story_played_for_test(story_id):
+			marked_count += 1
+
+	_notify_host_data_changed()
+	_reload_story_options()
+	_refresh_test_status()
+
+	if marked_count <= 0:
+		_show_test_result("所有剧情都已经标记为播放完成。")
+	else:
+		_show_test_result("已批量标记 %d 条剧情为播放完成。" % marked_count)
+
+
+func _is_story_played_for_test(story_id: String) -> bool:
+	var clean_story_id := story_id.strip_edges()
+	if clean_story_id == "" or StoryManager == null:
+		return false
+
+	if StoryManager.has_method("has_played_story"):
+		return bool(StoryManager.call("has_played_story", clean_story_id))
+
+	if _object_has_property(StoryManager, &"played_story_ids"):
+		var played_value = StoryManager.get(&"played_story_ids")
+		if typeof(played_value) == TYPE_DICTIONARY:
+			var played_ids: Dictionary = played_value
+			return played_ids.has(clean_story_id)
+
+	return false
+
+
+func _mark_story_played_for_test(story_id: String) -> bool:
+	var clean_story_id := story_id.strip_edges()
+	if clean_story_id == "" or StoryManager == null:
+		return false
+
+	if StoryManager.has_method("mark_story_played_by_id"):
+		StoryManager.call("mark_story_played_by_id", clean_story_id)
+		return true
+
+	if _object_has_property(StoryManager, &"played_story_ids"):
+		var played_value = StoryManager.get(&"played_story_ids")
+		if typeof(played_value) == TYPE_DICTIONARY:
+			var played_ids: Dictionary = played_value
+			played_ids[clean_story_id] = true
+			StoryManager.set(&"played_story_ids", played_ids)
+			return true
+
+	return false
 
 
 # =========================================================

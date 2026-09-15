@@ -112,7 +112,39 @@ size_flags_horizontal = 3
 [node name="MarkStoryPlayedButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=206462594]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
-text = "标记剧情已播放"
+text = "标记当前"
+
+[node name="StoryUnlockToCurrentLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 2
+text = "批量前置"
+
+[node name="StoryUnlockToCurrentHint" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "标记所选目标之前的剧情，保留目标未播放"
+autowrap_mode = 3
+
+[node name="UnlockToCurrentStoryButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "解锁到当前"
+
+[node name="StoryBatchLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 2
+text = "全部剧情"
+
+[node name="StoryBatchHint" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "将所有未播放剧情直接标记为已播放"
+autowrap_mode = 3
+
+[node name="MarkAllStoriesPlayedButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+text = "全部标记"
 
 [node name="ReputationLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=789430128]
 custom_minimum_size = Vector2(135, 0)

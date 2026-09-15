@@ -64,8 +64,6 @@ var book_list_dirty: bool = true
 func _ready() -> void:
 	# ReadBook 始终固定在屏幕坐标 (50, 66)。
 	position = FIXED_WINDOW_POSITION
-	if not position_changed.is_connected(_on_window_position_changed):
-		position_changed.connect(_on_window_position_changed)
 
 	# 使用 Window 自带右上角 X 关闭按钮。
 	if not close_requested.is_connected(_on_window_close_requested):
@@ -112,9 +110,10 @@ func open_window() -> void:
 	_focus_book_list_on_open()
 
 
-func _on_window_position_changed() -> void:
-	# 如果用户拖动窗口或系统尝试调整位置，立即恢复固定坐标。
-	if position != FIXED_WINDOW_POSITION:
+func _process(_delta: float) -> void:
+	# Window 没有 position_changed 信号，因此每帧检查位置。
+	# 只有窗口可见且坐标被改变时才写回，避免无意义赋值。
+	if visible and position != FIXED_WINDOW_POSITION:
 		position = FIXED_WINDOW_POSITION
 
 
