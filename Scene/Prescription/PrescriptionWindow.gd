@@ -411,13 +411,6 @@ func _build_book_entry_sort_map(
 # =========================================================
 # 药材按钮缓存 / 搜索
 # =========================================================
-func _refresh_herb_list() -> void:
-	# 兼容旧调用：不再销毁/创建按钮，只确保缓存存在并应用当前过滤条件。
-	_ensure_herb_button_cache()
-	_ensure_formula_search_cache()
-	_apply_herb_filter()
-
-
 func _ensure_herb_button_cache() -> void:
 	if herb_list == null or herb_database == null:
 		return
@@ -1097,49 +1090,6 @@ func _fill_role_list(list_node: ItemList, herb_items: Array[Dictionary]) -> void
 # =========================================================
 # 处方区辅助
 # =========================================================
-func _get_list_by_role(role_name: String) -> ItemList:
-	match role_name:
-		ROLE_JUN:
-			return jun_list
-		ROLE_CHEN:
-			return chen_list
-		ROLE_ZUO:
-			return zuo_list
-		ROLE_SHI:
-			return shi_list
-		_:
-			return jun_list
-
-
-func _get_selected_herb_id_from_list(list_node: ItemList) -> String:
-	if list_node == null:
-		return ""
-
-	var selected := list_node.get_selected_items()
-	if selected.is_empty():
-		return ""
-
-	var index: int = selected[0]
-	return list_node.get_item_metadata(index) as String
-
-
-func _get_selected_prescription_herb_id() -> String:
-	# 先从当前高亮区域取
-	var primary_list := _get_list_by_role(current_selected_role)
-	var herb_id := _get_selected_herb_id_from_list(primary_list)
-	if herb_id != "":
-		return herb_id
-
-	# 当前区域没选中，再遍历全部区域
-	for role_name in [ROLE_JUN, ROLE_CHEN, ROLE_ZUO, ROLE_SHI]:
-		var list_node := _get_list_by_role(role_name)
-		herb_id = _get_selected_herb_id_from_list(list_node)
-		if herb_id != "":
-			return herb_id
-
-	return ""
-
-
 # =========================================================
 # 在指定角色区域中查找某味药材
 # 找到返回对应 Dictionary
@@ -1745,26 +1695,6 @@ func _on_disease_selected(disease_name: String, disease_id: String = "") -> void
 	emit_signal("info_requested", "已选择疾病诊断：%s" % disease_name)
 
 
-func _clear_selected_disease() -> void:
-	disease_search_keyword = ""
-	selected_disease_id = ""
-	selected_disease_name = ""
-
-	if current_prescription != null and current_prescription.has_method("clear_disease"):
-		current_prescription.clear_disease()
-	else:
-		_set_current_prescription_disease("", "")
-
-	if disease_search != null:
-		_suppress_search_signal = true
-		disease_search.clear()
-		_suppress_search_signal = false
-
-	if _disease_search_timer != null:
-		_disease_search_timer.stop()
-	_apply_disease_filter()
-
-
 func _sync_selected_disease_from_prescription() -> void:
 	selected_disease_id = ""
 	selected_disease_name = ""
@@ -1825,21 +1755,6 @@ func _object_has_property(target, property_name: String) -> bool:
 			return true
 
 	return false
-
-
-func _is_disease_match_search(disease_name: String, disease_id: String = "") -> bool:
-	if disease_search_keyword == "":
-		return true
-
-	var normalized_name := _normalize_disease_search_text(disease_name)
-	var normalized_id := _normalize_disease_search_text(disease_id)
-	var disease_id_initials := _get_disease_id_initials(disease_id)
-
-	return (
-		normalized_name.contains(disease_search_keyword)
-		or normalized_id.contains(disease_search_keyword)
-		or disease_id_initials.contains(disease_search_keyword)
-	)
 
 
 func _normalize_disease_search_text(value: String) -> String:

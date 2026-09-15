@@ -429,11 +429,6 @@ func _split_text_to_columns(value: String, rows_per_column: int) -> Array[String
 	return columns
 
 
-func _build_vertical_text(value: String, rows_per_column: int) -> String:
-	var columns := _split_text_to_columns(value, rows_per_column)
-	return _build_vertical_text_from_columns(columns, rows_per_column)
-
-
 # =========================================================
 # 十、生成竖排文本矩阵
 # =========================================================

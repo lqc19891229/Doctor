@@ -1345,14 +1345,6 @@ func _on_story_endgame_requested() -> void:
 		_show_main_menu()
 
 
-func _is_game_over_story(story: StoryData) -> bool:
-	if story == null:
-		return false
-
-	# “播放后 = gameover”表示失败结局。
-	return story.should_game_over()
-
-
 func _get_or_create_tutorial_window() -> Node:
 	if tutorial_window != null and is_instance_valid(tutorial_window):
 		return tutorial_window

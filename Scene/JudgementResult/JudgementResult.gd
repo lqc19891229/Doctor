@@ -90,12 +90,6 @@ func _format_money_change(value: int) -> String:
 	return "%d文" % value
 
 
-func _placeholder(text: String) -> String:
-	if text.strip_edges() == "":
-		return "（无）"
-	return text
-
-
 func _input(event: InputEvent) -> void:
 	if not visible:
 		return
