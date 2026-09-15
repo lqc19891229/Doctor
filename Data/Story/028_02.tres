@@ -12,7 +12,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "贵公子所患的是痰迷心窍之症，开副涤痰汤调理一下。"
+text = "公子所患的是痰迷心窍之症，开副涤痰汤调理一下。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
@@ -68,7 +68,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "很多人表面看着正常，其实病得都不轻呢。"
+text = "很多人表面上看着正常，其实都病得不轻呢。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_009"]
 script = ExtResource("1_storyline")
@@ -76,8 +76,56 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "曾和"
-text = "胡扯，我看你就是没病说成有病，"
+text = "胡扯，我看你就是没病说成有病，骗病人买药赚钱"
 portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_010"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "曾和"
+text = "咱们家可是花了好多钱，把地都卖了供你读书，就只望着你能出人头地，光宗耀祖。可你怎么就这么不争气呢？"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_011"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "mid"
+inactive_portrait_mode = "dim"
+speaker = "曾题名"
+text = "..."
+portrait = ExtResource("portrait_3")
+[sub_resource type="Resource" id="StoryLine_012"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "这位仁兄，我也是读过书考过科举的，读书人其实也是有很多难处的。"
+portrait = ExtResource("portrait_1")
+[sub_resource type="Resource" id="StoryLine_013"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "曾和"
+text = "难？还能有我赚钱养家糊口难？天底下还能有比我们做父母更难的？"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_014"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "曾和"
+text = "再过半年可就要考试了，你这次无论如何也要给我好好考。"
+portrait = ExtResource("portrait_2")
+[sub_resource type="Resource" id="StoryLine_015"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "right"
+inactive_portrait_mode = "dim"
+speaker = "李东璧"
+text = "…"
+portrait = ExtResource("portrait_1")
 
 [resource]
 script = ExtResource("2_storydata")
@@ -100,4 +148,4 @@ experience_points_change = 0
 play_once = true
 sort_index = 0
 background_mode = "current_scene"
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011"), SubResource("StoryLine_012"), SubResource("StoryLine_013"), SubResource("StoryLine_014"), SubResource("StoryLine_015")])

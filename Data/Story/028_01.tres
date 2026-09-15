@@ -13,7 +13,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "曾和"
-text = "大夫啊，您快帮忙看看吧，这孩子整日目光呆滞，叫他也不应，就在那自言自语考中了考中了的…"
+text = "大夫啊，您快给看看吧，这孩子整日目光呆滞，叫他也不应，就在那自言自语，嘴里不知道嘟囔这什么，怪邪乎的…"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_002"]
 script = ExtResource("1_storyline")
