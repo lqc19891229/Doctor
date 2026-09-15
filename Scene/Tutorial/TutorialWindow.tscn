@@ -28,19 +28,19 @@ image = ExtResource("3_t4jru")
 [sub_resource type="Resource" id="TutorialSlide_2"]
 script = ExtResource("3_slide_data")
 title = "读书"
-description = "在读书窗口中可以阅读医学典籍，黄帝内经记载中医基础理论，作为参考"
+description = "在读书窗口中可以阅读医学典籍，《黄帝内经》记载中医基础理论，作为参考"
 image = ExtResource("4_b3wpr")
 
 [sub_resource type="Resource" id="TutorialSlide_3"]
 script = ExtResource("3_slide_data")
 title = "药材"
-description = "神农本草经记载药材的相关信息，作为参考"
+description = "《神农本草经》记载药材的相关信息，作为参考"
 image = ExtResource("5_jp6bf")
 
 [sub_resource type="Resource" id="TutorialSlide_4"]
 script = ExtResource("3_slide_data")
 title = "疾病"
-description = "诸病源候论记载疾病的相关信息，游戏中通过脉象来判断疾病，通过标准方治疗疾病"
+description = "《诸病源候论》记载疾病的相关信息，游戏中通过脉象来判断疾病，通过标准方治疗疾病"
 image = ExtResource("4_0xbrs")
 
 [sub_resource type="Resource" id="Resource_i02uo"]
