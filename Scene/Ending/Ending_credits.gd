@@ -41,31 +41,35 @@ const SEAL_COLOR := Color("#7C2B22")
 # 古籍阅读习惯通常从右向左，因此本脚本也按右侧第一列开始排。
 const CREDITS := [
 	{
-		"title": "制 作 人 员",
+		"title": "医 者",
 		"columns": [
-			["制作", "李"],
-			["策划", "李"],
-			["程序", "李"],
-			["美术", "李"]
+			["游戏设计", "李翘辰"],
+			["程序", "ChatGPT-Sol"],
+			["美术", "ChatGPT-Images"]
 		]
 	},
 	{
-		"title": "协 力",
+		"title": "音 乐 音 效",
 		"columns": [
-			["音乐", "某 某"],
-			["音效", "某 某"],
-			["测试", "某 某"],
-			["特别感谢", "某 某"]
+			["音乐", "Suno"],
+			["音效素材", "Pixabay免费素材作者"]
+		]
+	},
+	{
+		"title": "特 别 感 谢",
+		"columns": [
+			["Lucas Pope"],
+			["以及所有给予本作灵感与参考的独立游戏制作人"]
 		]
 	},
 	{
 		"title": "终",
 		"columns": [
-			["感 谢 游 玩"]
+			["感谢游玩"],
+			["医者"]
 		]
 	}
 ]
-
 @onready var viewport_mask: Control = $ViewportMask
 @onready var scroll_content: Control = $ViewportMask/ScrollContent
 

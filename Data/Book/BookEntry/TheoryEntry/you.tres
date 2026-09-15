@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="TheoryBookEntryData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="TheoryBookEntryData" format=3 uid="uid://dh7bs72wlthul"]
 
-[ext_resource type="Script" path="res://System/Book/BookEntry/TheoryBookEntryData.gd" id="1"]
+[ext_resource type="Script" uid="uid://jun6l1wpkum4" path="res://System/Book/BookEntry/TheoryBookEntryData.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
@@ -8,5 +8,11 @@ entry_id = "you"
 book_id = "huang_di_nei_jing"
 title = "忧"
 sort_index = 28
-detail_text = "【忧】\n\n忧是七情之一，主要指因担心、顾虑或处境不安而产生的忧愁情绪。短暂的忧虑属于正常心理活动，但长期忧心忡忡、反复担忧，则可能使气机受到抑制。\n\n中医认为忧与肺关系密切。忧愁过度容易损伤肺气，使肺的宣发肃降功能失常；长期忧虑也可能影响脾的运化，导致气血化生不足。\n\n忧伤肺时，可能出现胸闷、气短、呼吸不畅、声音低弱、精神疲倦或容易叹息等表现；影响脾胃时，还可能出现食欲减退、腹胀和身体乏力。判断时需要结合忧虑持续时间以及肺、脾的相关症状综合分析。"
+detail_text = "【忧】
+
+忧是七情之一，主要指因担心、顾虑或处境不安而产生的忧愁情绪。短暂的忧虑属于正常心理活动，但长期忧心忡忡、反复担忧，则可能使气机受到抑制。
+
+中医认为忧与肺关系密切。忧愁过度容易损伤肺气，使肺的宣发肃降功能失常；长期忧虑也可能影响脾的运化，导致气血化生不足。
+
+忧伤肺时，可能出现胸闷、气短、呼吸不畅、声音低弱、精神疲倦或容易叹息等表现；影响脾胃时，还可能出现食欲减退、腹胀和身体乏力。判断时需要结合忧虑持续时间以及肺、脾的相关症状综合分析。"
 unlock_required_experience_points = 80

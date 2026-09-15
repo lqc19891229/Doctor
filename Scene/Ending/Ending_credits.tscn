@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://bhpmg58lo106w"]
 
-[ext_resource path="res://Scene/Ending/Ending_credits.gd" type="Script" id="1_script"]
+[ext_resource type="Script" uid="uid://blo1puabak0l" path="res://Scene/Ending/Ending_credits.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://chpq8xgsyr7ec" path="res://Assets/Background/57dedfdb-20dd-4d7b-9bc6-423dd6192fca.png" id="2_u6yd3"]
 
-[node name="EndingCredits" type="Control"]
+[node name="EndingCredits" type="Control" unique_id=466100844]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,9 +11,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
-return_scene = "res://Scene/Main/Main.tscn"
+cover_texture = ExtResource("2_u6yd3")
+return_scene = "uid://5kw50n6ckjh0"
 
-[node name="BlackBackground" type="ColorRect" parent="."]
+[node name="BlackBackground" type="ColorRect" parent="." unique_id=735698112]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +24,8 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.035, 0.027, 0.02, 1)
 
-[node name="ViewportMask" type="Control" parent="."]
+[node name="ViewportMask" type="Control" parent="." unique_id=1888658360]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,13 +33,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-clip_contents = true
 
-[node name="ScrollContent" type="Control" parent="ViewportMask"]
-layout_mode = 0
+[node name="ScrollContent" type="Control" parent="ViewportMask" unique_id=645617976]
+anchors_preset = 0
 mouse_filter = 2
 
-[node name="ForegroundTop" type="ColorRect" parent="."]
+[node name="ForegroundTop" type="ColorRect" parent="." unique_id=1156792685]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -45,7 +47,7 @@ grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.12, 0.085, 0.05, 1)
 
-[node name="ForegroundBottom" type="ColorRect" parent="."]
+[node name="ForegroundBottom" type="ColorRect" parent="." unique_id=865959675]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -53,5 +55,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -26.0
 grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
 color = Color(0.12, 0.085, 0.05, 1)
