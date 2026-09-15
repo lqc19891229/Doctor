@@ -24,9 +24,9 @@ extends Control
 @export_file("*.tscn") var return_scene: String = ""
 
 @export_category("排版")
-@export var page_width: float = 920.0
-@export var horizontal_margin: float = 160.0
-@export var column_gap: float = 94.0
+@export var page_width: float = 800.0
+@export var horizontal_margin: float = 20.0
+@export var column_gap: float = 150.0
 @export var title_font_size: int = 42
 @export var name_font_size: int = 32
 
@@ -34,7 +34,6 @@ const PAPER_COLOR := Color("#D2BF91")
 const PAPER_DARK := Color("#B29D70")
 const INK_COLOR := Color("#2E261E")
 const MUTED_INK := Color("#574B3D")
-const SEAL_COLOR := Color("#7C2B22")
 
 # 每个 Dictionary 会生成一“页”。
 # columns 内每个元素是一列，列内文字自动竖排。
@@ -43,30 +42,34 @@ const CREDITS := [
 	{
 		"title": "医 者",
 		"columns": [
-			["游戏设计", "李翘辰"],
-			["程序", "ChatGPT-Sol"],
+			["游戏设计", "李翘辰"],			
+
+			["程序", "ChatGPT-Sol"],			
+
 			["美术", "ChatGPT-Images"]
 		]
 	},
 	{
 		"title": "音 乐 音 效",
 		"columns": [
-			["音乐", "Suno"],
-			["音效素材", "Pixabay免费素材作者"]
+			["音乐", "Suno"],	
+
+			["音效素材", "Pixabay"]
 		]
 	},
 	{
 		"title": "特 别 感 谢",
 		"columns": [
 			["Lucas Pope"],
-			["以及所有给予本作灵感与参考的独立游戏制作人"]
+			["以及所有给予本作灵感与参考的"],
+			["独立游戏制作人"]
 		]
 	},
 	{
 		"title": "终",
 		"columns": [
 			["感谢游玩"],
-			["医者"]
+			
 		]
 	}
 ]
@@ -78,12 +81,10 @@ var _running := false
 var _elapsed := 0.0
 var _finished := false
 
-
 func _ready() -> void:
 	resized.connect(_on_resized)
 	_build_scroll()
 	_reset_position()
-
 
 func _process(delta: float) -> void:
 	if _finished:
@@ -104,7 +105,6 @@ func _process(delta: float) -> void:
 		await get_tree().create_timer(end_delay).timeout
 		_finish_credits()
 
-
 func _on_resized() -> void:
 	if not is_node_ready():
 		return
@@ -112,14 +112,12 @@ func _on_resized() -> void:
 	_build_scroll()
 	_reset_position()
 
-
 func _reset_position() -> void:
 	# 从左侧完全藏住整张长卷，再向右进入。
 	scroll_content.position = Vector2(-_content_width, 0.0)
 	_elapsed = 0.0
 	_running = false
 	_finished = false
-
 
 func _build_scroll() -> void:
 	# 立即清理旧页面，保证本函数保持同步；_ready() 后可以立刻用新的 _content_width 复位。
@@ -142,7 +140,6 @@ func _build_scroll() -> void:
 		x += page_width
 
 	_create_cover_page(x)
-
 
 func _create_paper_background() -> void:
 	var paper := ColorRect.new()
@@ -182,7 +179,6 @@ func _create_paper_background() -> void:
 		stain.color = Color(0.32, 0.25, 0.16, 0.055)
 		stain.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		paper.add_child(stain)
-
 
 func _create_cover_page(page_x: float) -> void:
 	var page := Control.new()
@@ -227,9 +223,6 @@ func _create_cover_page(page_x: float) -> void:
 		title.size = Vector2(inner.size.x * 0.30, inner.size.y * 0.68)
 		title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		inner.add_child(title)
-
-		_add_seal(inner, Vector2(inner.size.x * 0.66, inner.size.y * 0.69), "古\n籍")
-
 
 func _create_credit_page(page_x: float, page_data: Dictionary) -> void:
 	var page := Control.new()
@@ -280,29 +273,6 @@ func _create_credit_page(page_x: float, page_data: Dictionary) -> void:
 			label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			column.add_child(label)
 
-	# 每页放一个小红印。
-	_add_seal(page, Vector2(100, size.y * 0.70), "製\n作")
-
-
-func _add_seal(parent: Control, pos: Vector2, text: String) -> void:
-	var seal := ColorRect.new()
-	seal.position = pos
-	seal.size = Vector2(64, 64)
-	seal.color = Color(SEAL_COLOR, 0.88)
-	seal.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	parent.add_child(seal)
-
-	var seal_text := Label.new()
-	seal_text.text = text
-	seal_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	seal_text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	seal_text.add_theme_font_size_override("font_size", 18)
-	seal_text.add_theme_color_override("font_color", Color("#E8D9B8"))
-	seal_text.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	seal_text.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	seal.add_child(seal_text)
-
-
 func _vertical_text(source: String) -> String:
 	# 空格只用于视觉分词，竖排时忽略。
 	var result := ""
@@ -314,7 +284,6 @@ func _vertical_text(source: String) -> String:
 			result += "\n"
 
 	return result
-
 
 func _finish_credits() -> void:
 	if return_scene.is_empty():

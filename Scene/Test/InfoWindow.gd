@@ -51,10 +51,10 @@ signal test_data_changed
 @onready var extended_test_panel: VBoxContainer = $Panel/VBoxContainer/ExtendedTestPanel
 @onready var day_spin_box: SpinBox = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/DaySpinBox
 @onready var set_day_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/SetDayButton
-@onready var story_option_button: OptionButton = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/StoryOptionButton
-@onready var mark_story_played_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/MarkStoryPlayedButton
-@onready var unlock_to_current_story_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/UnlockToCurrentStoryButton
-@onready var mark_all_stories_played_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/MarkAllStoriesPlayedButton
+@onready var story_check_list: VBoxContainer = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/StoryScrollContainer/StoryCheckList
+@onready var mark_selected_stories_played_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/StoryActionColumn/MarkSelectedStoriesPlayedButton
+@onready var select_all_unplayed_stories_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/StoryActionColumn/SelectAllUnplayedStoriesButton
+@onready var clear_story_selection_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/StoryActionColumn/ClearStorySelectionButton
 @onready var reputation_spin_box: SpinBox = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/ReputationSpinBox
 @onready var set_reputation_button: Button = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/SetReputationButton
 @onready var experience_spin_box: SpinBox = $Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/ExperienceSpinBox
@@ -122,14 +122,14 @@ func _connect_signals() -> void:
 	if set_day_button != null and not set_day_button.pressed.is_connected(_on_set_day_button_pressed):
 		set_day_button.pressed.connect(_on_set_day_button_pressed)
 
-	if mark_story_played_button != null and not mark_story_played_button.pressed.is_connected(_on_mark_story_played_button_pressed):
-		mark_story_played_button.pressed.connect(_on_mark_story_played_button_pressed)
+	if mark_selected_stories_played_button != null and not mark_selected_stories_played_button.pressed.is_connected(_on_mark_selected_stories_played_button_pressed):
+		mark_selected_stories_played_button.pressed.connect(_on_mark_selected_stories_played_button_pressed)
 
-	if unlock_to_current_story_button != null and not unlock_to_current_story_button.pressed.is_connected(_on_unlock_to_current_story_button_pressed):
-		unlock_to_current_story_button.pressed.connect(_on_unlock_to_current_story_button_pressed)
+	if select_all_unplayed_stories_button != null and not select_all_unplayed_stories_button.pressed.is_connected(_on_select_all_unplayed_stories_button_pressed):
+		select_all_unplayed_stories_button.pressed.connect(_on_select_all_unplayed_stories_button_pressed)
 
-	if mark_all_stories_played_button != null and not mark_all_stories_played_button.pressed.is_connected(_on_mark_all_stories_played_button_pressed):
-		mark_all_stories_played_button.pressed.connect(_on_mark_all_stories_played_button_pressed)
+	if clear_story_selection_button != null and not clear_story_selection_button.pressed.is_connected(_on_clear_story_selection_button_pressed):
+		clear_story_selection_button.pressed.connect(_on_clear_story_selection_button_pressed)
 
 	if set_reputation_button != null and not set_reputation_button.pressed.is_connected(_on_set_reputation_button_pressed):
 		set_reputation_button.pressed.connect(_on_set_reputation_button_pressed)
@@ -164,34 +164,34 @@ func _refresh_test_controls() -> void:
 	if money_spin_box != null:
 		money_spin_box.value = _get_current_money_wen()
 
-	_reload_story_options()
+	_reload_story_checklist()
 	_refresh_test_status()
 
 
-func _reload_story_options() -> void:
-	if story_option_button == null:
+func _reload_story_checklist() -> void:
+	if story_check_list == null:
 		return
 
-	var previous_story_id := ""
-	if story_option_button.item_count > 0 and story_option_button.selected >= 0:
-		previous_story_id = str(
-			story_option_button.get_item_metadata(story_option_button.selected)
-		).strip_edges()
+	var previously_selected_ids := _get_selected_story_ids_for_test()
 
-	story_option_button.clear()
+	# 立即从容器移除旧节点，避免 queue_free() 延迟导致刷新时暂时出现重复项。
+	for child in story_check_list.get_children():
+		story_check_list.remove_child(child)
+		child.queue_free()
 
 	if StoryManager == null or not StoryManager.has_method("get_all_stories"):
-		story_option_button.add_item("StoryManager 接口不可用")
-		story_option_button.disabled = true
+		_add_story_checklist_message("StoryManager 接口不可用")
+		_set_story_selection_buttons_enabled(false)
 		return
 
 	var all_stories = StoryManager.call("get_all_stories")
 	if typeof(all_stories) != TYPE_ARRAY:
-		story_option_button.add_item("未读取到剧情数据")
-		story_option_button.disabled = true
+		_add_story_checklist_message("未读取到剧情数据")
+		_set_story_selection_buttons_enabled(false)
 		return
 
-	var selected_index := -1
+	var story_count := 0
+	var unplayed_count := 0
 	for story in all_stories:
 		if story == null:
 			continue
@@ -200,35 +200,75 @@ func _reload_story_options() -> void:
 		if story_id == "":
 			continue
 
-		var has_played := false
-		if StoryManager.has_method("has_played_story"):
-			has_played = bool(StoryManager.call("has_played_story", story_id))
-
-		var state_text := "已播放" if has_played else "未播放"
+		var has_played := _is_story_played_for_test(story_id)
 		var trigger_scene := str(
 			_get_object_property(story, &"trigger_scene", "")
 		).strip_edges()
-		var display_text := "%s｜%s" % [state_text, story_id]
+
+		var story_check_box := CheckBox.new()
+		story_check_box.name = "Story_%d" % story_count
+		story_check_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		story_check_box.set_meta(&"story_id", story_id)
+
+		var state_text := "已播放" if has_played else "未播放"
+		story_check_box.text = "%s｜%s" % [state_text, story_id]
 		if trigger_scene != "":
-			display_text += "（%s）" % trigger_scene
+			story_check_box.text += "（%s）" % trigger_scene
 
-		story_option_button.add_item(display_text)
-		var item_index := story_option_button.item_count - 1
-		story_option_button.set_item_metadata(item_index, story_id)
-		if story_id == previous_story_id:
-			selected_index = item_index
+		# 已播放剧情仍显示，便于确认当前状态，但不允许再次选择。
+		story_check_box.disabled = has_played
+		if not has_played:
+			unplayed_count += 1
+			story_check_box.button_pressed = previously_selected_ids.has(story_id)
 
-	if story_option_button.item_count == 0:
-		story_option_button.add_item("没有可用剧情")
-		story_option_button.disabled = true
+		story_check_list.add_child(story_check_box)
+		story_count += 1
+
+	if story_count <= 0:
+		_add_story_checklist_message("没有可用剧情")
+		_set_story_selection_buttons_enabled(false)
 		return
 
-	story_option_button.disabled = false
-	if selected_index >= 0:
-		story_option_button.select(selected_index)
-	else:
-		story_option_button.select(0)
+	_set_story_selection_buttons_enabled(unplayed_count > 0)
 
+
+func _add_story_checklist_message(message: String) -> void:
+	if story_check_list == null:
+		return
+
+	var message_label := Label.new()
+	message_label.text = message
+	message_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	story_check_list.add_child(message_label)
+
+
+func _set_story_selection_buttons_enabled(enabled: bool) -> void:
+	if mark_selected_stories_played_button != null:
+		mark_selected_stories_played_button.disabled = not enabled
+	if select_all_unplayed_stories_button != null:
+		select_all_unplayed_stories_button.disabled = not enabled
+	if clear_story_selection_button != null:
+		clear_story_selection_button.disabled = not enabled
+
+
+func _get_selected_story_ids_for_test() -> Array[String]:
+	var selected_story_ids: Array[String] = []
+	if story_check_list == null:
+		return selected_story_ids
+
+	for child in story_check_list.get_children():
+		if not (child is CheckBox):
+			continue
+
+		var story_check_box := child as CheckBox
+		if story_check_box.disabled or not story_check_box.button_pressed:
+			continue
+
+		var story_id := str(story_check_box.get_meta(&"story_id", "")).strip_edges()
+		if story_id != "":
+			selected_story_ids.append(story_id)
+
+	return selected_story_ids
 
 func _refresh_test_status() -> void:
 	if test_status_label == null:
@@ -333,145 +373,76 @@ func _on_set_day_button_pressed() -> void:
 
 
 # =========================================================
-# 扩展测试功能：将前置剧情标记为已播放
+# 扩展测试功能：批量标记用户明确勾选的剧情
 # =========================================================
 
-func _on_mark_story_played_button_pressed() -> void:
-	if story_option_button == null or story_option_button.disabled:
-		_show_test_result("标记剧情失败：没有可选剧情。")
-		return
-
-	var selected_index := story_option_button.selected
-	if selected_index < 0 or selected_index >= story_option_button.item_count:
-		_show_test_result("标记剧情失败：请先选择剧情。")
-		return
-
-	var story_id := str(
-		story_option_button.get_item_metadata(selected_index)
-	).strip_edges()
-	if story_id == "":
-		_show_test_result("标记剧情失败：选中的剧情没有 story_id。")
-		return
-
+func _on_mark_selected_stories_played_button_pressed() -> void:
 	if StoryManager == null:
 		_show_test_result("标记剧情失败：StoryManager 不可用。")
 		return
 
-	var marked := false
-	if StoryManager.has_method("mark_story_played_by_id"):
-		StoryManager.call("mark_story_played_by_id", story_id)
-		marked = true
-	elif _object_has_property(StoryManager, &"played_story_ids"):
-		var played_value = StoryManager.get(&"played_story_ids")
-		if typeof(played_value) == TYPE_DICTIONARY:
-			var played_ids: Dictionary = played_value
-			played_ids[story_id] = true
-			StoryManager.set(&"played_story_ids", played_ids)
-			marked = true
-
-	if not marked:
-		_show_test_result("标记剧情失败：StoryManager 缺少已播放记录接口。")
-		return
-
-	_notify_host_data_changed()
-	_reload_story_options()
-	_refresh_test_status()
-	_show_test_result("前置剧情已标记为播放完成：%s。" % story_id)
-
-
-# =========================================================
-# 扩展测试功能：解锁到当前剧情
-# 选择目标剧情后，将列表中它之前的剧情全部标记为已播放，
-# 但保留目标剧情本身为未播放，便于立即测试目标剧情。
-# =========================================================
-
-func _on_unlock_to_current_story_button_pressed() -> void:
-	if story_option_button == null or story_option_button.disabled:
-		_show_test_result("解锁剧情失败：没有可选剧情。")
-		return
-
-	if StoryManager == null:
-		_show_test_result("解锁剧情失败：StoryManager 不可用。")
-		return
-
-	var selected_index := story_option_button.selected
-	if selected_index < 0 or selected_index >= story_option_button.item_count:
-		_show_test_result("解锁剧情失败：请先选择目标剧情。")
-		return
-
-	var target_story_id := str(
-		story_option_button.get_item_metadata(selected_index)
-	).strip_edges()
-	if target_story_id == "":
-		_show_test_result("解锁剧情失败：选中的剧情没有 story_id。")
+	var selected_story_ids := _get_selected_story_ids_for_test()
+	if selected_story_ids.is_empty():
+		_show_test_result("标记剧情失败：请先勾选需要解锁的剧情。")
 		return
 
 	var marked_count := 0
-	for item_index in range(selected_index):
-		var story_id := str(
-			story_option_button.get_item_metadata(item_index)
-		).strip_edges()
-		if story_id == "" or _is_story_played_for_test(story_id):
+	var failed_story_ids: Array[String] = []
+
+	for story_id in selected_story_ids:
+		if _is_story_played_for_test(story_id):
 			continue
 
 		if _mark_story_played_for_test(story_id):
 			marked_count += 1
+		else:
+			failed_story_ids.append(story_id)
 
 	_notify_host_data_changed()
-	_reload_story_options()
+	_reload_story_checklist()
 	_refresh_test_status()
 
-	if marked_count <= 0:
-		_show_test_result("目标剧情之前没有需要补标记的剧情：%s。" % target_story_id)
-	else:
+	if not failed_story_ids.is_empty():
 		_show_test_result(
-			"已标记目标剧情之前的 %d 条剧情；目标剧情仍保持未播放：%s。" % [
+			"已标记 %d 条剧情；以下剧情标记失败：%s。" % [
 				marked_count,
-				target_story_id
+				", ".join(PackedStringArray(failed_story_ids))
 			]
 		)
-
-
-# =========================================================
-# 扩展测试功能：批量将全部剧情标记为已播放
-# =========================================================
-
-func _on_mark_all_stories_played_button_pressed() -> void:
-	if StoryManager == null:
-		_show_test_result("批量标记剧情失败：StoryManager 不可用。")
-		return
-
-	if not StoryManager.has_method("get_all_stories"):
-		_show_test_result("批量标记剧情失败：无法获取剧情列表。")
-		return
-
-	var all_stories = StoryManager.call("get_all_stories")
-	if typeof(all_stories) != TYPE_ARRAY:
-		_show_test_result("批量标记剧情失败：剧情列表无效。")
-		return
-
-	var marked_count := 0
-	for story in all_stories:
-		if story == null:
-			continue
-
-		var story_id := str(
-			_get_object_property(story, &"story_id", "")
-		).strip_edges()
-		if story_id == "" or _is_story_played_for_test(story_id):
-			continue
-
-		if _mark_story_played_for_test(story_id):
-			marked_count += 1
-
-	_notify_host_data_changed()
-	_reload_story_options()
-	_refresh_test_status()
-
-	if marked_count <= 0:
-		_show_test_result("所有剧情都已经标记为播放完成。")
+	elif marked_count <= 0:
+		_show_test_result("选中的剧情已经全部处于已播放状态。")
 	else:
-		_show_test_result("已批量标记 %d 条剧情为播放完成。" % marked_count)
+		_show_test_result("已按选择标记 %d 条剧情为播放完成。" % marked_count)
+
+
+func _on_select_all_unplayed_stories_button_pressed() -> void:
+	if story_check_list == null:
+		return
+
+	var selected_count := 0
+	for child in story_check_list.get_children():
+		if not (child is CheckBox):
+			continue
+
+		var story_check_box := child as CheckBox
+		if story_check_box.disabled:
+			continue
+
+		story_check_box.button_pressed = true
+		selected_count += 1
+
+	_show_test_result("已选择全部 %d 条未播放剧情；点击“标记选中”后才会真正修改状态。" % selected_count)
+
+
+func _on_clear_story_selection_button_pressed() -> void:
+	if story_check_list == null:
+		return
+
+	for child in story_check_list.get_children():
+		if child is CheckBox:
+			(child as CheckBox).button_pressed = false
+
+	_show_test_result("已清空剧情选择，剧情播放状态未改变。")
 
 
 func _is_story_played_for_test(story_id: String) -> bool:

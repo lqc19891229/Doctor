@@ -102,49 +102,38 @@ text = "修改日期"
 [node name="StoryLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=917134802]
 custom_minimum_size = Vector2(135, 0)
 layout_mode = 2
-text = "前置剧情"
+text = "剧情多选"
+vertical_alignment = 1
 
-[node name="StoryOptionButton" type="OptionButton" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=817132345]
-custom_minimum_size = Vector2(380, 0)
+[node name="StoryScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
+custom_minimum_size = Vector2(380, 160)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarkStoryPlayedButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=206462594]
-custom_minimum_size = Vector2(170, 0)
-layout_mode = 2
-text = "标记当前"
-
-[node name="StoryUnlockToCurrentLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
-custom_minimum_size = Vector2(135, 0)
-layout_mode = 2
-text = "批量前置"
-
-[node name="StoryUnlockToCurrentHint" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
+[node name="StoryCheckList" type="VBoxContainer" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/StoryScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "标记所选目标之前的剧情，保留目标未播放"
-autowrap_mode = 3
+theme_override_constants/separation = 2
 
-[node name="UnlockToCurrentStoryButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
-custom_minimum_size = Vector2(170, 0)
+[node name="StoryActionColumn" type="VBoxContainer" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
+custom_minimum_size = Vector2(170, 160)
 layout_mode = 2
-text = "解锁到当前"
+theme_override_constants/separation = 6
 
-[node name="StoryBatchLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
-custom_minimum_size = Vector2(135, 0)
+[node name="MarkSelectedStoriesPlayedButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/StoryActionColumn"]
+custom_minimum_size = Vector2(170, 42)
 layout_mode = 2
-text = "全部剧情"
+text = "标记选中"
 
-[node name="StoryBatchHint" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
+[node name="SelectAllUnplayedStoriesButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/StoryActionColumn"]
+custom_minimum_size = Vector2(170, 42)
 layout_mode = 2
-size_flags_horizontal = 3
-text = "将所有未播放剧情直接标记为已播放"
-autowrap_mode = 3
+text = "全选未播放"
 
-[node name="MarkAllStoriesPlayedButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid"]
-custom_minimum_size = Vector2(170, 0)
+[node name="ClearStorySelectionButton" type="Button" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid/StoryActionColumn"]
+custom_minimum_size = Vector2(170, 42)
 layout_mode = 2
-text = "全部标记"
+text = "清空选择"
 
 [node name="ReputationLabel" type="Label" parent="Panel/VBoxContainer/ExtendedTestPanel/ExtendedTestGrid" unique_id=789430128]
 custom_minimum_size = Vector2(135, 0)
