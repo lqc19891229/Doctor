@@ -97,7 +97,7 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
 text = "退出游戏"
 
-[node name="DifficultyPopup" type="Panel" parent="MainMenuLayer"]
+[node name="DifficultyPopup" type="Panel" parent="MainMenuLayer" unique_id=1510056731]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -107,7 +107,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuLayer/DifficultyPopup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuLayer/DifficultyPopup" unique_id=1648362810]
 custom_minimum_size = Vector2(900, 650)
 layout_mode = 1
 anchors_preset = 8
@@ -123,38 +123,41 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 18
 
-[node name="TitleLabel" type="Label" parent="MainMenuLayer/DifficultyPopup/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="MainMenuLayer/DifficultyPopup/VBoxContainer" unique_id=1887764914]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
 text = "选择难度"
 horizontal_alignment = 1
 
-[node name="InfoLabel" type="Label" parent="MainMenuLayer/DifficultyPopup/VBoxContainer"]
+[node name="InfoLabel" type="Label" parent="MainMenuLayer/DifficultyPopup/VBoxContainer" unique_id=531191614]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "难度影响李言闻每个节气提供的固定收入。\n妙手回春次数仍由玩家实际诊疗结果决定。"
+text = "难度影响固定收入"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="EasyButton" type="Button" parent="MainMenuLayer/DifficultyPopup/VBoxContainer"]
+[node name="EasyButton" type="Button" parent="MainMenuLayer/DifficultyPopup/VBoxContainer" unique_id=360972516]
 custom_minimum_size = Vector2(0, 105)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "简单\n李言闻每节气收入 1000文"
+text = "简单
+全力依父"
 
-[node name="NormalButton" type="Button" parent="MainMenuLayer/DifficultyPopup/VBoxContainer"]
+[node name="NormalButton" type="Button" parent="MainMenuLayer/DifficultyPopup/VBoxContainer" unique_id=230779252]
 custom_minimum_size = Vector2(0, 105)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "普通\n李言闻每节气收入 500文"
+text = "普通
+全力以赴"
 
-[node name="HardButton" type="Button" parent="MainMenuLayer/DifficultyPopup/VBoxContainer"]
+[node name="HardButton" type="Button" parent="MainMenuLayer/DifficultyPopup/VBoxContainer" unique_id=2082318455]
 custom_minimum_size = Vector2(0, 105)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "困难\n李言闻无固定收入"
+text = "困难
+爹，您就安心躺平吧"
 
-[node name="CloseButton" type="Button" parent="MainMenuLayer/DifficultyPopup/VBoxContainer"]
+[node name="CloseButton" type="Button" parent="MainMenuLayer/DifficultyPopup/VBoxContainer" unique_id=1700077933]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25

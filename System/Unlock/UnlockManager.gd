@@ -462,6 +462,10 @@ var reputation_points: int = 0
 const WEN_PER_LIANG: int = 1000
 const STARTING_MONEY_WEN: int = 20000
 
+# 第 1 天（立春）为剧情日，不进行日常银钱收支。
+# 从第 2 天（雨水）开始启用诊疗收入与节气日结。
+const FINANCE_START_DAY: int = 2
+
 # -------------------- 收入相关常量 --------------------
 const CONSULTATION_FEE_INITIAL_WEN: int = 20
 const CONSULTATION_FEE_BEGINNER_WEN: int = 50
@@ -607,6 +611,10 @@ func get_li_yan_wen_income_wen() -> int:
 			return LI_YAN_WEN_INCOME_NORMAL_WEN
 
 
+func is_finance_active(day: int) -> bool:
+	return maxi(day, 1) >= FINANCE_START_DAY
+
+
 func get_money_wen() -> int:
 	return money_wen
 
@@ -708,6 +716,18 @@ func record_random_npc_treatment_finance(
 ) -> Dictionary:
 	_ensure_daily_finance_ledger(day)
 
+	# 第 1 天为剧情日，不启用日常诊疗收支。
+	if not is_finance_active(day):
+		return {
+			"consultation_fee_wen": 0,
+			"medicine_income_wen": 0,
+			"medicine_sales_wen": 0,
+			"medicine_purchase_cost_wen": 0,
+			"medicine_profit_wen": 0,
+			"total_income_wen": 0,
+			"money_wen": money_wen
+		}
+
 	# 只有治疗成功才收取诊费；治疗失败诊费为 0。
 	var consultation_fee := (
 		get_random_npc_consultation_fee_wen()
@@ -781,6 +801,10 @@ func record_random_npc_treatment_finance(
 func record_patient_thank_gift_income(day: int) -> int:
 	_ensure_daily_finance_ledger(day)
 
+	# 第 1 天为剧情日，不发放日常病家谢礼。
+	if not is_finance_active(day):
+		return 0
+
 	if economy_rng.randf() >= PATIENT_THANK_GIFT_PROBABILITY:
 		return 0
 
@@ -801,6 +825,16 @@ func record_patient_thank_gift_income(day: int) -> int:
 # 旧接口只提供“利润”，无法拆出售价和成本，因此仍按旧账本口径处理。
 func record_random_npc_treatment_income(day: int, prescription_profit_wen: int) -> Dictionary:
 	_ensure_daily_finance_ledger(day)
+
+	# 第 1 天为剧情日；旧接口同样不产生日常诊疗收入。
+	if not is_finance_active(day):
+		return {
+			"consultation_fee_wen": 0,
+			"medicine_profit_wen": 0,
+			"total_income_wen": 0,
+			"money_wen": money_wen
+		}
+
 	finance_ledger_accounting_version = 1
 
 	var consultation_fee := get_random_npc_consultation_fee_wen()
@@ -915,6 +949,47 @@ func settle_day_finances(day: int) -> Dictionary:
 	_ensure_daily_finance_ledger(safe_day)
 
 	var solar_term_index := _get_solar_term_index(safe_day)
+
+	# 第 1 天（立春）为剧情日：
+	# 不生成日常收入，不抽取随机支出，也不改变当前银钱。
+	# 剧情本身通过 StoryData / change_money_wen() 发放的奖励不受这里影响。
+	if not is_finance_active(safe_day):
+		last_finance_settled_day = safe_day
+		last_finance_report = {
+			"day": safe_day,
+			"solar_term_index": solar_term_index,
+			"accounting_version": finance_ledger_accounting_version,
+			"finance_skipped": true,
+			"random_npc_count": 0,
+			"consultation_income_wen": 0,
+			"patient_thank_gift_income_wen": 0,
+			"medicine_income_wen": 0,
+			"medicine_sales_wen": 0,
+			"medicine_purchase_cost_wen": 0,
+			"medicine_profit_wen": 0,
+			"failed_medicine_cost_wen": 0,
+			"total_income_wen": 0,
+			"chen_pi_wage_wen": 0,
+			"ban_xia_wage_wen": 0,
+			"staff_wage_wen": 0,
+			"li_jian_zhong_salary_wen": 0,
+			"li_yan_wen_income_wen": 0,
+			"land_rent_wen": 0,
+			"food_cost_wen": 0,
+			"human_gift_cost_wen": 0,
+			"medical_book_cost_wen": 0,
+			"coal_cost_wen": 0,
+			"clothing_cost_wen": 0,
+			"house_repair_cost_wen": 0,
+			"ancestor_worship_cost_wen": 0,
+			"moldy_herb_cost_wen": 0,
+			"summer_tax_wen": 0,
+			"autumn_tax_wen": 0,
+			"total_expense_wen": 0,
+			"net_change_wen": 0,
+			"money_after_wen": money_wen
+		}
+		return last_finance_report.duplicate(true)
 
 	# -------------------- 日结收入项目 --------------------
 	# 李建中俸禄：
@@ -1035,6 +1110,7 @@ func settle_day_finances(day: int) -> Dictionary:
 		"day": safe_day,
 		"solar_term_index": solar_term_index,
 		"accounting_version": finance_ledger_accounting_version,
+		"finance_skipped": false,
 		"random_npc_count": daily_random_npc_count,
 		"consultation_income_wen": daily_consultation_income_wen,
 		"patient_thank_gift_income_wen": daily_patient_thank_gift_income_wen,
@@ -1078,6 +1154,9 @@ func get_last_finance_report_for_day(day: int) -> Dictionary:
 func build_finance_report_text(day: int) -> String:
 	var report := get_last_finance_report_for_day(day)
 	if report.is_empty():
+		return ""
+
+	if bool(report.get("finance_skipped", false)):
 		return ""
 
 	var accounting_version := int(report.get("accounting_version", 1))
