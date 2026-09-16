@@ -410,18 +410,38 @@ var reputation_points: int = 0
 # 七、银钱系统（第一版）
 # =========================================================
 # 内部统一使用“文”记账，TopBar 再换算成“两 + 文”显示。
-# 第一版暂定：
+#
+# 记账规则：
 # - 1 两 = 1000 文
-# - random NPC 诊费根据当前名望分档：
+# - 诊费、药材销售和病家谢礼在白天实时入账。
+# - 俸禄、田租和全部支出在白天结束时统一结算。
+# - 无论治疗成功或失败，处方药材进货成本都会计入支出。
+#
+# 收入项目：
+# - random NPC 治疗成功时收取诊费，金额根据当前名望分档：
 #   初窥门径：0~100 名望 = 20 文 / 人
 #   略有小成：101~300 名望 = 50 文 / 人
 #   融会贯通：301~600 名望 = 200 文 / 人
 #   炉火纯青：601~2000 名望 = 500 文 / 人
 #   出神入化：2001+ 名望 = 1000 文 / 人
-# - 陈皮、半夏工钱合计 = 1000 文 / 2 个节气
-# - 食费 = 1000 文 / 每个节气
-# - 人情随礼：每个节气 30% 概率发生，金额随机为
-#   188 / 288 / 588 / 688 / 888 / 1888 / 2888 文
+# - 药材销售：random NPC 治疗成功时，按处方实际药材售价计算。
+# - 病家谢礼：获得“妙手回春”评价时有 20% 概率获得，金额随机为
+#   188 / 288 / 388 文。
+# - 李建中俸禄：完成 000_01《完书》剧情后，每两个节气收入 10000 文。
+# - 田租：
+#   大暑 = 5000 文
+#   霜降 = 15000 文
+#
+# 支出项目：
+# - 药材进货成本：按处方实际药材进价计算，治疗成功或失败都会产生。
+# - 陈皮、半夏工钱：每两个节气各 500 文，合计 1000 文。
+# - 食费：每个节气 1000 文。
+# - 人情随礼：每个节气有 30% 概率发生，金额随机为
+#   188 / 288 / 588 / 688 / 888 / 1888 文。
+# - 购买医书：每个节气必定发生，金额随机为
+#   100 / 200 / 300 / 400 / 500 / 600 / 700 / 800 / 900 / 1000 文。
+# - 夏税：大暑 = 500 文
+# - 秋税：霜降 = 1500 文
 # - 煤炭：
 #   立春 / 立夏 / 立秋 = 300 文
 #   立冬 = 1200 文
@@ -441,21 +461,22 @@ var reputation_points: int = 0
 # 如果后续要调整平衡，只需改下面常量即可。
 const WEN_PER_LIANG: int = 1000
 const STARTING_MONEY_WEN: int = 50000
+
+# -------------------- 收入相关常量 --------------------
 const CONSULTATION_FEE_INITIAL_WEN: int = 20
 const CONSULTATION_FEE_BEGINNER_WEN: int = 50
 const CONSULTATION_FEE_PROFICIENT_WEN: int = 200
 const CONSULTATION_FEE_MASTER_WEN: int = 500
 const CONSULTATION_FEE_TRANSCENDENT_WEN: int = 1000
 
-const CHEN_PI_WAGE_PER_SOLAR_TERM_WEN: int = 500
-const BAN_XIA_WAGE_PER_SOLAR_TERM_WEN: int = 500
-const WAGE_INTERVAL_SOLAR_TERMS: int = 2
-
 # 李建中俸禄：
-# 《本草纲目》完书剧情（000_01）后，每两个节气领取20两。
-# 1两 = 1000文，因此20两 = 20000文。
-const LI_JIAN_ZHONG_SALARY_WEN: int = 20000
+# 《本草纲目》完书剧情（000_01）后，每两个节气领取10两。
+# 1两 = 1000文，因此10两 = 10000文。
+const LI_JIAN_ZHONG_SALARY_WEN: int = 10000
 const LI_JIAN_ZHONG_SALARY_INTERVAL_SOLAR_TERMS: int = 2
+
+const LAND_RENT_DA_SHU_WEN: int = 5000
+const LAND_RENT_SHUANG_JIANG_WEN: int = 15000
 
 # 病家谢礼：
 # random NPC 获得“妙手回春”评价时，由 Clinic 调用发放。
@@ -463,11 +484,20 @@ const LI_JIAN_ZHONG_SALARY_INTERVAL_SOLAR_TERMS: int = 2
 const PATIENT_THANK_GIFT_PROBABILITY: float = 0.20
 const PATIENT_THANK_GIFT_OPTIONS_WEN = [188, 288, 388]
 
+# -------------------- 支出相关常量 --------------------
+const CHEN_PI_WAGE_PER_SOLAR_TERM_WEN: int = 500
+const BAN_XIA_WAGE_PER_SOLAR_TERM_WEN: int = 500
+const WAGE_INTERVAL_SOLAR_TERMS: int = 2
+
+const SUMMER_TAX_DA_SHU_WEN: int = 500
+const AUTUMN_TAX_SHUANG_JIANG_WEN: int = 1500
+
 const FOOD_COST_WEN: int = 1000
 const FOOD_COST_INTERVAL_SOLAR_TERMS: int = 1
 
 const RANDOM_EXPENSE_PROBABILITY: float = 0.30
-const HUMAN_GIFT_COST_OPTIONS_WEN = [188, 288, 588, 688, 888, 1888, 2888]
+const HUMAN_GIFT_COST_OPTIONS_WEN = [188, 288, 588, 688, 888, 1888]
+const MEDICAL_BOOK_COST_OPTIONS_WEN = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 const HOUSE_REPAIR_COST_OPTIONS_WEN = [1000, 2000, 3000]
 const ANCESTOR_WORSHIP_COST_OPTIONS_WEN = [1000, 2000, 3000]
 const MOLDY_HERB_COST_OPTIONS_WEN = [1000, 2000, 3000, 4000, 5000]
@@ -486,9 +516,11 @@ const SOLAR_TERM_XIAO_MAN: int = 8
 const SOLAR_TERM_MANG_ZHONG: int = 9
 const SOLAR_TERM_XIA_ZHI: int = 10
 const SOLAR_TERM_XIAO_SHU: int = 11
+const SOLAR_TERM_DA_SHU: int = 12
 const SOLAR_TERM_LI_QIU: int = 13
 const SOLAR_TERM_CHU_SHU: int = 14
 const SOLAR_TERM_QIU_FEN: int = 16
+const SOLAR_TERM_SHUANG_JIANG: int = 18
 const SOLAR_TERM_LI_DONG: int = 19
 const SOLAR_TERM_DA_HAN: int = 24
 
@@ -763,6 +795,16 @@ func _get_clothing_cost_for_solar_term(solar_term_index: int) -> int:
 			return 0
 
 
+func _get_land_rent_for_solar_term(solar_term_index: int) -> int:
+	match solar_term_index:
+		SOLAR_TERM_DA_SHU:
+			return LAND_RENT_DA_SHU_WEN
+		SOLAR_TERM_SHUANG_JIANG:
+			return LAND_RENT_SHUANG_JIANG_WEN
+		_:
+			return 0
+
+
 func _get_house_repair_cost_for_solar_term(solar_term_index: int) -> int:
 	match solar_term_index:
 		SOLAR_TERM_CHUN_FEN, SOLAR_TERM_QIU_FEN, SOLAR_TERM_DA_HAN:
@@ -794,7 +836,7 @@ func _get_moldy_herb_cost_for_solar_term(solar_term_index: int) -> int:
 
 
 # 白天结束、进入 Night 之前调用。
-# 收入已在白天接诊时实时入账；这里负责生成并扣除本节气全部支出。
+# 白天收入已实时入账；这里补入日结收入，并生成、扣除本节气全部支出。
 func settle_day_finances(day: int) -> Dictionary:
 	var safe_day := maxi(day, 1)
 
@@ -807,6 +849,18 @@ func settle_day_finances(day: int) -> Dictionary:
 
 	var solar_term_index := _get_solar_term_index(safe_day)
 
+	# -------------------- 日结收入项目 --------------------
+	# 李建中俸禄：
+	# 完成 000_01《完书》剧情后，每两个节气收入10两。
+	var li_jian_zhong_salary := 0
+	if StoryManager.has_played_story("000_01"):
+		if safe_day % LI_JIAN_ZHONG_SALARY_INTERVAL_SOLAR_TERMS == 0:
+			li_jian_zhong_salary = LI_JIAN_ZHONG_SALARY_WEN
+
+	# 田租：大暑收入 5000 文，霜降收入 15000 文。
+	var land_rent := _get_land_rent_for_solar_term(solar_term_index)
+
+	# -------------------- 日结支出项目 --------------------
 	# 陈皮、半夏工钱：每两个节气支付一次，合计 1000 文。
 	# 继续保留两个旧字段，避免其它现有代码或旧存档读取时报错。
 	var chen_pi_wage := 0
@@ -814,13 +868,6 @@ func settle_day_finances(day: int) -> Dictionary:
 	if safe_day % WAGE_INTERVAL_SOLAR_TERMS == 0:
 		chen_pi_wage = CHEN_PI_WAGE_PER_SOLAR_TERM_WEN
 		ban_xia_wage = BAN_XIA_WAGE_PER_SOLAR_TERM_WEN
-
-	# 李建中俸禄：
-	# 完成 000_01《完书》剧情后，每两个节气收入20两。
-	var li_jian_zhong_salary := 0
-	if StoryManager.has_played_story("000_01"):
-		if safe_day % LI_JIAN_ZHONG_SALARY_INTERVAL_SOLAR_TERMS == 0:
-			li_jian_zhong_salary = LI_JIAN_ZHONG_SALARY_WEN
 
 	# 食费：每个节气固定 1000 文。
 	var food_cost := 0
@@ -833,12 +880,23 @@ func settle_day_finances(day: int) -> Dictionary:
 		HUMAN_GIFT_COST_OPTIONS_WEN
 	)
 
+	# 每个节气必定购买一次医书，金额从配置档位中随机抽取。
+	var medical_book_cost := _pick_random_expense(MEDICAL_BOOK_COST_OPTIONS_WEN)
+
 	# 指定节气支出。
 	var coal_cost := _get_coal_cost_for_solar_term(solar_term_index)
 	var clothing_cost := _get_clothing_cost_for_solar_term(solar_term_index)
 	var house_repair_cost := _get_house_repair_cost_for_solar_term(solar_term_index)
 	var ancestor_worship_cost := _get_ancestor_worship_cost_for_solar_term(solar_term_index)
 	var moldy_herb_cost := _get_moldy_herb_cost_for_solar_term(solar_term_index)
+
+	# 夏税、秋税分别在大暑、霜降缴纳。
+	var summer_tax := SUMMER_TAX_DA_SHU_WEN if solar_term_index == SOLAR_TERM_DA_SHU else 0
+	var autumn_tax := (
+		AUTUMN_TAX_SHUANG_JIANG_WEN
+		if solar_term_index == SOLAR_TERM_SHUANG_JIANG
+		else 0
+	)
 
 	var is_gross_accounting := (
 		finance_ledger_accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS
@@ -860,6 +918,7 @@ func settle_day_finances(day: int) -> Dictionary:
 		)
 		+ daily_patient_thank_gift_income_wen
 		+ li_jian_zhong_salary
+		+ land_rent
 	)
 
 	var total_expense := (
@@ -867,18 +926,21 @@ func settle_day_finances(day: int) -> Dictionary:
 		+ ban_xia_wage
 		+ food_cost
 		+ human_gift_cost
+		+ medical_book_cost
 		+ coal_cost
 		+ clothing_cost
 		+ house_repair_cost
 		+ ancestor_worship_cost
 		+ moldy_herb_cost
+		+ summer_tax
+		+ autumn_tax
 		+ medicine_purchase_cost
 	)
 	var net_change := total_income - total_expense
 
 	# 诊费、药材销售和病家谢礼都已在白天实时入账；
-	# 李建中俸禄是在日结时才实际到账，因此这里只补入俸禄并扣除当天支出。
-	money_wen += li_jian_zhong_salary
+	# 李建中俸禄和田租在日结时才实际到账，因此在这里补入并扣除当天支出。
+	money_wen += li_jian_zhong_salary + land_rent
 	money_wen -= total_expense
 	money_wen_changed.emit(money_wen)
 
@@ -900,13 +962,17 @@ func settle_day_finances(day: int) -> Dictionary:
 		"ban_xia_wage_wen": ban_xia_wage,
 		"staff_wage_wen": chen_pi_wage + ban_xia_wage,
 		"li_jian_zhong_salary_wen": li_jian_zhong_salary,
+		"land_rent_wen": land_rent,
 		"food_cost_wen": food_cost,
 		"human_gift_cost_wen": human_gift_cost,
+		"medical_book_cost_wen": medical_book_cost,
 		"coal_cost_wen": coal_cost,
 		"clothing_cost_wen": clothing_cost,
 		"house_repair_cost_wen": house_repair_cost,
 		"ancestor_worship_cost_wen": ancestor_worship_cost,
 		"moldy_herb_cost_wen": moldy_herb_cost,
+		"summer_tax_wen": summer_tax,
+		"autumn_tax_wen": autumn_tax,
 		"total_expense_wen": total_expense,
 		"net_change_wen": net_change,
 		"money_after_wen": money_wen
@@ -941,11 +1007,14 @@ func build_finance_report_text(day: int) -> String:
 	)
 	var food_cost := int(report.get("food_cost_wen", 0))
 	var human_gift_cost := int(report.get("human_gift_cost_wen", 0))
+	var medical_book_cost := int(report.get("medical_book_cost_wen", 0))
 	var coal_cost := int(report.get("coal_cost_wen", 0))
 	var clothing_cost := int(report.get("clothing_cost_wen", 0))
 	var house_repair_cost := int(report.get("house_repair_cost_wen", 0))
 	var ancestor_worship_cost := int(report.get("ancestor_worship_cost_wen", 0))
 	var moldy_herb_cost := int(report.get("moldy_herb_cost_wen", 0))
+	var summer_tax := int(report.get("summer_tax_wen", 0))
+	var autumn_tax := int(report.get("autumn_tax_wen", 0))
 	var total_expense := int(report.get("total_expense_wen", 0))
 	var net_change := int(report.get("net_change_wen", 0))
 
@@ -973,6 +1042,10 @@ func build_finance_report_text(day: int) -> String:
 	if li_jian_zhong_salary > 0:
 		lines.append("李建中俸禄：%s" % format_money_change(li_jian_zhong_salary))
 
+	var land_rent := int(report.get("land_rent_wen", 0))
+	if land_rent > 0:
+		lines.append("田租：%s" % format_money_change(land_rent))
+
 	lines.append("收入合计：%s" % format_money_change(total_income))
 	lines.append("")
 	lines.append("支出")
@@ -992,6 +1065,8 @@ func build_finance_report_text(day: int) -> String:
 		lines.append("食物：%s" % format_money_change(-food_cost))
 	if human_gift_cost > 0:
 		lines.append("人情随礼：%s" % format_money_change(-human_gift_cost))
+	if medical_book_cost > 0:
+		lines.append("购买医书：%s" % format_money_change(-medical_book_cost))
 	if coal_cost > 0:
 		lines.append("煤炭：%s" % format_money_change(-coal_cost))
 	if clothing_cost > 0:
@@ -1002,6 +1077,10 @@ func build_finance_report_text(day: int) -> String:
 		lines.append("扫墓祭祖：%s" % format_money_change(-ancestor_worship_cost))
 	if moldy_herb_cost > 0:
 		lines.append("药材发霉：%s" % format_money_change(-moldy_herb_cost))
+	if summer_tax > 0:
+		lines.append("夏税：%s" % format_money_change(-summer_tax))
+	if autumn_tax > 0:
+		lines.append("秋税：%s" % format_money_change(-autumn_tax))
 
 	lines.append("支出合计：%s" % format_money_change(-total_expense))
 	lines.append("")
