@@ -55,7 +55,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "世子乃人中龙凤，可草民眼里看到的只有一位需要医治的病人，王爷只需付200文诊费即可。"
+text = "世子乃人中龙凤，可草民眼里看到的只有一位需要医治的病人，王爷只需付一两白银诊费即可。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
@@ -78,7 +78,7 @@ script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
-text = "名望+1000"
+text = "名望+1000，收入一两白银"
 
 [resource]
 script = ExtResource("2_storydata")
@@ -95,7 +95,7 @@ condition_story_id = "005_01"
 condition_treatment_result = "cured"
 after_play = "night"
 clinic_npc_id = ""
-money_change = 0
+money_change = 1000
 reputation_points_change = 1000
 experience_points_change = 0
 play_once = true

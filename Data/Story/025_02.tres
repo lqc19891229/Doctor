@@ -60,7 +60,7 @@ script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
-text = "金钱+2两"
+text = "收入二两白银"
 [sub_resource type="Resource" id="StoryLine_008"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"

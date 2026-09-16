@@ -5,9 +5,10 @@
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_dong_bi/li_dong_bi.png" id="portrait_1"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/xie_fei_yan/xie_fei_yan_sick.png" id="portrait_2"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/jin_yi_ma/jin_yi_ma.png" id="portrait_3"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wang_bai_tang/wang_bai_tang.png" id="portrait_4"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/ban_xia/ban_xia.png" id="portrait_5"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wu_zhi_lan/wu_zhi_lan.png" id="portrait_6"]
+[ext_resource type="Texture2D" path="res://Assets/Background/black.png" id="background_4"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wang_bai_tang/wang_bai_tang.png" id="portrait_5"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/ban_xia/ban_xia.png" id="portrait_6"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wu_zhi_lan/wu_zhi_lan.png" id="portrait_7"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
@@ -45,7 +46,7 @@ portrait = ExtResource("portrait_3")
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
-inactive_portrait_mode = "hide"
+inactive_portrait_mode = "dim"
 speaker = "金姨妈"
 text = "那就多谢大夫了，走吧女儿。"
 portrait = ExtResource("portrait_3")
@@ -53,19 +54,26 @@ portrait = ExtResource("portrait_3")
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
-inactive_portrait_mode = "hide"
+inactive_portrait_mode = "dim"
 speaker = "谢飞燕"
 text = "…"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_007"]
 script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = "收入一两白银"
+background = ExtResource("background_4")
+[sub_resource type="Resource" id="StoryLine_008"]
+script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "王百堂"
-text = "先生，刚才那姑娘是得了什么病啊？"
-portrait = ExtResource("portrait_4")
-[sub_resource type="Resource" id="StoryLine_008"]
+text = "大夫，刚才那姑娘是得了什么病啊？"
+portrait = ExtResource("portrait_5")
+[sub_resource type="Resource" id="StoryLine_009"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
@@ -73,15 +81,15 @@ inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "您是？"
 portrait = ExtResource("portrait_1")
-[sub_resource type="Resource" id="StoryLine_009"]
+[sub_resource type="Resource" id="StoryLine_010"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "王百堂"
 text = "小生是姑娘的一位相识，担心姑娘身体，来问问大夫。"
-portrait = ExtResource("portrait_4")
-[sub_resource type="Resource" id="StoryLine_010"]
+portrait = ExtResource("portrait_5")
+[sub_resource type="Resource" id="StoryLine_011"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
@@ -89,31 +97,31 @@ inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "哦，那姑娘所患的是肺气虚，并无大碍，只是看起来似乎有心事。您可知其中原委？"
 portrait = ExtResource("portrait_1")
-[sub_resource type="Resource" id="StoryLine_011"]
+[sub_resource type="Resource" id="StoryLine_012"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "半夏"
 text = "哎哟？这里面有事儿，快说来听听。"
-portrait = ExtResource("portrait_5")
-[sub_resource type="Resource" id="StoryLine_012"]
-script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
-inactive_portrait_mode = "dim"
-speaker = "王百堂"
-text = "实不相瞒，小生在柳月坊与飞燕相识，一见倾心，私底下定了终身。"
-portrait = ExtResource("portrait_4")
+portrait = ExtResource("portrait_6")
 [sub_resource type="Resource" id="StoryLine_013"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "王百堂"
-text = "原想着凑够五百两银子，给她赎身。可那老鸨坐地起价，张口就要一千两，这让我们上哪去凑这么多银子啊…"
-portrait = ExtResource("portrait_4")
+text = "实不相瞒，小生在柳月坊与飞燕相识，一见倾心，私底下定了终身。"
+portrait = ExtResource("portrait_5")
 [sub_resource type="Resource" id="StoryLine_014"]
+script = ExtResource("1_storyline")
+line_type = "dialogue"
+portrait_side = "left"
+inactive_portrait_mode = "dim"
+speaker = "王百堂"
+text = "原想着凑够五百两银子，给她赎身。可那老鸨坐地起价，张口就要一千两，这让我们上哪去凑这么多银子啊…"
+portrait = ExtResource("portrait_5")
+[sub_resource type="Resource" id="StoryLine_015"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
@@ -121,23 +129,23 @@ inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "想必姑娘是因为这事急坏了身子。"
 portrait = ExtResource("portrait_1")
-[sub_resource type="Resource" id="StoryLine_015"]
+[sub_resource type="Resource" id="StoryLine_016"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "半夏"
 text = "唉，又是一对儿苦命的鸳鸯。"
-portrait = ExtResource("portrait_5")
-[sub_resource type="Resource" id="StoryLine_016"]
+portrait = ExtResource("portrait_6")
+[sub_resource type="Resource" id="StoryLine_017"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "吴芷兰"
 text = "相公咱想办法帮帮他们吧。"
-portrait = ExtResource("portrait_6")
-[sub_resource type="Resource" id="StoryLine_017"]
+portrait = ExtResource("portrait_7")
+[sub_resource type="Resource" id="StoryLine_018"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
@@ -161,10 +169,10 @@ condition_story_id = "023_01"
 condition_treatment_result = "cured"
 after_play = "clinic"
 clinic_npc_id = ""
-money_change = 0
+money_change = 1000
 reputation_points_change = 0
 experience_points_change = 0
 play_once = true
 sort_index = 0
 background_mode = "current_scene"
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011"), SubResource("StoryLine_012"), SubResource("StoryLine_013"), SubResource("StoryLine_014"), SubResource("StoryLine_015"), SubResource("StoryLine_016"), SubResource("StoryLine_017")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011"), SubResource("StoryLine_012"), SubResource("StoryLine_013"), SubResource("StoryLine_014"), SubResource("StoryLine_015"), SubResource("StoryLine_016"), SubResource("StoryLine_017"), SubResource("StoryLine_018")])

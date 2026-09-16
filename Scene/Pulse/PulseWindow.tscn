@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cs8dpone7jush" path="res://Scene/Pulse/PulseWindow.gd" id="1_in46w"]
 [ext_resource type="Script" uid="uid://cqs7cn5g00f7v" path="res://Scene/Pulse/PulseDrawer.gd" id="2_drawer"]
+[ext_resource type="Texture2D" uid="uid://degvpccel4s0n" path="res://Assets/UI/right_hand.png" id="2_js3rb"]
+[ext_resource type="Texture2D" uid="uid://cql6kpejhpj56" path="res://Assets/UI/left_hand.png" id="4_twc2l"]
 
 [node name="PulseWindow" type="Window" unique_id=1028787152]
 oversampling_override = 1.0
@@ -17,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 2
+current_tab = 1
 tab_0/hidden = true
 tab_1/hidden = true
 tab_2/hidden = true
@@ -50,9 +52,18 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="右手脉象" type="Control" parent="LayerTabs" unique_id=416110597]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+
+[node name="RightHandBackground" type="TextureRect" parent="LayerTabs/右手脉象" unique_id=1993116739]
+self_modulate = Color(1, 1, 1, 0.10980392)
+custom_minimum_size = Vector2(640, 0)
+layout_mode = 0
+offset_left = 100.0
+offset_right = 740.0
+offset_bottom = 1000.0
+texture = ExtResource("2_js3rb")
+expand_mode = 1
 
 [node name="RightHandLayout" type="HBoxContainer" parent="LayerTabs/右手脉象" unique_id=1686573971]
 layout_mode = 0
@@ -104,8 +115,19 @@ size_flags_vertical = 3
 script = ExtResource("2_drawer")
 
 [node name="左手脉象" type="Control" parent="LayerTabs" unique_id=642620651]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="LeftHandBackground" type="TextureRect" parent="LayerTabs/左手脉象" unique_id=1601781860]
+self_modulate = Color(1, 1, 1, 0.10980392)
+custom_minimum_size = Vector2(640, 0)
+layout_mode = 0
+offset_left = 100.0
+offset_right = 740.0
+offset_bottom = 1000.0
+texture = ExtResource("4_twc2l")
+expand_mode = 1
 
 [node name="LeftHandLayout" type="HBoxContainer" parent="LayerTabs/左手脉象" unique_id=796273218]
 layout_mode = 0

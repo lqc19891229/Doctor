@@ -9,15 +9,14 @@ extends Control
 # 2. 管理脉象窗口及 Q/A/Z、W/S/X 多键把脉逻辑
 # 3. 持有当前处方，并接收 PrescriptionWindow 的提交请求
 # 4. 调用 FormulaJudge 完成处方判定，并组织判定结果展示数据
-# 5. 结算 random NPC 首次提交产生的诊费、药材销售、药材成本与固定名望/心得变化
+# 5. 结算 random NPC 首次提交产生的诊费、药材收入与固定名望/心得变化
 # 6. 管理治疗结果台词、JudgementResult 以及“最后一位病人”结束流程
 # 7. 接入 GameTimeManager、TopBar 与四季诊室背景
 # 8. 向 Main 发出“当天接诊结束”和“请求播放剧情”信号
 #
 # random NPC 当前财务规则：
-# - 妙手回春 / 治疗成功：按名望收诊费，并计入实际药材销售收入
-# - 治疗失败：诊费 = 0，药材销售 = 0
-# - 无论成功或失败，本张处方的药材进货成本都会计入今日支出
+# - 妙手回春 / 治疗成功：按名望收诊费，并计入药材收入（销售 - 成本）
+# - 治疗失败：诊费 = 0，药材收入 = 0 - 药材成本
 # =========================================================
 
 
@@ -210,11 +209,11 @@ var last_newly_unlocked_entry_titles: Array[String] = []
 var last_reputation_change: int = 0
 var last_experience_change: int = 0
 
-# 最近一次 random NPC 首次提交后产生的“治疗收入”（只统计收入，不扣药材成本）。
-# 口径：诊费 + 实际药材销售收入 + 病家谢仪礼（仅“妙手回春”有概率触发）。
-# 治疗失败时：诊费 = 0、药材销售 = 0、谢仪礼 = 0，因此治疗收入为 0；
-# 本张处方的药材进货成本仍会单独计入今日支出。
-var last_treatment_income_wen: int = 0
+# 最近一次 random NPC 首次提交产生的各项银钱变化。
+# JudgementResult 分项显示，不合并为“治疗收入”。
+var last_consultation_fee_wen: int = 0
+var last_medicine_income_wen: int = 0
+var last_patient_thank_gift_wen: int = 0
 
 # 最近一次提交是否允许显示“本次治疗奖励”。
 # 同一名病人只有第一次提交可以产生并显示奖励；重复提交只更新判定结果。
@@ -957,7 +956,9 @@ func refresh_clinic_view() -> void:
 	last_newly_unlocked_entry_titles.clear()
 	last_reputation_change = 0
 	last_experience_change = 0
-	last_treatment_income_wen = 0
+	last_consultation_fee_wen = 0
+	last_medicine_income_wen = 0
+	last_patient_thank_gift_wen = 0
 	last_submission_can_show_reward = false
 	waiting_judgement_after_treatment_dialogue = false
 
@@ -1277,12 +1278,11 @@ func submit_prescription() -> bool:
 
 	
 	# random NPC 财务只在同一名病人的第一次提交时入账：
-	# - 妙手回春 / 治疗成功：按当前名望收取诊费，药材售价总和计入销售收入；
-	# - 治疗失败：诊费为 0，药材销售收入也为 0；
-	# - 无论成功或失败：本张处方全部药材进货成本都计入今日支出；
+	# - 妙手回春 / 治疗成功：收取诊费，药材收入为销售金额减去成本；
+	# - 治疗失败：诊费为 0，药材收入为 0 减去本张处方成本；
 	# - 妙手回春：后面还可能额外获得“病家谢仪礼”。
 	#
-	# 收入在白天实时入账；药材进货成本等支出在正常白天结束时由 Unlock 统一日结。
+	# 诊费和药材收入都在白天实时入账。
 	# 重复提交仍会重新判定处方，但不会再次产生任何金钱变化。
 	if is_random_npc and not was_already_submitted:
 		var price_summary := _calculate_current_prescription_price_summary_wen()
@@ -1299,9 +1299,9 @@ func submit_prescription() -> bool:
 			)
 
 			var consultation_fee_wen := int(finance_result.get("consultation_fee_wen", 0))
-			var medicine_sales_wen := int(finance_result.get("medicine_sales_wen", 0))
-			var medicine_purchase_cost_wen := int(finance_result.get("medicine_purchase_cost_wen", 0))
-			var total_income_wen := int(finance_result.get("total_income_wen", 0))
+			var medicine_income_wen := int(finance_result.get("medicine_income_wen", 0))
+			last_consultation_fee_wen = consultation_fee_wen
+			last_medicine_income_wen = medicine_income_wen
 
 			# 妙手回春时额外判定“病家谢仪礼”：
 			# 20% 概率触发，金额从 188 / 288 / 388 文中等概率随机。
@@ -1319,27 +1319,19 @@ func submit_prescription() -> bool:
 					Unlock.record_patient_thank_gift_income(current_day)
 				)
 
-			var patient_total_income_wen := total_income_wen + patient_thank_gift_wen
-
-			# JudgementResult 的“治疗收入”口径与本次实际收入一致：
-			# 诊费 + 药材销售 + 病家谢仪礼；不在这里扣除药材进货成本。
-			last_treatment_income_wen = patient_total_income_wen
+			last_patient_thank_gift_wen = patient_thank_gift_wen
 
 			if consultation_fee_wen > 0:
 				summary_text += "\n诊费：+%d文" % consultation_fee_wen
 			else:
 				summary_text += "\n诊费：0文"
 
-			if medicine_sales_wen > 0:
-				summary_text += "\n药材销售：+%d文" % medicine_sales_wen
-			else:
-				summary_text += "\n药材销售：0文"
+			summary_text += "\n药材收入：%s" % Unlock.format_money_change(
+				medicine_income_wen
+			)
 
 			if patient_thank_gift_wen > 0:
 				summary_text += "\n病家谢仪礼：+%d文" % patient_thank_gift_wen
-
-			summary_text += "\n药材进货成本：-%d文（计入今日支出）" % medicine_purchase_cost_wen
-			summary_text += "\n本病人收入合计：+%d文" % patient_total_income_wen
 
 			_update_money_point_ui(true)
 
@@ -1592,7 +1584,9 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 		),
 		"reputation_change": last_reputation_change,
 		"experience_change": last_experience_change,
-		"treatment_income_wen": last_treatment_income_wen
+		"consultation_fee_wen": last_consultation_fee_wen,
+		"medicine_income_wen": last_medicine_income_wen,
+		"patient_thank_gift_wen": last_patient_thank_gift_wen
 	}
 
 
@@ -1997,7 +1991,9 @@ func _reset_transient_state_for_new_day() -> void:
 	last_newly_unlocked_entry_titles.clear()
 	last_reputation_change = 0
 	last_experience_change = 0
-	last_treatment_income_wen = 0
+	last_consultation_fee_wen = 0
+	last_medicine_income_wen = 0
+	last_patient_thank_gift_wen = 0
 	last_submission_can_show_reward = false
 	waiting_judgement_after_treatment_dialogue = false
 	current_display_region_name = DEFAULT_DISPLAY_REGION

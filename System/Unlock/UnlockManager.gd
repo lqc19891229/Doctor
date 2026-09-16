@@ -413,9 +413,9 @@ var reputation_points: int = 0
 #
 # 记账规则：
 # - 1 两 = 1000 文
-# - 诊费、药材销售和病家谢礼在白天实时入账。
+# - 诊费、药材收入和病家谢礼在白天实时入账。
 # - 俸禄、田租和全部支出在白天结束时统一结算。
-# - 无论治疗成功或失败，处方药材进货成本都会计入支出。
+# - 药材收入 = 药材销售金额 - 药材成本金额；治疗失败时销售金额为 0。
 #
 # 收入项目：
 # - random NPC 治疗成功时收取诊费，金额根据当前名望分档：
@@ -424,19 +424,19 @@ var reputation_points: int = 0
 #   融会贯通：301~600 名望 = 200 文 / 人
 #   炉火纯青：601~2000 名望 = 500 文 / 人
 #   出神入化：2001+ 名望 = 1000 文 / 人
-# - 药材销售：random NPC 治疗成功时，按处方实际药材售价计算。
+# - 药材收入：处方实际药材售价减去实际药材成本。
 # - 病家谢礼：获得“妙手回春”评价时有 20% 概率获得，金额随机为
 #   188 / 288 / 388 文。
 # - 李建中俸禄：完成 000_01《完书》剧情后，每两个节气收入 10000 文。
+# - 李言闻收入：每个节气随机收入 400～600 文。
 # - 田租：
 #   大暑 = 5000 文
 #   霜降 = 15000 文
 #
 # 支出项目：
-# - 药材进货成本：按处方实际药材进价计算，治疗成功或失败都会产生。
 # - 陈皮、半夏工钱：每两个节气各 500 文，合计 1000 文。
 # - 食费：每个节气 1000 文。
-# - 人情随礼：每个节气有 30% 概率发生，金额随机为
+# - 人情随礼：每两个节气有 30% 概率发生，金额随机为
 #   188 / 288 / 588 / 688 / 888 / 1888 文。
 # - 购买医书：每个节气必定发生，金额随机为
 #   100 / 200 / 300 / 400 / 500 / 600 / 700 / 800 / 900 / 1000 文。
@@ -475,6 +475,9 @@ const CONSULTATION_FEE_TRANSCENDENT_WEN: int = 1000
 const LI_JIAN_ZHONG_SALARY_WEN: int = 10000
 const LI_JIAN_ZHONG_SALARY_INTERVAL_SOLAR_TERMS: int = 2
 
+const LI_YAN_WEN_INCOME_MIN_WEN: int = 400
+const LI_YAN_WEN_INCOME_MAX_WEN: int = 600
+
 const LAND_RENT_DA_SHU_WEN: int = 5000
 const LAND_RENT_SHUANG_JIANG_WEN: int = 15000
 
@@ -496,6 +499,7 @@ const FOOD_COST_WEN: int = 1000
 const FOOD_COST_INTERVAL_SOLAR_TERMS: int = 1
 
 const RANDOM_EXPENSE_PROBABILITY: float = 0.30
+const HUMAN_GIFT_INTERVAL_SOLAR_TERMS: int = 2
 const HUMAN_GIFT_COST_OPTIONS_WEN = [188, 288, 588, 688, 888, 1888]
 const MEDICAL_BOOK_COST_OPTIONS_WEN = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 const HOUSE_REPAIR_COST_OPTIONS_WEN = [1000, 2000, 3000]
@@ -530,19 +534,23 @@ var money_wen: int = STARTING_MONEY_WEN
 
 # 当前白天账本。
 const FINANCE_ACCOUNTING_VERSION_GROSS: int = 2
+const FINANCE_ACCOUNTING_VERSION_NET_MEDICINE_INCOME: int = 3
 
 var finance_ledger_day: int = 1
-# 2 = 当前“销售额 / 进货成本”分开记账。
+# 3 = 当前只记录“药材收入 = 药材销售 - 药材成本”。
+# 2 = 旧版“销售额 / 进货成本”分开记账。
 # 1 = 旧版“药材利润 + 失败成本”账本，仅用于兼容旧存档的当前未结算日。
-var finance_ledger_accounting_version: int = FINANCE_ACCOUNTING_VERSION_GROSS
+var finance_ledger_accounting_version: int = FINANCE_ACCOUNTING_VERSION_NET_MEDICINE_INCOME
 
 var daily_random_npc_count: int = 0
 var daily_consultation_income_wen: int = 0
 var daily_patient_thank_gift_income_wen: int = 0
 
-# 当前正式账本：
-# 成功治疗时 medicine_sales 记实际售价总和；
-# 无论成功或失败，medicine_purchase_cost 都记本张处方的进货成本。
+# 当前正式账本只记录药材净收入。
+# 成功治疗：药材售价 - 药材成本；治疗失败：0 - 药材成本。
+var daily_medicine_income_wen: int = 0
+
+# 旧存档兼容字段。新版账本不再使用它们进行正式结算。
 var daily_medicine_sales_wen: int = 0
 var daily_medicine_purchase_cost_wen: int = 0
 
@@ -620,10 +628,11 @@ func format_money_change(amount_wen: int) -> String:
 
 func _reset_daily_finance_ledger(day: int) -> void:
 	finance_ledger_day = maxi(day, 1)
-	finance_ledger_accounting_version = FINANCE_ACCOUNTING_VERSION_GROSS
+	finance_ledger_accounting_version = FINANCE_ACCOUNTING_VERSION_NET_MEDICINE_INCOME
 	daily_random_npc_count = 0
 	daily_consultation_income_wen = 0
 	daily_patient_thank_gift_income_wen = 0
+	daily_medicine_income_wen = 0
 	daily_medicine_sales_wen = 0
 	daily_medicine_purchase_cost_wen = 0
 	daily_medicine_profit_wen = 0
@@ -641,14 +650,13 @@ func _ensure_daily_finance_ledger(day: int) -> void:
 # 每名 random NPC 第一次提交处方时调用一次。
 #
 # treatment_success:
-# - true：妙手回春 / 治疗成功，收取当前名望档位诊费，药材售价总和计入收入。
-# - false：治疗失败，诊费为 0，药材销售收入也为 0。
+# - true：妙手回春 / 治疗成功，收取诊费，药材收入 = 售价 - 成本。
+# - false：治疗失败，诊费为 0，药材收入 = 0 - 成本。
 #
 # prescription_sell_wen：本张处方按售价计算出的总和。
 # prescription_cost_wen：本张处方按进价计算出的总和。
 #
-# 无论成功还是失败，药材进货成本都会进入当天支出；
-# 但仍延续现有规则，在“正常白天结束”时统一扣除。
+# 新账本在病人结算时直接把药材收入计入银钱，不再把药材成本列入支出。
 func record_random_npc_treatment_finance(
 	day: int,
 	treatment_success: bool,
@@ -665,11 +673,27 @@ func record_random_npc_treatment_finance(
 	)
 	var medicine_sales := maxi(prescription_sell_wen, 0) if treatment_success else 0
 	var medicine_purchase_cost := maxi(prescription_cost_wen, 0)
+	var medicine_income := medicine_sales - medicine_purchase_cost
 
 	daily_random_npc_count += 1
 	daily_consultation_income_wen += consultation_fee
 
-	# 新账本直接记录销售额和进货成本。
+	# 新账本只记录药材净收入，并在白天立即计入银钱。
+	if finance_ledger_accounting_version >= FINANCE_ACCOUNTING_VERSION_NET_MEDICINE_INCOME:
+		daily_medicine_income_wen += medicine_income
+
+		var total_income := consultation_fee + medicine_income
+		money_wen += total_income
+		money_wen_changed.emit(money_wen)
+
+		return {
+			"consultation_fee_wen": consultation_fee,
+			"medicine_income_wen": medicine_income,
+			"total_income_wen": total_income,
+			"money_wen": money_wen
+		}
+
+	# 兼容版本 2 存档：当前未结算日继续分别记录销售额和进货成本。
 	if finance_ledger_accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS:
 		daily_medicine_sales_wen += medicine_sales
 		daily_medicine_purchase_cost_wen += medicine_purchase_cost
@@ -857,6 +881,12 @@ func settle_day_finances(day: int) -> Dictionary:
 		if safe_day % LI_JIAN_ZHONG_SALARY_INTERVAL_SOLAR_TERMS == 0:
 			li_jian_zhong_salary = LI_JIAN_ZHONG_SALARY_WEN
 
+	# 李言闻收入：每个节气随机收入 400～600 文。
+	var li_yan_wen_income := economy_rng.randi_range(
+		LI_YAN_WEN_INCOME_MIN_WEN,
+		LI_YAN_WEN_INCOME_MAX_WEN
+	)
+
 	# 田租：大暑收入 5000 文，霜降收入 15000 文。
 	var land_rent := _get_land_rent_for_solar_term(solar_term_index)
 
@@ -874,11 +904,13 @@ func settle_day_finances(day: int) -> Dictionary:
 	if safe_day % FOOD_COST_INTERVAL_SOLAR_TERMS == 0:
 		food_cost = FOOD_COST_WEN
 
-	# 每个节气都有 30% 概率发生一次人情随礼。
-	var human_gift_cost := _roll_random_expense(
-		RANDOM_EXPENSE_PROBABILITY,
-		HUMAN_GIFT_COST_OPTIONS_WEN
-	)
+	# 每两个节气进行一次判定，有 30% 概率发生人情随礼。
+	var human_gift_cost := 0
+	if safe_day % HUMAN_GIFT_INTERVAL_SOLAR_TERMS == 0:
+		human_gift_cost = _roll_random_expense(
+			RANDOM_EXPENSE_PROBABILITY,
+			HUMAN_GIFT_COST_OPTIONS_WEN
+		)
 
 	# 每个节气必定购买一次医书，金额从配置档位中随机抽取。
 	var medical_book_cost := _pick_random_expense(MEDICAL_BOOK_COST_OPTIONS_WEN)
@@ -901,6 +933,10 @@ func settle_day_finances(day: int) -> Dictionary:
 	var is_gross_accounting := (
 		finance_ledger_accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS
 	)
+	var is_net_medicine_income_accounting := (
+		finance_ledger_accounting_version
+		>= FINANCE_ACCOUNTING_VERSION_NET_MEDICINE_INCOME
+	)
 
 	var medicine_sales := daily_medicine_sales_wen if is_gross_accounting else 0
 	var medicine_purchase_cost := (
@@ -908,16 +944,26 @@ func settle_day_finances(day: int) -> Dictionary:
 		if is_gross_accounting
 		else daily_failed_medicine_cost_wen
 	)
+	var medicine_income := (
+		daily_medicine_income_wen
+		if is_net_medicine_income_accounting
+		else 0
+	)
 
 	var total_income := (
 		daily_consultation_income_wen
 		+ (
-			medicine_sales
-			if is_gross_accounting
-			else daily_medicine_profit_wen
+			medicine_income
+			if is_net_medicine_income_accounting
+			else (
+				medicine_sales
+				if is_gross_accounting
+				else daily_medicine_profit_wen
+			)
 		)
 		+ daily_patient_thank_gift_income_wen
 		+ li_jian_zhong_salary
+		+ li_yan_wen_income
 		+ land_rent
 	)
 
@@ -934,13 +980,13 @@ func settle_day_finances(day: int) -> Dictionary:
 		+ moldy_herb_cost
 		+ summer_tax
 		+ autumn_tax
-		+ medicine_purchase_cost
+		+ (0 if is_net_medicine_income_accounting else medicine_purchase_cost)
 	)
 	var net_change := total_income - total_expense
 
-	# 诊费、药材销售和病家谢礼都已在白天实时入账；
-	# 李建中俸禄和田租在日结时才实际到账，因此在这里补入并扣除当天支出。
-	money_wen += li_jian_zhong_salary + land_rent
+	# 诊费、药材收入和病家谢礼都已在白天实时入账；
+	# 李建中俸禄、李言闻收入和田租在日结时才实际到账。
+	money_wen += li_jian_zhong_salary + li_yan_wen_income + land_rent
 	money_wen -= total_expense
 	money_wen_changed.emit(money_wen)
 
@@ -952,6 +998,7 @@ func settle_day_finances(day: int) -> Dictionary:
 		"random_npc_count": daily_random_npc_count,
 		"consultation_income_wen": daily_consultation_income_wen,
 		"patient_thank_gift_income_wen": daily_patient_thank_gift_income_wen,
+		"medicine_income_wen": medicine_income,
 		"medicine_sales_wen": medicine_sales,
 		"medicine_purchase_cost_wen": medicine_purchase_cost,
 		# 保留旧字段，便于旧代码/旧存档兼容。
@@ -962,6 +1009,7 @@ func settle_day_finances(day: int) -> Dictionary:
 		"ban_xia_wage_wen": ban_xia_wage,
 		"staff_wage_wen": chen_pi_wage + ban_xia_wage,
 		"li_jian_zhong_salary_wen": li_jian_zhong_salary,
+		"li_yan_wen_income_wen": li_yan_wen_income,
 		"land_rent_wen": land_rent,
 		"food_cost_wen": food_cost,
 		"human_gift_cost_wen": human_gift_cost,
@@ -1024,7 +1072,10 @@ func build_finance_report_text(day: int) -> String:
 	lines.append("收入")
 	lines.append("诊费：%s" % format_money_change(consultation_income))
 
-	if accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS:
+	if accounting_version >= FINANCE_ACCOUNTING_VERSION_NET_MEDICINE_INCOME:
+		var medicine_income := int(report.get("medicine_income_wen", 0))
+		lines.append("药材收入：%s" % format_money_change(medicine_income))
+	elif accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS:
 		var medicine_sales := int(report.get("medicine_sales_wen", 0))
 		lines.append("药材销售：%s" % format_money_change(medicine_sales))
 	else:
@@ -1042,6 +1093,10 @@ func build_finance_report_text(day: int) -> String:
 	if li_jian_zhong_salary > 0:
 		lines.append("李建中俸禄：%s" % format_money_change(li_jian_zhong_salary))
 
+	var li_yan_wen_income := int(report.get("li_yan_wen_income_wen", 0))
+	if li_yan_wen_income > 0:
+		lines.append("李言闻收入：%s" % format_money_change(li_yan_wen_income))
+
 	var land_rent := int(report.get("land_rent_wen", 0))
 	if land_rent > 0:
 		lines.append("田租：%s" % format_money_change(land_rent))
@@ -1050,11 +1105,14 @@ func build_finance_report_text(day: int) -> String:
 	lines.append("")
 	lines.append("支出")
 
-	if accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS:
+	if (
+		accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS
+		and accounting_version < FINANCE_ACCOUNTING_VERSION_NET_MEDICINE_INCOME
+	):
 		var medicine_purchase_cost := int(report.get("medicine_purchase_cost_wen", 0))
 		if medicine_purchase_cost > 0:
 			lines.append("药材进货成本：%s" % format_money_change(-medicine_purchase_cost))
-	else:
+	elif accounting_version < FINANCE_ACCOUNTING_VERSION_GROSS:
 		var failed_medicine_cost := int(report.get("failed_medicine_cost_wen", 0))
 		if failed_medicine_cost > 0:
 			lines.append("治疗失败药材成本（旧账）：%s" % format_money_change(-failed_medicine_cost))
@@ -2222,6 +2280,7 @@ func get_save_data() -> Dictionary:
 		"daily_random_npc_count": daily_random_npc_count,
 		"daily_consultation_income_wen": daily_consultation_income_wen,
 		"daily_patient_thank_gift_income_wen": daily_patient_thank_gift_income_wen,
+		"daily_medicine_income_wen": daily_medicine_income_wen,
 		"daily_medicine_sales_wen": daily_medicine_sales_wen,
 		"daily_medicine_purchase_cost_wen": daily_medicine_purchase_cost_wen,
 		# 旧字段继续保存，便于回滚/兼容旧档。
@@ -2274,6 +2333,7 @@ func load_save_data(data: Dictionary) -> void:
 	daily_patient_thank_gift_income_wen = int(
 		data.get("daily_patient_thank_gift_income_wen", 0)
 	)
+	daily_medicine_income_wen = int(data.get("daily_medicine_income_wen", 0))
 	daily_medicine_sales_wen = int(data.get("daily_medicine_sales_wen", 0))
 	daily_medicine_purchase_cost_wen = int(data.get("daily_medicine_purchase_cost_wen", 0))
 	daily_medicine_profit_wen = int(data.get("daily_medicine_profit_wen", 0))

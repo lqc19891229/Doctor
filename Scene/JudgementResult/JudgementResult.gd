@@ -26,9 +26,10 @@ func show_result(data: Dictionary) -> void:
 	var newly_unlocked_entry_titles: Array[String] = _get_string_array(data.get("newly_unlocked_entry_titles", []))
 	var show_reward_change: bool = bool(data.get("show_reward_change", false))
 	var reputation_change: int = int(data.get("reputation_change", 0))
-	var treatment_income_wen: int = int(data.get("treatment_income_wen", 0))
+	var consultation_fee_wen: int = int(data.get("consultation_fee_wen", 0))
+	var medicine_income_wen: int = int(data.get("medicine_income_wen", 0))
+	var patient_thank_gift_wen: int = int(data.get("patient_thank_gift_wen", 0))
 	var grade := str(data.get("grade", "")).strip_edges()
-	var treatment_failed := grade == "治疗失败"
 
 	result_text.clear()
 	result_text.append_text("病人疾病：%s\n" % disease_name)
@@ -37,12 +38,19 @@ func show_result(data: Dictionary) -> void:
 	result_text.append_text("断病：%s\n" % player_disease_name)
 	result_text.append_text("开方：\n%s\n" % player_prescription_text)
 
-	# 治疗失败时整个“本次治疗奖励”区域不显示。
-	# 治疗成功 / 妙手回春时，在名望下方显示本次治疗收入。
-	if show_reward_change and not treatment_failed:
-		result_text.append_text("\n本次治疗奖励：\n")
-		result_text.append_text("名望%s\n" % _format_change(reputation_change))
-		result_text.append_text("治疗收入%s\n" % _format_money_change(treatment_income_wen))
+	# 首次提交时始终分项显示诊费和药材收入。
+	# 治疗失败时诊费为 0，药材收入为负的实际成本。
+	if show_reward_change:
+		var reward_parts: Array[String] = [
+			"名望%s" % _format_change(reputation_change),
+			"诊费%s" % _format_money_change(consultation_fee_wen),
+			"药材收入%s" % _format_money_change(medicine_income_wen)
+		]
+		if patient_thank_gift_wen > 0:
+			reward_parts.append(
+				"病家谢礼%s" % _format_money_change(patient_thank_gift_wen)
+			)
+		result_text.append_text("\n本次治疗奖励：%s\n" % "，".join(reward_parts))
 
 	if not newly_unlocked_entry_titles.is_empty():
 		result_text.append_text("\n解锁新条目：%s\n" % "、".join(newly_unlocked_entry_titles))
