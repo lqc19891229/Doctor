@@ -484,7 +484,7 @@ const LAND_RENT_SHUANG_JIANG_WEN: int = 15000
 # 病家谢礼：
 # random NPC 获得“妙手回春”评价时，由 Clinic 调用发放。
 # 20% 概率获得 188 / 288 / 388 文，并在白天实时到账。
-const PATIENT_THANK_GIFT_PROBABILITY: float = 0.20
+const PATIENT_THANK_GIFT_PROBABILITY: float = 0.40
 const PATIENT_THANK_GIFT_OPTIONS_WEN = [188, 288, 388]
 
 # -------------------- 支出相关常量 --------------------
