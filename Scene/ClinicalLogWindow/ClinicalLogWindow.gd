@@ -275,14 +275,20 @@ func _load_all_entries_from_unlock_state() -> void:
 		if Unlock.is_herb_unlocked_in_clinical_log(herb_entry.herb_id):
 			all_herb_entries.append(herb_entry)
 
-	# 按标题排序，方便查找。
+	# 按 sort_index 排序；sort_index 相同时再按标题排序。
 	all_disease_entries.sort_custom(func(a: BookEntryData, b: BookEntryData) -> bool:
+		if a.sort_index != b.sort_index:
+			return a.sort_index < b.sort_index
 		return a.title < b.title
 	)
 	all_formula_entries.sort_custom(func(a: BookEntryData, b: BookEntryData) -> bool:
+		if a.sort_index != b.sort_index:
+			return a.sort_index < b.sort_index
 		return a.title < b.title
 	)
 	all_herb_entries.sort_custom(func(a: BookEntryData, b: BookEntryData) -> bool:
+		if a.sort_index != b.sort_index:
+			return a.sort_index < b.sort_index
 		return a.title < b.title
 	)
 

@@ -92,7 +92,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "......也罢，科举考功名的学子千千万，可真能博取个功名的又有几人呢？东璧呀，你若真的想从医，今日起便随为父从《内经》、《本草》学起吧。"
+text = "唉......也罢，科举考功名的学子千千万，可真能博取个功名的又有几人呢？东璧呀，你若真的想从医，今日起便随为父从《内经》、《本草》学起吧。"
 portrait = ExtResource("portrait_4")
 [sub_resource type="Resource" id="StoryLine_012"]
 script = ExtResource("1_storyline")
