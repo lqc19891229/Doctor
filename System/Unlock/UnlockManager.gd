@@ -428,7 +428,7 @@ var reputation_points: int = 0
 # - 病家谢礼：获得“妙手回春”评价时有 20% 概率获得，金额随机为
 #   188 / 288 / 388 文。
 # - 李建中俸禄：完成 000_01《完书》剧情后，每两个节气收入 10000 文。
-# - 李言闻收入：每个节气随机收入 400～600 文。
+# - 李言闻收入：简单 1000 文 / 普通 500 文 / 困难 0 文。
 # - 田租：
 #   大暑 = 5000 文
 #   霜降 = 15000 文
@@ -475,8 +475,19 @@ const CONSULTATION_FEE_TRANSCENDENT_WEN: int = 1000
 const LI_JIAN_ZHONG_SALARY_WEN: int = 10000
 const LI_JIAN_ZHONG_SALARY_INTERVAL_SOLAR_TERMS: int = 2
 
-const LI_YAN_WEN_INCOME_MIN_WEN: int = 400
-const LI_YAN_WEN_INCOME_MAX_WEN: int = 600
+# 游戏难度：只控制明确纳入难度设计的固定经济参数。
+# “每天 2 / 3 / 4 次妙手回春”是平衡测算目标，不在代码中强制。
+enum GameDifficulty {
+	EASY,
+	NORMAL,
+	HARD,
+}
+
+const LI_YAN_WEN_INCOME_EASY_WEN: int = 1000
+const LI_YAN_WEN_INCOME_NORMAL_WEN: int = 500
+const LI_YAN_WEN_INCOME_HARD_WEN: int = 0
+
+var game_difficulty: int = GameDifficulty.NORMAL
 
 const LAND_RENT_DA_SHU_WEN: int = 5000
 const LAND_RENT_SHUANG_JIANG_WEN: int = 15000
@@ -562,6 +573,38 @@ var daily_failed_medicine_cost_wen: int = 0
 # 用于防止切场景 / 读档时重复生成随机支出或重复扣款。
 var last_finance_settled_day: int = 0
 var last_finance_report: Dictionary = {}
+
+
+func set_game_difficulty(value: int) -> void:
+	match value:
+		GameDifficulty.EASY, GameDifficulty.NORMAL, GameDifficulty.HARD:
+			game_difficulty = value
+		_:
+			game_difficulty = GameDifficulty.NORMAL
+
+
+func get_game_difficulty() -> int:
+	return game_difficulty
+
+
+func get_game_difficulty_name() -> String:
+	match game_difficulty:
+		GameDifficulty.EASY:
+			return "简单"
+		GameDifficulty.HARD:
+			return "困难"
+		_:
+			return "普通"
+
+
+func get_li_yan_wen_income_wen() -> int:
+	match game_difficulty:
+		GameDifficulty.EASY:
+			return LI_YAN_WEN_INCOME_EASY_WEN
+		GameDifficulty.HARD:
+			return LI_YAN_WEN_INCOME_HARD_WEN
+		_:
+			return LI_YAN_WEN_INCOME_NORMAL_WEN
 
 
 func get_money_wen() -> int:
@@ -881,11 +924,8 @@ func settle_day_finances(day: int) -> Dictionary:
 		if safe_day % LI_JIAN_ZHONG_SALARY_INTERVAL_SOLAR_TERMS == 0:
 			li_jian_zhong_salary = LI_JIAN_ZHONG_SALARY_WEN
 
-	# 李言闻收入：每个节气随机收入 400～600 文。
-	var li_yan_wen_income := economy_rng.randi_range(
-		LI_YAN_WEN_INCOME_MIN_WEN,
-		LI_YAN_WEN_INCOME_MAX_WEN
-	)
+	# 李言闻收入由本局难度决定：简单 1000 / 普通 500 / 困难 0 文。
+	var li_yan_wen_income := get_li_yan_wen_income_wen()
 
 	# 田租：大暑收入 5000 文，霜降收入 15000 文。
 	var land_rent := _get_land_rent_for_solar_term(solar_term_index)
@@ -2228,7 +2268,9 @@ func unlock_all_entries_for_test() -> Dictionary:
 # 十五、存档 / 读档
 # =========================================================
 
-func reset_progress() -> void:
+func reset_progress(new_difficulty: int = GameDifficulty.NORMAL) -> void:
+	set_game_difficulty(new_difficulty)
+
 	read_entry_ids.clear()
 	unlocked_entry_ids.clear()
 	unlocked_herb_ids.clear()
@@ -2275,6 +2317,7 @@ func get_save_data() -> Dictionary:
 		"miaoshouhuichun_formula_counts": miaoshouhuichun_formula_counts,
 		"reputation_points": reputation_points,
 		"money_wen": money_wen,
+		"game_difficulty": game_difficulty,
 		"finance_ledger_day": finance_ledger_day,
 		"finance_ledger_accounting_version": finance_ledger_accounting_version,
 		"daily_random_npc_count": daily_random_npc_count,
@@ -2293,7 +2336,11 @@ func get_save_data() -> Dictionary:
 
 
 func load_save_data(data: Dictionary) -> void:
-	reset_progress()
+	# 旧存档没有难度字段时按普通难度处理。
+	var loaded_difficulty := int(
+		data.get("game_difficulty", GameDifficulty.NORMAL)
+	)
+	reset_progress(loaded_difficulty)
 
 	read_entry_ids = _load_bool_dictionary(data.get("read_entry_ids", {}))
 	unlocked_entry_ids = _load_bool_dictionary(data.get("unlocked_entry_ids", {}))
