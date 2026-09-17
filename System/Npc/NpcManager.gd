@@ -69,21 +69,10 @@ func load_all_npcs(force_reload: bool = false) -> void:
 	npc_list.clear()
 	current_index = 0
 
-	var rebuilt_now := force_reload or not _shared_catalog_ready
-	if rebuilt_now:
+	if force_reload or not _shared_catalog_ready:
 		_rebuild_shared_npc_catalog()
 	else:
 		_attach_shared_npc_catalog()
-
-	if OS.is_debug_build():
-		print(
-			"[NpcManager] NPC 模板缓存：random=",
-			random_npc_pool.size(),
-			"，story=",
-			story_npc_by_id.size(),
-			"，来源=",
-			("重新扫描" if rebuilt_now else "共享缓存")
-		)
 
 
 func _rebuild_shared_npc_catalog() -> void:
@@ -92,24 +81,11 @@ func _rebuild_shared_npc_catalog() -> void:
 	random_npc_pool = []
 	story_npc_by_id = {}
 
-	var started_usec := Time.get_ticks_usec()
 	_scan_npc_dir(NPC_DIR)
 
 	_shared_random_npc_pool = random_npc_pool
 	_shared_story_npc_by_id = story_npc_by_id
 	_shared_catalog_ready = true
-
-	if OS.is_debug_build():
-		var elapsed_ms := float(Time.get_ticks_usec() - started_usec) / 1000.0
-		print(
-			"[NpcManager] NPC 模板首次缓存完成：random=",
-			_shared_random_npc_pool.size(),
-			"，story=",
-			_shared_story_npc_by_id.size(),
-			"，耗时 ",
-			"%.2f" % elapsed_ms,
-			" ms"
-		)
 
 
 func _attach_shared_npc_catalog() -> void:
@@ -351,11 +327,6 @@ func spawn_random_npc() -> NpcData:
 	npc_list.append(npc)
 	current_index = npc_list.size() - 1
 
-	print("抽取 random NPC：", npc.npc_name, " / ", npc.npc_id)
-	if npc.disease != null:
-		print("random NPC 疾病：", npc.disease.disease_name)
-	print("当前运行时 NPC 列表数量：", npc_list.size())
-
 	return npc
 
 
@@ -410,11 +381,6 @@ func spawn_story_npc(
 
 	npc_list.append(npc)
 	current_index = npc_list.size() - 1
-
-	print("抽取 story NPC：", npc.npc_name, " / ", npc.npc_id)
-	if npc.disease != null:
-		print("story NPC 疾病：", npc.disease.disease_name)
-	print("当前运行时 NPC 列表数量：", npc_list.size())
 
 	return npc
 

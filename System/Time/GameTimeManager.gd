@@ -170,8 +170,6 @@ func start_new_game() -> void:
 
 	time_changed.emit()
 
-	print("时间初始化：%s 白天 %s" % [get_day_text(), get_shichen_text()])
-
 
 # =========================================================
 # 玩家进入 Clinic 时调用
@@ -184,12 +182,6 @@ func start_clinic_time() -> void:
 		clinic_clock_paused_by_story = false
 
 		time_changed.emit()
-
-		print("Clinic 从剧情恢复计时：%s %s，累计 %.2f 秒" % [
-			get_day_text(),
-			get_shichen_text(),
-			clinic_time_accumulator
-		])
 		return
 
 	# 设置为白天
@@ -205,8 +197,6 @@ func start_clinic_time() -> void:
 	clinic_clock_running = true
 
 	time_changed.emit()
-
-	print("Clinic 开始计时：%s %s" % [get_day_text(), get_shichen_text()])
 
 
 # =========================================================
@@ -232,12 +222,6 @@ func pause_clinic_clock_for_story() -> bool:
 	clinic_clock_running = false
 	clinic_clock_paused_by_story = true
 
-	print("Clinic 因剧情暂停计时：%s %s，累计 %.2f 秒" % [
-		get_day_text(),
-		get_shichen_text(),
-		clinic_time_accumulator
-	])
-
 	return true
 
 
@@ -253,12 +237,6 @@ func resume_clinic_clock_after_story() -> void:
 	clinic_clock_paused_by_story = false
 
 	time_changed.emit()
-
-	print("Clinic 剧情结束后恢复计时：%s %s，累计 %.2f 秒" % [
-		get_day_text(),
-		get_shichen_text(),
-		clinic_time_accumulator
-	])
 
 
 func cancel_story_pause_state() -> void:
@@ -309,8 +287,6 @@ func advance_clinic_shichen() -> void:
 
 	time_changed.emit()
 
-	print("Clinic 时间推进：%s %s" % [get_day_text(), get_shichen_text()])
-
 
 # =========================================================
 # 白天结束
@@ -324,8 +300,6 @@ func finish_day() -> void:
 
 	time_changed.emit()
 
-	print("白天结束：%s 夜晚" % get_day_text())
-
 
 # =========================================================
 # 黑夜结束
@@ -338,8 +312,6 @@ func finish_night() -> void:
 	current_shichen_index = CLINIC_START_SHICHEN_INDEX
 
 	time_changed.emit()
-
-	print("黑夜结束：进入 %s 白天" % get_day_text())
 
 
 # =========================================================

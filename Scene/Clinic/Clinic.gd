@@ -283,12 +283,6 @@ func _ready() -> void:
 	_set_npc_dialogue_label_text("")
 	_refresh_topbar(true)
 
-	# 调试输出：仅在 Debug 构建中打印数据库加载情况，避免正式版刷屏。
-	if OS.is_debug_build():
-		print("药材数量：", herb_database.get_all_herbs().size())
-		if formula_database != null and formula_database.has_method("debug_print_all_formulas"):
-			formula_database.debug_print_all_formulas()
-
 	# 注意：不要在 _ready() 里自动触发剧情。
 	# Main 还没有连接 story_requested 信号时，_ready() 发出的信号会丢失。
 	# 自动剧情统一放到 start_new_day()，由 Main 连接好信号后调用。
@@ -636,7 +630,6 @@ func _on_clinic_time_finished() -> void:
 
 	clinic_time_expired_waiting_for_current_patient = true
 	_set_info_text("今日接诊时间已结束，请完成当前病人的诊疗。完成后将自动进入夜晚。")
-	print("Clinic 时间结束：等待玩家完成当前最后一位病人。")
 
 	# 兼容旧提交入口：如果处方已经判定，但结果展示流程尚未启动，
 	# 主动继续治疗台词与 JudgementResult 流程，避免停在 Clinic。
@@ -694,8 +687,6 @@ func _safe_connect_custom_signal(target: Object, signal_name: StringName, callab
 		return
 
 	if not target.has_signal(signal_name):
-		if OS.is_debug_build():
-			print("InfoWindow 缺少信号：", signal_name)
 		return
 
 	if not target.is_connected(signal_name, callable_fn):
@@ -726,11 +717,9 @@ func _set_info_text(text: String) -> void:
 	# 统一写入信息窗口文本。
 	# 说明：
 	# 1. 其它函数不再直接访问 info_label.text，减少空节点报错风险。
-	# 2. 如果 InfoLabel 暂未接入场景，则在 Debug 构建中打印，方便排查。
+	# 2. 如果 InfoLabel 暂未接入场景，则安全跳过。
 	if info_label != null:
 		info_label.text = text
-	elif OS.is_debug_build():
-		print(text)
 
 
 func _get_pressed_action_count(action_names: Array[StringName]) -> int:
@@ -1743,7 +1732,6 @@ func finish_clinic_for_today() -> void:
 	if GameTime.has_method("stop_clinic_clock"):
 		GameTime.stop_clinic_clock()
 
-	print("Clinic 发出 clinic_finished")
 	emit_signal("clinic_finished")
 
 func _clear_clinical_log_search_state() -> void:

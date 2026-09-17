@@ -18,7 +18,6 @@ var formulas: Array[FormulaData] = []
 
 func _ready() -> void:
 	load_all_formulas()
-	print("FormulaDataBase 已加载方剂数量：", formulas.size())
 
 
 # =========================================================
@@ -76,10 +75,9 @@ func _try_load_formula(path: String) -> void:
 			return
 
 		formulas.append(formula)
-		print("已加载方剂：", formula.formula_name, " | id=", formula.formula_id)
 	else:
 		# 如果这个 .tres 不是 FormulaData，就跳过
-		print("跳过非 FormulaData 资源：", path)
+		push_warning("FormulaDataBase: 跳过非 FormulaData 资源 -> " + path)
 
 
 # =========================================================
@@ -127,17 +125,5 @@ func get_formulas_by_disease(disease_id: String) -> Array[FormulaData]:
 # =========================================================
 
 func debug_print_all_formulas() -> void:
-	print("===== FormulaDataBase =====")
-	print("总方剂数：", formulas.size())
-
-	for formula in formulas:
-		if formula == null:
-			continue
-
-		print(
-			"方名：", formula.formula_name,
-			" | formula_id=", formula.formula_id,
-			" | target_disease_id=", formula.target_disease_id
-		)
-
-	print("===========================")
+	# 保留旧调试接口，避免现有 has_method()/调用方受到影响。
+	pass

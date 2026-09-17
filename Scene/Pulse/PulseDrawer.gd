@@ -72,10 +72,6 @@ var group_region_ids: Array[String] = []
 var region_scroll_map: Dictionary = {}
 
 
-func _ready() -> void:
-	print("PulseDrawer size = ", size)
-
-
 func _process(delta: float) -> void:
 	if not animate_wave:
 		return
