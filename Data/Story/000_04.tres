@@ -33,7 +33,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "李建中"
-text = "我还去找了胡承龙，他答应出资帮您出书。再加上这些年您医治的病人，咱家的亲戚朋友，也有愿意出钱帮忙的，咱们只要再凑一千两就可以出版此书。"
+text = "我还去找了胡承龙，他答应出资帮您出书。再加上这些年您医治的病人，咱家的亲戚朋友，也有愿意出钱帮忙的，咱们只要再凑六百两就可以出版此书。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
@@ -41,7 +41,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
-text = "一千两也不是个小数目，但总归是有盼头了…"
+text = "六百也不是个小数目，但总归是有盼头了…"
 portrait = ExtResource("portrait_2")
 
 [resource]

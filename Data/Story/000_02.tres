@@ -65,7 +65,7 @@ line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "胡承龙"
-text = "再者您这大作洋洋洒洒几百万字，还有大量插图。"
+text = "再者，您这大作洋洋洒洒几百万字，还有大量插图。"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_009"]
 script = ExtResource("1_storyline")
