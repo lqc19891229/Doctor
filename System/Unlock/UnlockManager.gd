@@ -151,8 +151,6 @@ func _build_unlock_indexes() -> void:
 	_book_entry_ids_by_disease_id.clear()
 	_experience_unlock_entries.clear()
 
-	var started_usec := Time.get_ticks_usec()
-
 	var all_formulas: Array[FormulaData] = FormulaDB.get_all_formulas()
 	for formula in all_formulas:
 		if formula == null:
@@ -228,20 +226,6 @@ func _build_unlock_indexes() -> void:
 	_experience_unlock_entries.sort_custom(Callable(self, "_experience_entry_sort_before"))
 	_experience_unlock_cursor = 0
 	_unlock_indexes_ready = true
-
-	if OS.is_debug_build():
-		var elapsed_ms := float(Time.get_ticks_usec() - started_usec) / 1000.0
-		print(
-			"[UnlockManager] 解锁索引完成：方剂=",
-			_formula_by_id.size(),
-			"，疾病=",
-			_disease_by_id.size(),
-			"，心得条目=",
-			_experience_unlock_entries.size(),
-			"，耗时 ",
-			"%.2f" % elapsed_ms,
-			" ms"
-		)
 
 
 func _append_unique_index_value(index: Dictionary, key: String, value: String) -> void:
@@ -2364,8 +2348,6 @@ func unlock_all_entries_for_test() -> Dictionary:
 
 	# 补齐实体之间的依赖关系及行医记考状态。
 	refresh_unlocks_by_dependencies()
-
-	print("[UnlockManager] 测试解锁并标记已读，已同步 Data 层：", result)
 	return result
 
 

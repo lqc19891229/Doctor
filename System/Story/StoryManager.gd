@@ -53,24 +53,11 @@ func _ready() -> void:
 
 
 func refresh_registered_story_paths() -> void:
-	var started_ms := Time.get_ticks_msec()
-
 	_story_cache_ready = false
 	registered_story_paths.clear()
 	_scan_story_dir(STORY_DIR)
 	registered_story_paths.sort()
 	_rebuild_story_cache_and_indexes()
-
-	if OS.is_debug_build():
-		print(
-			"[StoryManager] 剧情缓存完成：",
-			_story_cache_by_path.size(),
-			" 个，索引桶 ",
-			_story_candidates_by_scene_result.size() + _global_story_candidates_by_result.size(),
-			" 个，耗时 ",
-			Time.get_ticks_msec() - started_ms,
-			" ms"
-		)
 
 
 func _scan_story_dir(dir_path: String) -> void:

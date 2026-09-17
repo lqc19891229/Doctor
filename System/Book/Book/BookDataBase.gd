@@ -60,8 +60,6 @@ func load_all_books() -> void:
 
 	_sort_books()
 
-	print("BookDataBase 加载完成，书籍数量：", books.size())
-
 
 # =========================================================
 # 五、递归扫描目录
@@ -215,24 +213,3 @@ func get_visible_books() -> Array[BookData]:
 # 返回当前书本总数
 func get_book_count() -> int:
 	return books.size()
-
-
-# =========================================================
-# 九、调试
-# =========================================================
-
-func debug_print_all_books() -> void:
-	print("===== BookDataBase 书籍列表 =====")
-
-	for book in books:
-		if book == null:
-			continue
-
-		print(
-			"ID: ", book.book_id,
-			" | 书名: ", book.book_name,
-			" | 类型: ", book.book_type,
-			" | 排序: ", book.sort_index
-		)
-
-	print("总数: ", books.size())

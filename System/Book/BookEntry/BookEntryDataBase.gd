@@ -60,8 +60,6 @@ func load_all_entries() -> void:
 	_load_entries_recursive(entry_data_path)
 	_sort_entries()
 
-	print("[BookEntryDataBase] 已加载条目数量：", entry_map.size())
-
 
 # =========================================================
 # 五、递归加载

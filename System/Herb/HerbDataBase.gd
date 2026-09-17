@@ -63,8 +63,6 @@ func load_all_herbs() -> void:
 	for file_name in file_names:
 		_load_and_register_herb_file(file_name)
 
-	print("HerbDataBase 已加载药材数量：", herb_list.size())
-
 
 # 函数功能：
 # 清空药材列表和索引缓存，避免重复加载时留下旧数据。

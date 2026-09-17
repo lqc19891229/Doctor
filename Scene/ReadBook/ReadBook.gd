@@ -194,9 +194,6 @@ func _refresh_book_list_if_dirty(force_refresh: bool = false) -> void:
 	last_readbook_state_version = current_version
 	book_list_dirty = false
 
-	if OS.is_debug_build():
-		print("[ReadBook] 书籍列表已刷新：状态版本=", current_version, "，可见书籍=", books.size())
-
 
 # =========================
 # 刷新书籍列表

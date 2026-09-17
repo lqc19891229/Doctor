@@ -138,8 +138,6 @@ func _ready() -> void:
 	# 进入游戏时先显示菜单，不直接进入诊室。
 	_show_main_menu()
 
-	print("Main 初始化完成，等待玩家选择")
-
 
 # =========================================================
 # 连接菜单按钮
@@ -473,13 +471,13 @@ func _refresh_save_slot_popup() -> void:
 
 func _load_game_from_slot(slot_index: int) -> void:
 	if not SaveManager.has_save(slot_index):
-		print("没有存档，无法读取：", SaveManager.get_slot_display_label(slot_index))
+		push_warning("没有存档，无法读取：%s" % SaveManager.get_slot_display_label(slot_index))
 		_refresh_save_slot_popup()
 		return
 
 	var load_success: bool = SaveManager.load_game(slot_index)
 	if not load_success:
-		print("读取存档失败：", SaveManager.get_slot_display_label(slot_index))
+		push_warning("读取存档失败：%s" % SaveManager.get_slot_display_label(slot_index))
 		_refresh_save_slot_popup()
 		return
 
@@ -526,8 +524,6 @@ func _start_new_game_without_confirm(difficulty: int) -> void:
 
 	_hide_main_menu()
 	_enter_clinic()
-
-	print("新游戏开始，难度：%s" % Unlock.get_game_difficulty_name())
 
 func _open_overwrite_confirm_dialog() -> void:
 	_close_save_slot_popup()
@@ -967,7 +963,6 @@ func _enter_clinic(play_morning_sfx: bool = false) -> void:
 
 	_clear_current_scene()
 
-	var was_cached := clinic_scene_instance != null and is_instance_valid(clinic_scene_instance)
 	current_scene = _get_or_create_clinic_scene()
 	if current_scene == null:
 		push_error("Clinic 场景实例创建失败。")
@@ -979,23 +974,20 @@ func _enter_clinic(play_morning_sfx: bool = false) -> void:
 	if current_scene.has_signal("clinic_finished"):
 		if not current_scene.is_connected("clinic_finished", Callable(self, "_on_clinic_finished")):
 			current_scene.connect("clinic_finished", Callable(self, "_on_clinic_finished"))
-			print("Main 已连接 clinic_finished 信号")
 	else:
-		print("current_scene 没有 clinic_finished 信号")
+		push_warning("current_scene 没有 clinic_finished 信号")
 
 	# 必须在 start_new_day() 之前连接，避免入口自动剧情请求丢失。
 	if current_scene.has_signal("story_requested"):
 		if not current_scene.is_connected("story_requested", Callable(self, "_on_story_requested")):
 			current_scene.connect("story_requested", Callable(self, "_on_story_requested"))
-			print("Main 已连接 story_requested 信号")
 	else:
-		print("current_scene 没有 story_requested 信号")
+		push_warning("current_scene 没有 story_requested 信号")
 
 	if current_scene.has_method("set_day"):
 		current_scene.call("set_day", GameTime.current_day)
-		print("已刷新诊室天数：", GameTime.current_day)
 	else:
-		print("Clinic 没有 set_day 方法")
+		push_warning("Clinic 没有 set_day 方法")
 
 	# 先播放 Clinic 场景音乐，再执行 start_new_day()。
 	# start_new_day() 可能同步触发入口剧情；这样剧情 BGM 可以正确覆盖场景 BGM。
@@ -1020,11 +1012,6 @@ func _enter_clinic(play_morning_sfx: bool = false) -> void:
 	if play_morning_sfx:
 		_start_morning_fade_in()
 
-	if OS.is_debug_build() and was_cached:
-		print("[Main] 复用 Clinic 常驻实例")
-
-	print("已进入 Clinic 场景，第 %d 天" % GameTime.current_day)
-
 
 # =========================================================
 # 进入 Night
@@ -1040,7 +1027,6 @@ func _enter_night(
 
 	_clear_current_scene()
 
-	var was_cached := night_scene_instance != null and is_instance_valid(night_scene_instance)
 	current_scene = _get_or_create_night_scene()
 	if current_scene == null:
 		# 过渡失败时不要把玩家永久留在黑屏状态。
@@ -1055,17 +1041,15 @@ func _enter_night(
 	if current_scene.has_signal("night_finished"):
 		if not current_scene.is_connected("night_finished", Callable(self, "_on_night_finished")):
 			current_scene.connect("night_finished", Callable(self, "_on_night_finished"))
-			print("Main 已连接 night_finished 信号")
 	else:
-		print("current_scene 没有 night_finished 信号")
+		push_warning("current_scene 没有 night_finished 信号")
 
 	# 必须在 start_night() 之前连接，避免入口自动剧情请求丢失。
 	if current_scene.has_signal("story_requested"):
 		if not current_scene.is_connected("story_requested", Callable(self, "_on_story_requested")):
 			current_scene.connect("story_requested", Callable(self, "_on_story_requested"))
-			print("Main 已连接 Night story_requested 信号")
 	else:
-		print("current_scene 没有 story_requested 信号")
+		push_warning("current_scene 没有 story_requested 信号")
 
 	# 先播放 Night 场景音乐，再执行 start_night()。
 	# start_night() 可能同步触发入口剧情；这样剧情 BGM 可以正确覆盖场景 BGM。
@@ -1079,16 +1063,11 @@ func _enter_night(
 	if current_scene.has_method("start_night"):
 		current_scene.call("start_night", GameTime.current_day, show_finance_report)
 	else:
-		print("Night 没有 start_night 方法")
+		push_warning("Night 没有 start_night 方法")
 
 	# Night 初始化完成后，再从全黑慢慢渐亮。
 	if play_evening_fade_in:
 		_start_evening_fade_in()
-
-	if OS.is_debug_build() and was_cached:
-		print("[Main] 复用 Night 常驻实例")
-
-	print("已进入 Night 场景，第 %d 天" % GameTime.current_day)
 
 
 # =========================================================
@@ -1162,7 +1141,6 @@ func _play_story(story_path: String, _legacy_return_target: String = "") -> void
 
 	# 一次性剧情如果已经播放过，就不再进入 Story 场景。
 	if play_once and StoryManager.has_played_story(story_id):
-		print("剧情已播放，跳过：", story_id)
 		return
 
 	# “播放后”决定剧情结束目标。gameover / endgame 都不需要返回游戏场景。
@@ -1224,8 +1202,6 @@ func _play_story(story_path: String, _legacy_return_target: String = "") -> void
 		push_warning("Story 缺少 set_current_scene_background_texture()，无法使用当前场景背景。")
 	_connect_story_scene_signals(current_story_scene)
 	story_scene_root.add_child(current_story_scene)
-
-	print("Main 播放剧情：", story_path)
 
 
 func _connect_story_scene_signals(story_node: Node) -> void:
@@ -1544,8 +1520,6 @@ func _on_clinic_finished() -> void:
 	_settle_current_day_finances_if_needed()
 	GameTime.finish_day()
 	_save_game_with_warning("白天结束")
-
-	print("Clinic 已结束，渐黑后切换到 Night 场景")
 	_enter_night(true, true)
 
 
@@ -1574,8 +1548,6 @@ func _on_night_finished() -> void:
 func _finish_night_and_enter_next_day() -> void:
 	GameTime.finish_night()
 	_save_game_with_warning("夜晚结束")
-
-	print("夜晚结束，进入第 %d 天" % GameTime.current_day)
 	_enter_clinic(true)
 
 
@@ -1604,9 +1576,6 @@ func _get_or_create_clinic_scene() -> Node:
 	current_scene_root.add_child(clinic_scene_instance)
 	_set_scene_active(clinic_scene_instance, false)
 
-	if OS.is_debug_build():
-		print("[Main] Clinic 常驻实例创建完成")
-
 	return clinic_scene_instance
 
 
@@ -1617,9 +1586,6 @@ func _get_or_create_night_scene() -> Node:
 	night_scene_instance = NIGHT_SCENE.instantiate()
 	current_scene_root.add_child(night_scene_instance)
 	_set_scene_active(night_scene_instance, false)
-
-	if OS.is_debug_build():
-		print("[Main] Night 常驻实例创建完成")
 
 	return night_scene_instance
 

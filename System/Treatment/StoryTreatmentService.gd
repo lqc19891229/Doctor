@@ -77,16 +77,6 @@ func prepare_story_npc_treatment(
 	_current_npc = npc
 	_reset_attempt_state()
 
-	if OS.is_debug_build():
-		print(
-			"[StoryTreatmentService] 已准备剧情诊疗：",
-			_current_npc.npc_name,
-			" / ",
-			_current_npc.npc_id,
-			" / ",
-			_current_npc.disease.disease_name
-		)
-
 	return true
 
 
@@ -160,9 +150,6 @@ func submit_story_prescription() -> Dictionary:
 	_current_npc.is_treated = bool(result.success)
 	_current_npc.treatment_failed = not bool(result.success)
 	_set_info_text(_last_judge_summary_text)
-
-	if OS.is_debug_build() and result.has_method("debug_print"):
-		result.debug_print()
 
 	return {
 		"ok": true,

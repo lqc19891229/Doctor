@@ -78,8 +78,6 @@ func load_all_diseases() -> void:
 
 	dir.list_dir_end()
 
-	print("DiseaseDataBase 加载完成，疾病数量：", disease_map.size())
-
 
 ## =========================================================
 ## 五、加载单个疾病资源
@@ -159,21 +157,3 @@ func get_all_diseases() -> Array[DiseaseData]:
 ## 返回当前疾病总数
 func get_disease_count() -> int:
 	return disease_map.size()
-
-
-## =========================================================
-## 七、调试
-## =========================================================
-
-func debug_print_all_diseases() -> void:
-	print("===== DiseaseDataBase 疾病列表 =====")
-
-	for disease_id in disease_map.keys():
-		var data: DiseaseData = disease_map[disease_id]
-		print(
-			"ID: ", data.disease_id,
-			" | 名称: ", data.disease_name,
-			" | 方剂: ", data.recommended_formula_id
-		)
-
-	print("总数: ", disease_map.size())
