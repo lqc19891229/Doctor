@@ -2,13 +2,17 @@ extends Node
 
 # =========================================================
 # SaveManager
-# 负责游戏存档：
-# 1. 保存游戏时间
-# 2. 读取游戏时间
-# 3. 保存解锁进度
-# 4. 读取解锁进度
-# 5. 保存剧情播放状态
-# 6. 支持多个存档槽位
+# 当前存档结构：
+# 1号槽 = 自动存档
+# 2～5号槽 = 手动存档
+# 所有手动档共用同一个自动存档。
+#
+# 自动存档继续沿用原有“白天结束 / 夜晚结束”阶段保存机制，
+# 自动档始终写入 1 号槽。
+#
+# 手动保存规则：
+# - 白天：保存“本日刚开始”的状态（即上一夜结束后的状态）
+# - 夜晚：保存当前实时状态
 # =========================================================
 
 
@@ -16,26 +20,37 @@ extends Node
 # 存档配置
 # =========================================================
 const SAVE_VERSION: int = 1
-const SAVE_SLOT_COUNT: int = 3
-const SAVE_PATH_TEMPLATE: String = "user://save_slot_%d.json"
+const SAVE_SLOT_COUNT: int = 5
+
+const AUTO_SAVE_SLOT: int = 1
+const MANUAL_SAVE_FIRST_SLOT: int = 2
+const MANUAL_SAVE_LAST_SLOT: int = 5
+
+const AUTO_SAVE_PATH: String = "user://save_auto.json"
+const MANUAL_SAVE_PATH_TEMPLATE: String = "user://save_manual_%d.json"
+
 const SAVE_TEMP_SUFFIX: String = ".tmp"
 const SAVE_BACKUP_SUFFIX: String = ".bak"
 
-# 旧版单存档路径，仅用于兼容读取旧存档。
+# 旧版三槽位存档，仅用于兼容读取 / 清理。
+const LEGACY_SLOT_PATH_TEMPLATE: String = "user://save_slot_%d.json"
+
+# 更早的旧版单存档路径，仅用于兼容读取 / 清理。
 const LEGACY_SAVE_PATH: String = "user://save_game.json"
 
 # 后台存档工作器：只处理纯数据序列化和文件 I/O。
 const SaveWorkerScript = preload("res://System/Save/SaveWorker.gd")
 
-# 当前正在使用的槽位。
-# 不传 slot_index 时，save_game / load_game / has_save / delete_save 默认使用这个槽位。
-var current_slot_index: int = 1
+# 保留此字段供旧代码兼容；新结构下它只表示“最近一次读取/显式操作的槽位”。
+# 自动存档永远固定写入 AUTO_SAVE_SLOT，不受此值影响。
+var current_slot_index: int = AUTO_SAVE_SLOT
+
+# 白天手动保存必须使用“当天刚开始”的快照，不能保存白天进行中的诊疗状态。
+var _day_start_checkpoint: Dictionary = {}
 
 # =========================================================
 # 后台自动存档状态
 # =========================================================
-# save_game() 继续保留“同步落盘”语义，供需要立刻确认磁盘状态的旧代码使用。
-# Main 的阶段自动存档改走 save_game_async()，避免把 JSON / flush 卡在切场景关键帧。
 var _save_thread: Thread = null
 var _active_save_worker: RefCounted = null
 var _active_async_request: Dictionary = {}
@@ -47,72 +62,231 @@ func _process(_delta: float) -> void:
 
 
 func _exit_tree() -> void:
-	# Thread 销毁前必须 wait_to_finish()；退出游戏时确保最后一次存档真正落盘。
+	# Thread 销毁前必须 wait_to_finish()；退出游戏时确保最后一次自动存档真正落盘。
 	flush_async_saves()
 
 
 # =========================================================
-# 判断槽位是否合法
+# 槽位定义
 # =========================================================
 func is_valid_slot(slot_index: int) -> bool:
 	return slot_index >= 1 and slot_index <= SAVE_SLOT_COUNT
 
 
+func is_auto_slot(slot_index: int) -> bool:
+	return slot_index == AUTO_SAVE_SLOT
+
+
+func is_manual_slot(slot_index: int) -> bool:
+	return (
+		slot_index >= MANUAL_SAVE_FIRST_SLOT
+		and slot_index <= MANUAL_SAVE_LAST_SLOT
+	)
+
+
+func get_slot_display_label(slot_index: int) -> String:
+	if is_auto_slot(slot_index):
+		return "自动存档"
+
+	if is_manual_slot(slot_index):
+		return "手动存档 %d" % (slot_index - 1)
+
+	return "无效存档"
+
+
 # =========================================================
-# 获取指定槽位的存档路径
+# 存档路径
 # =========================================================
 func get_save_path(slot_index: int = -1) -> String:
 	if slot_index <= 0:
-		slot_index = current_slot_index
+		slot_index = AUTO_SAVE_SLOT
 
-	return SAVE_PATH_TEMPLATE % slot_index
+	if is_auto_slot(slot_index):
+		return AUTO_SAVE_PATH
+
+	if is_manual_slot(slot_index):
+		return MANUAL_SAVE_PATH_TEMPLATE % slot_index
+
+	return ""
+
+
+func _get_legacy_save_paths(slot_index: int) -> Array[String]:
+	var result: Array[String] = []
+
+	# 旧版只有 1～3 号槽。
+	if slot_index >= 1 and slot_index <= 3:
+		result.append(LEGACY_SLOT_PATH_TEMPLATE % slot_index)
+
+	# 最早的单存档只映射到现在的自动档。
+	if slot_index == AUTO_SAVE_SLOT:
+		result.append(LEGACY_SAVE_PATH)
+
+	return result
+
+
+func _resolve_existing_save_path(slot_index: int) -> String:
+	if not is_valid_slot(slot_index):
+		return ""
+
+	var save_path := get_save_path(slot_index)
+	if not save_path.is_empty():
+		if not _recover_interrupted_save(save_path):
+			push_warning("检查存档失败：无法恢复上次中断的存档事务：" + save_path)
+			return ""
+
+		if FileAccess.file_exists(save_path):
+			return save_path
+
+	for legacy_path in _get_legacy_save_paths(slot_index):
+		if FileAccess.file_exists(legacy_path):
+			return legacy_path
+
+	return ""
 
 
 # =========================================================
-# 判断是否存在存档
+# 查询存档
 # =========================================================
 func has_save(slot_index: int = -1) -> bool:
 	# 查询磁盘状态前先收尾后台任务，避免菜单看到旧档。
 	flush_async_saves()
 
 	if slot_index <= 0:
-		slot_index = current_slot_index
+		slot_index = AUTO_SAVE_SLOT
 
-	if not is_valid_slot(slot_index):
-		return false
+	return not _resolve_existing_save_path(slot_index).is_empty()
 
-	var save_path: String = get_save_path(slot_index)
-	if not _recover_interrupted_save(save_path):
-		push_warning("检查存档失败：无法恢复上次中断的存档事务：" + save_path)
-		return false
 
-	if FileAccess.file_exists(save_path):
-		return true
+func has_any_save() -> bool:
+	flush_async_saves()
 
-	# 兼容旧版单存档：只在 1 号槽判断旧路径。
-	if slot_index == 1 and FileAccess.file_exists(LEGACY_SAVE_PATH):
-		return true
+	for slot_index in range(1, SAVE_SLOT_COUNT + 1):
+		if not _resolve_existing_save_path(slot_index).is_empty():
+			return true
 
 	return false
 
 
 # =========================================================
-# 保存游戏
+# 快照
+# =========================================================
+func _make_current_save_data(slot_index: int = AUTO_SAVE_SLOT) -> Dictionary:
+	var progress_data: Dictionary = Unlock.get_save_data().duplicate(true)
+	var story_data: Dictionary = StoryManager.get_save_data().duplicate(true)
+	var phase := String(GameTime.current_phase)
+	var day := int(GameTime.current_day)
+
+	return {
+		"version": SAVE_VERSION,
+		"meta": _make_save_meta_for_state(slot_index, day, phase),
+		"time": {
+			"current_day": day,
+			"current_phase": phase
+		},
+		"progress": progress_data,
+		"story": story_data
+	}
+
+
+func _prepare_snapshot_for_slot(
+	source_data: Dictionary,
+	slot_index: int
+) -> Dictionary:
+	var save_data: Dictionary = source_data.duplicate(true)
+	save_data["version"] = SAVE_VERSION
+
+	var time_data: Dictionary = {}
+	if save_data.has("time") and typeof(save_data["time"]) == TYPE_DICTIONARY:
+		time_data = save_data["time"]
+	else:
+		time_data = save_data
+
+	var day := int(time_data.get("current_day", GameTime.current_day))
+	var phase := String(time_data.get("current_phase", GameTime.current_phase))
+	save_data["meta"] = _make_save_meta_for_state(slot_index, day, phase)
+
+	return save_data
+
+
+func capture_day_start_checkpoint() -> bool:
+	if GameTime == null or not GameTime.is_day():
+		return false
+
+	_day_start_checkpoint = _make_current_save_data(AUTO_SAVE_SLOT).duplicate(true)
+	return true
+
+
+func clear_day_start_checkpoint() -> void:
+	_day_start_checkpoint.clear()
+
+
+func has_day_start_checkpoint() -> bool:
+	return not _day_start_checkpoint.is_empty()
+
+
+# =========================================================
+# 保存请求构建
+# =========================================================
+func _make_save_request_from_data(
+	slot_index: int,
+	context: String,
+	source_data: Dictionary
+) -> Dictionary:
+	var save_data := _prepare_snapshot_for_slot(source_data, slot_index)
+
+	var time_data: Dictionary = {}
+	if save_data.has("time") and typeof(save_data["time"]) == TYPE_DICTIONARY:
+		time_data = save_data["time"]
+
+	var day := int(time_data.get("current_day", GameTime.current_day))
+	var phase := String(time_data.get("current_phase", GameTime.current_phase))
+
+	var save_path := get_save_path(slot_index)
+	var temp_path := save_path + SAVE_TEMP_SUFFIX
+	var backup_path := save_path + SAVE_BACKUP_SUFFIX
+
+	return {
+		"slot_index": slot_index,
+		"context": context,
+		"day": day,
+		"phase": phase,
+		"save_data": save_data,
+		"save_path": save_path,
+		"temp_path": temp_path,
+		"backup_path": backup_path,
+		"save_absolute": ProjectSettings.globalize_path(save_path),
+		"temp_absolute": ProjectSettings.globalize_path(temp_path),
+		"backup_absolute": ProjectSettings.globalize_path(backup_path)
+	}
+
+
+func _make_save_request(slot_index: int, context: String) -> Dictionary:
+	return _make_save_request_from_data(
+		slot_index,
+		context,
+		_make_current_save_data(slot_index)
+	)
+
+
+# =========================================================
+# 同步保存（兼容接口）
 # =========================================================
 func save_game(slot_index: int = -1) -> bool:
-	# 同步接口保持兼容：调用方返回时，数据已经真实写入磁盘。
-	# 为避免和后台自动存档争用同一 .tmp / .bak，先等待后台队列清空。
-	if not flush_async_saves():
-		push_warning("同步存档前发现后台存档失败，将继续尝试写入当前快照。")
-
+	# 不指定槽位时默认保存到自动档，避免“读取了某个手动档后，
+	# 后续旧代码又把自动保存写回那个手动档”。
 	if slot_index <= 0:
-		slot_index = current_slot_index
+		slot_index = AUTO_SAVE_SLOT
 
 	if not is_valid_slot(slot_index):
 		print("存档失败：无效槽位 %d" % slot_index)
 		return false
 
+	# 同步接口返回时要求真正落盘，因此先等待后台自动存档。
+	if not flush_async_saves():
+		push_warning("同步存档前发现后台存档失败，将继续尝试写入当前快照。")
+
 	current_slot_index = slot_index
+
 	var request := _make_save_request(slot_index, "同步存档")
 	var worker: RefCounted = SaveWorkerScript.new()
 	var result = worker.call("write_request", request)
@@ -126,23 +300,47 @@ func save_game(slot_index: int = -1) -> bool:
 	return bool(result_dict.get("ok", false))
 
 
-# 非阻塞自动存档：
-# 1. 主线程只创建一份纯数据快照；
-# 2. JSON.stringify、FileAccess、flush、.tmp/.bak 原子替换全部在 Thread 中执行；
-# 3. 同一槽位短时间连续请求时，只保留“当前正在写的一份 + 最新等待的一份”。
-func save_game_async(slot_index: int = -1, context: String = "自动存档") -> bool:
-	if slot_index <= 0:
-		slot_index = current_slot_index
-
-	if not is_valid_slot(slot_index):
-		push_warning("自动存档失败：无效槽位 %d" % slot_index)
-		return false
-
-	current_slot_index = slot_index
-
-	# 如果上一线程已经结束但还没等到下一帧 _process() 回收，先无阻塞回收。
+# =========================================================
+# 自动保存
+# =========================================================
+func save_auto_game_async(context: String = "自动存档") -> bool:
+	# 如果上一线程刚结束但还没等到下一帧 _process() 回收，先无阻塞回收。
 	_poll_async_save()
 
+	var save_data := _make_current_save_data(AUTO_SAVE_SLOT)
+
+	# 夜晚结束进入白天后生成的自动档，同时就是新一天的“日初检查点”。
+	# 新游戏第一天的日初检查点由 Main 在初始化完成后主动 capture。
+	if GameTime.is_day():
+		_day_start_checkpoint = save_data.duplicate(true)
+
+	var request := _make_save_request_from_data(
+		AUTO_SAVE_SLOT,
+		context,
+		save_data
+	)
+
+	if _save_thread != null and _save_thread.is_started():
+		_queue_latest_async_request(request)
+		return true
+
+	return _start_async_save_request(request)
+
+
+# 保留旧接口，Main 新代码会调用 save_auto_game_async()。
+func save_game_async(
+	slot_index: int = -1,
+	context: String = "自动存档"
+) -> bool:
+	if slot_index <= 0 or slot_index == AUTO_SAVE_SLOT:
+		return save_auto_game_async(context)
+
+	if not is_valid_slot(slot_index):
+		push_warning("后台存档失败：无效槽位 %d" % slot_index)
+		return false
+
+	_poll_async_save()
+	current_slot_index = slot_index
 	var request := _make_save_request(slot_index, context)
 
 	if _save_thread != null and _save_thread.is_started():
@@ -150,6 +348,46 @@ func save_game_async(slot_index: int = -1, context: String = "自动存档") -> 
 		return true
 
 	return _start_async_save_request(request)
+
+
+# =========================================================
+# 手动保存
+# =========================================================
+func save_manual_game(slot_index: int) -> bool:
+	if not is_manual_slot(slot_index):
+		push_warning("手动保存失败：%d 号槽不是手动存档槽。" % slot_index)
+		return false
+
+	var save_data: Dictionary
+
+	if GameTime.is_day():
+		# 白天绝不保存当前诊疗进行中的状态，只保存该天刚开始时的快照。
+		if _day_start_checkpoint.is_empty():
+			push_warning("手动保存失败：当前白天缺少日初检查点。")
+			return false
+
+		save_data = _day_start_checkpoint.duplicate(true)
+	else:
+		# 夜晚允许保存当前实时状态。
+		save_data = _make_current_save_data(slot_index)
+
+	current_slot_index = slot_index
+	var request := _make_save_request_from_data(
+		slot_index,
+		"手动保存",
+		save_data
+	)
+
+	var worker: RefCounted = SaveWorkerScript.new()
+	var result = worker.call("write_request", request)
+
+	if typeof(result) != TYPE_DICTIONARY:
+		push_error("手动保存失败：SaveWorker 返回了无效结果。")
+		return false
+
+	var result_dict: Dictionary = result
+	_handle_async_save_result(result_dict, false)
+	return bool(result_dict.get("ok", false))
 
 
 func is_async_save_busy() -> bool:
@@ -162,7 +400,7 @@ func is_async_save_busy() -> bool:
 # 需要“此函数返回后磁盘一定是最新状态”的场景调用：
 # - 读档
 # - 删除存档
-# - 存档槽位菜单读取摘要
+# - 存档菜单读取摘要
 # - 同步 save_game()
 # - 游戏退出
 func flush_async_saves() -> bool:
@@ -182,7 +420,6 @@ func flush_async_saves() -> bool:
 			push_error("后台存档线程返回了无效结果。")
 			all_ok = false
 
-	# flush 本身就是一个显式同步点；剩余快照直接顺序写完，避免再启动线程后立刻等待。
 	while not _pending_async_requests.is_empty():
 		var request: Dictionary = _pending_async_requests.pop_front()
 		var worker: RefCounted = SaveWorkerScript.new()
@@ -198,45 +435,6 @@ func flush_async_saves() -> bool:
 		all_ok = all_ok and bool(pending_result_dict.get("ok", false))
 
 	return all_ok
-
-
-func _make_save_request(slot_index: int, context: String) -> Dictionary:
-	# 这里是唯一允许接触 Autoload / Node 状态的部分，始终在主线程运行。
-	# duplicate(true) 把所有 Dictionary / Array 递归复制，后台线程不再共享运行时容器。
-	var progress_data: Dictionary = Unlock.get_save_data().duplicate(true)
-	var story_data: Dictionary = StoryManager.get_save_data().duplicate(true)
-	var phase := String(GameTime.current_phase)
-	var day := int(GameTime.current_day)
-
-	var save_data: Dictionary = {
-		"version": SAVE_VERSION,
-		"meta": _make_save_meta(slot_index).duplicate(true),
-		"time": {
-			"current_day": day,
-			"current_phase": phase
-		},
-		"progress": progress_data,
-		"story": story_data
-	}
-
-	var save_path := get_save_path(slot_index)
-	var temp_path := save_path + SAVE_TEMP_SUFFIX
-	var backup_path := save_path + SAVE_BACKUP_SUFFIX
-
-	return {
-		"slot_index": slot_index,
-		"context": context,
-		"day": day,
-		"phase": phase,
-		"save_data": save_data,
-		"save_path": save_path,
-		"temp_path": temp_path,
-		"backup_path": backup_path,
-		# 路径转换也在主线程完成，后台只使用已经准备好的字符串。
-		"save_absolute": ProjectSettings.globalize_path(save_path),
-		"temp_absolute": ProjectSettings.globalize_path(temp_path),
-		"backup_absolute": ProjectSettings.globalize_path(backup_path)
-	}
 
 
 func _queue_latest_async_request(request: Dictionary) -> void:
@@ -448,7 +646,6 @@ func _remove_file_if_exists(path: String) -> bool:
 	var remove_error: Error = DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	return remove_error == OK
 
-
 # =========================================================
 # 读取游戏
 # =========================================================
@@ -458,69 +655,51 @@ func load_game(slot_index: int = -1) -> bool:
 		push_warning("读档前有后台存档失败，将继续尝试读取磁盘上最后一个有效存档。")
 
 	if slot_index <= 0:
-		slot_index = current_slot_index
+		slot_index = AUTO_SAVE_SLOT
 
 	if not is_valid_slot(slot_index):
 		print("读档失败：无效槽位 %d" % slot_index)
 		return false
 
-	var save_path: String = get_save_path(slot_index)
-	if not _recover_interrupted_save(save_path):
-		print("读档失败：无法恢复上次中断的存档事务：", save_path)
+	var save_path := _resolve_existing_save_path(slot_index)
+	if save_path.is_empty():
+		print("读档失败：%s 没有存档" % get_slot_display_label(slot_index))
 		return false
 
-	# 兼容旧版单存档：如果 1 号槽没有新存档，但旧路径存在，则读取旧存档。
-	if not FileAccess.file_exists(save_path):
-		if slot_index == 1 and FileAccess.file_exists(LEGACY_SAVE_PATH):
-			save_path = LEGACY_SAVE_PATH
-		else:
-			print("读档失败：槽位 %d 没有存档" % slot_index)
-			return false
-
-	# 打开存档文件，READ 表示读取模式
 	var file: FileAccess = FileAccess.open(save_path, FileAccess.READ)
-
-	# 如果文件打开失败，读取失败
 	if file == null:
 		print("读档失败：无法打开存档文件：", save_path)
 		return false
 
-	# 读取全部文本
 	var json_text: String = file.get_as_text()
-
-	# 关闭文件
 	file.close()
 
-	# 解析 JSON
 	var json: JSON = JSON.new()
 	var error: Error = json.parse(json_text)
-
-	# JSON 格式错误，读取失败
 	if error != OK:
 		print("读档失败：JSON 解析错误")
 		return false
 
-	# 获取解析后的数据
 	var save_data = json.data
-
-	# 如果解析结果不是 Dictionary，读取失败
 	if typeof(save_data) != TYPE_DICTIONARY:
 		print("读档失败：存档数据格式错误")
 		return false
 
 	current_slot_index = slot_index
 
-	# 读取时间数据
 	_load_time_data(save_data)
-
-	# 读取进度数据
 	_load_progress_data(save_data)
-
-	# 读取剧情播放状态
 	_load_story_data(save_data)
 
-	print("读档完成：槽位 %d，第 %d 天，阶段：%s" % [
-		slot_index,
+	# 白天档本身就是“当天开始状态”，读入后重建日初检查点。
+	# 夜晚档不需要日初检查点；等夜晚结束进入下一天时由自动保存重新建立。
+	if GameTime.is_day():
+		_day_start_checkpoint = _make_current_save_data(AUTO_SAVE_SLOT).duplicate(true)
+	else:
+		_day_start_checkpoint.clear()
+
+	print("读档完成：%s，第 %d 天，阶段：%s" % [
+		get_slot_display_label(slot_index),
 		GameTime.current_day,
 		GameTime.current_phase
 	])
@@ -528,12 +707,6 @@ func load_game(slot_index: int = -1) -> bool:
 	return true
 
 
-# =========================================================
-# 读取时间数据
-# 兼容两种格式：
-# 1. 新格式：save_data["time"]["current_day"]
-# 2. 旧格式：save_data["current_day"]
-# =========================================================
 func _load_time_data(save_data: Dictionary) -> void:
 	var time_data: Dictionary = {}
 
@@ -602,90 +775,112 @@ func _load_story_data(save_data: Dictionary) -> void:
 	# 恢复剧情播放记录。
 	StoryManager.load_save_data(save_data["story"])
 
-
 # =========================================================
 # 删除存档
-# 以后做“重新开始游戏”按钮时会用到
 # =========================================================
+func _remove_save_transaction_files(save_path: String) -> bool:
+	if save_path.is_empty():
+		return true
+
+	var all_ok := true
+	all_ok = _remove_file_if_exists(save_path) and all_ok
+	all_ok = _remove_file_if_exists(save_path + SAVE_TEMP_SUFFIX) and all_ok
+	all_ok = _remove_file_if_exists(save_path + SAVE_BACKUP_SUFFIX) and all_ok
+	return all_ok
+
+
 func delete_save(slot_index: int = -1) -> bool:
-	# 删除前先结束可能正在写同一槽位的后台任务，避免文件竞争。
 	flush_async_saves()
 
 	if slot_index <= 0:
-		slot_index = current_slot_index
+		slot_index = AUTO_SAVE_SLOT
 
 	if not is_valid_slot(slot_index):
 		print("删除存档失败：无效槽位 %d" % slot_index)
 		return false
 
-	var slot_save_path: String = get_save_path(slot_index)
-	if not _recover_interrupted_save(slot_save_path):
-		print("删除存档失败：无法恢复上次中断的存档事务：", slot_save_path)
-		return false
-	var save_path: String = slot_save_path
+	var all_ok := true
+	var removed_any := false
 
-	if not FileAccess.file_exists(save_path):
-		# 兼容旧版单存档：只允许 1 号槽删除旧路径。
-		if slot_index == 1 and FileAccess.file_exists(LEGACY_SAVE_PATH):
-			save_path = LEGACY_SAVE_PATH
-		else:
-			print("没有可删除的存档：槽位 %d" % slot_index)
-			return false
+	var save_path := get_save_path(slot_index)
+	if FileAccess.file_exists(save_path):
+		removed_any = true
+	if not _remove_save_transaction_files(save_path):
+		all_ok = false
 
-	var err: Error = DirAccess.remove_absolute(ProjectSettings.globalize_path(save_path))
+	for legacy_path in _get_legacy_save_paths(slot_index):
+		if FileAccess.file_exists(legacy_path):
+			removed_any = true
+		if not _remove_save_transaction_files(legacy_path):
+			all_ok = false
 
-	if err != OK:
-		print("删除存档失败：槽位 %d" % slot_index)
-		return false
+	if all_ok and removed_any:
+		print("已删除：%s" % get_slot_display_label(slot_index))
 
-	# 删除新格式槽位时，同时清理可能遗留的事务文件。
-	if save_path == slot_save_path:
-		_remove_file_if_exists(slot_save_path + SAVE_TEMP_SUFFIX)
-		_remove_file_if_exists(slot_save_path + SAVE_BACKUP_SUFFIX)
+	return all_ok and removed_any
 
-	print("已删除存档：槽位 %d" % slot_index)
-	return true
+
+func delete_all_saves() -> bool:
+	# 新游戏会清空自动档、全部手动档，以及旧版兼容存档。
+	flush_async_saves()
+
+	var all_ok := true
+	var paths: Array[String] = []
+
+	for slot_index in range(1, SAVE_SLOT_COUNT + 1):
+		var new_path := get_save_path(slot_index)
+		if not new_path.is_empty() and not paths.has(new_path):
+			paths.append(new_path)
+
+		for legacy_path in _get_legacy_save_paths(slot_index):
+			if not legacy_path.is_empty() and not paths.has(legacy_path):
+				paths.append(legacy_path)
+
+	for save_path in paths:
+		if not _remove_save_transaction_files(save_path):
+			all_ok = false
+
+	_day_start_checkpoint.clear()
+	current_slot_index = AUTO_SAVE_SLOT
+
+	if all_ok:
+		print("已清除自动存档和全部手动存档。")
+
+	return all_ok
 
 
 # =========================================================
-# 获取单个槽位的存档摘要
-# 给存档选择界面显示用
+# 存档摘要
 # =========================================================
 func get_save_meta(slot_index: int) -> Dictionary:
-	# 存档菜单需要读取真实磁盘摘要；进入菜单时允许在这里同步收尾。
+	# 菜单显示摘要前同步收尾后台自动存档。
 	flush_async_saves()
 
 	if not is_valid_slot(slot_index):
 		return {
 			"slot_index": slot_index,
 			"exists": false,
+			"slot_label": "无效存档",
 			"display_name": "无效槽位"
 		}
 
-	var save_path: String = get_save_path(slot_index)
-	if not _recover_interrupted_save(save_path):
+	var slot_label := get_slot_display_label(slot_index)
+	var save_path := _resolve_existing_save_path(slot_index)
+
+	if save_path.is_empty():
 		return {
 			"slot_index": slot_index,
 			"exists": false,
-			"display_name": "存档恢复失败"
+			"slot_label": slot_label,
+			"display_name": "空存档"
 		}
-
-	# 兼容旧版单存档：只在 1 号槽读取旧路径摘要。
-	if not FileAccess.file_exists(save_path):
-		if slot_index == 1 and FileAccess.file_exists(LEGACY_SAVE_PATH):
-			save_path = LEGACY_SAVE_PATH
-		else:
-			return {
-				"slot_index": slot_index,
-				"exists": false,
-				"display_name": "空存档"
-			}
 
 	var file: FileAccess = FileAccess.open(save_path, FileAccess.READ)
 	if file == null:
 		return {
 			"slot_index": slot_index,
 			"exists": false,
+			"slot_label": slot_label,
 			"display_name": "读取失败"
 		}
 
@@ -698,6 +893,7 @@ func get_save_meta(slot_index: int) -> Dictionary:
 		return {
 			"slot_index": slot_index,
 			"exists": false,
+			"slot_label": slot_label,
 			"display_name": "损坏存档"
 		}
 
@@ -706,6 +902,7 @@ func get_save_meta(slot_index: int) -> Dictionary:
 		return {
 			"slot_index": slot_index,
 			"exists": false,
+			"slot_label": slot_label,
 			"display_name": "损坏存档"
 		}
 
@@ -716,14 +913,11 @@ func get_save_meta(slot_index: int) -> Dictionary:
 		meta = _make_meta_from_save_data(slot_index, save_data)
 
 	meta["slot_index"] = slot_index
+	meta["slot_label"] = slot_label
 	meta["exists"] = true
 	return meta
 
 
-# =========================================================
-# 获取全部槽位的存档摘要
-# 给存档选择界面显示用
-# =========================================================
 func get_all_save_meta() -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
 
@@ -737,17 +931,30 @@ func get_all_save_meta() -> Array[Dictionary]:
 # 生成存档摘要
 # =========================================================
 func _make_save_meta(slot_index: int) -> Dictionary:
-	var phase_text: String = _get_phase_display_text(GameTime.current_phase)
+	return _make_save_meta_for_state(
+		slot_index,
+		GameTime.current_day,
+		String(GameTime.current_phase)
+	)
+
+
+func _make_save_meta_for_state(
+	slot_index: int,
+	day: int,
+	phase: String
+) -> Dictionary:
+	var phase_text := _get_phase_display_text(phase)
 
 	return {
 		"slot_index": slot_index,
+		"slot_label": get_slot_display_label(slot_index),
 		"save_time": Time.get_datetime_string_from_system(false, true),
 		"display_name": "%s %s" % [
-			GameTime.get_day_text(),
+			_get_day_display_text(day),
 			phase_text
 		],
-		"current_day": GameTime.current_day,
-		"current_phase": GameTime.current_phase
+		"current_day": day,
+		"current_phase": phase
 	}
 
 
@@ -768,16 +975,17 @@ func _make_meta_from_save_data(slot_index: int, save_data: Dictionary) -> Dictio
 
 	return {
 		"slot_index": slot_index,
+		"slot_label": get_slot_display_label(slot_index),
 		"save_time": "",
-		"display_name": "%s %s" % [_get_day_display_text(current_day), phase_text],
+		"display_name": "%s %s" % [
+			_get_day_display_text(current_day),
+			phase_text
+		],
 		"current_day": current_day,
 		"current_phase": current_phase
 	}
 
 
-# =========================================================
-# 日期显示文本
-# =========================================================
 func _get_day_display_text(day_index: int) -> String:
 	if GameTime.has_method("get_day_text_by_index"):
 		return GameTime.get_day_text_by_index(day_index)
