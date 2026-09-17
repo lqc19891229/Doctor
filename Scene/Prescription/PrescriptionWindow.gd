@@ -167,6 +167,10 @@ func _ready() -> void:
 	# 初始化时恢复固定位置。
 	position = fixed_window_position
 
+	# 每次开方窗口从隐藏变为显示时，默认把键盘焦点放到疾病搜索栏。
+	if not visibility_changed.is_connected(_on_visibility_changed):
+		visibility_changed.connect(_on_visibility_changed)
+
 	_setup_unit_option()
 	_setup_search_debounce_timers()
 	_connect_signals()
@@ -181,6 +185,25 @@ func _process(_delta: float) -> void:
 	# 窗口显示期间，阻止玩家拖动标题栏改变窗口位置。
 	if visible and position != fixed_window_position:
 		position = fixed_window_position
+
+
+func _on_visibility_changed() -> void:
+	if not visible:
+		return
+
+	# 延迟到本帧 UI 完成显示后再获取焦点，避免 show() 同帧被其它控件抢走。
+	call_deferred("_focus_disease_search")
+
+
+func _focus_disease_search() -> void:
+	if not visible:
+		return
+
+	if disease_search == null:
+		return
+
+	disease_search.grab_focus()
+	disease_search.caret_column = disease_search.text.length()
 
 
 # =========================================================
@@ -1346,6 +1369,9 @@ func _input(event: InputEvent) -> void:
 	if _try_handle_escape(event):
 		return
 
+	if _try_handle_unit_shortcut(event):
+		return
+
 	if _try_handle_role_shortcut(event):
 		return
 
@@ -1384,6 +1410,65 @@ func _try_handle_escape(event: InputEvent) -> bool:
 	close_window()
 	get_viewport().set_input_as_handled()
 	return true
+
+
+# =========================================================
+# 单位快捷键
+# `（数字 1 左边的键）：向上切换单位
+# Tab：向下切换单位
+# 单位顺序：分 → 钱 → 两 → 斤；默认单位为钱。
+# =========================================================
+func _try_handle_unit_shortcut(event: InputEvent) -> bool:
+	# 只在开方窗口显示时处理，避免影响 Clinic 或其它窗口。
+	if not visible:
+		return false
+
+	if not (event is InputEventKey):
+		return false
+
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return false
+
+	if key_event.alt_pressed or key_event.ctrl_pressed or key_event.meta_pressed or key_event.shift_pressed:
+		return false
+
+	var direction: int = 0
+
+	# 数字 1 左边的 ` 键：向上切换。
+	# physical_keycode 优先保证按键物理位置；keycode 作为兼容兜底。
+	if key_event.physical_keycode == KEY_QUOTELEFT or key_event.keycode == KEY_QUOTELEFT:
+		direction = -1
+	# Tab：向下切换，并在这里消费事件，避免 Tab 同时切换 UI 焦点。
+	elif key_event.keycode == KEY_TAB or key_event.physical_keycode == KEY_TAB:
+		direction = 1
+	else:
+		return false
+
+	_shift_unit_selection(direction)
+	get_viewport().set_input_as_handled()
+	return true
+
+
+func _shift_unit_selection(direction: int) -> void:
+	if unit_option == null or unit_option.item_count <= 0:
+		return
+
+	var current_index: int = unit_option.selected
+	if current_index < 0:
+		current_index = 1
+
+	# 到最上 / 最下时停止，不循环跳转。
+	var next_index: int = clampi(
+		current_index + direction,
+		0,
+		unit_option.item_count - 1
+	)
+
+	if next_index == current_index:
+		return
+
+	unit_option.select(next_index)
 
 
 func _try_handle_role_shortcut(event: InputEvent) -> bool:

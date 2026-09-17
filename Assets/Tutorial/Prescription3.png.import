@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://82feb6kdffdx"
-path="res://.godot/imported/54b36a87-030c-47b8-9b95-4cf080c588cb.png-af1850dc48e6eaa53cedcc3462b15989.ctex"
+uid="uid://chtqtbs03euay"
+path="res://.godot/imported/Prescription3.png-0f2183f0e18be0f0d33133b49d04c3f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/StoryNpc/li_jian_zhong/54b36a87-030c-47b8-9b95-4cf080c588cb.png"
-dest_files=["res://.godot/imported/54b36a87-030c-47b8-9b95-4cf080c588cb.png-af1850dc48e6eaa53cedcc3462b15989.ctex"]
+source_file="res://Assets/Tutorial/Prescription3.png"
+dest_files=["res://.godot/imported/Prescription3.png-0f2183f0e18be0f0d33133b49d04c3f5.ctex"]
 
 [params]
 

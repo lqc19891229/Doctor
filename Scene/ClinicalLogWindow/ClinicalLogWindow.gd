@@ -182,6 +182,10 @@ func open_window() -> void:
 	# 每次打开时恢复固定位置
 	position = fixed_window_position
 
+	# 每次打开行医记考都默认回到“疾病”页（Tab 0）。
+	if tab_container != null:
+		tab_container.current_tab = 0
+
 	# 先显示窗口，让 Godot 开始计算窗口和子节点尺寸。
 	show()
 
@@ -205,6 +209,11 @@ func open_window() -> void:
 	# refresh_view 后再置顶一次，避免异步等待期间被其它窗口抢到前面。
 	_bring_self_to_front()
 	grab_focus()
+
+	# 每次打开行医记考，都把输入焦点放到 Tab 0「疾病」的搜索栏。
+	# 放在窗口 grab_focus() 之后，避免焦点被 Window 本身重新抢走。
+	if disease_search_bar != null:
+		disease_search_bar.grab_focus()
 	
 
 func close_window() -> void:
@@ -862,8 +871,63 @@ func _input(event: InputEvent) -> void:
 	if _try_handle_escape(event):
 		return
 
+	if _try_handle_tab_shortcut(event):
+		return
+
 	if _try_handle_clinic_window_shortcut(event):
 		return
+
+
+# =========================================================
+# 行医记考页签快捷键
+# 1 = 疾病（Tab 0）
+# 2 = 方剂（Tab 1）
+# 3 = 药材（Tab 2）
+# 同时支持主键盘数字键与数字小键盘。
+# =========================================================
+func _try_handle_tab_shortcut(event: InputEvent) -> bool:
+	if not visible:
+		return false
+
+	if not (event is InputEventKey):
+		return false
+
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return false
+
+	if key_event.alt_pressed or key_event.ctrl_pressed or key_event.meta_pressed or key_event.shift_pressed:
+		return false
+
+	var target_tab: int = -1
+
+	if (
+		key_event.keycode == KEY_1
+		or key_event.physical_keycode == KEY_1
+		or key_event.keycode == KEY_KP_1
+	):
+		target_tab = 0
+	elif (
+		key_event.keycode == KEY_2
+		or key_event.physical_keycode == KEY_2
+		or key_event.keycode == KEY_KP_2
+	):
+		target_tab = 1
+	elif (
+		key_event.keycode == KEY_3
+		or key_event.physical_keycode == KEY_3
+		or key_event.keycode == KEY_KP_3
+	):
+		target_tab = 2
+	else:
+		return false
+
+	if tab_container == null:
+		return false
+
+	tab_container.current_tab = target_tab
+	get_viewport().set_input_as_handled()
+	return true
 
 
 func _try_handle_escape(event: InputEvent) -> bool:

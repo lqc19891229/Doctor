@@ -1715,8 +1715,21 @@ func finish_clinic_for_today() -> void:
 	clinic_finished_emitted = true
 	clinic_time_expired_waiting_for_current_patient = false
 
-	# Clinic 当天真正结束时，清除开方窗口中的疾病 / 药材搜索残留。
-	# PrescriptionWindow 是常驻节点，只 hide() 不会自动清空 LineEdit 和搜索关键词。
+	# Clinic 白天真正结束时，再统一清空一次全部 5 个搜索栏。
+	clear_all_search_state()
+
+	# Clinic 结束时停止 GameTimeManager 里的 Clinic 计时器
+	if GameTime.has_method("stop_clinic_clock"):
+		GameTime.stop_clinic_clock()
+
+	emit_signal("clinic_finished")
+
+# =========================================================
+# 统一清空 Clinic 内全部搜索状态
+# 开方窗口：疾病 / 药材
+# 行医记考：疾病 / 方剂 / 药材
+# =========================================================
+func clear_all_search_state() -> void:
 	if (
 		prescription_window != null
 		and is_instance_valid(prescription_window)
@@ -1724,15 +1737,8 @@ func finish_clinic_for_today() -> void:
 	):
 		prescription_window.clear_search_state()
 
-	# 同时清除行医记考中的疾病 / 方剂 / 药材搜索栏。
-	# ClinicalLogWindow 也是常驻节点，跨天前需要主动清空搜索文字。
 	_clear_clinical_log_search_state()
 
-	# Clinic 结束时停止 GameTimeManager 里的 Clinic 计时器
-	if GameTime.has_method("stop_clinic_clock"):
-		GameTime.stop_clinic_clock()
-
-	emit_signal("clinic_finished")
 
 func _clear_clinical_log_search_state() -> void:
 	if clinical_log_window == null or not is_instance_valid(clinical_log_window):
@@ -1829,6 +1835,10 @@ func _on_prescription_submit_requested() -> void:
 	# random NPC 会先播放治疗成功 / 失败台词，再弹出 JudgementResult。
 	if not submit_prescription():
 		return
+
+	# 每次处方成功提交后，统一清空全部 5 个搜索栏。
+	# 提交校验失败时不会走到这里，因此不会误清除玩家正在输入的内容。
+	clear_all_search_state()
 
 	if window_controller != null:
 		window_controller.close_treatment_windows_after_submit()
