@@ -425,7 +425,7 @@ var reputation_points: int = 0
 #   炉火纯青：601~2000 名望 = 500 文 / 人
 #   出神入化：2001+ 名望 = 1000 文 / 人
 # - 药材收入：处方实际药材售价减去实际药材成本。
-# - 病家谢礼：获得“妙手回春”评价时有 20% 概率获得，金额随机为
+# - 病家谢礼：获得“妙手回春”评价时有 40% 概率获得，金额随机为
 #   188 / 288 / 388 文。
 # - 李建中俸禄：完成 000_01《完书》剧情后，每两个节气收入 10000 文。
 # - 李言闻收入：简单 1000 文 / 普通 500 文 / 困难 0 文。
@@ -496,9 +496,13 @@ var game_difficulty: int = GameDifficulty.NORMAL
 const LAND_RENT_DA_SHU_WEN: int = 5000
 const LAND_RENT_SHUANG_JIANG_WEN: int = 15000
 
+# 000_01《完书》完成后的田租收入。
+const LAND_RENT_AFTER_BOOK_DA_SHU_WEN: int = 10000
+const LAND_RENT_AFTER_BOOK_SHUANG_JIANG_WEN: int = 30000
+
 # 病家谢礼：
 # random NPC 获得“妙手回春”评价时，由 Clinic 调用发放。
-# 20% 概率获得 188 / 288 / 388 文，并在白天实时到账。
+# 40% 概率获得 188 / 288 / 388 文，并在白天实时到账。
 const PATIENT_THANK_GIFT_PROBABILITY: float = 0.40
 const PATIENT_THANK_GIFT_OPTIONS_WEN = [188, 288, 388]
 
@@ -796,7 +800,7 @@ func record_random_npc_treatment_finance(
 
 # 病家谢礼。
 # Clinic 仅在 random NPC 获得“妙手回春”评价时调用。
-# 命中 20% 概率后随机发放 188 / 288 / 388 文。
+# 命中 40% 概率后随机发放 188 / 288 / 388 文。
 # 谢礼属于白天实时收入：这里立即加钱，同时记入当天账本供夜间报表统计。
 func record_patient_thank_gift_income(day: int) -> int:
 	_ensure_daily_finance_ledger(day)
@@ -896,11 +900,18 @@ func _get_clothing_cost_for_solar_term(solar_term_index: int) -> int:
 			return 0
 
 
-func _get_land_rent_for_solar_term(solar_term_index: int) -> int:
+func _get_land_rent_for_solar_term(
+	solar_term_index: int,
+	has_finished_ben_cao_gang_mu: bool
+) -> int:
 	match solar_term_index:
 		SOLAR_TERM_DA_SHU:
+			if has_finished_ben_cao_gang_mu:
+				return LAND_RENT_AFTER_BOOK_DA_SHU_WEN
 			return LAND_RENT_DA_SHU_WEN
 		SOLAR_TERM_SHUANG_JIANG:
+			if has_finished_ben_cao_gang_mu:
+				return LAND_RENT_AFTER_BOOK_SHUANG_JIANG_WEN
 			return LAND_RENT_SHUANG_JIANG_WEN
 		_:
 			return 0
@@ -991,19 +1002,31 @@ func settle_day_finances(day: int) -> Dictionary:
 		}
 		return last_finance_report.duplicate(true)
 
+	# 000_01《完书》完成状态。
+	# 完书后：启用李建中俸禄，同时停止李言闻固定收入和购买医书支出。
+	var has_finished_ben_cao_gang_mu := StoryManager.has_played_story("000_01")
+
 	# -------------------- 日结收入项目 --------------------
 	# 李建中俸禄：
 	# 完成 000_01《完书》剧情后，每两个节气收入10两。
 	var li_jian_zhong_salary := 0
-	if StoryManager.has_played_story("000_01"):
+	if has_finished_ben_cao_gang_mu:
 		if safe_day % LI_JIAN_ZHONG_SALARY_INTERVAL_SOLAR_TERMS == 0:
 			li_jian_zhong_salary = LI_JIAN_ZHONG_SALARY_WEN
 
-	# 李言闻收入由本局难度决定：简单 1000 / 普通 500 / 困难 0 文。
-	var li_yan_wen_income := get_li_yan_wen_income_wen()
+	# 李言闻收入：
+	# 000_01《完书》完成前由本局难度决定；完成后停止该项收入。
+	var li_yan_wen_income := 0
+	if not has_finished_ben_cao_gang_mu:
+		li_yan_wen_income = get_li_yan_wen_income_wen()
 
-	# 田租：大暑收入 5000 文，霜降收入 15000 文。
-	var land_rent := _get_land_rent_for_solar_term(solar_term_index)
+	# 田租：
+	# 000_01《完书》前：大暑 5000 文，霜降 15000 文。
+	# 000_01《完书》后：大暑 10000 文，霜降 30000 文。
+	var land_rent := _get_land_rent_for_solar_term(
+		solar_term_index,
+		has_finished_ben_cao_gang_mu
+	)
 
 	# -------------------- 日结支出项目 --------------------
 	# 陈皮、半夏工钱：每两个节气支付一次，合计 1000 文。
@@ -1027,8 +1050,11 @@ func settle_day_finances(day: int) -> Dictionary:
 			HUMAN_GIFT_COST_OPTIONS_WEN
 		)
 
-	# 每个节气必定购买一次医书，金额从配置档位中随机抽取。
-	var medical_book_cost := _pick_random_expense(MEDICAL_BOOK_COST_OPTIONS_WEN)
+	# 购买医书：
+	# 000_01《完书》完成前每个节气购买一次；完成后停止该项支出。
+	var medical_book_cost := 0
+	if not has_finished_ben_cao_gang_mu:
+		medical_book_cost = _pick_random_expense(MEDICAL_BOOK_COST_OPTIONS_WEN)
 
 	# 指定节气支出。
 	var coal_cost := _get_coal_cost_for_solar_term(solar_term_index)
