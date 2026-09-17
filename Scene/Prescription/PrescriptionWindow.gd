@@ -191,6 +191,10 @@ func _on_visibility_changed() -> void:
 	if not visible:
 		return
 
+	# 每次打开开方窗口都把单位恢复为“钱”。
+	if unit_option != null and unit_option.item_count > 1:
+		unit_option.select(1)
+
 	# 延迟到本帧 UI 完成显示后再获取焦点，避免 show() 同帧被其它控件抢走。
 	call_deferred("_focus_disease_search")
 

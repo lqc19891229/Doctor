@@ -7,8 +7,7 @@
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wu_zhi_lan/wu_zhi_lan.png" id="portrait_3"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/ban_xia/ban_xia.png" id="portrait_4"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/xie_fei_yan/xie_fei_yan.png" id="portrait_5"]
-[ext_resource type="Texture2D" path="res://Assets/Background/black.png" id="background_6"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/jin_yi_ma/jin_yi_ma.png" id="portrait_7"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/jin_yi_ma/jin_yi_ma.png" id="portrait_6"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
@@ -110,7 +109,6 @@ line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
 text = "收入一两白银"
-background = ExtResource("background_6")
 [sub_resource type="Resource" id="StoryLine_014"]
 script = ExtResource("1_storyline")
 line_type = "subtitle"
@@ -124,7 +122,7 @@ portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "金姨妈"
 text = "李大夫，你叫我来是什么事儿啊？"
-portrait = ExtResource("portrait_7")
+portrait = ExtResource("portrait_6")
 [sub_resource type="Resource" id="StoryLine_016"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
@@ -140,7 +138,7 @@ portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "金姨妈"
 text = "啊？这可如何是好？"
-portrait = ExtResource("portrait_7")
+portrait = ExtResource("portrait_6")
 [sub_resource type="Resource" id="StoryLine_018"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
@@ -156,7 +154,7 @@ portrait_side = "left"
 inactive_portrait_mode = "dim"
 speaker = "金姨妈"
 text = "(若是这样，不如趁那小子不知情，便宜与了他去….)"
-portrait = ExtResource("portrait_7")
+portrait = ExtResource("portrait_6")
 
 [resource]
 script = ExtResource("2_storydata")

@@ -212,8 +212,7 @@ func open_window() -> void:
 
 	# 每次打开行医记考，都把输入焦点放到 Tab 0「疾病」的搜索栏。
 	# 放在窗口 grab_focus() 之后，避免焦点被 Window 本身重新抢走。
-	if disease_search_bar != null:
-		disease_search_bar.grab_focus()
+	_focus_search_bar_for_tab(0)
 	
 
 func close_window() -> void:
@@ -926,6 +925,11 @@ func _try_handle_tab_shortcut(event: InputEvent) -> bool:
 		return false
 
 	tab_container.current_tab = target_tab
+
+	# 如果按下的是当前已经选中的 Tab，tab_changed 不一定再次触发，
+	# 因此这里也主动把焦点交给该 Tab 的搜索栏。
+	call_deferred("_focus_search_bar_for_tab", target_tab)
+
 	get_viewport().set_input_as_handled()
 	return true
 
@@ -1109,6 +1113,30 @@ func _on_tab_changed(tab_index: int) -> void:
 			_refresh_current_formula_detail_after_tab_visible()
 		2:
 			_refresh_current_herb_detail_after_tab_visible()
+
+	# 无论是鼠标点击 Tab，还是 1/2/3 快捷键切换，
+	# 当前页签显示完成后都把输入焦点放到对应搜索栏。
+	_focus_search_bar_for_tab(tab_index)
+
+
+func _focus_search_bar_for_tab(tab_index: int) -> void:
+	var target_search_bar: LineEdit = null
+
+	match tab_index:
+		0:
+			target_search_bar = disease_search_bar
+		1:
+			target_search_bar = formula_search_bar
+		2:
+			target_search_bar = herb_search_bar
+		_:
+			return
+
+	if target_search_bar == null:
+		return
+
+	target_search_bar.grab_focus()
+	target_search_bar.caret_column = target_search_bar.text.length()
 
 
 func _refresh_current_disease_detail_after_tab_visible() -> void:
