@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://eg24ntnjfeh" path="res://Scene/Story/Story.gd" id="1_story_script"]
 [ext_resource type="PackedScene" uid="uid://b24f211e0acte" path="res://Scene/Pulse/PulseWindow.tscn" id="2_pulse"]
 [ext_resource type="PackedScene" uid="uid://c1kldxjoeyc78" path="res://Scene/Prescription/PrescriptionWindow.tscn" id="3_prescription"]
-[ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/clinicalLogWindow/ClinicalLogWindow.tscn" id="4_clinical_log"]
+[ext_resource type="PackedScene" uid="uid://rfnj1k2mnruh" path="res://Scene/ClinicalLogWindow/ClinicalLogWindow.tscn" id="4_clinical_log"]
 [ext_resource type="PackedScene" uid="uid://b5bphm5xo77my" path="res://Scene/JudgementResult/JudgementResult.tscn" id="5_judgement"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialogue"]
