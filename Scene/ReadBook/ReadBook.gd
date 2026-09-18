@@ -5,9 +5,6 @@ signal window_closed
 signal player_data_changed
 
 const FIXED_WINDOW_POSITION := Vector2i(50, 66)
-const GLOBAL_READBOOK_ARCHIVE_SCRIPT = preload(
-	"res://System/Book/Book/GlobalReadBookArchive.gd"
-)
 
 # =========================
 # 节点引用
@@ -58,8 +55,6 @@ var displayed_entries: Array[BookEntryData] = []
 
 var selected_book: BookData = null
 var selected_entry: BookEntryData = null
-var global_archive_mode: bool = false
-var global_archive = GLOBAL_READBOOK_ARCHIVE_SCRIPT.new()
 
 # UnlockManager 的医书状态版本。版本未变化时，不重建 22 本书的列表。
 var last_readbook_state_version: int = -1
@@ -88,16 +83,6 @@ func _ready() -> void:
 # =========================
 # 对外打开 / 关闭接口
 # =========================
-
-func open_global_archive() -> void:
-	global_archive_mode = true
-	title = "查阅典籍"
-	global_archive.reload()
-	if pulse_practice_button != null:
-		pulse_practice_button.hide()
-	if day_label != null:
-		day_label.hide()
-	open_window()
 
 func open_window() -> void:
 	# 每次打开都恢复固定位置，避免上次窗口状态影响坐标。
@@ -174,10 +159,6 @@ func _connect_ui_signals() -> void:
 func _update_day_label() -> void:
 	if day_label == null:
 		return
-	if global_archive_mode:
-		day_label.hide()
-		return
-	day_label.show()
 
 	day_label.text = GameTime.get_day_text()
 
@@ -192,61 +173,11 @@ func mark_data_dirty() -> void:
 
 
 func _get_readbook_state_version() -> int:
-	if global_archive_mode:
-		# 全局文件由独立管理器维护；打开窗口时强制重建列表。
-		return -1
-
 	if Unlock != null and Unlock.has_method("get_readbook_state_version"):
 		return int(Unlock.get_readbook_state_version())
 
 	# 兼容旧 UnlockManager：没有版本接口时每次打开都刷新一次。
 	return -1
-
-
-func _is_book_visible(book: BookData) -> bool:
-	if global_archive_mode:
-		return global_archive.is_book_visible_in_readbook(book)
-	return Unlock.is_book_visible_in_readbook(book)
-
-
-func _get_readable_entries(book_id: String) -> Array[BookEntryData]:
-	if global_archive_mode:
-		return global_archive.get_readable_entries_by_book(book_id)
-	return Unlock.get_readable_entries_by_book(book_id)
-
-
-func _get_unread_entry_count(book_id: String) -> int:
-	if global_archive_mode:
-		return global_archive.get_unread_readable_entry_count_by_book(book_id)
-	return Unlock.get_unread_readable_entry_count_by_book(book_id)
-
-
-func _is_entry_read(entry_id: String) -> bool:
-	if global_archive_mode:
-		return global_archive.is_entry_read(entry_id)
-	return Unlock.is_entry_read(entry_id)
-
-
-func _is_entry_unlocked(entry_id: String) -> bool:
-	if global_archive_mode:
-		return global_archive.is_entry_unlocked(entry_id)
-	return Unlock.is_entry_unlocked(entry_id)
-
-
-func _can_read_entry(entry_id: String) -> bool:
-	if global_archive_mode:
-		return global_archive.can_read_entry(entry_id)
-	return Unlock.can_read_entry(entry_id)
-
-
-func _mark_entry_as_read(entry: BookEntryData) -> void:
-	if entry == null:
-		return
-	if global_archive_mode:
-		global_archive.mark_entry_as_read(entry.entry_id)
-		return
-	Unlock.read_entry(entry)
-	_notify_player_data_changed()
 
 
 func _refresh_book_list_if_dirty(force_refresh: bool = false) -> void:
@@ -279,7 +210,7 @@ func _refresh_book_list() -> void:
 		if book == null:
 			continue
 
-		if not _is_book_visible(book):
+		if not Unlock.is_book_visible_in_readbook(book):
 			continue
 
 		all_visible_books.append(book)
@@ -311,7 +242,7 @@ func _count_matching_entries_in_book(book: BookData) -> int:
 		return 0
 
 	var match_count := 0
-	var entries: Array[BookEntryData] = _get_readable_entries(book.book_id)
+	var entries: Array[BookEntryData] = Unlock.get_readable_entries_by_book(book.book_id)
 
 	for entry in entries:
 		if _entry_matches_search(entry):
@@ -340,7 +271,7 @@ func _rebuild_book_list_for_search(preferred_book_id: String = "") -> int:
 				continue
 			global_search_match_count += match_count
 
-		var new_entry_count = _get_unread_entry_count(book.book_id)
+		var new_entry_count = Unlock.get_unread_readable_entry_count_by_book(book.book_id)
 		var display_name := book.book_name
 
 		if query != "":
@@ -447,7 +378,7 @@ func _refresh_entry_list_for_selected_book() -> void:
 	if selected_book == null:
 		return
 
-	readable_entries = _get_readable_entries(selected_book.book_id)
+	readable_entries = Unlock.get_readable_entries_by_book(selected_book.book_id)
 	_sort_entries_by_index()
 
 	_refresh_entry_list_view()
@@ -529,7 +460,7 @@ func _update_entry_info_label() -> void:
 		info_label.text = "《%s》当前没有已解锁条目。" % selected_book.book_name
 		return
 
-	var new_entry_count = _get_unread_entry_count(selected_book.book_id)
+	var new_entry_count = Unlock.get_unread_readable_entry_count_by_book(selected_book.book_id)
 	if new_entry_count > 0:
 		info_label.text = "《%s》共有 %d 个已解锁条目，其中 %d 个尚未查看。" % [
 			selected_book.book_name,
@@ -583,7 +514,7 @@ func _get_entry_list_display_name(entry: BookEntryData) -> String:
 		return ""
 
 	var display_name := entry.title
-	if not _is_entry_read(entry.entry_id) and _can_read_entry(entry.entry_id):
+	if not Unlock.is_entry_read(entry.entry_id) and Unlock.can_read_entry(entry.entry_id):
 		display_name += "  【新】"
 
 	return display_name
@@ -597,12 +528,22 @@ func _is_unread_readable_entry(entry: BookEntryData) -> bool:
 	if entry_id == "":
 		return false
 
-	return _can_read_entry(entry_id) and not _is_entry_read(entry_id)
+	return Unlock.can_read_entry(entry_id) and not Unlock.is_entry_read(entry_id)
 
 
 func _sort_entries_by_index() -> void:
 	readable_entries.sort_custom(
 		func(a: BookEntryData, b: BookEntryData) -> bool:
+			# 新解锁且尚未阅读的条目始终排在最上方，
+			# 方便玩家第一时间看到本轮新增内容。
+			var a_is_new := _is_unread_readable_entry(a)
+			var b_is_new := _is_unread_readable_entry(b)
+
+			if a_is_new != b_is_new:
+				return a_is_new
+
+			# 同为新条目，或同为已读条目时，再按 sort_index 排序。
+			# 因此一个新条目被阅读后，会自动回到它自己的 sort_index 位置。
 			if a.sort_index != b.sort_index:
 				return a.sort_index < b.sort_index
 
@@ -671,23 +612,25 @@ func _show_entry_by_index(index: int) -> void:
 		return
 
 	# 只允许查看已经满足对应解锁条件，或已经读过的条目。
-	if not _is_entry_unlocked(current_entry_id) and not _is_entry_read(current_entry_id):
+	if not Unlock.is_entry_unlocked(current_entry_id) and not Unlock.is_entry_read(current_entry_id):
 		info_label.text = "该条目尚未解锁，请先满足对应的解锁条件。"
 		_set_detail_text("")
 		return
 
-	var was_unread := not _is_entry_read(current_entry_id)
+	var was_unread := not Unlock.is_entry_read(current_entry_id)
 
 	# 第一次查看条目时标记为已读。
 	# 药材会在此时同步解锁；方剂和疾病通常已由依赖关系提前解锁。
 	if was_unread:
-		_mark_entry_as_read(selected_entry)
+		Unlock.read_entry(selected_entry)
+		_notify_player_data_changed()
 
 	_set_detail_text(_build_entry_text(selected_entry))
 	_update_pulse_practice_button()
 
 	if was_unread:
-		# 全局模式只记录“已查阅”；游戏内模式可能由 read_entry() 触发依赖解锁。
+		# read_entry() 可能进一步解锁药材 -> 方剂 -> 疾病，因此版本会变化。
+		# 这里只在这次真实状态变化后重建一次书籍栏。
 		mark_data_dirty()
 		_refresh_book_list_if_dirty()
 		_reselect_current_book_in_list()
@@ -710,6 +653,11 @@ func _reselect_current_book_in_list() -> void:
 
 
 func _refresh_entry_list_titles_keep_selection(entry_id: String) -> void:
+	# 阅读条目后可能触发级联解锁。
+	# 重新取得当前书的可读条目，确保刚解锁的新条目可以立刻出现在列表顶部。
+	if selected_book != null:
+		readable_entries = Unlock.get_readable_entries_by_book(selected_book.book_id)
+
 	_sort_entries_by_index()
 	_refresh_entry_list_view(entry_id)
 
@@ -738,11 +686,6 @@ func _get_selected_disease_data() -> DiseaseData:
 func _update_pulse_practice_button() -> void:
 	if pulse_practice_button == null:
 		return
-	if global_archive_mode:
-		pulse_practice_button.hide()
-		pulse_practice_button.disabled = true
-		return
-	pulse_practice_button.show()
 
 	var disease := _get_selected_disease_data()
 
@@ -758,9 +701,6 @@ func _update_pulse_practice_button() -> void:
 
 
 func _on_pulse_practice_button_pressed() -> void:
-	if global_archive_mode:
-		return
-
 	var disease := _get_selected_disease_data()
 	if disease == null:
 		info_label.text = "请先选择一个疾病条目，再查看脉象。"

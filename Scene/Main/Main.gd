@@ -110,6 +110,9 @@ var pending_new_game_slot_index: int = -1
 var return_to_menu_confirm_dialog: ConfirmationDialog = null
 var quit_game_confirm_dialog: ConfirmationDialog = null
 
+const SAVE_AND_RETURN_ACTION: StringName = &"save_and_return"
+const SAVE_AND_QUIT_ACTION: StringName = &"save_and_quit"
+
 # Clinic / Night 切换时使用的全屏黑色遮罩。
 # 遮罩属于 Main，而不是 Clinic / Night，因此切换常驻场景时不会出现一帧闪亮。
 # Night → Clinic：Night 自己负责渐黑；Main 负责 Clinic 从黑色渐亮。
@@ -240,6 +243,11 @@ func _connect_overlay_menu_signals() -> void:
 func _show_main_menu() -> void:
 	if is_instance_valid(read_book_window) and read_book_window.visible:
 		read_book_window.call("close_window")
+
+	# 标题菜单没有正在进行的游戏，清除旧的绑定槽。
+	# 之后读档或新游戏成功进入时会重新设置。
+	if SaveManager != null and SaveManager.has_method("clear_active_game_slot"):
+		SaveManager.clear_active_game_slot()
 
 	# 标题菜单永远处于非暂停状态。
 	var tree := get_tree()
@@ -634,6 +642,12 @@ func _start_new_game_in_slot(slot_index: int, difficulty: int) -> void:
 	GameTime.start_new_game()
 	Unlock.reset_progress(difficulty)
 
+	# 新游戏从玩家选择的手动档开始，本局之后“保存并返回 / 保存并退出”
+	# 都固定回写这个槽；中途另存到其他槽不会改变本局绑定。
+	if not SaveManager.set_active_game_slot(slot_index):
+		push_error("新游戏失败：无法绑定当前存档槽。")
+		return
+
 	# 新游戏必须清空剧情播放记录。
 	StoryManager.load_save_data({})
 
@@ -903,6 +917,16 @@ func _on_pause_main_menu_requested() -> void:
 		_return_to_main_menu_from_game()
 		return
 
+	var slot_label := SaveManager.get_slot_display_label(
+		SaveManager.get_active_game_slot()
+	)
+	return_to_menu_confirm_dialog.dialog_text = (
+		"当前阶段尚未完成。\n"
+		+ "直接返回主菜单后，本阶段未保存的进度将丢失。\n"
+		+ "选择“保存并返回”会先保存到%s。\n\n"
+		+ "是否返回主菜单？"
+	) % slot_label
+
 	_set_pause_menu_input_enabled(false)
 	return_to_menu_confirm_dialog.popup_centered()
 
@@ -911,6 +935,16 @@ func _on_pause_quit_requested() -> void:
 	if quit_game_confirm_dialog == null:
 		_quit_game_safely()
 		return
+
+	var slot_label := SaveManager.get_slot_display_label(
+		SaveManager.get_active_game_slot()
+	)
+	quit_game_confirm_dialog.dialog_text = (
+		"当前阶段尚未完成。\n"
+		+ "直接退出游戏后，本阶段未保存的进度将丢失。\n"
+		+ "选择“保存并退出”会先保存到%s。\n\n"
+		+ "是否退出游戏？"
+	) % slot_label
 
 	_set_pause_menu_input_enabled(false)
 	quit_game_confirm_dialog.popup_centered()
@@ -932,6 +966,16 @@ func _setup_pause_confirm_dialogs() -> void:
 			return_to_menu_confirm_dialog.get_ok_button().text = "返回主菜单"
 		if return_to_menu_confirm_dialog.get_cancel_button() != null:
 			return_to_menu_confirm_dialog.get_cancel_button().text = "取消"
+
+		return_to_menu_confirm_dialog.add_button(
+			"保存并返回",
+			false,
+			String(SAVE_AND_RETURN_ACTION)
+		)
+
+		var return_custom_callable := Callable(self, "_on_return_to_menu_custom_action")
+		if not return_to_menu_confirm_dialog.custom_action.is_connected(return_custom_callable):
+			return_to_menu_confirm_dialog.custom_action.connect(return_custom_callable)
 
 		var return_confirm_callable := Callable(self, "_on_return_to_menu_confirmed")
 		if not return_to_menu_confirm_dialog.confirmed.is_connected(return_confirm_callable):
@@ -961,6 +1005,16 @@ func _setup_pause_confirm_dialogs() -> void:
 		if quit_game_confirm_dialog.get_cancel_button() != null:
 			quit_game_confirm_dialog.get_cancel_button().text = "取消"
 
+		quit_game_confirm_dialog.add_button(
+			"保存并退出",
+			false,
+			String(SAVE_AND_QUIT_ACTION)
+		)
+
+		var quit_custom_callable := Callable(self, "_on_quit_game_custom_action")
+		if not quit_game_confirm_dialog.custom_action.is_connected(quit_custom_callable):
+			quit_game_confirm_dialog.custom_action.connect(quit_custom_callable)
+
 		var quit_confirm_callable := Callable(self, "_on_quit_game_confirmed")
 		if not quit_game_confirm_dialog.confirmed.is_connected(quit_confirm_callable):
 			quit_game_confirm_dialog.confirmed.connect(quit_confirm_callable)
@@ -975,11 +1029,91 @@ func _setup_pause_confirm_dialogs() -> void:
 
 
 func _on_return_to_menu_confirmed() -> void:
+	# 原按钮保持原行为：不额外保存，直接返回主菜单。
+	_return_to_main_menu_from_game()
+
+
+func _on_return_to_menu_custom_action(action: StringName) -> void:
+	if action != SAVE_AND_RETURN_ACTION:
+		return
+
+	if not _save_current_bound_slot_before_leave("保存并返回"):
+		_show_pause_leave_save_failure(
+			return_to_menu_confirm_dialog,
+			"保存失败，未返回主菜单。\n\n"
+			+ "请重试“保存并返回”，或选择“返回主菜单”放弃未保存进度。"
+		)
+		return
+
+	if return_to_menu_confirm_dialog != null:
+		return_to_menu_confirm_dialog.hide()
+
 	_return_to_main_menu_from_game()
 
 
 func _on_quit_game_confirmed() -> void:
+	# 原按钮保持原行为：不额外保存，直接退出游戏。
 	_quit_game_safely()
+
+
+func _on_quit_game_custom_action(action: StringName) -> void:
+	if action != SAVE_AND_QUIT_ACTION:
+		return
+
+	if not _save_current_bound_slot_before_leave("保存并退出"):
+		_show_pause_leave_save_failure(
+			quit_game_confirm_dialog,
+			"保存失败，未退出游戏。\n\n"
+			+ "请重试“保存并退出”，或选择“退出游戏”放弃未保存进度。"
+		)
+		return
+
+	if quit_game_confirm_dialog != null:
+		quit_game_confirm_dialog.hide()
+
+	_quit_game_safely()
+
+
+func _save_current_bound_slot_before_leave(context: String) -> bool:
+	if SaveManager == null:
+		push_error("%s失败：SaveManager 不可用。" % context)
+		return false
+
+	# 与现有暂停菜单手动保存规则保持一致：
+	# 剧情演出过程中不保存无法恢复的半状态。
+	if current_story_scene != null and is_instance_valid(current_story_scene):
+		push_warning("%s失败：剧情进行中，不能保存。" % context)
+		return false
+
+	var slot_index := SaveManager.get_active_game_slot()
+	if not SaveManager.is_valid_slot(slot_index):
+		push_warning("%s失败：当前游戏没有有效的绑定存档槽。" % context)
+		return false
+
+	var save_success := SaveManager.save_active_game_before_leave(context)
+	if not save_success:
+		push_warning(
+			"%s失败：无法写入%s。"
+			% [context, SaveManager.get_slot_display_label(slot_index)]
+		)
+
+	return save_success
+
+
+func _show_pause_leave_save_failure(
+	dialog: ConfirmationDialog,
+	message: String
+) -> void:
+	if dialog == null:
+		_set_pause_menu_input_enabled(true)
+		return
+
+	dialog.dialog_text = message
+
+	# custom_action 在不同平台/主题下可能保持弹窗或先关闭弹窗。
+	# 若已经关闭，则重新居中弹出错误提示。
+	if not dialog.visible:
+		dialog.popup_centered()
 
 
 func _on_pause_confirm_canceled() -> void:

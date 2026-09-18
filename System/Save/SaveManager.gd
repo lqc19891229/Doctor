@@ -48,6 +48,14 @@ const GLOBAL_READBOOK_ARCHIVE_SCRIPT = preload(
 # 自动存档永远固定写入 AUTO_SAVE_SLOT，不受此值影响。
 var current_slot_index: int = AUTO_SAVE_SLOT
 
+# 当前这一局游戏真正绑定的存档槽。
+# - 从哪个槽读档进入，就绑定哪个槽。
+# - 新游戏选择哪个手动槽，就绑定哪个槽。
+# - 游戏中“另存”到其他手动槽不会改变这个绑定。
+#
+# 使用 -1 表示当前没有正在进行且可回写的游戏，避免错误地默认写入 1 号自动档。
+var active_game_slot_index: int = -1
+
 # 白天手动保存必须使用“当天刚开始”的快照，不能保存白天进行中的诊疗状态。
 var _day_start_checkpoint: Dictionary = {}
 
@@ -95,6 +103,26 @@ func get_slot_display_label(slot_index: int) -> String:
 		return "手动存档 %d" % (slot_index - 1)
 
 	return "无效存档"
+
+
+# =========================================================
+# 当前游戏绑定槽
+# =========================================================
+func set_active_game_slot(slot_index: int) -> bool:
+	if not is_valid_slot(slot_index):
+		push_warning("设置当前游戏存档槽失败：无效槽位 %d" % slot_index)
+		return false
+
+	active_game_slot_index = slot_index
+	return true
+
+
+func get_active_game_slot() -> int:
+	return active_game_slot_index
+
+
+func clear_active_game_slot() -> void:
+	active_game_slot_index = -1
 
 
 # =========================================================
@@ -425,6 +453,60 @@ func save_manual_game(slot_index: int) -> bool:
 	return bool(result_dict.get("ok", false))
 
 
+# =========================================================
+# 保存并离开
+#
+# 用于 Pause Menu 的“保存并返回 / 保存并退出”。
+# 保存目标不是固定 1 号槽，而是本局进入时绑定的 active_game_slot_index。
+#
+# 白天：继续遵循现有安全规则，只保存本日开始检查点。
+# 夜晚：保存当前实时状态。
+# =========================================================
+func save_active_game_before_leave(context: String = "离开前保存") -> bool:
+	var slot_index := get_active_game_slot()
+
+	if not is_valid_slot(slot_index):
+		push_warning("%s失败：当前游戏没有有效的绑定存档槽。" % context)
+		return false
+
+	# 同步离开前保存：先等待可能仍在运行的后台自动存档，
+	# 避免与当前回写操作同时碰磁盘文件。
+	if not flush_async_saves():
+		push_warning("%s：等待后台存档完成时发现错误，将继续尝试保存当前绑定槽。" % context)
+
+	var save_data: Dictionary
+
+	if GameTime.is_day():
+		# 白天不能保存诊疗过程中的半状态。
+		if _day_start_checkpoint.is_empty():
+			push_warning("%s失败：当前白天缺少日初检查点。" % context)
+			return false
+
+		save_data = _day_start_checkpoint.duplicate(true)
+	else:
+		# 夜晚允许保存当前实时状态。
+		save_data = _make_current_save_data(slot_index)
+
+	current_slot_index = slot_index
+
+	var request := _make_save_request_from_data(
+		slot_index,
+		context,
+		save_data
+	)
+
+	var worker: RefCounted = SaveWorkerScript.new()
+	var result = worker.call("write_request", request)
+
+	if typeof(result) != TYPE_DICTIONARY:
+		push_error("%s失败：SaveWorker 返回了无效结果。" % context)
+		return false
+
+	var result_dict: Dictionary = result
+	_handle_async_save_result(result_dict, false)
+	return bool(result_dict.get("ok", false))
+
+
 func is_async_save_busy() -> bool:
 	return (
 		(_save_thread != null and _save_thread.is_started())
@@ -727,6 +809,7 @@ func load_game(slot_index: int = -1) -> bool:
 		return false
 
 	current_slot_index = slot_index
+	active_game_slot_index = slot_index
 
 	_load_time_data(save_data)
 	_load_progress_data(save_data)
@@ -883,6 +966,7 @@ func delete_all_saves() -> bool:
 
 	_day_start_checkpoint.clear()
 	current_slot_index = AUTO_SAVE_SLOT
+	active_game_slot_index = -1
 
 	if all_ok:
 		print("已清除自动存档和全部手动存档。")
