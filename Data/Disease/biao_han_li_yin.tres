@@ -6,7 +6,7 @@
 script = ExtResource("1")
 disease_id = "biao_han_li_yin"
 disease_name = "表寒里饮"
-detail_text = "表寒里饮\n\n【病机】外感风寒，寒邪束表；内有水饮伏肺，表里寒邪相合，寒饮壅遏肺气。\n\n\n【症状】恶寒发热，咳嗽气喘；痰多清稀，胸闷胸满，面部浮肿。\n\n\n【脉象】\n浮脉（表）：波速慢\n右寸（肺）：波速慢，波宽宽\n\n【标准方】小青龙汤"
+detail_text = "表寒里饮\n\n【病机】外感风寒，寒邪束表；内有水饮伏肺，表里寒邪相合，寒饮壅遏肺气。\n\n\n【症状】恶寒发热，咳嗽气喘；痰多清稀，胸闷胸满，面部浮肿。\n\n\n【脉象】\n浮脉（表）：脉搏次数少\n右寸（肺）：波宽宽\n\n【标准方】小青龙汤"
 recommended_formula_id = "xiao_qing_long_tang"
 exterior_qi = 1.0
 exterior_blood = 1.0

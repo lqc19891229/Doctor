@@ -8,5 +8,5 @@ entry_id = "biao_han_li_re"
 book_id = "zhu_bing_yuan_hou_lun"
 title = "表寒里热"
 sort_index = 16
-detail_text = "表寒里热\n\n【病机】寒邪束表，里有郁热，寒热错杂。\n\n【症状】怕冷无汗，口干咽痛，浑身酸痛怕冷，同时心烦燥热。\n\n【脉象】\n浮脉（表）：波速慢\n右寸（肺）：波速快\n\n【标准方】大青龙汤"
+detail_text = "表寒里热\n\n【病机】寒邪束表，里有郁热，寒热错杂。\n\n【症状】怕冷无汗，口干咽痛，浑身酸痛怕冷，同时心烦燥热。\n\n【脉象】\n浮脉（表）：脉搏次数少\n右寸（肺）：脉搏次数多\n\n【标准方】大青龙汤"
 disease_id = "biao_han_li_re"

@@ -93,7 +93,7 @@ metadata/_custom_type_script = "uid://dyml45imq64mo"
 script = ExtResource("3_slide_data")
 title = "寒热"
 description = "每次呼吸波峰经过指尖的次数反映寒热程度；
-次数越多越热，次数越少越寒。"
+脉搏数越多越热，脉搏次数越少越寒。"
 metadata/_custom_type_script = "uid://dyml45imq64mo"
 
 [sub_resource type="Resource" id="Resource_32e8r"]
