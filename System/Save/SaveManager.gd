@@ -40,6 +40,9 @@ const LEGACY_SAVE_PATH: String = "user://save_game.json"
 
 # 后台存档工作器：只处理纯数据序列化和文件 I/O。
 const SaveWorkerScript = preload("res://System/Save/SaveWorker.gd")
+const GLOBAL_READBOOK_ARCHIVE_SCRIPT = preload(
+	"res://System/Book/GlobalReadBookArchive.gd"
+)
 
 # 保留此字段供旧代码兼容；新结构下它只表示“最近一次读取/显式操作的槽位”。
 # 自动存档永远固定写入 AUTO_SAVE_SLOT，不受此值影响。
@@ -165,6 +168,38 @@ func has_any_save() -> bool:
 			return true
 
 	return false
+
+
+# 读取所有有效存档里的 progress，用于把旧档解锁内容迁入全局典籍。
+# 只读 JSON，不会把任何一档加载到运行中的 GameTime / Unlock / StoryManager。
+func get_all_saved_progress_data() -> Array[Dictionary]:
+	flush_async_saves()
+	var result: Array[Dictionary] = []
+	for slot_index in range(1, SAVE_SLOT_COUNT + 1):
+		var progress := _read_saved_progress_for_slot(slot_index)
+		if not progress.is_empty():
+			result.append(progress)
+	return result
+
+
+func _read_saved_progress_for_slot(slot_index: int) -> Dictionary:
+	var save_path := _resolve_existing_save_path(slot_index)
+	if save_path.is_empty():
+		return {}
+
+	var file := FileAccess.open(save_path, FileAccess.READ)
+	if file == null:
+		return {}
+	var json := JSON.new()
+	var parse_error := json.parse(file.get_as_text())
+	file.close()
+	if parse_error != OK or typeof(json.data) != TYPE_DICTIONARY:
+		return {}
+
+	var save_data: Dictionary = json.data
+	if typeof(save_data.get("progress", null)) != TYPE_DICTIONARY:
+		return {}
+	return save_data["progress"].duplicate(true)
 
 
 # =========================================================
@@ -522,6 +557,12 @@ func _handle_async_save_result(result: Dictionary, was_async: bool) -> void:
 	var context := String(result.get("context", ""))
 
 	if bool(result.get("ok", false)):
+		# 成功落盘后将这份存档的解锁并入全局典籍；不会反向写入本局进度。
+		var progress := _read_saved_progress_for_slot(slot_index)
+		if not progress.is_empty():
+			var global_archive = GLOBAL_READBOOK_ARCHIVE_SCRIPT.new()
+			global_archive.merge_progress(progress)
+
 		if OS.is_debug_build():
 			var mode_text := "后台" if was_async else "同步"
 			print("[%s存档] 完成：槽位 %d，第 %d 天，阶段：%s%s" % [

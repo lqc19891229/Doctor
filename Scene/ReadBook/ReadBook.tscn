@@ -15,7 +15,7 @@ bg_color = Color(0.41960785, 0.27058825, 0.15686275, 1)
 [node name="ReadBook" type="Window" unique_id=1553429074]
 oversampling_override = 1.0
 title = "读书"
-position = Vector2i(50, 36)
+position = Vector2i(0, 36)
 size = Vector2i(1800, 1000)
 script = ExtResource("1_uep66")
 

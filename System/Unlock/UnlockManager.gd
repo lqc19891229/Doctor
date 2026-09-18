@@ -6,6 +6,10 @@ signal experience_points_changed(value: int)
 signal reputation_points_changed(value: int)
 signal money_wen_changed(value: int)
 
+const GLOBAL_READBOOK_ARCHIVE_SCRIPT = preload(
+	"res://System/Book/GlobalReadBookArchive.gd"
+)
+
 # =========================================================
 # 解锁管理器
 #
@@ -106,6 +110,9 @@ func get_readbook_state_version() -> int:
 
 func _touch_readbook_state() -> void:
 	_readbook_state_version += 1
+	# 独立累积典籍条目；不会把全局图鉴状态写回本局 Unlock 进度。
+	var global_archive = GLOBAL_READBOOK_ARCHIVE_SCRIPT.new()
+	global_archive.merge_progress(get_save_data())
 
 
 func _emit_all_player_stat_signals() -> void:

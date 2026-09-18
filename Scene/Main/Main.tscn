@@ -94,6 +94,12 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
 text = "读取存档"
 
+[node name="ReadBookButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 35
+text = "查阅典籍"
+
 [node name="SettingsButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer" unique_id=1772277013]
 layout_mode = 2
 size_flags_vertical = 3
