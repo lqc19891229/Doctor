@@ -29,6 +29,7 @@ class_name Main
 # 开始菜单按钮
 @onready var new_game_button: Button = $MainMenuLayer/MenuPanel/VBoxContainer/NewGameButton
 @onready var load_game_button: Button = $MainMenuLayer/MenuPanel/VBoxContainer/LoadGameButton
+@onready var encyclopedia_button: Button = $MainMenuLayer/MenuPanel/VBoxContainer/EncyclopediaButton
 @onready var settings_button: Button = $MainMenuLayer/MenuPanel/VBoxContainer/SettingsButton
 @onready var quit_game_button: Button = $MainMenuLayer/MenuPanel/VBoxContainer/QuitGameButton
 
@@ -66,12 +67,14 @@ const TUTORIAL_WINDOW_SCENE: PackedScene = preload(
 const ENDING_CREDITS_SCENE: PackedScene = preload(
 	"res://Scene/Ending/Ending_credits.tscn"
 )
+const READ_BOOK_SCENE: PackedScene = preload("res://Scene/ReadBook/ReadBook.tscn")
 const STORY_TREATMENT_SERVICE_SCRIPT = preload("res://System/Treatment/StoryTreatmentService.gd")
 const MAP_SCENE_PATH: String = "res://Scene/Map/Map.tscn"
 
 
 # 当前子场景实例
 var current_scene: Node = null
+var menu_encyclopedia: Node = null
 var current_story_scene: Node = null
 var story_treatment_backend: Node = null
 
@@ -149,6 +152,9 @@ func _connect_menu_buttons() -> void:
 
 	if not load_game_button.pressed.is_connected(_on_load_game_button_pressed):
 		load_game_button.pressed.connect(_on_load_game_button_pressed)
+
+	if not encyclopedia_button.pressed.is_connected(_on_encyclopedia_button_pressed):
+		encyclopedia_button.pressed.connect(_on_encyclopedia_button_pressed)
 
 	if not settings_button.pressed.is_connected(_on_settings_button_pressed):
 		settings_button.pressed.connect(_on_settings_button_pressed)
@@ -266,6 +272,7 @@ func _show_main_menu() -> void:
 # =========================================================
 func _hide_main_menu() -> void:
 	_stop_main_menu_music()
+	_close_menu_encyclopedia()
 	main_menu_layer.visible = false
 	_close_difficulty_popup()
 	_close_save_slot_popup()
@@ -384,6 +391,59 @@ func _get_pending_new_game_difficulty_name() -> String:
 # =========================================================
 func _on_load_game_button_pressed() -> void:
 	_open_load_game_slot_popup()
+
+
+func _on_encyclopedia_button_pressed() -> void:
+	# ReadBook 使用当前 Unlock 状态；读档会恢复对应存档，新游戏会清空旧进度。
+	if menu_encyclopedia != null and is_instance_valid(menu_encyclopedia):
+		menu_encyclopedia.call("open_window")
+		return
+
+	menu_encyclopedia = READ_BOOK_SCENE.instantiate()
+	if menu_encyclopedia == null:
+		push_warning("Main 无法创建 ReadBook 图鉴窗口。")
+		return
+
+	add_child(menu_encyclopedia)
+
+	var closed_callable := Callable(self, "_on_menu_encyclopedia_closed")
+	if (
+		menu_encyclopedia.has_signal("window_closed")
+		and not menu_encyclopedia.is_connected("window_closed", closed_callable)
+	):
+		menu_encyclopedia.connect("window_closed", closed_callable)
+
+	if not menu_encyclopedia.has_method("open_window"):
+		push_warning("ReadBook 场景缺少 open_window()。")
+		menu_encyclopedia.queue_free()
+		menu_encyclopedia = null
+		return
+
+	menu_encyclopedia.call("open_window")
+
+
+func _on_menu_encyclopedia_closed() -> void:
+	var closed_window := menu_encyclopedia
+	menu_encyclopedia = null
+
+	if closed_window != null and is_instance_valid(closed_window):
+		closed_window.queue_free()
+
+
+func _close_menu_encyclopedia() -> void:
+	var current_window := menu_encyclopedia
+	menu_encyclopedia = null
+
+	if current_window == null or not is_instance_valid(current_window):
+		return
+
+	if current_window.has_method("close_window"):
+		current_window.call("close_window")
+	elif current_window is Window:
+		current_window.hide()
+
+	if is_instance_valid(current_window):
+		current_window.queue_free()
 
 
 # =========================================================
