@@ -13,7 +13,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "金姨妈"
+speaker = "郭妈妈"
 text = "李大夫，您快给我女儿瞧瞧吧，这孩子整日茶饭不进，愁眉苦脸咳个不停。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_002"]
@@ -37,7 +37,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "金姨妈"
+speaker = "郭妈妈"
 text = "哎呀，可不是嘛，这孩子随我学艺两年又半载，尤善歌舞，是咱柳月坊的花魁。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_005"]
@@ -45,7 +45,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "金姨妈"
+speaker = "郭妈妈"
 text = "可你看她现在这个样子，还怎么接待客人啊。"
 portrait = ExtResource("portrait_2")
 [sub_resource type="Resource" id="StoryLine_006"]

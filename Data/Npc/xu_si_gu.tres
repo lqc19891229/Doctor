@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://System/Npc/NpcData.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/xu_si_gu_before.png" id="portrait_before_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/xu_si_gu_after.png" id="portrait_after_1"]
+
+[resource]
+script = ExtResource("1")
+npc_id = "xu_si_gu"
+npc_type = "random"
+npc_name = "徐四姑"
+gender = "女"
+age = 34
+dialogue_prefix = "我最近"
+dialogue_suffix = "快给我看看吧。"
+dialogue_after_treatment = "多谢大夫。"
+dialogue_treatment_failed = "这是什么药？你想害死本姑娘啊？"
+portrait_before_treatment = ExtResource("portrait_before_1")
+portrait_after_treatment = ExtResource("portrait_after_1")

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://System/Npc/NpcData.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/ye_jiang_zhou_before.png" id="portrait_before_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/ye_jiang_zhou_after.png" id="portrait_after_1"]
+
+[resource]
+script = ExtResource("1")
+npc_id = "ye_jiang_zhou"
+npc_type = "random"
+npc_name = "叶江舟"
+gender = "男"
+age = 21
+dialogue_prefix = "先生，我这几日"
+dialogue_suffix = "劳烦先生给小可看看。"
+dialogue_after_treatment = "麻烦先生了，我感觉好多了"
+dialogue_treatment_failed = "咳咳咳，好难受啊"
+portrait_before_treatment = ExtResource("portrait_before_1")
+portrait_after_treatment = ExtResource("portrait_after_1")

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="NpcData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://System/Npc/NpcData.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/gao_xiu_lian_before.png" id="portrait_before_1"]
+[ext_resource type="Texture2D" path="res://Assets/Portrait/RandomNpc/gao_xiu_lian_after.png" id="portrait_after_1"]
+
+[resource]
+script = ExtResource("1")
+npc_id = "gao_xiu_lian"
+npc_type = "random"
+npc_name = "高秀莲"
+gender = "女"
+age = 39
+dialogue_prefix = "大夫，我最近"
+dialogue_suffix = "麻烦您给瞧瞧"
+dialogue_after_treatment = "感觉好多了，多谢先生。"
+dialogue_treatment_failed = "哎哟...哎哟…"
+portrait_before_treatment = ExtResource("portrait_before_1")
+portrait_after_treatment = ExtResource("portrait_after_1")

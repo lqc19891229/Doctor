@@ -87,7 +87,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "hide"
 speaker = "吴芷兰"
-text = "明日你让金姨妈来一趟，如此这般…."
+text = "明日你让郭妈妈来一趟，如此这般…."
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_011"]
 script = ExtResource("1_storyline")
@@ -120,7 +120,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "金姨妈"
+speaker = "郭妈妈"
 text = "李大夫，你叫我来是什么事儿啊？"
 portrait = ExtResource("portrait_6")
 [sub_resource type="Resource" id="StoryLine_016"]
@@ -136,7 +136,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "金姨妈"
+speaker = "郭妈妈"
 text = "啊？这可如何是好？"
 portrait = ExtResource("portrait_6")
 [sub_resource type="Resource" id="StoryLine_018"]
@@ -152,7 +152,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "金姨妈"
+speaker = "郭妈妈"
 text = "(若是这样，不如趁那小子不知情，便宜与了他去….)"
 portrait = ExtResource("portrait_6")
 

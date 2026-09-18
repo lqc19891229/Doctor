@@ -6,7 +6,7 @@
 script = ExtResource("1")
 npc_id = "jin_yi_ma"
 npc_type = "story"
-npc_name = "金姨妈"
+npc_name = "郭妈妈"
 gender = "女"
 age = 56
 dialogue_prefix = ""

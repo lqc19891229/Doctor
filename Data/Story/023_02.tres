@@ -38,7 +38,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "金姨妈"
+speaker = "郭妈妈"
 text = "成天好吃好喝的伺候着，她能有什么心事。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_005"]
@@ -46,7 +46,7 @@ script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
 inactive_portrait_mode = "dim"
-speaker = "金姨妈"
+speaker = "郭妈妈"
 text = "那就多谢大夫了，走吧女儿。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_006"]
