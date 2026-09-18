@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dq566bfgcn7i6"
-path="res://.godot/imported/zhang_you_shi_after.png-e5f221cc3120dd990656dcec4c035346.ctex"
+uid="uid://bgkgmgi7ehac6"
+path="res://.godot/imported/guo_ma_ma.png-d660a8f9a4cb978822ca4b47f3ef7e5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/RandomNpc/zhang_you_shi_after.png"
-dest_files=["res://.godot/imported/zhang_you_shi_after.png-e5f221cc3120dd990656dcec4c035346.ctex"]
+source_file="res://Assets/Portrait/StoryNpc/guo_ma_ma/guo_ma_ma.png"
+dest_files=["res://.godot/imported/guo_ma_ma.png-d660a8f9a4cb978822ca4b47f3ef7e5a.ctex"]
 
 [params]
 

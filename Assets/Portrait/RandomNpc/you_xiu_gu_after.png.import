@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dofkru1gs3xtv"
-path="res://.godot/imported/zhang_you_shi_before.png-71ec798833e12af52cda030648cbe025.ctex"
+uid="uid://618hpb8cxilo"
+path="res://.godot/imported/you_xiu_gu_after.png-24a5606cbc8a0960ca008b9d85bc12ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/RandomNpc/zhang_you_shi_before.png"
-dest_files=["res://.godot/imported/zhang_you_shi_before.png-71ec798833e12af52cda030648cbe025.ctex"]
+source_file="res://Assets/Portrait/RandomNpc/you_xiu_gu_after.png"
+dest_files=["res://.godot/imported/you_xiu_gu_after.png-24a5606cbc8a0960ca008b9d85bc12ec.ctex"]
 
 [params]
 

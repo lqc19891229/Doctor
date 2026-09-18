@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3y5xvnmisp7m"
-path="res://.godot/imported/jin_yi_ma.png-95ded76d7d1e7b6482958e80ab9f9583.ctex"
+uid="uid://cs5ppv8fkasmq"
+path="res://.godot/imported/you_xiu_gu_before.png-4dda9f4433372ac6af9b5e7b0eaa87cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/StoryNpc/jin_yi_ma/jin_yi_ma.png"
-dest_files=["res://.godot/imported/jin_yi_ma.png-95ded76d7d1e7b6482958e80ab9f9583.ctex"]
+source_file="res://Assets/Portrait/RandomNpc/you_xiu_gu_before.png"
+dest_files=["res://.godot/imported/you_xiu_gu_before.png-4dda9f4433372ac6af9b5e7b0eaa87cc.ctex"]
 
 [params]
 

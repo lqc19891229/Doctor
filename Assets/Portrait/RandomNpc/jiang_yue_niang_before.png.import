@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m4n61fiinm0y"
-path="res://.godot/imported/li_jiang_shi_before.png-53e1b4c2cacbe5b33cd9755461aead99.ctex"
+uid="uid://dcf3mvo40sx3l"
+path="res://.godot/imported/jiang_yue_niang_before.png-fbbec3ffdeee37c58fd20f4e0cd174a3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portrait/RandomNpc/li_jiang_shi_before.png"
-dest_files=["res://.godot/imported/li_jiang_shi_before.png-53e1b4c2cacbe5b33cd9755461aead99.ctex"]
+source_file="res://Assets/Portrait/RandomNpc/jiang_yue_niang_before.png"
+dest_files=["res://.godot/imported/jiang_yue_niang_before.png-fbbec3ffdeee37c58fd20f4e0cd174a3.ctex"]
 
 [params]
 
