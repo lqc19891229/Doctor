@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1")
-npc_id = "jin_yi_ma"
+npc_id = "guo_ma_ma"
 npc_type = "story"
 npc_name = "郭妈妈"
 gender = "女"
