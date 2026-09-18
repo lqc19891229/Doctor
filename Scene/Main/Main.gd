@@ -69,7 +69,7 @@ const ENDING_CREDITS_SCENE: PackedScene = preload(
 )
 const READ_BOOK_SCENE: PackedScene = preload("res://Scene/ReadBook/ReadBook.tscn")
 const GLOBAL_READBOOK_ARCHIVE_SCRIPT = preload(
-	"res://System/Book/GlobalReadBookArchive.gd"
+	"res://System/Book/Book/GlobalReadBookArchive.gd"
 )
 const STORY_TREATMENT_SERVICE_SCRIPT = preload("res://System/Treatment/StoryTreatmentService.gd")
 const MAP_SCENE_PATH: String = "res://Scene/Map/Map.tscn"

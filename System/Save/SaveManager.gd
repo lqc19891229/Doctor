@@ -41,7 +41,7 @@ const LEGACY_SAVE_PATH: String = "user://save_game.json"
 # 后台存档工作器：只处理纯数据序列化和文件 I/O。
 const SaveWorkerScript = preload("res://System/Save/SaveWorker.gd")
 const GLOBAL_READBOOK_ARCHIVE_SCRIPT = preload(
-	"res://System/Book/GlobalReadBookArchive.gd"
+	"res://System/Book/Book/GlobalReadBookArchive.gd"
 )
 
 # 保留此字段供旧代码兼容；新结构下它只表示“最近一次读取/显式操作的槽位”。

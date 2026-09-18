@@ -6,7 +6,7 @@ signal player_data_changed
 
 const FIXED_WINDOW_POSITION := Vector2i(50, 66)
 const GLOBAL_READBOOK_ARCHIVE_SCRIPT = preload(
-	"res://System/Book/GlobalReadBookArchive.gd"
+	"res://System/Book/Book/GlobalReadBookArchive.gd"
 )
 
 # =========================

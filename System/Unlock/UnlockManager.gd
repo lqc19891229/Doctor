@@ -7,7 +7,7 @@ signal reputation_points_changed(value: int)
 signal money_wen_changed(value: int)
 
 const GLOBAL_READBOOK_ARCHIVE_SCRIPT = preload(
-	"res://System/Book/GlobalReadBookArchive.gd"
+	"res://System/Book/Book/GlobalReadBookArchive.gd"
 )
 
 # =========================================================
