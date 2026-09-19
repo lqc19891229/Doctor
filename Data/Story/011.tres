@@ -38,7 +38,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李言闻"
-text = "嗯？…味道不对啊，这药里怎么掺了面粉？厚朴里也混了杂树皮充数。"
+text = "嗯？…味道不对啊，这药里怎么掺了面粉？厚朴里也混杂了树皮充数。"
 portrait = ExtResource("portrait_3")
 [sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")

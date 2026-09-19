@@ -8,9 +8,6 @@
 [ext_resource type="Texture2D" path="res://Assets/Background/009/009_01.png" id="background_4"]
 [ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/yang_shan_quan/yang_shan_quan.png" id="portrait_5"]
 [ext_resource type="Texture2D" path="res://Assets/Background/009/009_02.png" id="background_6"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/li_yan_wen/li_yan_wen.png" id="portrait_7"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/wu_zhi_lan/wu_zhi_lan.png" id="portrait_8"]
-[ext_resource type="Texture2D" path="res://Assets/Portrait/StoryNpc/chen_pi/chen_pi.png" id="portrait_9"]
 
 [sub_resource type="Resource" id="StoryLine_001"]
 script = ExtResource("1_storyline")
@@ -86,53 +83,13 @@ inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "好的好的。"
 portrait = ExtResource("portrait_2")
-[sub_resource type="Resource" id="StoryLine_010"]
-script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "mid"
-inactive_portrait_mode = "dim"
-speaker = "李言闻"
-text = "东璧回来啦，什么事儿啊，一大早就被叫去了？"
-portrait = ExtResource("portrait_7")
-[sub_resource type="Resource" id="StoryLine_011"]
-script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
-inactive_portrait_mode = "dim"
-speaker = "李东璧"
-text = "朝廷调拨了赈灾药材，这次不光惠民药局，咱们这些医馆药铺也要一起帮忙发放。"
-portrait = ExtResource("portrait_2")
-[sub_resource type="Resource" id="StoryLine_012"]
-script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "right"
-inactive_portrait_mode = "dim"
-speaker = "吴芷兰"
-text = "这几日我去菜市街买菜的时候，看到不少流民在城东，大灾之后必有大疫，朝廷这次赈灾太及时了。"
-portrait = ExtResource("portrait_8")
-[sub_resource type="Resource" id="StoryLine_013"]
-script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
-inactive_portrait_mode = "dim"
-speaker = "李东璧"
-text = "陈皮，跟我去后院收拾收拾库房，一会儿药材就要送来了，得赶紧腾出地方。"
-portrait = ExtResource("portrait_2")
-[sub_resource type="Resource" id="StoryLine_014"]
-script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "mid"
-inactive_portrait_mode = "dim"
-speaker = "陈皮"
-text = "好嘞。"
-portrait = ExtResource("portrait_9")
 
 [resource]
 script = ExtResource("2_storydata")
-story_id = "009"
+story_id = "009_01"
 story_name = "知州有请"
 condition_scene = "clinic"
-condition_day = 5
+condition_day = 1
 condition_money_op = ""
 condition_money = 0
 condition_reputation_op = ""
@@ -148,4 +105,4 @@ experience_points_change = 0
 play_once = true
 sort_index = 0
 background_mode = "current_scene"
-lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009"), SubResource("StoryLine_010"), SubResource("StoryLine_011"), SubResource("StoryLine_012"), SubResource("StoryLine_013"), SubResource("StoryLine_014")])
+lines = Array[ExtResource("1_storyline")]([SubResource("StoryLine_001"), SubResource("StoryLine_002"), SubResource("StoryLine_003"), SubResource("StoryLine_004"), SubResource("StoryLine_005"), SubResource("StoryLine_006"), SubResource("StoryLine_007"), SubResource("StoryLine_008"), SubResource("StoryLine_009")])

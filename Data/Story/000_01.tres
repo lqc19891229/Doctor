@@ -12,9 +12,15 @@ script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
-text = "李东璧去各地实地考察，采集样本，参考800多种书籍，花费27年，历经三次改写，至万历六年终于完成著作。全书共52卷，载药1892种，方剂11096首，插图1109幅，约190万字。"
+text = "转眼多年过去…"
 background = ExtResource("background_1")
 [sub_resource type="Resource" id="StoryLine_002"]
+script = ExtResource("1_storyline")
+line_type = "subtitle"
+portrait_side = "auto"
+inactive_portrait_mode = "dim"
+text = "李东璧去各地实地考察，采集样本，参考800多种书籍，花费27年，历经三次改写，至万历六年终于完成著作。全书共52卷，载药1892种，方剂11096首，插图1109幅，约190万字。"
+[sub_resource type="Resource" id="StoryLine_003"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "mid"
@@ -22,7 +28,7 @@ inactive_portrait_mode = "dim"
 speaker = "李东璧"
 text = "终于完成了…"
 portrait = ExtResource("portrait_2")
-[sub_resource type="Resource" id="StoryLine_003"]
+[sub_resource type="Resource" id="StoryLine_004"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "right"
@@ -30,7 +36,7 @@ inactive_portrait_mode = "dim"
 speaker = "吴芷兰"
 text = "老头子..."
 portrait = ExtResource("portrait_3")
-[sub_resource type="Resource" id="StoryLine_004"]
+[sub_resource type="Resource" id="StoryLine_005"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
 portrait_side = "left"
@@ -38,21 +44,13 @@ inactive_portrait_mode = "dim"
 speaker = "李建中"
 text = "爹，您写的这部旷世奇书一定要出版发行，让天下人都能用上。"
 portrait = ExtResource("portrait_4")
-[sub_resource type="Resource" id="StoryLine_005"]
-script = ExtResource("1_storyline")
-line_type = "dialogue"
-portrait_side = "left"
-inactive_portrait_mode = "dim"
-speaker = "李建中"
-text = "明日我就安排书商来谈出版之事。"
-portrait = ExtResource("portrait_4")
 
 [resource]
 script = ExtResource("2_storydata")
 story_id = "000_01"
 story_name = "完书"
 condition_scene = "night"
-condition_day = 2
+condition_day = 1
 condition_money_op = ""
 condition_money = 0
 condition_reputation_op = ""

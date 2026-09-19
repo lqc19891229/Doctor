@@ -57,7 +57,7 @@ background = ExtResource("background_5")
 [sub_resource type="Resource" id="StoryLine_006"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "黑衣人"
 text = "哎哟！"
@@ -89,7 +89,7 @@ portrait = ExtResource("portrait_7")
 [sub_resource type="Resource" id="StoryLine_010"]
 script = ExtResource("1_storyline")
 line_type = "dialogue"
-portrait_side = "left"
+portrait_side = "right"
 inactive_portrait_mode = "hide"
 speaker = "赵顺"
 text = "误会啊大人，误会。"
@@ -145,7 +145,7 @@ script = ExtResource("2_storydata")
 story_id = "020"
 story_name = "夜晚遇刺"
 condition_scene = "night_end"
-condition_day = 1
+condition_day = 0
 condition_money_op = ""
 condition_money = 0
 condition_reputation_op = ""
