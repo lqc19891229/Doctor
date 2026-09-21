@@ -1,0 +1,428 @@
+[gd_scene format=3 uid="uid://d300y7i7wjlwd"]
+
+[ext_resource type="Script" uid="uid://f7s4so1mqqxc" path="res://Scene/Records/RecordsWindow.gd" id="1_records"]
+
+[sub_resource type="StyleBoxFlat" id="StyleOuter"]
+bg_color = Color(0.141176, 0.0980392, 0.0784314, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.482353, 0.356863, 0.231373, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleInner"]
+bg_color = Color(0.0901961, 0.0627451, 0.0509804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.384314, 0.282353, 0.184314, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="RecordsWindow" type="Window" unique_id=696065044]
+oversampling_override = 1.0
+title = "行医记考"
+position = Vector2i(0, 36)
+size = Vector2i(1400, 820)
+min_size = Vector2i(1100, 680)
+script = ExtResource("1_records")
+
+[node name="RootPanel" type="PanelContainer" parent="." unique_id=1378176832]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleOuter")
+
+[node name="MarginContainer" type="MarginContainer" parent="RootPanel" unique_id=1816104481]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RootPanel/MarginContainer" unique_id=65267978]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Tabs" type="TabContainer" parent="RootPanel/MarginContainer/VBoxContainer" unique_id=608921425]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 26
+current_tab = 0
+tab_0/title = "诊疗记录"
+tab_1/title = "账目明细"
+tab_2/title = "数据统计"
+tab_3/title = "预制方剂"
+
+[node name="TreatmentPage" type="HSplitContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs" unique_id=575282359]
+layout_mode = 2
+theme_override_constants/separation = 16
+metadata/_tab_index = 0
+metadata/_tab_name = "诊疗记录"
+
+[node name="LeftPanel" type="PanelContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/TreatmentPage" unique_id=572677887]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleInner")
+
+[node name="MarginContainer" type="MarginContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/TreatmentPage/LeftPanel" unique_id=382078670]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 12
+
+[node name="Body" type="VBoxContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/TreatmentPage/LeftPanel/MarginContainer" unique_id=2023832025]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Caption" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/TreatmentPage/LeftPanel/MarginContainer/Body" unique_id=1409187327]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
+theme_override_font_sizes/font_size = 26
+text = "诊疗日期"
+
+[node name="TreatmentDayList" type="ItemList" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/TreatmentPage/LeftPanel/MarginContainer/Body" unique_id=696960686]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.952941, 0.894118, 0.760784, 1)
+theme_override_colors/font_selected_color = Color(1, 0.956863, 0.839216, 1)
+theme_override_font_sizes/font_size = 18
+
+[node name="DetailPanel" type="PanelContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/TreatmentPage" unique_id=39733046]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleInner")
+
+[node name="MarginContainer" type="MarginContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/TreatmentPage/DetailPanel" unique_id=1453759808]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="TreatmentDetail" type="RichTextLabel" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/TreatmentPage/DetailPanel/MarginContainer" unique_id=680645314]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.952941, 0.894118, 0.760784, 1)
+theme_override_font_sizes/normal_font_size = 19
+bbcode_enabled = true
+
+[node name="FinancePage" type="HSplitContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs" unique_id=1045310201]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+metadata/_tab_index = 1
+metadata/_tab_name = "账目明细"
+
+[node name="LeftPanel" type="PanelContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/FinancePage" unique_id=1095213367]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleInner")
+
+[node name="MarginContainer" type="MarginContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/FinancePage/LeftPanel" unique_id=782435642]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 12
+
+[node name="Body" type="VBoxContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/FinancePage/LeftPanel/MarginContainer" unique_id=281481527]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Caption" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/FinancePage/LeftPanel/MarginContainer/Body" unique_id=1178915489]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
+theme_override_font_sizes/font_size = 20
+text = "账目日期"
+
+[node name="FinanceDayList" type="ItemList" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/FinancePage/LeftPanel/MarginContainer/Body" unique_id=1848102175]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.952941, 0.894118, 0.760784, 1)
+theme_override_colors/font_selected_color = Color(1, 0.956863, 0.839216, 1)
+theme_override_font_sizes/font_size = 18
+
+[node name="DetailPanel" type="PanelContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/FinancePage" unique_id=1879156160]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleInner")
+
+[node name="MarginContainer" type="MarginContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/FinancePage/DetailPanel" unique_id=355310891]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="FinanceDetail" type="RichTextLabel" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/FinancePage/DetailPanel/MarginContainer" unique_id=59444087]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.952941, 0.894118, 0.760784, 1)
+theme_override_font_sizes/normal_font_size = 19
+bbcode_enabled = true
+
+[node name="StatsPage" type="VBoxContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs" unique_id=1467105691]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 22
+metadata/_tab_index = 2
+metadata/_tab_name = "数据统计"
+
+[node name="Hint" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage" unique_id=179131852]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
+theme_override_font_sizes/font_size = 20
+text = "行医至今的累计数据"
+
+[node name="StatsPanel" type="PanelContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage" unique_id=1465227583]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleInner")
+
+[node name="MarginContainer" type="MarginContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel" unique_id=1998624853]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="StatsGrid" type="GridContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer" unique_id=1636609416]
+layout_mode = 2
+theme_override_constants/h_separation = 28
+theme_override_constants/v_separation = 18
+columns = 4
+
+[node name="TotalPatientsLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1344819186]
+custom_minimum_size = Vector2(145, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
+theme_override_font_sizes/font_size = 20
+text = "治疗人数"
+vertical_alignment = 1
+
+[node name="TotalPatientsValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1185955566]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
+theme_override_font_sizes/font_size = 24
+text = "0 人"
+vertical_alignment = 1
+
+[node name="SuccessfulPatientsLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1316640685]
+custom_minimum_size = Vector2(145, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
+theme_override_font_sizes/font_size = 20
+text = "成功人数"
+vertical_alignment = 1
+
+[node name="SuccessfulPatientsValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1239901517]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
+theme_override_font_sizes/font_size = 24
+text = "0 人"
+vertical_alignment = 1
+
+[node name="MiaoshouPatientsLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=147659201]
+custom_minimum_size = Vector2(145, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
+theme_override_font_sizes/font_size = 20
+text = "妙手回春人数"
+vertical_alignment = 1
+
+[node name="MiaoshouPatientsValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1627540874]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
+theme_override_font_sizes/font_size = 24
+text = "0 人"
+vertical_alignment = 1
+
+[node name="FailedPatientsLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1764373090]
+custom_minimum_size = Vector2(145, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
+theme_override_font_sizes/font_size = 20
+text = "失败人数"
+vertical_alignment = 1
+
+[node name="FailedPatientsValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=582255610]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
+theme_override_font_sizes/font_size = 24
+text = "0 人"
+vertical_alignment = 1
+
+[node name="SuccessRateLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1968917436]
+custom_minimum_size = Vector2(145, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
+theme_override_font_sizes/font_size = 20
+text = "成功率"
+vertical_alignment = 1
+
+[node name="SuccessRateValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1544754521]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
+theme_override_font_sizes/font_size = 24
+text = "0.0%"
+vertical_alignment = 1
+
+[node name="TotalIncomeLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1077648975]
+custom_minimum_size = Vector2(145, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
+theme_override_font_sizes/font_size = 20
+text = "总收入"
+vertical_alignment = 1
+
+[node name="TotalIncomeValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=714524073]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.623529, 0.886275, 0.623529, 1)
+theme_override_font_sizes/font_size = 24
+text = "0两0文"
+vertical_alignment = 1
+
+[node name="TotalExpenseLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=335955640]
+custom_minimum_size = Vector2(145, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
+theme_override_font_sizes/font_size = 20
+text = "总支出"
+vertical_alignment = 1
+
+[node name="TotalExpenseValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=229915750]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.941176, 0.627451, 0.627451, 1)
+theme_override_font_sizes/font_size = 24
+text = "0两0文"
+vertical_alignment = 1
+
+[node name="NetChangeLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1132873637]
+custom_minimum_size = Vector2(145, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
+theme_override_font_sizes/font_size = 20
+text = "净变化"
+vertical_alignment = 1
+
+[node name="NetChangeValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=705117793]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
+theme_override_font_sizes/font_size = 24
+text = "0两0文"
+vertical_alignment = 1
+
+[node name="FinanceDaysLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=254771974]
+custom_minimum_size = Vector2(145, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
+theme_override_font_sizes/font_size = 20
+text = "记账天数"
+vertical_alignment = 1
+
+[node name="FinanceDaysValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1392748179]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
+theme_override_font_sizes/font_size = 24
+text = "0 天"
+vertical_alignment = 1
+
+[node name="PresetPage" type="HSplitContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs" unique_id=1523370686]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+metadata/_tab_index = 3
+metadata/_tab_name = "预制方剂"
+
+[node name="LeftPanel" type="PanelContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/PresetPage" unique_id=646471389]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleInner")
+
+[node name="MarginContainer" type="MarginContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/PresetPage/LeftPanel" unique_id=550065904]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 12
+
+[node name="Body" type="VBoxContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/PresetPage/LeftPanel/MarginContainer" unique_id=1667044604]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Caption" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/PresetPage/LeftPanel/MarginContainer/Body" unique_id=1408888542]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
+theme_override_font_sizes/font_size = 20
+text = "方剂熟练度"
+
+[node name="PresetList" type="ItemList" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/PresetPage/LeftPanel/MarginContainer/Body" unique_id=1003354055]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.952941, 0.894118, 0.760784, 1)
+theme_override_colors/font_selected_color = Color(1, 0.956863, 0.839216, 1)
+theme_override_font_sizes/font_size = 18
+
+[node name="DetailPanel" type="PanelContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/PresetPage" unique_id=146172187]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleInner")
+
+[node name="MarginContainer" type="MarginContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/PresetPage/DetailPanel" unique_id=1042139685]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="PresetDetail" type="RichTextLabel" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/PresetPage/DetailPanel/MarginContainer" unique_id=132027155]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.952941, 0.894118, 0.760784, 1)
+theme_override_font_sizes/normal_font_size = 19
+bbcode_enabled = true

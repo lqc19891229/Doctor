@@ -22,6 +22,7 @@ const NIGHT_RAINY_BACKGROUND_PATH: String = "res://Assets/Background/clinic/rain
 @export_range(0.5, 5.0, 0.1) var sleep_black_duration: float = 1.0
 
 @onready var read_book_window: Window = find_child("ReadBook", true, false) as Window
+@onready var records_window: Window = find_child("RecordsWindow", true, false) as Window
 @onready var info_window: Window = $InfoWindow
 @onready var info_label: Label = $InfoWindow/Panel/VBoxContainer/InfoLabel
 
@@ -67,6 +68,7 @@ func _ready() -> void:
 	_setup_buttons()
 	_setup_player_hint_dialog()
 	_setup_read_book_window()
+	_setup_records_window()
 	_setup_topbar_controller()
 	_refresh_topbar(true)
 
@@ -77,6 +79,7 @@ func _ready() -> void:
 
 func _validate_scene_node_bindings() -> void:
 	_check_node_binding(read_book_window, "ReadBook")
+	_check_node_binding(records_window, "RecordsWindow")
 	_check_node_binding(read_book_button, "ReadBookButton")
 	_check_node_binding(next_day_button, "NextDayButton")
 	_check_node_binding(day_label, "DayLabel")
@@ -533,6 +536,29 @@ func _on_read_book_button_pressed() -> void:
 	open_read_book_window()
 
 
+func open_records_window() -> void:
+	if records_window == null:
+		push_warning("Night.gd 找不到 RecordsWindow")
+		return
+
+	SfxManager.play_turn_page()
+	if records_window.has_method("open_window"):
+		records_window.call("open_window")
+	else:
+		records_window.popup_centered()
+	records_window.grab_focus()
+
+
+func _setup_records_window() -> void:
+	if records_window == null:
+		return
+	records_window.hide()
+	if records_window.has_signal("close_requested"):
+		var close_callable := Callable(records_window, "hide")
+		if not records_window.close_requested.is_connected(close_callable):
+			records_window.close_requested.connect(close_callable)
+
+
 func open_read_book_window() -> void:
 	if read_book_window == null:
 		push_warning("Night.gd 无法打开读书窗口：read_book_window 为空")
@@ -597,6 +623,11 @@ func _input(event: InputEvent) -> void:
 
 	if key_event.keycode == KEY_F2:
 		_on_next_day_button_pressed()
+		get_viewport().set_input_as_handled()
+		return
+
+	if key_event.keycode == KEY_F3:
+		open_records_window()
 		get_viewport().set_input_as_handled()
 		return
 
@@ -706,6 +737,7 @@ func prepare_for_scene_hide() -> void:
 	# ReadBook / InfoWindow 等可能是原生子窗口；场景隐藏时显式关闭。
 	var transient_nodes: Array[Node] = [
 		read_book_window,
+		records_window,
 		info_window,
 		player_hint_window
 	]
@@ -722,6 +754,7 @@ func _reset_transient_state_for_night_entry() -> void:
 
 	var transient_nodes: Array[Node] = [
 		read_book_window,
+		records_window,
 		info_window,
 		player_hint_window
 	]

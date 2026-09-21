@@ -641,6 +641,7 @@ func _start_new_game_in_slot(slot_index: int, difficulty: int) -> void:
 
 	GameTime.start_new_game()
 	Unlock.reset_progress(difficulty)
+	Records.reset_progress()
 
 	# 新游戏从玩家选择的手动档开始，本局之后“保存并返回 / 保存并退出”
 	# 都固定回写这个槽；中途另存到其他槽不会改变本局绑定。

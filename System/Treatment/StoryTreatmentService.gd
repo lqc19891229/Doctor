@@ -141,9 +141,28 @@ func submit_story_prescription() -> Dictionary:
 	if result == null:
 		return _submit_error("处方判定失败。")
 
+	var was_already_submitted := _diagnosis_submitted
 	_diagnosis_submitted = true
 	_last_judge_result = result
 	_last_judge_summary_text = result.get_summary_text()
+
+	# 剧情病人同样进入医馆账册；只在第一次提交时计入治疗人数。
+	if not was_already_submitted and Records != null and Records.has_method("record_treatment"):
+		var raw_grade = result.get("grade")
+		var raw_score = result.get("score")
+		if raw_score == null:
+			raw_score = -1
+		Records.record_treatment(_current_day, {
+			"patient_name": _current_npc.npc_name,
+			"npc_type": "story",
+			"disease_name": _current_npc.disease.disease_name,
+			"standard_formula_name": standard_formula.formula_name,
+			"diagnosis": _current_prescription.disease_name,
+			"prescription": _current_prescription.get_display_text(),
+			"grade": String(raw_grade) if raw_grade != null else "",
+			"score": raw_score,
+			"success": bool(result.success)
+		})
 
 	# story NPC 的名望 / 心得 / 银钱仍由后续 StoryData 在剧情播放完成后结算；
 	# 此处只更新当前治疗状态。

@@ -1363,6 +1363,29 @@ func submit_prescription() -> bool:
 		if raw_result_grade != null:
 			result_grade = str(raw_result_grade).strip_edges()
 
+	# 第一次提交后把完整诊疗信息写入医馆账册。
+	# 记录层只保存可序列化的显示文本，不保存 NpcData / FormulaData 资源引用。
+	if not was_already_submitted and Records != null and Records.has_method("record_treatment"):
+		var score_value = -1
+		if result != null:
+			var raw_score_value = result.get("score")
+			if raw_score_value != null:
+				score_value = raw_score_value
+		Records.record_treatment(current_day, {
+			"patient_name": current_npc.npc_name,
+			"npc_type": current_npc.npc_type,
+			"disease_name": current_npc.disease.disease_name if current_npc.disease != null else "未记录",
+			"standard_formula_name": standard_formula.formula_name if standard_formula != null else "未记录",
+			"diagnosis": current_prescription.disease_name,
+			"prescription": current_prescription.get_display_text(),
+			"grade": result_grade,
+			"score": score_value,
+			"success": bool(result.success),
+			"consultation_fee_wen": last_consultation_fee_wen,
+			"medicine_income_wen": last_medicine_income_wen,
+			"patient_thank_gift_wen": last_patient_thank_gift_wen
+		})
+
 	if uses_fixed_treatment_rewards and result_grade == "治疗成功" and not was_already_submitted:
 		summary_text += "\n治疗成功：名望不变"
 	elif uses_fixed_treatment_rewards and result_grade == "治疗成功" and was_already_submitted:

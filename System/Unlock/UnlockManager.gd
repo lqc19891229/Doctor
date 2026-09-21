@@ -573,6 +573,10 @@ var daily_failed_medicine_cost_wen: int = 0
 var last_finance_settled_day: int = 0
 var last_finance_report: Dictionary = {}
 
+# 已完成日结的历史账目，key = day 字符串，value = 该日完整结算报告。
+# 保留在 UnlockManager 中，确保账册与实际银钱结算使用同一份数据。
+var finance_history: Dictionary = {}
+
 
 func set_game_difficulty(value: int) -> void:
 	match value:
@@ -991,6 +995,8 @@ func settle_day_finances(day: int) -> Dictionary:
 			"net_change_wen": 0,
 			"money_after_wen": money_wen
 		}
+		last_finance_report["settled"] = true
+		finance_history[str(safe_day)] = last_finance_report.duplicate(true)
 		return last_finance_report.duplicate(true)
 
 	# 000_01《完书》完成状态。
@@ -1158,6 +1164,8 @@ func settle_day_finances(day: int) -> Dictionary:
 		"net_change_wen": net_change,
 		"money_after_wen": money_wen
 	}
+	last_finance_report["settled"] = true
+	finance_history[str(safe_day)] = last_finance_report.duplicate(true)
 
 	return last_finance_report.duplicate(true)
 
@@ -1166,6 +1174,73 @@ func get_last_finance_report_for_day(day: int) -> Dictionary:
 	if last_finance_settled_day != maxi(day, 1):
 		return {}
 	return last_finance_report.duplicate(true)
+
+
+func get_finance_days() -> Array[int]:
+	var days: Array[int] = []
+	for key in finance_history.keys():
+		days.append(int(key))
+	days.sort()
+	return days
+
+
+func get_finance_detail_for_day(day: int) -> Dictionary:
+	var safe_day := maxi(day, 1)
+	var history_key := str(safe_day)
+	if finance_history.has(history_key):
+		return finance_history[history_key].duplicate(true)
+
+	# 当前白天还没有日结报告时，账册仍显示已经实时发生的收入。
+	# 支出和日结收入要等进入夜晚后才会生成。
+	if finance_ledger_day != safe_day:
+		return {}
+
+	var current_income := (
+		daily_consultation_income_wen
+		+ daily_medicine_income_wen
+		+ daily_patient_thank_gift_income_wen
+	)
+	return {
+		"day": safe_day,
+		"settled": false,
+		"finance_skipped": not is_finance_active(safe_day),
+		"random_npc_count": daily_random_npc_count,
+		"consultation_income_wen": daily_consultation_income_wen,
+		"patient_thank_gift_income_wen": daily_patient_thank_gift_income_wen,
+		"medicine_income_wen": daily_medicine_income_wen,
+		"total_income_wen": current_income,
+		"total_expense_wen": 0,
+		"net_change_wen": current_income,
+		"money_after_wen": money_wen
+	}
+
+
+func get_finance_totals() -> Dictionary:
+	var total_income := 0
+	var total_expense := 0
+	var counted_days := 0
+	for key in finance_history.keys():
+		var report = finance_history[key]
+		if typeof(report) != TYPE_DICTIONARY:
+			continue
+		total_income += int(report.get("total_income_wen", 0))
+		total_expense += int(report.get("total_expense_wen", 0))
+		counted_days += 1
+
+	# 让统计页在白天也能反映刚刚发生的诊疗收入。
+	if not finance_history.has(str(finance_ledger_day)):
+		total_income += daily_consultation_income_wen
+		total_income += daily_medicine_income_wen
+		total_income += daily_patient_thank_gift_income_wen
+		if daily_random_npc_count > 0 or is_finance_active(finance_ledger_day):
+			counted_days += 1
+
+	return {
+		"total_income_wen": total_income,
+		"total_expense_wen": total_expense,
+		"net_change_wen": total_income - total_expense,
+		"finance_days": counted_days
+	}
 
 
 func build_finance_report_text(day: int) -> String:
@@ -2389,6 +2464,7 @@ func reset_progress(new_difficulty: int = GameDifficulty.NORMAL) -> void:
 	_reset_daily_finance_ledger(1)
 	last_finance_settled_day = 0
 	last_finance_report.clear()
+	finance_history.clear()
 	_emit_all_player_stat_signals()
 
 	# 新游戏也立即应用 0 点心得即可解锁的初始条目。
@@ -2425,6 +2501,7 @@ func get_save_data() -> Dictionary:
 		"daily_failed_medicine_cost_wen": daily_failed_medicine_cost_wen,
 		"last_finance_settled_day": last_finance_settled_day,
 		"last_finance_report": last_finance_report,
+		"finance_history": finance_history,
 		"unlocked_story_ids": unlocked_story_ids
 	}
 
@@ -2487,6 +2564,21 @@ func load_save_data(data: Dictionary) -> void:
 		last_finance_report = loaded_finance_report.duplicate(true)
 	else:
 		last_finance_report = {}
+
+	finance_history.clear()
+	var loaded_finance_history = data.get("finance_history", {})
+	if typeof(loaded_finance_history) == TYPE_DICTIONARY:
+		for key in loaded_finance_history.keys():
+			if typeof(loaded_finance_history[key]) == TYPE_DICTIONARY:
+				finance_history[str(key)] = loaded_finance_history[key].duplicate(true)
+
+	# 旧存档只有最近一次报告，至少把这一天迁入历史账目。
+	if finance_history.is_empty() and not last_finance_report.is_empty():
+		var legacy_day := int(last_finance_report.get("day", last_finance_settled_day))
+		if legacy_day > 0:
+			var legacy_report := last_finance_report.duplicate(true)
+			legacy_report["settled"] = true
+			finance_history[str(legacy_day)] = legacy_report
 
 	# 这些 Dictionary 是直接从旧存档恢复的，没有经过增量事件，
 	# 因此先暂停未读计数维护，最后统一重建一次。

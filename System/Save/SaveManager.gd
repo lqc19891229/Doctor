@@ -236,6 +236,7 @@ func _read_saved_progress_for_slot(slot_index: int) -> Dictionary:
 func _make_current_save_data(slot_index: int = AUTO_SAVE_SLOT) -> Dictionary:
 	var progress_data: Dictionary = Unlock.get_save_data().duplicate(true)
 	var story_data: Dictionary = StoryManager.get_save_data().duplicate(true)
+	var records_data: Dictionary = Records.get_save_data().duplicate(true)
 	var phase := String(GameTime.current_phase)
 	var day := int(GameTime.current_day)
 
@@ -247,7 +248,8 @@ func _make_current_save_data(slot_index: int = AUTO_SAVE_SLOT) -> Dictionary:
 			"current_phase": phase
 		},
 		"progress": progress_data,
-		"story": story_data
+		"story": story_data,
+		"records": records_data
 	}
 
 
@@ -870,15 +872,22 @@ func _load_progress_data(save_data: Dictionary) -> void:
 	# 这时重置进度，避免保留内存里的旧数据
 	if not save_data.has("progress"):
 		Unlock.reset_progress()
+		Records.reset_progress()
 		return
 
 	# progress 字段格式不对，也重置进度
 	if typeof(save_data["progress"]) != TYPE_DICTIONARY:
 		Unlock.reset_progress()
+		Records.reset_progress()
 		return
 
 	# 恢复解锁和阅读进度
 	Unlock.load_save_data(save_data["progress"])
+
+	if save_data.has("records") and typeof(save_data["records"]) == TYPE_DICTIONARY:
+		Records.load_save_data(save_data["records"])
+	else:
+		Records.reset_progress()
 
 
 # =========================================================
