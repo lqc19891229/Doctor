@@ -4,6 +4,7 @@ class_name RecordsWindow
 ## 医馆账册：诊疗记录、账目明细、数据统计、预制方剂。
 
 const FINANCE_START_DAY: int = 2
+const SORT_INDEX_FALLBACK: int = 2147483647
 
 @onready var tabs: TabContainer = %Tabs
 @onready var close_button: Button = get_node_or_null("%CloseButton") as Button
@@ -41,6 +42,12 @@ func _ready() -> void:
 	finance_day_list.item_selected.connect(_on_finance_day_selected)
 	preset_list.item_selected.connect(_on_preset_selected)
 	hide()
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if visible and event.is_action_pressed("ui_cancel"):
+		close_window()
+		get_viewport().set_input_as_handled()
 
 
 func open_window() -> void:
@@ -218,13 +225,19 @@ func _refresh_stats() -> void:
 func _refresh_preset_list() -> void:
 	preset_formulas.clear()
 	if FormulaDB != null and FormulaDB.has_method("get_all_formulas"):
-		preset_formulas = FormulaDB.get_all_formulas()
+		# 复制方剂列表，避免排序时改动 FormulaDB 内部数组的全局顺序。
+		for formula in FormulaDB.get_all_formulas():
+			if formula != null:
+				preset_formulas.append(formula)
+	var formula_sort_map := _build_formula_sort_map()
 	preset_formulas.sort_custom(func(a: FormulaData, b: FormulaData) -> bool:
-		var a_sort_index := _get_formula_sort_index(a)
-		var b_sort_index := _get_formula_sort_index(b)
+		var a_id := a.formula_id.strip_edges()
+		var b_id := b.formula_id.strip_edges()
+		var a_sort_index := int(formula_sort_map.get(a_id, SORT_INDEX_FALLBACK))
+		var b_sort_index := int(formula_sort_map.get(b_id, SORT_INDEX_FALLBACK))
 		if a_sort_index != b_sort_index:
 			return a_sort_index < b_sort_index
-		return a.formula_name < b.formula_name
+		return a_id.naturalnocasecmp_to(b_id) < 0
 	)
 	preset_list.clear()
 	for formula in preset_formulas:
@@ -238,13 +251,20 @@ func _refresh_preset_list() -> void:
 	_show_preset(0)
 
 
-func _get_formula_sort_index(formula: FormulaData) -> int:
-	if formula == null:
-		return 0
-	for property in formula.get_property_list():
-		if property.get("name") == &"sort_index":
-			return int(formula.get("sort_index"))
-	return 0
+func _build_formula_sort_map() -> Dictionary:
+	var result: Dictionary = {}
+	if BookEntryDB == null or not BookEntryDB.has_method("get_entries_by_type"):
+		return result
+
+	for entry in BookEntryDB.get_entries_by_type("formula"):
+		if entry == null:
+			continue
+		var formula_id := str(entry.get("formula_id")).strip_edges()
+		if formula_id.is_empty():
+			continue
+		result[formula_id] = int(entry.sort_index)
+
+	return result
 
 
 func _on_preset_selected(index: int) -> void:
