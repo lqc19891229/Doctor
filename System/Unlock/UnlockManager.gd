@@ -431,8 +431,8 @@ var reputation_points: int = 0
 #   188 / 288 / 588 / 688 / 888 / 1888 文。
 # - 购买医书：每个节气必定发生，金额随机为
 #   100 / 200 / 300 / 400 / 500 / 600 / 700 / 800 / 900 / 1000 文。
-# - 夏税：大暑 = 500 文
-# - 秋税：霜降 = 1500 文
+# - 夏税：大暑 = 500 文；完成 000_01《完书》后 = 1000 文
+# - 秋税：霜降 = 1500 文；完成 000_01《完书》后 = 3000 文
 # - 煤炭：
 #   立春 / 立夏 / 立秋 = 300 文
 #   立冬 = 1200 文
@@ -504,6 +504,8 @@ const WAGE_INTERVAL_SOLAR_TERMS: int = 2
 
 const SUMMER_TAX_DA_SHU_WEN: int = 500
 const AUTUMN_TAX_SHUANG_JIANG_WEN: int = 1500
+const SUMMER_TAX_AFTER_BOOK_DA_SHU_WEN: int = 1000
+const AUTUMN_TAX_AFTER_BOOK_SHUANG_JIANG_WEN: int = 3000
 
 const FOOD_COST_WEN: int = 1000
 const FOOD_COST_INTERVAL_SOLAR_TERMS: int = 1
@@ -1000,7 +1002,8 @@ func settle_day_finances(day: int) -> Dictionary:
 		return last_finance_report.duplicate(true)
 
 	# 000_01《完书》完成状态。
-	# 完书后：启用李建中俸禄，同时停止李言闻固定收入和购买医书支出。
+	# 完书后：启用李建中俸禄，停止李言闻固定收入和购买医书支出，
+	# 同时提高夏税和秋税。
 	var has_finished_ben_cao_gang_mu := StoryManager.has_played_story("000_01")
 
 	# -------------------- 日结收入项目 --------------------
@@ -1061,12 +1064,23 @@ func settle_day_finances(day: int) -> Dictionary:
 	var moldy_herb_cost := _get_moldy_herb_cost_for_solar_term(solar_term_index)
 
 	# 夏税、秋税分别在大暑、霜降缴纳。
-	var summer_tax := SUMMER_TAX_DA_SHU_WEN if solar_term_index == SOLAR_TERM_DA_SHU else 0
-	var autumn_tax := (
-		AUTUMN_TAX_SHUANG_JIANG_WEN
-		if solar_term_index == SOLAR_TERM_SHUANG_JIANG
-		else 0
-	)
+	# 000_01《完书》前：夏税 500 文，秋税 1500 文。
+	# 000_01《完书》后：夏税 1000 文，秋税 3000 文。
+	var summer_tax := 0
+	if solar_term_index == SOLAR_TERM_DA_SHU:
+		summer_tax = (
+			SUMMER_TAX_AFTER_BOOK_DA_SHU_WEN
+			if has_finished_ben_cao_gang_mu
+			else SUMMER_TAX_DA_SHU_WEN
+		)
+
+	var autumn_tax := 0
+	if solar_term_index == SOLAR_TERM_SHUANG_JIANG:
+		autumn_tax = (
+			AUTUMN_TAX_AFTER_BOOK_SHUANG_JIANG_WEN
+			if has_finished_ben_cao_gang_mu
+			else AUTUMN_TAX_SHUANG_JIANG_WEN
+		)
 
 	var is_gross_accounting := (
 		finance_ledger_accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS
