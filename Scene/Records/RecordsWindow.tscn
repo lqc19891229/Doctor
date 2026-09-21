@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d300y7i7wjlwd"]
 
-[ext_resource type="Script" uid="uid://f7s4so1mqqxc" path="res://Scene/Records/RecordsWindow.gd" id="1_records"]
+[ext_resource type="Script" path="res://Scene/Records/RecordsWindow.gd" id="1_records"]
 
 [sub_resource type="StyleBoxFlat" id="StyleOuter"]
 bg_color = Color(0.141176, 0.0980392, 0.0784314, 1)
@@ -146,7 +146,7 @@ theme_override_constants/separation = 10
 [node name="Caption" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/FinancePage/LeftPanel/MarginContainer/Body" unique_id=1178915489]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 26
 text = "账目日期"
 
 [node name="FinanceDayList" type="ItemList" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/FinancePage/LeftPanel/MarginContainer/Body" unique_id=1848102175]
@@ -183,12 +183,6 @@ layout_mode = 2
 theme_override_constants/separation = 22
 metadata/_tab_index = 2
 metadata/_tab_name = "数据统计"
-
-[node name="Hint" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage" unique_id=179131852]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
-theme_override_font_sizes/font_size = 20
-text = "行医至今的累计数据"
 
 [node name="StatsPanel" type="PanelContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage" unique_id=1465227583]
 layout_mode = 2
@@ -339,7 +333,7 @@ custom_minimum_size = Vector2(145, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
 theme_override_font_sizes/font_size = 20
-text = "净变化"
+text = "利润"
 vertical_alignment = 1
 
 [node name="NetChangeValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=705117793]
@@ -350,24 +344,6 @@ size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
 theme_override_font_sizes/font_size = 24
 text = "0两0文"
-vertical_alignment = 1
-
-[node name="FinanceDaysLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=254771974]
-custom_minimum_size = Vector2(145, 48)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
-theme_override_font_sizes/font_size = 20
-text = "记账天数"
-vertical_alignment = 1
-
-[node name="FinanceDaysValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1392748179]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(170, 48)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
-theme_override_font_sizes/font_size = 24
-text = "0 天"
 vertical_alignment = 1
 
 [node name="PresetPage" type="HSplitContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs" unique_id=1523370686]
@@ -396,7 +372,7 @@ theme_override_constants/separation = 10
 [node name="Caption" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/PresetPage/LeftPanel/MarginContainer/Body" unique_id=1408888542]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 26
 text = "方剂熟练度"
 
 [node name="PresetList" type="ItemList" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/PresetPage/LeftPanel/MarginContainer/Body" unique_id=1003354055]
