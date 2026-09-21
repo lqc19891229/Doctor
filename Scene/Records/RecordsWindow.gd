@@ -3,6 +3,8 @@ class_name RecordsWindow
 
 ## 医馆账册：诊疗记录、账目明细、数据统计、预制方剂。
 
+const FINANCE_START_DAY: int = 2
+
 @onready var tabs: TabContainer = %Tabs
 @onready var close_button: Button = get_node_or_null("%CloseButton") as Button
 
@@ -21,7 +23,6 @@ class_name RecordsWindow
 @onready var total_income_value: Label = %TotalIncomeValue
 @onready var total_expense_value: Label = %TotalExpenseValue
 @onready var net_change_value: Label = %NetChangeValue
-@onready var finance_days_value: Label = %FinanceDaysValue
 
 var treatment_days: Array[int] = []
 var finance_days: Array[int] = []
@@ -90,35 +91,45 @@ func _show_treatment_day(day: int) -> void:
 		for index in range(records.size()):
 			var record: Dictionary = records[index]
 			var status := "成功" if bool(record.get("success", false)) else "未愈"
-			var grade := String(record.get("grade", ""))
+			var grade := _record_text(record, "grade", "")
 			lines.append("\n[b]%d. %s[/b]  %s  ·  %s" % [
 				index + 1,
-				String(record.get("patient_name", "未知病人")),
+				_record_text(record, "patient_name", "未知病人"),
 				status,
 				grade
 			])
-			lines.append("病人疾病：[color=#e3d1aa]%s[/color]" % String(record.get("disease_name", "未记录")))
-			lines.append("标准方：[color=#e3d1aa]%s[/color]" % String(record.get("standard_formula_name", "未记录")))
-			lines.append("断病：[color=#e3d1aa]%s[/color]" % String(record.get("diagnosis", "未记录")))
-			lines.append("开方：[color=#e3d1aa]%s[/color]" % String(record.get("prescription", "（空方）")).replace("\n", "；"))
-			lines.append("评分：%s" % String(record.get("score", "-")))
+			lines.append("病人疾病：[color=#e3d1aa]%s[/color]" % _record_text(record, "disease_name", "未记录"))
+			lines.append("标准方：[color=#e3d1aa]%s[/color]" % _record_text(record, "standard_formula_name", "未记录"))
+			lines.append("断病：[color=#e3d1aa]%s[/color]" % _record_text(record, "diagnosis", "未记录"))
+			lines.append("开方：[color=#e3d1aa]%s[/color]" % _record_text(record, "prescription", "（空方）").replace("\n", "；"))
 			if index < records.size() - 1:
 				lines.append("[color=#62482f]────────────────────────[/color]")
 	treatment_detail.text = "\n".join(lines)
 
 
+func _record_text(record: Dictionary, key: String, fallback: String) -> String:
+	var value: Variant = record.get(key, null)
+	if value == null:
+		return fallback
+	var text_value := str(value).strip_edges()
+	return text_value if not text_value.is_empty() else fallback
+
+
 func _refresh_finance_list() -> void:
 	finance_days.clear()
 	if Unlock != null and Unlock.has_method("get_finance_days"):
-		finance_days = Unlock.get_finance_days()
-	if GameTime != null and GameTime.current_day > 0 and not finance_days.has(GameTime.current_day):
+		for day_value in Unlock.get_finance_days():
+			var recorded_day := int(day_value)
+			if recorded_day >= FINANCE_START_DAY and not finance_days.has(recorded_day):
+				finance_days.append(recorded_day)
+	if GameTime != null and GameTime.current_day >= FINANCE_START_DAY and not finance_days.has(GameTime.current_day):
 		finance_days.append(GameTime.current_day)
 	finance_days.sort()
 	finance_day_list.clear()
 	for day in finance_days:
 		finance_day_list.add_item(_format_record_date(day))
 	if finance_days.is_empty():
-		finance_detail.text = "[color=#c6ae83]尚无账目记录。[/color]"
+		finance_detail.text = "[color=#c6ae83]账目自%s开始记录。[/color]" % _format_record_date(FINANCE_START_DAY)
 		return
 	finance_day_list.select(finance_days.size() - 1)
 	_show_finance_day(finance_days.back())
@@ -130,6 +141,9 @@ func _on_finance_day_selected(index: int) -> void:
 
 
 func _show_finance_day(day: int) -> void:
+	if day < FINANCE_START_DAY:
+		finance_detail.text = "[color=#c6ae83]账目自%s开始记录。[/color]" % _format_record_date(FINANCE_START_DAY)
+		return
 	var report: Dictionary = Unlock.get_finance_detail_for_day(day) if Unlock != null and Unlock.has_method("get_finance_detail_for_day") else {}
 	if report.is_empty():
 		finance_detail.text = "[color=#c6ae83]%s暂无账目数据。[/color]" % _format_record_date(day)
@@ -177,9 +191,15 @@ func _format_money(amount: int) -> String:
 	return "%s%d两%d文" % [sign, absolute / 1000, absolute % 1000]
 
 
+func _format_money_without_positive_sign(amount: int) -> String:
+	var sign := "-" if amount < 0 else ""
+	var absolute := absi(amount)
+	return "%s%d两%d文" % [sign, absolute / 1000, absolute % 1000]
+
+
 func _format_record_date(day: int) -> String:
 	if GameTime != null and GameTime.has_method("get_day_text_by_index"):
-		return String(GameTime.get_day_text_by_index(day))
+		return str(GameTime.get_day_text_by_index(day))
 	return "日期未载"
 
 
@@ -190,10 +210,9 @@ func _refresh_stats() -> void:
 	miaoshou_patients_value.text = "%d 人" % int(stats.get("miaoshou_patients", 0))
 	failed_patients_value.text = "%d 人" % int(stats.get("failed_patients", 0))
 	success_rate_value.text = "%.1f%%" % float(stats.get("success_rate", 0.0))
-	total_income_value.text = _format_money(int(stats.get("total_income_wen", 0)))
-	total_expense_value.text = _format_money(int(stats.get("total_expense_wen", 0)))
+	total_income_value.text = _format_money_without_positive_sign(int(stats.get("total_income_wen", 0)))
+	total_expense_value.text = _format_money_without_positive_sign(int(stats.get("total_expense_wen", 0)))
 	net_change_value.text = _format_money(int(stats.get("net_change_wen", 0)))
-	finance_days_value.text = "%d 天" % int(stats.get("finance_days", 0))
 
 
 func _refresh_preset_list() -> void:
@@ -201,6 +220,10 @@ func _refresh_preset_list() -> void:
 	if FormulaDB != null and FormulaDB.has_method("get_all_formulas"):
 		preset_formulas = FormulaDB.get_all_formulas()
 	preset_formulas.sort_custom(func(a: FormulaData, b: FormulaData) -> bool:
+		var a_sort_index := _get_formula_sort_index(a)
+		var b_sort_index := _get_formula_sort_index(b)
+		if a_sort_index != b_sort_index:
+			return a_sort_index < b_sort_index
 		return a.formula_name < b.formula_name
 	)
 	preset_list.clear()
@@ -213,6 +236,15 @@ func _refresh_preset_list() -> void:
 		return
 	preset_list.select(0)
 	_show_preset(0)
+
+
+func _get_formula_sort_index(formula: FormulaData) -> int:
+	if formula == null:
+		return 0
+	for property in formula.get_property_list():
+		if property.get("name") == &"sort_index":
+			return int(formula.get("sort_index"))
+	return 0
 
 
 func _on_preset_selected(index: int) -> void:
