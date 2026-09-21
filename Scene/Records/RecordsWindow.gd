@@ -99,7 +99,7 @@ func _show_treatment_day(day: int) -> void:
 			var record: Dictionary = records[index]
 			var status := "成功" if bool(record.get("success", false)) else "未愈"
 			var grade := _record_text(record, "grade", "")
-			lines.append("\n[b]%d. %s[/b]  %s  ·  %s" % [
+			lines.append("\n%d. [font_size=22][color=#fff1c7]%s[/color][/font_size]  %s  ·  %s" % [
 				index + 1,
 				_record_text(record, "patient_name", "未知病人"),
 				status,

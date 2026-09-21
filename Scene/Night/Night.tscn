@@ -5,14 +5,15 @@
 [ext_resource type="Script" uid="uid://dgbnc226go4fl" path="res://Scene/Night/NightHotspot.gd" id="2_night_hotspot"]
 [ext_resource type="PackedScene" uid="uid://cbsehhhrv63ek" path="res://Scene/PlayerHint/PlayerHintWindow.tscn" id="3_3ehag"]
 [ext_resource type="PackedScene" uid="uid://drw157phi8l3n" path="res://Scene/Test/InfoWindow.tscn" id="4_info"]
-[ext_resource type="PackedScene" path="res://Scene/Records/RecordsWindow.tscn" id="10_records"]
 [ext_resource type="Texture2D" uid="uid://cdktg72vwwrl1" path="res://Assets/UI/TopBar.png" id="5_5x4ej"]
-[ext_resource type="Texture2D" uid="uid://8bdhvq1nyqj0" path="res://Assets/Background/clinic/spring_night.png" id="5_sslgd"]
-[ext_resource type="Texture2D" uid="uid://b8f6aogxyufp3" path="res://Assets/Background/clinic/night_table.png" id="6_ca75w"]
+[ext_resource type="Texture2D" uid="uid://bctaap61xvwpm" path="res://Assets/Background/clinic/spring_night.png" id="5_sslgd"]
+[ext_resource type="Texture2D" uid="uid://djrsg6p8uh1xb" path="res://Assets/Background/clinic/night_table.png" id="6_ca75w"]
 [ext_resource type="Texture2D" uid="uid://bun4qmh7amvw2" path="res://Assets/UI/silver_ingot.png" id="6_silver_ingot"]
 [ext_resource type="Texture2D" uid="uid://drj3b721nd3p5" path="res://Assets/UI/copper_coin.png" id="7_copper_coin"]
 [ext_resource type="Texture2D" uid="uid://cj4x1r4vgs5al" path="res://Assets/UI/F1.png" id="8_78dng"]
 [ext_resource type="Texture2D" uid="uid://bvvfhbe8p7oly" path="res://Assets/UI/F2.png" id="9_05eug"]
+[ext_resource type="PackedScene" uid="uid://d300y7i7wjlwd" path="res://Scene/Records/RecordsWindow.tscn" id="10_records"]
+[ext_resource type="Texture2D" uid="uid://bxi0kf4jsiwo6" path="res://Assets/UI/F3.png" id="10_vdr86"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sax03"]
 
@@ -36,7 +37,7 @@ visible = false
 [node name="InfoWindow" parent="." unique_id=182963632 instance=ExtResource("4_info")]
 visible = false
 
-[node name="RecordsWindow" parent="." instance=ExtResource("10_records")]
+[node name="RecordsWindow" parent="." unique_id=659806246 instance=ExtResource("10_records")]
 visible = false
 
 [node name="PlayerHintWindow" parent="." unique_id=198736852 instance=ExtResource("3_3ehag")]
@@ -144,6 +145,23 @@ offset_left = -32.600098
 offset_top = -67.59604
 offset_right = 31.399902
 offset_bottom = -3.5960388
+mouse_filter = 2
+texture = ExtResource("10_vdr86")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ClinicalLogWindow" type="TextureRect" parent="Background/TableImage" unique_id=1186516219]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.855
+anchor_top = 0.55600005
+anchor_right = 0.855
+anchor_bottom = 0.55600005
+offset_left = -261.6001
+offset_top = 32.40396
+offset_right = -197.6001
+offset_bottom = 96.40396
 mouse_filter = 2
 texture = ExtResource("9_05eug")
 expand_mode = 1
