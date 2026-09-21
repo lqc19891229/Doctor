@@ -23,7 +23,7 @@
 [sub_resource type="Resource" id="TutorialSlide_1"]
 script = ExtResource("3_slide_data")
 title = "夜间"
-description = "夜间点击书籍(F1)、油灯(F2)进行读书或休息进入下一天。"
+description = "夜间点击书籍(F1)读书，行医记考(F2)查看记录，油灯(F3)休息进入下一天。"
 image = ExtResource("3_t4jru")
 
 [sub_resource type="Resource" id="TutorialSlide_2"]

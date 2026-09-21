@@ -605,7 +605,7 @@ func _input(event: InputEvent) -> void:
 	if not is_visible_in_tree():
 		return
 
-	# 跨天黑屏期间不再响应任何 Night 快捷键，避免 F2 重复触发。
+	# 跨天黑屏期间不再响应任何 Night 快捷键，避免 F3 重复触发。
 	if sleep_transition_active:
 		return
 
@@ -622,12 +622,12 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if key_event.keycode == KEY_F2:
-		_on_next_day_button_pressed()
+		open_records_window()
 		get_viewport().set_input_as_handled()
 		return
 
 	if key_event.keycode == KEY_F3:
-		open_records_window()
+		_on_next_day_button_pressed()
 		get_viewport().set_input_as_handled()
 		return
 
