@@ -102,6 +102,17 @@ visible = false
 z_index = 10
 color = Color(1.0627335, 0.9528078, 0.4920603, 1)
 
+[node name="ClinicalLogWindowHotspot" type="Area2D" parent="Background/TableImage/DeskHotspots" unique_id=1208706020]
+script = ExtResource("2_night_hotspot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/TableImage/DeskHotspots/ClinicalLogWindowHotspot" unique_id=275664228]
+polygon = PackedVector2Array(1243, 538, 1236, 632, 1311, 772, 1575, 769, 1576, 673, 1451, 535)
+
+[node name="Polygon2D" type="Polygon2D" parent="Background/TableImage/DeskHotspots/ClinicalLogWindowHotspot" unique_id=2096279164]
+visible = false
+z_index = 10
+color = Color(1.0627335, 0.9528078, 0.4920603, 1)
+
 [node name="NextDayHotspot" type="Area2D" parent="Background/TableImage/DeskHotspots" unique_id=228788729]
 script = ExtResource("2_night_hotspot")
 action = 1

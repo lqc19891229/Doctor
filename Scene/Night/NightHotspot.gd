@@ -2,7 +2,8 @@ extends Area2D
 
 enum HotspotAction {
 	READ_BOOK,
-	NEXT_DAY
+	NEXT_DAY,
+	OPEN_RECORDS
 }
 
 # CollisionPolygon2D 是在 Night.tscn 的 DeskHotspots 局部坐标中校准的。
@@ -104,6 +105,10 @@ func _activate() -> void:
 		HotspotAction.NEXT_DAY:
 			if night.has_method("_on_next_day_button_pressed"):
 				night.call("_on_next_day_button_pressed")
+
+		HotspotAction.OPEN_RECORDS:
+			if night.has_method("open_records_window"):
+				night.call("open_records_window")
 
 
 func _find_night_root() -> Node:
