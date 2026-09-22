@@ -1004,7 +1004,7 @@ func settle_day_finances(day: int) -> Dictionary:
 	# 000_01《完书》完成状态。
 	# 完书后：启用李建中俸禄，停止李言闻固定收入和购买医书支出，
 	# 同时提高夏税和秋税。
-	var has_finished_ben_cao_gang_mu := StoryManager.has_played_story("000_01")
+	var has_finished_ben_cao_gang_mu: bool = StoryManager.has_played_story("000_01")
 
 	# -------------------- 日结收入项目 --------------------
 	# 李建中俸禄：
