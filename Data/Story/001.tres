@@ -12,6 +12,7 @@ script = ExtResource("1_storyline")
 line_type = "subtitle"
 portrait_side = "auto"
 inactive_portrait_mode = "dim"
+music = "res://Assets/Music/Story/问斩.mp3"
 text = "明嘉靖十九年，武昌府放榜处"
 background = ExtResource("background_1")
 [sub_resource type="Resource" id="StoryLine_002"]
