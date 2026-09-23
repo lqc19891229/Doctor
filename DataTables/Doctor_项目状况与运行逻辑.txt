@@ -5,14 +5,14 @@
 ------------------------------------------------------------
 仓库地址：https://github.com/lqc19891229/Doctor.git
 检查分支：main
-检查提交：9c7afe5b1f7af408dcf04cf962a1445eed39e089（合并提交；包含 9/23 清理）
+检查提交：f3f8a4c0b656a6eeff4f459ae59dbcc1edc67114（提交说明：9/23）
 检查日期：2026-09-23
 项目引擎：Godot 4.6，GL Compatibility 渲染模式
 启动场景：res://Scene/Disclaimer/Disclaimer.tscn
 主流程场景：res://Scene/Main/Main.tscn
 设计分辨率：1920×1080，Canvas Items 拉伸，Expand 宽高适配
 
-本文基于 main 分支 2026-09-23 提交 9c7afe5 的仓库树、脚本、场景、配置和
+本文基于 main 分支 2026-09-23 提交 f3f8a4c 的仓库树、脚本、场景、配置和
 DataTables/Data.xlsx 静态核对；调用 import_data.py 的读取、建索引与 validate_data
 流程，得到 0 项数据错误（没有执行会改写源表和资源的完整导入）。当前环境未安装
 Godot，尚未进行编辑器导入、游戏实测或 Steam 打包验证。风险条目是代码或文件
@@ -41,7 +41,7 @@ Godot，尚未进行编辑器导入、游戏实测或 Steam 打包验证。风�
 
 当前尚未看到可用的地图场景；代码引用 res://Scene/Map/Map.tscn，但仓库没有该文件，
 进入地图时会由 Main.gd 输出警告并回退到 Clinic。仓库中未发现 .github/workflows
-或自动化测试入口；原 Scene/Test/InfoWindow 调试窗口已从仓库移除。
+或自动化测试入口；仓库仍包含 Scene/Test/InfoWindow.tscn 调试窗口。
 
 
 三、目录与数据规模
@@ -64,8 +64,8 @@ default_bus_layout.tres  音频总线配置
 - 剧情资源：63 个
 - 医书资源：22 个
 - 医书条目：242 个（疾病 48、方剂 48、药材 114、理论 32）
-- 场景文件：14 个
-- Scene/System 脚本：62 个
+- 场景文件：15 个
+- Scene/System 脚本：63 个
 - Data 目录运行数据 .tres：625 个
 
 场景文件包括：
@@ -83,6 +83,7 @@ default_bus_layout.tres  音频总线配置
 - Scene/PlayerHint/PlayerHintWindow.tscn
 - Scene/Ending/Ending_credits.tscn
 - Scene/Tutorial/TutorialWindow.tscn
+- Scene/Test/InfoWindow.tscn
 
 
 四、全局系统（Autoload）
@@ -167,7 +168,7 @@ Clinic 是核心玩法场景，主要功能包括：
 - F1：把脉窗口
 - F2：开方窗口
 - F3：临证录窗口
-- 桌面热点也可打开上述窗口；旧的隐藏 ButtonRow 和三个入口按钮已删除
+- 桌面热点与对应按钮也可打开上述窗口
 
 随机病人经济逻辑：
 - 妙手回春/治疗成功：获得随声望变化的诊金，并按处方实际剂量计算药材销售收入。
@@ -241,17 +242,15 @@ Night 负责白天结束后的学习、结算和推进：
 - 显示顶部日期、声望和金钱。
 - 显示当日财务结算；玩家关闭结算提示后，再检查 Night 自动剧情。
 - 打开 ReadBook 医书窗口，以及独立的 RecordsWindow 医馆账册。
-- 保留玩家提示窗口；旧的 InfoWindow 调试场景已删除。
+- 支持调试用 InfoWindow 和玩家提示窗口。
 - 尝试播放 Night、NightEnd 等夜间剧情。
 - 点击“下一天”时检查是否仍有未读的新条目；存在未读条目时先提示玩家。
 - 正常结束夜晚后保存状态、日期加一，再回到 Clinic。
 
 夜晚快捷键/入口：
-- F1／桌面热点：打开医书，播放 turn_page。
+- F1／ReadBookButton／桌面热点：打开医书，播放 turn_page。
 - F2／桌面热点：打开“行医记考”（RecordsWindow 医馆账册），播放 turn_page。
-- F3／桌面热点：通过 Night.request_next_day() 尝试进入下一天；只有没有未读拦截、
-  确定进入休息时才播放 male_yawning。旧的隐藏 ButtonRow 及 ReadBookButton、
-  NextDayButton 已删除。夜间热点常显调试高亮只在 debug 构建中生效。
+- F3／NextDayButton／桌面热点：尝试进入下一天；只有没有未读拦截、确定进入休息时才播放 male_yawning。
 
 
 （八）ReadBook：医书阅读窗口
@@ -470,8 +469,8 @@ SfxManager：
 
 当前已接入音效：
 - res://Assets/Sfx/hear_tbeat.mp3：把脉时完整按住 Q+A+Z 或 W+S+X 播放，松开组合或关窗停止。
-- res://Assets/Sfx/turn_page.mp3：白天通过 F3 或桌面热点打开图鉴，以及夜间通过
-  F1／热点打开医书、F2／热点打开账册时播放。
+- res://Assets/Sfx/turn_page.mp3：Clinic 的 Openclinical_logWindowButton 和 Night 的
+  ReadBookButton 或 F1 打开医书，以及夜间 F2 打开账册时播放。
 - res://Assets/Sfx/male_yawning.mp3：Night 成功进入休息流程时播放；有未读条目被拦截时不播放。
 - res://Assets/Sfx/rooster_crows.mp3：Night 正常推进到次日 Clinic 时播放晨鸡叫。
 - res://Assets/Sfx/drum.mp3：诊室接诊时间结束时播放闭馆鼓声。
@@ -525,9 +524,9 @@ python import_data.py
    立绘缺口在当前仓库中已补齐。应以全新克隆的 Godot 导入确认是否仍有资源引用失败。
 
 4. 未发现 Godot 导出配置及 CI
-   仓库未发现 export_presets.cfg、.github/workflows 或自动化测试入口；旧的
-   Scene/Test/InfoWindow 场景与脚本已经删除。发布前仍需建立正式导出预设，
-   完成全新导入、实际运行和打包测试，不能仅凭静态检查宣称已具备 Steam 可发布构建。
+   仓库未发现 export_presets.cfg、.github/workflows 或自动化测试入口；InfoWindow 是游戏内
+   调试窗口。发布前需要建立本机正式导出预设、做全新导入和实际运行/打包测试，确认调试
+   窗口及调试入口的发布处理方式；不能仅凭静态检查宣称已具备 Steam 可发布构建。
 
 5. 经济与存档迁移需要回归
    新游戏采用净药材收入口径；旧存档当前未结算日可能仍使用第 1/2 版口径。请检查
@@ -547,27 +546,24 @@ python import_data.py
 1. 在全新目录用 Godot 4.6 完整导入，检查资源路径、UID 和脚本解析错误，设置并试导出正式包。
 2. 测试免责声明、主菜单、三种难度及新游戏仅选择 2～5 号槽；验证 1 号自动档和各手动档。
 3. 检查主菜单“全局典籍”按钮；当前预计因缺少 open_global_archive() 而只发出警告。
-4. 白天分别通过 F1/F2/F3 与桌面热点测试把脉、开方、图鉴；验证教程、处方评分
-   及重复提交防重复结算。
+4. 白天分别测试 F1 把脉、F2 开方、F3 图鉴、教程、处方评分及重复提交防重复结算。
 5. 测试首日剧情日不发生日常收支、第二天开始诊疗；妙手回春谢礼概率与各难度李言闻收入。
 6. 测试成功时销售额减成本、失败时负药材净收入即时入账，日结不重复扣药材成本。
-7. 夜间用 F1/F2/F3 与桌面热点测试医书、行医记考（诊疗记录/账目明细/统计/
-   预制方剂）和进入下一天；检查正式包中无调试常显高亮。
+7. 夜间测试 F1 医书、F2 行医记考（诊疗记录/账目明细/统计/预制方剂）、F3 下一天。
 8. 验证当日财务弹窗关闭后再触发夜间剧情，以及未读拦截时不播放哈欠音、不跨天。
 9. 验证 000_01《完书》前后李言闻/李建中收入切换、购买医书停止、田租及税费档位。
 10. 验证读档后账册、全局典籍文件、三种历史账本口径、旧三槽存档迁移与手动存档日初快照。
 11. 测试诊室计时结束、日夜过渡、随机/连续剧情、Game Over、Ending 及 0 文失败边界。
-12. 在发行配置中检查导出资源、Linux/Windows 路径大小写和 Steam 构建实机运行。
+12. 在发行配置中检查调试窗口、导出资源、Linux/Windows 路径大小写和 Steam 构建实机运行。
 
 
 十四、结论
 ------------------------------------------------------------
-截至 main 提交 9c7afe5，Doctor 的诊疗、评分、学习解锁、剧情和昼夜循环已有完整代码链路；
+截至 main 提交 f3f8a4c，Doctor 的诊疗、评分、学习解锁、剧情和昼夜循环已有完整代码链路；
 五槽存档、难度选择、日内诊疗记录和夜间账册也已加入。经济系统采用第 3 版药材净收入口径，
 完书剧情会切换日常收入、购买医书支出、田租和税费。静态数据校验通过（0 项错误）。
 
 当前最明确的功能缺口是主菜单全局典籍入口尚缺 ReadBook.open_global_archive() 实现；
-旧的 InfoWindow 和隐藏入口按钮已移除；地图场景仍未实现，2 张 UI 原图仍未提交，
-+另缺少导出预设及自动化检查。本次没有 Godot
+另有地图场景未实现、2 张 UI 原图未提交、缺少导出预设及自动化检查。本次没有 Godot
 运行或打包测试，因此“核心流程可玩”和“Steam 正式包可发布”仍须以全新导入和实机
 冒烟测试确认。本文仅更新说明文件，没有改动游戏代码与资源。
