@@ -61,14 +61,10 @@ func play_scene_ambient(place: String) -> void:
 
 func find_ambient(folder: String) -> String:
 
-	var dir = DirAccess.open(folder)
-
-	if dir == null:
-		return ""
-
+	# 导出后音频源文件会映射到导入资源；按资源名列出才能找到 MP3。
 	var sounds = []
 
-	for file in dir.get_files():
+	for file in ResourceLoader.list_directory(folder):
 
 		if (
 			file.to_lower().ends_with(".mp3")
