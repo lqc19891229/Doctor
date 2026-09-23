@@ -31,7 +31,6 @@ const SHORTCUT_OPEN_CLINICAL_LOG := KEY_F3
 @onready var pulse_window: Window = clinic_root.find_child("PulseWindow", true, false) as Window
 @onready var prescription_window: Window = clinic_root.find_child("PrescriptionWindow", true, false) as Window
 @onready var clinical_log_window: Window = clinic_root.find_child("ClinicalLogWindow", true, false) as Window
-@onready var info_window: Window = clinic_root.find_child("InfoWindow", true, false) as Window
 
 @onready var open_pulse_window_button: BaseButton = clinic_root.find_child("OpenPulseWindowButton", true, false) as BaseButton
 @onready var open_prescription_window_button: BaseButton = clinic_root.find_child("OpenPrescriptionWindowButton", true, false) as BaseButton
@@ -105,11 +104,6 @@ func _connect_signals() -> void:
 	if clinical_log_window != null and clinical_log_window.has_signal("close_requested"):
 		if not clinical_log_window.close_requested.is_connected(Callable(self, "close_clinical_log_window")):
 			clinical_log_window.close_requested.connect(Callable(self, "close_clinical_log_window"))
-
-	if info_window != null and info_window.has_signal("close_requested"):
-		if not info_window.close_requested.is_connected(Callable(self, "close_info_window")):
-			info_window.close_requested.connect(Callable(self, "close_info_window"))
-
 
 func _safe_connect_pressed(button: BaseButton, callable_fn: Callable) -> void:
 	if button != null and not button.pressed.is_connected(callable_fn):
@@ -344,25 +338,6 @@ func close_clinical_log_window() -> void:
 		clinical_log_window.call("close_window")
 	else:
 		clinical_log_window.hide()
-
-
-# =========================================================
-# 信息测试窗口
-# =========================================================
-
-func open_info_window() -> void:
-	if info_window == null:
-		return
-
-	info_window.popup_centered()
-	info_window.grab_focus()
-
-
-func close_info_window() -> void:
-	if info_window == null:
-		return
-
-	info_window.hide()
 
 
 # =========================================================

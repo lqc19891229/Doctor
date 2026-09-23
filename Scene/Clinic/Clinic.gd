@@ -123,15 +123,6 @@ var clinic_background_target_texture: Texture2D = null
 # ---------- 脉象窗口 ----------
 @onready var pulse_window: PulseWindow = find_child("PulseWindow", true, false) as PulseWindow
 
-# ---------- 信息测试窗口 ----------
-# 说明：
-# 1. info_window 仍按 Window 接收，避免 InfoWindow.gd 未注册 class_name 时报错
-# 2. info_label 使用 find_child 获取，兼容以下两种结构：
-#    - InfoWindow/Panel/InfoLabel
-#    - InfoWindow/Panel/VBoxContainer/InfoLabel
-@onready var info_window: Window = find_child("InfoWindow", true, false) as Window
-@onready var info_label: Label = find_child("InfoLabel", true, false) as Label
-
 # ---------- 数据库 / 管理器 ----------
 @onready var herb_database = HerbDB
 @onready var formula_database = FormulaDB
@@ -151,9 +142,6 @@ var clinic_background_target_texture: Texture2D = null
 
 # ---------- 通用顶部栏控制器 ----------
 var topbar_controller = null
-
-# ---------- 结束当天 ----------
-# 结束当天按钮已经转移到 InfoWindow，这里不再直接引用旧按钮
 
 
 # =========================================================
@@ -309,7 +297,6 @@ func _validate_scene_node_bindings() -> void:
 	# ├─ PrescriptionWindow
 	# ├─ PulseWindow
 	# ├─ ClinicalLogWindow
-	# ├─ InfoWindow
 	# └─ NpcManager
 	#
 	# 这里不要再写死 DiagnosisPanel/DiagnosisLayout 路径。
@@ -330,7 +317,6 @@ func _validate_scene_node_bindings() -> void:
 		"PulseWindow": pulse_window,
 		"PrescriptionWindow": prescription_window,
 		"ClinicalLogWindow": clinical_log_window,
-		"InfoWindow": info_window,
 		"NpcManager": npc_manager,
 		"ClinicWindowController": window_controller
 	}
@@ -670,29 +656,6 @@ func _connect_signals() -> void:
 		if not prescription_window.submit_requested.is_connected(_on_prescription_submit_requested):
 			prescription_window.submit_requested.connect(_on_prescription_submit_requested)
 
-	# ---------- 信息测试窗口业务信号 ----------
-	if info_window != null:
-		# 以下信号由 InfoWindow.gd 中的按钮发出
-		_safe_connect_custom_signal(info_window, "prev_npc_requested", _on_prev_button_pressed)
-		_safe_connect_custom_signal(info_window, "next_npc_requested", _on_next_button_pressed)
-		_safe_connect_custom_signal(info_window, "spawn_npc_requested", _on_spawn_npc_button_pressed)
-		_safe_connect_custom_signal(info_window, "end_today_requested", _on_end_today_pressed)
-		_safe_connect_custom_signal(info_window, "unlock_all_entries_requested", _on_unlock_all_entries_requested)
-
-
-func _safe_connect_custom_signal(target: Object, signal_name: StringName, callable_fn: Callable) -> void:
-	# 兼容自定义 InfoWindow.gd：
-	# 如果 InfoWindow 没有声明该信号，就直接跳过，避免报错。
-	if target == null:
-		return
-
-	if not target.has_signal(signal_name):
-		return
-
-	if not target.is_connected(signal_name, callable_fn):
-		target.connect(signal_name, callable_fn)
-
-
 # =========================================================
 # 通用工具函数
 # =========================================================
@@ -714,12 +677,9 @@ func _ensure_current_npc_valid(show_message: bool = false) -> bool:
 	return true
 
 func _set_info_text(text: String) -> void:
-	# 统一写入信息窗口文本。
-	# 说明：
-	# 1. 其它函数不再直接访问 info_label.text，减少空节点报错风险。
-	# 2. 如果 InfoLabel 暂未接入场景，则安全跳过。
-	if info_label != null:
-		info_label.text = text
+	# 正式版不再包含开发信息窗口；仅在调试构建中保留诊断输出。
+	if OS.is_debug_build():
+		print(text)
 
 
 func _get_pressed_action_count(action_names: Array[StringName]) -> int:
@@ -1781,47 +1741,6 @@ func _clear_clinical_log_search_state() -> void:
 
 
 # =========================================================
-# 病人切换按钮
-# =========================================================
-
-func _on_prev_button_pressed() -> void:
-	if clinic_time_expired_waiting_for_current_patient:
-		_set_info_text("今日接诊时间已结束，不能更换最后一位病人。")
-		return
-
-	npc_manager.prev_npc()
-	refresh_clinic_view()
-
-
-func _on_next_button_pressed() -> void:
-	if clinic_time_expired_waiting_for_current_patient:
-		_set_info_text("今日接诊时间已结束，不能更换最后一位病人。")
-		return
-
-	npc_manager.next_npc()
-	refresh_clinic_view()
-
-
-func _on_spawn_npc_button_pressed() -> void:
-	if clinic_time_expired_waiting_for_current_patient:
-		_set_info_text("今日接诊时间已结束，不能生成新的病人。")
-		return
-
-	if npc_manager.has_method("replace_with_random_npc"):
-		npc_manager.replace_with_random_npc()
-	else:
-		npc_manager.spawn_random_npc()
-	refresh_clinic_view()
-
-
-func _on_submit_button_pressed() -> void:
-	# 旧提交按钮兼容入口。当前正式流程使用 PrescriptionWindow.submit_requested，
-	# 并由 _on_prescription_submit_requested() 继续关闭诊疗窗口、播放结果台词和打开 JudgementResult。
-	# 此旧入口这里只保留“提交并判定”本身，不代表完整的当前诊疗结束流程。
-	submit_prescription()
-
-
-# =========================================================
 # 脉象窗口
 # =========================================================
 
@@ -1869,11 +1788,6 @@ func _on_prescription_submit_requested() -> void:
 	_show_current_patient_result_before_judgement()
 
 
-func _on_end_today_pressed() -> void:
-	# InfoWindow 中“结束当天”按钮的回调。
-	finish_clinic_for_today()
-
-
 # =========================================================
 # 设置当前天数（由 Main 调用）
 # =========================================================
@@ -1888,8 +1802,7 @@ func set_day(day: int) -> void:
 
 
 # =========================================================
-# 快捷键输入
-# Ctrl + T 打开信息测试窗口
+# 输入处理
 # =========================================================
 
 func _input(event: InputEvent) -> void:
@@ -1915,34 +1828,6 @@ func _input(event: InputEvent) -> void:
 				get_viewport().set_input_as_handled()
 				return
 
-	if event is InputEventKey:
-		# 只在按下瞬间触发，避免长按重复弹出
-		if event.pressed and not event.echo:
-			# 判断是否按下 Ctrl + T
-			if event.ctrl_pressed and event.keycode == KEY_T:
-				if window_controller != null:
-					window_controller.open_info_window()
-				get_viewport().set_input_as_handled()
-				return
-
-# =========================================================
-# 测试功能：一键解锁所有条目
-# =========================================================
-func _on_unlock_all_entries_requested() -> void:
-	var result: Dictionary = Unlock.unlock_all_entries_for_test()
-
-	_set_info_text("测试功能：已解锁全部条目\n条目：%d\n药材：%d\n方剂：%d\n疾病：%d\n医理：%d" % [
-		result.get("entry_count", 0),
-		result.get("herb_count", 0),
-		result.get("formula_count", 0),
-		result.get("disease_count", 0),
-		result.get("theory_count", 0)
-	])
-
-	if clinical_log_window != null and clinical_log_window.has_method("refresh_view"):
-		clinical_log_window.refresh_view()
-
-
 # =========================================================
 # 剧情系统入口
 # 说明：
@@ -1967,8 +1852,7 @@ func prepare_for_scene_hide() -> void:
 	var transient_nodes: Array[Node] = [
 		pulse_window,
 		prescription_window,
-		clinical_log_window,
-		info_window
+		clinical_log_window
 	]
 	for transient_node in transient_nodes:
 		if transient_node != null and is_instance_valid(transient_node):
@@ -1996,8 +1880,7 @@ func _reset_transient_state_for_new_day() -> void:
 	var transient_nodes: Array[Node] = [
 		pulse_window,
 		prescription_window,
-		clinical_log_window,
-		info_window
+		clinical_log_window
 	]
 	for transient_node in transient_nodes:
 		if transient_node != null and is_instance_valid(transient_node):

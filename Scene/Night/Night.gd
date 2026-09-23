@@ -23,15 +23,11 @@ const NIGHT_RAINY_BACKGROUND_PATH: String = "res://Assets/Background/clinic/rain
 
 @onready var read_book_window: Window = find_child("ReadBook", true, false) as Window
 @onready var records_window: Window = find_child("RecordsWindow", true, false) as Window
-@onready var info_window: Window = $InfoWindow
-@onready var info_label: Label = $InfoWindow/Panel/VBoxContainer/InfoLabel
 
 @onready var read_book_button: Button = find_child("ReadBookButton", true, false) as Button
 @onready var next_day_button: Button = find_child("NextDayButton", true, false) as Button
 
-# 顶部栏节点必须使用精确路径。
-# InfoWindow 中也存在名为 DayLabel 的测试节点；使用递归 find_child() 会误绑定到
-# 隐藏的测试窗口，导致屏幕左上角真正的日期一直停留在默认文字“天数”。
+# 顶部栏节点使用精确路径，避免未来其它子窗口出现同名节点时绑定错误。
 @onready var day_label: Label = $VBoxContainer/TopBar/HBoxContainer/DayLabel
 @onready var time_label: Label = $VBoxContainer/TopBar/HBoxContainer/TimeLabel
 @onready var reputation_point_label: Label = $VBoxContainer/TopBar/HBoxContainer/ReputationPoint
@@ -87,8 +83,6 @@ func _validate_scene_node_bindings() -> void:
 	_check_node_binding(reputation_point_label, "ReputationPoint")
 	_check_node_binding(money_point_label, "MoneyPoint")
 	_check_node_binding(night_background, "BackgroundImage")
-	_check_node_binding(info_window, "InfoWindow")
-	_check_node_binding(info_label, "InfoWindow/InfoLabel")
 
 
 func _check_node_binding(node: Node, node_name: String) -> void:
@@ -418,61 +412,6 @@ func _on_player_hint_visibility_changed() -> void:
 
 
 # =========================
-# 开发测试窗口
-# InfoWindow 已在 Night.tscn 中固定实例化，信号也由场景文件连接。
-# =========================
-
-func open_info_window() -> void:
-	if not OS.is_debug_build():
-		return
-
-	if info_window == null:
-		push_warning("Night.gd 找不到 Night.tscn 中固定实例化的 InfoWindow。")
-		return
-
-	if info_window.has_method("open_window"):
-		info_window.call("open_window")
-	else:
-		info_window.popup_centered()
-
-
-func _set_info_window_text(message: String) -> void:
-	if info_label != null:
-		info_label.text = message
-	elif OS.is_debug_build():
-		print(message)
-
-
-func _on_info_window_end_today_requested() -> void:
-	# 在 Night 中，“结束当天”作为测试用的“立即结束夜晚”。
-	# 故意跳过未读条目检查，方便快速测试跨天流程。
-	night_finished.emit()
-
-
-func _on_info_window_unlock_all_entries_requested() -> void:
-	if Unlock == null or not Unlock.has_method("unlock_all_entries_for_test"):
-		_set_info_window_text("测试功能不可用：Unlock 缺少 unlock_all_entries_for_test()。")
-		return
-
-	var result: Dictionary = Unlock.call("unlock_all_entries_for_test")
-	_set_info_window_text("测试功能：已解锁全部条目\n条目：%d\n药材：%d\n方剂：%d\n疾病：%d\n医理：%d" % [
-		result.get("entry_count", 0),
-		result.get("herb_count", 0),
-		result.get("formula_count", 0),
-		result.get("disease_count", 0),
-		result.get("theory_count", 0)
-	])
-
-	_refresh_topbar(true)
-	if read_book_window != null and read_book_window.has_method("mark_data_dirty"):
-		read_book_window.call("mark_data_dirty")
-
-
-func _on_info_window_npc_action_requested() -> void:
-	_set_info_window_text("Night 场景没有当前病人；切换或生成病人的测试功能仅在 Clinic 可用。")
-
-
-# =========================
 # 初始化读书窗口
 # =========================
 
@@ -597,8 +536,7 @@ func _on_player_data_changed() -> void:
 
 
 # =========================
-# 开发测试快捷键
-# Ctrl + T：打开 InfoWindow
+# 夜晚快捷键
 # =========================
 
 func _input(event: InputEvent) -> void:
@@ -630,14 +568,6 @@ func _input(event: InputEvent) -> void:
 		_on_next_day_button_pressed()
 		get_viewport().set_input_as_handled()
 		return
-
-	if not OS.is_debug_build():
-		return
-
-	if key_event.ctrl_pressed and key_event.keycode == KEY_T:
-		open_info_window()
-		get_viewport().set_input_as_handled()
-
 
 # =========================
 # 进入下一天
@@ -734,11 +664,10 @@ func _has_unread_entries() -> bool:
 # =========================
 
 func prepare_for_scene_hide() -> void:
-	# ReadBook / InfoWindow 等可能是原生子窗口；场景隐藏时显式关闭。
+	# 原生子窗口在场景隐藏时也需要显式关闭。
 	var transient_nodes: Array[Node] = [
 		read_book_window,
 		records_window,
-		info_window,
 		player_hint_window
 	]
 	for transient_node in transient_nodes:
@@ -755,7 +684,6 @@ func _reset_transient_state_for_night_entry() -> void:
 	var transient_nodes: Array[Node] = [
 		read_book_window,
 		records_window,
-		info_window,
 		player_hint_window
 	]
 	for transient_node in transient_nodes:

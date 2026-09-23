@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://b5g5rkphktrrq" path="res://Scene/Night/Night.gd" id="1_sax03"]
 [ext_resource type="Script" uid="uid://dgbnc226go4fl" path="res://Scene/Night/NightHotspot.gd" id="2_night_hotspot"]
 [ext_resource type="PackedScene" uid="uid://cbsehhhrv63ek" path="res://Scene/PlayerHint/PlayerHintWindow.tscn" id="3_3ehag"]
-[ext_resource type="PackedScene" uid="uid://drw157phi8l3n" path="res://Scene/Test/InfoWindow.tscn" id="4_info"]
 [ext_resource type="Texture2D" uid="uid://cdktg72vwwrl1" path="res://Assets/UI/TopBar.png" id="5_5x4ej"]
 [ext_resource type="Texture2D" uid="uid://bctaap61xvwpm" path="res://Assets/Background/clinic/spring_night.png" id="5_sslgd"]
 [ext_resource type="Texture2D" uid="uid://djrsg6p8uh1xb" path="res://Assets/Background/clinic/night_table.png" id="6_ca75w"]
@@ -32,9 +31,6 @@ mouse_filter = 2
 script = ExtResource("1_sax03")
 
 [node name="ReadBook" parent="." unique_id=1553429074 instance=ExtResource("1_s8hsq")]
-visible = false
-
-[node name="InfoWindow" parent="." unique_id=182963632 instance=ExtResource("4_info")]
 visible = false
 
 [node name="RecordsWindow" parent="." unique_id=659806246 instance=ExtResource("10_records")]
@@ -305,9 +301,3 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "进入明天"
-
-[connection signal="end_today_requested" from="InfoWindow" to="." method="_on_info_window_end_today_requested"]
-[connection signal="next_npc_requested" from="InfoWindow" to="." method="_on_info_window_npc_action_requested"]
-[connection signal="prev_npc_requested" from="InfoWindow" to="." method="_on_info_window_npc_action_requested"]
-[connection signal="spawn_npc_requested" from="InfoWindow" to="." method="_on_info_window_npc_action_requested"]
-[connection signal="unlock_all_entries_requested" from="InfoWindow" to="." method="_on_info_window_unlock_all_entries_requested"]

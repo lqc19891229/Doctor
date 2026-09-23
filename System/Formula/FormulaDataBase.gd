@@ -118,12 +118,3 @@ func get_formulas_by_disease(disease_id: String) -> Array[FormulaData]:
 			result.append(formula)
 
 	return result
-
-
-# =========================================================
-# 三、调试接口
-# =========================================================
-
-func debug_print_all_formulas() -> void:
-	# 保留旧调试接口，避免现有 has_method()/调用方受到影响。
-	pass

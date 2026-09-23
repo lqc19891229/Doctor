@@ -388,25 +388,3 @@ func get_pulse_regions_for_drawer_visual() -> Dictionary:
 		}
 
 	return result
-
-
-## =========================================================
-## 七、调试输出
-## =========================================================
-
-func debug_print() -> void:
-	print("疾病ID:", disease_id)
-	print("疾病名:", disease_name)
-	print("推荐方剂:", recommended_formula_id)
-	print("病证:", get_symptoms_text())
-
-	print("【七区脉象】")
-	for region_data in get_all_region_pulse_values():
-		print(
-			"  ",
-			region_data["region_name"],
-			" | 气:", region_data["qi"],
-			" 血:", region_data["blood"],
-			" 寒热:", region_data["cold_hot"],
-			" 湿燥:", region_data["wet_dry"]
-		)

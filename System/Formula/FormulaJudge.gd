@@ -354,13 +354,3 @@ func _join_or_placeholder(items: Array[String]) -> String:
 	if items.is_empty():
 		return "（无）"
 	return "、".join(items)
-
-
-# =========================================================
-# 七、快速测试
-# =========================================================
-func judge_and_print(player_prescription: Prescription, standard_formula: FormulaData) -> JudgeResult:
-	var result := judge_formula(player_prescription, standard_formula)
-	result.debug_print()
-	print(result.get_summary_text())
-	return result
