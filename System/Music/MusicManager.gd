@@ -100,14 +100,10 @@ func play_scene_music(place: String):
 
 func find_music(folder: String, exclude_path: String = "") -> String:
 
-	var dir = DirAccess.open(folder)
-
-	if dir == null:
-		return ""
-
+	# 导出后音频源文件会映射到导入资源；DirAccess 看不到原始 MP3 文件名。
 	var musics = []
 
-	for file in dir.get_files():
+	for file in ResourceLoader.list_directory(folder):
 
 		if (
 			file.to_lower().ends_with(".mp3")
@@ -169,7 +165,7 @@ func play_story_music(music_value: String) -> void:
 	# 这种情况下不再拼接目录和扩展名，直接按配置播放。
 	if value.begins_with("res://") or value.begins_with("user://"):
 
-		if FileAccess.file_exists(value):
+		if _music_resource_exists(value):
 			current_music_mode = "story"
 			play_music(value)
 			return
@@ -183,12 +179,20 @@ func play_story_music(music_value: String) -> void:
 	for ext in extensions:
 		var path: String = "res://Assets/Music/Story/" + value + ext
 
-		if FileAccess.file_exists(path):
+		if ResourceLoader.exists(path):
 			current_music_mode = "story"
 			play_music(path)
 			return
 
 	print("MusicManager: 剧情音乐不存在:", value)
+
+
+
+# 导出的 res:// 音频应通过资源加载器检查，才能识别导入后的文件映射。
+func _music_resource_exists(path: String) -> bool:
+	if path.begins_with("res://"):
+		return ResourceLoader.exists(path)
+	return FileAccess.file_exists(path)
 
 
 
