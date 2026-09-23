@@ -71,7 +71,7 @@ func _create_button_players() -> void:
 
 		player.name = "ButtonSfxPlayer%d" % (index + 1)
 		player.bus = _get_sfx_bus_name()
-		player.volume_db = -8.0
+		player.volume_db = 0
 		player.process_mode = Node.PROCESS_MODE_ALWAYS
 
 		add_child(player)
