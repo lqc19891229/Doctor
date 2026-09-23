@@ -27,15 +27,6 @@ bg_color = Color(0.18039216, 0.10980392, 0.05490196, 0.9490196)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h552d"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_436d3"]
-bg_color = Color(0.09239706, 0.09239707, 0.092397, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_las05"]
-bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h552d"]
-bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
-
 [node name="Clinic" type="Control" unique_id=360139135]
 layout_mode = 3
 anchors_preset = 15
@@ -332,34 +323,6 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 27.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_h552d")
-
-[node name="ButtonRow" type="HBoxContainer" parent="VBoxContainer" unique_id=906841336]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
-theme_override_constants/separation = 30
-
-[node name="OpenPulseWindowButton" type="Button" parent="VBoxContainer/ButtonRow" unique_id=1895980174]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_436d3")
-text = "把脉(F1)"
-
-[node name="OpenPrescriptionWindowButton" type="Button" parent="VBoxContainer/ButtonRow" unique_id=1911117914]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_las05")
-text = "开方(F2)"
-
-[node name="Openclinical_logWindowButton" type="Button" parent="VBoxContainer/ButtonRow" unique_id=1425448604]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_h552d")
-text = "行医记考(F3)"
 
 [node name="PrescriptionWindow" parent="." unique_id=901784337 instance=ExtResource("5_h552d")]
 visible = false

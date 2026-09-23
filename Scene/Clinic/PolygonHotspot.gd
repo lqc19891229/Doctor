@@ -43,15 +43,6 @@ func _ready() -> void:
 	if not input_event.is_connected(_on_input_event):
 		input_event.connect(_on_input_event)
 
-	set_process(true)
-
-
-func _process(_delta: float) -> void:
-	# 调试运行时如果直接调整 CollisionPolygon2D，
-	# 正在显示的高亮也会立即跟随，不再保留 _ready() 时的旧轮廓。
-	if highlight_polygon.visible:
-		_sync_highlight_polygon()
-
 
 func _sync_highlight_polygon() -> void:
 	if collision_polygon == null or highlight_polygon == null:

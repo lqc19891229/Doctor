@@ -284,21 +284,3 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 27.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rstq2")
-
-[node name="ButtonRow" type="HBoxContainer" parent="VBoxContainer" unique_id=1689106686]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
-
-[node name="ReadBookButton" type="Button" parent="VBoxContainer/ButtonRow" unique_id=275600831]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 25
-text = "读书"
-
-[node name="NextDayButton" type="Button" parent="VBoxContainer/ButtonRow" unique_id=2136836206]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 25
-text = "进入明天"

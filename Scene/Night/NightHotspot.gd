@@ -28,7 +28,7 @@ func _ready() -> void:
 	_sync_highlight_from_collision()
 	highlight_polygon.color = Color(1.0, 0.78, 0.18, 0.20)
 	highlight_polygon.z_index = 10
-	highlight_polygon.visible = debug_always_show
+	highlight_polygon.visible = debug_always_show and OS.is_debug_build()
 
 	input_pickable = true
 
@@ -76,7 +76,7 @@ func _on_mouse_entered() -> void:
 
 
 func _on_mouse_exited() -> void:
-	highlight_polygon.visible = debug_always_show
+	highlight_polygon.visible = debug_always_show and OS.is_debug_build()
 
 
 func _on_input_event(
@@ -103,8 +103,8 @@ func _activate() -> void:
 				night.call("open_read_book_window")
 
 		HotspotAction.NEXT_DAY:
-			if night.has_method("_on_next_day_button_pressed"):
-				night.call("_on_next_day_button_pressed")
+			if night.has_method("request_next_day"):
+				night.call("request_next_day")
 
 		HotspotAction.OPEN_RECORDS:
 			if night.has_method("open_records_window"):

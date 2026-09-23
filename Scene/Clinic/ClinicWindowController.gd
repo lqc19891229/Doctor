@@ -7,7 +7,7 @@ class_name ClinicWindowController
 #
 # 负责：
 # 1. F1 / F2 / F3 快捷键
-# 2. 主界面按钮打开窗口
+# 2. 供桌面热点调用的窗口打开接口
 # 3. 窗口 close_requested 关闭窗口
 # 4. 窗口置顶
 # 5. 提交处方后关闭诊疗窗口
@@ -32,10 +32,6 @@ const SHORTCUT_OPEN_CLINICAL_LOG := KEY_F3
 @onready var prescription_window: Window = clinic_root.find_child("PrescriptionWindow", true, false) as Window
 @onready var clinical_log_window: Window = clinic_root.find_child("ClinicalLogWindow", true, false) as Window
 
-@onready var open_pulse_window_button: BaseButton = clinic_root.find_child("OpenPulseWindowButton", true, false) as BaseButton
-@onready var open_prescription_window_button: BaseButton = clinic_root.find_child("OpenPrescriptionWindowButton", true, false) as BaseButton
-@onready var clinical_log_button: BaseButton = clinic_root.find_child("Openclinical_logWindowButton", true, false) as BaseButton
-
 var herb_database = null
 var current_prescription = null
 var formula_database = null
@@ -43,7 +39,6 @@ var formula_database = null
 
 func _ready() -> void:
 	_setup_windows()
-	_setup_button_shortcuts()
 	_connect_signals()
 
 
@@ -69,30 +64,7 @@ func _setup_windows() -> void:
 		clinical_log_window.hide()
 
 
-func _setup_button_shortcuts() -> void:
-	_setup_button_shortcut(open_pulse_window_button, SHORTCUT_OPEN_PULSE)
-	_setup_button_shortcut(open_prescription_window_button, SHORTCUT_OPEN_PRESCRIPTION)
-	_setup_button_shortcut(clinical_log_button, SHORTCUT_OPEN_CLINICAL_LOG)
-
-
-func _setup_button_shortcut(button: BaseButton, keycode: Key) -> void:
-	if button == null:
-		return
-
-	var shortcut := Shortcut.new()
-	var key_event := InputEventKey.new()
-	key_event.keycode = keycode
-	shortcut.events = [key_event]
-
-	button.shortcut = shortcut
-	button.shortcut_in_tooltip = true
-
-
 func _connect_signals() -> void:
-	_safe_connect_pressed(open_pulse_window_button, Callable(self, "open_pulse_window"))
-	_safe_connect_pressed(open_prescription_window_button, Callable(self, "open_prescription_window"))
-	_safe_connect_pressed(clinical_log_button, Callable(self, "open_clinical_log_window"))
-
 	if pulse_window != null and pulse_window.has_signal("close_requested"):
 		if not pulse_window.close_requested.is_connected(Callable(self, "close_pulse_window")):
 			pulse_window.close_requested.connect(Callable(self, "close_pulse_window"))
@@ -104,10 +76,6 @@ func _connect_signals() -> void:
 	if clinical_log_window != null and clinical_log_window.has_signal("close_requested"):
 		if not clinical_log_window.close_requested.is_connected(Callable(self, "close_clinical_log_window")):
 			clinical_log_window.close_requested.connect(Callable(self, "close_clinical_log_window"))
-
-func _safe_connect_pressed(button: BaseButton, callable_fn: Callable) -> void:
-	if button != null and not button.pressed.is_connected(callable_fn):
-		button.pressed.connect(callable_fn)
 
 
 # =========================================================
@@ -318,16 +286,16 @@ func open_clinical_log_window() -> void:
 		push_warning("ClinicalLogWindow 没找到，请检查节点名字和挂载位置")
 		return
 
-	# 无论入口来自按钮、桌面热点还是 F3，都统一在真正打开窗口时播放翻页声。
+	# 无论入口来自桌面热点还是 F3，都统一在真正打开窗口时播放翻页声。
 	SfxManager.play_turn_page()
-
-	_show_window_front(clinical_log_window)
 
 	if clinical_log_window.has_method("open_window"):
 		clinical_log_window.call("open_window")
-		_show_window_front(clinical_log_window)
 	elif clinical_log_window.has_method("refresh_view"):
+		_show_window_front(clinical_log_window)
 		clinical_log_window.call("refresh_view")
+	else:
+		_show_window_front(clinical_log_window)
 
 
 func close_clinical_log_window() -> void:

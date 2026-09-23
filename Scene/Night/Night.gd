@@ -24,9 +24,6 @@ const NIGHT_RAINY_BACKGROUND_PATH: String = "res://Assets/Background/clinic/rain
 @onready var read_book_window: Window = find_child("ReadBook", true, false) as Window
 @onready var records_window: Window = find_child("RecordsWindow", true, false) as Window
 
-@onready var read_book_button: Button = find_child("ReadBookButton", true, false) as Button
-@onready var next_day_button: Button = find_child("NextDayButton", true, false) as Button
-
 # 顶部栏节点使用精确路径，避免未来其它子窗口出现同名节点时绑定错误。
 @onready var day_label: Label = $VBoxContainer/TopBar/HBoxContainer/DayLabel
 @onready var time_label: Label = $VBoxContainer/TopBar/HBoxContainer/TimeLabel
@@ -61,7 +58,6 @@ func _ready() -> void:
 	_validate_scene_node_bindings()
 	_setup_night_background_fade_mask()
 	_setup_sleep_blackout()
-	_setup_buttons()
 	_setup_player_hint_dialog()
 	_setup_read_book_window()
 	_setup_records_window()
@@ -76,8 +72,6 @@ func _ready() -> void:
 func _validate_scene_node_bindings() -> void:
 	_check_node_binding(read_book_window, "ReadBook")
 	_check_node_binding(records_window, "RecordsWindow")
-	_check_node_binding(read_book_button, "ReadBookButton")
-	_check_node_binding(next_day_button, "NextDayButton")
 	_check_node_binding(day_label, "DayLabel")
 	_check_node_binding(time_label, "TimeLabel")
 	_check_node_binding(reputation_point_label, "ReputationPoint")
@@ -272,24 +266,6 @@ func get_current_background_texture() -> Texture2D:
 
 
 # =========================
-# 初始化按钮
-# =========================
-
-func _setup_buttons() -> void:
-	if read_book_button != null:
-		read_book_button.text = "读书"
-
-		if not read_book_button.pressed.is_connected(_on_read_book_button_pressed):
-			read_book_button.pressed.connect(_on_read_book_button_pressed)
-
-	if next_day_button != null:
-		next_day_button.text = "休息，进入明天"
-
-		if not next_day_button.pressed.is_connected(_on_next_day_button_pressed):
-			next_day_button.pressed.connect(_on_next_day_button_pressed)
-
-
-# =========================
 # 初始化玩家提示窗口
 # =========================
 
@@ -298,7 +274,7 @@ func _setup_player_hint_dialog() -> void:
 		push_warning("Night.gd 找不到根节点直属 PlayerHintWindow，请检查 Night.tscn。")
 		return
 
-	# 结算提示必须盖在夜晚背景 / TopBar / 按钮之上。
+	# 结算提示必须盖在夜晚背景和 TopBar 之上。
 	if player_hint_window is CanvasItem:
 		(player_hint_window as CanvasItem).z_index = 1000
 
@@ -467,14 +443,6 @@ func _refresh_topbar(force_refresh: bool = false) -> void:
 		topbar_controller.refresh_all(force_refresh)
 
 
-# =========================
-# 打开读书窗口
-# =========================
-
-func _on_read_book_button_pressed() -> void:
-	open_read_book_window()
-
-
 func open_records_window() -> void:
 	if records_window == null:
 		push_warning("Night.gd 找不到 RecordsWindow")
@@ -503,7 +471,7 @@ func open_read_book_window() -> void:
 		push_warning("Night.gd 无法打开读书窗口：read_book_window 为空")
 		return
 
-	# 无论入口来自按钮、桌面热点还是 F1，都统一在真正打开读书窗口时播放翻页声。
+	# 无论入口来自桌面热点还是 F1，都统一在真正打开读书窗口时播放翻页声。
 	SfxManager.play_turn_page()
 
 	# ReadBook.open_window() 自己根据 UnlockManager 的状态版本决定是否需要重建列表。
@@ -555,7 +523,7 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if key_event.keycode == KEY_F1:
-		_on_read_book_button_pressed()
+		open_read_book_window()
 		get_viewport().set_input_as_handled()
 		return
 
@@ -565,7 +533,7 @@ func _input(event: InputEvent) -> void:
 		return
 
 	if key_event.keycode == KEY_F3:
-		_on_next_day_button_pressed()
+		request_next_day()
 		get_viewport().set_input_as_handled()
 		return
 
@@ -573,7 +541,7 @@ func _input(event: InputEvent) -> void:
 # 进入下一天
 # =========================
 
-func _on_next_day_button_pressed() -> void:
+func request_next_day() -> void:
 	if sleep_transition_active:
 		return
 
@@ -582,9 +550,6 @@ func _on_next_day_button_pressed() -> void:
 		return
 
 	sleep_transition_active = true
-
-	if next_day_button != null:
-		next_day_button.disabled = true
 
 	# 只有真正允许进入下一天时才播放打哈欠音效。
 	# 如果被“尚有未读条目”拦截，则不会播放。
@@ -634,16 +599,13 @@ func _on_next_day_button_pressed() -> void:
 
 	sleep_transition_active = false
 
-	if next_day_button != null:
-		next_day_button.disabled = false
-
 
 func _has_unread_entries() -> bool:
 	if Unlock == null:
 		return false
 
 	# UnlockManager 现在会在后台进度或条目依赖状态变化时即时增量更新。
-	# 这里不再在玩家点击“休息”时执行全量刷新，避免把数据扫描集中到跨天按钮这一帧。
+	# 这里不再在玩家点击“休息”时执行全量刷新，避免把数据扫描集中到跨天操作这一帧。
 	if Unlock.has_method("has_unread_readable_entries"):
 		return Unlock.has_unread_readable_entries()
 
@@ -701,8 +663,6 @@ func _reset_transient_state_for_night_entry() -> void:
 	if sleep_blackout != null:
 		sleep_blackout.color = Color(0.0, 0.0, 0.0, 0.0)
 		sleep_blackout.hide()
-	if next_day_button != null:
-		next_day_button.disabled = false
 
 
 func start_night(day: int, show_finance_report: bool = true) -> void:
