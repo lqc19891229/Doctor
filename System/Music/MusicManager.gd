@@ -30,7 +30,7 @@ func _ready():
 		bgm_player.bus = "BGM"
 
 	add_child(bgm_player)
-	bgm_player.volume_db = 0
+	bgm_player.volume_db = -4
 
 	# 场景BGM自然播放结束后，自动随机播放下一首。
 	if not bgm_player.finished.is_connected(_on_bgm_finished):
@@ -232,7 +232,7 @@ func play_music(path: String, force_restart: bool = false):
 	fade_tween.tween_property(
 		bgm_player,
 		"volume_db",
-		0,
+		-4,
 		fade_time
 	)
 

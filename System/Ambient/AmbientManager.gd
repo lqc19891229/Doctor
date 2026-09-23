@@ -60,20 +60,15 @@ func play_scene_ambient(place: String) -> void:
 
 
 func find_ambient(folder: String) -> String:
+	var sounds: Array[String] = []
 
-	var dir = DirAccess.open(folder)
-
-	if dir == null:
-		return ""
-
-	var sounds = []
-
-	for file in dir.get_files():
+	for file in ResourceLoader.list_directory(folder):
+		var lower_name: String = file.to_lower()
 
 		if (
-			file.to_lower().ends_with(".mp3")
-			or file.to_lower().ends_with(".ogg")
-			or file.to_lower().ends_with(".wav")
+			lower_name.ends_with(".mp3")
+			or lower_name.ends_with(".ogg")
+			or lower_name.ends_with(".wav")
 		):
 			sounds.append(folder + "/" + file)
 
@@ -120,7 +115,7 @@ func play_ambient(path: String) -> void:
 	fade_tween.tween_property(
 		ambient_player,
 		"volume_db",
-		-8,
+		-4,
 		fade_time
 	)
 
