@@ -94,20 +94,15 @@ func play_scene_music(place: String):
 		play_music(path)
 
 
-
-# 从目录随机选择音乐。
+# 从资源目录随机选择音乐。
+# ResourceLoader 能在导出后列出音频原本的资源文件名。
 # 有多首时可排除上一首，避免连续重复。
 
 func find_music(folder: String, exclude_path: String = "") -> String:
 
-	var dir = DirAccess.open(folder)
-
-	if dir == null:
-		return ""
-
 	var musics = []
 
-	for file in dir.get_files():
+	for file in ResourceLoader.list_directory(folder):
 
 		if (
 			file.to_lower().ends_with(".mp3")
@@ -117,7 +112,6 @@ func find_music(folder: String, exclude_path: String = "") -> String:
 
 			musics.append(folder + "/" + file)
 
-
 	if musics.is_empty():
 		return ""
 
@@ -126,7 +120,6 @@ func find_music(folder: String, exclude_path: String = "") -> String:
 		musics.erase(exclude_path)
 
 	return musics.pick_random()
-
 
 
 # 场景BGM自然播放结束后随机播放下一首。
@@ -149,7 +142,6 @@ func _on_bgm_finished() -> void:
 	play_music(next_path, true)
 
 
-
 # 剧情音乐
 # 支持两种配置方式：
 # 1. 完整资源路径：
@@ -169,7 +161,7 @@ func play_story_music(music_value: String) -> void:
 	# 这种情况下不再拼接目录和扩展名，直接按配置播放。
 	if value.begins_with("res://") or value.begins_with("user://"):
 
-		if FileAccess.file_exists(value):
+		if _music_file_exists(value):
 			current_music_mode = "story"
 			play_music(value)
 			return
@@ -183,13 +175,22 @@ func play_story_music(music_value: String) -> void:
 	for ext in extensions:
 		var path: String = "res://Assets/Music/Story/" + value + ext
 
-		if FileAccess.file_exists(path):
+		if ResourceLoader.exists(path):
 			current_music_mode = "story"
 			play_music(path)
 			return
 
 	print("MusicManager: 剧情音乐不存在:", value)
 
+
+# 项目内导入的音频用 ResourceLoader 检查；
+# user:// 文件仍按原方式检查。
+func _music_file_exists(path: String) -> bool:
+
+	if path.begins_with("res://"):
+		return ResourceLoader.exists(path)
+
+	return FileAccess.file_exists(path)
 
 
 func play_music(path: String, force_restart: bool = false):
@@ -209,7 +210,6 @@ func play_music(path: String, force_restart: bool = false):
 	if fade_tween:
 		fade_tween.kill()
 
-
 	if bgm_player.playing:
 
 		fade_tween = create_tween()
@@ -223,11 +223,9 @@ func play_music(path: String, force_restart: bool = false):
 
 		await fade_tween.finished
 
-
 	bgm_player.stream = music
 	bgm_player.play()
 	bgm_player.volume_db = -40
-
 
 	fade_tween = create_tween()
 
@@ -237,7 +235,6 @@ func play_music(path: String, force_restart: bool = false):
 		-10,
 		fade_time
 	)
-
 
 
 # 剧情结束后重新根据当前场景状态播放场景音乐。
@@ -253,7 +250,6 @@ func resume_scene_music():
 		return
 
 	play_scene_music(current_place)
-
 
 
 func stop_music():
