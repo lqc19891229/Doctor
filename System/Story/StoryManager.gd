@@ -773,16 +773,6 @@ func has_played_story(story_id: String) -> bool:
 	return played_story_ids.has(clean_story_id)
 
 
-func mark_story_played_by_id(story_id: String) -> void:
-	var clean_story_id := story_id.strip_edges()
-	if clean_story_id == "":
-		return
-
-	played_story_ids[clean_story_id] = true
-	if not played_story_days.has(clean_story_id):
-		played_story_days[clean_story_id] = int(GameTime.current_day)
-
-
 func mark_current_story_played() -> void:
 	_mark_story_played(current_story)
 
