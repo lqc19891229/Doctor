@@ -40,6 +40,36 @@ var pending_load_slot: int = -1
 var load_confirm_dialog: ConfirmationDialog = null
 
 
+func _localized_slot_label(slot_index: int) -> String:
+	if slot_index == SaveManager.AUTO_SAVE_SLOT:
+		return tr("UI_AUTO_SAVE")
+	if not SaveManager.is_manual_slot(slot_index):
+		return tr("UI_INVALID_SAVE")
+	return tr("UI_MANUAL_SLOT_FMT") % (slot_index - 1)
+
+
+func _localized_save_name(meta: Dictionary) -> String:
+	if meta.has("current_day") and meta.has("current_phase"):
+		var phase_key := "UI_PHASE_NIGHT" if String(meta["current_phase"]) == GameTime.PHASE_NIGHT else "UI_PHASE_DAY"
+		return tr("UI_SAVE_DAY_PHASE") % [int(meta["current_day"]), tr(phase_key)]
+	return tr(String(meta.get("display_name", "UI_EMPTY_SAVE")))
+
+
+func refresh_language() -> void:
+	if manual_save_center.visible:
+		_refresh_manual_save_buttons()
+	if load_save_center.visible:
+		_refresh_load_game_buttons()
+	if load_confirm_dialog != null:
+		load_confirm_dialog.title = tr("UI_LOAD_SAVE")
+		load_confirm_dialog.get_ok_button().text = tr("UI_CONFIRM_LOAD")
+		load_confirm_dialog.get_cancel_button().text = tr("UI_CANCEL")
+	if manual_overwrite_dialog != null:
+		manual_overwrite_dialog.title = tr("UI_OVERWRITE_MANUAL")
+		manual_overwrite_dialog.get_ok_button().text = tr("UI_CONFIRM_OVERWRITE")
+		manual_overwrite_dialog.get_cancel_button().text = tr("UI_CANCEL")
+
+
 func _ready() -> void:
 	# PauseMenu 必须在 SceneTree.paused = true 时继续处理按钮和 ESC。
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -169,9 +199,7 @@ func _open_manual_save_menu() -> void:
 	if manual_save_center != null:
 		manual_save_center.visible = true
 
-	manual_save_status_label.text = (
-		"白天保存：记录本日开始状态；夜晚保存：记录当前夜晚状态。"
-	)
+	manual_save_status_label.text = tr("UI_MANUAL_SAVE_DETAIL")
 	_refresh_manual_save_buttons()
 	manual_slot_2_button.grab_focus()
 
@@ -189,13 +217,11 @@ func _refresh_manual_save_buttons() -> void:
 		var button := buttons[i]
 		var meta: Dictionary = SaveManager.get_save_meta(slot_index)
 
-		var slot_label := String(
-			meta.get("slot_label", SaveManager.get_slot_display_label(slot_index))
-		)
+		var slot_label := _localized_slot_label(slot_index)
 		var exists := bool(meta.get("exists", false))
 
 		if exists:
-			var display_name := String(meta.get("display_name", ""))
+			var display_name := _localized_save_name(meta)
 			var save_time := String(meta.get("save_time", ""))
 			button.text = "%s\n%s\n%s" % [
 				slot_label,
@@ -203,7 +229,7 @@ func _refresh_manual_save_buttons() -> void:
 				save_time
 			]
 		else:
-			button.text = "%s\n空存档" % slot_label
+			button.text = "%s\n%s" % [slot_label, tr("UI_EMPTY_SAVE")]
 
 		# 手动保存界面中的所有手动槽始终可以点击；已有存档会先询问覆盖。
 		button.disabled = false
@@ -217,7 +243,7 @@ func _open_load_game_menu() -> void:
 	if load_save_center != null:
 		load_save_center.visible = true
 
-	load_status_label.text = "读取后，当前未保存的进度将丢失。"
+	load_status_label.text = tr("UI_LOAD_WARNING")
 	_refresh_load_game_buttons()
 	_focus_first_available_load_slot()
 
@@ -235,18 +261,16 @@ func _refresh_load_game_buttons() -> void:
 		var slot_index := i + 1
 		var button := buttons[i]
 		var meta: Dictionary = SaveManager.get_save_meta(slot_index)
-		var slot_label := String(
-			meta.get("slot_label", SaveManager.get_slot_display_label(slot_index))
-		)
+		var slot_label := _localized_slot_label(slot_index)
 		var exists := bool(meta.get("exists", false))
 
 		if exists:
-			var display_name := String(meta.get("display_name", ""))
+			var display_name := _localized_save_name(meta)
 			var save_time := String(meta.get("save_time", ""))
 			button.text = "%s\n%s\n%s" % [slot_label, display_name, save_time]
 			button.disabled = false
 		else:
-			button.text = "%s\n空存档" % slot_label
+			button.text = "%s\n%s" % [slot_label, tr("UI_EMPTY_SAVE")]
 			button.disabled = true
 
 
@@ -273,17 +297,15 @@ func _request_load_game(slot_index: int) -> void:
 		return
 
 	if not SaveManager.has_save(slot_index):
-		load_status_label.text = "该栏位没有可读取的存档。"
+		load_status_label.text = tr("UI_NO_LOAD_IN_SLOT")
 		_refresh_load_game_buttons()
 		_focus_first_available_load_slot()
 		return
 
 	pending_load_slot = slot_index
 	var meta: Dictionary = SaveManager.get_save_meta(slot_index)
-	var slot_label := String(
-		meta.get("slot_label", SaveManager.get_slot_display_label(slot_index))
-	)
-	var display_name := String(meta.get("display_name", "已有存档"))
+	var slot_label := _localized_slot_label(slot_index)
+	var display_name := _localized_save_name(meta)
 	var save_time := String(meta.get("save_time", ""))
 
 	var detail := display_name
@@ -291,9 +313,7 @@ func _request_load_game(slot_index: int) -> void:
 		detail += "\n" + save_time
 
 	load_confirm_dialog.dialog_text = (
-		"读取%s：\n%s\n\n"
-		+ "当前未保存的进度将丢失。\n"
-		+ "是否读取？"
+		tr("UI_LOAD_CONFIRM_DETAIL")
 	) % [slot_label, detail]
 	load_confirm_dialog.popup_centered()
 
@@ -303,14 +323,14 @@ func _setup_load_confirm_dialog() -> void:
 		return
 
 	load_confirm_dialog = ConfirmationDialog.new()
-	load_confirm_dialog.title = "读取存档"
+	load_confirm_dialog.title = tr("UI_LOAD_SAVE")
 	load_confirm_dialog.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(load_confirm_dialog)
 
 	if load_confirm_dialog.get_ok_button() != null:
-		load_confirm_dialog.get_ok_button().text = "确认读取"
+		load_confirm_dialog.get_ok_button().text = tr("UI_CONFIRM_LOAD")
 	if load_confirm_dialog.get_cancel_button() != null:
-		load_confirm_dialog.get_cancel_button().text = "取消"
+		load_confirm_dialog.get_cancel_button().text = tr("UI_CANCEL")
 
 	load_confirm_dialog.confirmed.connect(_on_load_confirmed)
 	if load_confirm_dialog.has_signal("canceled"):
@@ -326,7 +346,7 @@ func _on_load_confirmed() -> void:
 	if slot_index < 1 or slot_index > 5:
 		return
 
-	load_status_label.text = "正在读取……"
+	load_status_label.text = tr("UI_LOADING_SAVE")
 	load_game_requested.emit(slot_index)
 
 
@@ -397,10 +417,10 @@ func _request_manual_save(slot_index: int) -> void:
 	if SaveManager.has_save(slot_index):
 		pending_manual_overwrite_slot = slot_index
 		var meta := SaveManager.get_save_meta(slot_index)
-		var display_name := String(meta.get("display_name", "已有存档"))
+		var display_name := _localized_save_name(meta)
 		manual_overwrite_dialog.dialog_text = (
-			"%s已有记录：\n%s\n\n是否覆盖？"
-			% [SaveManager.get_slot_display_label(slot_index), display_name]
+			tr("UI_MANUAL_OVERWRITE_DETAIL")
+			% [_localized_slot_label(slot_index), display_name]
 		)
 		manual_overwrite_dialog.popup_centered()
 		return
@@ -409,7 +429,7 @@ func _request_manual_save(slot_index: int) -> void:
 
 
 func _emit_manual_save_request(slot_index: int) -> void:
-	manual_save_status_label.text = "正在保存……"
+	manual_save_status_label.text = tr("UI_SAVING_GAME")
 	manual_save_requested.emit(slot_index)
 
 
@@ -418,15 +438,15 @@ func _setup_manual_overwrite_dialog() -> void:
 		return
 
 	manual_overwrite_dialog = ConfirmationDialog.new()
-	manual_overwrite_dialog.title = "覆盖手动存档"
+	manual_overwrite_dialog.title = tr("UI_OVERWRITE_MANUAL")
 	manual_overwrite_dialog.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(manual_overwrite_dialog)
 
 	if manual_overwrite_dialog.get_ok_button() != null:
-		manual_overwrite_dialog.get_ok_button().text = "确认覆盖"
+		manual_overwrite_dialog.get_ok_button().text = tr("UI_CONFIRM_OVERWRITE")
 
 	if manual_overwrite_dialog.get_cancel_button() != null:
-		manual_overwrite_dialog.get_cancel_button().text = "取消"
+		manual_overwrite_dialog.get_cancel_button().text = tr("UI_CANCEL")
 
 	manual_overwrite_dialog.confirmed.connect(_on_manual_overwrite_confirmed)
 

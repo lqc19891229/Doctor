@@ -109,6 +109,8 @@ var pending_new_game_slot_index: int = -1
 # 使用代码动态创建，避免再增加单独场景。
 var return_to_menu_confirm_dialog: ConfirmationDialog = null
 var quit_game_confirm_dialog: ConfirmationDialog = null
+var save_and_return_button: Button = null
+var save_and_quit_button: Button = null
 
 const SAVE_AND_RETURN_ACTION: StringName = &"save_and_return"
 const SAVE_AND_QUIT_ACTION: StringName = &"save_and_quit"
@@ -392,13 +394,28 @@ func _on_difficulty_close_button_pressed() -> void:
 func _get_pending_new_game_difficulty_name() -> String:
 	match pending_new_game_difficulty:
 		UnlockManager.GameDifficulty.EASY:
-			return "简单"
+			return tr("UI_DIFFICULTY_NAME_EASY")
 		UnlockManager.GameDifficulty.HARD:
-			return "困难"
+			return tr("UI_DIFFICULTY_NAME_HARD")
 		UnlockManager.GameDifficulty.NORMAL:
-			return "普通"
+			return tr("UI_DIFFICULTY_NAME_NORMAL")
 		_:
-			return "未选择"
+			return tr("UI_DIFFICULTY_NAME_NONE")
+
+
+func _localized_slot_label(slot_index: int) -> String:
+	if slot_index == SaveManager.AUTO_SAVE_SLOT:
+		return tr("UI_AUTO_SAVE")
+	if not SaveManager.is_manual_slot(slot_index):
+		return tr("UI_INVALID_SAVE")
+	return tr("UI_MANUAL_SLOT_FMT") % (slot_index - 1)
+
+
+func _localized_save_name(meta: Dictionary) -> String:
+	if meta.has("current_day") and meta.has("current_phase"):
+		var phase_key := "UI_PHASE_NIGHT" if String(meta["current_phase"]) == GameTime.PHASE_NIGHT else "UI_PHASE_DAY"
+		return tr("UI_SAVE_DAY_PHASE") % [int(meta["current_day"]), tr(phase_key)]
+	return tr(String(meta.get("display_name", "UI_EMPTY_SAVE")))
 
 
 # =========================================================
@@ -516,11 +533,11 @@ func _refresh_save_slot_popup() -> void:
 	if save_slot_title_label != null:
 		if save_slot_popup_mode == "new_game":
 			save_slot_title_label.text = (
-				"选择手动存档（%s难度）"
+				tr("UI_SELECT_MANUAL_DIFFICULTY")
 				% _get_pending_new_game_difficulty_name()
 			)
 		else:
-			save_slot_title_label.text = "选择存档"
+			save_slot_title_label.text = tr("UI_SAVE_SELECT")
 
 	var buttons: Array[Button] = [
 		save_slot_1_button,
@@ -543,10 +560,8 @@ func _refresh_save_slot_popup() -> void:
 
 		var meta: Dictionary = SaveManager.get_save_meta(slot_index)
 		var exists: bool = bool(meta.get("exists", false))
-		var slot_label: String = String(
-			meta.get("slot_label", SaveManager.get_slot_display_label(slot_index))
-		)
-		var display_name: String = String(meta.get("display_name", "空存档"))
+		var slot_label: String = _localized_slot_label(slot_index)
+		var display_name: String = _localized_save_name(meta)
 		var save_time: String = String(meta.get("save_time", ""))
 
 		if exists:
@@ -556,7 +571,7 @@ func _refresh_save_slot_popup() -> void:
 				save_time
 			]
 		else:
-			button.text = "%s\n空存档" % slot_label
+			button.text = "%s\n%s" % [slot_label, tr("UI_EMPTY_SAVE")]
 
 		if save_slot_popup_mode == "load":
 			button.disabled = not exists
@@ -674,10 +689,8 @@ func _open_overwrite_confirm_dialog(slot_index: int) -> void:
 	_close_save_slot_popup()
 
 	var meta: Dictionary = SaveManager.get_save_meta(slot_index)
-	var slot_label: String = String(
-		meta.get("slot_label", SaveManager.get_slot_display_label(slot_index))
-	)
-	var display_name: String = String(meta.get("display_name", "已有存档"))
+	var slot_label: String = _localized_slot_label(slot_index)
+	var display_name: String = _localized_save_name(meta)
 	var save_time: String = String(meta.get("save_time", ""))
 	var difficulty_name := _get_pending_new_game_difficulty_name()
 
@@ -686,9 +699,8 @@ func _open_overwrite_confirm_dialog(slot_index: int) -> void:
 		save_detail += "\n" + save_time
 
 	overwrite_confirm_message_label.text = (
-	"%s已有存档：\n%s\n\n"
-	+ "是否覆盖该手动存档？"
-) % [slot_label, save_detail]
+		tr("UI_OVERWRITE_DETAIL")
+	) % [slot_label, save_detail]
 
 	overwrite_confirm_popup.visible = true
 	overwrite_confirm_button.grab_focus()
@@ -815,17 +827,17 @@ func _on_pause_manual_save_requested(slot_index: int) -> void:
 
 	# 剧情覆盖层播放期间不允许手动保存，避免把“剧情进行中”保存成无法恢复的半状态。
 	if current_story_scene != null and is_instance_valid(current_story_scene):
-		message = "剧情进行中，不能手动保存。"
+		message = tr("UI_CANNOT_SAVE_STORY")
 	else:
 		save_success = SaveManager.save_manual_game(slot_index)
 
 		if save_success:
 			if GameTime.is_day():
-				message = "保存成功：已记录本日开始状态。"
+				message = tr("UI_SAVE_DAY_SUCCESS")
 			else:
-				message = "保存成功：已记录当前夜晚状态。"
+				message = tr("UI_SAVE_NIGHT_SUCCESS")
 		else:
-			message = "保存失败。"
+			message = tr("UI_SAVE_FAILED")
 
 	if pause_menu_layer != null and pause_menu_layer.has_method("notify_manual_save_result"):
 		pause_menu_layer.call(
@@ -837,7 +849,7 @@ func _on_pause_manual_save_requested(slot_index: int) -> void:
 
 func _on_pause_load_game_requested(slot_index: int) -> void:
 	if not SaveManager.has_save(slot_index):
-		var missing_message := "没有存档，无法读取：%s" % SaveManager.get_slot_display_label(slot_index)
+		var missing_message := tr("UI_LOAD_MISSING_FMT") % _localized_slot_label(slot_index)
 		push_warning(missing_message)
 		if pause_menu_layer != null and pause_menu_layer.has_method("notify_load_game_result"):
 			pause_menu_layer.call("notify_load_game_result", slot_index, false, missing_message)
@@ -845,7 +857,7 @@ func _on_pause_load_game_requested(slot_index: int) -> void:
 
 	var load_success: bool = SaveManager.load_game(slot_index)
 	if not load_success:
-		var failure_message := "读取存档失败：%s" % SaveManager.get_slot_display_label(slot_index)
+		var failure_message := tr("UI_LOAD_FAILED_FMT") % _localized_slot_label(slot_index)
 		push_warning(failure_message)
 		if pause_menu_layer != null and pause_menu_layer.has_method("notify_load_game_result"):
 			pause_menu_layer.call("notify_load_game_result", slot_index, false, failure_message)
@@ -911,6 +923,24 @@ func _close_settings_menu(emit_closed_signal: bool = true) -> void:
 
 func _on_settings_closed() -> void:
 	_set_pause_menu_input_enabled(true)
+	if pause_menu_layer != null and pause_menu_layer.has_method("refresh_language"):
+		pause_menu_layer.call("refresh_language")
+	_refresh_pause_confirm_language()
+
+
+func _refresh_pause_confirm_language() -> void:
+	if return_to_menu_confirm_dialog != null:
+		return_to_menu_confirm_dialog.title = tr("UI_RETURN_MENU")
+		return_to_menu_confirm_dialog.get_ok_button().text = tr("UI_RETURN_MENU")
+		return_to_menu_confirm_dialog.get_cancel_button().text = tr("UI_CANCEL")
+		if save_and_return_button != null:
+			save_and_return_button.text = tr("UI_SAVE_AND_RETURN")
+	if quit_game_confirm_dialog != null:
+		quit_game_confirm_dialog.title = tr("UI_MENU_QUIT_GAME")
+		quit_game_confirm_dialog.get_ok_button().text = tr("UI_MENU_QUIT_GAME")
+		quit_game_confirm_dialog.get_cancel_button().text = tr("UI_CANCEL")
+		if save_and_quit_button != null:
+			save_and_quit_button.text = tr("UI_SAVE_AND_QUIT")
 
 
 func _on_pause_main_menu_requested() -> void:
@@ -918,14 +948,11 @@ func _on_pause_main_menu_requested() -> void:
 		_return_to_main_menu_from_game()
 		return
 
-	var slot_label := SaveManager.get_slot_display_label(
+	var slot_label := _localized_slot_label(
 		SaveManager.get_active_game_slot()
 	)
 	return_to_menu_confirm_dialog.dialog_text = (
-		"当前阶段尚未完成。\n"
-		+ "直接返回主菜单后，本阶段未保存的进度将丢失。\n"
-		+ "选择“保存并返回”会先保存到%s。\n\n"
-		+ "是否返回主菜单？"
+		tr("UI_RETURN_CONFIRM_DETAIL")
 	) % slot_label
 
 	_set_pause_menu_input_enabled(false)
@@ -937,14 +964,11 @@ func _on_pause_quit_requested() -> void:
 		_quit_game_safely()
 		return
 
-	var slot_label := SaveManager.get_slot_display_label(
+	var slot_label := _localized_slot_label(
 		SaveManager.get_active_game_slot()
 	)
 	quit_game_confirm_dialog.dialog_text = (
-		"当前阶段尚未完成。\n"
-		+ "直接退出游戏后，本阶段未保存的进度将丢失。\n"
-		+ "选择“保存并退出”会先保存到%s。\n\n"
-		+ "是否退出游戏？"
+		tr("UI_QUIT_CONFIRM_DETAIL")
 	) % slot_label
 
 	_set_pause_menu_input_enabled(false)
@@ -954,22 +978,20 @@ func _on_pause_quit_requested() -> void:
 func _setup_pause_confirm_dialogs() -> void:
 	if return_to_menu_confirm_dialog == null:
 		return_to_menu_confirm_dialog = ConfirmationDialog.new()
-		return_to_menu_confirm_dialog.title = "返回主菜单"
+		return_to_menu_confirm_dialog.title = tr("UI_RETURN_MENU")
 		return_to_menu_confirm_dialog.dialog_text = (
-			"当前阶段尚未完成。\n"
-			+ "返回主菜单后，将从最近一次自动存档继续。\n\n"
-			+ "是否返回主菜单？"
+			tr("UI_RETURN_DEFAULT_DETAIL")
 		)
 		return_to_menu_confirm_dialog.process_mode = Node.PROCESS_MODE_ALWAYS
 		add_child(return_to_menu_confirm_dialog)
 
 		if return_to_menu_confirm_dialog.get_ok_button() != null:
-			return_to_menu_confirm_dialog.get_ok_button().text = "返回主菜单"
+			return_to_menu_confirm_dialog.get_ok_button().text = tr("UI_RETURN_MENU")
 		if return_to_menu_confirm_dialog.get_cancel_button() != null:
-			return_to_menu_confirm_dialog.get_cancel_button().text = "取消"
+			return_to_menu_confirm_dialog.get_cancel_button().text = tr("UI_CANCEL")
 
-		return_to_menu_confirm_dialog.add_button(
-			"保存并返回",
+		save_and_return_button = return_to_menu_confirm_dialog.add_button(
+			tr("UI_SAVE_AND_RETURN"),
 			false,
 			String(SAVE_AND_RETURN_ACTION)
 		)
@@ -992,22 +1014,20 @@ func _setup_pause_confirm_dialogs() -> void:
 
 	if quit_game_confirm_dialog == null:
 		quit_game_confirm_dialog = ConfirmationDialog.new()
-		quit_game_confirm_dialog.title = "退出游戏"
+		quit_game_confirm_dialog.title = tr("UI_MENU_QUIT_GAME")
 		quit_game_confirm_dialog.dialog_text = (
-			"当前阶段尚未完成。\n"
-			+ "退出游戏后，本阶段未保存的进度将丢失。\n\n"
-			+ "是否退出游戏？"
+			tr("UI_QUIT_DEFAULT_DETAIL")
 		)
 		quit_game_confirm_dialog.process_mode = Node.PROCESS_MODE_ALWAYS
 		add_child(quit_game_confirm_dialog)
 
 		if quit_game_confirm_dialog.get_ok_button() != null:
-			quit_game_confirm_dialog.get_ok_button().text = "退出游戏"
+			quit_game_confirm_dialog.get_ok_button().text = tr("UI_MENU_QUIT_GAME")
 		if quit_game_confirm_dialog.get_cancel_button() != null:
-			quit_game_confirm_dialog.get_cancel_button().text = "取消"
+			quit_game_confirm_dialog.get_cancel_button().text = tr("UI_CANCEL")
 
-		quit_game_confirm_dialog.add_button(
-			"保存并退出",
+		save_and_quit_button = quit_game_confirm_dialog.add_button(
+			tr("UI_SAVE_AND_QUIT"),
 			false,
 			String(SAVE_AND_QUIT_ACTION)
 		)
@@ -1038,11 +1058,10 @@ func _on_return_to_menu_custom_action(action: StringName) -> void:
 	if action != SAVE_AND_RETURN_ACTION:
 		return
 
-	if not _save_current_bound_slot_before_leave("保存并返回"):
+	if not _save_current_bound_slot_before_leave(tr("UI_SAVE_AND_RETURN")):
 		_show_pause_leave_save_failure(
 			return_to_menu_confirm_dialog,
-			"保存失败，未返回主菜单。\n\n"
-			+ "请重试“保存并返回”，或选择“返回主菜单”放弃未保存进度。"
+			tr("UI_RETURN_SAVE_FAILED_DETAIL")
 		)
 		return
 
@@ -1061,11 +1080,10 @@ func _on_quit_game_custom_action(action: StringName) -> void:
 	if action != SAVE_AND_QUIT_ACTION:
 		return
 
-	if not _save_current_bound_slot_before_leave("保存并退出"):
+	if not _save_current_bound_slot_before_leave(tr("UI_SAVE_AND_QUIT")):
 		_show_pause_leave_save_failure(
 			quit_game_confirm_dialog,
-			"保存失败，未退出游戏。\n\n"
-			+ "请重试“保存并退出”，或选择“退出游戏”放弃未保存进度。"
+			tr("UI_QUIT_SAVE_FAILED_DETAIL")
 		)
 		return
 

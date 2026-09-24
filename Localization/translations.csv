@@ -16,10 +16,122 @@ UI_DIFFICULTY_TITLE,选择难度,Choose Difficulty
 UI_DIFFICULTY_INFO,难度影响固定收入,Difficulty affects regular income
 UI_DIFFICULTY_EASY,"简单
 全力依父","Easy
-Rely on Dad"
+Daddy Carry"
 UI_DIFFICULTY_NORMAL,"普通
 全力以赴","Normal
 Give It Your All"
 UI_DIFFICULTY_HARD,"困难
 爹，您就安心躺平吧","Hard
 Dad, Take a Break"
+UI_SAVE_SELECT,选择存档,Choose Save
+UI_CLOSE,关闭,Close
+UI_CONFIRM_OVERWRITE,确认覆盖,Overwrite
+UI_OVERWRITE_QUESTION,该槽位已有存档，是否覆盖？,This slot already has a save. Overwrite it?
+UI_CANCEL,取消,Cancel
+UI_PAUSED,暂停,Paused
+UI_RESUME_GAME,继续游戏,Resume Game
+UI_SAVE_GAME,保存游戏,Save Game
+UI_LOAD_SAVE,读取存档,Load Save
+UI_RETURN_MENU,返回主菜单,Return to Main Menu
+UI_MANUAL_SAVE,手动保存,Manual Save
+UI_MANUAL_SAVE_RULE,白天保存本日开始状态；夜晚保存当前状态。,Daytime saves the start of the day; nighttime saves the current state.
+UI_MANUAL_SLOT_FMT,手动存档 %d,Manual Save %d
+UI_MANUAL_SLOT_1,手动存档 1,Manual Save 1
+UI_MANUAL_SLOT_2,手动存档 2,Manual Save 2
+UI_MANUAL_SLOT_3,手动存档 3,Manual Save 3
+UI_MANUAL_SLOT_4,手动存档 4,Manual Save 4
+UI_LOAD_RULE,可读取自动存档与全部手动存档。,Load an autosave or any manual save.
+UI_AUTO_SAVE,自动存档,Autosave
+UI_INVALID_SAVE,无效存档,Invalid Save
+UI_LOAD_WARNING,读取后，当前未保存的进度将丢失。,Loading will discard unsaved progress.
+UI_SELECT_MANUAL_DIFFICULTY,选择手动存档（%s难度）,Choose Manual Save (%s)
+UI_DIFFICULTY_NAME_EASY,简单,Easy
+UI_DIFFICULTY_NAME_NORMAL,普通,Normal
+UI_DIFFICULTY_NAME_HARD,困难,Hard
+UI_DIFFICULTY_NAME_NONE,未选择,Not Selected
+UI_EMPTY_SAVE,空存档,Empty Slot
+UI_PHASE_DAY,白天,Day
+UI_PHASE_NIGHT,夜晚,Night
+UI_SAVE_DAY_PHASE,第 %d 天 %s,Day %d · %s
+UI_OVERWRITE_DETAIL,"%s已有存档：
+%s
+
+是否覆盖该手动存档？","%s already has a save:
+%s
+
+Overwrite this manual save?"
+UI_MANUAL_SAVE_DETAIL,白天保存：记录本日开始状态；夜晚保存：记录当前夜晚状态。,Daytime saves the start of the day; nighttime saves the current state.
+UI_NO_LOAD_IN_SLOT,该栏位没有可读取的存档。,There is no save to load in this slot.
+UI_LOAD_CONFIRM_DETAIL,"读取%s：
+%s
+
+当前未保存的进度将丢失。
+是否读取？","Load %s:
+%s
+
+Unsaved progress will be lost.
+Load this save?"
+UI_CONFIRM_LOAD,确认读取,Load
+UI_LOADING_SAVE,正在读取……,Loading…
+UI_MANUAL_OVERWRITE_DETAIL,"%s已有记录：
+%s
+
+是否覆盖？","%s already has a save:
+%s
+
+Overwrite it?"
+UI_SAVING_GAME,正在保存……,Saving…
+UI_OVERWRITE_MANUAL,覆盖手动存档,Overwrite Manual Save
+UI_CANNOT_SAVE_STORY,剧情进行中，不能手动保存。,Cannot save while a story is playing.
+UI_SAVE_DAY_SUCCESS,保存成功：已记录本日开始状态。,Saved the start of the current day.
+UI_SAVE_NIGHT_SUCCESS,保存成功：已记录当前夜晚状态。,Saved the current night.
+UI_SAVE_FAILED,保存失败。,Save failed.
+UI_LOAD_MISSING_FMT,没有存档，无法读取：%s,No save to load: %s
+UI_LOAD_FAILED_FMT,读取存档失败：%s,Failed to load save: %s
+UI_SAVE_AND_RETURN,保存并返回,Save and Return
+UI_SAVE_AND_QUIT,保存并退出,Save and Quit
+UI_RETURN_CONFIRM_DETAIL,"当前阶段尚未完成。
+直接返回主菜单后，本阶段未保存的进度将丢失。
+选择“保存并返回”会先保存到%s。
+
+是否返回主菜单？","This stage is not complete.
+Returning to the main menu will discard unsaved progress.
+Save and Return will save to %s first.
+
+Return to the main menu?"
+UI_QUIT_CONFIRM_DETAIL,"当前阶段尚未完成。
+直接退出游戏后，本阶段未保存的进度将丢失。
+选择“保存并退出”会先保存到%s。
+
+是否退出游戏？","This stage is not complete.
+Quitting will discard unsaved progress.
+Save and Quit will save to %s first.
+
+Quit the game?"
+UI_RETURN_DEFAULT_DETAIL,"当前阶段尚未完成。
+返回主菜单后，将从最近一次自动存档继续。
+
+是否返回主菜单？","This stage is not complete.
+Returning to the main menu will resume from the most recent autosave.
+
+Return to the main menu?"
+UI_QUIT_DEFAULT_DETAIL,"当前阶段尚未完成。
+退出游戏后，本阶段未保存的进度将丢失。
+
+是否退出游戏？","This stage is not complete.
+Quitting will discard unsaved progress.
+
+Quit the game?"
+UI_RETURN_SAVE_FAILED_DETAIL,"保存失败，未返回主菜单。
+
+请重试“保存并返回”，或选择“返回主菜单”放弃未保存进度。","Save failed. You are still in the game.
+
+Try Save and Return again, or Return to Main Menu to discard unsaved progress."
+UI_QUIT_SAVE_FAILED_DETAIL,"保存失败，未退出游戏。
+
+请重试“保存并退出”，或选择“退出游戏”放弃未保存进度。","Save failed. The game is still running.
+
+Try Save and Quit again, or Quit Game to discard unsaved progress."
+已有存档,已有存档,Existing Save
+损坏存档,损坏存档,Corrupt Save
+读取失败,读取失败,Load Failed
