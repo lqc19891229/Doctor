@@ -617,3 +617,45 @@ UI_BOOK_NAME_YI_FANG_JI_JIE,医方集解,Yifang Jijie
 UI_BOOK_NAME_YI_FANG_KAO,医方考,Yifang Kao
 UI_BOOK_NAME_YI_LIN_GAI_CUO,医林改错,Yilin Gaicuo
 UI_BOOK_NAME_ZHU_BING_YUAN_HOU_LUN,诸病源候论,Zhu Bing Yuan Hou Lun
+UI_BOOK_ENTRY_TITLE_SI_ZHEN,四诊,Four Examinations
+UI_BOOK_ENTRY_BODY_SI_ZHEN,"【四诊】
+
+四诊是中医收集患者病情资料的四种基本诊察方法，包括望诊、闻诊、问诊和切诊。医者通过观察、听闻、询问和触按患者所表现出的各种信息，了解疾病的病因、病位、性质以及正邪盛衰，为辨证和治疗提供依据。
+
+望诊是观察患者的神、色、形、态以及舌象和局部变化；
+闻诊包括听声音和嗅气味，如辨别说话、呼吸、咳嗽等声音及异常气味；
+问诊是询问疾病经过、主要症状、生活习惯及既往情况；
+切诊包括脉诊和按诊，通过切脉与触按身体了解脉象及局部变化。
+
+【寸关尺】
+寸、关、尺是脉诊中的三个把脉位置，在手腕桡骨动脉上。医者通过按压这三个位置，感受脉象的强弱、快慢、沉浮、流畅程度，从而推测人体不同区域和脏腑的健康状况。
+
+【对应脏腑区域】
+浮脉：表
+左寸：心
+左关：肝
+左尺：肾阴
+右寸：肺
+右关：脾
+右尺：肾阳","FOUR EXAMINATIONS
+
+The four examinations are the basic ways of gathering information about a patient's condition in traditional Chinese medicine: inspection, listening and smelling, inquiry, and palpation. By observing, listening, asking questions and feeling the patient, a physician learns about the cause, location and nature of the condition and the relative strength of healthy and harmful influences. This helps guide pattern identification and treatment.
+
+Inspection examines the patient's appearance, complexion, build, posture, tongue and visible changes.
+Listening and smelling attend to speech, breathing, coughing and unusual odors.
+Inquiry covers the course of the illness, main symptoms, daily habits and medical history.
+Palpation includes taking the pulse and feeling the body for changes.
+
+CUN, GUAN AND CHI
+
+Cun, Guan and Chi are the three pulse positions over the radial artery at the wrist. By pressing these positions, a physician observes the pulse's strength, speed, depth and smoothness to assess different areas and organs of the body.
+
+CORRESPONDING AREAS
+
+Floating pulse: Exterior
+Left Cun: Heart
+Left Guan: Liver
+Left Chi: Kidney Yin
+Right Cun: Lung
+Right Guan: Spleen
+Right Chi: Kidney Yang"

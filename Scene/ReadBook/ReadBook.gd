@@ -77,6 +77,8 @@ func _notification(what: int) -> void:
 		_rebuild_book_list_for_search(book_id)
 		if selected_book != null:
 			_refresh_entry_list_view(entry_id)
+			if selected_entry != null:
+				_set_detail_text(_build_entry_text(selected_entry))
 
 	if selected_book != null and _info_message_key in [
 		"UI_READ_BOOK_SEARCH_SUMMARY_FMT",
@@ -407,9 +409,16 @@ func _set_detail_text(value: String) -> void:
 	if detail_text == null:
 		return
 
+	var use_english_page := false
+	if value != "" and selected_entry != null and TranslationServer.get_locale().begins_with("en"):
+		var body_key := "UI_BOOK_ENTRY_BODY_" + selected_entry.entry_id.to_upper()
+		use_english_page = tr(body_key) != body_key
+
 	# 如果 DetailText 挂的是 ClassicalVerticalRichTextLabel.gd，
 	# 使用 set_source_text 让它重新生成古籍竖排文本。
-	if detail_text.has_method("set_source_text"):
+	if use_english_page and detail_text.has_method("set_horizontal_source_text"):
+		detail_text.call("set_horizontal_source_text", value)
+	elif detail_text.has_method("set_source_text"):
 		detail_text.call("set_source_text", value)
 	else:
 		detail_text.text = value
@@ -458,7 +467,7 @@ func _entry_matches_search(entry: BookEntryData) -> bool:
 		return true
 
 	# findn() 为大小写不敏感搜索；中文标题可直接匹配。
-	return entry.title.findn(query) >= 0
+	return entry.title.findn(query) >= 0 or _localized_entry_title(entry).findn(query) >= 0
 
 
 func _refresh_entry_list_view(select_entry_id: String = "") -> void:
@@ -560,11 +569,19 @@ func _get_entry_list_display_name(entry: BookEntryData) -> String:
 	if entry == null:
 		return ""
 
-	var display_name := entry.title
+	var display_name := _localized_entry_title(entry)
 	if not Unlock.is_entry_read(entry.entry_id) and Unlock.can_read_entry(entry.entry_id):
 		display_name += tr("UI_READ_BOOK_NEW_BADGE")
 
 	return display_name
+
+
+func _localized_entry_title(entry: BookEntryData) -> String:
+	if entry == null:
+		return ""
+	var key := "UI_BOOK_ENTRY_TITLE_" + entry.entry_id.to_upper()
+	var translated := tr(key)
+	return entry.title if translated == key else translated
 
 
 func _is_unread_readable_entry(entry: BookEntryData) -> bool:
@@ -616,7 +633,9 @@ func _build_entry_text(entry: BookEntryData) -> String:
 		return ""
 
 	if entry.detail_text.strip_edges() != "":
-		return entry.detail_text
+		var key := "UI_BOOK_ENTRY_BODY_" + entry.entry_id.to_upper()
+		var translated := tr(key)
+		return entry.detail_text if translated == key else translated
 
 	return tr("UI_READ_BOOK_NO_CONTENT")
 

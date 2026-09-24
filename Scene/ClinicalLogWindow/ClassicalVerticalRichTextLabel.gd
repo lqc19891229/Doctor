@@ -73,6 +73,7 @@ class_name ClassicalVerticalRichTextLabel
 
 # 保存原始横排文本。
 var _source_text: String = ""
+var _horizontal_source: bool = false
 
 # 保存转换后的竖排文本。
 var _display_text: String = ""
@@ -120,6 +121,14 @@ func _ready() -> void:
 
 # 外部推荐调用这个方法设置文本。
 func set_source_text(value: String) -> void:
+	_horizontal_source = false
+	_source_text = value
+	_request_rebuild()
+
+
+# Translated English book pages read from left to right and scroll vertically.
+func set_horizontal_source_text(value: String) -> void:
+	_horizontal_source = true
 	_source_text = value
 	_request_rebuild()
 
@@ -217,6 +226,21 @@ func _request_rebuild() -> void:
 func _rebuild_vertical_text() -> void:
 	_rebuild_requested = false
 
+	if _horizontal_source:
+		_display_text = _source_text.replace("\r\n", "\n").replace("\r", "\n")
+		custom_minimum_size.x = 0.0
+		fit_content = true
+		autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		_is_applying_text = true
+		text = _display_text
+		_is_applying_text = false
+		call_deferred("_scroll_parent_to_left_edge")
+		return
+
+	fit_content = false
+	autowrap_mode = TextServer.AUTOWRAP_OFF
+	horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	var clean_text := _normalize_source_text(_source_text)
 	var rows_per_column := _estimate_rows_per_column(clean_text.length())
 	var columns := _split_text_to_columns(clean_text, rows_per_column)
@@ -233,6 +257,14 @@ func _rebuild_vertical_text() -> void:
 
 	# 切换条目后，从顶部开始看。
 	scroll_to_line(0)
+
+
+func _scroll_parent_to_left_edge() -> void:
+	var parent_node := get_parent()
+	if parent_node is ScrollContainer:
+		var scroll_parent := parent_node as ScrollContainer
+		scroll_parent.scroll_horizontal = 0
+		scroll_parent.scroll_vertical = 0
 
 
 # =========================================================
