@@ -19,7 +19,7 @@ default_font_size = 24
 
 [node name="PrescriptionWindow" type="Window" unique_id=901784337]
 oversampling_override = 1.0
-title = "断病开方"
+title = "UI_PRESCRIPTION_WINDOW_TITLE"
 position = Vector2i(0, 36)
 size = Vector2i(990, 1000)
 unresizable = true
@@ -45,12 +45,12 @@ size_flags_stretch_ratio = 1.5
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxTexture_xa6n0")
-text = "断病"
+text = "UI_PRESCRIPTION_DIAGNOSE"
 
 [node name="DiseaseSearch" type="LineEdit" parent="PrescriptionLayout/DiseaseSelectRow" unique_id=407987413]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-placeholder_text = "搜索疾病"
+placeholder_text = "UI_PRESCRIPTION_SEARCH_DISEASE"
 clear_button_enabled = true
 
 [node name="DiseaseListScroll" type="ScrollContainer" parent="PrescriptionLayout/DiseaseSelectRow" unique_id=261389170]
@@ -74,7 +74,7 @@ size_flags_stretch_ratio = 2.0
 [node name="Label" type="Label" parent="PrescriptionLayout/PrescriptionView" unique_id=2088633422]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "开方"
+text = "UI_PRESCRIPTION_PRESCRIBE"
 
 [node name="RoleContainer" type="HBoxContainer" parent="PrescriptionLayout/PrescriptionView" unique_id=377783294]
 layout_mode = 2
@@ -96,7 +96,7 @@ theme_override_constants/separation = 6
 [node name="JunTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel/VBoxContainer" unique_id=135647991]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "君(1)"
+text = "UI_PRESCRIPTION_ROLE_JUN_SHORTCUT"
 
 [node name="JunList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel/VBoxContainer" unique_id=931144293]
 layout_mode = 2
@@ -119,7 +119,7 @@ theme_override_constants/separation = 6
 [node name="ChenTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ChenPanel/VBoxContainer" unique_id=1646800110]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "臣(2)"
+text = "UI_PRESCRIPTION_ROLE_CHEN_SHORTCUT"
 
 [node name="ChenList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ChenPanel/VBoxContainer" unique_id=622450247]
 layout_mode = 2
@@ -141,7 +141,7 @@ grow_vertical = 2
 [node name="ZuoTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ZuoPanel/VBoxContainer" unique_id=356262114]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "佐(3)"
+text = "UI_PRESCRIPTION_ROLE_ZUO_SHORTCUT"
 
 [node name="ZuoList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ZuoPanel/VBoxContainer" unique_id=97672710]
 layout_mode = 2
@@ -163,7 +163,7 @@ grow_vertical = 2
 [node name="ShiTitle" type="Label" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel/VBoxContainer" unique_id=351366563]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "使(4)"
+text = "UI_PRESCRIPTION_ROLE_SHI_SHORTCUT"
 
 [node name="ShiList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/ShiPanel/VBoxContainer" unique_id=421256194]
 layout_mode = 2
@@ -182,7 +182,7 @@ size_flags_horizontal = 3
 [node name="HerbSearch" type="LineEdit" parent="PrescriptionLayout/HerbSelectRow/HerbSearchColumn" unique_id=1590971093]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-placeholder_text = "搜索药材"
+placeholder_text = "UI_PRESCRIPTION_SEARCH_HERB"
 clear_button_enabled = true
 
 [node name="HerbListScroll" type="ScrollContainer" parent="PrescriptionLayout/HerbSelectRow/HerbSearchColumn" unique_id=205035393]
@@ -210,10 +210,10 @@ theme = SubResource("Theme_o3aco")
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 22
-text = "清空处方"
+text = "UI_PRESCRIPTION_CLEAR"
 
 [node name="SubmitButton" type="Button" parent="PrescriptionLayout/HerbSelectRow/HerbEditColumn" unique_id=1983814487]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 22
-text = "提交处方"
+text = "UI_PRESCRIPTION_SUBMIT"

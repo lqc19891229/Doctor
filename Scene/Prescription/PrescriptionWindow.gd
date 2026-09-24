@@ -163,7 +163,17 @@ var _cached_disease_db_instance_id: int = 0
 # =========================================================
 # 生命周期
 # =========================================================
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		title = tr("UI_PRESCRIPTION_WINDOW_TITLE")
+		var selected_unit := unit_option.selected if unit_option != null else 1
+		_setup_unit_option()
+		unit_option.select(clampi(selected_unit, 0, unit_option.item_count - 1))
+		_refresh_prescription_list()
+
+
 func _ready() -> void:
+	title = tr("UI_PRESCRIPTION_WINDOW_TITLE")
 	# 初始化时恢复固定位置。
 	position = fixed_window_position
 
@@ -292,11 +302,51 @@ func _setup_unit_option() -> void:
 		return
 
 	unit_option.clear()
-	unit_option.add_item("分")
-	unit_option.add_item("钱")
-	unit_option.add_item("两")
-	unit_option.add_item("斤")
+	unit_option.add_item(tr("UI_PRESCRIPTION_UNIT_FEN"))
+	unit_option.add_item(tr("UI_PRESCRIPTION_UNIT_QIAN"))
+	unit_option.add_item(tr("UI_PRESCRIPTION_UNIT_LIANG"))
+	unit_option.add_item(tr("UI_PRESCRIPTION_UNIT_JIN"))
 	unit_option.select(1)
+
+
+# =========================================================
+# 四、运行时界面显示：角色与药材剂量
+# 内部处方仍使用中文角色和 fen/qian/liang/jin 单位。
+# =========================================================
+func _localized_role_name(role_name: String) -> String:
+	match role_name:
+		ROLE_JUN:
+			return tr("UI_PRESCRIPTION_ROLE_JUN")
+		ROLE_CHEN:
+			return tr("UI_PRESCRIPTION_ROLE_CHEN")
+		ROLE_ZUO:
+			return tr("UI_PRESCRIPTION_ROLE_ZUO")
+		ROLE_SHI:
+			return tr("UI_PRESCRIPTION_ROLE_SHI")
+	return role_name
+
+
+func _format_amount_for_ui(amount: float, unit: String) -> String:
+	if TranslationServer.get_locale().begins_with("zh"):
+		return HerbUnit.format_amount(amount, unit)
+
+	var remaining := HerbUnit.to_fen(amount, unit)
+	if remaining <= 0:
+		return tr("UI_PRESCRIPTION_ZERO_FEN")
+
+	var parts: Array[String] = []
+	for unit_data in [
+		[HerbUnit.FEN_PER_JIN, "UI_PRESCRIPTION_UNIT_JIN"],
+		[HerbUnit.FEN_PER_LIANG, "UI_PRESCRIPTION_UNIT_LIANG"],
+		[HerbUnit.FEN_PER_QIAN, "UI_PRESCRIPTION_UNIT_QIAN"],
+		[HerbUnit.FEN_PER_FEN, "UI_PRESCRIPTION_UNIT_FEN"]
+	]:
+		var unit_size: int = unit_data[0]
+		var count: int = remaining / unit_size
+		if count > 0:
+			parts.append("%d %s" % [count, tr(unit_data[1])])
+			remaining %= unit_size
+	return " ".join(parts)
 
 
 # =========================================================
@@ -475,7 +525,7 @@ func _ensure_herb_button_cache() -> void:
 	if herb_list == null or herb_database == null:
 		return
 	if not herb_database.has_method("get_all_herbs"):
-		emit_signal("info_requested", "药材数据库缺少 get_all_herbs()")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_HERB_DB_METHOD_MISSING"))
 		return
 
 	var db_instance_id: int = int(herb_database.get_instance_id())
@@ -784,25 +834,25 @@ func _apply_formula_filter() -> void:
 
 func _on_formula_button_pressed(formula) -> void:
 	if not _is_formula_unlocked(formula):
-		emit_signal("info_requested", "该方剂尚未解锁。")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_FORMULA_LOCKED"))
 		_apply_herb_filter()
 		return
 
 	if not _is_formula_preset_unlocked(formula):
-		emit_signal("info_requested", "该方剂尚未累计 5 次妙手回春，不能使用预制方剂。")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_PRESET_LOCKED"))
 		_apply_herb_filter()
 		return
 
 	if current_prescription == null:
-		emit_signal("info_requested", "当前处方未初始化")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_NOT_INITIALIZED"))
 		return
 
 	if herb_database == null:
-		emit_signal("info_requested", "药材数据库未初始化")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_HERB_DB_NOT_INITIALIZED"))
 		return
 
 	if formula == null or not formula.has_method("get_group_by_role"):
-		emit_signal("info_requested", "方剂数据无效，无法填入处方。")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_INVALID_FORMULA"))
 		return
 
 	# 先完整校验所有组成药材，再修改玩家当前处方，避免半途中断破坏旧处方。
@@ -812,7 +862,7 @@ func _on_formula_button_pressed(formula) -> void:
 
 		for ingredient in ingredient_group:
 			if ingredient == null:
-				emit_signal("info_requested", "方剂数据存在空药材，无法填入处方。")
+				emit_signal("info_requested", tr("UI_PRESCRIPTION_EMPTY_INGREDIENT"))
 				return
 
 			var herb_id := str(ingredient.get_herb_id()).strip_edges()
@@ -821,11 +871,11 @@ func _on_formula_button_pressed(formula) -> void:
 			var herb = herb_database.get_herb_by_id(herb_id)
 
 			if herb_id == "" or herb == null:
-				emit_signal("info_requested", "方剂中的药材资源缺失：%s" % herb_id)
+				emit_signal("info_requested", tr("UI_PRESCRIPTION_HERB_MISSING_FMT") % herb_id)
 				return
 
 			if amount <= 0.0 or not HerbUnit.is_valid_unit(unit):
-				emit_signal("info_requested", "方剂中的药材剂量无效：%s" % str(herb.herb_name))
+				emit_signal("info_requested", tr("UI_PRESCRIPTION_INVALID_DOSE_FMT") % str(herb.herb_name))
 				return
 
 			fill_items.append({
@@ -836,7 +886,7 @@ func _on_formula_button_pressed(formula) -> void:
 			})
 
 	if fill_items.is_empty():
-		emit_signal("info_requested", "该方剂没有可填入的药材。")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_NO_INGREDIENTS"))
 		return
 
 	# clear() 只清空四区药材，不清除已经选中的疾病。
@@ -854,7 +904,7 @@ func _on_formula_button_pressed(formula) -> void:
 	_set_selected_role(ROLE_JUN)
 	_refresh_prescription_list()
 
-	emit_signal("info_requested", "已按预制方剂填入：%s" % str(formula.formula_name))
+	emit_signal("info_requested", tr("UI_PRESCRIPTION_PRESET_FILLED_FMT") % str(formula.formula_name))
 
 
 func _normalize_herb_search_text(value: String) -> String:
@@ -886,7 +936,7 @@ func _on_herb_grid_button_pressed(herb_button: Button) -> void:
 		return
 
 	if current_prescription == null:
-		emit_signal("info_requested", "当前处方未初始化")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_NOT_INITIALIZED"))
 		return
 
 	# 取消上一个高亮
@@ -920,26 +970,26 @@ func _on_herb_grid_button_pressed(herb_button: Button) -> void:
 
 		var ok_update := set_prescription_herb_amount(selected_herb_id, new_amount, add_unit)
 		if not ok_update:
-			emit_signal("info_requested", "累加药材失败：%s" % herb_button.text)
+			emit_signal("info_requested", tr("UI_PRESCRIPTION_INCREASE_FAILED_FMT") % herb_button.text)
 			return
 
-		emit_signal("info_requested", "已加入%s区：%s，当前%s" % [
-			current_selected_role,
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_ADDED_TOTAL_FMT") % [
+			_localized_role_name(current_selected_role),
 			herb_button.text,
-			HerbUnit.format_amount(new_amount, add_unit)
+			_format_amount_for_ui(new_amount, add_unit)
 		])
 		return
 
 	# 不存在：首次加入
 	var ok_add := add_herb_by_id(selected_herb_id, add_amount, add_unit)
 	if not ok_add:
-		emit_signal("info_requested", "加入药材失败：%s" % herb_button.text)
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_ADD_FAILED_FMT") % herb_button.text)
 		return
 
-	emit_signal("info_requested", "已加入%s区：%s %s" % [
-		current_selected_role,
+	emit_signal("info_requested", tr("UI_PRESCRIPTION_ADDED_FMT") % [
+		_localized_role_name(current_selected_role),
 		herb_button.text,
-		HerbUnit.format_amount(add_amount, add_unit)
+		_format_amount_for_ui(add_amount, add_unit)
 	])
 
 
@@ -1058,11 +1108,11 @@ func clear_current_prescription() -> void:
 # =========================================================
 func _decrease_herb_by_id(herb_id: String, herb_name: String = "") -> void:
 	if current_prescription == null:
-		emit_signal("info_requested", "当前处方未初始化")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_NOT_INITIALIZED"))
 		return
 
 	if herb_id == "":
-		emit_signal("info_requested", "未找到要减少的药材")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_NOT_FOUND_TO_DECREASE"))
 		return
 
 	# 优先减少当前选中区域；若当前区域没有，再去其它区域里找
@@ -1079,7 +1129,7 @@ func _decrease_herb_by_id(herb_id: String, herb_name: String = "") -> void:
 				break
 
 	if target_item.is_empty():
-		emit_signal("info_requested", "该药材尚未加入处方：%s" % herb_name)
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_HERB_NOT_ADDED_FMT") % herb_name)
 		return
 
 	# 找到了实际所在区域后，同步当前选中区域高亮
@@ -1095,20 +1145,20 @@ func _decrease_herb_by_id(herb_id: String, herb_name: String = "") -> void:
 	# 减到 0 或以下，直接移除
 	if new_total_fen <= 0.0:
 		remove_herb_from_prescription(herb_id)
-		emit_signal("info_requested", "已移除%s区药材：%s" % [target_role, herb_name])
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_REMOVED_FMT") % [_localized_role_name(target_role), herb_name])
 		return
 
 	# 仍然大于 0，则保留并更新为当前单位显示
 	var new_amount := HerbUnit.from_fen(new_total_fen, decrease_unit)
 	var ok_update := set_prescription_herb_amount(herb_id, new_amount, decrease_unit)
 	if not ok_update:
-		emit_signal("info_requested", "减少药材失败：%s" % herb_name)
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_DECREASE_FAILED_FMT") % herb_name)
 		return
 
-	emit_signal("info_requested", "已减少%s区药材：%s，当前%s" % [
-		target_role,
+	emit_signal("info_requested", tr("UI_PRESCRIPTION_DECREASED_FMT") % [
+		_localized_role_name(target_role),
 		herb_name,
-		HerbUnit.format_amount(new_amount, decrease_unit)
+		_format_amount_for_ui(new_amount, decrease_unit)
 	])
 
 
@@ -1149,7 +1199,7 @@ func _fill_role_list(list_node: ItemList, herb_items: Array[Dictionary]) -> void
 		if herb_id == "":
 			continue
 
-		var text := "%s  %s" % [herb_name, HerbUnit.format_amount(amount, unit)]
+		var text := "%s  %s" % [herb_name, _format_amount_for_ui(amount, unit)]
 		list_node.add_item(text)
 
 		var index := list_node.item_count - 1
@@ -1182,16 +1232,16 @@ func _find_prescription_item_in_role(role_name: String, herb_id: String) -> Dict
 # =========================================================
 func _on_clear_prescription_button_pressed() -> void:
 	clear_current_prescription()
-	emit_signal("info_requested", "当前处方已清空")
+	emit_signal("info_requested", tr("UI_PRESCRIPTION_CLEARED"))
 
 
 func _on_submit_button_pressed() -> void:
 	if _is_disease_empty():
-		_show_player_hint("请先填入疾病。")
+		_show_player_hint(tr("UI_PRESCRIPTION_ENTER_DISEASE"))
 		return
 
 	if _is_prescription_herbs_empty():
-		_show_player_hint("请先填入药材。")
+		_show_player_hint(tr("UI_PRESCRIPTION_ENTER_HERB"))
 		return
 
 	emit_signal("submit_requested")
@@ -1293,12 +1343,12 @@ func _remove_clicked_role_item(role_name: String, list_node: ItemList, index: in
 
 	var herb_id := str(list_node.get_item_metadata(index))
 	if herb_id == "":
-		emit_signal("info_requested", "未找到要移除的药材")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_NOT_FOUND_TO_REMOVE"))
 		return
 
 	var herb_name := list_node.get_item_text(index).split("  ")[0]
 	remove_herb_from_prescription(herb_id)
-	emit_signal("info_requested", "已移除%s区药材：%s" % [role_name, herb_name])
+	emit_signal("info_requested", tr("UI_PRESCRIPTION_REMOVED_FMT") % [_localized_role_name(role_name), herb_name])
 
 
 func _on_jun_list_item_clicked(index: int, _at_position: Vector2, mouse_button_index: int) -> void:
@@ -1647,11 +1697,11 @@ func load_all_diseases() -> void:
 	all_diseases.clear()
 
 	if typeof(DiseaseDB) == TYPE_NIL:
-		emit_signal("info_requested", "疾病数据库未初始化")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_DISEASE_DB_NOT_INITIALIZED"))
 		return
 
 	if not DiseaseDB.has_method("get_all_diseases"):
-		emit_signal("info_requested", "DiseaseDB 缺少 get_all_diseases()")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_DISEASE_DB_METHOD_MISSING"))
 		return
 
 	all_diseases = DiseaseDB.get_all_diseases()
@@ -1796,16 +1846,16 @@ func _apply_disease_filter() -> void:
 
 func _on_disease_selected(disease_name: String, disease_id: String = "") -> void:
 	if current_prescription == null:
-		emit_signal("info_requested", "当前处方未初始化")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_NOT_INITIALIZED"))
 		return
 
 	if disease_id.strip_edges() == "":
-		emit_signal("info_requested", "疾病数据缺少 disease_id，无法选择")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_DISEASE_ID_MISSING"))
 		return
 
 	# 双保险：即使按钮被旧列表残留或外部调用触发，也不允许选择未解锁疾病。
 	if not Unlock.is_disease_unlocked(disease_id):
-		emit_signal("info_requested", "该疾病尚未解锁，不能用于断病")
+		emit_signal("info_requested", tr("UI_PRESCRIPTION_DISEASE_LOCKED"))
 		_refresh_disease_list(disease_search_keyword)
 		return
 
@@ -1823,7 +1873,7 @@ func _on_disease_selected(disease_name: String, disease_id: String = "") -> void
 		_disease_search_timer.stop()
 	disease_search_keyword = _normalize_disease_search_text(disease_name)
 	_apply_disease_filter()
-	emit_signal("info_requested", "已选择疾病诊断：%s" % disease_name)
+	emit_signal("info_requested", tr("UI_PRESCRIPTION_DIAGNOSIS_SELECTED_FMT") % disease_name)
 
 
 func _sync_selected_disease_from_prescription() -> void:

@@ -310,3 +310,52 @@ UI_RESULT_UNLOCK_SEPARATOR,、,", "
 UI_RESULT_GRADE_PERFECT,妙手回春,Miraculous Recovery
 UI_RESULT_GRADE_SUCCESS,治疗成功,Treatment Successful
 UI_RESULT_GRADE_FAILED,治疗失败,Treatment Failed
+UI_PRESCRIPTION_WINDOW_TITLE,断病开方,Diagnosis and Prescription
+UI_PRESCRIPTION_DIAGNOSE,断病,Diagnosis
+UI_PRESCRIPTION_SEARCH_DISEASE,搜索疾病,Search conditions
+UI_PRESCRIPTION_PRESCRIBE,开方,Prescription
+UI_PRESCRIPTION_ROLE_JUN_SHORTCUT,君(1),Chief (1)
+UI_PRESCRIPTION_ROLE_CHEN_SHORTCUT,臣(2),Deputy (2)
+UI_PRESCRIPTION_ROLE_ZUO_SHORTCUT,佐(3),Assistant (3)
+UI_PRESCRIPTION_ROLE_SHI_SHORTCUT,使(4),Envoy (4)
+UI_PRESCRIPTION_SEARCH_HERB,搜索药材,Search herbs
+UI_PRESCRIPTION_CLEAR,清空处方,Clear Prescription
+UI_PRESCRIPTION_SUBMIT,提交处方,Submit Prescription
+UI_PRESCRIPTION_ROLE_JUN,君,Chief
+UI_PRESCRIPTION_ROLE_CHEN,臣,Deputy
+UI_PRESCRIPTION_ROLE_ZUO,佐,Assistant
+UI_PRESCRIPTION_ROLE_SHI,使,Envoy
+UI_PRESCRIPTION_UNIT_FEN,分,fen
+UI_PRESCRIPTION_UNIT_QIAN,钱,qian
+UI_PRESCRIPTION_UNIT_LIANG,两,liang
+UI_PRESCRIPTION_UNIT_JIN,斤,jin
+UI_PRESCRIPTION_ZERO_FEN,零分,0 fen
+UI_PRESCRIPTION_HERB_DB_METHOD_MISSING,药材数据库缺少 get_all_herbs(),Herb database is missing get_all_herbs().
+UI_PRESCRIPTION_FORMULA_LOCKED,该方剂尚未解锁。,This formula is still locked.
+UI_PRESCRIPTION_PRESET_LOCKED,该方剂尚未累计 5 次妙手回春，不能使用预制方剂。,Use this formula for 5 Miraculous Recovery results to unlock its preset.
+UI_PRESCRIPTION_NOT_INITIALIZED,当前处方未初始化,The current prescription is not ready.
+UI_PRESCRIPTION_HERB_DB_NOT_INITIALIZED,药材数据库未初始化,The herb database is not ready.
+UI_PRESCRIPTION_INVALID_FORMULA,方剂数据无效，无法填入处方。,Invalid formula data; the prescription could not be filled.
+UI_PRESCRIPTION_EMPTY_INGREDIENT,方剂数据存在空药材，无法填入处方。,The formula has an empty ingredient; the prescription could not be filled.
+UI_PRESCRIPTION_HERB_MISSING_FMT,方剂中的药材资源缺失：%s,Missing herb resource in formula: %s
+UI_PRESCRIPTION_INVALID_DOSE_FMT,方剂中的药材剂量无效：%s,Invalid herb dose in formula: %s
+UI_PRESCRIPTION_NO_INGREDIENTS,该方剂没有可填入的药材。,This formula contains no usable herbs.
+UI_PRESCRIPTION_PRESET_FILLED_FMT,已按预制方剂填入：%s,Filled from formula preset: %s
+UI_PRESCRIPTION_INCREASE_FAILED_FMT,累加药材失败：%s,Could not increase herb dose: %s
+UI_PRESCRIPTION_ADDED_TOTAL_FMT,已加入%s区：%s，当前%s,"Added to %s: %s, now %s"
+UI_PRESCRIPTION_ADD_FAILED_FMT,加入药材失败：%s,Could not add herb: %s
+UI_PRESCRIPTION_ADDED_FMT,已加入%s区：%s %s,Added to %s: %s %s
+UI_PRESCRIPTION_NOT_FOUND_TO_DECREASE,未找到要减少的药材,No herb found to decrease.
+UI_PRESCRIPTION_HERB_NOT_ADDED_FMT,该药材尚未加入处方：%s,Herb is not in the prescription: %s
+UI_PRESCRIPTION_REMOVED_FMT,已移除%s区药材：%s,Removed from %s: %s
+UI_PRESCRIPTION_DECREASE_FAILED_FMT,减少药材失败：%s,Could not decrease herb dose: %s
+UI_PRESCRIPTION_DECREASED_FMT,已减少%s区药材：%s，当前%s,"Decreased in %s: %s, now %s"
+UI_PRESCRIPTION_CLEARED,当前处方已清空,Prescription cleared.
+UI_PRESCRIPTION_ENTER_DISEASE,请先填入疾病。,Select a condition first.
+UI_PRESCRIPTION_ENTER_HERB,请先填入药材。,Add an herb first.
+UI_PRESCRIPTION_NOT_FOUND_TO_REMOVE,未找到要移除的药材,No herb found to remove.
+UI_PRESCRIPTION_DISEASE_DB_NOT_INITIALIZED,疾病数据库未初始化,The condition database is not ready.
+UI_PRESCRIPTION_DISEASE_DB_METHOD_MISSING,DiseaseDB 缺少 get_all_diseases(),Condition database is missing get_all_diseases().
+UI_PRESCRIPTION_DISEASE_ID_MISSING,疾病数据缺少 disease_id，无法选择,Condition data has no disease_id; selection failed.
+UI_PRESCRIPTION_DISEASE_LOCKED,该疾病尚未解锁，不能用于断病,This condition is still locked and cannot be diagnosed.
+UI_PRESCRIPTION_DIAGNOSIS_SELECTED_FMT,已选择疾病诊断：%s,Selected diagnosis: %s
