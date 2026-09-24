@@ -14,7 +14,7 @@ bg_color = Color(0.41960785, 0.27058825, 0.15686275, 1)
 
 [node name="ReadBook" type="Window" unique_id=1553429074]
 oversampling_override = 1.0
-title = "读书"
+title = "UI_READ_BOOK_WINDOW_TITLE"
 position = Vector2i(0, 36)
 size = Vector2i(1800, 1000)
 script = ExtResource("1_uep66")
@@ -32,11 +32,11 @@ layout_mode = 2
 [node name="SearchEdit" type="LineEdit" parent="MarginContainer/VBoxRoot" unique_id=635280191]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
-tooltip_text = "搜索全部可阅读医书中的已解锁条目。"
+tooltip_text = "UI_READ_BOOK_SEARCH_TOOLTIP"
 theme_override_colors/font_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
 theme_override_colors/font_placeholder_color = Color(0.75, 0.7, 0.6, 1)
 theme_override_font_sizes/font_size = 23
-placeholder_text = "搜索全部已解锁条目..."
+placeholder_text = "UI_READ_BOOK_SEARCH_PLACEHOLDER"
 clear_button_enabled = true
 
 [node name="ContentRow" type="HBoxContainer" parent="MarginContainer/VBoxRoot" unique_id=745767981]
@@ -54,7 +54,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_qn5vy")
-text = "医书列表"
+text = "UI_READ_BOOK_BOOK_LIST"
 
 [node name="BookList" type="ItemList" parent="MarginContainer/VBoxRoot/ContentRow/BookPanel/BookVBox" unique_id=1764411966]
 layout_mode = 2
@@ -76,7 +76,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_akuei")
-text = "条目列表"
+text = "UI_READ_BOOK_ENTRY_LIST"
 
 [node name="EntryList" type="ItemList" parent="MarginContainer/VBoxRoot/ContentRow/EntryPanel/EntryVBox" unique_id=397650445]
 layout_mode = 2
@@ -124,15 +124,15 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
-text = "请选择今晚要阅读的医书。"
+text = "UI_READ_BOOK_CHOOSE_BOOK_TONIGHT"
 
 [node name="PulsePracticeButton" type="Button" parent="MarginContainer/VBoxRoot/BottomRow" unique_id=1280132523]
 custom_minimum_size = Vector2(170, 48)
 layout_mode = 2
-tooltip_text = "请先在条目列表中选择一个已解锁的疾病。"
+tooltip_text = "UI_READ_BOOK_PULSE_SELECT_HINT"
 theme_override_font_sizes/font_size = 22
 disabled = true
-text = "查看脉象"
+text = "UI_READ_BOOK_VIEW_PULSE"
 
 [node name="PulsePracticeWindow" parent="." unique_id=1426200903 instance=ExtResource("5_pulse")]
 visible = false

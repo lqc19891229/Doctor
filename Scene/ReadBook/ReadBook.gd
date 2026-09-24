@@ -59,9 +59,39 @@ var selected_entry: BookEntryData = null
 # UnlockManager 的医书状态版本。版本未变化时，不重建 22 本书的列表。
 var last_readbook_state_version: int = -1
 var book_list_dirty: bool = true
+var _info_message_key: String = ""
+var _info_message_args: Array = []
+
+
+func _notification(what: int) -> void:
+	if what != NOTIFICATION_TRANSLATION_CHANGED or not is_node_ready():
+		return
+
+	title = tr("UI_READ_BOOK_WINDOW_TITLE")
+	_update_pulse_practice_button()
+
+	# 只重绘列表文字，保留当前书籍、条目和正文的选中状态。
+	if visible:
+		var book_id := selected_book.book_id if selected_book != null else ""
+		var entry_id := selected_entry.entry_id if selected_entry != null else ""
+		_rebuild_book_list_for_search(book_id)
+		if selected_book != null:
+			_refresh_entry_list_view(entry_id)
+
+	if _info_message_key != "":
+		_set_info_message(_info_message_key, _info_message_args)
+	if pulse_practice_window != null and pulse_practice_window.visible:
+		call_deferred("_update_pulse_practice_title")
+
+
+func _set_info_message(key: String, args: Array = []) -> void:
+	_info_message_key = key
+	_info_message_args = args
+	info_label.text = tr(key) % args if not args.is_empty() else tr(key)
 
 
 func _ready() -> void:
+	title = tr("UI_READ_BOOK_WINDOW_TITLE")
 	# ReadBook 始终固定在屏幕坐标 (50, 66)。
 	position = FIXED_WINDOW_POSITION
 
@@ -77,7 +107,7 @@ func _ready() -> void:
 	book_list_dirty = true
 	_clear_entry_and_detail()
 
-	info_label.text = "请选择要查看的医书。"
+	_set_info_message("UI_READ_BOOK_CHOOSE_BOOK")
 
 
 # =========================
@@ -275,10 +305,10 @@ func _rebuild_book_list_for_search(preferred_book_id: String = "") -> int:
 		var display_name := book.book_name
 
 		if query != "":
-			display_name += "  【匹配%d】" % match_count
+			display_name += tr("UI_READ_BOOK_MATCH_BADGE_FMT") % match_count
 
 		if new_entry_count > 0:
-			display_name += "  【新%d】" % new_entry_count
+			display_name += tr("UI_READ_BOOK_NEW_COUNT_BADGE_FMT") % new_entry_count
 
 		books.append(book)
 		book_new_entry_counts.append(new_entry_count)
@@ -295,12 +325,12 @@ func _rebuild_book_list_for_search(preferred_book_id: String = "") -> int:
 		if query != "":
 			book_list.set_item_tooltip(
 				item_index,
-				"找到 %d 个匹配条目" % match_count
+				tr("UI_READ_BOOK_MATCH_TOOLTIP_FMT") % match_count
 			)
 		elif new_entry_count > 0:
 			book_list.set_item_tooltip(
 				item_index,
-				"有 %d 个新解锁条目可以查看" % new_entry_count
+				tr("UI_READ_BOOK_NEW_TOOLTIP_FMT") % new_entry_count
 			)
 
 		if preferred_book_id != "" and book.book_id.strip_edges() == preferred_book_id:
@@ -448,30 +478,30 @@ func _update_entry_info_label() -> void:
 	var raw_query := _get_search_query()
 
 	if raw_query != "":
-		info_label.text = "搜索“%s”：共找到 %d 个已解锁条目；当前《%s》有 %d 个匹配。" % [
+		_set_info_message("UI_READ_BOOK_SEARCH_SUMMARY_FMT", [
 			raw_query,
 			global_search_match_count,
 			selected_book.book_name,
 			displayed_entries.size()
-		]
+		])
 		return
 
 	if readable_entries.is_empty():
-		info_label.text = "《%s》当前没有已解锁条目。" % selected_book.book_name
+		_set_info_message("UI_READ_BOOK_EMPTY_BOOK_FMT", [selected_book.book_name])
 		return
 
 	var new_entry_count = Unlock.get_unread_readable_entry_count_by_book(selected_book.book_id)
 	if new_entry_count > 0:
-		info_label.text = "《%s》共有 %d 个已解锁条目，其中 %d 个尚未查看。" % [
+		_set_info_message("UI_READ_BOOK_UNREAD_COUNT_FMT", [
 			selected_book.book_name,
 			readable_entries.size(),
 			new_entry_count
-		]
+		])
 	else:
-		info_label.text = "《%s》共有 %d 个已解锁条目。" % [
+		_set_info_message("UI_READ_BOOK_ENTRY_COUNT_FMT", [
 			selected_book.book_name,
 			readable_entries.size()
-		]
+		])
 
 
 func _on_search_text_changed(_new_text: String) -> void:
@@ -490,9 +520,9 @@ func _on_search_text_changed(_new_text: String) -> void:
 
 		var query := _get_search_query()
 		if query == "":
-			info_label.text = "当前没有可查看的医书。"
+			_set_info_message("UI_READ_BOOK_NO_BOOKS")
 		else:
-			info_label.text = "没有找到包含“%s”的已解锁条目。" % query
+			_set_info_message("UI_READ_BOOK_NO_RESULTS_FMT", [query])
 		return
 
 	# 当前书仍有匹配结果时继续停留；
@@ -515,7 +545,7 @@ func _get_entry_list_display_name(entry: BookEntryData) -> String:
 
 	var display_name := entry.title
 	if not Unlock.is_entry_read(entry.entry_id) and Unlock.can_read_entry(entry.entry_id):
-		display_name += "  【新】"
+		display_name += tr("UI_READ_BOOK_NEW_BADGE")
 
 	return display_name
 
@@ -561,7 +591,7 @@ func _add_entry_list_item(entry: BookEntryData) -> void:
 
 	if _is_unread_readable_entry(entry):
 		entry_list.set_item_custom_fg_color(item_index, Color(1.0, 0.82, 0.32, 1.0))
-		entry_list.set_item_tooltip(item_index, "新解锁条目，尚未查看")
+		entry_list.set_item_tooltip(item_index, tr("UI_READ_BOOK_NEW_ENTRY_TOOLTIP"))
 
 
 func _build_entry_text(entry: BookEntryData) -> String:
@@ -571,7 +601,7 @@ func _build_entry_text(entry: BookEntryData) -> String:
 	if entry.detail_text.strip_edges() != "":
 		return entry.detail_text
 
-	return "暂无正文"
+	return tr("UI_READ_BOOK_NO_CONTENT")
 
 
 # =========================
@@ -613,7 +643,7 @@ func _show_entry_by_index(index: int) -> void:
 
 	# 只允许查看已经满足对应解锁条件，或已经读过的条目。
 	if not Unlock.is_entry_unlocked(current_entry_id) and not Unlock.is_entry_read(current_entry_id):
-		info_label.text = "该条目尚未解锁，请先满足对应的解锁条件。"
+		_set_info_message("UI_READ_BOOK_ENTRY_LOCKED")
 		_set_detail_text("")
 		return
 
@@ -635,7 +665,7 @@ func _show_entry_by_index(index: int) -> void:
 		_refresh_book_list_if_dirty()
 		_reselect_current_book_in_list()
 		_refresh_entry_list_titles_keep_selection(current_entry_id)
-		info_label.text = "已查看条目。"
+		_set_info_message("UI_READ_BOOK_ENTRY_READ")
 
 
 func _reselect_current_book_in_list() -> void:
@@ -691,33 +721,41 @@ func _update_pulse_practice_button() -> void:
 
 	if disease == null:
 		pulse_practice_button.disabled = true
-		pulse_practice_button.text = "查看脉象"
-		pulse_practice_button.tooltip_text = "请先在条目列表中选择一个已解锁的疾病。"
+		pulse_practice_button.text = tr("UI_READ_BOOK_VIEW_PULSE")
+		pulse_practice_button.tooltip_text = tr("UI_READ_BOOK_PULSE_SELECT_HINT")
 		return
 
 	pulse_practice_button.disabled = false
-	pulse_practice_button.text = "查看脉象"
-	pulse_practice_button.tooltip_text = "查看《%s》的左右手脉象，用于夜晚练习。" % disease.disease_name
+	pulse_practice_button.text = tr("UI_READ_BOOK_VIEW_PULSE")
+	pulse_practice_button.tooltip_text = tr("UI_READ_BOOK_PULSE_TOOLTIP_FMT") % disease.disease_name
 
 
 func _on_pulse_practice_button_pressed() -> void:
 	var disease := _get_selected_disease_data()
 	if disease == null:
-		info_label.text = "请先选择一个疾病条目，再查看脉象。"
+		_set_info_message("UI_READ_BOOK_SELECT_DISEASE_FIRST")
 		_update_pulse_practice_button()
 		return
 
 	if pulse_practice_window == null:
-		info_label.text = "脉象练习窗口不存在。"
+		_set_info_message("UI_READ_BOOK_PULSE_MISSING")
 		return
 
 	# 使用 ReadBook 自己的 PulseWindow 实例，不影响白天诊所的把脉窗口。
-	pulse_practice_window.title = "脉象练习 - %s" % disease.disease_name
+	_update_pulse_practice_title()
 	pulse_practice_window.open_window()
 
 	# PulseWindow.open_window() 会 deferred 回到“按键提示”页。
 	# 所以这里也 deferred，在它之后切换为练习模式并显示右手脉象。
 	call_deferred("_show_pulse_practice_disease", disease)
+
+
+func _update_pulse_practice_title() -> void:
+	if pulse_practice_window == null:
+		return
+	var disease := _get_selected_disease_data()
+	if disease != null:
+		pulse_practice_window.title = tr("UI_READ_BOOK_PULSE_TITLE_FMT") % disease.disease_name
 
 
 func _show_pulse_practice_disease(disease: DiseaseData) -> void:

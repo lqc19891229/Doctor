@@ -374,3 +374,31 @@ UI_LOG_SELECT_FORMULA,请选择左侧方剂条目,Select a formula
 UI_LOG_SELECT_HERB,请选择左侧药材条目,Select an herb
 UI_LOG_PREV_PAGE,上一页,Previous
 UI_LOG_NEXT_PAGE,下一页,Next
+UI_READ_BOOK_WINDOW_TITLE,读书,Read Books
+UI_READ_BOOK_SEARCH_TOOLTIP,搜索全部可阅读医书中的已解锁条目。,Search unlocked entries in all available books.
+UI_READ_BOOK_SEARCH_PLACEHOLDER,搜索全部已解锁条目...,Search all unlocked entries...
+UI_READ_BOOK_BOOK_LIST,医书列表,Medical Books
+UI_READ_BOOK_ENTRY_LIST,条目列表,Entries
+UI_READ_BOOK_CHOOSE_BOOK_TONIGHT,请选择今晚要阅读的医书。,Choose a book to read tonight.
+UI_READ_BOOK_CHOOSE_BOOK,请选择要查看的医书。,Choose a book to view.
+UI_READ_BOOK_MATCH_BADGE_FMT,  【匹配%d】,  [Matches: %d]
+UI_READ_BOOK_NEW_COUNT_BADGE_FMT,  【新%d】,  [New: %d]
+UI_READ_BOOK_MATCH_TOOLTIP_FMT,找到 %d 个匹配条目,Found %d matching entries
+UI_READ_BOOK_NEW_TOOLTIP_FMT,有 %d 个新解锁条目可以查看,%d newly unlocked entries are available
+UI_READ_BOOK_SEARCH_SUMMARY_FMT,搜索“%s”：共找到 %d 个已解锁条目；当前《%s》有 %d 个匹配。,"Search ""%s"": %d unlocked entries found; ""%s"" has %d matches."
+UI_READ_BOOK_EMPTY_BOOK_FMT,《%s》当前没有已解锁条目。,"""%s"" has no unlocked entries yet."
+UI_READ_BOOK_UNREAD_COUNT_FMT,《%s》共有 %d 个已解锁条目，其中 %d 个尚未查看。,"""%s"" has %d unlocked entries, including %d unread."
+UI_READ_BOOK_ENTRY_COUNT_FMT,《%s》共有 %d 个已解锁条目。,"""%s"" has %d unlocked entries."
+UI_READ_BOOK_NO_BOOKS,当前没有可查看的医书。,No books are available to view.
+UI_READ_BOOK_NO_RESULTS_FMT,没有找到包含“%s”的已解锁条目。,"No unlocked entries match ""%s""."
+UI_READ_BOOK_NEW_BADGE,  【新】,  [New]
+UI_READ_BOOK_NEW_ENTRY_TOOLTIP,新解锁条目，尚未查看,Newly unlocked; not yet read
+UI_READ_BOOK_NO_CONTENT,暂无正文,No text available
+UI_READ_BOOK_ENTRY_LOCKED,该条目尚未解锁，请先满足对应的解锁条件。,This entry is locked. Meet its unlock requirements first.
+UI_READ_BOOK_ENTRY_READ,已查看条目。,Entry read.
+UI_READ_BOOK_VIEW_PULSE,查看脉象,View Pulse
+UI_READ_BOOK_PULSE_SELECT_HINT,请先在条目列表中选择一个已解锁的疾病。,Select an unlocked condition from the entries first.
+UI_READ_BOOK_PULSE_TOOLTIP_FMT,查看《%s》的左右手脉象，用于夜晚练习。,View left and right pulse patterns for %s to practice at night.
+UI_READ_BOOK_SELECT_DISEASE_FIRST,请先选择一个疾病条目，再查看脉象。,Select a condition entry before viewing its pulse.
+UI_READ_BOOK_PULSE_MISSING,脉象练习窗口不存在。,Pulse practice window is unavailable.
+UI_READ_BOOK_PULSE_TITLE_FMT,脉象练习 - %s,Pulse Practice - %s
