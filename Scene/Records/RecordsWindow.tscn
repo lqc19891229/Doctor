@@ -28,7 +28,7 @@ corner_radius_bottom_left = 10
 
 [node name="RecordsWindow" type="Window" unique_id=696065044]
 oversampling_override = 1.0
-title = "行医记考"
+title = "UI_LOG_WINDOW_TITLE"
 position = Vector2i(0, 36)
 size = Vector2i(1400, 820)
 min_size = Vector2i(1100, 680)
@@ -59,10 +59,10 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 26
 current_tab = 0
-tab_0/title = "诊疗记录"
-tab_1/title = "账目明细"
-tab_2/title = "数据统计"
-tab_3/title = "预制方剂"
+tab_0/title = "UI_RECORDS_TAB_TREATMENT"
+tab_1/title = "UI_RECORDS_TAB_FINANCE"
+tab_2/title = "UI_RECORDS_TAB_STATS"
+tab_3/title = "UI_RECORDS_TAB_PRESETS"
 
 [node name="TreatmentPage" type="HSplitContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs" unique_id=575282359]
 layout_mode = 2
@@ -90,7 +90,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
 theme_override_font_sizes/font_size = 26
-text = "诊疗日期"
+text = "UI_RECORDS_TREATMENT_DATES"
 
 [node name="TreatmentDayList" type="ItemList" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/TreatmentPage/LeftPanel/MarginContainer/Body" unique_id=696960686]
 unique_name_in_owner = true
@@ -147,7 +147,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
 theme_override_font_sizes/font_size = 26
-text = "账目日期"
+text = "UI_RECORDS_FINANCE_DATES"
 
 [node name="FinanceDayList" type="ItemList" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/FinancePage/LeftPanel/MarginContainer/Body" unique_id=1848102175]
 unique_name_in_owner = true
@@ -207,7 +207,7 @@ custom_minimum_size = Vector2(145, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
 theme_override_font_sizes/font_size = 20
-text = "治疗人数"
+text = "UI_RECORDS_TOTAL_PATIENTS"
 vertical_alignment = 1
 
 [node name="TotalPatientsValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1185955566]
@@ -217,7 +217,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
 theme_override_font_sizes/font_size = 24
-text = "0 人"
+text = "UI_RECORDS_ZERO_PATIENTS"
 vertical_alignment = 1
 
 [node name="SuccessfulPatientsLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1316640685]
@@ -225,7 +225,7 @@ custom_minimum_size = Vector2(145, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
 theme_override_font_sizes/font_size = 20
-text = "成功人数"
+text = "UI_RECORDS_SUCCESSFUL_PATIENTS"
 vertical_alignment = 1
 
 [node name="SuccessfulPatientsValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1239901517]
@@ -235,7 +235,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
 theme_override_font_sizes/font_size = 24
-text = "0 人"
+text = "UI_RECORDS_ZERO_PATIENTS"
 vertical_alignment = 1
 
 [node name="MiaoshouPatientsLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=147659201]
@@ -243,7 +243,7 @@ custom_minimum_size = Vector2(145, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
 theme_override_font_sizes/font_size = 20
-text = "妙手回春人数"
+text = "UI_RECORDS_MIRACULOUS_PATIENTS"
 vertical_alignment = 1
 
 [node name="MiaoshouPatientsValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1627540874]
@@ -253,7 +253,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
 theme_override_font_sizes/font_size = 24
-text = "0 人"
+text = "UI_RECORDS_ZERO_PATIENTS"
 vertical_alignment = 1
 
 [node name="FailedPatientsLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1764373090]
@@ -261,7 +261,7 @@ custom_minimum_size = Vector2(145, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
 theme_override_font_sizes/font_size = 20
-text = "失败人数"
+text = "UI_RECORDS_FAILED_PATIENTS"
 vertical_alignment = 1
 
 [node name="FailedPatientsValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=582255610]
@@ -271,7 +271,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
 theme_override_font_sizes/font_size = 24
-text = "0 人"
+text = "UI_RECORDS_ZERO_PATIENTS"
 vertical_alignment = 1
 
 [node name="SuccessRateLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1968917436]
@@ -279,7 +279,7 @@ custom_minimum_size = Vector2(145, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
 theme_override_font_sizes/font_size = 20
-text = "成功率"
+text = "UI_RECORDS_SUCCESS_RATE"
 vertical_alignment = 1
 
 [node name="SuccessRateValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1544754521]
@@ -297,7 +297,7 @@ custom_minimum_size = Vector2(145, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
 theme_override_font_sizes/font_size = 20
-text = "总收入"
+text = "UI_RECORDS_TOTAL_INCOME"
 vertical_alignment = 1
 
 [node name="TotalIncomeValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=714524073]
@@ -307,7 +307,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.623529, 0.886275, 0.623529, 1)
 theme_override_font_sizes/font_size = 24
-text = "0两0文"
+text = "UI_RECORDS_ZERO_MONEY"
 vertical_alignment = 1
 
 [node name="TotalExpenseLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=335955640]
@@ -315,7 +315,7 @@ custom_minimum_size = Vector2(145, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
 theme_override_font_sizes/font_size = 20
-text = "总支出"
+text = "UI_RECORDS_TOTAL_EXPENSE"
 vertical_alignment = 1
 
 [node name="TotalExpenseValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=229915750]
@@ -325,7 +325,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.941176, 0.627451, 0.627451, 1)
 theme_override_font_sizes/font_size = 24
-text = "0两0文"
+text = "UI_RECORDS_ZERO_MONEY"
 vertical_alignment = 1
 
 [node name="NetChangeLabel" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=1132873637]
@@ -333,7 +333,7 @@ custom_minimum_size = Vector2(145, 48)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.776471, 0.682353, 0.513726, 1)
 theme_override_font_sizes/font_size = 20
-text = "利润"
+text = "UI_RECORDS_PROFIT"
 vertical_alignment = 1
 
 [node name="NetChangeValue" type="Label" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/StatsPage/StatsPanel/MarginContainer/StatsGrid" unique_id=705117793]
@@ -343,7 +343,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
 theme_override_font_sizes/font_size = 24
-text = "0两0文"
+text = "UI_RECORDS_ZERO_MONEY"
 vertical_alignment = 1
 
 [node name="PresetPage" type="HSplitContainer" parent="RootPanel/MarginContainer/VBoxContainer/Tabs" unique_id=1523370686]
@@ -373,7 +373,7 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_colors/font_color = Color(0.890196, 0.713726, 0.419608, 1)
 theme_override_font_sizes/font_size = 26
-text = "方剂熟练度"
+text = "UI_RECORDS_FORMULA_MASTERY"
 
 [node name="PresetList" type="ItemList" parent="RootPanel/MarginContainer/VBoxContainer/Tabs/PresetPage/LeftPanel/MarginContainer/Body" unique_id=1003354055]
 unique_name_in_owner = true

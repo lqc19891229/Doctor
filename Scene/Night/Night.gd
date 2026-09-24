@@ -546,7 +546,7 @@ func request_next_day() -> void:
 		return
 
 	if _has_unread_entries():
-		_show_player_hint("尚有未读条目，请先阅读后再休息。")
+		_show_player_hint(tr("UI_NIGHT_UNREAD_BEFORE_REST"))
 		return
 
 	sleep_transition_active = true

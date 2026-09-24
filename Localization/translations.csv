@@ -402,3 +402,85 @@ UI_READ_BOOK_PULSE_TOOLTIP_FMT,查看《%s》的左右手脉象，用于夜晚�
 UI_READ_BOOK_SELECT_DISEASE_FIRST,请先选择一个疾病条目，再查看脉象。,Select a condition entry before viewing its pulse.
 UI_READ_BOOK_PULSE_MISSING,脉象练习窗口不存在。,Pulse practice window is unavailable.
 UI_READ_BOOK_PULSE_TITLE_FMT,脉象练习 - %s,Pulse Practice - %s
+UI_RECORDS_TAB_TREATMENT,诊疗记录,Treatments
+UI_RECORDS_TAB_FINANCE,账目明细,Accounts
+UI_RECORDS_TAB_STATS,数据统计,Statistics
+UI_RECORDS_TAB_PRESETS,预制方剂,Formula Presets
+UI_RECORDS_TREATMENT_DATES,诊疗日期,Treatment Dates
+UI_RECORDS_FINANCE_DATES,账目日期,Account Dates
+UI_RECORDS_TOTAL_PATIENTS,治疗人数,Patients Treated
+UI_RECORDS_SUCCESSFUL_PATIENTS,成功人数,Successful Treatments
+UI_RECORDS_MIRACULOUS_PATIENTS,妙手回春人数,Miraculous Recoveries
+UI_RECORDS_FAILED_PATIENTS,失败人数,Failed Treatments
+UI_RECORDS_SUCCESS_RATE,成功率,Success Rate
+UI_RECORDS_TOTAL_INCOME,总收入,Total Income
+UI_RECORDS_TOTAL_EXPENSE,总支出,Total Expenses
+UI_RECORDS_PROFIT,利润,Profit
+UI_RECORDS_FORMULA_MASTERY,方剂熟练度,Formula Mastery
+UI_RECORDS_ZERO_PATIENTS,0 人,0 people
+UI_RECORDS_ZERO_MONEY,0两0文,0 liang 0 wen
+UI_RECORDS_TREATMENT_EMPTY,[color=#c6ae83]尚无诊疗记录。完成一次诊疗后，这里会按天保存病人、疾病、标准方、断病和开方。[/color],"[color=#c6ae83]No treatments recorded yet. After your first treatment, patients, conditions, standard formulas, diagnoses and prescriptions will be saved here by day.[/color]"
+UI_RECORDS_TREATMENT_HEADER_FMT,[font_size=24][color=#e3b66b]%s · 诊疗记录[/color][/font_size],[font_size=24][color=#e3b66b]%s · Treatments[/color][/font_size]
+UI_RECORDS_TREATMENT_DAY_EMPTY,"
+[color=#c6ae83]本日暂无记录。[/color]","
+[color=#c6ae83]No treatments recorded today.[/color]"
+UI_RECORDS_STATUS_SUCCESS,成功,Successful
+UI_RECORDS_STATUS_NOT_CURED,未愈,Not Cured
+UI_RECORDS_UNKNOWN_PATIENT,未知病人,Unknown Patient
+UI_RECORDS_NOT_RECORDED,未记录,Not Recorded
+UI_RECORDS_DISEASE_FMT,病人疾病：[color=#e3d1aa]%s[/color],Patient condition: [color=#e3d1aa]%s[/color]
+UI_RECORDS_FORMULA_FMT,标准方：[color=#e3d1aa]%s[/color],Standard formula: [color=#e3d1aa]%s[/color]
+UI_RECORDS_DIAGNOSIS_FMT,断病：[color=#e3d1aa]%s[/color],Diagnosis: [color=#e3d1aa]%s[/color]
+UI_RECORDS_PRESCRIPTION_FMT,开方：[color=#e3d1aa]%s[/color],Prescription: [color=#e3d1aa]%s[/color]
+UI_RECORDS_EMPTY_PRESCRIPTION,（空方）,(Empty prescription)
+UI_RECORDS_LINE_SEPARATOR,；,; 
+UI_RECORDS_FINANCE_START_FMT,[color=#c6ae83]账目自%s开始记录。[/color],[color=#c6ae83]Accounts are recorded from %s onward.[/color]
+UI_RECORDS_FINANCE_EMPTY_FMT,[color=#c6ae83]%s暂无账目数据。[/color],[color=#c6ae83]No accounts are available for %s.[/color]
+UI_RECORDS_FINANCE_HEADER_FMT,[font_size=24][color=#e3b66b]%s · 账目明细[/color][/font_size],[font_size=24][color=#e3b66b]%s · Accounts[/color][/font_size]
+UI_RECORDS_FINANCE_UNSETTLED,[color=#c6ae83]本日尚未结算，支出将在进入夜晚时生成。[/color],[color=#c6ae83]Today is not settled yet. Expenses are recorded when night begins.[/color]
+UI_RECORDS_INCOME_HEADER,"
+[b]收入[/b]","
+[b]Income[/b]"
+UI_RECORDS_EXPENSE_HEADER,"
+[b]支出[/b]","
+[b]Expenses[/b]"
+UI_RECORDS_FINANCE_CONSULTATION,诊费,Consultation Fees
+UI_RECORDS_FINANCE_MEDICINE,药材收入,Herb Sales
+UI_RECORDS_FINANCE_PATIENT_GIFT,病家谢礼,Patient Gifts
+UI_RECORDS_FINANCE_LI_JIAN_ZHONG,李建中俸禄,Li Jianzhong's Salary
+UI_RECORDS_FINANCE_LI_YAN_WEN,李言闻收入,Li Yanwen's Income
+UI_RECORDS_FINANCE_LAND_RENT,田租,Land Rent
+UI_RECORDS_FINANCE_STAFF_WAGES,陈皮半夏工钱,Chenpi and Banxia Wages
+UI_RECORDS_FINANCE_FOOD,食物,Food
+UI_RECORDS_FINANCE_GIFTS,人情随礼,Social Gifts
+UI_RECORDS_FINANCE_BOOKS,购买医书,Medical Books
+UI_RECORDS_FINANCE_COAL,煤炭,Coal
+UI_RECORDS_FINANCE_CLOTHING,布匹棉衣,Cloth and Winter Clothes
+UI_RECORDS_FINANCE_REPAIRS,修缮房屋,House Repairs
+UI_RECORDS_FINANCE_ANCESTORS,扫墓祭祖,Ancestral Rites
+UI_RECORDS_FINANCE_MOLDY_HERBS,药材发霉,Spoiled Herbs
+UI_RECORDS_FINANCE_SUMMER_TAX,夏税,Summer Tax
+UI_RECORDS_FINANCE_AUTUMN_TAX,秋税,Autumn Tax
+UI_RECORDS_TOTAL_INCOME_FMT,收入合计：[color=#9fe29f]%s[/color],Total Income: [color=#9fe29f]%s[/color]
+UI_RECORDS_TOTAL_EXPENSE_FMT,支出合计：[color=#f0a0a0]%s[/color],Total Expenses: [color=#f0a0a0]%s[/color]
+UI_RECORDS_NET_CHANGE_FMT,"
+本日变化：[color=#e3b66b]%s[/color]","
+Today's Change: [color=#e3b66b]%s[/color]"
+UI_RECORDS_MONEY_LINE_FMT,%s：[color=%s]%s[/color],%s: [color=%s]%s[/color]
+UI_RECORDS_MONEY_FMT,%s%d两%d文,%s%d liang %d wen
+UI_RECORDS_DATE_UNKNOWN,日期未载,Date Unknown
+UI_RECORDS_PATIENT_COUNT_FMT,%d 人,%d people
+UI_RECORDS_PRESET_UNLOCKED_BADGE,  · 已解锁,  · Unlocked
+UI_RECORDS_NO_FORMULAS,[color=#c6ae83]暂无方剂数据。[/color],[color=#c6ae83]No formula data available.[/color]
+UI_RECORDS_PRESET_UNLOCKED,已解锁：可在开方时一键使用,Unlocked: ready to use while prescribing
+UI_RECORDS_PRESET_LOCKED,未解锁：该方剂获得 5 次妙手回春后解锁,Locked: earn 5 Miraculous Recovery results with this formula
+UI_RECORDS_PRESET_PROGRESS_FMT,"
+掌握次数：%d / 5","
+Mastery: %d / 5"
+UI_RECORDS_PRESET_STATUS_FMT,状态：[color=%s]%s[/color],Status: [color=%s]%s[/color]
+UI_RECORDS_PRESET_INGREDIENTS,"
+标准方组成：","
+Standard Formula Ingredients:"
+UI_RECORDS_NO_INGREDIENTS,（暂无组成数据）,(No ingredient data)
+UI_RECORDS_INGREDIENT_FMT,%s（%s）,%s (%s)
+UI_NIGHT_UNREAD_BEFORE_REST,尚有未读条目，请先阅读后再休息。,Some entries are unread. Read them before resting.
