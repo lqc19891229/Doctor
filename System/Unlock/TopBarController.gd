@@ -43,6 +43,11 @@ var last_displayed_reputation_point: int = -999999
 var last_displayed_money_wen: int = -999999999
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		refresh_all(true)
+
+
 func setup(
 	_day_label: Label,
 	_time_label: Label,
@@ -92,15 +97,18 @@ func refresh_time() -> void:
 		if GameTime != null and GameTime.has_method("get_day_text"):
 			day_label.text = GameTime.get_day_text()
 		else:
-			day_label.text = "第 %d 天" % fallback_day
+			day_label.text = tr("UI_DAY_FALLBACK_FMT") % fallback_day
 
 	if time_label != null:
 		if not time_text_override.is_empty():
-			time_label.text = time_text_override
+			time_label.text = tr(time_text_override)
 		elif GameTime != null and GameTime.has_method("get_shichen_text"):
 			time_label.text = GameTime.get_shichen_text()
 		else:
-			time_label.text = "辰时"
+			time_label.text = tr("UI_SHICHEN_04")
+		var time_icon := time_label.get_parent().get_node_or_null("TimeIcon") as TextureRect
+		if time_icon != null:
+			time_icon.tooltip_text = time_label.text
 
 
 
@@ -145,10 +153,10 @@ func refresh_money_point(force_refresh: bool = false) -> void:
 
 		if money_debt_label != null:
 			money_debt_label.visible = current_money_wen < 0
-			money_debt_label.text = "欠"
+			money_debt_label.text = tr("UI_MONEY_DEBT_SHORT")
 
-		money_liang_label.text = "%d两" % liang
-		money_wen_label.text = "%d文" % wen
+		money_liang_label.text = tr("UI_MONEY_LIANG_FMT") % liang
+		money_wen_label.text = tr("UI_MONEY_WEN_FMT") % wen
 		return
 
 	# 其他尚未改造的场景继续使用原来的纯文字显示。
@@ -156,12 +164,18 @@ func refresh_money_point(force_refresh: bool = false) -> void:
 		return
 
 	_prepare_point_label(money_point_label)
-	if Unlock != null and Unlock.has_method("format_money"):
-		money_point_label.text = "银钱：%s" % Unlock.format_money(current_money_wen)
-	elif current_money_wen < 0:
-		money_point_label.text = "银钱：欠 %d两 %d文" % [liang, wen]
+	var money_parts: Array[String] = []
+	if liang > 0:
+		money_parts.append(tr("UI_MONEY_LIANG_FMT") % liang)
+	if wen > 0:
+		money_parts.append(tr("UI_MONEY_WEN_FMT") % wen)
+	if money_parts.is_empty():
+		money_parts.append(tr("UI_MONEY_WEN_FMT") % 0)
+	var amount_text := " ".join(money_parts)
+	if current_money_wen < 0:
+		money_point_label.text = tr("UI_MONEY_DEBT_TEXT_FMT") % amount_text
 	else:
-		money_point_label.text = "银钱：%d两 %d文" % [liang, wen]
+		money_point_label.text = tr("UI_MONEY_TEXT_FMT") % amount_text
 
 func _setup_money_display() -> void:
 	money_container = null
@@ -195,19 +209,19 @@ func _setup_money_display() -> void:
 func get_reputation_title(reputation: int) -> String:
 	# 负名望单独使用负面称号；-50 仍属于“略有微词”。
 	if reputation < -50:
-		return "臭名昭著"
+		return tr("UI_REPUTATION_INFAMOUS")
 	elif reputation < 0:
-		return "略有微词"
+		return tr("UI_REPUTATION_CRITICIZED")
 	elif reputation <= 100:
-		return "初窥门径"
+		return tr("UI_REPUTATION_NOVICE")
 	elif reputation <= 300:
-		return "略有小成"
+		return tr("UI_REPUTATION_LEARNER")
 	elif reputation <= 600:
-		return "融会贯通"
+		return tr("UI_REPUTATION_SKILLED")
 	elif reputation <= 2000:
-		return "炉火纯青"
+		return tr("UI_REPUTATION_MASTER")
 	else:
-		return "出神入化"
+		return tr("UI_REPUTATION_LEGEND")
 
 
 func get_reputation_display_text(reputation: int) -> String:
@@ -216,9 +230,9 @@ func get_reputation_display_text(reputation: int) -> String:
 
 	# 最高等级已经没有下一阶段目标。
 	if target <= 0:
-		return "名望：%d　%s" % [reputation, title]
+		return tr("UI_REPUTATION_MAX_FMT") % [reputation, title]
 
-	return "名望：%d/%d　%s" % [reputation, target, title]
+	return tr("UI_REPUTATION_PROGRESS_FMT") % [reputation, target, title]
 
 
 func get_reputation_target(reputation: int) -> int:

@@ -212,7 +212,7 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 25
 theme_override_styles/focus = SubResource("StyleBoxEmpty_sax03")
-text = "天数"
+text = "UI_TOPBAR_DATE_PLACEHOLDER"
 
 [node name="TimeLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=874910477]
 layout_mode = 2
@@ -221,21 +221,21 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 29.0
 theme_override_font_sizes/font_size = 25
 theme_override_styles/focus = SubResource("StyleBoxEmpty_5x4ej")
-text = "时辰"
+text = "UI_TOPBAR_TIME_PLACEHOLDER"
 
 [node name="ReputationPoint" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=358785046]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 2.0
 theme_override_font_sizes/font_size = 25
-text = "名望：0　初窥门径"
+text = "UI_TOPBAR_REPUTATION_PLACEHOLDER"
 
 [node name="MoneyPoint" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=383853109]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 25
-text = "银钱：0两 0文"
+text = "UI_TOPBAR_MONEY_PLACEHOLDER"
 
 [node name="MoneyContainer" type="HBoxContainer" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1606662350]
 layout_mode = 2
@@ -247,7 +247,7 @@ theme_override_constants/separation = 4
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "欠"
+text = "UI_MONEY_DEBT_SHORT"
 vertical_alignment = 1
 
 [node name="SilverIcon" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer" unique_id=2070630310]
@@ -261,7 +261,7 @@ stretch_mode = 5
 [node name="LiangLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer" unique_id=1353213824]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "0两"
+text = "UI_MONEY_LIANG_ZERO"
 vertical_alignment = 1
 
 [node name="CopperIcon" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer" unique_id=1941600706]
@@ -275,7 +275,7 @@ stretch_mode = 5
 [node name="WenLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer" unique_id=1262243003]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "0文"
+text = "UI_MONEY_WEN_ZERO"
 vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="VBoxContainer" unique_id=1045108170]

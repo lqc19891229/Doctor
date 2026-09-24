@@ -135,3 +135,74 @@ Try Save and Quit again, or Quit Game to discard unsaved progress."
 已有存档,已有存档,Existing Save
 损坏存档,损坏存档,Corrupt Save
 读取失败,读取失败,Load Failed
+UI_DISCLAIMER_TITLE,内容声明,Content Notice
+UI_DISCLAIMER_BODY,"本游戏为虚构作品，仅供娱乐。游戏中涉及的医学知识、诊断及治疗内容可能并不准确，不可作为现实中的医疗依据，请勿据此自行诊断、用药或治疗。
+
+如有健康问题，请咨询专业医生，并以正规医疗机构的建议为准。游戏中的人物、事件及剧情均属虚构，如有雷同，纯属巧合。","This game is a work of fiction for entertainment only. Medical knowledge, diagnoses, and treatments shown here may be inaccurate and must not be used as medical advice. Do not use this game to diagnose yourself, take medication, or choose treatment.
+
+If you have health concerns, consult a qualified doctor and follow the advice of a licensed medical institution. The characters, events, and story are fictional. Any resemblance to real people or events is coincidental."
+UI_PATIENT_NAME_PLACEHOLDER,病人姓名,Patient Name
+UI_PATIENT_DIALOGUE_PLACEHOLDER,病人台词,Patient Dialogue
+UI_TOPBAR_DATE_PLACEHOLDER,天数,Date
+UI_TOPBAR_TIME_PLACEHOLDER,时辰,Hour
+UI_TOPBAR_REPUTATION_PLACEHOLDER,名望：0　初窥门径,Rep 0 · Novice
+UI_TOPBAR_MONEY_PLACEHOLDER,银钱：0两 0文,Money: 0 liang 0 wen
+UI_CURRENT_SHICHEN,当前时辰,Current Hour
+UI_MONEY_DEBT_SHORT,欠,Debt
+UI_MONEY_LIANG_ZERO,0两,0 liang
+UI_MONEY_WEN_ZERO,0文,0 wen
+UI_MONEY_LIANG_FMT,%d两,%d liang
+UI_MONEY_WEN_FMT,%d文,%d wen
+UI_MONEY_TEXT_FMT,银钱：%s,Money: %s
+UI_MONEY_DEBT_TEXT_FMT,银钱：欠 %s,Money: Debt %s
+UI_DAY_FALLBACK_FMT,第 %d 天,Day %d
+UI_ERA_DATE_FMT,%s%s年%s,%s %s · %s
+UI_ERA_JIAJING,嘉靖,Jiajing
+UI_ERA_WANLI,万历,Wanli
+UI_FULL_TIME_FMT,%s %s · %s,%s %s · %s
+UI_UNKNOWN_SHICHEN,未知时辰,Unknown Hour
+UI_REPUTATION_INFAMOUS,臭名昭著,Infamous
+UI_REPUTATION_CRITICIZED,略有微词,Criticized
+UI_REPUTATION_NOVICE,初窥门径,Novice
+UI_REPUTATION_LEARNER,略有小成,Apprentice
+UI_REPUTATION_SKILLED,融会贯通,Skilled
+UI_REPUTATION_MASTER,炉火纯青,Master
+UI_REPUTATION_LEGEND,出神入化,Legend
+UI_REPUTATION_MAX_FMT,名望：%d　%s,Rep %d · %s
+UI_REPUTATION_PROGRESS_FMT,名望：%d/%d　%s,Rep %d/%d · %s
+UI_SHICHEN_00,子时,Zi Hour
+UI_SHICHEN_01,丑时,Chou Hour
+UI_SHICHEN_02,寅时,Yin Hour
+UI_SHICHEN_03,卯时,Mao Hour
+UI_SHICHEN_04,辰时,Chen Hour
+UI_SHICHEN_05,巳时,Si Hour
+UI_SHICHEN_06,午时,Wu Hour
+UI_SHICHEN_07,未时,Wei Hour
+UI_SHICHEN_08,申时,Shen Hour
+UI_SHICHEN_09,酉时,You Hour
+UI_SHICHEN_10,戌时,Xu Hour
+UI_SHICHEN_11,亥时,Hai Hour
+UI_SOLAR_TERM_00,立春,Start of Spring
+UI_SOLAR_TERM_01,雨水,Rain Water
+UI_SOLAR_TERM_02,惊蛰,Awakening of Insects
+UI_SOLAR_TERM_03,春分,Spring Equinox
+UI_SOLAR_TERM_04,清明,Pure Brightness
+UI_SOLAR_TERM_05,谷雨,Grain Rain
+UI_SOLAR_TERM_06,立夏,Start of Summer
+UI_SOLAR_TERM_07,小满,Grain Full
+UI_SOLAR_TERM_08,芒种,Grain in Ear
+UI_SOLAR_TERM_09,夏至,Summer Solstice
+UI_SOLAR_TERM_10,小暑,Minor Heat
+UI_SOLAR_TERM_11,大暑,Major Heat
+UI_SOLAR_TERM_12,立秋,Start of Autumn
+UI_SOLAR_TERM_13,处暑,End of Heat
+UI_SOLAR_TERM_14,白露,White Dew
+UI_SOLAR_TERM_15,秋分,Autumn Equinox
+UI_SOLAR_TERM_16,寒露,Cold Dew
+UI_SOLAR_TERM_17,霜降,Frost's Descent
+UI_SOLAR_TERM_18,立冬,Start of Winter
+UI_SOLAR_TERM_19,小雪,Minor Snow
+UI_SOLAR_TERM_20,大雪,Major Snow
+UI_SOLAR_TERM_21,冬至,Winter Solstice
+UI_SOLAR_TERM_22,小寒,Minor Cold
+UI_SOLAR_TERM_23,大寒,Major Cold

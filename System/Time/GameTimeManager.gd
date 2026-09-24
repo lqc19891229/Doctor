@@ -367,21 +367,24 @@ func get_day_text_by_index(day_index: int) -> String:
 	var solar_term_index: int = passed_terms % SOLAR_TERM_LIST.size()
 
 	var era_year_from_jiajing_start: int = START_ERA_YEAR + year_offset
-	var solar_term_text: String = SOLAR_TERM_LIST[solar_term_index]
+	var solar_term_text: String = tr("UI_SOLAR_TERM_%02d" % solar_term_index)
+	var english_locale := TranslationServer.get_locale().begins_with("en")
 
 	if era_year_from_jiajing_start <= START_ERA_LAST_YEAR:
-		return "%s%s年%s" % [
-			START_ERA_NAME,
-			era_year_to_chinese(era_year_from_jiajing_start),
+		var year_text := str(era_year_from_jiajing_start) if english_locale else era_year_to_chinese(era_year_from_jiajing_start)
+		return tr("UI_ERA_DATE_FMT") % [
+			tr("UI_ERA_JIAJING"),
+			year_text,
 			solar_term_text
 		]
 
 	var years_after_start_era: int = era_year_from_jiajing_start - START_ERA_LAST_YEAR
 	var next_era_year: int = NEXT_ERA_START_YEAR + years_after_start_era - 1
 
-	return "%s%s年%s" % [
-		NEXT_ERA_NAME,
-		era_year_to_chinese(next_era_year),
+	var next_year_text := str(next_era_year) if english_locale else era_year_to_chinese(next_era_year)
+	return tr("UI_ERA_DATE_FMT") % [
+		tr("UI_ERA_WANLI"),
+		next_year_text,
 		solar_term_text
 	]
 
@@ -453,14 +456,14 @@ func number_to_chinese(value: int) -> String:
 
 func get_shichen_text() -> String:
 	if current_shichen_index < 0 or current_shichen_index >= SHICHEN_LIST.size():
-		return "未知时辰"
+		return tr("UI_UNKNOWN_SHICHEN")
 
-	return SHICHEN_LIST[current_shichen_index]
+	return tr("UI_SHICHEN_%02d" % current_shichen_index)
 
 
 func get_full_time_text() -> String:
-	var phase_text := "白天" if is_day() else "夜晚"
-	return "%s %s · %s" % [get_day_text(), phase_text, get_shichen_text()]
+	var phase_text := tr("UI_PHASE_DAY") if is_day() else tr("UI_PHASE_NIGHT")
+	return tr("UI_FULL_TIME_FMT") % [get_day_text(), phase_text, get_shichen_text()]
 
 
 # =========================================================

@@ -425,7 +425,7 @@ func _setup_topbar_controller() -> void:
 		day_label,
 		time_label,
 		reputation_point_label,
-		"夜晚",
+		"UI_PHASE_NIGHT",
 		money_point_label
 	)
 
@@ -439,7 +439,7 @@ func _refresh_topbar(force_refresh: bool = false) -> void:
 		_setup_topbar_controller()
 
 	if topbar_controller != null:
-		topbar_controller.set_time_text_override("夜晚")
+		topbar_controller.set_time_text_override("UI_PHASE_NIGHT")
 		topbar_controller.refresh_all(force_refresh)
 
 

@@ -186,7 +186,7 @@ offset_right = 850.0
 offset_bottom = 750.0
 theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_k4yeq")
-text = "病人姓名"
+text = "UI_PATIENT_NAME_PLACEHOLDER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -198,7 +198,7 @@ offset_right = 1300.0
 offset_bottom = 440.0
 theme_override_font_sizes/normal_font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_l04vw")
-text = "病人台词"
+text = "UI_PATIENT_DIALOGUE_PLACEHOLDER"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=744765107]
 layout_mode = 1
@@ -239,7 +239,7 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 5.0
 theme_override_font_sizes/font_size = 25
 theme_override_styles/focus = SubResource("StyleBoxEmpty_l04vw")
-text = "天数"
+text = "UI_TOPBAR_DATE_PLACEHOLDER"
 
 [node name="TimeDisplay" type="HBoxContainer" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1763355432]
 layout_mode = 2
@@ -252,12 +252,12 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 25
 theme_override_styles/focus = SubResource("StyleBoxEmpty_436d3")
-text = "时辰"
+text = "UI_TOPBAR_TIME_PLACEHOLDER"
 
 [node name="TimeIcon" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer/TimeDisplay" unique_id=1351442177]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-tooltip_text = "当前时辰"
+tooltip_text = "UI_CURRENT_SHICHEN"
 mouse_filter = 0
 expand_mode = 1
 stretch_mode = 5
@@ -267,14 +267,14 @@ layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 2.0
 theme_override_font_sizes/font_size = 25
-text = "名望：0　初窥门径"
+text = "UI_TOPBAR_REPUTATION_PLACEHOLDER"
 
 [node name="MoneyPoint" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1857329256]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 25
-text = "银钱：0两 0文"
+text = "UI_TOPBAR_MONEY_PLACEHOLDER"
 
 [node name="MoneyContainer" type="HBoxContainer" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1727319860]
 layout_mode = 2
@@ -286,7 +286,7 @@ theme_override_constants/separation = 4
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "欠"
+text = "UI_MONEY_DEBT_SHORT"
 vertical_alignment = 1
 
 [node name="SilverIcon" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer" unique_id=100593002]
@@ -300,7 +300,7 @@ stretch_mode = 5
 [node name="LiangLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer" unique_id=207054282]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "0两"
+text = "UI_MONEY_LIANG_ZERO"
 vertical_alignment = 1
 
 [node name="CopperIcon" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer" unique_id=109453948]
@@ -314,7 +314,7 @@ stretch_mode = 5
 [node name="WenLabel" type="Label" parent="VBoxContainer/TopBar/HBoxContainer/MoneyContainer" unique_id=962271678]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "0文"
+text = "UI_MONEY_WEN_ZERO"
 vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="VBoxContainer" unique_id=922939220]

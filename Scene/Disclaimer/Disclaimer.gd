@@ -2,6 +2,7 @@ extends Control
 
 
 const MAIN_SCENE_PATH: String = "res://Scene/Main/Main.tscn"
+const SETTINGS_PATH: String = "user://settings.cfg"
 
 ## 声明画面的总停留时间，包含淡入和淡出。
 @export_range(0.5, 10.0, 0.1) var display_duration: float = 4.0
@@ -11,6 +12,17 @@ const MAIN_SCENE_PATH: String = "res://Scene/Main/Main.tscn"
 
 
 func _ready() -> void:
+	# 免责声明先于 Main/SettingsPanel 出现，先恢复玩家上次选择的语言。
+	var settings := ConfigFile.new()
+	var locale := "zh_CN"
+	if settings.load(SETTINGS_PATH) == OK:
+		var saved_locale := str(settings.get_value("language", "locale", locale))
+		if saved_locale == "zh_CN" or saved_locale == "en":
+			locale = saved_locale
+	TranslationServer.set_locale(locale)
+	$CenterContainer/ContentMargin/StatementContainer/Title.text = tr("UI_DISCLAIMER_TITLE")
+	$CenterContainer/ContentMargin/StatementContainer/Body.text = tr("UI_DISCLAIMER_BODY")
+
 	statement_container.modulate.a = 0.0
 
 	var actual_fade_duration: float = minf(

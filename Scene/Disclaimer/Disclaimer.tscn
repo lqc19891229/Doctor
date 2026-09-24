@@ -53,7 +53,7 @@ theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 42
-text = "内容声明"
+text = "UI_DISCLAIMER_TITLE"
 horizontal_alignment = 1
 
 [node name="Divider" type="ColorRect" parent="CenterContainer/ContentMargin/StatementContainer" unique_id=939444966]
@@ -71,9 +71,7 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 27
-text = "本游戏为虚构作品，仅供娱乐。游戏中涉及的医学知识、诊断及治疗内容可能并不准确，不可作为现实中的医疗依据，请勿据此自行诊断、用药或治疗。
-
-如有健康问题，请咨询专业医生，并以正规医疗机构的建议为准。游戏中的人物、事件及剧情均属虚构，如有雷同，纯属巧合。"
+text = "UI_DISCLAIMER_BODY"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
