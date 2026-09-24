@@ -82,6 +82,10 @@ pulse_left_cun={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://Localization/translations.zh_CN.translation", "res://Localization/translations.en.translation")
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

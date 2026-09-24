@@ -1,0 +1,25 @@
+keys,zh_CN,en
+UI_TEST,测试中文,English test
+UI_LANGUAGE,语言,Language
+UI_BACK,返回,Back
+UI_SETTINGS_TITLE,设置,Settings
+UI_MASTER_VOLUME,主音量,Master Volume
+UI_MUSIC_VOLUME,音乐音量,Music Volume
+UI_AMBIENT_VOLUME,环境音量,Ambient Volume
+UI_SFX_VOLUME,音效音量,Sound Effects Volume
+UI_FULLSCREEN,全屏,Fullscreen
+UI_MENU_NEW_GAME,新游戏,New Game
+UI_MENU_LOAD_GAME,读取存档,Load Game
+UI_MENU_READ_BOOK,查阅典籍,Read Books
+UI_MENU_QUIT_GAME,退出游戏,Quit Game
+UI_DIFFICULTY_TITLE,选择难度,Choose Difficulty
+UI_DIFFICULTY_INFO,难度影响固定收入,Difficulty affects regular income
+UI_DIFFICULTY_EASY,"简单
+全力依父","Easy
+Rely on Dad"
+UI_DIFFICULTY_NORMAL,"普通
+全力以赴","Normal
+Give It Your All"
+UI_DIFFICULTY_HARD,"困难
+爹，您就安心躺平吧","Hard
+Dad, Take a Break"

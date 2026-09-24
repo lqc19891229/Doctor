@@ -86,31 +86,31 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
-text = "新游戏"
+text = "UI_MENU_NEW_GAME"
 
 [node name="LoadGameButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer" unique_id=503802410]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
-text = "读取存档"
+text = "UI_MENU_LOAD_GAME"
 
-[node name="ReadBookButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer"]
+[node name="ReadBookButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer" unique_id=1672710317]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
-text = "查阅典籍"
+text = "UI_MENU_READ_BOOK"
 
 [node name="SettingsButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer" unique_id=1772277013]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
-text = "设置"
+text = "UI_SETTINGS_TITLE"
 
 [node name="QuitGameButton" type="Button" parent="MainMenuLayer/MenuPanel/VBoxContainer" unique_id=934317025]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
-text = "退出游戏"
+text = "UI_MENU_QUIT_GAME"
 
 [node name="DifficultyPopup" type="Panel" parent="MainMenuLayer" unique_id=1510056731]
 visible = false
@@ -142,13 +142,13 @@ theme_override_constants/separation = 18
 [node name="TitleLabel" type="Label" parent="MainMenuLayer/DifficultyPopup/VBoxContainer" unique_id=1887764914]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
-text = "选择难度"
+text = "UI_DIFFICULTY_TITLE"
 horizontal_alignment = 1
 
 [node name="InfoLabel" type="Label" parent="MainMenuLayer/DifficultyPopup/VBoxContainer" unique_id=531191614]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "难度影响固定收入"
+text = "UI_DIFFICULTY_INFO"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -156,28 +156,25 @@ autowrap_mode = 2
 custom_minimum_size = Vector2(0, 105)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "简单
-全力依父"
+text = "UI_DIFFICULTY_EASY"
 
 [node name="NormalButton" type="Button" parent="MainMenuLayer/DifficultyPopup/VBoxContainer" unique_id=230779252]
 custom_minimum_size = Vector2(0, 105)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "普通
-全力以赴"
+text = "UI_DIFFICULTY_NORMAL"
 
 [node name="HardButton" type="Button" parent="MainMenuLayer/DifficultyPopup/VBoxContainer" unique_id=2082318455]
 custom_minimum_size = Vector2(0, 105)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "困难
-爹，您就安心躺平吧"
+text = "UI_DIFFICULTY_HARD"
 
 [node name="CloseButton" type="Button" parent="MainMenuLayer/DifficultyPopup/VBoxContainer" unique_id=1700077933]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "返回"
+text = "UI_BACK"
 
 [node name="SaveSlotPopup" type="Panel" parent="MainMenuLayer" unique_id=1660799706]
 visible = false
@@ -580,13 +577,13 @@ theme_override_constants/separation = 14
 [node name="TitleLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1703268219]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
-text = "设置"
+text = "UI_SETTINGS_TITLE"
 horizontal_alignment = 1
 
 [node name="MasterLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1181533387]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "主音量"
+text = "UI_MASTER_VOLUME"
 
 [node name="MasterVolumeSlider" type="HSlider" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1842939586]
 custom_minimum_size = Vector2(0, 48)
@@ -596,7 +593,7 @@ value = 100.0
 [node name="MusicLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1614647754]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "音乐音量"
+text = "UI_MUSIC_VOLUME"
 
 [node name="MusicVolumeSlider" type="HSlider" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1976408704]
 custom_minimum_size = Vector2(0, 48)
@@ -606,7 +603,7 @@ value = 80.0
 [node name="AmbientLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=509876459]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "环境音量"
+text = "UI_AMBIENT_VOLUME"
 
 [node name="AmbientVolumeSlider" type="HSlider" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1903315977]
 custom_minimum_size = Vector2(0, 48)
@@ -616,21 +613,31 @@ value = 80.0
 [node name="SfxLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=58389724]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "音效音量"
+text = "UI_SFX_VOLUME"
 
 [node name="SfxVolumeSlider" type="HSlider" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2067475588]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 value = 80.0
 
+[node name="LanguageLabel" type="Label" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1612023403]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "UI_LANGUAGE"
+
+[node name="LanguageOptionButton" type="OptionButton" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1707288282]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+
 [node name="FullscreenCheckBox" type="CheckBox" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1796179758]
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "全屏"
+text = "UI_FULLSCREEN"
 
 [node name="BackButton" type="Button" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=550295947]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "返回"
+text = "UI_BACK"

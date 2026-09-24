@@ -5,6 +5,10 @@ signal closed
 const CONFIG_PATH: String = "user://settings.cfg"
 const SECTION_AUDIO: String = "audio"
 const SECTION_DISPLAY: String = "display"
+const SECTION_LANGUAGE: String = "language"
+
+const LOCALE_ZH_CN: String = "zh_CN"
+const LOCALE_EN: String = "en"
 
 const MASTER_BUS: String = "Master"
 const MUSIC_BUS: String = "BGM"
@@ -15,6 +19,7 @@ const AMBIENT_BUS: String = "Ambient"
 @onready var music_volume_slider: HSlider = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MusicVolumeSlider
 @onready var sfx_volume_slider: HSlider = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SfxVolumeSlider
 @onready var ambient_volume_slider: HSlider = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AmbientVolumeSlider
+@onready var language_option_button: OptionButton = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LanguageOptionButton
 @onready var fullscreen_check_box: CheckBox = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FullscreenCheckBox
 @onready var music_label: Label = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MusicLabel
 @onready var sfx_label: Label = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SfxLabel
@@ -30,9 +35,16 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	visible = false
 
+	_setup_language_options()
 	_load_settings()
 	_refresh_optional_audio_bus_state()
 	_connect_signals()
+
+
+func _setup_language_options() -> void:
+	language_option_button.clear()
+	language_option_button.add_item("简体中文")
+	language_option_button.add_item("English")
 
 
 func _connect_signals() -> void:
@@ -47,6 +59,9 @@ func _connect_signals() -> void:
 
 	if not ambient_volume_slider.value_changed.is_connected(_on_ambient_volume_changed):
 		ambient_volume_slider.value_changed.connect(_on_ambient_volume_changed)
+
+	if not language_option_button.item_selected.is_connected(_on_language_selected):
+		language_option_button.item_selected.connect(_on_language_selected)
 
 	if not fullscreen_check_box.toggled.is_connected(_on_fullscreen_toggled):
 		fullscreen_check_box.toggled.connect(_on_fullscreen_toggled)
@@ -94,6 +109,9 @@ func _load_settings() -> void:
 	var master_value := float(config.get_value(SECTION_AUDIO, "master_volume", 100.0))
 	var music_value := float(config.get_value(SECTION_AUDIO, "music_volume", 80.0))
 	var sfx_value := float(config.get_value(SECTION_AUDIO, "sfx_volume", 80.0))
+	var saved_locale := str(config.get_value(SECTION_LANGUAGE, "locale", LOCALE_ZH_CN))
+	if saved_locale != LOCALE_ZH_CN and saved_locale != LOCALE_EN:
+		saved_locale = LOCALE_ZH_CN
 	var fullscreen_value := bool(config.get_value(
 		SECTION_DISPLAY,
 		"fullscreen",
@@ -104,8 +122,10 @@ func _load_settings() -> void:
 	music_volume_slider.value = clampf(music_value, 0.0, 100.0)
 	sfx_volume_slider.value = clampf(sfx_value, 0.0, 100.0)
 	ambient_volume_slider.value = clampf(float(config.get_value(SECTION_AUDIO, "ambient_volume", 80.0)), 0.0, 100.0)
+	language_option_button.select(0 if saved_locale == LOCALE_ZH_CN else 1)
 	fullscreen_check_box.button_pressed = fullscreen_value
 
+	TranslationServer.set_locale(saved_locale)
 	_apply_bus_volume(MASTER_BUS, master_volume_slider.value)
 	_apply_bus_volume(MUSIC_BUS, music_volume_slider.value)
 	_apply_bus_volume(SFX_BUS, sfx_volume_slider.value)
@@ -120,11 +140,16 @@ func _save_settings() -> void:
 	config.set_value(SECTION_AUDIO, "music_volume", music_volume_slider.value)
 	config.set_value(SECTION_AUDIO, "sfx_volume", sfx_volume_slider.value)
 	config.set_value(SECTION_AUDIO, "ambient_volume", ambient_volume_slider.value)
+	config.set_value(SECTION_LANGUAGE, "locale", _selected_locale())
 	config.set_value(SECTION_DISPLAY, "fullscreen", fullscreen_check_box.button_pressed)
 
 	var save_error := config.save(CONFIG_PATH)
 	if save_error != OK:
 		push_warning("设置保存失败：%s" % CONFIG_PATH)
+
+
+func _selected_locale() -> String:
+	return LOCALE_EN if language_option_button.selected == 1 else LOCALE_ZH_CN
 
 
 func _refresh_optional_audio_bus_state() -> void:
@@ -194,6 +219,13 @@ func _on_ambient_volume_changed(value: float) -> void:
 	if loading_settings:
 		return
 	_apply_bus_volume(AMBIENT_BUS, value)
+
+
+func _on_language_selected(_index: int) -> void:
+	if loading_settings:
+		return
+	TranslationServer.set_locale(_selected_locale())
+	_save_settings()
 
 
 func _on_fullscreen_toggled(enabled: bool) -> void:
