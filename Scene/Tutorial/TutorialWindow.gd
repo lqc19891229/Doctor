@@ -29,8 +29,10 @@ enum TutorialSet {
 @export var wrap_pages: bool = false
 
 @onready var page_image: TextureRect = %PageImage
+@onready var window_title: Label = $CenterContainer/WindowPanel/OuterMargin/RootVBox/Header/WindowTitle
 @onready var title_label: Label = %TitleLabel
 @onready var description_label: Label = %DescriptionLabel
+@onready var keyboard_hint: Label = $CenterContainer/WindowPanel/OuterMargin/RootVBox/Content/TextPanel/TextMargin/TextVBox/KeyboardHint
 @onready var page_indicator: Label = %PageIndicator
 @onready var previous_button: Button = %PreviousButton
 @onready var next_button: Button = %NextButton
@@ -40,6 +42,11 @@ var current_page: int = 0
 var current_tutorial_set: int = TutorialSet.NIGHT
 var _tree_was_paused: bool = false
 var _active_slides: Array[TutorialSlideData] = []
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		_refresh_page()
 
 
 func _ready() -> void:
@@ -136,7 +143,7 @@ func set_pages(
 
 	for page_index in range(page_count):
 		var slide := TutorialSlideData.new()
-		slide.title = titles[page_index] if page_index < titles.size() else "游戏说明"
+		slide.title = titles[page_index] if page_index < titles.size() else "UI_TUTORIAL_WINDOW_TITLE"
 		slide.description = descriptions[page_index] if page_index < descriptions.size() else ""
 		slide.image = images[page_index] if page_index < images.size() else null
 		new_slides.append(slide)
@@ -170,6 +177,10 @@ func _refresh_page() -> void:
 	if not is_node_ready():
 		return
 
+	window_title.text = tr("UI_TUTORIAL_WINDOW_TITLE")
+	keyboard_hint.text = tr("UI_TUTORIAL_KEYBOARD_HINT")
+	previous_button.text = tr("UI_TUTORIAL_PREVIOUS")
+
 	var page_count := _get_page_count()
 	var has_pages := page_count > 0
 
@@ -178,13 +189,13 @@ func _refresh_page() -> void:
 
 	if not has_pages:
 		page_image.texture = null
-		title_label.text = "暂无说明"
+		title_label.text = tr("UI_TUTORIAL_NO_PAGES")
 		if current_tutorial_set == TutorialSet.DAY:
-			description_label.text = "请在 Inspector 的 Day Slides 中添加 TutorialSlideData。"
+			description_label.text = tr("UI_TUTORIAL_ADD_DAY_SLIDES")
 		else:
-			description_label.text = "请在 Inspector 的 Slides 中添加 TutorialSlideData。"
+			description_label.text = tr("UI_TUTORIAL_ADD_NIGHT_SLIDES")
 		page_indicator.text = "0 / 0"
-		next_button.text = "完成"
+		next_button.text = tr("UI_TUTORIAL_DONE")
 		return
 
 	current_page = clampi(current_page, 0, page_count - 1)
@@ -192,15 +203,15 @@ func _refresh_page() -> void:
 
 	if slide == null:
 		page_image.texture = null
-		title_label.text = "游戏说明"
-		description_label.text = "当前教程页未设置 TutorialSlideData。"
+		title_label.text = tr("UI_TUTORIAL_WINDOW_TITLE")
+		description_label.text = tr("UI_TUTORIAL_MISSING_SLIDE")
 	else:
 		page_image.texture = slide.image
-		title_label.text = slide.title
-		description_label.text = slide.description
+		title_label.text = tr(slide.title)
+		description_label.text = tr(slide.description)
 
 	page_indicator.text = "%d / %d" % [current_page + 1, page_count]
-	next_button.text = "完成" if current_page == page_count - 1 else "下一步"
+	next_button.text = tr("UI_TUTORIAL_DONE") if current_page == page_count - 1 else tr("UI_TUTORIAL_NEXT")
 	page_changed.emit(current_page, page_count)
 
 

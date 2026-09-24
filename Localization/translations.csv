@@ -503,3 +503,54 @@ UI_RESULT_FORMULA_NOT_FOUND,（未找到标准方）,(Standard formula not found
 UI_RESULT_NO_DIAGNOSIS,未选择疾病,No condition selected
 UI_RESULT_PRESET_UNLOCK,预制方剂,Formula Preset
 UI_RESULT_PRESET_UNLOCK_FMT,预制方剂：%s,Formula Preset: %s
+UI_TUTORIAL_WINDOW_TITLE,游戏说明,Game Guide
+UI_TUTORIAL_KEYBOARD_HINT,← / → 翻页    Esc 关闭,← / →: Pages    Esc: Close
+UI_TUTORIAL_PREVIOUS,上一步,Previous
+UI_TUTORIAL_NEXT,下一步,Next
+UI_TUTORIAL_DONE,完成,Finish
+UI_TUTORIAL_NO_PAGES,暂无说明,No guide pages yet
+UI_TUTORIAL_ADD_DAY_SLIDES,请在 Inspector 的 Day Slides 中添加 TutorialSlideData。,Add TutorialSlideData to Day Slides in the Inspector.
+UI_TUTORIAL_ADD_NIGHT_SLIDES,请在 Inspector 的 Slides 中添加 TutorialSlideData。,Add TutorialSlideData to Slides in the Inspector.
+UI_TUTORIAL_MISSING_SLIDE,当前教程页未设置 TutorialSlideData。,No TutorialSlideData is set for this guide page.
+UI_TUTORIAL_NIGHT_01_TITLE,夜间,Night
+UI_TUTORIAL_NIGHT_01_DESCRIPTION,夜间点击书籍(F1)读书，行医记考(F2)查看记录，油灯(F3)休息进入下一天。,"At night, click the books (F1) to read, the medical records (F2) to review entries, or the oil lamp (F3) to rest and begin the next day."
+UI_TUTORIAL_NIGHT_02_TITLE,读书,Reading
+UI_TUTORIAL_NIGHT_02_DESCRIPTION,在读书窗口中可以阅读医学典籍，《黄帝内经》记载中医基础理论，作为参考。,Read medical classics in the reading window. The Huangdi Neijing explains the foundations of traditional Chinese medicine and serves as a reference.
+UI_TUTORIAL_NIGHT_03_TITLE,药材,Herbs
+UI_TUTORIAL_NIGHT_03_DESCRIPTION,《神农本草经》记载药材的相关信息，作为参考。,The Shennong Bencao Jing records information about medicinal herbs and serves as a reference.
+UI_TUTORIAL_NIGHT_04_TITLE,疾病,Conditions
+UI_TUTORIAL_NIGHT_04_DESCRIPTION,《诸病源候论》记载疾病的相关信息，游戏中通过脉象来判断疾病，通过标准方治疗疾病。,"The Zhu Bing Yuan Hou Lun records information about diseases. In the game, diagnose conditions from pulse readings and treat them with standard formulas."
+UI_TUTORIAL_NIGHT_05_TITLE,方剂,Formulas
+UI_TUTORIAL_NIGHT_05_DESCRIPTION,其他医书记载各类方剂，白天在开方窗口填入方剂的组成药材来给病人开药。,"Other medical books list various formulas. During the day, enter their herbs in the prescription window to treat patients."
+UI_TUTORIAL_NIGHT_06_TITLE,脉象,Pulse Readings
+UI_TUTORIAL_NIGHT_06_DESCRIPTION,在《诸病源候论》中选择疾病条目时，点击右下角“查看脉象”按钮，可以观察该疾病的脉象。,"Select a disease entry in the Zhu Bing Yuan Hou Lun, then click 'View Pulse' in the lower right to examine its pulse."
+UI_TUTORIAL_NIGHT_07_TITLE,脉象,Pulse Readings
+UI_TUTORIAL_NIGHT_07_DESCRIPTION,健康的脉象是不高不低，不粗不细，不宽不窄，一次呼吸脉搏跳动四到五次。,"A healthy pulse is neither too high nor too low, thick nor thin, wide nor narrow. It beats four to five times per breath."
+UI_TUTORIAL_NIGHT_08_TITLE,气,Qi
+UI_TUTORIAL_NIGHT_08_DESCRIPTION,"波峰的高低反映气的强弱；
+波峰越高气滞程度越高，波峰越低气虚程度越高。","Peak height reflects the state of qi;
+higher peaks indicate stronger qi stagnation, while lower peaks indicate greater qi deficiency."
+UI_TUTORIAL_NIGHT_09_TITLE,血,Blood
+UI_TUTORIAL_NIGHT_09_DESCRIPTION,"波线的粗细反映血的状态；
+波线越粗血瘀程度越高，波线越细血虚程度越高。","Line thickness reflects the state of blood;
+thicker lines indicate more blood stasis, while thinner lines indicate greater blood deficiency."
+UI_TUTORIAL_NIGHT_10_TITLE,湿燥,Dampness and Dryness
+UI_TUTORIAL_NIGHT_10_DESCRIPTION,"波宽的宽窄反映湿燥程度；
+波宽越宽越湿，波宽越窄越燥。","Pulse width reflects dampness and dryness;
+a wider pulse indicates more dampness, while a narrower pulse indicates more dryness."
+UI_TUTORIAL_NIGHT_11_TITLE,寒热,Cold and Heat
+UI_TUTORIAL_NIGHT_11_DESCRIPTION,"每次呼吸波峰经过指尖的次数反映寒热程度；
+脉搏数越多越热，脉搏次数越少越寒。","The number of pulse peaks felt per breath reflects cold and heat;
+more beats indicate greater heat, while fewer indicate greater cold."
+UI_TUTORIAL_DAY_01_TITLE,接诊,Seeing Patients
+UI_TUTORIAL_DAY_01_DESCRIPTION,白天在医馆接诊病人，把脉(F1)确定疾病，翻阅行医记考(F3)确定方剂，给病人断病开方(F2)。,"During the day, see patients at the clinic. Check their pulse (F1) to identify the condition, consult the medical records (F3) for a formula, then diagnose and prescribe (F2)."
+UI_TUTORIAL_DAY_02_TITLE,把脉,Pulse Diagnosis
+UI_TUTORIAL_DAY_02_DESCRIPTION,在把脉窗口按住QAZ显示右手脉象，按住WSX显示左手脉象。,"In the pulse window, hold Q, A or Z to show the right-hand pulse; hold W, S or X for the left-hand pulse."
+UI_TUTORIAL_DAY_03_TITLE,行医记考,Medical Records
+UI_TUTORIAL_DAY_03_DESCRIPTION,在行医记考窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母查询。快捷键：疾病(1)，方剂(2)，药材(3),"Search the medical records by disease, formula or herb name, Chinese pinyin, or pinyin initials. Shortcuts: Conditions (1), Formulas (2), Herbs (3)."
+UI_TUTORIAL_DAY_04_TITLE,断病开方,Diagnosis and Prescription
+UI_TUTORIAL_DAY_04_DESCRIPTION,在断病开放窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母筛选对应条目。,"In the diagnosis and prescription window, search by disease, formula or herb name, Chinese pinyin, or pinyin initials to filter entries."
+UI_TUTORIAL_DAY_05_TITLE,开方,Prescribing
+UI_TUTORIAL_DAY_05_DESCRIPTION,选择君臣佐使区域，左键再点击药材加入，右键点击减少。右键点击君臣佐使区域已加入的药材，可以删除。选择单位剂量控制每次点击加入的药量。快捷键:君(1)臣(2)佐(3)使(4)，单位切换(~和Tab)。,"Select a Chief, Deputy, Assistant or Envoy area, then left-click an herb to add it or right-click to reduce it. Right-click an herb already in the formula to remove it. Choose the dose per click. Shortcuts: Chief (1), Deputy (2), Assistant (3), Envoy (4); switch dose (~ or Tab)."
+UI_TUTORIAL_DAY_06_TITLE,方剂,Formulas
+UI_TUTORIAL_DAY_06_DESCRIPTION,在搜索栏输入方剂名可筛选出该方剂所包含的药材条目。当达成一定次数的妙手回春评价后，会出现预制方剂条目，点击后会自动填入方剂所包含的所有药材及剂量。,"Search for a formula to filter its herbs. After earning enough Miraculous Recovery ratings, a preset formula appears. Click it to fill in all of its herbs and doses automatically."
