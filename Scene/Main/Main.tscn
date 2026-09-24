@@ -204,7 +204,7 @@ grow_vertical = 2
 [node name="TitleLabel" type="Label" parent="MainMenuLayer/SaveSlotPopup/VBoxContainer" unique_id=2125707231]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "UI_SAVE_SELECT"
+text = "选择存档"
 horizontal_alignment = 1
 
 [node name="Slot1Button" type="Button" parent="MainMenuLayer/SaveSlotPopup/VBoxContainer" unique_id=959813070]
@@ -230,7 +230,7 @@ theme_override_font_sizes/font_size = 25
 [node name="CloseButton" type="Button" parent="MainMenuLayer/SaveSlotPopup/VBoxContainer" unique_id=1794256127]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "UI_CLOSE"
+text = "关闭"
 
 [node name="OverwriteConfirmPopup" type="Panel" parent="MainMenuLayer" unique_id=970771500]
 visible = false
@@ -253,7 +253,7 @@ offset_top = 12.0
 offset_bottom = 52.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 26
-text = "UI_CONFIRM_OVERWRITE"
+text = "确认覆盖"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -269,7 +269,7 @@ offset_bottom = -82.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 26
-text = "UI_OVERWRITE_QUESTION"
+text = "该槽位已有存档，是否覆盖？"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -294,14 +294,14 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
-text = "UI_CONFIRM_OVERWRITE"
+text = "确认覆盖"
 
 [node name="CancelButton" type="Button" parent="MainMenuLayer/OverwriteConfirmPopup/HBoxContainer" unique_id=1301435808]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
-text = "UI_CANCEL"
+text = "取消"
 
 [node name="PauseMenuLayer" type="CanvasLayer" parent="." unique_id=790300192]
 layer = 100
@@ -342,44 +342,44 @@ theme_override_constants/separation = 20
 [node name="TitleLabel" type="Label" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=825037659]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
-text = "UI_PAUSED"
+text = "暂停"
 horizontal_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1268286723]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "UI_RESUME_GAME"
+text = "继续游戏"
 
 [node name="SaveButton" type="Button" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=242399726]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "UI_SAVE_GAME"
+text = "保存游戏"
 
 [node name="LoadGameButton" type="Button" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=532982773]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "UI_LOAD_SAVE"
+text = "读取存档"
 
 [node name="SettingsButton" type="Button" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1198081317]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "UI_SETTINGS_TITLE"
+text = "设置"
 
 [node name="MainMenuButton" type="Button" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=768174303]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "UI_RETURN_MENU"
+text = "返回主菜单"
 
 [node name="QuitButton" type="Button" parent="PauseMenuLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1322671440]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "UI_MENU_QUIT_GAME"
+text = "退出游戏"
 
 [node name="ManualSaveCenter" type="CenterContainer" parent="PauseMenuLayer/DarkBackground" unique_id=1919596295]
 visible = false
@@ -408,13 +408,13 @@ theme_override_constants/separation = 14
 [node name="TitleLabel" type="Label" parent="PauseMenuLayer/DarkBackground/ManualSaveCenter/PanelContainer/MarginContainer/VBoxContainer" unique_id=633616486]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "UI_MANUAL_SAVE"
+text = "手动保存"
 horizontal_alignment = 1
 
 [node name="RuleLabel" type="Label" parent="PauseMenuLayer/DarkBackground/ManualSaveCenter/PanelContainer/MarginContainer/VBoxContainer" unique_id=237993866]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "UI_MANUAL_SAVE_RULE"
+text = "白天保存本日开始状态；夜晚保存当前状态。"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -422,25 +422,25 @@ autowrap_mode = 2
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "UI_MANUAL_SLOT_1"
+text = "手动存档 1"
 
 [node name="ManualSlot3Button" type="Button" parent="PauseMenuLayer/DarkBackground/ManualSaveCenter/PanelContainer/MarginContainer/VBoxContainer" unique_id=16808515]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "UI_MANUAL_SLOT_2"
+text = "手动存档 2"
 
 [node name="ManualSlot4Button" type="Button" parent="PauseMenuLayer/DarkBackground/ManualSaveCenter/PanelContainer/MarginContainer/VBoxContainer" unique_id=1816480091]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "UI_MANUAL_SLOT_3"
+text = "手动存档 3"
 
 [node name="ManualSlot5Button" type="Button" parent="PauseMenuLayer/DarkBackground/ManualSaveCenter/PanelContainer/MarginContainer/VBoxContainer" unique_id=796127093]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "UI_MANUAL_SLOT_4"
+text = "手动存档 4"
 
 [node name="StatusLabel" type="Label" parent="PauseMenuLayer/DarkBackground/ManualSaveCenter/PanelContainer/MarginContainer/VBoxContainer" unique_id=351550172]
 custom_minimum_size = Vector2(0, 52)
@@ -454,7 +454,7 @@ autowrap_mode = 2
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "UI_BACK"
+text = "返回"
 
 [node name="LoadSaveCenter" type="CenterContainer" parent="PauseMenuLayer/DarkBackground" unique_id=728664772]
 visible = false
@@ -483,13 +483,13 @@ theme_override_constants/separation = 12
 [node name="TitleLabel" type="Label" parent="PauseMenuLayer/DarkBackground/LoadSaveCenter/PanelContainer/MarginContainer/VBoxContainer" unique_id=884737244]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "UI_LOAD_SAVE"
+text = "读取存档"
 horizontal_alignment = 1
 
 [node name="RuleLabel" type="Label" parent="PauseMenuLayer/DarkBackground/LoadSaveCenter/PanelContainer/MarginContainer/VBoxContainer" unique_id=1828378450]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "UI_LOAD_RULE"
+text = "可读取自动存档与全部手动存档。"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -497,37 +497,37 @@ autowrap_mode = 2
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
-text = "UI_AUTO_SAVE"
+text = "自动存档"
 
 [node name="LoadSlot2Button" type="Button" parent="PauseMenuLayer/DarkBackground/LoadSaveCenter/PanelContainer/MarginContainer/VBoxContainer" unique_id=724706042]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
-text = "UI_MANUAL_SLOT_1"
+text = "手动存档 1"
 
 [node name="LoadSlot3Button" type="Button" parent="PauseMenuLayer/DarkBackground/LoadSaveCenter/PanelContainer/MarginContainer/VBoxContainer" unique_id=453671254]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
-text = "UI_MANUAL_SLOT_2"
+text = "手动存档 2"
 
 [node name="LoadSlot4Button" type="Button" parent="PauseMenuLayer/DarkBackground/LoadSaveCenter/PanelContainer/MarginContainer/VBoxContainer" unique_id=1051289015]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
-text = "UI_MANUAL_SLOT_3"
+text = "手动存档 3"
 
 [node name="LoadSlot5Button" type="Button" parent="PauseMenuLayer/DarkBackground/LoadSaveCenter/PanelContainer/MarginContainer/VBoxContainer" unique_id=62938895]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
-text = "UI_MANUAL_SLOT_4"
+text = "手动存档 4"
 
 [node name="StatusLabel" type="Label" parent="PauseMenuLayer/DarkBackground/LoadSaveCenter/PanelContainer/MarginContainer/VBoxContainer" unique_id=798107410]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 19
-text = "UI_LOAD_WARNING"
+text = "读取后，当前未保存的进度将丢失。"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -536,7 +536,7 @@ autowrap_mode = 2
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "UI_BACK"
+text = "返回"
 
 [node name="SettingsLayer" type="CanvasLayer" parent="." unique_id=691791985]
 layer = 110

@@ -122,6 +122,8 @@ var waiting_for_treatment_backend: bool = false
 var resume_treatment_after_story: bool = false
 var last_treatment_success: bool = false
 var judgement_result_window: Control = null
+var _treatment_display_key: String = ""
+var _treatment_npc_display_name: String = ""
 
 var pulse_keyboard_override_active: bool = false
 var last_pulse_input_signature: String = ""
@@ -146,6 +148,17 @@ var current_scene_background_texture: Texture2D = null
 func set_current_scene_background_texture(texture: Texture2D) -> void:
 	# 这里只保存资源引用，不访问 @onready 节点；允许 Main 在 add_child() 前调用。
 	current_scene_background_texture = texture
+
+
+func _notification(what: int) -> void:
+	if what != NOTIFICATION_TRANSLATION_CHANGED or not is_node_ready() or not is_treatment_mode:
+		return
+	if _treatment_display_key == "UI_STORY_SELECT_TREATMENT":
+		speaker_label.text = _treatment_npc_display_name if _treatment_npc_display_name != "" else tr("UI_STORY_TREATMENT_SPEAKER")
+	else:
+		speaker_label.text = tr("UI_STORY_TREATMENT_HINT")
+	if _treatment_display_key != "":
+		dialogue_label.text = tr(_treatment_display_key)
 
 
 func _ready() -> void:
@@ -596,8 +609,10 @@ func _show_treatment_options() -> void:
 	# 每次进入或恢复诊疗选项时都重新应用，因此长按回车跳过失败剧情后也能正确恢复。
 	_apply_treatment_portrait_from_story_data()
 
-	speaker_label.text = npc_name if npc_name != "" else "诊疗"
-	dialogue_label.text = "请选择诊疗项目。"
+	_treatment_npc_display_name = npc_name
+	_treatment_display_key = "UI_STORY_SELECT_TREATMENT"
+	speaker_label.text = npc_name if npc_name != "" else tr("UI_STORY_TREATMENT_SPEAKER")
+	dialogue_label.text = tr("UI_STORY_SELECT_TREATMENT")
 	dialogue_label.visible_characters = -1
 	treatment_option_container.show()
 
@@ -640,10 +655,11 @@ func _apply_treatment_portrait_from_story_data() -> void:
 	target_rect.show()
 
 
-func _show_treatment_message(message: String) -> void:
+func _show_treatment_message(message: String, message_key: String = "") -> void:
+	_treatment_display_key = message_key
 	dialogue_block.show()
 	subtitle_block.hide()
-	speaker_label.text = "诊疗提示"
+	speaker_label.text = tr("UI_STORY_TREATMENT_HINT")
 	dialogue_label.text = message
 	dialogue_label.visible_characters = -1
 	continue_label.hide()
@@ -743,12 +759,15 @@ func _on_prescription_submit_requested() -> void:
 
 	var raw_submit_result = treatment_backend.call("submit_story_prescription")
 	if typeof(raw_submit_result) != TYPE_DICTIONARY:
-		_show_treatment_message("Clinic 返回了无效的诊疗结果。")
+		_show_treatment_message(tr("UI_STORY_INVALID_TREATMENT_RESULT"), "UI_STORY_INVALID_TREATMENT_RESULT")
 		return
 
 	var submit_result: Dictionary = raw_submit_result
 	if not bool(submit_result.get("ok", false)):
-		_show_treatment_message(str(submit_result.get("message", "处方提交失败。")))
+		if submit_result.has("message"):
+			_show_treatment_message(str(submit_result["message"]))
+		else:
+			_show_treatment_message(tr("UI_STORY_SUBMIT_FAILED"), "UI_STORY_SUBMIT_FAILED")
 		return
 
 	last_treatment_success = bool(submit_result.get("success", false))

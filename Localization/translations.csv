@@ -484,3 +484,16 @@ Standard Formula Ingredients:"
 UI_RECORDS_NO_INGREDIENTS,（暂无组成数据）,(No ingredient data)
 UI_RECORDS_INGREDIENT_FMT,%s（%s）,%s (%s)
 UI_NIGHT_UNREAD_BEFORE_REST,尚有未读条目，请先阅读后再休息。,Some entries are unread. Read them before resting.
+UI_STORY_DIALOGUE_PLACEHOLDER,人物对话显示区域,Dialogue appears here
+UI_STORY_PULSE_BUTTON,把脉(F1),Pulse (F1)
+UI_STORY_PRESCRIPTION_BUTTON,开方(F2),Prescribe (F2)
+UI_STORY_CLINICAL_LOG_BUTTON,行医记考(F3),Records (F3)
+UI_STORY_CONTINUE_HINT,点击 / 空格 /  继续，回车跳过剧情,Click / Space: Continue · Hold Enter: Skip Story
+UI_STORY_SUBTITLE_PLACEHOLDER,背景字幕显示区域,Subtitles appear here
+UI_STORY_SUBTITLE_CONTINUE_HINT,点击 / 空格 /  继续，长按回车跳过剧情,Click / Space: Continue · Hold Enter: Skip Story
+UI_STORY_TREATMENT_SPEAKER,诊疗,Treatment
+UI_STORY_SELECT_TREATMENT,请选择诊疗项目。,Choose a treatment action.
+UI_STORY_TREATMENT_HINT,诊疗提示,Treatment Notice
+UI_STORY_INVALID_TREATMENT_RESULT,Clinic 返回了无效的诊疗结果。,Clinic returned an invalid treatment result.
+UI_STORY_SUBMIT_FAILED,处方提交失败。,Could not submit the prescription.
+UI_HINT_PLACEHOLDER,提示内容,Notice text

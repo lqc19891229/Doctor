@@ -188,7 +188,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 35
-text = "人物对话显示区域"
+text = "UI_STORY_DIALOGUE_PLACEHOLDER"
 fit_content = true
 scroll_active = false
 
@@ -203,26 +203,26 @@ custom_minimum_size = Vector2(260, 56)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 28
-text = "把脉(F1)"
+text = "UI_STORY_PULSE_BUTTON"
 
 [node name="PrescriptionButton" type="Button" parent="DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer/TreatmentOptionContainer" unique_id=207002003]
 custom_minimum_size = Vector2(260, 56)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 28
-text = "开方(F2)"
+text = "UI_STORY_PRESCRIPTION_BUTTON"
 
 [node name="ClinicalLogButton" type="Button" parent="DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer/TreatmentOptionContainer" unique_id=207002004]
 custom_minimum_size = Vector2(260, 56)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 28
-text = "行医记考(F3)"
+text = "UI_STORY_CLINICAL_LOG_BUTTON"
 
 [node name="ContinueLabel" type="Label" parent="DialogueBlock/DialoguePanel/MarginContainer/VBoxContainer" unique_id=1823323477]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "点击 / 空格 /  继续，回车跳过剧情"
+text = "UI_STORY_CONTINUE_HINT"
 horizontal_alignment = 2
 
 [node name="SubtitleBlock" type="Control" parent="." unique_id=1749512874]
@@ -272,14 +272,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 34
-text = "背景字幕显示区域"
+text = "UI_STORY_SUBTITLE_PLACEHOLDER"
 fit_content = true
 scroll_active = false
 
 [node name="ContinueLabel" type="Label" parent="SubtitleBlock/SubtitlePanel/MarginContainer/VBoxContainer" unique_id=784895611]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "点击 / 空格 /  继续，长按回车跳过剧情"
+text = "UI_STORY_SUBTITLE_CONTINUE_HINT"
 horizontal_alignment = 2
 
 [node name="JudgementResultHost" type="Control" parent="." unique_id=207002013]

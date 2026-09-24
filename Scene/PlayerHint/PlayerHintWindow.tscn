@@ -29,6 +29,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(552, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
-text = "提示内容"
+text = "UI_HINT_PLACEHOLDER"
 vertical_alignment = 1
 autowrap_mode = 3
