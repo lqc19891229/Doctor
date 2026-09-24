@@ -114,6 +114,33 @@ var _herb_pages: Array[Dictionary] = []
 # 四、生命周期
 # =========================================================
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		_update_localized_ui()
+
+
+func _update_localized_ui() -> void:
+	title = tr("UI_LOG_WINDOW_TITLE")
+	tab_container.set_tab_title(0, tr("UI_LOG_TAB_DISEASE"))
+	tab_container.set_tab_title(1, tr("UI_LOG_TAB_FORMULA"))
+	tab_container.set_tab_title(2, tr("UI_LOG_TAB_HERB"))
+
+	for prev_button in [disease_prev_page_button, formula_prev_page_button, herb_prev_page_button]:
+		if prev_button != null:
+			prev_button.text = tr("UI_LOG_PREV_PAGE")
+	for next_button in [disease_next_page_button, formula_next_page_button, herb_next_page_button]:
+		if next_button != null:
+			next_button.text = tr("UI_LOG_NEXT_PAGE")
+
+	# 只有空状态使用界面文案，已选中的古籍正文保持原数据。
+	if visible_disease_entries.is_empty():
+		_clear_disease_detail()
+	if visible_formula_entries.is_empty():
+		_clear_formula_detail()
+	if visible_herb_entries.is_empty():
+		_clear_herb_detail()
+
+
 func _ready() -> void:
 	# 初始化时放到固定位置
 	position = fixed_window_position
@@ -123,11 +150,6 @@ func _ready() -> void:
 
 	# 点击窗口关闭按钮时，只隐藏窗口，不销毁节点。
 	close_requested.connect(_on_close_requested)
-
-	# 设置页签标题。
-	tab_container.set_tab_title(0, "疾病")
-	tab_container.set_tab_title(1, "方剂")
-	tab_container.set_tab_title(2, "药材")
 
 	# 监听页签切换。
 	# 方剂页和药材页第一次显示前处于隐藏状态，尺寸可能还是 0。
@@ -158,10 +180,8 @@ func _ready() -> void:
 	# 初始化三类详情翻页控件。
 	_setup_all_page_controls()
 
-	# 初始化空状态。
-	_clear_disease_detail()
-	_clear_formula_detail()
-	_clear_herb_detail()
+	# 设置页签、翻页按钮及初始空状态。
+	_update_localized_ui()
 
 
 # =========================================================
@@ -515,7 +535,7 @@ func _setup_page_controls(right_panel: Control, detail_scroll: ScrollContainer, 
 	if prev_button == null:
 		prev_button = Button.new()
 		prev_button.name = prev_name
-		prev_button.text = "上一页"
+		prev_button.text = tr("UI_LOG_PREV_PAGE")
 		page_controls.add_child(prev_button)
 
 	var indicator := page_controls.get_node_or_null(indicator_name) as Label
@@ -529,7 +549,7 @@ func _setup_page_controls(right_panel: Control, detail_scroll: ScrollContainer, 
 	if next_button == null:
 		next_button = Button.new()
 		next_button.name = next_name
-		next_button.text = "下一页"
+		next_button.text = tr("UI_LOG_NEXT_PAGE")
 		page_controls.add_child(next_button)
 
 	prev_button.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -799,7 +819,7 @@ func _update_page_controls(prev_button: Button, indicator: Label, next_button: B
 # =========================================================
 
 func _clear_disease_detail() -> void:
-	_current_disease_detail_text = "请选择左侧疾病条目"
+	_current_disease_detail_text = tr("UI_LOG_SELECT_DISEASE")
 	_disease_page_index = 0
 	_disease_page_count = 1
 	_disease_pages = _build_detail_pages(disease_detail_label, _current_disease_detail_text, disease_columns_per_page)
@@ -808,7 +828,7 @@ func _clear_disease_detail() -> void:
 
 
 func _clear_formula_detail() -> void:
-	_current_formula_detail_text = "请选择左侧方剂条目"
+	_current_formula_detail_text = tr("UI_LOG_SELECT_FORMULA")
 	_formula_page_index = 0
 	_formula_page_count = 1
 	_formula_pages = _build_detail_pages(formula_detail_label, _current_formula_detail_text, formula_columns_per_page)
@@ -817,7 +837,7 @@ func _clear_formula_detail() -> void:
 
 
 func _clear_herb_detail() -> void:
-	_current_herb_detail_text = "请选择左侧药材条目"
+	_current_herb_detail_text = tr("UI_LOG_SELECT_HERB")
 	_herb_page_index = 0
 	_herb_page_count = 1
 	_herb_pages = _build_detail_pages(herb_detail_label, _current_herb_detail_text, herb_columns_per_page)

@@ -13,7 +13,7 @@ bg_color = Color(0.14509805, 0.17254902, 0.18431373, 1)
 
 [node name="ClinicalLogWindow" type="Window" unique_id=1159353037]
 oversampling_override = 1.0
-title = "行医记考"
+title = "UI_LOG_WINDOW_TITLE"
 position = Vector2i(0, 36)
 size = Vector2i(900, 1000)
 unresizable = true
@@ -45,9 +45,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 23
 current_tab = 0
-tab_0/title = "疾病(1)"
-tab_1/title = "方剂(2)"
-tab_2/title = "药材(3)"
+tab_0/title = "UI_LOG_TAB_DISEASE_SHORTCUT"
+tab_1/title = "UI_LOG_TAB_FORMULA_SHORTCUT"
+tab_2/title = "UI_LOG_TAB_HERB_SHORTCUT"
 
 [node name="DiseasePage" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1471360721]
 layout_mode = 2
@@ -62,7 +62,7 @@ size_flags_vertical = 3
 [node name="SearchBar" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Left" unique_id=1002975457]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-placeholder_text = "搜索疾病"
+placeholder_text = "UI_LOG_SEARCH_DISEASE"
 clear_button_enabled = true
 
 [node name="DiseaseList" type="ItemList" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Left" unique_id=1658599805]
@@ -109,7 +109,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("3_yklnm")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "请选择左侧疾病条目"
+text = "UI_LOG_SELECT_DISEASE"
 scroll_following = true
 script = ExtResource("4_56jji")
 right_padding_chars = 1
@@ -129,7 +129,7 @@ alignment = 1
 
 [node name="PrevPageButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right/PageControls" unique_id=870140691]
 layout_mode = 2
-text = "上一页"
+text = "UI_LOG_PREV_PAGE"
 
 [node name="PageIndicator" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right/PageControls" unique_id=2088003432]
 layout_mode = 2
@@ -137,7 +137,7 @@ text = "1/1"
 
 [node name="NextPageButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right/PageControls" unique_id=481045821]
 layout_mode = 2
-text = "下一页"
+text = "UI_LOG_NEXT_PAGE"
 
 [node name="FormulaPage" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1370928369]
 visible = false
@@ -153,7 +153,7 @@ size_flags_vertical = 3
 [node name="SearchBar" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Left" unique_id=1437568058]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-placeholder_text = "搜索方剂"
+placeholder_text = "UI_LOG_SEARCH_FORMULA"
 clear_button_enabled = true
 
 [node name="FormulaList" type="ItemList" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Left" unique_id=34641383]
@@ -197,7 +197,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("3_yklnm")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "请选择左侧方剂条目"
+text = "UI_LOG_SELECT_FORMULA"
 scroll_following = true
 script = ExtResource("4_56jji")
 right_padding_chars = 1
@@ -217,7 +217,7 @@ alignment = 1
 
 [node name="PrevPageButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right/PageControls" unique_id=1704999882]
 layout_mode = 2
-text = "上一页"
+text = "UI_LOG_PREV_PAGE"
 
 [node name="PageIndicator" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right/PageControls" unique_id=1564673244]
 layout_mode = 2
@@ -225,7 +225,7 @@ text = "1/1"
 
 [node name="NextPageButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right/PageControls" unique_id=455416589]
 layout_mode = 2
-text = "下一页"
+text = "UI_LOG_NEXT_PAGE"
 
 [node name="HerbPage" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1129129444]
 visible = false
@@ -241,7 +241,7 @@ size_flags_vertical = 3
 [node name="SearchBar" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Left" unique_id=889016072]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-placeholder_text = "搜索药材"
+placeholder_text = "UI_LOG_SEARCH_HERB"
 clear_button_enabled = true
 
 [node name="HerbList" type="ItemList" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Left" unique_id=653784190]
@@ -285,7 +285,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("3_yklnm")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "请选择左侧药材条目"
+text = "UI_LOG_SELECT_HERB"
 scroll_following = true
 script = ExtResource("4_56jji")
 right_padding_chars = 1
@@ -305,7 +305,7 @@ alignment = 1
 
 [node name="PrevPageButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right/PageControls" unique_id=24393693]
 layout_mode = 2
-text = "上一页"
+text = "UI_LOG_PREV_PAGE"
 
 [node name="PageIndicator" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right/PageControls" unique_id=2080274858]
 layout_mode = 2
@@ -313,4 +313,4 @@ text = "1/1"
 
 [node name="NextPageButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right/PageControls" unique_id=1172871723]
 layout_mode = 2
-text = "下一页"
+text = "UI_LOG_NEXT_PAGE"

@@ -359,3 +359,18 @@ UI_PRESCRIPTION_DISEASE_DB_METHOD_MISSING,DiseaseDB 缺少 get_all_diseases(),Co
 UI_PRESCRIPTION_DISEASE_ID_MISSING,疾病数据缺少 disease_id，无法选择,Condition data has no disease_id; selection failed.
 UI_PRESCRIPTION_DISEASE_LOCKED,该疾病尚未解锁，不能用于断病,This condition is still locked and cannot be diagnosed.
 UI_PRESCRIPTION_DIAGNOSIS_SELECTED_FMT,已选择疾病诊断：%s,Selected diagnosis: %s
+UI_LOG_WINDOW_TITLE,行医记考,Clinical Records
+UI_LOG_TAB_DISEASE_SHORTCUT,疾病(1),Conditions (1)
+UI_LOG_TAB_FORMULA_SHORTCUT,方剂(2),Formulas (2)
+UI_LOG_TAB_HERB_SHORTCUT,药材(3),Herbs (3)
+UI_LOG_TAB_DISEASE,疾病,Conditions
+UI_LOG_TAB_FORMULA,方剂,Formulas
+UI_LOG_TAB_HERB,药材,Herbs
+UI_LOG_SEARCH_DISEASE,搜索疾病,Search conditions
+UI_LOG_SEARCH_FORMULA,搜索方剂,Search formulas
+UI_LOG_SEARCH_HERB,搜索药材,Search herbs
+UI_LOG_SELECT_DISEASE,请选择左侧疾病条目,Select a condition
+UI_LOG_SELECT_FORMULA,请选择左侧方剂条目,Select a formula
+UI_LOG_SELECT_HERB,请选择左侧药材条目,Select an herb
+UI_LOG_PREV_PAGE,上一页,Previous
+UI_LOG_NEXT_PAGE,下一页,Next
