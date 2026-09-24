@@ -554,3 +554,66 @@ UI_TUTORIAL_DAY_05_TITLE,开方,Prescribing
 UI_TUTORIAL_DAY_05_DESCRIPTION,选择君臣佐使区域，左键再点击药材加入，右键点击减少。右键点击君臣佐使区域已加入的药材，可以删除。选择单位剂量控制每次点击加入的药量。快捷键:君(1)臣(2)佐(3)使(4)，单位切换(~和Tab)。,"Select a Chief, Deputy, Assistant or Envoy area, then left-click an herb to add it or right-click to reduce it. Right-click an herb already in the formula to remove it. Choose the dose per click. Shortcuts: Chief (1), Deputy (2), Assistant (3), Envoy (4); switch dose (~ or Tab)."
 UI_TUTORIAL_DAY_06_TITLE,方剂,Formulas
 UI_TUTORIAL_DAY_06_DESCRIPTION,在搜索栏输入方剂名可筛选出该方剂所包含的药材条目。当达成一定次数的妙手回春评价后，会出现预制方剂条目，点击后会自动填入方剂所包含的所有药材及剂量。,"Search for a formula to filter its herbs. After earning enough Miraculous Recovery ratings, a preset formula appears. Click it to fill in all of its herbs and doses automatically."
+UI_CREDITS_GAME_TITLE,医 者,Doctor
+UI_CREDITS_GAME_DESIGN,游戏设计,Game Design
+UI_CREDITS_LI_QIAOCHEN,李翘辰,Li Qiaochen
+UI_CREDITS_PROGRAMMING,程序,Programming
+UI_CREDITS_ART,美术,Art
+UI_CREDITS_AUDIO_TITLE,音 乐 音 效,Music & Sound
+UI_CREDITS_MUSIC,音乐,Music
+UI_CREDITS_SOUND_ASSETS,音效素材,Sound Assets
+UI_CREDITS_SPECIAL_THANKS,特 别 感 谢,Special Thanks
+UI_CREDITS_INSPIRATION,以及所有给予本作灵感与参考的,Inspired by the work and ideas of
+UI_CREDITS_INDIE_DEVS,独立游戏制作人,Independent Game Developers
+UI_CREDITS_END,终,The End
+UI_CREDITS_THANK_YOU,感谢游玩,Thank You for Playing
+UI_CREDITS_BOOK_TITLE,本草纲目,Compendium of Materia Medica
+UI_DAILY_FINANCE_TITLE,今日银钱结算,Today's Finances
+UI_DAILY_FINANCE_INCOME,收入,Income
+UI_DAILY_FINANCE_CONSULTATION_FMT,诊费：%s,Consultation: %s
+UI_DAILY_FINANCE_MEDICINE_NET_FMT,药材收入：%s,Net Herb Income: %s
+UI_DAILY_FINANCE_MEDICINE_SALES_FMT,药材销售：%s,Herb Sales: %s
+UI_DAILY_FINANCE_OLD_PROFIT_FMT,药材利润（旧账）：%s,Herb Profit (Legacy): %s
+UI_DAILY_FINANCE_GIFT_FMT,病家谢礼：%s,Patient Gifts: %s
+UI_DAILY_FINANCE_LI_JIAN_ZHONG_FMT,李建中俸禄：%s,Li Jianzhong's Salary: %s
+UI_DAILY_FINANCE_LI_YAN_WEN_FMT,李言闻收入：%s,Li Yanwen's Income: %s
+UI_DAILY_FINANCE_LAND_RENT_FMT,田租：%s,Land Rent: %s
+UI_DAILY_FINANCE_TOTAL_INCOME_FMT,收入合计：%s,Total Income: %s
+UI_DAILY_FINANCE_EXPENSE,支出,Expenses
+UI_DAILY_FINANCE_MEDICINE_COST_FMT,药材进货成本：%s,Herb Purchase Cost: %s
+UI_DAILY_FINANCE_OLD_FAILURE_COST_FMT,治疗失败药材成本（旧账）：%s,Failed Treatment Herbs (Legacy): %s
+UI_DAILY_FINANCE_STAFF_WAGES_FMT,陈皮半夏工钱：%s,Chenpi & Banxia Pay: %s
+UI_DAILY_FINANCE_FOOD_FMT,食物：%s,Food: %s
+UI_DAILY_FINANCE_GIFTS_FMT,人情随礼：%s,Social Gifts: %s
+UI_DAILY_FINANCE_BOOKS_FMT,购买医书：%s,Medical Books: %s
+UI_DAILY_FINANCE_COAL_FMT,煤炭：%s,Coal: %s
+UI_DAILY_FINANCE_CLOTHING_FMT,布匹棉衣：%s,Cloth & Winter Clothes: %s
+UI_DAILY_FINANCE_REPAIRS_FMT,修缮房屋：%s,House Repairs: %s
+UI_DAILY_FINANCE_ANCESTORS_FMT,扫墓祭祖：%s,Ancestral Rites: %s
+UI_DAILY_FINANCE_MOLDY_HERBS_FMT,药材发霉：%s,Spoiled Herbs: %s
+UI_DAILY_FINANCE_SUMMER_TAX_FMT,夏税：%s,Summer Tax: %s
+UI_DAILY_FINANCE_AUTUMN_TAX_FMT,秋税：%s,Autumn Tax: %s
+UI_DAILY_FINANCE_TOTAL_EXPENSE_FMT,支出合计：%s,Total Expenses: %s
+UI_DAILY_FINANCE_NET_CHANGE_FMT,本日变化：%s,Today's Change: %s
+UI_BOOK_NAME_BEI_JI_QIAN_JIN_YAO_FANG,备急千金要方,Beiji Qianjin Yaofang
+UI_BOOK_NAME_HUANG_DI_NEI_JING,黄帝内经,Huangdi Neijing
+UI_BOOK_NAME_JIN_GUI_YAO_LUE,金匮要略,Jingui Yaolue
+UI_BOOK_NAME_JING_YUE_QUAN_SHU,景岳全书,Jingyue Quanshu
+UI_BOOK_NAME_JIU_YUAN_FANG,究原方,Jiuyuan Fang
+UI_BOOK_NAME_LAN_SHI_MI_CANG,兰室秘藏,Lanshi Micang
+UI_BOOK_NAME_LIU_ZHOU_YI_HUA,柳州医话,Liuzhou Yihua
+UI_BOOK_NAME_PU_JI_BEN_SHI_FANG,普济本事方,Puji Benshi Fang
+UI_BOOK_NAME_REN_ZHAI_ZHI_ZHI_FANG_LUN,仁斋直指方论,Renzhai Zhizhi Fanglun
+UI_BOOK_NAME_SHANG_HAN_LUN,伤寒论,Shanghan Lun
+UI_BOOK_NAME_SHEN_NONG_BEN_CAO_JING,神农本草经,Shennong Bencao Jing
+UI_BOOK_NAME_TAI_PING_HUI_MIN_HE_JI_JU_FANG,太平惠民和剂局方,Taiping Huimin Heji Jufang
+UI_BOOK_NAME_TAI_YI_YUAN_JING_YAN_QI_XIAO_LIANG_FANG_DA_QUAN,太医院经验奇效良方大全,Taiyiyuan Formula Collection
+UI_BOOK_NAME_WANG_SHI_BO_JI_FANG,王氏博济方,Wangshi Boji Fang
+UI_BOOK_NAME_WEN_BING_TIAO_BIAN,温病条辨,Wenbing Tiaobian
+UI_BOOK_NAME_XIAO_ER_YAO_ZHENG_ZHI_JUE,小儿药证直诀,Xiao'er Yaozheng Zhijue
+UI_BOOK_NAME_XING_YI_JI_KAO,行医记考,Clinical Records
+UI_BOOK_NAME_YAN_SHI_JI_SHENG_FANG,严氏济生方,Yanshi Jisheng Fang
+UI_BOOK_NAME_YI_FANG_JI_JIE,医方集解,Yifang Jijie
+UI_BOOK_NAME_YI_FANG_KAO,医方考,Yifang Kao
+UI_BOOK_NAME_YI_LIN_GAI_CUO,医林改错,Yilin Gaicuo
+UI_BOOK_NAME_ZHU_BING_YUAN_HOU_LUN,诸病源候论,Zhu Bing Yuan Hou Lun

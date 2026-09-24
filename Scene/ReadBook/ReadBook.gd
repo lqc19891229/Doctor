@@ -78,7 +78,14 @@ func _notification(what: int) -> void:
 		if selected_book != null:
 			_refresh_entry_list_view(entry_id)
 
-	if _info_message_key != "":
+	if selected_book != null and _info_message_key in [
+		"UI_READ_BOOK_SEARCH_SUMMARY_FMT",
+		"UI_READ_BOOK_EMPTY_BOOK_FMT",
+		"UI_READ_BOOK_UNREAD_COUNT_FMT",
+		"UI_READ_BOOK_ENTRY_COUNT_FMT"
+	]:
+		_update_entry_info_label()
+	elif _info_message_key != "":
 		_set_info_message(_info_message_key, _info_message_args)
 	if pulse_practice_window != null and pulse_practice_window.visible:
 		call_deferred("_update_pulse_practice_title")
@@ -88,6 +95,14 @@ func _set_info_message(key: String, args: Array = []) -> void:
 	_info_message_key = key
 	_info_message_args = args
 	info_label.text = tr(key) % args if not args.is_empty() else tr(key)
+
+
+func _localized_book_name(book: BookData) -> String:
+	if book == null:
+		return ""
+	var key := "UI_BOOK_NAME_" + book.book_id.to_upper()
+	var translated := tr(key)
+	return book.book_name if translated == key else translated
 
 
 func _ready() -> void:
@@ -302,7 +317,7 @@ func _rebuild_book_list_for_search(preferred_book_id: String = "") -> int:
 			global_search_match_count += match_count
 
 		var new_entry_count = Unlock.get_unread_readable_entry_count_by_book(book.book_id)
-		var display_name := book.book_name
+		var display_name := _localized_book_name(book)
 
 		if query != "":
 			display_name += tr("UI_READ_BOOK_MATCH_BADGE_FMT") % match_count
@@ -332,6 +347,8 @@ func _rebuild_book_list_for_search(preferred_book_id: String = "") -> int:
 				item_index,
 				tr("UI_READ_BOOK_NEW_TOOLTIP_FMT") % new_entry_count
 			)
+		else:
+			book_list.set_item_tooltip(item_index, display_name)
 
 		if preferred_book_id != "" and book.book_id.strip_edges() == preferred_book_id:
 			preferred_index = item_index
@@ -481,25 +498,25 @@ func _update_entry_info_label() -> void:
 		_set_info_message("UI_READ_BOOK_SEARCH_SUMMARY_FMT", [
 			raw_query,
 			global_search_match_count,
-			selected_book.book_name,
+			_localized_book_name(selected_book),
 			displayed_entries.size()
 		])
 		return
 
 	if readable_entries.is_empty():
-		_set_info_message("UI_READ_BOOK_EMPTY_BOOK_FMT", [selected_book.book_name])
+		_set_info_message("UI_READ_BOOK_EMPTY_BOOK_FMT", [_localized_book_name(selected_book)])
 		return
 
 	var new_entry_count = Unlock.get_unread_readable_entry_count_by_book(selected_book.book_id)
 	if new_entry_count > 0:
 		_set_info_message("UI_READ_BOOK_UNREAD_COUNT_FMT", [
-			selected_book.book_name,
+			_localized_book_name(selected_book),
 			readable_entries.size(),
 			new_entry_count
 		])
 	else:
 		_set_info_message("UI_READ_BOOK_ENTRY_COUNT_FMT", [
-			selected_book.book_name,
+			_localized_book_name(selected_book),
 			readable_entries.size()
 		])
 

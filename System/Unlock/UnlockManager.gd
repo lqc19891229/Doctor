@@ -1292,43 +1292,43 @@ func build_finance_report_text(day: int) -> String:
 	var net_change := int(report.get("net_change_wen", 0))
 
 	var lines: Array[String] = []
-	lines.append("今日银钱结算")
+	lines.append(tr("UI_DAILY_FINANCE_TITLE"))
 	lines.append("")
-	lines.append("收入")
-	lines.append("诊费：%s" % format_money_change(consultation_income))
+	lines.append(tr("UI_DAILY_FINANCE_INCOME"))
+	lines.append(tr("UI_DAILY_FINANCE_CONSULTATION_FMT") % _format_finance_change(consultation_income))
 
 	if accounting_version >= FINANCE_ACCOUNTING_VERSION_NET_MEDICINE_INCOME:
 		var medicine_income := int(report.get("medicine_income_wen", 0))
-		lines.append("药材收入：%s" % format_money_change(medicine_income))
+		lines.append(tr("UI_DAILY_FINANCE_MEDICINE_NET_FMT") % _format_finance_change(medicine_income))
 	elif accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS:
 		var medicine_sales := int(report.get("medicine_sales_wen", 0))
-		lines.append("药材销售：%s" % format_money_change(medicine_sales))
+		lines.append(tr("UI_DAILY_FINANCE_MEDICINE_SALES_FMT") % _format_finance_change(medicine_sales))
 	else:
 		# 仅用于无法还原销售额/成本拆分的旧存档当天。
 		var medicine_profit := int(report.get("medicine_profit_wen", 0))
-		lines.append("药材利润（旧账）：%s" % format_money_change(medicine_profit))
+		lines.append(tr("UI_DAILY_FINANCE_OLD_PROFIT_FMT") % _format_finance_change(medicine_profit))
 
 	if patient_thank_gift_income > 0:
 		lines.append(
-			"病家谢礼：%s"
-			% format_money_change(patient_thank_gift_income)
+			tr("UI_DAILY_FINANCE_GIFT_FMT")
+			% _format_finance_change(patient_thank_gift_income)
 		)
 
 	var li_jian_zhong_salary := int(report.get("li_jian_zhong_salary_wen", 0))
 	if li_jian_zhong_salary > 0:
-		lines.append("李建中俸禄：%s" % format_money_change(li_jian_zhong_salary))
+		lines.append(tr("UI_DAILY_FINANCE_LI_JIAN_ZHONG_FMT") % _format_finance_change(li_jian_zhong_salary))
 
 	var li_yan_wen_income := int(report.get("li_yan_wen_income_wen", 0))
 	if li_yan_wen_income > 0:
-		lines.append("李言闻收入：%s" % format_money_change(li_yan_wen_income))
+		lines.append(tr("UI_DAILY_FINANCE_LI_YAN_WEN_FMT") % _format_finance_change(li_yan_wen_income))
 
 	var land_rent := int(report.get("land_rent_wen", 0))
 	if land_rent > 0:
-		lines.append("田租：%s" % format_money_change(land_rent))
+		lines.append(tr("UI_DAILY_FINANCE_LAND_RENT_FMT") % _format_finance_change(land_rent))
 
-	lines.append("收入合计：%s" % format_money_change(total_income))
+	lines.append(tr("UI_DAILY_FINANCE_TOTAL_INCOME_FMT") % _format_finance_change(total_income))
 	lines.append("")
-	lines.append("支出")
+	lines.append(tr("UI_DAILY_FINANCE_EXPENSE"))
 
 	if (
 		accounting_version >= FINANCE_ACCOUNTING_VERSION_GROSS
@@ -1336,39 +1336,61 @@ func build_finance_report_text(day: int) -> String:
 	):
 		var medicine_purchase_cost := int(report.get("medicine_purchase_cost_wen", 0))
 		if medicine_purchase_cost > 0:
-			lines.append("药材进货成本：%s" % format_money_change(-medicine_purchase_cost))
+			lines.append(tr("UI_DAILY_FINANCE_MEDICINE_COST_FMT") % _format_finance_change(-medicine_purchase_cost))
 	elif accounting_version < FINANCE_ACCOUNTING_VERSION_GROSS:
 		var failed_medicine_cost := int(report.get("failed_medicine_cost_wen", 0))
 		if failed_medicine_cost > 0:
-			lines.append("治疗失败药材成本（旧账）：%s" % format_money_change(-failed_medicine_cost))
+			lines.append(tr("UI_DAILY_FINANCE_OLD_FAILURE_COST_FMT") % _format_finance_change(-failed_medicine_cost))
 
 	if staff_wage > 0:
-		lines.append("陈皮半夏工钱：%s" % format_money_change(-staff_wage))
+		lines.append(tr("UI_DAILY_FINANCE_STAFF_WAGES_FMT") % _format_finance_change(-staff_wage))
 	if food_cost > 0:
-		lines.append("食物：%s" % format_money_change(-food_cost))
+		lines.append(tr("UI_DAILY_FINANCE_FOOD_FMT") % _format_finance_change(-food_cost))
 	if human_gift_cost > 0:
-		lines.append("人情随礼：%s" % format_money_change(-human_gift_cost))
+		lines.append(tr("UI_DAILY_FINANCE_GIFTS_FMT") % _format_finance_change(-human_gift_cost))
 	if medical_book_cost > 0:
-		lines.append("购买医书：%s" % format_money_change(-medical_book_cost))
+		lines.append(tr("UI_DAILY_FINANCE_BOOKS_FMT") % _format_finance_change(-medical_book_cost))
 	if coal_cost > 0:
-		lines.append("煤炭：%s" % format_money_change(-coal_cost))
+		lines.append(tr("UI_DAILY_FINANCE_COAL_FMT") % _format_finance_change(-coal_cost))
 	if clothing_cost > 0:
-		lines.append("布匹棉衣：%s" % format_money_change(-clothing_cost))
+		lines.append(tr("UI_DAILY_FINANCE_CLOTHING_FMT") % _format_finance_change(-clothing_cost))
 	if house_repair_cost > 0:
-		lines.append("修缮房屋：%s" % format_money_change(-house_repair_cost))
+		lines.append(tr("UI_DAILY_FINANCE_REPAIRS_FMT") % _format_finance_change(-house_repair_cost))
 	if ancestor_worship_cost > 0:
-		lines.append("扫墓祭祖：%s" % format_money_change(-ancestor_worship_cost))
+		lines.append(tr("UI_DAILY_FINANCE_ANCESTORS_FMT") % _format_finance_change(-ancestor_worship_cost))
 	if moldy_herb_cost > 0:
-		lines.append("药材发霉：%s" % format_money_change(-moldy_herb_cost))
+		lines.append(tr("UI_DAILY_FINANCE_MOLDY_HERBS_FMT") % _format_finance_change(-moldy_herb_cost))
 	if summer_tax > 0:
-		lines.append("夏税：%s" % format_money_change(-summer_tax))
+		lines.append(tr("UI_DAILY_FINANCE_SUMMER_TAX_FMT") % _format_finance_change(-summer_tax))
 	if autumn_tax > 0:
-		lines.append("秋税：%s" % format_money_change(-autumn_tax))
+		lines.append(tr("UI_DAILY_FINANCE_AUTUMN_TAX_FMT") % _format_finance_change(-autumn_tax))
 
-	lines.append("支出合计：%s" % format_money_change(-total_expense))
+	lines.append(tr("UI_DAILY_FINANCE_TOTAL_EXPENSE_FMT") % _format_finance_change(-total_expense))
 	lines.append("")
-	lines.append("本日变化：%s" % format_money_change(net_change))
+	lines.append(tr("UI_DAILY_FINANCE_NET_CHANGE_FMT") % _format_finance_change(net_change))
 	return "\n".join(lines)
+
+
+func _format_finance_change(amount_wen: int) -> String:
+	if not TranslationServer.get_locale().begins_with("en"):
+		return format_money_change(amount_wen)
+
+	var amount := absi(amount_wen)
+	var liang: int = amount / WEN_PER_LIANG
+	var wen: int = amount % WEN_PER_LIANG
+	var parts: Array[String] = []
+	if liang > 0:
+		parts.append(tr("UI_MONEY_LIANG_FMT") % liang)
+	if wen > 0:
+		parts.append(tr("UI_MONEY_WEN_FMT") % wen)
+	if parts.is_empty():
+		parts.append(tr("UI_MONEY_WEN_FMT") % 0)
+	var sign := ""
+	if amount_wen > 0:
+		sign = "+"
+	elif amount_wen < 0:
+		sign = "-"
+	return sign + " ".join(parts)
 
 
 

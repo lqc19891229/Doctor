@@ -40,35 +40,35 @@ const MUTED_INK := Color("#574B3D")
 # 古籍阅读习惯通常从右向左，因此本脚本也按右侧第一列开始排。
 const CREDITS := [
 	{
-		"title": "医 者",
+		"title": "UI_CREDITS_GAME_TITLE",
 		"columns": [
-			["游戏设计", "李翘辰"],			
+			["UI_CREDITS_GAME_DESIGN", "UI_CREDITS_LI_QIAOCHEN"],			
 
-			["程序", "ChatGPT-Sol"],			
+			["UI_CREDITS_PROGRAMMING", "ChatGPT-Sol"],			
 
-			["美术", "ChatGPT-Images"]
+			["UI_CREDITS_ART", "ChatGPT-Images"]
 		]
 	},
 	{
-		"title": "音 乐 音 效",
+		"title": "UI_CREDITS_AUDIO_TITLE",
 		"columns": [
-			["音乐", "Suno"],	
+			["UI_CREDITS_MUSIC", "Suno"],	
 
-			["音效素材", "Pixabay"]
+			["UI_CREDITS_SOUND_ASSETS", "Pixabay"]
 		]
 	},
 	{
-		"title": "特 别 感 谢",
+		"title": "UI_CREDITS_SPECIAL_THANKS",
 		"columns": [
 			["Lucas Pope"],
-			["以及所有给予本作灵感与参考的"],
-			["独立游戏制作人"]
+			["UI_CREDITS_INSPIRATION"],
+			["UI_CREDITS_INDIE_DEVS"]
 		]
 	},
 	{
-		"title": "终",
+		"title": "UI_CREDITS_END",
 		"columns": [
-			["感谢游玩"],
+			["UI_CREDITS_THANK_YOU"],
 			
 		]
 	}
@@ -80,6 +80,13 @@ var _content_width: float = 0.0
 var _running := false
 var _elapsed := 0.0
 var _finished := false
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		_build_scroll()
+
+func _use_english_layout() -> bool:
+	return TranslationServer.get_locale().begins_with("en")
 
 func _ready() -> void:
 	resized.connect(_on_resized)
@@ -214,13 +221,14 @@ func _create_cover_page(page_x: float) -> void:
 		frame.add_child(inner)
 
 		var title := Label.new()
-		title.text = _vertical_text("本草纲目")
+		title.text = tr("UI_CREDITS_BOOK_TITLE") if _use_english_layout() else _vertical_text(tr("UI_CREDITS_BOOK_TITLE"))
 		title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		title.add_theme_font_size_override("font_size", 54)
+		title.add_theme_font_size_override("font_size", 38 if _use_english_layout() else 54)
 		title.add_theme_color_override("font_color", INK_COLOR)
-		title.position = Vector2(inner.size.x * 0.35, inner.size.y * 0.16)
-		title.size = Vector2(inner.size.x * 0.30, inner.size.y * 0.68)
+		title.position = Vector2(inner.size.x * (0.10 if _use_english_layout() else 0.35), inner.size.y * 0.16)
+		title.size = Vector2(inner.size.x * (0.80 if _use_english_layout() else 0.30), inner.size.y * 0.68)
+		title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		inner.add_child(title)
 
@@ -239,8 +247,12 @@ func _create_credit_page(page_x: float, page_data: Dictionary) -> void:
 	separator.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	page.add_child(separator)
 
+	if _use_english_layout():
+		_create_english_credit_text(page, page_data)
+		return
+
 	var title_label := Label.new()
-	title_label.text = _vertical_text(str(page_data.get("title", "")))
+	title_label.text = _vertical_text(tr(str(page_data.get("title", ""))))
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 	title_label.add_theme_font_size_override("font_size", title_font_size)
@@ -266,12 +278,43 @@ func _create_credit_page(page_x: float, page_data: Dictionary) -> void:
 
 		for item in column_data:
 			var label := Label.new()
-			label.text = _vertical_text(str(item))
+			label.text = _vertical_text(tr(str(item)))
 			label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			label.add_theme_font_size_override("font_size", name_font_size)
 			label.add_theme_color_override("font_color", INK_COLOR)
 			label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			column.add_child(label)
+
+func _create_english_credit_text(page: Control, page_data: Dictionary) -> void:
+	var heading := Label.new()
+	heading.text = tr(str(page_data.get("title", "")))
+	heading.position = Vector2(65, size.y * 0.15)
+	heading.size = Vector2(page_width - 130, size.y * 0.14)
+	heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	heading.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	heading.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	heading.add_theme_font_size_override("font_size", title_font_size)
+	heading.add_theme_color_override("font_color", MUTED_INK)
+	heading.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	page.add_child(heading)
+
+	var columns: Array = page_data.get("columns", [])
+	var row_height := size.y * 0.58 / maxf(3.0, float(columns.size()))
+	for index in range(columns.size()):
+		var pieces := PackedStringArray()
+		for item in columns[index]:
+			pieces.append(tr(str(item)))
+		var line := Label.new()
+		line.text = " · ".join(pieces)
+		line.position = Vector2(65, size.y * 0.31 + index * row_height)
+		line.size = Vector2(page_width - 130, row_height)
+		line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		line.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		line.add_theme_font_size_override("font_size", name_font_size)
+		line.add_theme_color_override("font_color", INK_COLOR)
+		line.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		page.add_child(line)
 
 func _vertical_text(source: String) -> String:
 	# 空格只用于视觉分词，竖排时忽略。
