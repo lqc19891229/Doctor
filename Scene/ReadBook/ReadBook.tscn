@@ -46,6 +46,7 @@ size_flags_vertical = 3
 [node name="BookPanel" type="PanelContainer" parent="MarginContainer/VBoxRoot/ContentRow" unique_id=1617596319]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
 
 [node name="BookVBox" type="VBoxContainer" parent="MarginContainer/VBoxRoot/ContentRow/BookPanel" unique_id=1835840276]
 layout_mode = 2

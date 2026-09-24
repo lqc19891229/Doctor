@@ -9,6 +9,7 @@ signal main_menu_requested
 signal quit_requested
 
 @onready var main_pause_center: CenterContainer = $DarkBackground/CenterContainer
+@onready var pause_title_label: Label = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/TitleLabel
 @onready var resume_button: Button = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResumeButton
 @onready var save_button: Button = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SaveButton
 @onready var load_button: Button = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LoadGameButton
@@ -17,6 +18,8 @@ signal quit_requested
 @onready var quit_button: Button = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/QuitButton
 
 @onready var manual_save_center: CenterContainer = $DarkBackground/ManualSaveCenter
+@onready var manual_save_title_label: Label = $DarkBackground/ManualSaveCenter/PanelContainer/MarginContainer/VBoxContainer/TitleLabel
+@onready var manual_save_rule_label: Label = $DarkBackground/ManualSaveCenter/PanelContainer/MarginContainer/VBoxContainer/RuleLabel
 @onready var manual_slot_2_button: Button = $DarkBackground/ManualSaveCenter/PanelContainer/MarginContainer/VBoxContainer/ManualSlot2Button
 @onready var manual_slot_3_button: Button = $DarkBackground/ManualSaveCenter/PanelContainer/MarginContainer/VBoxContainer/ManualSlot3Button
 @onready var manual_slot_4_button: Button = $DarkBackground/ManualSaveCenter/PanelContainer/MarginContainer/VBoxContainer/ManualSlot4Button
@@ -25,6 +28,8 @@ signal quit_requested
 @onready var manual_save_back_button: Button = $DarkBackground/ManualSaveCenter/PanelContainer/MarginContainer/VBoxContainer/BackButton
 
 @onready var load_save_center: CenterContainer = $DarkBackground/LoadSaveCenter
+@onready var load_title_label: Label = $DarkBackground/LoadSaveCenter/PanelContainer/MarginContainer/VBoxContainer/TitleLabel
+@onready var load_rule_label: Label = $DarkBackground/LoadSaveCenter/PanelContainer/MarginContainer/VBoxContainer/RuleLabel
 @onready var load_slot_1_button: Button = $DarkBackground/LoadSaveCenter/PanelContainer/MarginContainer/VBoxContainer/LoadSlot1Button
 @onready var load_slot_2_button: Button = $DarkBackground/LoadSaveCenter/PanelContainer/MarginContainer/VBoxContainer/LoadSlot2Button
 @onready var load_slot_3_button: Button = $DarkBackground/LoadSaveCenter/PanelContainer/MarginContainer/VBoxContainer/LoadSlot3Button
@@ -56,6 +61,19 @@ func _localized_save_name(meta: Dictionary) -> String:
 
 
 func refresh_language() -> void:
+	pause_title_label.text = tr("UI_PAUSED")
+	resume_button.text = tr("UI_RESUME_GAME")
+	save_button.text = tr("UI_SAVE_GAME")
+	load_button.text = tr("UI_LOAD_SAVE")
+	settings_button.text = tr("UI_SETTINGS_TITLE")
+	main_menu_button.text = tr("UI_RETURN_MENU")
+	quit_button.text = tr("UI_MENU_QUIT_GAME")
+	manual_save_title_label.text = tr("UI_MANUAL_SAVE")
+	manual_save_rule_label.text = tr("UI_MANUAL_SAVE_RULE")
+	manual_save_back_button.text = tr("UI_BACK")
+	load_title_label.text = tr("UI_LOAD_SAVE")
+	load_rule_label.text = tr("UI_LOAD_RULE")
+	load_back_button.text = tr("UI_BACK")
 	if manual_save_center.visible:
 		_refresh_manual_save_buttons()
 	if load_save_center.visible:
@@ -68,6 +86,11 @@ func refresh_language() -> void:
 		manual_overwrite_dialog.title = tr("UI_OVERWRITE_MANUAL")
 		manual_overwrite_dialog.get_ok_button().text = tr("UI_CONFIRM_OVERWRITE")
 		manual_overwrite_dialog.get_cancel_button().text = tr("UI_CANCEL")
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		refresh_language()
 
 
 func _ready() -> void:
@@ -123,6 +146,7 @@ func _ready() -> void:
 
 	_setup_manual_overwrite_dialog()
 	_setup_load_confirm_dialog()
+	refresh_language()
 	_show_main_pause_panel()
 
 
@@ -165,6 +189,7 @@ func set_input_enabled(enabled: bool) -> void:
 
 
 func show_menu() -> void:
+	refresh_language()
 	visible = true
 	_show_main_pause_panel()
 
