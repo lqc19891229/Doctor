@@ -497,3 +497,9 @@ UI_STORY_TREATMENT_HINT,诊疗提示,Treatment Notice
 UI_STORY_INVALID_TREATMENT_RESULT,Clinic 返回了无效的诊疗结果。,Clinic returned an invalid treatment result.
 UI_STORY_SUBMIT_FAILED,处方提交失败。,Could not submit the prescription.
 UI_HINT_PLACEHOLDER,提示内容,Notice text
+UI_RESULT_ROLE_LINE_FMT,%s：%s,%s: %s
+UI_RESULT_NONE,（无）,(None)
+UI_RESULT_FORMULA_NOT_FOUND,（未找到标准方）,(Standard formula not found)
+UI_RESULT_NO_DIAGNOSIS,未选择疾病,No condition selected
+UI_RESULT_PRESET_UNLOCK,预制方剂,Formula Preset
+UI_RESULT_PRESET_UNLOCK_FMT,预制方剂：%s,Formula Preset: %s

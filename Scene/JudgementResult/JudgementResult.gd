@@ -44,6 +44,23 @@ func _render_result(data: Dictionary) -> void:
 	var patient_thank_gift_wen: int = int(data.get("patient_thank_gift_wen", 0))
 	var grade := str(data.get("grade", "")).strip_edges()
 
+	# 结果页保留原始中文记录；英文只在显示时重组角色和剂量。
+	# 这样切换语言后可重新渲染，存档与处方计算仍使用原始值。
+	if TranslationServer.get_locale().begins_with("en"):
+		var standard_formula = data.get("standard_formula_resource", null)
+		if standard_formula is FormulaData:
+			standard_formula_text = _format_formula_for_english(standard_formula)
+		elif standard_formula_text == "（未找到标准方）":
+			standard_formula_text = tr("UI_RESULT_FORMULA_NOT_FOUND")
+
+		var prescription = data.get("player_prescription_resource", null)
+		if prescription is Prescription:
+			player_prescription_text = _format_prescription_for_english(prescription)
+		elif player_prescription_text == "（无）":
+			player_prescription_text = tr("UI_RESULT_NONE")
+		if player_disease_name == "未选择疾病":
+			player_disease_name = tr("UI_RESULT_NO_DIAGNOSIS")
+
 	result_text.clear()
 	result_text.append_text(tr("UI_RESULT_DISEASE_FMT") % disease_name)
 	result_text.append_text(tr("UI_RESULT_FORMULA_FMT") % standard_formula_name)
@@ -66,6 +83,9 @@ func _render_result(data: Dictionary) -> void:
 		result_text.append_text(tr("UI_RESULT_REWARDS_FMT") % tr("UI_RESULT_REWARD_SEPARATOR").join(reward_parts))
 
 	if not newly_unlocked_entry_titles.is_empty():
+		if TranslationServer.get_locale().begins_with("en"):
+			for index in range(newly_unlocked_entry_titles.size()):
+				newly_unlocked_entry_titles[index] = _localized_unlock_title(newly_unlocked_entry_titles[index])
 		result_text.append_text(tr("UI_RESULT_UNLOCKED_FMT") % tr("UI_RESULT_UNLOCK_SEPARATOR").join(newly_unlocked_entry_titles))
 
 	var rating_key := ""
@@ -86,6 +106,90 @@ func _render_result(data: Dictionary) -> void:
 	rating_image.visible = rating_image.texture != null and not use_english_text
 	rating_text.visible = use_english_text
 	rating_text.text = tr(rating_key) if use_english_text else ""
+
+
+func _format_formula_for_english(formula: FormulaData) -> String:
+	var groups := [
+		["UI_PRESCRIPTION_ROLE_JUN", formula.jun_group],
+		["UI_PRESCRIPTION_ROLE_CHEN", formula.chen_group],
+		["UI_PRESCRIPTION_ROLE_ZUO", formula.zuo_group],
+		["UI_PRESCRIPTION_ROLE_SHI", formula.shi_group]
+	]
+	var lines: Array[String] = []
+	for role_data in groups:
+		var parts: Array[String] = []
+		for ingredient in role_data[1]:
+			if ingredient == null:
+				continue
+			if ingredient.has_method("is_valid_data") and not ingredient.is_valid_data():
+				continue
+			var herb_name := ""
+			if ingredient.has_method("get_herb_name"):
+				herb_name = str(ingredient.get_herb_name()).strip_edges()
+			if herb_name == "" and ingredient.has_method("get_herb_id"):
+				herb_name = str(ingredient.get_herb_id()).strip_edges()
+			if herb_name == "":
+				continue
+			var amount := ""
+			if ingredient.has_method("get_amount_in_fen"):
+				amount = _format_dose_for_english(int(ingredient.get_amount_in_fen()))
+			if amount == "":
+				parts.append(herb_name)
+			else:
+				parts.append("%s %s" % [herb_name, amount])
+		var content := tr("UI_RESULT_NONE") if parts.is_empty() else tr("UI_RESULT_UNLOCK_SEPARATOR").join(parts)
+		lines.append(tr("UI_RESULT_ROLE_LINE_FMT") % [tr(role_data[0]), content])
+	return "\n".join(lines)
+
+
+func _format_prescription_for_english(prescription: Prescription) -> String:
+	var roles := [
+		["君", "UI_PRESCRIPTION_ROLE_JUN"],
+		["臣", "UI_PRESCRIPTION_ROLE_CHEN"],
+		["佐", "UI_PRESCRIPTION_ROLE_ZUO"],
+		["使", "UI_PRESCRIPTION_ROLE_SHI"]
+	]
+	var lines: Array[String] = []
+	for role_data in roles:
+		var parts: Array[String] = []
+		for item in prescription.get_herbs_by_role(role_data[0]):
+			var herb_name := str(item.get("herb_name", "")).strip_edges()
+			if herb_name == "":
+				continue
+			var amount := float(item.get("amount", 0.0))
+			var unit := str(item.get("unit", ""))
+			parts.append("%s %s" % [herb_name, _format_dose_for_english(HerbUnit.to_fen(amount, unit))])
+		var content := tr("UI_RESULT_NONE") if parts.is_empty() else tr("UI_RESULT_UNLOCK_SEPARATOR").join(parts)
+		lines.append(tr("UI_RESULT_ROLE_LINE_FMT") % [tr(role_data[1]), content])
+	return "\n".join(lines)
+
+
+func _format_dose_for_english(total_fen: int) -> String:
+	if total_fen <= 0:
+		return tr("UI_PRESCRIPTION_ZERO_FEN")
+
+	var remaining := total_fen
+	var parts: Array[String] = []
+	for unit_data in [
+		[HerbUnit.FEN_PER_JIN, "UI_PRESCRIPTION_UNIT_JIN"],
+		[HerbUnit.FEN_PER_LIANG, "UI_PRESCRIPTION_UNIT_LIANG"],
+		[HerbUnit.FEN_PER_QIAN, "UI_PRESCRIPTION_UNIT_QIAN"],
+		[HerbUnit.FEN_PER_FEN, "UI_PRESCRIPTION_UNIT_FEN"]
+	]:
+		var unit_size: int = unit_data[0]
+		var count: int = remaining / unit_size
+		if count > 0:
+			parts.append("%d %s" % [count, tr(unit_data[1])])
+			remaining %= unit_size
+	return " ".join(parts)
+
+
+func _localized_unlock_title(value: String) -> String:
+	if value == "预制方剂":
+		return tr("UI_RESULT_PRESET_UNLOCK")
+	if value.begins_with("预制方剂："):
+		return tr("UI_RESULT_PRESET_UNLOCK_FMT") % value.trim_prefix("预制方剂：")
+	return value
 
 
 func _get_string_array(value) -> Array[String]:
