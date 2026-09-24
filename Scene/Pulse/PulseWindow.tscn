@@ -7,7 +7,7 @@
 
 [node name="PulseWindow" type="Window" unique_id=1028787152]
 oversampling_override = 1.0
-title = "把脉"
+title = "UI_PULSE_WINDOW_TITLE"
 position = Vector2i(0, 36)
 size = Vector2i(990, 1000)
 unresizable = true
@@ -80,7 +80,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
-text = "浮脉(表)"
+text = "UI_PULSE_LABEL_FLOAT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -88,7 +88,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
-text = "右尺(肾阳)"
+text = "UI_PULSE_LABEL_RIGHT_CHI"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -96,7 +96,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
-text = "右关(脾)"
+text = "UI_PULSE_LABEL_RIGHT_GUAN"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -104,7 +104,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
-text = "右寸(肺)"
+text = "UI_PULSE_LABEL_RIGHT_CUN"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -144,7 +144,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
-text = "浮脉(表)"
+text = "UI_PULSE_LABEL_FLOAT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -152,7 +152,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
-text = "左尺(肾阴)"
+text = "UI_PULSE_LABEL_LEFT_CHI"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -160,7 +160,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
-text = "左关(肝)"
+text = "UI_PULSE_LABEL_LEFT_GUAN"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -168,7 +168,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
-text = "左寸(心)"
+text = "UI_PULSE_LABEL_LEFT_CUN"
 horizontal_alignment = 1
 vertical_alignment = 1
 

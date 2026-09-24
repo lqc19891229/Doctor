@@ -206,3 +206,107 @@ UI_SOLAR_TERM_20,大雪,Major Snow
 UI_SOLAR_TERM_21,冬至,Winter Solstice
 UI_SOLAR_TERM_22,小寒,Minor Cold
 UI_SOLAR_TERM_23,大寒,Major Cold
+UI_PULSE_WINDOW_TITLE,把脉,Pulse Diagnosis
+UI_PULSE_KEY_HINT,"
+
+按键提示：
+
+
+右手脉象：Q+A+Z
+
+左手脉象：W+S+X","
+
+Key Controls:
+
+
+Right Hand Pulse: Q+A+Z
+
+Left Hand Pulse: W+S+X"
+UI_PULSE_LABEL_FLOAT,浮脉(表),Floating (Exterior)
+UI_PULSE_LABEL_RIGHT_CHI,右尺(肾阳),Right Chi (Kidney Yang)
+UI_PULSE_LABEL_RIGHT_GUAN,右关(脾),Right Guan (Spleen)
+UI_PULSE_LABEL_RIGHT_CUN,右寸(肺),Right Cun (Lung)
+UI_PULSE_LABEL_LEFT_CHI,左尺(肾阴),Left Chi (Kidney Yin)
+UI_PULSE_LABEL_LEFT_GUAN,左关(肝),Left Guan (Liver)
+UI_PULSE_LABEL_LEFT_CUN,左寸(心),Left Cun (Heart)
+UI_PULSE_REGION_FLOAT,浮脉,Floating Pulse
+UI_PULSE_REGION_RIGHT_CHI,右尺,Right Chi
+UI_PULSE_REGION_RIGHT_GUAN,右关,Right Guan
+UI_PULSE_REGION_RIGHT_CUN,右寸,Right Cun
+UI_PULSE_REGION_LEFT_CHI,左尺,Left Chi
+UI_PULSE_REGION_LEFT_GUAN,左关,Left Guan
+UI_PULSE_REGION_LEFT_CUN,左寸,Left Cun
+UI_PULSE_AREA_EXTERIOR,表,Exterior
+UI_PULSE_AREA_KIDNEY_YANG,肾阳,Kidney Yang
+UI_PULSE_AREA_SPLEEN,脾,Spleen
+UI_PULSE_AREA_LUNG,肺,Lung
+UI_PULSE_AREA_KIDNEY_YIN,肾阴,Kidney Yin
+UI_PULSE_AREA_LIVER,肝,Liver
+UI_PULSE_AREA_HEART,心,Heart
+UI_PULSE_NO_DISEASE,当前没有疾病数据,No disease data available.
+UI_PULSE_UNKNOWN_REGION_FMT,未知脉诊区域：%s,Unknown pulse region: %s
+UI_PULSE_REGION_MISSING_FMT,"当前部位：%s
+对应区域：%s
+未找到区域数据","Current pulse point: %s
+Corresponding area: %s
+No data for this area."
+UI_PULSE_REGION_VALUES_FMT,"当前查看：%s
+对应区域：%s
+气：%s  血：%s  寒热：%s  湿燥：%s","Viewing: %s
+Corresponding area: %s
+Qi: %s  Blood: %s  Cold/Heat: %s  Damp/Dry: %s"
+UI_PULSE_HAND_RIGHT,右,Right
+UI_PULSE_HAND_LEFT,左,Left
+UI_PULSE_UNKNOWN_HAND_FMT,未知整手类型：%s,Unknown hand: %s
+UI_PULSE_HAND_LINE_EMPTY_FMT,%s（%s）：无数据,%s (%s): No data
+UI_PULSE_HAND_LINE_VALUES_FMT,%s（%s） 气：%s  血：%s  寒热：%s  湿燥：%s,%s (%s) Qi: %s  Blood: %s  Cold/Heat: %s  Damp/Dry: %s
+UI_PULSE_HAND_SUMMARY_FMT,"当前查看：%s手整手脉象
+显示顺序：%s / %s / %s / %s
+
+%s","Full pulse reading: %s hand
+Display order: %s / %s / %s / %s
+
+%s"
+UI_RESULT_TITLE,结果判定,Treatment Result
+UI_RESULT_CONTENT_PLACEHOLDER,内容,Details
+UI_RESULT_CLOSE_HINT,点击任意区域关闭,Click anywhere to close
+UI_RESULT_DISEASE_FMT,"病人疾病：%s
+","Patient's condition: %s
+"
+UI_RESULT_FORMULA_FMT,"标准方：%s
+","Standard formula: %s
+"
+UI_RESULT_FORMULA_DETAIL_FMT,"方剂配伍：
+%s
+
+","Formula composition:
+%s
+
+"
+UI_RESULT_DIAGNOSIS_FMT,"断病：%s
+","Diagnosis: %s
+"
+UI_RESULT_PRESCRIPTION_FMT,"开方：
+%s
+","Prescription:
+%s
+"
+UI_RESULT_REPUTATION_CHANGE_FMT,名望%s,Reputation %s
+UI_RESULT_CONSULTATION_CHANGE_FMT,诊费%s,Consultation fee %s
+UI_RESULT_MEDICINE_CHANGE_FMT,药材收入%s,Medicine income %s
+UI_RESULT_GIFT_CHANGE_FMT,病家谢礼%s,Patient's gift %s
+UI_RESULT_REWARDS_FMT,"
+本次治疗奖励：%s
+","
+Treatment rewards: %s
+"
+UI_RESULT_REWARD_SEPARATOR,，,", "
+UI_RESULT_UNLOCKED_FMT,"
+解锁新条目：%s
+","
+New entries unlocked: %s
+"
+UI_RESULT_UNLOCK_SEPARATOR,、,", "
+UI_RESULT_GRADE_PERFECT,妙手回春,Miraculous Recovery
+UI_RESULT_GRADE_SUCCESS,治疗成功,Treatment Successful
+UI_RESULT_GRADE_FAILED,治疗失败,Treatment Failed

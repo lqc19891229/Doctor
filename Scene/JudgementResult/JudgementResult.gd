@@ -5,6 +5,14 @@ signal result_closed
 @onready var title_label: Label = $Panel/VBoxContainer/Title
 @onready var result_text: RichTextLabel = $Panel/VBoxContainer/RichTextLabel
 @onready var rating_image: TextureRect = $Panel/VBoxContainer/RatingImage
+@onready var rating_text: Label = $Panel/VBoxContainer/RatingText
+
+var current_result_data: Dictionary = {}
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready() and not current_result_data.is_empty():
+		_render_result(current_result_data)
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -15,8 +23,13 @@ func _ready() -> void:
 		result_text.bbcode_enabled = true
 
 func show_result(data: Dictionary) -> void:
+	current_result_data = data.duplicate(true)
 	visible = true
 	get_tree().paused = true
+	_render_result(current_result_data)
+
+
+func _render_result(data: Dictionary) -> void:
 
 	var disease_name: String = str(data.get("disease_name", ""))
 	var standard_formula_name: String = str(data.get("standard_formula_name", ""))
@@ -32,40 +45,47 @@ func show_result(data: Dictionary) -> void:
 	var grade := str(data.get("grade", "")).strip_edges()
 
 	result_text.clear()
-	result_text.append_text("病人疾病：%s\n" % disease_name)
-	result_text.append_text("标准方：%s\n" % standard_formula_name)
-	result_text.append_text("方剂配伍：\n%s\n\n" % standard_formula_text)
-	result_text.append_text("断病：%s\n" % player_disease_name)
-	result_text.append_text("开方：\n%s\n" % player_prescription_text)
+	result_text.append_text(tr("UI_RESULT_DISEASE_FMT") % disease_name)
+	result_text.append_text(tr("UI_RESULT_FORMULA_FMT") % standard_formula_name)
+	result_text.append_text(tr("UI_RESULT_FORMULA_DETAIL_FMT") % standard_formula_text)
+	result_text.append_text(tr("UI_RESULT_DIAGNOSIS_FMT") % player_disease_name)
+	result_text.append_text(tr("UI_RESULT_PRESCRIPTION_FMT") % player_prescription_text)
 
 	# 首次提交时始终分项显示诊费和药材收入。
 	# 治疗失败时诊费为 0，药材收入为负的实际成本。
 	if show_reward_change:
 		var reward_parts: Array[String] = [
-			"名望%s" % _format_change(reputation_change),
-			"诊费%s" % _format_money_change(consultation_fee_wen),
-			"药材收入%s" % _format_money_change(medicine_income_wen)
+			tr("UI_RESULT_REPUTATION_CHANGE_FMT") % _format_change(reputation_change),
+			tr("UI_RESULT_CONSULTATION_CHANGE_FMT") % _format_money_change(consultation_fee_wen),
+			tr("UI_RESULT_MEDICINE_CHANGE_FMT") % _format_money_change(medicine_income_wen)
 		]
 		if patient_thank_gift_wen > 0:
 			reward_parts.append(
-				"病家谢礼%s" % _format_money_change(patient_thank_gift_wen)
+				tr("UI_RESULT_GIFT_CHANGE_FMT") % _format_money_change(patient_thank_gift_wen)
 			)
-		result_text.append_text("\n本次治疗奖励：%s\n" % "，".join(reward_parts))
+		result_text.append_text(tr("UI_RESULT_REWARDS_FMT") % tr("UI_RESULT_REWARD_SEPARATOR").join(reward_parts))
 
 	if not newly_unlocked_entry_titles.is_empty():
-		result_text.append_text("\n解锁新条目：%s\n" % "、".join(newly_unlocked_entry_titles))
+		result_text.append_text(tr("UI_RESULT_UNLOCKED_FMT") % tr("UI_RESULT_UNLOCK_SEPARATOR").join(newly_unlocked_entry_titles))
 
+	var rating_key := ""
 	match grade:
 		"妙手回春":
 			rating_image.texture = preload("res://Assets/Rating/rating_miaoshouhuichun.png")
+			rating_key = "UI_RESULT_GRADE_PERFECT"
 		"治疗成功":
 			rating_image.texture = preload("res://Assets/Rating/rating_success.png")
+			rating_key = "UI_RESULT_GRADE_SUCCESS"
 		"治疗失败":
 			rating_image.texture = preload("res://Assets/Rating/rating_failed.png")
+			rating_key = "UI_RESULT_GRADE_FAILED"
 		_:
 			rating_image.texture = null
 
-	rating_image.visible = rating_image.texture != null
+	var use_english_text := TranslationServer.get_locale().begins_with("en") and not rating_key.is_empty()
+	rating_image.visible = rating_image.texture != null and not use_english_text
+	rating_text.visible = use_english_text
+	rating_text.text = tr(rating_key) if use_english_text else ""
 
 
 func _get_string_array(value) -> Array[String]:
@@ -89,6 +109,21 @@ func _format_change(value: int) -> String:
 
 func _format_money_change(value: int) -> String:
 	# 与银钱系统当前“两 / 文”显示格式保持一致。
+	if TranslationServer.get_locale().begins_with("en"):
+		var amount := absi(value)
+		var liang: int = amount / 1000
+		var wen: int = amount % 1000
+		var parts: Array[String] = []
+		if liang > 0:
+			parts.append(tr("UI_MONEY_LIANG_FMT") % liang)
+		if wen > 0:
+			parts.append(tr("UI_MONEY_WEN_FMT") % wen)
+		if parts.is_empty():
+			parts.append(tr("UI_MONEY_WEN_FMT") % 0)
+		if value == 0:
+			return parts[0]
+		return ("+" if value > 0 else "-") + " ".join(parts)
+
 	if Unlock != null and Unlock.has_method("format_money_change"):
 		return String(Unlock.format_money_change(value))
 

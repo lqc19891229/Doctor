@@ -119,11 +119,45 @@ const LEFT_HAND_DISEASE_NAMES: Array[String] = [
 @onready var right_pulse_drawer: Control = $LayerTabs/右手脉象/RightHandLayout/RightPulseDrawer
 @onready var left_pulse_drawer: Control = $LayerTabs/左手脉象/LeftHandLayout/LeftPulseDrawer
 
+const REGION_DISPLAY_KEYS := {
+	"浮脉": "UI_PULSE_REGION_FLOAT",
+	"右尺": "UI_PULSE_REGION_RIGHT_CHI",
+	"右关": "UI_PULSE_REGION_RIGHT_GUAN",
+	"右寸": "UI_PULSE_REGION_RIGHT_CUN",
+	"左尺": "UI_PULSE_REGION_LEFT_CHI",
+	"左关": "UI_PULSE_REGION_LEFT_GUAN",
+	"左寸": "UI_PULSE_REGION_LEFT_CUN"
+}
+
+const DISEASE_REGION_DISPLAY_KEYS := {
+	"表": "UI_PULSE_AREA_EXTERIOR",
+	"肾阳": "UI_PULSE_AREA_KIDNEY_YANG",
+	"脾": "UI_PULSE_AREA_SPLEEN",
+	"肺": "UI_PULSE_AREA_LUNG",
+	"肾阴": "UI_PULSE_AREA_KIDNEY_YIN",
+	"肝": "UI_PULSE_AREA_LIVER",
+	"心": "UI_PULSE_AREA_HEART"
+}
+
+
+func _localized_region_name(name: String) -> String:
+	return tr(String(REGION_DISPLAY_KEYS.get(name, name)))
+
+
+func _localized_disease_region_name(name: String) -> String:
+	return tr(String(DISEASE_REGION_DISPLAY_KEYS.get(name, name)))
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		title = tr("UI_PULSE_WINDOW_TITLE")
+
 
 # =========================================================
 # 生命周期
 # =========================================================
 func _ready() -> void:
+	title = tr("UI_PULSE_WINDOW_TITLE")
 	# 初始化时放到固定位置
 	position = fixed_window_position
 
@@ -374,12 +408,12 @@ func show_region(display_region_name: String, disease) -> Dictionary:
 
 	if disease == null:
 		clear_display()
-		result.text = "当前没有疾病数据"
+		result.text = tr("UI_PULSE_NO_DISEASE")
 		return result
 
 	if not REGION_CONFIG.has(display_region_name):
 		clear_display()
-		result.text = "未知脉诊区域：" + display_region_name
+		result.text = tr("UI_PULSE_UNKNOWN_REGION_FMT") % _localized_region_name(display_region_name)
 		return result
 
 	# 每次查看时，同时刷新左右两页的数据
@@ -392,16 +426,16 @@ func show_region(display_region_name: String, disease) -> Dictionary:
 	var region_data = disease.get_region_pulse_values(disease_region_name)
 
 	if region_data.is_empty():
-		result.text = "当前部位：%s\n对应区域：%s\n未找到区域数据" % [
-			display_region_name,
-			disease_region_name
+		result.text = tr("UI_PULSE_REGION_MISSING_FMT") % [
+			_localized_region_name(display_region_name),
+			_localized_disease_region_name(disease_region_name)
 		]
 		return result
 
 	result.ok = true
-	result.text = "当前查看：%s\n对应区域：%s\n气：%s  血：%s  寒热：%s  湿燥：%s" % [
-		display_region_name,
-		disease_region_name,
+	result.text = tr("UI_PULSE_REGION_VALUES_FMT") % [
+		_localized_region_name(display_region_name),
+		_localized_disease_region_name(disease_region_name),
 		region_data.get("qi", 0.0),
 		region_data.get("blood", 0.0),
 		region_data.get("cold_hot", 0.0),
@@ -426,7 +460,7 @@ func show_hand_group(hand_side: String, disease) -> Dictionary:
 
 	if disease == null:
 		clear_display()
-		result.text = "当前没有疾病数据"
+		result.text = tr("UI_PULSE_NO_DISEASE")
 		return result
 
 	# 每次查看时，同时刷新左右两页的数据
@@ -439,7 +473,7 @@ func show_hand_group(hand_side: String, disease) -> Dictionary:
 	if hand_side == "right":
 		display_names = RIGHT_HAND_DISPLAY_NAMES
 		disease_names = RIGHT_HAND_DISEASE_NAMES
-		hand_name = "右"
+		hand_name = tr("UI_PULSE_HAND_RIGHT")
 
 		# 切到右手脉象页
 		_switch_to_right_tab()
@@ -447,13 +481,13 @@ func show_hand_group(hand_side: String, disease) -> Dictionary:
 	elif hand_side == "left":
 		display_names = LEFT_HAND_DISPLAY_NAMES
 		disease_names = LEFT_HAND_DISEASE_NAMES
-		hand_name = "左"
+		hand_name = tr("UI_PULSE_HAND_LEFT")
 
 		# 切到左手脉象页
 		_switch_to_left_tab()
 
 	else:
-		result.text = "未知整手类型：" + hand_side
+		result.text = tr("UI_PULSE_UNKNOWN_HAND_FMT") % hand_side
 		return result
 
 	var detail_lines: Array[String] = []
@@ -464,15 +498,15 @@ func show_hand_group(hand_side: String, disease) -> Dictionary:
 		var region_data = disease.get_region_pulse_values(disease_region_name)
 
 		if region_data.is_empty():
-			detail_lines.append("%s（%s）：无数据" % [
-				display_region_name,
-				disease_region_name
+			detail_lines.append(tr("UI_PULSE_HAND_LINE_EMPTY_FMT") % [
+				_localized_region_name(display_region_name),
+				_localized_disease_region_name(disease_region_name)
 			])
 		else:
 			detail_lines.append(
-				"%s（%s） 气：%s  血：%s  寒热：%s  湿燥：%s" % [
-					display_region_name,
-					disease_region_name,
+				tr("UI_PULSE_HAND_LINE_VALUES_FMT") % [
+					_localized_region_name(display_region_name),
+					_localized_disease_region_name(disease_region_name),
 					region_data.get("qi", 0.0),
 					region_data.get("blood", 0.0),
 					region_data.get("cold_hot", 0.0),
@@ -481,12 +515,12 @@ func show_hand_group(hand_side: String, disease) -> Dictionary:
 			)
 
 	result.ok = true
-	result.text = "当前查看：%s手整手脉象\n显示顺序：%s / %s / %s / %s\n\n%s" % [
+	result.text = tr("UI_PULSE_HAND_SUMMARY_FMT") % [
 		hand_name,
-		display_names[0],
-		display_names[1],
-		display_names[2],
-		display_names[3],
+		_localized_region_name(display_names[0]),
+		_localized_region_name(display_names[1]),
+		_localized_region_name(display_names[2]),
+		_localized_region_name(display_names[3]),
 		"\n".join(detail_lines)
 	]
 
