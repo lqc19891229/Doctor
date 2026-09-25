@@ -1,130 +1,422 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from __future__ import annotations
-import csv, re, sys, zipfile, xml.etree.ElementTree as ET
+
+import csv
+import re
+import sys
+from copy import copy
 from pathlib import Path
+
+try:
+    from openpyxl import load_workbook
+except ImportError:
+    print("ERROR: openpyxl is required.")
+    print("Install it with: pip install openpyxl")
+    raise SystemExit(1)
+
 
 SHEET_ORDER = ["UI", "Herbs", "Formulas", "Diseases", "NPC"]
 EXPECTED_HEADER = ["keys", "zh_CN", "en"]
-NS_MAIN = {"x": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
-PKG_REL = {"p": "http://schemas.openxmlformats.org/package/2006/relationships"}
+
+SYMPTOM_KEY_PREFIX = "UI_DISEASE_SYMPTOM_"
 PLACEHOLDER_RE = re.compile(r"%(?:[-+0 #]*\d*(?:\.\d+)?)?[sdif]")
 
-def column_index(ref):
-    letters = re.match(r"[A-Z]+", ref).group(0)
-    n = 0
-    for ch in letters:
-        n = n * 26 + ord(ch) - 64
-    return n - 1
 
-def shared_strings(zf):
-    path = "xl/sharedStrings.xml"
-    if path not in zf.namelist():
-        return []
-    root = ET.fromstring(zf.read(path))
-    return ["".join(t.text or "" for t in si.findall(".//x:t", NS_MAIN))
-            for si in root.findall("x:si", NS_MAIN)]
+def as_text(value) -> str:
+    if value is None:
+        return ""
+    return str(value).strip()
 
-def sheet_paths(zf):
-    wb = ET.fromstring(zf.read("xl/workbook.xml"))
-    rels_root = ET.fromstring(zf.read("xl/_rels/workbook.xml.rels"))
-    rels = {r.attrib["Id"]: r.attrib["Target"]
-            for r in rels_root.findall("p:Relationship", PKG_REL)}
-    result = {}
-    for s in wb.find("x:sheets", NS_MAIN).findall("x:sheet", NS_MAIN):
-        rid = s.attrib["{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id"]
-        target = rels[rid].lstrip("/")
-        if not target.startswith("xl/"):
-            target = "xl/" + target
-        result[s.attrib["name"]] = target
+
+def placeholders(value: str) -> list[str]:
+    return PLACEHOLDER_RE.findall(value or "")
+
+
+def find_data_xlsx(explicit_path: Path | None, managed_xlsx: Path) -> Path | None:
+    """
+    Locate Data.xlsx.
+
+    Priority:
+    1. Third command-line argument
+    2. Same folder as translations_managed.xlsx
+    3. ../DataTables/Data.xlsx relative to translations_managed.xlsx
+    4. ./DataTables/Data.xlsx relative to translations_managed.xlsx
+    5. Current working directory variants
+    """
+    if explicit_path is not None:
+        return explicit_path if explicit_path.exists() else None
+
+    candidates = [
+        managed_xlsx.parent / "Data.xlsx",
+        managed_xlsx.parent.parent / "DataTables" / "Data.xlsx",
+        managed_xlsx.parent / "DataTables" / "Data.xlsx",
+        Path("Data.xlsx"),
+        Path("../DataTables/Data.xlsx"),
+        Path("DataTables/Data.xlsx"),
+    ]
+
+    seen = set()
+    for path in candidates:
+        try:
+            resolved = path.resolve()
+        except OSError:
+            resolved = path
+
+        key = str(resolved)
+        if key in seen:
+            continue
+        seen.add(key)
+
+        if path.exists():
+            return path
+
+    return None
+
+
+def validate_managed_sheets(wb) -> None:
+    missing = [name for name in SHEET_ORDER if name not in wb.sheetnames]
+    if missing:
+        raise ValueError("translations workbook is missing sheets: " + ", ".join(missing))
+
+    for sheet_name in SHEET_ORDER:
+        ws = wb[sheet_name]
+        header = [as_text(ws.cell(1, col).value) for col in range(1, 4)]
+        if header != EXPECTED_HEADER:
+            raise ValueError(
+                f"{sheet_name} header must be {EXPECTED_HEADER}, got {header}"
+            )
+
+
+def read_disease_symptoms(data_xlsx: Path) -> list[tuple[str, list[str]]]:
+    """
+    Read Data.xlsx -> Disease -> DiseaseID + Symptoms.
+    Symptoms uses | as the separator.
+    """
+    wb = load_workbook(data_xlsx, data_only=True, read_only=True)
+
+    if "Disease" not in wb.sheetnames:
+        raise ValueError(f"{data_xlsx} is missing the Disease sheet")
+
+    ws = wb["Disease"]
+    headers = {
+        as_text(cell.value): index
+        for index, cell in enumerate(ws[1], start=1)
+        if as_text(cell.value)
+    }
+
+    for required in ("DiseaseID", "Symptoms"):
+        if required not in headers:
+            raise ValueError(f"Data.xlsx Disease sheet is missing column: {required}")
+
+    id_col = headers["DiseaseID"]
+    symptoms_col = headers["Symptoms"]
+
+    result: list[tuple[str, list[str]]] = []
+    seen_ids: set[str] = set()
+
+    for row_no in range(2, ws.max_row + 1):
+        disease_id = as_text(ws.cell(row_no, id_col).value)
+        raw_symptoms = as_text(ws.cell(row_no, symptoms_col).value)
+
+        if not disease_id:
+            continue
+
+        if disease_id in seen_ids:
+            raise ValueError(
+                f"Data.xlsx Disease sheet has duplicate DiseaseID at row {row_no}: "
+                f"{disease_id}"
+            )
+        seen_ids.add(disease_id)
+
+        symptoms = [
+            item.strip()
+            for item in raw_symptoms.split("|")
+            if item and item.strip()
+        ]
+
+        result.append((disease_id, symptoms))
+
     return result
 
-def cell_text(cell, shared):
-    t = cell.attrib.get("t", "")
-    if t == "inlineStr":
-        return "".join(x.text or "" for x in cell.findall(".//x:t", NS_MAIN))
-    v = cell.find("x:v", NS_MAIN)
-    raw = "" if v is None or v.text is None else v.text
-    if t == "s":
-        return shared[int(raw)] if raw else ""
-    return raw
 
-def read_sheet(zf, path, shared):
-    root = ET.fromstring(zf.read(path))
-    data = root.find("x:sheetData", NS_MAIN)
-    out = []
-    if data is None:
-        return out
-    for row in data.findall("x:row", NS_MAIN):
-        vals = ["", "", ""]
-        for c in row.findall("x:c", NS_MAIN):
-            ref = c.attrib.get("r", "")
-            if not ref:
+def parse_symptom_key(key: str) -> tuple[str, int] | None:
+    if not key.startswith(SYMPTOM_KEY_PREFIX):
+        return None
+
+    rest = key[len(SYMPTOM_KEY_PREFIX):]
+    match = re.fullmatch(r"(.+)_([0-9]{2,})", rest)
+    if match is None:
+        return None
+
+    return match.group(1).lower(), int(match.group(2))
+
+
+def copy_row_style(source_ws, source_row: int, target_ws, target_row: int) -> None:
+    for col in range(1, 4):
+        source = source_ws.cell(source_row, col)
+        target = target_ws.cell(target_row, col)
+
+        if source.has_style:
+            target._style = copy(source._style)
+        if source.number_format:
+            target.number_format = source.number_format
+        target.font = copy(source.font)
+        target.fill = copy(source.fill)
+        target.border = copy(source.border)
+        target.alignment = copy(source.alignment)
+        target.protection = copy(source.protection)
+
+    target_ws.row_dimensions[target_row].height = source_ws.row_dimensions[source_row].height
+
+
+def update_table_ranges(ws) -> None:
+    """
+    The managed workbook uses Excel tables.
+    After deleting/appending symptom rows, extend any table on this sheet to the new end row.
+    """
+    if ws.max_row < 1:
+        return
+
+    for table in ws.tables.values():
+        # All localization tables are A:C tables.
+        table.ref = f"A1:C{ws.max_row}"
+
+
+def sync_disease_symptoms(managed_wb, disease_symptoms: list[tuple[str, list[str]]]) -> list[str]:
+    """
+    Synchronize UI_DISEASE_SYMPTOM_* rows in the Diseases sheet.
+
+    Translation preservation priority:
+    1. Same disease + same Chinese symptom
+    2. Same Chinese symptom anywhere in old symptom rows
+    3. Otherwise English remains blank and export stops so it can be translated
+
+    This means reordering Symptoms in Data.xlsx will not attach the wrong English
+    translation to the new _01 / _02 / _03 numbering.
+    """
+    ws = managed_wb["Diseases"]
+
+    existing_by_disease_and_zh: dict[tuple[str, str], str] = {}
+    existing_by_zh: dict[str, str] = {}
+    symptom_rows: list[int] = []
+
+    style_source_row: int | None = None
+
+    for row_no in range(2, ws.max_row + 1):
+        key = as_text(ws.cell(row_no, 1).value)
+        parsed = parse_symptom_key(key)
+        if parsed is None:
+            continue
+
+        disease_id, _index = parsed
+        zh = as_text(ws.cell(row_no, 2).value)
+        en = as_text(ws.cell(row_no, 3).value)
+
+        symptom_rows.append(row_no)
+
+        if style_source_row is None:
+            style_source_row = row_no
+
+        if zh and en:
+            existing_by_disease_and_zh[(disease_id, zh)] = en
+            existing_by_zh.setdefault(zh, en)
+
+    # If the workbook has no symptom rows yet, use the last ordinary Diseases row
+    # as the formatting template.
+    if style_source_row is None:
+        style_source_row = max(ws.max_row, 2)
+
+    # Remove old symptom rows bottom-up.
+    for row_no in reversed(symptom_rows):
+        ws.delete_rows(row_no, 1)
+
+    missing_english: list[str] = []
+
+    for disease_id, symptoms in disease_symptoms:
+        for index, zh in enumerate(symptoms, start=1):
+            key = f"{SYMPTOM_KEY_PREFIX}{disease_id.upper()}_{index:02d}"
+
+            en = existing_by_disease_and_zh.get((disease_id.lower(), zh), "")
+            if not en:
+                en = existing_by_zh.get(zh, "")
+
+            target_row = ws.max_row + 1
+            copy_row_style(ws, style_source_row, ws, target_row)
+
+            ws.cell(target_row, 1).value = key
+            ws.cell(target_row, 2).value = zh
+            ws.cell(target_row, 3).value = en
+
+            if not en:
+                missing_english.append(f"{key} | {zh}")
+
+    update_table_ranges(ws)
+    return missing_english
+
+
+def save_managed_workbook_safely(wb, path: Path) -> None:
+    """
+    Save through a temporary file, then replace the original.
+    This reduces the risk of leaving a damaged workbook if saving is interrupted.
+    """
+    temp_path = path.with_name(path.stem + ".__tmp__" + path.suffix)
+
+    try:
+        wb.save(temp_path)
+        temp_path.replace(path)
+    finally:
+        if temp_path.exists():
+            try:
+                temp_path.unlink()
+            except OSError:
+                pass
+
+
+def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
+    all_rows: list[list[str]] = []
+    seen: dict[str, str] = {}
+    warnings: list[str] = []
+
+    for sheet_name in SHEET_ORDER:
+        ws = wb[sheet_name]
+        count = 0
+
+        for row_no in range(2, ws.max_row + 1):
+            key = as_text(ws.cell(row_no, 1).value)
+            zh = as_text(ws.cell(row_no, 2).value)
+            en = as_text(ws.cell(row_no, 3).value)
+
+            if not key and not zh and not en:
                 continue
-            idx = column_index(ref)
-            if 0 <= idx <= 2:
-                vals[idx] = cell_text(c, shared)
-        out.append(vals)
-    return out
 
-def ph(s):
-    return PLACEHOLDER_RE.findall(s or "")
+            if not key or not zh or not en:
+                raise ValueError(
+                    f"incomplete row: {sheet_name} row {row_no} "
+                    f"(key={key!r}, zh_CN={zh!r}, en={en!r})"
+                )
 
-def main():
-    xlsx = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("translations_managed.xlsx")
-    out_csv = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("translations.csv")
-    if not xlsx.exists():
-        print("ERROR: workbook not found:", xlsx)
-        return 1
+            if key in seen:
+                raise ValueError(
+                    f"duplicate key {key!r}: {seen[key]} and "
+                    f"{sheet_name} row {row_no}"
+                )
 
-    all_rows, seen, warnings = [], {}, []
-    with zipfile.ZipFile(xlsx, "r") as zf:
-        shared = shared_strings(zf)
-        paths = sheet_paths(zf)
+            seen[key] = f"{sheet_name} row {row_no}"
 
-        missing = [x for x in SHEET_ORDER if x not in paths]
-        if missing:
-            print("ERROR: missing sheets:", ", ".join(missing))
-            return 1
+            zh_ph = placeholders(zh)
+            en_ph = placeholders(en)
+            if sorted(zh_ph) != sorted(en_ph):
+                warnings.append(
+                    f"{sheet_name} row {row_no} {key}: "
+                    f"zh={zh_ph}, en={en_ph}"
+                )
 
-        for sheet in SHEET_ORDER:
-            rows = read_sheet(zf, paths[sheet], shared)
-            if not rows or rows[0] != EXPECTED_HEADER:
-                print(f"ERROR: {sheet} header must be {EXPECTED_HEADER}")
-                return 1
+            all_rows.append([key, zh, en])
+            count += 1
 
-            count = 0
-            for row_no, row in enumerate(rows[1:], 2):
-                key, zh, en = row
-                if not key and not zh and not en:
-                    continue
-                if not key or not zh or not en:
-                    print(f"ERROR: incomplete row: {sheet} row {row_no}")
-                    return 1
-                if key in seen:
-                    print(f"ERROR: duplicate key {key}: {seen[key]} and {sheet} row {row_no}")
-                    return 1
-                seen[key] = f"{sheet} row {row_no}"
-                if sorted(ph(zh)) != sorted(ph(en)):
-                    warnings.append(f"{sheet} row {row_no} {key}: zh={ph(zh)} en={ph(en)}")
-                all_rows.append([key, zh, en])
-                count += 1
-            print(f"{sheet}: {count} rows")
+        print(f"{sheet_name}: {count} rows")
+
+    out_csv.parent.mkdir(parents=True, exist_ok=True)
 
     with out_csv.open("w", encoding="utf-8-sig", newline="") as f:
-        w = csv.writer(f, lineterminator="\n")
-        w.writerow(EXPECTED_HEADER)
-        w.writerows(all_rows)
+        writer = csv.writer(f, lineterminator="\n")
+        writer.writerow(EXPECTED_HEADER)
+        writer.writerows(all_rows)
 
-    print(f"\nExported {len(all_rows)} rows -> {out_csv}")
-    if warnings:
-        print("\nWARNING: placeholder differences:")
-        for x in warnings:
-            print(" -", x)
-    else:
-        print("Placeholder check: OK")
-    print("\nReplace res://Localization/translations.csv and Reimport it in Godot.")
-    return 0
+    return len(all_rows), warnings
+
+
+def main() -> int:
+    managed_xlsx = (
+        Path(sys.argv[1])
+        if len(sys.argv) > 1
+        else Path("translations_managed.xlsx")
+    )
+    out_csv = (
+        Path(sys.argv[2])
+        if len(sys.argv) > 2
+        else Path("translations.csv")
+    )
+    explicit_data_xlsx = Path(sys.argv[3]) if len(sys.argv) > 3 else None
+
+    if not managed_xlsx.exists():
+        print("ERROR: translations workbook not found:", managed_xlsx)
+        return 1
+
+    data_xlsx = find_data_xlsx(explicit_data_xlsx, managed_xlsx)
+    if data_xlsx is None:
+        print("ERROR: Data.xlsx was not found.")
+        print("Pass it as the third argument, for example:")
+        print(
+            "  python export_translations.py "
+            "translations_managed.xlsx translations.csv ../DataTables/Data.xlsx"
+        )
+        return 1
+
+    print("Managed translations:", managed_xlsx)
+    print("Disease source:", data_xlsx)
+    print("Output CSV:", out_csv)
+    print()
+
+    try:
+        wb = load_workbook(managed_xlsx)
+        validate_managed_sheets(wb)
+
+        disease_symptoms = read_disease_symptoms(data_xlsx)
+        symptom_count = sum(len(items) for _disease_id, items in disease_symptoms)
+
+        print(
+            f"Syncing Disease!Symptoms: "
+            f"{len(disease_symptoms)} diseases, {symptom_count} symptom rows"
+        )
+
+        missing_english = sync_disease_symptoms(wb, disease_symptoms)
+
+        # Always save the synchronized managed workbook first.
+        save_managed_workbook_safely(wb, managed_xlsx)
+        print("Symptoms synchronized into Diseases sheet.")
+
+        # New Chinese symptoms need human translation before producing a game CSV.
+        if missing_english:
+            print()
+            print("STOP: new symptoms need English translations.")
+            print(
+                "They were added to translations_managed.xlsx with an empty en cell:"
+            )
+            for item in missing_english:
+                print(" -", item)
+            print()
+            print("Translate those rows, save the workbook, then run this script again.")
+            return 2
+
+        total, warnings = export_csv(wb, out_csv)
+
+        print()
+        print(f"Exported {total} rows -> {out_csv}")
+
+        if warnings:
+            print()
+            print("WARNING: placeholder differences:")
+            for item in warnings:
+                print(" -", item)
+        else:
+            print("Placeholder check: OK")
+
+        print()
+        print("Next: replace/reimport res://Localization/translations.csv in Godot.")
+        return 0
+
+    except PermissionError as exc:
+        print("ERROR:", exc)
+        print(
+            "Close translations_managed.xlsx in Excel/WPS and run the exporter again."
+        )
+        return 1
+    except Exception as exc:
+        print("ERROR:", exc)
+        return 1
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

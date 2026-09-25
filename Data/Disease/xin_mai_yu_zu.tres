@@ -6,6 +6,7 @@
 script = ExtResource("1")
 disease_id = "xin_mai_yu_zu"
 disease_name = "心脉瘀阻"
+Symptoms = Array[String](["不舒服", "心神不宁", "胸闷气短", "胸口疼"])
 detail_text = "心脉瘀阻\n\n【病机】瘀血阻滞心之脉络，气血不通，心失濡养，不通则痛。\n\n【症状】心胸疼痛，心悸心慌，胸闷气短，喘不得卧；面色晦暗、唇甲青紫。\n\n【脉象】\n左寸（心）：波线粗\n\n【标准方】血府逐瘀汤"
 recommended_formula_id = "xue_fu_zhu_yu_tang"
 exterior_qi = 1.0

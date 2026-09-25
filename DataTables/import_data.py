@@ -2220,6 +2220,11 @@ def build_disease_resources(indexed_data: dict[str, Any]) -> None:
         # 读取 Disease sheet 的 DetailText，写入 DiseaseData 资源本体。
         # 这样游戏逻辑直接加载 res://Data/Disease/*.tres 时也能拿到正文。
         detail_text = as_str(disease_row.get("DetailText"))
+
+        # Disease sheet 的 Symptoms 是随机 NPC 症状的唯一数据来源。
+        # 单元格使用 | 分隔，例如：不舒服|发烧|咳嗽。
+        symptoms = split_multi_value(disease_row.get("Symptoms"))
+
         # Disease 表现在填写 RecommendedFormulaName。
         # 导出 DiseaseData 时仍写入 recommended_formula_id，供游戏逻辑继续按 ID 查方剂。
         recommended_formula_id = get_disease_recommended_formula_id(disease_row, formula_name_to_id)
@@ -2232,6 +2237,7 @@ def build_disease_resources(indexed_data: dict[str, Any]) -> None:
 script = ExtResource("1")
 disease_id = {format_godot_string(disease_id)}
 disease_name = {format_godot_string(disease_name)}
+Symptoms = {format_godot_string_array(symptoms)}
 detail_text = {format_godot_string(detail_text)}
 recommended_formula_id = {format_godot_string(recommended_formula_id)}
 exterior_qi = {as_float(pulse_row.get("EQ"), 1.0)}
