@@ -25,6 +25,10 @@ class_name ClinicalLogWindow
 # =========================================================
 @export var fixed_window_position: Vector2i = Vector2i(1010, 66)
 
+# 中文竖排 / 英文横排使用不同书页背景。
+const BOOK_PAGE_TEXTURE_ZH: Texture2D = preload("res://Assets/UI/bookpage.png")
+const BOOK_PAGE_TEXTURE_EN: Texture2D = preload("res://Assets/UI/bookpage2.png")
+
 
 # =========================================================
 # 一、节点引用
@@ -36,6 +40,7 @@ class_name ClinicalLogWindow
 @onready var disease_search_bar: LineEdit = $Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Left/SearchBar
 @onready var disease_list: ItemList = $Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Left/DiseaseList
 @onready var disease_right_panel: Control = $Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right
+@onready var disease_book_page: TextureRect = $Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right/BookPage
 @onready var disease_detail_scroll: ScrollContainer = $Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right/DiseaseDetailScroll
 @onready var disease_detail_label: RichTextLabel = $Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage/Right/DiseaseDetailScroll/DiseaseDetail
 
@@ -43,6 +48,7 @@ class_name ClinicalLogWindow
 @onready var formula_search_bar: LineEdit = $Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Left/SearchBar
 @onready var formula_list: ItemList = $Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Left/FormulaList
 @onready var formula_right_panel: Control = $Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right
+@onready var formula_book_page: TextureRect = $Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right/BookPage
 @onready var formula_detail_scroll: ScrollContainer = $Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right/FormulaDetailScroll
 @onready var formula_detail_label: RichTextLabel = $Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage/Right/FormulaDetailScroll/FormulaDetail
 
@@ -50,6 +56,7 @@ class_name ClinicalLogWindow
 @onready var herb_search_bar: LineEdit = $Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Left/SearchBar
 @onready var herb_list: ItemList = $Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Left/HerbList
 @onready var herb_right_panel: Control = $Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right
+@onready var herb_book_page: TextureRect = $Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right/BookPage
 @onready var herb_detail_scroll: ScrollContainer = $Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right/HerbDetailScroll
 @onready var herb_detail_label: RichTextLabel = $Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage/Right/HerbDetailScroll/HerbDetail
 
@@ -116,6 +123,7 @@ var _herb_pages: Array[Dictionary] = []
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		_update_book_page_backgrounds()
 		_update_localized_ui()
 		if visible:
 			refresh_view()
@@ -181,6 +189,9 @@ func _ready() -> void:
 
 	# 初始化三类详情翻页控件。
 	_setup_all_page_controls()
+
+	# 根据当前语言设置书页背景。
+	_update_book_page_backgrounds()
 
 	# 设置页签、翻页按钮及初始空状态。
 	_update_localized_ui()
@@ -591,6 +602,14 @@ func _setup_page_controls(right_panel: Control, detail_scroll: ScrollContainer, 
 		"indicator": indicator,
 		"next": next_button,
 	}
+
+
+func _update_book_page_backgrounds() -> void:
+	var target_texture: Texture2D = BOOK_PAGE_TEXTURE_EN if _is_english_detail_layout() else BOOK_PAGE_TEXTURE_ZH
+
+	for book_page in [disease_book_page, formula_book_page, herb_book_page]:
+		if book_page != null:
+			book_page.texture = target_texture
 
 
 func _is_english_detail_layout() -> bool:
