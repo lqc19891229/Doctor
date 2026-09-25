@@ -52,7 +52,7 @@ tab_2/title = "UI_LOG_TAB_HERB_SHORTCUT"
 [node name="DiseasePage" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer" unique_id=1471360721]
 layout_mode = 2
 metadata/_tab_index = 0
-metadata/_tab_name = "疾病(1)"
+metadata/_tab_name = "UI_LOG_TAB_DISEASE_SHORTCUT"
 
 [node name="Left" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/DiseasePage" unique_id=770913058]
 layout_mode = 2
@@ -143,7 +143,7 @@ text = "UI_LOG_NEXT_PAGE"
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
-metadata/_tab_name = "方剂(2)"
+metadata/_tab_name = "UI_LOG_TAB_FORMULA_SHORTCUT"
 
 [node name="Left" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/FormulaPage" unique_id=557561604]
 layout_mode = 2
@@ -231,7 +231,7 @@ text = "UI_LOG_NEXT_PAGE"
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
-metadata/_tab_name = "药材(3)"
+metadata/_tab_name = "UI_LOG_TAB_HERB_SHORTCUT"
 
 [node name="Left" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/TabContainer/HerbPage" unique_id=881073121]
 layout_mode = 2

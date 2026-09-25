@@ -39,33 +39,66 @@ extends Resource
 ## =========================================================
 
 @export var is_treated: bool = false
-
-# 本轮治疗是否失败。失败时保持治疗前立绘，但显示治疗失败台词。
 var treatment_failed: bool = false
 
 ## =========================================================
 ## 五、台词系统（唯一入口）
 ## =========================================================
 
-# 治疗前台词开头
 @export_multiline var dialogue_prefix: String = ""
-
-# 治疗前台词结尾
 @export_multiline var dialogue_suffix: String = ""
-
-# 治疗后台词。治愈后显示 portrait_after_treatment 时使用。
 @export_multiline var dialogue_after_treatment: String = ""
-
-# 治疗失败台词。治疗失败时保持治疗前立绘，但显示这段台词。
 @export_multiline var dialogue_treatment_failed: String = ""
 
-# 运行时缓存：保证同一名病人刷新 UI / 打开窗口时，台词不会反复随机变化。
 var runtime_before_dialogue: String = ""
 var runtime_after_dialogue: String = ""
 var runtime_failed_dialogue: String = ""
 
 ## =========================================================
-## 六、对外接口（唯一台词生成入口）
+## 六、本地化辅助
+## =========================================================
+
+# UI 显示姓名统一通过这个方法获取。
+# npc_name 本身仍保留 .tres 中的原始中文，避免把当前语言写进存档或业务数据。
+func get_localized_name() -> String:
+	var fallback := npc_name.strip_edges()
+	var clean_id := npc_id.strip_edges()
+
+	if clean_id == "":
+		return fallback
+
+	var translation_key := "UI_NPC_NAME_" + clean_id.to_upper()
+	var translated := TranslationServer.translate(translation_key)
+
+	if translated.strip_edges() == "" or translated == translation_key:
+		return fallback
+
+	return translated
+
+
+func _is_english_locale() -> bool:
+	return TranslationServer.get_locale().to_lower().begins_with("en")
+
+
+func _get_localized_dialogue(dialogue_type: String) -> String:
+	var clean_id := npc_id.strip_edges()
+	if clean_id == "":
+		return ""
+
+	var translation_key := "UI_NPC_DIALOGUE_%s_%s" % [
+		dialogue_type.to_upper(),
+		clean_id.to_upper()
+	]
+	var translated := TranslationServer.translate(translation_key)
+
+	if translated.strip_edges() == "" or translated == translation_key:
+		return ""
+
+	return translated
+
+
+## =========================================================
+## 七、对外接口（唯一台词生成入口）
 ## =========================================================
 
 func setup_clinic_visit() -> void:
@@ -86,18 +119,35 @@ func get_dialogue() -> String:
 
 
 func get_before_treatment_dialogue() -> String:
+	# 中文环境保持原来的 prefix + symptom + suffix 动态拼接。
+	# 英文 random NPC 使用翻译表中的完整英文句，避免中文碎片混入英文。
+	if _is_english_locale() and npc_type.strip_edges().to_lower() == "random":
+		var translated := _get_localized_dialogue("BEFORE")
+		if translated != "":
+			return translated
+
 	if runtime_before_dialogue.strip_edges() == "":
 		runtime_before_dialogue = _build_before_treatment_dialogue()
 	return runtime_before_dialogue
 
 
 func get_after_treatment_dialogue() -> String:
+	if _is_english_locale() and npc_type.strip_edges().to_lower() == "random":
+		var translated := _get_localized_dialogue("AFTER")
+		if translated != "":
+			return translated
+
 	if runtime_after_dialogue.strip_edges() == "":
 		runtime_after_dialogue = _build_after_treatment_dialogue()
 	return runtime_after_dialogue
 
 
 func get_treatment_failed_dialogue() -> String:
+	if _is_english_locale() and npc_type.strip_edges().to_lower() == "random":
+		var translated := _get_localized_dialogue("FAILED")
+		if translated != "":
+			return translated
+
 	if runtime_failed_dialogue.strip_edges() == "":
 		runtime_failed_dialogue = _build_treatment_failed_dialogue()
 	return runtime_failed_dialogue
@@ -148,7 +198,7 @@ func _compose_dialogue(core: String) -> String:
 
 
 ## =========================================================
-## 七、症状获取（完全本地化）
+## 八、症状获取（完全本地化）
 ## =========================================================
 
 func _get_random_symptom() -> String:
@@ -165,17 +215,14 @@ func _get_random_symptom() -> String:
 	return str(list.pick_random()).strip_edges()
 
 
-
 ## =========================================================
-## 八、立绘获取
+## 九、立绘获取
 ## =========================================================
 
 func get_current_portrait() -> Texture2D:
-	# 治疗后优先显示 portrait_after_treatment。
 	if is_treated and portrait_after_treatment != null:
 		return portrait_after_treatment
 
-	# 治疗前优先显示 portrait_before_treatment。
 	if portrait_before_treatment != null:
 		return portrait_before_treatment
 

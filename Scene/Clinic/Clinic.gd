@@ -799,7 +799,7 @@ func _play_random_npc_portrait_entrance() -> void:
 # =========================================================
 
 func _update_npc_name() -> void:
-	# 只负责把 current_npc.npc_name 显示到 NpcNameLabel。
+	# 只负责把当前 NPC 的本地化名称显示到 NpcNameLabel。
 	# 如果当前没有病人，或病人姓名为空，则隐藏姓名 Label。
 	if npc_name_label == null:
 		return
@@ -810,6 +810,9 @@ func _update_npc_name() -> void:
 		return
 
 	var display_name := current_npc.npc_name.strip_edges()
+	if current_npc.has_method("get_localized_name"):
+		display_name = str(current_npc.get_localized_name()).strip_edges()
+
 	npc_name_label.text = display_name
 	npc_name_label.visible = display_name != ""
 
