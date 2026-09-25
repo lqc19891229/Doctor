@@ -3638,3 +3638,392 @@ Right cun (Lung): markedly high peak, markedly rapid rate, markedly narrow wave
 Right guan (Spleen): markedly high peak, markedly rapid rate, markedly narrow wave
 
 [Standard formula] Bai Hu Tang"
+UI_BOOK_ENTRY_TITLE_MA_HUANG,麻黄,Ma Huang (Ephedra)
+UI_BOOK_ENTRY_BODY_MA_HUANG,"麻黄
+【气味】辛苦，温。
+【毒性】无毒。
+【归经】归肺、膀胱经。
+【主治】发汗解表，宣肺平喘，利水消肿。
+【释名】龙沙（《本经》）、卑相（《别录》）、卑盐（《别录》）。
+
+时珍曰：诸名殊不可解。或云其味麻，其色黄，未审然否？张揖《广雅》云：龙沙，麻黄也。狗骨，麻黄根也。不知何以分别如此？
+
+【发明】弘景曰︰麻黄疗伤寒，解肌第一药。
+
+颂曰︰张仲景治伤寒，有麻黄汤及葛根汤、大小青龙汤，皆用麻黄。治肺痿上气，有射干麻黄汤、浓朴麻黄汤，皆大方也。
+
+杲曰︰轻可去实，麻黄、葛根之属是也。六淫有馀之邪，客于阳分皮毛之间，腠理闭拒，营卫气血不行，故谓之实。二药轻清成象，故可去之。麻黄微苦，其形中空，阴中之阳，入足太阳寒水之经。其经循背下行，本寒而又受外寒，故宜发汗，去皮毛气分寒邪，以泄表实。若过发则汗多亡阳，或饮食劳倦及杂病自汗表虚之证用之，则脱人元气，不可不禁。
+好古曰︰麻黄治卫实之药，桂枝治卫虚之药，二物虽为太阳证药，其实营卫药也。心主营为血，肺主卫为气。故麻黄为手太阴肺之剂，桂枝为手少阴心之剂。伤寒伤风而咳嗽，用麻黄、桂枝，即汤液之源也。
+
+时珍曰︰麻黄乃肺经专药，故治肺病多用之。张仲景治伤寒无汗用麻黄，有汗用桂枝。历代明医解释，皆随文傅会，未有究其精微者。时珍常绎思之，似有一得，与昔人所解不同云。津液为汗，汗即血也。在营则为血，在卫则为汗。夫寒伤营，营血内涩，不能外通于卫，卫气闭固，津液不行，故无汗发热而憎寒。夫风伤卫，卫气外泄，不能内护于营，营气虚弱，津液不固，故有汗发热而恶风。然风寒之邪，皆由皮毛而入。皮毛者，肺之合也。肺主卫气，包罗一身，天之象也。是证虽属乎太阳，而肺实受邪气。其证时兼面赤怫郁，咳嗽有痰，喘而胸满诸证者，非肺病乎？盖皮毛外闭，则邪热内攻，而肺气郁。故用麻黄、甘引出营分之邪，达之肌表，佐以杏仁泄肺而利气。汗后无大热而喘者，加以石膏。朱肱《活人书》，夏至后加石膏、知母，皆是泄肺火之药。是则麻黄汤虽太阳发汗重剂，实为发散肺经火郁之药也。腠理不密，则津液外泄，而肺气自虚。虚则补其母。故用桂枝同甘草，外散风邪以救表，内伐肝木以防脾。佐以芍药，泄木而固脾，泄东所以补西也。使以姜枣，行脾之津液而和营卫也。下后微喘者加浓朴、杏仁，以利肺气也。汗后脉沉迟者加人参，以益肺气也。朱肱加黄芩为阳旦汤，以泻肺热也。皆是脾肺之药。是则桂枝虽太阳解肌轻剂，实为理脾救肺之药也。此千古未发之秘旨，愚因表而出之。又少阴病发热脉沉，有麻黄附子细辛汤、麻黄附子甘草汤。少阴与太阳为表里，乃赵嗣真所谓熟附配麻黄，补中有发也。一锦衣夏月饮酒达旦，病水泄，数日不止，水谷直出。服分利消导升提诸药则反剧。时珍诊之，脉浮而缓，大肠下弩，复发痔血。此因肉食生冷茶水过杂，抑遏阳气在下，木盛土衰，《素问》所谓久风成飧泄也。法当升之扬之。遂以小续命汤投之，一服而愈。昔仲景治伤寒六七日，大下后，脉沉迟，手足厥逆，咽喉不利，唾脓血，泄利不止者，用麻黄汤平其肝肺，兼升发之，即斯理也。神而明之，此类是矣。","MA HUANG (EPHEDRA)
+
+[Taste and nature] Acrid and bitter; warm.
+
+[Toxicity] Recorded as non-toxic.
+
+[Channels] Lung and Bladder.
+
+[Actions] Promotes sweating and releases the exterior; disseminates Lung qi and calms wheezing; promotes urination and reduces swelling.
+
+[Names and origins]
+
+Other names: Longsha (Benjing), Beixiang and Beiyan (Bielu).
+
+Shizhen: These names are difficult to explain. Some say the plant's flavor is numbing (ma) and its color yellow (huang), though I cannot verify this. Zhang Yi's Guangya calls the plant Longsha and its root Gougu; why the two are distinguished this way is unclear.
+
+
+
+[Historical commentary]
+
+Hongjing: Among remedies for cold damage, Ma Huang is foremost for releasing the exterior and relieving the muscles.
+
+Song: Zhang Zhongjing used Ma Huang in Ma Huang Tang, Ge Gen Tang, and the major and minor Qing Long Tang formulas for cold damage. He also used it in She Gan Ma Huang Tang and Hou Po Ma Huang Tang for Lung wilting and counterflow breathing; these are substantial formulas.
+
+Gao: Light medicines can dispel excess; Ma Huang and Ge Gen are examples. When an excess of the six external influences lodges between the skin and body hair on the yang side, the pores close and nutritive and defensive qi and blood cannot move. This is called excess. Because these two medicines are light and clear, they can remove it. Ma Huang is slightly bitter and hollow, yang within yin; it enters the Foot Taiyang Bladder channel. That channel runs down the back and is associated with Cold; when external Cold also strikes it, sweating can drive Cold from the skin and qi level and relieve exterior excess. But excessive sweating can deplete yang. Using it for spontaneous sweating and exterior deficiency due to poor diet, overwork or other illness can exhaust the body's original qi, so it must be avoided in those circumstances.
+
+Haogu: Ma Huang treats excess in the defensive level; Gui Zhi treats deficiency there. Although both are used for Taiyang patterns, they act on the nutritive and defensive levels. The Heart governs nutritive blood, and the Lung governs defensive qi; thus Ma Huang pertains to the Hand Taiyin Lung and Gui Zhi to the Hand Shaoyin Heart. Their use for cough accompanying cold or wind damage is fundamental to decoction therapy.
+
+Shizhen: Ma Huang is particularly associated with the Lung channel, so it is often used for Lung conditions. Zhang Zhongjing used Ma Huang when cold damage caused no sweating and Gui Zhi when sweating was present. Later commentators followed the wording without probing the mechanism. I have reflected on it and offer another view. Body fluids become sweat; sweat and blood share a source: in the nutritive level they are blood, in the defensive level sweat. Cold damages the nutritive level, constricting its blood so it cannot reach the defensive level; defensive qi closes, fluids cease to move, and fever with aversion to cold occurs without sweating. Wind damages the defensive level; defensive qi leaks outward and cannot protect the nutritive level, which becomes weak and cannot secure the fluids, so fever and aversion to wind occur with sweating. Yet both Wind and Cold enter through the skin, which belongs to the Lung. The Lung governs defensive qi throughout the body. Thus even a Taiyang pattern involves the Lung; a flushed, troubled face, cough with phlegm, wheezing and chest fullness also point to it. When the surface is closed, pathogenic Heat presses inward and Lung qi becomes constrained. Ma Huang with Gan Cao draws the pathogen from the nutritive level to the skin, while Xing Ren helps the Lung descend and moves qi. If wheezing remains after sweating without high fever, Shi Gao is added. Zhu Gong's Huoren Shu adds Shi Gao and Zhi Mu after the summer solstice to drain Lung Fire. Ma Huang Tang is therefore a strong Taiyang sweating formula that also releases constrained Fire in the Lung. When the pores fail to close, fluids leak out and Lung qi becomes deficient; in deficiency one supplements its mother. Gui Zhi with Gan Cao disperses Wind at the exterior and, in this theory, restrains Liver Wood to protect the Spleen. Shao Yao checks Wood and secures the Spleen: draining the east supports the west. Ginger and jujube move Spleen fluids and harmonize nutritive and defensive qi. Slight wheezing after purging calls for Hou Po and Xing Ren to move Lung qi; a deep, slow pulse after sweating calls for Ren Shen to supplement it. Zhu Gong added Huang Qin in Yang Dan Tang to drain Lung Heat. All these medicines involve the Spleen and Lung. Thus, although Gui Zhi is a light Taiyang formula for relieving the muscles, it also regulates the Spleen and rescues the Lung. I set out this long-overlooked principle here. In Shaoyin disease with fever and a deep pulse, there are also Ma Huang Fu Zi Xi Xin Tang and Ma Huang Fu Zi Gan Cao Tang. Shaoyin and Taiyang are interior and exterior partners; as Zhao Sizhen said, prepared Fu Zi paired with Ma Huang releases the exterior while supplementing within. Once, a court official spent a summer night drinking and developed watery diarrhea that persisted for days, passing food and water almost unchanged. Medicines to drain, aid digestion or raise qi made it worse. I found his pulse floating and moderate, with rectal straining and bleeding hemorrhoids. Mixed meats, cold foods, tea and water had suppressed yang below; Wood was excessive and Earth weak, like the persistent undigested diarrhea described in the Suwen. I gave Xiao Xu Ming Tang to raise and disperse; one dose resolved it. Zhang Zhongjing likewise used Ma Huang Tang after severe purging in a prolonged cold damage illness with a deep, slow pulse, cold extremities, sore throat, spitting blood and pus, and persistent diarrhea, to regulate Liver and Lung and lift yang. Such cases illustrate how the principle can be applied."
+UI_BOOK_ENTRY_TITLE_GUI_ZHI,桂枝,Gui Zhi (Cinnamon Twig)
+UI_BOOK_ENTRY_BODY_GUI_ZHI,"桂枝（桂）
+【气味】味辛、甘，性温。
+【毒性】无毒。
+【归经】归心、肺、膀胱经。
+【主治】发汗解肌，温通经脉，助阳化气。
+【释名】时珍曰︰按︰范成大《桂海志》云︰凡木叶心皆一纵理，独桂有两道如圭形，故字从圭。
+
+陆佃《埤雅》云︰桂犹圭也。宣导百药，为之先聘通使，如执圭之使也。《尔雅》谓之梫者，能侵害他木也。故《吕氏春秋》云︰桂枝之下无杂木。《雷公炮炙论》云︰桂钉木根，其木即死，是也。桂即牡桂之浓而辛烈者，牡桂即桂之薄而味淡者，《别录》不当重出，今并为一，而分目于下。
+
+【发明】
+宗奭曰︰桂甘、辛，大热。《素问》云︰辛甘发散为阳。故汉张仲景桂枝汤治伤寒表虚，皆须此药，正合辛甘发散之意。本草三种之桂，不用牡桂、菌桂者，此二种性只于温，不可以治风寒之病也。然《本经》只言桂，仲景又言桂枝者，取枝上皮也。
+
+好古曰︰或问︰本草言桂能止烦出汗，而张仲景治伤寒有当发汗，凡数处，皆用桂枝汤。又云无汗不得服桂枝。汗家不得重发汗，若用桂枝是重发其汗。汗多者用桂枝甘草汤，此又用桂枝闭汗也。一药二用，与本草之义相通否乎？曰︰本草言桂辛甘大热，能宣导百药，通血脉，止烦出汗，是调其血而汗自出也。仲景云︰太阳中风，阴弱者，汗自出。卫实营虚，故发热汗出。又云太阳病发热汗出者，此为营弱卫强，阴虚阳必凑之，故皆用桂枝发其汗。此乃调其营气，则卫气自和，风邪无所容，遂自汗而解。非桂枝能开腠理，发出其汗也。汗多用桂枝者，以之调和营卫，则邪从汗出而汗自止，非桂枝能闭汗孔也。昧者不知出汗、闭汗之意，遇伤寒无汗者亦用桂枝，误之甚矣。桂枝汤下发汗字，当认作出字，汗自然发出，非若麻黄能开腠理，发出其汗也。其治虚汗，亦当逆察其意可也。
+
+成无己曰︰桂枝本为解肌。若太阳中风，腠理致密，营卫邪实，津液禁固，其脉浮紧，发热汗不出者，不可与此必也。皮肤疏泄，自汗，脉浮缓，风邪干于卫气者，乃可投之。发散以辛甘为主，桂枝辛热，故以为君。而以芍药为臣、甘草为佐者，风淫所胜，平以辛苦，以甘缓之，以酸收之也。以姜、枣为使者，辛甘能发散，而又用其行脾胃之津液而和营卫，不专于发散也。故麻黄汤不用姜、枣，专于发汗，不待行其津液也。
+
+时珍曰︰麻黄遍彻皮毛，故专于发汗而寒邪散，肺主皮毛，辛走肺也。桂枝透达营卫，故能解肌而风邪去，脾主营，肺主卫，甘走脾，辛走肺也。肉桂下行，益火之原，此东垣所谓肾苦燥，急食辛以润之，开腠理，致津液，通其气者也。《圣惠方》言︰桂心入心，引血化汗化脓。盖手少阴君火、厥阴相火，与命门同气者也。《别录》云桂通血脉是矣。","GUI ZHI (CINNAMON TWIG)
+
+[Taste and nature] Acrid and sweet; warm.
+
+[Toxicity] Recorded as non-toxic.
+
+[Channels] Heart, Lung and Bladder.
+
+[Actions] Promotes sweating and releases the muscles; warms and unblocks the channels; supports yang in transforming qi.
+
+[Names and origins]
+
+Shizhen: Fan Chengda's Guihai Zhi says the center of most leaves has one lengthwise vein, but cinnamon has two lines shaped like the jade tablet gui, hence its written name.
+
+Lu Dian's Piya connects gui with the jade tablet carried by an envoy: cinnamon leads and directs the other medicines. The Erya calls it qin because it can encroach upon other trees. The Lüshi Chunqiu says no other trees grow beneath cinnamon; the Leigong Paozhi Lun says even a nail made of cinnamon wood can kill a tree when driven into its root. Gui is the thicker and more pungent variety; Mu Gui is thinner and milder. They should not have been listed separately in the Bielu, so they are brought together here and treated under separate headings below.
+
+
+
+[Historical commentary]
+
+Zongshi: Cinnamon is sweet, acrid and strongly heating. The Suwen says acrid and sweet flavors disperse and are yang. Zhang Zhongjing therefore used Gui Zhi Tang for exterior deficiency in cold damage, in keeping with its dispersing properties. Of the three cinnamons in the materia medica, Mu Gui and Jun Gui are not used here because they are merely warm and cannot treat this Wind-Cold condition. The Benjing simply says gui, whereas Zhongjing specifies gui zhi, meaning bark taken from a branch.
+
+Haogu: Someone asks why the materia medica says cinnamon relieves vexation and brings out sweat, while Zhongjing uses Gui Zhi Tang to promote sweating but warns not to give it when there is no sweat or to induce more sweat in someone already sweating. Gui Zhi Gan Cao Tang is even used for excessive sweating. How can one medicine both produce and stop sweat? Cinnamon is described as acrid, sweet and strongly heating; it guides other medicines, opens the blood vessels and eases vexation so that sweating occurs once blood is regulated. In Taiyang Wind damage, a weak nutritive level and relatively strong defensive level lead to fever and spontaneous sweating. Gui Zhi regulates nutritive qi, allowing defensive qi to harmonize; Wind then has nowhere to lodge, and the patient recovers through natural sweating. It does not force open the pores as Ma Huang does. When there is too much sweating, the same harmonization allows the pathogen to leave and sweating to stop; it does not physically close the pores. Treating a cold damage patient who has no sweat with Gui Zhi through misunderstanding this distinction is a serious error. 'Promote sweating' in the Gui Zhi Tang instructions means allowing sweat to emerge of itself, rather than forcing it out as Ma Huang does. The same distinction explains its use for deficiency sweating.
+
+Cheng Wuji: Gui Zhi releases the muscles. In a Taiyang Wind pattern with tightly closed pores, excess in both nutritive and defensive levels, a floating, tight pulse and fever without sweat, it must not be given. It is suitable when the skin is open, sweating occurs spontaneously, the pulse is floating and moderate, and Wind affects defensive qi. Acrid and sweet medicines are used to disperse; Gui Zhi is acrid and hot, so it serves as chief. Shao Yao is deputy and Gan Cao assistant: pungency and bitterness check Wind, sweetness moderates it, and sourness restrains it. Ginger and jujube as envoys move Spleen and Stomach fluids and harmonize nutritive and defensive levels rather than merely dispersing. Ma Huang Tang has no ginger or jujube because it directly promotes sweating without first moving those fluids.
+
+Shizhen: Ma Huang reaches the skin and body hair, promotes sweating and disperses Cold; the Lung governs the skin, and acrid flavors enter the Lung. Gui Zhi reaches the nutritive and defensive levels, releases the muscles and removes Wind; the Spleen governs nutritive qi and the Lung defensive qi, while sweetness enters the Spleen and pungency the Lung. Rou Gui moves downward to support the source of Fire; Dongyuan spoke of pungent flavor moistening a dry Kidney by opening the pores, bringing fluids and moving qi. The Shenghui Fang says the heartwood of cinnamon enters the Heart and guides blood to become sweat or pus. Hand Shaoyin sovereign Fire, Jueyin ministerial Fire and the Gate of Life share a kind of qi. The Bielu's statement that cinnamon opens the blood vessels follows from this."
+UI_BOOK_ENTRY_TITLE_XING_REN,杏仁,Xing Ren (Apricot Kernel)
+UI_BOOK_ENTRY_BODY_XING_REN,"杏仁（杏）
+【气味】味苦，性温。
+【毒性】有小毒。
+【归经】归肺、大肠经。
+【主治】止咳平喘，润肠通便。
+【释名】时珍曰︰杏字篆文象子在木枝之形。或云从口及从可者，并非也。《江南录》云︰杨行密改杏名甜梅。
+
+【发明】
+元素曰︰杏仁气薄味浓，浊而沉坠，降也、阴也。入手太阴经。其用有三︰润肺也，消食积也，散滞气也。
+
+杲曰︰杏仁散结润燥，除肺中风热咳嗽。杏仁下喘，治气也；桃仁疗狂，治血也。俱治大便秘，当分气、血。昼则便难，行阳气也；夜则便难，行阴血也。故虚人便闭，不可过泄。脉浮者属气，用杏仁、陈皮；脉沉者属血，用桃仁、陈皮。手阳明与手太阴为表里，贲门主往来，魄门主收闭，为气之通道，故并用陈皮佐之。
+
+好古曰︰张仲景麻黄汤，及王朝奉治伤寒气上喘逆，并用杏仁者，为其利气、泻肺、解肌也。
+
+时珍曰︰杏仁能散能降，故解肌散风、降气润燥、消积治伤损药中用之。治疮杀虫，用其毒也。按《医余》云︰凡索面、豆粉近杏仁则烂。顷一兵官食粉成积，医师以积气丸、杏仁相半研为丸，熟水下，数服愈。又《野人闲话》云︰翰林学士辛士逊，在青城山道院中，梦皇姑谓曰︰可服杏仁，令汝聪明，老而健壮，心力不倦。求其方，则用杏仁一味，每盥漱毕，以七枚纳口中，良久脱去皮，细嚼和津液顿咽。日日食之，一年必换血，令人轻健。此申天师方也。又杨士瀛《直指方》云︰凡人以水浸杏仁五枚，五更端坐，逐粒细嚼至尽，和津吞下。久则能润五脏，去尘滓，驱风明目，治肝肾风虚，瞳人带青，眼翳风痒之病。珍按杏仁性热降气，亦非久服之药。此特其咀嚼吞纳津液，以消积秽则可耳。古有服杏丹法，云是左慈之方。唐慎微收入本草，云久服寿至千万。其说妄诞可鄙，今删其纰谬之辞，存之于下，使读者毋信其诳也。","XING REN (APRICOT KERNEL)
+
+[Taste and nature] Bitter; warm.
+
+[Toxicity] Recorded as mildly toxic.
+
+[Channels] Lung and Large Intestine.
+
+[Actions] Calms cough and wheezing; moistens the intestines and relieves constipation.
+
+[Names and origins]
+
+Shizhen: The seal-script character for apricot resembles a fruit on a tree branch; derivations from the characters for mouth or for 'can' are incorrect. The Jiangnan Lu says Yang Xingmi renamed the apricot 'sweet plum'.
+
+
+
+[Historical commentary]
+
+Yuansu: Xing Ren has a light qi but strong flavor; it is turbid, heavy, descending and yin. It enters the Hand Taiyin Lung channel. It has three uses: moistening the Lung, resolving accumulated food and dispersing stagnant qi.
+
+Gao: Xing Ren disperses binding, moistens Dryness and relieves Wind-Heat cough in the Lung. It brings wheezing downward by treating qi; Tao Ren is used for agitation by treating blood. Both can be used for constipation, but qi and blood patterns must be distinguished. Difficulty passing stool by day involves yang qi; difficulty by night involves yin blood. One must avoid excessive draining in deficient patients. A floating pulse suggests qi, for which Xing Ren and Chen Pi are used; a deep pulse suggests blood, for which Tao Ren and Chen Pi are used. Hand Yangming and Hand Taiyin form an exterior and interior pair. The upper gate allows passage, and the lower gate controls closure; both are pathways of qi. Hence Chen Pi assists in both cases.
+
+Haogu: Xing Ren is included in Zhang Zhongjing's Ma Huang Tang and in Wang Chaofeng's treatment for breath rising counter to its normal course in cold damage, because it moves qi, drains the Lung and releases the muscles.
+
+Shizhen: Xing Ren both disperses and descends. It is used to release the muscles and dispel Wind, bring qi down and moisten Dryness, resolve accumulation and treat injury; its toxicity is invoked when treating sores or parasites. According to Yiyu, fine noodles and bean flour soften when placed near apricot kernels. An officer once developed food accumulation after eating flour; a physician ground equal parts of an accumulation-relieving pill and Xing Ren into pellets and gave them with warm water; after several doses he recovered. Yeren Xianhua recounts a dream in which the scholar Xin Shixun was told to take Xing Ren to remain sharp and vigorous in old age. The supposed method was to put seven kernels in the mouth after washing, remove their skins later, chew them finely and swallow them with saliva every day, claiming renewed blood within a year. This was attributed to Master Shen. Yang Shiying's Zhizhi Fang gives another account involving five soaked kernels chewed and swallowed before dawn, claiming benefits for the organs, eyesight and various eye conditions. I note that Xing Ren is warming and makes qi descend, so it is not suitable for prolonged use. Chewing and swallowing it with saliva might simply help remove accumulation. Another ancient 'apricot elixir' attributed to Zuo Ci was included by Tang Shenwei with extravagant claims of immense longevity. I discard the falsehoods but preserve the account below so readers will not believe them."
+UI_BOOK_ENTRY_TITLE_GAN_CAO,甘草,Gan Cao (Licorice Root)
+UI_BOOK_ENTRY_BODY_GAN_CAO,"甘草
+【气味】味甘，性平。
+【毒性】无毒。
+【归经】归心、肺、脾、胃经。
+【主治】益气补中，清热解毒，祛痰止咳，缓急止痛，调和诸药。
+【释名】密甘（《别录》）、密草（《别录》）、美草（《别录》）、蕗草（《别录》）、灵通（《记事珠》）、国老（《别录》）。
+
+弘景曰︰此草最为众药之主，经方少有不用者，犹如香中有沉香也。国老即帝师之称，虽非君而为君所宗，是以能安和草石而解诸毒也。
+
+甄权曰︰诸药中甘草为君，治七十二种乳石毒，解一千二百般草木毒，调和众药有功故有国老之号。
+
+【发明】
+震亨曰︰甘草味甘，大缓诸火，黄中通理，厚德载物之君子也。欲达下焦，须用稍子。
+
+杲曰︰甘草气薄味浓，可升可降，阴中阳也。阳不足者，补之以甘。甘温能除大热，故生用则气平，补脾胃不足而大泻心火；炙之则气温，补三焦元气而散表寒，除邪热，去咽痛，缓正气，养阴血。凡心火乘脾，腹中急痛，腹皮急缩者，宜倍用之。其性能缓急，而又协和诸药，使之不争。故热药得之缓其热；寒药得之缓其寒；寒热相杂者用之得其平。
+
+好古曰︰五味之用，苦泄辛散，酸收咸敛，甘上行而发，而本草言甘草下气何也？盖甘味主中，有升降浮沉，可上可下，可外可内，有和有缓，有补有泄，居中之道尽矣。张仲景附子理中汤用甘草，恐其僭上也；调胃承气汤用甘草，恐其速下也，皆缓之之意。小柴胡汤有柴胡、黄芩之寒，人参、半夏之温，而用甘草者，则有调和之意。建中汤用甘草，以补中而缓脾急也；凤髓丹用甘草，以缓肾急而生元气也，乃甘补之意。又曰︰甘者令人中满；中满者勿食甘，甘缓而壅气，非中满所宜也。凡不满而用炙甘草为之补；若中满而用生甘草为之泻，能引诸药直至满所，甘味入脾，归其所喜，此升降、浮沉之理也。《经》云︰以甘补之，以甘泻之，以甘缓之，是矣。
+
+时珍曰︰甘草外赤中黄，色兼坤离；味浓气薄，资全土德。协和群品，有元老之功；普治百邪，得王道之化。赞帝力而人不知，敛神功而己不与，可谓药中之良相也。然中满、呕吐、酒客之病，不喜其甘；而大戟、芫花、甘遂、海藻，与之相反。是亦迂缓不可以救昏昧，而君子尝见嫉于宵人之意欤？
+
+颂曰︰按孙思邈《千金方论》云：甘草解百药毒，如汤沃雪。有中乌头、巴豆毒，甘草入腹即定，验如反掌。方称大豆汁解百药毒，予每试之不效。加入甘草为甘豆汤，其验乃奇也。又葛洪《肘后备急方》云：席辩刺史尝言岭南俚人解蛊毒药，并是常用之物，畏人得其法，乃言三百头牛药，或言三百两银药。久与亲狎，乃得其详。凡饮食时，先取炙熟甘草一寸，嚼之咽汁，若中毒，随即吐出。仍以炙甘草三两、生姜四两，水六升，煮二升，日三服。或用都淋藤、黄藤二物，酒煎温常服，则毒随大小溲出。又常带甘草数寸，随身备急。若经含甘草而食物不吐者，非毒物也。三百头牛药，即土常山也；三百两银药，即马兜铃藤也。详见各条。","GAN CAO (LICORICE ROOT)
+
+[Taste and nature] Sweet; neutral.
+
+[Toxicity] Recorded as non-toxic.
+
+[Channels] Heart, Lung, Spleen and Stomach.
+
+[Actions] Supplements qi and the middle; clears Heat and resolves toxins; transforms phlegm and eases cough; relieves spasms and pain; harmonizes other medicines.
+
+[Names and origins]
+
+Other names: Mi Gan, Mi Cao, Mei Cao and Lu Cao (Bielu); Ling Tong (Jishi Zhu); Guo Lao (Bielu).
+
+Hongjing: This herb is central to many prescriptions; few classical formulas omit it, just as agarwood is prized among aromatics. Guo Lao means an elder counselor to the ruler: not himself the ruler, yet respected by the ruler. The name refers to its ability to harmonize herbal and mineral medicines and resolve various toxins.
+
+Zhenquan: Gan Cao is chief among medicines. It is said to counter seventy-two kinds of mineral toxicity and 1,200 kinds of plant toxicity. Its ability to harmonize other ingredients earned it the name Guo Lao.
+
+
+
+[Historical commentary]
+
+Zhenheng: Gan Cao is sweet and greatly moderates different kinds of Fire. Yellow within, it embodies a virtuous person who bears all things. Use the tip of the root to reach the lower burner.
+
+Gao: Gan Cao has a light qi and strong flavor and can both rise and descend; it is yang within yin. Sweetness supplements deficient yang. Sweet and warm medicine may also relieve intense Heat: used raw, Gan Cao is neutral, supplements deficient Spleen and Stomach and strongly drains Heart Fire. When roasted, it becomes warming, supports original qi in the three burners, disperses exterior Cold, removes pathogenic Heat, eases sore throat, moderates healthy qi and nourishes yin blood. When Heart Fire overwhelms the Spleen, causing sudden abdominal pain and tightening of the abdominal wall, a larger amount is used. Gan Cao relaxes urgency and lets other medicines act together without conflict: it softens the heat of hot medicines and the cold of cold medicines, and balances mixtures of both.
+
+Haogu: Bitter flavors drain, acrid ones disperse, sour ones gather and salty ones restrain; sweet flavors rise and release. Why then does the materia medica say Gan Cao brings qi down? Sweetness governs the middle. It can rise, descend, float and sink; it can move upward, downward, outward and inward; it can harmonize, slow, supplement and drain. This is the way of the center. Gan Cao in Zhang Zhongjing's Fu Zi Li Zhong Tang prevents undue rising; in Tiao Wei Cheng Qi Tang it prevents overly rapid downward action. In Xiao Chai Hu Tang it harmonizes cool Chai Hu and Huang Qin with warm Ren Shen and Ban Xia. In Jian Zhong Tang it supplements the center and relaxes a tense Spleen; in Feng Sui Dan it eases Kidney urgency and supports original qi. Yet sweet flavors may cause abdominal fullness and should be avoided when the middle is already full. Roasted Gan Cao supplements when there is no fullness; raw Gan Cao may be used to drain when fullness is present, guiding the other medicines to the affected area. Sweetness enters the Spleen. As the classics say, sweetness can supplement, drain and moderate.
+
+Shizhen: Red outside and yellow within, Gan Cao combines the colors associated with Earth and Fire; its strong flavor and light qi embody Earth. By harmonizing the other ingredients it serves like an elder statesman; its wide-ranging action resembles a benevolent ruler. It assists without claiming credit: a fine minister among medicines. But its sweetness is disliked in abdominal fullness, vomiting or illness related to drinking alcohol. It is incompatible with Da Ji, Yuan Hua, Gan Sui and Hai Zao. Perhaps a gentle minister cannot rescue every confused ruler and is sometimes resented by lesser men.
+
+Song: Sun Simiao's Qianjin Fang Lun says Gan Cao counters many medicinal toxins as readily as hot water melts snow. It was said to settle poisoning by Wu Tou or Ba Dou immediately. I tried soybean juice alone for poisoning without success; adding Gan Cao to make a Gan Dou decoction seemed effective. Ge Hong's Zhouhou Beiji Fang recounts an official named Xi Bian describing ordinary antidotes used in Lingnan, disguised under fanciful names to keep the recipes secret. The account says to chew and swallow the juice from a small length of roasted Gan Cao before eating; vomiting afterward was taken as a sign of poisoning. It also describes boiling three liang of roasted Gan Cao with four liang of fresh ginger in six sheng of water, reducing it to two sheng and taking it in three portions over a day. Another account mentions Du Lin Teng and Huang Teng decocted in wine, claiming the poison then passes in urine or stool. People carried pieces of Gan Cao for emergencies. The mysterious 'three hundred oxen' and 'three hundred taels of silver' medicines are identified there as Tu Chang Shan and Ma Dou Ling vine. Details are given in their separate entries."
+UI_BOOK_ENTRY_TITLE_BAI_SHAO,白芍,Bai Shao (White Peony Root)
+UI_BOOK_ENTRY_BODY_BAI_SHAO,"白芍（芍药）
+【气味】苦、酸，微寒。
+【毒性】无毒。
+【归经】归肝、脾经。
+【主治】养血调经，敛阴止汗，柔肝止痛，平抑肝阳。
+【释名】将离（《纲目》）、犁食（《别录》）、白术（《别录》）、余容（《别录》）、铤（《别录》），白者名金芍药，赤者名木芍药（《图经》）。
+
+时珍曰：芍药，犹约也。约，美好貌。此草花容婥约，故以为名。又《雅翼》言：制食之毒，莫良于芍，故得药名，亦通。
+
+郑风诗云：伊其相谑，赠之以芍药。
+
+《韩诗外传》云：芍药，离草也。董子云：芍药一名将离，故将别赠之。俗呼其花之千叶者，为小牡丹；赤者为木芍药，与牡丹同名也。
+
+【发明】
+志曰：赤者，利小便下气；白者，止痛散血。
+
+大明曰：赤者补气，白者补血。
+
+弘景曰：赤者小利，俗方以止痛不减当归。白者道家亦服食之，及煮石用。
+
+成无己曰：**白补而赤泻，白收而赤散。酸以收之，甘以缓之，故酸甘相合，用补阴血。收逆气而除肺燥。**又云：芍药之酸，敛津液而益营血，收阴气而泄邪热。
+
+元素曰：**白补赤散，泻肝补脾胃。**酒浸行经，止中部腹痛；与姜同用，温经散湿通塞，利腹中痛，胃气不通。**白芍入脾经补中焦，乃下利必用之药。**盖泻利皆太阴病，故不可缺此。得炙甘草为佐，治腹中痛，夏月少加黄芩，恶寒加桂，此仲景神方也。其用凡六：安脾经，一也；治腹痛，二也；收胃气，三也；止泻痢，四也；和血脉，五也；固腠理，六也。
+
+宗奭曰：芍药须用单叶红花者为佳，然血虚寒人禁之。古人云：减芍药以避中寒。诚不可忽。
+
+震亨曰：芍药泻脾火，性味酸寒，冬月必以酒炒。凡腹痛多是血脉凝涩，亦必酒炒用。然止能治血虚腹痛，余并不治。为其酸寒收敛，无温散之功也。下痢腹痛必炒用，后重者不炒。产后不可用者，以其酸寒伐生发之气也。必不得已，亦酒炒用之。
+
+时珍曰：白芍药益脾，能于土中泻木。赤芍药散邪，能行血中之滞。《日华子》言：赤补气，白治血，欠审矣。产后肝血已虚，不可更泻，故禁之。酸寒之药多矣，何独避芍药耶？以此杲曰：或言古人以酸涩为收，《本经》何以言利小便？曰：芍药能益阴滋湿而停津液，故小便自行，非因通利也。曰：又言缓中何也？曰：损其肝者缓其中，即调血也，故四物汤用芍药。大抵酸涩者为收敛停湿之剂，故主手足太阴经收敛之体，又能治血海而入于九地之下，后至厥阴经。白者色在西方，故补；赤者色在南方，故泻。","BAI SHAO (WHITE PEONY ROOT)
+
+[Taste and nature] Bitter and sour; slightly cold.
+
+[Toxicity] Recorded as non-toxic.
+
+[Channels] Liver and Spleen.
+
+[Actions] Nourishes blood and regulates menstruation; preserves yin and reduces sweating; softens the Liver and relieves pain; calms rising Liver yang.
+
+[Names and origins]
+
+Other names: Jiang Li (Gangmu); Li Shi, Bai Zhu, Yu Rong and Ting (Bielu). The white variety is called Jin Shao Yao and the red variety Mu Shao Yao (Tujing).
+
+Shizhen: The name shao yao is associated with elegance and beauty, describing the flower's graceful appearance. Yayi also says it is especially good at counteracting poisons in food, which offers another explanation of its name.
+
+A poem from the state of Zheng says that people exchanged peony flowers while teasing one another.
+
+Han Shi Waizhuan calls peony a 'parting herb'. Dongzi says one of its names is Jiang Li, hence the custom of giving it when saying farewell. The many-petaled flower is commonly called 'little peony'; the red one is also called Mu Shao Yao, sharing a name with the tree peony.
+
+
+
+[Historical commentary]
+
+Zhi: The red variety promotes urination and moves qi downward; the white one relieves pain and disperses blood stasis.
+
+Daming: The red variety supplements qi, while the white variety supplements blood.
+
+Hongjing: The red variety mildly promotes urination and is used in folk remedies for pain, no less than Dang Gui. The white variety is also taken in Daoist regimens and used when processing minerals.
+
+Cheng Wuji: White peony supplements and restrains, while red peony drains and disperses. Sourness gathers and sweetness moderates; together, sour and sweet supplement yin and blood. It draws back counterflow qi and relieves Lung Dryness. He also says its sourness preserves fluids, benefits nutritive blood and yin qi, and drains pathogenic Heat.
+
+Yuansu: White peony supplements and red peony disperses; it drains the Liver and supplements the Spleen and Stomach. Soaked in wine it reaches the channels and relieves pain in the middle abdomen. Combined with ginger, it warms the channels, disperses Dampness, opens obstruction and relieves abdominal pain due to impaired Stomach qi. White peony enters the Spleen channel and supplements the middle burner, making it essential in diarrhea, which is considered a Taiyin condition. With roasted Gan Cao it treats abdominal pain; in summer a little Huang Qin can be added, and Gui when there is aversion to cold. This is a formula associated with Zhongjing. Its six uses are to settle the Spleen channel, treat abdominal pain, gather Stomach qi, stop diarrhea and dysentery, harmonize the blood vessels, and secure the pores.
+
+Zongshi: The preferred peony has a single layer of red petals. However, people with blood deficiency and Cold should avoid it. The ancient warning to reduce peony to prevent internal Cold should not be ignored.
+
+Zhenheng: Peony drains Spleen Fire and is sour and cold, so it should be stir-fried with wine in winter. Abdominal pain is often associated with sluggish blood, also calling for wine processing. Yet it only treats abdominal pain from blood deficiency, not every kind, because its sour, cold and restraining nature cannot warm and disperse. For painful diarrhea it is fried, unless there is a heavy feeling after passing stool. It is generally avoided after childbirth because its sour, cold nature may weaken the body's rising qi; if unavoidable, it should be wine-fried.
+
+Shizhen: White peony benefits the Spleen and checks Wood within Earth; red peony disperses pathogens and moves stagnation in the blood. Daming's claim that red peony supplements qi and white peony treats blood is not sufficiently precise. Liver blood is already deficient after childbirth, so it should not be drained further. But there are many sour, cold medicines: why single out peony? Gao explains that although sourness is generally thought to gather, the Benjing's statement that peony promotes urination means it nourishes yin and retains moisture, allowing urination to regulate itself; it is not simply a diuretic. 'Relaxing the middle' means moderating the Liver and regulating blood, hence peony in Si Wu Tang. Sour, astringent medicines generally restrain and retain fluids; peony acts in the Hand and Foot Taiyin channels and also reaches the sea of blood and the deep Jueyin level. In five-phase color theory, white belongs to the west and supplements, while red belongs to the south and drains."
+UI_BOOK_ENTRY_TITLE_SHENG_JIANG,生姜,Sheng Jiang (Fresh Ginger)
+UI_BOOK_ENTRY_BODY_SHENG_JIANG,"生姜
+【气味】味辛，性温。
+【毒性】无毒。
+【归经】归肺、脾、胃经。
+【主治】解表散寒，温中止呕，解鱼蟹毒。
+【释名】时珍曰：按：许慎《说文》：姜作䕬，云御湿之菜也。
+
+王安石《字说》云：姜能强御百邪，故谓之姜。初生嫩者，其尖微紫，名紫姜，或作子姜；宿根谓之母姜也。
+
+【发明】
+成无己曰︰姜、枣味辛、甘，专行脾之津液而和营卫。药中用之，不独专于发散也。
+
+杲曰︰生姜之用有四︰制半夏、浓朴之毒，一也；发散风寒，二也；与枣同用，辛温益脾胃元气，温中去湿，三也；与芍药同用，温经散寒，四也。孙真人云︰姜为呕家圣药，盖辛以散之。呕乃气逆不散，此药行阳而散气也。或问︰生姜辛温入肺，何以云入胃口？曰︰俗以心下为胃口者，非矣。咽门之下，受有形之物，乃胃之系，便是胃口，与肺系同行，故能入肺而开胃口也。曰︰人云夜间勿食生姜，令人闭气，何也？曰︰生姜辛温主开发。夜则气本收敛，反开发之，则违天道矣。若有病患，则不然也。生姜屑，比之乾姜则不热，比之生姜则不湿。以乾生姜代乾姜者，以其不僭故也。俗言上床萝卜下床姜。姜能开胃，萝卜消食也。
+
+时珍曰︰姜，辛而不荤，去邪辟恶，生啖熟食，醋、酱、糟、盐、蜜煎调和，无不宜之。可蔬可和，可果可药，其利博矣。凡早行山行，宜含一块，不犯雾露清湿之气，及山岚不正之邪。
+
+颂曰︰崔元亮《集验方》载︰敕赐姜茶治痢方︰以生姜切细，和好茶一、两碗，任意呷之，便瘥。若是热痢，留姜皮；冷痢，去皮，大妙。
+
+杨士瀛曰︰姜能助阳，茶能助阴，二物皆消散恶气，调和阴阳，且解湿热及酒食暑气之毒，不问赤、白通宜用之。苏东坡治文潞公有效。","SHENG JIANG (FRESH GINGER)
+
+[Taste and nature] Acrid; warm.
+
+[Toxicity] Recorded as non-toxic.
+
+[Channels] Lung, Spleen and Stomach.
+
+[Actions] Releases the exterior and disperses Cold; warms the middle and relieves nausea; traditionally used for fish and shellfish poisoning.
+
+[Names and origins]
+
+Shizhen: Xu Shen's Shuowen writes the character for ginger as 䕬 and calls it a vegetable that wards off Dampness.
+
+Wang Anshi's Zishuo says ginger is named for its ability to ward off harmful influences. Fresh, young ginger has a slightly purple tip and is called Zi Jiang; an older root is called Mu Jiang, or mother ginger.
+
+
+
+[Historical commentary]
+
+Cheng Wuji: Ginger is acrid and jujube sweet; together they move Spleen fluids and harmonize nutritive and defensive qi. They are included in formulas for more than dispersing an external pathogen.
+
+Gao: Fresh ginger has four uses: tempering the toxicity of Ban Xia and Hou Po; dispersing Wind-Cold; together with jujube, warming the middle, dispelling Dampness and supporting original Spleen and Stomach qi; and together with Shao Yao, warming the channels and dispersing Cold. Sun Simiao called ginger indispensable for vomiting: its acrid nature disperses qi that rises instead of descending. Someone asks why ginger, being acrid, warm and entering the Lung, is said to enter the Stomach opening. The 'opening of the Stomach' is not simply the area below the Heart, as people say: it is the passage below the throat that receives food and runs near the Lung passage. Ginger can therefore enter the Lung and open the Stomach. Why do some say ginger should not be eaten at night because it blocks qi? It is acrid and opening, while qi naturally gathers at night; opening it then runs counter to nature, though illness may be an exception. Partly dried ginger flakes are less heating than dried ginger and less damp than fresh ginger. Dried fresh ginger can replace dried ginger without being overly forceful. Thus the popular saying recommends radish before bed and ginger upon rising: ginger opens the appetite, while radish aids digestion.
+
+Shizhen: Ginger is acrid without the offensive smell of strong herbs. It is eaten raw or cooked and mixed with vinegar, sauces, fermented preparations, salt or honey; it serves as a vegetable, seasoning, fruit or medicine. In the old accounts, travelers setting out early or crossing mountains were told to hold a piece in the mouth against mist, dew, Dampness and mountain miasma.
+
+Song: Cui Yuanliang's Jiyan Fang records an imperial ginger-tea recipe for dysentery: finely sliced fresh ginger mixed with one or two bowls of good tea, sipped freely. The account says to leave the peel on for Heat dysentery and remove it for Cold dysentery.
+
+Yang Shiying: Ginger is said to support yang and tea yin; both disperse harmful qi, harmonize yin and yang, and address Damp-Heat and effects attributed to alcohol, food and summer Heat. The account applies it to both bloody and non-bloody dysentery, and says Su Dongpo used it successfully for Duke Wen of Lu."
+UI_BOOK_ENTRY_TITLE_DA_ZAO,大枣,Da Zao (Jujube)
+UI_BOOK_ENTRY_BODY_DA_ZAO,"大枣（枣）
+【气味】味甘，性温。
+【毒性】无毒。
+【归经】归脾、胃、心经。
+【主治】补中益气，养血安神，缓和药性。
+【释名】干枣（《别录》）、美枣（《别录》）、良枣（《别录》）。
+
+《别录》曰︰八月采，曝干。
+
+瑞曰︰此即晒干大枣也。味最良美，故宜入药。今人亦有用胶枣之肥大者。
+
+【发明】
+弘景曰︰道家方药，以枣为佳饵。其皮利，肉补虚，所以合汤皆擘之也。
+
+杲曰︰大枣气味俱浓，阳也。温以补不足，甘以缓阴血。
+
+成无己曰︰邪在营卫者，辛甘以解之。故用姜、枣以和营卫，生发脾胃升腾之气。张仲景治奔豚，用大枣滋脾土以平肾气也。治水饮胁痛有十枣汤，益土而胜水也。
+
+震亨曰︰枣属土而有火，味甘性缓。甘先入脾，补脾者未尝用甘。故今人食甘多者，脾必受病也。
+
+时珍曰︰《素问》言枣为脾之果，脾病宜食之。谓治病和药，枣为脾经血分药也。若无故频食，则生虫损齿，贻害多矣。按王好古云︰中满者勿食甘，甘令人满。故张仲景建中汤心下痞者，减饧、枣，与甘草同例，此得用枣之方矣。又按许叔微《本事方》云︰一妇病脏燥悲泣不止，祈祷备至。予忆古方治此证用大枣汤，遂治，与服尽剂而愈。古人识病治方，妙绝如此。又陈自明《妇人良方》云︰程虎卿内人妊娠四、五个月，遇昼则惨戚悲伤，泪下数欠，如有所凭，医巫兼治皆无益。管伯周说︰先人曾语此，治须大枣汤乃愈。虎卿借方治药，一投而愈。方见下条。又《摘玄方》治此证，用红枣烧存性，酒服三钱，亦大枣汤变法也。","DA ZAO (JUJUBE)
+
+[Taste and nature] Sweet; warm.
+
+[Toxicity] Recorded as non-toxic.
+
+[Channels] Spleen, Stomach and Heart.
+
+[Actions] Supplements the middle and boosts qi; nourishes blood and calms the mind; moderates the effects of other medicines.
+
+[Names and origins]
+
+Other names: Gan Zao, Mei Zao and Liang Zao (Bielu).
+
+Bielu: Gather in the eighth lunar month and dry in the sun.
+
+Rui: This is the sun-dried jujube. Its pleasant flavor makes it suitable for medicine; some people also use large, plump, candied jujubes.
+
+
+
+[Historical commentary]
+
+Hongjing: Daoist formulas value jujube as food. Its skin is considered to have a draining effect while the flesh supplements deficiency. That is why the fruit is split open when added to decoctions.
+
+Gao: Da Zao has both a strong qi and flavor, so it is yang. Warmth supplements insufficiency; sweetness moderates yin blood.
+
+Cheng Wuji: A pathogen in the nutritive and defensive levels is treated with acrid and sweet flavors; thus ginger and jujube harmonize those levels and support the ascending qi of Spleen and Stomach. Zhang Zhongjing used jujube to nourish Spleen Earth and quiet Kidney qi in running-piglet qi. Shi Zao Tang treats retained fluid and pain along the ribs: supporting Earth helps control Water.
+
+Zhenheng: Jujube corresponds to Earth and contains Fire; it is sweet and moderating. Sweet flavors enter the Spleen first, yet supplementing the Spleen does not always call for sweetness. Frequent sweet foods can injure it.
+
+Shizhen: The Suwen calls jujube the fruit of the Spleen and recommends it in Spleen illness. In treating illness and harmonizing prescriptions, it acts on the blood aspect of the Spleen channel. But eating it often without reason was said to produce parasites and harm the teeth. Wang Haogu cautions that sweet food may increase fullness in the middle; thus Zhongjing reduced malt syrup and jujube in Jian Zhong Tang when there was epigastric fullness, just as he adjusted Gan Cao. Xu Shuwei's Benshi Fang tells of a woman with persistent weeping and distress who recovered after a Da Zao decoction was given for this pattern. Chen Ziming's Furen Liangfang recounts a woman four or five months pregnant with daytime sadness and repeated crying who, after various failed treatments, improved when given the same formula suggested by Guan Bozhou. Zhai Xuan Fang records a variant involving charred red jujubes, of which three qian were taken with wine. These stories illustrate the old formula traditions."
+UI_BOOK_ENTRY_TITLE_JIN_YIN_HUA,金银花,Jin Yin Hua (Honeysuckle Flower)
+UI_BOOK_ENTRY_BODY_JIN_YIN_HUA,"金银花（忍冬）
+【气味】味甘，性寒。
+【毒性】无毒。
+【归经】归肺、心、胃经。
+【主治】清热解毒，疏散风热。
+【释名】金银藤（《纲目》）、鸳鸯藤（《纲目》）、鹭鸶藤（《纲目》）、老翁须（《纲目》）、左缠藤（《纲目》）、金钗股（《纲目》）、通灵草（《土宿》）、蜜桶藤（《土宿》）。
+
+弘景曰︰处处有之。藤生，凌冬不凋，故名忍冬。
+
+时珍曰︰其花长瓣垂须，黄白相半，而藤左缠，故有金银、鸳鸯以下诸名。金钗股，贵其功也。土宿真君云︰蜜桶藤，阴草也。取汁能伏硫制汞，故有通灵之称。
+
+【发明】弘景曰︰忍冬，煮汁酿酒饮，补虚疗风。此既长年益寿，可常采服，而《仙经》少用。凡易得之草，人多不肯为之，更求难得者，贵远贱近，庸人之情也。
+
+时珍曰︰忍冬，茎叶及花，功用皆同。昔人称其治风除胀，解痢逐尸为要药，而后世不复知用，后世称其消肿散毒治疮为要药，而昔人并未言及。乃知古今之理，万变不同，未可一辙论也。按︰陈自明《外科精要》云︰忍冬酒，治痈疽发背，初发便当服此，其效甚奇，胜于红内消。洪内翰迈、沈内翰括诸方，所载甚详。如疡医丹阳僧、江西僧鉴清、金陵王琪、王尉子骏、海州刘秀才纯臣等，所载疗痈疽发背经效奇方，皆是此物。故张相公云︰谁知至贱之中，乃有殊常之效，正此类也。","JIN YIN HUA (HONEYSUCKLE FLOWER)
+
+[Taste and nature] Sweet; cold.
+
+[Toxicity] Recorded as non-toxic.
+
+[Channels] Lung, Heart and Stomach.
+
+[Actions] Clears Heat and resolves toxins; disperses Wind-Heat.
+
+[Names and origins]
+
+Other names: Jin Yin Teng, Yuan Yang Teng, Lu Si Teng, Lao Weng Xu, Zuo Chan Teng and Jin Chai Gu (Gangmu); Tong Ling Cao and Mi Tong Teng (Tusu).
+
+Hongjing: The vine grows widely and stays green through winter, which is why it is also called Ren Dong, or 'enduring winter'.
+
+Shizhen: Its long-petaled flowers have hanging stamens, half yellow and half white, while the vine twists leftward; these traits explain its names referring to gold and silver, paired birds and twining. Jin Chai Gu praises its reputed usefulness. A Daoist source calls Mi Tong Teng a yin plant and says its juice can subdue sulfur and process mercury, hence the name Tong Ling Cao.
+
+
+
+[Historical commentary]
+
+Hongjing: The old account says that drinking wine prepared with boiled Ren Dong juice supplements deficiency and addresses Wind, and even claims it promotes long life. It remarks that people overlook this easy-to-find plant while seeking rare ingredients, valuing distant things over those close at hand.
+
+Shizhen: The stems, leaves and flowers of Ren Dong are described as having similar uses. Earlier writers praised it for Wind, swelling and dysentery, but later generations forgot these uses; later writers praised it for swollen sores and infection, uses not mentioned by the earlier authors. Medical fashions change, so one should not treat every age as identical. Chen Ziming's Waike Jingyao describes Ren Dong wine for an abscess or a sore on the back at its onset and claims remarkable results, superior to Hong Nei Xiao. Accounts by Hong Mai and Shen Kuo and other writers give further examples. Formulas reported by healers including a monk from Danyang, the monk Jianqing from Jiangxi, Wang Qi and Wang Zijun from Jinling, and the scholar Liu Chunchen from Haizhou likewise use this plant. As a minister remarked, extraordinary effects may be found in the most common things."
