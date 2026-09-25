@@ -1507,6 +1507,7 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 	var player_disease_name := ""
 	var player_prescription_text := ""
 	var grade := ""
+	var grade_level := ""
 	var total_score := 0
 
 	if current_npc != null:
@@ -1537,6 +1538,12 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 		if raw_grade != null:
 			grade = str(raw_grade)
 
+		# 判定显示优先使用稳定的内部 level：perfect / pass / fail。
+		# grade 继续保留中文值，兼容现有奖励和其它逻辑。
+		var raw_level = judge_result.get("level")
+		if raw_level != null:
+			grade_level = str(raw_level).strip_edges()
+
 		var raw_score = judge_result.get("score")
 		if raw_score != null:
 			total_score = int(raw_score)
@@ -1544,13 +1551,17 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 	return {
 		"npc_name": npc_name,
 		"disease_name": disease_name,
+		"disease_id": current_npc.disease.disease_id if current_npc != null and current_npc.disease != null else "",
 		"standard_formula_name": standard_formula_name,
+		"standard_formula_id": standard_formula.formula_id if standard_formula != null else "",
 		"standard_formula_text": standard_formula_text,
 		"standard_formula_resource": standard_formula,
 		"player_disease_name": player_disease_name,
+		"player_disease_id": current_prescription.disease_id if current_prescription != null else "",
 		"player_prescription_text": player_prescription_text,
 		"player_prescription_resource": current_prescription,
 		"grade": grade,
+		"grade_level": grade_level,
 		"total_score": total_score,
 		"summary_text": summary_text,
 		"newly_unlocked_entry_titles": last_newly_unlocked_entry_titles.duplicate(),

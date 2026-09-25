@@ -30,11 +30,13 @@ func show_result(data: Dictionary) -> void:
 
 
 func _render_result(data: Dictionary) -> void:
-
 	var disease_name: String = str(data.get("disease_name", ""))
+	var disease_id: String = str(data.get("disease_id", "")).strip_edges()
 	var standard_formula_name: String = str(data.get("standard_formula_name", ""))
+	var standard_formula_id: String = str(data.get("standard_formula_id", "")).strip_edges()
 	var standard_formula_text: String = str(data.get("standard_formula_text", ""))
 	var player_disease_name: String = str(data.get("player_disease_name", ""))
+	var player_disease_id: String = str(data.get("player_disease_id", "")).strip_edges()
 	var player_prescription_text: String = str(data.get("player_prescription_text", ""))
 	var newly_unlocked_entry_titles: Array[String] = _get_string_array(data.get("newly_unlocked_entry_titles", []))
 	var show_reward_change: bool = bool(data.get("show_reward_change", false))
@@ -43,10 +45,18 @@ func _render_result(data: Dictionary) -> void:
 	var medicine_income_wen: int = int(data.get("medicine_income_wen", 0))
 	var patient_thank_gift_wen: int = int(data.get("patient_thank_gift_wen", 0))
 	var grade := str(data.get("grade", "")).strip_edges()
+	var grade_level := str(data.get("grade_level", "")).strip_edges().to_lower()
+	var is_english := TranslationServer.get_locale().to_lower().begins_with("en")
 
-	# 结果页保留原始中文记录；英文只在显示时重组角色和剂量。
-	# 这样切换语言后可重新渲染，存档与处方计算仍使用原始值。
-	if TranslationServer.get_locale().begins_with("en"):
+	# 结果数据仍保留原始中文名称 / ID；英文环境只在显示层本地化。
+	# 这样切换语言时可立即重新渲染，不影响处方判定和存档数据。
+	if is_english:
+		if disease_id != "":
+			disease_name = LocalizedName.disease(disease_id, disease_name)
+
+		if standard_formula_id != "":
+			standard_formula_name = LocalizedName.formula(standard_formula_id, standard_formula_name)
+
 		var standard_formula = data.get("standard_formula_resource", null)
 		if standard_formula is FormulaData:
 			standard_formula_text = _format_formula_for_english(standard_formula)
@@ -58,51 +68,93 @@ func _render_result(data: Dictionary) -> void:
 			player_prescription_text = _format_prescription_for_english(prescription)
 		elif player_prescription_text == "（无）":
 			player_prescription_text = tr("UI_RESULT_NONE")
-		if player_disease_name == "未选择疾病":
+
+		if player_disease_id != "":
+			player_disease_name = LocalizedName.disease(player_disease_id, player_disease_name)
+		elif player_disease_name == "未选择疾病":
 			player_disease_name = tr("UI_RESULT_NO_DIAGNOSIS")
 
-	result_text.clear()
-	result_text.append_text(tr("UI_RESULT_DISEASE_FMT") % disease_name)
-	result_text.append_text(tr("UI_RESULT_FORMULA_FMT") % standard_formula_name)
-	result_text.append_text(tr("UI_RESULT_FORMULA_DETAIL_FMT") % standard_formula_text)
-	result_text.append_text(tr("UI_RESULT_DIAGNOSIS_FMT") % player_disease_name)
-	result_text.append_text(tr("UI_RESULT_PRESCRIPTION_FMT") % player_prescription_text)
+	# 结果排版统一为：
+	# 病人疾病：xxx，标准方：xxx
+	# 方剂配伍：
+	# 君 / 臣 / 佐 / 使
+	#
+	# 断病：xxx
+	# 开方：
+	# 君 / 臣 / 佐 / 使
+	#
+	# 本次治疗奖励：
+	var sections: Array[String] = []
 
-	# 首次提交时始终分项显示诊费和药材收入。
-	# 治疗失败时诊费为 0，药材收入为负的实际成本。
+	var disease_line := (tr("UI_RESULT_DISEASE_FMT") % disease_name).strip_edges()
+	var formula_line := (tr("UI_RESULT_FORMULA_FMT") % standard_formula_name).strip_edges()
+	var inline_separator := tr("UI_RESULT_REWARD_SEPARATOR")
+	if is_english:
+		inline_separator += " "
+
+	var standard_block := disease_line + inline_separator + formula_line
+	standard_block += "\n" + (tr("UI_RESULT_FORMULA_DETAIL_FMT") % standard_formula_text).strip_edges()
+	sections.append(standard_block)
+
+	var prescription_block := (tr("UI_RESULT_DIAGNOSIS_FMT") % player_disease_name).strip_edges()
+	prescription_block += "\n" + (tr("UI_RESULT_PRESCRIPTION_FMT") % player_prescription_text).strip_edges()
+	sections.append(prescription_block)
+
+	# 首次提交时分项显示诊费和药材收入。
+	# 每一项独占一行，保持结果区结构清晰。
 	if show_reward_change:
-		var reward_parts: Array[String] = [
+		var reward_lines: Array[String] = [
 			tr("UI_RESULT_REPUTATION_CHANGE_FMT") % _format_change(reputation_change),
 			tr("UI_RESULT_CONSULTATION_CHANGE_FMT") % _format_money_change(consultation_fee_wen),
 			tr("UI_RESULT_MEDICINE_CHANGE_FMT") % _format_money_change(medicine_income_wen)
 		]
 		if patient_thank_gift_wen > 0:
-			reward_parts.append(
+			reward_lines.append(
 				tr("UI_RESULT_GIFT_CHANGE_FMT") % _format_money_change(patient_thank_gift_wen)
 			)
-		result_text.append_text(tr("UI_RESULT_REWARDS_FMT") % tr("UI_RESULT_REWARD_SEPARATOR").join(reward_parts))
+
+		var reward_title := (tr("UI_RESULT_REWARDS_FMT") % "").strip_edges()
+		sections.append(reward_title + "\n" + "\n".join(reward_lines))
 
 	if not newly_unlocked_entry_titles.is_empty():
-		if TranslationServer.get_locale().begins_with("en"):
+		if is_english:
 			for index in range(newly_unlocked_entry_titles.size()):
 				newly_unlocked_entry_titles[index] = _localized_unlock_title(newly_unlocked_entry_titles[index])
-		result_text.append_text(tr("UI_RESULT_UNLOCKED_FMT") % tr("UI_RESULT_UNLOCK_SEPARATOR").join(newly_unlocked_entry_titles))
+		sections.append(
+			(tr("UI_RESULT_UNLOCKED_FMT") % tr("UI_RESULT_UNLOCK_SEPARATOR").join(newly_unlocked_entry_titles)).strip_edges()
+		)
 
+	result_text.clear()
+	result_text.append_text("\n\n".join(sections))
+
+	# 显示判定优先使用 FormulaJudge 的稳定内部 level。
+	# 旧数据没有 level 时继续兼容中文 grade。
 	var rating_key := ""
-	match grade:
-		"妙手回春":
+	match grade_level:
+		"perfect":
 			rating_image.texture = preload("res://Assets/Rating/rating_miaoshouhuichun.png")
 			rating_key = "UI_RESULT_GRADE_PERFECT"
-		"治疗成功":
+		"pass":
 			rating_image.texture = preload("res://Assets/Rating/rating_success.png")
 			rating_key = "UI_RESULT_GRADE_SUCCESS"
-		"治疗失败":
+		"fail":
 			rating_image.texture = preload("res://Assets/Rating/rating_failed.png")
 			rating_key = "UI_RESULT_GRADE_FAILED"
 		_:
-			rating_image.texture = null
+			match grade:
+				"妙手回春":
+					rating_image.texture = preload("res://Assets/Rating/rating_miaoshouhuichun.png")
+					rating_key = "UI_RESULT_GRADE_PERFECT"
+				"治疗成功":
+					rating_image.texture = preload("res://Assets/Rating/rating_success.png")
+					rating_key = "UI_RESULT_GRADE_SUCCESS"
+				"治疗失败":
+					rating_image.texture = preload("res://Assets/Rating/rating_failed.png")
+					rating_key = "UI_RESULT_GRADE_FAILED"
+				_:
+					rating_image.texture = null
 
-	var use_english_text := TranslationServer.get_locale().begins_with("en") and not rating_key.is_empty()
+	var use_english_text := is_english and not rating_key.is_empty()
 	rating_image.visible = rating_image.texture != null and not use_english_text
 	rating_text.visible = use_english_text
 	rating_text.text = tr(rating_key) if use_english_text else ""
@@ -123,11 +175,16 @@ func _format_formula_for_english(formula: FormulaData) -> String:
 				continue
 			if ingredient.has_method("is_valid_data") and not ingredient.is_valid_data():
 				continue
+			var herb_id := ""
 			var herb_name := ""
+			if ingredient.has_method("get_herb_id"):
+				herb_id = str(ingredient.get_herb_id()).strip_edges()
 			if ingredient.has_method("get_herb_name"):
 				herb_name = str(ingredient.get_herb_name()).strip_edges()
-			if herb_name == "" and ingredient.has_method("get_herb_id"):
-				herb_name = str(ingredient.get_herb_id()).strip_edges()
+			if herb_name == "":
+				herb_name = herb_id
+			if herb_id != "":
+				herb_name = LocalizedName.herb(herb_id, herb_name)
 			if herb_name == "":
 				continue
 			var amount := ""
@@ -153,7 +210,12 @@ func _format_prescription_for_english(prescription: Prescription) -> String:
 	for role_data in roles:
 		var parts: Array[String] = []
 		for item in prescription.get_herbs_by_role(role_data[0]):
+			var herb_id := str(item.get("herb_id", "")).strip_edges()
 			var herb_name := str(item.get("herb_name", "")).strip_edges()
+			if herb_name == "":
+				herb_name = herb_id
+			if herb_id != "":
+				herb_name = LocalizedName.herb(herb_id, herb_name)
 			if herb_name == "":
 				continue
 			var amount := float(item.get("amount", 0.0))
