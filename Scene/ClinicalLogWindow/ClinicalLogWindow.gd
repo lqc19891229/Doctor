@@ -593,6 +593,48 @@ func _setup_page_controls(right_panel: Control, detail_scroll: ScrollContainer, 
 	}
 
 
+func _is_english_detail_layout() -> bool:
+	return TranslationServer.get_locale().to_lower().begins_with("en")
+
+
+func _set_page_controls_visible(
+	prev_button: Button,
+	indicator: Label,
+	next_button: Button,
+	should_show: bool
+) -> void:
+	if prev_button != null:
+		prev_button.visible = should_show
+	if indicator != null:
+		indicator.visible = should_show
+	if next_button != null:
+		next_button.visible = should_show
+
+
+func _show_horizontal_detail(
+	label: RichTextLabel,
+	scroll: ScrollContainer,
+	value: String
+) -> void:
+	if label == null:
+		return
+
+	if label.has_method("set_horizontal_source_text"):
+		label.call("set_horizontal_source_text", value)
+	else:
+		# 普通 RichTextLabel 兜底。
+		label.fit_content = true
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		label.text = value
+
+	if scroll != null:
+		scroll.set_deferred("scroll_horizontal", 0)
+		scroll.set_deferred("scroll_vertical", 0)
+
+
+
+
 # =========================================================
 # 十一、详情显示
 # =========================================================
@@ -642,7 +684,18 @@ func _build_entry_detail_text(entry: BookEntryData) -> String:
 	if entry == null:
 		return ""
 
-	return entry.detail_text
+	var clean_entry_id := str(entry.entry_id).strip_edges()
+	if clean_entry_id == "":
+		return entry.detail_text
+
+	var translation_key := "UI_BOOK_ENTRY_BODY_" + clean_entry_id.to_upper()
+	var translated := TranslationServer.translate(translation_key)
+
+	# 找不到翻译时，回退到 .tres 原始正文。
+	if translated.strip_edges() == "" or translated == translation_key:
+		return entry.detail_text
+
+	return translated
 
 
 # 设置详情文本。
@@ -688,8 +741,27 @@ func _build_detail_pages(label: RichTextLabel, value: String, columns_per_page: 
 func _set_disease_detail_text_with_pages(value: String) -> void:
 	_current_disease_detail_text = value
 	_disease_page_index = 0
+
+	if _is_english_detail_layout():
+		_disease_pages = [{"text": value, "column_count": 1}]
+		_disease_page_count = 1
+		_show_horizontal_detail(disease_detail_label, disease_detail_scroll, value)
+		_set_page_controls_visible(
+			disease_prev_page_button,
+			disease_page_indicator,
+			disease_next_page_button,
+			false
+		)
+		return
+
 	_disease_pages = _build_detail_pages(disease_detail_label, value, disease_columns_per_page)
 	_disease_page_count = max(1, _disease_pages.size())
+	_set_page_controls_visible(
+		disease_prev_page_button,
+		disease_page_indicator,
+		disease_next_page_button,
+		true
+	)
 	_refresh_disease_detail_page()
 
 
@@ -729,8 +801,27 @@ func _on_disease_next_page_pressed() -> void:
 func _set_formula_detail_text_with_pages(value: String) -> void:
 	_current_formula_detail_text = value
 	_formula_page_index = 0
+
+	if _is_english_detail_layout():
+		_formula_pages = [{"text": value, "column_count": 1}]
+		_formula_page_count = 1
+		_show_horizontal_detail(formula_detail_label, formula_detail_scroll, value)
+		_set_page_controls_visible(
+			formula_prev_page_button,
+			formula_page_indicator,
+			formula_next_page_button,
+			false
+		)
+		return
+
 	_formula_pages = _build_detail_pages(formula_detail_label, value, formula_columns_per_page)
 	_formula_page_count = max(1, _formula_pages.size())
+	_set_page_controls_visible(
+		formula_prev_page_button,
+		formula_page_indicator,
+		formula_next_page_button,
+		true
+	)
 	_refresh_formula_detail_page()
 
 
@@ -770,8 +861,27 @@ func _on_formula_next_page_pressed() -> void:
 func _set_herb_detail_text_with_pages(value: String) -> void:
 	_current_herb_detail_text = value
 	_herb_page_index = 0
+
+	if _is_english_detail_layout():
+		_herb_pages = [{"text": value, "column_count": 1}]
+		_herb_page_count = 1
+		_show_horizontal_detail(herb_detail_label, herb_detail_scroll, value)
+		_set_page_controls_visible(
+			herb_prev_page_button,
+			herb_page_indicator,
+			herb_next_page_button,
+			false
+		)
+		return
+
 	_herb_pages = _build_detail_pages(herb_detail_label, value, herb_columns_per_page)
 	_herb_page_count = max(1, _herb_pages.size())
+	_set_page_controls_visible(
+		herb_prev_page_button,
+		herb_page_indicator,
+		herb_next_page_button,
+		true
+	)
 	_refresh_herb_detail_page()
 
 
@@ -849,30 +959,15 @@ func _update_page_controls(prev_button: Button, indicator: Label, next_button: B
 # =========================================================
 
 func _clear_disease_detail() -> void:
-	_current_disease_detail_text = tr("UI_LOG_SELECT_DISEASE")
-	_disease_page_index = 0
-	_disease_page_count = 1
-	_disease_pages = _build_detail_pages(disease_detail_label, _current_disease_detail_text, disease_columns_per_page)
-	_set_detail_page(disease_detail_label, _disease_pages[0])
-	_update_disease_page_controls()
+	_set_disease_detail_text_with_pages(tr("UI_LOG_SELECT_DISEASE"))
 
 
 func _clear_formula_detail() -> void:
-	_current_formula_detail_text = tr("UI_LOG_SELECT_FORMULA")
-	_formula_page_index = 0
-	_formula_page_count = 1
-	_formula_pages = _build_detail_pages(formula_detail_label, _current_formula_detail_text, formula_columns_per_page)
-	_set_detail_page(formula_detail_label, _formula_pages[0])
-	_update_formula_page_controls()
+	_set_formula_detail_text_with_pages(tr("UI_LOG_SELECT_FORMULA"))
 
 
 func _clear_herb_detail() -> void:
-	_current_herb_detail_text = tr("UI_LOG_SELECT_HERB")
-	_herb_page_index = 0
-	_herb_page_count = 1
-	_herb_pages = _build_detail_pages(herb_detail_label, _current_herb_detail_text, herb_columns_per_page)
-	_set_detail_page(herb_detail_label, _herb_pages[0])
-	_update_herb_page_controls()
+	_set_herb_detail_text_with_pages(tr("UI_LOG_SELECT_HERB"))
 
 
 # =========================================================

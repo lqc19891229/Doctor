@@ -116,6 +116,7 @@ const LEFT_HAND_DISEASE_NAMES: Array[String] = [
 # 节点引用
 # =========================================================
 @onready var layer_tabs: TabContainer = $LayerTabs
+@onready var key_hint_label: Label = $LayerTabs/按键提示/KeyHintPanel/KeyHintLabel
 @onready var right_pulse_drawer: Control = $LayerTabs/右手脉象/RightHandLayout/RightPulseDrawer
 @onready var left_pulse_drawer: Control = $LayerTabs/左手脉象/LeftHandLayout/LeftPulseDrawer
 
@@ -150,14 +151,21 @@ func _localized_disease_region_name(name: String) -> String:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
-		title = tr("UI_PULSE_WINDOW_TITLE")
+		_refresh_localized_ui()
+
+
+func _refresh_localized_ui() -> void:
+	title = tr("UI_PULSE_WINDOW_TITLE")
+
+	if key_hint_label != null:
+		key_hint_label.text = tr("UI_PULSE_KEY_HINT")
 
 
 # =========================================================
 # 生命周期
 # =========================================================
 func _ready() -> void:
-	title = tr("UI_PULSE_WINDOW_TITLE")
+	_refresh_localized_ui()
 	# 初始化时放到固定位置
 	position = fixed_window_position
 

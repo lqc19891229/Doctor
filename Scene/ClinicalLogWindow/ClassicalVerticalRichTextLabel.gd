@@ -173,6 +173,12 @@ func set_prebuilt_vertical_page(page_data: Dictionary) -> void:
 	var page_text := str(page_data.get("text", ""))
 	var column_count := int(page_data.get("column_count", 1))
 
+	# 从英文横排切回中文竖排时，必须恢复竖排状态。
+	_horizontal_source = false
+	fit_content = false
+	autowrap_mode = TextServer.AUTOWRAP_OFF
+	horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+
 	_source_text = ""
 	_display_text = page_text
 	_update_horizontal_content_size(column_count)

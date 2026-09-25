@@ -222,13 +222,20 @@ Key Controls:
 Right Hand Pulse: Q+A+Z
 
 Left Hand Pulse: W+S+X"
-UI_PULSE_LABEL_FLOAT,浮脉(表),Floating (Exterior)
-UI_PULSE_LABEL_RIGHT_CHI,右尺(肾阳),Right Chi (Kidney Yang)
-UI_PULSE_LABEL_RIGHT_GUAN,右关(脾),Right Guan (Spleen)
-UI_PULSE_LABEL_RIGHT_CUN,右寸(肺),Right Cun (Lung)
-UI_PULSE_LABEL_LEFT_CHI,左尺(肾阴),Left Chi (Kidney Yin)
-UI_PULSE_LABEL_LEFT_GUAN,左关(肝),Left Guan (Liver)
-UI_PULSE_LABEL_LEFT_CUN,左寸(心),Left Cun (Heart)
+UI_PULSE_LABEL_FLOAT,浮脉(表),"Floating
+(Exterior)"
+UI_PULSE_LABEL_RIGHT_CHI,右尺(肾阳),"Right Chi
+(Kidney Yang)"
+UI_PULSE_LABEL_RIGHT_GUAN,右关(脾),"Right Guan
+(Spleen)"
+UI_PULSE_LABEL_RIGHT_CUN,右寸(肺),"Right Cun
+(Lung)"
+UI_PULSE_LABEL_LEFT_CHI,左尺(肾阴),"Left Chi
+(Kidney Yin)"
+UI_PULSE_LABEL_LEFT_GUAN,左关(肝),"Left Guan
+(Liver)"
+UI_PULSE_LABEL_LEFT_CUN,左寸(心),"Left Cun
+(Heart)"
 UI_PULSE_REGION_FLOAT,浮脉,Floating Pulse
 UI_PULSE_REGION_RIGHT_CHI,右尺,Right Chi
 UI_PULSE_REGION_RIGHT_GUAN,右关,Right Guan
