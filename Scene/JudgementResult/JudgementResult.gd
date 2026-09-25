@@ -9,6 +9,28 @@ signal result_closed
 
 var current_result_data: Dictionary = {}
 
+# 判定等级文字颜色：
+# - 治疗成功：保留原来的金色
+# - 治疗失败：灰色
+# - 妙手回春：动态炫彩
+const RATING_SUCCESS_COLOR := Color(0.94, 0.78, 0.42, 1.0)
+const RATING_FAILED_COLOR := Color(0.55, 0.55, 0.55, 1.0)
+const RATING_RAINBOW_SPEED := 0.22
+
+var rating_rainbow_active: bool = false
+var rating_rainbow_time: float = 0.0
+
+
+func _process(delta: float) -> void:
+	if not rating_rainbow_active or rating_text == null or not rating_text.visible:
+		return
+
+	rating_rainbow_time = fmod(rating_rainbow_time + delta * RATING_RAINBOW_SPEED, 1.0)
+	rating_text.add_theme_color_override(
+		"font_color",
+		Color.from_hsv(rating_rainbow_time, 0.78, 1.0, 1.0)
+	)
+
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready() and not current_result_data.is_empty():
@@ -75,53 +97,63 @@ func _render_result(data: Dictionary) -> void:
 			player_disease_name = tr("UI_RESULT_NO_DIAGNOSIS")
 
 	# 结果排版统一为：
-	# 病人疾病：xxx，标准方：xxx
+	# 病人疾病：xxx
+	# 标准方：xxx
 	# 方剂配伍：
-	# 君 / 臣 / 佐 / 使
+	# 君：
+	# 臣：
+	# 佐：
+	# 使：
 	#
 	# 断病：xxx
 	# 开方：
-	# 君 / 臣 / 佐 / 使
+	# 君：
+	# 臣：
+	# 佐：
+	# 使：
 	#
-	# 本次治疗奖励：
+	# 本次治疗奖励：xxx，xxx，xxx
+	# 解锁：xxx，xxx，xxx
 	var sections: Array[String] = []
 
 	var disease_line := (tr("UI_RESULT_DISEASE_FMT") % disease_name).strip_edges()
 	var formula_line := (tr("UI_RESULT_FORMULA_FMT") % standard_formula_name).strip_edges()
-	var inline_separator := tr("UI_RESULT_REWARD_SEPARATOR")
-	if is_english:
-		inline_separator += " "
+	var formula_detail := (tr("UI_RESULT_FORMULA_DETAIL_FMT") % standard_formula_text).strip_edges()
+	sections.append(disease_line + "\n" + formula_line + "\n" + formula_detail)
 
-	var standard_block := disease_line + inline_separator + formula_line
-	standard_block += "\n" + (tr("UI_RESULT_FORMULA_DETAIL_FMT") % standard_formula_text).strip_edges()
-	sections.append(standard_block)
+	var diagnosis_line := (tr("UI_RESULT_DIAGNOSIS_FMT") % player_disease_name).strip_edges()
+	var prescription_detail := (tr("UI_RESULT_PRESCRIPTION_FMT") % player_prescription_text).strip_edges()
+	sections.append(diagnosis_line + "\n" + prescription_detail)
 
-	var prescription_block := (tr("UI_RESULT_DIAGNOSIS_FMT") % player_disease_name).strip_edges()
-	prescription_block += "\n" + (tr("UI_RESULT_PRESCRIPTION_FMT") % player_prescription_text).strip_edges()
-	sections.append(prescription_block)
-
-	# 首次提交时分项显示诊费和药材收入。
-	# 每一项独占一行，保持结果区结构清晰。
+	# 首次提交时，奖励保持在同一行，用当前语言的分隔符连接。
 	if show_reward_change:
-		var reward_lines: Array[String] = [
+		var reward_parts: Array[String] = [
 			tr("UI_RESULT_REPUTATION_CHANGE_FMT") % _format_change(reputation_change),
 			tr("UI_RESULT_CONSULTATION_CHANGE_FMT") % _format_money_change(consultation_fee_wen),
 			tr("UI_RESULT_MEDICINE_CHANGE_FMT") % _format_money_change(medicine_income_wen)
 		]
 		if patient_thank_gift_wen > 0:
-			reward_lines.append(
+			reward_parts.append(
 				tr("UI_RESULT_GIFT_CHANGE_FMT") % _format_money_change(patient_thank_gift_wen)
 			)
 
-		var reward_title := (tr("UI_RESULT_REWARDS_FMT") % "").strip_edges()
-		sections.append(reward_title + "\n" + "\n".join(reward_lines))
+		var reward_separator := tr("UI_RESULT_REWARD_SEPARATOR")
+		if is_english:
+			reward_separator += " "
+		sections.append(
+			(tr("UI_RESULT_REWARDS_FMT") % reward_separator.join(reward_parts)).strip_edges()
+		)
 
 	if not newly_unlocked_entry_titles.is_empty():
 		if is_english:
 			for index in range(newly_unlocked_entry_titles.size()):
 				newly_unlocked_entry_titles[index] = _localized_unlock_title(newly_unlocked_entry_titles[index])
+
+		var unlock_separator := tr("UI_RESULT_UNLOCK_SEPARATOR")
+		if is_english:
+			unlock_separator += " "
 		sections.append(
-			(tr("UI_RESULT_UNLOCKED_FMT") % tr("UI_RESULT_UNLOCK_SEPARATOR").join(newly_unlocked_entry_titles)).strip_edges()
+			(tr("UI_RESULT_UNLOCKED_FMT") % unlock_separator.join(newly_unlocked_entry_titles)).strip_edges()
 		)
 
 	result_text.clear()
@@ -158,6 +190,23 @@ func _render_result(data: Dictionary) -> void:
 	rating_image.visible = rating_image.texture != null and not use_english_text
 	rating_text.visible = use_english_text
 	rating_text.text = tr(rating_key) if use_english_text else ""
+
+	# 英文环境使用文字显示等级，并按等级应用颜色。
+	# 妙手回春使用持续变色的炫彩效果；治疗失败使用灰色。
+	rating_rainbow_active = false
+	if use_english_text:
+		match rating_key:
+			"UI_RESULT_GRADE_PERFECT":
+				rating_rainbow_active = true
+				rating_rainbow_time = 0.0
+				rating_text.add_theme_color_override(
+					"font_color",
+					Color.from_hsv(rating_rainbow_time, 0.78, 1.0, 1.0)
+				)
+			"UI_RESULT_GRADE_FAILED":
+				rating_text.add_theme_color_override("font_color", RATING_FAILED_COLOR)
+			_:
+				rating_text.add_theme_color_override("font_color", RATING_SUCCESS_COLOR)
 
 
 func _format_formula_for_english(formula: FormulaData) -> String:
