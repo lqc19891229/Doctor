@@ -8976,242 +8976,303 @@ Its medicinal identity is therefore summarized by its warm, moistening and downw
 
 Unlike strongly drying phlegm herbs, Aster Root was valued for chronic cough in which phlegm coexisted with Lung dryness or deficiency."
 UI_NPC_NAME_CHA_BO_SHI,茶博士,Tea Master
-UI_NPC_DIALOGUE_BEFORE_CHA_BO_SHI,我最近几日身体不适，劳烦先生给小可看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_CHA_BO_SHI,哎呀，真是多谢先生了。,"Oh, thank you very much, Doctor."
 UI_NPC_DIALOGUE_FAILED_CHA_BO_SHI,感觉更不舒服了…,I feel even worse...
 UI_NPC_NAME_CHEN_ER,陈二,Chen Er
-UI_NPC_DIALOGUE_BEFORE_CHEN_ER,先生，我最近身体不适，帮我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_CHEN_ER,多谢先生，我好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_CHEN_ER,嗯…哎哟…,Mm... ow...
 UI_NPC_NAME_CHEN_PO,陈婆,Granny Chen
-UI_NPC_DIALOGUE_BEFORE_CHEN_PO,先生，老婆子我这几日身体不适，您快帮我看看吧。,"Doctor, I haven't been feeling well these past few days. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_CHEN_PO,真是太谢谢先生了。,"Thank you so much, Doctor."
 UI_NPC_DIALOGUE_FAILED_CHEN_PO,感觉不太对啊…,Something doesn't feel right...
 UI_NPC_NAME_CHEN_SHAN_ZHANG,陈山长,Headmaster Chen
-UI_NPC_DIALOGUE_BEFORE_CHEN_SHAN_ZHANG,大夫，我这几日身体不适，劳烦您给我看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_CHEN_SHAN_ZHANG,大夫真是妙手回春啊。,"Doctor, your skill is remarkable. I feel restored."
 UI_NPC_DIALOGUE_FAILED_CHEN_SHAN_ZHANG,医术不精，还敢自称郎中！,You call yourself a physician with skills like that?!
 UI_NPC_NAME_DU_ER_SAO,杜二嫂,Second Sister-in-law Du
-UI_NPC_DIALOGUE_BEFORE_DU_ER_SAO,先生，我这两天身体不适，请您帮我看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_DU_ER_SAO,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_DU_ER_SAO,哎哟...哎哟…,Ow... ow...
 UI_NPC_NAME_FENG_JUN_BAO,冯军保,Feng Junbao
-UI_NPC_DIALOGUE_BEFORE_FENG_JUN_BAO,我这几日身体不适，请您帮我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_FENG_JUN_BAO,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_FENG_JUN_BAO,哎…奇怪…,Hmm... that's strange...
 UI_NPC_NAME_GAO_XIU_LIAN,高秀莲,Gao Xiulian
-UI_NPC_DIALOGUE_BEFORE_GAO_XIU_LIAN,大夫，我最近身体不适，麻烦您给瞧瞧,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_GAO_XIU_LIAN,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor."
 UI_NPC_DIALOGUE_FAILED_GAO_XIU_LIAN,哎哟...哎哟…,Ow... ow...
 UI_NPC_NAME_HAN_ZHANG_GUI,韩掌柜,Shopkeeper Han
-UI_NPC_DIALOGUE_BEFORE_HAN_ZHANG_GUI,大夫，我这两天身体不适，劳烦您给我看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_HAN_ZHANG_GUI,多谢大夫啦。,"Thank you, Doctor."
 UI_NPC_DIALOGUE_FAILED_HAN_ZHANG_GUI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?"
 UI_NPC_NAME_HE_SAN_JIE,贺三姐,Third Sister He
-UI_NPC_DIALOGUE_BEFORE_HE_SAN_JIE,我这两天身体不适，请您给我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_HE_SAN_JIE,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_HE_SAN_JIE,你会不会看病啊？,Do you actually know how to treat people?
 UI_NPC_NAME_HE_ZHANG_SHAO,何掌勺,Cook He
-UI_NPC_DIALOGUE_BEFORE_HE_ZHANG_SHAO,大夫，我最近身体不适，大夫快给我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_HE_ZHANG_SHAO,多谢先生了。,"Thank you, Doctor."
 UI_NPC_DIALOGUE_FAILED_HE_ZHANG_SHAO,还是好难受啊…,I still feel awful...
 UI_NPC_NAME_HUA_JIN_NIANG,华锦娘,Hua Jinniang
-UI_NPC_DIALOGUE_BEFORE_HUA_JIN_NIANG,我这几日身体不适，劳烦先生您给小妇看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_HUA_JIN_NIANG,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_HUA_JIN_NIANG,您给我开的这是什么药啊…,What kind of medicine did you give me...?
 UI_NPC_NAME_HUA_YUN,花芸,Hua Yun
-UI_NPC_DIALOGUE_BEFORE_HUA_YUN,先生，我这几天身体不适，烦请先生给我看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_HUA_YUN,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_HUA_YUN,嗯？感觉好奇怪啊…,Huh? I feel strange...
 UI_NPC_NAME_HUANG_NIU_ER,黄牛儿,Huang Niu'er
-UI_NPC_DIALOGUE_BEFORE_HUANG_NIU_ER,哎哟大夫，我身体不适，快给我看看吧。,"Oh dear, Doctor, I haven't been feeling well. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_HUANG_NIU_ER,真是太谢谢大夫了。,"Thank you so much, Doctor."
 UI_NPC_DIALOGUE_FAILED_HUANG_NIU_ER,感觉不太对啊…,Something doesn't feel right...
 UI_NPC_NAME_HUANG_QIU_JU,黄秋菊,Huang Qiuju
-UI_NPC_DIALOGUE_BEFORE_HUANG_QIU_JU,我这两天身体不适，请您给小女看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_HUANG_QIU_JU,多谢先生，我好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_HUANG_QIU_JU,还是好难受啊…,I still feel awful...
 UI_NPC_NAME_JI_YUN_NIANG,季云娘,Ji Yunniang
-UI_NPC_DIALOGUE_BEFORE_JI_YUN_NIANG,先生，我这几日身体不适，麻烦您给小女子看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_JI_YUN_NIANG,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_JI_YUN_NIANG,嗯…哎哟…,Mm... ow...
 UI_NPC_NAME_JIANG_CHUAN_ER,蒋船儿,Jiang Chuan'er
-UI_NPC_DIALOGUE_BEFORE_JIANG_CHUAN_ER,大夫，我这几天身体不适，给我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_JIANG_CHUAN_ER,多谢先生，我好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_JIANG_CHUAN_ER,嗯…哎哟…,Mm... ow...
 UI_NPC_NAME_JIANG_YUE_NIANG,姜月娘,Jiang Yueniang
-UI_NPC_DIALOGUE_BEFORE_JIANG_YUE_NIANG,我这几日身体不适，劳烦先生给我看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_JIANG_YUE_NIANG,先生医术真是高明，多谢了,"Your skill is impressive, Doctor. Thank you."
 UI_NPC_DIALOGUE_FAILED_JIANG_YUE_NIANG,嗯？感觉好奇怪啊…,Huh? I feel strange...
 UI_NPC_NAME_LI_GOU_DAN,李狗蛋,Li Goudan
-UI_NPC_DIALOGUE_BEFORE_LI_GOU_DAN,先生，俺这两天身体不适，请您给俺看看吧。,"Doctor, I haven't been feeling well lately. Please have a look."
 UI_NPC_DIALOGUE_AFTER_LI_GOU_DAN,真是太谢谢大夫了。,"Thank you so much, Doctor."
 UI_NPC_DIALOGUE_FAILED_LI_GOU_DAN,嗯…哎哟…,Mm... ow...
 UI_NPC_NAME_LI_JIN_QING,李近卿,Li Jinqing
-UI_NPC_DIALOGUE_BEFORE_LI_JIN_QING,先生，我这几日身体不适，烦请先生给看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_LI_JIN_QING,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_LI_JIN_QING,先生，我这病怎么还不见好？,"Doctor, why am I still not getting better?"
 UI_NPC_NAME_LI_SI,李四,Li Si
-UI_NPC_DIALOGUE_BEFORE_LI_SI,先生，我这几天身体不适，麻烦您帮我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_LI_SI,多谢先生，我感觉好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_LI_SI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?"
 UI_NPC_NAME_LI_YUAN_WAI,李员外,Squire Li
-UI_NPC_DIALOGUE_BEFORE_LI_YUAN_WAI,小郎中啊，老夫这几日身体不适，你给老夫瞧瞧。,"Doctor, I haven't been feeling well these past few days. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_LI_YUAN_WAI,嗯，不错不错，医术高明啊。,"Mm, very good. Your medical skill is impressive."
 UI_NPC_DIALOGUE_FAILED_LI_YUAN_WAI,你这庸医，招摇撞骗！,You quack! You're nothing but a fraud!
 UI_NPC_NAME_LIN_QIAO_NIANG,林巧娘,Lin Qiaoniang
-UI_NPC_DIALOGUE_BEFORE_LIN_QIAO_NIANG,我这几日身体不适，劳烦先生您给小妇看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_LIN_QIAO_NIANG,多谢先生了。,"Thank you, Doctor."
 UI_NPC_DIALOGUE_FAILED_LIN_QIAO_NIANG,感觉不太对啊…,Something doesn't feel right...
 UI_NPC_NAME_LIU_DA,刘大,Liu Da
-UI_NPC_DIALOGUE_BEFORE_LIU_DA,大夫，俺这两天身体不适，麻烦您帮俺看看吧。,"Doctor, I haven't been feeling well lately. Please have a look."
 UI_NPC_DIALOGUE_AFTER_LIU_DA,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_LIU_DA,感觉不太对啊…,Something doesn't feel right...
 UI_NPC_NAME_LIU_FU,刘福,Liu Fu
-UI_NPC_DIALOGUE_BEFORE_LIU_FU,大夫，我最近身体不适，给我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_LIU_FU,多谢先生了。,"Thank you, Doctor."
 UI_NPC_DIALOGUE_FAILED_LIU_FU,呃...不对啊。,Uh... something's not right.
 UI_NPC_NAME_LIU_TAI_GONG,刘太公,Elder Liu
-UI_NPC_DIALOGUE_BEFORE_LIU_TAI_GONG,先生啊，老朽这几日身体不适，麻烦您给我看看。,"Doctor, I haven't been feeling well these past few days. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_LIU_TAI_GONG,麻烦大夫啦，好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_LIU_TAI_GONG,咳咳咳，哎哟…,"Cough, cough... ow..."
 UI_NPC_NAME_LIU_WEN_PO,刘稳婆,Midwife Liu
-UI_NPC_DIALOGUE_BEFORE_LIU_WEN_PO,先生啊，俺这几天身体不适，请您给俺看看。,"Doctor, I haven't been feeling well lately. Please have a look."
 UI_NPC_DIALOGUE_AFTER_LIU_WEN_PO,哎哟，谢谢先生，您真是神医啊！,"Oh, thank you, Doctor! You're a marvelous physician!"
 UI_NPC_DIALOGUE_FAILED_LIU_WEN_PO,哎，不对啊…,"Hmm, something's not right..."
 UI_NPC_NAME_LIU_YING_ER,柳莺儿,Liu Ying'er
-UI_NPC_DIALOGUE_BEFORE_LIU_YING_ER,先生，我这几天身体不适，请您给小女看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_LIU_YING_ER,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_LIU_YING_ER,哎…奇怪…,Hmm... that's strange...
 UI_NPC_NAME_LV_TAI_JUN,吕太君,Matriarch Lü
-UI_NPC_DIALOGUE_BEFORE_LV_TAI_JUN,小先生啊，老婆子我最近身体不适，您给我瞧瞧。,"Doctor, I haven't been feeling well these past few days. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_LV_TAI_JUN,多谢小先生，老婆子我好多啦。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_LV_TAI_JUN,咳咳咳，你这开的是什么药啊？,Something doesn't feel right...
 UI_NPC_NAME_MA_CHANG_FENG,马长风,Ma Changfeng
-UI_NPC_DIALOGUE_BEFORE_MA_CHANG_FENG,先生，我最近身体不适，麻烦您给看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_MA_CHANG_FENG,麻烦大夫啦，好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_MA_CHANG_FENG,您给我开的这是什么药啊…,What kind of medicine did you give me...?
 UI_NPC_NAME_QIAN_BU_LOU,钱不漏,Qian Bulou
-UI_NPC_DIALOGUE_BEFORE_QIAN_BU_LOU,我最近身体不适，快快，快给我看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_QIAN_BU_LOU,谢啦。,Thanks.
 UI_NPC_DIALOGUE_FAILED_QIAN_BU_LOU,这开的是什么药，我要到官府告你！,What medicine is this? I'll report you to the authorities!
 UI_NPC_NAME_QIN_SAN_NIANG,秦三娘,Third Lady Qin
-UI_NPC_DIALOGUE_BEFORE_QIN_SAN_NIANG,咳咳，大夫，我这几日身体不适，劳烦您给我看看。,"Ahem... Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_QIN_SAN_NIANG,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_QIN_SAN_NIANG,哎哟...哎哟…,Ow... ow...
 UI_NPC_NAME_SHEN_GUI,沈贵,Shen Gui
-UI_NPC_DIALOGUE_BEFORE_SHEN_GUI,哎哟哟，我身体不适，快给我看看吧。,"Oh dear, Doctor, I haven't been feeling well. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_SHEN_GUI,多谢多谢。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_SHEN_GUI,你会不会看病啊？,Do you actually know how to treat people?
 UI_NPC_NAME_SHI_GAN,石敢,Shi Gan
-UI_NPC_DIALOGUE_BEFORE_SHI_GAN,咳咳，先生我这两天身体不适，您快帮我看看吧。,"Ahem... Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_SHI_GAN,哎呀，真是太感谢了，好多了。,"Oh, thank you so much. I feel much better."
 UI_NPC_DIALOGUE_FAILED_SHI_GAN,哎…奇怪…,Hmm... that's strange...
 UI_NPC_NAME_SHI_GENG_SHENG,史更生,Shi Gengsheng
-UI_NPC_DIALOGUE_BEFORE_SHI_GENG_SHENG,我最近几天身体不适，请您给看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_SHI_GENG_SHENG,好多了，真是太谢谢先生了。,"I feel much better. Thank you so much, Doctor."
 UI_NPC_DIALOGUE_FAILED_SHI_GENG_SHENG,你给我开的什么药啊…,What medicine did you give me...?
 UI_NPC_NAME_SU_XIU_HE,苏绣荷,Su Xiuhe
-UI_NPC_DIALOGUE_BEFORE_SU_XIU_HE,先生，我这几日身体不适，麻烦您给小女子看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_SU_XIU_HE,好多了，真是太谢谢先生了。,"I feel much better. Thank you so much, Doctor."
 UI_NPC_DIALOGUE_FAILED_SU_XIU_HE,咳咳咳，好难受啊,"Cough, cough... I feel terrible."
 UI_NPC_NAME_SUN_JIANG_ER,孙匠儿,Sun Jiang'er
-UI_NPC_DIALOGUE_BEFORE_SUN_JIANG_ER,先生，我这几日身体不适，请您帮我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_SUN_JIANG_ER,多谢先生了。,"Thank you, Doctor."
 UI_NPC_DIALOGUE_FAILED_SUN_JIANG_ER,呃…不对啊,Uh... something's not right.
 UI_NPC_NAME_SUN_XIAO_MEI,孙小妹,Sun Xiaomei
-UI_NPC_DIALOGUE_BEFORE_SUN_XIAO_MEI,我这几天身体不适，请您给我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_SUN_XIAO_MEI,多谢先生了。,"Thank you, Doctor."
 UI_NPC_DIALOGUE_FAILED_SUN_XIAO_MEI,咳咳咳，好难受啊,"Cough, cough... I feel terrible."
 UI_NPC_NAME_TIAN_CHUN_LUO,田春萝,Tian Chunluo
-UI_NPC_DIALOGUE_BEFORE_TIAN_CHUN_LUO,我最近几日身体不适，请您给看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_TIAN_CHUN_LUO,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor."
 UI_NPC_DIALOGUE_FAILED_TIAN_CHUN_LUO,嗯？感觉好奇怪啊…,Huh? I feel strange...
 UI_NPC_NAME_WANG_CHAO_FENG,王朝奉,Wang Chaofeng
-UI_NPC_DIALOGUE_BEFORE_WANG_CHAO_FENG,咳咳，我最近身体不适，您帮老夫瞧瞧。,"Ahem... Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_WANG_CHAO_FENG,好多了，多谢大夫。,"I feel much better. Thank you, Doctor."
 UI_NPC_DIALOGUE_FAILED_WANG_CHAO_FENG,你给我开的什么药啊…,What medicine did you give me...?
 UI_NPC_NAME_WANG_DA_SAO,王大嫂,Sister-in-law Wang
-UI_NPC_DIALOGUE_BEFORE_WANG_DA_SAO,先生，俺这两天身体不适，您帮俺瞧瞧。,"Doctor, I haven't been feeling well lately. Please have a look."
 UI_NPC_DIALOGUE_AFTER_WANG_DA_SAO,麻烦先生了，我感觉好多了,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_WANG_DA_SAO,哎哟...哎哟…,Ow... ow...
 UI_NPC_NAME_WANG_LAO_AN_REN,王老安人,Old Madam Wang
-UI_NPC_DIALOGUE_BEFORE_WANG_LAO_AN_REN,先生，老妇这两天身体不适，劳烦您给我看看。,"Doctor, I haven't been feeling well these past few days. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_WANG_LAO_AN_REN,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_WANG_LAO_AN_REN,咳咳咳，哎哟...,"Cough, cough... ow..."
 UI_NPC_NAME_WANG_WU,王五,Wang Wu
-UI_NPC_DIALOGUE_BEFORE_WANG_WU,大夫，我这两天身体不适，给我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_WANG_WU,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_WANG_WU,还是好难受啊…,I still feel awful...
 UI_NPC_NAME_WANG_YUAN_SHAN,王远山,Wang Yuanshan
-UI_NPC_DIALOGUE_BEFORE_WANG_YUAN_SHAN,先生，我最近身体不适，请您给我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_WANG_YUAN_SHAN,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_WANG_YUAN_SHAN,呃...不对啊。,Uh... something's not right.
 UI_NPC_NAME_WEI_DA_JIAO,魏大脚,Wei Dajiao
-UI_NPC_DIALOGUE_BEFORE_WEI_DA_JIAO,哎哟，俺这两天身体不适，麻烦您给瞧瞧,"Doctor, I haven't been feeling well lately. Please have a look."
 UI_NPC_DIALOGUE_AFTER_WEI_DA_JIAO,真是麻烦大夫啦，我感觉好多了。,"Thank you for your trouble, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_WEI_DA_JIAO,感觉更不舒服了…,I feel even worse...
 UI_NPC_NAME_WU_BAN_TOU,吴班头,Constable Wu
-UI_NPC_DIALOGUE_BEFORE_WU_BAN_TOU,大夫，我最近身体不适，您快帮我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_WU_BAN_TOU,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_WU_BAN_TOU,他娘的，你给我吃的是什么？,"Damn it, what did you make me take?"
 UI_NPC_NAME_XU_SI_GU,徐四姑,Fourth Aunt Xu
-UI_NPC_DIALOGUE_BEFORE_XU_SI_GU,我最近身体不适，快给我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_XU_SI_GU,多谢大夫。,"Thank you, Doctor."
 UI_NPC_DIALOGUE_FAILED_XU_SI_GU,这是什么药？你想害死本姑娘啊？,What is this medicine? Are you trying to kill me?
 UI_NPC_NAME_XU_XIANG_JUN,许香君,Xu Xiangjun
-UI_NPC_DIALOGUE_BEFORE_XU_XIANG_JUN,先生，我这几日身体不适，烦请先生给奴家看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_XU_XIANG_JUN,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_XU_XIANG_JUN,您给我开的这是什么药啊…,What kind of medicine did you give me...?
 UI_NPC_NAME_YAN_BU_TOU,严捕头,Constable Yan
-UI_NPC_DIALOGUE_BEFORE_YAN_BU_TOU,我这几日身体不适，烦请先生给看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_YAN_BU_TOU,好多了，多谢先生。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_YAN_BU_TOU,嗯…哎哟…,Mm... ow...
 UI_NPC_NAME_YAN_PO,严婆,Granny Yan
-UI_NPC_DIALOGUE_BEFORE_YAN_PO,先生，老妇这两天身体不适，请您帮我看看吧。,"Doctor, I haven't been feeling well these past few days. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_YAN_PO,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor."
 UI_NPC_DIALOGUE_FAILED_YAN_PO,咳咳咳，哎哟...,"Cough, cough... ow..."
 UI_NPC_NAME_YANG_XIU_CAI,杨秀才,Scholar Yang
-UI_NPC_DIALOGUE_BEFORE_YANG_XIU_CAI,大夫，学生这几日身体不适，请您给看看吧。,"Doctor, I've been feeling unwell these past few days. Please examine me."
 UI_NPC_DIALOGUE_AFTER_YANG_XIU_CAI,有劳大夫了，我好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_YANG_XIU_CAI,您给我开的这是什么药啊…,What kind of medicine did you give me...?
 UI_NPC_NAME_YAO_ZHANG_GUI,姚掌柜,Shopkeeper Yao
-UI_NPC_DIALOGUE_BEFORE_YAO_ZHANG_GUI,先生，我这两天身体不适，请您给看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_YAO_ZHANG_GUI,多谢先生，我好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_YAO_ZHANG_GUI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?"
 UI_NPC_NAME_YE_JIANG_ZHOU,叶江舟,Ye Jiangzhou
-UI_NPC_DIALOGUE_BEFORE_YE_JIANG_ZHOU,先生，我这几日身体不适，劳烦先生给小可看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_YE_JIANG_ZHOU,麻烦先生了，我感觉好多了,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_YE_JIANG_ZHOU,咳咳咳，好难受啊,"Cough, cough... I feel terrible."
 UI_NPC_NAME_YOU_XIU_GU,尤秀姑,You Xiugu
-UI_NPC_DIALOGUE_BEFORE_YOU_XIU_GU,我最近几天身体不适，请先生给我看看吧,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_YOU_XIU_GU,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_YOU_XIU_GU,嗯…哎哟…,Mm... ow...
 UI_NPC_NAME_ZHANG_SAN,张三,Zhang San
-UI_NPC_DIALOGUE_BEFORE_ZHANG_SAN,大夫，我这几天身体不适，帮我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_ZHANG_SAN,多谢大夫，我好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_ZHANG_SAN,哎…奇怪…,Hmm... that's strange...
 UI_NPC_NAME_ZHANG_TU,张屠,Butcher Zhang
-UI_NPC_DIALOGUE_BEFORE_ZHANG_TU,哎哟大夫，俺身体不适，快给俺看看吧。,"Doctor, I haven't been feeling well lately. Please have a look."
 UI_NPC_DIALOGUE_AFTER_ZHANG_TU,哈哈哈，太谢谢了。,Ha! Thank you very much.
 UI_NPC_DIALOGUE_FAILED_ZHANG_TU,他娘的怎么感觉怪怪的,"Damn it, why do I feel so strange?"
 UI_NPC_NAME_ZHANG_YU_ZHI,张玉枝,Zhang Yuzhi
-UI_NPC_DIALOGUE_BEFORE_ZHANG_YU_ZHI,大夫，我这两天身体不适，麻烦您帮我看看吧。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_ZHANG_YU_ZHI,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_ZHANG_YU_ZHI,嗯？感觉好奇怪啊…,Huh? I feel strange...
 UI_NPC_NAME_ZHAO_LIU,赵六,Zhao Liu
-UI_NPC_DIALOGUE_BEFORE_ZHAO_LIU,先生，我最近身体不适，麻烦您给我看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_ZHAO_LIU,多谢先生，我好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_ZHAO_LIU,还是好难受啊…,I still feel awful...
 UI_NPC_NAME_ZHAO_YA_PO,赵牙婆,Matchmaker Zhao
-UI_NPC_DIALOGUE_BEFORE_ZHAO_YA_PO,大夫，老婆子我这几日身体不适，劳烦您给我看看。,"Doctor, I haven't been feeling well these past few days. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_ZHAO_YA_PO,哎哟，谢谢先生，您真是神医啊！,"Oh, thank you, Doctor! You're a marvelous physician!"
 UI_NPC_DIALOGUE_FAILED_ZHAO_YA_PO,哎，不对啊…,"Hmm, something's not right..."
 UI_NPC_NAME_ZHENG_ER_JIE,郑二姐,Second Sister Zheng
-UI_NPC_DIALOGUE_BEFORE_ZHENG_ER_JIE,先生，我最近身体不适，麻烦您给我看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_ZHENG_ER_JIE,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better."
 UI_NPC_DIALOGUE_FAILED_ZHENG_ER_JIE,哎…奇怪…,Hmm... that's strange...
 UI_NPC_NAME_ZHOU_LU_AN,周炉安,Zhou Lu'an
-UI_NPC_DIALOGUE_BEFORE_ZHOU_LU_AN,大夫，我这几天身体不适，麻烦您给我看看。,"Doctor, I've been feeling unwell lately. Please take a look at me."
 UI_NPC_DIALOGUE_AFTER_ZHOU_LU_AN,多谢先生了。,"Thank you, Doctor."
 UI_NPC_DIALOGUE_FAILED_ZHOU_LU_AN,先生，我这病怎么还不见好？,"Doctor, why am I still not getting better?"
+UI_NPC_DIALOGUE_PREFIX_CHA_BO_SHI,我最近几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_CHA_BO_SHI,劳烦先生给小可看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_CHEN_ER,先生，我最近,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_CHEN_ER,帮我看看吧。,Please have a look.
+UI_NPC_DIALOGUE_PREFIX_CHEN_PO,先生，老婆子我这几日,"Doctor, here's what's been troubling this old woman: "
+UI_NPC_DIALOGUE_SUFFIX_CHEN_PO,您快帮我看看吧。,Please take a look at me.
+UI_NPC_DIALOGUE_PREFIX_CHEN_SHAN_ZHANG,大夫，我这几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_CHEN_SHAN_ZHANG,劳烦您给我看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_DU_ER_SAO,先生，我这两天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_DU_ER_SAO,请您帮我看看。,Please have a look.
+UI_NPC_DIALOGUE_PREFIX_FENG_JUN_BAO,我这几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_FENG_JUN_BAO,请您帮我看看吧。,Please have a look.
+UI_NPC_DIALOGUE_PREFIX_GAO_XIU_LIAN,大夫，我最近,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_GAO_XIU_LIAN,麻烦您给瞧瞧,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_HAN_ZHANG_GUI,大夫，我这两天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_HAN_ZHANG_GUI,劳烦您给我看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_HE_SAN_JIE,我这两天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_HE_SAN_JIE,请您给我看看吧。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_HE_ZHANG_SHAO,大夫，我最近,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_HE_ZHANG_SHAO,大夫快给我看看吧。,Please take a look at me.
+UI_NPC_DIALOGUE_PREFIX_HUA_JIN_NIANG,我这几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_HUA_JIN_NIANG,劳烦先生您给小妇看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_HUA_YUN,先生，我这几天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_HUA_YUN,烦请先生给我看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_HUANG_NIU_ER,哎哟大夫，我,"Oh dear, Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_HUANG_NIU_ER,快给我看看吧。,Please take a look at me.
+UI_NPC_DIALOGUE_PREFIX_HUANG_QIU_JU,我这两天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_HUANG_QIU_JU,请您给小女看看吧。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_JI_YUN_NIANG,先生，我这几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_JI_YUN_NIANG,麻烦您给小女子看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_JIANG_CHUAN_ER,大夫，我这几天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_JIANG_CHUAN_ER,给我看看吧。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_JIANG_YUE_NIANG,我这几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_JIANG_YUE_NIANG,劳烦先生给我看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_LI_GOU_DAN,先生，俺这两天,"Doctor, here's what's been bothering me: "
+UI_NPC_DIALOGUE_SUFFIX_LI_GOU_DAN,请您给俺看看吧。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_LI_JIN_QING,先生，我这几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_LI_JIN_QING,烦请先生给看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_LI_SI,先生，我这几天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_LI_SI,麻烦您帮我看看吧。,Please have a look.
+UI_NPC_DIALOGUE_PREFIX_LI_YUAN_WAI,小郎中啊，老夫这几日,"Young doctor, here's what's been troubling this old man: "
+UI_NPC_DIALOGUE_SUFFIX_LI_YUAN_WAI,你给老夫瞧瞧。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_LIN_QIAO_NIANG,我这几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_LIN_QIAO_NIANG,劳烦先生您给小妇看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_LIU_DA,大夫，俺这两天,"Doctor, here's what's been bothering me: "
+UI_NPC_DIALOGUE_SUFFIX_LIU_DA,麻烦您帮俺看看吧。,Please have a look.
+UI_NPC_DIALOGUE_PREFIX_LIU_FU,大夫，我最近,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_LIU_FU,给我看看吧。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_LIU_TAI_GONG,先生啊，老朽这几日,"Doctor, here's what's been troubling this old man: "
+UI_NPC_DIALOGUE_SUFFIX_LIU_TAI_GONG,麻烦您给我看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_LIU_WEN_PO,先生啊，俺这几天,"Doctor, here's what's been bothering me: "
+UI_NPC_DIALOGUE_SUFFIX_LIU_WEN_PO,请您给俺看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_LIU_YING_ER,先生，我这几天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_LIU_YING_ER,请您给小女看看吧。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_LV_TAI_JUN,小先生啊，老婆子我最近,"Doctor, here's what's been troubling this old woman: "
+UI_NPC_DIALOGUE_SUFFIX_LV_TAI_JUN,您给我瞧瞧。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_MA_CHANG_FENG,先生，我最近,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_MA_CHANG_FENG,麻烦您给看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_QIAN_BU_LOU,我最近,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_QIAN_BU_LOU,快快，快给我看看。,"Quickly, please take a look."
+UI_NPC_DIALOGUE_PREFIX_QIN_SAN_NIANG,咳咳，大夫，我这几日,"Ahem... Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_QIN_SAN_NIANG,劳烦您给我看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_SHEN_GUI,哎哟哟，我,"Oh dear, Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_SHEN_GUI,快给我看看吧。,Please take a look at me.
+UI_NPC_DIALOGUE_PREFIX_SHI_GAN,咳咳，先生我这两天,"Ahem... Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_SHI_GAN,您快帮我看看吧。,Please take a look at me.
+UI_NPC_DIALOGUE_PREFIX_SHI_GENG_SHENG,我最近几天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_SHI_GENG_SHENG,请您给看看吧。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_SU_XIU_HE,先生，我这几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_SU_XIU_HE,麻烦您给小女子看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_SUN_JIANG_ER,先生，我这几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_SUN_JIANG_ER,请您帮我看看吧。,Please have a look.
+UI_NPC_DIALOGUE_PREFIX_SUN_XIAO_MEI,我这几天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_SUN_XIAO_MEI,请您给我看看吧。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_TIAN_CHUN_LUO,我最近几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_TIAN_CHUN_LUO,请您给看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_WANG_CHAO_FENG,咳咳，我最近,"Ahem... Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_WANG_CHAO_FENG,您帮老夫瞧瞧。,Please have a look.
+UI_NPC_DIALOGUE_PREFIX_WANG_DA_SAO,先生，俺这两天,"Doctor, here's what's been bothering me: "
+UI_NPC_DIALOGUE_SUFFIX_WANG_DA_SAO,您帮俺瞧瞧。,Please have a look.
+UI_NPC_DIALOGUE_PREFIX_WANG_LAO_AN_REN,先生，老妇这两天,"Doctor, here's what's been troubling this old woman: "
+UI_NPC_DIALOGUE_SUFFIX_WANG_LAO_AN_REN,劳烦您给我看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_WANG_WU,大夫，我这两天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_WANG_WU,给我看看吧。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_WANG_YUAN_SHAN,先生，我最近,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_WANG_YUAN_SHAN,请您给我看看吧。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_WEI_DA_JIAO,哎哟，俺这两天,"Oh dear, Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_WEI_DA_JIAO,麻烦您给瞧瞧,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_WU_BAN_TOU,大夫，我最近,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_WU_BAN_TOU,您快帮我看看吧。,Please take a look at me.
+UI_NPC_DIALOGUE_PREFIX_XU_SI_GU,我最近,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_XU_SI_GU,快给我看看吧。,Please take a look at me.
+UI_NPC_DIALOGUE_PREFIX_XU_XIANG_JUN,先生，我这几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_XU_XIANG_JUN,烦请先生给奴家看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_YAN_BU_TOU,我这几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_YAN_BU_TOU,烦请先生给看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_YAN_PO,先生，老妇这两天,"Doctor, here's what's been troubling this old woman: "
+UI_NPC_DIALOGUE_SUFFIX_YAN_PO,请您帮我看看吧。,Please have a look.
+UI_NPC_DIALOGUE_PREFIX_YANG_XIU_CAI,大夫，学生这几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_YANG_XIU_CAI,请您给看看吧。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_YAO_ZHANG_GUI,先生，我这两天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_YAO_ZHANG_GUI,请您给看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_YE_JIANG_ZHOU,先生，我这几日,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_YE_JIANG_ZHOU,劳烦先生给小可看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_YOU_XIU_GU,我最近几天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_YOU_XIU_GU,请先生给我看看吧,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_ZHANG_SAN,大夫，我这几天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_ZHANG_SAN,帮我看看吧。,Please have a look.
+UI_NPC_DIALOGUE_PREFIX_ZHANG_TU,哎哟大夫，俺,"Oh dear, Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_ZHANG_TU,快给俺看看吧。,Please take a look at me.
+UI_NPC_DIALOGUE_PREFIX_ZHANG_YU_ZHI,大夫，我这两天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_ZHANG_YU_ZHI,麻烦您帮我看看吧。,Please have a look.
+UI_NPC_DIALOGUE_PREFIX_ZHAO_LIU,先生，我最近,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_ZHAO_LIU,麻烦您给我看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_ZHAO_YA_PO,大夫，老婆子我这几日,"Doctor, here's what's been troubling this old woman: "
+UI_NPC_DIALOGUE_SUFFIX_ZHAO_YA_PO,劳烦您给我看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_ZHENG_ER_JIE,先生，我最近,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_ZHENG_ER_JIE,麻烦您给我看看。,Please take a look.
+UI_NPC_DIALOGUE_PREFIX_ZHOU_LU_AN,大夫，我这几天,"Doctor, here's what's been troubling me: "
+UI_NPC_DIALOGUE_SUFFIX_ZHOU_LU_AN,麻烦您给我看看。,Please take a look.
+UI_NPC_GENERIC_SYMPTOM,身体不适,feeling unwell
