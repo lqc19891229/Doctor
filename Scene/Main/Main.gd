@@ -52,6 +52,7 @@ class_name Main
 
 # 覆盖已有存档确认框（场景节点）
 @onready var overwrite_confirm_popup: Panel = $MainMenuLayer/OverwriteConfirmPopup
+@onready var overwrite_confirm_title_label: Label = $MainMenuLayer/OverwriteConfirmPopup/TitleLabel
 @onready var overwrite_confirm_message_label: Label = $MainMenuLayer/OverwriteConfirmPopup/MessageLabel
 @onready var overwrite_confirm_button: Button = $MainMenuLayer/OverwriteConfirmPopup/HBoxContainer/ConfirmButton
 @onready var overwrite_cancel_button: Button = $MainMenuLayer/OverwriteConfirmPopup/HBoxContainer/CancelButton
@@ -130,6 +131,24 @@ var morning_fade_tween: Tween = null
 var clinic_to_night_transition_active: bool = false
 
 
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		_refresh_overwrite_confirm_language()
+		_refresh_pause_confirm_language()
+
+
+func _refresh_overwrite_confirm_language() -> void:
+	if overwrite_confirm_title_label != null:
+		overwrite_confirm_title_label.text = tr("UI_CONFIRM_OVERWRITE")
+
+	if overwrite_confirm_button != null:
+		overwrite_confirm_button.text = tr("UI_CONFIRM_OVERWRITE")
+
+	if overwrite_cancel_button != null:
+		overwrite_cancel_button.text = tr("UI_CANCEL")
+
+
 func _ready() -> void:
 	# 将旧存档里的解锁记录合并进独立的全局典籍，不加载或覆盖当前局状态。
 	var global_archive = GLOBAL_READBOOK_ARCHIVE_SCRIPT.new()
@@ -141,6 +160,9 @@ func _ready() -> void:
 	# 创建 Pause Menu 使用的确认框。
 	# “覆盖已有存档”确认框已经作为 Main.tscn 节点存在，不再动态创建。
 	_setup_pause_confirm_dialogs()
+
+	# 刷新覆盖确认框的当前语言。
+	_refresh_overwrite_confirm_language()
 
 	# 连接开始菜单，以及 Pause / Settings 的信号。
 	_connect_menu_buttons()
@@ -926,6 +948,7 @@ func _on_settings_closed() -> void:
 	if pause_menu_layer != null and pause_menu_layer.has_method("refresh_language"):
 		pause_menu_layer.call("refresh_language")
 	_refresh_pause_confirm_language()
+	_refresh_overwrite_confirm_language()
 
 
 func _refresh_pause_confirm_language() -> void:
