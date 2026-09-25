@@ -11,8 +11,8 @@ from pathlib import Path
 try:
     from openpyxl import load_workbook
 except ImportError:
-    print("ERROR: openpyxl is required.")
-    print("Install it with: pip install openpyxl")
+    print("错误：缺少 openpyxl 依赖。")
+    print("请先安装：pip install openpyxl")
     raise SystemExit(1)
 
 
@@ -77,14 +77,14 @@ def find_data_xlsx(explicit_path: Path | None, managed_xlsx: Path) -> Path | Non
 def validate_managed_sheets(wb) -> None:
     missing = [name for name in SHEET_ORDER if name not in wb.sheetnames]
     if missing:
-        raise ValueError("translations workbook is missing sheets: " + ", ".join(missing))
+        raise ValueError("翻译工作簿缺少以下工作表： " + ", ".join(missing))
 
     for sheet_name in SHEET_ORDER:
         ws = wb[sheet_name]
         header = [as_text(ws.cell(1, col).value) for col in range(1, 4)]
         if header != EXPECTED_HEADER:
             raise ValueError(
-                f"{sheet_name} header must be {EXPECTED_HEADER}, got {header}"
+                f"{sheet_name} 的表头必须是 {EXPECTED_HEADER}，当前实际为 {header}"
             )
 
 
@@ -96,7 +96,7 @@ def read_disease_symptoms(data_xlsx: Path) -> list[tuple[str, list[str]]]:
     wb = load_workbook(data_xlsx, data_only=True, read_only=True)
 
     if "Disease" not in wb.sheetnames:
-        raise ValueError(f"{data_xlsx} is missing the Disease sheet")
+        raise ValueError(f"{data_xlsx} 缺少 Disease 工作表")
 
     ws = wb["Disease"]
     headers = {
@@ -107,7 +107,7 @@ def read_disease_symptoms(data_xlsx: Path) -> list[tuple[str, list[str]]]:
 
     for required in ("DiseaseID", "Symptoms"):
         if required not in headers:
-            raise ValueError(f"Data.xlsx Disease sheet is missing column: {required}")
+            raise ValueError(f"Data.xlsx 的 Disease 工作表缺少列：{required}")
 
     id_col = headers["DiseaseID"]
     symptoms_col = headers["Symptoms"]
@@ -124,7 +124,7 @@ def read_disease_symptoms(data_xlsx: Path) -> list[tuple[str, list[str]]]:
 
         if disease_id in seen_ids:
             raise ValueError(
-                f"Data.xlsx Disease sheet has duplicate DiseaseID at row {row_no}: "
+                f"Data.xlsx 的 Disease 工作表第 {row_no} 行存在重复的 DiseaseID： "
                 f"{disease_id}"
             )
         seen_ids.add(disease_id)
@@ -292,13 +292,13 @@ def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
 
             if not key or not zh or not en:
                 raise ValueError(
-                    f"incomplete row: {sheet_name} row {row_no} "
+                    f"数据不完整：{sheet_name} 第 {row_no} 行 "
                     f"(key={key!r}, zh_CN={zh!r}, en={en!r})"
                 )
 
             if key in seen:
                 raise ValueError(
-                    f"duplicate key {key!r}: {seen[key]} and "
+                    f"发现重复 key {key!r}：{seen[key]} 与 "
                     f"{sheet_name} row {row_no}"
                 )
 
@@ -315,7 +315,7 @@ def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
             all_rows.append([key, zh, en])
             count += 1
 
-        print(f"{sheet_name}: {count} rows")
+        print(f"{sheet_name}：{count} 条")
 
     out_csv.parent.mkdir(parents=True, exist_ok=True)
 
@@ -341,22 +341,22 @@ def main() -> int:
     explicit_data_xlsx = Path(sys.argv[3]) if len(sys.argv) > 3 else None
 
     if not managed_xlsx.exists():
-        print("ERROR: translations workbook not found:", managed_xlsx)
+        print("错误：找不到翻译管理表：", managed_xlsx)
         return 1
 
     data_xlsx = find_data_xlsx(explicit_data_xlsx, managed_xlsx)
     if data_xlsx is None:
-        print("ERROR: Data.xlsx was not found.")
-        print("Pass it as the third argument, for example:")
+        print("错误：找不到 Data.xlsx。")
+        print("请把 Data.xlsx 路径作为第三个参数传入，例如：")
         print(
             "  python export_translations.py "
             "translations_managed.xlsx translations.csv ../DataTables/Data.xlsx"
         )
         return 1
 
-    print("Managed translations:", managed_xlsx)
-    print("Disease source:", data_xlsx)
-    print("Output CSV:", out_csv)
+    print("翻译管理表：", managed_xlsx)
+    print("疾病数据来源：", data_xlsx)
+    print("输出 CSV：", out_csv)
     print()
 
     try:
@@ -367,54 +367,54 @@ def main() -> int:
         symptom_count = sum(len(items) for _disease_id, items in disease_symptoms)
 
         print(
-            f"Syncing Disease!Symptoms: "
-            f"{len(disease_symptoms)} diseases, {symptom_count} symptom rows"
+            f"正在同步 Disease!Symptoms： "
+            f"{len(disease_symptoms)} 个疾病，{symptom_count} 条症状"
         )
 
         missing_english = sync_disease_symptoms(wb, disease_symptoms)
 
         # Always save the synchronized managed workbook first.
         save_managed_workbook_safely(wb, managed_xlsx)
-        print("Symptoms synchronized into Diseases sheet.")
+        print("症状已同步到 Diseases 工作表。")
 
         # New Chinese symptoms need human translation before producing a game CSV.
         if missing_english:
             print()
-            print("STOP: new symptoms need English translations.")
+            print("停止导出：发现新增症状尚未填写英文翻译。")
             print(
-                "They were added to translations_managed.xlsx with an empty en cell:"
+                "以下症状已写入 translations_managed.xlsx，但 en 列仍为空："
             )
             for item in missing_english:
                 print(" -", item)
             print()
-            print("Translate those rows, save the workbook, then run this script again.")
+            print("请补全这些英文翻译，保存工作簿后再重新运行本脚本。")
             return 2
 
         total, warnings = export_csv(wb, out_csv)
 
         print()
-        print(f"Exported {total} rows -> {out_csv}")
+        print(f"已导出 {total} 条翻译 -> {out_csv}")
 
         if warnings:
             print()
-            print("WARNING: placeholder differences:")
+            print("警告：发现中英文占位符不一致：")
             for item in warnings:
                 print(" -", item)
         else:
-            print("Placeholder check: OK")
+            print("占位符检查：通过")
 
         print()
-        print("Next: replace/reimport res://Localization/translations.csv in Godot.")
+        print("下一步：将 translations.csv 替换到 res://Localization/ 下，并在 Godot 中重新导入。")
         return 0
 
     except PermissionError as exc:
-        print("ERROR:", exc)
+        print("错误：", exc)
         print(
-            "Close translations_managed.xlsx in Excel/WPS and run the exporter again."
+            "请先关闭 Excel/WPS 中打开的 translations_managed.xlsx，然后重新运行导出脚本。"
         )
         return 1
     except Exception as exc:
-        print("ERROR:", exc)
+        print("错误：", exc)
         return 1
 
 

@@ -1,13 +1,13 @@
-﻿@echo off
+@echo off
 setlocal
 cd /d "%~dp0"
 
 echo ==========================================
-echo Doctor Data Import
+echo Doctor 数据导入
 echo ==========================================
 echo.
 
-REM Prefer "python"; fall back to Windows "py" launcher.
+REM 优先使用 python；如果不可用，则尝试 Windows 的 py 启动器。
 where python >nul 2>nul
 if %errorlevel%==0 (
     set "PYTHON_CMD=python"
@@ -16,39 +16,39 @@ if %errorlevel%==0 (
     if %errorlevel%==0 (
         set "PYTHON_CMD=py"
     ) else (
-        echo ERROR: Python was not found.
-        echo Please install Python and make sure python or py is available in PATH.
+        echo 错误：未找到 Python。
+        echo 请先安装 Python，并确认 python 或 py 已加入 PATH。
         echo.
         pause
         exit /b 1
     )
 )
 
-REM import_data.py expects Data.xlsx in the same DataTables folder.
+REM import_data.py 要求 Data.xlsx 与它位于同一个 DataTables 文件夹。
 if not exist "import_data.py" (
-    echo ERROR: import_data.py was not found in:
+    echo 错误：当前文件夹中找不到 import_data.py：
     echo %cd%
     echo.
-    echo Put this BAT file in the same folder as import_data.py and Data.xlsx.
+    echo 请把本 BAT 文件放到与 import_data.py 和 Data.xlsx 相同的文件夹中。
     echo.
     pause
     exit /b 1
 )
 
 if not exist "Data.xlsx" (
-    echo ERROR: Data.xlsx was not found in:
+    echo 错误：当前文件夹中找不到 Data.xlsx：
     echo %cd%
     echo.
-    echo import_data.py reads Data.xlsx from its own folder.
+    echo import_data.py 会从自身所在文件夹读取 Data.xlsx。
     echo.
     pause
     exit /b 1
 )
 
-echo Python:
+echo 当前 Python 版本：
 %PYTHON_CMD% --version
 echo.
-echo Running import_data.py...
+echo 正在运行 import_data.py...
 echo.
 
 %PYTHON_CMD% "import_data.py"
@@ -57,11 +57,11 @@ set "RESULT=%errorlevel%"
 echo.
 if not "%RESULT%"=="0" (
     echo ==========================================
-    echo IMPORT FAILED - exit code %RESULT%
+    echo 数据导入失败 - 退出代码 %RESULT%
     echo ==========================================
     echo.
-    echo Check the error messages above.
-    echo If openpyxl is missing, run:
+    echo 请查看上方的错误信息。
+    echo 如果提示缺少 openpyxl，请运行：
     echo     %PYTHON_CMD% -m pip install openpyxl
     echo.
     pause
@@ -69,10 +69,10 @@ if not "%RESULT%"=="0" (
 )
 
 echo ==========================================
-echo IMPORT COMPLETED SUCCESSFULLY
+echo 数据导入完成
 echo ==========================================
 echo.
-echo Data.xlsx has been imported and Godot .tres resources have been regenerated.
+echo Data.xlsx 已成功导入，并重新生成 Godot .tres 资源。
 echo.
 pause
 exit /b 0
