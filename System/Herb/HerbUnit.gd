@@ -243,13 +243,13 @@ static func _format_amount_english(amount: float, unit: String) -> String:
 # 英文环境使用阿拉伯数字。
 # 整数显示 3，不显示 3.0；小数最多保留两位。
 static func _format_number_english(amount: float) -> String:
-	var rounded_amount := round(amount * 100.0) / 100.0
-	var int_amount := int(rounded_amount)
+	var rounded_amount: float = round(amount * 100.0) / 100.0
+	var int_amount: int = int(rounded_amount)
 
 	if is_equal_approx(rounded_amount, float(int_amount)):
 		return str(int_amount)
 
-	var text := "%.2f" % rounded_amount
+	var text: String = "%.2f" % rounded_amount
 	while text.ends_with("0"):
 		text = text.trim_suffix("0")
 	if text.ends_with("."):
