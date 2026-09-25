@@ -2252,7 +2252,7 @@ UI_BOOK_ENTRY_BODY_GE_XIA_ZHU_YU_TANG,"膈下逐瘀汤
 [Indication] Stagnant Liver blood
 [Ingredients]
 Chief: Chinese Angelica Root 3 qian, Sichuan Lovage Rhizome 2 qian, Red Peony Root 2 qian
-Deputy: Peach Kernel 3 qian, Safflower 3 qian, Trogopterus Dung 2 qian, Dan Pi 2 qian
+Deputy: Peach Kernel 3 qian, Safflower 3 qian, Trogopterus Dung 2 qian, Moutan Cortex 2 qian
 Assistant: Cyperus Rhizome 1 qian, Lindera Root 2 qian, Zhi Qiao 1 qian, Corydalis Rhizome 1 qian
 Envoy: Licorice Root 3 qian
 [How the ingredients work together]
@@ -2260,7 +2260,7 @@ Peach Kernel and Safflower break up blood stasis.
 Trogopterus Dung disperses deep stasis beneath the diaphragm and eases pain.
 Chinese Angelica Root nourishes and moves blood, dispersing stasis without depleting it.
 Sichuan Lovage Rhizome moves qi and blood.
-Red Peony Root and Dan Pi cool blood and disperse stasis and lingering Heat.
+Red Peony Root and Moutan Cortex cool blood and disperse stasis and lingering Heat.
 Cyperus Rhizome spreads Liver qi.
 Lindera Root warms and disperses Cold and qi stagnation beneath the diaphragm.
 Zhi Qiao eases fullness and directs qi downward.
@@ -2417,14 +2417,14 @@ UI_BOOK_ENTRY_BODY_LIU_WEI_DI_HUANG_WAN,"六味地黄丸
 [Ingredients]
 Chief: Prepared Rehmannia Root 8 qian
 Deputy: Cornus Fruit 4 qian, Chinese Yam 4 qian
-Assistant: Alisma Rhizome 3 qian, Poria 3 qian, Dan Pi 3 qian
+Assistant: Alisma Rhizome 3 qian, Poria 3 qian, Moutan Cortex 3 qian
 Envoy:
 [How the ingredients work together]
 A large amount of Prepared Rehmannia Root nourishes Kidney yin and replenishes essence and marrow.
 Cornus Fruit supports the Liver and Kidney and helps retain essence.
 Chinese Yam supports the Spleen and Kidney and strengthens the lower body.
 Alisma Rhizome drains turbidity and balances the richness of Prepared Rehmannia Root.
-Dan Pi clears Deficiency fire and cools blood.
+Moutan Cortex clears Deficiency fire and cools blood.
 Poria strengthens the Spleen, drains Dampness and supports Chinese Yam."
 UI_BOOK_ENTRY_TITLE_JIN_GUI_SHEN_QI_WAN,金匮肾气丸,Kidney Qi Pill from the Golden Cabinet
 UI_BOOK_ENTRY_BODY_JIN_GUI_SHEN_QI_WAN,"金匮肾气丸
@@ -2446,12 +2446,12 @@ UI_BOOK_ENTRY_BODY_JIN_GUI_SHEN_QI_WAN,"金匮肾气丸
 [Ingredients]
 Chief: Prepared Aconite Root 2 qian, Cinnamon Twig 3 qian
 Deputy: Prepared Rehmannia Root 1 qian, Cornus Fruit 4 qian, Chinese Yam 5 qian
-Assistant: Alisma Rhizome 3 qian, Poria 3 qian, Dan Pi 3 qian
+Assistant: Alisma Rhizome 3 qian, Poria 3 qian, Moutan Cortex 3 qian
 Envoy:
 [How the ingredients work together]
 Prepared Aconite Root and Cinnamon Twig warm Kidney yang and encourage the Kidney's qi-transforming function.
 Prepared Rehmannia Root, Cornus Fruit and Chinese Yam nourish Kidney yin, supporting yang through yin.
-Dan Pi, Poria and Alisma Rhizome drain turbidity, clear Heat and move fluids, balancing the rich tonics."
+Moutan Cortex, Poria and Alisma Rhizome drain turbidity, clear Heat and move fluids, balancing the rich tonics."
 UI_BOOK_ENTRY_TITLE_ZHEN_WU_TANG,真武汤,True Warrior Decoction
 UI_BOOK_ENTRY_BODY_ZHEN_WU_TANG,"真武汤
 【出处】《伤寒论》
@@ -3679,7 +3679,7 @@ UI_BOOK_ENTRY_BODY_BAI_SHAO,"白芍（芍药）
 
 [Names and origins]
 
-Other names: Jiang Li (Gangmu); Li Shi, Bai Zhu, Yu Rong and Ting (Bielu). The white variety is called Jin Shao Yao and the red variety Mu Shao Yao (Tujing).
+Other names: Jiang Li (Gangmu); Li Shi, Atractylodes Rhizome, Yu Rong and Ting (Bielu). The white variety is called Jin Shao Yao and the red variety Mu Shao Yao (Tujing).
 
 Shizhen: The name shao yao is associated with elegance and beauty, describing the flower's graceful appearance. Yayi also says it is especially good at counteracting poisons in food, which offers another explanation of its name.
 
@@ -3743,11 +3743,11 @@ UI_BOOK_ENTRY_BODY_BAI_ZHI,"白芷
 
 Other names include Bai Chai, Fang Xiang, Ze Fen, Fu Li, Xue and Wan. Its leaves were also called Li Ma or Yao in older sources.
 
-Shizhen cites Xu Kai as saying that the name zhi refers to the plant's newly formed root and stem, which helps explain the name Bai Zhi.
+Shizhen cites Xu Kai as saying that the name zhi refers to the plant's newly formed root and stem, which helps explain the name Angelica Dahurica Root.
 
 Wang Anshi associated its fragrance with nourishing the nose and body.
 
-The Shuowen records different regional names for the plant. It grows in low, moist ground and was praised for a fragrance compared with orchids, leading to names such as Fang Xiang and Ze Fen. The older expression Xiang Bai Zhi emphasizes this fragrance.
+The Shuowen records different regional names for the plant. It grows in low, moist ground and was praised for a fragrance compared with orchids, leading to names such as Fang Xiang and Ze Fen. The older expression Xiang Angelica Dahurica Root emphasizes this fragrance.
 
 [Historical commentary]
 
@@ -3791,7 +3791,7 @@ UI_BOOK_ENTRY_BODY_BAI_ZHU,"白术（术）
 
 Other names include Shan Ji, Yang Fu, Fu Ji, Ma Ji, Shan Jiang, Shan Lian and Chi Li Jia.
 
-Shizhen: The ancient written form of zhu was said to resemble the plant's root, stem, branches and leaves. Wupu Bencao also calls it Shan Jie and Tian Ji because its leaves resemble thistle and its taste recalls ginger or mustard. Western regions used the name Chi Li Jia, which appears in the formula name Chi Li Jia San. Bai Zhu was widely grown around Yangzhou; its shape was compared with a drumstick, giving rise to names such as Yang Fu and Fu Ji. Older formulas did not always distinguish Cang Zhu from Bai Zhu; the distinction became standard later.
+Shizhen: The ancient written form of zhu was said to resemble the plant's root, stem, branches and leaves. Wupu Bencao also calls it Shan Jie and Tian Ji because its leaves resemble thistle and its taste recalls ginger or mustard. Western regions used the name Chi Li Jia, which appears in the formula name Chi Li Jia San. Atractylodes Rhizome was widely grown around Yangzhou; its shape was compared with a drumstick, giving rise to names such as Yang Fu and Fu Ji. Older formulas did not always distinguish Atractylodes Rhizome from Atractylodes Rhizome; the distinction became standard later.
 
 [Historical commentary]
 
@@ -3879,7 +3879,7 @@ UI_BOOK_ENTRY_BODY_BAN_XIA,"半夏
 
 Other names include Shou Tian, Shui Yu, Di Wen and He Gu.
 
-Shizhen links the name Ban Xia, literally 'half summer', to an old calendar text stating that the plant emerges around the middle of summer. Shui Yu, 'water jade', refers to its appearance.
+Shizhen links the name Pinellia Rhizome, literally 'half summer', to an old calendar text stating that the plant emerges around the middle of summer. Shui Yu, 'water jade', refers to its appearance.
 
 [Historical commentary]
 
@@ -3937,7 +3937,7 @@ UI_BOOK_ENTRY_BODY_BEI_MU,"贝母
 
 Older names include Qin Mu, Ku Cai, Ku Hua, Kong Cao and Yao Shi.
 
-Hongjing: The bulb resembles a cluster of small shells, which was given as an explanation for the name Bei Mu, 'shell mother'.
+Hongjing: The bulb resembles a cluster of small shells, which was given as an explanation for the name Fritillaria Bulb, 'shell mother'.
 
 Shizhen notes several ancient written forms and overlapping folk names. Some names were also used for unrelated plants, which made historical identification difficult.
 
@@ -4020,11 +4020,11 @@ UI_BOOK_ENTRY_BODY_BO_HE,"薄荷
 
 [Names and origins]
 
-Older names include Ba, Fan He Cai, Wu Ba, Nan Bo He and Jin Qian Bo He.
+Older names include Ba, Fan He Cai, Wu Ba, Nan Mint and Jin Qian Mint.
 
-Shizhen notes that Bo He is a later popular name and that older texts used forms such as Ba or Fan He. Mint from Suzhou was especially valued and was called Wu Ba to distinguish it from other varieties.
+Shizhen notes that Mint is a later popular name and that older texts used forms such as Ba or Fan He. Mint from Suzhou was especially valued and was called Wu Ba to distinguish it from other varieties.
 
-Zongshi explains that the name Nan Bo He distinguished it from another strongly aromatic type. Jin Qian Bo He, 'coin mint', refers to a small-leaved variety whose round leaves resemble coins.
+Zongshi explains that the name Nan Mint distinguished it from another strongly aromatic type. Jin Qian Mint, 'coin mint', refers to a small-leaved variety whose round leaves resemble coins.
 
 [Historical commentary]
 
@@ -4074,7 +4074,7 @@ UI_BOOK_ENTRY_BODY_CANG_ZHU,"苍术
 
 Older names include Chi Zhu, Shan Jing, Xian Zhu and Shan Ji.
 
-Shizhen explains that older materia medica often used the single name Zhu without clearly distinguishing Cang Zhu from Bai Zhu. Later physicians separated the two because their actions overlap but are not identical. Cang Zhu was also called Shan Jing or Xian Zhu in Daoist longevity traditions.
+Shizhen explains that older materia medica often used the single name Zhu without clearly distinguishing Atractylodes Rhizome from Atractylodes Rhizome. Later physicians separated the two because their actions overlap but are not identical. Atractylodes Rhizome was also called Shan Jing or Xian Zhu in Daoist longevity traditions.
 
 [Historical commentary]
 
@@ -4128,7 +4128,7 @@ UI_BOOK_ENTRY_BODY_CHAI_HU,"柴胡（茈胡）
 
 Older names include Di Xun, Yun Hao, Shan Cai and Ru Cao.
 
-Shizhen discusses the ancient character Zi, which could be read in different ways. He explains the name Chai Hu by noting that the plant grows in the mountains: its young shoots can be eaten, while older stems may be gathered as firewood. Early editions of the Shang Han Lun still used the older written form.
+Shizhen discusses the ancient character Zi, which could be read in different ways. He explains the name Bupleurum Root by noting that the plant grows in the mountains: its young shoots can be eaten, while older stems may be gathered as firewood. Early editions of the Shang Han Lun still used the older written form.
 
 [Historical commentary]
 
@@ -4220,11 +4220,11 @@ UI_BOOK_ENTRY_BODY_CHEN_PI,"陈皮（橘）
 
 [Names and origins]
 
-Also called Hong Pi, 'red peel,' and Chen Pi, 'aged peel.'
+Also called Hong Pi, 'red peel,' and Aged Tangerine Peel, 'aged peel.'
 
 Hongjing says aged tangerine peel is especially effective for disorders of qi and that long aging improves its medicinal quality.
 
-Haogu: The best peel is reddish and well aged, hence the names Hong Pi and Chen Pi. When the inner white pith is removed, the outer colored peel is called Ju Hong.
+Haogu: The best peel is reddish and well aged, hence the names Hong Pi and Aged Tangerine Peel. When the inner white pith is removed, the outer colored peel is called Ju Hong.
 
 [Historical commentary]
 
@@ -4398,7 +4398,7 @@ UI_BOOK_ENTRY_BODY_CHUAN_XIONG,"川芎（芎䓖）
 
 [Names and origins]
 
-Older names include Hu Xiong, Xiang Guo and Shan Ju Qiong. Different regional varieties were named after their places of origin, including Jing Xiong, Xi Xiong, Chuan Xiong, Tai Xiong and Fu Xiong.
+Older names include Hu Xiong, Xiang Guo and Shan Ju Qiong. Different regional varieties were named after their places of origin, including Jing Xiong, Xi Xiong, Sichuan Lovage Rhizome, Tai Xiong and Fu Xiong.
 
 Shizhen records an old explanation linking the name with the herb's upward-moving action and its frequent use for disorders of the head and brain. Other names arose from the shape of the rhizome or from geographic origin.
 
@@ -4645,7 +4645,7 @@ UI_BOOK_ENTRY_BODY_DAN_SHEN,"丹参
 
 Older names include Chi Shen, Shan Shen, Chan Cao, Mu Yang Ru, Zhu Ma and Ben Ma Cao.
 
-Shizhen discusses an old system that matched different 'shen' herbs and colors with the five organs. Dan Shen, being red, was associated with the Heart and therefore also called Chi Shen.
+Shizhen discusses an old system that matched different 'shen' herbs and colors with the five organs. Red Sage Root, being red, was associated with the Heart and therefore also called Chi Shen.
 
 One old explanation for the name Ben Ma Cao claims the herb was used for weakness of the legs and could restore movement so effectively that one could 'chase a running horse.'
 
@@ -4699,9 +4699,9 @@ UI_BOOK_ENTRY_BODY_DANG_GUI,"当归
 
 Older names include Qian Gui, Shan Qi, Bai Qi and Wen Wu.
 
-Some early authors compared the plant with celery because its foliage resembles that family, though Shizhen argues that Dang Gui is not truly a celery species.
+Some early authors compared the plant with celery because its foliage resembles that family, though Shizhen argues that Chinese Angelica Root is not truly a celery species.
 
-The name Dang Gui, literally 'ought to return,' attracted several traditional explanations. One links it with women's blood and the wish for an absent husband to return. Another says the herb restores disordered qi and blood to their proper places.
+The name Chinese Angelica Root, literally 'ought to return,' attracted several traditional explanations. One links it with women's blood and the wish for an absent husband to return. Another says the herb restores disordered qi and blood to their proper places.
 
 [Historical commentary]
 
@@ -4745,11 +4745,11 @@ UI_BOOK_ENTRY_BODY_DU_HUO,"独活（独活羌活）
 
 [Names and origins]
 
-Older names overlap with Qiang Huo, including Qiang Huo, Qiang Qing, Du Yao Cao, Hu Qiang Shi Zhe, Hu Wang Shi Zhe and Chang Sheng Cao.
+Older names overlap with Notopterygium Root, including Notopterygium Root, Qiang Qing, Du Yao Cao, Hu Qiang Shi Zhe, Hu Wang Shi Zhe and Chang Sheng Cao.
 
-Hongjing explains the name Du Huo through the image of a single upright stalk that does not sway with the wind. Another old name, Du Yao Cao, came from the curious claim that the plant could move without wind.
+Hongjing explains the name Angelica Pubescens Root through the image of a single upright stalk that does not sway with the wind. Another old name, Du Yao Cao, came from the curious claim that the plant could move without wind.
 
-Shizhen treats Du Huo and Qiang Huo as closely related but distinct medicinal types, much as older writers distinguished Cang Zhu from Bai Zhu or regional forms of Chuan Xiong.
+Shizhen treats Angelica Pubescens Root and Notopterygium Root as closely related but distinct medicinal types, much as older writers distinguished Atractylodes Rhizome from Atractylodes Rhizome or regional forms of Sichuan Lovage Rhizome.
 
 [Historical commentary]
 
@@ -4796,7 +4796,7 @@ UI_BOOK_ENTRY_BODY_E_JIAO,"阿胶
 
 Also called Fu Zhi Jiao in early materia medica.
 
-Hongjing: The name E Jiao comes from Dong'e, the place where the product was traditionally made.
+Hongjing: The name Donkey-Hide Gelatin comes from Dong'e, the place where the product was traditionally made.
 
 Shizhen identifies an ancient well near old Dong'e in present-day Shandong. Historical texts describe water from this well being used in the annual preparation of gelatin for the imperial court.
 
@@ -4835,9 +4835,9 @@ UI_BOOK_ENTRY_BODY_FANG_FENG,"防风
 
 [Names and origins]
 
-Older names include Tong Yun, Hui Yun, Hui Cao, Ping Feng, Gen, Bai Zhi and Bai Fei.
+Older names include Tong Yun, Hui Yun, Hui Cao, Ping Feng, Gen, Angelica Dahurica Root and Bai Fei.
 
-Shizhen explains the name Fang Feng as 'defending against Wind,' reflecting its importance in Wind disorders. Ping Feng, 'screen against Wind,' is a wordplay on the same idea.
+Shizhen explains the name Saposhnikovia Root as 'defending against Wind,' reflecting its importance in Wind disorders. Ping Feng, 'screen against Wind,' is a wordplay on the same idea.
 
 [Historical commentary]
 
@@ -4878,7 +4878,7 @@ UI_BOOK_ENTRY_BODY_FENG_MI,"蜂蜜
 
 Also called Feng Tang. Honey gathered from rocky cliffs was historically called Shi Mi, Shi Yi or Yan Mi.
 
-Shizhen argues that Feng Mi is the clearest general name. Earlier texts often used Shi Mi because cliff honey was considered especially good.
+Shizhen argues that Honey is the clearest general name. Earlier texts often used Shi Mi because cliff honey was considered especially good.
 
 [Historical commentary]
 
@@ -4929,11 +4929,11 @@ UI_BOOK_ENTRY_BODY_FU_LING,"茯苓
 
 [Names and origins]
 
-Older names include Fu Ling, Fu Tu, Song Yu and Bu Si Mian. Poria that grows around and encloses a pine root is called Fu Shen.
+Older names include Poria, Fu Tu, Song Yu and Bu Si Mian. Poria that grows around and encloses a pine root is called Poria with Pine Root.
 
-Zongshi explains the traditional idea that after an old pine is cut, its remaining vital essence may condense in the soil. When this essence gathers apart from the root it forms Fu Ling; when it remains attached to the root it is called Fu Shen.
+Zongshi explains the traditional idea that after an old pine is cut, its remaining vital essence may condense in the soil. When this essence gathers apart from the root it forms Poria; when it remains attached to the root it is called Poria with Pine Root.
 
-Shizhen notes that older texts wrote the name as Fu Ling, 'hidden spirit,' reflecting the belief that the essence of pine concealed underground and formed the fungus.
+Shizhen notes that older texts wrote the name as Poria, 'hidden spirit,' reflecting the belief that the essence of pine concealed underground and formed the fungus.
 
 [Historical commentary]
 
@@ -4981,9 +4981,9 @@ UI_BOOK_ENTRY_BODY_FU_SHEN,"茯神（茯苓）
 
 [Names and origins]
 
-Fu Shen is the form of Fu Ling that grows around and encloses a pine root. Older names shared with Fu Ling include Fu Ling, Fu Tu, Song Yu and Bu Si Mian.
+Poria with Pine Root is the form of Poria that grows around and encloses a pine root. Older names shared with Poria include Poria, Fu Tu, Song Yu and Bu Si Mian.
 
-Zongshi explains that when the residual essence of an old pine remains attached to its root, poria forms around that root and is therefore called Fu Shen.
+Zongshi explains that when the residual essence of an old pine remains attached to its root, poria forms around that root and is therefore called Poria with Pine Root.
 
 [Historical commentary]
 
@@ -5028,7 +5028,7 @@ UI_BOOK_ENTRY_BODY_FU_ZI,"附子
 
 [Names and origins]
 
-Fu Zi is the lateral daughter root that grows attached to the main aconite root, Wu Tou. Shizhen explains the name literally as a 'child attached to the mother.'
+Prepared Aconite Root is the lateral daughter root that grows attached to the main aconite root, Aconite Root. Shizhen explains the name literally as a 'child attached to the mother.'
 
 He distinguishes cultivated Sichuan aconite from other aconite species and warns that older texts often confused them.
 
@@ -5084,7 +5084,7 @@ UI_BOOK_ENTRY_BODY_GAN_CAO,"甘草
 
 Older names include Mi Gan, Mi Cao, Mei Cao, Lu Cao, Ling Tong and Guo Lao, 'elder statesman.'
 
-Hongjing compares Gan Cao's role among medicines to the importance of agarwood among fragrances. The title Guo Lao refers to a respected elder who harmonizes others without being the ruler himself.
+Hongjing compares Licorice Root's role among medicines to the importance of agarwood among fragrances. The title Guo Lao refers to a respected elder who harmonizes others without being the ruler himself.
 
 Zhen Quan likewise praises its ability to moderate the actions and toxicity of many substances, explaining the honorary name Guo Lao.
 
@@ -5138,7 +5138,7 @@ Shizhen explains the name simply as dried mature ginger. Dense, pale pieces were
 
 Yuansu: Dried Ginger is strongly acrid and hot. He lists four major functions: supporting Heart yang, removing deep internal Cold, dispersing Cold from the channels, and treating abdominal pain from Cold.
 
-When Kidney yang is exhausted and the pulse is near collapse, it was paired with Prepared Aconite Root in Jiang Fu Tang. It also appears in Si Ni Tang and Li Zhong Tang for severe internal Cold.
+When Kidney yang is exhausted and the pulse is near collapse, it was paired with Prepared Aconite Root in Jiang Fu Tang. It also appears in Frigid Extremities Decoction and Regulate the Middle Decoction for severe internal Cold.
 
 Yuansu distinguishes Dried Ginger from Prepared Aconite Root by saying that processed dried ginger tends to remain in the middle and treat interior Cold, while Prepared Aconite Root is more mobile and penetrating.
 
@@ -5232,7 +5232,7 @@ UI_BOOK_ENTRY_BODY_GE_JIE,"蛤蚧
 
 Older names include Ge Xie and Xian Chan.
 
-Historical authors linked the name Ge Jie to the animal's call. Another name, Xian Chan, compares its appearance with a large toad. Some writers even assigned different syllables of the name to the male and female.
+Historical authors linked the name Gecko to the animal's call. Another name, Xian Chan, compares its appearance with a large toad. Some writers even assigned different syllables of the name to the male and female.
 
 [Historical commentary]
 
@@ -5361,9 +5361,9 @@ UI_BOOK_ENTRY_BODY_GUA_LOU_REN,"瓜蒌仁（栝蒌）
 
 [Names and origins]
 
-Older names for the fruit include Guo Luo, Gua Lou, Tian Gua, Huang Gua, Di Lou and Ze Gu. The root was separately known as Bai Yao, Tian Hua Fen and Rui Xue.
+Older names for the fruit include Guo Luo, Gua Lou, Tian Gua, Huang Gua, Di Lou and Ze Gu. The root was separately known as Bai Yao, Trichosanthes Root and Rui Xue.
 
-Shizhen traces several of these names to ancient descriptions of a vine whose fruit hangs from other plants. He also notes that powder made from the root is white like snow, explaining the name Tian Hua Fen.
+Shizhen traces several of these names to ancient descriptions of a vine whose fruit hangs from other plants. He also notes that powder made from the root is white like snow, explaining the name Trichosanthes Root.
 
 [Historical commentary]
 
@@ -5443,7 +5443,7 @@ UI_BOOK_ENTRY_BODY_GUI_ZHI,"桂枝（桂）
 
 Shizhen cites an old explanation that the written character gui reflects the distinctive vein pattern of cinnamon leaves.
 
-Another traditional explanation compares Gui Zhi with an envoy carrying an official jade tablet: it guides and leads other medicines through the body.
+Another traditional explanation compares Cinnamon Twig with an envoy carrying an official jade tablet: it guides and leads other medicines through the body.
 
 [Historical commentary]
 
@@ -5590,7 +5590,7 @@ UI_BOOK_ENTRY_BODY_HUANG_LIAN,"黄连
 
 Older names include Wang Lian and Zhi Lian.
 
-Shizhen explains that the yellow root grows in connected, bead-like segments, giving rise to the name Huang Lian.
+Shizhen explains that the yellow root grows in connected, bead-like segments, giving rise to the name Coptis Rhizome.
 
 [Historical commentary]
 
@@ -5659,9 +5659,9 @@ UI_BOOK_ENTRY_BODY_HUANG_QI,"黄芪（黄耆）
 
 [Names and origins]
 
-Older names include Huang Qi, Dai Shen, Du Shen, Ji Cao, Shu Zhi, Bai Ben and Wang Sun.
+Older names include Astragalus Root, Dai Shen, Du Shen, Ji Cao, Shu Zhi, Bai Ben and Wang Sun.
 
-Shizhen explains the name by saying qi means 'elder' or 'chief': because the yellow root was regarded as one of the foremost qi tonics, it became known as Huang Qi.
+Shizhen explains the name by saying qi means 'elder' or 'chief': because the yellow root was regarded as one of the foremost qi tonics, it became known as Astragalus Root.
 
 [Historical commentary]
 
@@ -5765,7 +5765,7 @@ UI_BOOK_ENTRY_BODY_HUI_XIANG,"茴香
 
 Also called Ba Yue Zhu in older materia medica.
 
-Song notes that the northern pronunciation of the name helped establish the form Hui Xiang.
+Song notes that the northern pronunciation of the name helped establish the form Fennel.
 
 Sun Simiao gives a practical folk explanation: a little fennel removes unpleasant odors from meat or sauces, leaving them fragrant.
 
@@ -5807,7 +5807,7 @@ UI_BOOK_ENTRY_BODY_HUO_XIANG,"藿香
 
 An older Buddhist name is Dou Lou Po Xiang. Shizhen notes that several transliterated Sanskrit names appear in Buddhist scriptures.
 
-The Chinese name Huo Xiang refers to the resemblance of its leaves to those of certain bean plants.
+The Chinese name Patchouli refers to the resemblance of its leaves to those of certain bean plants.
 
 [Historical commentary]
 
@@ -5845,7 +5845,7 @@ UI_BOOK_ENTRY_BODY_JI_ZI_HUANG,"鸡子黄
 
 [Names and origins]
 
-An older name for the chicken is Zhu Ye.
+An older name for the chicken is Bamboo Leaf.
 
 Shizhen cites philological explanations connecting the word for chicken with its ability to mark time by crowing.
 
@@ -5891,7 +5891,7 @@ UI_BOOK_ENTRY_BODY_JIE_GENG,"桔梗
 
 Older names include Bai Yao, Geng Cao and Ji.
 
-Shizhen explains the name from the plant's firm, straight root. He also distinguishes Jie Geng from a sweet-tasting related plant that older texts sometimes grouped with it.
+Shizhen explains the name from the plant's firm, straight root. He also distinguishes Platycodon Root from a sweet-tasting related plant that older texts sometimes grouped with it.
 
 [Historical commentary]
 
@@ -5986,7 +5986,7 @@ UI_BOOK_ENTRY_BODY_JING_JIE,"荆芥（假苏）
 
 Older names include Jia Su, Jiang Jie and Shu Ming.
 
-Historical authors debated whether Jia Su and Jing Jie were one plant or two. Shizhen sides with earlier sources identifying Jia Su as another name for Jing Jie and explains the names from its pungent, aromatic character.
+Historical authors debated whether Jia Su and Schizonepeta Herb were one plant or two. Shizhen sides with earlier sources identifying Jia Su as another name for Schizonepeta Herb and explains the names from its pungent, aromatic character.
 
 [Historical commentary]
 
@@ -6175,11 +6175,11 @@ UI_BOOK_ENTRY_BODY_LIAN_QIAO,"连翘
 
 [Names and origins]
 
-Older names include Lian, Yi Qiao, Han Lian Zi, Lan Hua and San Lian. The root was also called Lian Yao or Zhe Gen.
+Older names include Lian, Yi Qiao, Han Lotus Seed, Lan Hua and San Lian. The root was also called Lian Yao or Zhe Gen.
 
 Historical writers proposed different explanations for the name. One linked it with the fruit rising above surrounding vegetation, while another derived it from the paired, curved sections of the fruit.
 
-Shizhen notes that ancient texts may originally have treated Lian and Yi Qiao as separate names later combined into Lian Qiao.
+Shizhen notes that ancient texts may originally have treated Lian and Yi Qiao as separate names later combined into Forsythia Fruit.
 
 [Historical commentary]
 
@@ -6380,7 +6380,7 @@ UI_BOOK_ENTRY_BODY_LONG_YAN,"龙眼
 
 Older names include Long Mu, Yuan Yan, Yi Zhi, Ya Li Zhi, Li Zhi Nu, Li Zhu, Yan Luan, Mi Pi and Jiao Lei.
 
-Long Yan and Long Mu, literally 'dragon eye,' refer to the fruit's appearance.
+Longan Fruit and Long Mu, literally 'dragon eye,' refer to the fruit's appearance.
 
 Hongjing notes that the old name Yi Zhi for longan should not be confused with the herb now known as Yi Zhi Ren.
 
@@ -6501,7 +6501,7 @@ UI_BOOK_ENTRY_BODY_MA_HUANG,"麻黄
 
 Older names include Long Sha, Bei Xiang and Bei Yan.
 
-Shizhen notes that the origins of these names are uncertain. One folk explanation links Ma Huang with its numbing taste and yellowish color, but he does not consider this certain.
+Shizhen notes that the origins of these names are uncertain. One folk explanation links Ephedra Herb with its numbing taste and yellowish color, but he does not consider this certain.
 
 [Historical commentary]
 
@@ -6564,7 +6564,7 @@ Zongshi: Ophiopogon Tuber is especially useful for Lung Heat and deficiency Heat
 
 Combined with Di Huang, Donkey-Hide Gelatin and Huo Ma Ren, it nourishes fluids and blood. With Schisandra Fruit and Goji Berry, it supports fluid and qi preservation.
 
-Yuansu highlights Sheng Mai San, combining Ophiopogon Tuber with Ginseng Root and Schisandra Fruit for severe depletion of Lung qi and fluids.
+Yuansu highlights Generate the Pulse Powder, combining Ophiopogon Tuber with Ginseng Root and Schisandra Fruit for severe depletion of Lung qi and fluids.
 
 Gao explains this formula through summer Heat and Dampness causing weakness, shortness of breath, dizziness and fatigue. Ginseng Root supports source qi, Ophiopogon Tuber nourishes Lung yin and fluids, and Schisandra Fruit helps secure qi and fluids.
 
@@ -6706,9 +6706,9 @@ UI_BOOK_ENTRY_BODY_MU_XIANG,"木香
 
 [Names and origins]
 
-Older names include Mi Xiang, Qing Mu Xiang, Wu Mu Xiang and Nan Mu Xiang.
+Older names include Mi Xiang, Qing Costus Root, Wu Costus Root and Nan Costus Root.
 
-Shizhen explains that the herb was originally called Mi Xiang because of its honey-like fragrance. Later naming became confused with other aromatic plants, so names such as Nan Mu Xiang and Guang Mu Xiang were used to distinguish it.
+Shizhen explains that the herb was originally called Mi Xiang because of its honey-like fragrance. Later naming became confused with other aromatic plants, so names such as Nan Costus Root and Guang Costus Root were used to distinguish it.
 
 [Historical commentary]
 
@@ -6966,9 +6966,9 @@ UI_BOOK_ENTRY_BODY_QIANG_HUO,"羌活（独活羌活）
 
 [Names and origins]
 
-Older names overlap with Du Huo and include Qiang Qing, Du Yao Cao, Hu Qiang Shi Zhe, Hu Wang Shi Zhe and Chang Sheng Cao.
+Older names overlap with Angelica Pubescens Root and include Qiang Qing, Du Yao Cao, Hu Qiang Shi Zhe, Hu Wang Shi Zhe and Chang Sheng Cao.
 
-Shizhen treats Qiang Huo and Du Huo as closely related but distinct medicinal types.
+Shizhen treats Notopterygium Root and Angelica Pubescens Root as closely related but distinct medicinal types.
 
 [Historical commentary]
 
@@ -7056,7 +7056,7 @@ UI_BOOK_ENTRY_BODY_REN_SHEN,"人参
 
 [Names and origins]
 
-Older names include Ren Shen, Huang Shen, Xue Shen, Ren Xian, Gui Gai, Shen Cao, Tu Jing, Di Jing, Hai Yu and Zhou Mian Huan Dan.
+Older names include Ginseng Root, Huang Shen, Xue Shen, Ren Xian, Gui Gai, Shen Cao, Tu Jing, Di Jing, Hai Yu and Zhou Mian Huan Dan.
 
 Shizhen explains the name from old roots that gradually develop a human-like shape and from the plant's legendary reputation as a spiritually potent herb.
 
@@ -7076,7 +7076,7 @@ Haogu rejects replacing Ginseng Root casually with Adenophora Root. Ginseng Root
 
 Later authors distinguish raw and processed ginseng, assigning slightly cooler or warmer tendencies according to preparation.
 
-Sheng Mai San combines Ginseng Root, Ophiopogon Tuber and Schisandra Fruit for severe summer depletion of qi and fluids. Ginseng Root restores qi, Ophiopogon Tuber nourishes yin and fluids, and Schisandra Fruit helps secure what is being lost.
+Generate the Pulse Powder combines Ginseng Root, Ophiopogon Tuber and Schisandra Fruit for severe summer depletion of qi and fluids. Ginseng Root restores qi, Ophiopogon Tuber nourishes yin and fluids, and Schisandra Fruit helps secure what is being lost.
 
 The older literature therefore presents Ginseng Root not as a general stimulant, but as a powerful tonic whose use depends on the patient's underlying deficiency pattern."
 UI_BOOK_ENTRY_TITLE_ROU_GUI,肉桂,Cinnamon Bark
@@ -7162,7 +7162,7 @@ Gao: Mulberry Root Bark can clear excess Lung qi and relieve cough, but he cauti
 
 Shizhen emphasizes its ability to promote urination. It is especially appropriate when Lung Heat or retained fluid interferes with normal fluid movement.
 
-He cites Xie Bai San, a classical formula using Mulberry Root Bark with Di Gu Pi, Licorice Root and Non-Glutinous Rice for Lung Heat with cough, wheezing, facial swelling and fever.
+He cites Drain the White Powder, a classical formula using Mulberry Root Bark with Di Gu Pi, Licorice Root and Non-Glutinous Rice for Lung Heat with cough, wheezing, facial swelling and fever.
 
 In this formula, Mulberry Root Bark and Di Gu Pi clear Heat, Licorice Root moderates, and Non-Glutinous Rice protects Lung and Stomach qi.
 
@@ -7277,9 +7277,9 @@ UI_BOOK_ENTRY_BODY_SHA_SHEN,"沙参
 
 Older names include Bai Shen, Yang Ru, Yang Po Nai, Ling Er Cao, Hu Xu and Ku Xin.
 
-Hongjing grouped Sha Shen with Ren Shen, Xuan Shen, Dan Shen and Ku Shen as the 'five shen' herbs, although their appearance and actions differ.
+Hongjing grouped Adenophora Root with Ginseng Root, Scrophularia Root, Red Sage Root and Ku Shen as the 'five shen' herbs, although their appearance and actions differ.
 
-Shizhen explains that Sha Shen is pale in color and favors sandy soil. Its root exudes a white sap, leading to folk names meaning 'goat's milk.'
+Shizhen explains that Adenophora Root is pale in color and favors sandy soil. Its root exudes a white sap, leading to folk names meaning 'goat's milk.'
 
 [Historical commentary]
 
@@ -7371,11 +7371,11 @@ UI_BOOK_ENTRY_BODY_SHAN_YAO,"山药（薯蓣）
 
 [Names and origins]
 
-Older names include Shu Yu, Tu Shu, Shan Shu, Shan Yu, Shan Yao and Yu Yan.
+Older names include Shu Yu, Tu Shu, Shan Shu, Shan Yu, Chinese Yam and Yu Yan.
 
 Historical records preserve many regional names for the same plant.
 
-Zongshi explains that the modern name Shan Yao arose through successive imperial naming taboos: the older name Shu Yu was changed first to Shu Yao and later to Shan Yao.
+Zongshi explains that the modern name Chinese Yam arose through successive imperial naming taboos: the older name Shu Yu was changed first to Shu Yao and later to Chinese Yam.
 
 [Historical commentary]
 
@@ -7417,7 +7417,7 @@ UI_BOOK_ENTRY_BODY_SHAN_ZHU_YU,"山茱萸
 
 Older names include Shu Suan Zao, Rou Zao, Qi Shi, Ji Zu and Shu Shi.
 
-Zongshi notes that Shan Zhu Yu is quite different from Wu Zhu Yu in both appearance and medicinal use despite the similarity of their names.
+Zongshi notes that Cornus Fruit is quite different from Wu Zhu Yu in both appearance and medicinal use despite the similarity of their names.
 
 Shizhen says names such as Shu Suan Zao and Rou Zao describe the fruit's appearance and fleshy, sour character.
 
@@ -7427,7 +7427,7 @@ Haogu explains its action through the principle that astringent medicines restra
 
 Its sour and astringent flavor was therefore used for excessive urination, loss of essence and other deficiency patterns involving failure to secure.
 
-He also notes its important role in classical Kidney formulas such as Ba Wei Wan.
+He also notes its important role in classical Kidney formulas such as Eight-Ingredient Pill.
 
 The herb's traditional value lies in combining gentle Liver-Kidney tonification with a securing action rather than strongly moving or draining."
 UI_BOOK_ENTRY_TITLE_SHENG_DI_HUANG,生地黄,Fresh Rehmannia Root
@@ -7665,7 +7665,7 @@ UI_BOOK_ENTRY_BODY_SHU_DI_HUANG,"熟地黄（地黄）
 
 [Names and origins]
 
-Shu Di Huang is prepared from Di Huang through repeated steaming and drying.
+Prepared Rehmannia Root is prepared from Di Huang through repeated steaming and drying.
 
 Older names shared with Rehmannia include Hu, Qi and Di Sui.
 
@@ -7677,7 +7677,7 @@ Yuansu clearly distinguishes raw and prepared forms: raw Di Huang is very cold a
 
 Haogu likewise recommends Fresh Rehmannia Root for exuberant Heat with strong pulses and Prepared Rehmannia Root for deficiency with weak pulses.
 
-Prepared Rehmannia is a central herb in classical formulas such as Ba Wei Wan and Four-Substance Decoction, reflecting its major role in nourishing Kidney essence and Liver blood.
+Prepared Rehmannia is a central herb in classical formulas such as Eight-Ingredient Pill and Four-Substance Decoction, reflecting its major role in nourishing Kidney essence and Liver blood.
 
 Shizhen cites older distinctions between generating fresh blood with Fresh Rehmannia Root and replenishing depleted blood and essence with Prepared Rehmannia Root.
 
@@ -7841,9 +7841,9 @@ UI_BOOK_ENTRY_BODY_TIAN_HUA_FEN,"天花粉（栝蒌）
 
 Older names for the plant include Guo Luo, Gua Lou, Tian Gua, Huang Gua, Di Lou and Ze Gu.
 
-The root was called Bai Yao, Tian Hua Fen and Rui Xue.
+The root was called Bai Yao, Trichosanthes Root and Rui Xue.
 
-Shizhen explains that the powdered root is clean and white like snow, which gave rise to names such as Tian Hua Fen.
+Shizhen explains that the powdered root is clean and white like snow, which gave rise to names such as Trichosanthes Root.
 
 [Historical commentary]
 
@@ -7903,7 +7903,7 @@ Older names include Men Dong, Dian Le, Tian Ji and Wan Sui Teng.
 
 Classical texts record many regional names, some of which were also used for entirely different plants.
 
-Shizhen therefore carefully distinguishes Tian Men Dong from Bai Bu and other similarly named herbs.
+Shizhen therefore carefully distinguishes Asparagus Root from Bai Bu and other similarly named herbs.
 
 [Historical commentary]
 
@@ -7956,7 +7956,7 @@ UI_BOOK_ENTRY_BODY_TU_SI_ZI,"菟丝子
 
 Older names include Tu Lü, Tu Lei, Tu Lu, Tu Qiu, Chi Wang, Yu Nü, Tang Meng, Huo Yan Cao, Ye Hu Si and Jin Xian Cao.
 
-Classical authors debated the parasitic plant's relationship with Fu Ling and with another epiphyte called Nü Luo.
+Classical authors debated the parasitic plant's relationship with Poria and with another epiphyte called Nü Luo.
 
 Shizhen concludes that many earlier identifications resulted from confusion between different parasitic plants.
 
@@ -7996,7 +7996,7 @@ UI_BOOK_ENTRY_BODY_WU_LING_ZHI,"五灵脂
 
 [Names and origins]
 
-Wu Ling Zhi is the dried fecal material of the animal historically called He Dan or Han Hao.
+Trogopterus Dung is the dried fecal material of the animal historically called He Dan or Han Hao.
 
 Shizhen records numerous regional and literary names for the animal and explains the medicinal name as referring to droppings that resemble congealed fat and were poetically said to contain the essence of the five phases.
 
@@ -8010,7 +8010,7 @@ Older texts also preserve emergency folk use with Xiong Huang after snakebite, b
 
 Shizhen classifies Trogopterus Dung as a Liver and blood-level medicine. Because the Liver governs blood, he uses it for pain and disorders associated with blood stasis.
 
-He especially praises Shi Xiao San, a classic formula containing Trogopterus Dung for abdominal, chest, rib and lower abdominal pain attributed to blood stasis.
+He especially praises Sudden Smile Powder, a classic formula containing Trogopterus Dung for abdominal, chest, rib and lower abdominal pain attributed to blood stasis.
 
 The herb was also historically used in abnormal uterine bleeding, postpartum pain and other blood-stasis patterns, reflecting its combination of blood-moving and hemostatic actions."
 UI_BOOK_ENTRY_TITLE_WU_TOU,乌头,Aconite Root
@@ -8061,13 +8061,13 @@ UI_BOOK_ENTRY_BODY_WU_TOU,"乌头（川乌，草乌）
 
 [Chuan Wu]
 
-Shizhen explains Wu Tou, 'crow's head,' from the shape of the main root. Fu Zi grows attached to it like a child attached to its mother.
+Shizhen explains Aconite Root, 'crow's head,' from the shape of the main root. Prepared Aconite Root grows attached to it like a child attached to its mother.
 
-He carefully distinguishes cultivated Chuan Wu from wild Cao Wu and from unrelated plants historically called Bai Fu Zi.
+He carefully distinguishes cultivated Chuan Wu from wild Cao Wu and from unrelated plants historically called Bai Prepared Aconite Root.
 
 [Cao Wu]
 
-Older names include Wu Hui, Cao Wu Tou, Tu Fu Zi, Xi Du, Geng Zi, Du Gong, Jin Ya and others.
+Older names include Wu Hui, Cao Aconite Root, Tu Prepared Aconite Root, Xi Du, Geng Zi, Du Gong, Jin Ya and others.
 
 Shizhen identifies Cao Wu as the wild form and notes that its juice was historically concentrated into arrow poison, which explains names such as She Wang.
 
@@ -8135,7 +8135,7 @@ UI_BOOK_ENTRY_BODY_WU_WEI_ZI,"五味子
 
 Older names include Zhi Zhu, Xuan Ji and Hui Ji.
 
-Gong explains the name Wu Wei Zi, 'five-flavor fruit,' by saying the skin and flesh are sweet and sour, the seed is acrid and bitter, and a salty quality is also present.
+Gong explains the name Schisandra Fruit, 'five-flavor fruit,' by saying the skin and flesh are sweet and sour, the seed is acrid and bitter, and a salty quality is also present.
 
 [Historical commentary]
 
@@ -8183,7 +8183,7 @@ UI_BOOK_ENTRY_BODY_WU_YAO,"乌药
 
 Older names include Pang Qi, Pang Pi and Ai Zhang.
 
-Shizhen explains the name Wu Yao from the dark color of the root. Southern regions also called it Ai Zhang because its fragrance resembles camphor.
+Shizhen explains the name Lindera Root from the dark color of the root. Southern regions also called it Ai Zhang because its fragrance resembles camphor.
 
 [Historical commentary]
 
@@ -8195,7 +8195,7 @@ Lindera Root Shun Qi San uses this property to regulate qi first, on the traditi
 
 Si Mo Tang combines Ginseng Root, Lindera Root, Agarwood and Bin Lang for severe qi constraint with upward rebellion and wheezing. The formula balances descending and supporting actions.
 
-Lindera Root was also paired with Yi Zhi Ren in Suo Quan Wan for frequent urination attributed to deficiency-Cold, reflecting its traditional relationship with the Kidney and Bladder."
+Lindera Root was also paired with Yi Zhi Ren in Secure the Springs Pill for frequent urination attributed to deficiency-Cold, reflecting its traditional relationship with the Kidney and Bladder."
 UI_BOOK_ENTRY_TITLE_XI_XIN,细辛,Asarum Herb
 UI_BOOK_ENTRY_BODY_XI_XIN,"细辛
 【气味】味辛，性温。
@@ -8233,7 +8233,7 @@ UI_BOOK_ENTRY_BODY_XI_XIN,"细辛
 
 Older names include Xiao Xin and Shao Xin.
 
-Song explains the name Xi Xin, 'fine acrid herb,' from its very slender roots and intensely pungent taste.
+Song explains the name Asarum Herb, 'fine acrid herb,' from its very slender roots and intensely pungent taste.
 
 [Historical commentary]
 
@@ -8276,9 +8276,9 @@ UI_BOOK_ENTRY_BODY_XIANG_FU,"香附（莎根，香附子）
 
 [Names and origins]
 
-Older names include Que Tou Xiang, Cao Fu Zi, Shui Xiang Leng, Shui Ba Ji, Shui Sha, Hou Sha, Sha Jie, Fu Xu, Xu Gen Cao and Di Mao.
+Older names include Que Tou Xiang, Cao Prepared Aconite Root, Shui Xiang Leng, Shui Ba Ji, Shui Sha, Hou Sha, Sha Jie, Fu Xu, Xu Gen Cao and Di Mao.
 
-Shizhen notes that early materia medica described the whole sedge, while later physicians mainly used the aromatic rhizome and called it Xiang Fu Zi.
+Shizhen notes that early materia medica described the whole sedge, while later physicians mainly used the aromatic rhizome and called it Cyperus Rhizome Zi.
 
 The rhizomes grow in connected clusters and have a noticeable fragrance, which helped establish the later name.
 
@@ -8366,7 +8366,7 @@ UI_BOOK_ENTRY_BODY_XU_DUAN,"续断
 
 Older names include Shu Zhe, Jie Gu, Long Dou and Nan Cao.
 
-Shizhen explains that names such as Xu Duan, 'restore what is severed,' and Jie Gu, 'join the bones,' refer directly to the herb's traditional functions.
+Shizhen explains that names such as Dipsacus Root, 'restore what is severed,' and Jie Gu, 'join the bones,' refer directly to the herb's traditional functions.
 
 [Historical commentary]
 
@@ -8406,7 +8406,7 @@ Older names include Hei Shen, Xuan Tai, Chong Tai, Lu Chang, Zheng Ma, Zhu Ma, F
 
 Shizhen explains xuan as 'black,' referring to the dark color of the root.
 
-Hongjing notes that the stem somewhat resembles Ren Shen, which helped give it the name Shen.
+Hongjing notes that the stem somewhat resembles Ginseng Root, which helped give it the name Shen.
 
 [Historical commentary]
 
@@ -8544,9 +8544,9 @@ UI_BOOK_ENTRY_BODY_YU_ZHU,"玉竹（萎蕤）
 
 [Names and origins]
 
-Older names include Nü Wei, Wei Rui, Wei Yi, Wei Wei, Wei Xiang, Ying, Yu Zhu and Di Jie.
+Older names include Nü Wei, Wei Rui, Wei Yi, Wei Wei, Wei Xiang, Ying, Polygonatum Odoratum Rhizome and Di Jie.
 
-Shizhen links several names with the plant's graceful drooping form. The glossy bamboo-like leaves and jointed rhizome explain the later name Yu Zhu, 'jade bamboo.'
+Shizhen links several names with the plant's graceful drooping form. The glossy bamboo-like leaves and jointed rhizome explain the later name Polygonatum Odoratum Rhizome, 'jade bamboo.'
 
 [Historical commentary]
 
@@ -8590,7 +8590,7 @@ UI_BOOK_ENTRY_BODY_YUAN_ZHI,"远志
 
 The aerial portion was called Xiao Cao, along with other older names such as Xi Cao and Ji Wan.
 
-Shizhen explains Yuan Zhi, 'far-reaching will,' from the traditional belief that the herb strengthens memory, resolve and mental clarity.
+Shizhen explains Polygala Root, 'far-reaching will,' from the traditional belief that the herb strengthens memory, resolve and mental clarity.
 
 Another literary name was Xing Xin Zhang, 'staff that awakens the Heart.'
 
@@ -8640,11 +8640,11 @@ UI_BOOK_ENTRY_BODY_ZE_XIE,"泽泻
 
 Older names include Shui Xie, Hu Xie, Ji Xie, Yu, Mang Yu and Yu Sun.
 
-Shizhen explains the name Ze Xie through the image of draining water from a marsh. The name Yu Sun, 'descendant of Yu,' alludes to the legendary Yu the Great controlling floods.
+Shizhen explains the name Alisma Rhizome through the image of draining water from a marsh. The name Yu Sun, 'descendant of Yu,' alludes to the legendary Yu the Great controlling floods.
 
 [Historical commentary]
 
-Song notes repeated use of Alisma Rhizome in classical formulas for retained fluids, including Alisma Rhizome Tang and Wu Ling San.
+Song notes repeated use of Alisma Rhizome in classical formulas for retained fluids, including Alisma Rhizome Tang and Five-Ingredient Powder with Poria.
 
 Yuansu calls it an important Dampness-draining herb that enters the Kidney and treats difficult urination.
 
@@ -8654,7 +8654,7 @@ This raised an old debate: some sources said long-term use brightens the eyes, w
 
 Haogu reconciles this by saying that removing retained fluid may initially clear the senses, but excessive drainage can weaken Kidney qi.
 
-Wang Lü rejects the idea that Alisma Rhizome appears in Ba Wei Wan merely as a guide for Gui and Prepared Aconite Root. Instead, he sees it as a draining component within a tonic formula, removing pathogenic water so the tonifying herbs can work effectively.
+Wang Lü rejects the idea that Alisma Rhizome appears in Eight-Ingredient Pill merely as a guide for Gui and Prepared Aconite Root. Instead, he sees it as a draining component within a tonic formula, removing pathogenic water so the tonifying herbs can work effectively.
 
 Shizhen agrees with this broader principle: classical tonic formulas often combine supplementation with controlled elimination of pathogenic factors.
 
@@ -8694,9 +8694,9 @@ UI_BOOK_ENTRY_BODY_ZHI_KE,"枳壳（枳）
 
 [Names and origins]
 
-Zhi Shi and Zhi Ke come from the same fruit at different stages of maturity.
+Immature Bitter Orange and Mature Bitter Orange come from the same fruit at different stages of maturity.
 
-Zongshi explains that the younger fruit, Zhi Shi, acts more forcefully and quickly, while the larger mature fruit, Zhi Ke, is gentler and slower.
+Zongshi explains that the younger fruit, Immature Bitter Orange, acts more forcefully and quickly, while the larger mature fruit, Mature Bitter Orange, is gentler and slower.
 
 Shizhen compares this distinction with that between green and aged citrus peel.
 
@@ -8790,7 +8790,7 @@ UI_BOOK_ENTRY_BODY_ZHI_SHI,"枳实（枳）
 
 [Names and origins]
 
-Zhi Shi is the smaller, immature fruit of the same plant that yields Zhi Ke when mature.
+Immature Bitter Orange is the smaller, immature fruit of the same plant that yields Mature Bitter Orange when mature.
 
 Zongshi explains that the immature fruit acts more forcefully and rapidly, which is why Zhang Zhongjing used it in urgent purgative formulas.
 
@@ -8885,7 +8885,7 @@ UI_BOOK_ENTRY_BODY_ZHU_RU,"竹茹（竹）
 
 [Names and origins]
 
-Zhu Ru refers to the thin inner shavings taken from bamboo stems.
+Bamboo Shavings refers to the thin inner shavings taken from bamboo stems.
 
 Shizhen discusses the written form of zhu, 'bamboo,' and cites older botanical descriptions that portray bamboo as neither fully grass nor ordinary wood, yet recognizable by its hollow segmented stalk.
 
