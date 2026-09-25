@@ -285,7 +285,11 @@ func _refresh_preset_list() -> void:
 	for formula in preset_formulas:
 		var unlocked := Unlock != null and Unlock.has_method("is_preset_formula_unlocked") and Unlock.is_preset_formula_unlocked(formula.formula_id)
 		var count := Unlock.get_miaoshouhuichun_prescription_count(formula.formula_id) if Unlock != null and Unlock.has_method("get_miaoshouhuichun_prescription_count") else 0
-		preset_list.add_item("%s  [%d/5]%s" % [formula.formula_name, count, tr("UI_RECORDS_PRESET_UNLOCKED_BADGE") if unlocked else ""])
+		var localized_formula_name := LocalizedName.formula(
+			formula.formula_id,
+			formula.formula_name
+		)
+		preset_list.add_item("%s  [%d/5]%s" % [localized_formula_name, count, tr("UI_RECORDS_PRESET_UNLOCKED_BADGE") if unlocked else ""])
 	if preset_formulas.is_empty():
 		preset_detail.text = tr("UI_RECORDS_NO_FORMULAS")
 		return
@@ -320,8 +324,12 @@ func _show_preset(index: int) -> void:
 	var count := Unlock.get_miaoshouhuichun_prescription_count(formula.formula_id) if Unlock != null and Unlock.has_method("get_miaoshouhuichun_prescription_count") else 0
 	var unlocked := Unlock.is_preset_formula_unlocked(formula.formula_id) if Unlock != null and Unlock.has_method("is_preset_formula_unlocked") else false
 	var status := tr("UI_RECORDS_PRESET_UNLOCKED") if unlocked else tr("UI_RECORDS_PRESET_LOCKED")
+	var localized_formula_name := LocalizedName.formula(
+		formula.formula_id,
+		formula.formula_name
+	)
 	var lines: Array[String] = [
-		"[font_size=26][color=#e3b66b]%s[/color][/font_size]" % formula.formula_name,
+		"[font_size=26][color=#e3b66b]%s[/color][/font_size]" % localized_formula_name,
 		tr("UI_RECORDS_PRESET_PROGRESS_FMT") % count,
 		tr("UI_RECORDS_PRESET_STATUS_FMT") % ["#9fe29f" if unlocked else "#c6ae83", status],
 		tr("UI_RECORDS_PRESET_INGREDIENTS"),
@@ -335,5 +343,17 @@ func _formula_ingredients_text(formula: FormulaData) -> String:
 	for ingredient in formula.get_all_ingredients():
 		if ingredient == null:
 			continue
-		parts.append(tr("UI_RECORDS_INGREDIENT_FMT") % [ingredient.get_herb_name(), ingredient.get_display_text()])
+
+		var localized_herb_name := LocalizedName.herb(
+			ingredient.get_herb_id(),
+			ingredient.get_herb_name()
+		)
+
+		parts.append(
+			tr("UI_RECORDS_INGREDIENT_FMT") % [
+				localized_herb_name,
+				ingredient.get_amount_text()
+			]
+		)
+
 	return tr("UI_RESULT_UNLOCK_SEPARATOR").join(parts) if not parts.is_empty() else tr("UI_RECORDS_NO_INGREDIENTS")

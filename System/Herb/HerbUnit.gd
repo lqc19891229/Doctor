@@ -220,8 +220,67 @@ static func format_fen_auto(total_fen: int) -> String:
 
 
 # 函数功能：把输入的“数量 + 单位”格式化为中药剂量文本。
+# 中文环境保持原来的中文数字 + 中文单位；
+# 英文环境使用阿拉伯数字 + 本地化单位，例如：3 qian。
 static func format_amount(amount: float, unit: String) -> String:
+	if TranslationServer.get_locale().to_lower().begins_with("en"):
+		return _format_amount_english(amount, unit)
+
 	return format_fen_as_compound(to_fen(amount, unit))
+
+
+# 英文环境剂量显示。
+static func _format_amount_english(amount: float, unit: String) -> String:
+	var amount_text := _format_number_english(amount)
+	var unit_text := _get_localized_unit_name(unit)
+
+	if unit_text.strip_edges() == "":
+		return amount_text
+
+	return "%s %s" % [amount_text, unit_text]
+
+
+# 英文环境使用阿拉伯数字。
+# 整数显示 3，不显示 3.0；小数最多保留两位。
+static func _format_number_english(amount: float) -> String:
+	var rounded_amount := round(amount * 100.0) / 100.0
+	var int_amount := int(rounded_amount)
+
+	if is_equal_approx(rounded_amount, float(int_amount)):
+		return str(int_amount)
+
+	var text := "%.2f" % rounded_amount
+	while text.ends_with("0"):
+		text = text.trim_suffix("0")
+	if text.ends_with("."):
+		text = text.trim_suffix(".")
+
+	return text
+
+
+# 根据内部单位 key 获取当前语言下的显示名称。
+static func _get_localized_unit_name(unit: String) -> String:
+	var translation_key := ""
+
+	match unit:
+		UNIT_FEN:
+			translation_key = "UI_PRESCRIPTION_UNIT_FEN"
+		UNIT_QIAN:
+			translation_key = "UI_PRESCRIPTION_UNIT_QIAN"
+		UNIT_LIANG:
+			translation_key = "UI_PRESCRIPTION_UNIT_LIANG"
+		UNIT_JIN:
+			translation_key = "UI_PRESCRIPTION_UNIT_JIN"
+		_:
+			return unit
+
+	var translated := TranslationServer.translate(translation_key)
+
+	# 找不到翻译时退回内部单位 key，避免显示翻译 key 本身。
+	if translated.strip_edges() == "" or translated == translation_key:
+		return unit
+
+	return translated
 
 
 # 函数功能：向复合剂量文本数组中追加非零单位片段。
