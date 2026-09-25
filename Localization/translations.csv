@@ -489,23 +489,23 @@ UI_TUTORIAL_NIGHT_05_DESCRIPTION,其他医书记载各类方剂，白天在开�
 UI_TUTORIAL_NIGHT_06_TITLE,脉象,Pulse Readings
 UI_TUTORIAL_NIGHT_06_DESCRIPTION,在《诸病源候论》中选择疾病条目时，点击右下角“查看脉象”按钮，可以观察该疾病的脉象。,"Select a disease entry in the Treatise on the Origins and Manifestations of Various Diseases, then click 'View Pulse' in the lower right to examine its pulse."
 UI_TUTORIAL_NIGHT_07_TITLE,脉象,Pulse Readings
-UI_TUTORIAL_NIGHT_07_DESCRIPTION,健康的脉象是不高不低，不粗不细，不宽不窄，一次呼吸脉搏跳动四到五次。,"A healthy pulse is neither too high nor too low, thick nor thin, wide nor narrow. It beats four to five times per breath."
+UI_TUTORIAL_NIGHT_07_DESCRIPTION,健康的脉象是不高不低，不粗不细，不宽不窄，一次呼吸脉搏跳动四到五次。,"A healthy pulse has neither increased nor decreased amplitude, neither a thicker nor thinner pulse line, and neither broader nor narrower pulse width. Its pulse frequency is four to five beats per breath."
 UI_TUTORIAL_NIGHT_08_TITLE,气,Qi
 UI_TUTORIAL_NIGHT_08_DESCRIPTION,"波峰的高低反映气的强弱；
-波峰越高气滞程度越高，波峰越低气虚程度越高。","Peak height reflects the state of Qi;
-higher peaks indicate stronger Qi stagnation, while lower peaks indicate greater Qi deficiency."
+波峰越高气滞程度越高，波峰越低气虚程度越高。","Amplitude reflects the state of Qi;
+increased amplitude indicates greater Qi stagnation, while decreased amplitude indicates greater Qi deficiency."
 UI_TUTORIAL_NIGHT_09_TITLE,血,Blood
 UI_TUTORIAL_NIGHT_09_DESCRIPTION,"波线的粗细反映血的状态；
-波线越粗血瘀程度越高，波线越细血虚程度越高。","Line thickness reflects the state of blood;
-thicker lines indicate more blood stasis, while thinner lines indicate greater blood deficiency."
+波线越粗血瘀程度越高，波线越细血虚程度越高。","Pulse-line thickness reflects the state of Blood;
+a thicker pulse line indicates greater blood stasis, while a thinner pulse line indicates greater blood deficiency."
 UI_TUTORIAL_NIGHT_10_TITLE,湿燥,Dampness and Dryness
 UI_TUTORIAL_NIGHT_10_DESCRIPTION,"波宽的宽窄反映湿燥程度；
-波宽越宽越湿，波宽越窄越燥。","Pulse width reflects dampness and dryness;
-a wider pulse indicates more dampness, while a narrower pulse indicates more dryness."
+波宽越宽越湿，波宽越窄越燥。","Pulse width reflects Dampness and Dryness;
+broader pulse width indicates greater Dampness, while narrower pulse width indicates greater Dryness."
 UI_TUTORIAL_NIGHT_11_TITLE,寒热,Cold and Heat
 UI_TUTORIAL_NIGHT_11_DESCRIPTION,"每次呼吸波峰经过指尖的次数反映寒热程度；
-脉搏数越多越热，脉搏次数越少越寒。","The number of pulse peaks felt per breath reflects cold and heat;
-more beats indicate greater heat, while fewer indicate greater cold."
+脉搏数越多越热，脉搏次数越少越寒。","Pulse frequency reflects Cold and Heat;
+higher pulse frequency indicates greater Heat, while lower pulse frequency indicates greater Cold."
 UI_TUTORIAL_DAY_01_TITLE,接诊,Seeing Patients
 UI_TUTORIAL_DAY_01_DESCRIPTION,白天在医馆接诊病人，把脉(F1)确定疾病，翻阅行医记考(F3)确定方剂，给病人断病开方(F2)。,"During the day, see patients at the clinic. Check their pulse (F1) to identify the condition, consult the medical records (F3) for a formula, then diagnose and prescribe (F2)."
 UI_TUTORIAL_DAY_02_TITLE,把脉,Pulse Diagnosis
@@ -7950,7 +7950,7 @@ UI_BOOK_ENTRY_BODY_FENG_HAN_BIAO_SHI_ZHENG,"风寒表实证
 [Symptoms] Aversion to cold with fever, aching of the head and body, no sweating, and wheezing.
 
 [Pulse]
-Floating pulse (Exterior): high peak, slow rate
+Floating pulse (Exterior): increased amplitude, lower pulse frequency
 
 [Standard formula] Ephedra Decoction"
 UI_BOOK_ENTRY_TITLE_FENG_HAN_BIAO_XU_ZHENG,风寒表虚证,Wind-Cold Exterior Deficiency Pattern
@@ -7970,7 +7970,7 @@ UI_BOOK_ENTRY_BODY_FENG_HAN_BIAO_XU_ZHENG,"风寒表虚证
 [Symptoms] Aversion to wind with fever, headache, clear nasal discharge, and sweating.
 
 [Pulse]
-Floating pulse (Exterior): low peak, slow rate
+Floating pulse (Exterior): decreased amplitude, lower pulse frequency
 
 [Standard formula] Cinnamon Twig Decoction"
 UI_BOOK_ENTRY_TITLE_FENG_RE_BIAO_ZHENG,风热表证,Wind-Heat Exterior Pattern
@@ -7990,7 +7990,7 @@ UI_BOOK_ENTRY_BODY_FENG_RE_BIAO_ZHENG,"风热表证
 [Symptoms] Pronounced fever, a red and swollen throat, and thick yellow phlegm and nasal discharge.
 
 [Pulse]
-Floating pulse (Exterior): rapid rate
+Floating pulse (Exterior): higher pulse frequency
 
 [Standard formula] Honeysuckle and Forsythia Powder"
 UI_BOOK_ENTRY_TITLE_WEN_ZAO_ZHENG,温燥证,Warm-Dryness Pattern
@@ -8010,7 +8010,7 @@ UI_BOOK_ENTRY_BODY_WEN_ZAO_ZHENG,"温燥证
 [Symptoms] Fever with aversion to wind; dry mouth and nose, dry throat and thirst, a dry cough with little phlegm, and thick yellow phlegm or nasal discharge.
 
 [Pulse]
-Floating pulse (Exterior): rapid rate, narrow wave
+Floating pulse (Exterior): higher pulse frequency, narrower pulse width
 
 [Standard formula] Mulberry Leaf and Apricot Kernel Decoction"
 UI_BOOK_ENTRY_TITLE_LIANG_ZAO_ZHENG,凉燥证,Cool-Dryness Pattern
@@ -8030,7 +8030,7 @@ UI_BOOK_ENTRY_BODY_LIANG_ZAO_ZHENG,"凉燥证
 [Symptoms] Aversion to cold with fever, a blocked nose with clear discharge, a dry cough with little phlegm, dry throat and lips, and dry skin.
 
 [Pulse]
-Floating pulse (Exterior): slow rate, narrow wave
+Floating pulse (Exterior): lower pulse frequency, narrower pulse width
 
 [Standard formula] Apricot Kernel and Perilla Leaf Powder"
 UI_BOOK_ENTRY_TITLE_WEI_QI_XU,卫气虚,Defensive Qi Deficiency
@@ -8050,7 +8050,7 @@ UI_BOOK_ENTRY_BODY_WEI_QI_XU,"卫气虚
 [Symptoms] Spontaneous sweating even at rest, worse with activity; frequent colds, aversion to wind and cold, and catching cold easily; a pale complexion, shortness of breath, fatigue, and little inclination to speak; loose pores and frequent sensitivity to wind.
 
 [Pulse]
-Floating pulse (Exterior): low peak
+Floating pulse (Exterior): decreased amplitude
 
 [Standard formula] Jade Windscreen Powder"
 UI_BOOK_ENTRY_TITLE_TONG_BI,痛痹,Painful Bi (Cold Bi)
@@ -8070,7 +8070,7 @@ UI_BOOK_ENTRY_BODY_TONG_BI,"痛痹（寒痹）
 [Symptoms] Severe, fixed pain in the limbs and joints; worse with cold and relieved by warmth; restricted joint movement and local sensitivity to cold.
 
 [Pulse]
-Floating pulse (Exterior): slightly high peak, markedly slow rate, slightly broad wave
+Floating pulse (Exterior): slightly increased amplitude, markedly lower pulse frequency, slightly broader pulse width
 
 [Standard formula] Aconite Decoction"
 UI_BOOK_ENTRY_TITLE_RE_BI,热痹,Heat Bi
@@ -8090,7 +8090,7 @@ UI_BOOK_ENTRY_BODY_RE_BI,"热痹
 [Symptoms] Red, swollen, burning joints with severe pain; hot and tender to touch, somewhat relieved by cold; fever, thirst, and irritability; restricted movement of the limbs.
 
 [Pulse]
-Floating pulse (Exterior): slightly high peak, rapid rate, slightly broad wave
+Floating pulse (Exterior): slightly increased amplitude, higher pulse frequency, slightly broader pulse width
 
 [Standard formula] White Tiger Decoction with Cinnamon Twig"
 UI_BOOK_ENTRY_TITLE_ZHUO_BI,着痹,Fixed Bi (Damp Bi)
@@ -8112,7 +8112,7 @@ UI_BOOK_ENTRY_BODY_ZHUO_BI,"着痹（湿痹）
 Worse in rainy or humid weather.
 
 [Pulse]
-Floating pulse (Exterior): slightly high peak, slightly slow rate, markedly broad wave
+Floating pulse (Exterior): slightly increased amplitude, slightly lower pulse frequency, markedly broader pulse width
 
 [Standard formula] Coix Seed Decoction"
 UI_BOOK_ENTRY_TITLE_XING_BI,行痹,Wandering Bi (Wind Bi)
@@ -8132,7 +8132,7 @@ UI_BOOK_ENTRY_BODY_XING_BI,"行痹（风痹）
 [Symptoms] Aching joints and limbs with pain that shifts from place to place throughout the body.
 
 [Pulse]
-Floating pulse (Exterior): markedly high peak, slightly slow rate, slightly broad wave
+Floating pulse (Exterior): markedly increased amplitude, slightly lower pulse frequency, slightly broader pulse width
 
 [Standard formula] Saposhnikovia Decoction"
 UI_BOOK_ENTRY_TITLE_FEI_RE_YONG_SHENG,肺热壅盛,Exuberant Heat in the Lung
@@ -8152,7 +8152,7 @@ UI_BOOK_ENTRY_BODY_FEI_RE_YONG_SHENG,"肺热壅盛
 [Symptoms] Forceful coughing and wheezing with chest tightness; thick, sticky yellow phlegm that is hard to expectorate; fever, thirst, and sore throat; flaring nostrils, relatively dry stools, and yellow urine.
 
 [Pulse]
-Right cun (Lung): rapid rate
+Right cun (Lung): higher pulse frequency
 
 [Standard formula] Ephedra, Apricot Kernel, Gypsum and Licorice Decoction"
 UI_BOOK_ENTRY_TITLE_FEI_QI_XU,肺气虚,Lung Qi Deficiency
@@ -8172,7 +8172,7 @@ UI_BOOK_ENTRY_BODY_FEI_QI_XU,"肺气虚
 [Symptoms] Weak coughing and wheezing, shortness of breath and reluctance to speak, worse with activity; a weak voice and fatigue; spontaneous sweating, aversion to wind, and frequent colds; scant, thin, clear phlegm.
 
 [Pulse]
-Right cun (Lung): low peak
+Right cun (Lung): decreased amplitude
 
 [Standard formula] Lung-Tonifying Decoction"
 UI_BOOK_ENTRY_TITLE_TAN_SHI_ZU_FEI,痰湿阻肺,Phlegm-Damp Obstructing the Lung
@@ -8192,7 +8192,7 @@ UI_BOOK_ENTRY_BODY_TAN_SHI_ZU_FEI,"痰湿阻肺
 [Symptoms] A cough with abundant white, sticky phlegm that is easy to bring up; chest tightness, wheezing, and rattling phlegm in the throat; heavy limbs and a bland taste without thirst.
 
 [Pulse]
-Right cun (Lung): broad wave
+Right cun (Lung): broader pulse width
 
 [Standard formula] Two-Cured Decoction"
 UI_BOOK_ENTRY_TITLE_FEI_YIN_XU,肺阴虚,Lung Yin Deficiency
@@ -8212,7 +8212,7 @@ UI_BOOK_ENTRY_BODY_FEI_YIN_XU,"肺阴虚
 [Symptoms] A dry cough without phlegm, or a little sticky phlegm that is hard to bring up; dry throat and mouth with hoarseness; tidal fever, night sweats, and heat in the palms, soles, and chest; flushed cheekbones and weight loss.
 
 [Pulse]
-Right cun (Lung): thin wave, rapid rate, narrow wave
+Right cun (Lung): thinner pulse line, higher pulse frequency, narrower pulse width
 
 [Standard formula] Adenophora and Ophiopogon Decoction"
 UI_BOOK_ENTRY_TITLE_TAN_RE_YONG_FEI,痰热壅肺,Phlegm-Heat Congesting the Lung
@@ -8232,7 +8232,7 @@ UI_BOOK_ENTRY_BODY_TAN_RE_YONG_FEI,"痰热壅肺
 [Symptoms] Coughing and wheezing with abundant, thick yellow phlegm that is difficult to bring up; chest tightness and pain, sometimes with flaring nostrils; fever, thirst, irritability, constipation, and yellow urine.
 
 [Pulse]
-Right cun (Lung): rapid rate, broad wave
+Right cun (Lung): higher pulse frequency, broader pulse width
 
 [Standard formula] Clear Qi and Transform Phlegm Pill"
 UI_BOOK_ENTRY_TITLE_BIAO_HAN_LI_RE,表寒里热,Exterior Cold with Interior Heat
@@ -8253,8 +8253,8 @@ UI_BOOK_ENTRY_BODY_BIAO_HAN_LI_RE,"表寒里热
 [Symptoms] Aversion to cold without sweating, dry mouth and sore throat, generalized aches and chills, together with irritability and a sensation of internal heat.
 
 [Pulse]
-Floating pulse (Exterior): slow rate
-Right cun (Lung): rapid rate
+Floating pulse (Exterior): lower pulse frequency
+Right cun (Lung): higher pulse frequency
 
 [Standard formula] Great Azure Dragon Decoction"
 UI_BOOK_ENTRY_TITLE_BIAO_HAN_LI_YIN,表寒里饮,Exterior Cold with Interior Fluid Retention
@@ -8277,8 +8277,8 @@ UI_BOOK_ENTRY_BODY_BIAO_HAN_LI_YIN,"表寒里饮
 [Symptoms] Aversion to cold with fever, coughing and wheezing; copious thin, clear phlegm, chest fullness and tightness, and facial swelling.
 
 [Pulse]
-Floating pulse (Exterior): slow rate
-Right cun (Lung): broad wave
+Floating pulse (Exterior): lower pulse frequency
+Right cun (Lung): broader pulse width
 
 [Standard formula] Minor Azure Dragon Decoction"
 UI_BOOK_ENTRY_TITLE_PI_QI_XU,脾气虚,Spleen Qi Deficiency
@@ -8298,7 +8298,7 @@ UI_BOOK_ENTRY_BODY_PI_QI_XU,"脾气虚
 [Symptoms] Poor appetite and abdominal bloating, especially after meals; fatigue, weakness, little inclination to speak and tired limbs; a sallow complexion with weight loss or swelling; loose stools.
 
 [Pulse]
-Right guan (Spleen): low peak
+Right guan (Spleen): decreased amplitude
 
 [Standard formula] Four Gentlemen Decoction"
 UI_BOOK_ENTRY_TITLE_SHI_SHENG_KUN_PI,湿盛困脾,Excess Dampness Encumbering the Spleen
@@ -8318,7 +8318,7 @@ UI_BOOK_ENTRY_BODY_SHI_SHENG_KUN_PI,"湿盛困脾
 [Symptoms] Fullness in the upper abdomen and poor appetite; nausea, a sticky feeling in the mouth and a bland taste without thirst; a heavy head and body, aching limbs and drowsiness; loose, unsatisfying stools.
 
 [Pulse]
-Right guan (Spleen): broad wave
+Right guan (Spleen): broader pulse width
 
 [Standard formula] Calm the Stomach Powder"
 UI_BOOK_ENTRY_TITLE_PI_YANG_XU,脾阳虚,Spleen Yang Deficiency
@@ -8338,7 +8338,7 @@ UI_BOOK_ENTRY_BODY_PI_YANG_XU,"脾阳虚
 [Symptoms] Poor appetite and cold abdominal pain relieved by warmth and pressure; thin, loose stools, sometimes with undigested food; aversion to cold, cold limbs and fatigue; a bland taste without thirst and a pale or sallow complexion; possibly swelling or copious, thin, clear vaginal discharge.
 
 [Pulse]
-Right guan (Spleen): low peak, slow rate, broad wave
+Right guan (Spleen): decreased amplitude, lower pulse frequency, broader pulse width
 
 [Standard formula] Regulate the Middle Pill"
 UI_BOOK_ENTRY_TITLE_PI_XU_SHI_SHENG,脾虚湿盛,Spleen Deficiency with Excess Dampness
@@ -8358,7 +8358,7 @@ UI_BOOK_ENTRY_BODY_PI_XU_SHI_SHENG,"脾虚湿盛
 [Symptoms] Poor appetite and abdominal fullness, worse after eating; fatigue, little inclination to speak and heavy limbs; loose stools or diarrhea with a sticky, unsatisfying feeling; a sallow complexion, sometimes with swelling or copious thin, clear vaginal discharge.
 
 [Pulse]
-Right guan (Spleen): low peak, broad wave
+Right guan (Spleen): decreased amplitude, broader pulse width
 
 [Standard formula] Ginseng, Poria and Atractylodes Powder"
 UI_BOOK_ENTRY_TITLE_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI,外感风寒，内伤湿滞,External Wind-Cold with Internal Damp Stagnation
@@ -8379,8 +8379,8 @@ UI_BOOK_ENTRY_BODY_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI,"外感风寒，内伤湿�
 [Symptoms] External Wind-Cold: aversion to cold with fever, headache and heavy body, no sweating, and a blocked nose with clear discharge; internal Damp stagnation: chest fullness, abdominal distension and pain, nausea, vomiting, bowel sounds and diarrhea; chills and fever with both vomiting and diarrhea, a heavy body and chest tightness.
 
 [Pulse]
-Floating pulse (Exterior): slow rate
-Right guan (Spleen): broad wave
+Floating pulse (Exterior): lower pulse frequency
+Right guan (Spleen): broader pulse width
 
 [Standard formula] Patchouli Qi-Rectifying Powder"
 UI_BOOK_ENTRY_TITLE_HAN_NING_XIN_MAI,寒凝心脉,Cold Congealing in the Heart Vessels
@@ -8400,7 +8400,7 @@ UI_BOOK_ENTRY_BODY_HAN_NING_XIN_MAI,"寒凝心脉
 [Symptoms] Sudden, severe chest pain, worse with cold and relieved by warmth; chest tightness, shortness of breath and palpitations; aversion to cold, cold limbs, a pale face, and bluish lips and nails.
 
 [Pulse]
-Left cun (Heart): slow rate
+Left cun (Heart): lower pulse frequency
 
 [Standard formula] Chinese Angelica Decoction for Frigid Extremities"
 UI_BOOK_ENTRY_TITLE_XIN_HUO_KANG_SHENG,心火亢盛,Exuberant Heart Fire
@@ -8420,7 +8420,7 @@ UI_BOOK_ENTRY_BODY_XIN_HUO_KANG_SHENG,"心火亢盛
 [Symptoms] Heat and agitation in the chest, palpitations, insomnia and irritability; painful mouth and tongue sores and a red, sore tongue tip; dry mouth, bitter taste, a flushed face and red eyes; scant, red urine with burning, difficult urination.
 
 [Pulse]
-Left cun (Heart): rapid rate
+Left cun (Heart): higher pulse frequency
 
 [Standard formula] Guide Out the Red Powder"
 UI_BOOK_ENTRY_TITLE_TAN_MI_XIN_QIAO,痰迷心窍,Phlegm Obscuring the Heart Orifices
@@ -8440,7 +8440,7 @@ UI_BOOK_ENTRY_BODY_TAN_MI_XIN_QIAO,"痰迷心窍
 [Symptoms] Confusion or mental dullness, depression and an indifferent expression; muttering, unusual behavior or reduced awareness; rattling phlegm in the throat, chest tightness, copious phlegm and clouded consciousness; in severe cases, sudden collapse and unconsciousness.
 
 [Pulse]
-Left cun (Heart): broad wave
+Left cun (Heart): broader pulse width
 
 [Standard formula] Scour Phlegm Decoction"
 UI_BOOK_ENTRY_TITLE_XIN_QI_XU,心气虚,Heart Qi Deficiency
@@ -8460,7 +8460,7 @@ UI_BOOK_ENTRY_BODY_XIN_QI_XU,"心气虚
 [Symptoms] Palpitations, worse with activity; shortness of breath, chest tightness and fatigue; spontaneous sweating and a pale complexion.
 
 [Pulse]
-Left cun (Heart): low peak
+Left cun (Heart): decreased amplitude
 
 [Standard formula] Nourish the Heart Decoction"
 UI_BOOK_ENTRY_TITLE_XIN_MAI_YU_ZU,心脉瘀阻,Blood Stasis Obstructing the Heart Vessels
@@ -8480,7 +8480,7 @@ UI_BOOK_ENTRY_BODY_XIN_MAI_YU_ZU,"心脉瘀阻
 [Symptoms] Chest and Heart pain, palpitations, chest tightness, shortness of breath and breathlessness when lying down; a dull complexion and bluish lips and nails.
 
 [Pulse]
-Left cun (Heart): thick wave
+Left cun (Heart): thicker pulse line
 
 [Standard formula] Drive Out Stasis in the Mansion of Blood Decoction"
 UI_BOOK_ENTRY_TITLE_XIN_YIN_XU,心阴虚,Heart Yin Deficiency
@@ -8500,7 +8500,7 @@ UI_BOOK_ENTRY_BODY_XIN_YIN_XU,"心阴虚
 [Symptoms] Palpitations and unease; restlessness, insomnia and frequent waking from dreams; heat in the palms, soles and chest, tidal fever and night sweats; dry mouth and throat with flushed cheekbones.
 
 [Pulse]
-Left cun (Heart): thin wave, rapid rate, narrow wave
+Left cun (Heart): thinner pulse line, higher pulse frequency, narrower pulse width
 
 [Standard formula] Heavenly Emperor's Heart-Tonifying Elixir"
 UI_BOOK_ENTRY_TITLE_XIN_YANG_XU,心阳虚,Heart Yang Deficiency
@@ -8520,7 +8520,7 @@ UI_BOOK_ENTRY_BODY_XIN_YANG_XU,"心阳虚
 [Symptoms] Palpitations and unease; chest tightness and shortness of breath, worse with cold; aversion to cold and cool limbs; a pale complexion, fatigue and spontaneous sweating.
 
 [Pulse]
-Left cun (Heart): low peak, slow rate
+Left cun (Heart): decreased amplitude, lower pulse frequency
 
 [Standard formula] Cinnamon Twig and Licorice Decoction"
 UI_BOOK_ENTRY_TITLE_TAN_HUO_RAO_XIN,痰火扰心,Phlegm-Fire Disturbing the Heart
@@ -8540,7 +8540,7 @@ UI_BOOK_ENTRY_BODY_TAN_HUO_RAO_XIN,"痰火扰心
 [Symptoms] Restlessness, insomnia, agitation and irritability; disturbing dreams, being easily startled, sometimes incoherent speech or inappropriate laughing and crying; chest fullness, a bitter taste and copious thick, yellow phlegm.
 
 [Pulse]
-Left cun (Heart): rapid rate, broad wave
+Left cun (Heart): higher pulse frequency, broader pulse width
 
 [Standard formula] Coptis Warm-Gallbladder Decoction"
 UI_BOOK_ENTRY_TITLE_XIN_PI_LIANG_XU,心脾两虚,Heart and Spleen Deficiency
@@ -8561,8 +8561,8 @@ UI_BOOK_ENTRY_BODY_XIN_PI_LIANG_XU,"心脾两虚
 [Symptoms] Palpitations, insomnia with vivid dreams, forgetfulness and dizziness; poor appetite, bloating, loose stools and fatigue; a sallow or pale complexion and tired limbs; in women, scant pale menstrual flow or prolonged spotting.
 
 [Pulse]
-Left cun (Heart): thin wave
-Right guan (Spleen): low peak
+Left cun (Heart): thinner pulse line
+Right guan (Spleen): decreased amplitude
 
 [Standard formula] Restore the Spleen Decoction"
 UI_BOOK_ENTRY_TITLE_GAN_HUO_SHANG_YAN,肝火上炎,Liver Fire Blazing Upward
@@ -8582,7 +8582,7 @@ UI_BOOK_ENTRY_BODY_GAN_HUO_SHANG_YAN,"肝火上炎
 [Symptoms] Dizziness with a distending headache, a flushed face, red eyes and irritability; bitter and dry mouth, ringing in the ears or hearing loss, and burning pain along the ribs; insomnia and vivid dreams, possibly agitation; vomiting blood or nosebleeds.
 
 [Pulse]
-Left guan (Liver): rapid rate
+Left guan (Liver): higher pulse frequency
 
 [Standard formula] Gentian Decoction to Drain the Liver"
 UI_BOOK_ENTRY_TITLE_HAN_ZHI_GAN_MAI,寒滞肝脉,Cold Stagnating in the Liver Channel
@@ -8602,7 +8602,7 @@ UI_BOOK_ENTRY_BODY_HAN_ZHI_GAN_MAI,"寒滞肝脉
 [Symptoms] Cold pain in the lower abdomen; dragging, cold pain in the testicles or hernia pain; pain at the top of the head, aversion to cold, preference for warmth, relief with warmth and worsening with cold; icy limbs and a pale, bluish complexion.
 
 [Pulse]
-Left guan (Liver): slow rate
+Left guan (Liver): lower pulse frequency
 
 [Standard formula] Warm the Liver Decoction"
 UI_BOOK_ENTRY_TITLE_GAN_QI_YU_JIE,肝气郁结,Liver Qi Stagnation
@@ -8622,7 +8622,7 @@ UI_BOOK_ENTRY_BODY_GAN_QI_YU_JIE,"肝气郁结
 [Symptoms] Moving, distending pain in the chest, flanks, breasts or lower abdomen; low mood, irritability and frequent sighing; a lump sensation in the throat, chest tightness and belching; irregular or painful menstruation.
 
 [Pulse]
-Left guan (Liver): high peak
+Left guan (Liver): increased amplitude
 
 [Standard formula] Bupleurum Liver-Soothing Powder"
 UI_BOOK_ENTRY_TITLE_GAN_XUE_XU,肝血虚,Liver Blood Deficiency
@@ -8642,7 +8642,7 @@ UI_BOOK_ENTRY_BODY_GAN_XUE_XU,"肝血虚
 [Symptoms] Dizziness, reduced vision and blurred sight; dry, brittle nails, numb limbs and muscle cramps; a pale or sallow complexion and pale lips and tongue; scant, pale menstruation or even absence of periods; restless sleep, vivid dreams and being easily startled.
 
 [Pulse]
-Left guan (Liver): thin wave
+Left guan (Liver): thinner pulse line
 
 [Standard formula] Four-Substance Decoction"
 UI_BOOK_ENTRY_TITLE_GAN_XUE_YU_ZHI,肝血瘀滞,Liver Blood Stasis
@@ -8662,7 +8662,7 @@ UI_BOOK_ENTRY_BODY_GAN_XUE_YU_ZHI,"肝血瘀滞
 [Symptoms] Dry, rough skin, bruising and fine red spider-like markings; stabbing, distending pain along the ribs, low mood and pain that worsens after anger.
 
 [Pulse]
-Left guan (Liver): thick wave
+Left guan (Liver): thicker pulse line
 
 [Standard formula] Drive Out Blood Stasis Below the Diaphragm Decoction"
 UI_BOOK_ENTRY_TITLE_GAN_YIN_XU,肝阴虚,Liver Yin Deficiency
@@ -8682,7 +8682,7 @@ UI_BOOK_ENTRY_BODY_GAN_YIN_XU,"肝阴虚
 [Symptoms] Dizziness, tinnitus, dry eyes and blurred vision; a faint burning pain in the flanks and heat in the palms, soles and chest; tidal fever, night sweats, dry mouth and throat, and facial flushing; restless or twitching hands and feet with muscle cramps.
 
 [Pulse]
-Left guan (Liver): thin wave, rapid rate, narrow wave
+Left guan (Liver): thinner pulse line, higher pulse frequency, narrower pulse width
 
 [Standard formula] Linking Decoction"
 UI_BOOK_ENTRY_TITLE_GAN_YANG_SHANG_KANG,肝阳上亢,Liver Yang Rising
@@ -8702,7 +8702,7 @@ UI_BOOK_ENTRY_BODY_GAN_YANG_SHANG_KANG,"肝阳上亢
 [Symptoms] Dizziness, tinnitus, a distending headache, a flushed face and red eyes; irritability, insomnia, vivid dreams and aching lower back and knees; a heavy head, light feeling in the feet and unsteady walking.
 
 [Pulse]
-Left guan (Liver): high peak, rapid rate
+Left guan (Liver): increased amplitude, higher pulse frequency
 
 [Standard formula] Uncaria Powder"
 UI_BOOK_ENTRY_TITLE_GAN_PI_BU_HE,肝脾不和,Liver-Spleen Disharmony
@@ -8723,8 +8723,8 @@ UI_BOOK_ENTRY_BODY_GAN_PI_BU_HE,"肝脾不和（肝郁脾虚）
 [Symptoms] Distending pain in the chest and flanks, frequent sighing, low mood and irritability; abdominal fullness, belching and poor appetite; abdominal pain with diarrhea, relieved after a bowel movement; poor appetite, bowel sounds and frequent passing of gas.
 
 [Pulse]
-Left guan (Liver): high peak
-Right guan (Spleen): low peak
+Left guan (Liver): increased amplitude
+Right guan (Spleen): decreased amplitude
 
 [Standard formula] Free and Easy Wanderer Powder"
 UI_BOOK_ENTRY_TITLE_SHEN_BU_NA_QI,肾不纳气,Kidney Failure to Grasp Qi
@@ -8745,8 +8745,8 @@ UI_BOOK_ENTRY_BODY_SHEN_BU_NA_QI,"肾不纳气
 [Symptoms] Chronic wheezing with a short inhalation and long exhalation, worse with exertion; shortness of breath and shallow inhalation; weak or aching lower back and knees with fatigue; sometimes spontaneous sweating and a weak voice.
 
 [Pulse]
-Right cun (Lung): low peak
-Right chi (Kidney Yang): low peak
+Right cun (Lung): decreased amplitude
+Right chi (Kidney Yang): decreased amplitude
 
 [Standard formula] Ginseng and Gecko Powder"
 UI_BOOK_ENTRY_TITLE_SHEN_YIN_XU,肾阴虚,Kidney Yin Deficiency
@@ -8767,8 +8767,8 @@ UI_BOOK_ENTRY_BODY_SHEN_YIN_XU,"肾阴虚
 [Symptoms] Aching lower back and knees, dizziness, tinnitus and forgetfulness; tidal fever, night sweats, heat in the palms, soles and chest, and dry mouth and throat; in men, nocturnal emissions or premature ejaculation; in women, scant or absent periods or abnormal uterine bleeding; weight loss, insomnia and vivid dreams.
 
 [Pulse]
-Right chi (Kidney Yang): rapid rate
-Left chi (Kidney Yin): thin wave, narrow wave
+Right chi (Kidney Yang): higher pulse frequency
+Left chi (Kidney Yin): thinner pulse line, narrower pulse width
 
 [Standard formula] Six-Ingredient Rehmannia Pill"
 UI_BOOK_ENTRY_TITLE_SHEN_YANG_XU,肾阳虚,Kidney Yang Deficiency
@@ -8789,8 +8789,8 @@ UI_BOOK_ENTRY_BODY_SHEN_YANG_XU,"肾阳虚
 [Symptoms] Cold, aching and weak lower back and knees; aversion to cold and cold limbs, especially the legs; listlessness and a pale or dark complexion; copious clear urine, frequent urination at night and bed-wetting; in men, erectile dysfunction or premature ejaculation; in women, infertility associated with a cold uterus or thin, clear vaginal discharge; prolonged loose stools, undigested food or diarrhea before dawn.
 
 [Pulse]
-Right chi (Kidney Yang): low peak, slow rate
-Left chi (Kidney Yin): broad wave
+Right chi (Kidney Yang): decreased amplitude, lower pulse frequency
+Left chi (Kidney Yin): broader pulse width
 
 [Standard formula] Kidney Qi Pill from the Golden Cabinet"
 UI_BOOK_ENTRY_TITLE_SHEN_XU_SHUI_FAN,肾虚水泛,Kidney Deficiency with Overflowing Water
@@ -8812,9 +8812,9 @@ UI_BOOK_ENTRY_BODY_SHEN_XU_SHUI_FAN,"肾虚水泛
 [Symptoms] Swelling throughout the body, worse below the waist and leaving an indentation when pressed; cold, aching and weak lower back and knees with aversion to cold and cold limbs; scant or difficult urination; palpitations, shortness of breath, wheezing or coughing with watery phlegm; a pale or grayish complexion.
 
 [Pulse]
-Right guan (Spleen): broad wave
-Right chi (Kidney Yang): low peak, slow rate
-Left chi (Kidney Yin): broad wave
+Right guan (Spleen): broader pulse width
+Right chi (Kidney Yang): decreased amplitude, lower pulse frequency
+Left chi (Kidney Yin): broader pulse width
 
 [Standard formula] True Warrior Decoction"
 UI_BOOK_ENTRY_TITLE_SHEN_JING_BU_ZU,肾精不足,Kidney Essence Deficiency
@@ -8837,8 +8837,8 @@ UI_BOOK_ENTRY_BODY_SHEN_JING_BU_ZU,"肾精不足
 In adults, poor nourishment of the brain may cause dizziness, tinnitus, forgetfulness, insomnia and slowed thinking; early aging may cause hair loss, loose teeth or prematurely gray hair. Poor nourishment of the bones can cause weak lower back, knees and legs. Reproductive deficiency may cause low sperm count or infertility in men, and absent periods or infertility in women.
 
 [Pulse]
-Right chi (Kidney Yang): low peak
-Left chi (Kidney Yin): thin wave
+Right chi (Kidney Yang): decreased amplitude
+Left chi (Kidney Yin): thinner pulse line
 
 [Standard formula] Restore the Left Pill"
 UI_BOOK_ENTRY_TITLE_SHEN_QI_BU_GU,肾气不固,Kidney Qi Failing to Secure
@@ -8859,8 +8859,8 @@ UI_BOOK_ENTRY_BODY_SHEN_QI_BU_GU,"肾气不固
 [Symptoms] Aching and weak lower back and knees, fatigue and tinnitus; frequent, copious clear urination, nighttime urination, bed-wetting or incontinence; in men, involuntary semen leakage or premature ejaculation; in women, copious thin, clear vaginal discharge or recurrent signs of threatened miscarriage.
 
 [Pulse]
-Right chi (Kidney Yang): low peak
-Left chi (Kidney Yin): broad wave
+Right chi (Kidney Yang): decreased amplitude
+Left chi (Kidney Yin): broader pulse width
 
 [Standard formula] Metal Lock Pill to Secure the Essence"
 UI_BOOK_ENTRY_TITLE_REN_SHEN_DISEASE,妊娠,Pregnancy
@@ -8884,9 +8884,9 @@ UI_BOOK_ENTRY_BODY_REN_SHEN_DISEASE,"妊娠
 [Symptoms] Nausea and vomiting, sometimes immediately after eating, aversion to greasy foods, dizziness and fatigue.
 
 [Pulse]
-Right guan (Spleen): broad wave
-Right chi (Kidney Yang): high peak
-Left chi (Kidney Yin): thick wave
+Right guan (Spleen): broader pulse width
+Right chi (Kidney Yang): increased amplitude
+Left chi (Kidney Yin): thicker pulse line
 
 [Standard formula] Mount Tai Rock-Solid Powder"
 UI_BOOK_ENTRY_TITLE_XIN_SHEN_BU_JIAO,心肾不交,Heart-Kidney Disharmony
@@ -8908,9 +8908,9 @@ UI_BOOK_ENTRY_BODY_XIN_SHEN_BU_JIAO,"心肾不交
 [Symptoms] Heart Fire above: restlessness, insomnia, frequent waking from dreams, palpitations and mouth sores; Kidney Yin deficiency below: aching lower back and knees, dizziness, tinnitus, tidal fever, night sweats and heat in the palms, soles and chest; troubled sleep with vivid dreams and persistent weakness in the lower back and knees.
 
 [Pulse]
-Left cun (Heart): rapid rate
-Left chi (Kidney Yin): thin wave, narrow wave
-Right chi (Kidney Yang): rapid rate
+Left cun (Heart): higher pulse frequency
+Left chi (Kidney Yin): thinner pulse line, narrower pulse width
+Right chi (Kidney Yang): higher pulse frequency
 
 [Standard formula] Coptis and Donkey-Hide Gelatin Decoction"
 UI_BOOK_ENTRY_TITLE_QI_FEN_RE_SHENG,气分热盛,Exuberant Heat at the Qi Level
@@ -8933,10 +8933,10 @@ UI_BOOK_ENTRY_BODY_QI_FEN_RE_SHENG,"气分热盛
 [Symptoms] Intense fever with aversion to heat rather than cold; profuse sweating as Heat forces fluids outward; intense thirst with a preference for cold drinks; a surging, large pulse.
 
 [Pulse]
-Floating pulse (Exterior): slightly high peak, slightly rapid rate, slightly narrow wave
-Left cun (Heart): slightly high peak, slightly rapid rate, slightly narrow wave
-Right cun (Lung): markedly high peak, markedly rapid rate, markedly narrow wave
-Right guan (Spleen): markedly high peak, markedly rapid rate, markedly narrow wave
+Floating pulse (Exterior): slightly increased amplitude, slightly higher pulse frequency, slightly narrower pulse width
+Left cun (Heart): slightly increased amplitude, slightly higher pulse frequency, slightly narrower pulse width
+Right cun (Lung): markedly increased amplitude, markedly higher pulse frequency, markedly narrower pulse width
+Right guan (Spleen): markedly increased amplitude, markedly higher pulse frequency, markedly narrower pulse width
 
 [Standard formula] White Tiger Decoction"
 UI_DISEASE_SYMPTOM_FENG_HAN_BIAO_SHI_ZHENG_01,不舒服,feeling unwell
