@@ -169,7 +169,67 @@ func _notification(what: int) -> void:
 		var selected_unit := unit_option.selected if unit_option != null else 1
 		_setup_unit_option()
 		unit_option.select(clampi(selected_unit, 0, unit_option.item_count - 1))
+		_refresh_localized_dynamic_names()
 		_refresh_prescription_list()
+
+
+func _refresh_localized_dynamic_names() -> void:
+	# 语言切换后，动态按钮文字和搜索缓存都必须按当前语言重建。
+	_clear_herb_button_cache()
+	_clear_formula_button_cache()
+	_clear_disease_button_cache()
+
+	_formula_search_records.clear()
+	_cached_herb_db_instance_id = 0
+	_cached_formula_db_instance_id = 0
+	_cached_disease_db_instance_id = 0
+
+	if herb_database != null:
+		_ensure_herb_button_cache()
+	if formula_database != null:
+		_ensure_formula_search_cache()
+
+	# all_diseases 已由 load_all_diseases() 缓存；这里只重建按钮即可。
+	if not all_diseases.is_empty():
+		_ensure_disease_button_cache()
+
+	_apply_herb_filter()
+	_apply_disease_filter()
+
+
+func _is_english_search_locale() -> bool:
+	return LocalizedName.is_english_locale()
+
+
+func _build_localized_search_record(localized_name: String, original_name: String, entity_id: String) -> Dictionary:
+	if _is_english_search_locale():
+		return {
+			"name": LocalizedName.normalize_search_text(localized_name),
+			"initials": LocalizedName.english_initials(localized_name)
+		}
+
+	return {
+		"name": _normalize_herb_search_text(original_name),
+		"pinyin": _normalize_herb_search_text(entity_id.to_lower()),
+		"initials": _get_id_initials(entity_id.to_lower())
+	}
+
+
+func _localized_search_record_matches(record: Dictionary, keyword: String) -> bool:
+	if keyword == "":
+		return false
+
+	if _is_english_search_locale():
+		return (
+			str(record.get("name", "")).contains(keyword)
+			or str(record.get("initials", "")).begins_with(keyword)
+		)
+
+	return (
+		str(record.get("name", "")).contains(keyword)
+		or str(record.get("pinyin", "")).begins_with(keyword)
+		or str(record.get("initials", "")).begins_with(keyword)
+	)
 
 
 func _ready() -> void:
@@ -559,14 +619,14 @@ func _ensure_herb_button_cache() -> void:
 		if herb_id == "":
 			continue
 
-		var herb_name := str(herb.herb_name).strip_edges()
-		var herb_id_raw := herb_id.to_lower()
+		var original_herb_name := str(herb.herb_name).strip_edges()
+		var herb_name := LocalizedName.herb(herb_id, original_herb_name)
 
-		_herb_search_record_by_id[herb_id] = {
-			"name": _normalize_herb_search_text(herb_name),
-			"pinyin": _normalize_herb_search_text(herb_id_raw),
-			"initials": _get_id_initials(herb_id_raw)
-		}
+		_herb_search_record_by_id[herb_id] = _build_localized_search_record(
+			herb_name,
+			original_herb_name,
+			herb_id
+		)
 
 		var herb_button := Button.new()
 		herb_button.text = herb_name
@@ -642,19 +702,20 @@ func _ensure_formula_search_cache() -> void:
 		var formula_id := str(formula.formula_id).strip_edges()
 		if formula_id == "":
 			continue
-		var formula_id_raw := formula_id.to_lower()
-
-		_formula_search_records.append({
-			"formula": formula,
-			"formula_id": formula_id,
-			"name": _normalize_herb_search_text(str(formula.formula_name)),
-			"pinyin": _normalize_herb_search_text(formula_id_raw),
-			"initials": _get_id_initials(formula_id_raw)
-		})
+		var original_formula_name := str(formula.formula_name).strip_edges()
+		var localized_formula_name := LocalizedName.formula(formula_id, original_formula_name)
+		var formula_search_record := _build_localized_search_record(
+			localized_formula_name,
+			original_formula_name,
+			formula_id
+		)
+		formula_search_record["formula"] = formula
+		formula_search_record["formula_id"] = formula_id
+		_formula_search_records.append(formula_search_record)
 
 		# 预制方剂按钮也只创建一次；搜索时仅切换 visible。
 		var formula_button := Button.new()
-		formula_button.text = str(formula.formula_name)
+		formula_button.text = localized_formula_name
 		formula_button.custom_minimum_size = Vector2(180, 44)
 		formula_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		formula_button.focus_mode = Control.FOCUS_NONE
@@ -760,10 +821,9 @@ func _apply_herb_filter() -> void:
 			if typeof(record_value) == TYPE_DICTIONARY:
 				record = record_value
 
-			var matches_herb_search := (
-				str(record.get("name", "")).contains(herb_search_keyword)
-				or str(record.get("pinyin", "")).begins_with(herb_search_keyword)
-				or str(record.get("initials", "")).begins_with(herb_search_keyword)
+			var matches_herb_search := _localized_search_record_matches(
+				record,
+				herb_search_keyword
 			)
 			var belongs_to_matched_formula := bool(formula_herb_ids.get(herb_id, false))
 			should_show = matches_herb_search or belongs_to_matched_formula
@@ -799,13 +859,7 @@ func _is_formula_unlocked(formula) -> bool:
 
 
 func _formula_record_matches(record: Dictionary) -> bool:
-	if herb_search_keyword == "":
-		return false
-	return (
-		str(record.get("name", "")).contains(herb_search_keyword)
-		or str(record.get("pinyin", "")).begins_with(herb_search_keyword)
-		or str(record.get("initials", "")).begins_with(herb_search_keyword)
-	)
+	return _localized_search_record_matches(record, herb_search_keyword)
 
 
 func _apply_formula_filter() -> void:
@@ -911,7 +965,8 @@ func _normalize_herb_search_text(value: String) -> String:
 	return value.strip_edges().to_lower() \
 		.replace("_", "") \
 		.replace("-", "") \
-		.replace(" ", "")
+		.replace(" ", "") \
+		.replace("'", "")
 
 
 func _get_id_initials(value: String) -> String:
@@ -1745,18 +1800,18 @@ func _ensure_disease_button_cache() -> void:
 	_cached_disease_db_instance_id = db_instance_id
 
 	for disease in all_diseases:
-		var disease_name := _get_disease_name(disease)
+		var original_disease_name := _get_disease_name(disease)
 		var disease_id := _get_disease_id(disease)
 
-		if disease_name == "" or disease_id == "":
+		if original_disease_name == "" or disease_id == "":
 			continue
 
-		var disease_id_raw := disease_id.to_lower()
-		_disease_search_record_by_id[disease_id] = {
-			"name": _normalize_disease_search_text(disease_name),
-			"pinyin": _normalize_disease_search_text(disease_id_raw),
-			"initials": _get_disease_id_initials(disease_id_raw)
-		}
+		var disease_name := LocalizedName.disease(disease_id, original_disease_name)
+		_disease_search_record_by_id[disease_id] = _build_localized_search_record(
+			disease_name,
+			original_disease_name,
+			disease_id
+		)
 
 		var btn := Button.new()
 		btn.text = disease_name
@@ -1835,10 +1890,9 @@ func _apply_disease_filter() -> void:
 			var record_value = _disease_search_record_by_id.get(disease_id, {})
 			if typeof(record_value) == TYPE_DICTIONARY:
 				record = record_value
-			should_show = (
-				str(record.get("name", "")).contains(disease_search_keyword)
-				or str(record.get("pinyin", "")).contains(disease_search_keyword)
-				or str(record.get("initials", "")).contains(disease_search_keyword)
+			should_show = _localized_search_record_matches(
+				record,
+				disease_search_keyword
 			)
 
 		button.visible = should_show
@@ -1942,7 +1996,8 @@ func _normalize_disease_search_text(value: String) -> String:
 	return value.strip_edges().to_lower() \
 		.replace("_", "") \
 		.replace("-", "") \
-		.replace(" ", "")
+		.replace(" ", "") \
+		.replace("'", "")
 
 
 func _get_disease_id_initials(disease_id: String) -> String:

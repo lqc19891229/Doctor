@@ -117,6 +117,8 @@ var _herb_pages: Array[Dictionary] = []
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
 		_update_localized_ui()
+		if visible:
+			refresh_view()
 
 
 func _update_localized_ui() -> void:
@@ -393,6 +395,19 @@ func _is_entry_match_clinical_log_search(entry: BookEntryData, clean_keyword: St
 	if entry == null:
 		return false
 
+	var localized_title := _get_localized_entry_title(entry)
+
+	# 英文环境：英文名称 + 英文单词首字母。
+	if LocalizedName.is_english_locale():
+		var english_name := _normalize_clinical_log_search_text(localized_title)
+		var english_initials := LocalizedName.english_initials(localized_title)
+		return (
+			english_name.contains(clean_keyword)
+			or english_initials.begins_with(clean_keyword)
+		)
+
+	# 中文环境保持原有逻辑：
+	# 中文标题 + ID 拼音全拼 + 拼音首字母。
 	var title_text := _normalize_clinical_log_search_text(entry.title)
 	var entry_id_raw := str(entry.entry_id).to_lower()
 	var entry_id_text := _normalize_clinical_log_search_text(entry_id_raw)
@@ -402,7 +417,6 @@ func _is_entry_match_clinical_log_search(entry: BookEntryData, clean_keyword: St
 	var data_id_initials := _get_clinical_log_id_initials(data_id_raw)
 
 	# 列表搜索只匹配条目名称和条目 ID，不匹配正文 detail_text。
-	# 否则搜索“杏仁”时，正文里提到杏仁的“苏叶、陈皮、麻黄”等也会出现在药材列表中。
 	return (
 		title_text.contains(clean_keyword)
 		or entry_id_text.contains(clean_keyword)
@@ -425,11 +439,27 @@ func _get_entry_data_id(entry: BookEntryData) -> String:
 	return ""
 
 
+func _get_localized_entry_title(entry: BookEntryData) -> String:
+	if entry == null:
+		return ""
+
+	if entry is DiseaseBookEntryData:
+		var disease_entry := entry as DiseaseBookEntryData
+		return LocalizedName.disease(disease_entry.disease_id, entry.title)
+
+	if entry is FormulaBookEntryData:
+		var formula_entry := entry as FormulaBookEntryData
+		return LocalizedName.formula(formula_entry.formula_id, entry.title)
+
+	if entry is HerbBookEntryData:
+		var herb_entry := entry as HerbBookEntryData
+		return LocalizedName.herb(herb_entry.herb_id, entry.title)
+
+	return entry.title
+
+
 func _normalize_clinical_log_search_text(value: String) -> String:
-	return value.strip_edges().to_lower() \
-		.replace("_", "") \
-		.replace("-", "") \
-		.replace(" ", "")
+	return LocalizedName.normalize_search_text(value)
 
 
 func _get_clinical_log_id_initials(value: String) -> String:
@@ -457,7 +487,7 @@ func _rebuild_item_list(target_list: ItemList, entries: Array[BookEntryData]) ->
 		if entry == null:
 			continue
 
-		target_list.add_item(entry.title)
+		target_list.add_item(_get_localized_entry_title(entry))
 
 
 # =========================================================

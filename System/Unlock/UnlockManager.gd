@@ -2479,6 +2479,24 @@ func load_save_data(data: Dictionary) -> void:
 	clinical_log_unlocked_formula_ids = _load_bool_dictionary(data.get("clinical_log_unlocked_formula_ids", {}))
 	unlocked_story_ids = _load_bool_dictionary(data.get("unlocked_story_ids", {}))
 
+	# 兼容旧存档：
+	# 旧版本可能已经解锁了实体，但尚未保存对应的行医记考同步字典。
+	# 这里只把“已解锁实体”补进 clinical_log，不会反向解锁任何新内容。
+	for herb_id_value in unlocked_herb_ids.keys():
+		var herb_id := String(herb_id_value).strip_edges()
+		if herb_id != "":
+			clinical_log_unlocked_herb_ids[herb_id] = true
+
+	for formula_id_value in unlocked_formula_ids.keys():
+		var formula_id := String(formula_id_value).strip_edges()
+		if formula_id != "":
+			clinical_log_unlocked_formula_ids[formula_id] = true
+
+	for disease_id_value in unlocked_disease_ids.keys():
+		var disease_id := String(disease_id_value).strip_edges()
+		if disease_id != "":
+			clinical_log_unlocked_disease_ids[disease_id] = true
+
 	experience_points = int(data.get("experience_points", 0))
 	miaoshouhuichun_prescription_count = maxi(
 		int(data.get("miaoshouhuichun_prescription_count", 0)),
