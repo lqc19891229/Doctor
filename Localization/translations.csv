@@ -659,3 +659,2982 @@ Left Chi: Kidney Yin
 Right Cun: Lung
 Right Guan: Spleen
 Right Chi: Kidney Yang"
+UI_BOOK_ENTRY_TITLE_BA_GANG_BIAN_ZHENG,八纲辨证,Eight Principles of Pattern Identification
+UI_BOOK_ENTRY_BODY_BA_GANG_BIAN_ZHENG,"【八纲辨证】
+
+八纲辨证是中医分析病情的基本方法。医者通过望、闻、问、切收集症状，再以阴、阳、表、里、寒、热、虚、实八项纲领进行归纳，从而判断疾病的位置、性质以及正邪力量的盛衰。
+
+表里：辨别病位的内外深浅。病在肌表、经络，多属表；病入脏腑、气血，多属里。
+
+寒热：辨别疾病的性质。寒证多见畏寒喜暖、口淡不渴；热证多见发热喜凉、口渴烦躁。
+
+虚实：辨别正邪盛衰。虚证多为正气不足、功能衰弱；实证多为邪气较盛、病理产物壅滞。
+
+阴阳：统摄其余六纲，是八纲的总纲。一般而言，表、热、实偏属阳，里、寒、虚偏属阴。
+
+八纲之间并非彼此孤立，一种病证可以同时具有多种性质，如表寒证、里热证或虚寒证。病情发展过程中，还可能发生表里出入、寒热转化和虚实变化。因此，医者必须四诊合参，方能把握疾病的整体情况。","EIGHT PRINCIPLES OF PATTERN IDENTIFICATION
+
+Pattern identification by the eight principles is a basic method of analyzing a patient's condition in traditional Chinese medicine. After gathering signs and symptoms through the four examinations, a physician groups them under eight principles: Yin, Yang, Exterior, Interior, Cold, Heat, Deficiency and Excess. This helps determine where the condition is located, its nature, and the relative strength of healthy qi and pathogenic influences.
+
+Exterior and Interior describe the location and depth of a condition. Conditions affecting the body surface or channels are generally exterior; those affecting the organs, qi or blood are generally interior.
+
+Cold and Heat describe the nature of a condition. Cold patterns may involve aversion to cold, a preference for warmth, a bland taste and little thirst. Heat patterns may involve fever, a preference for coolness, thirst and restlessness.
+
+Deficiency and Excess describe the relative strength of healthy qi and pathogenic influences. Deficiency patterns generally arise when healthy qi is insufficient and bodily functions are weakened. Excess patterns generally arise when pathogenic influences are strong or pathological substances accumulate and obstruct normal function.
+
+Yin and Yang encompass the other six principles and form the overall framework of the eight principles. In general, Exterior, Heat and Excess tend toward Yang, while Interior, Cold and Deficiency tend toward Yin.
+
+The eight principles are not mutually exclusive. A pattern may combine several qualities, such as Exterior Cold, Interior Heat or Deficiency Cold. As a condition develops, it may shift between Exterior and Interior, change from Cold to Heat, or vary between Deficiency and Excess. A physician therefore considers all four examinations together to understand the condition as a whole."
+UI_BOOK_ENTRY_TITLE_YIN_YANG,阴阳,Yin and Yang
+UI_BOOK_ENTRY_BODY_YIN_YANG,"【阴阳】
+
+阴阳是中医认识人体与自然变化的基本方法。阴代表相对安静、寒凉、内守的一面，阳代表相对活动、温热、外发的一面。二者相互对立，又彼此依存，并会随着时间与环境不断消长变化。
+
+人体中的寒热、表里、虚实、动静，都可以用阴阳来概括。阴阳保持协调，身体便能正常运行；若一方偏盛或偏衰，就可能出现疾病。医者诊病时，需要分辨阴阳变化，判断失衡所在，再采用相应的方法使其重新趋于协调。","YIN AND YANG
+
+Yin and Yang are a basic framework in traditional Chinese medicine for understanding the human body and changes in nature. Yin represents qualities that are relatively still, cool and inward directed, while Yang represents qualities that are relatively active, warm and outward directed. They are opposing yet interdependent, and their balance changes over time and with the environment.
+
+Cold and Heat, Exterior and Interior, Deficiency and Excess, and activity and stillness in the body can all be understood through Yin and Yang. When Yin and Yang remain in balance, the body can function normally; when either becomes excessive or deficient, illness may arise. In diagnosis, a physician identifies changes in Yin and Yang, locates the imbalance, then chooses an appropriate approach to restore harmony."
+UI_BOOK_ENTRY_TITLE_BIAO_LI,表里,Exterior and Interior
+UI_BOOK_ENTRY_BODY_BIAO_LI,"【表里】
+
+表里是中医八纲辨证中用来判断疾病部位深浅和病势进退的两项纲领。表证通常指病邪位于皮毛、肌腠和经络，多见于外邪侵袭人体的初期；里证通常指病邪深入脏腑、气血或骨髓，也可由饮食、情志、劳倦等内伤因素直接形成。这里的表里并不单纯指身体的外部和内部，而是对病位与病势的综合判断。
+
+表证：常见恶寒发热、头痛身痛、鼻塞流涕、咳嗽、舌苔薄白、脉浮等表现。由于病邪尚在体表，通常病程较短，起病较急。
+
+里证：临床表现较为复杂，可见但热不寒、口渴、烦躁、腹痛、呕吐、腹泻、便秘、小便异常、舌苔厚或脉沉等表现。由于病变涉及脏腑气血，其症状会随寒热、虚实及所病脏腑的不同而有所变化。
+
+表证和里证可以同时存在，称为表里同病；疾病由表入里，通常表示病邪逐渐深入；由里出表，则可能表示病邪向外透达。医者需要结合寒热、虚实以及望、闻、问、切所得信息进行判断，不可只凭一个症状确定表里。辨明疾病部位后，表证通常以解表为基本方向，里证则根据具体的寒热虚实采取相应治法。","EXTERIOR AND INTERIOR
+
+Exterior and Interior are two of the eight principles used in traditional Chinese medicine to assess the depth of a condition and how it is progressing. An Exterior pattern generally means that a pathogenic influence is at the skin, superficial tissues or channels, often early in an externally contracted illness. An Interior pattern generally means that it has reached the organs, qi, blood or bone marrow; it may also arise directly from internal factors such as diet, emotions or overwork. These terms describe the location and course of a condition, not simply the outside and inside of the body.
+
+Exterior pattern: Common signs include aversion to cold with fever, headache and body aches, a stuffy or runny nose, cough, a thin white tongue coating and a floating pulse. While the pathogenic influence remains near the surface, the condition often begins suddenly and has a relatively short course.
+
+Interior pattern: Signs are more varied and may include fever without chills, thirst, restlessness, abdominal pain, vomiting, diarrhea, constipation, changes in urination, a thick tongue coating or a deep pulse. They vary with the organs involved and with whether the pattern is Cold or Heat, Deficiency or Excess.
+
+Exterior and Interior patterns can occur together. A shift from Exterior to Interior generally indicates that the pathogenic influence is moving deeper; a shift from Interior to Exterior may indicate that it is moving outward. A physician considers Cold and Heat, Deficiency and Excess, and information from all four examinations rather than judging by a single sign. After identifying the location, the general approach is to release an Exterior pattern or to address an Interior pattern according to its specific qualities."
+UI_BOOK_ENTRY_TITLE_HAN_RE,寒热,Cold and Heat
+UI_BOOK_ENTRY_BODY_HAN_RE,"【寒热】
+
+寒热是中医八纲辨证中用来判断疾病性质的两项纲领。寒证多由寒邪侵袭，或人体阳气不足所致；热证多由热邪侵袭、阳气偏盛，或阴液不足所致。这里的寒热并不只指体温高低，而是对患者整体表现的综合判断。
+
+寒证：常见畏寒喜暖、四肢发冷、面色苍白、口淡不渴、小便清长、大便稀溏、舌淡苔白、脉象迟缓等表现。
+
+热证：常见发热喜凉、面红烦躁、口渴喜冷饮、小便短黄、大便干结、舌红苔黄、脉象较数等表现。
+
+寒证又可分为实寒与虚寒，热证也可分为实热与虚热。医者需要结合表里、虚实以及望、闻、问、切所得信息进行判断，不可只凭一个症状确定寒热。辨明疾病性质后，通常遵循寒证用温法、热证用清法的基本方向。","COLD AND HEAT
+
+Cold and Heat are two of the eight principles used to assess the nature of a condition. A Cold pattern may result from an external cold influence or insufficient yang qi. A Heat pattern may result from an external heat influence, excessive yang qi or insufficient yin fluids. These terms describe the overall pattern of signs, not just body temperature.
+
+Cold pattern: Common signs include aversion to cold and a preference for warmth, cold limbs, a pale complexion, a bland taste with little thirst, copious clear urine, loose stools, a pale tongue with a white coating and a slow pulse.
+
+Heat pattern: Common signs include fever and a preference for coolness, a flushed face and restlessness, thirst for cold drinks, scant dark yellow urine, dry stools, a red tongue with a yellow coating and a relatively rapid pulse.
+
+Cold patterns can be further classified as Excess Cold or Deficiency Cold; Heat patterns as Excess Heat or Deficiency Heat. A physician considers Exterior and Interior, Deficiency and Excess, and all four examinations rather than relying on one sign. Once the nature of the pattern is clear, the general approach is to warm Cold patterns and clear Heat patterns."
+UI_BOOK_ENTRY_TITLE_XU_SHI,虚实,Deficiency and Excess
+UI_BOOK_ENTRY_BODY_XU_SHI,"【虚实】
+
+虚实是中医八纲辨证中用来判断人体正气强弱和病邪盛衰的两项纲领。虚证多由人体正气不足、脏腑功能衰退，或气血阴阳亏损所致；实证多由外邪侵袭，或痰饮、瘀血、食积等病理产物壅盛所致。这里的虚实并不单指身体强壮或虚弱，而是对正邪双方力量和病理状态的综合判断。
+
+虚证：常见精神疲倦、身体乏力、面色少华、声音低弱、气短、自汗或盗汗、疼痛喜按、舌质淡嫩或少苔、脉象细弱无力等表现。其具体症状会因气、血、阴、阳亏虚的不同而有所变化。
+
+实证：常见起病较急、精神烦躁、声音洪亮、呼吸气粗、腹胀拒按、疼痛明显、痰涎壅盛、便秘或小便不利、舌苔厚腻、脉象有力等表现。其具体症状会随寒热性质以及病邪种类的不同而有所变化。
+
+虚证又可分为气虚、血虚、阴虚和阳虚等类型，实证则可见气滞、血瘀、痰湿、食积等不同情况。虚实也可能同时存在，称为虚实夹杂；病程中还可能出现由实转虚或因虚致实。医者需要结合表里、寒热以及望、闻、问、切所得信息进行判断，不可只凭一个症状确定虚实。辨明正邪盛衰后，虚证通常以补虚扶正为基本方向，实证通常以祛邪泻实为基本方向。","DEFICIENCY AND EXCESS
+
+Deficiency and Excess are two of the eight principles used to assess the strength of healthy qi relative to pathogenic influences. Deficiency patterns may arise from insufficient healthy qi, weakened organ functions, or depleted qi, blood, yin or yang. Excess patterns may arise from an external pathogenic influence or from an accumulation of phlegm, retained fluids, stagnant blood or undigested food. These terms assess the underlying balance, not simply whether a person looks strong or weak.
+
+Deficiency pattern: Common signs include fatigue, weakness, a dull complexion, a weak voice, shortness of breath, spontaneous or night sweating, pain relieved by pressure, a pale tender tongue or little tongue coating, and a thin weak pulse. Specific signs vary according to whether qi, blood, yin or yang is deficient.
+
+Excess pattern: Common signs include a sudden onset, restlessness, a loud voice, heavy breathing, abdominal distension that resists pressure, pronounced pain, abundant phlegm, constipation or difficulty urinating, a thick greasy tongue coating and a forceful pulse. Specific signs vary with the nature of the pathogenic influence and whether the pattern is Cold or Heat.
+
+Deficiency may involve qi, blood, yin or yang; Excess may involve qi stagnation, blood stasis, phlegm and dampness, or food accumulation. The two can coexist, and a condition can shift from Excess to Deficiency or develop Excess because of underlying Deficiency. A physician considers Exterior and Interior, Cold and Heat, and all four examinations rather than relying on one sign. The general approach is to support healthy qi in Deficiency patterns and dispel pathogenic influences in Excess patterns."
+UI_BOOK_ENTRY_TITLE_WU_XING,五行,Five Phases
+UI_BOOK_ENTRY_BODY_WU_XING,"【五行】
+
+五行是以木、火、土、金、水五种属性，说明自然与人体之间相互联系、不断变化的规律。五行并非单指五种物质，而是对生长、温热、承载、收敛和滋润等不同特性的概括。
+
+五行之间既有相生，也有相克。木生火、火生土、土生金、金生水、水生木；木克土、土克水、水克火、火克金、金克木。中医以五行联系五脏：肝属木、心属火、脾属土、肺属金、肾属水。五脏彼此滋养、相互制约，共同维持人体平衡；若生克关系失常，也可能使疾病相互传变。
+
+【五行与五类相应】
+
+五行是中医用来归纳自然现象和人体功能的方法。木、火、土、金、水分别象征生长、温热、承载、收敛和闭藏。中医通过“取象比类”，将季节、气候、味道、颜色以及人体脏腑联系起来，从整体上观察人体与自然环境的变化。
+
+五行：木，火，土，金，水
+五季：春，夏，长夏，秋，冬
+五气：温，热，平，凉，寒
+五味：酸，苦，甘，辛，咸
+五色：青，赤，黄，白，黑
+五脏：肝，心，脾，肺，肾
+五腑：胆，小肠，胃，大肠，膀胱
+五官：目，舌，口，鼻，耳
+五志：怒，喜，思，悲，恐
+五体：筋，脉，肉，皮毛，骨
+五液：泪，汗，涎，涕，唾
+
+春季万物生发，属木，与风、酸味和肝相应；夏季气候炎热，属火，与暑、苦味和心相应；长夏湿气较盛，属土，与湿、甘味和脾相应；秋季万物收敛，属金，与燥、辛味和肺相应；冬季万物闭藏，属水，与寒、咸味和肾相应。
+
+这些对应关系并不是说五脏只会受到某一种季节、气候或味道影响，而是用来说明自然环境、饮食情志和人体功能之间可能存在的联系。医者可以据此观察疾病发生与传变的规律，但诊断时仍须结合患者的全部症状综合判断。","FIVE PHASES
+
+The Five Phases—Wood, Fire, Earth, Metal and Water—describe patterns of connection and change in nature and the human body. They do not simply name five physical substances; they also represent qualities such as growth, warmth, nourishment, contraction and moisture.
+
+The phases both generate and restrain one another. In the generating cycle, Wood generates Fire, Fire generates Earth, Earth generates Metal, Metal generates Water, and Water generates Wood. In the restraining cycle, Wood restrains Earth, Earth restrains Water, Water restrains Fire, Fire restrains Metal, and Metal restrains Wood. Traditional Chinese medicine links the five zang organs to these phases: Liver to Wood, Heart to Fire, Spleen to Earth, Lung to Metal and Kidney to Water. The organs are thought to nourish and regulate one another; disturbances in these relationships may also affect how a condition develops.
+
+FIVE PHASES AND THEIR CORRESPONDENCES
+
+The Five Phases provide a way to group natural phenomena and bodily functions. Wood, Fire, Earth, Metal and Water respectively suggest growth, warmth, nourishment, contraction and storage. By comparing shared qualities, this framework links seasons, climate, flavors and colors with the body's organs and functions.
+
+Five Phases: Wood, Fire, Earth, Metal, Water
+Five Seasons: Spring, Summer, Late Summer, Autumn, Winter
+Five Climatic Qualities: Warm, Hot, Neutral, Cool, Cold
+Five Flavors: Sour, Bitter, Sweet, Pungent, Salty
+Five Colors: Blue-Green, Red, Yellow, White, Black
+Five Zang Organs: Liver, Heart, Spleen, Lung, Kidney
+Five Fu Organs: Gallbladder, Small Intestine, Stomach, Large Intestine, Bladder
+Five Sense Organs: Eyes, Tongue, Mouth, Nose, Ears
+Five Emotions: Anger, Joy, Pensiveness, Grief, Fear
+Five Body Tissues: Tendons, Vessels, Flesh, Skin and Hair, Bones
+Five Fluids: Tears, Sweat, Drool, Nasal Mucus, Spittle
+
+Spring's growth corresponds to Wood, wind, sour flavors and the Liver. Summer's heat corresponds to Fire, summer heat, bitter flavors and the Heart. Late Summer's humidity corresponds to Earth, dampness, sweet flavors and the Spleen. Autumn's contraction corresponds to Metal, dryness, pungent flavors and the Lung. Winter's storage corresponds to Water, cold, salty flavors and the Kidney.
+
+These correspondences do not mean that an organ is affected by only one season, climate or flavor. They describe possible relationships among the environment, diet, emotions and bodily functions. A physician may use them to observe how a condition arises and changes, while still considering all of the patient's signs when making a diagnosis."
+UI_BOOK_ENTRY_TITLE_ZANG_XIANG,藏象,Visceral Manifestations
+UI_BOOK_ENTRY_BODY_ZANG_XIANG,"【藏象】
+
+藏象是中医研究人体脏腑生理功能、病理变化及其相互关系的理论。“藏”指藏于体内的脏腑，“象”指脏腑功能表现于外的各种征象。中医通过观察人的面色、形体、情志、声音、舌象和脉象等外在变化，推断脏腑的功能状态。
+
+藏象学说将人体内脏分为五脏、六腑和奇恒之腑。五脏包括肝、心、脾、肺、肾，以化生和贮藏精气为主要特点；六腑包括胆、小肠、胃、大肠、膀胱、三焦，以受盛和传化水谷为主要特点。奇恒之腑包括脑、髓、骨、脉、胆和女子胞。
+
+藏象理论强调人体是一个相互联系的整体。各脏腑不仅具有各自的功能，还通过气血津液、经络以及五行生克关系彼此协调，并与形体、官窍、情志和自然环境相联系。中医所说的脏腑属于功能体系，不能与现代医学中的解剖器官完全等同。","VISCERAL MANIFESTATIONS
+
+Visceral Manifestations is a traditional Chinese medicine theory about the functions of the body's internal systems, how they change in illness and how they relate to one another. Zang refers to the internal organs, while Xiang refers to outward signs of their functions. By observing changes in complexion, build, emotions, voice, tongue and pulse, a physician infers how those systems are functioning.
+
+The theory divides the internal organs into the five zang organs, the six fu organs and the extraordinary fu organs. The five zang organs are the Liver, Heart, Spleen, Lung and Kidney; their main characteristics are forming and storing vital substances. The six fu organs are the Gallbladder, Small Intestine, Stomach, Large Intestine, Bladder and Sanjiao (Triple Burner); their main characteristics are receiving and transforming food and drink. The extraordinary fu organs include the Brain, Marrow, Bones, Vessels, Gallbladder and Uterus.
+
+Visceral Manifestations treats the body as an interconnected whole. Each system has its own functions and coordinates with others through qi, blood, body fluids, the channels and the generating and restraining relationships of the Five Phases. The systems are also connected with the body's tissues, sense organs, emotions and natural environment. The zang and fu of traditional Chinese medicine are functional systems and cannot be equated directly with anatomical organs in modern medicine."
+UI_BOOK_ENTRY_TITLE_GAN,肝,Liver
+UI_BOOK_ENTRY_BODY_GAN,"【肝】
+
+肝是五脏之一，在五行属木，与胆相表里。中医认为肝具有主疏泄和藏血的功能。主疏泄是指肝能够调畅全身气机，促进脾胃运化、胆汁排泄和情志活动；藏血是指肝能够贮藏血液，并根据人体活动和休息的需要调节血量。
+
+肝在体合筋，其华在爪，开窍于目，在志为怒，在液为泪。肝血充足时，筋脉得到濡养，肢体活动灵活，双目视物清晰，指甲坚韧润泽。若肝血不足，可能出现视物模糊、肢体麻木、筋脉拘急或指甲失养等表现。
+
+肝的疏泄功能失常，可见情志抑郁、急躁易怒、胸胁胀满、食欲不振等表现；肝阳偏亢或肝火上炎，则可能出现头晕、头痛、面红目赤等表现。判断肝的功能状态，需要结合气血阴阳及其他脏腑情况综合分析。","LIVER
+
+The Liver is one of the five zang organs. In the Five Phases it corresponds to Wood and is paired with the Gallbladder. In traditional Chinese medicine, the Liver governs the free flow of qi and stores blood. The free flow of qi supports the movement of qi throughout the body, the digestive functions of the Spleen and Stomach, the release of bile and emotional activity. Storing blood means that the Liver holds blood and adjusts its distribution to the body's needs during activity and rest.
+
+The Liver is associated with the tendons, manifests in the nails, opens into the eyes, corresponds to anger among the emotions and to tears among the body fluids. When Liver blood is sufficient, the tendons are nourished, movement is supple, vision is clear, and nails are strong and smooth. Insufficient Liver blood may be associated with blurred vision, numb limbs, tight tendons or poorly nourished nails.
+
+Disruption of the Liver's free flow may be associated with low mood, irritability, distension in the chest and flanks, or poor appetite. Excessive Liver yang or rising Liver fire may be associated with dizziness, headache, a flushed face and red eyes. A physician assesses Liver function in relation to qi, blood, yin and yang and the other organs."
+UI_BOOK_ENTRY_TITLE_XIN,心,Heart
+UI_BOOK_ENTRY_BODY_XIN,"【心】
+
+心是五脏之一，在五行属火，与小肠相表里。中医认为心具有主血脉和藏神的功能。主血脉是指心气推动血液在脉中运行，以濡养全身；藏神是指心与人的精神、意识、思维、情志和睡眠等活动密切相关。
+
+心在体合脉，其华在面，开窍于舌，在志为喜，在液为汗。心气和心血充足时，血脉运行通畅，面色红润，精神充沛，意识清楚，语言表达正常。若心血不足或心神失养，可能出现心悸、失眠、多梦、健忘、面色少华等表现。
+
+心气不足或心阳不振，可见心悸气短、精神疲倦、畏寒肢冷等表现；心火偏盛，则可能出现心烦失眠、口舌生疮、舌尖红等表现。判断心的功能状态，需要结合血脉、神志、舌象和脉象综合分析。","HEART
+
+The Heart is one of the five zang organs. In the Five Phases it corresponds to Fire and is paired with the Small Intestine. In traditional Chinese medicine, the Heart governs blood and the vessels and houses the spirit (shen). Governing blood and the vessels means that Heart qi moves blood through the vessels to nourish the body. Housing the spirit refers to the Heart's close connection with awareness, thinking, emotions and sleep.
+
+The Heart is associated with the vessels, manifests in the complexion, opens into the tongue, corresponds to joy among the emotions and to sweat among the body fluids. When Heart qi and blood are sufficient, blood flows freely, the complexion is rosy, energy and awareness are clear, and speech is normal. Insufficient Heart blood or poor nourishment of the spirit may be associated with palpitations, insomnia, frequent dreams, forgetfulness or a dull complexion.
+
+Insufficient Heart qi or weakened Heart yang may be associated with palpitations, shortness of breath, fatigue, aversion to cold and cold limbs. Excessive Heart fire may be associated with restlessness and insomnia, sores in the mouth or on the tongue, and a red tongue tip. A physician assesses Heart function in relation to the vessels, mental activity, the tongue and the pulse."
+UI_BOOK_ENTRY_TITLE_PI,脾,Spleen
+UI_BOOK_ENTRY_BODY_PI,"【脾】
+
+脾是五脏之一，在五行属土，与胃相表里。中医认为脾具有主运化、升清和统血的功能。主运化是指脾将饮食物转化为水谷精微，并输布至全身；升清是指将精微物质向上输送；统血是指脾气能够固摄血液，使其正常运行于脉中。
+
+脾在体合肉，主四肢，其华在唇，开窍于口，在志为思，在液为涎。脾气健运时，饮食消化正常，肌肉充实，四肢有力，口唇红润。若脾失健运，可能出现食欲不振、腹胀、便溏、身体困重、四肢乏力等表现。
+
+脾气不足可导致水谷精微化生不足，也可能使水湿停聚，形成痰湿；脾不统血时，则可能出现便血、皮下出血或女性月经过多等表现。判断脾的功能状态，需要结合胃的受纳、气血生成和水液代谢情况综合分析。","SPLEEN
+
+The Spleen is one of the five zang organs. In the Five Phases it corresponds to Earth and is paired with the Stomach. In traditional Chinese medicine, the Spleen transforms and transports, raises the clear, and governs blood. Transforming and transporting means turning food and drink into nourishing substances and distributing them throughout the body. Raising the clear means sending these refined substances upward. Governing blood means that Spleen qi helps keep blood within the vessels.
+
+The Spleen is associated with the muscles and limbs, manifests in the lips, opens into the mouth, corresponds to pensiveness among the emotions and to drool among the body fluids. When Spleen qi functions well, digestion is normal, muscles are nourished, the limbs are strong and the lips have a healthy color. Poor Spleen function may be associated with loss of appetite, abdominal bloating, loose stools, heaviness and weakness of the limbs.
+
+Insufficient Spleen qi may reduce the production of nourishing substances from food and drink. It may also allow fluids to accumulate and form phlegm and dampness. If the Spleen fails to keep blood within the vessels, signs may include blood in the stool, bleeding beneath the skin or heavy menstrual bleeding. A physician assesses Spleen function together with the Stomach's ability to receive food, the production of qi and blood, and fluid metabolism."
+UI_BOOK_ENTRY_TITLE_FEI,肺,Lung
+UI_BOOK_ENTRY_BODY_FEI,"【肺】
+
+肺是五脏之一，在五行属金，与大肠相表里。中医认为肺具有主气、司呼吸、主宣发肃降和通调水道的功能。肺吸入自然界的清气，并参与宗气的生成；宣发使气和津液向上、向外输布，肃降使气和津液向下运行，并维持呼吸通畅。
+
+肺在体合皮，其华在毛，开窍于鼻，在志为悲忧，在液为涕。肺气充足时，呼吸均匀，声音有力，皮肤和毛发得到濡养，人体抵御外邪的能力正常。若肺气不足，可能出现气短、咳嗽、声音低弱、自汗和容易感受外邪等表现。
+
+肺失宣降时，可见咳嗽、气喘、鼻塞或痰液增多；肺的通调水道功能失常，还可能出现水液停聚、小便不利或水肿等表现。判断肺的功能状态，需要结合呼吸、声音、皮毛、鼻窍和水液代谢情况综合分析。","LUNG
+
+The Lung is one of the five zang organs. In the Five Phases it corresponds to Metal and is paired with the Large Intestine. In traditional Chinese medicine, the Lung governs qi and breathing, disperses and descends, and regulates the water pathways. It draws in clear qi from the air and helps form gathering qi. Dispersing distributes qi and body fluids upward and outward; descending directs them downward and helps maintain smooth breathing.
+
+The Lung is associated with the skin, manifests in the body hair, opens into the nose, corresponds to grief and worry among the emotions and to nasal mucus among the body fluids. When Lung qi is sufficient, breathing is steady, the voice is strong, the skin and hair are nourished, and the body's resistance to external influences functions normally. Insufficient Lung qi may be associated with shortness of breath, coughing, a weak voice, spontaneous sweating and susceptibility to external influences.
+
+When the Lung fails to disperse and descend, signs may include coughing, wheezing, a blocked nose or increased phlegm. Disruption of its regulation of the water pathways may also lead to fluid accumulation, difficulty urinating or swelling. A physician assesses Lung function in relation to breathing, the voice, skin and hair, the nose and fluid metabolism."
+UI_BOOK_ENTRY_TITLE_SHEN,肾,Kidney
+UI_BOOK_ENTRY_BODY_SHEN,"【肾】
+
+肾是五脏之一，在五行属水，与膀胱相表里。中医认为肾具有藏精、主生长发育与生殖、主水和主纳气的功能。肾精是人体生长、发育和生殖的重要物质基础；肾主水，是指肾参与调节全身水液代谢；肾主纳气，是指肾能够帮助肺维持呼吸的深度和稳定。
+
+肾在体合骨，生髓充脑，其华在发，开窍于耳及二阴，在志为恐，在液为唾。肾精充足时，骨骼坚固，牙齿强健，听觉正常，头发有光泽，生长发育和生殖功能正常。若肾精不足，可能出现腰膝酸软、耳鸣、健忘、牙齿松动或生长发育迟缓等表现。
+
+肾阳不足可见畏寒肢冷、水肿、夜尿增多等表现；肾阴不足则可能出现潮热盗汗、口咽干燥、头晕耳鸣等表现；肾不纳气时，可见呼吸短促、动则气喘等表现。判断肾的功能状态，需要结合精、气、阴、阳以及水液代谢情况综合分析。","KIDNEY
+
+The Kidney is one of the five zang organs. In the Five Phases it corresponds to Water and is paired with the Bladder. In traditional Chinese medicine, the Kidney stores essence, governs growth, development and reproduction, regulates water, and grasps qi. Kidney essence provides a foundation for growth, development and reproduction. Regulating water means that the Kidney helps manage the body's fluid metabolism. Grasping qi means that it helps the Lung maintain deep, steady breathing.
+
+The Kidney is associated with the bones, produces marrow and nourishes the brain, manifests in the hair, opens into the ears and the two lower orifices, corresponds to fear among the emotions and to spittle among the body fluids. When Kidney essence is sufficient, the bones and teeth are strong, hearing is normal, the hair is lustrous, and growth and reproductive functions are healthy. Insufficient Kidney essence may be associated with weakness or soreness in the lower back and knees, ringing in the ears, forgetfulness, loose teeth or delayed development.
+
+Insufficient Kidney yang may be associated with aversion to cold, cold limbs, swelling or increased urination at night. Insufficient Kidney yin may be associated with tidal fever, night sweats, dryness of the mouth and throat, dizziness or ringing in the ears. If the Kidney fails to grasp qi, breathing may be short and wheezing may occur with exertion. A physician assesses Kidney function in relation to essence, qi, yin and yang, and fluid metabolism."
+UI_BOOK_ENTRY_TITLE_QI,气,Qi
+UI_BOOK_ENTRY_BODY_QI,"【气】
+
+气是中医生命理论中的基本概念，既指构成人体和维持生命活动的精微物质，也指脏腑经络所表现出的功能活动。人体之气主要由先天之精、水谷精微和自然界清气化生，并依靠肺、脾、肾等脏腑共同维持。
+
+气具有推动、温煦、防御、固摄和气化等作用。它能够推动血液和津液运行，温暖脏腑形体，抵御外邪，固摄血液、汗液和二便，并促进饮食物及水液的转化。根据来源、分布和功能的不同，气还可分为元气、宗气、营气和卫气等。
+
+气的生成不足或功能减退，可形成气虚，常见乏力、气短、声音低弱、自汗等表现；气机运行不畅可形成气滞，出现胀满或疼痛；气机上逆、下陷或闭塞时，还可分别形成气逆、气陷和气闭。判断气的状态，需要结合脏腑功能、气血津液及全身表现综合分析。","QI
+
+Qi is a basic concept in traditional Chinese medicine's account of life. It refers both to the subtle substances that make up the body and sustain life, and to the activities of the organs and channels. The body's qi arises chiefly from inherited essence, the refined substances obtained from food and drink, and clear qi from the air. The Lung, Spleen, Kidney and other organs work together to sustain it.
+
+Qi moves, warms, protects, holds things in place and enables transformation. It helps circulate blood and body fluids, warms the organs and tissues, resists external pathogenic influences, keeps blood, sweat, urine and stool from escaping inappropriately, and supports the transformation of food and fluids. According to its source, location and function, qi may be described as original qi, gathering qi, nutritive qi or defensive qi.
+
+When qi is produced in insufficient amounts or its functions weaken, a Deficiency of qi may arise, with signs such as fatigue, shortness of breath, a weak voice and spontaneous sweating. When its movement is obstructed, qi stagnation may cause distension or pain. Abnormal upward movement, sinking or blockage of qi may give rise to other patterns. A physician assesses qi in relation to organ function, blood, body fluids and the overall pattern of signs."
+UI_BOOK_ENTRY_TITLE_XUE,血,Blood
+UI_BOOK_ENTRY_BODY_XUE,"【血】
+
+血是中医所说运行于脉中、具有濡养和滋润作用的红色液态物质，也是维持人体生命活动的重要基础。血主要由脾胃运化所得的水谷精微化生，并与营气、津液及肾精的作用密切相关。
+
+血在心气推动下循脉运行，由肝贮藏和调节，并依靠脾气固摄而不致逸出脉外。血能够濡养脏腑、经络、肌肉、皮肤和官窍，同时也是精神意识活动的重要物质基础。血液充足、运行通畅时，面色润泽，感觉和运动正常，精神安定。
+
+血液不足可形成血虚，常见面色淡白、头晕、心悸、肢体麻木等表现；血行不畅可形成血瘀，常见固定刺痛、肿块或面色晦暗；血热、血寒及血液逸出脉外，也会形成不同证候。判断血的状态，需要结合气、津液和相关脏腑功能综合分析。","BLOOD
+
+In traditional Chinese medicine, blood is a red fluid that circulates in the vessels, nourishes and moistens the body, and supports life. It is formed mainly from the refined substances obtained from food and drink through the work of the Spleen and Stomach, with the involvement of nutritive qi, body fluids and Kidney essence.
+
+Heart qi propels blood through the vessels. The Liver stores and regulates it, while Spleen qi helps keep it within the vessels. Blood nourishes the organs, channels, muscles, skin and sense organs, and provides a material foundation for mental activity. When blood is plentiful and flows freely, the complexion is healthy, sensation and movement are normal, and the mind is settled.
+
+Insufficient blood may form a Blood Deficiency pattern, with signs such as a pale complexion, dizziness, palpitations and numb limbs. Impaired circulation may lead to Blood Stasis, with fixed stabbing pain, lumps or a darkened complexion. Heat or Cold affecting blood, or blood leaving the vessels, may produce other patterns. A physician assesses blood together with qi, body fluids and the related organ functions."
+UI_BOOK_ENTRY_TITLE_JIN,津,Jin (Thin Fluids)
+UI_BOOK_ENTRY_BODY_JIN,"【津】
+
+津是人体正常水液的一部分，与液合称“津液”。中医认为津的性质较为清稀、流动性较强，主要分布于皮肤、肌肉和孔窍，也可渗入血脉，参与血液的组成和运行。
+
+津具有滋润皮肤、肌肉、口鼻和其他官窍的作用，并参与汗液、尿液等的生成和排泄。津的输布与脾的运化、肺的宣发肃降、肾的气化以及三焦水道是否通畅密切相关。
+
+津液不足时，常见口渴、口鼻干燥、皮肤干涩、小便短少或大便干结等表现；津的输布和排泄失常时，则可能停聚为水湿、痰饮或形成水肿。津和液性质有所不同，但能够相互转化，临床上通常结合起来判断。","JIN (THIN BODY FLUIDS)
+
+Jin is one component of the body's normal fluids. Together with the thicker Ye fluids, it makes up Jin-Ye, or body fluids. Traditional Chinese medicine describes Jin as relatively thin and mobile. It is found mainly in the skin, muscles and body openings, and can also enter the vessels and contribute to the composition and circulation of blood.
+
+Jin moistens the skin, muscles, mouth, nose and other sense organs. It also contributes to the production and elimination of sweat and urine. Its movement depends closely on the Spleen's transformation and transportation, the Lung's dispersing and descending, the Kidney's transformation of fluids, and unobstructed water pathways through the Sanjiao.
+
+When body fluids are insufficient, signs may include thirst, a dry mouth or nose, dry skin, reduced urination or hard stools. If Jin is not distributed or eliminated properly, fluids may accumulate as dampness, phlegm and retained fluids, or swelling. Jin and Ye have different qualities but can transform into one another, so they are usually assessed together."
+UI_BOOK_ENTRY_TITLE_YE,液,Ye (Thick Fluids)
+UI_BOOK_ENTRY_BODY_YE,"【液】
+
+液是人体正常水液的一部分，与津合称“津液”。中医认为液的性质较为稠厚、流动性相对较小，主要分布于脏腑、关节、骨髓和脑髓等较深部位。
+
+液具有濡养脏腑、滑利关节、充养骨髓和脑髓等作用，使关节活动灵活，并维持深部组织的滋润。液的生成、输布与排泄同样依赖脾、肺、肾和三焦等脏腑的协调作用。
+
+液不足时，可能出现关节活动不利、肌肤失润、口干咽燥、眩晕或身体消瘦等表现；液的运行失常时，也可能停聚形成痰饮、水湿等病理产物。一般而言，津偏于清稀并滋润体表，液偏于稠厚并濡养体内，但二者之间没有绝对界限。","YE (THICK BODY FLUIDS)
+
+Ye is one component of the body's normal fluids. Together with the thinner Jin fluids, it makes up Jin-Ye, or body fluids. Traditional Chinese medicine describes Ye as relatively thick and less mobile. It is found mainly in deeper areas, including the organs, joints, bone marrow and brain.
+
+Ye nourishes the organs, lubricates the joints, and supports the bone marrow and brain. It allows the joints to move freely and keeps deeper tissues moist. Like Jin, its production, distribution and elimination depend on the coordinated functions of the Spleen, Lung, Kidney and Sanjiao.
+
+Insufficient Ye may be associated with stiff joints, dry skin, a dry mouth or throat, dizziness or loss of body mass. If its movement is disrupted, it may collect as phlegm, retained fluids or dampness. In general, Jin is thinner and moistens the body's surface, while Ye is thicker and nourishes deeper tissues, though the boundary between them is not absolute."
+UI_BOOK_ENTRY_TITLE_WAI_GAN_LIU_XIE,外感六邪,Six External Pathogenic Influences
+UI_BOOK_ENTRY_BODY_WAI_GAN_LIU_XIE,"【外感六邪】
+
+外感六邪是中医对风、寒、暑、湿、燥、热六类外来致病因素的统称，又称“六淫”。风、寒、暑、湿、燥、热原本是自然界正常的气候变化，称为“六气”；当气候变化过于强烈、反常，或人体正气不足、适应能力下降时，六气便可能成为致病因素。
+
+外感六邪通常从皮毛、口鼻侵入人体，具有一定的季节性和地域性。例如春季多风、冬季多寒、长夏多湿、秋季多燥。六邪既可单独致病，也可相互结合，形成风寒、风热、寒湿、湿热等证候，在一定条件下还可能相互转化。
+
+不同邪气具有不同的致病特点，但人体患病后的具体表现还会受到体质、环境、病程及脏腑状态的影响。医者需要结合表里、寒热、虚实以及望、闻、问、切所得信息综合判断，不能仅凭季节或单一症状确定邪气种类。","SIX EXTERNAL PATHOGENIC INFLUENCES
+
+In traditional Chinese medicine, the six external pathogenic influences are Wind, Cold, Summer Heat, Dampness, Dryness and Heat. They are also called the Six Excesses. Under normal conditions, these are natural climatic influences, known as the Six Climatic Influences. They may become pathogenic when the weather is extreme or unusual, or when the body's healthy qi and ability to adapt are weakened.
+
+The six influences are understood to enter through the skin, mouth or nose and have seasonal and regional patterns. For example, Wind is more common in spring, Cold in winter, Dampness in Late Summer and Dryness in autumn. They may act alone or together in patterns such as Wind-Cold, Wind-Heat, Cold-Dampness or Damp-Heat. Under some conditions, one influence may also transform into another.
+
+Each influence has its own characteristic effects, but the signs of illness also depend on a person's constitution, environment, course of illness and organ functions. A physician considers Exterior and Interior, Cold and Heat, Deficiency and Excess, and information from all four examinations. A season or single symptom alone cannot establish which influence is involved."
+UI_BOOK_ENTRY_TITLE_FENG_XIE,风邪,Wind Pathogen
+UI_BOOK_ENTRY_BODY_FENG_XIE,"【风邪】
+
+风邪是外感六邪之一，在五行与春季相应，但其他季节也可出现。中医认为风为阳邪，性质轻扬开泄，容易侵袭人体上部、肌表和肺卫，因此风邪致病多见头面部及体表症状。
+
+风邪具有善行数变的特点。“善行”是指症状位置游走不定，如游走性关节疼痛；“数变”是指发病较急、症状变化较快。风邪还具有主动的特点，可能出现眩晕、震颤、抽搐或肢体活动异常等表现。
+
+风邪常见恶风、发热、头痛、鼻塞、咳嗽、汗出、皮肤瘙痒等表现。由于风邪容易与其他邪气结合，又被称为“百病之长”，临床上常见风寒、风热、风湿和风燥等不同证候。","WIND PATHOGEN
+
+Wind is one of the six external pathogenic influences. It is associated with spring in the Five Phases framework but can also occur in other seasons. Traditional Chinese medicine regards Wind as a yang influence that is light, rising and opening. It readily affects the upper body, the surface and the Lung's defensive functions, so signs often appear on the head, face and skin.
+
+Wind is said to move and change rapidly. Movement means that symptoms may shift location, as with wandering joint pain. Rapid change means that a condition may begin suddenly and its signs may change quickly. Wind is also associated with motion, so signs may include dizziness, tremors, convulsions or unusual movements of the limbs.
+
+Common signs associated with Wind include aversion to drafts, fever, headache, a blocked nose, cough, sweating and itching. Because Wind readily combines with other influences, it is sometimes called the forerunner of many illnesses. Combined patterns include Wind-Cold, Wind-Heat, Wind-Dampness and Wind-Dryness."
+UI_BOOK_ENTRY_TITLE_HAN_XIE,寒邪,Cold Pathogen
+UI_BOOK_ENTRY_BODY_HAN_XIE,"【寒邪】
+
+寒邪是外感六邪之一，在五行与冬季相应，气温骤降、衣着不足或长时间处于寒冷环境时较易侵袭人体。中医认为寒为阴邪，容易损伤人体阳气，使温煦和推动功能受到影响。
+
+寒邪具有凝滞和收引的特点。凝滞是指寒邪可使气血运行不畅，容易引起较为明显的疼痛；收引是指寒邪可使腠理、筋脉和经络收缩，出现无汗、肢体拘急、关节屈伸不利等表现。
+
+寒邪侵袭肌表时，常见恶寒明显、发热较轻、无汗、头痛身痛、鼻流清涕、舌苔薄白、脉浮紧等表现；寒邪深入脏腑时，则可能出现脘腹冷痛、呕吐、腹泻或四肢发冷等表现。辨治时还需区分外寒、内寒以及寒邪所在部位。","COLD PATHOGEN
+
+Cold is one of the six external pathogenic influences. It is associated with winter and is more likely to affect the body when temperatures fall suddenly, clothing is inadequate or exposure to cold is prolonged. Traditional Chinese medicine regards Cold as a yin influence that can weaken yang qi and impair its warming and moving functions.
+
+Cold is characterized by congealing and contracting. Congealing means that it may impede the movement of qi and blood, often causing pronounced pain. Contracting means that it may tighten superficial tissues, tendons and channels, leading to an absence of sweating, stiff limbs or limited movement of the joints.
+
+When Cold affects the surface, common signs include marked aversion to cold, mild fever, no sweating, headache and body aches, a clear runny nose, a thin white tongue coating and a floating tight pulse. If Cold penetrates deeper, signs may include cold pain in the stomach or abdomen, vomiting, diarrhea or cold limbs. A physician also distinguishes external Cold from internal Cold and considers where the pattern is located."
+UI_BOOK_ENTRY_TITLE_SHU_XIE,暑邪,Summer Heat Pathogen
+UI_BOOK_ENTRY_BODY_SHU_XIE,"【暑邪】
+
+暑邪是外感六邪之一，是夏季特有的致病邪气，多由天气炎热、长时间暴露于高温环境或劳作过度所致。中医认为暑为阳邪，性质炎热升散，容易使人体腠理开泄、汗液大量排出。
+
+暑邪容易耗气伤津，常见高热、面红、心烦、口渴、大量出汗、身体乏力、气短、小便短黄等表现。暑邪严重时还可能出现头晕、恶心、突然昏倒或意识异常等情况。
+
+暑季气候往往炎热而潮湿，因此暑邪常与湿邪同时侵袭人体，形成“暑湿”。除发热口渴外，还可见胸闷、恶心、食欲不振、身体困重、腹泻和舌苔腻等表现。辨治时需要根据暑热与湿邪所占比重分别判断。","SUMMER HEAT PATHOGEN
+
+Summer Heat is one of the six external pathogenic influences and is specific to summer. It is associated with hot weather, prolonged exposure to high temperatures or excessive exertion. Traditional Chinese medicine regards it as a yang influence that is intensely hot, rising and dispersing. It can open the skin's pores and cause profuse sweating.
+
+Summer Heat can deplete qi and body fluids. Common signs include high fever, a flushed face, restlessness, thirst, heavy sweating, weakness, shortness of breath and scant dark yellow urine. Severe presentations may also include dizziness, nausea, sudden fainting or changes in awareness.
+
+Because summers are often hot and humid, Summer Heat may occur together with Dampness in a Summer Heat-Dampness pattern. Along with fever and thirst, signs may include chest tightness, nausea, poor appetite, heaviness, diarrhea and a greasy tongue coating. The relative contribution of Heat and Dampness is assessed in each case."
+UI_BOOK_ENTRY_TITLE_SHI_XIE,湿邪,Dampness Pathogen
+UI_BOOK_ENTRY_BODY_SHI_XIE,"【湿邪】
+
+湿邪是外感六邪之一，在五行与长夏相应，常与气候潮湿、淋雨涉水或长期处于湿润环境有关。中医认为湿为阴邪，容易阻碍气机、损伤阳气，并与脾的运化功能关系密切。
+
+湿邪具有重浊、黏滞和趋下的特点。重浊是指患者常有身体沉重、头重如裹、四肢困倦等感觉；黏滞是指症状缠绵、病程较长、分泌物黏腻不爽；趋下是指湿邪引起的症状较易出现在人体下部。
+
+湿邪致病常见胸闷脘痞、食欲不振、恶心、腹胀、便溏、肢体沉重、关节酸痛、舌苔厚腻等表现。湿邪还常与风、寒、热等邪气结合，形成风湿、寒湿或湿热等不同证候。","DAMPNESS PATHOGEN
+
+Dampness is one of the six external pathogenic influences. It is associated with Late Summer and may be linked with humid weather, getting soaked by rain or prolonged exposure to damp surroundings. Traditional Chinese medicine regards Dampness as a yin influence that may obstruct the movement of qi and weaken yang qi. It is closely connected with the Spleen's function of transforming and transporting.
+
+Dampness is described as heavy and turbid, sticky, and tending to move downward. Heaviness may be felt in the body, head or limbs. Stickiness means symptoms may linger, the course may be long, and secretions may feel thick and difficult to clear. Its downward tendency means signs may more readily appear in the lower body.
+
+Common signs associated with Dampness include chest tightness, fullness in the upper abdomen, poor appetite, nausea, bloating, loose stools, heavy limbs, aching joints and a thick greasy tongue coating. Dampness may combine with Wind, Cold or Heat to form Wind-Dampness, Cold-Dampness or Damp-Heat patterns."
+UI_BOOK_ENTRY_TITLE_ZAO_XIE,燥邪,Dryness Pathogen
+UI_BOOK_ENTRY_BODY_ZAO_XIE,"【燥邪】
+
+燥邪是外感六邪之一，在五行与秋季相应，常见于气候干燥或人体津液不足以适应环境变化时。中医认为燥邪性质干涩，最容易耗伤人体津液，并容易侵袭肺脏。
+
+燥邪损伤津液后，常见口鼻干燥、咽干口渴、皮肤干涩、毛发失润、大便干结、小便短少等表现。肺为娇脏，喜润恶燥，因此燥邪犯肺时还可能出现干咳少痰，或痰液黏稠、不易咳出等表现。
+
+燥邪可分为温燥与凉燥。温燥多带有热象，可见发热、微恶风、口渴等表现；凉燥多带有寒象，可见恶寒、头痛、无汗等表现。医者需要结合季节、寒热和津液受损程度综合判断。","DRYNESS PATHOGEN
+
+Dryness is one of the six external pathogenic influences. It is associated with autumn and may arise in dry weather or when the body's fluids cannot adequately adapt to environmental changes. Traditional Chinese medicine describes Dryness as parching and especially likely to deplete body fluids and affect the Lung.
+
+After body fluids are depleted, signs may include a dry mouth and nose, a dry and thirsty throat, dry skin and hair, hard stools and scant urine. The Lung is considered especially sensitive to Dryness, so Dryness affecting the Lung may also cause a dry cough with little phlegm or thick phlegm that is difficult to cough up.
+
+Dryness may be Warm or Cool. Warm Dryness tends to include Heat signs, such as fever, slight aversion to drafts and thirst. Cool Dryness tends to include Cold signs, such as aversion to cold, headache and no sweating. A physician considers the season, Cold and Heat signs, and the extent of fluid depletion together."
+UI_BOOK_ENTRY_TITLE_RE_XIE,热邪,Heat Pathogen
+UI_BOOK_ENTRY_BODY_RE_XIE,"【热邪】
+
+热邪是外感六邪之一，又常称为火邪。中医认为热为阳邪，性质炎热升腾，容易使人体出现阳热偏盛的表现。热邪可由外界侵入，也可由其他邪气在体内转化而成；热邪发展至较严重程度时，常称为火邪。
+
+热邪容易耗气伤津，常见高热、口渴喜冷饮、汗多、身体乏力、小便短黄、大便干结等表现。热邪具有炎上的特点，容易出现面红、目赤、咽喉肿痛、口舌生疮等人体上部症状。
+
+热邪还可能生风、动血或腐肉成脓。热极生风时可见抽搐、颈项强直等表现；热迫血行时可见出血、皮疹等表现；热邪壅聚局部时可能形成红、肿、热、痛的疮疡。判断热邪时，需要结合病位、病程及津液损伤程度综合分析。","HEAT PATHOGEN
+
+Heat is one of the six external pathogenic influences and is also associated with Fire. Traditional Chinese medicine regards it as a yang influence that burns and rises, producing signs of excessive yang heat. Heat may enter from outside or develop when another influence transforms inside the body. A more severe form is often described as Fire.
+
+Heat may deplete qi and body fluids. Common signs include high fever, thirst for cold drinks, heavy sweating, weakness, scant dark yellow urine and hard stools. Because Heat rises, it may also cause upper-body signs such as a flushed face, red eyes, a swollen sore throat, or sores in the mouth and on the tongue.
+
+Heat may also stir Wind, disturb the blood or contribute to pus formation. Extreme Heat that stirs Wind may cause convulsions or a stiff neck. Heat that drives blood out of its normal course may cause bleeding or rashes. Concentrated Heat may produce sores with redness, swelling, warmth and pain. A physician considers the location, course and extent of fluid depletion when assessing Heat."
+UI_BOOK_ENTRY_TITLE_QI_QING_NEI_SHANG,七情内伤,Internal Injury from the Seven Emotions
+UI_BOOK_ENTRY_BODY_QI_QING_NEI_SHANG,"【七情内伤】
+
+七情内伤是中医对喜、怒、忧、思、悲、恐、惊七种情志活动引起疾病的概括。七情原本是人体对外界事物产生的正常情绪反应，一般不会致病；当情绪过于强烈、突然发生或持续时间过长，超过人体自身的调节能力时，便可能影响脏腑气血，成为内伤病因。
+
+中医认为七情分别与五脏关系密切，即喜与心相应、怒与肝相应、思与脾相应、忧悲与肺相应、恐与肾相应。某种情绪过度时，容易影响相应脏腑；脏腑功能失调后，也可能反过来导致情绪变化。
+
+七情主要通过影响气机而致病，常概括为“怒则气上、喜则气缓、悲则气消、恐则气下、惊则气乱、思则气结”。例如，过怒可能出现头痛、面红、胸胁胀满；过思可能出现食欲不振、腹胀、失眠；惊恐过度可能出现心悸、神志不安或二便异常等表现。
+
+七情内伤通常直接影响内在脏腑，也可能导致气滞、血瘀、痰湿或阴阳失调。由于不同情志能够相互影响，具体表现还会因个人体质、情绪强度和持续时间而有所不同。医者需要结合患者的情志变化、脏腑症状以及望、闻、问、切所得信息综合判断。","INTERNAL INJURY FROM THE SEVEN EMOTIONS
+
+In traditional Chinese medicine, internal injury from the seven emotions refers to illness associated with Joy, Anger, Worry, Pensiveness, Grief, Fear and Fright. These emotions are normal responses to life and generally do not cause illness. If an emotion is exceptionally intense, comes on suddenly or persists for too long, it may exceed the body's ability to regulate itself and affect the organs, qi and blood.
+
+The seven emotions are linked with the five zang organs: Joy with the Heart, Anger with the Liver, Pensiveness with the Spleen, Worry and Grief with the Lung, and Fear with the Kidney. An excessive emotion may affect its associated organ, while a disturbance in organ function may in turn change a person's emotional state.
+
+The seven emotions are thought to affect the movement of qi. Traditional descriptions say that anger makes qi rise, joy relaxes qi, grief depletes qi, fear sends qi downward, fright disorders qi and pensiveness binds qi. Excessive anger may be associated with headache, a flushed face and fullness in the chest or flanks; prolonged pensiveness with poor appetite, bloating and insomnia; intense fear or fright with palpitations, unease or changes in urination and bowel movements.
+
+The seven emotions may directly affect the internal organs and contribute to qi stagnation, blood stasis, phlegm and dampness, or an imbalance of yin and yang. The pattern varies with the person, the intensity of the emotion and its duration. A physician considers emotional changes, organ-related signs and information from all four examinations together."
+UI_BOOK_ENTRY_TITLE_XI,喜,Joy
+UI_BOOK_ENTRY_BODY_XI,"【喜】
+
+喜是七情之一，是人在愿望得到满足或遇到愉快事物时产生的正常情绪。适度的喜悦能够使心情舒畅、气血和缓，对身心具有积极作用。中医认为喜与心相应，正常的喜悦有助于心气调畅。
+
+喜悦过度或突然大喜时，则可能使心气涣散、心神失守，称为“喜则气缓”。这里的“缓”既有气机舒缓的一面，也包含过度时气机弛缓、精神难以集中的含义。
+
+过喜伤心时，可能出现心悸、失眠、精神涣散、注意力不集中或情绪异常兴奋等表现；情况严重时，还可能出现神志恍惚。判断是否由喜伤心，需要结合情绪变化、心神表现及个人体质综合分析。","JOY
+
+Joy is one of the seven emotions. It is a normal feeling that arises when a wish is fulfilled or something pleasant happens. Moderate joy can ease the mind and help qi and blood move smoothly. In traditional Chinese medicine, Joy is linked with the Heart, and ordinary happiness is thought to support the free movement of Heart qi.
+
+Excessive joy or a sudden burst of elation may cause Heart qi to become scattered and the spirit to lose its steadiness. This is described as 'joy relaxes qi.' Relaxing qi can be beneficial, but in excess it may leave qi too slack and make concentration difficult.
+
+When excessive joy affects the Heart, signs may include palpitations, insomnia, scattered thoughts, poor concentration or unusually heightened excitement. Severe cases may include confusion. A physician considers changes in emotion, signs relating to the Heart and spirit, and the person's constitution."
+UI_BOOK_ENTRY_TITLE_NU,怒,Anger
+UI_BOOK_ENTRY_BODY_NU,"【怒】
+
+怒是七情之一，是人在受到挫折、压迫或不公平对待时产生的正常情绪。适度表达愤怒有助于情绪疏解，但长期压抑、频繁发怒或突然暴怒，都可能影响人体气机。
+
+中医认为怒与肝相应。肝主疏泄，负责调畅气机；愤怒过度容易使肝的疏泄功能失常，导致气机上逆，称为“怒则气上”。
+
+怒伤肝时，常见头胀头痛、面红目赤、急躁易怒、胸胁胀满、口苦或眩晕等表现。肝气长期郁滞还可能影响脾胃，出现食欲不振、腹胀等症状。判断时需要区分肝气郁结、肝火上炎和肝阳上亢等不同情况。","ANGER
+
+Anger is one of the seven emotions and a normal response to frustration, pressure or unfair treatment. Expressing it in moderation can help release emotion, while prolonged suppression, frequent anger or a sudden outburst may disturb the movement of qi.
+
+In traditional Chinese medicine, Anger is linked with the Liver. The Liver's free-flowing function regulates the movement of qi. Excessive anger may disrupt this function and cause qi to surge upward, described as 'anger makes qi rise.'
+
+When anger affects the Liver, signs may include a distending headache, a flushed face and red eyes, irritability, fullness in the chest and flanks, a bitter taste or dizziness. Prolonged stagnation of Liver qi may also affect the Spleen and Stomach, causing poor appetite or bloating. A physician distinguishes Liver qi stagnation, rising Liver fire and excessive Liver yang."
+UI_BOOK_ENTRY_TITLE_YOU,忧,Worry
+UI_BOOK_ENTRY_BODY_YOU,"【忧】
+
+忧是七情之一，主要指因担心、顾虑或处境不安而产生的忧愁情绪。短暂的忧虑属于正常心理活动，但长期忧心忡忡、反复担忧，则可能使气机受到抑制。
+
+中医认为忧与肺关系密切。忧愁过度容易损伤肺气，使肺的宣发肃降功能失常；长期忧虑也可能影响脾的运化，导致气血化生不足。
+
+忧伤肺时，可能出现胸闷、气短、呼吸不畅、声音低弱、精神疲倦或容易叹息等表现；影响脾胃时，还可能出现食欲减退、腹胀和身体乏力。判断时需要结合忧虑持续时间以及肺、脾的相关症状综合分析。","WORRY
+
+Worry is one of the seven emotions. It refers to distress arising from concerns, uncertainty or an unsettled situation. Brief periods of worry are normal, but persistent or repeated worrying may constrain the movement of qi.
+
+In traditional Chinese medicine, Worry is closely linked with the Lung. Excessive worry may weaken Lung qi and disturb the Lung's dispersing and descending functions. Over time, it may also affect the Spleen's transforming and transporting functions, reducing the production of qi and blood.
+
+When worry affects the Lung, signs may include chest tightness, shortness of breath, uneven breathing, a weak voice, fatigue or frequent sighing. If the Spleen and Stomach are also affected, poor appetite, bloating and weakness may occur. A physician considers how long the worry has lasted and signs associated with the Lung and Spleen."
+UI_BOOK_ENTRY_TITLE_SI,思,Pensiveness
+UI_BOOK_ENTRY_BODY_SI,"【思】
+
+思是七情之一，主要指思考、谋虑和注意力集中的精神活动。正常思考有助于学习和处理问题，但思虑过度、长期用脑或反复纠结同一件事，则可能影响人体气机。
+
+中医认为思与脾相应。思虑过度容易使气机郁结，称为“思则气结”，并可能影响脾的运化功能，使饮食物不能正常转化为气血津液。
+
+思伤脾时，常见食欲不振、腹胀、便溏、身体乏力、精神倦怠等表现；心脾同时受到影响时，还可能出现心悸、健忘、失眠、多梦等症状。判断时需要结合饮食、睡眠和精神状态综合分析。","PENSIVENESS
+
+Pensiveness is one of the seven emotions. It refers to thinking, planning and focused attention. Ordinary thought helps with learning and problem-solving, while excessive thinking, prolonged mental effort or repeated rumination on one subject may disrupt the movement of qi.
+
+In traditional Chinese medicine, Pensiveness is linked with the Spleen. Too much rumination may bind the movement of qi, described as 'pensiveness binds qi.' It may also interfere with the Spleen's transformation of food and drink into qi, blood and body fluids.
+
+When pensiveness affects the Spleen, signs may include poor appetite, bloating, loose stools, weakness and mental fatigue. If the Heart and Spleen are both affected, palpitations, forgetfulness, insomnia and frequent dreams may also occur. A physician considers diet, sleep and mental state together."
+UI_BOOK_ENTRY_TITLE_BEI,悲,Grief
+UI_BOOK_ENTRY_BODY_BEI,"【悲】
+
+悲是七情之一，是人在经历失去、离别或重大打击时产生的哀伤情绪。适度悲伤属于正常的情感反应，但悲伤过度或长期不能缓解时，可能消耗人体之气，使精神和身体逐渐衰弱。
+
+中医认为悲与肺相应，悲伤过度容易耗伤肺气，称为“悲则气消”。肺气受损后，肺主气、司呼吸以及宣发肃降的功能可能受到影响。
+
+悲伤过度时，常见精神低落、气短乏力、声音低弱、胸闷、哭泣、食欲下降等表现。长期悲伤还可能进一步影响心、脾等脏腑。忧与悲都和肺有关，但忧偏于担心和愁虑，悲则偏于哀痛和失落。","GRIEF
+
+Grief is one of the seven emotions and a normal response to loss, separation or a major setback. Moderate sadness is a normal human feeling. When grief is overwhelming or does not ease over a long period, it may deplete qi and gradually weaken the body and mind.
+
+In traditional Chinese medicine, Grief is linked with the Lung. Excessive grief may deplete Lung qi, described as 'grief depletes qi.' This may affect the Lung's roles in governing qi and breathing, and in dispersing and descending.
+
+Signs associated with prolonged grief may include low spirits, shortness of breath, fatigue, a weak voice, chest tightness, crying and loss of appetite. Prolonged grief may also affect the Heart or Spleen. Worry and Grief are both linked with the Lung, but Worry centers on concern and apprehension, while Grief centers on sorrow and loss."
+UI_BOOK_ENTRY_TITLE_KONG,恐,Fear
+UI_BOOK_ENTRY_BODY_KONG,"【恐】
+
+恐是七情之一，是人在面临危险、威胁或未知事物时产生的害怕情绪。适度恐惧能够使人提高警觉、躲避危险，但长期处于恐惧之中或突然受到强烈惊吓，则可能扰乱脏腑气机。
+
+中医认为恐与肾相应。恐惧过度容易使肾气不固、气机下陷，称为“恐则气下”，从而影响肾的封藏及对二便的固摄功能。
+
+恐伤肾时，可能出现腰膝酸软、精神不安、遗尿、尿失禁或二便异常等表现；长期恐惧还可能耗伤肾精，使人出现健忘、耳鸣和意志消沉等症状。判断时需要结合恐惧发生的原因、持续时间及肾的相关表现综合分析。","FEAR
+
+Fear is one of the seven emotions and a normal response to danger, threats or the unknown. Moderate fear helps a person stay alert and avoid harm. Living with fear for a long time or experiencing an intense sudden scare may, however, disturb the movement of qi and the functions of the organs.
+
+In traditional Chinese medicine, Fear is linked with the Kidney. Excessive fear may weaken the Kidney's ability to hold qi and cause qi to sink, described as 'fear sends qi downward.' This may affect the Kidney's storing function and control of urination and bowel movements.
+
+When fear affects the Kidney, signs may include soreness or weakness in the lower back and knees, unease, bed-wetting, urinary incontinence or changes in urination and bowel movements. Prolonged fear may also deplete Kidney essence and be associated with forgetfulness, ringing in the ears or loss of resolve. A physician considers the cause and duration of fear together with Kidney-related signs."
+UI_BOOK_ENTRY_TITLE_JING,惊,Fright
+UI_BOOK_ENTRY_BODY_JING,"【惊】
+
+惊是七情之一，是人在突然遇到意外、声响或危险时产生的急剧情绪反应。惊与恐有所不同：惊通常由突发刺激引起，事先没有心理准备；恐则多是对已知或预期危险产生的害怕。
+
+中医认为惊主要影响心神，可使气机紊乱，称为“惊则气乱”。受到突然惊吓后，心神失去安定，气血运行也可能暂时失常，并可进一步影响肾的封藏功能。
+
+惊伤心神时，常见心悸、失眠、神志不宁、精神恍惚、容易受惊或注意力难以集中等表现；情况严重时，还可能出现昏厥或神志异常。判断时需要结合刺激强度、持续影响及患者原有的身心状态综合分析。","FRIGHT
+
+Fright is one of the seven emotions. It is an abrupt emotional response to an unexpected event, sound or danger. It differs from Fear: Fright follows a sudden stimulus that a person was not prepared for, while Fear is more often a response to a known or anticipated threat.
+
+In traditional Chinese medicine, Fright primarily affects the Heart and spirit. It may disorder the movement of qi, described as 'fright disorders qi.' After a sudden scare, the spirit may become unsettled and the movement of qi and blood may be temporarily disrupted. The Kidney's storing function may also be affected.
+
+When fright affects the Heart and spirit, signs may include palpitations, insomnia, restlessness, confusion, being easily startled or difficulty concentrating. Severe cases may include fainting or altered awareness. A physician considers the intensity of the stimulus, how long its effects last and the person's prior physical and emotional state."
+UI_BOOK_ENTRY_TITLE_MA_HUANG_TANG,麻黄汤,Ma Huang Tang
+UI_BOOK_ENTRY_BODY_MA_HUANG_TANG,"麻黄汤
+【出处】《伤寒论》
+【功效】发汗解表，宣肺平喘
+【主治】风寒表实证
+【组成】
+君：麻黄 三钱
+臣：桂枝 二钱
+佐：杏仁 二钱
+使：甘草 一钱
+【配伍】
+麻桂相须，增强发汗散寒之力，专治表实无汗。
+麻杏相使，宣降相配，专治寒邪闭肺之喘逆。
+甘草调和诸药","MA HUANG TANG
+[Source] Shanghan Lun
+[Actions] Promotes sweating to release the Exterior; disperses Lung qi to ease wheezing
+[Indication] Wind-Cold Exterior Excess pattern
+[Ingredients]
+Chief: Ma Huang 3 qian
+Deputy: Gui Zhi 2 qian
+Assistant: Xing Ren 2 qian
+Envoy: Gan Cao 1 qian
+[How the ingredients work together]
+Ma Huang and Gui Zhi reinforce one another in promoting sweating and dispersing Cold, addressing an Exterior Excess pattern without sweating.
+Ma Huang and Xing Ren work together to disperse and descend Lung qi, addressing wheezing when Cold obstructs the Lung.
+Gan Cao harmonizes the ingredients."
+UI_BOOK_ENTRY_TITLE_GUI_ZHI_TANG,桂枝汤,Gui Zhi Tang
+UI_BOOK_ENTRY_BODY_GUI_ZHI_TANG,"桂枝汤
+【出处】《伤寒论》
+【功效】解肌发表，调和营卫
+【主治】风寒表虚证
+【组成】
+君：桂枝 三钱
+臣：白芍 三钱
+佐：生姜 三钱，大枣 二钱
+使：甘草 二钱
+【配伍】
+桂枝辛散卫邪，白芍酸敛营阴；一散一收，调和营卫，不伤正、不敛邪。
+姜枣相合，调和脾胃，化生气血，资营卫之源。","GUI ZHI TANG
+[Source] Shanghan Lun
+[Actions] Releases the muscle layer and Exterior; harmonizes nutritive and defensive qi
+[Indication] Wind-Cold Exterior Deficiency pattern
+[Ingredients]
+Chief: Gui Zhi 3 qian
+Deputy: Bai Shao 3 qian
+Assistant: Sheng Jiang 3 qian, Da Zao 2 qian
+Envoy: Gan Cao 2 qian
+[How the ingredients work together]
+Gui Zhi is acrid and disperses pathogenic influences from the defensive layer; Bai Shao is sour and astringent, protecting nutritive yin. One disperses and the other gathers, harmonizing nutritive and defensive qi without weakening healthy qi or trapping the pathogenic influence.
+Sheng Jiang and Da Zao work together to harmonize the Spleen and Stomach and support the formation of qi and blood, the source of nutritive and defensive qi."
+UI_BOOK_ENTRY_TITLE_YIN_QIAO_SAN,银翘散,Yin Qiao San
+UI_BOOK_ENTRY_BODY_YIN_QIAO_SAN,"银翘散
+【出处】《温病条辨》
+【功效】辛凉透表，清热解毒
+【主治】风热表证
+【组成】
+君：金银花 一两，连翘 一两
+臣：牛蒡子 六钱，荆芥四钱，薄荷 六钱，淡豆豉 五钱
+佐：桔梗 六钱，芦根 四钱，竹叶 四钱
+使：甘草 五钱
+【配伍】
+金银花、连翘：辛凉透表、疏散风热，清热解毒，轻清宣透上焦风热
+薄荷、牛蒡子：辛凉疏散风热，清利咽喉、宣肺止咳
+荆芥穗、淡豆豉：辛温透表，发汗透邪，防寒凉郁遏气机，助邪外达
+桔梗：宣肺利咽、开气止咳
+淡竹叶、芦根：清热生津、除烦止渴，缓解风热口渴
+生甘草：调和诸药，兼清热解毒、利咽止痛","YIN QIAO SAN
+[Source] Wenbing Tiaobian
+[Actions] Releases the Exterior with acrid, cool herbs; clears Heat and resolves toxin
+[Indication] Wind-Heat Exterior pattern
+[Ingredients]
+Chief: Jin Yin Hua 1 liang, Lian Qiao 1 liang
+Deputy: Niu Bang Zi 6 qian, Jing Jie 4 qian, Bo He 6 qian, Dan Dou Chi 5 qian
+Assistant: Jie Geng 6 qian, Lu Gen 4 qian, Zhu Ye 4 qian
+Envoy: Gan Cao 5 qian
+[How the ingredients work together]
+Jin Yin Hua and Lian Qiao release the Exterior, disperse Wind-Heat, clear Heat and resolve toxin, especially in the upper body.
+Bo He and Niu Bang Zi cool and disperse Wind-Heat, ease the throat, disperse Lung qi and relieve cough.
+Jing Jie and Dan Dou Chi are acrid and warm; they help release the Exterior so cool ingredients do not impede the movement of qi.
+Jie Geng disperses Lung qi, soothes the throat and relieves cough.
+Zhu Ye and Lu Gen clear Heat, generate body fluids and ease restlessness and thirst.
+Gan Cao harmonizes the ingredients while helping to clear Heat and ease throat pain."
+UI_BOOK_ENTRY_TITLE_SANG_XING_TANG,桑杏汤,Sang Xing Tang
+UI_BOOK_ENTRY_BODY_SANG_XING_TANG,"桑杏汤
+【出处】《温病条辨》
+【功效】清宣温燥，润肺止咳
+【主治】温燥证
+【组成】
+君：桑叶 一钱五分，杏仁 二钱
+臣：沙参 一钱
+佐：贝母 一钱，淡豆豉 一钱，栀子 一钱，梨皮一钱
+使：
+【配伍】
+桑叶：轻清宣透、疏散上焦温燥
+杏仁：苦润降肺、润燥止咳
+淡豆豉：透表散邪
+贝母：清热化痰、润肺散结
+沙参：养阴生津、润肺
+栀子：轻清泄上焦燥热
+梨皮：清热润燥、生津止渴","SANG XING TANG
+[Source] Wenbing Tiaobian
+[Actions] Gently disperses Warm Dryness; moistens the Lung and eases cough
+[Indication] Warm Dryness pattern
+[Ingredients]
+Chief: Sang Ye 1 qian 5 fen, Xing Ren 2 qian
+Deputy: Sha Shen 1 qian
+Assistant: Bei Mu 1 qian, Dan Dou Chi 1 qian, Zhi Zi 1 qian, Li Pi 1 qian
+Envoy:
+[How the ingredients work together]
+Sang Ye gently disperses Warm Dryness from the upper body.
+Xing Ren moistens Dryness, directs Lung qi downward and eases cough.
+Dan Dou Chi helps release pathogenic influences from the Exterior.
+Bei Mu clears Heat, transforms phlegm, moistens the Lung and disperses accumulation.
+Sha Shen nourishes yin, generates body fluids and moistens the Lung.
+Zhi Zi clears Dryness-Heat from the upper body.
+Li Pi clears Heat, moistens Dryness, generates fluids and eases thirst."
+UI_BOOK_ENTRY_TITLE_XING_SU_SAN,杏苏散,Xing Su San
+UI_BOOK_ENTRY_BODY_XING_SU_SAN,"杏苏散
+【出处】《温病条辨》
+【功效】轻宣凉燥，理肺化痰
+【主治】凉燥证
+【组成】
+君：杏仁 三钱，苏叶 三钱
+臣：半夏 三钱，前胡 三钱，陈皮 三钱
+佐：茯苓 二钱，桔梗 二钱，枳壳 二钱
+使：甘草 一钱
+【配伍】
+苏叶：辛温发散，轻宣凉燥、疏散风寒；
+杏仁：苦温润燥，降肺止咳。
+前胡：疏风降气、化痰；
+桔梗枳壳：一升一降，宣畅肺气。
+半夏、陈皮、茯苓：燥湿化痰、理气健脾，杜生痰之源。
+生甘草：调和诸药","XING SU SAN
+[Source] Wenbing Tiaobian
+[Actions] Gently disperses Cool Dryness; regulates the Lung and transforms phlegm
+[Indication] Cool Dryness pattern
+[Ingredients]
+Chief: Xing Ren 3 qian, Su Ye 3 qian
+Deputy: Ban Xia 3 qian, Qian Hu 3 qian, Chen Pi 3 qian
+Assistant: Fu Ling 2 qian, Jie Geng 2 qian, Zhi Qiao 2 qian
+Envoy: Gan Cao 1 qian
+[How the ingredients work together]
+Su Ye is acrid and warm; it gently disperses Cool Dryness and Wind-Cold.
+Xing Ren moistens Dryness, directs Lung qi downward and eases cough.
+Qian Hu disperses Wind, directs qi downward and transforms phlegm.
+Jie Geng raises and Zhi Qiao lowers qi, together promoting the free movement of Lung qi.
+Ban Xia, Chen Pi and Fu Ling dry Dampness, transform phlegm, regulate qi and support the Spleen.
+Gan Cao harmonizes the ingredients."
+UI_BOOK_ENTRY_TITLE_YU_PING_FENG_SAN,玉屏风散,Yu Ping Feng San
+UI_BOOK_ENTRY_BODY_YU_PING_FENG_SAN,"玉屏风散
+【出处】《究原方》
+【功效】益气固表，止汗御风
+【主治】卫气虚
+【组成】
+君：黄芪  一两
+臣：白术 一两
+佐：防风 五钱
+使：
+【配伍】
+黄芪：大补肺脾之气，固表实卫、益气止汗。
+白术：健脾益气，助黄芪培补元气、固护肌表。
+防风：走肌表、疏散风邪，固表不留邪、祛风不伤正。","YU PING FENG SAN
+[Source] Jiuyuan Fang
+[Actions] Supports qi and strengthens the Exterior; reduces sweating and protects against Wind
+[Indication] Defensive qi Deficiency
+[Ingredients]
+Chief: Huang Qi 1 liang
+Deputy: Bai Zhu 1 liang
+Assistant: Fang Feng 5 qian
+Envoy:
+[How the ingredients work together]
+Huang Qi supports Lung and Spleen qi, strengthens the Exterior and defensive qi, and reduces sweating.
+Bai Zhu strengthens Spleen qi, helping Huang Qi support original qi and protect the body's surface.
+Fang Feng reaches the surface and disperses Wind. It allows the formula to strengthen the Exterior without retaining a pathogenic influence, and to dispel Wind without weakening healthy qi."
+UI_BOOK_ENTRY_TITLE_WU_TOU_TANG,乌头汤,Wu Tou Tang
+UI_BOOK_ENTRY_BODY_WU_TOU_TANG,"乌头汤
+【出处】《金匮要略》
+【功效】温经散寒，除湿止痛
+【主治】痛痹（寒痹）
+【组成】
+君：乌头 二钱
+臣：麻黄 三钱
+佐：白芍 三钱，黄芪 三钱
+使：甘草 三钱，蜂蜜 一斤
+【配伍】
+乌头：大辛大热，温经散寒、逐寒湿、止剧痛，专治寒凝痹痛；
+麻黄：发汗散寒，宣通经络，助乌头透邪外出。
+黄芪：益气固表、扶正实卫，防辛散耗气；
+白芍：养血和营、缓急止痛，柔筋止拘挛；
+炙甘草、蜂蜜：缓乌头峻烈毒性，调和诸药，缓急止痛。","WU TOU TANG
+[Source] Jingui Yaolue
+[Actions] Warms the channels, disperses Cold and Dampness, and eases pain
+[Indication] Painful Cold Bi pattern
+[Ingredients]
+Chief: Wu Tou 2 qian
+Deputy: Ma Huang 3 qian
+Assistant: Bai Shao 3 qian, Huang Qi 3 qian
+Envoy: Gan Cao 3 qian, Feng Mi 1 jin
+[How the ingredients work together]
+Wu Tou is intensely warming; it warms the channels, disperses Cold-Dampness and eases severe pain from Cold obstruction.
+Ma Huang promotes sweating and disperses Cold, opens the channels and helps expel the pathogenic influence.
+Huang Qi supports qi and strengthens the Exterior, helping protect healthy qi during dispersal.
+Bai Shao nourishes blood, harmonizes the nutritive layer, relaxes the sinews and eases spasms and pain.
+Prepared Gan Cao and Feng Mi temper the strong toxicity of Wu Tou, harmonize the ingredients and ease spasms and pain."
+UI_BOOK_ENTRY_TITLE_BAI_HU_GUI_ZHI_TANG,白虎桂枝汤,Bai Hu Gui Zhi Tang
+UI_BOOK_ENTRY_BODY_BAI_HU_GUI_ZHI_TANG,"白虎桂枝汤
+【出处】《金匮要略》
+【功效】清热通络，和营祛风
+【主治】热痹
+【组成】
+君：石膏 二两
+臣：知母 六钱
+佐：桂枝 三钱，粳米 五钱
+使：甘草 三钱
+【配伍】
+生石膏：大寒大清，清气分实热，泻火除烦，专治关节红肿灼热。
+知母：苦寒清热、滋阴润燥，助石膏清泄里热。
+桂枝：辛温通络、祛风和营，引药直达经络关节，散经络风湿热邪；辛温反佐，防寒凉凝滞气血。
+炙甘草、粳米：益气养胃，缓和石膏、知母寒凉之性，保护胃气。","BAI HU GUI ZHI TANG
+[Source] Jingui Yaolue
+[Actions] Clears Heat, opens the channels, harmonizes the nutritive layer and dispels Wind
+[Indication] Heat Bi pattern
+[Ingredients]
+Chief: Shi Gao 2 liang
+Deputy: Zhi Mu 6 qian
+Assistant: Gui Zhi 3 qian, Jing Mi 5 qian
+Envoy: Gan Cao 3 qian
+[How the ingredients work together]
+Raw Shi Gao strongly clears Heat from the qi level, relieves agitation and addresses red, swollen, burning joints.
+Zhi Mu clears Heat and nourishes yin, reinforcing Shi Gao in clearing internal Heat.
+Gui Zhi warms and opens the channels, dispels Wind and harmonizes the nutritive layer, guiding the formula toward the joints. Its warmth also balances the cooling ingredients.
+Prepared Gan Cao and Jing Mi support qi and the Stomach, temper the cooling nature of Shi Gao and Zhi Mu, and protect Stomach qi."
+UI_BOOK_ENTRY_TITLE_YI_YI_REN_TANG,薏苡仁汤,Yi Yi Ren Tang
+UI_BOOK_ENTRY_BODY_YI_YI_REN_TANG,"薏苡仁汤
+【出处】《太医院经验奇效良方大全》
+【功效】除湿通络，祛风散寒
+【主治】着痹（湿痹）
+【组成】
+君：薏苡仁 一两
+臣：羌活 三钱，独活 三钱，麻黄 三钱，桂枝 三钱
+佐：当归 二钱，川芎 二钱
+使：甘草 三钱
+【配伍】
+薏苡仁：利水渗湿、健脾除痹、舒筋缓急，专治湿痹重着。
+羌活、独活：祛风胜湿、通络止痛，上下分治周身湿邪
+麻、桂：温经散寒、通阳通络，助祛湿
+当归、川芎：养血活血、通络止痛，治风先治血、血行风自灭
+甘草：调和诸药，温散助祛湿。","YI YI REN TANG
+[Source] Taiyiyuan Formula Collection
+[Actions] Drains Dampness, opens the channels, dispels Wind and disperses Cold
+[Indication] Fixed Damp Bi pattern
+[Ingredients]
+Chief: Yi Yi Ren 1 liang
+Deputy: Qiang Huo 3 qian, Du Huo 3 qian, Ma Huang 3 qian, Gui Zhi 3 qian
+Assistant: Dang Gui 2 qian, Chuan Xiong 2 qian
+Envoy: Gan Cao 3 qian
+[How the ingredients work together]
+Yi Yi Ren promotes urination, drains Dampness, supports the Spleen, relieves Bi and relaxes the sinews in a heavy, fixed Damp Bi pattern.
+Qiang Huo and Du Huo dispel Wind-Dampness, open the channels and relieve pain throughout the upper and lower body.
+Ma Huang and Gui Zhi warm the channels, disperse Cold and support the removal of Dampness.
+Dang Gui and Chuan Xiong nourish and move blood, open the channels and ease pain. Moving blood also helps address Wind.
+Gan Cao harmonizes the ingredients and supports the warm dispersal of Dampness."
+UI_BOOK_ENTRY_TITLE_FANG_FENG_TANG,防风汤,Fang Feng Tang
+UI_BOOK_ENTRY_BODY_FANG_FENG_TANG,"防风汤
+【出处】《太平惠民和剂局方》
+【功效】祛风通络，散寒除湿
+【主治】行痹（风痹）
+【组成】
+君：防风 五钱
+臣：桂枝 三钱，秦艽 三钱
+佐：当归 二钱，川芎 二钱，葛根 三钱
+使：甘草 一钱
+【配伍】
+防风：祛风胜湿、走窜经络，专治游走痹痛。
+桂枝：温散风寒、通经活络；
+秦艽：祛风湿、通络止痛，善治游走痹。
+当归：养血和营、祛风通络；
+川芎：活血通络；
+葛根：解肌舒筋；
+甘草调和诸药，调和营卫。","FANG FENG TANG
+[Source] Taiping Huimin Heji Jufang
+[Actions] Dispels Wind, opens the channels, and disperses Cold and Dampness
+[Indication] Wandering Wind Bi pattern
+[Ingredients]
+Chief: Fang Feng 5 qian
+Deputy: Gui Zhi 3 qian, Qin Jiao 3 qian
+Assistant: Dang Gui 2 qian, Chuan Xiong 2 qian, Ge Gen 3 qian
+Envoy: Gan Cao 1 qian
+[How the ingredients work together]
+Fang Feng dispels Wind and Dampness and moves through the channels, addressing wandering Bi pain.
+Gui Zhi warms and disperses Wind-Cold and opens the channels.
+Qin Jiao dispels Wind-Dampness, opens the channels and relieves wandering pain.
+Dang Gui nourishes blood, harmonizes the nutritive layer and helps dispel Wind from the channels.
+Chuan Xiong moves blood and opens the channels.
+Ge Gen releases the muscle layer and relaxes the sinews.
+Gan Cao harmonizes the ingredients and the nutritive and defensive layers."
+UI_BOOK_ENTRY_TITLE_MA_XING_SHI_GAN_TANG,麻杏石甘汤,Ma Xing Shi Gan Tang
+UI_BOOK_ENTRY_BODY_MA_XING_SHI_GAN_TANG,"麻杏石甘汤
+【出处】《伤寒论》
+【功效】辛凉疏表，清肺平喘
+【主治】肺热壅盛
+【组成】
+君：麻黄 三钱
+臣：石膏 八钱
+佐：杏仁 三钱
+使：甘草 二钱
+【配伍】
+麻黄：辛温，宣肺平喘、开泄肺气，散邪解表。
+石膏:辛甘大寒，清泻肺热、生津止渴，清里热以制麻黄之温。
+杏仁:苦降肺气，降利平喘，与麻黄一宣一降，恢复肺之宣肃。
+炙甘草:调和诸药，益气护中，缓急润肺。","MA XING SHI GAN TANG
+[Source] Shanghan Lun
+[Actions] Releases the Exterior with acrid, cool herbs; clears Lung Heat and eases wheezing
+[Indication] Excessive Lung Heat
+[Ingredients]
+Chief: Ma Huang 3 qian
+Deputy: Shi Gao 8 qian
+Assistant: Xing Ren 3 qian
+Envoy: Gan Cao 2 qian
+[How the ingredients work together]
+Ma Huang disperses Lung qi, eases wheezing and releases the Exterior.
+Shi Gao strongly clears Lung Heat, generates fluids and balances the warming nature of Ma Huang.
+Xing Ren directs Lung qi downward and eases wheezing; with Ma Huang it restores the Lung's dispersing and descending functions.
+Prepared Gan Cao harmonizes the ingredients, supports qi and the middle, and moistens the Lung."
+UI_BOOK_ENTRY_TITLE_BU_FEI_TANG,补肺汤,Bu Fei Tang
+UI_BOOK_ENTRY_BODY_BU_FEI_TANG,"补肺汤
+【出处】《备急千金要方》
+【功效】补肺益气，止咳平喘
+【主治】肺气虚
+【组成】
+君：人参 三钱，黄芪 五钱
+臣：熟地黄 五钱
+佐：五味子 二钱，紫菀 三钱，桑白皮 三钱
+使：
+【配伍】
+人参、黄芪：大补肺气、固表益气，补益肺气虚之本。
+熟地黄：滋肾填精，金水相生，助肺气之源。
+五味子：收敛肺气、敛汗止喘，固表止自汗。
+紫菀、桑白皮：降肺气、化痰止咳，清润不燥，补虚不滞。","BU FEI TANG
+[Source] Beiji Qianjin Yaofang
+[Actions] Supports Lung qi, relieves cough and eases wheezing
+[Indication] Lung qi Deficiency
+[Ingredients]
+Chief: Ren Shen 3 qian, Huang Qi 5 qian
+Deputy: Shu Di Huang 5 qian
+Assistant: Wu Wei Zi 2 qian, Zi Wan 3 qian, Sang Bai Pi 3 qian
+Envoy:
+[How the ingredients work together]
+Ren Shen and Huang Qi strongly support Lung qi and strengthen the Exterior, addressing the underlying Deficiency.
+Shu Di Huang nourishes Kidney essence, supporting the Lung through the Metal-Water relationship.
+Wu Wei Zi astringes Lung qi, reduces sweating and eases wheezing.
+Zi Wan and Sang Bai Pi direct Lung qi downward, transform phlegm and ease cough without being overly drying."
+UI_BOOK_ENTRY_TITLE_ER_CHEN_TANG,二陈汤,Er Chen Tang
+UI_BOOK_ENTRY_BODY_ER_CHEN_TANG,"二陈汤
+【出处】《太平惠民和剂局方》
+【功效】燥湿化痰，理气和中
+【主治】痰湿阻肺
+【组成】
+君：半夏 五钱
+臣：陈皮 五钱
+佐：茯苓 三钱
+使：甘草 一钱五分
+【配伍】
+半夏：辛温燥烈，燥湿化痰、降逆止呕。
+陈皮：理气行滞、燥湿化痰，使气顺则痰消。
+茯苓：健脾渗湿，杜生痰之源。
+甘草：调和诸药，益气和中。","ER CHEN TANG
+[Source] Taiping Huimin Heji Jufang
+[Actions] Dries Dampness, transforms phlegm, regulates qi and harmonizes the middle
+[Indication] Phlegm-Dampness obstructing the Lung
+[Ingredients]
+Chief: Ban Xia 5 qian
+Deputy: Chen Pi 5 qian
+Assistant: Fu Ling 3 qian
+Envoy: Gan Cao 1 qian 5 fen
+[How the ingredients work together]
+Ban Xia dries Dampness, transforms phlegm, directs rebellious qi downward and relieves nausea.
+Chen Pi regulates qi and dries Dampness so phlegm can be resolved as qi moves freely.
+Fu Ling supports the Spleen and drains Dampness, reducing the source of phlegm.
+Gan Cao harmonizes the ingredients, supports qi and harmonizes the middle."
+UI_BOOK_ENTRY_TITLE_SHA_SHEN_MAI_DONG_TANG,沙参麦冬汤,Sha Shen Mai Dong Tang
+UI_BOOK_ENTRY_BODY_SHA_SHEN_MAI_DONG_TANG,"沙参麦冬汤
+【出处】《温病条辨》
+【功效】清养肺胃，生津润燥
+【主治】肺阴虚
+【组成】
+君：沙参 三钱，麦门冬 三钱
+臣：玉竹 二钱，天花粉 一钱五分
+佐：扁豆 一钱五分，桑叶 一钱五分
+使：甘草 一钱
+【配伍】
+沙参、麦冬：养阴润肺、生津止渴，直补肺阴。
+玉竹、天花粉：增强养阴生津、润燥止咳，清虚热、润肺燥。
+桑叶：轻清宣肺、疏散虚热；
+扁豆：健脾养胃，培土生金，助生津之源。
+甘草：调和诸药，益气和中。","SHA SHEN MAI DONG TANG
+[Source] Wenbing Tiaobian
+[Actions] Nourishes and clears the Lung and Stomach, generates fluids and moistens Dryness
+[Indication] Lung yin Deficiency
+[Ingredients]
+Chief: Sha Shen 3 qian, Mai Men Dong 3 qian
+Deputy: Yu Zhu 2 qian, Tian Hua Fen 1 qian 5 fen
+Assistant: Bian Dou 1 qian 5 fen, Sang Ye 1 qian 5 fen
+Envoy: Gan Cao 1 qian
+[How the ingredients work together]
+Sha Shen and Mai Men Dong nourish yin, moisten the Lung and generate fluids to relieve thirst.
+Yu Zhu and Tian Hua Fen reinforce yin and fluid nourishment, moisten Dryness and ease cough and Deficiency Heat.
+Sang Ye gently disperses Lung qi and clears Deficiency Heat.
+Bian Dou strengthens the Spleen and nourishes the Stomach, supporting the source of body fluids.
+Gan Cao harmonizes the ingredients, supports qi and harmonizes the middle."
+UI_BOOK_ENTRY_TITLE_QING_QI_HUA_TAN_WAN,清气化痰丸,Qing Qi Hua Tan Wan
+UI_BOOK_ENTRY_BODY_QING_QI_HUA_TAN_WAN,"清气化痰丸
+【出处】《医方考》
+【功效】清热化痰，理气止咳
+【主治】痰热壅肺
+【组成】
+君：胆南星 一两五钱
+臣：半夏 一两五钱，瓜蒌仁 一两，黄芩 一两
+佐：杏仁 一两，陈皮 一两，枳实 一两，茯苓 一两
+使：生姜 三两
+【配伍】
+胆南星：清热化痰，专治痰热壅肺。
+瓜蒌仁：清热化痰、润肺下气、宽胸散结；
+黄芩：清泻肺火，助南星清化痰热。
+杏仁、半夏：降利肺气、化痰止咳
+陈皮、枳实：理气破结，气顺痰自消
+茯苓：健脾渗湿，杜绝生痰之源
+生姜：制胆南星、半夏之毒","QING QI HUA TAN WAN
+[Source] Yifang Kao
+[Actions] Clears Heat, transforms phlegm, regulates qi and eases cough
+[Indication] Phlegm-Heat congesting the Lung
+[Ingredients]
+Chief: Dan Nan Xing 1 liang 5 qian
+Deputy: Ban Xia 1 liang 5 qian, Gua Lou Ren 1 liang, Huang Qin 1 liang
+Assistant: Xing Ren 1 liang, Chen Pi 1 liang, Zhi Shi 1 liang, Fu Ling 1 liang
+Envoy: Sheng Jiang 3 liang
+[How the ingredients work together]
+Dan Nan Xing clears Heat and transforms phlegm, targeting Phlegm-Heat in the Lung.
+Gua Lou Ren clears Heat and phlegm, moistens the Lung, directs qi downward and relieves chest fullness.
+Huang Qin clears Lung Heat and strengthens Dan Nan Xing's effect on Phlegm-Heat.
+Xing Ren and Ban Xia direct Lung qi downward, transform phlegm and ease cough.
+Chen Pi and Zhi Shi break up qi stagnation so phlegm can disperse.
+Fu Ling supports the Spleen and drains Dampness, reducing the source of phlegm.
+Sheng Jiang tempers the toxicity of Dan Nan Xing and Ban Xia."
+UI_BOOK_ENTRY_TITLE_DA_QING_LONG_TANG,大青龙汤,Da Qing Long Tang
+UI_BOOK_ENTRY_BODY_DA_QING_LONG_TANG,"大青龙汤
+【出处】《伤寒论》
+【功效】发汗解表，兼清里热
+【主治】表寒里热
+【组成】
+君：麻黄 六钱
+臣：桂枝 二钱，石膏 一两
+佐：杏仁 三钱，生姜 三钱，大枣 三钱
+使：甘草 二钱
+【配伍】
+麻黄：发汗峻散，开表散寒，同时宣肺平喘。
+桂枝：助麻黄发汗解表，温通卫阳，散肌表寒邪，解决周身疼痛；
+石膏：辛甘大寒，专清郁于肌腠、肺胃之里热，除烦躁，制约麻黄辛温燥热之性，使发汗而不助热。
+杏仁：降利肺气，配麻黄平喘止咳；
+生姜：辛温，助解表，和胃散水气；
+大枣：补中滋液，防峻汗耗伤津液。
+炙甘草：调和诸药；缓麻黄峻烈之性，护中气；姜枣草合用，滋养营阴，防止大汗伤津。","DA QING LONG TANG
+[Source] Shanghan Lun
+[Actions] Promotes sweating to release the Exterior while clearing internal Heat
+[Indication] Exterior Cold with Interior Heat
+[Ingredients]
+Chief: Ma Huang 6 qian
+Deputy: Gui Zhi 2 qian, Shi Gao 1 liang
+Assistant: Xing Ren 3 qian, Sheng Jiang 3 qian, Da Zao 3 qian
+Envoy: Gan Cao 2 qian
+[How the ingredients work together]
+Ma Huang strongly promotes sweating, opens the Exterior, disperses Cold and helps ease wheezing.
+Gui Zhi supports Ma Huang in releasing the Exterior, warms defensive yang and eases body aches.
+Shi Gao clears Heat trapped within the tissues, Lung and Stomach, relieves agitation and balances Ma Huang's warming nature.
+Xing Ren directs Lung qi downward and works with Ma Huang to ease wheezing and cough.
+Sheng Jiang supports the release of the Exterior and harmonizes the Stomach.
+Da Zao supports the middle and body fluids to offset their loss through strong sweating.
+Prepared Gan Cao harmonizes the formula, tempers Ma Huang and protects the middle. Alongside Sheng Jiang and Da Zao, it helps protect nutritive yin and fluids."
+UI_BOOK_ENTRY_TITLE_XIAO_QING_LONG_TANG,小青龙汤,Xiao Qing Long Tang
+UI_BOOK_ENTRY_BODY_XIAO_QING_LONG_TANG,"小青龙汤
+【出处】《伤寒论》
+【功效】解表散寒，温肺化饮
+【主治】表寒里饮
+【组成】
+君：麻黄 三钱，桂枝 三钱
+臣：干姜 二钱，细辛 二钱
+佐：白芍 三钱，五味子 二钱，半夏 三钱
+使：甘草 二钱
+【配伍】
+麻黄、桂枝：麻黄发汗解表、宣肺平喘；桂枝解肌通阳，温散肌表风寒。
+干姜、细辛：干姜温脾肺，散脏腑寒邪、化水饮；细辛温散少阴寒饮，既助麻桂解表，又入肺内化伏饮。
+半夏：燥湿化痰，降逆止咳，消胸膈水饮痰浊；
+五味子：酸收敛肺止咳。防麻、桂、姜、辛辛温发散太过耗伤肺气，散收并用；
+白芍：酸寒敛阴和营。防诸辛温药耗伤阴血，制约燥烈之性。
+炙甘草：调和全方；益气补中，顾护脾胃，缓和麻、辛、干姜峻烈之性。","XIAO QING LONG TANG
+[Source] Shanghan Lun
+[Actions] Releases the Exterior, disperses Cold, warms the Lung and transforms retained fluids
+[Indication] Exterior Cold with internal retained fluids
+[Ingredients]
+Chief: Ma Huang 3 qian, Gui Zhi 3 qian
+Deputy: Gan Jiang 2 qian, Xi Xin 2 qian
+Assistant: Bai Shao 3 qian, Wu Wei Zi 2 qian, Ban Xia 3 qian
+Envoy: Gan Cao 2 qian
+[How the ingredients work together]
+Ma Huang promotes sweating, releases the Exterior and eases wheezing; Gui Zhi warms yang and disperses Wind-Cold at the surface.
+Gan Jiang warms the Spleen and Lung and transforms retained fluids. Xi Xin disperses Cold and helps release the Exterior and transform fluids in the Lung.
+Ban Xia dries Dampness, transforms phlegm, directs qi downward and reduces retained fluids in the chest.
+Wu Wei Zi astringes Lung qi and eases cough, tempering the dispersing action of the warming ingredients.
+Bai Shao preserves yin and the nutritive layer and tempers the drying ingredients.
+Prepared Gan Cao harmonizes the formula, supports the middle and tempers the stronger warming ingredients."
+UI_BOOK_ENTRY_TITLE_SI_JUN_ZI_TANG,四君子汤,Si Jun Zi Tang
+UI_BOOK_ENTRY_BODY_SI_JUN_ZI_TANG,"四君子汤
+【出处】《太平惠民和剂局方》
+【功效】益气健脾
+【主治】脾气虚
+【组成】
+君：人参 四钱
+臣：白术 三钱
+佐：茯苓 三钱
+使：甘草 二钱
+【配伍】
+人参：大补元气、益气健脾。
+白术：健脾燥湿，助人参运化。
+茯苓：健脾渗湿，宁心安神，使补而不滞。
+炙甘草：益气和中、调和诸药。","SI JUN ZI TANG
+[Source] Taiping Huimin Heji Jufang
+[Actions] Supports qi and strengthens the Spleen
+[Indication] Spleen qi Deficiency
+[Ingredients]
+Chief: Ren Shen 4 qian
+Deputy: Bai Zhu 3 qian
+Assistant: Fu Ling 3 qian
+Envoy: Gan Cao 2 qian
+[How the ingredients work together]
+Ren Shen strongly supports original qi and strengthens the Spleen.
+Bai Zhu strengthens the Spleen and dries Dampness, supporting Ren Shen's transforming function.
+Fu Ling supports the Spleen, drains Dampness and calms the spirit without causing stagnation.
+Prepared Gan Cao supports qi, harmonizes the middle and brings the ingredients together."
+UI_BOOK_ENTRY_TITLE_PING_WEI_SAN,平胃散,Ping Wei San
+UI_BOOK_ENTRY_BODY_PING_WEI_SAN,"平胃散
+【出处】《太平惠民和剂局方》
+【功效】燥湿运脾，行气和胃
+【主治】湿盛困脾
+【组成】
+君：苍术 三钱
+臣：厚朴 二钱
+佐：陈皮 二钱
+使：甘草 一钱
+【配伍】
+苍术：苦温燥湿、健脾运脾，专治湿困脾胃。
+厚朴：行气除满、燥湿化浊，消脘腹胀痞。
+陈皮：理气和胃、燥湿醒脾，使气机条达。
+炙甘草：益气和中、调和诸药；姜枣调和脾胃。","PING WEI SAN
+[Source] Taiping Huimin Heji Jufang
+[Actions] Dries Dampness, restores the Spleen's transport, moves qi and harmonizes the Stomach
+[Indication] Dampness overwhelming the Spleen
+[Ingredients]
+Chief: Cang Zhu 3 qian
+Deputy: Hou Po 2 qian
+Assistant: Chen Pi 2 qian
+Envoy: Gan Cao 1 qian
+[How the ingredients work together]
+Cang Zhu dries Dampness and strengthens the Spleen when Dampness obstructs the Spleen and Stomach.
+Hou Po moves qi, relieves fullness and transforms turbid Dampness in the upper abdomen.
+Chen Pi regulates qi, harmonizes the Stomach and dries Dampness.
+Prepared Gan Cao supports qi and harmonizes the formula; Sheng Jiang and Da Zao are also described as harmonizing the Spleen and Stomach."
+UI_BOOK_ENTRY_TITLE_LI_ZHONG_WAN,理中丸,Li Zhong Wan
+UI_BOOK_ENTRY_BODY_LI_ZHONG_WAN,"理中丸
+【出处】《伤寒论》
+【功效】温中祛寒，补气健脾
+【主治】脾阳虚
+【组成】
+君：干姜 五钱
+臣：人参 五钱
+佐：白术 五钱
+使：甘草 五钱
+【配伍】
+干姜：大辛大热，温中祛寒、振奋脾阳。
+人参：益气健脾，补益脾胃气虚之本。
+白术：健脾燥湿，助运化、利水湿。
+炙甘草：益气和中、调和诸药，缓急止痛。","LI ZHONG WAN
+[Source] Shanghan Lun
+[Actions] Warms the middle, dispels Cold, supports qi and strengthens the Spleen
+[Indication] Spleen yang Deficiency
+[Ingredients]
+Chief: Gan Jiang 5 qian
+Deputy: Ren Shen 5 qian
+Assistant: Bai Zhu 5 qian
+Envoy: Gan Cao 5 qian
+[How the ingredients work together]
+Gan Jiang strongly warms the middle, disperses Cold and invigorates Spleen yang.
+Ren Shen supports qi and the Spleen, addressing the underlying Spleen and Stomach Deficiency.
+Bai Zhu strengthens the Spleen and dries Dampness, supporting the transport of food and fluids.
+Prepared Gan Cao supports qi, harmonizes the middle and the ingredients, and eases spasmodic pain."
+UI_BOOK_ENTRY_TITLE_SHEN_LING_BAI_ZHU_SAN,参苓白术散,Shen Ling Bai Zhu San
+UI_BOOK_ENTRY_BODY_SHEN_LING_BAI_ZHU_SAN,"参苓白术散
+【出处】《太平惠民和剂局方》
+【功效】益气健脾，渗湿止泻
+【主治】脾虚湿盛
+【组成】
+君：人参 五钱，茯苓 五钱，白术 五钱
+臣：山药 五钱，莲子 三钱，扁豆 三钱，薏苡仁 七钱
+佐：砂仁 二钱，桔梗 二钱
+使：甘草 二钱
+【配伍】
+人参、白术、茯苓、炙甘草：即四君子汤，益气健脾、补益脾虚之本。
+山药、莲子：健脾益气、固肠止泻；
+扁豆、薏仁：健脾渗湿、利水除浊；
+砂仁：芳香醒脾、行气和胃，防补药滋腻碍胃；
+桔梗：宣利肺气、载药上行，培土生金，兼治肺虚久咳。","SHEN LING BAI ZHU SAN
+[Source] Taiping Huimin Heji Jufang
+[Actions] Supports qi, strengthens the Spleen, drains Dampness and relieves diarrhea
+[Indication] Spleen Deficiency with excess Dampness
+[Ingredients]
+Chief: Ren Shen 5 qian, Fu Ling 5 qian, Bai Zhu 5 qian
+Deputy: Shan Yao 5 qian, Lian Zi 3 qian, Bian Dou 3 qian, Yi Yi Ren 7 qian
+Assistant: Sha Ren 2 qian, Jie Geng 2 qian
+Envoy: Gan Cao 2 qian
+[How the ingredients work together]
+Ren Shen, Bai Zhu, Fu Ling and prepared Gan Cao form Si Jun Zi Tang, supporting qi and addressing the underlying Spleen Deficiency.
+Shan Yao and Lian Zi strengthen the Spleen and help secure the intestines.
+Bian Dou and Yi Yi Ren strengthen the Spleen and drain Dampness.
+Sha Ren aromatically awakens the Spleen, moves qi and harmonizes the Stomach to prevent rich tonics from causing stagnation.
+Jie Geng disperses Lung qi and guides the formula upward, also addressing chronic cough associated with Lung Deficiency."
+UI_BOOK_ENTRY_TITLE_HUO_XIANG_ZHENG_QI_SAN,藿香正气散,Huo Xiang Zheng Qi San
+UI_BOOK_ENTRY_BODY_HUO_XIANG_ZHENG_QI_SAN,"藿香正气散
+【出处】《太平惠民和剂局方》
+【功效】解表散寒，化湿和中，理气止呕
+【主治】外感风寒，内伤湿滞
+【组成】
+君：藿香 五钱
+臣：苏叶 三钱，白芷 三钱，半夏 四钱，厚朴 四钱
+佐：白术 四钱，苍术 四钱，陈皮 三钱，茯苓 五钱，大腹皮 五钱 ，桔梗 二钱
+使：甘草 二钱，生姜 二钱，大枣 二钱
+【配伍】
+藿香：芳香化湿、和中止呕，兼解表散寒，表里兼顾。
+紫苏、白芷：解表散寒、化湿辟秽，助藿香散外感风寒。
+陈皮、半夏、厚朴、大腹皮：理气燥湿、消胀除满、降逆止呕；
+白术、苍术、 茯苓：健脾祛湿、实脾止泻；
+桔梗：宣利肺气、载药上行。
+炙甘草、姜枣：调和脾胃，益气和中，调和诸药。","HUO XIANG ZHENG QI SAN
+[Source] Taiping Huimin Heji Jufang
+[Actions] Releases the Exterior, disperses Cold, transforms Dampness, harmonizes the middle and relieves nausea
+[Indication] External Wind-Cold with internal Dampness stagnation
+[Ingredients]
+Chief: Huo Xiang 5 qian
+Deputy: Su Ye 3 qian, Bai Zhi 3 qian, Ban Xia 4 qian, Hou Po 4 qian
+Assistant: Bai Zhu 4 qian, Cang Zhu 4 qian, Chen Pi 3 qian, Fu Ling 5 qian, Da Fu Pi 5 qian, Jie Geng 2 qian
+Envoy: Gan Cao 2 qian, Sheng Jiang 2 qian, Da Zao 2 qian
+[How the ingredients work together]
+Huo Xiang aromatically transforms Dampness, harmonizes the middle and relieves nausea while also dispersing external Wind-Cold.
+Su Ye and Bai Zhi release the Exterior, disperse Cold and transform Dampness.
+Chen Pi, Ban Xia, Hou Po and Da Fu Pi regulate qi, dry Dampness, relieve bloating and direct rebellious qi downward.
+Bai Zhu, Cang Zhu and Fu Ling strengthen the Spleen and remove Dampness.
+Jie Geng disperses Lung qi and guides the formula upward.
+Prepared Gan Cao, Sheng Jiang and Da Zao harmonize the Spleen and Stomach, support qi and harmonize the ingredients."
+UI_BOOK_ENTRY_TITLE_DANG_GUI_SI_NI_TANG,当归四逆汤,Dang Gui Si Ni Tang
+UI_BOOK_ENTRY_BODY_DANG_GUI_SI_NI_TANG,"当归四逆汤
+【出处】《伤寒论》
+【功效】温经散寒，养血通脉
+【主治】寒凝心脉
+【组成】
+君：当归 四钱
+臣：桂枝 三钱，白芍 三钱
+佐：细辛 一钱，木通 二钱
+使：甘草 二钱，大枣 二钱
+【配伍】
+当归：养血和血、温补肝血，濡养经脉。
+桂枝：温通经脉、宣通阳气；
+白芍：养血敛阴，缓急止痛；
+细辛：直入三阴，温经散寒、破寒凝。
+通草：通利经脉，引寒邪外泄。
+大枣、炙甘草益气健脾、调和诸药，养血以助脉道充盈。","DANG GUI SI NI TANG
+[Source] Shanghan Lun
+[Actions] Warms the channels, disperses Cold, nourishes blood and opens the vessels
+[Indication] Cold congealing in the Heart vessels
+[Ingredients]
+Chief: Dang Gui 4 qian
+Deputy: Gui Zhi 3 qian, Bai Shao 3 qian
+Assistant: Xi Xin 1 qian, Mu Tong 2 qian
+Envoy: Gan Cao 2 qian, Da Zao 2 qian
+[How the ingredients work together]
+Dang Gui nourishes and harmonizes blood, warms Liver blood and nourishes the channels.
+Gui Zhi warms and opens the channels and promotes the movement of yang qi.
+Bai Shao nourishes blood, preserves yin and eases spasms and pain.
+Xi Xin penetrates the yin channels, warms the channels and disperses congealed Cold.
+Tong Cao opens the channels and helps expel Cold.
+Da Zao and prepared Gan Cao support qi and the Spleen, harmonize the formula and help nourish blood."
+UI_BOOK_ENTRY_TITLE_DAO_CHI_SAN,导赤散,Dao Chi San
+UI_BOOK_ENTRY_BODY_DAO_CHI_SAN,"导赤散
+【出处】《小儿药证直诀》
+【功效】清心利水养阴
+【主治】心火亢盛
+【组成】
+君：生地黄 二钱，木通 二钱
+臣：竹叶 二钱
+佐：甘草 二钱
+使：
+【配伍】
+生地黄：凉血滋阴、清心降火，养阴以制心火。
+木通：清心泻火、利水通淋，导心火从小便而出。
+竹叶：清心除烦、淡渗利水，助木通清心导赤。
+生甘草：梢清热解毒、直达茎中，缓尿痛、调和诸药。","DAO CHI SAN
+[Source] Xiao'er Yaozheng Zhijue
+[Actions] Clears Heart Heat, promotes urination and nourishes yin
+[Indication] Excessive Heart fire
+[Ingredients]
+Chief: Sheng Di Huang 2 qian, Mu Tong 2 qian
+Deputy: Zhu Ye 2 qian
+Assistant: Gan Cao 2 qian
+Envoy:
+[How the ingredients work together]
+Sheng Di Huang cools blood, nourishes yin and clears Heart fire.
+Mu Tong clears Heart fire and promotes urination, guiding Heat out through urine.
+Zhu Ye clears the Heart, eases restlessness and promotes urination.
+The tip of raw Gan Cao clears Heat and soothes urinary pain while harmonizing the ingredients."
+UI_BOOK_ENTRY_TITLE_DI_TAN_TANG,涤痰汤,Di Tan Tang
+UI_BOOK_ENTRY_BODY_DI_TAN_TANG,"涤痰汤
+【出处】《太医院经验奇效良方大全》
+【功效】涤痰开窍，益气扶正
+【主治】痰迷心窍
+【组成】
+君：半夏 二钱五分，胆南星 二钱五分
+臣：枳实 二钱，陈皮 一钱五分
+佐：竹茹 一钱，茯苓 二钱，石菖蒲 一钱，人参 一钱
+使：生姜 一钱，甘草 一钱
+【配伍】
+半夏、陈皮：燥湿化痰、理气和胃，直祛痰湿之本。
+胆南星：清气化痰，助半夏化痰之力
+枳实、竹茹：清热化痰、破气开郁，降逆涤痰。
+石菖蒲：豁痰开窍、交通心肾、醒神益智；
+茯苓：健脾渗湿，杜绝生痰之源；
+人参：益气扶正，扶助正气以运痰。
+甘草、生姜：调和诸药，益气和中，制胆南星、半夏之毒。","DI TAN TANG
+[Source] Taiyiyuan Formula Collection
+[Actions] Clears phlegm and opens the sensory orifices; supports qi and healthy functions
+[Indication] Phlegm clouding the Heart orifices
+[Ingredients]
+Chief: Ban Xia 2 qian 5 fen, Dan Nan Xing 2 qian 5 fen
+Deputy: Zhi Shi 2 qian, Chen Pi 1 qian 5 fen
+Assistant: Zhu Ru 1 qian, Fu Ling 2 qian, Shi Chang Pu 1 qian, Ren Shen 1 qian
+Envoy: Sheng Jiang 1 qian, Gan Cao 1 qian
+[How the ingredients work together]
+Ban Xia and Chen Pi dry Dampness, transform phlegm, regulate qi and harmonize the Stomach.
+Dan Nan Xing clears phlegm and reinforces Ban Xia.
+Zhi Shi and Zhu Ru clear Heat and phlegm, break qi stagnation and direct rebellious qi downward.
+Shi Chang Pu transforms phlegm, opens the orifices, connects Heart and Kidney functions and clears the mind.
+Fu Ling strengthens the Spleen and drains Dampness, reducing the source of phlegm.
+Ren Shen supports qi and healthy functions so the body can move phlegm.
+Gan Cao and Sheng Jiang harmonize the ingredients and temper the toxicity of Dan Nan Xing and Ban Xia."
+UI_BOOK_ENTRY_TITLE_YANG_XIN_TANG,养心汤,Yang Xin Tang
+UI_BOOK_ENTRY_BODY_YANG_XIN_TANG,"养心汤
+【出处】《仁斋直指方论》
+【功效】益气补血，养心安神
+【主治】心气虚
+【组成】
+君：黄芪 五钱，人参 三钱
+臣：当归 五钱，茯神 五钱，茯苓 五钱
+佐：酸枣仁 三钱，柏子仁 三钱，远志 三钱，五味子 三钱，川芎 五钱，半夏 五钱，肉桂 三钱
+使：甘草 四钱，生姜 一钱，大枣 一钱
+【配伍】
+人参、黄芪：大补心气，固元益气，直补心气之本。
+当归、川芎：养血和营，气阴双补，气血互生。
+茯苓、茯神：健脾宁心、安神定悸
+枣仁、柏子仁、远志、五味子：养心安神、敛心止汗、交通心肾
+半夏：和胃化痰，防滋补壅滞
+肉桂：少佐温通，助心阳以鼓心气
+炙甘草、生姜、大枣：益气和中，调和诸药，制半夏之毒。","YANG XIN TANG
+[Source] Renzhai Zhizhi Fanglun
+[Actions] Supports qi, nourishes blood, nourishes the Heart and calms the spirit
+[Indication] Heart qi Deficiency
+[Ingredients]
+Chief: Huang Qi 5 qian, Ren Shen 3 qian
+Deputy: Dang Gui 5 qian, Fu Shen 5 qian, Fu Ling 5 qian
+Assistant: Suan Zao Ren 3 qian, Bai Zi Ren 3 qian, Yuan Zhi 3 qian, Wu Wei Zi 3 qian, Chuan Xiong 5 qian, Ban Xia 5 qian, Rou Gui 3 qian
+Envoy: Gan Cao 4 qian, Sheng Jiang 1 qian, Da Zao 1 qian
+[How the ingredients work together]
+Ren Shen and Huang Qi strongly support Heart qi and address its underlying Deficiency.
+Dang Gui and Chuan Xiong nourish and move blood, supporting qi and blood together.
+Fu Ling and Fu Shen strengthen the Spleen, calm the Heart and settle palpitations.
+Suan Zao Ren, Bai Zi Ren, Yuan Zhi and Wu Wei Zi nourish the Heart, calm the spirit and reduce sweating.
+Ban Xia harmonizes the Stomach and transforms phlegm to prevent rich tonics from causing stagnation.
+A small amount of Rou Gui warms and promotes Heart yang.
+Prepared Gan Cao, Sheng Jiang and Da Zao support the middle, harmonize the formula and temper Ban Xia."
+UI_BOOK_ENTRY_TITLE_XUE_FU_ZHU_YU_TANG,血府逐瘀汤,Xue Fu Zhu Yu Tang
+UI_BOOK_ENTRY_BODY_XUE_FU_ZHU_YU_TANG,"血府逐瘀汤
+【出处】《医林改错》
+【功效】活血祛瘀，行气止痛
+【主治】心脉瘀阻
+【组成】
+君：桃仁 四钱，红花 三钱
+臣：赤芍 二钱，川芎 二钱，牛膝 三钱
+佐：当归 三钱，生地黄 三钱，桔梗 二钱，枳壳 三钱，柴胡 一钱
+使：甘草 二钱
+【配伍】
+桃仁、红花：破血行瘀，疏通胸中凝滞瘀血，直攻血府瘀阻，专治瘀血刺痛，为活血核心。
+川芎、赤芍：川芎上行头目、疏通胸胁血脉，活血行气；赤芍凉血散瘀，缓胸胁刺痛。
+牛膝：活血祛瘀，引胸中瘀血向下排出，化解胸中瘀堵。
+柴胡、枳壳：柴胡疏肝解郁，升发胸中之气；枳壳宽胸行气。气行则血行，解决气滞致瘀之本，缓解胸闷胀痛。
+桔梗：宣开肺气、上行胸中，载活血药直达血府，与牛膝一升一降，疏通胸膈气机血脉。
+当归、生地：当归补血活血，化瘀而不伤新血；生地滋阴凉血，防活血药耗伤阴血，祛瘀不伤正。
+使药：调和诸药。","XUE FU ZHU YU TANG
+[Source] Yilin Gaicuo
+[Actions] Moves blood, dispels stasis, moves qi and relieves pain
+[Indication] Blood stasis obstructing the Heart vessels
+[Ingredients]
+Chief: Tao Ren 4 qian, Hong Hua 3 qian
+Deputy: Chi Shao 2 qian, Chuan Xiong 2 qian, Niu Xi 3 qian
+Assistant: Dang Gui 3 qian, Sheng Di Huang 3 qian, Jie Geng 2 qian, Zhi Qiao 3 qian, Chai Hu 1 qian
+Envoy: Gan Cao 2 qian
+[How the ingredients work together]
+Tao Ren and Hong Hua break up blood stasis in the chest and address stabbing pain.
+Chuan Xiong moves blood and qi through the chest and flanks; Chi Shao cools blood, disperses stasis and eases pain.
+Niu Xi moves blood and guides stasis downward from the chest.
+Chai Hu releases constrained Liver qi while Zhi Qiao moves qi in the chest; moving qi helps blood move.
+Jie Geng disperses Lung qi and guides blood-moving herbs upward. With Niu Xi it promotes movement through the chest in both directions.
+Dang Gui nourishes and moves blood, while Sheng Di Huang nourishes yin and cools blood, helping protect healthy blood as stasis is cleared.
+The envoy herb harmonizes the ingredients."
+UI_BOOK_ENTRY_TITLE_TIAN_WANG_BU_XIN_DAN,天王补心丹,Tian Wang Bu Xin Dan
+UI_BOOK_ENTRY_BODY_TIAN_WANG_BU_XIN_DAN,"天王补心丹
+【出处】《金匮要略》
+【功效】滋阴养血，补心安神
+【主治】心阴虚
+【组成】
+君：生地黄 四两
+臣：天门冬 一两，麦门冬 一两，酸枣仁 一两，柏子仁 一两，当归一两
+佐：人参五钱，茯苓 五钱，玄参 五钱，丹参 五钱，远志 五钱，五味子 五钱
+使：桔梗 五钱
+【配伍】
+生地黄：重用甘寒，滋阴养血、清心降火，直补心肾阴血。
+天冬、麦冬、玄参：滋阴清热、生津润燥，壮水制虚火；
+当归、丹参：养血和血、清心安神。
+人参、茯苓：益气宁心；
+酸枣仁、柏子仁、五味子：养心安神、敛汗宁心；
+远志：交通心肾、安神益智。
+桔梗：载药上行入心经，引药归经。","TIAN WANG BU XIN DAN
+[Source] Jingui Yaolue
+[Actions] Nourishes yin and blood, supports the Heart and calms the spirit
+[Indication] Heart yin Deficiency
+[Ingredients]
+Chief: Sheng Di Huang 4 liang
+Deputy: Tian Men Dong 1 liang, Mai Men Dong 1 liang, Suan Zao Ren 1 liang, Bai Zi Ren 1 liang, Dang Gui 1 liang
+Assistant: Ren Shen 5 qian, Fu Ling 5 qian, Xuan Shen 5 qian, Dan Shen 5 qian, Yuan Zhi 5 qian, Wu Wei Zi 5 qian
+Envoy: Jie Geng 5 qian
+[How the ingredients work together]
+A large amount of Sheng Di Huang nourishes yin and blood, clears Heart fire and supports the Heart and Kidney.
+Tian Men Dong, Mai Men Dong and Xuan Shen nourish yin, clear Heat and generate fluids to restrain Deficiency fire.
+Dang Gui and Dan Shen nourish and harmonize blood and calm the Heart.
+Ren Shen and Fu Ling support qi and settle the Heart.
+Suan Zao Ren, Bai Zi Ren and Wu Wei Zi nourish the Heart, calm the spirit and reduce sweating.
+Yuan Zhi supports communication between the Heart and Kidney and calms the spirit.
+Jie Geng guides the formula upward toward the Heart channel."
+UI_BOOK_ENTRY_TITLE_GUI_ZHI_GAN_CAO_TANG,桂枝甘草汤,Gui Zhi Gan Cao Tang
+UI_BOOK_ENTRY_BODY_GUI_ZHI_GAN_CAO_TANG,"桂枝甘草汤
+【出处】《伤寒论》
+【功效】温补心阳，益气定悸
+【主治】心阳虚
+【组成】
+君：桂枝 四钱
+臣：甘草 二钱
+佐：
+使：
+【配伍】
+桂枝：辛甘温，温通心阳、平冲降逆、温经通脉。
+炙甘草：益气补中、缓急养心，甘温益气。","GUI ZHI GAN CAO TANG
+[Source] Shanghan Lun
+[Actions] Warms and supports Heart yang, strengthens qi and settles palpitations
+[Indication] Heart yang Deficiency
+[Ingredients]
+Chief: Gui Zhi 4 qian
+Deputy: Gan Cao 2 qian
+Assistant:
+Envoy:
+[How the ingredients work together]
+Gui Zhi warms Heart yang, calms rising qi and warms the channels and vessels.
+Prepared Gan Cao supports qi and the middle, relaxes urgency and nourishes the Heart."
+UI_BOOK_ENTRY_TITLE_HUANG_LIAN_WEN_DAN_TANG,黄连温胆汤,Huang Lian Wen Dan Tang
+UI_BOOK_ENTRY_BODY_HUANG_LIAN_WEN_DAN_TANG,"黄连温胆汤
+【出处】《备急千金要方》
+【功效】清热化痰，和中安神
+【主治】痰火扰心
+【组成】
+君：黄连 三钱
+臣：半夏 四钱，竹茹 五钱
+佐：陈皮 四钱，枳实 四钱，茯苓 四钱
+使：甘草 二钱，生姜 一钱，大枣 一钱
+【配伍】
+黄连：苦寒直折，清心泻火、燥湿清热，专清痰火。
+半夏：燥湿化痰；
+竹茹：清热化痰、除烦安神。
+陈皮：理气化痰；
+枳实：破气消痞、导痰下行；
+茯苓：健脾渗湿，绝生痰之源。
+甘草:调和诸药，和中缓急。
+生姜：和胃止呕，制半夏之毒
+大枣：益气补中，调和脾胃","HUANG LIAN WEN DAN TANG
+[Source] Beiji Qianjin Yaofang
+[Actions] Clears Heat, transforms phlegm, harmonizes the middle and calms the spirit
+[Indication] Phlegm-Fire disturbing the Heart
+[Ingredients]
+Chief: Huang Lian 3 qian
+Deputy: Ban Xia 4 qian, Zhu Ru 5 qian
+Assistant: Chen Pi 4 qian, Zhi Shi 4 qian, Fu Ling 4 qian
+Envoy: Gan Cao 2 qian, Sheng Jiang 1 qian, Da Zao 1 qian
+[How the ingredients work together]
+Huang Lian clears Heart fire and dries Dampness, targeting Phlegm-Fire.
+Ban Xia dries Dampness and transforms phlegm.
+Zhu Ru clears Heat and phlegm, relieves restlessness and calms the spirit.
+Chen Pi regulates qi and transforms phlegm.
+Zhi Shi breaks qi stagnation and directs phlegm downward.
+Fu Ling strengthens the Spleen and drains Dampness, reducing the source of phlegm.
+Gan Cao harmonizes the ingredients and the middle.
+Sheng Jiang harmonizes the Stomach, eases nausea and tempers Ban Xia.
+Da Zao supports qi and the middle and harmonizes the Spleen and Stomach."
+UI_BOOK_ENTRY_TITLE_GUI_PI_TANG,归脾汤,Gui Pi Tang
+UI_BOOK_ENTRY_BODY_GUI_PI_TANG,"归脾汤
+【出处】《严氏济生方》
+【功效】益气补血，健脾养心
+【主治】心脾两虚
+【组成】
+君：黄芪 一两，人参 五钱
+臣：龙眼 五钱，白术 五钱，当归 五钱，酸枣仁 六钱
+佐：茯神 五钱，远志 三钱，木香 二钱
+使：甘草 二钱，生姜 一钱，大枣 一钱
+【配伍】
+黄芪、人参：大补脾气，益气生血。
+当归、龙眼：肉养血补心、安神。
+白术：助健脾；
+酸枣仁、茯神：宁心安神；
+远志：安神益智、交通心肾；
+木香：理气醒脾，防滋补壅滞碍胃。
+炙甘草、姜枣：益气和中、调和诸药，助脾胃生化气血。","GUI PI TANG
+[Source] Yanshi Jisheng Fang
+[Actions] Supports qi, nourishes blood, strengthens the Spleen and nourishes the Heart
+[Indication] Heart and Spleen Deficiency
+[Ingredients]
+Chief: Huang Qi 1 liang, Ren Shen 5 qian
+Deputy: Long Yan 5 qian, Bai Zhu 5 qian, Dang Gui 5 qian, Suan Zao Ren 6 qian
+Assistant: Fu Shen 5 qian, Yuan Zhi 3 qian, Mu Xiang 2 qian
+Envoy: Gan Cao 2 qian, Sheng Jiang 1 qian, Da Zao 1 qian
+[How the ingredients work together]
+Huang Qi and Ren Shen strongly strengthen Spleen qi and support blood production.
+Dang Gui and Long Yan nourish blood and the Heart and calm the spirit.
+Bai Zhu strengthens the Spleen.
+Suan Zao Ren and Fu Shen calm the Heart and spirit.
+Yuan Zhi calms the spirit, supports mental clarity and connects Heart and Kidney functions.
+Mu Xiang moves qi and awakens the Spleen so rich tonics do not burden the Stomach.
+Prepared Gan Cao, Sheng Jiang and Da Zao support the middle and harmonize the ingredients, helping the Spleen and Stomach produce qi and blood."
+UI_BOOK_ENTRY_TITLE_LONG_DAN_XIE_GAN_TANG,龙胆泻肝汤,Long Dan Xie Gan Tang
+UI_BOOK_ENTRY_BODY_LONG_DAN_XIE_GAN_TANG,"龙胆泻肝汤
+【出处】《兰室秘藏》
+【功效】清泻肝胆实火，清利肝经湿热
+【主治】肝火上炎
+【组成】
+君：龙胆草 二钱
+臣：黄芩 三钱，栀子 三钱
+佐：泽泻四钱，木通三钱，车前子 三钱，当归 三钱，生地黄 六钱，柴胡 三钱
+使：甘草 二钱
+【配伍】
+龙胆草：大苦大寒，直泻肝胆实火、清利下焦湿热。
+黄芩、栀子：苦寒泻火，清热燥湿，助龙胆草清泻肝火。
+泽泻、木通、车前子：清热利湿，导湿热从小便而去；
+生地黄、当归：滋阴养血，防苦寒药燥烈伤阴；
+柴胡：疏肝引经，畅达肝胆气机。
+生甘草清热解毒、调和诸药，护胃安中。","LONG DAN XIE GAN TANG
+[Source] Lanshi Micang
+[Actions] Drains Excess fire from the Liver and Gallbladder and clears Damp-Heat from the Liver channel
+[Indication] Rising Liver fire
+[Ingredients]
+Chief: Long Dan Cao 2 qian
+Deputy: Huang Qin 3 qian, Zhi Zi 3 qian
+Assistant: Ze Xie 4 qian, Mu Tong 3 qian, Che Qian Zi 3 qian, Dang Gui 3 qian, Sheng Di Huang 6 qian, Chai Hu 3 qian
+Envoy: Gan Cao 2 qian
+[How the ingredients work together]
+Long Dan Cao strongly drains Excess fire from the Liver and Gallbladder and clears Damp-Heat in the lower body.
+Huang Qin and Zhi Zi clear Heat and dry Dampness, reinforcing Long Dan Cao.
+Ze Xie, Mu Tong and Che Qian Zi promote urination to carry Damp-Heat away.
+Sheng Di Huang and Dang Gui nourish yin and blood to offset the drying nature of the bitter, cooling herbs.
+Chai Hu frees constrained Liver qi and guides the formula toward the Liver and Gallbladder channels.
+Raw Gan Cao clears Heat, harmonizes the formula and protects the Stomach."
+UI_BOOK_ENTRY_TITLE_NUAN_GAN_JIAN,暖肝煎,Nuan Gan Jian
+UI_BOOK_ENTRY_BODY_NUAN_GAN_JIAN,"暖肝煎
+【出处】《景岳全书》
+【功效】温补肝肾，行气散寒
+【主治】寒滞肝脉
+【组成】
+君：肉桂 一钱，茴香 二钱
+臣：当归 二钱，枸杞子 三钱
+佐：乌药 二钱，茯苓 二钱，沉香 一钱
+使：生姜 一钱
+【配伍】
+肉桂：温肾暖肝、散寒止痛；
+茴香：暖肝理气、专治寒疝睾丸冷痛。
+当归、枸杞：养血补肝、温补肝肾，扶正固本。
+乌药：行气散寒、疏肝止痛；
+沉香：降气暖肝、下气止痛；
+茯苓：健脾渗湿，助肝肾气化。
+生姜：散寒和胃，辅助中焦","NUAN GAN JIAN
+[Source] Jingyue Quanshu
+[Actions] Warms and supports the Liver and Kidney, moves qi and disperses Cold
+[Indication] Cold stagnating in the Liver channel
+[Ingredients]
+Chief: Rou Gui 1 qian, Hui Xiang 2 qian
+Deputy: Dang Gui 2 qian, Gou Qi Zi 3 qian
+Assistant: Wu Yao 2 qian, Fu Ling 2 qian, Chen Xiang 1 qian
+Envoy: Sheng Jiang 1 qian
+[How the ingredients work together]
+Rou Gui warms the Kidney and Liver, disperses Cold and eases pain.
+Hui Xiang warms the Liver and moves qi, addressing Cold pain in the testicles.
+Dang Gui and Gou Qi Zi nourish Liver blood and support the Liver and Kidney.
+Wu Yao moves qi, disperses Cold and eases Liver-related pain.
+Chen Xiang directs qi downward, warms the Liver and eases pain.
+Fu Ling strengthens the Spleen and drains Dampness.
+Sheng Jiang disperses Cold and harmonizes the Stomach."
+UI_BOOK_ENTRY_TITLE_CHAI_HU_SHU_GAN_SAN,柴胡疏肝散,Chai Hu Shu Gan San
+UI_BOOK_ENTRY_BODY_CHAI_HU_SHU_GAN_SAN,"柴胡疏肝散
+【出处】《景岳全书》
+【功效】疏肝解郁，行气止痛
+【主治】肝气郁结
+【组成】君：柴胡 二钱
+臣：香附 一钱五分钱，川芎 一钱五分
+佐：陈皮 二钱，枳壳 一钱五分，白芍 一钱五分
+使：甘草 五分
+【配伍】
+柴胡：疏肝解郁、调畅气机，直入肝胆疏泄郁滞。
+香附:理气疏肝、止痛；
+川芎:行气活血、通络止痛。
+枳壳、陈皮:理气行滞、宽胸除胀；
+白芍:柔肝缓急、养阴和营，防理气药耗伤肝阴。
+炙甘草:调和诸药，配白芍酸甘化阴、缓急止痛。","CHAI HU SHU GAN SAN
+[Source] Jingyue Quanshu
+[Actions] Spreads Liver qi, relieves constraint, moves qi and eases pain
+[Indication] Liver qi stagnation
+[Ingredients]
+Chief: Chai Hu 2 qian
+Deputy: Xiang Fu 1 qian 5 fen, Chuan Xiong 1 qian 5 fen
+Assistant: Chen Pi 2 qian, Zhi Qiao 1 qian 5 fen, Bai Shao 1 qian 5 fen
+Envoy: Gan Cao 5 fen
+[How the ingredients work together]
+Chai Hu releases constrained Liver qi and promotes its free movement.
+Xiang Fu regulates Liver qi and eases pain.
+Chuan Xiong moves qi and blood through the channels to ease pain.
+Zhi Qiao and Chen Pi move stagnant qi, open the chest and relieve distension.
+Bai Shao softens the Liver, nourishes yin and protects it from the dispersing herbs.
+Prepared Gan Cao harmonizes the ingredients; together with Bai Shao, it eases spasms and pain."
+UI_BOOK_ENTRY_TITLE_SI_WU_TANG,四物汤,Si Wu Tang
+UI_BOOK_ENTRY_BODY_SI_WU_TANG,"四物汤
+【出处】《太平惠民和剂局方》
+【功效】补血调血
+【主治】肝血虚
+【组成】
+君：熟地黄 四钱
+臣：当归 三钱
+佐：白芍 三钱，川芎 二钱
+使：
+【配伍】
+熟地黄：甘温味厚，滋阴补血、填精益髓，为补血之本。
+当归：补血养肝、活血调经，既补又行，补而不滞。
+白芍：养血敛阴、柔肝缓急，濡养筋脉。
+川芎：行气活血、疏肝通络，使补而不壅、补血不滞气。","SI WU TANG
+[Source] Taiping Huimin Heji Jufang
+[Actions] Nourishes and regulates blood
+[Indication] Liver blood Deficiency
+[Ingredients]
+Chief: Shu Di Huang 4 qian
+Deputy: Dang Gui 3 qian
+Assistant: Bai Shao 3 qian, Chuan Xiong 2 qian
+Envoy:
+[How the ingredients work together]
+Shu Di Huang nourishes yin and blood, replenishes essence and supports marrow.
+Dang Gui nourishes Liver blood and moves blood, providing nourishment without causing stagnation.
+Bai Shao nourishes blood and yin, softens the Liver and nourishes the sinews.
+Chuan Xiong moves qi and blood through the channels so blood can be nourished without becoming stagnant."
+UI_BOOK_ENTRY_TITLE_GE_XIA_ZHU_YU_TANG,膈下逐瘀汤,Ge Xia Zhu Yu Tang
+UI_BOOK_ENTRY_BODY_GE_XIA_ZHU_YU_TANG,"膈下逐瘀汤
+【出处】《医林改错》
+【功效】活血祛瘀，行气止痛。
+【主治】肝血瘀滞
+【组成】
+君：当归 三钱，川芎 二钱，赤芍 二钱
+臣：桃仁 三钱，红花 三钱，五灵脂 二钱，丹皮 二钱
+佐：香附 一钱，乌药 二钱，枳壳 一钱，延胡索 一钱
+使：甘草 三钱
+【配伍】
+桃仁、红花：破血逐瘀；
+五灵脂：专散胸腹瘀血、化瘀止痛，共主散膈下深部瘀血。
+当归：养血活血，散瘀不伤血；
+川芎：行气活血；
+赤芍、丹皮：凉血散瘀，清瘀久郁热。
+香附：疏肝行气；
+乌药：温散下焦膈下寒凝气滞；
+枳壳：宽中下气；
+延胡索：行气活血止痛。
+甘草：调和诸药，缓急止痛，缓和活血破瘀药峻烈之性。","GE XIA ZHU YU TANG
+[Source] Yilin Gaicuo
+[Actions] Moves blood, dispels stasis, moves qi and eases pain
+[Indication] Stagnant Liver blood
+[Ingredients]
+Chief: Dang Gui 3 qian, Chuan Xiong 2 qian, Chi Shao 2 qian
+Deputy: Tao Ren 3 qian, Hong Hua 3 qian, Wu Ling Zhi 2 qian, Dan Pi 2 qian
+Assistant: Xiang Fu 1 qian, Wu Yao 2 qian, Zhi Qiao 1 qian, Yan Hu Suo 1 qian
+Envoy: Gan Cao 3 qian
+[How the ingredients work together]
+Tao Ren and Hong Hua break up blood stasis.
+Wu Ling Zhi disperses deep stasis beneath the diaphragm and eases pain.
+Dang Gui nourishes and moves blood, dispersing stasis without depleting it.
+Chuan Xiong moves qi and blood.
+Chi Shao and Dan Pi cool blood and disperse stasis and lingering Heat.
+Xiang Fu spreads Liver qi.
+Wu Yao warms and disperses Cold and qi stagnation beneath the diaphragm.
+Zhi Qiao eases fullness and directs qi downward.
+Yan Hu Suo moves qi and blood and eases pain.
+Gan Cao harmonizes the ingredients, eases spasms and tempers the stronger blood-moving herbs."
+UI_BOOK_ENTRY_TITLE_YI_GUAN_JIAN,一贯煎,Yi Guan Jian
+UI_BOOK_ENTRY_BODY_YI_GUAN_JIAN,"一贯煎
+【出处】《柳州医话》
+【功效】滋阴疏肝
+【主治】肝阴虚
+【组成】
+君：生地黄 一两
+臣：枸杞子 六钱，沙参 三钱，麦门冬 三钱，当归 三钱
+佐：川楝子 一钱五分
+使：
+【配伍】
+生地黄：重用滋阴养血、补益肝肾，直补肝阴之本。
+枸杞：滋补肝肾、填精养阴；
+当归：养血柔肝、濡养经脉。
+北沙参、麦冬：养阴生津、润肺养胃，滋水以涵木；
+川楝子：苦寒疏肝泄热、行气止痛，疏肝而不伤阴。","YI GUAN JIAN
+[Source] Liuzhou Yihua
+[Actions] Nourishes yin and spreads Liver qi
+[Indication] Liver yin Deficiency
+[Ingredients]
+Chief: Sheng Di Huang 1 liang
+Deputy: Gou Qi Zi 6 qian, Sha Shen 3 qian, Mai Men Dong 3 qian, Dang Gui 3 qian
+Assistant: Chuan Lian Zi 1 qian 5 fen
+Envoy:
+[How the ingredients work together]
+A large amount of Sheng Di Huang nourishes yin and blood in the Liver and Kidney.
+Gou Qi Zi supports the Liver and Kidney and nourishes essence and yin.
+Dang Gui nourishes blood, softens the Liver and nourishes the channels.
+Sha Shen and Mai Men Dong nourish yin, generate fluids and moisten the Lung and Stomach.
+Chuan Lian Zi clears Heat, moves Liver qi and eases pain without depleting yin."
+UI_BOOK_ENTRY_TITLE_GOU_TENG_SAN,钩藤散,Gou Teng San
+UI_BOOK_ENTRY_BODY_GOU_TENG_SAN,"钩藤散
+【出处】《普济本事方》
+【功效】平肝息风，清热化痰，益气养阴
+【主治】肝阳上亢
+【组成】
+君：钩藤 三钱，菊花 三钱
+臣：防风 三钱，石膏 三钱
+佐：茯苓 三钱，半夏 三钱，陈皮 三钱，人参 三钱
+使：甘草 三钱，生姜 二钱
+【配伍】
+钩藤、菊花：平肝息风、清利头目
+石膏：清热泻火、除烦止晕
+防风：祛风解痉、载药上行
+半夏、陈皮、茯苓：燥湿化痰、和胃降逆
+麦冬、人参：益气养阴、扶正固本
+茯神：宁心安神
+炙甘草、生姜+调和诸药、和胃止呕、制半夏之毒","GOU TENG SAN
+[Source] Puji Benshi Fang
+[Actions] Calms the Liver and Wind, clears Heat and phlegm, and supports qi and yin
+[Indication] Rising Liver yang
+[Ingredients]
+Chief: Gou Teng 3 qian, Ju Hua 3 qian
+Deputy: Fang Feng 3 qian, Shi Gao 3 qian
+Assistant: Fu Ling 3 qian, Ban Xia 3 qian, Chen Pi 3 qian, Ren Shen 3 qian
+Envoy: Gan Cao 3 qian, Sheng Jiang 2 qian
+[How the ingredients work together]
+Gou Teng and Ju Hua calm Liver Wind and clear the head and eyes.
+Shi Gao clears Heat, relieves agitation and dizziness.
+Fang Feng dispels Wind, eases spasms and guides the formula upward.
+Ban Xia, Chen Pi and Fu Ling dry Dampness, transform phlegm and harmonize the Stomach.
+Mai Men Dong and Ren Shen support qi and yin and strengthen healthy functions.
+Fu Shen calms the Heart and spirit.
+Prepared Gan Cao and Sheng Jiang harmonize the formula, harmonize the Stomach and temper Ban Xia."
+UI_BOOK_ENTRY_TITLE_XIAO_YAO_SAN,逍遥散,Xiao Yao San
+UI_BOOK_ENTRY_BODY_XIAO_YAO_SAN,"逍遥散
+【出处】《太平惠民和剂局方》
+【功效】疏肝解郁，养血健脾
+【主治】肝脾不和（肝郁脾虚）
+【组成】
+君：柴胡 三钱
+臣：当归 三钱，白芍 三钱
+佐：白术 三钱，茯苓 三钱，生姜 一钱，薄荷 一钱
+使：甘草 一钱
+【配伍】
+柴胡：疏肝解郁、条达肝气，疏散郁滞。
+当归、白芍：养血柔肝，补肝体、缓肝急；防肝郁化火伤阴。
+白术、茯苓：健脾祛湿、培土荣木；
+生姜：温胃和中、调和气血。
+薄荷：助柴胡疏肝透热、疏散郁遏；
+炙甘草：益气补中，调和诸药；合白芍缓急止痛。","XIAO YAO SAN
+[Source] Taiping Huimin Heji Jufang
+[Actions] Spreads Liver qi, relieves constraint, nourishes blood and strengthens the Spleen
+[Indication] Liver-Spleen disharmony with Liver constraint and Spleen Deficiency
+[Ingredients]
+Chief: Chai Hu 3 qian
+Deputy: Dang Gui 3 qian, Bai Shao 3 qian
+Assistant: Bai Zhu 3 qian, Fu Ling 3 qian, Sheng Jiang 1 qian, Bo He 1 qian
+Envoy: Gan Cao 1 qian
+[How the ingredients work together]
+Chai Hu spreads constrained Liver qi.
+Dang Gui and Bai Shao nourish blood, soften the Liver and protect yin.
+Bai Zhu and Fu Ling strengthen the Spleen and remove Dampness.
+Sheng Jiang warms and harmonizes the Stomach and supports qi and blood.
+Bo He supports Chai Hu in spreading Liver qi and clearing constrained Heat.
+Prepared Gan Cao supports qi, harmonizes the ingredients and works with Bai Shao to ease pain."
+UI_BOOK_ENTRY_TITLE_REN_SHEN_GE_JIE_SAN,人参蛤蚧散,Ren Shen Ge Jie San
+UI_BOOK_ENTRY_BODY_REN_SHEN_GE_JIE_SAN,"人参蛤蚧散
+【出处】《博济方》
+【功效】补肺益肾，纳气定喘，止咳化痰
+【主治】肾不纳气
+【组成】
+君：蛤蚧 五钱，人参 四钱
+臣：知母 三钱，贝母 三钱，桑白皮 三钱
+佐：茯苓 四钱，杏仁 四钱
+使：甘草 三钱
+【配伍】
+蛤蚧：补肺益肾、温肾纳气、定喘止嗽，专治肾不纳气虚喘。
+人参：大补元气、补益肺气，助蛤蚧固本益气。
+杏仁、贝母：润肺化痰、降气止咳
+桑白皮、知母：清泻肺热、润燥止咳
+茯苓：健脾渗湿、杜绝生痰之源
+炙甘草：益气和中，调和诸药。","REN SHEN GE JIE SAN
+[Source] Boji Fang
+[Actions] Supports the Lung and Kidney, helps the Kidney grasp qi, eases wheezing and transforms phlegm
+[Indication] Kidney failing to grasp qi
+[Ingredients]
+Chief: Ge Jie 5 qian, Ren Shen 4 qian
+Deputy: Zhi Mu 3 qian, Bei Mu 3 qian, Sang Bai Pi 3 qian
+Assistant: Fu Ling 4 qian, Xing Ren 4 qian
+Envoy: Gan Cao 3 qian
+[How the ingredients work together]
+Ge Jie supports the Lung and Kidney, warms the Kidney and helps it grasp qi, easing Deficiency-related wheezing.
+Ren Shen supports original and Lung qi, reinforcing the underlying functions.
+Xing Ren and Bei Mu moisten the Lung, transform phlegm, direct qi downward and ease cough.
+Sang Bai Pi and Zhi Mu clear Lung Heat and moisten Dryness.
+Fu Ling strengthens the Spleen and drains Dampness, reducing the source of phlegm.
+Prepared Gan Cao supports qi, harmonizes the middle and brings the ingredients together."
+UI_BOOK_ENTRY_TITLE_LIU_WEI_DI_HUANG_WAN,六味地黄丸,Liu Wei Di Huang Wan
+UI_BOOK_ENTRY_BODY_LIU_WEI_DI_HUANG_WAN,"六味地黄丸
+【出处】《小儿药证直诀》
+【功效】滋阴补肾
+【主治】肾阴虚
+【组成】
+君：熟地黄 八钱
+臣：山茱萸 四钱，山药 四钱
+佐：泽泻 三钱，茯苓 三钱，丹皮 三钱
+使：
+【配伍】
+熟地黄：重用滋阴补肾、填精益髓。
+萸肉：补肝肾、敛精气；
+山药：补脾益肾、固涩下焦。
+泽泻：泻肾浊、防熟地滋腻；
+丹皮：清泻虚火、凉血除蒸；
+茯苓：健脾渗湿、助山药补脾。","LIU WEI DI HUANG WAN
+[Source] Xiao'er Yaozheng Zhijue
+[Actions] Nourishes yin and supports the Kidney
+[Indication] Kidney yin Deficiency
+[Ingredients]
+Chief: Shu Di Huang 8 qian
+Deputy: Shan Zhu Yu 4 qian, Shan Yao 4 qian
+Assistant: Ze Xie 3 qian, Fu Ling 3 qian, Dan Pi 3 qian
+Envoy:
+[How the ingredients work together]
+A large amount of Shu Di Huang nourishes Kidney yin and replenishes essence and marrow.
+Shan Zhu Yu supports the Liver and Kidney and helps retain essence.
+Shan Yao supports the Spleen and Kidney and strengthens the lower body.
+Ze Xie drains turbidity and balances the richness of Shu Di Huang.
+Dan Pi clears Deficiency fire and cools blood.
+Fu Ling strengthens the Spleen, drains Dampness and supports Shan Yao."
+UI_BOOK_ENTRY_TITLE_JIN_GUI_SHEN_QI_WAN,金匮肾气丸,Jin Gui Shen Qi Wan
+UI_BOOK_ENTRY_BODY_JIN_GUI_SHEN_QI_WAN,"金匮肾气丸
+【出处】《金匮要略》
+【功效】温补肾阳，化气行水
+【主治】肾阳虚
+【组成】
+君：附子 二钱，桂枝 三钱
+臣：熟地黄 一钱，山茱萸 四钱，山药 五钱
+佐：泽泻 三钱，茯苓 三钱，丹皮 三钱
+使：
+【配伍】
+附子、桂枝：温补肾阳、温通命门，微微生火、鼓舞肾气。
+熟地、山萸肉、山药：即六味三补，滋补肾阴、阴中求阳。
+丹皮、茯苓、泽泻：即六味三泻，泻浊降火、渗湿利水，防滋腻壅滞。","JIN GUI SHEN QI WAN
+[Source] Jingui Yaolue
+[Actions] Warms and supports Kidney yang, transforms qi and moves water
+[Indication] Kidney yang Deficiency
+[Ingredients]
+Chief: Fu Zi 2 qian, Gui Zhi 3 qian
+Deputy: Shu Di Huang 1 qian, Shan Zhu Yu 4 qian, Shan Yao 5 qian
+Assistant: Ze Xie 3 qian, Fu Ling 3 qian, Dan Pi 3 qian
+Envoy:
+[How the ingredients work together]
+Fu Zi and Gui Zhi warm Kidney yang and encourage the Kidney's qi-transforming function.
+Shu Di Huang, Shan Zhu Yu and Shan Yao nourish Kidney yin, supporting yang through yin.
+Dan Pi, Fu Ling and Ze Xie drain turbidity, clear Heat and move fluids, balancing the rich tonics."
+UI_BOOK_ENTRY_TITLE_ZHEN_WU_TANG,真武汤,Zhen Wu Tang
+UI_BOOK_ENTRY_BODY_ZHEN_WU_TANG,"真武汤
+【出处】《伤寒论》
+【功效】温阳利水
+【主治】肾虚水泛
+【组成】
+君：附子 三钱
+臣：茯苓 三钱，白术 三钱
+佐：生姜 二钱，白芍 三钱
+使：
+【配伍】
+附子：大辛大热，温补肾阳、散阴寒，助气化以行水。
+茯苓：健脾渗湿、利水消肿；
+白术：健脾燥湿、培土制水。
+生姜：温散水气、助附子温阳，兼和胃散饮。
+芍药：利小便、柔肝缓急止痛，防附子燥热伤阴，敛阴和营。","ZHEN WU TANG
+[Source] Shanghan Lun
+[Actions] Warms yang and promotes the movement of water
+[Indication] Kidney Deficiency with overflowing fluids
+[Ingredients]
+Chief: Fu Zi 3 qian
+Deputy: Fu Ling 3 qian, Bai Zhu 3 qian
+Assistant: Sheng Jiang 2 qian, Bai Shao 3 qian
+Envoy:
+[How the ingredients work together]
+Fu Zi strongly warms Kidney yang, disperses Cold and supports the transformation of fluids.
+Fu Ling strengthens the Spleen, drains Dampness and reduces swelling.
+Bai Zhu strengthens the Spleen, dries Dampness and helps control water.
+Sheng Jiang warms and disperses retained fluids and harmonizes the Stomach.
+Bai Shao promotes urination, softens the Liver and eases pain while balancing the drying and warming nature of Fu Zi."
+UI_BOOK_ENTRY_TITLE_ZUO_GUI_WAN,左归丸,Zuo Gui Wan
+UI_BOOK_ENTRY_BODY_ZUO_GUI_WAN,"左归丸
+【出处】《景岳全书》
+【功效】滋阴补肾，填精益髓
+【主治】肾精不足
+【组成】
+君：熟地黄 八钱
+臣：龟板胶四钱，鹿角胶四钱，枸杞子四钱，菟丝子四钱
+佐：山茱萸 四钱，山药 四钱
+使：牛膝 三钱
+【配伍】
+熟地黄：大补真阴、填精补髓。
+山药、枸杞、山茱萸：滋补肝肾、养阴固精，助熟地滋补肾精。
+龟鹿二胶：峻补精血、阴阳双补、侧重填髓
+菟丝子：补肾益精
+川牛膝：补肝肾、强筋骨、引药下行","ZUO GUI WAN
+[Source] Jingyue Quanshu
+[Actions] Nourishes yin, supports the Kidney and replenishes essence and marrow
+[Indication] Insufficient Kidney essence
+[Ingredients]
+Chief: Shu Di Huang 8 qian
+Deputy: Gui Ban Jiao 4 qian, Lu Jiao Jiao 4 qian, Gou Qi Zi 4 qian, Tu Si Zi 4 qian
+Assistant: Shan Zhu Yu 4 qian, Shan Yao 4 qian
+Envoy: Niu Xi 3 qian
+[How the ingredients work together]
+Shu Di Huang strongly nourishes yin and replenishes essence and marrow.
+Shan Yao, Gou Qi Zi and Shan Zhu Yu support the Liver and Kidney, nourish yin and help retain essence.
+Gui Ban Jiao and Lu Jiao Jiao strongly replenish essence and blood and support both yin and yang, especially marrow.
+Tu Si Zi supports the Kidney and replenishes essence.
+Niu Xi supports the Liver and Kidney, strengthens the sinews and bones, and guides the formula downward."
+UI_BOOK_ENTRY_TITLE_JIN_SUO_GU_JING_WAN,金锁固精丸,Jin Suo Gu Jing Wan
+UI_BOOK_ENTRY_BODY_JIN_SUO_GU_JING_WAN,"金锁固精丸
+【出处】《医方集解》
+【功效】补肾涩精，固摄肾气
+【主治】肾气不固
+【组成】
+君：沙苑子 五钱
+臣：芡实 五钱
+佐：龙骨 五钱，牡蛎 五钱，莲须 三钱
+使：莲子 三两
+【配伍】
+沙苑子：补肾益精、平补肝肾，固本培元。
+芡实：健脾益肾、固涩精气。
+莲须：专涩精；
+龙骨、牡蛎：重镇收敛、固涩滑脱。
+莲子：养心安神，补肾涩精，制丸药赋形","JIN SUO GU JING WAN
+[Source] Yifang Jijie
+[Actions] Supports the Kidney, astringes essence and strengthens Kidney qi
+[Indication] Kidney qi failing to secure essence
+[Ingredients]
+Chief: Sha Yuan Zi 5 qian
+Deputy: Qian Shi 5 qian
+Assistant: Long Gu 5 qian, Mu Li 5 qian, Lian Xu 3 qian
+Envoy: Lian Zi 3 liang
+[How the ingredients work together]
+Sha Yuan Zi supports Kidney essence and nourishes the Liver and Kidney.
+Qian Shi strengthens the Spleen and Kidney and helps secure essence.
+Lian Xu helps retain essence.
+Long Gu and Mu Li settle and astringe to help prevent leakage.
+Lian Zi nourishes the Heart, calms the spirit, supports the Kidney and helps bind the pills."
+UI_BOOK_ENTRY_TITLE_TAI_SHAN_PAN_SHI_SAN,泰山磐石散,Tai Shan Pan Shi San
+UI_BOOK_ENTRY_BODY_TAI_SHAN_PAN_SHI_SAN,"泰山磐石散
+【出处】《景岳全书》
+【功效】益气健脾，养血安胎
+【主治】妊娠
+【组成】
+君：白术 二钱
+臣：人参 一钱，黄芪 一钱，续断 一钱，熟地黄 一钱，当归 一钱
+佐：白芍 八分，川芎 八分，黄芩 一钱，砂仁 五分
+使：甘草 五分，糯米 五分
+【配伍】
+人参、黄芪、白术：脾胃为气血生化之源，健脾益气以固胎之本。
+当归、熟地、白芍、川芎：养血和血，补益冲任。冲为血海，任主胞胎，血足则养胎。
+续断：补肝肾、固冲任、安胎；肾主系胎。
+黄芩：清热安胎。
+砂仁：理气和胃，醒脾行滞；防补药滋腻碍胃，使气血流通，胎气安和。
+炙甘草：益气和中，调和诸药；
+糯米：补脾养胃，滋养胎元。","TAI SHAN PAN SHI SAN
+[Source] Jingyue Quanshu
+[Actions] Supports qi, strengthens the Spleen, nourishes blood and steadies pregnancy
+[Indication] Pregnancy
+[Ingredients]
+Chief: Bai Zhu 2 qian
+Deputy: Ren Shen 1 qian, Huang Qi 1 qian, Xu Duan 1 qian, Shu Di Huang 1 qian, Dang Gui 1 qian
+Assistant: Bai Shao 8 fen, Chuan Xiong 8 fen, Huang Qin 1 qian, Sha Ren 5 fen
+Envoy: Gan Cao 5 fen, Nuo Mi 5 fen
+[How the ingredients work together]
+Ren Shen, Huang Qi and Bai Zhu strengthen the Spleen and Stomach, supporting the production of qi and blood and a stable pregnancy.
+Dang Gui, Shu Di Huang, Bai Shao and Chuan Xiong nourish and harmonize blood and support the Chong and Ren vessels.
+Xu Duan supports the Liver and Kidney and the Chong and Ren vessels, helping to steady pregnancy.
+Huang Qin clears Heat and helps steady pregnancy.
+Sha Ren regulates qi and harmonizes the Stomach so rich tonics do not cause stagnation.
+Prepared Gan Cao supports qi, harmonizes the middle and brings the ingredients together.
+Nuo Mi strengthens the Spleen and Stomach and nourishes the developing fetus."
+UI_BOOK_ENTRY_TITLE_HUANG_LIAN_E_JIAO_TANG,黄连阿胶汤,Huang Lian E Jiao Tang
+UI_BOOK_ENTRY_BODY_HUANG_LIAN_E_JIAO_TANG,"黄连阿胶汤
+【出处】《伤寒论》
+【功效】滋阴降火，交通心肾
+【主治】心肾不交
+【组成】
+君：黄连 四钱
+臣：黄芩 三钱，白芍 三钱
+佐：阿胶 三钱
+使：鸡子黄 一两
+【配伍】
+黄连：苦寒直折，清泻心火、除烦安神。
+黄芩：助黄连清心泻火；
+阿胶：滋阴补肾、养血填阴，滋肾阴以济心火。
+白芍：敛阴和营、柔肝缓急；
+鸡子黄：滋阴润燥、养心安神，入少阴交通心肾。","HUANG LIAN E JIAO TANG
+[Source] Shanghan Lun
+[Actions] Nourishes yin, clears fire and connects Heart and Kidney functions
+[Indication] Heart-Kidney disharmony
+[Ingredients]
+Chief: Huang Lian 4 qian
+Deputy: Huang Qin 3 qian, Bai Shao 3 qian
+Assistant: E Jiao 3 qian
+Envoy: Ji Zi Huang 1 liang
+[How the ingredients work together]
+Huang Lian clears Heart fire, relieves restlessness and calms the spirit.
+Huang Qin reinforces Huang Lian in clearing Heart fire.
+E Jiao nourishes Kidney yin and blood to help balance Heart fire.
+Bai Shao preserves yin, harmonizes the nutritive layer and eases spasms.
+Ji Zi Huang nourishes yin, moistens Dryness and calms the Heart and spirit."
+UI_BOOK_ENTRY_TITLE_BAI_HU_TANG,白虎汤,Bai Hu Tang
+UI_BOOK_ENTRY_BODY_BAI_HU_TANG,"白虎汤
+【出处】《伤寒论》
+【功效】清热生津，辛寒清气
+【主治】气分热盛
+【组成】
+君：石膏 二两
+臣：知母 六钱
+佐：粳米 三钱
+使：甘草 二钱
+【配伍】
+生石膏：辛甘大寒，清泻阳明气分实热，除壮热、止大汗。
+知母：苦寒质润，清热泻火、滋阴生津，助石膏清润除烦止渴。
+粳米、炙甘草：益气养胃、缓和石膏知母寒凉之性，保护胃气；生津补液，防大寒伤中。","BAI HU TANG
+[Source] Shanghan Lun
+[Actions] Clears Heat and generates body fluids, especially Heat at the qi level
+[Indication] Intense Heat at the qi level
+[Ingredients]
+Chief: Shi Gao 2 liang
+Deputy: Zhi Mu 6 qian
+Assistant: Jing Mi 3 qian
+Envoy: Gan Cao 2 qian
+[How the ingredients work together]
+Raw Shi Gao strongly clears intense Heat at the Yangming qi level, easing high fever and heavy sweating.
+Zhi Mu clears Heat, nourishes yin and generates fluids, relieving agitation and thirst.
+Jing Mi and prepared Gan Cao support qi and the Stomach, temper the cooling herbs and protect body fluids."
+UI_BOOK_ENTRY_TITLE_FENG_HAN_BIAO_SHI_ZHENG,风寒表实证,Wind-Cold Exterior Excess Pattern
+UI_BOOK_ENTRY_BODY_FENG_HAN_BIAO_SHI_ZHENG,"风寒表实证
+
+【病机】寒邪束表、腠理闭塞、卫阳被遏。
+
+【症状】恶寒发热，头身酸疼，无汗而喘。
+
+【脉象】
+浮脉（表）：波峰高，脉搏次数少
+
+【标准方】麻黄汤","WIND-COLD EXTERIOR EXCESS PATTERN
+
+[Pathogenesis] Cold constrains the exterior, closes the pores and inhibits defensive yang.
+
+[Symptoms] Aversion to cold with fever, aching of the head and body, no sweating, and wheezing.
+
+[Pulse]
+Floating pulse (Exterior): high peak, slow rate
+
+[Standard formula] Ma Huang Tang"
+UI_BOOK_ENTRY_TITLE_FENG_HAN_BIAO_XU_ZHENG,风寒表虚证,Wind-Cold Exterior Deficiency Pattern
+UI_BOOK_ENTRY_BODY_FENG_HAN_BIAO_XU_ZHENG,"风寒表虚证
+
+【病机】风寒袭表，卫气不固，营阴外泄。
+
+【症状】恶风发热，头痛流清涕，出汗。
+
+【脉象】
+浮脉（表）：波峰低，脉搏次数少
+
+【标准方】桂枝汤","WIND-COLD EXTERIOR DEFICIENCY PATTERN
+
+[Pathogenesis] Wind-Cold invades the exterior; defensive qi fails to secure the surface, allowing nutritive yin to escape.
+
+[Symptoms] Aversion to wind with fever, headache, clear nasal discharge, and sweating.
+
+[Pulse]
+Floating pulse (Exterior): low peak, slow rate
+
+[Standard formula] Gui Zhi Tang"
+UI_BOOK_ENTRY_TITLE_FENG_RE_BIAO_ZHENG,风热表证,Wind-Heat Exterior Pattern
+UI_BOOK_ENTRY_BODY_FENG_RE_BIAO_ZHENG,"风热表证
+
+【病机】风热之邪侵袭肺卫，卫气失和，肺失清肃。
+
+【症状】发热重，咽喉红肿，痰涕黄稠。
+
+【脉象】
+浮脉（表）：脉搏次数多
+
+【标准方】银翘散","WIND-HEAT EXTERIOR PATTERN
+
+[Pathogenesis] Wind-Heat invades the Lung and defensive level, disrupting defensive qi and the Lung's clearing and descending functions.
+
+[Symptoms] Pronounced fever, a red and swollen throat, and thick yellow phlegm and nasal discharge.
+
+[Pulse]
+Floating pulse (Exterior): rapid rate
+
+[Standard formula] Yin Qiao San"
+UI_BOOK_ENTRY_TITLE_WEN_ZAO_ZHENG,温燥证,Warm-Dryness Pattern
+UI_BOOK_ENTRY_BODY_WEN_ZAO_ZHENG,"温燥证
+
+【病机】初秋燥热之邪侵袭肺卫，肺失清润。
+
+【症状】发热恶风，口鼻干燥、咽干口渴、干咳少痰，痰涕黄稠。
+
+【脉象】
+浮脉（表）：脉搏次数多，波宽窄
+
+【标准方】桑杏汤","WARM-DRYNESS PATTERN
+
+[Pathogenesis] Warm and dry influences in early autumn invade the Lung and defensive level, impairing the Lung's moistening function.
+
+[Symptoms] Fever with aversion to wind; dry mouth and nose, dry throat and thirst, a dry cough with little phlegm, and thick yellow phlegm or nasal discharge.
+
+[Pulse]
+Floating pulse (Exterior): rapid rate, narrow wave
+
+[Standard formula] Sang Xing Tang"
+UI_BOOK_ENTRY_TITLE_LIANG_ZAO_ZHENG,凉燥证,Cool-Dryness Pattern
+UI_BOOK_ENTRY_BODY_LIANG_ZAO_ZHENG,"凉燥证
+
+【病机】深秋寒气渐生，燥邪兼风寒侵袭肺卫。
+
+【症状】恶寒发热、鼻塞流清涕、干咳少痰、咽干唇燥、皮肤干燥。
+
+【脉象】
+浮脉（表）：脉搏次数少，波宽窄
+
+【标准方】杏苏散","COOL-DRYNESS PATTERN
+
+[Pathogenesis] As cold sets in during late autumn, Dryness together with Wind-Cold invades the Lung and defensive level.
+
+[Symptoms] Aversion to cold with fever, a blocked nose with clear discharge, a dry cough with little phlegm, dry throat and lips, and dry skin.
+
+[Pulse]
+Floating pulse (Exterior): slow rate, narrow wave
+
+[Standard formula] Xing Su San"
+UI_BOOK_ENTRY_TITLE_WEI_QI_XU,卫气虚,Defensive Qi Deficiency
+UI_BOOK_ENTRY_BODY_WEI_QI_XU,"卫气虚
+
+【病机】素体虚弱、久病耗伤肺气，卫气不固、腠理疏松、防御固摄功能减退。
+
+【症状】自汗：不活动也出汗，动则更甚；易感冒：怕风畏冷、不耐风寒，稍受凉即感冒；面色㿠白、气短乏力、神疲懒言；皮肤腠理疏松、常畏风。
+
+【脉象】
+浮脉（表）：波峰低
+
+【标准方】玉屏风散","DEFENSIVE QI DEFICIENCY
+
+[Pathogenesis] An inherently weak constitution or prolonged illness depletes Lung qi. Defensive qi fails to secure the surface; loose pores weaken protection and containment.
+
+[Symptoms] Spontaneous sweating even at rest, worse with activity; frequent colds, aversion to wind and cold, and catching cold easily; a pale complexion, shortness of breath, fatigue, and little inclination to speak; loose pores and frequent sensitivity to wind.
+
+[Pulse]
+Floating pulse (Exterior): low peak
+
+[Standard formula] Yu Ping Feng San"
+UI_BOOK_ENTRY_TITLE_TONG_BI,痛痹,Painful Bi (Cold Bi)
+UI_BOOK_ENTRY_BODY_TONG_BI,"痛痹（寒痹）
+
+【病机】风寒湿邪痹阻经络，寒邪偏盛。寒主收引、凝滞，气血不通则疼痛剧烈。
+
+【症状】肢体关节疼痛剧烈、固定不移；遇寒加重、得温痛减；关节屈伸不利，局部怕冷。
+
+【脉象】
+浮脉（表）：波峰高（轻微），脉搏次数少（剧烈），波宽宽（轻微）
+
+【标准方】乌头汤","PAINFUL BI (COLD BI)
+
+[Pathogenesis] Wind-Cold-Damp obstructs the channels, with Cold predominating. Cold contracts and congeals; blocked qi and blood cause severe pain.
+
+[Symptoms] Severe, fixed pain in the limbs and joints; worse with cold and relieved by warmth; restricted joint movement and local sensitivity to cold.
+
+[Pulse]
+Floating pulse (Exterior): slightly high peak, markedly slow rate, slightly broad wave
+
+[Standard formula] Wu Tou Tang"
+UI_BOOK_ENTRY_TITLE_RE_BI,热痹,Heat Bi
+UI_BOOK_ENTRY_BODY_RE_BI,"热痹
+
+【病机】风湿热邪侵袭经络关节，或风寒湿邪郁而化热，气血壅滞、经络痹阻。
+
+【症状】关节红肿灼热、疼痛剧烈；触之发热、拒按，得冷稍舒；发热、口渴、烦躁；肢体屈伸不利。
+
+【脉象】
+浮脉（表）：波峰高（轻微），脉搏次数多，波宽宽（轻微）
+
+【标准方】白虎桂枝汤","HEAT BI
+
+[Pathogenesis] Wind-Damp-Heat invades the channels and joints, or Wind-Cold-Damp stagnates and turns to Heat. Qi and blood become congested, obstructing the channels.
+
+[Symptoms] Red, swollen, burning joints with severe pain; hot and tender to touch, somewhat relieved by cold; fever, thirst, and irritability; restricted movement of the limbs.
+
+[Pulse]
+Floating pulse (Exterior): slightly high peak, rapid rate, slightly broad wave
+
+[Standard formula] Bai Hu Gui Zhi Tang"
+UI_BOOK_ENTRY_TITLE_ZHUO_BI,着痹,Fixed Bi (Damp Bi)
+UI_BOOK_ENTRY_BODY_ZHUO_BI,"着痹（湿痹）
+
+【病机】风寒湿邪侵袭，湿邪偏盛；湿性重浊、黏滞，阻滞经络、困遏气机。
+
+【症状】关节沉重酸痛、重着如裹；痛处固定，肌肤麻木、肢体困重；关节肿胀、屈伸不利。
+阴雨潮湿天气加重
+
+【脉象】
+浮脉（表）：波峰高（轻微），脉搏次数少（轻微），波宽宽（剧烈）
+
+【标准方】薏苡仁汤","FIXED BI (DAMP BI)
+
+[Pathogenesis] Wind-Cold-Damp invades, with Dampness predominating. Its heavy, sticky quality obstructs the channels and impedes the movement of qi.
+
+[Symptoms] Heavy, aching joints, as though wrapped; fixed pain, skin numbness, and heavy limbs; joint swelling and restricted movement.
+Worse in rainy or humid weather.
+
+[Pulse]
+Floating pulse (Exterior): slightly high peak, slightly slow rate, markedly broad wave
+
+[Standard formula] Yi Yi Ren Tang"
+UI_BOOK_ENTRY_TITLE_XING_BI,行痹,Wandering Bi (Wind Bi)
+UI_BOOK_ENTRY_BODY_XING_BI,"行痹（风痹）
+
+【病机】风寒湿邪侵袭经络，以风邪偏盛为主。风性善行、走窜不定。
+
+【症状】肢体关节酸痛，疼痛游走不定，窜走周身。
+
+【脉象】
+浮脉（表）：波峰高（剧烈），脉搏次数少（轻微），波宽宽（轻微）
+
+【标准方】防风汤","WANDERING BI (WIND BI)
+
+[Pathogenesis] Wind-Cold-Damp invades the channels, with Wind predominating. Wind moves readily and causes shifting symptoms.
+
+[Symptoms] Aching joints and limbs with pain that shifts from place to place throughout the body.
+
+[Pulse]
+Floating pulse (Exterior): markedly high peak, slightly slow rate, slightly broad wave
+
+[Standard formula] Fang Feng Tang"
+UI_BOOK_ENTRY_TITLE_FEI_RE_YONG_SHENG,肺热壅盛,Exuberant Heat in the Lung
+UI_BOOK_ENTRY_BODY_FEI_RE_YONG_SHENG,"肺热壅盛
+
+【病机】邪热壅滞于肺，肺失宣降，气机闭塞，热盛气逆。
+
+【症状】咳嗽气粗、喘促胸闷；痰黄黏稠、不易咳出；发热、口渴咽痛；鼻翼煽动，大便偏干，小便黄。
+
+【脉象】
+右寸（肺）：脉搏次数多
+
+【标准方】麻杏石甘汤","EXUBERANT HEAT IN THE LUNG
+
+[Pathogenesis] Pathogenic Heat congests the Lung, impairing its dispersing and descending functions; qi becomes blocked and rises against its normal flow.
+
+[Symptoms] Forceful coughing and wheezing with chest tightness; thick, sticky yellow phlegm that is hard to expectorate; fever, thirst, and sore throat; flaring nostrils, relatively dry stools, and yellow urine.
+
+[Pulse]
+Right cun (Lung): rapid rate
+
+[Standard formula] Ma Xing Shi Gan Tang"
+UI_BOOK_ENTRY_TITLE_FEI_QI_XU,肺气虚,Lung Qi Deficiency
+UI_BOOK_ENTRY_BODY_FEI_QI_XU,"肺气虚
+
+【病机】肺气不足，宣降无力，卫外不固。
+
+【症状】咳喘无力，气短懒言，动则加重；语声低微、少气乏力；自汗、怕风、易感冒；痰液清稀、量少。
+
+【脉象】
+右寸（肺）：波峰低
+
+【标准方】补肺汤","LUNG QI DEFICIENCY
+
+[Pathogenesis] Insufficient Lung qi weakens its dispersing and descending functions and fails to secure the exterior.
+
+[Symptoms] Weak coughing and wheezing, shortness of breath and reluctance to speak, worse with activity; a weak voice and fatigue; spontaneous sweating, aversion to wind, and frequent colds; scant, thin, clear phlegm.
+
+[Pulse]
+Right cun (Lung): low peak
+
+[Standard formula] Bu Fei Tang"
+UI_BOOK_ENTRY_TITLE_TAN_SHI_ZU_FEI,痰湿阻肺,Phlegm-Damp Obstructing the Lung
+UI_BOOK_ENTRY_BODY_TAN_SHI_ZU_FEI,"痰湿阻肺
+
+【病机】脾失健运，痰湿内生，上壅于肺，肺失宣降。
+
+【症状】咳嗽痰多，色白黏稠、量多易咯；胸闷、气喘、喉间痰鸣；肢体困重，口淡不渴。
+
+【脉象】
+右寸（肺）：波宽宽
+
+【标准方】二陈汤","PHLEGM-DAMP OBSTRUCTING THE LUNG
+
+[Pathogenesis] When the Spleen fails to transform and transport, Phlegm-Damp forms internally and accumulates in the Lung, impairing its dispersing and descending functions.
+
+[Symptoms] A cough with abundant white, sticky phlegm that is easy to bring up; chest tightness, wheezing, and rattling phlegm in the throat; heavy limbs and a bland taste without thirst.
+
+[Pulse]
+Right cun (Lung): broad wave
+
+[Standard formula] Er Chen Tang"
+UI_BOOK_ENTRY_TITLE_FEI_YIN_XU,肺阴虚,Lung Yin Deficiency
+UI_BOOK_ENTRY_BODY_FEI_YIN_XU,"肺阴虚
+
+【病机】肺阴亏虚，虚火内生，肺失滋润、清肃无权。
+
+【症状】干咳无痰，或痰少黏稠难咯；咽干口燥、声音嘶哑；潮热盗汗、五心烦热；颧红、形体消瘦。
+
+【脉象】
+右寸（肺）：波线细，脉搏次数多，波宽窄
+
+【标准方】沙参麦冬汤","LUNG YIN DEFICIENCY
+
+[Pathogenesis] Depleted Lung yin gives rise to deficiency Fire; the Lung loses moisture and cannot perform its clearing function.
+
+[Symptoms] A dry cough without phlegm, or a little sticky phlegm that is hard to bring up; dry throat and mouth with hoarseness; tidal fever, night sweats, and heat in the palms, soles, and chest; flushed cheekbones and weight loss.
+
+[Pulse]
+Right cun (Lung): thin wave, rapid rate, narrow wave
+
+[Standard formula] Sha Shen Mai Dong Tang"
+UI_BOOK_ENTRY_TITLE_TAN_RE_YONG_FEI,痰热壅肺,Phlegm-Heat Congesting the Lung
+UI_BOOK_ENTRY_BODY_TAN_RE_YONG_FEI,"痰热壅肺
+
+【病机】邪热入里，灼津成痰、痰热互结，壅遏肺气，肺失宣降。
+
+【症状】咳嗽气喘，痰多黄稠、黏稠难咯；胸闷胸痛，甚则鼻翼煽动；发热口渴、烦躁、大便干结、小便黄。
+
+【脉象】
+右寸（肺）：脉搏次数多，波宽宽
+
+【标准方】清气化痰丸","PHLEGM-HEAT CONGESTING THE LUNG
+
+[Pathogenesis] Pathogenic Heat enters the interior and scorches fluids into Phlegm. Phlegm and Heat combine and congest the Lung, impairing its dispersing and descending functions.
+
+[Symptoms] Coughing and wheezing with abundant, thick yellow phlegm that is difficult to bring up; chest tightness and pain, sometimes with flaring nostrils; fever, thirst, irritability, constipation, and yellow urine.
+
+[Pulse]
+Right cun (Lung): rapid rate, broad wave
+
+[Standard formula] Qing Qi Hua Tan Wan"
+UI_BOOK_ENTRY_TITLE_BIAO_HAN_LI_RE,表寒里热,Exterior Cold with Interior Heat
+UI_BOOK_ENTRY_BODY_BIAO_HAN_LI_RE,"表寒里热
+
+【病机】寒邪束表，里有郁热，寒热错杂。
+
+【症状】怕冷无汗，口干咽痛，浑身酸痛怕冷，同时心烦燥热。
+
+【脉象】
+浮脉（表）：脉搏次数少
+右寸（肺）：脉搏次数多
+
+【标准方】大青龙汤","EXTERIOR COLD WITH INTERIOR HEAT
+
+[Pathogenesis] Cold constrains the exterior while Heat is trapped inside, producing a mixed Cold-Heat pattern.
+
+[Symptoms] Aversion to cold without sweating, dry mouth and sore throat, generalized aches and chills, together with irritability and a sensation of internal heat.
+
+[Pulse]
+Floating pulse (Exterior): slow rate
+Right cun (Lung): rapid rate
+
+[Standard formula] Da Qing Long Tang"
+UI_BOOK_ENTRY_TITLE_BIAO_HAN_LI_YIN,表寒里饮,Exterior Cold with Interior Fluid Retention
+UI_BOOK_ENTRY_BODY_BIAO_HAN_LI_YIN,"表寒里饮
+
+【病机】外感风寒，寒邪束表；内有水饮伏肺，表里寒邪相合，寒饮壅遏肺气。
+
+
+【症状】恶寒发热，咳嗽气喘；痰多清稀，胸闷胸满，面部浮肿。
+
+
+【脉象】
+浮脉（表）：脉搏次数少
+右寸（肺）：波宽宽
+
+【标准方】小青龙汤","EXTERIOR COLD WITH INTERIOR FLUID RETENTION
+
+[Pathogenesis] External Wind-Cold constrains the surface. Retained fluid within the Lung combines with exterior Cold, obstructing Lung qi.
+
+[Symptoms] Aversion to cold with fever, coughing and wheezing; copious thin, clear phlegm, chest fullness and tightness, and facial swelling.
+
+[Pulse]
+Floating pulse (Exterior): slow rate
+Right cun (Lung): broad wave
+
+[Standard formula] Xiao Qing Long Tang"
+UI_BOOK_ENTRY_TITLE_PI_QI_XU,脾气虚,Spleen Qi Deficiency
+UI_BOOK_ENTRY_BODY_PI_QI_XU,"脾气虚
+
+【病机】饮食劳倦、久病耗伤，脾失健运、中气不足、运化失职。
+
+【症状】食少纳呆、脘腹胀满，饭后尤甚；神疲乏力、少气懒言、肢体倦怠；面色萎黄、形体消瘦或浮肿；大便溏薄。
+
+【脉象】
+右关（脾）：波峰低
+
+【标准方】四君子汤","SPLEEN QI DEFICIENCY
+
+[Pathogenesis] Poor diet, overwork or prolonged illness depletes the Spleen. Middle qi becomes weak and the Spleen cannot transform and transport properly.
+
+[Symptoms] Poor appetite and abdominal bloating, especially after meals; fatigue, weakness, little inclination to speak and tired limbs; a sallow complexion with weight loss or swelling; loose stools.
+
+[Pulse]
+Right guan (Spleen): low peak
+
+[Standard formula] Si Jun Zi Tang"
+UI_BOOK_ENTRY_TITLE_SHI_SHENG_KUN_PI,湿盛困脾,Excess Dampness Encumbering the Spleen
+UI_BOOK_ENTRY_BODY_SHI_SHENG_KUN_PI,"湿盛困脾
+
+【病机】外感湿邪、或嗜食生冷肥甘，湿邪壅滞、脾阳被困、运化失司，属实证。
+
+【症状】脘腹痞闷、食少纳呆；恶心欲呕、口中黏腻、口淡不渴；头身困重、四肢酸楚、困倦嗜睡；大便溏稀不爽。
+
+【脉象】
+右关（脾）：波宽宽
+
+【标准方】平胃散","EXCESS DAMPNESS ENCUMBERING THE SPLEEN
+
+[Pathogenesis] External Dampness, or frequent cold, raw and rich foods, causes Dampness to accumulate. It constrains Spleen yang and impairs transformation and transport; this is an excess pattern.
+
+[Symptoms] Fullness in the upper abdomen and poor appetite; nausea, a sticky feeling in the mouth and a bland taste without thirst; a heavy head and body, aching limbs and drowsiness; loose, unsatisfying stools.
+
+[Pulse]
+Right guan (Spleen): broad wave
+
+[Standard formula] Ping Wei San"
+UI_BOOK_ENTRY_TITLE_PI_YANG_XU,脾阳虚,Spleen Yang Deficiency
+UI_BOOK_ENTRY_BODY_PI_YANG_XU,"脾阳虚
+
+【病机】脾气久虚，脾阳不足、虚寒内生、运化腐熟无权。
+
+【症状】食少纳呆、脘腹冷痛，喜温喜按；大便清稀溏薄，甚至完谷不化；畏寒肢冷、四肢不温、神疲乏力；口淡不渴、面色㿠白或萎黄；或肢体浮肿、白带清稀量多。
+
+【脉象】
+右关（脾）：波峰低，脉搏次数少，波宽宽
+
+【标准方】理中丸","SPLEEN YANG DEFICIENCY
+
+[Pathogenesis] Longstanding Spleen qi deficiency weakens Spleen yang. Deficiency Cold develops and the Spleen can no longer transform or digest food effectively.
+
+[Symptoms] Poor appetite and cold abdominal pain relieved by warmth and pressure; thin, loose stools, sometimes with undigested food; aversion to cold, cold limbs and fatigue; a bland taste without thirst and a pale or sallow complexion; possibly swelling or copious, thin, clear vaginal discharge.
+
+[Pulse]
+Right guan (Spleen): low peak, slow rate, broad wave
+
+[Standard formula] Li Zhong Wan"
+UI_BOOK_ENTRY_TITLE_PI_XU_SHI_SHENG,脾虚湿盛,Spleen Deficiency with Excess Dampness
+UI_BOOK_ENTRY_BODY_PI_XU_SHI_SHENG,"脾虚湿盛
+
+【病机】脾气本虚，运化无力，水湿内生，湿浊内停。
+
+【症状】食少纳呆，脘腹痞闷，饭后胀甚；神疲乏力、少气懒言、四肢困重；大便溏薄、或泄泻、黏滞不爽；面色萎黄，或肢体浮肿、带下量多清稀。
+
+【脉象】
+右关（脾）：波峰低，波宽宽
+
+【标准方】参苓白术散","SPLEEN DEFICIENCY WITH EXCESS DAMPNESS
+
+[Pathogenesis] Underlying Spleen qi deficiency weakens transformation and transport, causing fluids to accumulate as Dampness.
+
+[Symptoms] Poor appetite and abdominal fullness, worse after eating; fatigue, little inclination to speak and heavy limbs; loose stools or diarrhea with a sticky, unsatisfying feeling; a sallow complexion, sometimes with swelling or copious thin, clear vaginal discharge.
+
+[Pulse]
+Right guan (Spleen): low peak, broad wave
+
+[Standard formula] Shen Ling Bai Zhu San"
+UI_BOOK_ENTRY_TITLE_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI,外感风寒，内伤湿滞,External Wind-Cold with Internal Damp Stagnation
+UI_BOOK_ENTRY_BODY_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI,"外感风寒，内伤湿滞
+
+【病机】外感风寒之邪束表，内伤饮食湿浊阻滞中焦；表有风寒、里有湿滞。
+
+【症状】外感风寒：恶寒发热、头痛身重、无汗、鼻塞流清涕；内伤湿滞：胸膈满闷、脘腹胀痛、恶心呕吐、肠鸣泄泻；怕冷发热 + 又吐又泻、身重胸闷。
+
+【脉象】
+浮脉（表）：脉搏次数少
+右关（脾）：波宽宽
+
+【标准方】藿香正气散","EXTERNAL WIND-COLD WITH INTERNAL DAMP STAGNATION
+
+[Pathogenesis] External Wind-Cold constrains the surface while dietary injury and Dampness obstruct the middle burner: Wind-Cold outside and Damp stagnation inside.
+
+[Symptoms] External Wind-Cold: aversion to cold with fever, headache and heavy body, no sweating, and a blocked nose with clear discharge; internal Damp stagnation: chest fullness, abdominal distension and pain, nausea, vomiting, bowel sounds and diarrhea; chills and fever with both vomiting and diarrhea, a heavy body and chest tightness.
+
+[Pulse]
+Floating pulse (Exterior): slow rate
+Right guan (Spleen): broad wave
+
+[Standard formula] Huo Xiang Zheng Qi San"
+UI_BOOK_ENTRY_TITLE_HAN_NING_XIN_MAI,寒凝心脉,Cold Congealing in the Heart Vessels
+UI_BOOK_ENTRY_BODY_HAN_NING_XIN_MAI,"寒凝心脉
+
+【病机】素体阳虚，阴寒凝滞，寒邪痹阻心脉、胸阳不振，心脉拘急不通而痛。
+
+【症状】猝然胸痛、痛势剧烈、遇寒加重、得温痛减；胸闷气短、心悸怔忡；畏寒肢冷、面色苍白、唇甲青紫。
+
+【脉象】
+左寸（心）：脉搏次数少
+
+【标准方】当归四逆汤","COLD CONGEALING IN THE HEART VESSELS
+
+[Pathogenesis] In a person with underlying yang deficiency, Cold congeals and obstructs the Heart vessels. Chest yang is weakened; the constricted vessels cannot carry blood freely, causing pain.
+
+[Symptoms] Sudden, severe chest pain, worse with cold and relieved by warmth; chest tightness, shortness of breath and palpitations; aversion to cold, cold limbs, a pale face, and bluish lips and nails.
+
+[Pulse]
+Left cun (Heart): slow rate
+
+[Standard formula] Dang Gui Si Ni Tang"
+UI_BOOK_ENTRY_TITLE_XIN_HUO_KANG_SHENG,心火亢盛,Exuberant Heart Fire
+UI_BOOK_ENTRY_BODY_XIN_HUO_KANG_SHENG,"心火亢盛
+
+【病机】心火内炽，火热扰心、灼伤脉络、下移小肠。
+
+【症状】心胸烦热、心悸失眠、烦躁易怒；口舌生疮、舌尖红赤疼痛；口干口苦、面红目赤；小便短赤、灼热涩痛。
+
+【脉象】
+左寸（心）：脉搏次数多
+
+【标准方】导赤散","EXUBERANT HEART FIRE
+
+[Pathogenesis] Heart Fire blazes internally, disturbing the mind and scorching the vessels; the Fire also descends to the Small Intestine.
+
+[Symptoms] Heat and agitation in the chest, palpitations, insomnia and irritability; painful mouth and tongue sores and a red, sore tongue tip; dry mouth, bitter taste, a flushed face and red eyes; scant, red urine with burning, difficult urination.
+
+[Pulse]
+Left cun (Heart): rapid rate
+
+[Standard formula] Dao Chi San"
+UI_BOOK_ENTRY_TITLE_TAN_MI_XIN_QIAO,痰迷心窍,Phlegm Obscuring the Heart Orifices
+UI_BOOK_ENTRY_BODY_TAN_MI_XIN_QIAO,"痰迷心窍
+
+【病机】痰湿浊邪蒙蔽心窍，神明失主，多由情志郁结、脾失健运、痰浊内生，上蒙心神所致。
+
+【症状】神志痴呆、精神抑郁、表情淡漠；喃喃自语、举止失常、昏不知人；喉中痰鸣、胸闷痰多、意识模糊；甚则突然昏仆、不省人事。
+
+【脉象】
+左寸（心）：波宽宽
+
+【标准方】涤痰汤","PHLEGM OBSCURING THE HEART ORIFICES
+
+[Pathogenesis] Turbid Phlegm-Damp clouds the Heart orifices and disrupts awareness. Emotional constraint and weak Spleen transport may generate Phlegm that rises to disturb the mind.
+
+[Symptoms] Confusion or mental dullness, depression and an indifferent expression; muttering, unusual behavior or reduced awareness; rattling phlegm in the throat, chest tightness, copious phlegm and clouded consciousness; in severe cases, sudden collapse and unconsciousness.
+
+[Pulse]
+Left cun (Heart): broad wave
+
+[Standard formula] Di Tan Tang"
+UI_BOOK_ENTRY_TITLE_XIN_QI_XU,心气虚,Heart Qi Deficiency
+UI_BOOK_ENTRY_BODY_XIN_QI_XU,"心气虚
+
+【病机】心气不足，鼓动无力，心神失养。
+
+【症状】心悸怔忡，活动后加重；气短、胸闷、精神疲倦；自汗，面色淡白。
+
+【脉象】
+左寸（心）：波峰低
+
+【标准方】养心汤","HEART QI DEFICIENCY
+
+[Pathogenesis] Insufficient Heart qi weakens its ability to propel blood and fails to nourish the mind.
+
+[Symptoms] Palpitations, worse with activity; shortness of breath, chest tightness and fatigue; spontaneous sweating and a pale complexion.
+
+[Pulse]
+Left cun (Heart): low peak
+
+[Standard formula] Yang Xin Tang"
+UI_BOOK_ENTRY_TITLE_XIN_MAI_YU_ZU,心脉瘀阻,Blood Stasis Obstructing the Heart Vessels
+UI_BOOK_ENTRY_BODY_XIN_MAI_YU_ZU,"心脉瘀阻
+
+【病机】瘀血阻滞心之脉络，气血不通，心失濡养，不通则痛。
+
+【症状】心胸疼痛，心悸心慌，胸闷气短，喘不得卧；面色晦暗、唇甲青紫。
+
+【脉象】
+左寸（心）：波线粗
+
+【标准方】血府逐瘀汤","BLOOD STASIS OBSTRUCTING THE HEART VESSELS
+
+[Pathogenesis] Blood stasis blocks the Heart vessels, impedes the circulation of qi and blood, and deprives the Heart of nourishment. Obstruction causes pain.
+
+[Symptoms] Chest and Heart pain, palpitations, chest tightness, shortness of breath and breathlessness when lying down; a dull complexion and bluish lips and nails.
+
+[Pulse]
+Left cun (Heart): thick wave
+
+[Standard formula] Xue Fu Zhu Yu Tang"
+UI_BOOK_ENTRY_TITLE_XIN_YIN_XU,心阴虚,Heart Yin Deficiency
+UI_BOOK_ENTRY_BODY_XIN_YIN_XU,"心阴虚
+
+【病机】心阴亏虚，心神失养，虚火内扰。
+
+【症状】心悸怔忡，心慌不安；心烦失眠、多梦易醒；五心烦热、潮热盗汗；口干咽燥、面色颧红。
+
+【脉象】
+左寸（心）：波线细，脉搏次数多，波宽窄
+
+【标准方】天王补心丹","HEART YIN DEFICIENCY
+
+[Pathogenesis] Depleted Heart yin fails to nourish the mind, while deficiency Fire disturbs it internally.
+
+[Symptoms] Palpitations and unease; restlessness, insomnia and frequent waking from dreams; heat in the palms, soles and chest, tidal fever and night sweats; dry mouth and throat with flushed cheekbones.
+
+[Pulse]
+Left cun (Heart): thin wave, rapid rate, narrow wave
+
+[Standard formula] Tian Wang Bu Xin Dan"
+UI_BOOK_ENTRY_TITLE_XIN_YANG_XU,心阳虚,Heart Yang Deficiency
+UI_BOOK_ENTRY_BODY_XIN_YANG_XU,"心阳虚
+
+【病机】心阳不足，温煦、鼓动无力，虚寒内生。
+
+【症状】心悸怔忡，心慌不安；胸闷气短、遇寒加重；畏寒怕冷、四肢不温；面色㿠白，精神疲乏，自汗。
+
+【脉象】
+左寸（心）：波峰低，脉搏次数少
+
+【标准方】桂枝甘草汤","HEART YANG DEFICIENCY
+
+[Pathogenesis] Insufficient Heart yang cannot warm or propel effectively, giving rise to internal deficiency Cold.
+
+[Symptoms] Palpitations and unease; chest tightness and shortness of breath, worse with cold; aversion to cold and cool limbs; a pale complexion, fatigue and spontaneous sweating.
+
+[Pulse]
+Left cun (Heart): low peak, slow rate
+
+[Standard formula] Gui Zhi Gan Cao Tang"
+UI_BOOK_ENTRY_TITLE_TAN_HUO_RAO_XIN,痰火扰心,Phlegm-Fire Disturbing the Heart
+UI_BOOK_ENTRY_BODY_TAN_HUO_RAO_XIN,"痰火扰心
+
+【病机】痰浊郁而化火，痰火互结、上扰心神，神明躁动不宁。
+
+【症状】心烦失眠、躁扰不宁、狂躁易怒；多梦易惊、甚至胡言乱语、哭笑无常；胸闷痞满、口苦、痰多黄稠。
+
+【脉象】
+左寸（心）：脉搏次数多，波宽宽
+
+【标准方】黄连温胆汤","PHLEGM-FIRE DISTURBING THE HEART
+
+[Pathogenesis] Stagnant Phlegm turns into Fire. Phlegm and Fire combine and rise to disturb the Heart and mind, causing agitation.
+
+[Symptoms] Restlessness, insomnia, agitation and irritability; disturbing dreams, being easily startled, sometimes incoherent speech or inappropriate laughing and crying; chest fullness, a bitter taste and copious thick, yellow phlegm.
+
+[Pulse]
+Left cun (Heart): rapid rate, broad wave
+
+[Standard formula] Huang Lian Wen Dan Tang"
+UI_BOOK_ENTRY_TITLE_XIN_PI_LIANG_XU,心脾两虚,Heart and Spleen Deficiency
+UI_BOOK_ENTRY_BODY_XIN_PI_LIANG_XU,"心脾两虚
+
+【病机】思虑过度、劳倦伤脾、久病体虚、失血过多；脾气虚弱，气血生化不足，心血亏虚、心神失养，属气血两虚、虚证。
+
+【症状】心悸怔忡、失眠多梦、健忘头晕；食欲不振、腹胀便溏、神疲乏力；面色萎黄或苍白、肢体倦怠；女子月经量少色淡、淋漓不尽。
+
+【脉象】
+左寸（心）：波线细
+右关（脾）：波峰低
+
+【标准方】归脾汤","HEART AND SPLEEN DEFICIENCY
+
+[Pathogenesis] Overthinking, overwork, prolonged illness or blood loss weakens the Spleen. Insufficient production of qi and blood depletes Heart blood, leaving the mind unnourished; this is a deficiency of both qi and blood.
+
+[Symptoms] Palpitations, insomnia with vivid dreams, forgetfulness and dizziness; poor appetite, bloating, loose stools and fatigue; a sallow or pale complexion and tired limbs; in women, scant pale menstrual flow or prolonged spotting.
+
+[Pulse]
+Left cun (Heart): thin wave
+Right guan (Spleen): low peak
+
+[Standard formula] Gui Pi Tang"
+UI_BOOK_ENTRY_TITLE_GAN_HUO_SHANG_YAN,肝火上炎,Liver Fire Blazing Upward
+UI_BOOK_ENTRY_BODY_GAN_HUO_SHANG_YAN,"肝火上炎
+
+【病机】肝郁化火、暴怒伤肝，肝火炽盛、气火上逆，属实热证。
+
+【症状】头晕胀痛、面红目赤、急躁易怒；口苦口干、耳鸣耳聋、胁肋灼痛；失眠多梦、甚至狂躁；吐血、衄血。
+
+【脉象】
+左关（肝）：脉搏次数多
+
+【标准方】龙胆泻肝汤","LIVER FIRE BLAZING UPWARD
+
+[Pathogenesis] Constrained Liver qi turns to Fire, or intense anger injures the Liver. Liver Fire blazes and qi and Fire rise; this is an excess Heat pattern.
+
+[Symptoms] Dizziness with a distending headache, a flushed face, red eyes and irritability; bitter and dry mouth, ringing in the ears or hearing loss, and burning pain along the ribs; insomnia and vivid dreams, possibly agitation; vomiting blood or nosebleeds.
+
+[Pulse]
+Left guan (Liver): rapid rate
+
+[Standard formula] Long Dan Xie Gan Tang"
+UI_BOOK_ENTRY_TITLE_HAN_ZHI_GAN_MAI,寒滞肝脉,Cold Stagnating in the Liver Channel
+UI_BOOK_ENTRY_BODY_HAN_ZHI_GAN_MAI,"寒滞肝脉
+
+【病机】外感寒邪、凝滞肝经，肝脉拘急、气血阻滞、阳气被遏，属实寒证。
+
+【症状】少腹冷痛、睾丸坠胀冷痛、疝气痛；巅顶头痛、畏寒喜暖、得温痛减、遇寒加重；四肢厥冷、面色青白。
+
+【脉象】
+左关（肝）：脉搏次数少
+
+【标准方】暖肝煎","COLD STAGNATING IN THE LIVER CHANNEL
+
+[Pathogenesis] External Cold congeals in the Liver channel, constricting its vessels, obstructing qi and blood, and suppressing yang. This is an excess Cold pattern.
+
+[Symptoms] Cold pain in the lower abdomen; dragging, cold pain in the testicles or hernia pain; pain at the top of the head, aversion to cold, preference for warmth, relief with warmth and worsening with cold; icy limbs and a pale, bluish complexion.
+
+[Pulse]
+Left guan (Liver): slow rate
+
+[Standard formula] Nuan Gan Jian"
+UI_BOOK_ENTRY_TITLE_GAN_QI_YU_JIE,肝气郁结,Liver Qi Stagnation
+UI_BOOK_ENTRY_BODY_GAN_QI_YU_JIE,"肝气郁结
+
+【病机】情志不遂，肝失疏泄，气机郁滞、经脉不畅。
+
+【症状】胸胁、乳房、少腹胀痛走窜；情绪抑郁、易怒、善太息；咽部异物感（梅核气）、胸闷嗳气；女子月经不调、痛经。
+
+【脉象】
+左关（肝）：波峰高
+
+【标准方】柴胡疏肝散","LIVER QI STAGNATION
+
+[Pathogenesis] Emotional frustration impairs the Liver's free flow, causing qi to stagnate and the channels to become obstructed.
+
+[Symptoms] Moving, distending pain in the chest, flanks, breasts or lower abdomen; low mood, irritability and frequent sighing; a lump sensation in the throat, chest tightness and belching; irregular or painful menstruation.
+
+[Pulse]
+Left guan (Liver): high peak
+
+[Standard formula] Chai Hu Shu Gan San"
+UI_BOOK_ENTRY_TITLE_GAN_XUE_XU,肝血虚,Liver Blood Deficiency
+UI_BOOK_ENTRY_BODY_GAN_XUE_XU,"肝血虚
+
+【病机】肝血不足，筋脉、目、爪甲、心神失于濡养。
+
+【症状】头晕眼花、视力减退、视物模糊；爪甲干枯脆薄，肢体麻木、筋脉拘挛；面色淡白或萎黄，唇舌色淡；女子月经量少、色淡，甚则闭经；失眠多梦、易惊。
+
+【脉象】
+左关（肝）：波线细
+
+【标准方】四物汤","LIVER BLOOD DEFICIENCY
+
+[Pathogenesis] Insufficient Liver blood fails to nourish the sinews, eyes, nails and mind.
+
+[Symptoms] Dizziness, reduced vision and blurred sight; dry, brittle nails, numb limbs and muscle cramps; a pale or sallow complexion and pale lips and tongue; scant, pale menstruation or even absence of periods; restless sleep, vivid dreams and being easily startled.
+
+[Pulse]
+Left guan (Liver): thin wave
+
+[Standard formula] Si Wu Tang"
+UI_BOOK_ENTRY_TITLE_GAN_XUE_YU_ZHI,肝血瘀滞,Liver Blood Stasis
+UI_BOOK_ENTRY_BODY_GAN_XUE_YU_ZHI,"肝血瘀滞
+
+【病机】肝气失疏，血行凝滞，瘀血痹阻肝之脉络。
+
+【症状】肌肤甲错，周身瘀斑、蛛丝红缕；胁肋刺痛胀满，情绪压抑、生气后疼痛加重。
+
+【脉象】
+左关（肝）：波线粗
+
+【标准方】膈下逐瘀汤","LIVER BLOOD STASIS
+
+[Pathogenesis] Impaired free flow of Liver qi slows the blood. Blood stasis obstructs the Liver vessels.
+
+[Symptoms] Dry, rough skin, bruising and fine red spider-like markings; stabbing, distending pain along the ribs, low mood and pain that worsens after anger.
+
+[Pulse]
+Left guan (Liver): thick wave
+
+[Standard formula] Ge Xia Zhu Yu Tang"
+UI_BOOK_ENTRY_TITLE_GAN_YIN_XU,肝阴虚,Liver Yin Deficiency
+UI_BOOK_ENTRY_BODY_GAN_YIN_XU,"肝阴虚
+
+【病机】情志化火、久病耗伤，肝阴不足、虚火内生、头目筋脉失养。
+
+【症状】头晕耳鸣、两目干涩、视物昏花；胁肋隐隐灼痛、五心烦热；潮热盗汗、口燥咽干、面部烘热；手足蠕动、筋脉拘急。
+
+【脉象】
+左关（肝）：波线细，脉搏次数多，波宽窄
+
+【标准方】一贯煎","LIVER YIN DEFICIENCY
+
+[Pathogenesis] Emotional strain generating Fire or prolonged illness depletes Liver yin. Deficiency Fire arises, leaving the head, eyes and sinews unnourished.
+
+[Symptoms] Dizziness, tinnitus, dry eyes and blurred vision; a faint burning pain in the flanks and heat in the palms, soles and chest; tidal fever, night sweats, dry mouth and throat, and facial flushing; restless or twitching hands and feet with muscle cramps.
+
+[Pulse]
+Left guan (Liver): thin wave, rapid rate, narrow wave
+
+[Standard formula] Yi Guan Jian"
+UI_BOOK_ENTRY_TITLE_GAN_YANG_SHANG_KANG,肝阳上亢,Liver Yang Rising
+UI_BOOK_ENTRY_BODY_GAN_YANG_SHANG_KANG,"肝阳上亢
+
+【病机】肝肾阴虚，阴不制阳、肝阳升发太过、上扰头目，属本虚标实。
+
+【症状】眩晕耳鸣、头目胀痛、面红目赤；急躁易怒、失眠多梦、腰膝酸软；头重脚轻、步履不稳。
+
+【脉象】
+左关（肝）：波峰高，脉搏次数多
+
+【标准方】钩藤散","LIVER YANG RISING
+
+[Pathogenesis] Liver and Kidney yin deficiency cannot restrain yang. Liver yang rises excessively to disturb the head and eyes: deficiency at the root, excess in the manifestation.
+
+[Symptoms] Dizziness, tinnitus, a distending headache, a flushed face and red eyes; irritability, insomnia, vivid dreams and aching lower back and knees; a heavy head, light feeling in the feet and unsteady walking.
+
+[Pulse]
+Left guan (Liver): high peak, rapid rate
+
+[Standard formula] Gou Teng San"
+UI_BOOK_ENTRY_TITLE_GAN_PI_BU_HE,肝脾不和,Liver-Spleen Disharmony
+UI_BOOK_ENTRY_BODY_GAN_PI_BU_HE,"肝脾不和（肝郁脾虚）
+
+【病机】情志不舒、肝气郁结，木旺克土；脾虚失运、肝气乘脾。
+
+【症状】胸胁胀痛、善太息、情绪抑郁易怒；脘腹胀满、嗳气食少；腹痛泄泻、泻后痛减；食欲不振、肠鸣矢气多。
+
+【脉象】
+左关（肝）：波峰高
+右关（脾）：波峰低
+
+【标准方】逍遥散","LIVER-SPLEEN DISHARMONY
+
+[Pathogenesis] Emotional distress constrains Liver qi, so Wood overacts on Earth. A weakened Spleen fails to transport properly, and Liver qi overwhelms it.
+
+[Symptoms] Distending pain in the chest and flanks, frequent sighing, low mood and irritability; abdominal fullness, belching and poor appetite; abdominal pain with diarrhea, relieved after a bowel movement; poor appetite, bowel sounds and frequent passing of gas.
+
+[Pulse]
+Left guan (Liver): high peak
+Right guan (Spleen): low peak
+
+[Standard formula] Xiao Yao San"
+UI_BOOK_ENTRY_TITLE_SHEN_BU_NA_QI,肾不纳气,Kidney Failure to Grasp Qi
+UI_BOOK_ENTRY_BODY_SHEN_BU_NA_QI,"肾不纳气
+
+【病机】久病咳喘、年老肾虚、劳伤肾气；肾气亏虚，下元不固，不能摄纳肺气，气浮于上。属虚喘、肺肾两虚，无明显实邪。
+
+【症状】喘促日久、呼多吸少、动则喘甚；气短不足以息、吸气浅表；腰膝酸软、神疲乏力；或自汗、语声低怯。
+
+【脉象】
+右寸（肺）：波峰低
+右尺（肾阳）：波峰低
+
+【标准方】人参蛤蚧散","KIDNEY FAILURE TO GRASP QI
+
+[Pathogenesis] Chronic coughing or wheezing, aging or overwork depletes Kidney qi. The lower source cannot secure and draw down Lung qi, which rises. This is deficiency wheezing involving both Lung and Kidney, without an obvious excess pathogen.
+
+[Symptoms] Chronic wheezing with a short inhalation and long exhalation, worse with exertion; shortness of breath and shallow inhalation; weak or aching lower back and knees with fatigue; sometimes spontaneous sweating and a weak voice.
+
+[Pulse]
+Right cun (Lung): low peak
+Right chi (Kidney Yang): low peak
+
+[Standard formula] Ren Shen Ge Jie San"
+UI_BOOK_ENTRY_TITLE_SHEN_YIN_XU,肾阴虚,Kidney Yin Deficiency
+UI_BOOK_ENTRY_BODY_SHEN_YIN_XU,"肾阴虚
+
+【病机】久病耗伤、房劳过度、过服温燥，肾阴亏虚、虚火内生、失于滋养。
+
+【症状】腰膝酸痛、眩晕耳鸣、健忘；潮热盗汗、五心烦热、口燥咽干；男子遗精早泄，女子经少、闭经或崩漏；形体消瘦、失眠多梦。
+
+【脉象】
+右尺（肾阳）：脉搏次数多
+左尺（肾阴）：波线细，波宽窄
+
+【标准方】六味地黄丸","KIDNEY YIN DEFICIENCY
+
+[Pathogenesis] Prolonged illness, excessive sexual activity or too many warming and drying substances depletes Kidney yin. Deficiency Fire arises and nourishment is lost.
+
+[Symptoms] Aching lower back and knees, dizziness, tinnitus and forgetfulness; tidal fever, night sweats, heat in the palms, soles and chest, and dry mouth and throat; in men, nocturnal emissions or premature ejaculation; in women, scant or absent periods or abnormal uterine bleeding; weight loss, insomnia and vivid dreams.
+
+[Pulse]
+Right chi (Kidney Yang): rapid rate
+Left chi (Kidney Yin): thin wave, narrow wave
+
+[Standard formula] Liu Wei Di Huang Wan"
+UI_BOOK_ENTRY_TITLE_SHEN_YANG_XU,肾阳虚,Kidney Yang Deficiency
+UI_BOOK_ENTRY_BODY_SHEN_YANG_XU,"肾阳虚
+
+【病机】年老肾亏、久病伤阳、房劳耗损，肾阳亏虚、命门火衰、温煦气化无权。
+
+【症状】腰膝冷痛、酸软无力；畏寒肢冷，尤以下肢为甚；精神萎靡、面色㿠白或黧黑；小便清长、夜尿多、遗尿；男子阳痿早泄，女子宫寒不孕、带下清稀；大便久泄不止、完谷不化、五更泄泻。
+
+【脉象】
+右尺（肾阳）：波峰低，脉搏次数少
+左尺（肾阴）：波宽宽
+
+【标准方】金匮肾气丸","KIDNEY YANG DEFICIENCY
+
+[Pathogenesis] Aging, prolonged illness or sexual overexertion depletes Kidney yang. The Fire of the Gate of Life weakens, impairing warmth and fluid transformation.
+
+[Symptoms] Cold, aching and weak lower back and knees; aversion to cold and cold limbs, especially the legs; listlessness and a pale or dark complexion; copious clear urine, frequent urination at night and bed-wetting; in men, erectile dysfunction or premature ejaculation; in women, infertility associated with a cold uterus or thin, clear vaginal discharge; prolonged loose stools, undigested food or diarrhea before dawn.
+
+[Pulse]
+Right chi (Kidney Yang): low peak, slow rate
+Left chi (Kidney Yin): broad wave
+
+[Standard formula] Jin Gui Shen Qi Wan"
+UI_BOOK_ENTRY_TITLE_SHEN_XU_SHUI_FAN,肾虚水泛,Kidney Deficiency with Overflowing Water
+UI_BOOK_ENTRY_BODY_SHEN_XU_SHUI_FAN,"肾虚水泛
+
+【病机】肾阳虚衰，气化无权，水湿内停，泛溢肌肤。
+
+【症状】周身浮肿，腰以下肿甚，按之凹陷不起；腰膝酸软冷痛，畏寒肢冷；小便短少，或小便不利；心悸气短、喘咳痰稀如水；面色㿠白或灰黯。
+
+【脉象】
+右关（脾）：波宽宽
+右尺（肾阳）：波峰低，脉搏次数少
+左尺（肾阴）：波宽宽
+
+【标准方】真武汤","KIDNEY DEFICIENCY WITH OVERFLOWING WATER
+
+[Pathogenesis] Deficient Kidney yang cannot transform fluids. Water and Dampness accumulate and overflow into the skin.
+
+[Symptoms] Swelling throughout the body, worse below the waist and leaving an indentation when pressed; cold, aching and weak lower back and knees with aversion to cold and cold limbs; scant or difficult urination; palpitations, shortness of breath, wheezing or coughing with watery phlegm; a pale or grayish complexion.
+
+[Pulse]
+Right guan (Spleen): broad wave
+Right chi (Kidney Yang): low peak, slow rate
+Left chi (Kidney Yin): broad wave
+
+[Standard formula] Zhen Wu Tang"
+UI_BOOK_ENTRY_TITLE_SHEN_JING_BU_ZU,肾精不足,Kidney Essence Deficiency
+UI_BOOK_ENTRY_BODY_SHEN_JING_BU_ZU,"肾精不足
+
+【病机】先天禀赋不足、后天耗伤太过、久病及肾、房劳过度，肾精亏少，不能充养骨骼、脑髓、生殖之本。
+
+【症状】小儿五迟五软：立迟、行迟、语迟、发迟、齿迟；囟门迟闭、智力低下、身材矮小。
+成人脑髓失养：头晕耳鸣、健忘失眠、精神迟钝；早衰特征：发脱齿摇、须发早白；骨骼失养：腰膝酸软、足痿无力生殖亏虚：男子精少不育；女子经闭、不孕。
+
+【脉象】
+右尺（肾阳）：波峰低
+左尺（肾阴）：波线细
+
+【标准方】左归丸","KIDNEY ESSENCE DEFICIENCY
+
+[Pathogenesis] Weak congenital endowment, excessive later-life depletion, chronic illness or sexual overexertion reduces Kidney essence, which can no longer nourish the bones, brain and reproductive system.
+
+[Symptoms] In children, the 'five delays and five weaknesses': late standing, walking, speech, hair growth and tooth eruption; delayed fontanelle closure, impaired intellectual development and short stature.
+In adults, poor nourishment of the brain may cause dizziness, tinnitus, forgetfulness, insomnia and slowed thinking; early aging may cause hair loss, loose teeth or prematurely gray hair. Poor nourishment of the bones can cause weak lower back, knees and legs. Reproductive deficiency may cause low sperm count or infertility in men, and absent periods or infertility in women.
+
+[Pulse]
+Right chi (Kidney Yang): low peak
+Left chi (Kidney Yin): thin wave
+
+[Standard formula] Zuo Gui Wan"
+UI_BOOK_ENTRY_TITLE_SHEN_QI_BU_GU,肾气不固,Kidney Qi Failing to Secure
+UI_BOOK_ENTRY_BODY_SHEN_QI_BU_GU,"肾气不固
+
+【病机】久病劳损、年老体弱、房事不节，肾气亏虚、封藏固摄无权，偏虚证、无明显寒热。
+
+【症状】腰膝酸软、神疲乏力，耳鸣；小便频数清长、夜尿多、遗尿、小便失禁；男子：滑精、早泄；女子：带下清稀量多、胎动易滑。
+
+【脉象】
+右尺（肾阳）：波峰低
+左尺（肾阴）：波宽宽
+
+【标准方】金锁固精丸","KIDNEY QI FAILING TO SECURE
+
+[Pathogenesis] Chronic illness, aging or sexual overexertion depletes Kidney qi, weakening its ability to store and secure. This is mainly a deficiency pattern without marked Cold or Heat.
+
+[Symptoms] Aching and weak lower back and knees, fatigue and tinnitus; frequent, copious clear urination, nighttime urination, bed-wetting or incontinence; in men, involuntary semen leakage or premature ejaculation; in women, copious thin, clear vaginal discharge or recurrent signs of threatened miscarriage.
+
+[Pulse]
+Right chi (Kidney Yang): low peak
+Left chi (Kidney Yin): broad wave
+
+[Standard formula] Jin Suo Gu Jing Wan"
+UI_BOOK_ENTRY_TITLE_REN_SHEN_DISEASE,妊娠,Pregnancy
+UI_BOOK_ENTRY_BODY_REN_SHEN_DISEASE,"妊娠
+
+【病机】气血下聚冲任以养胎元，母体气血为胎元之本。胎之成，成于肾；胎之养，养于脾。
+
+【症状】恶心呕吐，食入即吐、厌油腻、头晕倦怠；
+
+
+【脉象】
+
+右关（脾）：波宽宽
+右尺（肾阳）：波峰高
+左尺（肾阴）：波线粗
+
+【标准方】泰山磐石散","PREGNANCY
+
+[Pathogenesis] Qi and blood gather in the Chong and Ren vessels to nourish the fetus. Maternal qi and blood sustain fetal growth: the Kidney supports its formation and the Spleen its nourishment.
+
+[Symptoms] Nausea and vomiting, sometimes immediately after eating, aversion to greasy foods, dizziness and fatigue.
+
+[Pulse]
+Right guan (Spleen): broad wave
+Right chi (Kidney Yang): high peak
+Left chi (Kidney Yin): thick wave
+
+[Standard formula] Tai Shan Pan Shi San"
+UI_BOOK_ENTRY_TITLE_XIN_SHEN_BU_JIAO,心肾不交,Heart-Kidney Disharmony
+UI_BOOK_ENTRY_BODY_XIN_SHEN_BU_JIAO,"心肾不交
+
+【病机】肾阴不足，不能上滋心火；心火偏亢，不能下温肾水，水火失济、阴阳失调。多由劳神过度、久病耗阴、情志郁而化火所致，多属阴虚火旺。
+
+【症状】心火亢于上：心烦失眠、多梦易醒、心悸怔忡、口舌生疮；肾阴亏于下：腰膝酸软、眩晕耳鸣、潮热盗汗、五心烦热；失眠多梦 ， 腰膝酸软 ， 夜寐不安。
+
+【脉象】
+左寸（心）：脉搏次数多
+左尺（肾阴）：波线细，波宽窄
+右尺（肾阳）：脉搏次数多
+
+【标准方】黄连阿胶汤","HEART-KIDNEY DISHARMONY
+
+[Pathogenesis] Insufficient Kidney yin fails to nourish the Heart, while excessive Heart Fire cannot descend to the Kidney. Water and Fire fail to balance, disturbing yin and yang. Overwork, chronic illness or emotional constraint turning to Fire may contribute; this is generally yin deficiency with exuberant Fire.
+
+[Symptoms] Heart Fire above: restlessness, insomnia, frequent waking from dreams, palpitations and mouth sores; Kidney yin deficiency below: aching lower back and knees, dizziness, tinnitus, tidal fever, night sweats and heat in the palms, soles and chest; troubled sleep with vivid dreams and persistent weakness in the lower back and knees.
+
+[Pulse]
+Left cun (Heart): rapid rate
+Left chi (Kidney Yin): thin wave, narrow wave
+Right chi (Kidney Yang): rapid rate
+
+[Standard formula] Huang Lian E Jiao Tang"
+UI_BOOK_ENTRY_TITLE_QI_FEN_RE_SHENG,气分热盛,Exuberant Heat at the Qi Level
+UI_BOOK_ENTRY_BODY_QI_FEN_RE_SHENG,"气分热盛
+
+【病机】外感温热病邪入里，邪热炽盛、入居气分、里热蒸腾、正邪剧争，属实热证。
+
+【症状】大热：全身壮热、不恶寒反恶热；大汗：热迫津泄、大汗出；大渴：口大渴、喜冷饮；脉洪大。
+
+【脉象】
+浮脉（表）：波峰高（轻微），脉搏次数多（轻微），波宽窄（轻微）
+左寸（心）：波峰高（轻微），脉搏次数多（轻微），波宽窄（轻微）
+右寸（肺）：波峰高（剧烈），脉搏次数多（剧烈），波宽窄（剧烈）
+右关（脾）：波峰高（剧烈），脉搏次数多（剧烈），波宽窄（剧烈）
+
+【标准方】白虎汤","EXUBERANT HEAT AT THE QI LEVEL
+
+[Pathogenesis] An external warm pathogen enters the interior and blazes at the qi level. Internal Heat rises as the body's defenses struggle against it; this is an excess Heat pattern.
+
+[Symptoms] Intense fever with aversion to heat rather than cold; profuse sweating as Heat forces fluids outward; intense thirst with a preference for cold drinks; a surging, large pulse.
+
+[Pulse]
+Floating pulse (Exterior): slightly high peak, slightly rapid rate, slightly narrow wave
+Left cun (Heart): slightly high peak, slightly rapid rate, slightly narrow wave
+Right cun (Lung): markedly high peak, markedly rapid rate, markedly narrow wave
+Right guan (Spleen): markedly high peak, markedly rapid rate, markedly narrow wave
+
+[Standard formula] Bai Hu Tang"
