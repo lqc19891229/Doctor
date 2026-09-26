@@ -10844,16 +10844,16 @@ UI_BOOK_ENTRY_BODY_FENG_HAN_BIAO_SHI_ZHENG,"风寒表实证
 [Pulse]
 Floating pulse (Exterior): increased amplitude, lower pulse frequency
 
-[Standard formula] Ephedra Decoction","风寒表实证
+[Standard formula] Ephedra Decoction","風寒表実証
 
-【病机】寒邪束表、腠理闭塞、卫阳被遏。
+【病機】寒邪が体表を塞ぎ、皮膚のきめが閉じ、衛陽の働きが妨げられる。
 
-【症状】恶寒发热，头身酸疼，无汗而喘。
+【症状】悪寒と発熱、頭や体の痛み、汗が出ず喘ぐ。
 
-【脉象】
-浮脉（表）：波峰高，脉搏次数少
+【脈象】
+浮脈（表）：波の峰が高く、脈拍が少ない。
 
-【标准方】麻黄汤"
+【標準処方】麻黄湯"
 UI_BOOK_ENTRY_TITLE_FENG_HAN_BIAO_XU_ZHENG,风寒表虚证,Wind-Cold Exterior Deficiency Pattern,風寒表虚証
 UI_BOOK_ENTRY_BODY_FENG_HAN_BIAO_XU_ZHENG,"风寒表虚证
 
@@ -10873,16 +10873,16 @@ UI_BOOK_ENTRY_BODY_FENG_HAN_BIAO_XU_ZHENG,"风寒表虚证
 [Pulse]
 Floating pulse (Exterior): decreased amplitude, lower pulse frequency
 
-[Standard formula] Cinnamon Twig Decoction","风寒表虚证
+[Standard formula] Cinnamon Twig Decoction","風寒表虚証
 
-【病机】风寒袭表，卫气不固，营阴外泄。
+【病機】風寒が体表を侵し、衛気が外を守れず、営陰が外へ漏れる。
 
-【症状】恶风发热，头痛流清涕，出汗。
+【症状】風を嫌う発熱、頭痛と透明な鼻水、発汗。
 
-【脉象】
-浮脉（表）：波峰低，脉搏次数少
+【脈象】
+浮脈（表）：波の峰が低く、脈拍が少ない。
 
-【标准方】桂枝汤"
+【標準処方】桂枝湯"
 UI_BOOK_ENTRY_TITLE_FENG_RE_BIAO_ZHENG,风热表证,Wind-Heat Exterior Pattern,風熱表証
 UI_BOOK_ENTRY_BODY_FENG_RE_BIAO_ZHENG,"风热表证
 
@@ -10902,16 +10902,16 @@ UI_BOOK_ENTRY_BODY_FENG_RE_BIAO_ZHENG,"风热表证
 [Pulse]
 Floating pulse (Exterior): higher pulse frequency
 
-[Standard formula] Honeysuckle and Forsythia Powder","风热表证
+[Standard formula] Honeysuckle and Forsythia Powder","風熱表証
 
-【病机】风热之邪侵袭肺卫，卫气失和，肺失清肃。
+【病機】風熱の邪が肺と衛を侵し、衛気の調和が乱れて、肺の清粛の働きが失われる。
 
-【症状】发热重，咽喉红肿，痰涕黄稠。
+【症状】高い熱、喉の発赤と腫れ、黄色く粘る痰と鼻水。
 
-【脉象】
-浮脉（表）：脉搏次数多
+【脈象】
+浮脈（表）：脈拍が多い。
 
-【标准方】银翘散"
+【標準処方】銀翹散"
 UI_BOOK_ENTRY_TITLE_WEN_ZAO_ZHENG,温燥证,Warm-Dryness Pattern,温燥証
 UI_BOOK_ENTRY_BODY_WEN_ZAO_ZHENG,"温燥证
 
@@ -10931,16 +10931,16 @@ UI_BOOK_ENTRY_BODY_WEN_ZAO_ZHENG,"温燥证
 [Pulse]
 Floating pulse (Exterior): higher pulse frequency, narrower pulse width
 
-[Standard formula] Mulberry Leaf and Apricot Kernel Decoction","温燥证
+[Standard formula] Mulberry Leaf and Apricot Kernel Decoction","温燥証
 
-【病机】初秋燥热之邪侵袭肺卫，肺失清润。
+【病機】初秋の乾燥と熱が肺と衛を侵し、肺の潤いが失われる。
 
-【症状】发热恶风，口鼻干燥、咽干口渴、干咳少痰，痰涕黄稠。
+【症状】発熱して風を嫌い、口や鼻が乾く。喉の乾きと渇き、痰の少ない空咳、黄色く粘る痰や鼻水。
 
-【脉象】
-浮脉（表）：脉搏次数多，波宽窄
+【脈象】
+浮脈（表）：脈拍が多く、波の幅が狭い。
 
-【标准方】桑杏汤"
+【標準処方】桑杏湯"
 UI_BOOK_ENTRY_TITLE_LIANG_ZAO_ZHENG,凉燥证,Cool-Dryness Pattern,涼燥証
 UI_BOOK_ENTRY_BODY_LIANG_ZAO_ZHENG,"凉燥证
 
@@ -10960,16 +10960,16 @@ UI_BOOK_ENTRY_BODY_LIANG_ZAO_ZHENG,"凉燥证
 [Pulse]
 Floating pulse (Exterior): lower pulse frequency, narrower pulse width
 
-[Standard formula] Apricot Kernel and Perilla Leaf Powder","凉燥证
+[Standard formula] Apricot Kernel and Perilla Leaf Powder","涼燥証
 
-【病机】深秋寒气渐生，燥邪兼风寒侵袭肺卫。
+【病機】晩秋の寒さが強まるころ、乾燥の邪が風寒とともに肺と衛を侵す。
 
-【症状】恶寒发热、鼻塞流清涕、干咳少痰、咽干唇燥、皮肤干燥。
+【症状】悪寒と発熱、鼻づまりと透明な鼻水、痰の少ない空咳、喉と唇や皮膚の乾燥。
 
-【脉象】
-浮脉（表）：脉搏次数少，波宽窄
+【脈象】
+浮脈（表）：脈拍が少なく、波の幅が狭い。
 
-【标准方】杏苏散"
+【標準処方】杏蘇散"
 UI_BOOK_ENTRY_TITLE_WEI_QI_XU,卫气虚,Defensive Qi Deficiency,衛気虚
 UI_BOOK_ENTRY_BODY_WEI_QI_XU,"卫气虚
 
@@ -10989,16 +10989,16 @@ UI_BOOK_ENTRY_BODY_WEI_QI_XU,"卫气虚
 [Pulse]
 Floating pulse (Exterior): decreased amplitude
 
-[Standard formula] Jade Windscreen Powder","卫气虚
+[Standard formula] Jade Windscreen Powder","衛気虚
 
-【病机】素体虚弱、久病耗伤肺气，卫气不固、腠理疏松、防御固摄功能减退。
+【病機】もともとの虚弱や長患いで肺気を消耗し、衛気が体表を守れない。皮膚のきめが緩み、防御と保持の働きが弱まる。
 
-【症状】自汗：不活动也出汗，动则更甚；易感冒：怕风畏冷、不耐风寒，稍受凉即感冒；面色㿠白、气短乏力、神疲懒言；皮肤腠理疏松、常畏风。
+【症状】自汗：動かなくても汗をかき、動くと増す。風邪をひきやすい：風や寒さを嫌い、少し冷えるだけで風邪をひく。顔色が白く、息切れと倦怠感があり、話すのもおっくう。肌のきめが緩く、よく風を嫌う。
 
-【脉象】
-浮脉（表）：波峰低
+【脈象】
+浮脈（表）：波の峰が低い。
 
-【标准方】玉屏风散"
+【標準処方】玉屏風散"
 UI_BOOK_ENTRY_TITLE_TONG_BI,痛痹,Painful Bi (Cold Bi),痛痺
 UI_BOOK_ENTRY_BODY_TONG_BI,"痛痹（寒痹）
 
@@ -11018,16 +11018,16 @@ UI_BOOK_ENTRY_BODY_TONG_BI,"痛痹（寒痹）
 [Pulse]
 Floating pulse (Exterior): slightly increased amplitude, markedly lower pulse frequency, slightly broader pulse width
 
-[Standard formula] Aconite Decoction","痛痹（寒痹）
+[Standard formula] Aconite Decoction","痛痺（寒痺）
 
-【病机】风寒湿邪痹阻经络，寒邪偏盛。寒主收引、凝滞，气血不通则疼痛剧烈。
+【病機】風・寒・湿の邪が経絡を塞ぎ、とくに寒邪が強い。寒は収縮と停滞をもたらし、気血が通らなくなると強い痛みが生じる。
 
-【症状】肢体关节疼痛剧烈、固定不移；遇寒加重、得温痛减；关节屈伸不利，局部怕冷。
+【症状】手足の関節が強く痛み、痛む場所は変わらない。冷えると悪化し、温めると和らぐ。関節を曲げ伸ばししにくく、患部が冷える。
 
-【脉象】
-浮脉（表）：波峰高（轻微），脉搏次数少（剧烈），波宽宽（轻微）
+【脈象】
+浮脈（表）：波の峰がやや高く、脈拍は著しく少なく、波の幅はやや広い。
 
-【标准方】乌头汤"
+【標準処方】烏頭湯"
 UI_BOOK_ENTRY_TITLE_RE_BI,热痹,Heat Bi,熱痺
 UI_BOOK_ENTRY_BODY_RE_BI,"热痹
 
@@ -11047,16 +11047,16 @@ UI_BOOK_ENTRY_BODY_RE_BI,"热痹
 [Pulse]
 Floating pulse (Exterior): slightly increased amplitude, higher pulse frequency, slightly broader pulse width
 
-[Standard formula] White Tiger Decoction with Cinnamon Twig","热痹
+[Standard formula] White Tiger Decoction with Cinnamon Twig","熱痺
 
-【病机】风湿热邪侵袭经络关节，或风寒湿邪郁而化热，气血壅滞、经络痹阻。
+【病機】風湿熱が経絡と関節を侵す。または風寒湿が体内で熱に変わり、気血が停滞して経絡を塞ぐ。
 
-【症状】关节红肿灼热、疼痛剧烈；触之发热、拒按，得冷稍舒；发热、口渴、烦躁；肢体屈伸不利。
+【症状】関節が赤く腫れて熱を持ち、強く痛む。触ると熱く、押すと痛むが、冷やすと少し楽になる。発熱、口の渇き、いらだち、関節を曲げ伸ばししにくい。
 
-【脉象】
-浮脉（表）：波峰高（轻微），脉搏次数多，波宽宽（轻微）
+【脈象】
+浮脈（表）：波の峰がやや高く、脈拍が多く、波の幅がやや広い。
 
-【标准方】白虎桂枝汤"
+【標準処方】白虎桂枝湯"
 UI_BOOK_ENTRY_TITLE_ZHUO_BI,着痹,Fixed Bi (Damp Bi),着痺
 UI_BOOK_ENTRY_BODY_ZHUO_BI,"着痹（湿痹）
 
@@ -11078,17 +11078,16 @@ Worse in rainy or humid weather.
 [Pulse]
 Floating pulse (Exterior): slightly increased amplitude, slightly lower pulse frequency, markedly broader pulse width
 
-[Standard formula] Coix Seed Decoction","着痹（湿痹）
+[Standard formula] Coix Seed Decoction","着痺（湿痺）
 
-【病机】风寒湿邪侵袭，湿邪偏盛；湿性重浊、黏滞，阻滞经络、困遏气机。
+【病機】風寒湿が侵入し、とくに湿邪が強い。湿の重さと粘りによって経絡が塞がれ、気の流れが妨げられる。
 
-【症状】关节沉重酸痛、重着如裹；痛处固定，肌肤麻木、肢体困重；关节肿胀、屈伸不利。
-阴雨潮湿天气加重
+【症状】関節が重く鈍く痛み、包まれたようにだるい。痛む場所は一定で、皮膚のしびれと手足の重だるさがある。関節が腫れて動かしにくく、雨や湿気で悪化する。
 
-【脉象】
-浮脉（表）：波峰高（轻微），脉搏次数少（轻微），波宽宽（剧烈）
+【脈象】
+浮脈（表）：波の峰がやや高く、脈拍はやや少なく、波の幅が著しく広い。
 
-【标准方】薏苡仁汤"
+【標準処方】薏苡仁湯"
 UI_BOOK_ENTRY_TITLE_XING_BI,行痹,Wandering Bi (Wind Bi),行痺
 UI_BOOK_ENTRY_BODY_XING_BI,"行痹（风痹）
 
@@ -11108,16 +11107,16 @@ UI_BOOK_ENTRY_BODY_XING_BI,"行痹（风痹）
 [Pulse]
 Floating pulse (Exterior): markedly increased amplitude, slightly lower pulse frequency, slightly broader pulse width
 
-[Standard formula] Saposhnikovia Decoction","行痹（风痹）
+[Standard formula] Saposhnikovia Decoction","行痺（風痺）
 
-【病机】风寒湿邪侵袭经络，以风邪偏盛为主。风性善行、走窜不定。
+【病機】風寒湿が経絡を侵し、とくに風邪が強い。風の性質により、症状があちこちへ移り変わる。
 
-【症状】肢体关节酸痛，疼痛游走不定，窜走周身。
+【症状】手足の関節が鈍く痛み、痛む場所が定まらず全身を移動する。
 
-【脉象】
-浮脉（表）：波峰高（剧烈），脉搏次数少（轻微），波宽宽（轻微）
+【脈象】
+浮脈（表）：波の峰が著しく高く、脈拍はやや少なく、波の幅がやや広い。
 
-【标准方】防风汤"
+【標準処方】防風湯"
 UI_BOOK_ENTRY_TITLE_FEI_RE_YONG_SHENG,肺热壅盛,Exuberant Heat in the Lung,肺熱壅盛
 UI_BOOK_ENTRY_BODY_FEI_RE_YONG_SHENG,"肺热壅盛
 
@@ -11137,16 +11136,16 @@ UI_BOOK_ENTRY_BODY_FEI_RE_YONG_SHENG,"肺热壅盛
 [Pulse]
 Right cun (Lung): higher pulse frequency
 
-[Standard formula] Ephedra, Apricot Kernel, Gypsum and Licorice Decoction","肺热壅盛
+[Standard formula] Ephedra, Apricot Kernel, Gypsum and Licorice Decoction","肺熱壅盛
 
-【病机】邪热壅滞于肺，肺失宣降，气机闭塞，热盛气逆。
+【病機】熱邪が肺にこもり、肺の宣発と粛降が働かず、気の流れが塞がれて逆上する。
 
-【症状】咳嗽气粗、喘促胸闷；痰黄黏稠、不易咳出；发热、口渴咽痛；鼻翼煽动，大便偏干，小便黄。
+【症状】激しい咳と呼吸、息苦しさと胸の圧迫感。黄色く粘り、出しにくい痰。発熱、口の渇き、喉の痛み。鼻翼が大きく動き、便は乾きがちで尿は黄色い。
 
-【脉象】
-右寸（肺）：脉搏次数多
+【脈象】
+右寸（肺）：脈拍が多い。
 
-【标准方】麻杏石甘汤"
+【標準処方】麻杏石甘湯"
 UI_BOOK_ENTRY_TITLE_FEI_QI_XU,肺气虚,Lung Qi Deficiency,肺気虚
 UI_BOOK_ENTRY_BODY_FEI_QI_XU,"肺气虚
 
@@ -11166,16 +11165,16 @@ UI_BOOK_ENTRY_BODY_FEI_QI_XU,"肺气虚
 [Pulse]
 Right cun (Lung): decreased amplitude
 
-[Standard formula] Lung-Tonifying Decoction","肺气虚
+[Standard formula] Lung-Tonifying Decoction","肺気虚
 
-【病机】肺气不足，宣降无力，卫外不固。
+【病機】肺気が不足し、宣発と粛降の力が弱く、体表を守る衛気も不足する。
 
-【症状】咳喘无力，气短懒言，动则加重；语声低微、少气乏力；自汗、怕风、易感冒；痰液清稀、量少。
+【症状】力のない咳と喘ぎ、息切れ、話すのがおっくうで、動くと悪化する。声は小さく疲れやすい。自汗、風を嫌う、風邪をひきやすい。痰は透明で少量。
 
-【脉象】
-右寸（肺）：波峰低
+【脈象】
+右寸（肺）：波の峰が低い。
 
-【标准方】补肺汤"
+【標準処方】補肺湯"
 UI_BOOK_ENTRY_TITLE_TAN_SHI_ZU_FEI,痰湿阻肺,Phlegm-Damp Obstructing the Lung,痰湿阻肺
 UI_BOOK_ENTRY_BODY_TAN_SHI_ZU_FEI,"痰湿阻肺
 
@@ -11197,14 +11196,14 @@ Right cun (Lung): broader pulse width
 
 [Standard formula] Two-Cured Decoction","痰湿阻肺
 
-【病机】脾失健运，痰湿内生，上壅于肺，肺失宣降。
+【病機】脾の運化が低下して痰湿が生じ、肺に上って滞り、肺の宣発と粛降が失われる。
 
-【症状】咳嗽痰多，色白黏稠、量多易咯；胸闷、气喘、喉间痰鸣；肢体困重，口淡不渴。
+【症状】咳が出て痰が多く、白く粘る痰を大量に吐きやすい。胸の圧迫感、喘ぎ、喉の痰音。手足が重だるく、口は淡く渇かない。
 
-【脉象】
-右寸（肺）：波宽宽
+【脈象】
+右寸（肺）：波の幅が広い。
 
-【标准方】二陈汤"
+【標準処方】二陳湯"
 UI_BOOK_ENTRY_TITLE_FEI_YIN_XU,肺阴虚,Lung Yin Deficiency,肺陰虚
 UI_BOOK_ENTRY_BODY_FEI_YIN_XU,"肺阴虚
 
@@ -11224,16 +11223,16 @@ UI_BOOK_ENTRY_BODY_FEI_YIN_XU,"肺阴虚
 [Pulse]
 Right cun (Lung): thinner pulse line, higher pulse frequency, narrower pulse width
 
-[Standard formula] Adenophora and Ophiopogon Decoction","肺阴虚
+[Standard formula] Adenophora and Ophiopogon Decoction","肺陰虚
 
-【病机】肺阴亏虚，虚火内生，肺失滋润、清肃无权。
+【病機】肺陰が不足して虚熱が生じ、肺の潤いと清粛の働きが失われる。
 
-【症状】干咳无痰，或痰少黏稠难咯；咽干口燥、声音嘶哑；潮热盗汗、五心烦热；颧红、形体消瘦。
+【症状】痰のない空咳、または少量で粘り出しにくい痰。喉や口の乾燥、声がれ。午後からの熱感、寝汗、手足のほてり。頬が赤く、体が痩せる。
 
-【脉象】
-右寸（肺）：波线细，脉搏次数多，波宽窄
+【脈象】
+右寸（肺）：波線が細く、脈拍が多く、波の幅が狭い。
 
-【标准方】沙参麦冬汤"
+【標準処方】沙参麦冬湯"
 UI_BOOK_ENTRY_TITLE_TAN_RE_YONG_FEI,痰热壅肺,Phlegm-Heat Congesting the Lung,痰熱壅肺
 UI_BOOK_ENTRY_BODY_TAN_RE_YONG_FEI,"痰热壅肺
 
@@ -11253,16 +11252,16 @@ UI_BOOK_ENTRY_BODY_TAN_RE_YONG_FEI,"痰热壅肺
 [Pulse]
 Right cun (Lung): higher pulse frequency, broader pulse width
 
-[Standard formula] Clear Qi and Transform Phlegm Pill","痰热壅肺
+[Standard formula] Clear Qi and Transform Phlegm Pill","痰熱壅肺
 
-【病机】邪热入里，灼津成痰、痰热互结，壅遏肺气，肺失宣降。
+【病機】熱邪が内に入り、津液を焼いて痰を生む。痰と熱が結びついて肺気を塞ぎ、肺の宣発と粛降が失われる。
 
-【症状】咳嗽气喘，痰多黄稠、黏稠难咯；胸闷胸痛，甚则鼻翼煽动；发热口渴、烦躁、大便干结、小便黄。
+【症状】咳と喘ぎがあり、黄色く粘る痰が多くて出しにくい。胸の圧迫感と痛み、重い場合は鼻翼が大きく動く。発熱、口の渇き、いらだち、便秘、黄色い尿。
 
-【脉象】
-右寸（肺）：脉搏次数多，波宽宽
+【脈象】
+右寸（肺）：脈拍が多く、波の幅が広い。
 
-【标准方】清气化痰丸"
+【標準処方】清気化痰丸"
 UI_BOOK_ENTRY_TITLE_BIAO_HAN_LI_RE,表寒里热,Exterior Cold with Interior Heat,表寒裏熱
 UI_BOOK_ENTRY_BODY_BIAO_HAN_LI_RE,"表寒里热
 
@@ -11284,17 +11283,17 @@ UI_BOOK_ENTRY_BODY_BIAO_HAN_LI_RE,"表寒里热
 Floating pulse (Exterior): lower pulse frequency
 Right cun (Lung): higher pulse frequency
 
-[Standard formula] Great Azure Dragon Decoction","表寒里热
+[Standard formula] Great Azure Dragon Decoction","表寒裏熱
 
-【病机】寒邪束表，里有郁热，寒热错杂。
+【病機】寒邪が体表を塞ぐ一方、体内にはこもった熱があり、寒と熱が混在する。
 
-【症状】怕冷无汗，口干咽痛，浑身酸痛怕冷，同时心烦燥热。
+【症状】寒気がして汗が出ず、口や喉が乾いて痛む。全身が痛んで寒がる一方、熱っぽくいらだつ。
 
-【脉象】
-浮脉（表）：脉搏次数少
-右寸（肺）：脉搏次数多
+【脈象】
+浮脈（表）：脈拍が少ない。
+右寸（肺）：脈拍が多い。
 
-【标准方】大青龙汤"
+【標準処方】大青竜湯"
 UI_BOOK_ENTRY_TITLE_BIAO_HAN_LI_YIN,表寒里饮,Exterior Cold with Interior Fluid Retention,表寒裏飲
 UI_BOOK_ENTRY_BODY_BIAO_HAN_LI_YIN,"表寒里饮
 
@@ -11318,19 +11317,17 @@ UI_BOOK_ENTRY_BODY_BIAO_HAN_LI_YIN,"表寒里饮
 Floating pulse (Exterior): lower pulse frequency
 Right cun (Lung): broader pulse width
 
-[Standard formula] Minor Azure Dragon Decoction","表寒里饮
+[Standard formula] Minor Azure Dragon Decoction","表寒裏飲
 
-【病机】外感风寒，寒邪束表；内有水饮伏肺，表里寒邪相合，寒饮壅遏肺气。
+【病機】外から風寒を受け、寒邪が体表を塞ぐ。体内には水飲が肺に潜み、内外の寒が重なって肺気を妨げる。
 
+【症状】悪寒と発熱、咳と喘ぎ。透明で薄い痰が多く、胸が重苦しく、顔がむくむ。
 
-【症状】恶寒发热，咳嗽气喘；痰多清稀，胸闷胸满，面部浮肿。
+【脈象】
+浮脈（表）：脈拍が少ない。
+右寸（肺）：波の幅が広い。
 
-
-【脉象】
-浮脉（表）：脉搏次数少
-右寸（肺）：波宽宽
-
-【标准方】小青龙汤"
+【標準処方】小青竜湯"
 UI_BOOK_ENTRY_TITLE_PI_QI_XU,脾气虚,Spleen Qi Deficiency,脾気虚
 UI_BOOK_ENTRY_BODY_PI_QI_XU,"脾气虚
 
@@ -11350,16 +11347,16 @@ UI_BOOK_ENTRY_BODY_PI_QI_XU,"脾气虚
 [Pulse]
 Right guan (Spleen): decreased amplitude
 
-[Standard formula] Four Gentlemen Decoction","脾气虚
+[Standard formula] Four Gentlemen Decoction","脾気虚
 
-【病机】饮食劳倦、久病耗伤，脾失健运、中气不足、运化失职。
+【病機】食生活や疲労、長患いによって脾が弱り、中気が不足して、運化がうまく働かない。
 
-【症状】食少纳呆、脘腹胀满，饭后尤甚；神疲乏力、少气懒言、肢体倦怠；面色萎黄、形体消瘦或浮肿；大便溏薄。
+【症状】食欲が乏しく、みぞおちや腹が張り、食後に悪化する。疲れやすく、息切れして話すのがおっくう。顔色が黄色く、痩せるかむくむ。便は柔らかい。
 
-【脉象】
-右关（脾）：波峰低
+【脈象】
+右関（脾）：波の峰が低い。
 
-【标准方】四君子汤"
+【標準処方】四君子湯"
 UI_BOOK_ENTRY_TITLE_SHI_SHENG_KUN_PI,湿盛困脾,Excess Dampness Encumbering the Spleen,湿盛困脾
 UI_BOOK_ENTRY_BODY_SHI_SHENG_KUN_PI,"湿盛困脾
 
@@ -11381,14 +11378,14 @@ Right guan (Spleen): broader pulse width
 
 [Standard formula] Calm the Stomach Powder","湿盛困脾
 
-【病机】外感湿邪、或嗜食生冷肥甘，湿邪壅滞、脾阳被困、运化失司，属实证。
+【病機】外から湿邪を受けるか、冷たい物や脂っこい甘味を好み、湿が停滞する。脾陽が妨げられ運化が低下した実証。
 
-【症状】脘腹痞闷、食少纳呆；恶心欲呕、口中黏腻、口淡不渴；头身困重、四肢酸楚、困倦嗜睡；大便溏稀不爽。
+【症状】みぞおちや腹がつかえ、食欲がない。吐き気、口の粘つき、口が淡く渇かない。頭と体が重く、手足がだるく眠い。便が柔らかく、すっきり出ない。
 
-【脉象】
-右关（脾）：波宽宽
+【脈象】
+右関（脾）：波の幅が広い。
 
-【标准方】平胃散"
+【標準処方】平胃散"
 UI_BOOK_ENTRY_TITLE_PI_YANG_XU,脾阳虚,Spleen Yang Deficiency,脾陽虚
 UI_BOOK_ENTRY_BODY_PI_YANG_XU,"脾阳虚
 
@@ -11408,16 +11405,16 @@ UI_BOOK_ENTRY_BODY_PI_YANG_XU,"脾阳虚
 [Pulse]
 Right guan (Spleen): decreased amplitude, lower pulse frequency, broader pulse width
 
-[Standard formula] Regulate the Middle Pill","脾阳虚
+[Standard formula] Regulate the Middle Pill","脾陽虚
 
-【病机】脾气久虚，脾阳不足、虚寒内生、运化腐熟无权。
+【病機】脾気の不足が長く続き、脾陽が衰えて内側に虚寒が生じ、消化と運化が弱まる。
 
-【症状】食少纳呆、脘腹冷痛，喜温喜按；大便清稀溏薄，甚至完谷不化；畏寒肢冷、四肢不温、神疲乏力；口淡不渴、面色㿠白或萎黄；或肢体浮肿、白带清稀量多。
+【症状】食欲が乏しく、腹が冷えて痛み、温めたり押したりすると楽になる。水っぽい便、未消化の便。寒がりで手足が冷え、疲れやすい。口は渇かず、顔色が白いか黄色い。むくみや薄い帯下が見られることもある。
 
-【脉象】
-右关（脾）：波峰低，脉搏次数少，波宽宽
+【脈象】
+右関（脾）：波の峰が低く、脈拍が少なく、波の幅が広い。
 
-【标准方】理中丸"
+【標準処方】理中丸"
 UI_BOOK_ENTRY_TITLE_PI_XU_SHI_SHENG,脾虚湿盛,Spleen Deficiency with Excess Dampness,脾虚湿盛
 UI_BOOK_ENTRY_BODY_PI_XU_SHI_SHENG,"脾虚湿盛
 
@@ -11439,14 +11436,14 @@ Right guan (Spleen): decreased amplitude, broader pulse width
 
 [Standard formula] Ginseng, Poria and Atractylodes Powder","脾虚湿盛
 
-【病机】脾气本虚，运化无力，水湿内生，湿浊内停。
+【病機】もともと脾気が弱く、運化が低下して体内に水湿が生じ、濁った湿が滞る。
 
-【症状】食少纳呆，脘腹痞闷，饭后胀甚；神疲乏力、少气懒言、四肢困重；大便溏薄、或泄泻、黏滞不爽；面色萎黄，或肢体浮肿、带下量多清稀。
+【症状】食欲がなく、みぞおちと腹が張り、食後に悪化する。疲労と息切れ、手足の重だるさ。柔らかい便や下痢、粘ついてすっきり出ない。顔色が黄色く、むくみや水っぽい帯下を伴うこともある。
 
-【脉象】
-右关（脾）：波峰低，波宽宽
+【脈象】
+右関（脾）：波の峰が低く、波の幅が広い。
 
-【标准方】参苓白术散"
+【標準処方】参苓白朮散"
 UI_BOOK_ENTRY_TITLE_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI,外感风寒，内伤湿滞,External Wind-Cold with Internal Damp Stagnation,外感風寒・内傷湿滞
 UI_BOOK_ENTRY_BODY_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI,"外感风寒，内伤湿滞
 
@@ -11468,17 +11465,17 @@ UI_BOOK_ENTRY_BODY_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI,"外感风寒，内伤湿�
 Floating pulse (Exterior): lower pulse frequency
 Right guan (Spleen): broader pulse width
 
-[Standard formula] Patchouli Qi-Rectifying Powder","外感风寒，内伤湿滞
+[Standard formula] Patchouli Qi-Rectifying Powder","外感風寒・内傷湿滞
 
-【病机】外感风寒之邪束表，内伤饮食湿浊阻滞中焦；表有风寒、里有湿滞。
+【病機】外から受けた風寒が体表を塞ぎ、飲食などによる湿が中焦に滞る。表には風寒、裏には湿滞がある。
 
-【症状】外感风寒：恶寒发热、头痛身重、无汗、鼻塞流清涕；内伤湿滞：胸膈满闷、脘腹胀痛、恶心呕吐、肠鸣泄泻；怕冷发热 + 又吐又泻、身重胸闷。
+【症状】風寒の症状：悪寒、発熱、頭痛、体の重さ、無汗、透明な鼻水。湿滞の症状：胸とみぞおちの張り、腹痛、吐き気、嘔吐、下痢。寒気と熱に加えて嘔吐や下痢、体の重さが見られる。
 
-【脉象】
-浮脉（表）：脉搏次数少
-右关（脾）：波宽宽
+【脈象】
+浮脈（表）：脈拍が少ない。
+右関（脾）：波の幅が広い。
 
-【标准方】藿香正气散"
+【標準処方】藿香正気散"
 UI_BOOK_ENTRY_TITLE_HAN_NING_XIN_MAI,寒凝心脉,Cold Congealing in the Heart Vessels,寒凝心脈
 UI_BOOK_ENTRY_BODY_HAN_NING_XIN_MAI,"寒凝心脉
 
@@ -11498,16 +11495,16 @@ UI_BOOK_ENTRY_BODY_HAN_NING_XIN_MAI,"寒凝心脉
 [Pulse]
 Left cun (Heart): lower pulse frequency
 
-[Standard formula] Chinese Angelica Decoction for Frigid Extremities","寒凝心脉
+[Standard formula] Chinese Angelica Decoction for Frigid Extremities","寒凝心脈
 
-【病机】素体阳虚，阴寒凝滞，寒邪痹阻心脉、胸阳不振，心脉拘急不通而痛。
+【病機】もともと陽が不足し、陰寒が凝り滞る。寒邪が心脈を塞ぎ、胸の陽気が弱まって心脈が収縮し、強く痛む。
 
-【症状】猝然胸痛、痛势剧烈、遇寒加重、得温痛减；胸闷气短、心悸怔忡；畏寒肢冷、面色苍白、唇甲青紫。
+【症状】突然の激しい胸痛。寒さで悪化し、温めると和らぐ。胸の圧迫感、息切れ、動悸。寒がりで手足が冷え、顔色が白く、唇や爪が紫がかる。
 
-【脉象】
-左寸（心）：脉搏次数少
+【脈象】
+左寸（心）：脈拍が少ない。
 
-【标准方】当归四逆汤"
+【標準処方】当帰四逆湯"
 UI_BOOK_ENTRY_TITLE_XIN_HUO_KANG_SHENG,心火亢盛,Exuberant Heart Fire,心火亢盛
 UI_BOOK_ENTRY_BODY_XIN_HUO_KANG_SHENG,"心火亢盛
 
@@ -11529,14 +11526,14 @@ Left cun (Heart): higher pulse frequency
 
 [Standard formula] Guide Out the Red Powder","心火亢盛
 
-【病机】心火内炽，火热扰心、灼伤脉络、下移小肠。
+【病機】心火が内で燃え、熱が心神を乱し、脈絡を傷め、小腸にも及ぶ。
 
-【症状】心胸烦热、心悸失眠、烦躁易怒；口舌生疮、舌尖红赤疼痛；口干口苦、面红目赤；小便短赤、灼热涩痛。
+【症状】胸のほてり、動悸と不眠、いらだち。口内炎、舌先の赤みと痛み。口の渇きと苦味、顔や目の赤み。尿は少なく赤く、排尿時に熱感や痛みがある。
 
-【脉象】
-左寸（心）：脉搏次数多
+【脈象】
+左寸（心）：脈拍が多い。
 
-【标准方】导赤散"
+【標準処方】導赤散"
 UI_BOOK_ENTRY_TITLE_TAN_MI_XIN_QIAO,痰迷心窍,Phlegm Obscuring the Heart Orifices,痰迷心竅
 UI_BOOK_ENTRY_BODY_TAN_MI_XIN_QIAO,"痰迷心窍
 
@@ -11556,16 +11553,16 @@ UI_BOOK_ENTRY_BODY_TAN_MI_XIN_QIAO,"痰迷心窍
 [Pulse]
 Left cun (Heart): broader pulse width
 
-[Standard formula] Scour Phlegm Decoction","痰迷心窍
+[Standard formula] Scour Phlegm Decoction","痰迷心竅
 
-【病机】痰湿浊邪蒙蔽心窍，神明失主，多由情志郁结、脾失健运、痰浊内生，上蒙心神所致。
+【病機】痰湿が心竅を覆って意識を乱す。情緒の停滞や脾の運化低下で痰濁が生じ、心神を妨げる。
 
-【症状】神志痴呆、精神抑郁、表情淡漠；喃喃自语、举止失常、昏不知人；喉中痰鸣、胸闷痰多、意识模糊；甚则突然昏仆、不省人事。
+【症状】反応が鈍く、気分が沈み、表情が乏しい。独り言や異常な振る舞い、意識の混濁。喉の痰音、胸の圧迫感と多量の痰。重い場合は突然倒れて意識を失う。
 
-【脉象】
-左寸（心）：波宽宽
+【脈象】
+左寸（心）：波の幅が広い。
 
-【标准方】涤痰汤"
+【標準処方】滌痰湯"
 UI_BOOK_ENTRY_TITLE_XIN_QI_XU,心气虚,Heart Qi Deficiency,心気虚
 UI_BOOK_ENTRY_BODY_XIN_QI_XU,"心气虚
 
@@ -11585,16 +11582,16 @@ UI_BOOK_ENTRY_BODY_XIN_QI_XU,"心气虚
 [Pulse]
 Left cun (Heart): decreased amplitude
 
-[Standard formula] Nourish the Heart Decoction","心气虚
+[Standard formula] Nourish the Heart Decoction","心気虚
 
-【病机】心气不足，鼓动无力，心神失养。
+【病機】心気が不足し、血を動かす力が弱く、心神への滋養が足りない。
 
-【症状】心悸怔忡，活动后加重；气短、胸闷、精神疲倦；自汗，面色淡白。
+【症状】動悸があり、動くと悪化する。息切れ、胸苦しさ、疲労。自然に汗が出て、顔色が白い。
 
-【脉象】
-左寸（心）：波峰低
+【脈象】
+左寸（心）：波の峰が低い。
 
-【标准方】养心汤"
+【標準処方】養心湯"
 UI_BOOK_ENTRY_TITLE_XIN_MAI_YU_ZU,心脉瘀阻,Blood Stasis Obstructing the Heart Vessels,心脈瘀阻
 UI_BOOK_ENTRY_BODY_XIN_MAI_YU_ZU,"心脉瘀阻
 
@@ -11614,16 +11611,16 @@ UI_BOOK_ENTRY_BODY_XIN_MAI_YU_ZU,"心脉瘀阻
 [Pulse]
 Left cun (Heart): thicker pulse line
 
-[Standard formula] Drive Out Stasis in the Mansion of Blood Decoction","心脉瘀阻
+[Standard formula] Drive Out Stasis in the Mansion of Blood Decoction","心脈瘀阻
 
-【病机】瘀血阻滞心之脉络，气血不通，心失濡养，不通则痛。
+【病機】瘀血が心脈を塞ぎ、気血が通らず、心が十分に養われないため痛みが生じる。
 
-【症状】心胸疼痛，心悸心慌，胸闷气短，喘不得卧；面色晦暗、唇甲青紫。
+【症状】胸や心臓の辺りが痛み、動悸、胸苦しさ、息切れがある。横になれないほど喘ぐこともある。顔色は暗く、唇や爪が紫がかる。
 
-【脉象】
-左寸（心）：波线粗
+【脈象】
+左寸（心）：波線が太い。
 
-【标准方】血府逐瘀汤"
+【標準処方】血府逐瘀湯"
 UI_BOOK_ENTRY_TITLE_XIN_YIN_XU,心阴虚,Heart Yin Deficiency,心陰虚
 UI_BOOK_ENTRY_BODY_XIN_YIN_XU,"心阴虚
 
@@ -11643,16 +11640,16 @@ UI_BOOK_ENTRY_BODY_XIN_YIN_XU,"心阴虚
 [Pulse]
 Left cun (Heart): thinner pulse line, higher pulse frequency, narrower pulse width
 
-[Standard formula] Heavenly Emperor's Heart-Tonifying Elixir","心阴虚
+[Standard formula] Heavenly Emperor's Heart-Tonifying Elixir","心陰虚
 
-【病机】心阴亏虚，心神失养，虚火内扰。
+【病機】心陰が不足し、心神が養われず、虚熱が内で乱す。
 
-【症状】心悸怔忡，心慌不安；心烦失眠、多梦易醒；五心烦热、潮热盗汗；口干咽燥、面色颧红。
+【症状】動悸と不安、いらだち、不眠、夢が多く目覚めやすい。手足のほてり、午後からの熱感、寝汗。口や喉の乾燥、頬の赤み。
 
-【脉象】
-左寸（心）：波线细，脉搏次数多，波宽窄
+【脈象】
+左寸（心）：波線が細く、脈拍が多く、波の幅が狭い。
 
-【标准方】天王补心丹"
+【標準処方】天王補心丹"
 UI_BOOK_ENTRY_TITLE_XIN_YANG_XU,心阳虚,Heart Yang Deficiency,心陽虚
 UI_BOOK_ENTRY_BODY_XIN_YANG_XU,"心阳虚
 
@@ -11672,16 +11669,16 @@ UI_BOOK_ENTRY_BODY_XIN_YANG_XU,"心阳虚
 [Pulse]
 Left cun (Heart): decreased amplitude, lower pulse frequency
 
-[Standard formula] Cinnamon Twig and Licorice Decoction","心阳虚
+[Standard formula] Cinnamon Twig and Licorice Decoction","心陽虚
 
-【病机】心阳不足，温煦、鼓动无力，虚寒内生。
+【病機】心陽が不足し、温めて血を動かす力が弱く、内側に虚寒が生じる。
 
-【症状】心悸怔忡，心慌不安；胸闷气短、遇寒加重；畏寒怕冷、四肢不温；面色㿠白，精神疲乏，自汗。
+【症状】動悸と不安、胸の圧迫感、息切れ。寒さで悪化し、手足が冷える。顔色が白く、疲れやすく、自然に汗が出る。
 
-【脉象】
-左寸（心）：波峰低，脉搏次数少
+【脈象】
+左寸（心）：波の峰が低く、脈拍が少ない。
 
-【标准方】桂枝甘草汤"
+【標準処方】桂枝甘草湯"
 UI_BOOK_ENTRY_TITLE_TAN_HUO_RAO_XIN,痰火扰心,Phlegm-Fire Disturbing the Heart,痰火擾心
 UI_BOOK_ENTRY_BODY_TAN_HUO_RAO_XIN,"痰火扰心
 
@@ -11701,16 +11698,16 @@ UI_BOOK_ENTRY_BODY_TAN_HUO_RAO_XIN,"痰火扰心
 [Pulse]
 Left cun (Heart): higher pulse frequency, broader pulse width
 
-[Standard formula] Coptis Warm-Gallbladder Decoction","痰火扰心
+[Standard formula] Coptis Warm-Gallbladder Decoction","痰火擾心
 
-【病机】痰浊郁而化火，痰火互结、上扰心神，神明躁动不宁。
+【病機】痰濁が停滞して熱となり、痰と火が結びついて心神を乱す。
 
-【症状】心烦失眠、躁扰不宁、狂躁易怒；多梦易惊、甚至胡言乱语、哭笑无常；胸闷痞满、口苦、痰多黄稠。
+【症状】いらだって眠れず、落ち着きがなく怒りやすい。悪夢や驚き、重いときは支離滅裂な言葉や不安定な感情。胸のつかえ、口の苦味、黄色く粘る痰が多い。
 
-【脉象】
-左寸（心）：脉搏次数多，波宽宽
+【脈象】
+左寸（心）：脈拍が多く、波の幅が広い。
 
-【标准方】黄连温胆汤"
+【標準処方】黄連温胆湯"
 UI_BOOK_ENTRY_TITLE_XIN_PI_LIANG_XU,心脾两虚,Heart and Spleen Deficiency,心脾両虚
 UI_BOOK_ENTRY_BODY_XIN_PI_LIANG_XU,"心脾两虚
 
@@ -11732,17 +11729,17 @@ UI_BOOK_ENTRY_BODY_XIN_PI_LIANG_XU,"心脾两虚
 Left cun (Heart): thinner pulse line
 Right guan (Spleen): decreased amplitude
 
-[Standard formula] Restore the Spleen Decoction","心脾两虚
+[Standard formula] Restore the Spleen Decoction","心脾両虚
 
-【病机】思虑过度、劳倦伤脾、久病体虚、失血过多；脾气虚弱，气血生化不足，心血亏虚、心神失养，属气血两虚、虚证。
+【病機】考えすぎや疲労、長患い、失血などで脾気が弱り、気血が十分に作られず、心血が不足して心神を養えない。気血両虚の虚証。
 
-【症状】心悸怔忡、失眠多梦、健忘头晕；食欲不振、腹胀便溏、神疲乏力；面色萎黄或苍白、肢体倦怠；女子月经量少色淡、淋漓不尽。
+【症状】動悸、不眠、多夢、物忘れ、めまい。食欲不振、腹の張り、柔らかい便、疲労。顔色が黄色いか白く、手足がだるい。女性では月経量が少なく色が薄い、または出血が長引く。
 
-【脉象】
-左寸（心）：波线细
-右关（脾）：波峰低
+【脈象】
+左寸（心）：波線が細い。
+右関（脾）：波の峰が低い。
 
-【标准方】归脾汤"
+【標準処方】帰脾湯"
 UI_BOOK_ENTRY_TITLE_GAN_HUO_SHANG_YAN,肝火上炎,Liver Fire Blazing Upward,肝火上炎
 UI_BOOK_ENTRY_BODY_GAN_HUO_SHANG_YAN,"肝火上炎
 
@@ -11764,14 +11761,14 @@ Left guan (Liver): higher pulse frequency
 
 [Standard formula] Gentian Decoction to Drain the Liver","肝火上炎
 
-【病机】肝郁化火、暴怒伤肝，肝火炽盛、气火上逆，属实热证。
+【病機】肝気の鬱滞が火に変わるか、激怒で肝を傷め、肝火が強まって気と熱が上昇する実熱証。
 
-【症状】头晕胀痛、面红目赤、急躁易怒；口苦口干、耳鸣耳聋、胁肋灼痛；失眠多梦、甚至狂躁；吐血、衄血。
+【症状】頭の張る痛みとめまい、顔や目の赤み、怒りっぽさ。口の苦味と乾燥、耳鳴りや聞こえづらさ、脇腹の熱い痛み。不眠や多夢、重い場合は激しい興奮。吐血や鼻血。
 
-【脉象】
-左关（肝）：脉搏次数多
+【脈象】
+左関（肝）：脈拍が多い。
 
-【标准方】龙胆泻肝汤"
+【標準処方】竜胆瀉肝湯"
 UI_BOOK_ENTRY_TITLE_HAN_ZHI_GAN_MAI,寒滞肝脉,Cold Stagnating in the Liver Channel,寒滞肝脈
 UI_BOOK_ENTRY_BODY_HAN_ZHI_GAN_MAI,"寒滞肝脉
 
@@ -11791,16 +11788,16 @@ UI_BOOK_ENTRY_BODY_HAN_ZHI_GAN_MAI,"寒滞肝脉
 [Pulse]
 Left guan (Liver): lower pulse frequency
 
-[Standard formula] Warm the Liver Decoction","寒滞肝脉
+[Standard formula] Warm the Liver Decoction","寒滞肝脈
 
-【病机】外感寒邪、凝滞肝经，肝脉拘急、气血阻滞、阳气被遏，属实寒证。
+【病機】外から寒邪を受け、肝経に凝り滞る。肝脈が収縮し、気血が滞って陽気が妨げられる実寒証。
 
-【症状】少腹冷痛、睾丸坠胀冷痛、疝气痛；巅顶头痛、畏寒喜暖、得温痛减、遇寒加重；四肢厥冷、面色青白。
+【症状】下腹部や精巣の冷える痛み、鼠径部の痛み。頭頂部の頭痛、寒がりで温かさを好み、温めると楽になり冷えると悪化する。手足がひどく冷え、顔色が青白い。
 
-【脉象】
-左关（肝）：脉搏次数少
+【脈象】
+左関（肝）：脈拍が少ない。
 
-【标准方】暖肝煎"
+【標準処方】暖肝煎"
 UI_BOOK_ENTRY_TITLE_GAN_QI_YU_JIE,肝气郁结,Liver Qi Stagnation,肝気鬱結
 UI_BOOK_ENTRY_BODY_GAN_QI_YU_JIE,"肝气郁结
 
@@ -11820,16 +11817,16 @@ UI_BOOK_ENTRY_BODY_GAN_QI_YU_JIE,"肝气郁结
 [Pulse]
 Left guan (Liver): increased amplitude
 
-[Standard formula] Bupleurum Liver-Soothing Powder","肝气郁结
+[Standard formula] Bupleurum Liver-Soothing Powder","肝気鬱結
 
-【病机】情志不遂，肝失疏泄，气机郁滞、经脉不畅。
+【病機】思いどおりにならないことが続き、肝の疏泄が乱れ、気と経脈の流れが滞る。
 
-【症状】胸胁、乳房、少腹胀痛走窜；情绪抑郁、易怒、善太息；咽部异物感（梅核气）、胸闷嗳气；女子月经不调、痛经。
+【症状】胸や脇、乳房、下腹部に移動する張った痛み。気分が沈み、怒りやすく、ため息が多い。喉の異物感、胸苦しさ、げっぷ。女性では月経不順や月経痛。
 
-【脉象】
-左关（肝）：波峰高
+【脈象】
+左関（肝）：波の峰が高い。
 
-【标准方】柴胡疏肝散"
+【標準処方】柴胡疏肝散"
 UI_BOOK_ENTRY_TITLE_GAN_XUE_XU,肝血虚,Liver Blood Deficiency,肝血虚
 UI_BOOK_ENTRY_BODY_GAN_XUE_XU,"肝血虚
 
@@ -11851,14 +11848,14 @@ Left guan (Liver): thinner pulse line
 
 [Standard formula] Four-Substance Decoction","肝血虚
 
-【病机】肝血不足，筋脉、目、爪甲、心神失于濡养。
+【病機】肝血が不足し、筋や経脈、目、爪、心神が十分に養われない。
 
-【症状】头晕眼花、视力减退、视物模糊；爪甲干枯脆薄，肢体麻木、筋脉拘挛；面色淡白或萎黄，唇舌色淡；女子月经量少、色淡，甚则闭经；失眠多梦、易惊。
+【症状】めまい、視力の低下とかすみ目。爪が乾いてもろく、手足のしびれや筋のひきつれ。顔色や唇、舌の色が薄い。女性では月経量が少なく色が薄い、重い場合は無月経。不眠、多夢、驚きやすさ。
 
-【脉象】
-左关（肝）：波线细
+【脈象】
+左関（肝）：波線が細い。
 
-【标准方】四物汤"
+【標準処方】四物湯"
 UI_BOOK_ENTRY_TITLE_GAN_XUE_YU_ZHI,肝血瘀滞,Liver Blood Stasis,肝血瘀滞
 UI_BOOK_ENTRY_BODY_GAN_XUE_YU_ZHI,"肝血瘀滞
 
@@ -11880,14 +11877,14 @@ Left guan (Liver): thicker pulse line
 
 [Standard formula] Drive Out Blood Stasis Below the Diaphragm Decoction","肝血瘀滞
 
-【病机】肝气失疏，血行凝滞，瘀血痹阻肝之脉络。
+【病機】肝の疏泄が乱れ、血が滞って瘀血が肝の脈絡を塞ぐ。
 
-【症状】肌肤甲错，周身瘀斑、蛛丝红缕；胁肋刺痛胀满，情绪压抑、生气后疼痛加重。
+【症状】皮膚が乾いてざらつき、全身にあざや細い赤い筋が見える。脇腹が刺すように痛んで張り、気分が沈み、怒ると痛みが増す。
 
-【脉象】
-左关（肝）：波线粗
+【脈象】
+左関（肝）：波線が太い。
 
-【标准方】膈下逐瘀汤"
+【標準処方】膈下逐瘀湯"
 UI_BOOK_ENTRY_TITLE_GAN_YIN_XU,肝阴虚,Liver Yin Deficiency,肝陰虚
 UI_BOOK_ENTRY_BODY_GAN_YIN_XU,"肝阴虚
 
@@ -11907,16 +11904,16 @@ UI_BOOK_ENTRY_BODY_GAN_YIN_XU,"肝阴虚
 [Pulse]
 Left guan (Liver): thinner pulse line, higher pulse frequency, narrower pulse width
 
-[Standard formula] Linking Decoction","肝阴虚
+[Standard formula] Linking Decoction","肝陰虚
 
-【病机】情志化火、久病耗伤，肝阴不足、虚火内生、头目筋脉失养。
+【病機】情緒の乱れが熱に変わるか、長患いで消耗し、肝陰が不足する。虚熱が生じ、頭や目、筋脈が十分に養われない。
 
-【症状】头晕耳鸣、两目干涩、视物昏花；胁肋隐隐灼痛、五心烦热；潮热盗汗、口燥咽干、面部烘热；手足蠕动、筋脉拘急。
+【症状】めまい、耳鳴り、目の乾きとかすみ。脇腹のかすかな熱い痛み、手足のほてり。午後からの熱感、寝汗、口と喉の乾燥、顔のほてり。手足がぴくつき、筋がひきつる。
 
-【脉象】
-左关（肝）：波线细，脉搏次数多，波宽窄
+【脈象】
+左関（肝）：波線が細く、脈拍が多く、波の幅が狭い。
 
-【标准方】一贯煎"
+【標準処方】一貫煎"
 UI_BOOK_ENTRY_TITLE_GAN_YANG_SHANG_KANG,肝阳上亢,Liver Yang Rising,肝陽上亢
 UI_BOOK_ENTRY_BODY_GAN_YANG_SHANG_KANG,"肝阳上亢
 
@@ -11936,16 +11933,16 @@ UI_BOOK_ENTRY_BODY_GAN_YANG_SHANG_KANG,"肝阳上亢
 [Pulse]
 Left guan (Liver): increased amplitude, higher pulse frequency
 
-[Standard formula] Uncaria Powder","肝阳上亢
+[Standard formula] Uncaria Powder","肝陽上亢
 
-【病机】肝肾阴虚，阴不制阳、肝阳升发太过、上扰头目，属本虚标实。
+【病機】肝と腎の陰が不足し、陽を抑えられず、肝陽が過度に上昇して頭と目を乱す。根本は虚、現れは実。
 
-【症状】眩晕耳鸣、头目胀痛、面红目赤；急躁易怒、失眠多梦、腰膝酸软；头重脚轻、步履不稳。
+【症状】めまいと耳鳴り、頭や目の張る痛み、顔と目の赤み。いらだち、不眠、多夢、腰や膝のだるさ。頭が重く足元がふらつく。
 
-【脉象】
-左关（肝）：波峰高，脉搏次数多
+【脈象】
+左関（肝）：波の峰が高く、脈拍が多い。
 
-【标准方】钩藤散"
+【標準処方】釣藤散"
 UI_BOOK_ENTRY_TITLE_GAN_PI_BU_HE,肝脾不和,Liver-Spleen Disharmony,肝脾不和
 UI_BOOK_ENTRY_BODY_GAN_PI_BU_HE,"肝脾不和（肝郁脾虚）
 
@@ -11967,17 +11964,17 @@ UI_BOOK_ENTRY_BODY_GAN_PI_BU_HE,"肝脾不和（肝郁脾虚）
 Left guan (Liver): increased amplitude
 Right guan (Spleen): decreased amplitude
 
-[Standard formula] Free and Easy Wanderer Powder","肝脾不和（肝郁脾虚）
+[Standard formula] Free and Easy Wanderer Powder","肝脾不和（肝鬱脾虚）
 
-【病机】情志不舒、肝气郁结，木旺克土；脾虚失运、肝气乘脾。
+【病機】情緒の滞りで肝気が鬱結し、脾の働きを妨げる。脾も弱まり、肝気の影響を受けやすくなる。
 
-【症状】胸胁胀痛、善太息、情绪抑郁易怒；脘腹胀满、嗳气食少；腹痛泄泻、泻后痛减；食欲不振、肠鸣矢气多。
+【症状】胸と脇が張って痛み、ため息が多く、気分が沈んで怒りやすい。みぞおちと腹の張り、げっぷ、食欲不振。腹痛と下痢があり、排便後に痛みが和らぐ。腹が鳴り、ガスが多い。
 
-【脉象】
-左关（肝）：波峰高
-右关（脾）：波峰低
+【脈象】
+左関（肝）：波の峰が高い。
+右関（脾）：波の峰が低い。
 
-【标准方】逍遥散"
+【標準処方】逍遥散"
 UI_BOOK_ENTRY_TITLE_SHEN_BU_NA_QI,肾不纳气,Kidney Failure to Grasp Qi,腎不納気
 UI_BOOK_ENTRY_BODY_SHEN_BU_NA_QI,"肾不纳气
 
@@ -11999,17 +11996,17 @@ UI_BOOK_ENTRY_BODY_SHEN_BU_NA_QI,"肾不纳气
 Right cun (Lung): decreased amplitude
 Right chi (Kidney Yang): decreased amplitude
 
-[Standard formula] Ginseng and Gecko Powder","肾不纳气
+[Standard formula] Ginseng and Gecko Powder","腎不納気
 
-【病机】久病咳喘、年老肾虚、劳伤肾气；肾气亏虚，下元不固，不能摄纳肺气，气浮于上。属虚喘、肺肾两虚，无明显实邪。
+【病機】長く続く咳と喘ぎ、高齢や過労で腎気が不足し、肺から下りる気を腎が受け止められない。虚証の喘ぎで、肺と腎がともに弱い。
 
-【症状】喘促日久、呼多吸少、动则喘甚；气短不足以息、吸气浅表；腰膝酸软、神疲乏力；或自汗、语声低怯。
+【症状】喘ぎが長引き、吐く息に比べ吸う息が浅く、動くと悪化する。息切れ、腰や膝のだるさ、疲労。自然に汗が出て、声が小さいこともある。
 
-【脉象】
-右寸（肺）：波峰低
-右尺（肾阳）：波峰低
+【脈象】
+右寸（肺）：波の峰が低い。
+右尺（腎陽）：波の峰が低い。
 
-【标准方】人参蛤蚧散"
+【標準処方】人参蛤蚧散"
 UI_BOOK_ENTRY_TITLE_SHEN_YIN_XU,肾阴虚,Kidney Yin Deficiency,腎陰虚
 UI_BOOK_ENTRY_BODY_SHEN_YIN_XU,"肾阴虚
 
@@ -12031,17 +12028,17 @@ UI_BOOK_ENTRY_BODY_SHEN_YIN_XU,"肾阴虚
 Right chi (Kidney Yang): higher pulse frequency
 Left chi (Kidney Yin): thinner pulse line, narrower pulse width
 
-[Standard formula] Six-Ingredient Rehmannia Pill","肾阴虚
+[Standard formula] Six-Ingredient Rehmannia Pill","腎陰虚
 
-【病机】久病耗伤、房劳过度、过服温燥，肾阴亏虚、虚火内生、失于滋养。
+【病機】長患いや房事の過度、温燥の薬の使いすぎなどで腎陰が不足し、虚熱が生じ、滋養が足りなくなる。
 
-【症状】腰膝酸痛、眩晕耳鸣、健忘；潮热盗汗、五心烦热、口燥咽干；男子遗精早泄，女子经少、闭经或崩漏；形体消瘦、失眠多梦。
+【症状】腰や膝のだるい痛み、めまい、耳鳴り、物忘れ。午後からの熱感、寝汗、手足のほてり、口と喉の乾燥。男性では遺精や早漏、女性では月経量の減少や無月経、不正出血。痩せ、不眠、多夢。
 
-【脉象】
-右尺（肾阳）：脉搏次数多
-左尺（肾阴）：波线细，波宽窄
+【脈象】
+右尺（腎陽）：脈拍が多い。
+左尺（腎陰）：波線が細く、波の幅が狭い。
 
-【标准方】六味地黄丸"
+【標準処方】六味地黄丸"
 UI_BOOK_ENTRY_TITLE_SHEN_YANG_XU,肾阳虚,Kidney Yang Deficiency,腎陽虚
 UI_BOOK_ENTRY_BODY_SHEN_YANG_XU,"肾阳虚
 
@@ -12063,17 +12060,17 @@ UI_BOOK_ENTRY_BODY_SHEN_YANG_XU,"肾阳虚
 Right chi (Kidney Yang): decreased amplitude, lower pulse frequency
 Left chi (Kidney Yin): broader pulse width
 
-[Standard formula] Kidney Qi Pill from the Golden Cabinet","肾阳虚
+[Standard formula] Kidney Qi Pill from the Golden Cabinet","腎陽虚
 
-【病机】年老肾亏、久病伤阳、房劳耗损，肾阳亏虚、命门火衰、温煦气化无权。
+【病機】高齢や長患い、房事による消耗で腎陽が衰え、体を温めて水を巡らせる働きが低下する。
 
-【症状】腰膝冷痛、酸软无力；畏寒肢冷，尤以下肢为甚；精神萎靡、面色㿠白或黧黑；小便清长、夜尿多、遗尿；男子阳痿早泄，女子宫寒不孕、带下清稀；大便久泄不止、完谷不化、五更泄泻。
+【症状】腰や膝が冷えて痛み、力が入らない。特に下半身が冷える。元気がなく、顔色が白いか暗い。薄い尿が多く、夜間頻尿や尿漏れ。男性では勃起不全や早漏、女性では冷えによる不妊や水っぽい帯下。長引く下痢や未消化の便、夜明け前の下痢。
 
-【脉象】
-右尺（肾阳）：波峰低，脉搏次数少
-左尺（肾阴）：波宽宽
+【脈象】
+右尺（腎陽）：波の峰が低く、脈拍が少ない。
+左尺（腎陰）：波の幅が広い。
 
-【标准方】金匮肾气丸"
+【標準処方】金匱腎気丸"
 UI_BOOK_ENTRY_TITLE_SHEN_XU_SHUI_FAN,肾虚水泛,Kidney Deficiency with Overflowing Water,腎虚水泛
 UI_BOOK_ENTRY_BODY_SHEN_XU_SHUI_FAN,"肾虚水泛
 
@@ -12097,18 +12094,18 @@ Right guan (Spleen): broader pulse width
 Right chi (Kidney Yang): decreased amplitude, lower pulse frequency
 Left chi (Kidney Yin): broader pulse width
 
-[Standard formula] True Warrior Decoction","肾虚水泛
+[Standard formula] True Warrior Decoction","腎虚水泛
 
-【病机】肾阳虚衰，气化无权，水湿内停，泛溢肌肤。
+【病機】腎陽が衰えて水の代謝ができず、水湿が体内に停滞して皮膚にあふれる。
 
-【症状】周身浮肿，腰以下肿甚，按之凹陷不起；腰膝酸软冷痛，畏寒肢冷；小便短少，或小便不利；心悸气短、喘咳痰稀如水；面色㿠白或灰黯。
+【症状】全身がむくみ、腰から下が特に腫れて、押すとへこんだまま戻りにくい。腰や膝が冷えて痛み、手足も冷える。尿量が少なく、排尿しにくい。動悸、息切れ、水のように薄い痰を伴う咳。顔色が白いか灰色がかる。
 
-【脉象】
-右关（脾）：波宽宽
-右尺（肾阳）：波峰低，脉搏次数少
-左尺（肾阴）：波宽宽
+【脈象】
+右関（脾）：波の幅が広い。
+右尺（腎陽）：波の峰が低く、脈拍が少ない。
+左尺（腎陰）：波の幅が広い。
 
-【标准方】真武汤"
+【標準処方】真武湯"
 UI_BOOK_ENTRY_TITLE_SHEN_JING_BU_ZU,肾精不足,Kidney Essence Deficiency,腎精不足
 UI_BOOK_ENTRY_BODY_SHEN_JING_BU_ZU,"肾精不足
 
@@ -12132,18 +12129,17 @@ In adults, poor nourishment of the brain may cause dizziness, tinnitus, forgetfu
 Right chi (Kidney Yang): decreased amplitude
 Left chi (Kidney Yin): thinner pulse line
 
-[Standard formula] Restore the Left Pill","肾精不足
+[Standard formula] Restore the Left Pill","腎精不足
 
-【病机】先天禀赋不足、后天耗伤太过、久病及肾、房劳过度，肾精亏少，不能充养骨骼、脑髓、生殖之本。
+【病機】先天的な不足や過度の消耗、長患い、房事のしすぎで腎精が減り、骨、脳、生殖の基礎を養えない。
 
-【症状】小儿五迟五软：立迟、行迟、语迟、发迟、齿迟；囟门迟闭、智力低下、身材矮小。
-成人脑髓失养：头晕耳鸣、健忘失眠、精神迟钝；早衰特征：发脱齿摇、须发早白；骨骼失养：腰膝酸软、足痿无力生殖亏虚：男子精少不育；女子经闭、不孕。
+【症状】小児では立つ、歩く、話す、髪や歯の発育が遅く、頭の泉門が閉じるのも遅い。発達の遅れや低身長。成人ではめまい、耳鳴り、物忘れ、不眠、反応の鈍さ。抜け毛や歯のぐらつき、若白髪、腰や膝のだるさ、脚の弱り。男性では精子の不足と不妊、女性では無月経や不妊。
 
-【脉象】
-右尺（肾阳）：波峰低
-左尺（肾阴）：波线细
+【脈象】
+右尺（腎陽）：波の峰が低い。
+左尺（腎陰）：波線が細い。
 
-【标准方】左归丸"
+【標準処方】左帰丸"
 UI_BOOK_ENTRY_TITLE_SHEN_QI_BU_GU,肾气不固,Kidney Qi Failing to Secure,腎気不固
 UI_BOOK_ENTRY_BODY_SHEN_QI_BU_GU,"肾气不固
 
@@ -12165,17 +12161,17 @@ UI_BOOK_ENTRY_BODY_SHEN_QI_BU_GU,"肾气不固
 Right chi (Kidney Yang): decreased amplitude
 Left chi (Kidney Yin): broader pulse width
 
-[Standard formula] Metal Lock Pill to Secure the Essence","肾气不固
+[Standard formula] Metal Lock Pill to Secure the Essence","腎気不固
 
-【病机】久病劳损、年老体弱、房事不节，肾气亏虚、封藏固摄无权，偏虚证、无明显寒热。
+【病機】長患いや疲労、高齢、房事の不摂生で腎気が不足し、蓄える力が弱まる。目立った寒熱のない虚証。
 
-【症状】腰膝酸软、神疲乏力，耳鸣；小便频数清长、夜尿多、遗尿、小便失禁；男子：滑精、早泄；女子：带下清稀量多、胎动易滑。
+【症状】腰や膝のだるさ、疲労、耳鳴り。尿の回数が増え、薄い尿や夜間頻尿、尿漏れがある。男性では遺精や早漏、女性では水っぽい帯下が多く、妊娠を維持しにくい。
 
-【脉象】
-右尺（肾阳）：波峰低
-左尺（肾阴）：波宽宽
+【脈象】
+右尺（腎陽）：波の峰が低い。
+左尺（腎陰）：波の幅が広い。
 
-【标准方】金锁固精丸"
+【標準処方】金鎖固精丸"
 UI_BOOK_ENTRY_TITLE_REN_SHEN_DISEASE,妊娠,Pregnancy,妊娠
 UI_BOOK_ENTRY_BODY_REN_SHEN_DISEASE,"妊娠
 
@@ -12203,18 +12199,16 @@ Left chi (Kidney Yin): thicker pulse line
 
 [Standard formula] Mount Tai Rock-Solid Powder","妊娠
 
-【病机】气血下聚冲任以养胎元，母体气血为胎元之本。胎之成，成于肾；胎之养，养于脾。
+【病機】気血が衝脈と任脈に集まって胎児を養う。母の気血が胎児の基礎となり、胎児は腎により生じ、脾によって養われる。
 
-【症状】恶心呕吐，食入即吐、厌油腻、头晕倦怠；
+【症状】吐き気と嘔吐、食べると吐く、脂っこいものを嫌う。めまいと倦怠感。
 
+【脈象】
+右関（脾）：波の幅が広い。
+右尺（腎陽）：波の峰が高い。
+左尺（腎陰）：波線が太い。
 
-【脉象】
-
-右关（脾）：波宽宽
-右尺（肾阳）：波峰高
-左尺（肾阴）：波线粗
-
-【标准方】泰山磐石散"
+【標準処方】泰山磐石散"
 UI_BOOK_ENTRY_TITLE_XIN_SHEN_BU_JIAO,心肾不交,Heart-Kidney Disharmony,心腎不交
 UI_BOOK_ENTRY_BODY_XIN_SHEN_BU_JIAO,"心肾不交
 
@@ -12238,18 +12232,18 @@ Left cun (Heart): higher pulse frequency
 Left chi (Kidney Yin): thinner pulse line, narrower pulse width
 Right chi (Kidney Yang): higher pulse frequency
 
-[Standard formula] Coptis and Donkey-Hide Gelatin Decoction","心肾不交
+[Standard formula] Coptis and Donkey-Hide Gelatin Decoction","心腎不交
 
-【病机】肾阴不足，不能上滋心火；心火偏亢，不能下温肾水，水火失济、阴阳失调。多由劳神过度、久病耗阴、情志郁而化火所致，多属阴虚火旺。
+【病機】腎陰が不足して心火を抑えられず、心火が強まって心と腎の調和が崩れる。過労や長患い、情緒の鬱滞による熱が原因となりやすい陰虚火旺。
 
-【症状】心火亢于上：心烦失眠、多梦易醒、心悸怔忡、口舌生疮；肾阴亏于下：腰膝酸软、眩晕耳鸣、潮热盗汗、五心烦热；失眠多梦 ， 腰膝酸软 ， 夜寐不安。
+【症状】上ではいらだち、不眠、多夢、動悸、口内炎。下では腰や膝のだるさ、めまい、耳鳴り、午後からの熱感、寝汗、手足のほてり。眠りが浅い。
 
-【脉象】
-左寸（心）：脉搏次数多
-左尺（肾阴）：波线细，波宽窄
-右尺（肾阳）：脉搏次数多
+【脈象】
+左寸（心）：脈拍が多い。
+左尺（腎陰）：波線が細く、波の幅が狭い。
+右尺（腎陽）：脈拍が多い。
 
-【标准方】黄连阿胶汤"
+【標準処方】黄連阿膠湯"
 UI_BOOK_ENTRY_TITLE_QI_FEN_RE_SHENG,气分热盛,Exuberant Heat at the Qi Level,気分熱盛
 UI_BOOK_ENTRY_BODY_QI_FEN_RE_SHENG,"气分热盛
 
@@ -12275,158 +12269,158 @@ Left cun (Heart): slightly increased amplitude, slightly higher pulse frequency,
 Right cun (Lung): markedly increased amplitude, markedly higher pulse frequency, markedly narrower pulse width
 Right guan (Spleen): markedly increased amplitude, markedly higher pulse frequency, markedly narrower pulse width
 
-[Standard formula] White Tiger Decoction","气分热盛
+[Standard formula] White Tiger Decoction","気分熱盛
 
-【病机】外感温热病邪入里，邪热炽盛、入居气分、里热蒸腾、正邪剧争，属实热证。
+【病機】温熱の邪が体内深く入り、気分に強い熱がこもって正気と激しく争う実熱証。
 
-【症状】大热：全身壮热、不恶寒反恶热；大汗：热迫津泄、大汗出；大渴：口大渴、喜冷饮；脉洪大。
+【症状】高熱：全身が強く熱し、寒気より熱さを嫌う。大量の汗：熱で津液が流れ出る。強い渇き：冷たい飲み物を欲する。脈は大きく力強い。
 
-【脉象】
-浮脉（表）：波峰高（轻微），脉搏次数多（轻微），波宽窄（轻微）
-左寸（心）：波峰高（轻微），脉搏次数多（轻微），波宽窄（轻微）
-右寸（肺）：波峰高（剧烈），脉搏次数多（剧烈），波宽窄（剧烈）
-右关（脾）：波峰高（剧烈），脉搏次数多（剧烈），波宽窄（剧烈）
+【脈象】
+浮脈（表）：波の峰がやや高く、脈拍がやや多く、波の幅がやや狭い。
+左寸（心）：波の峰がやや高く、脈拍がやや多く、波の幅がやや狭い。
+右寸（肺）：波の峰が著しく高く、脈拍が著しく多く、波の幅が著しく狭い。
+右関（脾）：波の峰が著しく高く、脈拍が著しく多く、波の幅が著しく狭い。
 
-【标准方】白虎汤"
-UI_DISEASE_SYMPTOM_FENG_HAN_BIAO_SHI_ZHENG_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_FENG_HAN_BIAO_SHI_ZHENG_02,发烧,running a fever,发烧
-UI_DISEASE_SYMPTOM_FENG_HAN_BIAO_SHI_ZHENG_03,咳嗽,coughing,咳嗽
-UI_DISEASE_SYMPTOM_FENG_HAN_BIAO_XU_ZHENG_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_FENG_HAN_BIAO_XU_ZHENG_02,发烧,running a fever,发烧
-UI_DISEASE_SYMPTOM_FENG_HAN_BIAO_XU_ZHENG_03,咳嗽,coughing,咳嗽
-UI_DISEASE_SYMPTOM_FENG_RE_BIAO_ZHENG_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_FENG_RE_BIAO_ZHENG_02,发烧,running a fever,发烧
-UI_DISEASE_SYMPTOM_FENG_RE_BIAO_ZHENG_03,咳嗽,coughing,咳嗽
-UI_DISEASE_SYMPTOM_WEN_ZAO_ZHENG_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_WEN_ZAO_ZHENG_02,发烧,running a fever,发烧
-UI_DISEASE_SYMPTOM_WEN_ZAO_ZHENG_03,咳嗽,coughing,咳嗽
-UI_DISEASE_SYMPTOM_LIANG_ZAO_ZHENG_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_LIANG_ZAO_ZHENG_02,发烧,running a fever,发烧
-UI_DISEASE_SYMPTOM_LIANG_ZAO_ZHENG_03,咳嗽,coughing,咳嗽
-UI_DISEASE_SYMPTOM_WEI_QI_XU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_WEI_QI_XU_02,经常感冒,catching colds often,经常感冒
-UI_DISEASE_SYMPTOM_TONG_BI_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_TONG_BI_02,关节疼,having joint pain,关节疼
-UI_DISEASE_SYMPTOM_RE_BI_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_RE_BI_02,关节疼,having joint pain,关节疼
-UI_DISEASE_SYMPTOM_ZHUO_BI_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_ZHUO_BI_02,关节疼,having joint pain,关节疼
-UI_DISEASE_SYMPTOM_XING_BI_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_XING_BI_02,关节疼,having joint pain,关节疼
-UI_DISEASE_SYMPTOM_FEI_RE_YONG_SHENG_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_FEI_RE_YONG_SHENG_02,发烧,running a fever,发烧
-UI_DISEASE_SYMPTOM_FEI_RE_YONG_SHENG_03,咳嗽,coughing,咳嗽
-UI_DISEASE_SYMPTOM_FEI_QI_XU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_FEI_QI_XU_02,咳嗽,coughing,咳嗽
-UI_DISEASE_SYMPTOM_FEI_QI_XU_03,胸闷气短,feeling tightness in my chest and short of breath,胸闷气短
-UI_DISEASE_SYMPTOM_TAN_SHI_ZU_FEI_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_TAN_SHI_ZU_FEI_02,痰多,bringing up a lot of phlegm,痰多
-UI_DISEASE_SYMPTOM_TAN_SHI_ZU_FEI_03,咳嗽,coughing,咳嗽
-UI_DISEASE_SYMPTOM_FEI_YIN_XU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_FEI_YIN_XU_02,咳嗽,coughing,咳嗽
-UI_DISEASE_SYMPTOM_TAN_RE_YONG_FEI_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_TAN_RE_YONG_FEI_02,发烧,running a fever,发烧
-UI_DISEASE_SYMPTOM_TAN_RE_YONG_FEI_03,痰多,bringing up a lot of phlegm,痰多
-UI_DISEASE_SYMPTOM_TAN_RE_YONG_FEI_04,咳嗽,coughing,咳嗽
-UI_DISEASE_SYMPTOM_BIAO_HAN_LI_RE_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_BIAO_HAN_LI_RE_02,时冷时热,alternating between chills and fever,时冷时热
-UI_DISEASE_SYMPTOM_BIAO_HAN_LI_RE_03,痰多,bringing up a lot of phlegm,痰多
-UI_DISEASE_SYMPTOM_BIAO_HAN_LI_RE_04,咳嗽,coughing,咳嗽
-UI_DISEASE_SYMPTOM_BIAO_HAN_LI_YIN_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_BIAO_HAN_LI_YIN_02,痰多,bringing up a lot of phlegm,痰多
-UI_DISEASE_SYMPTOM_BIAO_HAN_LI_YIN_03,咳嗽,coughing,咳嗽
-UI_DISEASE_SYMPTOM_PI_QI_XU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_PI_QI_XU_02,拉肚子,having diarrhea,拉肚子
-UI_DISEASE_SYMPTOM_SHI_SHENG_KUN_PI_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_SHI_SHENG_KUN_PI_02,拉肚子,having diarrhea,拉肚子
-UI_DISEASE_SYMPTOM_PI_YANG_XU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_PI_YANG_XU_02,拉肚子,having diarrhea,拉肚子
-UI_DISEASE_SYMPTOM_PI_YANG_XU_03,肚子疼,having abdominal pain,肚子疼
-UI_DISEASE_SYMPTOM_PI_XU_SHI_SHENG_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_PI_XU_SHI_SHENG_02,拉肚子,having diarrhea,拉肚子
-UI_DISEASE_SYMPTOM_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI_02,发烧,running a fever,发烧
-UI_DISEASE_SYMPTOM_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI_03,拉肚子,having diarrhea,拉肚子
-UI_DISEASE_SYMPTOM_HAN_NING_XIN_MAI_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_HAN_NING_XIN_MAI_02,心神不宁,feeling restless and uneasy,心神不宁
-UI_DISEASE_SYMPTOM_HAN_NING_XIN_MAI_03,胸闷气短,feeling tightness in my chest and short of breath,胸闷气短
-UI_DISEASE_SYMPTOM_XIN_HUO_KANG_SHENG_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_XIN_HUO_KANG_SHENG_02,心神不宁,feeling restless and uneasy,心神不宁
-UI_DISEASE_SYMPTOM_XIN_HUO_KANG_SHENG_03,失眠多梦,sleeping poorly and having frequent dreams,失眠多梦
-UI_DISEASE_SYMPTOM_TAN_MI_XIN_QIAO_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_TAN_MI_XIN_QIAO_02,痰多,bringing up a lot of phlegm,痰多
-UI_DISEASE_SYMPTOM_TAN_MI_XIN_QIAO_03,胸闷气短,feeling tightness in my chest and short of breath,胸闷气短
-UI_DISEASE_SYMPTOM_XIN_QI_XU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_XIN_QI_XU_02,心神不宁,feeling restless and uneasy,心神不宁
-UI_DISEASE_SYMPTOM_XIN_QI_XU_03,胸闷气短,feeling tightness in my chest and short of breath,胸闷气短
-UI_DISEASE_SYMPTOM_XIN_MAI_YU_ZU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_XIN_MAI_YU_ZU_02,心神不宁,feeling restless and uneasy,心神不宁
-UI_DISEASE_SYMPTOM_XIN_MAI_YU_ZU_03,胸闷气短,feeling tightness in my chest and short of breath,胸闷气短
-UI_DISEASE_SYMPTOM_XIN_MAI_YU_ZU_04,胸口疼,having chest pain,胸口疼
-UI_DISEASE_SYMPTOM_XIN_YIN_XU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_XIN_YIN_XU_02,心神不宁,feeling restless and uneasy,心神不宁
-UI_DISEASE_SYMPTOM_XIN_YIN_XU_03,失眠多梦,sleeping poorly and having frequent dreams,失眠多梦
-UI_DISEASE_SYMPTOM_XIN_YANG_XU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_XIN_YANG_XU_02,心神不宁,feeling restless and uneasy,心神不宁
-UI_DISEASE_SYMPTOM_XIN_YANG_XU_03,胸闷气短,feeling tightness in my chest and short of breath,胸闷气短
-UI_DISEASE_SYMPTOM_TAN_HUO_RAO_XIN_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_TAN_HUO_RAO_XIN_02,心神不宁,feeling restless and uneasy,心神不宁
-UI_DISEASE_SYMPTOM_TAN_HUO_RAO_XIN_03,失眠多梦,sleeping poorly and having frequent dreams,失眠多梦
-UI_DISEASE_SYMPTOM_XIN_PI_LIANG_XU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_XIN_PI_LIANG_XU_02,心神不宁,feeling restless and uneasy,心神不宁
-UI_DISEASE_SYMPTOM_XIN_PI_LIANG_XU_03,头晕,feeling dizzy,头晕
-UI_DISEASE_SYMPTOM_XIN_PI_LIANG_XU_04,失眠多梦,sleeping poorly and having frequent dreams,失眠多梦
-UI_DISEASE_SYMPTOM_GAN_HUO_SHANG_YAN_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_GAN_HUO_SHANG_YAN_02,头晕,feeling dizzy,头晕
-UI_DISEASE_SYMPTOM_GAN_HUO_SHANG_YAN_03,失眠多梦,sleeping poorly and having frequent dreams,失眠多梦
-UI_DISEASE_SYMPTOM_HAN_ZHI_GAN_MAI_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_HAN_ZHI_GAN_MAI_02,肚子疼,having abdominal pain,肚子疼
-UI_DISEASE_SYMPTOM_HAN_ZHI_GAN_MAI_03,头晕,feeling dizzy,头晕
-UI_DISEASE_SYMPTOM_GAN_QI_YU_JIE_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_GAN_QI_YU_JIE_02,肚子疼,having abdominal pain,肚子疼
-UI_DISEASE_SYMPTOM_GAN_QI_YU_JIE_03,胸闷气短,feeling tightness in my chest and short of breath,胸闷气短
-UI_DISEASE_SYMPTOM_GAN_XUE_XU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_GAN_XUE_XU_02,头晕,feeling dizzy,头晕
-UI_DISEASE_SYMPTOM_GAN_XUE_XU_03,失眠多梦,sleeping poorly and having frequent dreams,失眠多梦
-UI_DISEASE_SYMPTOM_GAN_XUE_YU_ZHI_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_GAN_XUE_YU_ZHI_02,胁下痛,having pain below my ribs,胁下痛
-UI_DISEASE_SYMPTOM_GAN_XUE_YU_ZHI_03,心烦意乱,feeling agitated and restless,心烦意乱
-UI_DISEASE_SYMPTOM_GAN_YIN_XU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_GAN_YIN_XU_02,头晕,feeling dizzy,头晕
-UI_DISEASE_SYMPTOM_GAN_YIN_XU_03,失眠多梦,sleeping poorly and having frequent dreams,失眠多梦
-UI_DISEASE_SYMPTOM_GAN_YANG_SHANG_KANG_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_GAN_YANG_SHANG_KANG_02,头晕,feeling dizzy,头晕
-UI_DISEASE_SYMPTOM_GAN_YANG_SHANG_KANG_03,失眠多梦,sleeping poorly and having frequent dreams,失眠多梦
-UI_DISEASE_SYMPTOM_GAN_PI_BU_HE_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_GAN_PI_BU_HE_02,肚子疼,having abdominal pain,肚子疼
-UI_DISEASE_SYMPTOM_GAN_PI_BU_HE_03,拉肚子,having diarrhea,拉肚子
-UI_DISEASE_SYMPTOM_SHEN_BU_NA_QI_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_SHEN_BU_NA_QI_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰膝酸软
-UI_DISEASE_SYMPTOM_SHEN_BU_NA_QI_03,胸闷气短,feeling tightness in my chest and short of breath,胸闷气短
-UI_DISEASE_SYMPTOM_SHEN_YIN_XU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_SHEN_YIN_XU_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰膝酸软
-UI_DISEASE_SYMPTOM_SHEN_YIN_XU_03,耳鸣,having ringing in my ears,耳鸣
-UI_DISEASE_SYMPTOM_SHEN_YANG_XU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_SHEN_YANG_XU_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰膝酸软
-UI_DISEASE_SYMPTOM_SHEN_YANG_XU_03,夜尿多,urinating frequently at night,夜尿多
-UI_DISEASE_SYMPTOM_SHEN_YANG_XU_04,耳鸣,having ringing in my ears,耳鸣
-UI_DISEASE_SYMPTOM_SHEN_XU_SHUI_FAN_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_SHEN_XU_SHUI_FAN_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰膝酸软
-UI_DISEASE_SYMPTOM_SHEN_XU_SHUI_FAN_03,夜尿多,urinating frequently at night,夜尿多
-UI_DISEASE_SYMPTOM_SHEN_JING_BU_ZU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_SHEN_JING_BU_ZU_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰膝酸软
-UI_DISEASE_SYMPTOM_SHEN_JING_BU_ZU_03,耳鸣,having ringing in my ears,耳鸣
-UI_DISEASE_SYMPTOM_SHEN_QI_BU_GU_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_SHEN_QI_BU_GU_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰膝酸软
-UI_DISEASE_SYMPTOM_SHEN_QI_BU_GU_03,夜尿多,urinating frequently at night,夜尿多
-UI_DISEASE_SYMPTOM_SHEN_QI_BU_GU_04,耳鸣,having ringing in my ears,耳鸣
-UI_DISEASE_SYMPTOM_REN_SHEN_DISEASE_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_REN_SHEN_DISEASE_02,恶心,feeling nauseous,恶心
-UI_DISEASE_SYMPTOM_XIN_SHEN_BU_JIAO_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_XIN_SHEN_BU_JIAO_02,失眠多梦,sleeping poorly and having frequent dreams,失眠多梦
-UI_DISEASE_SYMPTOM_XIN_SHEN_BU_JIAO_03,腰膝酸软,having soreness and weakness in my lower back and knees,腰膝酸软
-UI_DISEASE_SYMPTOM_QI_FEN_RE_SHENG_01,不舒服,feeling unwell,不舒服
-UI_DISEASE_SYMPTOM_QI_FEN_RE_SHENG_02,发烧,running a fever,发烧
+【標準処方】白虎湯"
+UI_DISEASE_SYMPTOM_FENG_HAN_BIAO_SHI_ZHENG_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_FENG_HAN_BIAO_SHI_ZHENG_02,发烧,running a fever,熱がある
+UI_DISEASE_SYMPTOM_FENG_HAN_BIAO_SHI_ZHENG_03,咳嗽,coughing,咳が出る
+UI_DISEASE_SYMPTOM_FENG_HAN_BIAO_XU_ZHENG_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_FENG_HAN_BIAO_XU_ZHENG_02,发烧,running a fever,熱がある
+UI_DISEASE_SYMPTOM_FENG_HAN_BIAO_XU_ZHENG_03,咳嗽,coughing,咳が出る
+UI_DISEASE_SYMPTOM_FENG_RE_BIAO_ZHENG_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_FENG_RE_BIAO_ZHENG_02,发烧,running a fever,熱がある
+UI_DISEASE_SYMPTOM_FENG_RE_BIAO_ZHENG_03,咳嗽,coughing,咳が出る
+UI_DISEASE_SYMPTOM_WEN_ZAO_ZHENG_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_WEN_ZAO_ZHENG_02,发烧,running a fever,熱がある
+UI_DISEASE_SYMPTOM_WEN_ZAO_ZHENG_03,咳嗽,coughing,咳が出る
+UI_DISEASE_SYMPTOM_LIANG_ZAO_ZHENG_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_LIANG_ZAO_ZHENG_02,发烧,running a fever,熱がある
+UI_DISEASE_SYMPTOM_LIANG_ZAO_ZHENG_03,咳嗽,coughing,咳が出る
+UI_DISEASE_SYMPTOM_WEI_QI_XU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_WEI_QI_XU_02,经常感冒,catching colds often,風邪をひきやすい
+UI_DISEASE_SYMPTOM_TONG_BI_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_TONG_BI_02,关节疼,having joint pain,関節が痛い
+UI_DISEASE_SYMPTOM_RE_BI_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_RE_BI_02,关节疼,having joint pain,関節が痛い
+UI_DISEASE_SYMPTOM_ZHUO_BI_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_ZHUO_BI_02,关节疼,having joint pain,関節が痛い
+UI_DISEASE_SYMPTOM_XING_BI_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_XING_BI_02,关节疼,having joint pain,関節が痛い
+UI_DISEASE_SYMPTOM_FEI_RE_YONG_SHENG_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_FEI_RE_YONG_SHENG_02,发烧,running a fever,熱がある
+UI_DISEASE_SYMPTOM_FEI_RE_YONG_SHENG_03,咳嗽,coughing,咳が出る
+UI_DISEASE_SYMPTOM_FEI_QI_XU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_FEI_QI_XU_02,咳嗽,coughing,咳が出る
+UI_DISEASE_SYMPTOM_FEI_QI_XU_03,胸闷气短,feeling tightness in my chest and short of breath,胸が苦しく、息切れする
+UI_DISEASE_SYMPTOM_TAN_SHI_ZU_FEI_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_TAN_SHI_ZU_FEI_02,痰多,bringing up a lot of phlegm,痰が多い
+UI_DISEASE_SYMPTOM_TAN_SHI_ZU_FEI_03,咳嗽,coughing,咳が出る
+UI_DISEASE_SYMPTOM_FEI_YIN_XU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_FEI_YIN_XU_02,咳嗽,coughing,咳が出る
+UI_DISEASE_SYMPTOM_TAN_RE_YONG_FEI_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_TAN_RE_YONG_FEI_02,发烧,running a fever,熱がある
+UI_DISEASE_SYMPTOM_TAN_RE_YONG_FEI_03,痰多,bringing up a lot of phlegm,痰が多い
+UI_DISEASE_SYMPTOM_TAN_RE_YONG_FEI_04,咳嗽,coughing,咳が出る
+UI_DISEASE_SYMPTOM_BIAO_HAN_LI_RE_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_BIAO_HAN_LI_RE_02,时冷时热,alternating between chills and fever,寒気と熱感を繰り返す
+UI_DISEASE_SYMPTOM_BIAO_HAN_LI_RE_03,痰多,bringing up a lot of phlegm,痰が多い
+UI_DISEASE_SYMPTOM_BIAO_HAN_LI_RE_04,咳嗽,coughing,咳が出る
+UI_DISEASE_SYMPTOM_BIAO_HAN_LI_YIN_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_BIAO_HAN_LI_YIN_02,痰多,bringing up a lot of phlegm,痰が多い
+UI_DISEASE_SYMPTOM_BIAO_HAN_LI_YIN_03,咳嗽,coughing,咳が出る
+UI_DISEASE_SYMPTOM_PI_QI_XU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_PI_QI_XU_02,拉肚子,having diarrhea,下痢をする
+UI_DISEASE_SYMPTOM_SHI_SHENG_KUN_PI_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_SHI_SHENG_KUN_PI_02,拉肚子,having diarrhea,下痢をする
+UI_DISEASE_SYMPTOM_PI_YANG_XU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_PI_YANG_XU_02,拉肚子,having diarrhea,下痢をする
+UI_DISEASE_SYMPTOM_PI_YANG_XU_03,肚子疼,having abdominal pain,腹が痛い
+UI_DISEASE_SYMPTOM_PI_XU_SHI_SHENG_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_PI_XU_SHI_SHENG_02,拉肚子,having diarrhea,下痢をする
+UI_DISEASE_SYMPTOM_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI_02,发烧,running a fever,熱がある
+UI_DISEASE_SYMPTOM_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI_03,拉肚子,having diarrhea,下痢をする
+UI_DISEASE_SYMPTOM_HAN_NING_XIN_MAI_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_HAN_NING_XIN_MAI_02,心神不宁,feeling restless and uneasy,落ち着かない
+UI_DISEASE_SYMPTOM_HAN_NING_XIN_MAI_03,胸闷气短,feeling tightness in my chest and short of breath,胸が苦しく、息切れする
+UI_DISEASE_SYMPTOM_XIN_HUO_KANG_SHENG_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_XIN_HUO_KANG_SHENG_02,心神不宁,feeling restless and uneasy,落ち着かない
+UI_DISEASE_SYMPTOM_XIN_HUO_KANG_SHENG_03,失眠多梦,sleeping poorly and having frequent dreams,眠れず、夢をよく見る
+UI_DISEASE_SYMPTOM_TAN_MI_XIN_QIAO_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_TAN_MI_XIN_QIAO_02,痰多,bringing up a lot of phlegm,痰が多い
+UI_DISEASE_SYMPTOM_TAN_MI_XIN_QIAO_03,胸闷气短,feeling tightness in my chest and short of breath,胸が苦しく、息切れする
+UI_DISEASE_SYMPTOM_XIN_QI_XU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_XIN_QI_XU_02,心神不宁,feeling restless and uneasy,落ち着かない
+UI_DISEASE_SYMPTOM_XIN_QI_XU_03,胸闷气短,feeling tightness in my chest and short of breath,胸が苦しく、息切れする
+UI_DISEASE_SYMPTOM_XIN_MAI_YU_ZU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_XIN_MAI_YU_ZU_02,心神不宁,feeling restless and uneasy,落ち着かない
+UI_DISEASE_SYMPTOM_XIN_MAI_YU_ZU_03,胸闷气短,feeling tightness in my chest and short of breath,胸が苦しく、息切れする
+UI_DISEASE_SYMPTOM_XIN_MAI_YU_ZU_04,胸口疼,having chest pain,胸が痛い
+UI_DISEASE_SYMPTOM_XIN_YIN_XU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_XIN_YIN_XU_02,心神不宁,feeling restless and uneasy,落ち着かない
+UI_DISEASE_SYMPTOM_XIN_YIN_XU_03,失眠多梦,sleeping poorly and having frequent dreams,眠れず、夢をよく見る
+UI_DISEASE_SYMPTOM_XIN_YANG_XU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_XIN_YANG_XU_02,心神不宁,feeling restless and uneasy,落ち着かない
+UI_DISEASE_SYMPTOM_XIN_YANG_XU_03,胸闷气短,feeling tightness in my chest and short of breath,胸が苦しく、息切れする
+UI_DISEASE_SYMPTOM_TAN_HUO_RAO_XIN_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_TAN_HUO_RAO_XIN_02,心神不宁,feeling restless and uneasy,落ち着かない
+UI_DISEASE_SYMPTOM_TAN_HUO_RAO_XIN_03,失眠多梦,sleeping poorly and having frequent dreams,眠れず、夢をよく見る
+UI_DISEASE_SYMPTOM_XIN_PI_LIANG_XU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_XIN_PI_LIANG_XU_02,心神不宁,feeling restless and uneasy,落ち着かない
+UI_DISEASE_SYMPTOM_XIN_PI_LIANG_XU_03,头晕,feeling dizzy,めまいがする
+UI_DISEASE_SYMPTOM_XIN_PI_LIANG_XU_04,失眠多梦,sleeping poorly and having frequent dreams,眠れず、夢をよく見る
+UI_DISEASE_SYMPTOM_GAN_HUO_SHANG_YAN_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_GAN_HUO_SHANG_YAN_02,头晕,feeling dizzy,めまいがする
+UI_DISEASE_SYMPTOM_GAN_HUO_SHANG_YAN_03,失眠多梦,sleeping poorly and having frequent dreams,眠れず、夢をよく見る
+UI_DISEASE_SYMPTOM_HAN_ZHI_GAN_MAI_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_HAN_ZHI_GAN_MAI_02,肚子疼,having abdominal pain,腹が痛い
+UI_DISEASE_SYMPTOM_HAN_ZHI_GAN_MAI_03,头晕,feeling dizzy,めまいがする
+UI_DISEASE_SYMPTOM_GAN_QI_YU_JIE_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_GAN_QI_YU_JIE_02,肚子疼,having abdominal pain,腹が痛い
+UI_DISEASE_SYMPTOM_GAN_QI_YU_JIE_03,胸闷气短,feeling tightness in my chest and short of breath,胸が苦しく、息切れする
+UI_DISEASE_SYMPTOM_GAN_XUE_XU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_GAN_XUE_XU_02,头晕,feeling dizzy,めまいがする
+UI_DISEASE_SYMPTOM_GAN_XUE_XU_03,失眠多梦,sleeping poorly and having frequent dreams,眠れず、夢をよく見る
+UI_DISEASE_SYMPTOM_GAN_XUE_YU_ZHI_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_GAN_XUE_YU_ZHI_02,胁下痛,having pain below my ribs,脇腹が痛い
+UI_DISEASE_SYMPTOM_GAN_XUE_YU_ZHI_03,心烦意乱,feeling agitated and restless,いらいらして落ち着かない
+UI_DISEASE_SYMPTOM_GAN_YIN_XU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_GAN_YIN_XU_02,头晕,feeling dizzy,めまいがする
+UI_DISEASE_SYMPTOM_GAN_YIN_XU_03,失眠多梦,sleeping poorly and having frequent dreams,眠れず、夢をよく見る
+UI_DISEASE_SYMPTOM_GAN_YANG_SHANG_KANG_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_GAN_YANG_SHANG_KANG_02,头晕,feeling dizzy,めまいがする
+UI_DISEASE_SYMPTOM_GAN_YANG_SHANG_KANG_03,失眠多梦,sleeping poorly and having frequent dreams,眠れず、夢をよく見る
+UI_DISEASE_SYMPTOM_GAN_PI_BU_HE_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_GAN_PI_BU_HE_02,肚子疼,having abdominal pain,腹が痛い
+UI_DISEASE_SYMPTOM_GAN_PI_BU_HE_03,拉肚子,having diarrhea,下痢をする
+UI_DISEASE_SYMPTOM_SHEN_BU_NA_QI_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_SHEN_BU_NA_QI_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰や膝がだるい
+UI_DISEASE_SYMPTOM_SHEN_BU_NA_QI_03,胸闷气短,feeling tightness in my chest and short of breath,胸が苦しく、息切れする
+UI_DISEASE_SYMPTOM_SHEN_YIN_XU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_SHEN_YIN_XU_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰や膝がだるい
+UI_DISEASE_SYMPTOM_SHEN_YIN_XU_03,耳鸣,having ringing in my ears,耳鳴りがする
+UI_DISEASE_SYMPTOM_SHEN_YANG_XU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_SHEN_YANG_XU_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰や膝がだるい
+UI_DISEASE_SYMPTOM_SHEN_YANG_XU_03,夜尿多,urinating frequently at night,夜間の尿が多い
+UI_DISEASE_SYMPTOM_SHEN_YANG_XU_04,耳鸣,having ringing in my ears,耳鳴りがする
+UI_DISEASE_SYMPTOM_SHEN_XU_SHUI_FAN_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_SHEN_XU_SHUI_FAN_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰や膝がだるい
+UI_DISEASE_SYMPTOM_SHEN_XU_SHUI_FAN_03,夜尿多,urinating frequently at night,夜間の尿が多い
+UI_DISEASE_SYMPTOM_SHEN_JING_BU_ZU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_SHEN_JING_BU_ZU_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰や膝がだるい
+UI_DISEASE_SYMPTOM_SHEN_JING_BU_ZU_03,耳鸣,having ringing in my ears,耳鳴りがする
+UI_DISEASE_SYMPTOM_SHEN_QI_BU_GU_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_SHEN_QI_BU_GU_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰や膝がだるい
+UI_DISEASE_SYMPTOM_SHEN_QI_BU_GU_03,夜尿多,urinating frequently at night,夜間の尿が多い
+UI_DISEASE_SYMPTOM_SHEN_QI_BU_GU_04,耳鸣,having ringing in my ears,耳鳴りがする
+UI_DISEASE_SYMPTOM_REN_SHEN_DISEASE_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_REN_SHEN_DISEASE_02,恶心,feeling nauseous,吐き気がする
+UI_DISEASE_SYMPTOM_XIN_SHEN_BU_JIAO_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_XIN_SHEN_BU_JIAO_02,失眠多梦,sleeping poorly and having frequent dreams,眠れず、夢をよく見る
+UI_DISEASE_SYMPTOM_XIN_SHEN_BU_JIAO_03,腰膝酸软,having soreness and weakness in my lower back and knees,腰や膝がだるい
+UI_DISEASE_SYMPTOM_QI_FEN_RE_SHENG_01,不舒服,feeling unwell,具合が悪い
+UI_DISEASE_SYMPTOM_QI_FEN_RE_SHENG_02,发烧,running a fever,熱がある
 UI_NPC_NAME_CHA_BO_SHI,茶博士,Tea Master,茶博士
 UI_NPC_DIALOGUE_AFTER_CHA_BO_SHI,哎呀，真是多谢先生了。,"Oh, thank you very much, Doctor.",先生、本当にありがとうございます。
 UI_NPC_DIALOGUE_FAILED_CHA_BO_SHI,感觉更不舒服了…,I feel even worse...,前より具合が悪くなりました……
@@ -12783,7 +12777,7 @@ STORY_000_03_010_SPEAKER,李建中,Li Jianzhong,李建中
 STORY_000_03_010_TEXT,儿子明日就去太仓拜访王老先生！,I will go to Taicang tomorrow and visit Master Wang!,明日、私が太倉へ行って王先生を訪ねます！
 STORY_000_04_001_SPEAKER,李建中,Li Jianzhong,李建中
 STORY_000_04_001_TEXT,爹，我回来了，王老先生给您的书写了序。,"Father, I am back. Master Wang has written a preface for your book.",父上、ただいま戻りました。王先生が序文を書いてくださいました。
-STORY_000_04_002_TEXT,此帝王之秘箓，臣民之重宝。兹集也，藏之深山石室，无当。盖锲之，以共天下后世味太玄如子云者。,"A secret record fit for emperors, a precious treasure for ministers and common people alike. This collection should not be hidden away in some mountain vault. Let it be carved and printed, so that future generations throughout the world may study its profound mysteries.",此帝王之秘箓，臣民之重宝。兹集也，藏之深山石室，无当。盖锲之，以共天下后世味太玄如子云者。
+STORY_000_04_002_TEXT,此帝王之秘箓，臣民之重宝。兹集也，藏之深山石室，无当。盖锲之，以共天下后世味太玄如子云者。,"A secret record fit for emperors, a precious treasure for ministers and common people alike. This collection should not be hidden away in some mountain vault. Let it be carved and printed, so that future generations throughout the world may study its profound mysteries.",これは帝王の秘録にして、臣民の重宝である。この書を深山の石室にしまい込むのはふさわしくない。版木に刻み、後世の人々と広く分かち合うべきだ。
 STORY_000_04_003_SPEAKER,李东璧,Li Dongbi,李東璧
 STORY_000_04_003_TEXT,太好了。,Wonderful.,それは素晴らしい。
 STORY_000_04_004_SPEAKER,李建中,Li Jianzhong,李建中
@@ -12792,7 +12786,7 @@ STORY_000_04_005_SPEAKER,李东璧,Li Dongbi,李東璧
 STORY_000_04_005_TEXT,六百也不是个小数目，但总归是有盼头了…,"Six hundred is still a great deal of money, but at least there is hope now…",六百両も小さな額ではないが、ようやく希望が見えた……
 STORY_000_05_001_TEXT,万历二十一年李东璧病逝，终年76岁…,"Li Dongbi died in the twenty-first year of the Wanli reign, aged seventy-six…",万暦二十一年、李東璧は七十六歳で世を去った……
 STORY_000_05_002_TEXT,万历二十四年，这部耗尽他一生心血的医书终于刻板发行…,"In the twenty-fourth year of Wanli, the medical book to which he had devoted his life was finally printed…",万暦二十四年、生涯をかけて書き上げた医学書が、ついに版木を彫って刊行された……
-STORY_000_05_003_TEXT,时珍，荆楚鄙人也。幼多羸疾，质成钝椎。僭纂述之权，岁历三十稔，书考八百余家，稿凡三易，复者芟之，阙者缉之，讹者绳之。旧本一千五百二十八种，今增药三百七十四种，分为一十六部，著成五十二卷，僭名曰本草纲目。,"I, Shizhen, am a humble man of Jingchu. Sickly as a child and slow of mind, I presumed to undertake this compilation. Over thirty years I consulted more than eight hundred works and revised the manuscript three times, cutting repetition, filling gaps and correcting errors. To the 1,528 medicinal substances in earlier works, I added 374, arranged them in sixteen divisions and completed fifty-two volumes. I have dared to call it the Compendium of Materia Medica.",时珍，荆楚鄙人也。幼多羸疾，质成钝椎。僭纂述之权，岁历三十稔，书考八百余家，稿凡三易，复者芟之，阙者缉之，讹者绳之。旧本一千五百二十八种，今增药三百七十四种，分为一十六部，著成五十二卷，僭名曰本草纲目。
+STORY_000_05_003_TEXT,时珍，荆楚鄙人也。幼多羸疾，质成钝椎。僭纂述之权，岁历三十稔，书考八百余家，稿凡三易，复者芟之，阙者缉之，讹者绳之。旧本一千五百二十八种，今增药三百七十四种，分为一十六部，著成五十二卷，僭名曰本草纲目。,"I, Shizhen, am a humble man of Jingchu. Sickly as a child and slow of mind, I presumed to undertake this compilation. Over thirty years I consulted more than eight hundred works and revised the manuscript three times, cutting repetition, filling gaps and correcting errors. To the 1,528 medicinal substances in earlier works, I added 374, arranged them in sixteen divisions and completed fifty-two volumes. I have dared to call it the Compendium of Materia Medica.",時珍は荊楚の片田舎の者である。幼少より病弱で、才も鈍かった。僭越ながら書を編むこと三十年余り、八百余家の書を調べ、稿を三度改め、重複を削り、欠落を補い、誤りを正した。旧書の薬千五百二十八種に三百七十四種を加え、十六部、五十二巻にまとめ、恐れ多くも『本草綱目』と名づけた。
 STORY_000_06_001_SPEAKER,李言闻,Li Yanwen,李言聞
 STORY_000_06_001_TEXT,东璧啊，咱们这医馆已经经营不下去了，我们收拾行李回乡下老家吧…,"Dongbi, we can no longer keep this clinic open. Let us pack our things and return to our hometown in the countryside…",東璧、この診療所はもう続けられないわ。荷物をまとめて故郷の村へ帰りましょう……
 STORY_000_06_002_TEXT,因经营不善，医馆被迫关闭,The clinic was forced to close after falling into financial difficulty.,経営難のため、診療所は閉鎖を余儀なくされた。
@@ -13058,543 +13052,543 @@ STORY_009_02_004_TEXT,陈皮，跟我去后院收拾收拾库房，一会儿药�
 STORY_009_02_005_SPEAKER,陈皮,Chen Pi,陳皮
 STORY_009_02_005_TEXT,好嘞。,Right away.,はい！
 STORY_010_001_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_010_001_TEXT,数目都对，有劳几位了，进来喝点水吧。,"The count is correct. Thank you, gentlemen. Would you come in for some water?",数目都对，有劳几位了，进来喝点水吧。
+STORY_010_001_TEXT,数目都对，有劳几位了，进来喝点水吧。,"The count is correct. Thank you, gentlemen. Would you come in for some water?",数は合っています。お疲れさまでした。中で水でも飲んでいきませんか。
 STORY_010_002_SPEAKER,衙役,Constable,役人
-STORY_010_002_TEXT,还有公务在身，就不劳烦李太医啦，兄弟们，走了！,"We are still on duty, Doctor Li. No need to trouble yourself. Men, let us go!",还有公务在身，就不劳烦李太医啦，兄弟们，走了！
+STORY_010_002_TEXT,还有公务在身，就不劳烦李太医啦，兄弟们，走了！,"We are still on duty, Doctor Li. No need to trouble yourself. Men, let us go!",まだ公務がありますので、お構いなく。皆、行くぞ！
 STORY_010_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_010_003_TEXT,爹，货都到齐了吗？,"Father, has everything arrived?",爹，货都到齐了吗？
+STORY_010_003_TEXT,爹，货都到齐了吗？,"Father, has everything arrived?",父上、荷は全部届きましたか？
 STORY_010_004_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_010_004_TEXT,嗯，我都点数过了，这次是按份分装的，倒省得咱们再称量，不错不错。,"Yes, I counted it all. It has already been packed into individual portions, so we will not need to weigh it ourselves. Excellent.",嗯，我都点数过了，这次是按份分装的，倒省得咱们再称量，不错不错。
+STORY_010_004_TEXT,嗯，我都点数过了，这次是按份分装的，倒省得咱们再称量，不错不错。,"Yes, I counted it all. It has already been packed into individual portions, so we will not need to weigh it ourselves. Excellent.",ああ、全部数えた。今回は一回分ずつ包んであるから、こちらで量り直さずに済む。よくできている。
 STORY_010_005_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_010_005_TEXT,明日我带着芷兰他们发药，医馆的活计你好生照看。,Tomorrow I will distribute the medicine with Zhilan and the others. You look after the clinic.,明日我带着芷兰他们发药，医馆的活计你好生照看。
+STORY_010_005_TEXT,明日我带着芷兰他们发药，医馆的活计你好生照看。,Tomorrow I will distribute the medicine with Zhilan and the others. You look after the clinic.,明日はわしが芷蘭たちを連れて薬を配る。お前は診療所の仕事を頼む。
 STORY_010_006_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_010_006_TEXT,知道了爹。,"Of course, Father.",知道了爹。
+STORY_010_006_TEXT,知道了爹。,"Of course, Father.",分かりました、父上。
 STORY_011_001_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_011_001_TEXT,爹，药熬好了。,"Father, the medicine is ready.",爹，药熬好了。
+STORY_011_001_TEXT,爹，药熬好了。,"Father, the medicine is ready.",父上、薬が煎じ上がりました。
 STORY_011_002_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_011_002_TEXT,忙活了一天，药材发得差不多了，咱们家也该把药喝了。我看看这次开的是什么方子。,"After a full day's work, we have handed out nearly all the supplies. We should take our own medicine too. Let me see what formula they have given us.",忙活了一天，药材发得差不多了，咱们家也该把药喝了。我看看这次开的是什么方子。
+STORY_011_002_TEXT,忙活了一天，药材发得差不多了，咱们家也该把药喝了。我看看这次开的是什么方子。,"After a full day's work, we have handed out nearly all the supplies. We should take our own medicine too. Let me see what formula they have given us.",一日働いて薬もほぼ配り終えた。わしらも飲んでおこう。今回はどんな処方か見せてくれ。
 STORY_011_003_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_011_003_TEXT,嗯…有藿香，有紫苏，应该是藿香正气散的方子。,Hmm… Agastache and perilla leaf. This should be Agastache Powder to Rectify the Qi.,嗯…有藿香，有紫苏，应该是藿香正气散的方子。
+STORY_011_003_TEXT,嗯…有藿香，有紫苏，应该是藿香正气散的方子。,Hmm… Agastache and perilla leaf. This should be Agastache Powder to Rectify the Qi.,うむ……藿香と紫蘇が入っている。藿香正気散だろう。
 STORY_011_004_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_011_004_TEXT,嗯？…味道不对啊，这药里怎么掺了面粉？厚朴里也混杂了树皮充数。,"Hm? It does not taste right. Why is flour mixed in with the medicine? They have bulked out the magnolia bark with ordinary tree bark, too.",嗯？…味道不对啊，这药里怎么掺了面粉？厚朴里也混杂了树皮充数。
+STORY_011_004_TEXT,嗯？…味道不对啊，这药里怎么掺了面粉？厚朴里也混杂了树皮充数。,"Hm? It does not taste right. Why is flour mixed in with the medicine? They have bulked out the magnolia bark with ordinary tree bark, too.",ん？　匂いがおかしい。薬に小麦粉が混じっているぞ。厚朴には別の木の皮まで混ぜてかさ増ししてある。
 STORY_011_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_011_005_TEXT,我尝尝…藿香用的是梗，气味微薄。,Let me taste it… They used agastache stems. The aroma is weak.,我尝尝…藿香用的是梗，气味微薄。
+STORY_011_005_TEXT,我尝尝…藿香用的是梗，气味微薄。,Let me taste it… They used agastache stems. The aroma is weak.,少し味を見よう……藿香は茎ばかりで、香りが弱い。
 STORY_011_006_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_011_006_TEXT,这…连赈灾药材都敢动手脚…,They even dared tamper with medicine meant for disaster relief…,这…连赈灾药材都敢动手脚…
+STORY_011_006_TEXT,这…连赈灾药材都敢动手脚…,They even dared tamper with medicine meant for disaster relief…,そんな……救済用の薬材にまで手を加えるとは……
 STORY_011_007_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_011_007_TEXT,赈灾药材事关重大，我们得上报官府。,These supplies are too important. We must report this to the authorities.,赈灾药材事关重大，我们得上报官府。
+STORY_011_007_TEXT,赈灾药材事关重大，我们得上报官府。,These supplies are too important. We must report this to the authorities.,救済用の薬材は大事なものだ。役所に報告しなければ。
 STORY_011_008_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_011_008_TEXT,明日我去药剂局跟孙大夫商量商量。,Tomorrow I will discuss it with Doctor Sun at the dispensary.,明日我去药剂局跟孙大夫商量商量。
+STORY_011_008_TEXT,明日我去药剂局跟孙大夫商量商量。,Tomorrow I will discuss it with Doctor Sun at the dispensary.,明日、薬剤局へ行って孫先生に相談してみます。
 STORY_012_001_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_012_001_TEXT,坏事了坏事了，孙大夫被抓了。,Something terrible has happened! Doctor Sun has been arrested!,坏事了坏事了，孙大夫被抓了。
+STORY_012_001_TEXT,坏事了坏事了，孙大夫被抓了。,Something terrible has happened! Doctor Sun has been arrested!,大変だ！　孫先生が捕まった！
 STORY_012_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_012_002_TEXT,出什么事了？,What happened?,出什么事了？
+STORY_012_002_TEXT,出什么事了？,What happened?,何があった？
 STORY_012_003_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_012_003_TEXT,孙大夫也发现赈灾药材有问题，去州衙找吴世良，谁知被扣了个私换药材的罪名，打了二十板子关进大狱里了。,"Doctor Sun noticed the problems with the relief medicine too. He went to confront Wu Shiliang at the prefectural office. Instead, they accused him of secretly swapping the medicine, flogged him twenty times and threw him in prison.",孙大夫也发现赈灾药材有问题，去州衙找吴世良，谁知被扣了个私换药材的罪名，打了二十板子关进大狱里了。
+STORY_012_003_TEXT,孙大夫也发现赈灾药材有问题，去州衙找吴世良，谁知被扣了个私换药材的罪名，打了二十板子关进大狱里了。,"Doctor Sun noticed the problems with the relief medicine too. He went to confront Wu Shiliang at the prefectural office. Instead, they accused him of secretly swapping the medicine, flogged him twenty times and threw him in prison.",孫先生も薬材の異常に気づいて、州役所の呉世良に会いに行った。ところが薬材を勝手にすり替えたと罪を着せられ、杖で二十回打たれて牢に入れられたんだ。
 STORY_012_004_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_012_004_TEXT,这个吴世良，平日里看着人模狗样的，真不是个东西啊。,"Wu Shiliang always looked respectable, but he is rotten to the core.",这个吴世良，平日里看着人模狗样的，真不是个东西啊。
+STORY_012_004_TEXT,这个吴世良，平日里看着人模狗样的，真不是个东西啊。,"Wu Shiliang always looked respectable, but he is rotten to the core.",呉世良め、普段は立派そうに見えたのに、とんでもないやつだ。
 STORY_012_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_012_005_TEXT,我们得给孙大夫讨回公道。,We have to seek justice for Doctor Sun.,我们得给孙大夫讨回公道。
+STORY_012_005_TEXT,我们得给孙大夫讨回公道。,We have to seek justice for Doctor Sun.,孫先生の無実を証明しなければ。
 STORY_012_006_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_012_006_TEXT,儿啊，我看咱们还是别蹚浑水了，多一事不如少一事，明哲保身吧。这不是咱们平民百姓管得了的。,"Son, I think we should stay out of this. Better to keep our heads down. Ordinary people like us cannot fight the authorities.",儿啊，我看咱们还是别蹚浑水了，多一事不如少一事，明哲保身吧。这不是咱们平民百姓管得了的。
+STORY_012_006_TEXT,儿啊，我看咱们还是别蹚浑水了，多一事不如少一事，明哲保身吧。这不是咱们平民百姓管得了的。,"Son, I think we should stay out of this. Better to keep our heads down. Ordinary people like us cannot fight the authorities.",息子よ、この件には関わらないほうがいい。余計なことに首を突っ込まず、身を守りなさい。わしら庶民にどうにかできる話ではない。
 STORY_012_007_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_012_007_TEXT,…...,…,…...
+STORY_012_007_TEXT,…...,…,…………
 STORY_013_001_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_013_001_TEXT,贤弟，好久不见啊，今天来抓点药顺便来看看你。,"My friend, it has been too long. I came to pick up some medicine and thought I would visit you.",贤弟，好久不见啊，今天来抓点药顺便来看看你。
+STORY_013_001_TEXT,贤弟，好久不见啊，今天来抓点药顺便来看看你。,"My friend, it has been too long. I came to pick up some medicine and thought I would visit you.",久しぶりだな。薬を買いに来たついでに、お前の顔も見に来たよ。
 STORY_013_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_013_002_TEXT,雷兄哪里不舒服？,"What is troubling you, Brother Lei?",雷兄哪里不舒服？
+STORY_013_002_TEXT,雷兄哪里不舒服？,"What is troubling you, Brother Lei?",雷兄、どこか具合が悪いのですか？
 STORY_013_003_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_013_003_TEXT,这次省内各州县的赈灾药材都要从咱们蕲州调拨，我奉命押送，全省各处跑，路上染了点风寒。,"All the disaster relief medicine for the province is being sent out from Qizhou. I was ordered to escort shipments from place to place, and I caught a chill on the road.",这次省内各州县的赈灾药材都要从咱们蕲州调拨，我奉命押送，全省各处跑，路上染了点风寒。
+STORY_013_003_TEXT,这次省内各州县的赈灾药材都要从咱们蕲州调拨，我奉命押送，全省各处跑，路上染了点风寒。,"All the disaster relief medicine for the province is being sent out from Qizhou. I was ordered to escort shipments from place to place, and I caught a chill on the road.",今回は省内各地へ送る救済用の薬材を、すべて蘄州から運ぶことになった。護送を命じられてあちこち走り回るうち、風邪をひいてしまった。
 STORY_013_004_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_013_004_TEXT,全省都从蕲州调拨？,The whole province is receiving supplies from Qizhou?,全省都从蕲州调拨？
+STORY_013_004_TEXT,全省都从蕲州调拨？,The whole province is receiving supplies from Qizhou?,全省分を蘄州から運ぶのですか？
 STORY_013_005_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_013_005_TEXT,是啊，这次的药材统一由蕲州采办存放，哪里缺药就从咱们这调拨。,"Yes. All the medicine is bought and stored here, then sent wherever it is needed.",是啊，这次的药材统一由蕲州采办存放，哪里缺药就从咱们这调拨。
+STORY_013_005_TEXT,是啊，这次的药材统一由蕲州采办存放，哪里缺药就从咱们这调拨。,"Yes. All the medicine is bought and stored here, then sent wherever it is needed.",そうだ。蘄州で一括して買い入れ、保管している。薬が足りない所にはここから送る。
 STORY_013_006_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_013_006_TEXT,有件事儿你知道吗？这次的赈灾药材被人动了手脚，以次充好，根本治不了病。,Have you heard? Someone has tampered with these relief supplies. They have replaced good medicine with poor quality stock. It cannot cure anyone.,有件事儿你知道吗？这次的赈灾药材被人动了手脚，以次充好，根本治不了病。
+STORY_013_006_TEXT,有件事儿你知道吗？这次的赈灾药材被人动了手脚，以次充好，根本治不了病。,Have you heard? Someone has tampered with these relief supplies. They have replaced good medicine with poor quality stock. It cannot cure anyone.,ご存じですか？　今回の薬材には粗悪品が混ざっています。あれでは病を治せません。
 STORY_013_007_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_013_007_TEXT,什么？有这事儿？,What? Is that true?,什么？有这事儿？
+STORY_013_007_TEXT,什么？有这事儿？,What? Is that true?,何だって？　本当か？
 STORY_013_008_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_013_008_TEXT,药剂局的孙大夫去找吴世良理论，被关进大牢，知情的大夫们都不敢声张。,Doctor Sun from the dispensary challenged Wu Shiliang about it and was imprisoned. The other doctors who know are afraid to speak up.,药剂局的孙大夫去找吴世良理论，被关进大牢，知情的大夫们都不敢声张。
+STORY_013_008_TEXT,药剂局的孙大夫去找吴世良理论，被关进大牢，知情的大夫们都不敢声张。,Doctor Sun from the dispensary challenged Wu Shiliang about it and was imprisoned. The other doctors who know are afraid to speak up.,薬剤局の孫先生が呉世良に抗議したら、牢に入れられました。事情を知る医者は誰も声を上げられません。
 STORY_013_009_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_013_009_TEXT,他娘的，没有王法了！这州府衙门肯定是不能去了，我到武昌府湖广按察司，把这事报上去。,Damn them! Has the law lost all meaning? We cannot go to the local officials. I will report this to the Huguang Provincial Surveillance Commission in Wuchang.,他娘的，没有王法了！这州府衙门肯定是不能去了，我到武昌府湖广按察司，把这事报上去。
+STORY_013_009_TEXT,他娘的，没有王法了！这州府衙门肯定是不能去了，我到武昌府湖广按察司，把这事报上去。,Damn them! Has the law lost all meaning? We cannot go to the local officials. I will report this to the Huguang Provincial Surveillance Commission in Wuchang.,なんてことだ、法もないのか！　州役所には訴えられないな。武昌府の湖広按察司へ行って、この件を上に報告する。
 STORY_013_010_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_013_010_TEXT,雷兄这一趟要多加小心啊。,"Take care on the journey, Brother Lei.",雷兄这一趟要多加小心啊。
+STORY_013_010_TEXT,雷兄这一趟要多加小心啊。,"Take care on the journey, Brother Lei.",雷兄、どうかお気をつけて。
 STORY_014_01_001_SPEAKER,沈修文,Shen Xiuwen,沈修文
-STORY_014_01_001_TEXT,李大夫，小生有礼了。,"Doctor Li, it is a pleasure to see you.",李大夫，小生有礼了。
+STORY_014_01_001_TEXT,李大夫，小生有礼了。,"Doctor Li, it is a pleasure to see you.",李先生、ご無沙汰しております。
 STORY_014_01_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_014_01_002_TEXT,是沈先生啊，请坐。,"Master Shen. Please, sit down.",是沈先生啊，请坐。
+STORY_014_01_002_TEXT,是沈先生啊，请坐。,"Master Shen. Please, sit down.",沈殿でしたか。どうぞお掛けください。
 STORY_014_01_003_SPEAKER,沈修文,Shen Xiuwen,沈修文
-STORY_014_01_003_TEXT,最近有点失眠，没什么食欲，来请李大夫给看看。,I have been sleeping poorly and have little appetite. I hoped you would examine me.,最近有点失眠，没什么食欲，来请李大夫给看看。
+STORY_014_01_003_TEXT,最近有点失眠，没什么食欲，来请李大夫给看看。,I have been sleeping poorly and have little appetite. I hoped you would examine me.,最近よく眠れず、食欲もありません。診ていただきたいのです。
 STORY_014_02_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_014_02_001_TEXT,先生这是心脾两虚之症，思虑过度暗耗心血导致心血不足，脾气虚弱。给您开一服归脾汤，您可要注意休息啊。,You have a deficiency of both heart and spleen. Too much worry has depleted your heart blood and weakened your spleen qi. I will prescribe Restore the Spleen Decoction. Please make sure you rest.,先生这是心脾两虚之症，思虑过度暗耗心血导致心血不足，脾气虚弱。给您开一服归脾汤，您可要注意休息啊。
+STORY_014_02_001_TEXT,先生这是心脾两虚之症，思虑过度暗耗心血导致心血不足，脾气虚弱。给您开一服归脾汤，您可要注意休息啊。,You have a deficiency of both heart and spleen. Too much worry has depleted your heart blood and weakened your spleen qi. I will prescribe Restore the Spleen Decoction. Please make sure you rest.,心脾両虚の証です。考えすぎて心血を消耗し、脾の気も弱っています。帰脾湯を処方しますから、しっかり休んでください。
 STORY_014_02_002_SPEAKER,沈修文,Shen Xiuwen,沈修文
-STORY_014_02_002_TEXT,李神医名不虚传，这阵子确实是公务繁忙，做钱谷师爷这一行，一刻也不得闲啊。,Your reputation is well deserved. Official business has kept me very busy. A financial secretary never has a moment to spare.,李神医名不虚传，这阵子确实是公务繁忙，做钱谷师爷这一行，一刻也不得闲啊。
+STORY_014_02_002_TEXT,李神医名不虚传，这阵子确实是公务繁忙，做钱谷师爷这一行，一刻也不得闲啊。,Your reputation is well deserved. Official business has kept me very busy. A financial secretary never has a moment to spare.,さすが名医の李先生。最近は役所の仕事が忙しくて。金銭や穀物の帳簿を扱う書記は、休む暇もありません。
 STORY_014_02_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_014_02_003_TEXT,先生是操劳赈灾药材的采办之事？,Have you been occupied with buying the relief medicine?,先生是操劳赈灾药材的采办之事？
+STORY_014_02_003_TEXT,先生是操劳赈灾药材的采办之事？,Have you been occupied with buying the relief medicine?,救済用の薬材の調達でお忙しいのですか？
 STORY_014_02_004_SPEAKER,沈修文,Shen Xiuwen,沈修文
-STORY_014_02_004_TEXT,这是衙门公务，在下不方便说，也劝李大夫不要打听衙门的事。,"That is government business. I cannot discuss it, and I advise you not to inquire into official affairs.",这是衙门公务，在下不方便说，也劝李大夫不要打听衙门的事。
+STORY_014_02_004_TEXT,这是衙门公务，在下不方便说，也劝李大夫不要打听衙门的事。,"That is government business. I cannot discuss it, and I advise you not to inquire into official affairs.",それは役所の公務ですから、お話しできません。先生も役所のことは詮索しないほうがいい。
 STORY_014_02_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_014_02_005_TEXT,是在下唐突了。,Forgive my presumption.,是在下唐突了。
+STORY_014_02_005_TEXT,是在下唐突了。,Forgive my presumption.,出過ぎたことを申しました。
 STORY_014_02_006_SPEAKER,沈修文,Shen Xiuwen,沈修文
-STORY_014_02_006_TEXT,无妨，您和令尊医术高明，赈灾药材用的是什么，想必你们心里有数。,No matter. You and your father are skilled physicians. I imagine you know exactly what is in the relief medicine.,无妨，您和令尊医术高明，赈灾药材用的是什么，想必你们心里有数。
+STORY_014_02_006_TEXT,无妨，您和令尊医术高明，赈灾药材用的是什么，想必你们心里有数。,No matter. You and your father are skilled physicians. I imagine you know exactly what is in the relief medicine.,いえ。あなたと父上ほどの医者なら、救済用の薬材に何が使われているか、お分かりでしょう。
 STORY_014_02_007_SPEAKER,沈修文,Shen Xiuwen,沈修文
-STORY_014_02_007_TEXT,但我得提醒您一句，赈灾药材不只是一两个州府的事，更不是你我能管的事。,But let me warn you: these supplies concern more than one or two prefectures. Neither you nor I can set things right.,但我得提醒您一句，赈灾药材不只是一两个州府的事，更不是你我能管的事。
+STORY_014_02_007_TEXT,但我得提醒您一句，赈灾药材不只是一两个州府的事，更不是你我能管的事。,But let me warn you: these supplies concern more than one or two prefectures. Neither you nor I can set things right.,ただ、ひとつ忠告します。この件は一つ二つの州府だけの問題ではない。私たちにどうにかできることでもありません。
 STORY_014_02_008_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_014_02_008_TEXT,......,…,......
+STORY_014_02_008_TEXT,......,…,…………
 STORY_014_02_009_SPEAKER,沈修文,Shen Xiuwen,沈修文
-STORY_014_02_009_TEXT,先生医术闻名全省，在下十分钦佩，不要浪费了老天给您的才华。在下告辞。,"Your medical skill is renowned throughout the province, and I admire it greatly. Do not squander the gift Heaven has given you. I shall take my leave.",先生医术闻名全省，在下十分钦佩，不要浪费了老天给您的才华。在下告辞。
-STORY_014_02_010_TEXT,收入一两白银,Received one tael of silver.,收入一两白银
+STORY_014_02_009_TEXT,先生医术闻名全省，在下十分钦佩，不要浪费了老天给您的才华。在下告辞。,"Your medical skill is renowned throughout the province, and I admire it greatly. Do not squander the gift Heaven has given you. I shall take my leave.",先生の医術は省中に知れ渡っています。その天から授かった才能を無駄になさらぬよう。では失礼します。
+STORY_014_02_010_TEXT,收入一两白银,Received one tael of silver.,収入：銀一両
 STORY_014_03_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_014_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",不对，我需要好好想想这是什么病，该开什么方。
-STORY_015_001_TEXT,咚咚咚…,"Knock, knock, knock…",咚咚咚…
+STORY_014_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。
+STORY_015_001_TEXT,咚咚咚…,"Knock, knock, knock…",トントン……
 STORY_015_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_015_002_TEXT,谁？,Who is there?,谁？
+STORY_015_002_TEXT,谁？,Who is there?,誰だ？
 STORY_015_003_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_015_003_TEXT,贤弟，是我。,"It is me, my friend.",贤弟，是我。
+STORY_015_003_TEXT,贤弟，是我。,"It is me, my friend.",私だよ。
 STORY_015_004_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_015_004_TEXT,雷兄，怎么样，事情有眉目了吗？,Brother Lei! Have you made any progress?,雷兄，怎么样，事情有眉目了吗？
+STORY_015_004_TEXT,雷兄，怎么样，事情有眉目了吗？,Brother Lei! Have you made any progress?,雷兄、どうでした？　何か分かりましたか？
 STORY_015_005_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_015_005_TEXT,唉…按察司、布政司都不受理，去所部都指挥使司面见老宪台，他老人家说这里面水太深，让我别多管闲事…,No… Neither the provincial surveillance office nor the provincial administration would hear the case. I even went to see the commander at the military commission. He said the matter runs too deep and told me to stay out of it…,唉…按察司、布政司都不受理，去所部都指挥使司面见老宪台，他老人家说这里面水太深，让我别多管闲事…
+STORY_015_005_TEXT,唉…按察司、布政司都不受理，去所部都指挥使司面见老宪台，他老人家说这里面水太深，让我别多管闲事…,No… Neither the provincial surveillance office nor the provincial administration would hear the case. I even went to see the commander at the military commission. He said the matter runs too deep and told me to stay out of it…,はあ……按察司も布政司も訴えを受け付けなかった。都指揮使司の長官にも会ったが、裏が深いから関わるなと言われたよ……
 STORY_015_006_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_015_006_TEXT,看来这事远比我们想的复杂…,Then this is far more complicated than we thought…,看来这事远比我们想的复杂…
+STORY_015_006_TEXT,看来这事远比我们想的复杂…,Then this is far more complicated than we thought…,どうやら想像以上に複雑な話ですね……
 STORY_015_007_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_015_007_TEXT,放任不管的话，是要出大事的...,"If we let it go, something terrible will happen…",放任不管的话，是要出大事的...
+STORY_015_007_TEXT,放任不管的话，是要出大事的...,"If we let it go, something terrible will happen…",放っておけば大変なことになる……
 STORY_015_008_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_015_008_TEXT,我想到了一个能帮上忙的人。,I know someone who might help.,我想到了一个能帮上忙的人。
+STORY_015_008_TEXT,我想到了一个能帮上忙的人。,I know someone who might help.,助けてくれそうな人に心当たりがあります。
 STORY_015_009_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_015_009_TEXT,哦？是谁？,Oh? Who?,哦？是谁？
+STORY_015_009_TEXT,哦？是谁？,Oh? Who?,ほう？　誰だ？
 STORY_015_010_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_015_010_TEXT,楚王。,The Prince of Chu.,楚王。
+STORY_015_010_TEXT,楚王。,The Prince of Chu.,楚王です。
 STORY_015_011_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_015_011_TEXT,贤弟认识这么大的人物？,You know someone so powerful?,贤弟认识这么大的人物？
+STORY_015_011_TEXT,贤弟认识这么大的人物？,You know someone so powerful?,お前、そんな大物と知り合いなのか？
 STORY_015_012_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_015_012_TEXT,之前医治过世子，应该能说得上话。,I treated his son. He may be willing to hear me out.,之前医治过世子，应该能说得上话。
+STORY_015_012_TEXT,之前医治过世子，应该能说得上话。,I treated his son. He may be willing to hear me out.,以前、世子様を治療しました。話は聞いていただけるはずです。
 STORY_015_013_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_015_013_TEXT,那还等什么，我陪你现在就去！,Then what are we waiting for? I will go with you now!,那还等什么，我陪你现在就去！
-STORY_015_014_TEXT,一路无话，两人来到了楚王府,The two traveled to the Prince of Chu's residence in silence.,一路无话，两人来到了楚王府
+STORY_015_013_TEXT,那还等什么，我陪你现在就去！,Then what are we waiting for? I will go with you now!,それならすぐに行こう。私も同行する！
+STORY_015_014_TEXT,一路无话，两人来到了楚王府,The two traveled to the Prince of Chu's residence in silence.,道中、二人は無言のまま楚王府へたどり着いた。
 STORY_015_015_SPEAKER,楚王,Prince of Chu,楚王
-STORY_015_015_TEXT,前日一别，先生别来无恙啊。,"Doctor Li, it is good to see you again.",前日一别，先生别来无恙啊。
+STORY_015_015_TEXT,前日一别，先生别来无恙啊。,"Doctor Li, it is good to see you again.",先日以来ですね。先生、お元気でしたか。
 STORY_015_016_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_015_016_TEXT,草民拜见王爷，今日来是有一事请王爷帮忙。,"My respects, Your Highness. I have come to ask for your help.",草民拜见王爷，今日来是有一事请王爷帮忙。
+STORY_015_016_TEXT,草民拜见王爷，今日来是有一事请王爷帮忙。,"My respects, Your Highness. I have come to ask for your help.",殿下に拝謁いたします。本日はお願いがあって参りました。
 STORY_015_017_SPEAKER,楚王,Prince of Chu,楚王
-STORY_015_017_TEXT,先生是犬子的救命恩人，若有本王能帮上忙的，一定尽力而为。,"You saved my son's life. If there is anything within my power, I will do my best.",先生是犬子的救命恩人，若有本王能帮上忙的，一定尽力而为。
-STORY_015_018_TEXT,李东璧将事情的前因后果如实告诉了楚王,Li Dongbi told the Prince of Chu everything that had happened.,李东璧将事情的前因后果如实告诉了楚王
+STORY_015_017_TEXT,先生是犬子的救命恩人，若有本王能帮上忙的，一定尽力而为。,"You saved my son's life. If there is anything within my power, I will do my best.",先生は息子の命の恩人です。私にできることなら、力を尽くしましょう。
+STORY_015_018_TEXT,李东璧将事情的前因后果如实告诉了楚王,Li Dongbi told the Prince of Chu everything that had happened.,李東璧は事の経緯をありのまま楚王に伝えた。
 STORY_015_019_SPEAKER,楚王,Prince of Chu,楚王
-STORY_015_019_TEXT,嗯…这些地方官胆子也太大了。可自成祖文皇帝之后，藩王不临民，不治事，干预地方军政是谋逆的大罪，本王也爱莫能助。,"Hmm… These local officials are brazen indeed. But since the reign of the Yongle Emperor, imperial princes have been forbidden to govern the people or interfere in local military and civil affairs. To do so would be treated as treason. I fear I cannot intervene.",嗯…这些地方官胆子也太大了。可自成祖文皇帝之后，藩王不临民，不治事，干预地方军政是谋逆的大罪，本王也爱莫能助。
+STORY_015_019_TEXT,嗯…这些地方官胆子也太大了。可自成祖文皇帝之后，藩王不临民，不治事，干预地方军政是谋逆的大罪，本王也爱莫能助。,"Hmm… These local officials are brazen indeed. But since the reign of the Yongle Emperor, imperial princes have been forbidden to govern the people or interfere in local military and civil affairs. To do so would be treated as treason. I fear I cannot intervene.",うむ……地方官どもは大胆なことをする。だが成祖文皇帝以来、藩王は民を治めず政務にも携わらぬことになっている。地方の軍政への介入は謀反の罪となる。私にも手出しはできない。
 STORY_015_020_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_015_020_TEXT,这事儿要是您不管，就没人能管了…瘟病若起，湖广将民不聊生啊。,"If you do nothing, no one can… If an epidemic breaks out, the people of Huguang will suffer terribly.",这事儿要是您不管，就没人能管了…瘟病若起，湖广将民不聊生啊。
+STORY_015_020_TEXT,这事儿要是您不管，就没人能管了…瘟病若起，湖广将民不聊生啊。,"If you do nothing, no one can… If an epidemic breaks out, the people of Huguang will suffer terribly.",殿下が動かなければ、もう誰も動けません……疫病が広がれば、湖広の民は苦しみます。
 STORY_015_021_SPEAKER,楚王,Prince of Chu,楚王
-STORY_015_021_TEXT,此事牵扯甚广，先生就不怕引火烧身吗？,Many people are implicated. Are you not afraid of putting yourself in danger?,此事牵扯甚广，先生就不怕引火烧身吗？
+STORY_015_021_TEXT,此事牵扯甚广，先生就不怕引火烧身吗？,Many people are implicated. Are you not afraid of putting yourself in danger?,関係者は多い。先生は自分に災いが及ぶことが怖くないのですか？
 STORY_015_022_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_015_022_TEXT,草民自幼读四书五经，诸子百家，文章未成，功名未就，所学所求只有为生民立命，若以我一命换千万民生，吾往矣。,"Since childhood I have studied the classics and the teachings of the sages. I have written no great work and earned no official title. All I have learned, all I seek, is to help the people live. If my one life can save millions, I will give it gladly.",草民自幼读四书五经，诸子百家，文章未成，功名未就，所学所求只有为生民立命，若以我一命换千万民生，吾往矣。
+STORY_015_022_TEXT,草民自幼读四书五经，诸子百家，文章未成，功名未就，所学所求只有为生民立命，若以我一命换千万民生，吾往矣。,"Since childhood I have studied the classics and the teachings of the sages. I have written no great work and earned no official title. All I have learned, all I seek, is to help the people live. If my one life can save millions, I will give it gladly.",幼い頃から四書五経や諸子百家を学びました。文章も功名も得られませんでしたが、学んだのは民の命を支えるためです。私一人の命で大勢の民を救えるなら、喜んで進みます。
 STORY_015_023_SPEAKER,楚王,Prince of Chu,楚王
-STORY_015_023_TEXT,先生所言让本王惭愧啊…待本王修一道密疏，向圣上禀明此事。先生也切莫再向他人提及。,Your words put me to shame… I will send a secret memorial to His Majesty explaining the matter. But you must speak of this to no one else.,先生所言让本王惭愧啊…待本王修一道密疏，向圣上禀明此事。先生也切莫再向他人提及。
+STORY_015_023_TEXT,先生所言让本王惭愧啊…待本王修一道密疏，向圣上禀明此事。先生也切莫再向他人提及。,Your words put me to shame… I will send a secret memorial to His Majesty explaining the matter. But you must speak of this to no one else.,先生の言葉に恥じ入るばかりだ……私から陛下へ密奏を送り、この件をお伝えしよう。先生もほかの者には口外しないでください。
 STORY_016_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_016_001_TEXT,是沈先生啊，病好点了吗？,"Master Shen, are you feeling any better?",是沈先生啊，病好点了吗？
+STORY_016_001_TEXT,是沈先生啊，病好点了吗？,"Master Shen, are you feeling any better?",沈殿、病は良くなりましたか？
 STORY_016_002_SPEAKER,沈修文,Shen Xiuwen,沈修文
-STORY_016_002_TEXT,小生时日不多了。,I do not have much time left.,小生时日不多了。
+STORY_016_002_TEXT,小生时日不多了。,I do not have much time left.,私にはもう時間がありません。
 STORY_016_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_016_003_TEXT,啊？您的病没那么严重，只要按时吃药好好休息肯定会好起来的。,"What? Your illness is not that serious. Take the medicine and get enough rest, and you will recover.",啊？您的病没那么严重，只要按时吃药好好休息肯定会好起来的。
+STORY_016_003_TEXT,啊？您的病没那么严重，只要按时吃药好好休息肯定会好起来的。,"What? Your illness is not that serious. Take the medicine and get enough rest, and you will recover.",え？　それほど重い病ではありませんよ。薬を飲んで休めば、きっと良くなります。
 STORY_016_004_SPEAKER,沈修文,Shen Xiuwen,沈修文
-STORY_016_004_TEXT,治得了病，治不了命。今天来是有样东西要交给李大夫。,"Medicine can cure an illness, but it cannot change one's fate. I came to give you something.",治得了病，治不了命。今天来是有样东西要交给李大夫。
+STORY_016_004_TEXT,治得了病，治不了命。今天来是有样东西要交给李大夫。,"Medicine can cure an illness, but it cannot change one's fate. I came to give you something.",病は治せても、運命は治せません。今日は先生にお渡ししたいものがあります。
 STORY_016_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_016_005_TEXT,这是？,What is this?,这是？
+STORY_016_005_TEXT,这是？,What is this?,これは？
 STORY_016_006_SPEAKER,沈修文,Shen Xiuwen,沈修文
-STORY_016_006_TEXT,这是吴世良让我写的账册抄本，交给您应该能派上用场。,A copy of the accounts Wu Shiliang ordered me to keep. I think it will be useful in your hands.,这是吴世良让我写的账册抄本，交给您应该能派上用场。
+STORY_016_006_TEXT,这是吴世良让我写的账册抄本，交给您应该能派上用场。,A copy of the accounts Wu Shiliang ordered me to keep. I think it will be useful in your hands.,呉世良に命じられて私が書いた帳簿の写しです。あなたのお役に立つでしょう。
 STORY_016_007_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_016_007_TEXT,…....,…,…....
+STORY_016_007_TEXT,…....,…,…………
 STORY_016_008_SPEAKER,沈修文,Shen Xiuwen,沈修文
-STORY_016_008_TEXT,说实话我很羡慕李大夫，所学的本事能有处施展，唉…小生就此别过。,"To tell the truth, I envy you. Your abilities can be put to good use. Ah… Farewell, Doctor Li.",说实话我很羡慕李大夫，所学的本事能有处施展，唉…小生就此别过。
+STORY_016_008_TEXT,说实话我很羡慕李大夫，所学的本事能有处施展，唉…小生就此别过。,"To tell the truth, I envy you. Your abilities can be put to good use. Ah… Farewell, Doctor Li.",正直、先生が羨ましい。学んだことを人々のために生かせるのですから……では失礼します。
 STORY_016_009_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_016_009_TEXT,沈先生…....,Master Shen…,沈先生…....
-STORY_016_010_TEXT,获得赈灾药材账本抄本,Obtained a copy of the disaster relief medicine accounts.,获得赈灾药材账本抄本
+STORY_016_009_TEXT,沈先生…....,Master Shen…,沈殿……
+STORY_016_010_TEXT,获得赈灾药材账本抄本,Obtained a copy of the disaster relief medicine accounts.,救済用薬材の帳簿の写しを入手した。
 STORY_017_01_001_SPEAKER,杨善泉,Yang Shanquan,楊善泉
-STORY_017_01_001_TEXT,李大夫，我这两天腰酸腿软，夜尿还多，给我开点药吧。,"Doctor Li, my lower back and legs have felt weak these past few days, and I keep waking to urinate. Could you prescribe something?",李大夫，我这两天腰酸腿软，夜尿还多，给我开点药吧。
+STORY_017_01_001_TEXT,李大夫，我这两天腰酸腿软，夜尿还多，给我开点药吧。,"Doctor Li, my lower back and legs have felt weak these past few days, and I keep waking to urinate. Could you prescribe something?",李先生、この二日ほど腰と脚がだるく、夜も何度も小便に起きます。薬を出してください。
 STORY_017_01_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_017_01_002_TEXT,杨大使请坐。,"Please, sit down, Officer Yang.",杨大使请坐。
+STORY_017_01_002_TEXT,杨大使请坐。,"Please, sit down, Officer Yang.",楊殿、どうぞお掛けください。
 STORY_017_02_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_017_02_001_TEXT,杨大使所患的是肾气不固之症，要注意休养，最近是遇到什么事受了惊吗？,You have a failure of the kidneys to secure qi. You need rest. Has something frightened you recently?,杨大使所患的是肾气不固之症，要注意休养，最近是遇到什么事受了惊吗？
+STORY_017_02_001_TEXT,杨大使所患的是肾气不固之症，要注意休养，最近是遇到什么事受了惊吗？,You have a failure of the kidneys to secure qi. You need rest. Has something frightened you recently?,楊殿は腎気不固の証です。静養してください。最近、何か怖い目に遭いましたか？
 STORY_017_02_002_SPEAKER,杨善泉,Yang Shanquan,楊善泉
-STORY_017_02_002_TEXT,您听说沈师爷的事了吗？,Have you heard what happened to Secretary Shen?,您听说沈师爷的事了吗？
+STORY_017_02_002_TEXT,您听说沈师爷的事了吗？,Have you heard what happened to Secretary Shen?,沈書記の件を聞きましたか？
 STORY_017_02_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_017_02_003_TEXT,沈师爷怎么了？,What happened to him?,沈师爷怎么了？
+STORY_017_02_003_TEXT,沈师爷怎么了？,What happened to him?,沈殿に何があったのです？
 STORY_017_02_004_SPEAKER,杨善泉,Yang Shanquan,楊善泉
-STORY_017_02_004_TEXT,昨天沈师爷在自己屋里死了…,They found him dead in his room yesterday…,昨天沈师爷在自己屋里死了…
+STORY_017_02_004_TEXT,昨天沈师爷在自己屋里死了…,They found him dead in his room yesterday…,昨日、自室で亡くなっていたんです……
 STORY_017_02_005_SPEAKER,李东璧,Li Dongbi,李東璧
 STORY_017_02_005_TEXT,！！！,What?!,！！！
 STORY_017_02_006_SPEAKER,杨善泉,Yang Shanquan,楊善泉
-STORY_017_02_006_TEXT,他们开始灭口了...下一个就该轮到我了...,They have begun silencing witnesses… I will be next…,他们开始灭口了...下一个就该轮到我了...
+STORY_017_02_006_TEXT,他们开始灭口了...下一个就该轮到我了...,They have begun silencing witnesses… I will be next…,口封じが始まった……次は私の番だ……
 STORY_017_02_007_SPEAKER,杨善泉,Yang Shanquan,楊善泉
-STORY_017_02_007_TEXT,这一批药材入库验收、各地调拨都是我经的手，多少药、什么成色、送到哪里，账上都有我的画押。他们想把这笔账做干净，就不会留我这个活口。,"I oversaw the receipt of that shipment and its dispatch to each district. How much medicine there was, its quality, where it went—my signature is on every entry. If they want to erase the trail, they cannot leave me alive.",这一批药材入库验收、各地调拨都是我经的手，多少药、什么成色、送到哪里，账上都有我的画押。他们想把这笔账做干净，就不会留我这个活口。
+STORY_017_02_007_TEXT,这一批药材入库验收、各地调拨都是我经的手，多少药、什么成色、送到哪里，账上都有我的画押。他们想把这笔账做干净，就不会留我这个活口。,"I oversaw the receipt of that shipment and its dispatch to each district. How much medicine there was, its quality, where it went—my signature is on every entry. If they want to erase the trail, they cannot leave me alive.",この薬材の検収から各地への発送まで、すべて私が担当しました。量、品質、届け先、帳簿には私の署名が残っています。証拠を消すつもりなら、私を生かしてはおかないでしょう。
 STORY_017_02_008_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_017_02_008_TEXT,......,…,......
-STORY_017_02_009_TEXT,收入一两白银,Received one tael of silver.,收入一两白银
+STORY_017_02_008_TEXT,......,…,…………
+STORY_017_02_009_TEXT,收入一两白银,Received one tael of silver.,収入：銀一両
 STORY_017_03_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_017_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",不对，我需要好好想想这是什么病，该开什么方。
-STORY_018_001_TEXT,"""库房失火啦！快来人救火啊！""",“The storeroom is on fire! Somebody help!”,"""库房失火啦！快来人救火啊！"""
+STORY_017_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。
+STORY_018_001_TEXT,"""库房失火啦！快来人救火啊！""",“The storeroom is on fire! Somebody help!”,「倉庫が火事だ！　誰か、火を消してくれ！」
 STORY_018_002_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_018_002_TEXT,少掌柜的，惠民药局的药料库起火啦！,"Young master, the public dispensary's medicine storehouse is burning!",少掌柜的，惠民药局的药料库起火啦！
+STORY_018_002_TEXT,少掌柜的，惠民药局的药料库起火啦！,"Young master, the public dispensary's medicine storehouse is burning!",若旦那、恵民薬局の薬材倉庫が燃えています！
 STORY_018_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_018_003_TEXT,走，去帮忙。,Come on. Let us help.,走，去帮忙。
+STORY_018_003_TEXT,走，去帮忙。,Come on. Let us help.,行こう、手伝うぞ。
 STORY_018_004_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_018_004_TEXT,这火烧得蹊跷。,There is something suspicious about this fire.,这火烧得蹊跷。
+STORY_018_004_TEXT,这火烧得蹊跷。,There is something suspicious about this fire.,この火事は妙だ。
 STORY_018_005_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_018_005_TEXT,那边抬出来一个人。,They are carrying someone out over there.,那边抬出来一个人。
+STORY_018_005_TEXT,那边抬出来一个人。,They are carrying someone out over there.,向こうから誰かが運び出されてくる。
 STORY_018_006_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_018_006_TEXT,……是杨善泉。,…It is Yang Shanquan.,……是杨善泉。
+STORY_018_006_TEXT,……是杨善泉。,…It is Yang Shanquan.,……楊善泉だ。
 STORY_019_001_SPEAKER,赵顺,Zhao Shun,趙順
-STORY_019_001_TEXT,掌柜的生意兴隆啊(四处打量...)，那扇门是通后院的吧？,"Business looks good, Master Li. (Looks around…) That door leads to the rear courtyard, does it?",掌柜的生意兴隆啊(四处打量...)，那扇门是通后院的吧？
+STORY_019_001_TEXT,掌柜的生意兴隆啊(四处打量...)，那扇门是通后院的吧？,"Business looks good, Master Li. (Looks around…) That door leads to the rear courtyard, does it?",お店は繁盛しているようですね。（辺りを見回す……）あの扉は裏庭に通じるんですか？
 STORY_019_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_019_002_TEXT,敢问来小馆有何贵干？,May I ask what brings you to my clinic?,敢问来小馆有何贵干？
+STORY_019_002_TEXT,敢问来小馆有何贵干？,May I ask what brings you to my clinic?,当院に何のご用ですか？
 STORY_019_003_SPEAKER,赵顺,Zhao Shun,趙順
-STORY_019_003_TEXT,啊，哈哈，没事没事，就来看看，听说咱蕲州有一位李神医，来瞻仰瞻仰。,"Oh, ha, ha, nothing in particular. I heard Qizhou had a famous Physician Li and came to see him for myself.",啊，哈哈，没事没事，就来看看，听说咱蕲州有一位李神医，来瞻仰瞻仰。
+STORY_019_003_TEXT,啊，哈哈，没事没事，就来看看，听说咱蕲州有一位李神医，来瞻仰瞻仰。,"Oh, ha, ha, nothing in particular. I heard Qizhou had a famous Physician Li and came to see him for myself.",いや、はは、何でもありません。蘄州に名医の李先生がいると聞いて、お顔を拝みに来ただけです。
 STORY_019_004_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_019_004_TEXT,小馆还要接待病患，无事便请回吧。,"We have patients to see. If you have no business here, please leave.",小馆还要接待病患，无事便请回吧。
+STORY_019_004_TEXT,小馆还要接待病患，无事便请回吧。,"We have patients to see. If you have no business here, please leave.",患者を診ています。ご用がなければお引き取りください。
 STORY_019_005_SPEAKER,赵顺,Zhao Shun,趙順
-STORY_019_005_TEXT,切，那咱们就后会有期了。,Hmph. We will meet again.,切，那咱们就后会有期了。
-STORY_020_001_TEXT,咯噔,Click.,咯噔
+STORY_019_005_TEXT,切，那咱们就后会有期了。,Hmph. We will meet again.,ちぇっ、また会おうぜ。
+STORY_020_001_TEXT,咯噔,Click.,カタン。
 STORY_020_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_020_002_TEXT,谁！,Who is there?!,谁！
+STORY_020_002_TEXT,谁！,Who is there?!,誰だ！
 STORY_020_003_SPEAKER,黑衣人,Man in Black,黒衣の者
-STORY_020_003_TEXT,李大夫，我来送你上路啦。,"Doctor Li, I have come to send you to the next world.",李大夫，我来送你上路啦。
+STORY_020_003_TEXT,李大夫，我来送你上路啦。,"Doctor Li, I have come to send you to the next world.",李先生、あの世へ送ってやるよ。
 STORY_020_004_SPEAKER,李东璧,Li Dongbi,李東璧
 STORY_020_004_TEXT,！！！,What?!,！！！
-STORY_020_005_TEXT,砰！,Bang!,砰！
+STORY_020_005_TEXT,砰！,Bang!,バン！
 STORY_020_006_SPEAKER,黑衣人,Man in Black,黒衣の者
-STORY_020_006_TEXT,哎哟！,Ow!,哎哟！
+STORY_020_006_TEXT,哎哟！,Ow!,痛っ！
 STORY_020_007_SPEAKER,李东璧,Li Dongbi,李東璧
 STORY_020_007_TEXT,！！！,What?!,！！！
 STORY_020_008_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_020_008_TEXT,贤弟，你没事吧？王爷听说沈修文和杨善泉都被灭口了，猜想下一个就是你，便派我们在暗中保护。,"My friend, are you all right? When His Highness heard that Shen Xiuwen and Yang Shanquan had both been silenced, he feared you would be next. He sent us to protect you in secret.",贤弟，你没事吧？王爷听说沈修文和杨善泉都被灭口了，猜想下一个就是你，便派我们在暗中保护。
+STORY_020_008_TEXT,贤弟，你没事吧？王爷听说沈修文和杨善泉都被灭口了，猜想下一个就是你，便派我们在暗中保护。,"My friend, are you all right? When His Highness heard that Shen Xiuwen and Yang Shanquan had both been silenced, he feared you would be next. He sent us to protect you in secret.",無事か？　沈修文と楊善泉が口封じに遭ったと知った王様は、次はお前の番だと考え、我々を護衛に遣わしたのだ。
 STORY_020_009_SPEAKER,王府护卫,Palace Guard,王府の護衛
-STORY_020_009_TEXT,把他绑起来。,Tie him up.,把他绑起来。
+STORY_020_009_TEXT,把他绑起来。,Tie him up.,そいつを縛れ。
 STORY_020_010_SPEAKER,赵顺,Zhao Shun,趙順
-STORY_020_010_TEXT,误会啊大人，误会。,"It is a misunderstanding, sir! A misunderstanding!",误会啊大人，误会。
-STORY_020_011_TEXT,一行人来到王府,The group arrived at the prince's residence.,一行人来到王府
+STORY_020_010_TEXT,误会啊大人，误会。,"It is a misunderstanding, sir! A misunderstanding!",誤解です、お役人様、誤解です！
+STORY_020_011_TEXT,一行人来到王府,The group arrived at the prince's residence.,一行は王府へ向かった。
 STORY_020_012_SPEAKER,王府护卫,Palace Guard,王府の護衛
-STORY_020_012_TEXT,启禀王爷，人都带来了。,"Your Highness, we have brought them all here.",启禀王爷，人都带来了。
+STORY_020_012_TEXT,启禀王爷，人都带来了。,"Your Highness, we have brought them all here.",王様、全員連れてまいりました。
 STORY_020_013_SPEAKER,楚王,Prince of Chu,楚王
-STORY_020_013_TEXT,这几位是朝廷派来查赈灾药材案的钦差。,These gentlemen are imperial investigators sent to examine the disaster relief medicine case.,这几位是朝廷派来查赈灾药材案的钦差。
+STORY_020_013_TEXT,这几位是朝廷派来查赈灾药材案的钦差。,These gentlemen are imperial investigators sent to examine the disaster relief medicine case.,こちらは救済用薬材の事件を調べるため、朝廷から派遣された使者たちです。
 STORY_020_014_SPEAKER,陆丁,Lu Ding,陸丁
-STORY_020_014_TEXT,北镇抚司陆丁，你就是李东璧？,Lu Ding of the Northern Pacification Office. Are you Li Dongbi?,北镇抚司陆丁，你就是李东璧？
+STORY_020_014_TEXT,北镇抚司陆丁，你就是李东璧？,Lu Ding of the Northern Pacification Office. Are you Li Dongbi?,北鎮撫司の陸丁だ。お前が李東璧か？
 STORY_020_015_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_020_015_TEXT,正是草民。,"I am, sir.",正是草民。
-STORY_020_016_TEXT,李东璧将前前后后发生的事情一五一十地禀明钦差,Li Dongbi gave the imperial investigators a full account of everything that had happened.,李东璧将前前后后发生的事情一五一十地禀明钦差
-STORY_021_001_TEXT,蕲州赈灾药材贪污案惊动朝廷，锦衣卫奉旨查办，地方涉案官员数十人，贪污银钱近万两。,"The corruption of Qizhou's disaster relief medicine drew the court's attention. The Imperial Guards were ordered to investigate. Dozens of local officials were implicated, and nearly ten thousand taels of silver had been embezzled.",蕲州赈灾药材贪污案惊动朝廷，锦衣卫奉旨查办，地方涉案官员数十人，贪污银钱近万两。
-STORY_021_002_TEXT,主犯吴世良、赵顺等即刻斩首。湖广巡抚陈仕贤等，连坐失察，官降两级。,"The principal offenders, including Wu Shiliang and Zhao Shun, were executed at once. Chen Shixian, governor of Huguang, and others were demoted two ranks for failing to uncover the crime.",主犯吴世良、赵顺等即刻斩首。湖广巡抚陈仕贤等，连坐失察，官降两级。
-STORY_021_003_TEXT,蕲州所需赈灾药材由太医院调拨，重新发放。,The Imperial Medical Academy supplied a new shipment of relief medicine for Qizhou to distribute.,蕲州所需赈灾药材由太医院调拨，重新发放。
+STORY_020_015_TEXT,正是草民。,"I am, sir.",はい、私でございます。
+STORY_020_016_TEXT,李东璧将前前后后发生的事情一五一十地禀明钦差,Li Dongbi gave the imperial investigators a full account of everything that had happened.,李東璧は事件の一部始終を、朝廷の使者に包み隠さず伝えた。
+STORY_021_001_TEXT,蕲州赈灾药材贪污案惊动朝廷，锦衣卫奉旨查办，地方涉案官员数十人，贪污银钱近万两。,"The corruption of Qizhou's disaster relief medicine drew the court's attention. The Imperial Guards were ordered to investigate. Dozens of local officials were implicated, and nearly ten thousand taels of silver had been embezzled.",蘄州の救済用薬材をめぐる汚職事件は朝廷を揺るがした。錦衣衛が勅命を受けて捜査し、数十人の地方官が関与、横領額は銀一万両近くに上った。
+STORY_021_002_TEXT,主犯吴世良、赵顺等即刻斩首。湖广巡抚陈仕贤等，连坐失察，官降两级。,"The principal offenders, including Wu Shiliang and Zhao Shun, were executed at once. Chen Shixian, governor of Huguang, and others were demoted two ranks for failing to uncover the crime.",主犯の呉世良、趙順らは直ちに斬首された。湖広巡撫の陳仕賢らも監督不行き届きで連座し、官位を二階級下げられた。
+STORY_021_003_TEXT,蕲州所需赈灾药材由太医院调拨，重新发放。,The Imperial Medical Academy supplied a new shipment of relief medicine for Qizhou to distribute.,蘄州に必要な薬材は太医院から改めて送られ、配り直された。
 STORY_021_004_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_021_004_TEXT,到头来这吴世良不过是个被推出来顶罪的罢了。,"In the end, Wu Shiliang was little more than a scapegoat.",到头来这吴世良不过是个被推出来顶罪的罢了。
+STORY_021_004_TEXT,到头来这吴世良不过是个被推出来顶罪的罢了。,"In the end, Wu Shiliang was little more than a scapegoat.",結局、呉世良は身代わりにされたにすぎない。
 STORY_021_005_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_021_005_TEXT,朝政被严党把持，这些做官的你中有我，我中有你，真细究起来又是一笔糊涂账。,"The Yan faction controls the court. Every official has ties to another. If anyone truly followed the trail, it would lead into a hopeless tangle.",朝政被严党把持，这些做官的你中有我，我中有你，真细究起来又是一笔糊涂账。
+STORY_021_005_TEXT,朝政被严党把持，这些做官的你中有我，我中有你，真细究起来又是一笔糊涂账。,"The Yan faction controls the court. Every official has ties to another. If anyone truly followed the trail, it would lead into a hopeless tangle.",朝政は厳党に握られている。役人同士は皆つながっている。突き詰めれば、またうやむやになるだろう。
 STORY_021_006_SPEAKER,楚王,Prince of Chu,楚王
 STORY_021_006_TEXT,李先生。,Doctor Li.,李先生。
 STORY_021_007_SPEAKER,李东璧,Li Dongbi,李東璧
 STORY_021_007_TEXT,楚王殿下。,Your Highness.,楚王殿下。
 STORY_021_008_SPEAKER,楚王,Prince of Chu,楚王
-STORY_021_008_TEXT,这次我上奏皇上，除了赈灾药材一案，还将先生举荐给朝廷。正好太医院院判一职空缺，特批先生赴任。,"When I reported the medicine case to His Majesty, I also recommended you for service at court. A deputy director's post at the Imperial Medical Academy happened to be vacant, and His Majesty has approved your appointment.",这次我上奏皇上，除了赈灾药材一案，还将先生举荐给朝廷。正好太医院院判一职空缺，特批先生赴任。
+STORY_021_008_TEXT,这次我上奏皇上，除了赈灾药材一案，还将先生举荐给朝廷。正好太医院院判一职空缺，特批先生赴任。,"When I reported the medicine case to His Majesty, I also recommended you for service at court. A deputy director's post at the Imperial Medical Academy happened to be vacant, and His Majesty has approved your appointment.",このたび陛下に上奏した際、薬材の事件とともに先生を朝廷へ推薦しました。太医院の院判がちょうど欠員となり、先生の任官が特に認められました。
 STORY_021_009_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_021_009_TEXT,多谢王爷提拔，可草民荆楚鄙人，幼多羸疾，质成钝椎，实在是力不从心。,"Thank you for your kindness, Your Highness. But I am only a humble man of Jingchu, sickly since childhood and slow of mind. I fear I am not equal to the task.",多谢王爷提拔，可草民荆楚鄙人，幼多羸疾，质成钝椎，实在是力不从心。
+STORY_021_009_TEXT,多谢王爷提拔，可草民荆楚鄙人，幼多羸疾，质成钝椎，实在是力不从心。,"Thank you for your kindness, Your Highness. But I am only a humble man of Jingchu, sickly since childhood and slow of mind. I fear I am not equal to the task.",殿下のお引き立てに感謝します。しかし私は荊楚の田舎者で、幼少から病弱、才にも乏しい身です。大任を果たす自信がありません。
 STORY_021_010_SPEAKER,楚王,Prince of Chu,楚王
-STORY_021_010_TEXT,……既然如此，那本王就不强人所难了。,…Very well. I will not press you.,……既然如此，那本王就不强人所难了。
+STORY_021_010_TEXT,……既然如此，那本王就不强人所难了。,…Very well. I will not press you.,……そうですか。無理強いはしません。
 STORY_022_01_001_SPEAKER,柳敬亭,Liu Jingting,柳敬亭
-STORY_022_01_001_TEXT,咳咳咳，咳咳，大夫，我这嗓子嗓子也不知怎么了，又疼又痒，咳得嗓子都哑了。,"Cough, cough… Doctor, I do not know what has happened to my throat. It hurts and itches, and I have coughed until my voice is hoarse.",咳咳咳，咳咳，大夫，我这嗓子嗓子也不知怎么了，又疼又痒，咳得嗓子都哑了。
+STORY_022_01_001_TEXT,咳咳咳，咳咳，大夫，我这嗓子嗓子也不知怎么了，又疼又痒，咳得嗓子都哑了。,"Cough, cough… Doctor, I do not know what has happened to my throat. It hurts and itches, and I have coughed until my voice is hoarse.",ゴホゴホ……先生、喉がどうしたのか痛くてかゆくて、咳で声まで枯れました。
 STORY_022_01_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_022_01_002_TEXT,是柳先生啊，快请坐。,"Master Liu, please sit down.",是柳先生啊，快请坐。
+STORY_022_01_002_TEXT,是柳先生啊，快请坐。,"Master Liu, please sit down.",柳先生でしたか。どうぞお掛けください。
 STORY_022_02_001_SPEAKER,柳敬亭,Liu Jingting,柳敬亭
-STORY_022_02_001_TEXT,哎呀，舒服多了。,"Ah, that feels much better.",哎呀，舒服多了。
+STORY_022_02_001_TEXT,哎呀，舒服多了。,"Ah, that feels much better.",ああ、ずいぶん楽になりました。
 STORY_022_02_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_022_02_002_TEXT,您这是温燥证，整日说书久坐少动，伤津耗气，易生内热。,"You have a warm dryness pattern. Sitting and telling stories all day without much movement has depleted your fluids and qi, making you prone to internal heat.",您这是温燥证，整日说书久坐少动，伤津耗气，易生内热。
+STORY_022_02_002_TEXT,您这是温燥证，整日说书久坐少动，伤津耗气，易生内热。,"You have a warm dryness pattern. Sitting and telling stories all day without much movement has depleted your fluids and qi, making you prone to internal heat.",温燥の証です。毎日の語りで座りっぱなしですから、津液と気を損ない、体内に熱が生じやすくなっています。
 STORY_022_02_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_022_02_003_TEXT,给您开一副桑杏汤，一天三服，也记得多喝水。,"I will prescribe Mulberry Leaf and Apricot Kernel Decoction, three doses a day. Remember to drink plenty of water too.",给您开一副桑杏汤，一天三服，也记得多喝水。
+STORY_022_02_003_TEXT,给您开一副桑杏汤，一天三服，也记得多喝水。,"I will prescribe Mulberry Leaf and Apricot Kernel Decoction, three doses a day. Remember to drink plenty of water too.",桑杏湯を処方します。一日三回服用し、水もよく飲んでください。
 STORY_022_02_004_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_022_02_004_TEXT,柳先生，我最喜欢听您说书啦，您真是啥都知道啥都会，讲什么像什么。,"Master Liu, I love hearing your stories! You know everything, and you bring every tale to life.",柳先生，我最喜欢听您说书啦，您真是啥都知道啥都会，讲什么像什么。
+STORY_022_02_004_TEXT,柳先生，我最喜欢听您说书啦，您真是啥都知道啥都会，讲什么像什么。,"Master Liu, I love hearing your stories! You know everything, and you bring every tale to life.",柳先生の語りは大好きです！　何でもご存じで、どんな話も本物みたいに語りますね。
 STORY_022_02_005_SPEAKER,柳敬亭,Liu Jingting,柳敬亭
-STORY_022_02_005_TEXT,诶嘿嘿，小兄弟过奖了，我只是说些王侯将相，才子佳人的故事，来听书的客官喜欢什么，我就讲什么。,"Heh, heh. You flatter me, young man. I only tell tales of kings and generals, scholars and beauties. I tell the audience whatever they want to hear.",诶嘿嘿，小兄弟过奖了，我只是说些王侯将相，才子佳人的故事，来听书的客官喜欢什么，我就讲什么。
+STORY_022_02_005_TEXT,诶嘿嘿，小兄弟过奖了，我只是说些王侯将相，才子佳人的故事，来听书的客官喜欢什么，我就讲什么。,"Heh, heh. You flatter me, young man. I only tell tales of kings and generals, scholars and beauties. I tell the audience whatever they want to hear.",いやあ、褒めすぎだよ。王侯将相や才子佳人の話を、お客が好むように語っているだけさ。
 STORY_022_02_006_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_022_02_006_TEXT,先生，您现在就在这讲一段吧。,"Please tell us a story now, Master Liu.",先生，您现在就在这讲一段吧。
+STORY_022_02_006_TEXT,先生，您现在就在这讲一段吧。,"Please tell us a story now, Master Liu.",先生、今ここで一席お願いします！
 STORY_022_02_007_SPEAKER,半夏,Banxia,半夏
-STORY_022_02_007_TEXT,是啊是啊，讲一段吧。,"Yes, please! Just one story!",是啊是啊，讲一段吧。
+STORY_022_02_007_TEXT,是啊是啊，讲一段吧。,"Yes, please! Just one story!",そうだ、聞かせてください！
 STORY_022_02_008_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_022_02_008_TEXT,人家柳先生还病着呢，你们别在这胡闹。,Master Liu is still ill. Stop pestering him.,人家柳先生还病着呢，你们别在这胡闹。
+STORY_022_02_008_TEXT,人家柳先生还病着呢，你们别在这胡闹。,Master Liu is still ill. Stop pestering him.,柳先生は病気なのよ。困らせないで。
 STORY_022_02_009_SPEAKER,柳敬亭,Liu Jingting,柳敬亭
-STORY_022_02_009_TEXT,无妨，呵呵，那就说一个王道士胡诌妒妇方。,It is all right. Let me tell you the tale of Daoist Wang and his remedy for jealousy.,无妨，呵呵，那就说一个王道士胡诌妒妇方。
+STORY_022_02_009_TEXT,无妨，呵呵，那就说一个王道士胡诌妒妇方。,It is all right. Let me tell you the tale of Daoist Wang and his remedy for jealousy.,構わないさ。では「王道士がでっち上げた嫉妬の薬」をひとつ。
 STORY_022_02_010_SPEAKER,柳敬亭,Liu Jingting,柳敬亭
-STORY_022_02_010_TEXT,说京城有一富商，娶了位善妒的夫人，家中鸡飞狗跳无一日安宁。他的朋友觉得这是病，得找人医治。,"Once, a wealthy merchant in the capital married a very jealous woman. Their home knew no peace. A friend decided her jealousy was an illness that needed a cure.",说京城有一富商，娶了位善妒的夫人，家中鸡飞狗跳无一日安宁。他的朋友觉得这是病，得找人医治。
+STORY_022_02_010_TEXT,说京城有一富商，娶了位善妒的夫人，家中鸡飞狗跳无一日安宁。他的朋友觉得这是病，得找人医治。,"Once, a wealthy merchant in the capital married a very jealous woman. Their home knew no peace. A friend decided her jealousy was an illness that needed a cure.",都にある裕福な商人が、ひどく嫉妬深い妻をめとった。家は毎日大騒ぎ。友人は、これは病気だから治してもらおうと考えた。
 STORY_022_02_011_SPEAKER,柳敬亭,Liu Jingting,柳敬亭
-STORY_022_02_011_TEXT,正巧天齐庙有位摆摊卖膏药的王道士，因膏药灵验得名王一贴，富商的朋友便去求方问药。,"At Tianqi Temple, a Daoist called Wang sold medicinal plasters. His plasters were so effective that everyone called him Wang the One-Plaster Wonder. The friend went to ask him for a remedy.",正巧天齐庙有位摆摊卖膏药的王道士，因膏药灵验得名王一贴，富商的朋友便去求方问药。
+STORY_022_02_011_TEXT,正巧天齐庙有位摆摊卖膏药的王道士，因膏药灵验得名王一贴，富商的朋友便去求方问药。,"At Tianqi Temple, a Daoist called Wang sold medicinal plasters. His plasters were so effective that everyone called him Wang the One-Plaster Wonder. The friend went to ask him for a remedy.",ちょうど天斉廟に、効く膏薬で「王一貼」と呼ばれる王道士がいた。友人は彼に薬を求めに行った。
 STORY_022_02_012_SPEAKER,柳敬亭,Liu Jingting,柳敬亭
-STORY_022_02_012_TEXT,王一贴道：“这贴妒的膏药倒没经过。有一种汤药，或者可医，只是慢些儿，不能立刻见效的。”,"Wang said, “I have never made a plaster for jealousy. There is a decoction that might help, but it works slowly. Do not expect an immediate cure.”",王一贴道：“这贴妒的膏药倒没经过。有一种汤药，或者可医，只是慢些儿，不能立刻见效的。”
+STORY_022_02_012_TEXT,王一贴道：“这贴妒的膏药倒没经过。有一种汤药，或者可医，只是慢些儿，不能立刻见效的。”,"Wang said, “I have never made a plaster for jealousy. There is a decoction that might help, but it works slowly. Do not expect an immediate cure.”",王一貼は言った。「嫉妬に効く膏薬は知らないが、煎じ薬ならあるかもしれん。ただし効き目は遅く、すぐには治らない」
 STORY_022_02_013_SPEAKER,柳敬亭,Liu Jingting,柳敬亭
-STORY_022_02_013_TEXT,朋友问：“什么汤？怎么吃法？”,"The friend asked, “What decoction? How does she take it?”",朋友问：“什么汤？怎么吃法？”
+STORY_022_02_013_TEXT,朋友问：“什么汤？怎么吃法？”,"The friend asked, “What decoction? How does she take it?”",友人は尋ねた。「どんな薬で、どう飲むんだ？」
 STORY_022_02_014_SPEAKER,柳敬亭,Liu Jingting,柳敬亭
-STORY_022_02_014_TEXT,王一贴道：“这叫做‘疗妒汤’。用极好的秋梨一个，二钱冰糖，一钱陈皮，水三碗，梨熟为度。每日清晨吃这一个梨，吃来吃去就好了。”,"Wang replied, “It is called Jealousy-Curing Decoction. Take one fine autumn pear, two qian of rock sugar and one qian of aged tangerine peel. Boil them in three bowls of water until the pear is tender. Have her eat one pear each morning. Keep at it, and she will get better.”",王一贴道：“这叫做‘疗妒汤’。用极好的秋梨一个，二钱冰糖，一钱陈皮，水三碗，梨熟为度。每日清晨吃这一个梨，吃来吃去就好了。”
+STORY_022_02_014_TEXT,王一贴道：“这叫做‘疗妒汤’。用极好的秋梨一个，二钱冰糖，一钱陈皮，水三碗，梨熟为度。每日清晨吃这一个梨，吃来吃去就好了。”,"Wang replied, “It is called Jealousy-Curing Decoction. Take one fine autumn pear, two qian of rock sugar and one qian of aged tangerine peel. Boil them in three bowls of water until the pear is tender. Have her eat one pear each morning. Keep at it, and she will get better.”",王一貼は答えた。「『療妬湯』という。上等な秋梨一個、氷砂糖二銭、陳皮一銭を水三杯で煮込み、梨が柔らかくなればよい。毎朝梨を一個食べれば、そのうち治る」
 STORY_022_02_015_SPEAKER,柳敬亭,Liu Jingting,柳敬亭
-STORY_022_02_015_TEXT,朋友道：“这也不值什么。只怕未必见效。”,"“That costs next to nothing,” the friend said. “But will it really work?”",朋友道：“这也不值什么。只怕未必见效。”
+STORY_022_02_015_TEXT,朋友道：“这也不值什么。只怕未必见效。”,"“That costs next to nothing,” the friend said. “But will it really work?”",友人は言った。「大した手間ではないが、効くとは思えない」
 STORY_022_02_016_SPEAKER,柳敬亭,Liu Jingting,柳敬亭
-STORY_022_02_016_TEXT,王一贴道：“一剂不效，吃十剂；今日不效，明日再吃；今年不效，明年再吃。”,"Wang replied, “If one dose fails, give her ten. If it fails today, try tomorrow. If it fails this year, try again next year.”",王一贴道：“一剂不效，吃十剂；今日不效，明日再吃；今年不效，明年再吃。”
+STORY_022_02_016_TEXT,王一贴道：“一剂不效，吃十剂；今日不效，明日再吃；今年不效，明年再吃。”,"Wang replied, “If one dose fails, give her ten. If it fails today, try tomorrow. If it fails this year, try again next year.”",王一貼は答えた。「一回で効かなければ十回飲め。今日効かなければ明日、今年効かなければ来年だ」
 STORY_022_02_017_SPEAKER,柳敬亭,Liu Jingting,柳敬亭
-STORY_022_02_017_TEXT,“横竖这三味药都是润肺开胃不伤人的，甜丝丝的，又止咳嗽，又好吃。吃过一百岁，人横竖是要死的，死了还妒什么？那时就见效了。”,"“After all, these ingredients soothe the lungs and aid the appetite. They are sweet, tasty and ease a cough. They will do her no harm. Once she is past a hundred, she must die someday. And once she is dead, she cannot be jealous. Then you will see it has worked!”",“横竖这三味药都是润肺开胃不伤人的，甜丝丝的，又止咳嗽，又好吃。吃过一百岁，人横竖是要死的，死了还妒什么？那时就见效了。”
+STORY_022_02_017_TEXT,“横竖这三味药都是润肺开胃不伤人的，甜丝丝的，又止咳嗽，又好吃。吃过一百岁，人横竖是要死的，死了还妒什么？那时就见效了。”,"“After all, these ingredients soothe the lungs and aid the appetite. They are sweet, tasty and ease a cough. They will do her no harm. Once she is past a hundred, she must die someday. And once she is dead, she cannot be jealous. Then you will see it has worked!”",「どれも肺を潤して食欲を促す、害のない甘い薬だ。咳にもよく、おいしい。百歳まで飲めば、いずれ人は死ぬ。死んでしまえば嫉妬もしない。そのときには確かに効くだろう」
 STORY_022_02_018_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_022_02_018_TEXT,哈哈哈，还有这种方子。,"Ha, ha, ha! What sort of prescription is that?",哈哈哈，还有这种方子。
+STORY_022_02_018_TEXT,哈哈哈，还有这种方子。,"Ha, ha, ha! What sort of prescription is that?",ははは、そんな処方があるのか。
 STORY_022_02_019_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_022_02_019_TEXT,哈哈哈，这道士说的也不无道理。,"Ha, ha, ha! The Daoist does have a point.",哈哈哈，这道士说的也不无道理。
-STORY_022_02_020_TEXT,收入一两白银,Received one tael of silver.,收入一两白银
+STORY_022_02_019_TEXT,哈哈哈，这道士说的也不无道理。,"Ha, ha, ha! The Daoist does have a point.",ははは、道士の言うことも一理あるな。
+STORY_022_02_020_TEXT,收入一两白银,Received one tael of silver.,収入：銀一両
 STORY_022_03_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_022_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",不对，我需要好好想想这是什么病，该开什么方。
+STORY_022_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。
 STORY_023_01_001_SPEAKER,郭妈妈,Madam Guo,郭おばさん
-STORY_023_01_001_TEXT,李大夫，您快给我女儿瞧瞧吧，这孩子整日茶饭不进，愁眉苦脸咳个不停。,"Doctor Li, please examine my daughter. She hardly eats or drinks, looks miserable all day and cannot stop coughing.",李大夫，您快给我女儿瞧瞧吧，这孩子整日茶饭不进，愁眉苦脸咳个不停。
+STORY_023_01_001_TEXT,李大夫，您快给我女儿瞧瞧吧，这孩子整日茶饭不进，愁眉苦脸咳个不停。,"Doctor Li, please examine my daughter. She hardly eats or drinks, looks miserable all day and cannot stop coughing.",李先生、娘を診てください。食事も取らず、沈んだ顔で咳ばかりしているんです。
 STORY_023_01_002_SPEAKER,谢飞燕,Xie Feiyan,謝飛燕
-STORY_023_01_002_TEXT,…,…,…
+STORY_023_01_002_TEXT,…,…,……
 STORY_023_01_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_023_01_003_TEXT,这是您女儿？,She is your daughter?,这是您女儿？
+STORY_023_01_003_TEXT,这是您女儿？,She is your daughter?,こちらは娘さんですか？
 STORY_023_01_004_SPEAKER,郭妈妈,Madam Guo,郭おばさん
-STORY_023_01_004_TEXT,哎呀，可不是嘛，这孩子随我学艺两年又半载，尤善歌舞，是咱柳月坊的花魁。,"Why, of course! She has studied with me for two and a half years. She is a fine singer and dancer, the star of our Willow Moon House.",哎呀，可不是嘛，这孩子随我学艺两年又半载，尤善歌舞，是咱柳月坊的花魁。
+STORY_023_01_004_TEXT,哎呀，可不是嘛，这孩子随我学艺两年又半载，尤善歌舞，是咱柳月坊的花魁。,"Why, of course! She has studied with me for two and a half years. She is a fine singer and dancer, the star of our Willow Moon House.",そうですよ。二年半も私について芸を学び、特に歌と踊りが得意な柳月坊の花魁です。
 STORY_023_01_005_SPEAKER,郭妈妈,Madam Guo,郭おばさん
-STORY_023_01_005_TEXT,可你看她现在这个样子，还怎么接待客人啊。,But look at her now. How is she supposed to entertain guests like this?,可你看她现在这个样子，还怎么接待客人啊。
+STORY_023_01_005_TEXT,可你看她现在这个样子，还怎么接待客人啊。,But look at her now. How is she supposed to entertain guests like this?,でも今のこの様子では、お客をもてなせません。
 STORY_023_01_006_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_023_01_006_TEXT,姑娘你坐下，我给你把把脉。哎，半夏你在这干什么？,"Please sit down, miss. I will take your pulse. Banxia, what are you doing here?",姑娘你坐下，我给你把把脉。哎，半夏你在这干什么？
+STORY_023_01_006_TEXT,姑娘你坐下，我给你把把脉。哎，半夏你在这干什么？,"Please sit down, miss. I will take your pulse. Banxia, what are you doing here?",お嬢さん、座ってください。脈を診ます。……半夏、ここで何をしている？
 STORY_023_01_007_SPEAKER,半夏,Banxia,半夏
-STORY_023_01_007_TEXT,我替少夫人来看着你。,The young mistress sent me to keep an eye on you.,我替少夫人来看着你。
+STORY_023_01_007_TEXT,我替少夫人来看着你。,The young mistress sent me to keep an eye on you.,若奥様の代わりに、旦那様を見張っています。
 STORY_023_01_008_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_023_01_008_TEXT,…,…,…
+STORY_023_01_008_TEXT,…,…,……
 STORY_023_02_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_023_02_001_TEXT,姑娘这病是肺气虚，平日注意避风避寒，开副补肺汤调养调养。早上练练六字诀中的呬字诀，舒畅胸中气机。,"You have a deficiency of lung qi. Keep warm and avoid the wind. I will prescribe a Lung-Tonifying Decoction. In the mornings, practice the “si” sound of the Six Healing Sounds to ease the flow of qi in your chest.",姑娘这病是肺气虚，平日注意避风避寒，开副补肺汤调养调养。早上练练六字诀中的呬字诀，舒畅胸中气机。
+STORY_023_02_001_TEXT,姑娘这病是肺气虚，平日注意避风避寒，开副补肺汤调养调养。早上练练六字诀中的呬字诀，舒畅胸中气机。,"You have a deficiency of lung qi. Keep warm and avoid the wind. I will prescribe a Lung-Tonifying Decoction. In the mornings, practice the “si” sound of the Six Healing Sounds to ease the flow of qi in your chest.",肺気虚です。普段は風と寒さを避け、補肺湯で養生してください。朝は六字訣の「呬」の呼吸を練習し、胸の気を巡らせるとよいでしょう。
 STORY_023_02_002_SPEAKER,谢飞燕,Xie Feiyan,謝飛燕
-STORY_023_02_002_TEXT,…多谢先生。,"…Thank you, Doctor.",…多谢先生。
+STORY_023_02_002_TEXT,…多谢先生。,"…Thank you, Doctor.",……ありがとうございます。
 STORY_023_02_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_023_02_003_TEXT,姑娘可是有什么心事？,Is something troubling you?,姑娘可是有什么心事？
+STORY_023_02_003_TEXT,姑娘可是有什么心事？,Is something troubling you?,何か悩みがあるのですか？
 STORY_023_02_004_SPEAKER,郭妈妈,Madam Guo,郭おばさん
-STORY_023_02_004_TEXT,成天好吃好喝的伺候着，她能有什么心事。,She eats and drinks well every day. What could she possibly be worried about?,成天好吃好喝的伺候着，她能有什么心事。
+STORY_023_02_004_TEXT,成天好吃好喝的伺候着，她能有什么心事。,She eats and drinks well every day. What could she possibly be worried about?,毎日おいしいものを食べさせているのに、何を悩むことがあるんです？
 STORY_023_02_005_SPEAKER,郭妈妈,Madam Guo,郭おばさん
-STORY_023_02_005_TEXT,那就多谢大夫了，走吧女儿。,"Thank you, Doctor. Come along, daughter.",那就多谢大夫了，走吧女儿。
+STORY_023_02_005_TEXT,那就多谢大夫了，走吧女儿。,"Thank you, Doctor. Come along, daughter.",先生、ありがとうございました。さあ、帰るよ。
 STORY_023_02_006_SPEAKER,谢飞燕,Xie Feiyan,謝飛燕
-STORY_023_02_006_TEXT,…,…,…
-STORY_023_02_007_TEXT,收入一两白银,Received one tael of silver.,收入一两白银
+STORY_023_02_006_TEXT,…,…,……
+STORY_023_02_007_TEXT,收入一两白银,Received one tael of silver.,収入：銀一両
 STORY_023_02_008_SPEAKER,王百堂,Wang Baitang,王百堂
-STORY_023_02_008_TEXT,大夫，刚才那姑娘是得了什么病啊？,"Doctor, what was wrong with the young woman who just left?",大夫，刚才那姑娘是得了什么病啊？
+STORY_023_02_008_TEXT,大夫，刚才那姑娘是得了什么病啊？,"Doctor, what was wrong with the young woman who just left?",先生、さっきの娘さんは何の病気だったんですか？
 STORY_023_02_009_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_023_02_009_TEXT,您是？,And you are?,您是？
+STORY_023_02_009_TEXT,您是？,And you are?,失礼ですが、あなたは？
 STORY_023_02_010_SPEAKER,王百堂,Wang Baitang,王百堂
-STORY_023_02_010_TEXT,小生是姑娘的一位相识，担心姑娘身体，来问问大夫。,I am an acquaintance of hers. I am worried about her health and came to ask.,小生是姑娘的一位相识，担心姑娘身体，来问问大夫。
+STORY_023_02_010_TEXT,小生是姑娘的一位相识，担心姑娘身体，来问问大夫。,I am an acquaintance of hers. I am worried about her health and came to ask.,彼女の知人です。体が心配で、お尋ねに来ました。
 STORY_023_02_011_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_023_02_011_TEXT,哦，那姑娘所患的是肺气虚，并无大碍，只是看起来似乎有心事。您可知其中原委？,"She has a deficiency of lung qi. It is not serious, but she seems deeply troubled. Do you know why?",哦，那姑娘所患的是肺气虚，并无大碍，只是看起来似乎有心事。您可知其中原委？
+STORY_023_02_011_TEXT,哦，那姑娘所患的是肺气虚，并无大碍，只是看起来似乎有心事。您可知其中原委？,"She has a deficiency of lung qi. It is not serious, but she seems deeply troubled. Do you know why?",肺気虚ですが、大事には至りません。ただ何か悩みがあるようでした。事情をご存じですか？
 STORY_023_02_012_SPEAKER,半夏,Banxia,半夏
-STORY_023_02_012_TEXT,哎哟？这里面有事儿，快说来听听。,Oh? There is a story here? Tell us!,哎哟？这里面有事儿，快说来听听。
+STORY_023_02_012_TEXT,哎哟？这里面有事儿，快说来听听。,Oh? There is a story here? Tell us!,おや、何か訳がありそうだ。聞かせてくれ。
 STORY_023_02_013_SPEAKER,王百堂,Wang Baitang,王百堂
-STORY_023_02_013_TEXT,实不相瞒，小生在柳月坊与飞燕相识，一见倾心，私底下定了终身。,"To be honest, I met Feiyan at Willow Moon House. We fell in love at first sight and privately pledged to marry.",实不相瞒，小生在柳月坊与飞燕相识，一见倾心，私底下定了终身。
+STORY_023_02_013_TEXT,实不相瞒，小生在柳月坊与飞燕相识，一见倾心，私底下定了终身。,"To be honest, I met Feiyan at Willow Moon House. We fell in love at first sight and privately pledged to marry.",実は柳月坊で飛燕と出会い、一目で心を奪われました。二人で将来を誓い合っています。
 STORY_023_02_014_SPEAKER,王百堂,Wang Baitang,王百堂
-STORY_023_02_014_TEXT,原想着凑够五百两银子，给她赎身。可那老鸨坐地起价，张口就要一千两，这让我们上哪去凑这么多银子啊…,I hoped to save five hundred taels to buy her freedom. But the madam doubled the price to a thousand. How could we ever raise that much silver?,原想着凑够五百两银子，给她赎身。可那老鸨坐地起价，张口就要一千两，这让我们上哪去凑这么多银子啊…
+STORY_023_02_014_TEXT,原想着凑够五百两银子，给她赎身。可那老鸨坐地起价，张口就要一千两，这让我们上哪去凑这么多银子啊…,I hoped to save five hundred taels to buy her freedom. But the madam doubled the price to a thousand. How could we ever raise that much silver?,銀五百両を貯めて身請けするつもりでした。ところが楼主が突然値を上げ、千両を要求してきたのです。そんな大金、どこから用意すれば……
 STORY_023_02_015_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_023_02_015_TEXT,想必姑娘是因为这事急坏了身子。,No wonder her health has suffered from worry.,想必姑娘是因为这事急坏了身子。
+STORY_023_02_015_TEXT,想必姑娘是因为这事急坏了身子。,No wonder her health has suffered from worry.,そのせいで、彼女は心労から体を壊したのでしょう。
 STORY_023_02_016_SPEAKER,半夏,Banxia,半夏
-STORY_023_02_016_TEXT,唉，又是一对儿苦命的鸳鸯。,"Ah, another pair of ill-fated lovers.",唉，又是一对儿苦命的鸳鸯。
+STORY_023_02_016_TEXT,唉，又是一对儿苦命的鸳鸯。,"Ah, another pair of ill-fated lovers.",はあ、また不遇な恋人たちか。
 STORY_023_02_017_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_023_02_017_TEXT,相公咱想办法帮帮他们吧。,"Dear, we should find a way to help them.",相公咱想办法帮帮他们吧。
+STORY_023_02_017_TEXT,相公咱想办法帮帮他们吧。,"Dear, we should find a way to help them.",あなた、二人を助けてあげましょうよ。
 STORY_023_02_018_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_023_02_018_TEXT,我也想帮他们，可怎么帮呢？,"I would like to, but how?",我也想帮他们，可怎么帮呢？
+STORY_023_02_018_TEXT,我也想帮他们，可怎么帮呢？,"I would like to, but how?",助けたいが、どうすればいい？
 STORY_023_03_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_023_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",不对，我需要好好想想这是什么病，该开什么方。
+STORY_023_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。
 STORY_024_01_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_024_01_001_TEXT,姑娘你来啦，病好点了吗？,"You have come back, miss. Are you feeling any better?",姑娘你来啦，病好点了吗？
+STORY_024_01_001_TEXT,姑娘你来啦，病好点了吗？,"You have come back, miss. Are you feeling any better?",お嬢さん、また来たのですね。具合は良くなりましたか？
 STORY_024_01_002_SPEAKER,谢飞燕,Xie Feiyan,謝飛燕
-STORY_024_01_002_TEXT,唉，这些日子一直不太好，前天还咳出血丝来了…,Not really. I even coughed up a little blood the day before yesterday…,唉，这些日子一直不太好，前天还咳出血丝来了…
+STORY_024_01_002_TEXT,唉，这些日子一直不太好，前天还咳出血丝来了…,Not really. I even coughed up a little blood the day before yesterday…,いいえ、ずっと良くならず、一昨日は咳に血まで混じりました……
 STORY_024_01_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_024_01_003_TEXT,请坐，我再给你看看。,Please sit. I will examine you again.,请坐，我再给你看看。
+STORY_024_01_003_TEXT,请坐，我再给你看看。,Please sit. I will examine you again.,お掛けください。もう一度診ましょう。
 STORY_024_02_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_024_02_001_TEXT,姑娘你这病，因气虚日久，气不化津，已经恶化为肺阴虚了。给你开些沙参麦冬汤补津养肺。,"Your longstanding qi deficiency has kept fluids from forming, and your condition has progressed to a deficiency of lung yin. I will prescribe Glehnia and Ophiopogon Decoction to nourish your fluids and lungs.",姑娘你这病，因气虚日久，气不化津，已经恶化为肺阴虚了。给你开些沙参麦冬汤补津养肺。
+STORY_024_02_001_TEXT,姑娘你这病，因气虚日久，气不化津，已经恶化为肺阴虚了。给你开些沙参麦冬汤补津养肺。,"Your longstanding qi deficiency has kept fluids from forming, and your condition has progressed to a deficiency of lung yin. I will prescribe Glehnia and Ophiopogon Decoction to nourish your fluids and lungs.",長く気虚が続き、津液を作れず、肺陰虚に悪化しています。沙参麦冬湯を処方して、肺を養いましょう。
 STORY_024_02_002_SPEAKER,谢飞燕,Xie Feiyan,謝飛燕
-STORY_024_02_002_TEXT,多谢先生…,"Thank you, Doctor…",多谢先生…
+STORY_024_02_002_TEXT,多谢先生…,"Thank you, Doctor…",ありがとうございます……
 STORY_024_02_003_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_024_02_003_TEXT,可这药只能医肺病，不能医心病，心病还须心药医。,But medicine can only treat your lungs. It cannot cure what weighs on your heart. That needs a different remedy.,可这药只能医肺病，不能医心病，心病还须心药医。
+STORY_024_02_003_TEXT,可这药只能医肺病，不能医心病，心病还须心药医。,But medicine can only treat your lungs. It cannot cure what weighs on your heart. That needs a different remedy.,ただ、この薬で治せるのは肺の病だけ。心の悩みには、別の手立てが必要ですよ。
 STORY_024_02_004_SPEAKER,谢飞燕,Xie Feiyan,謝飛燕
-STORY_024_02_004_TEXT,夫人这是何意味？,"What do you mean, madam?",夫人这是何意味？
+STORY_024_02_004_TEXT,夫人这是何意味？,"What do you mean, madam?",奥様、それはどういう意味ですか？
 STORY_024_02_005_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_024_02_005_TEXT,前些天你来看病，你前脚刚走，王公子就来这问你的病情，很是担心你。,"When you left after your last visit, Young Master Wang came to ask about your health. He was terribly worried.",前些天你来看病，你前脚刚走，王公子就来这问你的病情，很是担心你。
+STORY_024_02_005_TEXT,前些天你来看病，你前脚刚走，王公子就来这问你的病情，很是担心你。,"When you left after your last visit, Young Master Wang came to ask about your health. He was terribly worried.",先日、あなたが帰った直後に王さんが病状を尋ねに来ました。とても心配していましたよ。
 STORY_024_02_006_SPEAKER,谢飞燕,Xie Feiyan,謝飛燕
-STORY_024_02_006_TEXT,唉，我们这行当是做不长久的，只盼着有个如意的郎君，趁着年轻嫁入好人家。,Women in my profession cannot work forever. We hope to find a kind husband and marry into a good family while we are still young.,唉，我们这行当是做不长久的，只盼着有个如意的郎君，趁着年轻嫁入好人家。
+STORY_024_02_006_TEXT,唉，我们这行当是做不长久的，只盼着有个如意的郎君，趁着年轻嫁入好人家。,Women in my profession cannot work forever. We hope to find a kind husband and marry into a good family while we are still young.,この仕事は長く続けられません。若いうちに良い人と結ばれたい、それだけを願っています。
 STORY_024_02_007_SPEAKER,谢飞燕,Xie Feiyan,謝飛燕
-STORY_024_02_007_TEXT,王郎待我真心诚意，我俩满心欢喜想着赎身之后拜堂成亲，可谁曾想干娘竟如此对我…,"Wang truly loves me. We dreamed of buying my freedom and marrying, but I never imagined my foster mother would treat me this way…",王郎待我真心诚意，我俩满心欢喜想着赎身之后拜堂成亲，可谁曾想干娘竟如此对我…
+STORY_024_02_007_TEXT,王郎待我真心诚意，我俩满心欢喜想着赎身之后拜堂成亲，可谁曾想干娘竟如此对我…,"Wang truly loves me. We dreamed of buying my freedom and marrying, but I never imagined my foster mother would treat me this way…",王様は私を心から大切にしてくれます。身請けが済んだら結婚できると二人で喜んでいたのに、おかみさんがあんな仕打ちをするなんて……
 STORY_024_02_008_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_024_02_008_TEXT,我有一计，可使你二人有情人终成眷属。,I have an idea that may help the two of you marry.,我有一计，可使你二人有情人终成眷属。
+STORY_024_02_008_TEXT,我有一计，可使你二人有情人终成眷属。,I have an idea that may help the two of you marry.,二人が結ばれるための策があります。
 STORY_024_02_009_SPEAKER,半夏,Banxia,半夏
-STORY_024_02_009_TEXT,少夫人你有什么主意呀？快说快说！,"Young mistress, what is it? Tell us!",少夫人你有什么主意呀？快说快说！
+STORY_024_02_009_TEXT,少夫人你有什么主意呀？快说快说！,"Young mistress, what is it? Tell us!",若奥様、どんな策ですか？　早く教えてください！
 STORY_024_02_010_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_024_02_010_TEXT,明日你让郭妈妈来一趟，如此这般….,Ask Madam Guo to come here tomorrow. Here is what we shall do…,明日你让郭妈妈来一趟，如此这般….
-STORY_024_02_011_TEXT,吴芷兰和众人说出了自己的主意,Wu Zhilan explained her plan to everyone.,吴芷兰和众人说出了自己的主意
+STORY_024_02_010_TEXT,明日你让郭妈妈来一趟，如此这般….,Ask Madam Guo to come here tomorrow. Here is what we shall do…,明日、郭おばさんをここへ呼んでください。それから……
+STORY_024_02_011_TEXT,吴芷兰和众人说出了自己的主意,Wu Zhilan explained her plan to everyone.,呉芷蘭は皆に考えた策を話した。
 STORY_024_02_012_SPEAKER,谢飞燕,Xie Feiyan,謝飛燕
-STORY_024_02_012_TEXT,先生若是能帮我们渡此难关，便是再造父母。,"If you can see us through this, we will owe you as much as we owe our own parents.",先生若是能帮我们渡此难关，便是再造父母。
-STORY_024_02_013_TEXT,收入一两白银,Received one tael of silver.,收入一两白银
-STORY_024_02_014_TEXT,次日,The next day.,次日
+STORY_024_02_012_TEXT,先生若是能帮我们渡此难关，便是再造父母。,"If you can see us through this, we will owe you as much as we owe our own parents.",先生にこの苦境を救っていただけるなら、一生の恩人です。
+STORY_024_02_013_TEXT,收入一两白银,Received one tael of silver.,収入：銀一両
+STORY_024_02_014_TEXT,次日,The next day.,翌日。
 STORY_024_02_015_SPEAKER,郭妈妈,Madam Guo,郭おばさん
-STORY_024_02_015_TEXT,李大夫，你叫我来是什么事儿啊？,"Doctor Li, why did you ask me to come?",李大夫，你叫我来是什么事儿啊？
+STORY_024_02_015_TEXT,李大夫，你叫我来是什么事儿啊？,"Doctor Li, why did you ask me to come?",李先生、何の用で呼んだんですか？
 STORY_024_02_016_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_024_02_016_TEXT,昨日经我仔细检查，谢姑娘的病乃是肺痨，此病只能缓解，不能根治，而且身边之人都有可能沾染。,"After a careful examination yesterday, I found that Miss Xie has consumption of the lungs. We can ease it, but not cure it, and people close to her may catch it.",昨日经我仔细检查，谢姑娘的病乃是肺痨，此病只能缓解，不能根治，而且身边之人都有可能沾染。
+STORY_024_02_016_TEXT,昨日经我仔细检查，谢姑娘的病乃是肺痨，此病只能缓解，不能根治，而且身边之人都有可能沾染。,"After a careful examination yesterday, I found that Miss Xie has consumption of the lungs. We can ease it, but not cure it, and people close to her may catch it.",昨日詳しく診たところ、謝さんは肺癆でした。この病は和らげられても根治は難しく、近くの人にうつるおそれもあります。
 STORY_024_02_017_SPEAKER,郭妈妈,Madam Guo,郭おばさん
-STORY_024_02_017_TEXT,啊？这可如何是好？,What? What am I to do?,啊？这可如何是好？
+STORY_024_02_017_TEXT,啊？这可如何是好？,What? What am I to do?,えっ？　どうしたらいいの？
 STORY_024_02_018_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_024_02_018_TEXT,您还是早做打算，给女儿寻觅个好归宿吧。,You had best make arrangements soon and find your daughter a good home.,您还是早做打算，给女儿寻觅个好归宿吧。
+STORY_024_02_018_TEXT,您还是早做打算，给女儿寻觅个好归宿吧。,You had best make arrangements soon and find your daughter a good home.,早めに娘さんの行く末を考え、良い嫁ぎ先を探してあげてください。
 STORY_024_02_019_SPEAKER,郭妈妈,Madam Guo,郭おばさん
-STORY_024_02_019_TEXT,(若是这样，不如趁那小子不知情，便宜与了他去….),"(In that case, I should let that young man have her cheaply before he finds out…)",(若是这样，不如趁那小子不知情，便宜与了他去….)
+STORY_024_02_019_TEXT,(若是这样，不如趁那小子不知情，便宜与了他去….),"(In that case, I should let that young man have her cheaply before he finds out…)",（そういうことなら、あの若造が知らぬうちに安く引き取らせたほうがいい……）
 STORY_024_03_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_024_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",不对，我需要好好想想这是什么病，该开什么方。
+STORY_024_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。
 STORY_024_04_001_SPEAKER,王百堂,Wang Baitang,王百堂
-STORY_024_04_001_TEXT,恩公！小生拜见恩公。,My benefactor! I have come to pay my respects.,恩公！小生拜见恩公。
+STORY_024_04_001_TEXT,恩公！小生拜见恩公。,My benefactor! I have come to pay my respects.,恩人様！　お目にかかれて光栄です。
 STORY_024_04_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_024_04_002_TEXT,是你啊，快请起。你和谢姑娘怎么样了？,"It is you. Please, get up. How are you and Miss Xie?",是你啊，快请起。你和谢姑娘怎么样了？
+STORY_024_04_002_TEXT,是你啊，快请起。你和谢姑娘怎么样了？,"It is you. Please, get up. How are you and Miss Xie?",あなたでしたか。さあ、お立ちください。謝さんとはどうなりました？
 STORY_024_04_003_SPEAKER,王百堂,Wang Baitang,王百堂
-STORY_024_04_003_TEXT,承蒙恩公出手相助，我二人已结为夫妻，在城外安顿下来，今日特来拜谢。,"Thanks to your help, we are married and have settled outside the city. We came today to thank you.",承蒙恩公出手相助，我二人已结为夫妻，在城外安顿下来，今日特来拜谢。
+STORY_024_04_003_TEXT,承蒙恩公出手相助，我二人已结为夫妻，在城外安顿下来，今日特来拜谢。,"Thanks to your help, we are married and have settled outside the city. We came today to thank you.",お力添えのおかげで夫婦になり、城の外に住まいを構えました。今日はお礼を申し上げに参りました。
 STORY_024_04_004_SPEAKER,王百堂,Wang Baitang,王百堂
-STORY_024_04_004_TEXT,听闻恩公酷好青囊之书，先父也是一生行医，家中有不少先父留下的笔记心得，今日便赠予恩公。,I hear you are devoted to medical books. My late father practiced medicine all his life and left many notes. I would like you to have them.,听闻恩公酷好青囊之书，先父也是一生行医，家中有不少先父留下的笔记心得，今日便赠予恩公。
+STORY_024_04_004_TEXT,听闻恩公酷好青囊之书，先父也是一生行医，家中有不少先父留下的笔记心得，今日便赠予恩公。,I hear you are devoted to medical books. My late father practiced medicine all his life and left many notes. I would like you to have them.,先生は医学書がお好きと聞きました。父も生涯医者を務め、多くの手控えを残しました。今日、それをお贈りします。
 STORY_024_04_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_024_04_005_TEXT,哎呀，这可太好了，真是求之不得啊。,That is wonderful! I could ask for nothing better.,哎呀，这可太好了，真是求之不得啊。
+STORY_024_04_005_TEXT,哎呀，这可太好了，真是求之不得啊。,That is wonderful! I could ask for nothing better.,それはありがたい！　願ってもない贈り物です。
 STORY_025_01_001_SPEAKER,性空,Xingkong,性空
-STORY_025_01_001_TEXT,"阿弥陀佛，贫僧法号性空，《中论》曰：""众因缘生法，我说即是空，亦为是假名，亦是中道义。""正所谓缘起性空是也。","Amitabha Buddha. My Dharma name is Xingkong. The Treatise on the Middle Way says: “Whatever arises through causes and conditions, I call emptiness. It is also a provisional name and the meaning of the Middle Way.” Such is the emptiness of dependent arising.","阿弥陀佛，贫僧法号性空，《中论》曰：""众因缘生法，我说即是空，亦为是假名，亦是中道义。""正所谓缘起性空是也。"
+STORY_025_01_001_TEXT,"阿弥陀佛，贫僧法号性空，《中论》曰：""众因缘生法，我说即是空，亦为是假名，亦是中道义。""正所谓缘起性空是也。","Amitabha Buddha. My Dharma name is Xingkong. The Treatise on the Middle Way says: “Whatever arises through causes and conditions, I call emptiness. It is also a provisional name and the meaning of the Middle Way.” Such is the emptiness of dependent arising.",阿弥陀仏。拙僧は性空と申す。『中論』に「因縁より生じるものは空であり、仮の名であり、中道でもある」とある。これぞ縁起性空ですな。
 STORY_025_01_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_025_01_002_TEXT,师父请坐，今日来小馆是？(这和尚身上好大的酒味啊...),"Please, sit down, Master. What brings you to my clinic today? (He smells strongly of wine…)",师父请坐，今日来小馆是？(这和尚身上好大的酒味啊...)
+STORY_025_01_002_TEXT,师父请坐，今日来小馆是？(这和尚身上好大的酒味啊...),"Please, sit down, Master. What brings you to my clinic today? (He smells strongly of wine…)",どうぞお掛けください。今日は何のご用で？（この僧、酒の匂いが強いな……）
 STORY_025_01_003_SPEAKER,性空,Xingkong,性空
-STORY_025_01_003_TEXT,最近身体不太舒服，老是耳鸣头晕，请大夫给贫僧看看。,"I have not felt well lately. My ears ring and I often feel dizzy. Would you examine me, Doctor?",最近身体不太舒服，老是耳鸣头晕，请大夫给贫僧看看。
+STORY_025_01_003_TEXT,最近身体不太舒服，老是耳鸣头晕，请大夫给贫僧看看。,"I have not felt well lately. My ears ring and I often feel dizzy. Would you examine me, Doctor?",近ごろ具合が悪く、耳鳴りやめまいがします。診ていただきたい。
 STORY_025_02_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_025_02_001_TEXT,师父所患的乃是肾精不足之症，嗯…是房事过劳所致…,You have a deficiency of kidney essence. Hmm… caused by excessive sexual activity…,师父所患的乃是肾精不足之症，嗯…是房事过劳所致…
+STORY_025_02_001_TEXT,师父所患的乃是肾精不足之症，嗯…是房事过劳所致…,You have a deficiency of kidney essence. Hmm… caused by excessive sexual activity…,腎精不足の証ですね。ええと……房事のしすぎが原因かと……
 STORY_025_02_002_SPEAKER,性空,Xingkong,性空
-STORY_025_02_002_TEXT,哎哟，施主啊，这可不敢乱说啊，我可是出家人啊，怎么会干那种事呢。,"My good man, you must not say such things! I am a monk. How could I do that?",哎哟，施主啊，这可不敢乱说啊，我可是出家人啊，怎么会干那种事呢。
+STORY_025_02_002_TEXT,哎哟，施主啊，这可不敢乱说啊，我可是出家人啊，怎么会干那种事呢。,"My good man, you must not say such things! I am a monk. How could I do that?",おいおい、そんなことを言ってはいかん。拙僧は出家の身、そんなことをするはずがなかろう。
 STORY_025_02_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_025_02_003_TEXT,…,…,…
+STORY_025_02_003_TEXT,…,…,……
 STORY_025_02_004_SPEAKER,性空,Xingkong,性空
-STORY_025_02_004_TEXT,一定是我晚上念经太过用功，着凉了。,It must be that I caught a chill while reciting sutras late at night.,一定是我晚上念经太过用功，着凉了。
+STORY_025_02_004_TEXT,一定是我晚上念经太过用功，着凉了。,It must be that I caught a chill while reciting sutras late at night.,夜に読経を頑張りすぎて、冷えたのに違いない。
 STORY_025_02_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_025_02_005_TEXT,是是是，师父说得对，也不是没有这个可能。,"Of course, Master. That is possible too.",是是是，师父说得对，也不是没有这个可能。
+STORY_025_02_005_TEXT,是是是，师父说得对，也不是没有这个可能。,"Of course, Master. That is possible too.",ええ、おっしゃるとおりです。そういう可能性もありますね。
 STORY_025_02_006_SPEAKER,性空,Xingkong,性空
-STORY_025_02_006_TEXT,嗯，可别到处乱说啊，这钱你拿着吧，这小郎中真是…,"Yes. Do not spread any rumors. Here, take this money. What a young doctor you are…",嗯，可别到处乱说啊，这钱你拿着吧，这小郎中真是…
-STORY_025_02_007_TEXT,收入二两白银,Received two taels of silver.,收入二两白银
+STORY_025_02_006_TEXT,嗯，可别到处乱说啊，这钱你拿着吧，这小郎中真是…,"Yes. Do not spread any rumors. Here, take this money. What a young doctor you are…",うむ、人には言うでないぞ。ほら、これを受け取れ。まったく、この若い医者は……
+STORY_025_02_007_TEXT,收入二两白银,Received two taels of silver.,収入：銀二両
 STORY_025_02_008_SPEAKER,半夏,Banxia,半夏
-STORY_025_02_008_TEXT,哇，这就是传说中的花和尚吗？,Wow. Is that what they call a worldly monk?,哇，这就是传说中的花和尚吗？
+STORY_025_02_008_TEXT,哇，这就是传说中的花和尚吗？,Wow. Is that what they call a worldly monk?,わあ、あれが噂の生臭坊主ってやつ？
 STORY_025_02_009_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_025_02_009_TEXT,…,…,…
+STORY_025_02_009_TEXT,…,…,……
 STORY_025_02_010_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_025_02_010_TEXT,他是花和尚，你是花痴，正好凑一对儿。,"He is a monk with a wandering eye, and you are lovestruck. You would make a fine pair.",他是花和尚，你是花痴，正好凑一对儿。
+STORY_025_02_010_TEXT,他是花和尚，你是花痴，正好凑一对儿。,"He is a monk with a wandering eye, and you are lovestruck. You would make a fine pair.",あの人は生臭坊主、お前は色恋に夢中。お似合いだな。
 STORY_025_02_011_SPEAKER,半夏,Banxia,半夏
-STORY_025_02_011_TEXT,找打！,You are asking for it!,找打！
+STORY_025_02_011_TEXT,找打！,You are asking for it!,もう、怒るよ！
 STORY_025_02_012_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_025_02_012_TEXT,哎哟！,Ow!,哎哟！
+STORY_025_02_012_TEXT,哎哟！,Ow!,痛っ！
 STORY_025_03_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_025_03_001_TEXT,虽然这不是个正经和尚，但还是得好好想想他得的是什么病。,"He may not be a model monk, but I still need to diagnose his illness properly.",虽然这不是个正经和尚，但还是得好好想想他得的是什么病。
+STORY_025_03_001_TEXT,虽然这不是个正经和尚，但还是得好好想想他得的是什么病。,"He may not be a model monk, but I still need to diagnose his illness properly.",まともな僧とは言えないが、病はきちんと考えなければ。
 STORY_026_01_001_SPEAKER,半夏,Banxia,半夏
-STORY_026_01_001_TEXT,少掌柜的，少夫人在屋里晕倒了，您快来看看啊！,Young master! The young mistress has fainted in her room! Please come quickly!,少掌柜的，少夫人在屋里晕倒了，您快来看看啊！
+STORY_026_01_001_TEXT,少掌柜的，少夫人在屋里晕倒了，您快来看看啊！,Young master! The young mistress has fainted in her room! Please come quickly!,若旦那、若奥様がお部屋で倒れました！　早く来てください！
 STORY_026_01_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_026_01_002_TEXT,芷兰！！！,Zhilan!,芷兰！！！
+STORY_026_01_002_TEXT,芷兰！！！,Zhilan!,芷蘭！！！
 STORY_026_01_003_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_026_01_003_TEXT,…...,…,…...
+STORY_026_01_003_TEXT,…...,…,…………
 STORY_026_01_004_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_026_01_004_TEXT,相公，我最近头晕目眩，时不时的还恶心想吐，不知是怎么了…,"Husband, I have been dizzy lately, and sometimes I feel sick to my stomach. I do not know what is wrong…",相公，我最近头晕目眩，时不时的还恶心想吐，不知是怎么了…
+STORY_026_01_004_TEXT,相公，我最近头晕目眩，时不时的还恶心想吐，不知是怎么了…,"Husband, I have been dizzy lately, and sometimes I feel sick to my stomach. I do not know what is wrong…",あなた、最近めまいがして、ときどき吐き気もするの。どうしたのかしら……
 STORY_026_01_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_026_01_005_TEXT,夫人一定是操持家务太过劳累，我给你把把脉。,You must be exhausted from running the household. Let me take your pulse.,夫人一定是操持家务太过劳累，我给你把把脉。
+STORY_026_01_005_TEXT,夫人一定是操持家务太过劳累，我给你把把脉。,You must be exhausted from running the household. Let me take your pulse.,家事で疲れすぎたんだろう。脈を診るよ。
 STORY_026_02_001_SPEAKER,半夏,Banxia,半夏
-STORY_026_02_001_TEXT,呜呜呜，少夫人到底是得了什么病啊。,Oh no… What illness does the young mistress have?,呜呜呜，少夫人到底是得了什么病啊。
+STORY_026_02_001_TEXT,呜呜呜，少夫人到底是得了什么病啊。,Oh no… What illness does the young mistress have?,うう……若奥様は何の病気なんですか？
 STORY_026_02_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_026_02_002_TEXT,芷兰…我们有孩子了…,Zhilan… We are going to have a child…,芷兰…我们有孩子了…
+STORY_026_02_002_TEXT,芷兰…我们有孩子了…,Zhilan… We are going to have a child…,芷蘭……私たちに子どもができたんだ……
 STORY_026_02_003_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_026_02_003_TEXT,真的吗！哎呀，太好了，是男孩儿女孩儿？,"Really? Oh, that is wonderful! A boy or a girl?",真的吗！哎呀，太好了，是男孩儿女孩儿？
+STORY_026_02_003_TEXT,真的吗！哎呀，太好了，是男孩儿女孩儿？,"Really? Oh, that is wonderful! A boy or a girl?",本当？　うれしい！　男の子？　女の子？
 STORY_026_02_004_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_026_02_004_TEXT,现在还看不出来，男孩儿女孩儿都一样，我们要当爹当娘了。,"It is too early to tell. Boy or girl, it does not matter. We are going to be parents.",现在还看不出来，男孩儿女孩儿都一样，我们要当爹当娘了。
+STORY_026_02_004_TEXT,现在还看不出来，男孩儿女孩儿都一样，我们要当爹当娘了。,"It is too early to tell. Boy or girl, it does not matter. We are going to be parents.",今はまだ分からないよ。どちらでもいい。私たち、親になるんだ。
 STORY_026_02_005_SPEAKER,半夏,Banxia,半夏
-STORY_026_02_005_TEXT,哇，恭喜恭喜，真是菩萨保佑，我去把这喜事告诉老爷去！,Congratulations! The Bodhisattva has blessed us! I am going to tell the master the good news!,哇，恭喜恭喜，真是菩萨保佑，我去把这喜事告诉老爷去！
+STORY_026_02_005_TEXT,哇，恭喜恭喜，真是菩萨保佑，我去把这喜事告诉老爷去！,Congratulations! The Bodhisattva has blessed us! I am going to tell the master the good news!,わあ、おめでとうございます！　ありがたいことです。旦那様にも知らせてきます！
 STORY_026_03_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_026_03_001_TEXT,不对不对，我在干什么呀，冷静冷静，再好好想想。,"No, no. What am I doing? Calm down and think again.",不对不对，我在干什么呀，冷静冷静，再好好想想。
+STORY_026_03_001_TEXT,不对不对，我在干什么呀，冷静冷静，再好好想想。,"No, no. What am I doing? Calm down and think again.",違う、私は何を考えているんだ。落ち着いて、もう一度よく考えよう。
 STORY_027_001_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_027_001_TEXT,今天是上元佳节，咱们全家去城里逛逛，听说今年的灯节格外热闹。,It is the Lantern Festival today. Let us all go into town. I hear this year's celebrations are especially lively.,今天是上元佳节，咱们全家去城里逛逛，听说今年的灯节格外热闹。
+STORY_027_001_TEXT,今天是上元佳节，咱们全家去城里逛逛，听说今年的灯节格外热闹。,It is the Lantern Festival today. Let us all go into town. I hear this year's celebrations are especially lively.,今日は元宵節だ。家族みんなで町へ出よう。今年の灯籠祭りはとりわけ賑やからしい。
 STORY_027_002_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_027_002_TEXT,太好了，咱们快出发吧。,Wonderful! Let us go.,太好了，咱们快出发吧。
+STORY_027_002_TEXT,太好了，咱们快出发吧。,Wonderful! Let us go.,やった！　早く行きましょう。
 STORY_027_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_027_003_TEXT,走。,Come along.,走。
+STORY_027_003_TEXT,走。,Come along.,行こう。
 STORY_027_004_SPEAKER,半夏,Banxia,半夏
-STORY_027_004_TEXT,哇，好多人啊！好热闹啊！,"Wow, so many people! It is so lively!",哇，好多人啊！好热闹啊！
+STORY_027_004_TEXT,哇，好多人啊！好热闹啊！,"Wow, so many people! It is so lively!",わあ、人がいっぱい！　すごい賑わいだ！
 STORY_027_005_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_027_005_TEXT,看你那没见过世面的样子。,You act as if you have never been out before.,看你那没见过世面的样子。
+STORY_027_005_TEXT,看你那没见过世面的样子。,You act as if you have never been out before.,まるで世間を知らない子どもね。
 STORY_027_006_SPEAKER,半夏,Banxia,半夏
-STORY_027_006_TEXT,找打，你别跑！,Just you wait! Stop running!,找打，你别跑！
+STORY_027_006_TEXT,找打，你别跑！,Just you wait! Stop running!,こら、待ちなさい！
 STORY_027_007_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_027_007_TEXT,那边好像有唱戏的，咱们去那边看看。,There seems to be a play over there. Let us go and watch.,那边好像有唱戏的，咱们去那边看看。
+STORY_027_007_TEXT,那边好像有唱戏的，咱们去那边看看。,There seems to be a play over there. Let us go and watch.,あちらで芝居をしているみたい。見に行きましょう。
 STORY_027_008_SPEAKER,半夏,Banxia,半夏
-STORY_027_008_TEXT,夫人，那边有座桥，咱们去走百病！,"Dear, there is a bridge over there. Let us cross it to ward off illness!",夫人，那边有座桥，咱们去走百病！
+STORY_027_008_TEXT,夫人，那边有座桥，咱们去走百病！,"Dear, there is a bridge over there. Let us cross it to ward off illness!",あなた、向こうに橋があるわ。渡って厄払いをしましょう！
 STORY_027_009_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_027_009_TEXT,走，今夜走三桥，一年无灾病。,"Yes! Cross three bridges tonight, and we will be free of sickness all year.",走，今夜走三桥，一年无灾病。
+STORY_027_009_TEXT,走，今夜走三桥，一年无灾病。,"Yes! Cross three bridges tonight, and we will be free of sickness all year.",行こう。今夜三つの橋を渡れば、一年病気知らずだ。
 STORY_027_010_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_027_010_TEXT,儿子啊，你和芷兰准备啥时候要孩子啊？,"Son, when are you and Zhilan going to have a child?",儿子啊，你和芷兰准备啥时候要孩子啊？
+STORY_027_010_TEXT,儿子啊，你和芷兰准备啥时候要孩子啊？,"Son, when are you and Zhilan going to have a child?",ところで、東璧と芷蘭はいつ子どもを作るつもりだ？
 STORY_027_011_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_027_011_TEXT,哎哟，爹，您就别操心了。,"Oh, Father, please do not worry about that.",哎哟，爹，您就别操心了。
+STORY_027_011_TEXT,哎哟，爹，您就别操心了。,"Oh, Father, please do not worry about that.",父上、もう心配なさらないでください。
 STORY_027_012_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_027_012_TEXT,你们俩一会儿去南门摸摸福气去，听说可灵了。,You two should go to the south gate and touch the lucky charm. I hear it really works.,你们俩一会儿去南门摸摸福气去，听说可灵了。
+STORY_027_012_TEXT,你们俩一会儿去南门摸摸福气去，听说可灵了。,You two should go to the south gate and touch the lucky charm. I hear it really works.,あとで南門へ行って幸運を願うといい。よく効くらしいぞ。
 STORY_027_013_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_027_013_TEXT,别说了爹，咱们看戏去吧。,"Please, Father. Let us watch the play.",别说了爹，咱们看戏去吧。
+STORY_027_013_TEXT,别说了爹，咱们看戏去吧。,"Please, Father. Let us watch the play.",父上、その話はもう。芝居を見に行きましょう。
 STORY_027_014_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_027_014_TEXT,老爷，那边儿在唱紫钗记呢。,"Master, they are performing The Purple Hairpin over there.",老爷，那边儿在唱紫钗记呢。
-STORY_027_015_TEXT,谢皇恩灯华月华，谢天恩春华岁华，遍写着国泰民安天下，遨头去唱声哗。好灯也，说灯花南天门最佳，香车隘挑笼绛纱，喝道转身停马，尘影里看谁家。,"We thank the emperor for lantern light and moonlight; we thank Heaven for springtime and the turning year. Peace fills the realm. Hear the revelers sing! What splendid lanterns! The finest shine at the southern gate. Carriages crowd beneath red silk lanterns. The escort calls for a halt, and through the dusty shadows we wonder who has come.",谢皇恩灯华月华，谢天恩春华岁华，遍写着国泰民安天下，遨头去唱声哗。好灯也，说灯花南天门最佳，香车隘挑笼绛纱，喝道转身停马，尘影里看谁家。
+STORY_027_014_TEXT,老爷，那边儿在唱紫钗记呢。,"Master, they are performing The Purple Hairpin over there.",旦那様、あちらでは『紫釵記』を演じていますよ。
+STORY_027_015_TEXT,谢皇恩灯华月华，谢天恩春华岁华，遍写着国泰民安天下，遨头去唱声哗。好灯也，说灯花南天门最佳，香车隘挑笼绛纱，喝道转身停马，尘影里看谁家。,"We thank the emperor for lantern light and moonlight; we thank Heaven for springtime and the turning year. Peace fills the realm. Hear the revelers sing! What splendid lanterns! The finest shine at the southern gate. Carriages crowd beneath red silk lanterns. The escort calls for a halt, and through the dusty shadows we wonder who has come.",皇恩に感謝せん、灯も月も華やかに。天恩に感謝せん、春も歳も栄えゆく。国泰民安の世に歌声は満ち、灯火の美しさは南天門が随一。絹の灯籠を掲げた車が行き交い、馬を止め、塵の中に誰の家かを眺める。
 STORY_027_016_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_027_016_TEXT,相公，咱们去猜灯谜吧！,"Husband, let us go solve the lantern riddles!",相公，咱们去猜灯谜吧！
+STORY_027_016_TEXT,相公，咱们去猜灯谜吧！,"Husband, let us go solve the lantern riddles!",あなた、灯籠のなぞなぞを解きましょう！
 STORY_027_017_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_027_017_TEXT,走！,Let us!,走！
+STORY_027_017_TEXT,走！,Let us!,いいね！
 STORY_027_018_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_027_018_TEXT,"这么多灯谜，""一点一横长，一撇到南洋，南阳有个人，只有一寸长""，打一个字…","There are so many! “A dot above a long stroke, a slant toward the south; a person in Nanyang, with an inch below.” Guess the Chinese character…","这么多灯谜，""一点一横长，一撇到南洋，南阳有个人，只有一寸长""，打一个字…"
+STORY_027_018_TEXT,"这么多灯谜，""一点一横长，一撇到南洋，南阳有个人，只有一寸长""，打一个字…","There are so many! “A dot above a long stroke, a slant toward the south; a person in Nanyang, with an inch below.” Guess the Chinese character…",こんなにたくさん。これは「広い屋根の下に『付』がいる。さて何の字？」
 STORY_027_019_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_027_019_TEXT,"我知道，这是个""府""字。",I know! It is “府.”,"我知道，这是个""府""字。"
+STORY_027_019_TEXT,"我知道，这是个""府""字。",I know! It is “府.”,分かった。「府」だね。
 STORY_027_020_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_027_020_TEXT,还是娘子聪慧啊，哈哈。,"You are clever as ever, my dear. Ha, ha!",还是娘子聪慧啊，哈哈。
+STORY_027_020_TEXT,还是娘子聪慧啊，哈哈。,"You are clever as ever, my dear. Ha, ha!",さすが芷蘭、頭がいいな。ははは。
 STORY_027_021_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_027_021_TEXT,"你看这个，""大雪压青松""，打一味药材。",Look at this one: “Heavy snow presses on a green pine.” Name a medicinal herb.,"你看这个，""大雪压青松""，打一味药材。"
+STORY_027_021_TEXT,"你看这个，""大雪压青松""，打一味药材。",Look at this one: “Heavy snow presses on a green pine.” Name a medicinal herb.,こっちは「大雪が青松を押す」。薬材の名前を当てるんだ。
 STORY_027_022_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_027_022_TEXT,"这个我会，是""忍冬""。",I know this one. It is honeysuckle.,"这个我会，是""忍冬""。"
+STORY_027_022_TEXT,"这个我会，是""忍冬""。",I know this one. It is honeysuckle.,これは分かる。「忍冬」だよ。
 STORY_027_023_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_027_023_TEXT,哇，放烟花啦！,Wow! Fireworks!,哇，放烟花啦！
+STORY_027_023_TEXT,哇，放烟花啦！,Wow! Fireworks!,わあ、花火だ！
 STORY_027_024_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_027_024_TEXT,真漂亮啊。,How beautiful.,真漂亮啊。
+STORY_027_024_TEXT,真漂亮啊。,How beautiful.,きれいだね。
 STORY_027_025_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_027_025_TEXT,东璧，芷兰，咱们去小摊儿坐会儿吃点元宵。,"Dongbi, Zhilan, let us sit at a stall and have some sweet rice balls.",东璧，芷兰，咱们去小摊儿坐会儿吃点元宵。
+STORY_027_025_TEXT,东璧，芷兰，咱们去小摊儿坐会儿吃点元宵。,"Dongbi, Zhilan, let us sit at a stall and have some sweet rice balls.",東璧、芷蘭、露店で休んで元宵を食べよう。
 STORY_027_026_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_027_026_TEXT,干了一年坐堂医，感觉怎么样，和你之前想的一样吗？,You have spent a year treating patients at the clinic. How does it feel? Is it what you expected?,干了一年坐堂医，感觉怎么样，和你之前想的一样吗？
+STORY_027_026_TEXT,干了一年坐堂医，感觉怎么样，和你之前想的一样吗？,You have spent a year treating patients at the clinic. How does it feel? Is it what you expected?,医者として一年働いて、どうだった？　想像していたとおりか？
 STORY_027_027_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_027_027_TEXT,我倒是挺喜欢这一行，只是赚不到什么钱，苦了您和芷兰了…,I do enjoy the work. I only wish it earned more. You and Zhilan have had to make sacrifices because of me…,我倒是挺喜欢这一行，只是赚不到什么钱，苦了您和芷兰了…
+STORY_027_027_TEXT,我倒是挺喜欢这一行，只是赚不到什么钱，苦了您和芷兰了…,I do enjoy the work. I only wish it earned more. You and Zhilan have had to make sacrifices because of me…,私はこの仕事が好きです。ただ収入が少なく、父上と芷蘭に苦労をかけてしまって……
 STORY_027_028_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_027_028_TEXT,只要咱们一家人能一起平平安安的过日子，我就知足了，要那么多钱做什么。,"As long as our family can live safely together, I have all I need. What would we do with more money?",只要咱们一家人能一起平平安安的过日子，我就知足了，要那么多钱做什么。
+STORY_027_028_TEXT,只要咱们一家人能一起平平安安的过日子，我就知足了，要那么多钱做什么。,"As long as our family can live safely together, I have all I need. What would we do with more money?",家族みんなが無事に暮らせれば、私はそれで十分。そんなにお金があっても仕方ないわ。
 STORY_027_029_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_027_029_TEXT,是啊，一家人平平安安就好啊。,Yes. Being together and well is enough.,是啊，一家人平平安安就好啊。
+STORY_027_029_TEXT,是啊，一家人平平安安就好啊。,Yes. Being together and well is enough.,そうだな。皆が無事なのが一番だ。
 STORY_027_030_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_027_030_TEXT,好了，不早了，咱们该回家了。,It is getting late. We should go home.,好了，不早了，咱们该回家了。
+STORY_027_030_TEXT,好了，不早了，咱们该回家了。,It is getting late. We should go home.,さあ、もう遅い。家に帰ろう。
 STORY_028_01_001_SPEAKER,曾和,Zeng He,曽和
-STORY_028_01_001_TEXT,大夫啊，您快给看看吧，这孩子整日目光呆滞，叫他也不应，就在那自言自语，嘴里不知道嘟囔这什么，怪邪乎的…,"Doctor, please look at my son. He stares into space all day and does not answer when spoken to. He mutters to himself. It is downright uncanny…",大夫啊，您快给看看吧，这孩子整日目光呆滞，叫他也不应，就在那自言自语，嘴里不知道嘟囔这什么，怪邪乎的…
+STORY_028_01_001_TEXT,大夫啊，您快给看看吧，这孩子整日目光呆滞，叫他也不应，就在那自言自语，嘴里不知道嘟囔这什么，怪邪乎的…,"Doctor, please look at my son. He stares into space all day and does not answer when spoken to. He mutters to himself. It is downright uncanny…",先生、この子を診てください。一日中ぼんやりして、呼んでも返事をせず、何やら独り言をつぶやいているんです。気味が悪くて……
 STORY_028_01_002_SPEAKER,曾题名,Zeng Timing,曽題名
-STORY_028_01_002_TEXT,…,…,…
+STORY_028_01_002_TEXT,…,…,……
 STORY_028_01_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_028_01_003_TEXT,别急，坐下来让我看看。,Do not worry. Sit down and let me examine him.,别急，坐下来让我看看。
+STORY_028_01_003_TEXT,别急，坐下来让我看看。,Do not worry. Sit down and let me examine him.,落ち着いて。座って診せてください。
 STORY_028_02_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_028_02_001_TEXT,公子所患的是痰迷心窍之症，开副涤痰汤调理一下。,Your son has phlegm clouding the mind. I will prescribe Phlegm-Expelling Decoction to help him recover.,公子所患的是痰迷心窍之症，开副涤痰汤调理一下。
+STORY_028_02_001_TEXT,公子所患的是痰迷心窍之症，开副涤痰汤调理一下。,Your son has phlegm clouding the mind. I will prescribe Phlegm-Expelling Decoction to help him recover.,息子さんは痰迷心竅の証です。滌痰湯を処方して、調子を整えましょう。
 STORY_028_02_002_SPEAKER,曾和,Zeng He,曽和
-STORY_028_02_002_TEXT,好好的怎么就得了这怪病呢？,How did he suddenly develop such a strange illness?,好好的怎么就得了这怪病呢？
+STORY_028_02_002_TEXT,好好的怎么就得了这怪病呢？,How did he suddenly develop such a strange illness?,元気だったのに、どうしてこんな病に？
 STORY_028_02_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_028_02_003_TEXT,是不是读书压力太大了呀？,Could the pressure of studying be too much for him?,是不是读书压力太大了呀？
+STORY_028_02_003_TEXT,是不是读书压力太大了呀？,Could the pressure of studying be too much for him?,勉強の重圧が大きすぎたのでは？
 STORY_028_02_004_SPEAKER,曾题名,Zeng Timing,曽題名
-STORY_028_02_004_TEXT,…,…,…
+STORY_028_02_004_TEXT,…,…,……
 STORY_028_02_005_SPEAKER,曾和,Zeng He,曽和
-STORY_028_02_005_TEXT,他就一门心思读书，其他的什么都不用他管，能有什么压力？,All he does is study. We take care of everything else. What pressure could he have?,他就一门心思读书，其他的什么都不用他管，能有什么压力？
+STORY_028_02_005_TEXT,他就一门心思读书，其他的什么都不用他管，能有什么压力？,All he does is study. We take care of everything else. What pressure could he have?,この子は勉強だけして、ほかは何もしなくていいのよ。どんな重圧があるというの？
 STORY_028_02_006_SPEAKER,曾和,Zeng He,曽和
-STORY_028_02_006_TEXT,再说了天下那么多读书人，怎么就他得了这怪病？,"Besides, there are countless scholars in the world. Why would only he fall ill like this?",再说了天下那么多读书人，怎么就他得了这怪病？
+STORY_028_02_006_TEXT,再说了天下那么多读书人，怎么就他得了这怪病？,"Besides, there are countless scholars in the world. Why would only he fall ill like this?",ほかにも勉強している子は大勢いるのに、どうしてこの子だけ？
 STORY_028_02_007_SPEAKER,曾题名,Zeng Timing,曽題名
-STORY_028_02_007_TEXT,…,…,…
+STORY_028_02_007_TEXT,…,…,……
 STORY_028_02_008_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_028_02_008_TEXT,很多人表面上看着正常，其实都病得不轻呢。,Many people seem perfectly well on the outside when they are suffering deeply within.,很多人表面上看着正常，其实都病得不轻呢。
+STORY_028_02_008_TEXT,很多人表面上看着正常，其实都病得不轻呢。,Many people seem perfectly well on the outside when they are suffering deeply within.,外からは普通に見えても、心に重い病を抱えている人は少なくありません。
 STORY_028_02_009_SPEAKER,曾和,Zeng He,曽和
-STORY_028_02_009_TEXT,胡扯，我看你就是没病说成有病，骗病人买药赚钱,"Nonsense! You call him sick when he is not, just to sell him medicine.",胡扯，我看你就是没病说成有病，骗病人买药赚钱
+STORY_028_02_009_TEXT,胡扯，我看你就是没病说成有病，骗病人买药赚钱,"Nonsense! You call him sick when he is not, just to sell him medicine.",でたらめを言うな。病気でもないのに薬を売りつけたいだけだろう。
 STORY_028_02_010_SPEAKER,曾和,Zeng He,曽和
-STORY_028_02_010_TEXT,咱们家可是花了好多钱，把地都卖了供你读书，就只望着你能出人头地，光宗耀祖。可你怎么就这么不争气呢？,We spent so much on your education that we even sold our land! All we ask is that you succeed and bring honor to the family. Why can you not live up to that?,咱们家可是花了好多钱，把地都卖了供你读书，就只望着你能出人头地，光宗耀祖。可你怎么就这么不争气呢？
+STORY_028_02_010_TEXT,咱们家可是花了好多钱，把地都卖了供你读书，就只望着你能出人头地，光宗耀祖。可你怎么就这么不争气呢？,We spent so much on your education that we even sold our land! All we ask is that you succeed and bring honor to the family. Why can you not live up to that?,うちはお前を学ばせるために大金を使い、畑まで売ったんだ。出世して家の名を上げてほしいだけなのに、どうして期待に応えてくれない？
 STORY_028_02_011_SPEAKER,曾题名,Zeng Timing,曽題名
-STORY_028_02_011_TEXT,...,…,...
+STORY_028_02_011_TEXT,...,…,……
 STORY_028_02_012_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_028_02_012_TEXT,这位仁兄，我也是读过书考过科举的，读书人其实也是有很多难处的。,"Sir, I too studied and sat the imperial examinations. Scholars face many hardships of their own.",这位仁兄，我也是读过书考过科举的，读书人其实也是有很多难处的。
+STORY_028_02_012_TEXT,这位仁兄，我也是读过书考过科举的，读书人其实也是有很多难处的。,"Sir, I too studied and sat the imperial examinations. Scholars face many hardships of their own.",私も科挙を受けたことがあります。学問をする者にも、さまざまな苦しみがあるのです。
 STORY_028_02_013_SPEAKER,曾和,Zeng He,曽和
-STORY_028_02_013_TEXT,难？还能有我赚钱养家糊口难？天底下还能有比我们做父母更难的？,Hardships? Are they harder than earning enough to feed a family? Who has it harder than us parents?,难？还能有我赚钱养家糊口难？天底下还能有比我们做父母更难的？
+STORY_028_02_013_TEXT,难？还能有我赚钱养家糊口难？天底下还能有比我们做父母更难的？,Hardships? Are they harder than earning enough to feed a family? Who has it harder than us parents?,苦しみ？　家族を食べさせる私より苦しいと？　親ほど苦労している者がいるか？
 STORY_028_02_014_SPEAKER,曾和,Zeng He,曽和
-STORY_028_02_014_TEXT,再过半年可就要考试了，你这次无论如何也要给我好好考。,"The examinations are only six months away. You must do well this time, whatever it takes.",再过半年可就要考试了，你这次无论如何也要给我好好考。
+STORY_028_02_014_TEXT,再过半年可就要考试了，你这次无论如何也要给我好好考。,"The examinations are only six months away. You must do well this time, whatever it takes.",試験まであと半年だ。今度こそ必ずしっかり勉強しなさい。
 STORY_028_02_015_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_028_02_015_TEXT,…,…,…
+STORY_028_02_015_TEXT,…,…,……
 STORY_028_03_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_028_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",不对，我需要好好想想这是什么病，该开什么方。
+STORY_028_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。
