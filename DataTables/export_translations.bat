@@ -13,7 +13,7 @@ REM
 REM Python 脚本也支持自动查找 Data.xlsx，
 REM 这里显式传入路径，避免项目结构歧义。
 
-python export_translations.py translations_managed.xlsx translations.csv ..\DataTables\Data.xlsx
+python export_translations.py translations_managed.xlsx ..\Localization\translations.csv Data.xlsx
 
 echo.
 if errorlevel 2 (
