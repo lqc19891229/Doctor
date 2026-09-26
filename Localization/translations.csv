@@ -12428,471 +12428,471 @@ UI_DISEASE_SYMPTOM_XIN_SHEN_BU_JIAO_03,腰膝酸软,having soreness and weakness
 UI_DISEASE_SYMPTOM_QI_FEN_RE_SHENG_01,不舒服,feeling unwell,不舒服
 UI_DISEASE_SYMPTOM_QI_FEN_RE_SHENG_02,发烧,running a fever,发烧
 UI_NPC_NAME_CHA_BO_SHI,茶博士,Tea Master,茶博士
-UI_NPC_DIALOGUE_AFTER_CHA_BO_SHI,哎呀，真是多谢先生了。,"Oh, thank you very much, Doctor.",哎呀，真是多谢先生了。
-UI_NPC_DIALOGUE_FAILED_CHA_BO_SHI,感觉更不舒服了…,I feel even worse...,感觉更不舒服了…
-UI_NPC_NAME_CHEN_ER,陈二,Chen Second,陈二
-UI_NPC_DIALOGUE_AFTER_CHEN_ER,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",多谢先生，我好多了。
-UI_NPC_DIALOGUE_FAILED_CHEN_ER,嗯…哎哟…,Mm... ow...,嗯…哎哟…
-UI_NPC_NAME_CHEN_PO,陈婆,Chen Granny,陈婆
-UI_NPC_DIALOGUE_AFTER_CHEN_PO,真是太谢谢先生了。,"Thank you so much, Doctor.",真是太谢谢先生了。
-UI_NPC_DIALOGUE_FAILED_CHEN_PO,感觉不太对啊…,Something doesn't feel right...,感觉不太对啊…
-UI_NPC_NAME_CHEN_SHAN_ZHANG,陈山长,Chen Headmaster,陈山长
-UI_NPC_DIALOGUE_AFTER_CHEN_SHAN_ZHANG,大夫真是妙手回春啊。,"Doctor, your skill is remarkable. I feel restored.",大夫真是妙手回春啊。
-UI_NPC_DIALOGUE_FAILED_CHEN_SHAN_ZHANG,医术不精，还敢自称郎中！,You call yourself a physician with skills like that?!,医术不精，还敢自称郎中！
+UI_NPC_DIALOGUE_AFTER_CHA_BO_SHI,哎呀，真是多谢先生了。,"Oh, thank you very much, Doctor.",先生、本当にありがとうございます。
+UI_NPC_DIALOGUE_FAILED_CHA_BO_SHI,感觉更不舒服了…,I feel even worse...,前より具合が悪くなりました……
+UI_NPC_NAME_CHEN_ER,陈二,Chen Second,陳二
+UI_NPC_DIALOGUE_AFTER_CHEN_ER,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。
+UI_NPC_DIALOGUE_FAILED_CHEN_ER,嗯…哎哟…,Mm... ow...,うう……痛い……
+UI_NPC_NAME_CHEN_PO,陈婆,Chen Granny,陳婆
+UI_NPC_DIALOGUE_AFTER_CHEN_PO,真是太谢谢先生了。,"Thank you so much, Doctor.",先生、本当にありがとうございます。
+UI_NPC_DIALOGUE_FAILED_CHEN_PO,感觉不太对啊…,Something doesn't feel right...,どうも様子がおかしい……
+UI_NPC_NAME_CHEN_SHAN_ZHANG,陈山长,Chen Headmaster,陳山長
+UI_NPC_DIALOGUE_AFTER_CHEN_SHAN_ZHANG,大夫真是妙手回春啊。,"Doctor, your skill is remarkable. I feel restored.",先生の腕は本当に見事です。
+UI_NPC_DIALOGUE_FAILED_CHEN_SHAN_ZHANG,医术不精，还敢自称郎中！,You call yourself a physician with skills like that?!,腕もないくせに医者を名乗るな！
 UI_NPC_NAME_DU_ER_SAO,杜二嫂,Du Second Sister-in-law,杜二嫂
-UI_NPC_DIALOGUE_AFTER_DU_ER_SAO,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better.",真是多谢先生了，好多了
-UI_NPC_DIALOGUE_FAILED_DU_ER_SAO,哎哟...哎哟…,Ow... ow...,哎哟...哎哟…
-UI_NPC_NAME_FENG_JUN_BAO,冯军保,Feng Army Protector,冯军保
-UI_NPC_DIALOGUE_AFTER_FENG_JUN_BAO,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",多谢先生，感觉好多了。
-UI_NPC_DIALOGUE_FAILED_FENG_JUN_BAO,哎…奇怪…,Hmm... that's strange...,哎…奇怪…
-UI_NPC_NAME_GAO_XIU_LIAN,高秀莲,Gao Elegant Lotus,高秀莲
-UI_NPC_DIALOGUE_AFTER_GAO_XIU_LIAN,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor.",感觉好多了，多谢先生。
-UI_NPC_DIALOGUE_FAILED_GAO_XIU_LIAN,哎哟...哎哟…,Ow... ow...,哎哟...哎哟…
-UI_NPC_NAME_HAN_ZHANG_GUI,韩掌柜,Han Shopkeeper,韩掌柜
-UI_NPC_DIALOGUE_AFTER_HAN_ZHANG_GUI,多谢大夫啦。,"Thank you, Doctor.",多谢大夫啦。
-UI_NPC_DIALOGUE_FAILED_HAN_ZHANG_GUI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?",大夫，我这病怎么还不见好？
-UI_NPC_NAME_HE_SAN_JIE,贺三姐,He Third Sister,贺三姐
-UI_NPC_DIALOGUE_AFTER_HE_SAN_JIE,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better.",多谢大夫，感觉好多了。
-UI_NPC_DIALOGUE_FAILED_HE_SAN_JIE,你会不会看病啊？,Do you actually know how to treat people?,你会不会看病啊？
-UI_NPC_NAME_HE_ZHANG_SHAO,何掌勺,He Cook,何掌勺
-UI_NPC_DIALOGUE_AFTER_HE_ZHANG_SHAO,多谢先生了。,"Thank you, Doctor.",多谢先生了。
-UI_NPC_DIALOGUE_FAILED_HE_ZHANG_SHAO,还是好难受啊…,I still feel awful...,还是好难受啊…
-UI_NPC_NAME_HUA_JIN_NIANG,华锦娘,Hua Brocade Maiden,华锦娘
-UI_NPC_DIALOGUE_AFTER_HUA_JIN_NIANG,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",多谢先生，感觉好多了。
-UI_NPC_DIALOGUE_FAILED_HUA_JIN_NIANG,您给我开的这是什么药啊…,What kind of medicine did you give me...?,您给我开的这是什么药啊…
+UI_NPC_DIALOGUE_AFTER_DU_ER_SAO,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better.",先生、本当にありがとうございます。楽になりました。
+UI_NPC_DIALOGUE_FAILED_DU_ER_SAO,哎哟...哎哟…,Ow... ow...,あいたた……あいたた……
+UI_NPC_NAME_FENG_JUN_BAO,冯军保,Feng Army Protector,馮军保
+UI_NPC_DIALOGUE_AFTER_FENG_JUN_BAO,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。
+UI_NPC_DIALOGUE_FAILED_FENG_JUN_BAO,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……
+UI_NPC_NAME_GAO_XIU_LIAN,高秀莲,Gao Elegant Lotus,高秀蓮
+UI_NPC_DIALOGUE_AFTER_GAO_XIU_LIAN,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor.",だいぶ楽になりました。先生、ありがとうございます。
+UI_NPC_DIALOGUE_FAILED_GAO_XIU_LIAN,哎哟...哎哟…,Ow... ow...,あいたた……あいたた……
+UI_NPC_NAME_HAN_ZHANG_GUI,韩掌柜,Han Shopkeeper,韓店主
+UI_NPC_DIALOGUE_AFTER_HAN_ZHANG_GUI,多谢大夫啦。,"Thank you, Doctor.",先生、ありがとうございます。
+UI_NPC_DIALOGUE_FAILED_HAN_ZHANG_GUI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？
+UI_NPC_NAME_HE_SAN_JIE,贺三姐,He Third Sister,賀三姐
+UI_NPC_DIALOGUE_AFTER_HE_SAN_JIE,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。楽になりました。
+UI_NPC_DIALOGUE_FAILED_HE_SAN_JIE,你会不会看病啊？,Do you actually know how to treat people?,本当に診察できるんですか？
+UI_NPC_NAME_HE_ZHANG_SHAO,何掌勺,He Cook,何料理長
+UI_NPC_DIALOGUE_AFTER_HE_ZHANG_SHAO,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。
+UI_NPC_DIALOGUE_FAILED_HE_ZHANG_SHAO,还是好难受啊…,I still feel awful...,まだとてもつらい……
+UI_NPC_NAME_HUA_JIN_NIANG,华锦娘,Hua Brocade Maiden,華錦娘
+UI_NPC_DIALOGUE_AFTER_HUA_JIN_NIANG,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。
+UI_NPC_DIALOGUE_FAILED_HUA_JIN_NIANG,您给我开的这是什么药啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……
 UI_NPC_NAME_HUA_YUN,花芸,Hua Rue,花芸
-UI_NPC_DIALOGUE_AFTER_HUA_YUN,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",有劳先生了，感觉好多了。
-UI_NPC_DIALOGUE_FAILED_HUA_YUN,嗯？感觉好奇怪啊…,Huh? I feel strange...,嗯？感觉好奇怪啊…
-UI_NPC_NAME_HUANG_NIU_ER,黄牛儿,Huang Little Ox,黄牛儿
-UI_NPC_DIALOGUE_AFTER_HUANG_NIU_ER,真是太谢谢大夫了。,"Thank you so much, Doctor.",真是太谢谢大夫了。
-UI_NPC_DIALOGUE_FAILED_HUANG_NIU_ER,感觉不太对啊…,Something doesn't feel right...,感觉不太对啊…
+UI_NPC_DIALOGUE_AFTER_HUA_YUN,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。
+UI_NPC_DIALOGUE_FAILED_HUA_YUN,嗯？感觉好奇怪啊…,Huh? I feel strange...,えっ？　なんだか変な感じがします……
+UI_NPC_NAME_HUANG_NIU_ER,黄牛儿,Huang Little Ox,黄牛児
+UI_NPC_DIALOGUE_AFTER_HUANG_NIU_ER,真是太谢谢大夫了。,"Thank you so much, Doctor.",先生、本当にありがとうございます。
+UI_NPC_DIALOGUE_FAILED_HUANG_NIU_ER,感觉不太对啊…,Something doesn't feel right...,どうも様子がおかしい……
 UI_NPC_NAME_HUANG_QIU_JU,黄秋菊,Huang Autumn Chrysanthemum,黄秋菊
-UI_NPC_DIALOGUE_AFTER_HUANG_QIU_JU,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",多谢先生，我好多了。
-UI_NPC_DIALOGUE_FAILED_HUANG_QIU_JU,还是好难受啊…,I still feel awful...,还是好难受啊…
-UI_NPC_NAME_JI_YUN_NIANG,季云娘,Ji Cloud Maiden,季云娘
-UI_NPC_DIALOGUE_AFTER_JI_YUN_NIANG,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",有劳先生了，感觉好多了。
-UI_NPC_DIALOGUE_FAILED_JI_YUN_NIANG,嗯…哎哟…,Mm... ow...,嗯…哎哟…
-UI_NPC_NAME_JIANG_CHUAN_ER,蒋船儿,Jiang Little Boat,蒋船儿
-UI_NPC_DIALOGUE_AFTER_JIANG_CHUAN_ER,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",多谢先生，我好多了。
-UI_NPC_DIALOGUE_FAILED_JIANG_CHUAN_ER,嗯…哎哟…,Mm... ow...,嗯…哎哟…
+UI_NPC_DIALOGUE_AFTER_HUANG_QIU_JU,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。
+UI_NPC_DIALOGUE_FAILED_HUANG_QIU_JU,还是好难受啊…,I still feel awful...,まだとてもつらい……
+UI_NPC_NAME_JI_YUN_NIANG,季云娘,Ji Cloud Maiden,季雲娘
+UI_NPC_DIALOGUE_AFTER_JI_YUN_NIANG,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。
+UI_NPC_DIALOGUE_FAILED_JI_YUN_NIANG,嗯…哎哟…,Mm... ow...,うう……痛い……
+UI_NPC_NAME_JIANG_CHUAN_ER,蒋船儿,Jiang Little Boat,蔣船児
+UI_NPC_DIALOGUE_AFTER_JIANG_CHUAN_ER,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。
+UI_NPC_DIALOGUE_FAILED_JIANG_CHUAN_ER,嗯…哎哟…,Mm... ow...,うう……痛い……
 UI_NPC_NAME_JIANG_YUE_NIANG,姜月娘,Jiang Moon Maiden,姜月娘
-UI_NPC_DIALOGUE_AFTER_JIANG_YUE_NIANG,先生医术真是高明，多谢了,"Your skill is impressive, Doctor. Thank you.",先生医术真是高明，多谢了
-UI_NPC_DIALOGUE_FAILED_JIANG_YUE_NIANG,嗯？感觉好奇怪啊…,Huh? I feel strange...,嗯？感觉好奇怪啊…
+UI_NPC_DIALOGUE_AFTER_JIANG_YUE_NIANG,先生医术真是高明，多谢了,"Your skill is impressive, Doctor. Thank you.",先生の腕は見事ですね。ありがとうございます。
+UI_NPC_DIALOGUE_FAILED_JIANG_YUE_NIANG,嗯？感觉好奇怪啊…,Huh? I feel strange...,えっ？　なんだか変な感じがします……
 UI_NPC_NAME_LI_GOU_DAN,李狗蛋,Li Dog Egg,李狗蛋
-UI_NPC_DIALOGUE_AFTER_LI_GOU_DAN,真是太谢谢大夫了。,"Thank you so much, Doctor.",真是太谢谢大夫了。
-UI_NPC_DIALOGUE_FAILED_LI_GOU_DAN,嗯…哎哟…,Mm... ow...,嗯…哎哟…
+UI_NPC_DIALOGUE_AFTER_LI_GOU_DAN,真是太谢谢大夫了。,"Thank you so much, Doctor.",先生、本当にありがとうございます。
+UI_NPC_DIALOGUE_FAILED_LI_GOU_DAN,嗯…哎哟…,Mm... ow...,うう……痛い……
 UI_NPC_NAME_LI_JIN_QING,李近卿,Li Near Noble,李近卿
-UI_NPC_DIALOGUE_AFTER_LI_JIN_QING,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",有劳先生了，感觉好多了。
-UI_NPC_DIALOGUE_FAILED_LI_JIN_QING,先生，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生，我这病怎么还不见好？
+UI_NPC_DIALOGUE_AFTER_LI_JIN_QING,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。
+UI_NPC_DIALOGUE_FAILED_LI_JIN_QING,先生，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？
 UI_NPC_NAME_LI_SI,李四,Li Fourth,李四
-UI_NPC_DIALOGUE_AFTER_LI_SI,多谢先生，我感觉好多了。,"Thank you, Doctor. I feel much better.",多谢先生，我感觉好多了。
-UI_NPC_DIALOGUE_FAILED_LI_SI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?",大夫，我这病怎么还不见好？
-UI_NPC_NAME_LI_YUAN_WAI,李员外,Li Squire,李员外
-UI_NPC_DIALOGUE_AFTER_LI_YUAN_WAI,嗯，不错不错，医术高明啊。,"Mm, very good. Your medical skill is impressive.",嗯，不错不错，医术高明啊。
-UI_NPC_DIALOGUE_FAILED_LI_YUAN_WAI,你这庸医，招摇撞骗！,You quack! You're nothing but a fraud!,你这庸医，招摇撞骗！
+UI_NPC_DIALOGUE_AFTER_LI_SI,多谢先生，我感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。
+UI_NPC_DIALOGUE_FAILED_LI_SI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？
+UI_NPC_NAME_LI_YUAN_WAI,李员外,Li Squire,李員外
+UI_NPC_DIALOGUE_AFTER_LI_YUAN_WAI,嗯，不错不错，医术高明啊。,"Mm, very good. Your medical skill is impressive.",うむ、素晴らしい。見事な腕前だ。
+UI_NPC_DIALOGUE_FAILED_LI_YUAN_WAI,你这庸医，招摇撞骗！,You quack! You're nothing but a fraud!,このやぶ医者め、よくも騙したな！
 UI_NPC_NAME_LIN_QIAO_NIANG,林巧娘,Lin Clever Maiden,林巧娘
-UI_NPC_DIALOGUE_AFTER_LIN_QIAO_NIANG,多谢先生了。,"Thank you, Doctor.",多谢先生了。
-UI_NPC_DIALOGUE_FAILED_LIN_QIAO_NIANG,感觉不太对啊…,Something doesn't feel right...,感觉不太对啊…
-UI_NPC_NAME_LIU_DA,刘大,Liu Eldest,刘大
-UI_NPC_DIALOGUE_AFTER_LIU_DA,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better.",多谢大夫，感觉好多了。
-UI_NPC_DIALOGUE_FAILED_LIU_DA,感觉不太对啊…,Something doesn't feel right...,感觉不太对啊…
-UI_NPC_NAME_LIU_FU,刘福,Liu Fortune,刘福
-UI_NPC_DIALOGUE_AFTER_LIU_FU,多谢先生了。,"Thank you, Doctor.",多谢先生了。
-UI_NPC_DIALOGUE_FAILED_LIU_FU,呃...不对啊。,Uh... something's not right.,呃...不对啊。
-UI_NPC_NAME_LIU_TAI_GONG,刘太公,Liu Elder,刘太公
-UI_NPC_DIALOGUE_AFTER_LIU_TAI_GONG,麻烦大夫啦，好多了。,"Thank you, Doctor. I feel much better.",麻烦大夫啦，好多了。
-UI_NPC_DIALOGUE_FAILED_LIU_TAI_GONG,咳咳咳，哎哟…,"Cough, cough... ow...",咳咳咳，哎哟…
-UI_NPC_NAME_LIU_WEN_PO,刘稳婆,Liu Midwife,刘稳婆
-UI_NPC_DIALOGUE_AFTER_LIU_WEN_PO,哎哟，谢谢先生，您真是神医啊！,"Oh, thank you, Doctor! You're a marvelous physician!",哎哟，谢谢先生，您真是神医啊！
-UI_NPC_DIALOGUE_FAILED_LIU_WEN_PO,哎，不对啊…,"Hmm, something's not right...",哎，不对啊…
-UI_NPC_NAME_LIU_YING_ER,柳莺儿,Liu Little Oriole,柳莺儿
-UI_NPC_DIALOGUE_AFTER_LIU_YING_ER,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better.",多谢先生了，我好多了。
-UI_NPC_DIALOGUE_FAILED_LIU_YING_ER,哎…奇怪…,Hmm... that's strange...,哎…奇怪…
-UI_NPC_NAME_LV_TAI_JUN,吕太君,Lü Matriarch,吕太君
-UI_NPC_DIALOGUE_AFTER_LV_TAI_JUN,多谢小先生，老婆子我好多啦。,"Thank you, Doctor. I feel much better.",多谢小先生，老婆子我好多啦。
-UI_NPC_DIALOGUE_FAILED_LV_TAI_JUN,咳咳咳，你这开的是什么药啊？,Something doesn't feel right...,咳咳咳，你这开的是什么药啊？
-UI_NPC_NAME_MA_CHANG_FENG,马长风,Ma Long Wind,马长风
-UI_NPC_DIALOGUE_AFTER_MA_CHANG_FENG,麻烦大夫啦，好多了。,"Thank you, Doctor. I feel much better.",麻烦大夫啦，好多了。
-UI_NPC_DIALOGUE_FAILED_MA_CHANG_FENG,您给我开的这是什么药啊…,What kind of medicine did you give me...?,您给我开的这是什么药啊…
-UI_NPC_NAME_QIAN_BU_LOU,钱不漏,Qian No Leak,钱不漏
-UI_NPC_DIALOGUE_AFTER_QIAN_BU_LOU,谢啦。,Thanks.,谢啦。
-UI_NPC_DIALOGUE_FAILED_QIAN_BU_LOU,这开的是什么药，我要到官府告你！,What medicine is this? I'll report you to the authorities!,这开的是什么药，我要到官府告你！
+UI_NPC_DIALOGUE_AFTER_LIN_QIAO_NIANG,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。
+UI_NPC_DIALOGUE_FAILED_LIN_QIAO_NIANG,感觉不太对啊…,Something doesn't feel right...,どうも様子がおかしい……
+UI_NPC_NAME_LIU_DA,刘大,Liu Eldest,劉大
+UI_NPC_DIALOGUE_AFTER_LIU_DA,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。楽になりました。
+UI_NPC_DIALOGUE_FAILED_LIU_DA,感觉不太对啊…,Something doesn't feel right...,どうも様子がおかしい……
+UI_NPC_NAME_LIU_FU,刘福,Liu Fortune,劉福
+UI_NPC_DIALOGUE_AFTER_LIU_FU,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。
+UI_NPC_DIALOGUE_FAILED_LIU_FU,呃...不对啊。,Uh... something's not right.,あれ……おかしいな。
+UI_NPC_NAME_LIU_TAI_GONG,刘太公,Liu Elder,劉太公
+UI_NPC_DIALOGUE_AFTER_LIU_TAI_GONG,麻烦大夫啦，好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。楽になりました。
+UI_NPC_DIALOGUE_FAILED_LIU_TAI_GONG,咳咳咳，哎哟…,"Cough, cough... ow...",ゴホゴホ……あいたた……
+UI_NPC_NAME_LIU_WEN_PO,刘稳婆,Liu Midwife,劉産婆
+UI_NPC_DIALOGUE_AFTER_LIU_WEN_PO,哎哟，谢谢先生，您真是神医啊！,"Oh, thank you, Doctor! You're a marvelous physician!",先生、ありがとうございます！　本当に名医ですね！
+UI_NPC_DIALOGUE_FAILED_LIU_WEN_PO,哎，不对啊…,"Hmm, something's not right...",あれ、おかしいな……
+UI_NPC_NAME_LIU_YING_ER,柳莺儿,Liu Little Oriole,柳鶯児
+UI_NPC_DIALOGUE_AFTER_LIU_YING_ER,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ良くなりました。
+UI_NPC_DIALOGUE_FAILED_LIU_YING_ER,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……
+UI_NPC_NAME_LV_TAI_JUN,吕太君,Lü Matriarch,呂太君
+UI_NPC_DIALOGUE_AFTER_LV_TAI_JUN,多谢小先生，老婆子我好多啦。,"Thank you, Doctor. I feel much better.",若先生、ありがとうございます。ずいぶん楽になりました。
+UI_NPC_DIALOGUE_FAILED_LV_TAI_JUN,咳咳咳，你这开的是什么药啊？,Something doesn't feel right...,ゴホゴホ……これは何の薬なんですか？
+UI_NPC_NAME_MA_CHANG_FENG,马长风,Ma Long Wind,馬長风
+UI_NPC_DIALOGUE_AFTER_MA_CHANG_FENG,麻烦大夫啦，好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。楽になりました。
+UI_NPC_DIALOGUE_FAILED_MA_CHANG_FENG,您给我开的这是什么药啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……
+UI_NPC_NAME_QIAN_BU_LOU,钱不漏,Qian No Leak,銭不漏
+UI_NPC_DIALOGUE_AFTER_QIAN_BU_LOU,谢啦。,Thanks.,ありがとう。
+UI_NPC_DIALOGUE_FAILED_QIAN_BU_LOU,这开的是什么药，我要到官府告你！,What medicine is this? I'll report you to the authorities!,これは何の薬だ！　役所に訴えてやる！
 UI_NPC_NAME_QIN_SAN_NIANG,秦三娘,Qin Third Lady,秦三娘
-UI_NPC_DIALOGUE_AFTER_QIN_SAN_NIANG,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",多谢先生，感觉好多了。
-UI_NPC_DIALOGUE_FAILED_QIN_SAN_NIANG,哎哟...哎哟…,Ow... ow...,哎哟...哎哟…
-UI_NPC_NAME_SHEN_GUI,沈贵,Shen Noble,沈贵
-UI_NPC_DIALOGUE_AFTER_SHEN_GUI,多谢多谢。,"Thank you, Doctor. I feel much better.",多谢多谢。
-UI_NPC_DIALOGUE_FAILED_SHEN_GUI,你会不会看病啊？,Do you actually know how to treat people?,你会不会看病啊？
+UI_NPC_DIALOGUE_AFTER_QIN_SAN_NIANG,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。
+UI_NPC_DIALOGUE_FAILED_QIN_SAN_NIANG,哎哟...哎哟…,Ow... ow...,あいたた……あいたた……
+UI_NPC_NAME_SHEN_GUI,沈贵,Shen Noble,沈貴
+UI_NPC_DIALOGUE_AFTER_SHEN_GUI,多谢多谢。,"Thank you, Doctor. I feel much better.",どうもありがとう。
+UI_NPC_DIALOGUE_FAILED_SHEN_GUI,你会不会看病啊？,Do you actually know how to treat people?,本当に診察できるんですか？
 UI_NPC_NAME_SHI_GAN,石敢,Shi Daring,石敢
-UI_NPC_DIALOGUE_AFTER_SHI_GAN,哎呀，真是太感谢了，好多了。,"Oh, thank you so much. I feel much better.",哎呀，真是太感谢了，好多了。
-UI_NPC_DIALOGUE_FAILED_SHI_GAN,哎…奇怪…,Hmm... that's strange...,哎…奇怪…
+UI_NPC_DIALOGUE_AFTER_SHI_GAN,哎呀，真是太感谢了，好多了。,"Oh, thank you so much. I feel much better.",本当にありがとうございます。楽になりました。
+UI_NPC_DIALOGUE_FAILED_SHI_GAN,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……
 UI_NPC_NAME_SHI_GENG_SHENG,史更生,Shi Reborn,史更生
-UI_NPC_DIALOGUE_AFTER_SHI_GENG_SHENG,好多了，真是太谢谢先生了。,"I feel much better. Thank you so much, Doctor.",好多了，真是太谢谢先生了。
-UI_NPC_DIALOGUE_FAILED_SHI_GENG_SHENG,你给我开的什么药啊…,What medicine did you give me...?,你给我开的什么药啊…
-UI_NPC_NAME_SU_XIU_HE,苏绣荷,Su Embroidered Lotus,苏绣荷
-UI_NPC_DIALOGUE_AFTER_SU_XIU_HE,好多了，真是太谢谢先生了。,"I feel much better. Thank you so much, Doctor.",好多了，真是太谢谢先生了。
-UI_NPC_DIALOGUE_FAILED_SU_XIU_HE,咳咳咳，好难受啊,"Cough, cough... I feel terrible.",咳咳咳，好难受啊
-UI_NPC_NAME_SUN_JIANG_ER,孙匠儿,Sun Little Craftsman,孙匠儿
-UI_NPC_DIALOGUE_AFTER_SUN_JIANG_ER,多谢先生了。,"Thank you, Doctor.",多谢先生了。
-UI_NPC_DIALOGUE_FAILED_SUN_JIANG_ER,呃…不对啊,Uh... something's not right.,呃…不对啊
-UI_NPC_NAME_SUN_XIAO_MEI,孙小妹,Sun Little Sister,孙小妹
-UI_NPC_DIALOGUE_AFTER_SUN_XIAO_MEI,多谢先生了。,"Thank you, Doctor.",多谢先生了。
-UI_NPC_DIALOGUE_FAILED_SUN_XIAO_MEI,咳咳咳，好难受啊,"Cough, cough... I feel terrible.",咳咳咳，好难受啊
+UI_NPC_DIALOGUE_AFTER_SHI_GENG_SHENG,好多了，真是太谢谢先生了。,"I feel much better. Thank you so much, Doctor.",ずいぶん良くなりました。先生、本当にありがとうございます。
+UI_NPC_DIALOGUE_FAILED_SHI_GENG_SHENG,你给我开的什么药啊…,What medicine did you give me...?,いったい何の薬を出したんですか……
+UI_NPC_NAME_SU_XIU_HE,苏绣荷,Su Embroidered Lotus,蘇繍荷
+UI_NPC_DIALOGUE_AFTER_SU_XIU_HE,好多了，真是太谢谢先生了。,"I feel much better. Thank you so much, Doctor.",ずいぶん良くなりました。先生、本当にありがとうございます。
+UI_NPC_DIALOGUE_FAILED_SU_XIU_HE,咳咳咳，好难受啊,"Cough, cough... I feel terrible.",ゴホゴホ……つらい……
+UI_NPC_NAME_SUN_JIANG_ER,孙匠儿,Sun Little Craftsman,孫匠児
+UI_NPC_DIALOGUE_AFTER_SUN_JIANG_ER,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。
+UI_NPC_DIALOGUE_FAILED_SUN_JIANG_ER,呃…不对啊,Uh... something's not right.,あれ……おかしいな。
+UI_NPC_NAME_SUN_XIAO_MEI,孙小妹,Sun Little Sister,孫小妹
+UI_NPC_DIALOGUE_AFTER_SUN_XIAO_MEI,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。
+UI_NPC_DIALOGUE_FAILED_SUN_XIAO_MEI,咳咳咳，好难受啊,"Cough, cough... I feel terrible.",ゴホゴホ……つらい……
 UI_NPC_NAME_TIAN_CHUN_LUO,田春萝,Tian Spring Vine,田春萝
-UI_NPC_DIALOGUE_AFTER_TIAN_CHUN_LUO,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor.",感觉好多了，多谢先生。
-UI_NPC_DIALOGUE_FAILED_TIAN_CHUN_LUO,嗯？感觉好奇怪啊…,Huh? I feel strange...,嗯？感觉好奇怪啊…
+UI_NPC_DIALOGUE_AFTER_TIAN_CHUN_LUO,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor.",だいぶ楽になりました。先生、ありがとうございます。
+UI_NPC_DIALOGUE_FAILED_TIAN_CHUN_LUO,嗯？感觉好奇怪啊…,Huh? I feel strange...,えっ？　なんだか変な感じがします……
 UI_NPC_NAME_WANG_CHAO_FENG,王朝奉,Wang Court Attendant,王朝奉
-UI_NPC_DIALOGUE_AFTER_WANG_CHAO_FENG,好多了，多谢大夫。,"I feel much better. Thank you, Doctor.",好多了，多谢大夫。
-UI_NPC_DIALOGUE_FAILED_WANG_CHAO_FENG,你给我开的什么药啊…,What medicine did you give me...?,你给我开的什么药啊…
-UI_NPC_NAME_WANG_DA_SAO,王大嫂,Wang Sister-in-law,王大嫂
-UI_NPC_DIALOGUE_AFTER_WANG_DA_SAO,麻烦先生了，我感觉好多了,"Thank you, Doctor. I feel much better.",麻烦先生了，我感觉好多了
-UI_NPC_DIALOGUE_FAILED_WANG_DA_SAO,哎哟...哎哟…,Ow... ow...,哎哟...哎哟…
-UI_NPC_NAME_WANG_LAO_AN_REN,王老安人,Wang Old Madam,王老安人
-UI_NPC_DIALOGUE_AFTER_WANG_LAO_AN_REN,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better.",真是多谢先生了，好多了
-UI_NPC_DIALOGUE_FAILED_WANG_LAO_AN_REN,咳咳咳，哎哟...,"Cough, cough... ow...",咳咳咳，哎哟...
+UI_NPC_DIALOGUE_AFTER_WANG_CHAO_FENG,好多了，多谢大夫。,"I feel much better. Thank you, Doctor.",楽になりました。先生、ありがとうございます。
+UI_NPC_DIALOGUE_FAILED_WANG_CHAO_FENG,你给我开的什么药啊…,What medicine did you give me...?,いったい何の薬を出したんですか……
+UI_NPC_NAME_WANG_DA_SAO,王大嫂,Wang Sister-in-law,王おばさん
+UI_NPC_DIALOGUE_AFTER_WANG_DA_SAO,麻烦先生了，我感觉好多了,"Thank you, Doctor. I feel much better.",先生、お世話になりました。楽になりました。
+UI_NPC_DIALOGUE_FAILED_WANG_DA_SAO,哎哟...哎哟…,Ow... ow...,あいたた……あいたた……
+UI_NPC_NAME_WANG_LAO_AN_REN,王老安人,Wang Old Madam,王老夫人
+UI_NPC_DIALOGUE_AFTER_WANG_LAO_AN_REN,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better.",先生、本当にありがとうございます。楽になりました。
+UI_NPC_DIALOGUE_FAILED_WANG_LAO_AN_REN,咳咳咳，哎哟...,"Cough, cough... ow...",ゴホゴホ……あいたた……
 UI_NPC_NAME_WANG_WU,王五,Wang Fifth,王五
-UI_NPC_DIALOGUE_AFTER_WANG_WU,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better.",多谢大夫，感觉好多了。
-UI_NPC_DIALOGUE_FAILED_WANG_WU,还是好难受啊…,I still feel awful...,还是好难受啊…
-UI_NPC_NAME_WANG_YUAN_SHAN,王远山,Wang Distant Mountain,王远山
-UI_NPC_DIALOGUE_AFTER_WANG_YUAN_SHAN,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better.",多谢先生了，我好多了。
-UI_NPC_DIALOGUE_FAILED_WANG_YUAN_SHAN,呃...不对啊。,Uh... something's not right.,呃...不对啊。
+UI_NPC_DIALOGUE_AFTER_WANG_WU,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。楽になりました。
+UI_NPC_DIALOGUE_FAILED_WANG_WU,还是好难受啊…,I still feel awful...,まだとてもつらい……
+UI_NPC_NAME_WANG_YUAN_SHAN,王远山,Wang Distant Mountain,王遠山
+UI_NPC_DIALOGUE_AFTER_WANG_YUAN_SHAN,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ良くなりました。
+UI_NPC_DIALOGUE_FAILED_WANG_YUAN_SHAN,呃...不对啊。,Uh... something's not right.,あれ……おかしいな。
 UI_NPC_NAME_WEI_DA_JIAO,魏大脚,Wei Bigfoot,魏大脚
-UI_NPC_DIALOGUE_AFTER_WEI_DA_JIAO,真是麻烦大夫啦，我感觉好多了。,"Thank you for your trouble, Doctor. I feel much better.",真是麻烦大夫啦，我感觉好多了。
-UI_NPC_DIALOGUE_FAILED_WEI_DA_JIAO,感觉更不舒服了…,I feel even worse...,感觉更不舒服了…
-UI_NPC_NAME_WU_BAN_TOU,吴班头,Wu Constable,吴班头
-UI_NPC_DIALOGUE_AFTER_WU_BAN_TOU,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",有劳先生了，感觉好多了。
-UI_NPC_DIALOGUE_FAILED_WU_BAN_TOU,他娘的，你给我吃的是什么？,"Damn it, what did you make me take?",他娘的，你给我吃的是什么？
+UI_NPC_DIALOGUE_AFTER_WEI_DA_JIAO,真是麻烦大夫啦，我感觉好多了。,"Thank you for your trouble, Doctor. I feel much better.",先生、お世話になりました。楽になりました。
+UI_NPC_DIALOGUE_FAILED_WEI_DA_JIAO,感觉更不舒服了…,I feel even worse...,前より具合が悪くなりました……
+UI_NPC_NAME_WU_BAN_TOU,吴班头,Wu Constable,呉班頭
+UI_NPC_DIALOGUE_AFTER_WU_BAN_TOU,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。
+UI_NPC_DIALOGUE_FAILED_WU_BAN_TOU,他娘的，你给我吃的是什么？,"Damn it, what did you make me take?",ちくしょう、何を飲ませたんだ？
 UI_NPC_NAME_XU_SI_GU,徐四姑,Xu Fourth Aunt,徐四姑
-UI_NPC_DIALOGUE_AFTER_XU_SI_GU,多谢大夫。,"Thank you, Doctor.",多谢大夫。
-UI_NPC_DIALOGUE_FAILED_XU_SI_GU,这是什么药？你想害死本姑娘啊？,What is this medicine? Are you trying to kill me?,这是什么药？你想害死本姑娘啊？
-UI_NPC_NAME_XU_XIANG_JUN,许香君,Xu Fragrant Lady,许香君
-UI_NPC_DIALOGUE_AFTER_XU_XIANG_JUN,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better.",多谢先生了，我好多了。
-UI_NPC_DIALOGUE_FAILED_XU_XIANG_JUN,您给我开的这是什么药啊…,What kind of medicine did you give me...?,您给我开的这是什么药啊…
-UI_NPC_NAME_YAN_BU_TOU,严捕头,Yan Constable,严捕头
-UI_NPC_DIALOGUE_AFTER_YAN_BU_TOU,好多了，多谢先生。,"Thank you, Doctor. I feel much better.",好多了，多谢先生。
-UI_NPC_DIALOGUE_FAILED_YAN_BU_TOU,嗯…哎哟…,Mm... ow...,嗯…哎哟…
-UI_NPC_NAME_YAN_PO,严婆,Yan Granny,严婆
-UI_NPC_DIALOGUE_AFTER_YAN_PO,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor.",感觉好多了，多谢先生。
-UI_NPC_DIALOGUE_FAILED_YAN_PO,咳咳咳，哎哟...,"Cough, cough... ow...",咳咳咳，哎哟...
-UI_NPC_NAME_YANG_XIU_CAI,杨秀才,Yang Scholar,杨秀才
-UI_NPC_DIALOGUE_AFTER_YANG_XIU_CAI,有劳大夫了，我好多了。,"Thank you, Doctor. I feel much better.",有劳大夫了，我好多了。
-UI_NPC_DIALOGUE_FAILED_YANG_XIU_CAI,您给我开的这是什么药啊…,What kind of medicine did you give me...?,您给我开的这是什么药啊…
-UI_NPC_NAME_YAO_ZHANG_GUI,姚掌柜,Yao Shopkeeper,姚掌柜
-UI_NPC_DIALOGUE_AFTER_YAO_ZHANG_GUI,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",多谢先生，我好多了。
-UI_NPC_DIALOGUE_FAILED_YAO_ZHANG_GUI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?",大夫，我这病怎么还不见好？
-UI_NPC_NAME_YE_JIANG_ZHOU,叶江舟,Ye River Boat,叶江舟
-UI_NPC_DIALOGUE_AFTER_YE_JIANG_ZHOU,麻烦先生了，我感觉好多了,"Thank you, Doctor. I feel much better.",麻烦先生了，我感觉好多了
-UI_NPC_DIALOGUE_FAILED_YE_JIANG_ZHOU,咳咳咳，好难受啊,"Cough, cough... I feel terrible.",咳咳咳，好难受啊
+UI_NPC_DIALOGUE_AFTER_XU_SI_GU,多谢大夫。,"Thank you, Doctor.",先生、ありがとうございます。
+UI_NPC_DIALOGUE_FAILED_XU_SI_GU,这是什么药？你想害死本姑娘啊？,What is this medicine? Are you trying to kill me?,何の薬よ？　私を殺す気？
+UI_NPC_NAME_XU_XIANG_JUN,许香君,Xu Fragrant Lady,許香君
+UI_NPC_DIALOGUE_AFTER_XU_XIANG_JUN,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ良くなりました。
+UI_NPC_DIALOGUE_FAILED_XU_XIANG_JUN,您给我开的这是什么药啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……
+UI_NPC_NAME_YAN_BU_TOU,严捕头,Yan Constable,厳捕頭
+UI_NPC_DIALOGUE_AFTER_YAN_BU_TOU,好多了，多谢先生。,"Thank you, Doctor. I feel much better.",楽になりました。先生、ありがとうございます。
+UI_NPC_DIALOGUE_FAILED_YAN_BU_TOU,嗯…哎哟…,Mm... ow...,うう……痛い……
+UI_NPC_NAME_YAN_PO,严婆,Yan Granny,厳婆
+UI_NPC_DIALOGUE_AFTER_YAN_PO,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor.",だいぶ楽になりました。先生、ありがとうございます。
+UI_NPC_DIALOGUE_FAILED_YAN_PO,咳咳咳，哎哟...,"Cough, cough... ow...",ゴホゴホ……あいたた……
+UI_NPC_NAME_YANG_XIU_CAI,杨秀才,Yang Scholar,楊秀才
+UI_NPC_DIALOGUE_AFTER_YANG_XIU_CAI,有劳大夫了，我好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。
+UI_NPC_DIALOGUE_FAILED_YANG_XIU_CAI,您给我开的这是什么药啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……
+UI_NPC_NAME_YAO_ZHANG_GUI,姚掌柜,Yao Shopkeeper,姚店主
+UI_NPC_DIALOGUE_AFTER_YAO_ZHANG_GUI,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。
+UI_NPC_DIALOGUE_FAILED_YAO_ZHANG_GUI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？
+UI_NPC_NAME_YE_JIANG_ZHOU,叶江舟,Ye River Boat,葉江舟
+UI_NPC_DIALOGUE_AFTER_YE_JIANG_ZHOU,麻烦先生了，我感觉好多了,"Thank you, Doctor. I feel much better.",先生、お世話になりました。楽になりました。
+UI_NPC_DIALOGUE_FAILED_YE_JIANG_ZHOU,咳咳咳，好难受啊,"Cough, cough... I feel terrible.",ゴホゴホ……つらい……
 UI_NPC_NAME_YOU_XIU_GU,尤秀姑,You Graceful Maiden,尤秀姑
-UI_NPC_DIALOGUE_AFTER_YOU_XIU_GU,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",多谢先生，感觉好多了。
-UI_NPC_DIALOGUE_FAILED_YOU_XIU_GU,嗯…哎哟…,Mm... ow...,嗯…哎哟…
-UI_NPC_NAME_ZHANG_SAN,张三,Zhang Third,张三
-UI_NPC_DIALOGUE_AFTER_ZHANG_SAN,多谢大夫，我好多了。,"Thank you, Doctor. I feel much better.",多谢大夫，我好多了。
-UI_NPC_DIALOGUE_FAILED_ZHANG_SAN,哎…奇怪…,Hmm... that's strange...,哎…奇怪…
-UI_NPC_NAME_ZHANG_TU,张屠,Zhang Butcher,张屠
-UI_NPC_DIALOGUE_AFTER_ZHANG_TU,哈哈哈，太谢谢了。,Ha! Thank you very much.,哈哈哈，太谢谢了。
-UI_NPC_DIALOGUE_FAILED_ZHANG_TU,他娘的怎么感觉怪怪的,"Damn it, why do I feel so strange?",他娘的怎么感觉怪怪的
-UI_NPC_NAME_ZHANG_YU_ZHI,张玉枝,Zhang Jade Branch,张玉枝
-UI_NPC_DIALOGUE_AFTER_ZHANG_YU_ZHI,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better.",真是多谢先生了，好多了
-UI_NPC_DIALOGUE_FAILED_ZHANG_YU_ZHI,嗯？感觉好奇怪啊…,Huh? I feel strange...,嗯？感觉好奇怪啊…
-UI_NPC_NAME_ZHAO_LIU,赵六,Zhao Sixth,赵六
-UI_NPC_DIALOGUE_AFTER_ZHAO_LIU,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",多谢先生，我好多了。
-UI_NPC_DIALOGUE_FAILED_ZHAO_LIU,还是好难受啊…,I still feel awful...,还是好难受啊…
-UI_NPC_NAME_ZHAO_YA_PO,赵牙婆,Zhao Matchmaker,赵牙婆
-UI_NPC_DIALOGUE_AFTER_ZHAO_YA_PO,哎哟，谢谢先生，您真是神医啊！,"Oh, thank you, Doctor! You're a marvelous physician!",哎哟，谢谢先生，您真是神医啊！
-UI_NPC_DIALOGUE_FAILED_ZHAO_YA_PO,哎，不对啊…,"Hmm, something's not right...",哎，不对啊…
-UI_NPC_NAME_ZHENG_ER_JIE,郑二姐,Zheng Second Sister,郑二姐
-UI_NPC_DIALOGUE_AFTER_ZHENG_ER_JIE,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",有劳先生了，感觉好多了。
-UI_NPC_DIALOGUE_FAILED_ZHENG_ER_JIE,哎…奇怪…,Hmm... that's strange...,哎…奇怪…
+UI_NPC_DIALOGUE_AFTER_YOU_XIU_GU,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。
+UI_NPC_DIALOGUE_FAILED_YOU_XIU_GU,嗯…哎哟…,Mm... ow...,うう……痛い……
+UI_NPC_NAME_ZHANG_SAN,张三,Zhang Third,張三
+UI_NPC_DIALOGUE_AFTER_ZHANG_SAN,多谢大夫，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。楽になりました。
+UI_NPC_DIALOGUE_FAILED_ZHANG_SAN,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……
+UI_NPC_NAME_ZHANG_TU,张屠,Zhang Butcher,張屠
+UI_NPC_DIALOGUE_AFTER_ZHANG_TU,哈哈哈，太谢谢了。,Ha! Thank you very much.,ははは、本当にありがとう。
+UI_NPC_DIALOGUE_FAILED_ZHANG_TU,他娘的怎么感觉怪怪的,"Damn it, why do I feel so strange?",ちくしょう、なんだか変な感じがする。
+UI_NPC_NAME_ZHANG_YU_ZHI,张玉枝,Zhang Jade Branch,張玉枝
+UI_NPC_DIALOGUE_AFTER_ZHANG_YU_ZHI,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better.",先生、本当にありがとうございます。楽になりました。
+UI_NPC_DIALOGUE_FAILED_ZHANG_YU_ZHI,嗯？感觉好奇怪啊…,Huh? I feel strange...,えっ？　なんだか変な感じがします……
+UI_NPC_NAME_ZHAO_LIU,赵六,Zhao Sixth,趙六
+UI_NPC_DIALOGUE_AFTER_ZHAO_LIU,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。
+UI_NPC_DIALOGUE_FAILED_ZHAO_LIU,还是好难受啊…,I still feel awful...,まだとてもつらい……
+UI_NPC_NAME_ZHAO_YA_PO,赵牙婆,Zhao Matchmaker,趙仲人
+UI_NPC_DIALOGUE_AFTER_ZHAO_YA_PO,哎哟，谢谢先生，您真是神医啊！,"Oh, thank you, Doctor! You're a marvelous physician!",先生、ありがとうございます！　本当に名医ですね！
+UI_NPC_DIALOGUE_FAILED_ZHAO_YA_PO,哎，不对啊…,"Hmm, something's not right...",あれ、おかしいな……
+UI_NPC_NAME_ZHENG_ER_JIE,郑二姐,Zheng Second Sister,鄭二姐
+UI_NPC_DIALOGUE_AFTER_ZHENG_ER_JIE,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。
+UI_NPC_DIALOGUE_FAILED_ZHENG_ER_JIE,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……
 UI_NPC_NAME_ZHOU_LU_AN,周炉安,Zhou Hearth Peace,周炉安
-UI_NPC_DIALOGUE_AFTER_ZHOU_LU_AN,多谢先生了。,"Thank you, Doctor.",多谢先生了。
-UI_NPC_DIALOGUE_FAILED_ZHOU_LU_AN,先生，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生，我这病怎么还不见好？
-UI_NPC_DIALOGUE_PREFIX_CHA_BO_SHI,我最近几日,"These past few days, I've been",我最近几日
-UI_NPC_DIALOGUE_SUFFIX_CHA_BO_SHI,劳烦先生给小可看看。,"Would you kindly examine me, Doctor?",劳烦先生给小可看看。
-UI_NPC_DIALOGUE_PREFIX_CHEN_ER,先生，我最近,"Doctor, lately I've been",先生，我最近
-UI_NPC_DIALOGUE_SUFFIX_CHEN_ER,帮我看看吧。,Could you take a look?,帮我看看吧。
-UI_NPC_DIALOGUE_PREFIX_CHEN_PO,先生，老婆子我这几日,"Doctor, these past few days I've been",先生，老婆子我这几日
-UI_NPC_DIALOGUE_SUFFIX_CHEN_PO,您快帮我看看吧。,"Please, have a look at me quickly.",您快帮我看看吧。
-UI_NPC_DIALOGUE_PREFIX_CHEN_SHAN_ZHANG,大夫，我这几日,"Doctor, these past few days I've been",大夫，我这几日
-UI_NPC_DIALOGUE_SUFFIX_CHEN_SHAN_ZHANG,劳烦您给我看看。,Would you kindly take a look?,劳烦您给我看看。
-UI_NPC_DIALOGUE_PREFIX_DU_ER_SAO,先生，我这两天,"Doctor, for the past couple of days I've been",先生，我这两天
-UI_NPC_DIALOGUE_SUFFIX_DU_ER_SAO,请您帮我看看。,Could you please examine me?,请您帮我看看。
-UI_NPC_DIALOGUE_PREFIX_FENG_JUN_BAO,我这几日,"These past few days, I've been",我这几日
-UI_NPC_DIALOGUE_SUFFIX_FENG_JUN_BAO,请您帮我看看吧。,"Please, could you take a look?",请您帮我看看吧。
-UI_NPC_DIALOGUE_PREFIX_GAO_XIU_LIAN,大夫，我最近,"Doctor, lately I've been",大夫，我最近
-UI_NPC_DIALOGUE_SUFFIX_GAO_XIU_LIAN,麻烦您给瞧瞧,Would you mind taking a look?,麻烦您给瞧瞧
-UI_NPC_DIALOGUE_PREFIX_HAN_ZHANG_GUI,大夫，我这两天,"Doctor, for the past couple of days I've been",大夫，我这两天
-UI_NPC_DIALOGUE_SUFFIX_HAN_ZHANG_GUI,劳烦您给我看看。,Would you kindly take a look?,劳烦您给我看看。
-UI_NPC_DIALOGUE_PREFIX_HE_SAN_JIE,我这两天,"For the past couple of days, I've been",我这两天
-UI_NPC_DIALOGUE_SUFFIX_HE_SAN_JIE,请您给我看看吧。,Please take a look and see what's wrong.,请您给我看看吧。
-UI_NPC_DIALOGUE_PREFIX_HE_ZHANG_SHAO,大夫，我最近,"Doctor, lately I've been",大夫，我最近
-UI_NPC_DIALOGUE_SUFFIX_HE_ZHANG_SHAO,大夫快给我看看吧。,"Doctor, please have a look at me quickly.",大夫快给我看看吧。
-UI_NPC_DIALOGUE_PREFIX_HUA_JIN_NIANG,我这几日,"These past few days, I've been",我这几日
-UI_NPC_DIALOGUE_SUFFIX_HUA_JIN_NIANG,劳烦先生您给小妇看看。,"Would you kindly examine me, Doctor?",劳烦先生您给小妇看看。
-UI_NPC_DIALOGUE_PREFIX_HUA_YUN,先生，我这几天,"Doctor, these past few days I've been",先生，我这几天
-UI_NPC_DIALOGUE_SUFFIX_HUA_YUN,烦请先生给我看看。,"Doctor, would you please take a look?",烦请先生给我看看。
-UI_NPC_DIALOGUE_PREFIX_HUANG_NIU_ER,哎哟大夫，我,"Oh dear, Doctor, I've been",哎哟大夫，我
-UI_NPC_DIALOGUE_SUFFIX_HUANG_NIU_ER,快给我看看吧。,Please have a look at me quickly.,快给我看看吧。
-UI_NPC_DIALOGUE_PREFIX_HUANG_QIU_JU,我这两天,"For the past couple of days, I've been",我这两天
-UI_NPC_DIALOGUE_SUFFIX_HUANG_QIU_JU,请您给小女看看吧。,Please take a look at me.,请您给小女看看吧。
-UI_NPC_DIALOGUE_PREFIX_JI_YUN_NIANG,先生，我这几日,"Doctor, these past few days I've been",先生，我这几日
-UI_NPC_DIALOGUE_SUFFIX_JI_YUN_NIANG,麻烦您给小女子看看。,Would you mind examining me?,麻烦您给小女子看看。
-UI_NPC_DIALOGUE_PREFIX_JIANG_CHUAN_ER,大夫，我这几天,"Doctor, these past few days I've been",大夫，我这几天
-UI_NPC_DIALOGUE_SUFFIX_JIANG_CHUAN_ER,给我看看吧。,"Have a look at me, please.",给我看看吧。
-UI_NPC_DIALOGUE_PREFIX_JIANG_YUE_NIANG,我这几日,"These past few days, I've been",我这几日
-UI_NPC_DIALOGUE_SUFFIX_JIANG_YUE_NIANG,劳烦先生给我看看。,"Doctor, would you kindly take a look?",劳烦先生给我看看。
-UI_NPC_DIALOGUE_PREFIX_LI_GOU_DAN,先生，俺这两天,"Doctor, these past couple of days I've been",先生，俺这两天
-UI_NPC_DIALOGUE_SUFFIX_LI_GOU_DAN,请您给俺看看吧。,Please take a look at me.,请您给俺看看吧。
-UI_NPC_DIALOGUE_PREFIX_LI_JIN_QING,先生，我这几日,"Doctor, these past few days I've been",先生，我这几日
-UI_NPC_DIALOGUE_SUFFIX_LI_JIN_QING,烦请先生给看看。,"Doctor, please take a look.",烦请先生给看看。
-UI_NPC_DIALOGUE_PREFIX_LI_SI,先生，我这几天,"Doctor, these past few days I've been",先生，我这几天
-UI_NPC_DIALOGUE_SUFFIX_LI_SI,麻烦您帮我看看吧。,Could you please see what's wrong?,麻烦您帮我看看吧。
-UI_NPC_DIALOGUE_PREFIX_LI_YUAN_WAI,小郎中啊，老夫这几日,"Young doctor, these past few days I've been",小郎中啊，老夫这几日
-UI_NPC_DIALOGUE_SUFFIX_LI_YUAN_WAI,你给老夫瞧瞧。,"Take a look at me, young doctor.",你给老夫瞧瞧。
-UI_NPC_DIALOGUE_PREFIX_LIN_QIAO_NIANG,我这几日,"These past few days, I've been",我这几日
-UI_NPC_DIALOGUE_SUFFIX_LIN_QIAO_NIANG,劳烦先生您给小妇看看。,"Would you kindly examine me, Doctor?",劳烦先生您给小妇看看。
-UI_NPC_DIALOGUE_PREFIX_LIU_DA,大夫，俺这两天,"Doctor, these past couple of days I've been",大夫，俺这两天
-UI_NPC_DIALOGUE_SUFFIX_LIU_DA,麻烦您帮俺看看吧。,Could you please see what's wrong with me?,麻烦您帮俺看看吧。
-UI_NPC_DIALOGUE_PREFIX_LIU_FU,大夫，我最近,"Doctor, lately I've been",大夫，我最近
-UI_NPC_DIALOGUE_SUFFIX_LIU_FU,给我看看吧。,"Have a look at me, please.",给我看看吧。
-UI_NPC_DIALOGUE_PREFIX_LIU_TAI_GONG,先生啊，老朽这几日,"Doctor, these past few days I've been",先生啊，老朽这几日
-UI_NPC_DIALOGUE_SUFFIX_LIU_TAI_GONG,麻烦您给我看看。,Would you mind taking a look?,麻烦您给我看看。
-UI_NPC_DIALOGUE_PREFIX_LIU_WEN_PO,先生啊，俺这几天,"Doctor, these past few days I've been",先生啊，俺这几天
-UI_NPC_DIALOGUE_SUFFIX_LIU_WEN_PO,请您给俺看看。,Please have a look at me.,请您给俺看看。
-UI_NPC_DIALOGUE_PREFIX_LIU_YING_ER,先生，我这几天,"Doctor, these past few days I've been",先生，我这几天
-UI_NPC_DIALOGUE_SUFFIX_LIU_YING_ER,请您给小女看看吧。,Please take a look at me.,请您给小女看看吧。
-UI_NPC_DIALOGUE_PREFIX_LV_TAI_JUN,小先生啊，老婆子我最近,"Young doctor, lately I've been",小先生啊，老婆子我最近
-UI_NPC_DIALOGUE_SUFFIX_LV_TAI_JUN,您给我瞧瞧。,"Have a look at me, would you?",您给我瞧瞧。
-UI_NPC_DIALOGUE_PREFIX_MA_CHANG_FENG,先生，我最近,"Doctor, lately I've been",先生，我最近
-UI_NPC_DIALOGUE_SUFFIX_MA_CHANG_FENG,麻烦您给看看。,Would you mind having a look?,麻烦您给看看。
-UI_NPC_DIALOGUE_PREFIX_QIAN_BU_LOU,我最近,"Lately, I've been",我最近
-UI_NPC_DIALOGUE_SUFFIX_QIAN_BU_LOU,快快，快给我看看。,Quickly—please take a look at me.,快快，快给我看看。
-UI_NPC_DIALOGUE_PREFIX_QIN_SAN_NIANG,咳咳，大夫，我这几日,"Ahem... Doctor, these past few days I've been",咳咳，大夫，我这几日
-UI_NPC_DIALOGUE_SUFFIX_QIN_SAN_NIANG,劳烦您给我看看。,Would you kindly take a look?,劳烦您给我看看。
-UI_NPC_DIALOGUE_PREFIX_SHEN_GUI,哎哟哟，我,Oh dear... I've been,哎哟哟，我
-UI_NPC_DIALOGUE_SUFFIX_SHEN_GUI,快给我看看吧。,Please have a look at me quickly.,快给我看看吧。
-UI_NPC_DIALOGUE_PREFIX_SHI_GAN,咳咳，先生我这两天,"Ahem... Doctor, these past couple of days I've been",咳咳，先生我这两天
-UI_NPC_DIALOGUE_SUFFIX_SHI_GAN,您快帮我看看吧。,"Please, have a look at me quickly.",您快帮我看看吧。
-UI_NPC_DIALOGUE_PREFIX_SHI_GENG_SHENG,我最近几天,"These past few days, I've been",我最近几天
-UI_NPC_DIALOGUE_SUFFIX_SHI_GENG_SHENG,请您给看看吧。,Please have a look.,请您给看看吧。
-UI_NPC_DIALOGUE_PREFIX_SU_XIU_HE,先生，我这几日,"Doctor, these past few days I've been",先生，我这几日
-UI_NPC_DIALOGUE_SUFFIX_SU_XIU_HE,麻烦您给小女子看看。,Would you mind examining me?,麻烦您给小女子看看。
-UI_NPC_DIALOGUE_PREFIX_SUN_JIANG_ER,先生，我这几日,"Doctor, these past few days I've been",先生，我这几日
-UI_NPC_DIALOGUE_SUFFIX_SUN_JIANG_ER,请您帮我看看吧。,"Please, could you take a look?",请您帮我看看吧。
-UI_NPC_DIALOGUE_PREFIX_SUN_XIAO_MEI,我这几天,"These past few days, I've been",我这几天
-UI_NPC_DIALOGUE_SUFFIX_SUN_XIAO_MEI,请您给我看看吧。,Please take a look and see what's wrong.,请您给我看看吧。
-UI_NPC_DIALOGUE_PREFIX_TIAN_CHUN_LUO,我最近几日,"These past few days, I've been",我最近几日
-UI_NPC_DIALOGUE_SUFFIX_TIAN_CHUN_LUO,请您给看看。,Please take a look.,请您给看看。
-UI_NPC_DIALOGUE_PREFIX_WANG_CHAO_FENG,咳咳，我最近,"Ahem... Lately, I've been",咳咳，我最近
-UI_NPC_DIALOGUE_SUFFIX_WANG_CHAO_FENG,您帮老夫瞧瞧。,"Would you take a look at me, Doctor?",您帮老夫瞧瞧。
-UI_NPC_DIALOGUE_PREFIX_WANG_DA_SAO,先生，俺这两天,"Doctor, these past couple of days I've been",先生，俺这两天
-UI_NPC_DIALOGUE_SUFFIX_WANG_DA_SAO,您帮俺瞧瞧。,Could you have a look at me?,您帮俺瞧瞧。
-UI_NPC_DIALOGUE_PREFIX_WANG_LAO_AN_REN,先生，老妇这两天,"Doctor, these past couple of days I've been",先生，老妇这两天
-UI_NPC_DIALOGUE_SUFFIX_WANG_LAO_AN_REN,劳烦您给我看看。,Would you kindly take a look?,劳烦您给我看看。
-UI_NPC_DIALOGUE_PREFIX_WANG_WU,大夫，我这两天,"Doctor, for the past couple of days I've been",大夫，我这两天
-UI_NPC_DIALOGUE_SUFFIX_WANG_WU,给我看看吧。,"Have a look at me, please.",给我看看吧。
-UI_NPC_DIALOGUE_PREFIX_WANG_YUAN_SHAN,先生，我最近,"Doctor, lately I've been",先生，我最近
-UI_NPC_DIALOGUE_SUFFIX_WANG_YUAN_SHAN,请您给我看看吧。,Please take a look and see what's wrong.,请您给我看看吧。
-UI_NPC_DIALOGUE_PREFIX_WEI_DA_JIAO,哎哟，俺这两天,Oh dear... These past couple of days I've been,哎哟，俺这两天
-UI_NPC_DIALOGUE_SUFFIX_WEI_DA_JIAO,麻烦您给瞧瞧,Would you mind taking a look?,麻烦您给瞧瞧
-UI_NPC_DIALOGUE_PREFIX_WU_BAN_TOU,大夫，我最近,"Doctor, lately I've been",大夫，我最近
-UI_NPC_DIALOGUE_SUFFIX_WU_BAN_TOU,您快帮我看看吧。,"Please, have a look at me quickly.",您快帮我看看吧。
-UI_NPC_DIALOGUE_PREFIX_XU_SI_GU,我最近,"Lately, I've been",我最近
-UI_NPC_DIALOGUE_SUFFIX_XU_SI_GU,快给我看看吧。,Please have a look at me quickly.,快给我看看吧。
-UI_NPC_DIALOGUE_PREFIX_XU_XIANG_JUN,先生，我这几日,"Doctor, these past few days I've been",先生，我这几日
-UI_NPC_DIALOGUE_SUFFIX_XU_XIANG_JUN,烦请先生给奴家看看。,"Doctor, would you kindly examine me?",烦请先生给奴家看看。
-UI_NPC_DIALOGUE_PREFIX_YAN_BU_TOU,我这几日,"These past few days, I've been",我这几日
-UI_NPC_DIALOGUE_SUFFIX_YAN_BU_TOU,烦请先生给看看。,"Doctor, please take a look.",烦请先生给看看。
-UI_NPC_DIALOGUE_PREFIX_YAN_PO,先生，老妇这两天,"Doctor, these past couple of days I've been",先生，老妇这两天
-UI_NPC_DIALOGUE_SUFFIX_YAN_PO,请您帮我看看吧。,"Please, could you take a look?",请您帮我看看吧。
-UI_NPC_DIALOGUE_PREFIX_YANG_XIU_CAI,大夫，学生这几日,"Doctor, these past few days I've been",大夫，学生这几日
-UI_NPC_DIALOGUE_SUFFIX_YANG_XIU_CAI,请您给看看吧。,Please have a look.,请您给看看吧。
-UI_NPC_DIALOGUE_PREFIX_YAO_ZHANG_GUI,先生，我这两天,"Doctor, for the past couple of days I've been",先生，我这两天
-UI_NPC_DIALOGUE_SUFFIX_YAO_ZHANG_GUI,请您给看看。,Please take a look.,请您给看看。
-UI_NPC_DIALOGUE_PREFIX_YE_JIANG_ZHOU,先生，我这几日,"Doctor, these past few days I've been",先生，我这几日
-UI_NPC_DIALOGUE_SUFFIX_YE_JIANG_ZHOU,劳烦先生给小可看看。,"Would you kindly examine me, Doctor?",劳烦先生给小可看看。
-UI_NPC_DIALOGUE_PREFIX_YOU_XIU_GU,我最近几天,"These past few days, I've been",我最近几天
-UI_NPC_DIALOGUE_SUFFIX_YOU_XIU_GU,请先生给我看看吧,"Doctor, please take a look at me.",请先生给我看看吧
-UI_NPC_DIALOGUE_PREFIX_ZHANG_SAN,大夫，我这几天,"Doctor, these past few days I've been",大夫，我这几天
-UI_NPC_DIALOGUE_SUFFIX_ZHANG_SAN,帮我看看吧。,Could you take a look?,帮我看看吧。
-UI_NPC_DIALOGUE_PREFIX_ZHANG_TU,哎哟大夫，俺,"Oh dear, Doctor, I've been",哎哟大夫，俺
-UI_NPC_DIALOGUE_SUFFIX_ZHANG_TU,快给俺看看吧。,"Please, have a look at me quickly.",快给俺看看吧。
-UI_NPC_DIALOGUE_PREFIX_ZHANG_YU_ZHI,大夫，我这两天,"Doctor, for the past couple of days I've been",大夫，我这两天
-UI_NPC_DIALOGUE_SUFFIX_ZHANG_YU_ZHI,麻烦您帮我看看吧。,Could you please see what's wrong?,麻烦您帮我看看吧。
-UI_NPC_DIALOGUE_PREFIX_ZHAO_LIU,先生，我最近,"Doctor, lately I've been",先生，我最近
-UI_NPC_DIALOGUE_SUFFIX_ZHAO_LIU,麻烦您给我看看。,Would you mind taking a look?,麻烦您给我看看。
-UI_NPC_DIALOGUE_PREFIX_ZHAO_YA_PO,大夫，老婆子我这几日,"Doctor, these past few days I've been",大夫，老婆子我这几日
-UI_NPC_DIALOGUE_SUFFIX_ZHAO_YA_PO,劳烦您给我看看。,Would you kindly take a look?,劳烦您给我看看。
-UI_NPC_DIALOGUE_PREFIX_ZHENG_ER_JIE,先生，我最近,"Doctor, lately I've been",先生，我最近
-UI_NPC_DIALOGUE_SUFFIX_ZHENG_ER_JIE,麻烦您给我看看。,Would you mind taking a look?,麻烦您给我看看。
-UI_NPC_DIALOGUE_PREFIX_ZHOU_LU_AN,大夫，我这几天,"Doctor, these past few days I've been",大夫，我这几天
-UI_NPC_DIALOGUE_SUFFIX_ZHOU_LU_AN,麻烦您给我看看。,Would you mind taking a look?,麻烦您给我看看。
-UI_NPC_GENERIC_SYMPTOM,身体不适,feeling unwell,身体不适
-STORY_000_01_001_TEXT,转眼多年过去…,Years passed in the blink of an eye…,转眼多年过去…
-STORY_000_01_002_TEXT,李东璧去各地实地考察，采集样本，参考800多种书籍，历经三次改写，终于完成著作。全书共52卷，载药1892种，方剂11096首，插图1109幅，约190万字。,"Li Dongbi traveled far and wide to study medicinal plants and collect specimens. Drawing on more than 800 books, he revised his manuscript three times before finally completing it: 52 volumes describing 1,892 medicinal substances and 11,096 prescriptions, with 1,109 illustrations and roughly 1.9 million Chinese characters.",李东璧去各地实地考察，采集样本，参考800多种书籍，历经三次改写，终于完成著作。全书共52卷，载药1892种，方剂11096首，插图1109幅，约190万字。
+UI_NPC_DIALOGUE_AFTER_ZHOU_LU_AN,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。
+UI_NPC_DIALOGUE_FAILED_ZHOU_LU_AN,先生，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？
+UI_NPC_DIALOGUE_PREFIX_CHA_BO_SHI,我最近几日,"These past few days, I've been",ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_CHA_BO_SHI,劳烦先生给小可看看。,"Would you kindly examine me, Doctor?",先生、診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_CHEN_ER,先生，我最近,"Doctor, lately I've been",先生、最近、
+UI_NPC_DIALOGUE_SUFFIX_CHEN_ER,帮我看看吧。,Could you take a look?,診てください。
+UI_NPC_DIALOGUE_PREFIX_CHEN_PO,先生，老婆子我这几日,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_CHEN_PO,您快帮我看看吧。,"Please, have a look at me quickly.",早く診てください。
+UI_NPC_DIALOGUE_PREFIX_CHEN_SHAN_ZHANG,大夫，我这几日,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_CHEN_SHAN_ZHANG,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_DU_ER_SAO,先生，我这两天,"Doctor, for the past couple of days I've been",先生、この二日ほど、
+UI_NPC_DIALOGUE_SUFFIX_DU_ER_SAO,请您帮我看看。,Could you please examine me?,診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_FENG_JUN_BAO,我这几日,"These past few days, I've been",ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_FENG_JUN_BAO,请您帮我看看吧。,"Please, could you take a look?",診ていただけませんか。
+UI_NPC_DIALOGUE_PREFIX_GAO_XIU_LIAN,大夫，我最近,"Doctor, lately I've been",先生、最近、
+UI_NPC_DIALOGUE_SUFFIX_GAO_XIU_LIAN,麻烦您给瞧瞧,Would you mind taking a look?,診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_HAN_ZHANG_GUI,大夫，我这两天,"Doctor, for the past couple of days I've been",先生、この二日ほど、
+UI_NPC_DIALOGUE_SUFFIX_HAN_ZHANG_GUI,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_HE_SAN_JIE,我这两天,"For the past couple of days, I've been",この二日ほど、
+UI_NPC_DIALOGUE_SUFFIX_HE_SAN_JIE,请您给我看看吧。,Please take a look and see what's wrong.,診察をお願いします。
+UI_NPC_DIALOGUE_PREFIX_HE_ZHANG_SHAO,大夫，我最近,"Doctor, lately I've been",先生、最近、
+UI_NPC_DIALOGUE_SUFFIX_HE_ZHANG_SHAO,大夫快给我看看吧。,"Doctor, please have a look at me quickly.",先生、早く診てください。
+UI_NPC_DIALOGUE_PREFIX_HUA_JIN_NIANG,我这几日,"These past few days, I've been",ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_HUA_JIN_NIANG,劳烦先生您给小妇看看。,"Would you kindly examine me, Doctor?",先生、私を診ていただけませんか。
+UI_NPC_DIALOGUE_PREFIX_HUA_YUN,先生，我这几天,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_HUA_YUN,烦请先生给我看看。,"Doctor, would you please take a look?",先生、どうか診てください。
+UI_NPC_DIALOGUE_PREFIX_HUANG_NIU_ER,哎哟大夫，我,"Oh dear, Doctor, I've been",あいたた……先生、私は
+UI_NPC_DIALOGUE_SUFFIX_HUANG_NIU_ER,快给我看看吧。,Please have a look at me quickly.,早く診てください。
+UI_NPC_DIALOGUE_PREFIX_HUANG_QIU_JU,我这两天,"For the past couple of days, I've been",この二日ほど、
+UI_NPC_DIALOGUE_SUFFIX_HUANG_QIU_JU,请您给小女看看吧。,Please take a look at me.,娘を診ていただけませんか。
+UI_NPC_DIALOGUE_PREFIX_JI_YUN_NIANG,先生，我这几日,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_JI_YUN_NIANG,麻烦您给小女子看看。,Would you mind examining me?,私を診ていただけませんか。
+UI_NPC_DIALOGUE_PREFIX_JIANG_CHUAN_ER,大夫，我这几天,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_JIANG_CHUAN_ER,给我看看吧。,"Have a look at me, please.",診てください。
+UI_NPC_DIALOGUE_PREFIX_JIANG_YUE_NIANG,我这几日,"These past few days, I've been",ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_JIANG_YUE_NIANG,劳烦先生给我看看。,"Doctor, would you kindly take a look?",先生、診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_LI_GOU_DAN,先生，俺这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、
+UI_NPC_DIALOGUE_SUFFIX_LI_GOU_DAN,请您给俺看看吧。,Please take a look at me.,どうか診てください。
+UI_NPC_DIALOGUE_PREFIX_LI_JIN_QING,先生，我这几日,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_LI_JIN_QING,烦请先生给看看。,"Doctor, please take a look.",先生、どうか診てください。
+UI_NPC_DIALOGUE_PREFIX_LI_SI,先生，我这几天,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_LI_SI,麻烦您帮我看看吧。,Could you please see what's wrong?,どうか診ていただけませんか。
+UI_NPC_DIALOGUE_PREFIX_LI_YUAN_WAI,小郎中啊，老夫这几日,"Young doctor, these past few days I've been",若い先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_LI_YUAN_WAI,你给老夫瞧瞧。,"Take a look at me, young doctor.",わしを診てくれ。
+UI_NPC_DIALOGUE_PREFIX_LIN_QIAO_NIANG,我这几日,"These past few days, I've been",ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_LIN_QIAO_NIANG,劳烦先生您给小妇看看。,"Would you kindly examine me, Doctor?",先生、私を診ていただけませんか。
+UI_NPC_DIALOGUE_PREFIX_LIU_DA,大夫，俺这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、
+UI_NPC_DIALOGUE_SUFFIX_LIU_DA,麻烦您帮俺看看吧。,Could you please see what's wrong with me?,どうか診てください。
+UI_NPC_DIALOGUE_PREFIX_LIU_FU,大夫，我最近,"Doctor, lately I've been",先生、最近、
+UI_NPC_DIALOGUE_SUFFIX_LIU_FU,给我看看吧。,"Have a look at me, please.",診てください。
+UI_NPC_DIALOGUE_PREFIX_LIU_TAI_GONG,先生啊，老朽这几日,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_LIU_TAI_GONG,麻烦您给我看看。,Would you mind taking a look?,診察をお願いします。
+UI_NPC_DIALOGUE_PREFIX_LIU_WEN_PO,先生啊，俺这几天,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_LIU_WEN_PO,请您给俺看看。,Please have a look at me.,どうか診てください。
+UI_NPC_DIALOGUE_PREFIX_LIU_YING_ER,先生，我这几天,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_LIU_YING_ER,请您给小女看看吧。,Please take a look at me.,娘を診ていただけませんか。
+UI_NPC_DIALOGUE_PREFIX_LV_TAI_JUN,小先生啊，老婆子我最近,"Young doctor, lately I've been",若先生、最近、
+UI_NPC_DIALOGUE_SUFFIX_LV_TAI_JUN,您给我瞧瞧。,"Have a look at me, would you?",診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_MA_CHANG_FENG,先生，我最近,"Doctor, lately I've been",先生、最近、
+UI_NPC_DIALOGUE_SUFFIX_MA_CHANG_FENG,麻烦您给看看。,Would you mind having a look?,診察をお願いします。
+UI_NPC_DIALOGUE_PREFIX_QIAN_BU_LOU,我最近,"Lately, I've been",最近、
+UI_NPC_DIALOGUE_SUFFIX_QIAN_BU_LOU,快快，快给我看看。,Quickly—please take a look at me.,早く、早く診てくれ。
+UI_NPC_DIALOGUE_PREFIX_QIN_SAN_NIANG,咳咳，大夫，我这几日,"Ahem... Doctor, these past few days I've been",ゴホゴホ……先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_QIN_SAN_NIANG,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_SHEN_GUI,哎哟哟，我,Oh dear... I've been,あいたた……私は
+UI_NPC_DIALOGUE_SUFFIX_SHEN_GUI,快给我看看吧。,Please have a look at me quickly.,早く診てください。
+UI_NPC_DIALOGUE_PREFIX_SHI_GAN,咳咳，先生我这两天,"Ahem... Doctor, these past couple of days I've been",ゴホゴホ……先生、この二日ほど、
+UI_NPC_DIALOGUE_SUFFIX_SHI_GAN,您快帮我看看吧。,"Please, have a look at me quickly.",早く診てください。
+UI_NPC_DIALOGUE_PREFIX_SHI_GENG_SHENG,我最近几天,"These past few days, I've been",ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_SHI_GENG_SHENG,请您给看看吧。,Please have a look.,どうか診てください。
+UI_NPC_DIALOGUE_PREFIX_SU_XIU_HE,先生，我这几日,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_SU_XIU_HE,麻烦您给小女子看看。,Would you mind examining me?,私を診ていただけませんか。
+UI_NPC_DIALOGUE_PREFIX_SUN_JIANG_ER,先生，我这几日,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_SUN_JIANG_ER,请您帮我看看吧。,"Please, could you take a look?",診ていただけませんか。
+UI_NPC_DIALOGUE_PREFIX_SUN_XIAO_MEI,我这几天,"These past few days, I've been",ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_SUN_XIAO_MEI,请您给我看看吧。,Please take a look and see what's wrong.,診察をお願いします。
+UI_NPC_DIALOGUE_PREFIX_TIAN_CHUN_LUO,我最近几日,"These past few days, I've been",ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_TIAN_CHUN_LUO,请您给看看。,Please take a look.,診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_WANG_CHAO_FENG,咳咳，我最近,"Ahem... Lately, I've been",ゴホゴホ……最近、
+UI_NPC_DIALOGUE_SUFFIX_WANG_CHAO_FENG,您帮老夫瞧瞧。,"Would you take a look at me, Doctor?",わしを診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_WANG_DA_SAO,先生，俺这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、
+UI_NPC_DIALOGUE_SUFFIX_WANG_DA_SAO,您帮俺瞧瞧。,Could you have a look at me?,診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_WANG_LAO_AN_REN,先生，老妇这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、
+UI_NPC_DIALOGUE_SUFFIX_WANG_LAO_AN_REN,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_WANG_WU,大夫，我这两天,"Doctor, for the past couple of days I've been",先生、この二日ほど、
+UI_NPC_DIALOGUE_SUFFIX_WANG_WU,给我看看吧。,"Have a look at me, please.",診てください。
+UI_NPC_DIALOGUE_PREFIX_WANG_YUAN_SHAN,先生，我最近,"Doctor, lately I've been",先生、最近、
+UI_NPC_DIALOGUE_SUFFIX_WANG_YUAN_SHAN,请您给我看看吧。,Please take a look and see what's wrong.,診察をお願いします。
+UI_NPC_DIALOGUE_PREFIX_WEI_DA_JIAO,哎哟，俺这两天,Oh dear... These past couple of days I've been,あいたた……この二日ほど、
+UI_NPC_DIALOGUE_SUFFIX_WEI_DA_JIAO,麻烦您给瞧瞧,Would you mind taking a look?,診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_WU_BAN_TOU,大夫，我最近,"Doctor, lately I've been",先生、最近、
+UI_NPC_DIALOGUE_SUFFIX_WU_BAN_TOU,您快帮我看看吧。,"Please, have a look at me quickly.",早く診てください。
+UI_NPC_DIALOGUE_PREFIX_XU_SI_GU,我最近,"Lately, I've been",最近、
+UI_NPC_DIALOGUE_SUFFIX_XU_SI_GU,快给我看看吧。,Please have a look at me quickly.,早く診てください。
+UI_NPC_DIALOGUE_PREFIX_XU_XIANG_JUN,先生，我这几日,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_XU_XIANG_JUN,烦请先生给奴家看看。,"Doctor, would you kindly examine me?",先生、どうか私を診てください。
+UI_NPC_DIALOGUE_PREFIX_YAN_BU_TOU,我这几日,"These past few days, I've been",ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_YAN_BU_TOU,烦请先生给看看。,"Doctor, please take a look.",先生、どうか診てください。
+UI_NPC_DIALOGUE_PREFIX_YAN_PO,先生，老妇这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、
+UI_NPC_DIALOGUE_SUFFIX_YAN_PO,请您帮我看看吧。,"Please, could you take a look?",診ていただけませんか。
+UI_NPC_DIALOGUE_PREFIX_YANG_XIU_CAI,大夫，学生这几日,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_YANG_XIU_CAI,请您给看看吧。,Please have a look.,どうか診てください。
+UI_NPC_DIALOGUE_PREFIX_YAO_ZHANG_GUI,先生，我这两天,"Doctor, for the past couple of days I've been",先生、この二日ほど、
+UI_NPC_DIALOGUE_SUFFIX_YAO_ZHANG_GUI,请您给看看。,Please take a look.,診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_YE_JIANG_ZHOU,先生，我这几日,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_YE_JIANG_ZHOU,劳烦先生给小可看看。,"Would you kindly examine me, Doctor?",先生、診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_YOU_XIU_GU,我最近几天,"These past few days, I've been",ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_YOU_XIU_GU,请先生给我看看吧,"Doctor, please take a look at me.",先生、どうか診てください。
+UI_NPC_DIALOGUE_PREFIX_ZHANG_SAN,大夫，我这几天,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_ZHANG_SAN,帮我看看吧。,Could you take a look?,診てください。
+UI_NPC_DIALOGUE_PREFIX_ZHANG_TU,哎哟大夫，俺,"Oh dear, Doctor, I've been",あいたた……先生、私は
+UI_NPC_DIALOGUE_SUFFIX_ZHANG_TU,快给俺看看吧。,"Please, have a look at me quickly.",早く診てください。
+UI_NPC_DIALOGUE_PREFIX_ZHANG_YU_ZHI,大夫，我这两天,"Doctor, for the past couple of days I've been",先生、この二日ほど、
+UI_NPC_DIALOGUE_SUFFIX_ZHANG_YU_ZHI,麻烦您帮我看看吧。,Could you please see what's wrong?,どうか診ていただけませんか。
+UI_NPC_DIALOGUE_PREFIX_ZHAO_LIU,先生，我最近,"Doctor, lately I've been",先生、最近、
+UI_NPC_DIALOGUE_SUFFIX_ZHAO_LIU,麻烦您给我看看。,Would you mind taking a look?,診察をお願いします。
+UI_NPC_DIALOGUE_PREFIX_ZHAO_YA_PO,大夫，老婆子我这几日,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_ZHAO_YA_PO,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。
+UI_NPC_DIALOGUE_PREFIX_ZHENG_ER_JIE,先生，我最近,"Doctor, lately I've been",先生、最近、
+UI_NPC_DIALOGUE_SUFFIX_ZHENG_ER_JIE,麻烦您给我看看。,Would you mind taking a look?,診察をお願いします。
+UI_NPC_DIALOGUE_PREFIX_ZHOU_LU_AN,大夫，我这几天,"Doctor, these past few days I've been",先生、ここ数日、
+UI_NPC_DIALOGUE_SUFFIX_ZHOU_LU_AN,麻烦您给我看看。,Would you mind taking a look?,診察をお願いします。
+UI_NPC_GENERIC_SYMPTOM,身体不适,feeling unwell,体調が優れません
+STORY_000_01_001_TEXT,转眼多年过去…,Years passed in the blink of an eye…,それから長い年月が流れた……
+STORY_000_01_002_TEXT,李东璧去各地实地考察，采集样本，参考800多种书籍，历经三次改写，终于完成著作。全书共52卷，载药1892种，方剂11096首，插图1109幅，约190万字。,"Li Dongbi traveled far and wide to study medicinal plants and collect specimens. Drawing on more than 800 books, he revised his manuscript three times before finally completing it: 52 volumes describing 1,892 medicinal substances and 11,096 prescriptions, with 1,109 illustrations and roughly 1.9 million Chinese characters.",李東璧は各地を実地調査し、標本を集め、800種を超える書物を参照した。原稿を三度書き直し、ついに著作を完成させた。全52巻、収録した薬は1892種、処方は11096方、挿絵は1109点、文字数は約190万字に及ぶ。
 STORY_000_01_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_000_01_003_TEXT,终于完成了…,At last… it's finished.,终于完成了…
+STORY_000_01_003_TEXT,终于完成了…,At last… it's finished.,ようやく完成した……
 STORY_000_01_004_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_000_01_004_TEXT,老头子...,You old man…,老头子...
+STORY_000_01_004_TEXT,老头子...,You old man…,あなた……
 STORY_000_01_005_SPEAKER,李建中,Li Jianzhong,李建中
-STORY_000_01_005_TEXT,爹，您写的这部旷世奇书一定要出版发行，让天下人都能用上。,"Father, this extraordinary book of yours must be published, so people everywhere can put it to use.",爹，您写的这部旷世奇书一定要出版发行，让天下人都能用上。
+STORY_000_01_005_TEXT,爹，您写的这部旷世奇书一定要出版发行，让天下人都能用上。,"Father, this extraordinary book of yours must be published, so people everywhere can put it to use.",父上、この世にまたとない大著は、ぜひ出版してください。天下の人々の役に立つはずです。
 STORY_000_02_001_SPEAKER,胡承龙,Hu Chenglong,胡承竜
-STORY_000_02_001_TEXT,李老先生，打扰啦。在下胡承龙，是做书籍生意的，听说您有书想要刻板发行？,"Master Li, pardon the intrusion. I am Hu Chenglong, a bookseller. I hear you have a book you wish to have printed?",李老先生，打扰啦。在下胡承龙，是做书籍生意的，听说您有书想要刻板发行？
+STORY_000_02_001_TEXT,李老先生，打扰啦。在下胡承龙，是做书籍生意的，听说您有书想要刻板发行？,"Master Li, pardon the intrusion. I am Hu Chenglong, a bookseller. I hear you have a book you wish to have printed?",李先生、お邪魔いたします。書肆を営む胡承竜と申します。版木を彫って出版したい本があると伺いましたが？
 STORY_000_02_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_000_02_002_TEXT,辛苦胡老板亲自来一趟，在下确实有一部医书想要拜托您发行。,"Thank you for coming in person, Master Hu. I do indeed have a medical book I would like you to publish.",辛苦胡老板亲自来一趟，在下确实有一部医书想要拜托您发行。
-STORY_000_02_003_TEXT,胡承龙大致确认了书的内容,Hu Chenglong briefly examined the manuscript.,胡承龙大致确认了书的内容
+STORY_000_02_002_TEXT,辛苦胡老板亲自来一趟，在下确实有一部医书想要拜托您发行。,"Thank you for coming in person, Master Hu. I do indeed have a medical book I would like you to publish.",胡殿、わざわざお越しいただき恐縮です。確かに医学書の刊行をお願いしたいのです。
+STORY_000_02_003_TEXT,胡承龙大致确认了书的内容,Hu Chenglong briefly examined the manuscript.,胡承竜は書物の内容をひととおり確かめた。
 STORY_000_02_004_SPEAKER,胡承龙,Hu Chenglong,胡承竜
-STORY_000_02_004_TEXT,哎呀，老先生大作真是让在下佩服，真是古今医书之集大成者啊。,"What a remarkable work, Master Li! It brings together the finest medical knowledge of past and present.",哎呀，老先生大作真是让在下佩服，真是古今医书之集大成者啊。
+STORY_000_02_004_TEXT,哎呀，老先生大作真是让在下佩服，真是古今医书之集大成者啊。,"What a remarkable work, Master Li! It brings together the finest medical knowledge of past and present.",いやはや、先生の大著には感服いたしました。古今の医学書を集大成した一冊ですな。
 STORY_000_02_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_000_02_005_TEXT,胡老板过奖了，您看什么时候能开始刻板？,"You flatter me, Master Hu. When might you begin carving the printing blocks?",胡老板过奖了，您看什么时候能开始刻板？
+STORY_000_02_005_TEXT,胡老板过奖了，您看什么时候能开始刻板？,"You flatter me, Master Hu. When might you begin carving the printing blocks?",お褒めにあずかり恐縮です。版木の彫刻はいつ始められますか？
 STORY_000_02_006_SPEAKER,胡承龙,Hu Chenglong,胡承竜
-STORY_000_02_006_TEXT,唉，老先生我就跟您实话实说吧。,"Master Li, I had best speak frankly.",唉，老先生我就跟您实话实说吧。
+STORY_000_02_006_TEXT,唉，老先生我就跟您实话实说吧。,"Master Li, I had best speak frankly.",はあ……先生には正直に申し上げましょう。
 STORY_000_02_007_SPEAKER,胡承龙,Hu Chenglong,胡承竜
-STORY_000_02_007_TEXT,您的书确实是医家至宝，可当今世人爱看的是英雄演义，才子佳人，就算发行了恐怕也是卖不出去的。,"Your book is a treasure for physicians, but readers these days want heroic tales and romances. I fear it would not sell even if we printed it.",您的书确实是医家至宝，可当今世人爱看的是英雄演义，才子佳人，就算发行了恐怕也是卖不出去的。
+STORY_000_02_007_TEXT,您的书确实是医家至宝，可当今世人爱看的是英雄演义，才子佳人，就算发行了恐怕也是卖不出去的。,"Your book is a treasure for physicians, but readers these days want heroic tales and romances. I fear it would not sell even if we printed it.",確かに医家にとっては宝ですが、今の世で好まれるのは英雄譚や恋物語。刊行しても売れないでしょう。
 STORY_000_02_008_SPEAKER,胡承龙,Hu Chenglong,胡承竜
-STORY_000_02_008_TEXT,再者，您这大作洋洋洒洒几百万字，还有大量插图。,"Besides, your manuscript runs to millions of characters and contains a great many illustrations.",再者，您这大作洋洋洒洒几百万字，还有大量插图。
+STORY_000_02_008_TEXT,再者，您这大作洋洋洒洒几百万字，还有大量插图。,"Besides, your manuscript runs to millions of characters and contains a great many illustrations.",しかも、これだけの大著には何百万もの文字と大量の挿絵があります。
 STORY_000_02_009_SPEAKER,胡承龙,Hu Chenglong,胡承竜
-STORY_000_02_009_TEXT,我按市价每百字一钱银子算，再加上油墨，纸张，木料，装订各种费用，初版二十套的发行，我估计要花费两千两白银。,"At the market rate of one qian of silver per hundred characters, plus ink, paper, wood and binding, I estimate that an initial run of twenty sets would cost two thousand taels of silver.",我按市价每百字一钱银子算，再加上油墨，纸张，木料，装订各种费用，初版二十套的发行，我估计要花费两千两白银。
+STORY_000_02_009_TEXT,我按市价每百字一钱银子算，再加上油墨，纸张，木料，装订各种费用，初版二十套的发行，我估计要花费两千两白银。,"At the market rate of one qian of silver per hundred characters, plus ink, paper, wood and binding, I estimate that an initial run of twenty sets would cost two thousand taels of silver.",相場どおり百字につき銀一銭として、墨、紙、木材、製本の費用も加えると、初版二十組だけで銀二千両はかかるでしょう。
 STORY_000_02_010_SPEAKER,胡承龙,Hu Chenglong,胡承竜
-STORY_000_02_010_TEXT,虽然您这书确实是好书，可我们也不能做亏本买卖不是。,"It is an excellent book, but I cannot run my business at a loss.",虽然您这书确实是好书，可我们也不能做亏本买卖不是。
+STORY_000_02_010_TEXT,虽然您这书确实是好书，可我们也不能做亏本买卖不是。,"It is an excellent book, but I cannot run my business at a loss.",良書であるのは間違いありませんが、こちらも赤字の商売はできません。
 STORY_000_02_011_SPEAKER,胡承龙,Hu Chenglong,胡承竜
-STORY_000_02_011_TEXT,您老要是想自己掏钱印书，胡某也不是无情无义之人，我不赚钱，给您按最低的成本价给您发行，您看如何？,"If you can pay to print it yourself, I will charge you only the bare cost. I would earn nothing from it. What do you say?",您老要是想自己掏钱印书，胡某也不是无情无义之人，我不赚钱，给您按最低的成本价给您发行，您看如何？
+STORY_000_02_011_TEXT,您老要是想自己掏钱印书，胡某也不是无情无义之人，我不赚钱，给您按最低的成本价给您发行，您看如何？,"If you can pay to print it yourself, I will charge you only the bare cost. I would earn nothing from it. What do you say?",先生が自費で印刷なさるなら、私も利益を取らず、最低限の実費で引き受けます。いかがでしょう？
 STORY_000_02_012_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_000_02_012_TEXT,两千两…我上哪弄两千两银子啊…,Two thousand taels… Where could I possibly find that much silver?,两千两…我上哪弄两千两银子啊…
+STORY_000_02_012_TEXT,两千两…我上哪弄两千两银子啊…,Two thousand taels… Where could I possibly find that much silver?,二千両……そんな大金をどこから用意すれば……
 STORY_000_02_013_SPEAKER,胡承龙,Hu Chenglong,胡承竜
-STORY_000_02_013_TEXT,老先生您慢慢考虑，在下就先告辞了。,"Take your time to consider it, Master Li. I shall take my leave.",老先生您慢慢考虑，在下就先告辞了。
+STORY_000_02_013_TEXT,老先生您慢慢考虑，在下就先告辞了。,"Take your time to consider it, Master Li. I shall take my leave.",どうぞゆっくりお考えください。私はこれで失礼します。
 STORY_000_03_001_SPEAKER,李建中,Li Jianzhong,李建中
-STORY_000_03_001_TEXT,爹，今天和书商谈得怎么样？,"Father, how did the meeting with the bookseller go today?",爹，今天和书商谈得怎么样？
+STORY_000_03_001_TEXT,爹，今天和书商谈得怎么样？,"Father, how did the meeting with the bookseller go today?",父上、今日の書肆との話し合いはどうでしたか？
 STORY_000_03_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_000_03_002_TEXT,那书商说，刻板发行需要两千两银子…,He says it will cost two thousand taels of silver to carve the blocks and print the book…,那书商说，刻板发行需要两千两银子…
+STORY_000_03_002_TEXT,那书商说，刻板发行需要两千两银子…,He says it will cost two thousand taels of silver to carve the blocks and print the book…,版木を彫って刊行するには銀二千両が必要だそうだ……
 STORY_000_03_003_SPEAKER,李建中,Li Jianzhong,李建中
-STORY_000_03_003_TEXT,两千两？要这么多银子！,Two thousand taels? That much?,两千两？要这么多银子！
+STORY_000_03_003_TEXT,两千两？要这么多银子！,Two thousand taels? That much?,二千両？　そんなにかかるのですか！
 STORY_000_03_004_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_000_03_004_TEXT,唉，要是不能出版，我看这书怕是没有多少年头就要失传了…,"If it cannot be published, I fear the book will be lost within a few years…",唉，要是不能出版，我看这书怕是没有多少年头就要失传了…
+STORY_000_03_004_TEXT,唉，要是不能出版，我看这书怕是没有多少年头就要失传了…,"If it cannot be published, I fear the book will be lost within a few years…",はあ……出版できなければ、この書もそう遠くないうちに失われるだろう……
 STORY_000_03_005_SPEAKER,李建中,Li Jianzhong,李建中
-STORY_000_03_005_TEXT,儿子没用，不能给父亲分忧…,"I have failed you, Father. I cannot help shoulder this burden…",儿子没用，不能给父亲分忧…
+STORY_000_03_005_TEXT,儿子没用，不能给父亲分忧…,"I have failed you, Father. I cannot help shoulder this burden…",息子の力が足りず、父上のお役に立てません……
 STORY_000_03_006_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_000_03_006_TEXT,这是哪儿的话，你可是咱家最有出息的了。,Do not say that. You have accomplished more than anyone else in this family.,这是哪儿的话，你可是咱家最有出息的了。
+STORY_000_03_006_TEXT,这是哪儿的话，你可是咱家最有出息的了。,Do not say that. You have accomplished more than anyone else in this family.,何を言う。お前は我が家で一番の出世頭だ。
 STORY_000_03_007_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_000_03_007_TEXT,你为官清廉，是官场清流，全家都以你为荣。这书的事儿，咱们再想想办法。,"You are an honest official, a rare bright light in government. We are all proud of you. We will find another way to publish the book.",你为官清廉，是官场清流，全家都以你为荣。这书的事儿，咱们再想想办法。
+STORY_000_03_007_TEXT,你为官清廉，是官场清流，全家都以你为荣。这书的事儿，咱们再想想办法。,"You are an honest official, a rare bright light in government. We are all proud of you. We will find another way to publish the book.",お前は清廉な役人として、一家の誇りだ。この書のことは、また方法を考えよう。
 STORY_000_03_008_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_000_03_008_TEXT,老头子，你的恩师顾老先生和当今文坛第一人王世贞是世交，若能请他给你的书写一个序，天下学子必慕名而来，到时候肯定有书商愿意出版此书。,"Dear, your mentor Master Gu is an old family friend of Wang Shizhen, the leading man of letters today. If Wang wrote a preface for your book, scholars everywhere would seek it out. Surely a bookseller would then agree to publish it.",老头子，你的恩师顾老先生和当今文坛第一人王世贞是世交，若能请他给你的书写一个序，天下学子必慕名而来，到时候肯定有书商愿意出版此书。
+STORY_000_03_008_TEXT,老头子，你的恩师顾老先生和当今文坛第一人王世贞是世交，若能请他给你的书写一个序，天下学子必慕名而来，到时候肯定有书商愿意出版此书。,"Dear, your mentor Master Gu is an old family friend of Wang Shizhen, the leading man of letters today. If Wang wrote a preface for your book, scholars everywhere would seek it out. Surely a bookseller would then agree to publish it.",あなたの恩師である顧先生は、今の文壇の第一人者、王世貞先生と古いお知り合いでしょう。王先生に序文を書いていただければ、名を慕って多くの人が読み、出版を引き受ける書肆も現れるはずです。
 STORY_000_03_009_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_000_03_009_TEXT,哎呀，还得是你啊老婆子，这主意好，这主意好。,"Ah, my dear, you have done it! What a fine idea!",哎呀，还得是你啊老婆子，这主意好，这主意好。
+STORY_000_03_009_TEXT,哎呀，还得是你啊老婆子，这主意好，这主意好。,"Ah, my dear, you have done it! What a fine idea!",さすがはお前だ。いい考えだ、実にいい。
 STORY_000_03_010_SPEAKER,李建中,Li Jianzhong,李建中
-STORY_000_03_010_TEXT,儿子明日就去太仓拜访王老先生！,I will go to Taicang tomorrow and visit Master Wang!,儿子明日就去太仓拜访王老先生！
+STORY_000_03_010_TEXT,儿子明日就去太仓拜访王老先生！,I will go to Taicang tomorrow and visit Master Wang!,明日、私が太倉へ行って王先生を訪ねます！
 STORY_000_04_001_SPEAKER,李建中,Li Jianzhong,李建中
-STORY_000_04_001_TEXT,爹，我回来了，王老先生给您的书写了序。,"Father, I am back. Master Wang has written a preface for your book.",爹，我回来了，王老先生给您的书写了序。
+STORY_000_04_001_TEXT,爹，我回来了，王老先生给您的书写了序。,"Father, I am back. Master Wang has written a preface for your book.",父上、ただいま戻りました。王先生が序文を書いてくださいました。
 STORY_000_04_002_TEXT,此帝王之秘箓，臣民之重宝。兹集也，藏之深山石室，无当。盖锲之，以共天下后世味太玄如子云者。,"A secret record fit for emperors, a precious treasure for ministers and common people alike. This collection should not be hidden away in some mountain vault. Let it be carved and printed, so that future generations throughout the world may study its profound mysteries.",此帝王之秘箓，臣民之重宝。兹集也，藏之深山石室，无当。盖锲之，以共天下后世味太玄如子云者。
 STORY_000_04_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_000_04_003_TEXT,太好了。,Wonderful.,太好了。
+STORY_000_04_003_TEXT,太好了。,Wonderful.,それは素晴らしい。
 STORY_000_04_004_SPEAKER,李建中,Li Jianzhong,李建中
-STORY_000_04_004_TEXT,我还去找了胡承龙，他答应出资帮您出书。再加上这些年您医治的病人，咱家的亲戚朋友，也有愿意出钱帮忙的，咱们只要再凑六百两就可以出版此书。,"I also spoke to Hu Chenglong. He has agreed to contribute to the publication. Some of your former patients, along with our relatives and friends, are willing to help as well. We need only raise another six hundred taels to publish the book.",我还去找了胡承龙，他答应出资帮您出书。再加上这些年您医治的病人，咱家的亲戚朋友，也有愿意出钱帮忙的，咱们只要再凑六百两就可以出版此书。
+STORY_000_04_004_TEXT,我还去找了胡承龙，他答应出资帮您出书。再加上这些年您医治的病人，咱家的亲戚朋友，也有愿意出钱帮忙的，咱们只要再凑六百两就可以出版此书。,"I also spoke to Hu Chenglong. He has agreed to contribute to the publication. Some of your former patients, along with our relatives and friends, are willing to help as well. We need only raise another six hundred taels to publish the book.",胡承竜にも会いました。出版費用を出してくれるそうです。父上が治療した患者や親戚、友人にも援助を申し出てくれた人がいます。あと六百両集めれば刊行できます。
 STORY_000_04_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_000_04_005_TEXT,六百也不是个小数目，但总归是有盼头了…,"Six hundred is still a great deal of money, but at least there is hope now…",六百也不是个小数目，但总归是有盼头了…
-STORY_000_05_001_TEXT,万历二十一年李东璧病逝，终年76岁…,"Li Dongbi died in the twenty-first year of the Wanli reign, aged seventy-six…",万历二十一年李东璧病逝，终年76岁…
-STORY_000_05_002_TEXT,万历二十四年，这部耗尽他一生心血的医书终于刻板发行…,"In the twenty-fourth year of Wanli, the medical book to which he had devoted his life was finally printed…",万历二十四年，这部耗尽他一生心血的医书终于刻板发行…
+STORY_000_04_005_TEXT,六百也不是个小数目，但总归是有盼头了…,"Six hundred is still a great deal of money, but at least there is hope now…",六百両も小さな額ではないが、ようやく希望が見えた……
+STORY_000_05_001_TEXT,万历二十一年李东璧病逝，终年76岁…,"Li Dongbi died in the twenty-first year of the Wanli reign, aged seventy-six…",万暦二十一年、李東璧は七十六歳で世を去った……
+STORY_000_05_002_TEXT,万历二十四年，这部耗尽他一生心血的医书终于刻板发行…,"In the twenty-fourth year of Wanli, the medical book to which he had devoted his life was finally printed…",万暦二十四年、生涯をかけて書き上げた医学書が、ついに版木を彫って刊行された……
 STORY_000_05_003_TEXT,时珍，荆楚鄙人也。幼多羸疾，质成钝椎。僭纂述之权，岁历三十稔，书考八百余家，稿凡三易，复者芟之，阙者缉之，讹者绳之。旧本一千五百二十八种，今增药三百七十四种，分为一十六部，著成五十二卷，僭名曰本草纲目。,"I, Shizhen, am a humble man of Jingchu. Sickly as a child and slow of mind, I presumed to undertake this compilation. Over thirty years I consulted more than eight hundred works and revised the manuscript three times, cutting repetition, filling gaps and correcting errors. To the 1,528 medicinal substances in earlier works, I added 374, arranged them in sixteen divisions and completed fifty-two volumes. I have dared to call it the Compendium of Materia Medica.",时珍，荆楚鄙人也。幼多羸疾，质成钝椎。僭纂述之权，岁历三十稔，书考八百余家，稿凡三易，复者芟之，阙者缉之，讹者绳之。旧本一千五百二十八种，今增药三百七十四种，分为一十六部，著成五十二卷，僭名曰本草纲目。
 STORY_000_06_001_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_000_06_001_TEXT,东璧啊，咱们这医馆已经经营不下去了，我们收拾行李回乡下老家吧…,"Dongbi, we can no longer keep this clinic open. Let us pack our things and return to our hometown in the countryside…",东璧啊，咱们这医馆已经经营不下去了，我们收拾行李回乡下老家吧…
-STORY_000_06_002_TEXT,因经营不善，医馆被迫关闭,The clinic was forced to close after falling into financial difficulty.,因经营不善，医馆被迫关闭
+STORY_000_06_001_TEXT,东璧啊，咱们这医馆已经经营不下去了，我们收拾行李回乡下老家吧…,"Dongbi, we can no longer keep this clinic open. Let us pack our things and return to our hometown in the countryside…",東璧、この診療所はもう続けられないわ。荷物をまとめて故郷の村へ帰りましょう……
+STORY_000_06_002_TEXT,因经营不善，医馆被迫关闭,The clinic was forced to close after falling into financial difficulty.,経営難のため、診療所は閉鎖を余儀なくされた。
 STORY_000_07_001_SPEAKER,衙役,Constable,役人
-STORY_000_07_001_TEXT,李东璧，有人告你医术不精，招摇撞骗，跟我们去衙门走一趟吧。,"Li Dongbi, someone has accused you of practicing medicine without skill and deceiving your patients. Come with us to the magistrate's office.",李东璧，有人告你医术不精，招摇撞骗，跟我们去衙门走一趟吧。
+STORY_000_07_001_TEXT,李东璧，有人告你医术不精，招摇撞骗，跟我们去衙门走一趟吧。,"Li Dongbi, someone has accused you of practicing medicine without skill and deceiving your patients. Come with us to the magistrate's office.",李東璧、お前の医術が未熟で、人を騙していると訴えがあった。役所まで来てもらうぞ。
 STORY_000_07_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_000_07_002_TEXT,冤枉啊！冤枉！,I am innocent! I have been wronged!,冤枉啊！冤枉！
+STORY_000_07_002_TEXT,冤枉啊！冤枉！,I am innocent! I have been wronged!,濡れ衣です！　無実です！
 STORY_000_07_003_SPEAKER,衙役,Constable,役人
-STORY_000_07_003_TEXT,少废话，快走！,Enough talk. Move!,少废话，快走！
-STORY_000_07_004_TEXT,李东璧因行医时过失杀人，被杖四十，永世不得为医。,"Li Dongbi was found responsible for a patient's death, flogged forty times and forbidden to practice medicine ever again.",李东璧因行医时过失杀人，被杖四十，永世不得为医。
-STORY_000_08_001_TEXT,万历二十一年李东璧病逝，终年76岁…,"Li Dongbi died in the twenty-first year of the Wanli reign, aged seventy-six…",万历二十一年李东璧病逝，终年76岁…
-STORY_000_08_002_TEXT,遗憾的是这部耗尽一生编写的医书，最终没能保存下来…,"Sadly, the medical book he had spent a lifetime writing was never preserved…",遗憾的是这部耗尽一生编写的医书，最终没能保存下来…
-STORY_001_001_TEXT,明嘉靖十九年，武昌府放榜处,"The examination results are posted in Wuchang Prefecture, in the nineteenth year of the Jiajing reign.",明嘉靖十九年，武昌府放榜处
+STORY_000_07_003_TEXT,少废话，快走！,Enough talk. Move!,黙れ、早く歩け！
+STORY_000_07_004_TEXT,李东璧因行医时过失杀人，被杖四十，永世不得为医。,"Li Dongbi was found responsible for a patient's death, flogged forty times and forbidden to practice medicine ever again.",李東璧は診療中の過失によって人を死なせた罪で、杖刑四十回を受け、生涯医業を禁じられた。
+STORY_000_08_001_TEXT,万历二十一年李东璧病逝，终年76岁…,"Li Dongbi died in the twenty-first year of the Wanli reign, aged seventy-six…",万暦二十一年、李東璧は七十六歳で世を去った……
+STORY_000_08_002_TEXT,遗憾的是这部耗尽一生编写的医书，最终没能保存下来…,"Sadly, the medical book he had spent a lifetime writing was never preserved…",残念ながら、生涯をかけて編纂した医学書は、後世に残らなかった……
+STORY_001_001_TEXT,明嘉靖十九年，武昌府放榜处,"The examination results are posted in Wuchang Prefecture, in the nineteenth year of the Jiajing reign.",明の嘉靖十九年、武昌府の合格者掲示場。
 STORY_001_002_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_001_002_TEXT,老爷，榜上没找到少爷的名字。,"Master, the young master's name is not on the list.",老爷，榜上没找到少爷的名字。
+STORY_001_002_TEXT,老爷，榜上没找到少爷的名字。,"Master, the young master's name is not on the list.",旦那様、合格者の中に若旦那のお名前がありません。
 STORY_001_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_001_003_TEXT,嘶...... 又没中......,Ah… I failed again…,嘶...... 又没中......
+STORY_001_003_TEXT,嘶...... 又没中......,Ah… I failed again…,はあ……また落ちたか……
 STORY_001_004_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_001_004_TEXT,你们再仔细看看。,"Look again, more carefully.",你们再仔细看看。
+STORY_001_004_TEXT,你们再仔细看看。,"Look again, more carefully.",もう一度よく見てくれ。
 STORY_001_005_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_001_005_TEXT,我看了好几遍了，确实没有少爷的名字...,I have checked several times. His name really is not there…,我看了好几遍了，确实没有少爷的名字...
+STORY_001_005_TEXT,我看了好几遍了，确实没有少爷的名字...,I have checked several times. His name really is not there…,何度も確かめましたが、やはり若旦那のお名前はありません……
 STORY_001_006_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_001_006_TEXT,考了三次都没中举，爹，看来我不是读书的材料...,"Three attempts, and still no success in the provincial examination. Father, perhaps I am simply not made for scholarship…",考了三次都没中举，爹，看来我不是读书的材料...
+STORY_001_006_TEXT,考了三次都没中举，爹，看来我不是读书的材料...,"Three attempts, and still no success in the provincial examination. Father, perhaps I am simply not made for scholarship…",三度受けても郷試に受かりません。父上、私には学問が向いていないようです……
 STORY_001_007_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_001_007_TEXT,这说的是什么话，你看隔壁村那个老范，考了大半辈子童试，年过半百才中秀才，后来又中了举人，你这才哪儿到哪儿。,"Do not talk like that. Old Fan from the next village spent most of his life taking the lower examinations. He was over fifty when he finally earned his first degree, and later he passed the provincial examination too. You are still young.",这说的是什么话，你看隔壁村那个老范，考了大半辈子童试，年过半百才中秀才，后来又中了举人，你这才哪儿到哪儿。
+STORY_001_007_TEXT,这说的是什么话，你看隔壁村那个老范，考了大半辈子童试，年过半百才中秀才，后来又中了举人，你这才哪儿到哪儿。,"Do not talk like that. Old Fan from the next village spent most of his life taking the lower examinations. He was over fifty when he finally earned his first degree, and later he passed the provincial examination too. You are still young.",何を言う。隣村の范じいさんは、半生を費やして童試を受け、五十を過ぎてようやく秀才になった。その後は挙人にもなったぞ。お前はまだまだこれからだ。
 STORY_001_008_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_001_008_TEXT,我看我还是跟您学医吧，科举八股什么的，孩儿实在是学不来…,I think I would rather study medicine with you. I simply cannot get the hang of those examination essays…,我看我还是跟您学医吧，科举八股什么的，孩儿实在是学不来…
+STORY_001_008_TEXT,我看我还是跟您学医吧，科举八股什么的，孩儿实在是学不来…,I think I would rather study medicine with you. I simply cannot get the hang of those examination essays…,それなら、父上について医術を学びたいです。科挙の文章はどうにも身につきません……
 STORY_001_009_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_001_009_TEXT,学医哪里比得上做官有前途啊，你爹我行医一辈子，辛苦又赚不到钱不说，医得不好还要受人白眼。,"A career in medicine offers nothing like the prospects of an official post. I have practiced all my life. The work is hard, the pay is poor, and if a treatment goes badly, people look down on you.",学医哪里比得上做官有前途啊，你爹我行医一辈子，辛苦又赚不到钱不说，医得不好还要受人白眼。
+STORY_001_009_TEXT,学医哪里比得上做官有前途啊，你爹我行医一辈子，辛苦又赚不到钱不说，医得不好还要受人白眼。,"A career in medicine offers nothing like the prospects of an official post. I have practiced all my life. The work is hard, the pay is poor, and if a treatment goes badly, people look down on you.",医者より役人のほうが将来があるだろう。わしは生涯医者をやってきたが、苦労の割に稼げず、治療がうまくいかなければ非難される。
 STORY_001_010_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_001_010_TEXT,可我真心喜欢研究那些药材方子，考证典籍，不赚钱我也愿意干。,"But I truly love studying herbs, prescriptions and the old texts. I would do it even if I earned nothing.",可我真心喜欢研究那些药材方子，考证典籍，不赚钱我也愿意干。
+STORY_001_010_TEXT,可我真心喜欢研究那些药材方子，考证典籍，不赚钱我也愿意干。,"But I truly love studying herbs, prescriptions and the old texts. I would do it even if I earned nothing.",それでも薬材や処方を調べ、古い書物を考証するのが好きなのです。儲からなくても構いません。
 STORY_001_011_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_001_011_TEXT,唉......也罢，科举考功名的学子千千万，可真能博取个功名的又有几人呢？东璧呀，你若真的想从医，今日起便随为父从《内经》、《本草》学起吧。,"Ah… Very well. Thousands pursue an official title through the examinations, but how many ever obtain one? Dongbi, if you truly wish to become a physician, then from today we shall begin with the Inner Canon and the materia medica.",唉......也罢，科举考功名的学子千千万，可真能博取个功名的又有几人呢？东璧呀，你若真的想从医，今日起便随为父从《内经》、《本草》学起吧。
-STORY_001_012_TEXT,李东璧十四岁考中秀才，可之后九年间三次参加乡试均告落榜，本就无心科举的李东璧决定开始随父亲学医,"Li Dongbi passed his first examination at fourteen, but failed the provincial examination three times over the next nine years. With little desire for an official career, he decided to study medicine under his father.",李东璧十四岁考中秀才，可之后九年间三次参加乡试均告落榜，本就无心科举的李东璧决定开始随父亲学医
-STORY_002_001_TEXT,一年后…,One year later…,一年后…
+STORY_001_011_TEXT,唉......也罢，科举考功名的学子千千万，可真能博取个功名的又有几人呢？东璧呀，你若真的想从医，今日起便随为父从《内经》、《本草》学起吧。,"Ah… Very well. Thousands pursue an official title through the examinations, but how many ever obtain one? Dongbi, if you truly wish to become a physician, then from today we shall begin with the Inner Canon and the materia medica.",はあ……それもよかろう。科挙を受ける者は数知れぬが、功名を得られる者はわずかだ。東璧、本当に医の道へ進みたいなら、今日から父と『内経』『本草』を学ぼう。
+STORY_001_012_TEXT,李东璧十四岁考中秀才，可之后九年间三次参加乡试均告落榜，本就无心科举的李东璧决定开始随父亲学医,"Li Dongbi passed his first examination at fourteen, but failed the provincial examination three times over the next nine years. With little desire for an official career, he decided to study medicine under his father.",李東璧は十四歳で秀才となったが、その後九年間に三度の郷試で落第した。もとより科挙に心を向けていなかった彼は、父について医術を学ぶ決意をした。
+STORY_002_001_TEXT,一年后…,One year later…,一年後……
 STORY_002_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_002_002_TEXT,麻桂相须，增强发汗散寒之力，专治表实无汗。麻杏相使，宣降相配，专治寒邪闭肺之喘逆…,"Ephedra and cinnamon twig work together to induce sweating and dispel cold, treating an exterior excess pattern without sweat. Ephedra and apricot kernel help the lungs diffuse and descend qi, treating wheezing caused by cold obstructing the lungs…",麻桂相须，增强发汗散寒之力，专治表实无汗。麻杏相使，宣降相配，专治寒邪闭肺之喘逆…
+STORY_002_002_TEXT,麻桂相须，增强发汗散寒之力，专治表实无汗。麻杏相使，宣降相配，专治寒邪闭肺之喘逆…,"Ephedra and cinnamon twig work together to induce sweating and dispel cold, treating an exterior excess pattern without sweat. Ephedra and apricot kernel help the lungs diffuse and descend qi, treating wheezing caused by cold obstructing the lungs…",麻黄と桂枝を併用すれば、発汗と散寒の働きが強まり、表実で汗の出ない症に適する。麻黄と杏仁を組み合わせれば、肺気の宣発と下降を整え、寒邪が肺を塞ぐ喘ぎを治す……
 STORY_002_003_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_002_003_TEXT,相公，晚饭做好了，该吃饭了。,"Husband, dinner is ready. Come and eat.",相公，晚饭做好了，该吃饭了。
+STORY_002_003_TEXT,相公，晚饭做好了，该吃饭了。,"Husband, dinner is ready. Come and eat.",あなた、夕食ができましたよ。
 STORY_002_004_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_002_004_TEXT,来了来了。,"Coming, coming.",来了来了。
+STORY_002_004_TEXT,来了来了。,"Coming, coming.",今行くよ。
 STORY_002_005_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_002_005_TEXT,东璧啊，白天教你的都听明白了吗？,"Dongbi, did you understand everything I taught you today?",东璧啊，白天教你的都听明白了吗？
+STORY_002_005_TEXT,东璧啊，白天教你的都听明白了吗？,"Dongbi, did you understand everything I taught you today?",東璧、昼間教えたことは理解できたか？
 STORY_002_006_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_002_006_TEXT,都明白了，平常日子里看您治病，其实已经窥得些门道了。,"Yes. I have watched you treat patients for years, so I already know a little of how it works.",都明白了，平常日子里看您治病，其实已经窥得些门道了。
+STORY_002_006_TEXT,都明白了，平常日子里看您治病，其实已经窥得些门道了。,"Yes. I have watched you treat patients for years, so I already know a little of how it works.",はい。普段から父上の診療を見て、少しは心得ていました。
 STORY_002_007_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_002_007_TEXT,学医最要紧的是积累，吃完晚饭去把这些天教你的内容再看一遍，明日一早你随我一起出诊。,"The most important thing in medicine is to build experience. After dinner, review what I have taught you these past few days. Tomorrow morning, you will accompany me on my rounds.",学医最要紧的是积累，吃完晚饭去把这些天教你的内容再看一遍，明日一早你随我一起出诊。
+STORY_002_007_TEXT,学医最要紧的是积累，吃完晚饭去把这些天教你的内容再看一遍，明日一早你随我一起出诊。,"The most important thing in medicine is to build experience. After dinner, review what I have taught you these past few days. Tomorrow morning, you will accompany me on my rounds.",医術で大切なのは積み重ねだ。夕食の後は、この数日教えたことを復習しなさい。明朝はわしと一緒に往診に行くぞ。
 STORY_002_008_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_002_008_TEXT,哇，太好了！,"Oh, wonderful!",哇，太好了！
+STORY_002_008_TEXT,哇，太好了！,"Oh, wonderful!",やった、ありがとうございます！
 STORY_003_001_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_003_001_TEXT,从今天起，你就正式开始给病患治病。记住我教给你的，先把脉确定病性，辨证判断所患何病，再因病开方。如果记不住脉象、药方，就翻翻笔记。,"From today on, you will treat patients yourself. Remember what I taught you: first take the pulse to understand the nature of the illness, then identify the pattern and diagnose the condition before writing a prescription. If you forget a pulse pattern or formula, consult your notes.",从今天起，你就正式开始给病患治病。记住我教给你的，先把脉确定病性，辨证判断所患何病，再因病开方。如果记不住脉象、药方，就翻翻笔记。
+STORY_003_001_TEXT,从今天起，你就正式开始给病患治病。记住我教给你的，先把脉确定病性，辨证判断所患何病，再因病开方。如果记不住脉象、药方，就翻翻笔记。,"From today on, you will treat patients yourself. Remember what I taught you: first take the pulse to understand the nature of the illness, then identify the pattern and diagnose the condition before writing a prescription. If you forget a pulse pattern or formula, consult your notes.",今日からお前も正式に患者を診る。教えたことを忘れるな。まず脈を診て病の性質を確かめ、弁証によって病を判断し、それに合う処方を出す。脈や処方を忘れたら、手控えを読み返しなさい。
 STORY_003_002_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_003_002_TEXT,好了，病人已经在等着你了，快去吧。,"Now then, your patient is waiting. Go on.",好了，病人已经在等着你了，快去吧。
+STORY_003_002_TEXT,好了，病人已经在等着你了，快去吧。,"Now then, your patient is waiting. Go on.",患者が待っている。さあ、行きなさい。
 STORY_004_01_001_SPEAKER,顾问,Gu Wen,顧問
-STORY_004_01_001_TEXT,言闻兄别来无恙啊。,"Brother Yanwen, it has been too long. I hope you are well.",言闻兄别来无恙啊。
+STORY_004_01_001_TEXT,言闻兄别来无恙啊。,"Brother Yanwen, it has been too long. I hope you are well.",言聞殿、お変わりありませんか。
 STORY_004_01_002_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_004_01_002_TEXT,哎哟，是日岩兄啊，失迎失迎。,"Ah, Brother Riyan! Forgive me for not greeting you sooner.",哎哟，是日岩兄啊，失迎失迎。
+STORY_004_01_002_TEXT,哎哟，是日岩兄啊，失迎失迎。,"Ah, Brother Riyan! Forgive me for not greeting you sooner.",これは日岩殿。お迎えもせず失礼しました。
 STORY_004_01_003_SPEAKER,顾问,Gu Wen,顧問
-STORY_004_01_003_TEXT,东璧近来如何啊？,How has Dongbi been lately?,东璧近来如何啊？
+STORY_004_01_003_TEXT,东璧近来如何啊？,How has Dongbi been lately?,東璧は近頃どうしていますか？
 STORY_004_01_004_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_004_01_004_TEXT,和我学了一年多医术，现在啊已经能自己出诊了。你还别说，这小子学得挺快，医馆让他打理，我也清闲许多。,"He has studied medicine with me for over a year and can already see patients on his own. He learns quickly, too. Now that he helps run the clinic, I have more time to rest.",和我学了一年多医术，现在啊已经能自己出诊了。你还别说，这小子学得挺快，医馆让他打理，我也清闲许多。
+STORY_004_01_004_TEXT,和我学了一年多医术，现在啊已经能自己出诊了。你还别说，这小子学得挺快，医馆让他打理，我也清闲许多。,"He has studied medicine with me for over a year and can already see patients on his own. He learns quickly, too. Now that he helps run the clinic, I have more time to rest.",もう一年余り医術を学び、今では一人で診療できるようになりました。覚えも早く、診療所を任せられるので、わしも少し楽になりましたよ。
 STORY_004_01_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_004_01_005_TEXT,顾先生，学生有礼了。,"Master Gu, it is an honor to see you.",顾先生，学生有礼了。
+STORY_004_01_005_TEXT,顾先生，学生有礼了。,"Master Gu, it is an honor to see you.",顧先生、ご無沙汰しております。
 STORY_004_01_006_SPEAKER,顾问,Gu Wen,顧問
-STORY_004_01_006_TEXT,正好我这几日不怎么舒服，东璧你给我看看。,"As it happens, I have not felt well these past few days. Dongbi, would you examine me?",正好我这几日不怎么舒服，东璧你给我看看。
+STORY_004_01_006_TEXT,正好我这几日不怎么舒服，东璧你给我看看。,"As it happens, I have not felt well these past few days. Dongbi, would you examine me?",ちょうどこの数日、体調が優れぬ。東璧、診てくれるか。
 STORY_004_02_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_004_02_001_TEXT,老师所患的是心阳虚之症，需注意休息，切勿过度操劳，学生这就去给您抓药。,"Master, you have a deficiency of heart yang. Please rest and avoid overwork. I will prepare your medicine.",老师所患的是心阳虚之症，需注意休息，切勿过度操劳，学生这就去给您抓药。
+STORY_004_02_001_TEXT,老师所患的是心阳虚之症，需注意休息，切勿过度操劳，学生这就去给您抓药。,"Master, you have a deficiency of heart yang. Please rest and avoid overwork. I will prepare your medicine.",先生は心陽虚の症です。休息を取り、働きすぎないようにしてください。すぐに薬を用意します。
 STORY_004_02_002_SPEAKER,顾问,Gu Wen,顧問
-STORY_004_02_002_TEXT,世人皆以为考取功名方为正途，你能认清本心承袭家学，济世安民，难得啊。,"Most people believe the examinations and an official post are the only proper path. You have recognized your true calling, carried on your family's medicine and chosen to help others. That is rare indeed.",世人皆以为考取功名方为正途，你能认清本心承袭家学，济世安民，难得啊。
+STORY_004_02_002_TEXT,世人皆以为考取功名方为正途，你能认清本心承袭家学，济世安民，难得啊。,"Most people believe the examinations and an official post are the only proper path. You have recognized your true calling, carried on your family's medicine and chosen to help others. That is rare indeed.",世間では科挙に受かって官職に就くことだけが正道と思われている。お前は自分の心を見つめ、家の医術を継いで人々を救う道を選んだ。立派なことだ。
 STORY_004_02_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_004_02_003_TEXT,学生愚钝，辜负了老师的教导…,"I was a poor student. I have let you down, Master…",学生愚钝，辜负了老师的教导…
+STORY_004_02_003_TEXT,学生愚钝，辜负了老师的教导…,"I was a poor student. I have let you down, Master…",私は不出来な弟子で、先生の教えに背いてしまいました……
 STORY_004_02_004_SPEAKER,顾问,Gu Wen,顧問
-STORY_004_02_004_TEXT,你是我最中意的门生，以前是，现在也是。,"You were my favorite pupil then, and you still are.",你是我最中意的门生，以前是，现在也是。
+STORY_004_02_004_TEXT,你是我最中意的门生，以前是，现在也是。,"You were my favorite pupil then, and you still are.",お前は昔も今も、わしの一番の弟子だ。
 STORY_004_02_005_SPEAKER,顾问,Gu Wen,顧問
-STORY_004_02_005_TEXT,人生在世不止科举取仕一条路，你能找到一条适合自己的路，为师很欣慰。,The examinations are not the only path in life. I am glad you have found one that suits you.,人生在世不止科举取仕一条路，你能找到一条适合自己的路，为师很欣慰。
+STORY_004_02_005_TEXT,人生在世不止科举取仕一条路，你能找到一条适合自己的路，为师很欣慰。,The examinations are not the only path in life. I am glad you have found one that suits you.,人生の道は科挙だけではない。自分に合った道を見つけたことを、師として嬉しく思う。
 STORY_004_02_006_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_004_02_006_TEXT,承蒙老师教诲，学生定不负师恩，精进医术。,"Thank you for your guidance, Master. I will honor your teaching by improving my medical skills.",承蒙老师教诲，学生定不负师恩，精进医术。
+STORY_004_02_006_TEXT,承蒙老师教诲，学生定不负师恩，精进医术。,"Thank you for your guidance, Master. I will honor your teaching by improving my medical skills.",先生の教えに感謝します。医術を磨き、ご恩に報います。
 STORY_004_03_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_004_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",不对，我需要好好想想这是什么病，该开什么方。
+STORY_004_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。
 STORY_004_04_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_004_04_001_TEXT,哎呀，是老师来了，学生失迎。,Master! Forgive me for not welcoming you sooner.,哎呀，是老师来了，学生失迎。
+STORY_004_04_001_TEXT,哎呀，是老师来了，学生失迎。,Master! Forgive me for not welcoming you sooner.,先生、いらしていたのですか。お迎えもせず失礼しました。
 STORY_004_04_002_SPEAKER,顾问,Gu Wen,顧問
-STORY_004_04_002_TEXT,东璧啊，朝廷来了调令，命我去福建赴任。临走来看看你和你爹。,"Dongbi, the court has ordered me to take up a post in Fujian. I came to see you and your father before I leave.",东璧啊，朝廷来了调令，命我去福建赴任。临走来看看你和你爹。
+STORY_004_04_002_TEXT,东璧啊，朝廷来了调令，命我去福建赴任。临走来看看你和你爹。,"Dongbi, the court has ordered me to take up a post in Fujian. I came to see you and your father before I leave.",東璧よ、朝廷から福建への赴任を命じられた。発つ前に、お前と父上に会いに来たのだ。
 STORY_004_04_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_004_04_003_TEXT,老师请坐，我去给您泡壶茶。,"Please, have a seat, Master. I will make you some tea.",老师请坐，我去给您泡壶茶。
+STORY_004_04_003_TEXT,老师请坐，我去给您泡壶茶。,"Please, have a seat, Master. I will make you some tea.",先生、お掛けください。お茶をお淹れします。
 STORY_004_04_004_SPEAKER,顾问,Gu Wen,顧問
-STORY_004_04_004_TEXT,嗯，最近如何，学医有什么进展吗？,"Well, how have you been? How are your medical studies coming along?",嗯，最近如何，学医有什么进展吗？
+STORY_004_04_004_TEXT,嗯，最近如何，学医有什么进展吗？,"Well, how have you been? How are your medical studies coming along?",うむ、最近はどうだ。医術の勉強は進んでいるか？
 STORY_004_04_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_004_04_005_TEXT,学生行医读书时发现，自《神农本草经》之后，历代本草著作屡经增补改订，其中药材、方子的遗漏、讹误不可枚举。一方之误，害及数人，一药之讹，误尽苍生。,"As I have practiced and studied, I have found that the materia medica has been expanded and revised many times since the Divine Farmer's Classic. Errors and omissions concerning herbs and prescriptions are beyond counting. A mistaken formula can harm several people; a mistaken herb can harm countless more.",学生行医读书时发现，自《神农本草经》之后，历代本草著作屡经增补改订，其中药材、方子的遗漏、讹误不可枚举。一方之误，害及数人，一药之讹，误尽苍生。
+STORY_004_04_005_TEXT,学生行医读书时发现，自《神农本草经》之后，历代本草著作屡经增补改订，其中药材、方子的遗漏、讹误不可枚举。一方之误，害及数人，一药之讹，误尽苍生。,"As I have practiced and studied, I have found that the materia medica has been expanded and revised many times since the Divine Farmer's Classic. Errors and omissions concerning herbs and prescriptions are beyond counting. A mistaken formula can harm several people; a mistaken herb can harm countless more.",診療と読書を続けるうちに、『神農本草経』以降の本草書には、度重なる増補や改訂によって薬材や処方の抜け、誤りが数えきれないほどあると気づきました。処方を一つ誤れば数人を害し、薬を一つ取り違えれば多くの命に関わります。
 STORY_004_04_006_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_004_04_006_TEXT,学生想核对典籍，拾遗补正，重新编写一部能为后人所用的医书。,"I want to check the old texts, recover what was lost, correct their mistakes and write a new medical book for future generations.",学生想核对典籍，拾遗补正，重新编写一部能为后人所用的医书。
+STORY_004_04_006_TEXT,学生想核对典籍，拾遗补正，重新编写一部能为后人所用的医书。,"I want to check the old texts, recover what was lost, correct their mistakes and write a new medical book for future generations.",古い典籍を照合し、欠けた部分を補い、誤りを正して、後世に役立つ医学書を新たに編みたいのです。
 STORY_004_04_007_SPEAKER,顾问,Gu Wen,顧問
-STORY_004_04_007_TEXT,嗯，好啊东璧，你这想法甚好。,"A fine ambition, Dongbi. A fine ambition indeed.",嗯，好啊东璧，你这想法甚好。
+STORY_004_04_007_TEXT,嗯，好啊东璧，你这想法甚好。,"A fine ambition, Dongbi. A fine ambition indeed.",うむ、よい考えだ、東璧。
 STORY_004_04_008_SPEAKER,顾问,Gu Wen,顧問
-STORY_004_04_008_TEXT,"宋儒张载有四句教：""为天地立心，为生民立命，为往圣继绝学，为万世开太平""。",The Song scholar Zhang Zai wrote: “Establish a heart for Heaven and Earth; secure a life for the people; carry forward the lost learning of the sages; and bring peace to all generations.”,"宋儒张载有四句教：""为天地立心，为生民立命，为往圣继绝学，为万世开太平""。"
+STORY_004_04_008_TEXT,"宋儒张载有四句教：""为天地立心，为生民立命，为往圣继绝学，为万世开太平""。",The Song scholar Zhang Zai wrote: “Establish a heart for Heaven and Earth; secure a life for the people; carry forward the lost learning of the sages; and bring peace to all generations.”,宋の儒者、張載には四句の教えがある。「天地のために心を立て、生民のために命を立て、往聖のために絶学を継ぎ、万世のために太平を開く」。
 STORY_004_04_009_SPEAKER,顾问,Gu Wen,顧問
-STORY_004_04_009_TEXT,若是能著成此书，真可谓是为生民立命，为往圣继绝学了啊。,"If you complete this book, you will truly help secure a life for the people and carry forward the learning of the sages.",若是能著成此书，真可谓是为生民立命，为往圣继绝学了啊。
+STORY_004_04_009_TEXT,若是能著成此书，真可谓是为生民立命，为往圣继绝学了啊。,"If you complete this book, you will truly help secure a life for the people and carry forward the learning of the sages.",この書を書き上げれば、まさしく人々のために道を示し、先人の学問を後世へ伝えることになる。
 STORY_004_04_010_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_004_04_010_TEXT,为生民立命，为往圣继绝学…学生记下了。,"Secure a life for the people, and carry forward the learning of the sages… I will remember that.",为生民立命，为往圣继绝学…学生记下了。
-STORY_005_01_001_TEXT,咚咚咚...咚咚咚咚咚…,"Knock, knock… Knock, knock, knock, knock…",咚咚咚...咚咚咚咚咚…
+STORY_004_04_010_TEXT,为生民立命，为往圣继绝学…学生记下了。,"Secure a life for the people, and carry forward the learning of the sages… I will remember that.",「生民のために命を立て、往聖のために絶学を継ぐ」……心に刻みます。
+STORY_005_01_001_TEXT,咚咚咚...咚咚咚咚咚…,"Knock, knock… Knock, knock, knock, knock…",トントン……トントントントン……
 STORY_005_01_002_SPEAKER,陈皮,Chen Pi,陳皮
 STORY_005_01_002_TEXT,大半夜的谁啊，谁在敲门啊？,Who could be knocking in the middle of the night?,大半夜的谁啊，谁在敲门啊？
 STORY_005_01_003_SPEAKER,陈皮,Chen Pi,陳皮
