@@ -419,6 +419,11 @@ func _is_entry_match_clinical_log_search(entry: BookEntryData, clean_keyword: St
 		return false
 
 	var localized_title := _get_localized_entry_title(entry)
+	if LocalizedName.is_japanese_locale():
+		var entity_id := _get_entry_data_id(entry)
+		if entity_id.is_empty():
+			entity_id = entry.entry_id
+		return LocalizedName.japanese_search_matches(localized_title, entity_id, clean_keyword)
 
 	# 英文环境：英文名称 + 英文单词首字母。
 	if LocalizedName.is_english_locale():
@@ -617,7 +622,7 @@ func _setup_page_controls(right_panel: Control, detail_scroll: ScrollContainer, 
 
 
 func _apply_detail_scroll_layout() -> void:
-	var is_english := LocalizedName.is_english_locale()
+	var is_english := LocalizedName.is_english_locale() or LocalizedName.is_japanese_locale()
 
 	for scroll in [
 		disease_detail_scroll,
@@ -658,7 +663,7 @@ func _update_book_page_backgrounds() -> void:
 
 
 func _is_english_detail_layout() -> bool:
-	return TranslationServer.get_locale().to_lower().begins_with("en")
+	return LocalizedName.is_english_locale() or LocalizedName.is_japanese_locale()
 
 
 func _set_page_controls_visible(

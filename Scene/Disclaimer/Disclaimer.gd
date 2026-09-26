@@ -17,7 +17,7 @@ func _ready() -> void:
 	var locale := "zh_CN"
 	if settings.load(SETTINGS_PATH) == OK:
 		var saved_locale := str(settings.get_value("language", "locale", locale))
-		if saved_locale == "zh_CN" or saved_locale == "en":
+		if saved_locale in ["zh_CN", "en", "ja"]:
 			locale = saved_locale
 	TranslationServer.set_locale(locale)
 	$CenterContainer/ContentMargin/StatementContainer/Title.text = tr("UI_DISCLAIMER_TITLE")

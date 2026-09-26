@@ -223,7 +223,7 @@ static func format_fen_auto(total_fen: int) -> String:
 # 中文环境保持原来的中文数字 + 中文单位；
 # 英文环境使用阿拉伯数字 + 本地化单位，例如：3 qian。
 static func format_amount(amount: float, unit: String) -> String:
-	if TranslationServer.get_locale().to_lower().begins_with("en"):
+	if TranslationServer.get_locale().to_lower().begins_with("en") or TranslationServer.get_locale().to_lower().begins_with("ja"):
 		return _format_amount_english(amount, unit)
 
 	return format_fen_as_compound(to_fen(amount, unit))

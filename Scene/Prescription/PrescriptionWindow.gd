@@ -209,6 +209,9 @@ func _is_english_search_locale() -> bool:
 
 
 func _build_localized_search_record(localized_name: String, original_name: String, entity_id: String) -> Dictionary:
+	if LocalizedName.is_japanese_locale():
+		return {"display": localized_name, "entity_id": entity_id}
+
 	if _is_english_search_locale():
 		return {
 			"name": LocalizedName.normalize_search_text(localized_name),
@@ -225,6 +228,10 @@ func _build_localized_search_record(localized_name: String, original_name: Strin
 func _localized_search_record_matches(record: Dictionary, keyword: String) -> bool:
 	if keyword == "":
 		return false
+	if LocalizedName.is_japanese_locale():
+		return LocalizedName.japanese_search_matches(
+			str(record.get("display", "")), str(record.get("entity_id", "")), keyword
+		)
 
 	if _is_english_search_locale():
 		return (

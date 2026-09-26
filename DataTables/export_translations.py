@@ -18,6 +18,8 @@ except ImportError:
 
 SHEET_ORDER = ["UI", "Herbs", "Formulas", "Diseases", "NPC", "Story"]
 EXPECTED_HEADER = ["keys", "zh_CN", "en", "ja"]
+SEARCH_HEADER = ["keys", "zh_CN", "ja_kana", "ja_romaji"]
+SEARCH_EXPORT_HEADER = ["keys", "ja_kana", "ja_romaji"]
 
 SYMPTOM_KEY_PREFIX = "UI_DISEASE_SYMPTOM_"
 PLACEHOLDER_RE = re.compile(r"%(?:[-+0 #]*\d*(?:\.\d+)?)?[sdif]")
@@ -88,6 +90,12 @@ def validate_managed_sheets(wb) -> None:
             raise ValueError(
                 f"{sheet_name} 的表头必须是 {EXPECTED_HEADER}，当前实际为 {header}"
             )
+
+    if "JapaneseSearch" not in wb.sheetnames:
+        raise ValueError("翻译工作簿缺少 JapaneseSearch 工作表")
+    search_header = [as_text(wb["JapaneseSearch"].cell(1, col).value) for col in range(1, 5)]
+    if search_header != SEARCH_HEADER:
+        raise ValueError(f"JapaneseSearch 的表头必须是 {SEARCH_HEADER}")
 
 
 def read_disease_symptoms(data_xlsx: Path) -> list[tuple[str, list[str]]]:
@@ -381,6 +389,58 @@ def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
     return len(all_rows), warnings
 
 
+def export_japanese_search(wb, out_csv: Path) -> int:
+    """Export explicit Japanese readings; never derive them from Chinese pinyin IDs."""
+    title_keys = {
+        as_text(row[0])
+        for name in SHEET_ORDER
+        for row in wb[name].iter_rows(min_row=2, values_only=True)
+        if as_text(row[0]).startswith("UI_BOOK_ENTRY_TITLE_")
+    }
+    rows = []
+    seen = set()
+    for row_no, row in enumerate(wb["JapaneseSearch"].iter_rows(min_row=2, values_only=True), start=2):
+        key, _source_zh, kana, romaji = (as_text(value) for value in row[:4])
+        if not key and not kana and not romaji:
+            continue
+        if key not in title_keys or key in seen:
+            raise ValueError(f"JapaneseSearch 第 {row_no} 行的 key 无效或重复：{key}")
+        seen.add(key)
+        rows.append((key, kana, romaji))
+    if seen != title_keys:
+        raise ValueError(f"JapaneseSearch 缺少 {len(title_keys - seen)} 个名称 key")
+    # .txt keeps this runtime lookup file as a regular text resource in Godot exports.
+    path = out_csv.with_name("search_ja.txt")
+    with path.open("w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.writer(f, lineterminator="\n")
+        writer.writerow(SEARCH_EXPORT_HEADER)
+        writer.writerows(rows)
+    return len(rows)
+
+
+def sync_japanese_search(wb) -> None:
+    """Keep search keys in step with entry titles without losing edited readings."""
+    ws = wb["JapaneseSearch"]
+    existing = {
+        as_text(row[0]): (as_text(row[2]), as_text(row[3]))
+        for row in ws.iter_rows(min_row=2, values_only=True)
+        if as_text(row[0])
+    }
+    titles = []
+    seen = set()
+    for name in SHEET_ORDER:
+        for row in wb[name].iter_rows(min_row=2, values_only=True):
+            key = as_text(row[0])
+            if key.startswith("UI_BOOK_ENTRY_TITLE_") and key not in seen:
+                seen.add(key)
+                titles.append((key, as_text(row[1])))
+    if ws.max_row > 1:
+        ws.delete_rows(2, ws.max_row - 1)
+    for key, zh in titles:
+        kana, romaji = existing.get(key, ("", ""))
+        ws.append((key, zh, kana, romaji))
+
+
 def main() -> int:
     managed_xlsx = (
         Path(sys.argv[1])
@@ -427,6 +487,7 @@ def main() -> int:
 
         missing_english = sync_disease_symptoms(wb, disease_symptoms)
         missing_story = sync_story(wb, data_xlsx)
+        sync_japanese_search(wb)
 
         # Always save the synchronized managed workbook first.
         save_managed_workbook_safely(wb, managed_xlsx)
@@ -446,11 +507,13 @@ def main() -> int:
             return 2
 
         total, warnings = export_csv(wb, out_csv)
+        search_count = export_japanese_search(wb, out_csv)
         if missing_story:
             print(f"剧情待翻译：{len(missing_story)} 条；英文暂用中文原文，补全 Story 工作表后重导出。")
 
         print()
         print(f"已导出 {total} 条翻译 -> {out_csv}")
+        print(f"日语搜索读音：{search_count} 条 -> {out_csv.with_name('search_ja.txt')}")
 
         if warnings:
             print()

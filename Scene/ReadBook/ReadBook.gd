@@ -410,7 +410,7 @@ func _set_detail_text(value: String) -> void:
 		return
 
 	var use_english_page := false
-	if value != "" and selected_entry != null and TranslationServer.get_locale().begins_with("en"):
+	if value != "" and selected_entry != null and (LocalizedName.is_english_locale() or LocalizedName.is_japanese_locale()):
 		var body_key := "UI_BOOK_ENTRY_BODY_" + selected_entry.entry_id.to_upper()
 		use_english_page = tr(body_key) != body_key
 
@@ -465,6 +465,15 @@ func _entry_matches_search(entry: BookEntryData) -> bool:
 	var query := _get_search_query()
 	if query == "":
 		return true
+	if LocalizedName.is_japanese_locale():
+		var entity_id := entry.entry_id
+		if entry is HerbBookEntryData:
+			entity_id = (entry as HerbBookEntryData).herb_id
+		elif entry is FormulaBookEntryData:
+			entity_id = (entry as FormulaBookEntryData).formula_id
+		elif entry is DiseaseBookEntryData:
+			entity_id = (entry as DiseaseBookEntryData).disease_id
+		return LocalizedName.japanese_search_matches(_localized_entry_title(entry), entity_id, query)
 
 	# findn() 为大小写不敏感搜索；中文标题可直接匹配。
 	return entry.title.findn(query) >= 0 or _localized_entry_title(entry).findn(query) >= 0

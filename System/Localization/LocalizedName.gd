@@ -46,6 +46,65 @@ static func is_english_locale() -> bool:
 	return TranslationServer.get_locale().to_lower().begins_with("en")
 
 
+static func is_japanese_locale() -> bool:
+	return TranslationServer.get_locale().to_lower().begins_with("ja")
+
+
+static var _japanese_aliases_loaded: bool = false
+static var _japanese_aliases: Dictionary = {}
+
+
+static func normalize_japanese_search_text(value: String) -> String:
+	var result := ""
+	for index in range(value.length()):
+		var code := value.unicode_at(index)
+		# 片假名统一成平假名；全角英文字母和数字统一成半角。
+		if code >= 0x30A1 and code <= 0x30F6:
+			code -= 0x60
+		elif code >= 0xFF01 and code <= 0xFF5E:
+			code -= 0xFEE0
+		if code in [0x20, 0x3000, 0x2D, 0x5F, 0x27]:
+			continue
+		result += String.chr(code)
+	return result.to_lower()
+
+
+static func _load_japanese_aliases() -> void:
+	if _japanese_aliases_loaded:
+		return
+	_japanese_aliases_loaded = true
+	var path := "res://Localization/search_ja.txt"
+	if not FileAccess.file_exists(path):
+		return
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		return
+	file.get_csv_line() # header
+	while not file.eof_reached():
+		var fields := file.get_csv_line()
+		if fields.size() < 3 or fields[0].strip_edges().is_empty():
+			continue
+		_japanese_aliases[fields[0]] = [
+			normalize_japanese_search_text(fields[1]),
+			normalize_japanese_search_text(fields[2])
+		]
+
+
+static func japanese_search_matches(display_name: String, entity_id: String, query: String) -> bool:
+	var needle := normalize_japanese_search_text(query)
+	if needle.is_empty():
+		return false
+	if normalize_japanese_search_text(display_name).contains(needle):
+		return true
+	_load_japanese_aliases()
+	var key := "UI_BOOK_ENTRY_TITLE_" + entity_id.to_upper()
+	var aliases: Array = _japanese_aliases.get(key, [])
+	for alias in aliases:
+		if not str(alias).is_empty() and str(alias).contains(needle):
+			return true
+	return false
+
+
 static func normalize_search_text(value: String) -> String:
 	return value.strip_edges().to_lower() \
 		.replace("_", "") \
