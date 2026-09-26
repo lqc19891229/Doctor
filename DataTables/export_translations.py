@@ -17,7 +17,7 @@ except ImportError:
 
 
 SHEET_ORDER = ["UI", "Herbs", "Formulas", "Diseases", "NPC", "Story"]
-EXPECTED_HEADER = ["keys", "zh_CN", "en"]
+EXPECTED_HEADER = ["keys", "zh_CN", "en", "ja"]
 
 SYMPTOM_KEY_PREFIX = "UI_DISEASE_SYMPTOM_"
 PLACEHOLDER_RE = re.compile(r"%(?:[-+0 #]*\d*(?:\.\d+)?)?[sdif]")
@@ -83,7 +83,7 @@ def validate_managed_sheets(wb) -> None:
         if sheet_name == "Story" and sheet_name not in wb.sheetnames:
             continue
         ws = wb[sheet_name]
-        header = [as_text(ws.cell(1, col).value) for col in range(1, 4)]
+        header = [as_text(ws.cell(1, col).value) for col in range(1, 5)]
         if header != EXPECTED_HEADER:
             raise ValueError(
                 f"{sheet_name} 的表头必须是 {EXPECTED_HEADER}，当前实际为 {header}"
@@ -155,7 +155,7 @@ def parse_symptom_key(key: str) -> tuple[str, int] | None:
 
 
 def copy_row_style(source_ws, source_row: int, target_ws, target_row: int) -> None:
-    for col in range(1, 4):
+    for col in range(1, 5):
         source = source_ws.cell(source_row, col)
         target = target_ws.cell(target_row, col)
 
@@ -181,8 +181,7 @@ def update_table_ranges(ws) -> None:
         return
 
     for table in ws.tables.values():
-        # All localization tables are A:C tables.
-        table.ref = f"A1:C{ws.max_row}"
+        table.ref = f"A1:D{ws.max_row}"
 
 
 def sync_disease_symptoms(managed_wb, disease_symptoms: list[tuple[str, list[str]]]) -> list[str]:
@@ -199,8 +198,8 @@ def sync_disease_symptoms(managed_wb, disease_symptoms: list[tuple[str, list[str
     """
     ws = managed_wb["Diseases"]
 
-    existing_by_disease_and_zh: dict[tuple[str, str], str] = {}
-    existing_by_zh: dict[str, str] = {}
+    existing_by_disease_and_zh: dict[tuple[str, str], tuple[str, str]] = {}
+    existing_by_zh: dict[str, tuple[str, str]] = {}
     symptom_rows: list[int] = []
 
     style_source_row: int | None = None
@@ -214,15 +213,16 @@ def sync_disease_symptoms(managed_wb, disease_symptoms: list[tuple[str, list[str
         disease_id, _index = parsed
         zh = as_text(ws.cell(row_no, 2).value)
         en = as_text(ws.cell(row_no, 3).value)
+        ja = as_text(ws.cell(row_no, 4).value)
 
         symptom_rows.append(row_no)
 
         if style_source_row is None:
             style_source_row = row_no
 
-        if zh and en:
-            existing_by_disease_and_zh[(disease_id, zh)] = en
-            existing_by_zh.setdefault(zh, en)
+        if zh:
+            existing_by_disease_and_zh[(disease_id, zh)] = (en, ja)
+            existing_by_zh.setdefault(zh, (en, ja))
 
     # If the workbook has no symptom rows yet, use the last ordinary Diseases row
     # as the formatting template.
@@ -239,9 +239,9 @@ def sync_disease_symptoms(managed_wb, disease_symptoms: list[tuple[str, list[str
         for index, zh in enumerate(symptoms, start=1):
             key = f"{SYMPTOM_KEY_PREFIX}{disease_id.upper()}_{index:02d}"
 
-            en = existing_by_disease_and_zh.get((disease_id.lower(), zh), "")
-            if not en:
-                en = existing_by_zh.get(zh, "")
+            en, ja = existing_by_disease_and_zh.get(
+                (disease_id.lower(), zh), existing_by_zh.get(zh, ("", ""))
+            )
 
             target_row = ws.max_row + 1
             copy_row_style(ws, style_source_row, ws, target_row)
@@ -249,6 +249,7 @@ def sync_disease_symptoms(managed_wb, disease_symptoms: list[tuple[str, list[str
             ws.cell(target_row, 1).value = key
             ws.cell(target_row, 2).value = zh
             ws.cell(target_row, 3).value = en
+            ws.cell(target_row, 4).value = ja
 
             if not en:
                 missing_english.append(f"{key} | {zh}")
@@ -263,14 +264,14 @@ def sync_story(wb, data_xlsx: Path) -> list[str]:
     if "StoryLine" not in source.sheetnames:
         raise ValueError(f"{data_xlsx} 缺少 StoryLine 工作表")
     ws = wb["Story"] if "Story" in wb else wb.create_sheet("Story")
-    if [as_text(ws.cell(1, col).value) for col in range(1, 4)] != EXPECTED_HEADER:
+    if [as_text(ws.cell(1, col).value) for col in range(1, 5)] != EXPECTED_HEADER:
         ws.insert_rows(1)
         for col, name in enumerate(EXPECTED_HEADER, start=1):
             ws.cell(1, col).value = name
     old = {}
     for row in ws.iter_rows(min_row=2, values_only=True):
         if row[0]:
-            old[str(row[0])] = (as_text(row[1]), as_text(row[2]))
+            old[str(row[0])] = (as_text(row[1]), as_text(row[2]), as_text(row[3]))
     source_ws = source["StoryLine"]
     headers = {as_text(c.value): i for i, c in enumerate(source_ws[1])}
     required = ("StoryID", "LineIndex", "Speaker", "Text")
@@ -291,15 +292,16 @@ def sync_story(wb, data_xlsx: Path) -> list[str]:
             if not zh:
                 continue
             key = f"STORY_{story_id}_{index:03d}_{suffix}"
-            previous_zh, previous_en = old.get(key, ("", ""))
+            previous_zh, previous_en, previous_ja = old.get(key, ("", "", ""))
             en = previous_en if previous_zh == zh else ""
-            rows.append((key, zh, en))
+            ja = previous_ja if previous_zh == zh else ""
+            rows.append((key, zh, en, ja))
     if ws.max_row > 1:
         ws.delete_rows(2, ws.max_row - 1)
-    for key, zh, en in rows:
-        ws.append((key, zh, en))
+    for key, zh, en, ja in rows:
+        ws.append((key, zh, en, ja))
     update_table_ranges(ws)
-    return [f"{key} | {zh}" for key, zh, en in rows if not en]
+    return [f"{key} | {zh}" for key, zh, en, ja in rows if not en]
 
 
 def save_managed_workbook_safely(wb, path: Path) -> None:
@@ -334,7 +336,9 @@ def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
             zh = as_text(ws.cell(row_no, 2).value)
             en = as_text(ws.cell(row_no, 3).value)
 
-            if not key and not zh and not en:
+            ja = as_text(ws.cell(row_no, 4).value)
+
+            if not key and not zh and not en and not ja:
                 continue
 
             if not key or not zh or (not en and sheet_name != "Story"):
@@ -359,7 +363,10 @@ def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
                     f"zh={zh_ph}, en={en_ph}"
                 )
 
-            all_rows.append([key, zh, en or zh])
+            if ja and sorted(placeholders(ja)) != sorted(zh_ph):
+                warnings.append(f"{sheet_name} row {row_no} {key}: ja={placeholders(ja)}, zh={zh_ph}")
+
+            all_rows.append([key, zh, en or zh, ja or zh])
             count += 1
 
         print(f"{sheet_name}：{count} 条")
