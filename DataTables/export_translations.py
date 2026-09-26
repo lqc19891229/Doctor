@@ -16,7 +16,7 @@ except ImportError:
     raise SystemExit(1)
 
 
-SHEET_ORDER = ["UI", "Herbs", "Formulas", "Diseases", "NPC"]
+SHEET_ORDER = ["UI", "Herbs", "Formulas", "Diseases", "NPC", "Story"]
 EXPECTED_HEADER = ["keys", "zh_CN", "en"]
 
 SYMPTOM_KEY_PREFIX = "UI_DISEASE_SYMPTOM_"
@@ -75,11 +75,13 @@ def find_data_xlsx(explicit_path: Path | None, managed_xlsx: Path) -> Path | Non
 
 
 def validate_managed_sheets(wb) -> None:
-    missing = [name for name in SHEET_ORDER if name not in wb.sheetnames]
+    missing = [name for name in SHEET_ORDER if name != "Story" and name not in wb.sheetnames]
     if missing:
         raise ValueError("翻译工作簿缺少以下工作表： " + ", ".join(missing))
 
     for sheet_name in SHEET_ORDER:
+        if sheet_name == "Story" and sheet_name not in wb.sheetnames:
+            continue
         ws = wb[sheet_name]
         header = [as_text(ws.cell(1, col).value) for col in range(1, 4)]
         if header != EXPECTED_HEADER:
@@ -255,6 +257,51 @@ def sync_disease_symptoms(managed_wb, disease_symptoms: list[tuple[str, list[str
     return missing_english
 
 
+def sync_story(wb, data_xlsx: Path) -> list[str]:
+    """Rebuild story rows from stable StoryID/LineIndex while retaining reviewed English."""
+    source = load_workbook(data_xlsx, read_only=True, data_only=True)
+    if "StoryLine" not in source.sheetnames:
+        raise ValueError(f"{data_xlsx} 缺少 StoryLine 工作表")
+    ws = wb["Story"] if "Story" in wb else wb.create_sheet("Story")
+    if [as_text(ws.cell(1, col).value) for col in range(1, 4)] != EXPECTED_HEADER:
+        ws.insert_rows(1)
+        for col, name in enumerate(EXPECTED_HEADER, start=1):
+            ws.cell(1, col).value = name
+    old = {}
+    for row in ws.iter_rows(min_row=2, values_only=True):
+        if row[0]:
+            old[str(row[0])] = (as_text(row[1]), as_text(row[2]))
+    source_ws = source["StoryLine"]
+    headers = {as_text(c.value): i for i, c in enumerate(source_ws[1])}
+    required = ("StoryID", "LineIndex", "Speaker", "Text")
+    if any(name not in headers for name in required):
+        raise ValueError("Data.xlsx 的 StoryLine 工作表缺少必要列")
+    rows = []
+    seen = set()
+    for row in source_ws.iter_rows(min_row=2, values_only=True):
+        story_id = as_text(row[headers["StoryID"]])
+        if not story_id:
+            continue
+        index = int(row[headers["LineIndex"]])
+        if index < 1 or (story_id, index) in seen:
+            raise ValueError(f"StoryLine 行号无效或重复：{story_id} / {index}")
+        seen.add((story_id, index))
+        for field, suffix in (("Speaker", "SPEAKER"), ("Text", "TEXT")):
+            zh = as_text(row[headers[field]])
+            if not zh:
+                continue
+            key = f"STORY_{story_id}_{index:03d}_{suffix}"
+            previous_zh, previous_en = old.get(key, ("", ""))
+            en = previous_en if previous_zh == zh else ""
+            rows.append((key, zh, en))
+    if ws.max_row > 1:
+        ws.delete_rows(2, ws.max_row - 1)
+    for key, zh, en in rows:
+        ws.append((key, zh, en))
+    update_table_ranges(ws)
+    return [f"{key} | {zh}" for key, zh, en in rows if not en]
+
+
 def save_managed_workbook_safely(wb, path: Path) -> None:
     """
     Save through a temporary file, then replace the original.
@@ -290,7 +337,7 @@ def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
             if not key and not zh and not en:
                 continue
 
-            if not key or not zh or not en:
+            if not key or not zh or (not en and sheet_name != "Story"):
                 raise ValueError(
                     f"数据不完整：{sheet_name} 第 {row_no} 行 "
                     f"(key={key!r}, zh_CN={zh!r}, en={en!r})"
@@ -312,7 +359,7 @@ def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
                     f"zh={zh_ph}, en={en_ph}"
                 )
 
-            all_rows.append([key, zh, en])
+            all_rows.append([key, zh, en or zh])
             count += 1
 
         print(f"{sheet_name}：{count} 条")
@@ -372,6 +419,7 @@ def main() -> int:
         )
 
         missing_english = sync_disease_symptoms(wb, disease_symptoms)
+        missing_story = sync_story(wb, data_xlsx)
 
         # Always save the synchronized managed workbook first.
         save_managed_workbook_safely(wb, managed_xlsx)
@@ -391,6 +439,8 @@ def main() -> int:
             return 2
 
         total, warnings = export_csv(wb, out_csv)
+        if missing_story:
+            print(f"剧情待翻译：{len(missing_story)} 条；英文暂用中文原文，补全 Story 工作表后重导出。")
 
         print()
         print(f"已导出 {total} 条翻译 -> {out_csv}")
@@ -404,7 +454,7 @@ def main() -> int:
             print("占位符检查：通过")
 
         print()
-        print("下一步：将 translations.csv 替换到 res://Localization/ 下，并在 Godot 中重新导入。")
+        print("下一步：在 Godot 中重新导入 Localization/translations.csv。")
         return 0
 
     except PermissionError as exc:
