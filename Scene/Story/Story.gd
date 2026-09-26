@@ -151,35 +151,34 @@ func set_current_scene_background_texture(texture: Texture2D) -> void:
 
 
 func _notification(what: int) -> void:
-    if what != NOTIFICATION_TRANSLATION_CHANGED or not is_node_ready():
-        return
-    if is_treatment_mode:
-        if _treatment_display_key == "UI_STORY_SELECT_TREATMENT":
-            speaker_label.text = _treatment_npc_display_name if _treatment_npc_display_name != "" else tr("UI_STORY_TREATMENT_SPEAKER")
-        else:
-            speaker_label.text = tr("UI_STORY_TREATMENT_HINT")
-        if _treatment_display_key != "":
-            dialogue_label.text = tr(_treatment_display_key)
-    elif current_line_index >= 0 and current_line_index < current_lines.size():
-        var line_data: StoryLine = current_lines[current_line_index]
-        if line_data != null:
-            var old_length := maxi(current_full_text.length(), 1)
-            var progress := float(visible_character_count) / float(old_length)
-            current_full_text = _localized_story_value(line_data.text, "TEXT")
-            speaker_label.text = _localized_story_value(line_data.speaker, "SPEAKER")
-            dialogue_label.text = current_full_text
-            subtitle_label.text = current_full_text
-            visible_character_count = clampi(roundi(progress * current_full_text.length()), 0, current_full_text.length())
-            _update_visible_text()
+	if what != NOTIFICATION_TRANSLATION_CHANGED or not is_node_ready():
+		return
+	if is_treatment_mode:
+		if _treatment_display_key == "UI_STORY_SELECT_TREATMENT":
+			speaker_label.text = _treatment_npc_display_name if _treatment_npc_display_name != "" else tr("UI_STORY_TREATMENT_SPEAKER")
+		else:
+			speaker_label.text = tr("UI_STORY_TREATMENT_HINT")
+		if _treatment_display_key != "":
+			dialogue_label.text = tr(_treatment_display_key)
+	elif current_line_index >= 0 and current_line_index < current_lines.size():
+		var line_data: StoryLine = current_lines[current_line_index]
+		if line_data != null:
+			var old_length := maxi(current_full_text.length(), 1)
+			var progress := float(visible_character_count) / float(old_length)
+			current_full_text = _localized_story_value(line_data.text, "TEXT")
+			speaker_label.text = _localized_story_value(line_data.speaker, "SPEAKER")
+			dialogue_label.text = current_full_text
+			subtitle_label.text = current_full_text
+			visible_character_count = clampi(roundi(progress * current_full_text.length()), 0, current_full_text.length())
+			_update_visible_text()
 
 
 func _localized_story_value(original: String, field: String) -> String:
-    if original.is_empty() or story_data == null:
-        return original
-    var key := "STORY_%s_%03d_%s" % [story_data.story_id, current_line_index + 1, field]
-    var translated := tr(key)
-    return original if translated == key or translated.is_empty() else translated
-
+	if original.is_empty() or story_data == null:
+		return original
+	var key := "STORY_%s_%03d_%s" % [story_data.story_id, current_line_index + 1, field]
+	var translated := tr(key)
+	return original if translated == key or translated.is_empty() else translated
 
 func _ready() -> void:
 	dark_mask_normal_alpha = dark_mask.color.a
