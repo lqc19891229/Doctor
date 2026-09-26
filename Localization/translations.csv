@@ -8680,19 +8680,19 @@ Envoy: Licorice Root 1 qian
 [How the ingredients work together]
 Ephedra Herb and Cinnamon Twig reinforce one another in promoting sweating and dispersing Cold, addressing an Exterior Excess pattern without sweating.
 Ephedra Herb and Apricot Kernel work together to disperse and descend Lung Qi, addressing wheezing when Cold obstructs the Lung.
-Licorice Root harmonizes the ingredients.","麻黄汤
-【出处】《伤寒论》
-【功效】发汗解表，宣肺平喘
-【主治】风寒表实证
-【组成】
-君：麻黄 三钱
-臣：桂枝 二钱
-佐：杏仁 二钱
-使：甘草 一钱
+Licorice Root harmonizes the ingredients.","麻黄湯
+【出典】『傷寒論』
+【効能】発汗して表の邪を解き、肺気を巡らせて喘ぎを鎮める
+【主治】風寒表実証
+【構成】
+君：麻黄 三銭
+臣：桂枝 二銭
+佐：杏仁 二銭
+使：甘草 一銭
 【配伍】
-麻桂相须，增强发汗散寒之力，专治表实无汗。
-麻杏相使，宣降相配，专治寒邪闭肺之喘逆。
-甘草调和诸药"
+麻黄と桂枝を併用し、発汗と散寒の働きを強め、表実で汗が出ない状態を治す。
+麻黄と杏仁は肺気の宣発と下降を助け合い、寒邪が肺を塞いで起こる喘ぎに用いる。
+甘草は薬材全体を調和させる。"
 UI_BOOK_ENTRY_TITLE_GUI_ZHI_TANG,桂枝汤,Cinnamon Twig Decoction,桂枝湯
 UI_BOOK_ENTRY_BODY_GUI_ZHI_TANG,"桂枝汤
 【出处】《伤寒论》
@@ -8716,18 +8716,18 @@ Assistant: Fresh Ginger 3 qian, Jujube 2 qian
 Envoy: Licorice Root 2 qian
 [How the ingredients work together]
 Cinnamon Twig is acrid and disperses pathogenic influences from the defensive layer; White Peony Root is sour and astringent, protecting nutritive Yin. One disperses and the other gathers, harmonizing nutritive and defensive Qi without weakening healthy Qi or trapping the pathogenic influence.
-Fresh Ginger and Jujube work together to harmonize the Spleen and Stomach and support the formation of Qi and blood, the source of nutritive and defensive Qi.","桂枝汤
-【出处】《伤寒论》
-【功效】解肌发表，调和营卫
-【主治】风寒表虚证
-【组成】
-君：桂枝 三钱
-臣：白芍 三钱
-佐：生姜 三钱，大枣 二钱
-使：甘草 二钱
+Fresh Ginger and Jujube work together to harmonize the Spleen and Stomach and support the formation of Qi and blood, the source of nutritive and defensive Qi.","桂枝湯
+【出典】『傷寒論』
+【効能】肌表を解き、営と衛を調和させる
+【主治】風寒表虚証
+【構成】
+君：桂枝 三銭
+臣：白芍 三銭
+佐：生姜 三銭、大棗 二銭
+使：甘草 二銭
 【配伍】
-桂枝辛散卫邪，白芍酸敛营阴；一散一收，调和营卫，不伤正、不敛邪。
-姜枣相合，调和脾胃，化生气血，资营卫之源。"
+桂枝は衛の邪を散らし、白芍は営陰を収める。散らす働きと収める働きが営衛を整え、正気を傷めず邪も閉じ込めない。
+生姜と大棗は脾胃を整え、気血を生み、営衛を養う。"
 UI_BOOK_ENTRY_TITLE_YIN_QIAO_SAN,银翘散,Honeysuckle and Forsythia Powder,銀翹散
 UI_BOOK_ENTRY_BODY_YIN_QIAO_SAN,"银翘散
 【出处】《温病条辨》
@@ -8759,22 +8759,22 @@ Mint and Burdock Fruit cool and disperse Wind-Heat, ease the throat, disperse Lu
 Schizonepeta Herb and Fermented Soybean are acrid and warm; they help release the Exterior so cool ingredients do not impede the movement of Qi.
 Platycodon Root disperses Lung Qi, soothes the throat and relieves cough.
 Bamboo Leaf and Reed Rhizome clear Heat, generate body fluids and ease restlessness and thirst.
-Licorice Root harmonizes the ingredients while helping to clear Heat and ease throat pain.","银翘散
-【出处】《温病条辨》
-【功效】辛凉透表，清热解毒
-【主治】风热表证
-【组成】
-君：金银花 一两，连翘 一两
-臣：牛蒡子 六钱，荆芥四钱，薄荷 六钱，淡豆豉 五钱
-佐：桔梗 六钱，芦根 四钱，竹叶 四钱
-使：甘草 五钱
+Licorice Root harmonizes the ingredients while helping to clear Heat and ease throat pain.","銀翹散
+【出典】『温病条弁』
+【効能】辛涼の薬で表の邪を透かし、熱を清め毒を解く
+【主治】風熱表証
+【構成】
+君：金銀花 一両、連翹 一両
+臣：牛蒡子 六銭、荊芥 四銭、薄荷 六銭、淡豆豉 五銭
+佐：桔梗 六銭、芦根 四銭、竹葉 四銭
+使：甘草 五銭
 【配伍】
-金银花、连翘：辛凉透表、疏散风热，清热解毒，轻清宣透上焦风热
-薄荷、牛蒡子：辛凉疏散风热，清利咽喉、宣肺止咳
-荆芥穗、淡豆豉：辛温透表，发汗透邪，防寒凉郁遏气机，助邪外达
-桔梗：宣肺利咽、开气止咳
-淡竹叶、芦根：清热生津、除烦止渴，缓解风热口渴
-生甘草：调和诸药，兼清热解毒、利咽止痛"
+金銀花・連翹：風熱を散らし、熱を清め毒を解き、上焦の邪を外へ透かす。
+薄荷・牛蒡子：風熱を散らし、喉を清め、肺気を巡らせて咳を鎮める。
+荊芥穂・淡豆豉：温かい性質で発汗を促し、寒涼の薬で気の流れが滞るのを防ぐ。
+桔梗：肺気を巡らせ、喉を整え、咳を鎮める。
+淡竹葉・芦根：熱を清めて津液を生み、いらだちと渇きを和らげる。
+生甘草：諸薬を調和し、熱を清め、喉の痛みを和らげる。"
 UI_BOOK_ENTRY_TITLE_SANG_XING_TANG,桑杏汤,Mulberry Leaf and Apricot Kernel Decoction,桑杏湯
 UI_BOOK_ENTRY_BODY_SANG_XING_TANG,"桑杏汤
 【出处】《温病条辨》
@@ -8808,23 +8808,23 @@ Fermented Soybean helps release pathogenic influences from the Exterior.
 Fritillaria Bulb clears Heat, transforms phlegm, moistens the Lung and disperses accumulation.
 Adenophora Root nourishes Yin, generates body fluids and moistens the Lung.
 Gardenia Fruit clears Dryness-Heat from the upper body.
-Pear Peel clears Heat, moistens Dryness, generates fluids and eases thirst.","桑杏汤
-【出处】《温病条辨》
-【功效】清宣温燥，润肺止咳
-【主治】温燥证
-【组成】
-君：桑叶 一钱五分，杏仁 二钱
-臣：沙参 一钱
-佐：贝母 一钱，淡豆豉 一钱，栀子 一钱，梨皮一钱
+Pear Peel clears Heat, moistens Dryness, generates fluids and eases thirst.","桑杏湯
+【出典】『温病条弁』
+【効能】温燥を清めて肺気を巡らせ、肺を潤して咳を鎮める
+【主治】温燥証
+【構成】
+君：桑葉 一銭五分、杏仁 二銭
+臣：沙参 一銭
+佐：貝母 一銭、淡豆豉 一銭、山梔子 一銭、梨皮 一銭
 使：
 【配伍】
-桑叶：轻清宣透、疏散上焦温燥
-杏仁：苦润降肺、润燥止咳
-淡豆豉：透表散邪
-贝母：清热化痰、润肺散结
-沙参：养阴生津、润肺
-栀子：轻清泄上焦燥热
-梨皮：清热润燥、生津止渴"
+桑葉：軽やかに上焦の温燥を外へ透かす。
+杏仁：肺気を下ろし、乾燥を潤して咳を鎮める。
+淡豆豉：表の邪を散らす。
+貝母：熱を清めて痰を除き、肺を潤す。
+沙参：陰と津液を養い、肺を潤す。
+山梔子：上焦の燥熱を清める。
+梨皮：熱と乾燥を和らげ、津液を生んで渇きを鎮める。"
 UI_BOOK_ENTRY_TITLE_XING_SU_SAN,杏苏散,Apricot Kernel and Perilla Leaf Powder,杏蘇散
 UI_BOOK_ENTRY_BODY_XING_SU_SAN,"杏苏散
 【出处】《温病条辨》
@@ -8856,22 +8856,22 @@ Apricot Kernel moistens Dryness, directs Lung Qi downward and eases cough.
 Peucedanum Root disperses Wind, directs Qi downward and transforms phlegm.
 Platycodon Root raises and Zhi Qiao lowers Qi, together promoting the free movement of Lung Qi.
 Pinellia Rhizome, Aged Tangerine Peel and Poria dry Dampness, transform phlegm, regulate Qi and support the Spleen.
-Licorice Root harmonizes the ingredients.","杏苏散
-【出处】《温病条辨》
-【功效】轻宣凉燥，理肺化痰
-【主治】凉燥证
-【组成】
-君：杏仁 三钱，苏叶 三钱
-臣：半夏 三钱，前胡 三钱，陈皮 三钱
-佐：茯苓 二钱，桔梗 二钱，枳壳 二钱
-使：甘草 一钱
+Licorice Root harmonizes the ingredients.","杏蘇散
+【出典】『温病条弁』
+【効能】涼燥を軽く散らし、肺気を整えて痰を除く
+【主治】涼燥証
+【構成】
+君：杏仁 三銭、蘇葉 三銭
+臣：半夏 三銭、前胡 三銭、陳皮 三銭
+佐：茯苓 二銭、桔梗 二銭、枳殻 二銭
+使：甘草 一銭
 【配伍】
-苏叶：辛温发散，轻宣凉燥、疏散风寒；
-杏仁：苦温润燥，降肺止咳。
-前胡：疏风降气、化痰；
-桔梗枳壳：一升一降，宣畅肺气。
-半夏、陈皮、茯苓：燥湿化痰、理气健脾，杜生痰之源。
-生甘草：调和诸药"
+蘇葉：温かい性質で風寒と涼燥を軽く散らす。
+杏仁：乾燥を潤し、肺気を下ろして咳を鎮める。
+前胡：風を散らし、気を下ろして痰を除く。
+桔梗と枳殻：一方は気を上げ、他方は下ろして肺気を整える。
+半夏・陳皮・茯苓：湿を乾かして痰を除き、気と脾を整えて痰の生じる元を抑える。
+生甘草：諸薬を調和させる。"
 UI_BOOK_ENTRY_TITLE_YU_PING_FENG_SAN,玉屏风散,Jade Windscreen Powder,玉屏風散
 UI_BOOK_ENTRY_BODY_YU_PING_FENG_SAN,"玉屏风散
 【出处】《究原方》
@@ -8897,19 +8897,19 @@ Envoy:
 [How the ingredients work together]
 Astragalus Root supports Lung and Spleen Qi, strengthens the Exterior and defensive Qi, and reduces sweating.
 White Atractylodes Rhizome strengthens Spleen Qi, helping Astragalus Root support original Qi and protect the body's surface.
-Saposhnikovia Root reaches the surface and disperses Wind. It allows the formula to strengthen the Exterior without retaining a pathogenic influence, and to dispel Wind without weakening healthy Qi.","玉屏风散
-【出处】《究原方》
-【功效】益气固表，止汗御风
-【主治】卫气虚
-【组成】
-君：黄芪  一两
-臣：白术 一两
-佐：防风 五钱
+Saposhnikovia Root reaches the surface and disperses Wind. It allows the formula to strengthen the Exterior without retaining a pathogenic influence, and to dispel Wind without weakening healthy Qi.","玉屏風散
+【出典】『究原方』
+【効能】気を補って表を固め、汗を止めて風を防ぐ
+【主治】衛気虚
+【構成】
+君：黄耆 一両
+臣：白朮 一両
+佐：防風 五銭
 使：
 【配伍】
-黄芪：大补肺脾之气，固表实卫、益气止汗。
-白术：健脾益气，助黄芪培补元气、固护肌表。
-防风：走肌表、疏散风邪，固表不留邪、祛风不伤正。"
+黄耆：肺と脾の気を大いに補い、体表を固めて汗を抑える。
+白朮：脾と気を補い、黄耆を助けて体表を守る。
+防風：肌表の風邪を散らす。表を固めながら邪を閉じ込めず、風を除きながら正気を傷めない。"
 UI_BOOK_ENTRY_TITLE_WU_TOU_TANG,乌头汤,Aconite Decoction,烏頭湯
 UI_BOOK_ENTRY_BODY_WU_TOU_TANG,"乌头汤
 【出处】《金匮要略》
@@ -8939,21 +8939,21 @@ Aconite Root is intensely warming; it warms the channels, disperses Cold-Dampnes
 Ephedra Herb promotes sweating and disperses Cold, opens the channels and helps expel the pathogenic influence.
 Astragalus Root supports Qi and strengthens the Exterior, helping protect healthy Qi during dispersal.
 White Peony Root nourishes blood, harmonizes the nutritive layer, relaxes the sinews and eases spasms and pain.
-Prepared Licorice Root and Honey temper the strong toxicity of Aconite Root, harmonize the ingredients and ease spasms and pain.","乌头汤
-【出处】《金匮要略》
-【功效】温经散寒，除湿止痛
-【主治】痛痹（寒痹）
-【组成】
-君：乌头 二钱
-臣：麻黄 三钱
-佐：白芍 三钱，黄芪 三钱
-使：甘草 三钱，蜂蜜 一斤
+Prepared Licorice Root and Honey temper the strong toxicity of Aconite Root, harmonize the ingredients and ease spasms and pain.","烏頭湯
+【出典】『金匱要略』
+【効能】経絡を温めて寒を散らし、湿を除いて痛みを鎮める
+【主治】痛痺（寒痺）
+【構成】
+君：烏頭 二銭
+臣：麻黄 三銭
+佐：白芍 三銭、黄耆 三銭
+使：甘草 三銭、蜂蜜 一斤
 【配伍】
-乌头：大辛大热，温经散寒、逐寒湿、止剧痛，专治寒凝痹痛；
-麻黄：发汗散寒，宣通经络，助乌头透邪外出。
-黄芪：益气固表、扶正实卫，防辛散耗气；
-白芍：养血和营、缓急止痛，柔筋止拘挛；
-炙甘草、蜂蜜：缓乌头峻烈毒性，调和诸药，缓急止痛。"
+烏頭：強い温熱の性質で経絡を温め、寒湿を追い払い、強い痛みを鎮める。
+麻黄：発汗して寒を散らし、経絡を通じさせて邪を外へ出す。
+黄耆：気を補って表を固め、辛散による消耗を防ぐ。
+白芍：血と営を養い、筋のひきつれを緩めて痛みを鎮める。
+炙甘草・蜂蜜：烏頭の強い毒性を和らげ、諸薬を調和し、痛みを緩める。"
 UI_BOOK_ENTRY_TITLE_BAI_HU_GUI_ZHI_TANG,白虎桂枝汤,White Tiger Decoction with Cinnamon Twig,白虎桂枝湯
 UI_BOOK_ENTRY_BODY_BAI_HU_GUI_ZHI_TANG,"白虎桂枝汤
 【出处】《金匮要略》
@@ -8981,20 +8981,20 @@ Envoy: Licorice Root 3 qian
 Raw Gypsum strongly clears Heat from the Qi level, relieves agitation and addresses red, swollen, burning joints.
 Anemarrhena Rhizome clears Heat and nourishes Yin, reinforcing Gypsum in clearing internal Heat.
 Cinnamon Twig warms and opens the channels, dispels Wind and harmonizes the nutritive layer, guiding the formula toward the joints. Its warmth also balances the cooling ingredients.
-Prepared Licorice Root and Non-Glutinous Rice support Qi and the Stomach, temper the cooling nature of Gypsum and Anemarrhena Rhizome, and protect Stomach Qi.","白虎桂枝汤
-【出处】《金匮要略》
-【功效】清热通络，和营祛风
-【主治】热痹
-【组成】
-君：石膏 二两
-臣：知母 六钱
-佐：桂枝 三钱，粳米 五钱
-使：甘草 三钱
+Prepared Licorice Root and Non-Glutinous Rice support Qi and the Stomach, temper the cooling nature of Gypsum and Anemarrhena Rhizome, and protect Stomach Qi.","白虎桂枝湯
+【出典】『金匱要略』
+【効能】熱を清めて経絡を通し、営を整えて風を除く
+【主治】熱痺
+【構成】
+君：石膏 二両
+臣：知母 六銭
+佐：桂枝 三銭、粳米 五銭
+使：甘草 三銭
 【配伍】
-生石膏：大寒大清，清气分实热，泻火除烦，专治关节红肿灼热。
-知母：苦寒清热、滋阴润燥，助石膏清泄里热。
-桂枝：辛温通络、祛风和营，引药直达经络关节，散经络风湿热邪；辛温反佐，防寒凉凝滞气血。
-炙甘草、粳米：益气养胃，缓和石膏、知母寒凉之性，保护胃气。"
+生石膏：気分の強い熱を清め、火といらだちを除き、赤く腫れて熱を持つ関節に用いる。
+知母：熱を清め、陰を養って乾燥を潤し、石膏を助ける。
+桂枝：経絡を温めて通し、風を除いて営を整える。薬を関節へ導き、寒涼の薬で気血が滞るのを防ぐ。
+炙甘草・粳米：気と胃を養い、石膏と知母の冷やす性質を和らげる。"
 UI_BOOK_ENTRY_TITLE_YI_YI_REN_TANG,薏苡仁汤,Coix Seed Decoction,薏苡仁湯
 UI_BOOK_ENTRY_BODY_YI_YI_REN_TANG,"薏苡仁汤
 【出处】《太医院经验奇效良方大全》
@@ -9024,21 +9024,21 @@ Coix Seed promotes urination, drains Dampness, supports the Spleen, relieves Bi 
 Notopterygium Root and Angelica Pubescens Root dispel Wind-Dampness, open the channels and relieve pain throughout the upper and lower body.
 Ephedra Herb and Cinnamon Twig warm the channels, disperse Cold and support the removal of Dampness.
 Chinese Angelica Root and Sichuan Lovage Rhizome nourish and move blood, open the channels and ease pain. Moving blood also helps address Wind.
-Licorice Root harmonizes the ingredients and supports the warm dispersal of Dampness.","薏苡仁汤
-【出处】《太医院经验奇效良方大全》
-【功效】除湿通络，祛风散寒
-【主治】着痹（湿痹）
-【组成】
-君：薏苡仁 一两
-臣：羌活 三钱，独活 三钱，麻黄 三钱，桂枝 三钱
-佐：当归 二钱，川芎 二钱
-使：甘草 三钱
+Licorice Root harmonizes the ingredients and supports the warm dispersal of Dampness.","薏苡仁湯
+【出典】『太医院経験奇効良方大全』
+【効能】湿を除いて経絡を通し、風と寒を散らす
+【主治】着痺（湿痺）
+【構成】
+君：薏苡仁 一両
+臣：羌活 三銭、独活 三銭、麻黄 三銭、桂枝 三銭
+佐：当帰 二銭、川芎 二銭
+使：甘草 三銭
 【配伍】
-薏苡仁：利水渗湿、健脾除痹、舒筋缓急，专治湿痹重着。
-羌活、独活：祛风胜湿、通络止痛，上下分治周身湿邪
-麻、桂：温经散寒、通阳通络，助祛湿
-当归、川芎：养血活血、通络止痛，治风先治血、血行风自灭
-甘草：调和诸药，温散助祛湿。"
+薏苡仁：水と湿を排し、脾を整えて痺れを除き、筋を緩める。重だるい湿痺に用いる。
+羌活・独活：風湿を除いて経絡を通し、全身の上下に働く。
+麻黄・桂枝：経絡を温めて寒を散らし、陽を通して湿を除く。
+当帰・川芎：血を養って巡らせ、経絡の痛みを和らげる。
+甘草：諸薬を調和し、湿を除く働きを助ける。"
 UI_BOOK_ENTRY_TITLE_FANG_FENG_TANG,防风汤,Saposhnikovia Decoction,防風湯
 UI_BOOK_ENTRY_BODY_FANG_FENG_TANG,"防风汤
 【出处】《太平惠民和剂局方》
@@ -9072,23 +9072,23 @@ Gentiana Macrophylla Root dispels Wind-Dampness, opens the channels and relieves
 Chinese Angelica Root nourishes blood, harmonizes the nutritive layer and helps dispel Wind from the channels.
 Sichuan Lovage Rhizome moves blood and opens the channels.
 Kudzu Root releases the muscle layer and relaxes the sinews.
-Licorice Root harmonizes the ingredients and the nutritive and defensive layers.","防风汤
-【出处】《太平惠民和剂局方》
-【功效】祛风通络，散寒除湿
-【主治】行痹（风痹）
-【组成】
-君：防风 五钱
-臣：桂枝 三钱，秦艽 三钱
-佐：当归 二钱，川芎 二钱，葛根 三钱
-使：甘草 一钱
+Licorice Root harmonizes the ingredients and the nutritive and defensive layers.","防風湯
+【出典】『太平恵民和剤局方』
+【効能】風を除いて経絡を通し、寒と湿を散らす
+【主治】行痺（風痺）
+【構成】
+君：防風 五銭
+臣：桂枝 三銭、秦艽 三銭
+佐：当帰 二銭、川芎 二銭、葛根 三銭
+使：甘草 一銭
 【配伍】
-防风：祛风胜湿、走窜经络，专治游走痹痛。
-桂枝：温散风寒、通经活络；
-秦艽：祛风湿、通络止痛，善治游走痹。
-当归：养血和营、祛风通络；
-川芎：活血通络；
-葛根：解肌舒筋；
-甘草调和诸药，调和营卫。"
+防風：風湿を除き経絡を巡って、場所の移る痺痛に用いる。
+桂枝：風寒を温めて散らし、経絡を通す。
+秦艽：風湿を除き、経絡の痛みを和らげる。
+当帰：血と営を養い、風を除いて経絡を通す。
+川芎：血を巡らせて経絡を通す。
+葛根：肌を解き、筋を緩める。
+甘草：諸薬と営衛を調和させる。"
 UI_BOOK_ENTRY_TITLE_MA_XING_SHI_GAN_TANG,麻杏石甘汤,"Ephedra, Apricot Kernel, Gypsum and Licorice Decoction",麻杏石甘湯
 UI_BOOK_ENTRY_BODY_MA_XING_SHI_GAN_TANG,"麻杏石甘汤
 【出处】《伤寒论》
@@ -9116,20 +9116,20 @@ Envoy: Licorice Root 2 qian
 Ephedra Herb disperses Lung Qi, eases wheezing and releases the Exterior.
 Gypsum strongly clears Lung Heat, generates fluids and balances the warming nature of Ephedra Herb.
 Apricot Kernel directs Lung Qi downward and eases wheezing; with Ephedra Herb it restores the Lung's dispersing and descending functions.
-Prepared Licorice Root harmonizes the ingredients, supports Qi and the middle, and moistens the Lung.","麻杏石甘汤
-【出处】《伤寒论》
-【功效】辛凉疏表，清肺平喘
-【主治】肺热壅盛
-【组成】
-君：麻黄 三钱
-臣：石膏 八钱
-佐：杏仁 三钱
-使：甘草 二钱
+Prepared Licorice Root harmonizes the ingredients, supports Qi and the middle, and moistens the Lung.","麻杏石甘湯
+【出典】『傷寒論』
+【効能】辛涼の薬で表を解き、肺熱を清めて喘ぎを鎮める
+【主治】肺熱壅盛
+【構成】
+君：麻黄 三銭
+臣：石膏 八銭
+佐：杏仁 三銭
+使：甘草 二銭
 【配伍】
-麻黄：辛温，宣肺平喘、开泄肺气，散邪解表。
-石膏:辛甘大寒，清泻肺热、生津止渴，清里热以制麻黄之温。
-杏仁:苦降肺气，降利平喘，与麻黄一宣一降，恢复肺之宣肃。
-炙甘草:调和诸药，益气护中，缓急润肺。"
+麻黄：温かい性質で肺気を開き、喘ぎを鎮め、表の邪を散らす。
+石膏：強い寒性で肺の熱を清め、津液を生んで渇きを鎮め、麻黄の温性を抑える。
+杏仁：肺気を下ろして喘ぎを鎮め、麻黄とともに肺気の上下を整える。
+炙甘草：諸薬を調和し、気と胃を守り、肺を潤す。"
 UI_BOOK_ENTRY_TITLE_BU_FEI_TANG,补肺汤,Lung-Tonifying Decoction,補肺湯
 UI_BOOK_ENTRY_BODY_BU_FEI_TANG,"补肺汤
 【出处】《备急千金要方》
@@ -9157,20 +9157,20 @@ Envoy:
 Ginseng Root and Astragalus Root strongly support Lung Qi and strengthen the Exterior, addressing the underlying Deficiency.
 Prepared Rehmannia Root nourishes Kidney essence, supporting the Lung through the Metal-Water relationship.
 Schisandra Fruit astringes Lung Qi, reduces sweating and eases wheezing.
-Aster Root and Mulberry Root Bark direct Lung Qi downward, transform phlegm and ease cough without being overly drying.","补肺汤
-【出处】《备急千金要方》
-【功效】补肺益气，止咳平喘
-【主治】肺气虚
-【组成】
-君：人参 三钱，黄芪 五钱
-臣：熟地黄 五钱
-佐：五味子 二钱，紫菀 三钱，桑白皮 三钱
+Aster Root and Mulberry Root Bark direct Lung Qi downward, transform phlegm and ease cough without being overly drying.","補肺湯
+【出典】『備急千金要方』
+【効能】肺を補って気を益し、咳と喘ぎを鎮める
+【主治】肺気虚
+【構成】
+君：人参 三銭、黄耆 五銭
+臣：熟地黄 五銭
+佐：五味子 二銭、紫苑 三銭、桑白皮 三銭
 使：
 【配伍】
-人参、黄芪：大补肺气、固表益气，补益肺气虚之本。
-熟地黄：滋肾填精，金水相生，助肺气之源。
-五味子：收敛肺气、敛汗止喘，固表止自汗。
-紫菀、桑白皮：降肺气、化痰止咳，清润不燥，补虚不滞。"
+人参・黄耆：肺気を大いに補い、表を固めて肺気虚の根本に働く。
+熟地黄：腎を潤して精を補い、肺気の源を養う。
+五味子：肺気と汗を収め、喘ぎや自汗を抑える。
+紫苑・桑白皮：肺気を下ろし、痰と咳を鎮める。潤いを保ちつつ、補っても滞らせない。"
 UI_BOOK_ENTRY_TITLE_ER_CHEN_TANG,二陈汤,Two-Cured Decoction,二陳湯
 UI_BOOK_ENTRY_BODY_ER_CHEN_TANG,"二陈汤
 【出处】《太平惠民和剂局方》
@@ -9198,20 +9198,20 @@ Envoy: Licorice Root 1 qian 5 fen
 Pinellia Rhizome dries Dampness, transforms phlegm, directs rebellious Qi downward and relieves nausea.
 Aged Tangerine Peel regulates Qi and dries Dampness so phlegm can be resolved as Qi moves freely.
 Poria supports the Spleen and drains Dampness, reducing the source of phlegm.
-Licorice Root harmonizes the ingredients, supports Qi and harmonizes the middle.","二陈汤
-【出处】《太平惠民和剂局方》
-【功效】燥湿化痰，理气和中
+Licorice Root harmonizes the ingredients, supports Qi and harmonizes the middle.","二陳湯
+【出典】『太平恵民和剤局方』
+【効能】湿を乾かして痰を除き、気と胃を整える
 【主治】痰湿阻肺
-【组成】
-君：半夏 五钱
-臣：陈皮 五钱
-佐：茯苓 三钱
-使：甘草 一钱五分
+【構成】
+君：半夏 五銭
+臣：陳皮 五銭
+佐：茯苓 三銭
+使：甘草 一銭五分
 【配伍】
-半夏：辛温燥烈，燥湿化痰、降逆止呕。
-陈皮：理气行滞、燥湿化痰，使气顺则痰消。
-茯苓：健脾渗湿，杜生痰之源。
-甘草：调和诸药，益气和中。"
+半夏：温かく乾かす性質で湿と痰を除き、逆上する気と吐き気を抑える。
+陳皮：気を巡らせて湿と痰を除く。気が順調に巡れば痰も減る。
+茯苓：脾を整え湿を排し、痰の生じる元を抑える。
+甘草：諸薬を調和し、気を補って胃を整える。"
 UI_BOOK_ENTRY_TITLE_SHA_SHEN_MAI_DONG_TANG,沙参麦冬汤,Adenophora and Ophiopogon Decoction,沙参麦冬湯
 UI_BOOK_ENTRY_BODY_SHA_SHEN_MAI_DONG_TANG,"沙参麦冬汤
 【出处】《温病条辨》
@@ -9241,21 +9241,21 @@ Adenophora Root and Ophiopogon Tuber nourish Yin, moisten the Lung and generate 
 Polygonatum Odoratum Rhizome and Trichosanthes Root reinforce Yin and fluid nourishment, moisten Dryness and ease cough and Deficiency Heat.
 Mulberry Leaf gently disperses Lung Qi and clears Deficiency Heat.
 Hyacinth Bean strengthens the Spleen and nourishes the Stomach, supporting the source of body fluids.
-Licorice Root harmonizes the ingredients, supports Qi and harmonizes the middle.","沙参麦冬汤
-【出处】《温病条辨》
-【功效】清养肺胃，生津润燥
-【主治】肺阴虚
-【组成】
-君：沙参 三钱，麦门冬 三钱
-臣：玉竹 二钱，天花粉 一钱五分
-佐：扁豆 一钱五分，桑叶 一钱五分
-使：甘草 一钱
+Licorice Root harmonizes the ingredients, supports Qi and harmonizes the middle.","沙参麦冬湯
+【出典】『温病条弁』
+【効能】肺と胃を養い、津液を生んで乾燥を潤す
+【主治】肺陰虚
+【構成】
+君：沙参 三銭、麦門冬 三銭
+臣：玉竹 二銭、天花粉 一銭五分
+佐：扁豆 一銭五分、桑葉 一銭五分
+使：甘草 一銭
 【配伍】
-沙参、麦冬：养阴润肺、生津止渴，直补肺阴。
-玉竹、天花粉：增强养阴生津、润燥止咳，清虚热、润肺燥。
-桑叶：轻清宣肺、疏散虚热；
-扁豆：健脾养胃，培土生金，助生津之源。
-甘草：调和诸药，益气和中。"
+沙参・麦門冬：陰と肺を養い、津液を生んで渇きを鎮める。
+玉竹・天花粉：陰と津液を補い、乾燥と咳を和らげ、虚熱を清める。
+桑葉：肺気を軽く巡らせ、虚熱を散らす。
+扁豆：脾と胃を整えて津液の源を養う。
+甘草：諸薬を調和し、気と胃を整える。"
 UI_BOOK_ENTRY_TITLE_QING_QI_HUA_TAN_WAN,清气化痰丸,Clear Qi and Transform Phlegm Pill,清気化痰丸
 UI_BOOK_ENTRY_BODY_QING_QI_HUA_TAN_WAN,"清气化痰丸
 【出处】《医方考》
@@ -9289,23 +9289,23 @@ Scutellaria Root clears Lung Heat and strengthens Bile-Processed Arisaema's effe
 Apricot Kernel and Pinellia Rhizome direct Lung Qi downward, transform phlegm and ease cough.
 Aged Tangerine Peel and Immature Bitter Orange break up Qi stagnation so phlegm can disperse.
 Poria supports the Spleen and drains Dampness, reducing the source of phlegm.
-Fresh Ginger tempers the toxicity of Bile-Processed Arisaema and Pinellia Rhizome.","清气化痰丸
-【出处】《医方考》
-【功效】清热化痰，理气止咳
-【主治】痰热壅肺
-【组成】
-君：胆南星 一两五钱
-臣：半夏 一两五钱，瓜蒌仁 一两，黄芩 一两
-佐：杏仁 一两，陈皮 一两，枳实 一两，茯苓 一两
-使：生姜 三两
+Fresh Ginger tempers the toxicity of Bile-Processed Arisaema and Pinellia Rhizome.","清気化痰丸
+【出典】『医方考』
+【効能】熱を清めて痰を除き、気を巡らせて咳を鎮める
+【主治】痰熱壅肺
+【構成】
+君：胆南星 一両五銭
+臣：半夏 一両五銭、瓜蔞仁 一両、黄芩 一両
+佐：杏仁 一両、陳皮 一両、枳実 一両、茯苓 一両
+使：生姜 三両
 【配伍】
-胆南星：清热化痰，专治痰热壅肺。
-瓜蒌仁：清热化痰、润肺下气、宽胸散结；
-黄芩：清泻肺火，助南星清化痰热。
-杏仁、半夏：降利肺气、化痰止咳
-陈皮、枳实：理气破结，气顺痰自消
-茯苓：健脾渗湿，杜绝生痰之源
-生姜：制胆南星、半夏之毒"
+胆南星：熱と痰を清め、痰熱が肺にこもる状態に用いる。
+瓜蔞仁：熱と痰を除き、肺を潤して気を下ろし、胸のつかえを和らげる。
+黄芩：肺の熱を清め、胆南星を助ける。
+杏仁・半夏：肺気を下ろし、痰と咳を鎮める。
+陳皮・枳実：気を巡らせ、つかえを解く。
+茯苓：脾を整え湿を排し、痰の生じる元を抑える。
+生姜：胆南星と半夏の毒性を和らげる。"
 UI_BOOK_ENTRY_TITLE_DA_QING_LONG_TANG,大青龙汤,Great Azure Dragon Decoction,大青竜湯
 UI_BOOK_ENTRY_BODY_DA_QING_LONG_TANG,"大青龙汤
 【出处】《伤寒论》
@@ -9339,23 +9339,23 @@ Gypsum clears Heat trapped within the tissues, Lung and Stomach, relieves agitat
 Apricot Kernel directs Lung Qi downward and works with Ephedra Herb to ease wheezing and cough.
 Fresh Ginger supports the release of the Exterior and harmonizes the Stomach.
 Jujube supports the middle and body fluids to offset their loss through strong sweating.
-Prepared Licorice Root harmonizes the formula, tempers Ephedra Herb and protects the middle. Alongside Fresh Ginger and Jujube, it helps protect nutritive Yin and fluids.","大青龙汤
-【出处】《伤寒论》
-【功效】发汗解表，兼清里热
-【主治】表寒里热
-【组成】
-君：麻黄 六钱
-臣：桂枝 二钱，石膏 一两
-佐：杏仁 三钱，生姜 三钱，大枣 三钱
-使：甘草 二钱
+Prepared Licorice Root harmonizes the formula, tempers Ephedra Herb and protects the middle. Alongside Fresh Ginger and Jujube, it helps protect nutritive Yin and fluids.","大青竜湯
+【出典】『傷寒論』
+【効能】発汗して表を解き、内側の熱も清める
+【主治】表寒裏熱
+【構成】
+君：麻黄 六銭
+臣：桂枝 二銭、石膏 一両
+佐：杏仁 三銭、生姜 三銭、大棗 三銭
+使：甘草 二銭
 【配伍】
-麻黄：发汗峻散，开表散寒，同时宣肺平喘。
-桂枝：助麻黄发汗解表，温通卫阳，散肌表寒邪，解决周身疼痛；
-石膏：辛甘大寒，专清郁于肌腠、肺胃之里热，除烦躁，制约麻黄辛温燥热之性，使发汗而不助热。
-杏仁：降利肺气，配麻黄平喘止咳；
-生姜：辛温，助解表，和胃散水气；
-大枣：补中滋液，防峻汗耗伤津液。
-炙甘草：调和诸药；缓麻黄峻烈之性，护中气；姜枣草合用，滋养营阴，防止大汗伤津。"
+麻黄：強い発汗で表の寒を散らし、肺気を巡らせて喘ぎを鎮める。
+桂枝：麻黄を助け、体表の寒と全身の痛みを和らげる。
+石膏：肌と肺胃にこもる熱を清め、いらだちを鎮め、麻黄の温熱を抑える。
+杏仁：肺気を下ろし、麻黄とともに咳と喘ぎを鎮める。
+生姜：表を解き、胃を整える。
+大棗：中焦と津液を補い、強い発汗による消耗を防ぐ。
+炙甘草：諸薬を調和し、胃を守り、麻黄の強い働きを緩める。"
 UI_BOOK_ENTRY_TITLE_XIAO_QING_LONG_TANG,小青龙汤,Minor Azure Dragon Decoction,小青竜湯
 UI_BOOK_ENTRY_BODY_XIAO_QING_LONG_TANG,"小青龙汤
 【出处】《伤寒论》
@@ -9387,22 +9387,22 @@ Dried Ginger warms the Spleen and Lung and transforms retained fluids. Asarum He
 Pinellia Rhizome dries Dampness, transforms phlegm, directs Qi downward and reduces retained fluids in the chest.
 Schisandra Fruit astringes Lung Qi and eases cough, tempering the dispersing action of the warming ingredients.
 White Peony Root preserves Yin and the nutritive layer and tempers the drying ingredients.
-Prepared Licorice Root harmonizes the formula, supports the middle and tempers the stronger warming ingredients.","小青龙汤
-【出处】《伤寒论》
-【功效】解表散寒，温肺化饮
-【主治】表寒里饮
-【组成】
-君：麻黄 三钱，桂枝 三钱
-臣：干姜 二钱，细辛 二钱
-佐：白芍 三钱，五味子 二钱，半夏 三钱
-使：甘草 二钱
+Prepared Licorice Root harmonizes the formula, supports the middle and tempers the stronger warming ingredients.","小青竜湯
+【出典】『傷寒論』
+【効能】表を解いて寒を散らし、肺を温めて水飲を除く
+【主治】表寒裏飲
+【構成】
+君：麻黄 三銭、桂枝 三銭
+臣：乾姜 二銭、細辛 二銭
+佐：白芍 三銭、五味子 二銭、半夏 三銭
+使：甘草 二銭
 【配伍】
-麻黄、桂枝：麻黄发汗解表、宣肺平喘；桂枝解肌通阳，温散肌表风寒。
-干姜、细辛：干姜温脾肺，散脏腑寒邪、化水饮；细辛温散少阴寒饮，既助麻桂解表，又入肺内化伏饮。
-半夏：燥湿化痰，降逆止咳，消胸膈水饮痰浊；
-五味子：酸收敛肺止咳。防麻、桂、姜、辛辛温发散太过耗伤肺气，散收并用；
-白芍：酸寒敛阴和营。防诸辛温药耗伤阴血，制约燥烈之性。
-炙甘草：调和全方；益气补中，顾护脾胃，缓和麻、辛、干姜峻烈之性。"
+麻黄・桂枝：発汗して体表の風寒を散らし、肺気を巡らせて喘ぎを鎮める。
+乾姜・細辛：脾と肺を温め、内に潜む寒と水飲を除く。
+半夏：湿と痰を除き、逆上する気と咳を抑える。
+五味子：肺気を収めて咳を鎮め、温散する薬による肺気の消耗を防ぐ。
+白芍：陰と営を守り、温性の薬による陰血の消耗を防ぐ。
+炙甘草：諸薬を調和し、脾胃を守って強い温散を緩める。"
 UI_BOOK_ENTRY_TITLE_SI_JUN_ZI_TANG,四君子汤,Four Gentlemen Decoction,四君子湯
 UI_BOOK_ENTRY_BODY_SI_JUN_ZI_TANG,"四君子汤
 【出处】《太平惠民和剂局方》
@@ -9430,20 +9430,20 @@ Envoy: Licorice Root 2 qian
 Ginseng Root strongly supports original Qi and strengthens the Spleen.
 White Atractylodes Rhizome strengthens the Spleen and dries Dampness, supporting Ginseng Root's transforming function.
 Poria supports the Spleen, drains Dampness and calms the spirit without causing stagnation.
-Prepared Licorice Root supports Qi, harmonizes the middle and brings the ingredients together.","四君子汤
-【出处】《太平惠民和剂局方》
-【功效】益气健脾
-【主治】脾气虚
-【组成】
-君：人参 四钱
-臣：白术 三钱
-佐：茯苓 三钱
-使：甘草 二钱
+Prepared Licorice Root supports Qi, harmonizes the middle and brings the ingredients together.","四君子湯
+【出典】『太平恵民和剤局方』
+【効能】気を補い、脾を健やかにする
+【主治】脾気虚
+【構成】
+君：人参 四銭
+臣：白朮 三銭
+佐：茯苓 三銭
+使：甘草 二銭
 【配伍】
-人参：大补元气、益气健脾。
-白术：健脾燥湿，助人参运化。
-茯苓：健脾渗湿，宁心安神，使补而不滞。
-炙甘草：益气和中、调和诸药。"
+人参：元気を大いに補い、脾を整える。
+白朮：脾を健やかにし、湿を乾かして人参を助ける。
+茯苓：脾を整えて湿を排し、心を落ち着かせる。
+炙甘草：気と胃を養い、諸薬を調和させる。"
 UI_BOOK_ENTRY_TITLE_PING_WEI_SAN,平胃散,Calm the Stomach Powder,平胃散
 UI_BOOK_ENTRY_BODY_PING_WEI_SAN,"平胃散
 【出处】《太平惠民和剂局方》
@@ -9472,19 +9472,19 @@ Atractylodes Rhizome dries Dampness and strengthens the Spleen when Dampness obs
 Magnolia Bark moves Qi, relieves fullness and transforms turbid Dampness in the upper abdomen.
 Aged Tangerine Peel regulates Qi, harmonizes the Stomach and dries Dampness.
 Prepared Licorice Root supports Qi and harmonizes the formula; Fresh Ginger and Jujube are also described as harmonizing the Spleen and Stomach.","平胃散
-【出处】《太平惠民和剂局方》
-【功效】燥湿运脾，行气和胃
+【出典】『太平恵民和剤局方』
+【効能】湿を乾かして脾を働かせ、気と胃を整える
 【主治】湿盛困脾
-【组成】
-君：苍术 三钱
-臣：厚朴 二钱
-佐：陈皮 二钱
-使：甘草 一钱
+【構成】
+君：蒼朮 三銭
+臣：厚朴 二銭
+佐：陳皮 二銭
+使：甘草 一銭
 【配伍】
-苍术：苦温燥湿、健脾运脾，专治湿困脾胃。
-厚朴：行气除满、燥湿化浊，消脘腹胀痞。
-陈皮：理气和胃、燥湿醒脾，使气机条达。
-炙甘草：益气和中、调和诸药；姜枣调和脾胃。"
+蒼朮：湿を乾かし、脾を整えて運化を助ける。
+厚朴：気を巡らせ、湿と濁りを除き、みぞおちと腹の張りを和らげる。
+陳皮：気と胃を整え、湿を乾かす。
+炙甘草：気と胃を養い、諸薬を調和させる。生姜と大棗も脾胃を整える。"
 UI_BOOK_ENTRY_TITLE_LI_ZHONG_WAN,理中丸,Regulate the Middle Pill,理中丸
 UI_BOOK_ENTRY_BODY_LI_ZHONG_WAN,"理中丸
 【出处】《伤寒论》
@@ -9513,19 +9513,19 @@ Dried Ginger strongly warms the middle, disperses Cold and invigorates Spleen Ya
 Ginseng Root supports Qi and the Spleen, addressing the underlying Spleen and Stomach Deficiency.
 White Atractylodes Rhizome strengthens the Spleen and dries Dampness, supporting the transport of food and fluids.
 Prepared Licorice Root supports Qi, harmonizes the middle and the ingredients, and eases spasmodic pain.","理中丸
-【出处】《伤寒论》
-【功效】温中祛寒，补气健脾
-【主治】脾阳虚
-【组成】
-君：干姜 五钱
-臣：人参 五钱
-佐：白术 五钱
-使：甘草 五钱
+【出典】『傷寒論』
+【効能】中焦を温めて寒を除き、気と脾を補う
+【主治】脾陽虚
+【構成】
+君：乾姜 五銭
+臣：人参 五銭
+佐：白朮 五銭
+使：甘草 五銭
 【配伍】
-干姜：大辛大热，温中祛寒、振奋脾阳。
-人参：益气健脾，补益脾胃气虚之本。
-白术：健脾燥湿，助运化、利水湿。
-炙甘草：益气和中、调和诸药，缓急止痛。"
+乾姜：強い温熱の性質で中焦を温め、寒を除き、脾陽を助ける。
+人参：気と脾を補い、脾胃の虚弱を支える。
+白朮：脾を整え、湿を乾かして運化を助ける。
+炙甘草：気と胃を養い、諸薬を調和し、痛みを緩める。"
 UI_BOOK_ENTRY_TITLE_SHEN_LING_BAI_ZHU_SAN,参苓白术散,"Ginseng, Poria and White Atractylodes Powder",参苓白朮散
 UI_BOOK_ENTRY_BODY_SHEN_LING_BAI_ZHU_SAN,"参苓白术散
 【出处】《太平惠民和剂局方》
