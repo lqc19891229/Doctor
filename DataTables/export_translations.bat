@@ -2,27 +2,16 @@
 setlocal
 cd /d "%~dp0"
 
-REM 默认目录结构：
-REM   Localization\
-REM     translations_managed.xlsx
-REM     export_translations.py
-REM     export_translations.bat
-REM   DataTables\
-REM     Data.xlsx
-REM
-REM Python 脚本也支持自动查找 Data.xlsx，
-REM 这里显式传入路径，避免项目结构歧义。
-
-python export_translations.py translations_managed.xlsx translations.csv ..\DataTables\Data.xlsx
+REM Export directly to the CSV imported by the Godot project.
+python export_translations.py translations_managed.xlsx ..\Localization\translations.csv Data.xlsx
 
 echo.
 if errorlevel 2 (
-    echo 已同步新的疾病症状，但其中部分英文翻译仍为空。
-    echo 请打开 translations_managed.xlsx，补全新增症状的英文后再次运行。
+    echo New symptoms need English translations in translations_managed.xlsx.
 ) else if errorlevel 1 (
-    echo 导出失败，请查看上方错误信息。
+    echo Export failed. See the error above.
 ) else (
-    echo 导出成功。
+    echo Export completed. Reimport translations.csv in Godot.
 )
 echo.
 pause

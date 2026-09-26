@@ -373,12 +373,10 @@ def main() -> int:
 
         missing_english = sync_disease_symptoms(wb, disease_symptoms)
 
-        # Always save the synchronized managed workbook first.
-        save_managed_workbook_safely(wb, managed_xlsx)
-        print("症状已同步到 Diseases 工作表。")
-
         # New Chinese symptoms need human translation before producing a game CSV.
         if missing_english:
+            save_managed_workbook_safely(wb, managed_xlsx)
+            print("症状已同步到 Diseases 工作表。")
             print()
             print("停止导出：发现新增症状尚未填写英文翻译。")
             print(
@@ -390,18 +388,22 @@ def main() -> int:
             print("请补全这些英文翻译，保存工作簿后再重新运行本脚本。")
             return 2
 
-        total, warnings = export_csv(wb, out_csv)
+        # Validate and stage the CSV before changing either user-facing file.
+        # A bad row must not update the workbook while leaving the game CSV stale.
+        staged_csv = out_csv.with_name(out_csv.name + ".__tmp__")
+        try:
+            total, warnings = export_csv(wb, staged_csv)
+            if warnings:
+                raise ValueError("中英文占位符不一致：\n" + "\n".join(warnings))
+            save_managed_workbook_safely(wb, managed_xlsx)
+            staged_csv.replace(out_csv)
+        finally:
+            staged_csv.unlink(missing_ok=True)
 
         print()
         print(f"已导出 {total} 条翻译 -> {out_csv}")
 
-        if warnings:
-            print()
-            print("警告：发现中英文占位符不一致：")
-            for item in warnings:
-                print(" -", item)
-        else:
-            print("占位符检查：通过")
+        print("占位符检查：通过")
 
         print()
         print("下一步：将 translations.csv 替换到 res://Localization/ 下，并在 Godot 中重新导入。")
