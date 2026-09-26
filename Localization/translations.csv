@@ -111,11 +111,11 @@ UI_RETURN_CONFIRM_DETAIL,"当前阶段尚未完成。
 Returning to the main menu will discard unsaved progress.
 Save and Return will save to %s first.
 
-Return to the main menu?","当前阶段尚未完成。
-直接返回主菜单后，本阶段未保存的进度将丢失。
-选择“保存并返回”会先保存到%s。
+Return to the main menu?","現在の段階はまだ完了していません。
+メインメニューに戻ると、保存していない進行状況は失われます。
+「保存して戻る」を選ぶと、先に%sに保存します。
 
-是否返回主菜单？"
+メインメニューに戻りますか？"
 UI_QUIT_CONFIRM_DETAIL,"当前阶段尚未完成。
 直接退出游戏后，本阶段未保存的进度将丢失。
 选择“保存并退出”会先保存到%s。
@@ -124,62 +124,62 @@ UI_QUIT_CONFIRM_DETAIL,"当前阶段尚未完成。
 Quitting will discard unsaved progress.
 Save and Quit will save to %s first.
 
-Quit the game?","当前阶段尚未完成。
-直接退出游戏后，本阶段未保存的进度将丢失。
-选择“保存并退出”会先保存到%s。
+Quit the game?","現在の段階はまだ完了していません。
+ゲームを終了すると、保存していない進行状況は失われます。
+「保存して終了」を選ぶと、先に%sに保存します。
 
-是否退出游戏？"
+ゲームを終了しますか？"
 UI_RETURN_DEFAULT_DETAIL,"当前阶段尚未完成。
 返回主菜单后，将从最近一次自动存档继续。
 
 是否返回主菜单？","This stage is not complete.
 Returning to the main menu will resume from the most recent autosave.
 
-Return to the main menu?","当前阶段尚未完成。
-返回主菜单后，将从最近一次自动存档继续。
+Return to the main menu?","現在の段階はまだ完了していません。
+メインメニューに戻った場合、次回は最新のオートセーブから再開します。
 
-是否返回主菜单？"
+メインメニューに戻りますか？"
 UI_QUIT_DEFAULT_DETAIL,"当前阶段尚未完成。
 退出游戏后，本阶段未保存的进度将丢失。
 
 是否退出游戏？","This stage is not complete.
 Quitting will discard unsaved progress.
 
-Quit the game?","当前阶段尚未完成。
-退出游戏后，本阶段未保存的进度将丢失。
+Quit the game?","現在の段階はまだ完了していません。
+ゲームを終了すると、保存していない進行状況は失われます。
 
-是否退出游戏？"
+終了しますか？"
 UI_RETURN_SAVE_FAILED_DETAIL,"保存失败，未返回主菜单。
 
 请重试“保存并返回”，或选择“返回主菜单”放弃未保存进度。","Save failed. You are still in the game.
 
-Try Save and Return again, or Return to Main Menu to discard unsaved progress.","保存失败，未返回主菜单。
+Try Save and Return again, or Return to Main Menu to discard unsaved progress.","保存に失敗したため、メインメニューには戻りませんでした。
 
-请重试“保存并返回”，或选择“返回主菜单”放弃未保存进度。"
+「保存して戻る」を再試行するか、「メインメニューに戻る」で未保存の進行状況を破棄してください。"
 UI_QUIT_SAVE_FAILED_DETAIL,"保存失败，未退出游戏。
 
 请重试“保存并退出”，或选择“退出游戏”放弃未保存进度。","Save failed. The game is still running.
 
-Try Save and Quit again, or Quit Game to discard unsaved progress.","保存失败，未退出游戏。
+Try Save and Quit again, or Quit Game to discard unsaved progress.","保存に失敗したため、ゲームは終了しませんでした。
 
-请重试“保存并退出”，或选择“退出游戏”放弃未保存进度。"
-已有存档,已有存档,Existing Save,已有存档
-损坏存档,损坏存档,Corrupt Save,损坏存档
-读取失败,读取失败,Load Failed,读取失败
+「保存して終了」を再試行するか、「ゲームを終了」で未保存の進行状況を破棄してください。"
+已有存档,已有存档,Existing Save,セーブデータあり
+损坏存档,损坏存档,Corrupt Save,破損したセーブデータ
+读取失败,读取失败,Load Failed,読み込み失敗
 UI_DISCLAIMER_TITLE,内容声明,Content Notice,内容に関する注意
 UI_DISCLAIMER_BODY,"本游戏为虚构作品，仅供娱乐。游戏中涉及的医学知识、诊断及治疗内容可能并不准确，不可作为现实中的医疗依据，请勿据此自行诊断、用药或治疗。
 
 如有健康问题，请咨询专业医生，并以正规医疗机构的建议为准。游戏中的人物、事件及剧情均属虚构，如有雷同，纯属巧合。","This game is a work of fiction for entertainment only. Medical knowledge, diagnoses, and treatments shown here may be inaccurate and must not be used as medical advice. Do not use this game to diagnose yourself, take medication, or choose treatment.
 
-If you have health concerns, consult a qualified doctor and follow the advice of a licensed medical institution. The characters, events, and story are fictional. Any resemblance to real people or events is coincidental.","本游戏为虚构作品，仅供娱乐。游戏中涉及的医学知识、诊断及治疗内容可能并不准确，不可作为现实中的医疗依据，请勿据此自行诊断、用药或治疗。
+If you have health concerns, consult a qualified doctor and follow the advice of a licensed medical institution. The characters, events, and story are fictional. Any resemblance to real people or events is coincidental.","本作はフィクションであり、娯楽を目的としています。ゲーム中の医学知識、診断や治療の内容は正確でない場合があり、現実の医療判断には使用できません。これを根拠に自己診断、服薬、治療を行わないでください。
 
-如有健康问题，请咨询专业医生，并以正规医疗机构的建议为准。游戏中的人物、事件及剧情均属虚构，如有雷同，纯属巧合。"
+健康上の問題がある場合は医師に相談し、正規の医療機関の助言に従ってください。登場人物、出来事、物語はすべて架空のものです。実在のものと類似していても偶然です。"
 UI_PATIENT_NAME_PLACEHOLDER,病人姓名,Patient Name,患者の名前
 UI_PATIENT_DIALOGUE_PLACEHOLDER,病人台词,Patient Dialogue,患者の台詞
 UI_TOPBAR_DATE_PLACEHOLDER,天数,Date,日付
 UI_TOPBAR_TIME_PLACEHOLDER,时辰,Hour,時刻
-UI_TOPBAR_REPUTATION_PLACEHOLDER,名望：0　初窥门径,Rep 0 · Novice,名望：0　初窥门径
-UI_TOPBAR_MONEY_PLACEHOLDER,银钱：0两 0文,Money: 0 liang 0 wen,银钱：0两 0文
+UI_TOPBAR_REPUTATION_PLACEHOLDER,名望：0　初窥门径,Rep 0 · Novice,名声：0　見習い
+UI_TOPBAR_MONEY_PLACEHOLDER,银钱：0两 0文,Money: 0 liang 0 wen,所持金：0両 0文
 UI_CURRENT_SHICHEN,当前时辰,Current Hour,現在の時刻
 UI_MONEY_DEBT_SHORT,欠,Debt,借金
 UI_MONEY_LIANG_ZERO,0两,0 liang,0両
@@ -192,17 +192,17 @@ UI_DAY_FALLBACK_FMT,第 %d 天,Day %d,%d日目
 UI_ERA_DATE_FMT,%s%s年%s,%s %s · %s,%s%s年%s
 UI_ERA_JIAJING,嘉靖,Jiajing,嘉靖
 UI_ERA_WANLI,万历,Wanli,万暦
-UI_FULL_TIME_FMT,%s %s · %s,%s %s · %s,%s %s · %s
+UI_FULL_TIME_FMT,%s %s · %s,%s %s · %s,%s %s・%s
 UI_UNKNOWN_SHICHEN,未知时辰,Unknown Hour,時刻不明
-UI_REPUTATION_INFAMOUS,臭名昭著,Infamous,臭名昭著
-UI_REPUTATION_CRITICIZED,略有微词,Criticized,略有微词
-UI_REPUTATION_NOVICE,初窥门径,Novice,初窥门径
-UI_REPUTATION_LEARNER,略有小成,Apprentice,略有小成
-UI_REPUTATION_SKILLED,融会贯通,Skilled,融会贯通
-UI_REPUTATION_MASTER,炉火纯青,Master,炉火纯青
-UI_REPUTATION_LEGEND,出神入化,Legend,出神入化
-UI_REPUTATION_MAX_FMT,名望：%d　%s,Rep %d · %s,名望：%d　%s
-UI_REPUTATION_PROGRESS_FMT,名望：%d/%d　%s,Rep %d/%d · %s,名望：%d/%d　%s
+UI_REPUTATION_INFAMOUS,臭名昭著,Infamous,悪名高い
+UI_REPUTATION_CRITICIZED,略有微词,Criticized,評判が悪い
+UI_REPUTATION_NOVICE,初窥门径,Novice,見習い
+UI_REPUTATION_LEARNER,略有小成,Apprentice,駆け出し
+UI_REPUTATION_SKILLED,融会贯通,Skilled,熟練
+UI_REPUTATION_MASTER,炉火纯青,Master,名医
+UI_REPUTATION_LEGEND,出神入化,Legend,伝説の名医
+UI_REPUTATION_MAX_FMT,名望：%d　%s,Rep %d · %s,名声：%d　%s
+UI_REPUTATION_PROGRESS_FMT,名望：%d/%d　%s,Rep %d/%d · %s,名声：%d/%d　%s
 UI_SHICHEN_00,子时,Zi Hour,子の刻
 UI_SHICHEN_01,丑时,Chou Hour,丑の刻
 UI_SHICHEN_02,寅时,Yin Hour,寅の刻
@@ -389,249 +389,249 @@ UI_LOG_TAB_HERB_SHORTCUT,药材(3),Herbs (3),薬材(3)
 UI_LOG_TAB_DISEASE,疾病,Conditions,疾病
 UI_LOG_TAB_FORMULA,方剂,Formulas,処方
 UI_LOG_TAB_HERB,药材,Herbs,薬材
-UI_LOG_SEARCH_DISEASE,搜索疾病,Search conditions,搜索疾病
-UI_LOG_SEARCH_FORMULA,搜索方剂,Search formulas,搜索方剂
-UI_LOG_SEARCH_HERB,搜索药材,Search herbs,搜索药材
-UI_LOG_SELECT_DISEASE,请选择左侧疾病条目,Select a condition,请选择左侧疾病条目
-UI_LOG_SELECT_FORMULA,请选择左侧方剂条目,Select a formula,请选择左侧方剂条目
-UI_LOG_SELECT_HERB,请选择左侧药材条目,Select an herb,请选择左侧药材条目
-UI_LOG_PREV_PAGE,上一页,Previous,上一页
-UI_LOG_NEXT_PAGE,下一页,Next,下一页
-UI_READ_BOOK_WINDOW_TITLE,读书,Read Books,读书
-UI_READ_BOOK_SEARCH_TOOLTIP,搜索全部可阅读医书中的已解锁条目。,Search unlocked entries in all available books.,搜索全部可阅读医书中的已解锁条目。
-UI_READ_BOOK_SEARCH_PLACEHOLDER,搜索全部已解锁条目...,Search all unlocked entries...,搜索全部已解锁条目...
-UI_READ_BOOK_BOOK_LIST,医书列表,Medical Books,医书列表
-UI_READ_BOOK_ENTRY_LIST,条目列表,Entries,条目列表
-UI_READ_BOOK_CHOOSE_BOOK_TONIGHT,请选择今晚要阅读的医书。,Choose a book to read tonight.,请选择今晚要阅读的医书。
-UI_READ_BOOK_CHOOSE_BOOK,请选择要查看的医书。,Choose a book to view.,请选择要查看的医书。
-UI_READ_BOOK_MATCH_BADGE_FMT,【匹配%d】,[Matches: %d],【匹配%d】
-UI_READ_BOOK_NEW_COUNT_BADGE_FMT,【新%d】,[New: %d],【新%d】
-UI_READ_BOOK_MATCH_TOOLTIP_FMT,找到 %d 个匹配条目,Found %d matching entries,找到 %d 个匹配条目
-UI_READ_BOOK_NEW_TOOLTIP_FMT,有 %d 个新解锁条目可以查看,%d newly unlocked entries are available,有 %d 个新解锁条目可以查看
-UI_READ_BOOK_SEARCH_SUMMARY_FMT,搜索“%s”：共找到 %d 个已解锁条目；当前《%s》有 %d 个匹配。,"Search ""%s"": %d unlocked entries found; ""%s"" has %d matches.",搜索“%s”：共找到 %d 个已解锁条目；当前《%s》有 %d 个匹配。
-UI_READ_BOOK_EMPTY_BOOK_FMT,《%s》当前没有已解锁条目。,"""%s"" has no unlocked entries yet.",《%s》当前没有已解锁条目。
-UI_READ_BOOK_UNREAD_COUNT_FMT,《%s》共有 %d 个已解锁条目，其中 %d 个尚未查看。,"""%s"" has %d unlocked entries, including %d unread.",《%s》共有 %d 个已解锁条目，其中 %d 个尚未查看。
-UI_READ_BOOK_ENTRY_COUNT_FMT,《%s》共有 %d 个已解锁条目。,"""%s"" has %d unlocked entries.",《%s》共有 %d 个已解锁条目。
-UI_READ_BOOK_NO_BOOKS,当前没有可查看的医书。,No books are available to view.,当前没有可查看的医书。
-UI_READ_BOOK_NO_RESULTS_FMT,没有找到包含“%s”的已解锁条目。,"No unlocked entries match ""%s"".",没有找到包含“%s”的已解锁条目。
-UI_READ_BOOK_NEW_BADGE,【新】,[New],【新】
-UI_READ_BOOK_NEW_ENTRY_TOOLTIP,新解锁条目，尚未查看,Newly unlocked; not yet read,新解锁条目，尚未查看
-UI_READ_BOOK_NO_CONTENT,暂无正文,No text available,暂无正文
-UI_READ_BOOK_ENTRY_LOCKED,该条目尚未解锁，请先满足对应的解锁条件。,This entry is locked. Meet its unlock requirements first.,该条目尚未解锁，请先满足对应的解锁条件。
-UI_READ_BOOK_ENTRY_READ,已查看条目。,Entry read.,已查看条目。
-UI_READ_BOOK_VIEW_PULSE,查看脉象,View Pulse,查看脉象
-UI_READ_BOOK_PULSE_SELECT_HINT,请先在条目列表中选择一个已解锁的疾病。,Select an unlocked condition from the entries first.,请先在条目列表中选择一个已解锁的疾病。
-UI_READ_BOOK_PULSE_TOOLTIP_FMT,查看《%s》的左右手脉象，用于夜晚练习。,View left and right pulse patterns for %s to practice at night.,查看《%s》的左右手脉象，用于夜晚练习。
-UI_READ_BOOK_SELECT_DISEASE_FIRST,请先选择一个疾病条目，再查看脉象。,Select a condition entry before viewing its pulse.,请先选择一个疾病条目，再查看脉象。
-UI_READ_BOOK_PULSE_MISSING,脉象练习窗口不存在。,Pulse practice window is unavailable.,脉象练习窗口不存在。
-UI_READ_BOOK_PULSE_TITLE_FMT,脉象练习 - %s,Pulse Practice - %s,脉象练习 - %s
-UI_RECORDS_TAB_TREATMENT,诊疗记录,Treatments,诊疗记录
-UI_RECORDS_TAB_FINANCE,账目明细,Accounts,账目明细
-UI_RECORDS_TAB_STATS,数据统计,Statistics,数据统计
-UI_RECORDS_TAB_PRESETS,预制方剂,Formula Presets,预制方剂
-UI_RECORDS_TREATMENT_DATES,诊疗日期,Treatment Dates,诊疗日期
-UI_RECORDS_FINANCE_DATES,账目日期,Account Dates,账目日期
-UI_RECORDS_TOTAL_PATIENTS,治疗人数,Patients Treated,治疗人数
-UI_RECORDS_SUCCESSFUL_PATIENTS,成功人数,Successful Treatments,成功人数
-UI_RECORDS_MIRACULOUS_PATIENTS,妙手回春人数,Miraculous Recoveries,妙手回春人数
-UI_RECORDS_FAILED_PATIENTS,失败人数,Failed Treatments,失败人数
+UI_LOG_SEARCH_DISEASE,搜索疾病,Search conditions,病名を検索
+UI_LOG_SEARCH_FORMULA,搜索方剂,Search formulas,処方を検索
+UI_LOG_SEARCH_HERB,搜索药材,Search herbs,薬材を検索
+UI_LOG_SELECT_DISEASE,请选择左侧疾病条目,Select a condition,左側の疾病を選択してください
+UI_LOG_SELECT_FORMULA,请选择左侧方剂条目,Select a formula,左側の処方を選択してください
+UI_LOG_SELECT_HERB,请选择左侧药材条目,Select an herb,左側の薬材を選択してください
+UI_LOG_PREV_PAGE,上一页,Previous,前のページ
+UI_LOG_NEXT_PAGE,下一页,Next,次のページ
+UI_READ_BOOK_WINDOW_TITLE,读书,Read Books,読書
+UI_READ_BOOK_SEARCH_TOOLTIP,搜索全部可阅读医书中的已解锁条目。,Search unlocked entries in all available books.,閲覧可能な医学書にある、解放済みの項目をすべて検索します。
+UI_READ_BOOK_SEARCH_PLACEHOLDER,搜索全部已解锁条目...,Search all unlocked entries...,解放済みの項目を検索……
+UI_READ_BOOK_BOOK_LIST,医书列表,Medical Books,医学書一覧
+UI_READ_BOOK_ENTRY_LIST,条目列表,Entries,項目一覧
+UI_READ_BOOK_CHOOSE_BOOK_TONIGHT,请选择今晚要阅读的医书。,Choose a book to read tonight.,今夜読む医学書を選んでください。
+UI_READ_BOOK_CHOOSE_BOOK,请选择要查看的医书。,Choose a book to view.,閲覧する医学書を選んでください。
+UI_READ_BOOK_MATCH_BADGE_FMT,【匹配%d】,[Matches: %d],【一致%d】
+UI_READ_BOOK_NEW_COUNT_BADGE_FMT,【新%d】,[New: %d],【新着%d】
+UI_READ_BOOK_MATCH_TOOLTIP_FMT,找到 %d 个匹配条目,Found %d matching entries,一致する項目が %d 件見つかりました
+UI_READ_BOOK_NEW_TOOLTIP_FMT,有 %d 个新解锁条目可以查看,%d newly unlocked entries are available,新しく解放された項目が %d 件あります
+UI_READ_BOOK_SEARCH_SUMMARY_FMT,搜索“%s”：共找到 %d 个已解锁条目；当前《%s》有 %d 个匹配。,"Search ""%s"": %d unlocked entries found; ""%s"" has %d matches.",「%s」の検索結果：解放済みの項目が合計 %d 件。現在の『%s』には %d 件あります。
+UI_READ_BOOK_EMPTY_BOOK_FMT,《%s》当前没有已解锁条目。,"""%s"" has no unlocked entries yet.",『%s』には現在、解放済みの項目がありません。
+UI_READ_BOOK_UNREAD_COUNT_FMT,《%s》共有 %d 个已解锁条目，其中 %d 个尚未查看。,"""%s"" has %d unlocked entries, including %d unread.",『%s』には解放済みの項目が %d 件あり、うち %d 件は未読です。
+UI_READ_BOOK_ENTRY_COUNT_FMT,《%s》共有 %d 个已解锁条目。,"""%s"" has %d unlocked entries.",『%s』には解放済みの項目が %d 件あります。
+UI_READ_BOOK_NO_BOOKS,当前没有可查看的医书。,No books are available to view.,閲覧できる医学書がありません。
+UI_READ_BOOK_NO_RESULTS_FMT,没有找到包含“%s”的已解锁条目。,"No unlocked entries match ""%s"".",「%s」に一致する解放済みの項目は見つかりませんでした。
+UI_READ_BOOK_NEW_BADGE,【新】,[New],【新着】
+UI_READ_BOOK_NEW_ENTRY_TOOLTIP,新解锁条目，尚未查看,Newly unlocked; not yet read,新しく解放された未読の項目
+UI_READ_BOOK_NO_CONTENT,暂无正文,No text available,本文はありません
+UI_READ_BOOK_ENTRY_LOCKED,该条目尚未解锁，请先满足对应的解锁条件。,This entry is locked. Meet its unlock requirements first.,この項目はまだ解放されていません。先に解放条件を満たしてください。
+UI_READ_BOOK_ENTRY_READ,已查看条目。,Entry read.,閲覧済みの項目です。
+UI_READ_BOOK_VIEW_PULSE,查看脉象,View Pulse,脈を確認
+UI_READ_BOOK_PULSE_SELECT_HINT,请先在条目列表中选择一个已解锁的疾病。,Select an unlocked condition from the entries first.,まず項目一覧から解放済みの疾病を選んでください。
+UI_READ_BOOK_PULSE_TOOLTIP_FMT,查看《%s》的左右手脉象，用于夜晚练习。,View left and right pulse patterns for %s to practice at night.,『%s』の左右の脈を確認し、夜間の練習に使います。
+UI_READ_BOOK_SELECT_DISEASE_FIRST,请先选择一个疾病条目，再查看脉象。,Select a condition entry before viewing its pulse.,脈を確認する前に、疾病の項目を選んでください。
+UI_READ_BOOK_PULSE_MISSING,脉象练习窗口不存在。,Pulse practice window is unavailable.,脈診の練習画面が見つかりません。
+UI_READ_BOOK_PULSE_TITLE_FMT,脉象练习 - %s,Pulse Practice - %s,脈診の練習・%s
+UI_RECORDS_TAB_TREATMENT,诊疗记录,Treatments,診療記録
+UI_RECORDS_TAB_FINANCE,账目明细,Accounts,収支明細
+UI_RECORDS_TAB_STATS,数据统计,Statistics,統計
+UI_RECORDS_TAB_PRESETS,预制方剂,Formula Presets,定型処方
+UI_RECORDS_TREATMENT_DATES,诊疗日期,Treatment Dates,診療日
+UI_RECORDS_FINANCE_DATES,账目日期,Account Dates,記帳日
+UI_RECORDS_TOTAL_PATIENTS,治疗人数,Patients Treated,診療した患者
+UI_RECORDS_SUCCESSFUL_PATIENTS,成功人数,Successful Treatments,治療成功
+UI_RECORDS_MIRACULOUS_PATIENTS,妙手回春人数,Miraculous Recoveries,妙手回春
+UI_RECORDS_FAILED_PATIENTS,失败人数,Failed Treatments,治療失敗
 UI_RECORDS_SUCCESS_RATE,成功率,Success Rate,成功率
-UI_RECORDS_TOTAL_INCOME,总收入,Total Income,总收入
-UI_RECORDS_TOTAL_EXPENSE,总支出,Total Expenses,总支出
-UI_RECORDS_PROFIT,利润,Profit,利润
-UI_RECORDS_FORMULA_MASTERY,方剂熟练度,Formula Mastery,方剂熟练度
-UI_RECORDS_ZERO_PATIENTS,0 人,0 people,0 人
-UI_RECORDS_ZERO_MONEY,0两0文,0 liang 0 wen,0两0文
-UI_RECORDS_TREATMENT_EMPTY,[color=#c6ae83]尚无诊疗记录。完成一次诊疗后，这里会按天保存病人、疾病、标准方、断病和开方。[/color],"[color=#c6ae83]No treatments recorded yet. After your first treatment, patients, conditions, standard formulas, diagnoses and prescriptions will be saved here by day.[/color]",[color=#c6ae83]尚无诊疗记录。完成一次诊疗后，这里会按天保存病人、疾病、标准方、断病和开方。[/color]
-UI_RECORDS_TREATMENT_HEADER_FMT,[font_size=24][color=#e3b66b]%s · 诊疗记录[/color][/font_size],[font_size=24][color=#e3b66b]%s · Treatments[/color][/font_size],[font_size=24][color=#e3b66b]%s · 诊疗记录[/color][/font_size]
-UI_RECORDS_TREATMENT_DAY_EMPTY,[color=#c6ae83]本日暂无记录。[/color],[color=#c6ae83]No treatments recorded today.[/color],[color=#c6ae83]本日暂无记录。[/color]
+UI_RECORDS_TOTAL_INCOME,总收入,Total Income,総収入
+UI_RECORDS_TOTAL_EXPENSE,总支出,Total Expenses,総支出
+UI_RECORDS_PROFIT,利润,Profit,利益
+UI_RECORDS_FORMULA_MASTERY,方剂熟练度,Formula Mastery,処方の熟練度
+UI_RECORDS_ZERO_PATIENTS,0 人,0 people,0人
+UI_RECORDS_ZERO_MONEY,0两0文,0 liang 0 wen,0両0文
+UI_RECORDS_TREATMENT_EMPTY,[color=#c6ae83]尚无诊疗记录。完成一次诊疗后，这里会按天保存病人、疾病、标准方、断病和开方。[/color],"[color=#c6ae83]No treatments recorded yet. After your first treatment, patients, conditions, standard formulas, diagnoses and prescriptions will be saved here by day.[/color]",[color=#c6ae83]診療記録はまだありません。診療を終えると、患者・疾病・標準処方・診断・処方が日ごとに記録されます。[/color]
+UI_RECORDS_TREATMENT_HEADER_FMT,[font_size=24][color=#e3b66b]%s · 诊疗记录[/color][/font_size],[font_size=24][color=#e3b66b]%s · Treatments[/color][/font_size],[font_size=24][color=#e3b66b]%s・診療記録[/color][/font_size]
+UI_RECORDS_TREATMENT_DAY_EMPTY,[color=#c6ae83]本日暂无记录。[/color],[color=#c6ae83]No treatments recorded today.[/color],[color=#c6ae83]この日の記録はありません。[/color]
 UI_RECORDS_STATUS_SUCCESS,成功,Successful,成功
-UI_RECORDS_STATUS_NOT_CURED,未愈,Not Cured,未愈
-UI_RECORDS_UNKNOWN_PATIENT,未知病人,Unknown Patient,未知病人
-UI_RECORDS_NOT_RECORDED,未记录,Not Recorded,未记录
-UI_RECORDS_DISEASE_FMT,病人疾病：[color=#e3d1aa]%s[/color],Patient condition: [color=#e3d1aa]%s[/color],病人疾病：[color=#e3d1aa]%s[/color]
-UI_RECORDS_FORMULA_FMT,标准方：[color=#e3d1aa]%s[/color],Standard formula: [color=#e3d1aa]%s[/color],标准方：[color=#e3d1aa]%s[/color]
-UI_RECORDS_DIAGNOSIS_FMT,断病：[color=#e3d1aa]%s[/color],Diagnosis: [color=#e3d1aa]%s[/color],断病：[color=#e3d1aa]%s[/color]
-UI_RECORDS_PRESCRIPTION_FMT,开方：[color=#e3d1aa]%s[/color],Prescription: [color=#e3d1aa]%s[/color],开方：[color=#e3d1aa]%s[/color]
-UI_RECORDS_EMPTY_PRESCRIPTION,（空方）,(Empty prescription),（空方）
+UI_RECORDS_STATUS_NOT_CURED,未愈,Not Cured,未治癒
+UI_RECORDS_UNKNOWN_PATIENT,未知病人,Unknown Patient,不明な患者
+UI_RECORDS_NOT_RECORDED,未记录,Not Recorded,記録なし
+UI_RECORDS_DISEASE_FMT,病人疾病：[color=#e3d1aa]%s[/color],Patient condition: [color=#e3d1aa]%s[/color],患者の病名：[color=#e3d1aa]%s[/color]
+UI_RECORDS_FORMULA_FMT,标准方：[color=#e3d1aa]%s[/color],Standard formula: [color=#e3d1aa]%s[/color],標準処方：[color=#e3d1aa]%s[/color]
+UI_RECORDS_DIAGNOSIS_FMT,断病：[color=#e3d1aa]%s[/color],Diagnosis: [color=#e3d1aa]%s[/color],診断：[color=#e3d1aa]%s[/color]
+UI_RECORDS_PRESCRIPTION_FMT,开方：[color=#e3d1aa]%s[/color],Prescription: [color=#e3d1aa]%s[/color],処方：[color=#e3d1aa]%s[/color]
+UI_RECORDS_EMPTY_PRESCRIPTION,（空方）,(Empty prescription),（処方なし）
 UI_RECORDS_LINE_SEPARATOR,；,;,；
-UI_RECORDS_FINANCE_START_FMT,[color=#c6ae83]账目自%s开始记录。[/color],[color=#c6ae83]Accounts are recorded from %s onward.[/color],[color=#c6ae83]账目自%s开始记录。[/color]
-UI_RECORDS_FINANCE_EMPTY_FMT,[color=#c6ae83]%s暂无账目数据。[/color],[color=#c6ae83]No accounts are available for %s.[/color],[color=#c6ae83]%s暂无账目数据。[/color]
-UI_RECORDS_FINANCE_HEADER_FMT,[font_size=24][color=#e3b66b]%s · 账目明细[/color][/font_size],[font_size=24][color=#e3b66b]%s · Accounts[/color][/font_size],[font_size=24][color=#e3b66b]%s · 账目明细[/color][/font_size]
-UI_RECORDS_FINANCE_UNSETTLED,[color=#c6ae83]本日尚未结算，支出将在进入夜晚时生成。[/color],[color=#c6ae83]Today is not settled yet. Expenses are recorded when night begins.[/color],[color=#c6ae83]本日尚未结算，支出将在进入夜晚时生成。[/color]
-UI_RECORDS_INCOME_HEADER,[b]收入[/b],[b]Income[/b],[b]收入[/b]
+UI_RECORDS_FINANCE_START_FMT,[color=#c6ae83]账目自%s开始记录。[/color],[color=#c6ae83]Accounts are recorded from %s onward.[/color],[color=#c6ae83]収支の記録は%sから始まります。[/color]
+UI_RECORDS_FINANCE_EMPTY_FMT,[color=#c6ae83]%s暂无账目数据。[/color],[color=#c6ae83]No accounts are available for %s.[/color],[color=#c6ae83]%sの収支データはありません。[/color]
+UI_RECORDS_FINANCE_HEADER_FMT,[font_size=24][color=#e3b66b]%s · 账目明细[/color][/font_size],[font_size=24][color=#e3b66b]%s · Accounts[/color][/font_size],[font_size=24][color=#e3b66b]%s・収支明細[/color][/font_size]
+UI_RECORDS_FINANCE_UNSETTLED,[color=#c6ae83]本日尚未结算，支出将在进入夜晚时生成。[/color],[color=#c6ae83]Today is not settled yet. Expenses are recorded when night begins.[/color],[color=#c6ae83]この日の決算はまだです。夜になると支出が計上されます。[/color]
+UI_RECORDS_INCOME_HEADER,[b]收入[/b],[b]Income[/b],[b]収入[/b]
 UI_RECORDS_EXPENSE_HEADER,[b]支出[/b],[b]Expenses[/b],[b]支出[/b]
-UI_RECORDS_FINANCE_CONSULTATION,诊费,Consultation Fees,诊费
-UI_RECORDS_FINANCE_MEDICINE,药材收入,Herb Sales,药材收入
-UI_RECORDS_FINANCE_PATIENT_GIFT,病家谢礼,Patient Gifts,病家谢礼
-UI_RECORDS_FINANCE_LI_JIAN_ZHONG,李建中俸禄,Li Jianzhong's Salary,李建中俸禄
-UI_RECORDS_FINANCE_LI_YAN_WEN,李言闻收入,Li Yanwen's Income,李言闻收入
-UI_RECORDS_FINANCE_LAND_RENT,田租,Land Rent,田租
-UI_RECORDS_FINANCE_STAFF_WAGES,陈皮半夏工钱,Chenpi and Banxia Wages,陈皮半夏工钱
-UI_RECORDS_FINANCE_FOOD,食物,Food,食物
-UI_RECORDS_FINANCE_GIFTS,人情随礼,Social Gifts,人情随礼
-UI_RECORDS_FINANCE_BOOKS,购买医书,Medical Books,购买医书
-UI_RECORDS_FINANCE_COAL,煤炭,Coal,煤炭
-UI_RECORDS_FINANCE_CLOTHING,布匹棉衣,Cloth and Winter Clothes,布匹棉衣
-UI_RECORDS_FINANCE_REPAIRS,修缮房屋,House Repairs,修缮房屋
-UI_RECORDS_FINANCE_ANCESTORS,扫墓祭祖,Ancestral Rites,扫墓祭祖
-UI_RECORDS_FINANCE_MOLDY_HERBS,药材发霉,Spoiled Herbs,药材发霉
-UI_RECORDS_FINANCE_SUMMER_TAX,夏税,Summer Tax,夏税
-UI_RECORDS_FINANCE_AUTUMN_TAX,秋税,Autumn Tax,秋税
-UI_RECORDS_TOTAL_INCOME_FMT,收入合计：[color=#9fe29f]%s[/color],Total Income: [color=#9fe29f]%s[/color],收入合计：[color=#9fe29f]%s[/color]
-UI_RECORDS_TOTAL_EXPENSE_FMT,支出合计：[color=#f0a0a0]%s[/color],Total Expenses: [color=#f0a0a0]%s[/color],支出合计：[color=#f0a0a0]%s[/color]
-UI_RECORDS_NET_CHANGE_FMT,本日变化：[color=#e3b66b]%s[/color],Today's Change: [color=#e3b66b]%s[/color],本日变化：[color=#e3b66b]%s[/color]
+UI_RECORDS_FINANCE_CONSULTATION,诊费,Consultation Fees,診察料
+UI_RECORDS_FINANCE_MEDICINE,药材收入,Herb Sales,薬材収入
+UI_RECORDS_FINANCE_PATIENT_GIFT,病家谢礼,Patient Gifts,患者からの謝礼
+UI_RECORDS_FINANCE_LI_JIAN_ZHONG,李建中俸禄,Li Jianzhong's Salary,李建中の俸禄
+UI_RECORDS_FINANCE_LI_YAN_WEN,李言闻收入,Li Yanwen's Income,李言聞の収入
+UI_RECORDS_FINANCE_LAND_RENT,田租,Land Rent,地代
+UI_RECORDS_FINANCE_STAFF_WAGES,陈皮半夏工钱,Chenpi and Banxia Wages,陳皮と半夏の給金
+UI_RECORDS_FINANCE_FOOD,食物,Food,食費
+UI_RECORDS_FINANCE_GIFTS,人情随礼,Social Gifts,贈答費
+UI_RECORDS_FINANCE_BOOKS,购买医书,Medical Books,医学書の購入
+UI_RECORDS_FINANCE_COAL,煤炭,Coal,石炭
+UI_RECORDS_FINANCE_CLOTHING,布匹棉衣,Cloth and Winter Clothes,衣服と綿入れ
+UI_RECORDS_FINANCE_REPAIRS,修缮房屋,House Repairs,家屋の修繕
+UI_RECORDS_FINANCE_ANCESTORS,扫墓祭祖,Ancestral Rites,墓参りと先祖供養
+UI_RECORDS_FINANCE_MOLDY_HERBS,药材发霉,Spoiled Herbs,薬材のカビ
+UI_RECORDS_FINANCE_SUMMER_TAX,夏税,Summer Tax,夏の税
+UI_RECORDS_FINANCE_AUTUMN_TAX,秋税,Autumn Tax,秋の税
+UI_RECORDS_TOTAL_INCOME_FMT,收入合计：[color=#9fe29f]%s[/color],Total Income: [color=#9fe29f]%s[/color],収入合計：[color=#9fe29f]%s[/color]
+UI_RECORDS_TOTAL_EXPENSE_FMT,支出合计：[color=#f0a0a0]%s[/color],Total Expenses: [color=#f0a0a0]%s[/color],支出合計：[color=#f0a0a0]%s[/color]
+UI_RECORDS_NET_CHANGE_FMT,本日变化：[color=#e3b66b]%s[/color],Today's Change: [color=#e3b66b]%s[/color],本日の増減：[color=#e3b66b]%s[/color]
 UI_RECORDS_MONEY_LINE_FMT,%s：[color=%s]%s[/color],%s: [color=%s]%s[/color],%s：[color=%s]%s[/color]
-UI_RECORDS_MONEY_FMT,%s%d两%d文,%s%d liang %d wen,%s%d两%d文
-UI_RECORDS_DATE_UNKNOWN,日期未载,Date Unknown,日期未载
-UI_RECORDS_PATIENT_COUNT_FMT,%d 人,%d people,%d 人
-UI_RECORDS_PRESET_UNLOCKED_BADGE,· 已解锁,· Unlocked,· 已解锁
-UI_RECORDS_NO_FORMULAS,[color=#c6ae83]暂无方剂数据。[/color],[color=#c6ae83]No formula data available.[/color],[color=#c6ae83]暂无方剂数据。[/color]
-UI_RECORDS_PRESET_UNLOCKED,已解锁：可在开方时一键使用,Unlocked: ready to use while prescribing,已解锁：可在开方时一键使用
-UI_RECORDS_PRESET_LOCKED,未解锁：该方剂获得 5 次妙手回春后解锁,Locked: earn 5 Miraculous Recovery results with this formula,未解锁：该方剂获得 5 次妙手回春后解锁
-UI_RECORDS_PRESET_PROGRESS_FMT,掌握次数：%d / 5,Mastery: %d / 5,掌握次数：%d / 5
-UI_RECORDS_PRESET_STATUS_FMT,状态：[color=%s]%s[/color],Status: [color=%s]%s[/color],状态：[color=%s]%s[/color]
-UI_RECORDS_PRESET_INGREDIENTS,标准方组成：,Standard Formula Ingredients:,标准方组成：
-UI_RECORDS_NO_INGREDIENTS,（暂无组成数据）,(No ingredient data),（暂无组成数据）
+UI_RECORDS_MONEY_FMT,%s%d两%d文,%s%d liang %d wen,%s%d両%d文
+UI_RECORDS_DATE_UNKNOWN,日期未载,Date Unknown,日付不明
+UI_RECORDS_PATIENT_COUNT_FMT,%d 人,%d people,%d人
+UI_RECORDS_PRESET_UNLOCKED_BADGE,· 已解锁,· Unlocked,・解放済み
+UI_RECORDS_NO_FORMULAS,[color=#c6ae83]暂无方剂数据。[/color],[color=#c6ae83]No formula data available.[/color],[color=#c6ae83]処方データはありません。[/color]
+UI_RECORDS_PRESET_UNLOCKED,已解锁：可在开方时一键使用,Unlocked: ready to use while prescribing,解放済み：処方時にワンクリックで使用できます
+UI_RECORDS_PRESET_LOCKED,未解锁：该方剂获得 5 次妙手回春后解锁,Locked: earn 5 Miraculous Recovery results with this formula,未解放：この処方で「妙手回春」を5回達成すると解放されます
+UI_RECORDS_PRESET_PROGRESS_FMT,掌握次数：%d / 5,Mastery: %d / 5,達成回数：%d / 5
+UI_RECORDS_PRESET_STATUS_FMT,状态：[color=%s]%s[/color],Status: [color=%s]%s[/color],状態：[color=%s]%s[/color]
+UI_RECORDS_PRESET_INGREDIENTS,标准方组成：,Standard Formula Ingredients:,標準処方の構成：
+UI_RECORDS_NO_INGREDIENTS,（暂无组成数据）,(No ingredient data),（構成データなし）
 UI_RECORDS_INGREDIENT_FMT,%s（%s）,%s (%s),%s（%s）
-UI_NIGHT_UNREAD_BEFORE_REST,尚有未读条目，请先阅读后再休息。,Some entries are unread. Read them before resting.,尚有未读条目，请先阅读后再休息。
-UI_STORY_DIALOGUE_PLACEHOLDER,人物对话显示区域,Dialogue appears here,人物对话显示区域
-UI_STORY_PULSE_BUTTON,把脉(F1),Pulse (F1),把脉(F1)
-UI_STORY_PRESCRIPTION_BUTTON,开方(F2),Prescribe (F2),开方(F2)
-UI_STORY_CLINICAL_LOG_BUTTON,行医记考(F3),Records (F3),行医记考(F3)
-UI_STORY_CONTINUE_HINT,点击 / 空格 /  继续，回车跳过剧情,Click / Space: Continue · Hold Enter: Skip Story,点击 / 空格 /  继续，回车跳过剧情
-UI_STORY_SUBTITLE_PLACEHOLDER,背景字幕显示区域,Subtitles appear here,背景字幕显示区域
-UI_STORY_SUBTITLE_CONTINUE_HINT,点击 / 空格 /  继续，长按回车跳过剧情,Click / Space: Continue · Hold Enter: Skip Story,点击 / 空格 /  继续，长按回车跳过剧情
-UI_STORY_TREATMENT_SPEAKER,诊疗,Treatment,诊疗
-UI_STORY_SELECT_TREATMENT,请选择诊疗项目。,Choose a treatment action.,请选择诊疗项目。
-UI_STORY_TREATMENT_HINT,诊疗提示,Treatment Notice,诊疗提示
-UI_STORY_INVALID_TREATMENT_RESULT,Clinic 返回了无效的诊疗结果。,Clinic returned an invalid treatment result.,Clinic 返回了无效的诊疗结果。
-UI_STORY_SUBMIT_FAILED,处方提交失败。,Could not submit the prescription.,处方提交失败。
-UI_HINT_PLACEHOLDER,提示内容,Notice text,提示内容
+UI_NIGHT_UNREAD_BEFORE_REST,尚有未读条目，请先阅读后再休息。,Some entries are unread. Read them before resting.,未読の項目があります。休む前に読んでください。
+UI_STORY_DIALOGUE_PLACEHOLDER,人物对话显示区域,Dialogue appears here,人物の会話が表示されます
+UI_STORY_PULSE_BUTTON,把脉(F1),Pulse (F1),脈診(F1)
+UI_STORY_PRESCRIPTION_BUTTON,开方(F2),Prescribe (F2),処方(F2)
+UI_STORY_CLINICAL_LOG_BUTTON,行医记考(F3),Records (F3),診療記録(F3)
+UI_STORY_CONTINUE_HINT,点击 / 空格 /  继续，回车跳过剧情,Click / Space: Continue · Hold Enter: Skip Story,クリック / スペース：続ける、Enter：物語をスキップ
+UI_STORY_SUBTITLE_PLACEHOLDER,背景字幕显示区域,Subtitles appear here,場面の字幕が表示されます
+UI_STORY_SUBTITLE_CONTINUE_HINT,点击 / 空格 /  继续，长按回车跳过剧情,Click / Space: Continue · Hold Enter: Skip Story,クリック / スペース：続ける、Enter長押し：物語をスキップ
+UI_STORY_TREATMENT_SPEAKER,诊疗,Treatment,診療
+UI_STORY_SELECT_TREATMENT,请选择诊疗项目。,Choose a treatment action.,診療項目を選んでください。
+UI_STORY_TREATMENT_HINT,诊疗提示,Treatment Notice,診療のヒント
+UI_STORY_INVALID_TREATMENT_RESULT,Clinic 返回了无效的诊疗结果。,Clinic returned an invalid treatment result.,Clinic から無効な診療結果が返されました。
+UI_STORY_SUBMIT_FAILED,处方提交失败。,Could not submit the prescription.,処方を提出できませんでした。
+UI_HINT_PLACEHOLDER,提示内容,Notice text,ヒントの内容
 UI_RESULT_ROLE_LINE_FMT,%s：%s,%s: %s,%s：%s
-UI_RESULT_NONE,（无）,(None),（无）
-UI_RESULT_FORMULA_NOT_FOUND,（未找到标准方）,(Standard formula not found),（未找到标准方）
-UI_RESULT_NO_DIAGNOSIS,未选择疾病,No condition selected,未选择疾病
-UI_RESULT_PRESET_UNLOCK,预制方剂,Formula Preset,预制方剂
-UI_RESULT_PRESET_UNLOCK_FMT,预制方剂：%s,Formula Preset: %s,预制方剂：%s
-UI_TUTORIAL_WINDOW_TITLE,游戏说明,Game Guide,游戏说明
-UI_TUTORIAL_KEYBOARD_HINT,← / → 翻页    Esc 关闭,← / →: Pages    Esc: Close,← / → 翻页    Esc 关闭
-UI_TUTORIAL_PREVIOUS,上一步,Previous,上一步
-UI_TUTORIAL_NEXT,下一步,Next,下一步
-UI_TUTORIAL_DONE,完成,Finish,完成
-UI_TUTORIAL_NO_PAGES,暂无说明,No guide pages yet,暂无说明
-UI_TUTORIAL_ADD_DAY_SLIDES,请在 Inspector 的 Day Slides 中添加 TutorialSlideData。,Add TutorialSlideData to Day Slides in the Inspector.,请在 Inspector 的 Day Slides 中添加 TutorialSlideData。
-UI_TUTORIAL_ADD_NIGHT_SLIDES,请在 Inspector 的 Slides 中添加 TutorialSlideData。,Add TutorialSlideData to Slides in the Inspector.,请在 Inspector 的 Slides 中添加 TutorialSlideData。
-UI_TUTORIAL_MISSING_SLIDE,当前教程页未设置 TutorialSlideData。,No TutorialSlideData is set for this guide page.,当前教程页未设置 TutorialSlideData。
-UI_TUTORIAL_NIGHT_01_TITLE,夜间,Night,夜间
-UI_TUTORIAL_NIGHT_01_DESCRIPTION,夜间点击书籍(F1)读书，行医记考(F2)查看记录，油灯(F3)休息进入下一天。,"At night, click the books (F1) to read, the medical records (F2) to review entries, or the oil lamp (F3) to rest and begin the next day.",夜间点击书籍(F1)读书，行医记考(F2)查看记录，油灯(F3)休息进入下一天。
-UI_TUTORIAL_NIGHT_02_TITLE,读书,Reading,读书
-UI_TUTORIAL_NIGHT_02_DESCRIPTION,在读书窗口中可以阅读医学典籍，《黄帝内经》记载中医基础理论，作为参考。,Read medical classics in the reading window. The Yellow Emperor's Inner Canon explains the foundations of traditional Chinese medicine and serves as a reference.,在读书窗口中可以阅读医学典籍，《黄帝内经》记载中医基础理论，作为参考。
-UI_TUTORIAL_NIGHT_03_TITLE,药材,Herbs,药材
-UI_TUTORIAL_NIGHT_03_DESCRIPTION,《神农本草经》记载药材的相关信息，作为参考。,The Divine Farmer's Classic of Materia Medica records information about medicinal herbs and serves as a reference.,《神农本草经》记载药材的相关信息，作为参考。
+UI_RESULT_NONE,（无）,(None),（なし）
+UI_RESULT_FORMULA_NOT_FOUND,（未找到标准方）,(Standard formula not found),（標準処方が見つかりません）
+UI_RESULT_NO_DIAGNOSIS,未选择疾病,No condition selected,病名を選択していません
+UI_RESULT_PRESET_UNLOCK,预制方剂,Formula Preset,定型処方
+UI_RESULT_PRESET_UNLOCK_FMT,预制方剂：%s,Formula Preset: %s,定型処方：%s
+UI_TUTORIAL_WINDOW_TITLE,游戏说明,Game Guide,遊び方
+UI_TUTORIAL_KEYBOARD_HINT,← / → 翻页    Esc 关闭,← / →: Pages    Esc: Close,← / → ページ切り替え    Esc 閉じる
+UI_TUTORIAL_PREVIOUS,上一步,Previous,前へ
+UI_TUTORIAL_NEXT,下一步,Next,次へ
+UI_TUTORIAL_DONE,完成,Finish,完了
+UI_TUTORIAL_NO_PAGES,暂无说明,No guide pages yet,説明はありません
+UI_TUTORIAL_ADD_DAY_SLIDES,请在 Inspector 的 Day Slides 中添加 TutorialSlideData。,Add TutorialSlideData to Day Slides in the Inspector.,Inspector の Day Slides に TutorialSlideData を追加してください。
+UI_TUTORIAL_ADD_NIGHT_SLIDES,请在 Inspector 的 Slides 中添加 TutorialSlideData。,Add TutorialSlideData to Slides in the Inspector.,Inspector の Slides に TutorialSlideData を追加してください。
+UI_TUTORIAL_MISSING_SLIDE,当前教程页未设置 TutorialSlideData。,No TutorialSlideData is set for this guide page.,このチュートリアルページには TutorialSlideData が設定されていません。
+UI_TUTORIAL_NIGHT_01_TITLE,夜间,Night,夜
+UI_TUTORIAL_NIGHT_01_DESCRIPTION,夜间点击书籍(F1)读书，行医记考(F2)查看记录，油灯(F3)休息进入下一天。,"At night, click the books (F1) to read, the medical records (F2) to review entries, or the oil lamp (F3) to rest and begin the next day.",夜は書物(F1)をクリックして読書、診療記録(F2)で記録の確認、灯火(F3)で休んで翌日へ進みます。
+UI_TUTORIAL_NIGHT_02_TITLE,读书,Reading,読書
+UI_TUTORIAL_NIGHT_02_DESCRIPTION,在读书窗口中可以阅读医学典籍，《黄帝内经》记载中医基础理论，作为参考。,Read medical classics in the reading window. The Yellow Emperor's Inner Canon explains the foundations of traditional Chinese medicine and serves as a reference.,読書画面では医学書を読めます。『黄帝内経』には東洋医学の基礎理論が記されており、参考にできます。
+UI_TUTORIAL_NIGHT_03_TITLE,药材,Herbs,薬材
+UI_TUTORIAL_NIGHT_03_DESCRIPTION,《神农本草经》记载药材的相关信息，作为参考。,The Divine Farmer's Classic of Materia Medica records information about medicinal herbs and serves as a reference.,『神農本草経』には薬材に関する情報が記されています。参考にしてください。
 UI_TUTORIAL_NIGHT_04_TITLE,疾病,Conditions,疾病
-UI_TUTORIAL_NIGHT_04_DESCRIPTION,《诸病源候论》记载疾病的相关信息，游戏中通过脉象来判断疾病，通过标准方治疗疾病。,"The Treatise on the Origins and Manifestations of Various Diseases records information about diseases. In the game, diagnose conditions from pulse readings and treat them with standard formulas.",《诸病源候论》记载疾病的相关信息，游戏中通过脉象来判断疾病，通过标准方治疗疾病。
-UI_TUTORIAL_NIGHT_05_TITLE,方剂,Formulas,方剂
-UI_TUTORIAL_NIGHT_05_DESCRIPTION,其他医书记载各类方剂，白天在开方窗口填入方剂的组成药材来给病人开药。,"Other medical books list various formulas. During the day, enter their herbs in the prescription window to treat patients.",其他医书记载各类方剂，白天在开方窗口填入方剂的组成药材来给病人开药。
-UI_TUTORIAL_NIGHT_06_TITLE,脉象,Pulse Readings,脉象
-UI_TUTORIAL_NIGHT_06_DESCRIPTION,在《诸病源候论》中选择疾病条目时，点击右下角“查看脉象”按钮，可以观察该疾病的脉象。,"Select a disease entry in the Treatise on the Origins and Manifestations of Various Diseases, then click 'View Pulse' in the lower right to examine its pulse.",在《诸病源候论》中选择疾病条目时，点击右下角“查看脉象”按钮，可以观察该疾病的脉象。
-UI_TUTORIAL_NIGHT_07_TITLE,脉象,Pulse Readings,脉象
-UI_TUTORIAL_NIGHT_07_DESCRIPTION,健康的脉象是不高不低，不粗不细，不宽不窄，一次呼吸脉搏跳动四到五次。,"A healthy pulse has neither increased nor decreased amplitude, neither a thicker nor thinner pulse line, and neither broader nor narrower pulse width. Its pulse frequency is four to five beats per breath.",健康的脉象是不高不低，不粗不细，不宽不窄，一次呼吸脉搏跳动四到五次。
-UI_TUTORIAL_NIGHT_08_TITLE,气,Qi,气
+UI_TUTORIAL_NIGHT_04_DESCRIPTION,《诸病源候论》记载疾病的相关信息，游戏中通过脉象来判断疾病，通过标准方治疗疾病。,"The Treatise on the Origins and Manifestations of Various Diseases records information about diseases. In the game, diagnose conditions from pulse readings and treat them with standard formulas.",『諸病源候論』には疾病に関する情報が記されています。ゲームでは脈から疾病を判断し、標準処方で治療します。
+UI_TUTORIAL_NIGHT_05_TITLE,方剂,Formulas,処方
+UI_TUTORIAL_NIGHT_05_DESCRIPTION,其他医书记载各类方剂，白天在开方窗口填入方剂的组成药材来给病人开药。,"Other medical books list various formulas. During the day, enter their herbs in the prescription window to treat patients.",ほかの医学書にはさまざまな処方が載っています。昼間は処方画面で構成薬材を入力し、患者に薬を出します。
+UI_TUTORIAL_NIGHT_06_TITLE,脉象,Pulse Readings,脈
+UI_TUTORIAL_NIGHT_06_DESCRIPTION,在《诸病源候论》中选择疾病条目时，点击右下角“查看脉象”按钮，可以观察该疾病的脉象。,"Select a disease entry in the Treatise on the Origins and Manifestations of Various Diseases, then click 'View Pulse' in the lower right to examine its pulse.",『諸病源候論』で疾病の項目を選び、右下の「脈を確認」を押すと、その病の脈を観察できます。
+UI_TUTORIAL_NIGHT_07_TITLE,脉象,Pulse Readings,脈
+UI_TUTORIAL_NIGHT_07_DESCRIPTION,健康的脉象是不高不低，不粗不细，不宽不窄，一次呼吸脉搏跳动四到五次。,"A healthy pulse has neither increased nor decreased amplitude, neither a thicker nor thinner pulse line, and neither broader nor narrower pulse width. Its pulse frequency is four to five beats per breath.",健康な脈は高すぎず低すぎず、太すぎず細すぎず、広すぎず狭すぎず、呼吸一回につき四～五回打ちます。
+UI_TUTORIAL_NIGHT_08_TITLE,气,Qi,気
 UI_TUTORIAL_NIGHT_08_DESCRIPTION,"波峰的高低反映气的强弱；
 波峰越高气滞程度越高，波峰越低气虚程度越高。","Amplitude reflects the state of Qi;
-increased amplitude indicates greater Qi stagnation, while decreased amplitude indicates greater Qi deficiency.","波峰的高低反映气的强弱；
-波峰越高气滞程度越高，波峰越低气虚程度越高。"
+increased amplitude indicates greater Qi stagnation, while decreased amplitude indicates greater Qi deficiency.","波の峰の高さは気の状態を表します。
+峰が高いほど気滞が強く、低いほど気虚が強くなります。"
 UI_TUTORIAL_NIGHT_09_TITLE,血,Blood,血
 UI_TUTORIAL_NIGHT_09_DESCRIPTION,"波线的粗细反映血的状态；
 波线越粗血瘀程度越高，波线越细血虚程度越高。","Pulse-line thickness reflects the state of Blood;
-a thicker pulse line indicates greater blood stasis, while a thinner pulse line indicates greater blood deficiency.","波线的粗细反映血的状态；
-波线越粗血瘀程度越高，波线越细血虚程度越高。"
-UI_TUTORIAL_NIGHT_10_TITLE,湿燥,Dampness and Dryness,湿燥
+a thicker pulse line indicates greater blood stasis, while a thinner pulse line indicates greater blood deficiency.","波線の太さは血の状態を表します。
+太いほど瘀血が強く、細いほど血虚が強くなります。"
+UI_TUTORIAL_NIGHT_10_TITLE,湿燥,Dampness and Dryness,湿と燥
 UI_TUTORIAL_NIGHT_10_DESCRIPTION,"波宽的宽窄反映湿燥程度；
 波宽越宽越湿，波宽越窄越燥。","Pulse width reflects Dampness and Dryness;
-broader pulse width indicates greater Dampness, while narrower pulse width indicates greater Dryness.","波宽的宽窄反映湿燥程度；
-波宽越宽越湿，波宽越窄越燥。"
-UI_TUTORIAL_NIGHT_11_TITLE,寒热,Cold and Heat,寒热
+broader pulse width indicates greater Dampness, while narrower pulse width indicates greater Dryness.","波の幅は湿と燥の程度を表します。
+広いほど湿が強く、狭いほど燥が強くなります。"
+UI_TUTORIAL_NIGHT_11_TITLE,寒热,Cold and Heat,寒と熱
 UI_TUTORIAL_NIGHT_11_DESCRIPTION,"每次呼吸波峰经过指尖的次数反映寒热程度；
 脉搏数越多越热，脉搏次数越少越寒。","Pulse frequency reflects Cold and Heat;
-higher pulse frequency indicates greater Heat, while lower pulse frequency indicates greater Cold.","每次呼吸波峰经过指尖的次数反映寒热程度；
-脉搏数越多越热，脉搏次数越少越寒。"
-UI_TUTORIAL_DAY_01_TITLE,接诊,Seeing Patients,接诊
-UI_TUTORIAL_DAY_01_DESCRIPTION,白天在医馆接诊病人，把脉(F1)确定疾病，翻阅行医记考(F3)确定方剂，给病人断病开方(F2)。,"During the day, see patients at the clinic. Check their pulse (F1) to identify the condition, consult the medical records (F3) for a formula, then diagnose and prescribe (F2).",白天在医馆接诊病人，把脉(F1)确定疾病，翻阅行医记考(F3)确定方剂，给病人断病开方(F2)。
-UI_TUTORIAL_DAY_02_TITLE,把脉,Pulse Diagnosis,把脉
-UI_TUTORIAL_DAY_02_DESCRIPTION,在把脉窗口按住QAZ显示右手脉象，按住WSX显示左手脉象。,"In the pulse window, hold Q, A or Z to show the right-hand pulse; hold W, S or X for the left-hand pulse.",在把脉窗口按住QAZ显示右手脉象，按住WSX显示左手脉象。
-UI_TUTORIAL_DAY_03_TITLE,行医记考,Medical Records,行医记考
-UI_TUTORIAL_DAY_03_DESCRIPTION,在行医记考窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母查询。快捷键：疾病(1)，方剂(2)，药材(3),"Search the medical records by disease, formula or herb name, Chinese pinyin, or pinyin initials. Shortcuts: Conditions (1), Formulas (2), Herbs (3).",在行医记考窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母查询。快捷键：疾病(1)，方剂(2)，药材(3)
-UI_TUTORIAL_DAY_04_TITLE,断病开方,Diagnosis and Prescription,断病开方
-UI_TUTORIAL_DAY_04_DESCRIPTION,在断病开放窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母筛选对应条目。,"In the diagnosis and prescription window, search by disease, formula or herb name, Chinese pinyin, or pinyin initials to filter entries.",在断病开放窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母筛选对应条目。
-UI_TUTORIAL_DAY_05_TITLE,开方,Prescribing,开方
-UI_TUTORIAL_DAY_05_DESCRIPTION,选择君臣佐使区域，左键再点击药材加入，右键点击减少。右键点击君臣佐使区域已加入的药材，可以删除。选择单位剂量控制每次点击加入的药量。快捷键:君(1)臣(2)佐(3)使(4)，单位切换(~和Tab)。,"Select a Chief, Deputy, Assistant or Envoy area, then left-click an herb to add it or right-click to reduce it. Right-click an herb already in the formula to remove it. Choose the dose per click. Shortcuts: Chief (1), Deputy (2), Assistant (3), Envoy (4); switch dose (~ or Tab).",选择君臣佐使区域，左键再点击药材加入，右键点击减少。右键点击君臣佐使区域已加入的药材，可以删除。选择单位剂量控制每次点击加入的药量。快捷键:君(1)臣(2)佐(3)使(4)，单位切换(~和Tab)。
-UI_TUTORIAL_DAY_06_TITLE,方剂,Formulas,方剂
-UI_TUTORIAL_DAY_06_DESCRIPTION,在搜索栏输入方剂名可筛选出该方剂所包含的药材条目。当达成一定次数的妙手回春评价后，会出现预制方剂条目，点击后会自动填入方剂所包含的所有药材及剂量。,"Search for a formula to filter its herbs. After earning enough Miraculous Recovery ratings, a preset formula appears. Click it to fill in all of its herbs and doses automatically.",在搜索栏输入方剂名可筛选出该方剂所包含的药材条目。当达成一定次数的妙手回春评价后，会出现预制方剂条目，点击后会自动填入方剂所包含的所有药材及剂量。
+higher pulse frequency indicates greater Heat, while lower pulse frequency indicates greater Cold.","一呼吸の間に指先を通る波の数が寒熱を表します。
+脈拍が多いほど熱、少ないほど寒が強くなります。"
+UI_TUTORIAL_DAY_01_TITLE,接诊,Seeing Patients,診察
+UI_TUTORIAL_DAY_01_DESCRIPTION,白天在医馆接诊病人，把脉(F1)确定疾病，翻阅行医记考(F3)确定方剂，给病人断病开方(F2)。,"During the day, see patients at the clinic. Check their pulse (F1) to identify the condition, consult the medical records (F3) for a formula, then diagnose and prescribe (F2).",昼は診療所で患者を迎え、脈診(F1)で病を調べ、診療記録(F3)を参考に処方を決め、診断と処方(F2)を行います。
+UI_TUTORIAL_DAY_02_TITLE,把脉,Pulse Diagnosis,脈診
+UI_TUTORIAL_DAY_02_DESCRIPTION,在把脉窗口按住QAZ显示右手脉象，按住WSX显示左手脉象。,"In the pulse window, hold Q, A or Z to show the right-hand pulse; hold W, S or X for the left-hand pulse.",脈診画面では Q・A・Z を押し続けると右手、W・S・X で左手の脈が表示されます。
+UI_TUTORIAL_DAY_03_TITLE,行医记考,Medical Records,診療記録
+UI_TUTORIAL_DAY_03_DESCRIPTION,在行医记考窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母查询。快捷键：疾病(1)，方剂(2)，药材(3),"Search the medical records by disease, formula or herb name, Chinese pinyin, or pinyin initials. Shortcuts: Conditions (1), Formulas (2), Herbs (3).",診療記録の検索欄では、病名・処方・薬材の漢字、ひらがな・カタカナ、ローマ字で検索できます。ショートカット：疾病(1)、処方(2)、薬材(3)。
+UI_TUTORIAL_DAY_04_TITLE,断病开方,Diagnosis and Prescription,診断と処方
+UI_TUTORIAL_DAY_04_DESCRIPTION,在断病开放窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母筛选对应条目。,"In the diagnosis and prescription window, search by disease, formula or herb name, Chinese pinyin, or pinyin initials to filter entries.",診断と処方の検索欄では、病名・処方・薬材の漢字、ひらがな・カタカナ、ローマ字で項目を絞り込めます。
+UI_TUTORIAL_DAY_05_TITLE,开方,Prescribing,処方
+UI_TUTORIAL_DAY_05_DESCRIPTION,选择君臣佐使区域，左键再点击药材加入，右键点击减少。右键点击君臣佐使区域已加入的药材，可以删除。选择单位剂量控制每次点击加入的药量。快捷键:君(1)臣(2)佐(3)使(4)，单位切换(~和Tab)。,"Select a Chief, Deputy, Assistant or Envoy area, then left-click an herb to add it or right-click to reduce it. Right-click an herb already in the formula to remove it. Choose the dose per click. Shortcuts: Chief (1), Deputy (2), Assistant (3), Envoy (4); switch dose (~ or Tab).",君薬・臣薬・佐薬・使薬の欄を選び、薬材を左クリックして追加、右クリックして減量します。追加済みの薬材を欄内で右クリックすると削除できます。単位と用量を選ぶと一度に加える量が変わります。ショートカット：君(1)、臣(2)、佐(3)、使(4)、単位切り替え(~ / Tab)。
+UI_TUTORIAL_DAY_06_TITLE,方剂,Formulas,方剤
+UI_TUTORIAL_DAY_06_DESCRIPTION,在搜索栏输入方剂名可筛选出该方剂所包含的药材条目。当达成一定次数的妙手回春评价后，会出现预制方剂条目，点击后会自动填入方剂所包含的所有药材及剂量。,"Search for a formula to filter its herbs. After earning enough Miraculous Recovery ratings, a preset formula appears. Click it to fill in all of its herbs and doses automatically.",検索欄に処方名を入力すると、その処方に含まれる薬材を絞り込めます。同じ処方で「妙手回春」を一定回数達成すると定型処方が現れ、クリックすると薬材と用量が自動入力されます。
 UI_CREDITS_GAME_TITLE,医 者,Doctor,医 者
-UI_CREDITS_GAME_DESIGN,游戏设计,Game Design,游戏设计
-UI_CREDITS_LI_QIAOCHEN,李翘辰,Li Qiaochen,李翘辰
-UI_CREDITS_PROGRAMMING,程序,Programming,程序
-UI_CREDITS_ART,美术,Art,美术
-UI_CREDITS_AUDIO_TITLE,音 乐 音 效,Music & Sound,音 乐 音 效
-UI_CREDITS_MUSIC,音乐,Music,音乐
-UI_CREDITS_SOUND_ASSETS,音效素材,Sound Assets,音效素材
-UI_CREDITS_SPECIAL_THANKS,特 别 感 谢,Special Thanks,特 别 感 谢
-UI_CREDITS_INSPIRATION,以及所有给予本作灵感与参考的,Inspired by the work and ideas of,以及所有给予本作灵感与参考的
-UI_CREDITS_INDIE_DEVS,独立游戏制作人,Independent Game Developers,独立游戏制作人
-UI_CREDITS_END,终,The End,终
-UI_CREDITS_THANK_YOU,感谢游玩,Thank You for Playing,感谢游玩
-UI_CREDITS_BOOK_TITLE,本草纲目,Compendium of Materia Medica,本草纲目
-UI_DAILY_FINANCE_TITLE,今日银钱结算,Today's Finances,今日银钱结算
-UI_DAILY_FINANCE_INCOME,收入,Income,收入
-UI_DAILY_FINANCE_CONSULTATION_FMT,诊费：%s,Consultation: %s,诊费：%s
-UI_DAILY_FINANCE_MEDICINE_NET_FMT,药材收入：%s,Net Herb Income: %s,药材收入：%s
-UI_DAILY_FINANCE_MEDICINE_SALES_FMT,药材销售：%s,Herb Sales: %s,药材销售：%s
-UI_DAILY_FINANCE_OLD_PROFIT_FMT,药材利润（旧账）：%s,Herb Profit (Legacy): %s,药材利润（旧账）：%s
-UI_DAILY_FINANCE_GIFT_FMT,病家谢礼：%s,Patient Gifts: %s,病家谢礼：%s
-UI_DAILY_FINANCE_LI_JIAN_ZHONG_FMT,李建中俸禄：%s,Li Jianzhong's Salary: %s,李建中俸禄：%s
-UI_DAILY_FINANCE_LI_YAN_WEN_FMT,李言闻收入：%s,Li Yanwen's Income: %s,李言闻收入：%s
-UI_DAILY_FINANCE_LAND_RENT_FMT,田租：%s,Land Rent: %s,田租：%s
-UI_DAILY_FINANCE_TOTAL_INCOME_FMT,收入合计：%s,Total Income: %s,收入合计：%s
+UI_CREDITS_GAME_DESIGN,游戏设计,Game Design,ゲームデザイン
+UI_CREDITS_LI_QIAOCHEN,李翘辰,Li Qiaochen,李翹辰
+UI_CREDITS_PROGRAMMING,程序,Programming,プログラミング
+UI_CREDITS_ART,美术,Art,アート
+UI_CREDITS_AUDIO_TITLE,音 乐 音 效,Music & Sound,音 楽 ・ 効 果 音
+UI_CREDITS_MUSIC,音乐,Music,音楽
+UI_CREDITS_SOUND_ASSETS,音效素材,Sound Assets,効果音素材
+UI_CREDITS_SPECIAL_THANKS,特 别 感 谢,Special Thanks,特 別 な 感 謝
+UI_CREDITS_INSPIRATION,以及所有给予本作灵感与参考的,Inspired by the work and ideas of,そして本作に着想と参考を与えてくださった
+UI_CREDITS_INDIE_DEVS,独立游戏制作人,Independent Game Developers,インディーゲーム制作者の皆様
+UI_CREDITS_END,终,The End,終
+UI_CREDITS_THANK_YOU,感谢游玩,Thank You for Playing,ご遊戯ありがとうございました
+UI_CREDITS_BOOK_TITLE,本草纲目,Compendium of Materia Medica,本草綱目
+UI_DAILY_FINANCE_TITLE,今日银钱结算,Today's Finances,本日の収支
+UI_DAILY_FINANCE_INCOME,收入,Income,収入
+UI_DAILY_FINANCE_CONSULTATION_FMT,诊费：%s,Consultation: %s,診察料：%s
+UI_DAILY_FINANCE_MEDICINE_NET_FMT,药材收入：%s,Net Herb Income: %s,薬材収入：%s
+UI_DAILY_FINANCE_MEDICINE_SALES_FMT,药材销售：%s,Herb Sales: %s,薬材売上：%s
+UI_DAILY_FINANCE_OLD_PROFIT_FMT,药材利润（旧账）：%s,Herb Profit (Legacy): %s,薬材の利益（旧帳簿）：%s
+UI_DAILY_FINANCE_GIFT_FMT,病家谢礼：%s,Patient Gifts: %s,患者からの謝礼：%s
+UI_DAILY_FINANCE_LI_JIAN_ZHONG_FMT,李建中俸禄：%s,Li Jianzhong's Salary: %s,李建中の俸禄：%s
+UI_DAILY_FINANCE_LI_YAN_WEN_FMT,李言闻收入：%s,Li Yanwen's Income: %s,李言聞の収入：%s
+UI_DAILY_FINANCE_LAND_RENT_FMT,田租：%s,Land Rent: %s,地代：%s
+UI_DAILY_FINANCE_TOTAL_INCOME_FMT,收入合计：%s,Total Income: %s,収入合計：%s
 UI_DAILY_FINANCE_EXPENSE,支出,Expenses,支出
-UI_DAILY_FINANCE_MEDICINE_COST_FMT,药材进货成本：%s,Herb Purchase Cost: %s,药材进货成本：%s
-UI_DAILY_FINANCE_OLD_FAILURE_COST_FMT,治疗失败药材成本（旧账）：%s,Failed Treatment Herbs (Legacy): %s,治疗失败药材成本（旧账）：%s
-UI_DAILY_FINANCE_STAFF_WAGES_FMT,陈皮半夏工钱：%s,Chenpi & Banxia Pay: %s,陈皮半夏工钱：%s
-UI_DAILY_FINANCE_FOOD_FMT,食物：%s,Food: %s,食物：%s
-UI_DAILY_FINANCE_GIFTS_FMT,人情随礼：%s,Social Gifts: %s,人情随礼：%s
-UI_DAILY_FINANCE_BOOKS_FMT,购买医书：%s,Medical Books: %s,购买医书：%s
-UI_DAILY_FINANCE_COAL_FMT,煤炭：%s,Coal: %s,煤炭：%s
-UI_DAILY_FINANCE_CLOTHING_FMT,布匹棉衣：%s,Cloth & Winter Clothes: %s,布匹棉衣：%s
-UI_DAILY_FINANCE_REPAIRS_FMT,修缮房屋：%s,House Repairs: %s,修缮房屋：%s
-UI_DAILY_FINANCE_ANCESTORS_FMT,扫墓祭祖：%s,Ancestral Rites: %s,扫墓祭祖：%s
-UI_DAILY_FINANCE_MOLDY_HERBS_FMT,药材发霉：%s,Spoiled Herbs: %s,药材发霉：%s
-UI_DAILY_FINANCE_SUMMER_TAX_FMT,夏税：%s,Summer Tax: %s,夏税：%s
-UI_DAILY_FINANCE_AUTUMN_TAX_FMT,秋税：%s,Autumn Tax: %s,秋税：%s
-UI_DAILY_FINANCE_TOTAL_EXPENSE_FMT,支出合计：%s,Total Expenses: %s,支出合计：%s
-UI_DAILY_FINANCE_NET_CHANGE_FMT,本日变化：%s,Today's Change: %s,本日变化：%s
-UI_BOOK_NAME_BEI_JI_QIAN_JIN_YAO_FANG,备急千金要方,Essential Prescriptions Worth a Thousand Gold for Emergencies,备急千金要方
-UI_BOOK_NAME_HUANG_DI_NEI_JING,黄帝内经,Yellow Emperor's Inner Canon,黄帝内经
-UI_BOOK_NAME_JIN_GUI_YAO_LUE,金匮要略,Essentials from the Golden Cabinet,金匮要略
-UI_BOOK_NAME_JING_YUE_QUAN_SHU,景岳全书,Complete Works of Jingyue,景岳全书
+UI_DAILY_FINANCE_MEDICINE_COST_FMT,药材进货成本：%s,Herb Purchase Cost: %s,薬材の仕入れ：%s
+UI_DAILY_FINANCE_OLD_FAILURE_COST_FMT,治疗失败药材成本（旧账）：%s,Failed Treatment Herbs (Legacy): %s,治療失敗時の薬材費（旧帳簿）：%s
+UI_DAILY_FINANCE_STAFF_WAGES_FMT,陈皮半夏工钱：%s,Chenpi & Banxia Pay: %s,陳皮と半夏の給金：%s
+UI_DAILY_FINANCE_FOOD_FMT,食物：%s,Food: %s,食費：%s
+UI_DAILY_FINANCE_GIFTS_FMT,人情随礼：%s,Social Gifts: %s,贈答費：%s
+UI_DAILY_FINANCE_BOOKS_FMT,购买医书：%s,Medical Books: %s,医学書の購入：%s
+UI_DAILY_FINANCE_COAL_FMT,煤炭：%s,Coal: %s,石炭：%s
+UI_DAILY_FINANCE_CLOTHING_FMT,布匹棉衣：%s,Cloth & Winter Clothes: %s,衣服と綿入れ：%s
+UI_DAILY_FINANCE_REPAIRS_FMT,修缮房屋：%s,House Repairs: %s,家屋の修繕：%s
+UI_DAILY_FINANCE_ANCESTORS_FMT,扫墓祭祖：%s,Ancestral Rites: %s,墓参りと先祖供養：%s
+UI_DAILY_FINANCE_MOLDY_HERBS_FMT,药材发霉：%s,Spoiled Herbs: %s,薬材のカビ：%s
+UI_DAILY_FINANCE_SUMMER_TAX_FMT,夏税：%s,Summer Tax: %s,夏の税：%s
+UI_DAILY_FINANCE_AUTUMN_TAX_FMT,秋税：%s,Autumn Tax: %s,秋の税：%s
+UI_DAILY_FINANCE_TOTAL_EXPENSE_FMT,支出合计：%s,Total Expenses: %s,支出合計：%s
+UI_DAILY_FINANCE_NET_CHANGE_FMT,本日变化：%s,Today's Change: %s,本日の増減：%s
+UI_BOOK_NAME_BEI_JI_QIAN_JIN_YAO_FANG,备急千金要方,Essential Prescriptions Worth a Thousand Gold for Emergencies,備急千金要方
+UI_BOOK_NAME_HUANG_DI_NEI_JING,黄帝内经,Yellow Emperor's Inner Canon,黄帝内経
+UI_BOOK_NAME_JIN_GUI_YAO_LUE,金匮要略,Essentials from the Golden Cabinet,金匱要略
+UI_BOOK_NAME_JING_YUE_QUAN_SHU,景岳全书,Complete Works of Jingyue,景岳全書
 UI_BOOK_NAME_JIU_YUAN_FANG,究原方,Formulas for Investigating Origins,究原方
-UI_BOOK_NAME_LAN_SHI_MI_CANG,兰室秘藏,Secret Treasury of the Orchid Chamber,兰室秘藏
-UI_BOOK_NAME_LIU_ZHOU_YI_HUA,柳州医话,Medical Talks from Liuzhou,柳州医话
-UI_BOOK_NAME_PU_JI_BEN_SHI_FANG,普济本事方,Proven Formulas for Universal Relief,普济本事方
-UI_BOOK_NAME_REN_ZHAI_ZHI_ZHI_FANG_LUN,仁斋直指方论,Renzhai's Direct Guide to Formulas and Medical Theory,仁斋直指方论
-UI_BOOK_NAME_SHANG_HAN_LUN,伤寒论,Treatise on Cold Damage,伤寒论
-UI_BOOK_NAME_SHEN_NONG_BEN_CAO_JING,神农本草经,Divine Farmer's Classic of Materia Medica,神农本草经
-UI_BOOK_NAME_TAI_PING_HUI_MIN_HE_JI_JU_FANG,太平惠民和剂局方,Formulary of the Taiping Imperial Pharmacy for the People's Welfare,太平惠民和剂局方
-UI_BOOK_NAME_TAI_YI_YUAN_JING_YAN_QI_XIAO_LIANG_FANG_DA_QUAN,太医院经验奇效良方大全,Complete Collection of Proven and Miraculous Formulas from the Imperial Medical Academy,太医院经验奇效良方大全
-UI_BOOK_NAME_WANG_SHI_BO_JI_FANG,王氏博济方,Wang's Formulas for Broad Relief,王氏博济方
-UI_BOOK_NAME_WEN_BING_TIAO_BIAN,温病条辨,Systematic Differentiation of Warm Diseases,温病条辨
-UI_BOOK_NAME_XIAO_ER_YAO_ZHENG_ZHI_JUE,小儿药证直诀,Key to Therapeutics of Children's Diseases,小儿药证直诀
-UI_BOOK_NAME_XING_YI_JI_KAO,行医记考,Clinical Records,行医记考
-UI_BOOK_NAME_YAN_SHI_JI_SHENG_FANG,严氏济生方,Yan's Formulas for Aiding Life,严氏济生方
+UI_BOOK_NAME_LAN_SHI_MI_CANG,兰室秘藏,Secret Treasury of the Orchid Chamber,蘭室秘蔵
+UI_BOOK_NAME_LIU_ZHOU_YI_HUA,柳州医话,Medical Talks from Liuzhou,柳州医話
+UI_BOOK_NAME_PU_JI_BEN_SHI_FANG,普济本事方,Proven Formulas for Universal Relief,普済本事方
+UI_BOOK_NAME_REN_ZHAI_ZHI_ZHI_FANG_LUN,仁斋直指方论,Renzhai's Direct Guide to Formulas and Medical Theory,仁斎直指方論
+UI_BOOK_NAME_SHANG_HAN_LUN,伤寒论,Treatise on Cold Damage,傷寒論
+UI_BOOK_NAME_SHEN_NONG_BEN_CAO_JING,神农本草经,Divine Farmer's Classic of Materia Medica,神農本草経
+UI_BOOK_NAME_TAI_PING_HUI_MIN_HE_JI_JU_FANG,太平惠民和剂局方,Formulary of the Taiping Imperial Pharmacy for the People's Welfare,太平恵民和剤局方
+UI_BOOK_NAME_TAI_YI_YUAN_JING_YAN_QI_XIAO_LIANG_FANG_DA_QUAN,太医院经验奇效良方大全,Complete Collection of Proven and Miraculous Formulas from the Imperial Medical Academy,太医院経験奇効良方大全
+UI_BOOK_NAME_WANG_SHI_BO_JI_FANG,王氏博济方,Wang's Formulas for Broad Relief,王氏博済方
+UI_BOOK_NAME_WEN_BING_TIAO_BIAN,温病条辨,Systematic Differentiation of Warm Diseases,温病条弁
+UI_BOOK_NAME_XIAO_ER_YAO_ZHENG_ZHI_JUE,小儿药证直诀,Key to Therapeutics of Children's Diseases,小児薬証直訣
+UI_BOOK_NAME_XING_YI_JI_KAO,行医记考,Clinical Records,診療記録
+UI_BOOK_NAME_YAN_SHI_JI_SHENG_FANG,严氏济生方,Yan's Formulas for Aiding Life,厳氏済生方
 UI_BOOK_NAME_YI_FANG_JI_JIE,医方集解,Collected Explanations of Medical Formulas,医方集解
 UI_BOOK_NAME_YI_FANG_KAO,医方考,Investigation of Medical Formulas,医方考
-UI_BOOK_NAME_YI_LIN_GAI_CUO,医林改错,Correction of Errors in Medical Classics,医林改错
-UI_BOOK_NAME_ZHU_BING_YUAN_HOU_LUN,诸病源候论,Treatise on the Origins and Manifestations of Various Diseases,诸病源候论
+UI_BOOK_NAME_YI_LIN_GAI_CUO,医林改错,Correction of Errors in Medical Classics,医林改錯
+UI_BOOK_NAME_ZHU_BING_YUAN_HOU_LUN,诸病源候论,Treatise on the Origins and Manifestations of Various Diseases,諸病源候論
 UI_BOOK_ENTRY_TITLE_SI_ZHEN,四诊,Four Examinations,四診
 UI_BOOK_ENTRY_BODY_SI_ZHEN,"【四诊】
 
@@ -12894,169 +12894,169 @@ STORY_004_04_010_SPEAKER,李东璧,Li Dongbi,李東璧
 STORY_004_04_010_TEXT,为生民立命，为往圣继绝学…学生记下了。,"Secure a life for the people, and carry forward the learning of the sages… I will remember that.",「生民のために命を立て、往聖のために絶学を継ぐ」……心に刻みます。
 STORY_005_01_001_TEXT,咚咚咚...咚咚咚咚咚…,"Knock, knock… Knock, knock, knock, knock…",トントン……トントントントン……
 STORY_005_01_002_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_005_01_002_TEXT,大半夜的谁啊，谁在敲门啊？,Who could be knocking in the middle of the night?,大半夜的谁啊，谁在敲门啊？
+STORY_005_01_002_TEXT,大半夜的谁啊，谁在敲门啊？,Who could be knocking in the middle of the night?,こんな夜中に誰だ？　誰が戸を叩いている？
 STORY_005_01_003_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_005_01_003_TEXT,啊！！！我的妈呀！！,Ah! Good heavens!,啊！！！我的妈呀！！
+STORY_005_01_003_TEXT,啊！！！我的妈呀！！,Ah! Good heavens!,うわあっ！　びっくりした！
 STORY_005_01_004_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_005_01_004_TEXT,出什么事儿了？,What happened?,出什么事儿了？
+STORY_005_01_004_TEXT,出什么事儿了？,What happened?,何があった？
 STORY_005_01_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_005_01_005_TEXT,啊！,Ah!,啊！
+STORY_005_01_005_TEXT,啊！,Ah!,あっ！
 STORY_005_01_006_SPEAKER,王府护卫,Palace Guard,王府の護衛
-STORY_005_01_006_TEXT,奉楚王谕令，请先生去王府走一趟。,"By order of the Prince of Chu, you are requested at his residence.",奉楚王谕令，请先生去王府走一趟。
+STORY_005_01_006_TEXT,奉楚王谕令，请先生去王府走一趟。,"By order of the Prince of Chu, you are requested at his residence.",楚王のご命令により、先生を王府へお連れします。
 STORY_005_01_007_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_005_01_007_TEXT,是什么人病了？要我去看病吗？,Is someone ill? Am I being called to treat a patient?,是什么人病了？要我去看病吗？
+STORY_005_01_007_TEXT,是什么人病了？要我去看病吗？,Is someone ill? Am I being called to treat a patient?,どなたか病気なのですか？　診療に行くのですか？
 STORY_005_01_008_SPEAKER,王府护卫,Palace Guard,王府の護衛
-STORY_005_01_008_TEXT,事关重大您去了就知道了，马车已经备好了，请先生速速启程。,It is a matter of great importance. You will learn more when you arrive. The carriage is ready. Please leave at once.,事关重大您去了就知道了，马车已经备好了，请先生速速启程。
-STORY_005_01_009_TEXT,一夜舟车劳顿，李东璧到了楚王府。,"After a weary night on the road, Li Dongbi arrived at the Prince of Chu's residence.",一夜舟车劳顿，李东璧到了楚王府。
+STORY_005_01_008_TEXT,事关重大您去了就知道了，马车已经备好了，请先生速速启程。,It is a matter of great importance. You will learn more when you arrive. The carriage is ready. Please leave at once.,重大な件です。行けば分かります。馬車は用意してありますので、すぐにお発ちください。
+STORY_005_01_009_TEXT,一夜舟车劳顿，李东璧到了楚王府。,"After a weary night on the road, Li Dongbi arrived at the Prince of Chu's residence.",一晩中の長旅を経て、李東璧は楚王府に到着した。
 STORY_005_01_010_SPEAKER,楚王,Prince of Chu,楚王
-STORY_005_01_010_TEXT,您就是李神医啊，比我想得要年轻许多。请先生来，是小王有事相求。,So you are the renowned Physician Li. You are much younger than I expected. I have asked you here because I need your help.,您就是李神医啊，比我想得要年轻许多。请先生来，是小王有事相求。
+STORY_005_01_010_TEXT,您就是李神医啊，比我想得要年轻许多。请先生来，是小王有事相求。,So you are the renowned Physician Li. You are much younger than I expected. I have asked you here because I need your help.,あなたが名医の李先生ですか。思ったよりずっとお若い。お呼びしたのは、私からお願いがあるからです。
 STORY_005_01_011_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_005_01_011_TEXT,草民拜见王爷，有什么我能帮上忙的？,"My respects, Your Highness. How may I help you?",草民拜见王爷，有什么我能帮上忙的？
+STORY_005_01_011_TEXT,草民拜见王爷，有什么我能帮上忙的？,"My respects, Your Highness. How may I help you?",楚王殿下に拝謁いたします。私に何ができましょうか。
 STORY_005_01_012_SPEAKER,楚王,Prince of Chu,楚王
-STORY_005_01_012_TEXT,犬子前些日子突然病倒了，卧床不起。精神萎靡，食欲不振。小王请了好几位大夫，给开了好多方子，都不见好转。眼见着人一天比一天瘦，再这么下去怕是要坏事了…,"My son suddenly fell ill some days ago and has been confined to bed. He is listless and has no appetite. I have called several physicians and tried many prescriptions, but he has not improved. He grows thinner by the day. I fear what may happen if this continues…",犬子前些日子突然病倒了，卧床不起。精神萎靡，食欲不振。小王请了好几位大夫，给开了好多方子，都不见好转。眼见着人一天比一天瘦，再这么下去怕是要坏事了…
+STORY_005_01_012_TEXT,犬子前些日子突然病倒了，卧床不起。精神萎靡，食欲不振。小王请了好几位大夫，给开了好多方子，都不见好转。眼见着人一天比一天瘦，再这么下去怕是要坏事了…,"My son suddenly fell ill some days ago and has been confined to bed. He is listless and has no appetite. I have called several physicians and tried many prescriptions, but he has not improved. He grows thinner by the day. I fear what may happen if this continues…",息子が先日突然倒れ、床から起きられなくなった。気力も食欲もない。何人も医者を呼び、さまざまな処方を試したが良くならぬ。日に日に痩せて、このままでは取り返しがつかない……
 STORY_005_01_013_SPEAKER,楚王,Prince of Chu,楚王
-STORY_005_01_013_TEXT,听闻蕲州李先生医术高明，特请先生来给犬子医治。,"I heard of your skill in Qizhou, Physician Li, and asked you here to treat my son.",听闻蕲州李先生医术高明，特请先生来给犬子医治。
+STORY_005_01_013_TEXT,听闻蕲州李先生医术高明，特请先生来给犬子医治。,"I heard of your skill in Qizhou, Physician Li, and asked you here to treat my son.",蘄州の李先生は腕のよい医者だと聞き、息子の治療をお願いしたのです。
 STORY_005_01_014_SPEAKER,世子,The Heir,世子
-STORY_005_01_014_TEXT,咳咳咳，父王…,"Cough, cough… Father…",咳咳咳，父王…
+STORY_005_01_014_TEXT,咳咳咳，父王…,"Cough, cough… Father…",ゴホゴホ……父上……
 STORY_005_01_015_SPEAKER,楚王,Prince of Chu,楚王
-STORY_005_01_015_TEXT,先生，小王就这么一个儿子，请您救救孩子吧。,"He is my only son, Doctor. Please save him.",先生，小王就这么一个儿子，请您救救孩子吧。
+STORY_005_01_015_TEXT,先生，小王就这么一个儿子，请您救救孩子吧。,"He is my only son, Doctor. Please save him.",私にはこの子しかおりません。先生、どうか息子をお救いください。
 STORY_005_02_001_SPEAKER,世子,The Heir,世子
-STORY_005_02_001_TEXT,父王，我觉得好多了。,"Father, I feel much better.",父王，我觉得好多了。
+STORY_005_02_001_TEXT,父王，我觉得好多了。,"Father, I feel much better.",父上、ずいぶん楽になりました。
 STORY_005_02_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_005_02_002_TEXT,世子所患的是脾虚湿盛之证，只要按方每日吃药，病情就无大碍了。,"Your son has spleen deficiency with an excess of dampness. If he takes the medicine as prescribed each day, he should recover well.",世子所患的是脾虚湿盛之证，只要按方每日吃药，病情就无大碍了。
+STORY_005_02_002_TEXT,世子所患的是脾虚湿盛之证，只要按方每日吃药，病情就无大碍了。,"Your son has spleen deficiency with an excess of dampness. If he takes the medicine as prescribed each day, he should recover well.",世子様は脾虚湿盛の証です。この処方の薬を毎日飲めば、大事には至りません。
 STORY_005_02_003_SPEAKER,楚王,Prince of Chu,楚王
-STORY_005_02_003_TEXT,先生真是华佗再世，小王无以为报。这一千两白银是我的一点心意，感谢先生救命之恩。,You are Hua Tuo reborn! I cannot thank you enough. Please accept this thousand taels of silver as a token of gratitude for saving his life.,先生真是华佗再世，小王无以为报。这一千两白银是我的一点心意，感谢先生救命之恩。
+STORY_005_02_003_TEXT,先生真是华佗再世，小王无以为报。这一千两白银是我的一点心意，感谢先生救命之恩。,You are Hua Tuo reborn! I cannot thank you enough. Please accept this thousand taels of silver as a token of gratitude for saving his life.,先生はまさに華佗の再来だ。感謝してもしきれぬ。この銀千両は気持ちばかりの謝礼です。命を救っていただき、ありがとうございます。
 STORY_005_02_004_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_005_02_004_TEXT,一千两太多了，草民不能收。,A thousand taels is far too much. I cannot accept it.,一千两太多了，草民不能收。
+STORY_005_02_004_TEXT,一千两太多了，草民不能收。,A thousand taels is far too much. I cannot accept it.,千両は多すぎます。いただけません。
 STORY_005_02_005_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_005_02_005_TEXT,少掌柜的，那可是一千两白银啊！,"Young master, that is a thousand taels of silver!",少掌柜的，那可是一千两白银啊！
+STORY_005_02_005_TEXT,少掌柜的，那可是一千两白银啊！,"Young master, that is a thousand taels of silver!",若旦那、銀千両ですよ！
 STORY_005_02_006_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_005_02_006_TEXT,世子乃人中龙凤，可草民眼里看到的只有一位需要医治的病人，王爷只需付一两白银诊费即可。,"Your son is of noble birth, but to me he is simply a patient in need of care. One tael of silver for the consultation will suffice, Your Highness.",世子乃人中龙凤，可草民眼里看到的只有一位需要医治的病人，王爷只需付一两白银诊费即可。
+STORY_005_02_006_TEXT,世子乃人中龙凤，可草民眼里看到的只有一位需要医治的病人，王爷只需付一两白银诊费即可。,"Your son is of noble birth, but to me he is simply a patient in need of care. One tael of silver for the consultation will suffice, Your Highness.",世子様は尊いお方ですが、私にとっては治療を必要とする一人の患者です。診察料として銀一両だけいただきます。
 STORY_005_02_007_SPEAKER,楚王,Prince of Chu,楚王
-STORY_005_02_007_TEXT,……先生好风骨，本王平日见的那些儒生满口仁义，可见了真金白银没几个不迷糊的。有您这样的大夫是天下苍生之福啊。,"…You are a man of rare integrity. Many scholars speak of virtue, yet few keep their heads when they see silver. The people are fortunate to have a doctor like you.",……先生好风骨，本王平日见的那些儒生满口仁义，可见了真金白银没几个不迷糊的。有您这样的大夫是天下苍生之福啊。
+STORY_005_02_007_TEXT,……先生好风骨，本王平日见的那些儒生满口仁义，可见了真金白银没几个不迷糊的。有您这样的大夫是天下苍生之福啊。,"…You are a man of rare integrity. Many scholars speak of virtue, yet few keep their heads when they see silver. The people are fortunate to have a doctor like you.",……先生の気骨には恐れ入った。日頃会う儒者は仁義を語るが、大金を前にして心を乱さぬ者は少ない。あなたのような医者がいるのは民の幸せだ。
 STORY_005_02_008_SPEAKER,楚王,Prince of Chu,楚王
-STORY_005_02_008_TEXT,先生的恩情本王记下了，日后有能帮到先生的地方尽管开口。,"I will remember what you have done. If there is ever anything I can do for you, you need only ask.",先生的恩情本王记下了，日后有能帮到先生的地方尽管开口。
-STORY_005_02_009_TEXT,名望+1000，收入一两白银,Reputation +1000; received one tael of silver.,名望+1000，收入一两白银
+STORY_005_02_008_TEXT,先生的恩情本王记下了，日后有能帮到先生的地方尽管开口。,"I will remember what you have done. If there is ever anything I can do for you, you need only ask.",このご恩は忘れません。いつか力になれることがあれば、遠慮なくおっしゃってください。
+STORY_005_02_009_TEXT,名望+1000，收入一两白银,Reputation +1000; received one tael of silver.,名声＋1000、収入：銀一両
 STORY_005_03_001_SPEAKER,世子,The Heir,世子
-STORY_005_03_001_TEXT,咳咳咳，啊…,"Cough, cough… Ah…",咳咳咳，啊…
+STORY_005_03_001_TEXT,咳咳咳，啊…,"Cough, cough… Ah…",ゴホゴホ……うっ……
 STORY_005_03_002_SPEAKER,楚王,Prince of Chu,楚王
-STORY_005_03_002_TEXT,我的儿，你怎么了！,My son! What is happening to you?,我的儿，你怎么了！
+STORY_005_03_002_TEXT,我的儿，你怎么了！,My son! What is happening to you?,息子よ、どうした！
 STORY_005_03_003_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_005_03_003_TEXT,哎呀，这个…王爷你听我解释…,"Ah, well… Your Highness, please let me explain…",哎呀，这个…王爷你听我解释…
+STORY_005_03_003_TEXT,哎呀，这个…王爷你听我解释…,"Ah, well… Your Highness, please let me explain…",あの、その……王様、どうか話を聞いて……
 STORY_005_03_004_SPEAKER,楚王,Prince of Chu,楚王
-STORY_005_03_004_TEXT,来人！把这个挨千刀的江湖骗子给我叉出去剁了！,Guards! Drag this damned charlatan out and execute him!,来人！把这个挨千刀的江湖骗子给我叉出去剁了！
+STORY_005_03_004_TEXT,来人！把这个挨千刀的江湖骗子给我叉出去剁了！,Guards! Drag this damned charlatan out and execute him!,誰か！　この詐欺師を連れ出して斬れ！
 STORY_005_03_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_005_03_005_TEXT,不好！啊啊啊啊！！！,Oh no! Aaaah!,不好！啊啊啊啊！！！
+STORY_005_03_005_TEXT,不好！啊啊啊啊！！！,Oh no! Aaaah!,まずい！　うわあああ！
 STORY_006_001_SPEAKER,贾荃,Jia Quan,賈荃
-STORY_006_001_TEXT,生意兴隆啊老板，嘿嘿嘿。,"May business prosper, Master Li. Heh, heh, heh.",生意兴隆啊老板，嘿嘿嘿。
+STORY_006_001_TEXT,生意兴隆啊老板，嘿嘿嘿。,"May business prosper, Master Li. Heh, heh, heh.",ご繁盛ですね、旦那。へへへ。
 STORY_006_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_006_002_TEXT,敢问您是？(这人什么时候进来的...),And you are…? (When did he come in…?),敢问您是？(这人什么时候进来的...)
+STORY_006_002_TEXT,敢问您是？(这人什么时候进来的...),And you are…? (When did he come in…?),失礼ですが、どなたですか？（いつの間に入ってきたんだ……）
 STORY_006_003_SPEAKER,贾荃,Jia Quan,賈荃
-STORY_006_003_TEXT,在下贾荃，是做药材生意的，在湖广省小有一点名气，嘿嘿嘿。,"I am Jia Quan, a medicinal herb merchant of some repute in Huguang Province. Heh, heh, heh.",在下贾荃，是做药材生意的，在湖广省小有一点名气，嘿嘿嘿。
+STORY_006_003_TEXT,在下贾荃，是做药材生意的，在湖广省小有一点名气，嘿嘿嘿。,"I am Jia Quan, a medicinal herb merchant of some repute in Huguang Province. Heh, heh, heh.",薬材商の賈荃と申します。湖広では少し名の知れた商人ですよ。へへへ。
 STORY_006_004_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_006_004_TEXT,久闻久闻，不知今日来小馆所为何事？,Of course I have heard of you. What brings you to my humble clinic today?,久闻久闻，不知今日来小馆所为何事？
+STORY_006_004_TEXT,久闻久闻，不知今日来小馆所为何事？,Of course I have heard of you. What brings you to my humble clinic today?,お名前はかねがね。今日は当院に何のご用ですか？
 STORY_006_005_SPEAKER,贾荃,Jia Quan,賈荃
-STORY_006_005_TEXT,呃，呵呵，今日是想找李神医谈一桩好生意。,"Well, I have come to discuss a profitable arrangement with the famous Physician Li.",呃，呵呵，今日是想找李神医谈一桩好生意。
+STORY_006_005_TEXT,呃，呵呵，今日是想找李神医谈一桩好生意。,"Well, I have come to discuss a profitable arrangement with the famous Physician Li.",ええ、李先生にうまい商談を持ってきたのです。
 STORY_006_006_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_006_006_TEXT,哦？愿闻其详。,Oh? I am listening.,哦？愿闻其详。
+STORY_006_006_TEXT,哦？愿闻其详。,Oh? I am listening.,ほう？　詳しく聞かせてください。
 STORY_006_007_SPEAKER,贾荃,Jia Quan,賈荃
-STORY_006_007_TEXT,小可上个月进了一批人参，想请李兄在医馆帮忙出货。,I acquired a shipment of ginseng last month. I was hoping you could help me sell it through your clinic.,小可上个月进了一批人参，想请李兄在医馆帮忙出货。
+STORY_006_007_TEXT,小可上个月进了一批人参，想请李兄在医馆帮忙出货。,I acquired a shipment of ginseng last month. I was hoping you could help me sell it through your clinic.,先月、人参を大量に仕入れましてね。先生の診療所で売っていただけませんか。
 STORY_006_008_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_006_008_TEXT,小馆平时接待的病患多是平常百姓，人参这种名贵药材用量是不多的。,Most of my patients are ordinary people. We have little need for an expensive herb like ginseng.,小馆平时接待的病患多是平常百姓，人参这种名贵药材用量是不多的。
+STORY_006_008_TEXT,小馆平时接待的病患多是平常百姓，人参这种名贵药材用量是不多的。,Most of my patients are ordinary people. We have little need for an expensive herb like ginseng.,うちに来る患者は普通の民が大半です。人参のような高価な薬材を使うことはあまりありません。
 STORY_006_009_SPEAKER,贾荃,Jia Quan,賈荃
-STORY_006_009_TEXT,李兄此言差矣，人参是补药，是病就得补。像那种头疼脑热的小病您也给加一点，这量不就有了嘛。,"You are looking at it all wrong, Brother Li. Ginseng is a tonic. Every illness needs a tonic! Add a little even for a headache or a fever, and you will move plenty of it.",李兄此言差矣，人参是补药，是病就得补。像那种头疼脑热的小病您也给加一点，这量不就有了嘛。
+STORY_006_009_TEXT,李兄此言差矣，人参是补药，是病就得补。像那种头疼脑热的小病您也给加一点，这量不就有了嘛。,"You are looking at it all wrong, Brother Li. Ginseng is a tonic. Every illness needs a tonic! Add a little even for a headache or a fever, and you will move plenty of it.",それは違いますよ。人参は補薬、病気には滋養が必要です。頭痛や熱程度の患者にも少し足せば、すぐに使い切れます。
 STORY_006_010_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_006_010_TEXT,按病开方岂能胡乱加药？,How could I add herbs at random instead of prescribing for the patient's condition?,按病开方岂能胡乱加药？
+STORY_006_010_TEXT,按病开方岂能胡乱加药？,How could I add herbs at random instead of prescribing for the patient's condition?,病に合わせて処方するのに、むやみに薬を加えられますか。
 STORY_006_011_SPEAKER,贾荃,Jia Quan,賈荃
-STORY_006_011_TEXT,不白加，每斤人参我给您一两白银的提成，怎么样，是桩好生意吧。,"You would not be doing it for nothing. I will pay you one tael of silver for every jin of ginseng you sell. A fine arrangement, is it not?",不白加，每斤人参我给您一两白银的提成，怎么样，是桩好生意吧。
+STORY_006_011_TEXT,不白加，每斤人参我给您一两白银的提成，怎么样，是桩好生意吧。,"You would not be doing it for nothing. I will pay you one tael of silver for every jin of ginseng you sell. A fine arrangement, is it not?",ただとは言いません。人参一斤につき銀一両の歩合を差し上げます。いい話でしょう？
 STORY_006_012_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_006_012_TEXT,您还是请回吧，陈皮，送客。,"I think you should leave. Chen Pi, show our guest out.",您还是请回吧，陈皮，送客。
+STORY_006_012_TEXT,您还是请回吧，陈皮，送客。,"I think you should leave. Chen Pi, show our guest out.",お帰りください。陳皮、お見送りを。
 STORY_006_013_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_006_013_TEXT,贾老板，您这边请。,"This way, Master Jia.",贾老板，您这边请。
+STORY_006_013_TEXT,贾老板，您这边请。,"This way, Master Jia.",賈旦那、こちらへどうぞ。
 STORY_006_014_SPEAKER,贾荃,Jia Quan,賈荃
-STORY_006_014_TEXT,哼，不知好歹。,Hmph. You do not know a good offer when you see one.,哼，不知好歹。
+STORY_006_014_TEXT,哼，不知好歹。,Hmph. You do not know a good offer when you see one.,ふん、融通の利かないやつだ。
 STORY_007_01_001_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_007_01_001_TEXT,贤弟，别来无恙啊。,"My friend, it has been a while. I hope you are well.",贤弟，别来无恙啊。
+STORY_007_01_001_TEXT,贤弟，别来无恙啊。,"My friend, it has been a while. I hope you are well.",友よ、元気にしていたか。
 STORY_007_01_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_007_01_002_TEXT,雷总旗，好久不见啊。,Captain Lei! It is good to see you again.,雷总旗，好久不见啊。
+STORY_007_01_002_TEXT,雷总旗，好久不见啊。,Captain Lei! It is good to see you again.,雷隊長、お久しぶりです。
 STORY_007_01_003_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_007_01_003_TEXT,哎呀，老毛病犯了，又得麻烦你啦。,My old trouble has flared up. I am afraid I must impose on you again.,哎呀，老毛病犯了，又得麻烦你啦。
+STORY_007_01_003_TEXT,哎呀，老毛病犯了，又得麻烦你啦。,My old trouble has flared up. I am afraid I must impose on you again.,また持病が出てしまってな。世話になるよ。
 STORY_007_01_004_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_007_01_004_TEXT,哪里的话，请坐。,"It is no trouble. Please, sit down.",哪里的话，请坐。
+STORY_007_01_004_TEXT,哪里的话，请坐。,"It is no trouble. Please, sit down.",お気になさらず。お掛けください。
 STORY_007_02_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_007_02_001_TEXT,雷兄，你这肝阳上亢的老毛病，除了吃药，还得注意控制情绪，切莫扰动肝火。,"Brother Lei, your liver yang is rising again. Along with taking the medicine, you must keep your temper in check and avoid stirring up liver fire.",雷兄，你这肝阳上亢的老毛病，除了吃药，还得注意控制情绪，切莫扰动肝火。
+STORY_007_02_001_TEXT,雷兄，你这肝阳上亢的老毛病，除了吃药，还得注意控制情绪，切莫扰动肝火。,"Brother Lei, your liver yang is rising again. Along with taking the medicine, you must keep your temper in check and avoid stirring up liver fire.",雷兄、肝陽上亢の持病は、薬を飲むだけでなく、気持ちを落ち着けることも大切です。怒りで肝火を強めないようにしてください。
 STORY_007_02_002_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_007_02_002_TEXT,哎呀，这都被你看出来啦。,Ha! You saw right through me.,哎呀，这都被你看出来啦。
+STORY_007_02_002_TEXT,哎呀，这都被你看出来啦。,Ha! You saw right through me.,はは、見抜かれてしまったか。
 STORY_007_02_003_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_007_02_003_TEXT,昨日我带着兄弟们和州府的征粮官去收粮，这帮狗腿子淋尖踢斛下脚那叫一个狠，气得我当场骂娘。,Yesterday my men and I accompanied the prefecture's grain tax collectors. Those lackeys were heaping and kicking the measures so hard that I cursed them on the spot.,昨日我带着兄弟们和州府的征粮官去收粮，这帮狗腿子淋尖踢斛下脚那叫一个狠，气得我当场骂娘。
+STORY_007_02_003_TEXT,昨日我带着兄弟们和州府的征粮官去收粮，这帮狗腿子淋尖踢斛下脚那叫一个狠，气得我当场骂娘。,Yesterday my men and I accompanied the prefecture's grain tax collectors. Those lackeys were heaping and kicking the measures so hard that I cursed them on the spot.,昨日、部下と徴税官を連れて年貢米を集めに行ったんだが、あの役人どもが升を蹴って米を巻き上げるやり方がひどくてな。思わずその場で怒鳴ったよ。
 STORY_007_02_004_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_007_02_004_TEXT,"什么叫""淋尖踢斛""呀？",What do you mean by “heaping and kicking the measures”?,"什么叫""淋尖踢斛""呀？"
+STORY_007_02_004_TEXT,"什么叫""淋尖踢斛""呀？",What do you mean by “heaping and kicking the measures”?,升を蹴るとは、どういうことですか？
 STORY_007_02_005_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_007_02_005_TEXT,"贤弟你有所不知，百姓交粮时，要把粮食倒进斛里，堆得高出斛口，堆成尖尖的，这叫""淋尖""。","When common folk pay their grain tax, they pour grain into a measuring vessel until it forms a mound above the rim. That is the “heaping.”","贤弟你有所不知，百姓交粮时，要把粮食倒进斛里，堆得高出斛口，堆成尖尖的，这叫""淋尖""。"
+STORY_007_02_005_TEXT,"贤弟你有所不知，百姓交粮时，要把粮食倒进斛里，堆得高出斛口，堆成尖尖的，这叫""淋尖""。","When common folk pay their grain tax, they pour grain into a measuring vessel until it forms a mound above the rim. That is the “heaping.”",民が年貢を納めるとき、升の縁より高く山になるまで米を盛らせる。それを「尖り盛り」と呼ぶんだ。
 STORY_007_02_006_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_007_02_006_TEXT,官吏再踢一脚斛，那些被震落、洒在斛外的粮食，不算入百姓缴纳的赋税，直接入了这帮狗腿子的口袋。,Then an official kicks the vessel. The grain that spills out does not count toward the tax. Those lackeys pocket it instead.,官吏再踢一脚斛，那些被震落、洒在斛外的粮食，不算入百姓缴纳的赋税，直接入了这帮狗腿子的口袋。
+STORY_007_02_006_TEXT,官吏再踢一脚斛，那些被震落、洒在斛外的粮食，不算入百姓缴纳的赋税，直接入了这帮狗腿子的口袋。,Then an official kicks the vessel. The grain that spills out does not count toward the tax. Those lackeys pocket it instead.,役人が升を蹴ってこぼした米は納税分に数えられず、そのまま役人の懐に入る。
 STORY_007_02_007_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_007_02_007_TEXT,啊…这也太过分了…,That is outrageous…,啊…这也太过分了…
+STORY_007_02_007_TEXT,啊…这也太过分了…,That is outrageous…,そんな……ひどすぎます……
 STORY_007_02_008_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_007_02_008_TEXT,现在这淋尖踢斛已经是各处不成文的规矩了，但昨天那帮混蛋踢得太狠，简直成明抢了。,"It has become an unwritten rule everywhere, but yesterday those scoundrels kicked so hard it was open robbery.",现在这淋尖踢斛已经是各处不成文的规矩了，但昨天那帮混蛋踢得太狠，简直成明抢了。
+STORY_007_02_008_TEXT,现在这淋尖踢斛已经是各处不成文的规矩了，但昨天那帮混蛋踢得太狠，简直成明抢了。,"It has become an unwritten rule everywhere, but yesterday those scoundrels kicked so hard it was open robbery.",今ではどこでも暗黙の慣習だが、昨日の連中は蹴りすぎだ。あれではただの強奪だよ。
 STORY_007_02_009_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_007_02_009_TEXT,百姓的日子是越来越不好过了，我去给你抓药，雷兄稍候。,"Life is getting harder for the people. I will prepare your medicine, Brother Lei. Please wait here.",百姓的日子是越来越不好过了，我去给你抓药，雷兄稍候。
+STORY_007_02_009_TEXT,百姓的日子是越来越不好过了，我去给你抓药，雷兄稍候。,"Life is getting harder for the people. I will prepare your medicine, Brother Lei. Please wait here.",民の暮らしは苦しくなる一方ですね。薬を取ってきますので、雷兄は少々お待ちください。
 STORY_007_02_010_SPEAKER,雷万钧,Lei Wanjun,雷万鈞
-STORY_007_02_010_TEXT,有劳贤弟。,"Thank you, my friend.",有劳贤弟。
+STORY_007_02_010_TEXT,有劳贤弟。,"Thank you, my friend.",すまないな。
 STORY_007_03_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_007_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",不对，我需要好好想想这是什么病，该开什么方。
+STORY_007_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。
 STORY_008_01_001_SPEAKER,陆忠,Lu Zhong,陸忠
-STORY_008_01_001_TEXT,大夫大夫！救命啊大夫！我家老爷要不行了！,"Doctor! Doctor, help! My master is dying!",大夫大夫！救命啊大夫！我家老爷要不行了！
+STORY_008_01_001_TEXT,大夫大夫！救命啊大夫！我家老爷要不行了！,"Doctor! Doctor, help! My master is dying!",先生！　先生！　助けてください！　うちの旦那様が危ないんです！
 STORY_008_01_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_008_01_002_TEXT,出什么事了？,What happened?,出什么事了？
+STORY_008_01_002_TEXT,出什么事了？,What happened?,何があったんですか？
 STORY_008_01_003_SPEAKER,陆忠,Lu Zhong,陸忠
-STORY_008_01_003_TEXT,我家老爷刚才在醉仙楼喝酒，突然就开始胡言乱语，神志不清了。,He was drinking at the Drunken Immortal Tavern when he suddenly began speaking nonsense. He no longer knows what is going on.,我家老爷刚才在醉仙楼喝酒，突然就开始胡言乱语，神志不清了。
+STORY_008_01_003_TEXT,我家老爷刚才在醉仙楼喝酒，突然就开始胡言乱语，神志不清了。,He was drinking at the Drunken Immortal Tavern when he suddenly began speaking nonsense. He no longer knows what is going on.,旦那様が酔仙楼で飲んでいたところ、突然訳の分からないことを言い始め、意識もはっきりしなくなりました。
 STORY_008_01_004_SPEAKER,贾荃,Jia Quan,賈荃
-STORY_008_01_004_TEXT,我是湖广首富！哈哈哈哈，我看谁再敢小看我！,"I am the richest man in Huguang! Ha, ha, ha! Let us see who dares look down on me now!",我是湖广首富！哈哈哈哈，我看谁再敢小看我！
+STORY_008_01_004_TEXT,我是湖广首富！哈哈哈哈，我看谁再敢小看我！,"I am the richest man in Huguang! Ha, ha, ha! Let us see who dares look down on me now!",私は湖広一の大金持ちだ！　ははは！　もう誰にも見下されないぞ！
 STORY_008_01_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_008_01_005_TEXT,这不是贾老板吗，快把他抬过来。,"Is that Master Jia? Bring him over here, quickly.",这不是贾老板吗，快把他抬过来。
+STORY_008_01_005_TEXT,这不是贾老板吗，快把他抬过来。,"Is that Master Jia? Bring him over here, quickly.",賈旦那じゃないか。早くここへ運んで。
 STORY_008_01_006_SPEAKER,贾荃,Jia Quan,賈荃
-STORY_008_01_006_TEXT,我有一桩大买卖，天大的买卖！呕~,"I have a grand deal, the greatest deal of all! Urgh…",我有一桩大买卖，天大的买卖！呕~
+STORY_008_01_006_TEXT,我有一桩大买卖，天大的买卖！呕~,"I have a grand deal, the greatest deal of all! Urgh…",大きな商売がある、ものすごい商売だ！　うっ……
 STORY_008_02_001_SPEAKER,贾荃,Jia Quan,賈荃
-STORY_008_02_001_TEXT,哎哟，我的头好晕啊。,"Oh, my head is spinning.",哎哟，我的头好晕啊。
+STORY_008_02_001_TEXT,哎哟，我的头好晕啊。,"Oh, my head is spinning.",ああ、頭がくらくらする……
 STORY_008_02_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_008_02_002_TEXT,贾老板的神志不清是由痰火扰心所致，心情大起大落再加上饮酒过度，使病情加剧。需要戒酒静养，按时服药。,"Master Jia's confusion was caused by phlegm fire disturbing the heart. Strong swings in mood and too much wine made it worse. He must avoid alcohol, rest and take his medicine regularly.",贾老板的神志不清是由痰火扰心所致，心情大起大落再加上饮酒过度，使病情加剧。需要戒酒静养，按时服药。
+STORY_008_02_002_TEXT,贾老板的神志不清是由痰火扰心所致，心情大起大落再加上饮酒过度，使病情加剧。需要戒酒静养，按时服药。,"Master Jia's confusion was caused by phlegm fire disturbing the heart. Strong swings in mood and too much wine made it worse. He must avoid alcohol, rest and take his medicine regularly.",賈旦那の意識の乱れは、痰火が心を乱したためです。激しい感情の起伏と飲みすぎで悪化しました。酒を断って静養し、薬を時間どおりに飲んでください。
 STORY_008_02_003_SPEAKER,陆忠,Lu Zhong,陸忠
-STORY_008_02_003_TEXT,真是太谢谢先生了，老爷，我们走吧。,"Thank you so much, Doctor. Come, Master, let us go home.",真是太谢谢先生了，老爷，我们走吧。
+STORY_008_02_003_TEXT,真是太谢谢先生了，老爷，我们走吧。,"Thank you so much, Doctor. Come, Master, let us go home.",先生、本当にありがとうございます。旦那様、帰りましょう。
 STORY_008_02_004_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_008_02_004_TEXT,这贾老板怎么突然犯病了呀？我看是这个奸商干坏事儿遭报应了。,Why did Master Jia suddenly fall ill? I bet that crooked merchant is getting what he deserves.,这贾老板怎么突然犯病了呀？我看是这个奸商干坏事儿遭报应了。
+STORY_008_02_004_TEXT,这贾老板怎么突然犯病了呀？我看是这个奸商干坏事儿遭报应了。,Why did Master Jia suddenly fall ill? I bet that crooked merchant is getting what he deserves.,賈旦那はどうして急に倒れたんでしょう？　悪事を働いた報いじゃありませんか。
 STORY_008_02_005_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_008_02_005_TEXT,别乱说，快去把他吐的地方收拾收拾，还有病患要看病呢。,Do not say that. Clean up where he was sick. We still have patients to see.,别乱说，快去把他吐的地方收拾收拾，还有病患要看病呢。
+STORY_008_02_005_TEXT,别乱说，快去把他吐的地方收拾收拾，还有病患要看病呢。,Do not say that. Clean up where he was sick. We still have patients to see.,余計なことを言わず、吐いた場所を片づけて。まだ患者を診なくては。
 STORY_008_03_001_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_008_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",不对，我需要好好想想这是什么病，该开什么方。
+STORY_008_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。
 STORY_009_01_001_SPEAKER,衙役,Constable,役人
-STORY_009_01_001_TEXT,李大夫，知州大人请您去州衙有事商议。,"Doctor Li, the prefect requests your presence at the government office.",李大夫，知州大人请您去州衙有事商议。
+STORY_009_01_001_TEXT,李大夫，知州大人请您去州衙有事商议。,"Doctor Li, the prefect requests your presence at the government office.",李先生、知州様が州役所で相談したいことがあるそうです。
 STORY_009_01_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_009_01_002_TEXT,我知道了，我这就去。,Understood. I will go at once.,我知道了，我这就去。
+STORY_009_01_002_TEXT,我知道了，我这就去。,Understood. I will go at once.,分かりました。すぐ参ります。
 STORY_009_01_003_SPEAKER,吴世良,Wu Shiliang,呉世良
-STORY_009_01_003_TEXT,今日召诸位来，是朝廷有旨意下达。,I have summoned you all today to convey an order from the court.,今日召诸位来，是朝廷有旨意下达。
+STORY_009_01_003_TEXT,今日召诸位来，是朝廷有旨意下达。,I have summoned you all today to convey an order from the court.,今日皆を集めたのは、朝廷から命が下ったためだ。
 STORY_009_01_004_SPEAKER,吴世良,Wu Shiliang,呉世良
-STORY_009_01_004_TEXT,浙江省淳安建德两县突发水灾，周边各地已有瘟疫出现，朝廷为防止疫情扩散，特令周边州府发放赈灾药材。,"Flooding has struck Chun'an and Jiande counties in Zhejiang. Disease has already appeared in nearby districts. To prevent an epidemic from spreading, the court has ordered surrounding prefectures to distribute medicinal supplies for disaster relief.",浙江省淳安建德两县突发水灾，周边各地已有瘟疫出现，朝廷为防止疫情扩散，特令周边州府发放赈灾药材。
+STORY_009_01_004_TEXT,浙江省淳安建德两县突发水灾，周边各地已有瘟疫出现，朝廷为防止疫情扩散，特令周边州府发放赈灾药材。,"Flooding has struck Chun'an and Jiande counties in Zhejiang. Disease has already appeared in nearby districts. To prevent an epidemic from spreading, the court has ordered surrounding prefectures to distribute medicinal supplies for disaster relief.",浙江省の淳安県と建徳県で突然洪水が起き、周辺では疫病も発生している。感染の拡大を防ぐため、朝廷は近隣の州府に救済用の薬材を配るよう命じた。
 STORY_009_01_005_SPEAKER,吴世良,Wu Shiliang,呉世良
-STORY_009_01_005_TEXT,昨日，赈灾药材已采办完备，这次除了惠民药局，还要各医馆药铺配合诊治病患、发放药材。,"The supplies were procured yesterday. This time, private clinics and apothecaries must help the public dispensary treat patients and distribute medicine.",昨日，赈灾药材已采办完备，这次除了惠民药局，还要各医馆药铺配合诊治病患、发放药材。
+STORY_009_01_005_TEXT,昨日，赈灾药材已采办完备，这次除了惠民药局，还要各医馆药铺配合诊治病患、发放药材。,"The supplies were procured yesterday. This time, private clinics and apothecaries must help the public dispensary treat patients and distribute medicine.",薬材の調達は昨日終わった。今回は恵民薬局だけでなく、各診療所と薬舗にも患者の診療と薬材の配布に協力してもらう。
 STORY_009_01_006_SPEAKER,吴世良,Wu Shiliang,呉世良
-STORY_009_01_006_TEXT,一会儿诸位就去库房画押登记，明日起官府会张贴榜文，通知百姓就近领取药材。,"You will sign the register at the storehouse shortly. Starting tomorrow, the authorities will post notices telling residents where to collect medicine nearby.",一会儿诸位就去库房画押登记，明日起官府会张贴榜文，通知百姓就近领取药材。
+STORY_009_01_006_TEXT,一会儿诸位就去库房画押登记，明日起官府会张贴榜文，通知百姓就近领取药材。,"You will sign the register at the storehouse shortly. Starting tomorrow, the authorities will post notices telling residents where to collect medicine nearby.",皆にはこのあと倉庫で署名と登録をしてもらう。明日から役所が告示を出し、民に近くで薬を受け取るよう知らせる。
 STORY_009_01_007_SPEAKER,杨善泉,Yang Shanquan,楊善泉
-STORY_009_01_007_TEXT,诸位到我这画押，排好队一个一个来，写好收货地址，我们会专门派人运送。,"Line up here to sign, one at a time. Write down your delivery address and we will send someone with the supplies.",诸位到我这画押，排好队一个一个来，写好收货地址，我们会专门派人运送。
+STORY_009_01_007_TEXT,诸位到我这画押，排好队一个一个来，写好收货地址，我们会专门派人运送。,"Line up here to sign, one at a time. Write down your delivery address and we will send someone with the supplies.",皆さん、こちらで署名してください。一列に並んで順番に。届け先の住所を書けば、担当者が運びます。
 STORY_009_01_008_SPEAKER,杨善泉,Yang Shanquan,楊善泉
-STORY_009_01_008_TEXT,李大夫您在这画押，上面催得紧，我们赶着发运呢。,"Doctor Li, please sign here. Our superiors are pressing us to dispatch everything quickly.",李大夫您在这画押，上面催得紧，我们赶着发运呢。
+STORY_009_01_008_TEXT,李大夫您在这画押，上面催得紧，我们赶着发运呢。,"Doctor Li, please sign here. Our superiors are pressing us to dispatch everything quickly.",李先生、こちらに署名を。上から急かされており、すぐに発送しなければなりません。
 STORY_009_01_009_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_009_01_009_TEXT,好的好的。,"Yes, of course.",好的好的。
+STORY_009_01_009_TEXT,好的好的。,"Yes, of course.",はい、分かりました。
 STORY_009_02_001_SPEAKER,李言闻,Li Yanwen,李言聞
-STORY_009_02_001_TEXT,东璧回来啦，什么事儿啊，一大早就被叫去了？,"Dongbi, you are back. Why did they call you away so early?",东璧回来啦，什么事儿啊，一大早就被叫去了？
+STORY_009_02_001_TEXT,东璧回来啦，什么事儿啊，一大早就被叫去了？,"Dongbi, you are back. Why did they call you away so early?",東璧、おかえり。朝早くから呼ばれて、何の用だったの？
 STORY_009_02_002_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_009_02_002_TEXT,朝廷调拨了赈灾药材，这次不光惠民药局，咱们这些医馆药铺也要一起帮忙发放。,"The court has sent medicine for disaster relief. This time, our clinics and apothecaries must help distribute it alongside the public dispensary.",朝廷调拨了赈灾药材，这次不光惠民药局，咱们这些医馆药铺也要一起帮忙发放。
+STORY_009_02_002_TEXT,朝廷调拨了赈灾药材，这次不光惠民药局，咱们这些医馆药铺也要一起帮忙发放。,"The court has sent medicine for disaster relief. This time, our clinics and apothecaries must help distribute it alongside the public dispensary.",朝廷が救済用の薬材を配るそうだ。今回は恵民薬局だけでなく、うちのような診療所も配布を手伝う。
 STORY_009_02_003_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭
-STORY_009_02_003_TEXT,这几日我去菜市街买菜的时候，看到不少流民在城东，大灾之后必有大疫，朝廷这次赈灾太及时了。,I have seen many displaced people in the east of town on my way to the market. A great disaster is often followed by an epidemic. The relief could not have come sooner.,这几日我去菜市街买菜的时候，看到不少流民在城东，大灾之后必有大疫，朝廷这次赈灾太及时了。
+STORY_009_02_003_TEXT,这几日我去菜市街买菜的时候，看到不少流民在城东，大灾之后必有大疫，朝廷这次赈灾太及时了。,I have seen many displaced people in the east of town on my way to the market. A great disaster is often followed by an epidemic. The relief could not have come sooner.,最近、市場へ買い物に行くと城の東で避難民をよく見かけます。大災害のあとには疫病が起こりやすいですし、朝廷の救済はちょうどよかったですね。
 STORY_009_02_004_SPEAKER,李东璧,Li Dongbi,李東璧
-STORY_009_02_004_TEXT,陈皮，跟我去后院收拾收拾库房，一会儿药材就要送来了，得赶紧腾出地方。,"Chen Pi, come help me clear the storeroom out back. The medicine will arrive soon, and we need to make room.",陈皮，跟我去后院收拾收拾库房，一会儿药材就要送来了，得赶紧腾出地方。
+STORY_009_02_004_TEXT,陈皮，跟我去后院收拾收拾库房，一会儿药材就要送来了，得赶紧腾出地方。,"Chen Pi, come help me clear the storeroom out back. The medicine will arrive soon, and we need to make room.",陳皮、裏の倉庫を片づけに行こう。もうすぐ薬材が届くから、急いで場所を空けないと。
 STORY_009_02_005_SPEAKER,陈皮,Chen Pi,陳皮
-STORY_009_02_005_TEXT,好嘞。,Right away.,好嘞。
+STORY_009_02_005_TEXT,好嘞。,Right away.,はい！
 STORY_010_001_SPEAKER,李言闻,Li Yanwen,李言聞
 STORY_010_001_TEXT,数目都对，有劳几位了，进来喝点水吧。,"The count is correct. Thank you, gentlemen. Would you come in for some water?",数目都对，有劳几位了，进来喝点水吧。
 STORY_010_002_SPEAKER,衙役,Constable,役人
