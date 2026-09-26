@@ -22,7 +22,7 @@ oversampling_override = 1.0
 title = "UI_PRESCRIPTION_WINDOW_TITLE"
 position = Vector2i(0, 36)
 size = Vector2i(990, 1000)
-unresizable = true
+min_size = Vector2i(800, 1000)
 script = ExtResource("1_e60oy")
 
 [node name="PlayerHintWindow" parent="." unique_id=1059458014 instance=ExtResource("2_xa6n0")]
@@ -101,7 +101,7 @@ text = "UI_PRESCRIPTION_ROLE_JUN_SHORTCUT"
 [node name="JunList" type="ItemList" parent="PrescriptionLayout/PrescriptionView/RoleContainer/JunPanel/VBoxContainer" unique_id=931144293]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 24
 
 [node name="ChenPanel" type="Panel" parent="PrescriptionLayout/PrescriptionView/RoleContainer" unique_id=847712501]
 layout_mode = 2

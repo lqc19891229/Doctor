@@ -29,6 +29,13 @@ class_name ClinicalLogWindow
 const BOOK_PAGE_TEXTURE_ZH: Texture2D = preload("res://Assets/UI/bookpage.png")
 const BOOK_PAGE_TEXTURE_EN: Texture2D = preload("res://Assets/UI/bookpage2.png")
 
+# 英文横排正文在 bookpage2.png 中的可书写区域边距。
+# 中文竖排继续使用原来的满区域布局。
+@export var english_detail_margin_left: float = 24.0
+@export var english_detail_margin_top: float = 58.0
+@export var english_detail_margin_right: float = 24.0
+@export var english_detail_margin_bottom: float = 28.0
+
 
 # =========================================================
 # 一、节点引用
@@ -124,6 +131,7 @@ var _herb_pages: Array[Dictionary] = []
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
 		_update_book_page_backgrounds()
+		_apply_detail_scroll_layout()
 		_update_localized_ui()
 		if visible:
 			refresh_view()
@@ -192,6 +200,10 @@ func _ready() -> void:
 
 	# 根据当前语言设置书页背景。
 	_update_book_page_backgrounds()
+
+	# 根据当前语言设置详情正文区域。
+	# 英文正文限制在 bookpage2.png 的纸张范围内，并启用纵向滚动。
+	_apply_detail_scroll_layout()
 
 	# 设置页签、翻页按钮及初始空状态。
 	_update_localized_ui()
@@ -604,6 +616,39 @@ func _setup_page_controls(right_panel: Control, detail_scroll: ScrollContainer, 
 	}
 
 
+func _apply_detail_scroll_layout() -> void:
+	var is_english := LocalizedName.is_english_locale()
+
+	for scroll in [
+		disease_detail_scroll,
+		formula_detail_scroll,
+		herb_detail_scroll
+	]:
+		if scroll == null:
+			continue
+
+		if is_english:
+			# 英文横排：正文只占书页内部区域。
+			scroll.offset_left = english_detail_margin_left
+			scroll.offset_top = english_detail_margin_top
+			scroll.offset_right = -english_detail_margin_right
+			scroll.offset_bottom = -english_detail_margin_bottom
+
+			# 英文长文本只允许上下滚动，禁止横向滚动。
+			scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+			scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+		else:
+			# 中文竖排恢复原布局。
+			scroll.offset_left = 0.0
+			scroll.offset_top = 0.0
+			scroll.offset_right = 0.0
+			scroll.offset_bottom = 0.0
+
+			# 中文竖排保留横向浏览，不使用纵向滚动。
+			scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+			scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+
+
 func _update_book_page_backgrounds() -> void:
 	var target_texture: Texture2D = BOOK_PAGE_TEXTURE_EN if _is_english_detail_layout() else BOOK_PAGE_TEXTURE_ZH
 
@@ -637,6 +682,8 @@ func _show_horizontal_detail(
 ) -> void:
 	if label == null:
 		return
+
+	_apply_detail_scroll_layout()
 
 	if label.has_method("set_horizontal_source_text"):
 		label.call("set_horizontal_source_text", value)

@@ -52,6 +52,13 @@ const SORT_INDEX_FALLBACK := 2147483647
 # 开方窗口固定位置，和场景中的初始坐标保持一致。
 @export var fixed_window_position: Vector2i = Vector2i(5, 66)
 
+# 窗口只允许横向改变大小：
+# - 左上角位置始终固定
+# - 高度始终保持初始高度
+# - 玩家可拖动右侧边缘调整宽度
+@export var minimum_window_width: int = 800
+var fixed_window_height: int = 1000
+
 
 # =========================================================
 # 场景节点引用
@@ -234,8 +241,10 @@ func _localized_search_record_matches(record: Dictionary, keyword: String) -> bo
 
 func _ready() -> void:
 	title = tr("UI_PRESCRIPTION_WINDOW_TITLE")
-	# 初始化时恢复固定位置。
+	# 初始化时恢复固定位置，并记录场景中的初始高度。
 	position = fixed_window_position
+	fixed_window_height = size.y
+	min_size = Vector2i(minimum_window_width, fixed_window_height)
 
 	# 每次开方窗口从隐藏变为显示时，默认把键盘焦点放到疾病搜索栏。
 	if not visibility_changed.is_connected(_on_visibility_changed):
@@ -252,9 +261,19 @@ func _ready() -> void:
 # 窗口位置锁定
 # =========================================================
 func _process(_delta: float) -> void:
-	# 窗口显示期间，阻止玩家拖动标题栏改变窗口位置。
-	if visible and position != fixed_window_position:
+	if not visible:
+		return
+
+	# 左上角位置始终固定。
+	# 因此拖动标题栏、左边缘或上边缘后，窗口都会回到固定位置。
+	if position != fixed_window_position:
 		position = fixed_window_position
+
+	# 高度始终固定，只保留横向宽度变化。
+	# 实际使用时拖动右侧边缘即可调整窗口宽度。
+	var target_width: int = maxi(size.x, minimum_window_width)
+	if size.x != target_width or size.y != fixed_window_height:
+		size = Vector2i(target_width, fixed_window_height)
 
 
 func _on_visibility_changed() -> void:
@@ -1253,6 +1272,11 @@ func _fill_role_list(list_node: ItemList, herb_items: Array[Dictionary]) -> void
 
 		if herb_id == "":
 			continue
+
+		# 处方内部继续保存原始中文药材名；显示时按当前语言本地化。
+		# NOTIFICATION_TRANSLATION_CHANGED 会重新调用 _refresh_prescription_list()，
+		# 因此运行中切换语言后，君臣佐使四区会立即同步更新。
+		herb_name = LocalizedName.herb(herb_id, herb_name)
 
 		var text := "%s  %s" % [herb_name, _format_amount_for_ui(amount, unit)]
 		list_node.add_item(text)
