@@ -1,61 +1,61 @@
 ﻿keys,zh_CN,en,ja
 UI_TEST,测试中文,English test,测试中文
-UI_LANGUAGE,语言,Language,语言
-UI_BACK,返回,Back,返回
-UI_SETTINGS_TITLE,设置,Settings,设置
-UI_MASTER_VOLUME,主音量,Master Volume,主音量
-UI_MUSIC_VOLUME,音乐音量,Music Volume,音乐音量
-UI_AMBIENT_VOLUME,环境音量,Ambient Volume,环境音量
-UI_SFX_VOLUME,音效音量,Sound Effects Volume,音效音量
-UI_FULLSCREEN,全屏,Fullscreen,全屏
-UI_MENU_NEW_GAME,新游戏,New Game,新游戏
-UI_MENU_LOAD_GAME,读取存档,Load Game,读取存档
-UI_MENU_READ_BOOK,查阅典籍,Read Books,查阅典籍
-UI_MENU_QUIT_GAME,退出游戏,Quit Game,退出游戏
-UI_DIFFICULTY_TITLE,选择难度,Choose Difficulty,选择难度
-UI_DIFFICULTY_INFO,难度影响固定收入,Difficulty affects regular income,难度影响固定收入
+UI_LANGUAGE,语言,Language,言語
+UI_BACK,返回,Back,戻る
+UI_SETTINGS_TITLE,设置,Settings,設定
+UI_MASTER_VOLUME,主音量,Master Volume,全体音量
+UI_MUSIC_VOLUME,音乐音量,Music Volume,音楽の音量
+UI_AMBIENT_VOLUME,环境音量,Ambient Volume,環境音の音量
+UI_SFX_VOLUME,音效音量,Sound Effects Volume,効果音の音量
+UI_FULLSCREEN,全屏,Fullscreen,全画面表示
+UI_MENU_NEW_GAME,新游戏,New Game,ニューゲーム
+UI_MENU_LOAD_GAME,读取存档,Load Game,セーブデータを読み込む
+UI_MENU_READ_BOOK,查阅典籍,Read Books,書物を読む
+UI_MENU_QUIT_GAME,退出游戏,Quit Game,ゲームを終了
+UI_DIFFICULTY_TITLE,选择难度,Choose Difficulty,難易度を選択
+UI_DIFFICULTY_INFO,难度影响固定收入,Difficulty affects regular income,難易度によって定期収入が変わります
 UI_DIFFICULTY_EASY,"简单
 全力依父","Easy
-Daddy Carry","简单
-全力依父"
+Daddy Carry","易しい
+父に頼る"
 UI_DIFFICULTY_NORMAL,"普通
 全力以赴","Normal
 Give It Your All","普通
-全力以赴"
+全力を尽くす"
 UI_DIFFICULTY_HARD,"困难
 爹，您就安心躺平吧","Hard
-Dad, Take a Break","困难
-爹，您就安心躺平吧"
-UI_SAVE_SELECT,选择存档,Choose Save,选择存档
-UI_CLOSE,关闭,Close,关闭
-UI_CONFIRM_OVERWRITE,确认覆盖,Overwrite,确认覆盖
-UI_OVERWRITE_QUESTION,该槽位已有存档，是否覆盖？,This slot already has a save. Overwrite it?,该槽位已有存档，是否覆盖？
-UI_CANCEL,取消,Cancel,取消
-UI_PAUSED,暂停,Paused,暂停
-UI_RESUME_GAME,继续游戏,Resume Game,继续游戏
-UI_SAVE_GAME,保存游戏,Save Game,保存游戏
-UI_LOAD_SAVE,读取存档,Load Save,读取存档
-UI_RETURN_MENU,返回主菜单,Return to Main Menu,返回主菜单
-UI_MANUAL_SAVE,手动保存,Manual Save,手动保存
-UI_MANUAL_SAVE_RULE,白天保存本日开始状态；夜晚保存当前状态。,Daytime saves the start of the day; nighttime saves the current state.,白天保存本日开始状态；夜晚保存当前状态。
-UI_MANUAL_SLOT_FMT,手动存档 %d,Manual Save %d,手动存档 %d
-UI_MANUAL_SLOT_1,手动存档 1,Manual Save 1,手动存档 1
-UI_MANUAL_SLOT_2,手动存档 2,Manual Save 2,手动存档 2
-UI_MANUAL_SLOT_3,手动存档 3,Manual Save 3,手动存档 3
-UI_MANUAL_SLOT_4,手动存档 4,Manual Save 4,手动存档 4
-UI_LOAD_RULE,可读取自动存档与全部手动存档。,Load an autosave or any manual save.,可读取自动存档与全部手动存档。
-UI_AUTO_SAVE,自动存档,Autosave,自动存档
-UI_INVALID_SAVE,无效存档,Invalid Save,无效存档
-UI_LOAD_WARNING,读取后，当前未保存的进度将丢失。,Loading will discard unsaved progress.,读取后，当前未保存的进度将丢失。
-UI_SELECT_MANUAL_DIFFICULTY,选择手动存档（%s难度）,Choose Manual Save (%s),选择手动存档（%s难度）
-UI_DIFFICULTY_NAME_EASY,简单,Easy,简单
+Dad, Take a Break","難しい
+父上、どうぞお休みください"
+UI_SAVE_SELECT,选择存档,Choose Save,セーブデータを選択
+UI_CLOSE,关闭,Close,閉じる
+UI_CONFIRM_OVERWRITE,确认覆盖,Overwrite,上書きを確認
+UI_OVERWRITE_QUESTION,该槽位已有存档，是否覆盖？,This slot already has a save. Overwrite it?,このスロットにはセーブデータがあります。上書きしますか？
+UI_CANCEL,取消,Cancel,キャンセル
+UI_PAUSED,暂停,Paused,一時停止
+UI_RESUME_GAME,继续游戏,Resume Game,ゲームを再開
+UI_SAVE_GAME,保存游戏,Save Game,セーブ
+UI_LOAD_SAVE,读取存档,Load Save,セーブデータを読み込む
+UI_RETURN_MENU,返回主菜单,Return to Main Menu,メインメニューに戻る
+UI_MANUAL_SAVE,手动保存,Manual Save,手動セーブ
+UI_MANUAL_SAVE_RULE,白天保存本日开始状态；夜晚保存当前状态。,Daytime saves the start of the day; nighttime saves the current state.,昼はその日の開始時点、夜は現在の状態を保存します。
+UI_MANUAL_SLOT_FMT,手动存档 %d,Manual Save %d,手動セーブ %d
+UI_MANUAL_SLOT_1,手动存档 1,Manual Save 1,手動セーブ 1
+UI_MANUAL_SLOT_2,手动存档 2,Manual Save 2,手動セーブ 2
+UI_MANUAL_SLOT_3,手动存档 3,Manual Save 3,手動セーブ 3
+UI_MANUAL_SLOT_4,手动存档 4,Manual Save 4,手動セーブ 4
+UI_LOAD_RULE,可读取自动存档与全部手动存档。,Load an autosave or any manual save.,オートセーブとすべての手動セーブを読み込めます。
+UI_AUTO_SAVE,自动存档,Autosave,オートセーブ
+UI_INVALID_SAVE,无效存档,Invalid Save,無効なセーブデータ
+UI_LOAD_WARNING,读取后，当前未保存的进度将丢失。,Loading will discard unsaved progress.,読み込むと、保存していない進行状況は失われます。
+UI_SELECT_MANUAL_DIFFICULTY,选择手动存档（%s难度）,Choose Manual Save (%s),手動セーブを選択（難易度：%s）
+UI_DIFFICULTY_NAME_EASY,简单,Easy,易しい
 UI_DIFFICULTY_NAME_NORMAL,普通,Normal,普通
-UI_DIFFICULTY_NAME_HARD,困难,Hard,困难
-UI_DIFFICULTY_NAME_NONE,未选择,Not Selected,未选择
-UI_EMPTY_SAVE,空存档,Empty Slot,空存档
-UI_PHASE_DAY,白天,Day,白天
-UI_PHASE_NIGHT,夜晚,Night,夜晚
-UI_SAVE_DAY_PHASE,第 %d 天 %s,Day %d · %s,第 %d 天 %s
+UI_DIFFICULTY_NAME_HARD,困难,Hard,難しい
+UI_DIFFICULTY_NAME_NONE,未选择,Not Selected,未選択
+UI_EMPTY_SAVE,空存档,Empty Slot,空きスロット
+UI_PHASE_DAY,白天,Day,昼
+UI_PHASE_NIGHT,夜晚,Night,夜
+UI_SAVE_DAY_PHASE,第 %d 天 %s,Day %d · %s,%d日目・%s
 UI_OVERWRITE_DETAIL,"%s已有存档：
 %s
 
@@ -67,7 +67,7 @@ Overwrite this manual save?","%s已有存档：
 
 是否覆盖该手动存档？"
 UI_MANUAL_SAVE_DETAIL,白天保存：记录本日开始状态；夜晚保存：记录当前夜晚状态。,Daytime saves the start of the day; nighttime saves the current state.,白天保存：记录本日开始状态；夜晚保存：记录当前夜晚状态。
-UI_NO_LOAD_IN_SLOT,该栏位没有可读取的存档。,There is no save to load in this slot.,该栏位没有可读取的存档。
+UI_NO_LOAD_IN_SLOT,该栏位没有可读取的存档。,There is no save to load in this slot.,このスロットには読み込めるセーブデータがありません。
 UI_LOAD_CONFIRM_DETAIL,"读取%s：
 %s
 
@@ -81,8 +81,8 @@ Load this save?","读取%s：
 
 当前未保存的进度将丢失。
 是否读取？"
-UI_CONFIRM_LOAD,确认读取,Load,确认读取
-UI_LOADING_SAVE,正在读取……,Loading…,正在读取……
+UI_CONFIRM_LOAD,确认读取,Load,読み込む
+UI_LOADING_SAVE,正在读取……,Loading…,読み込み中……
 UI_MANUAL_OVERWRITE_DETAIL,"%s已有记录：
 %s
 
@@ -93,16 +93,16 @@ Overwrite it?","%s已有记录：
 %s
 
 是否覆盖？"
-UI_SAVING_GAME,正在保存……,Saving…,正在保存……
-UI_OVERWRITE_MANUAL,覆盖手动存档,Overwrite Manual Save,覆盖手动存档
-UI_CANNOT_SAVE_STORY,剧情进行中，不能手动保存。,Cannot save while a story is playing.,剧情进行中，不能手动保存。
-UI_SAVE_DAY_SUCCESS,保存成功：已记录本日开始状态。,Saved the start of the current day.,保存成功：已记录本日开始状态。
-UI_SAVE_NIGHT_SUCCESS,保存成功：已记录当前夜晚状态。,Saved the current night.,保存成功：已记录当前夜晚状态。
-UI_SAVE_FAILED,保存失败。,Save failed.,保存失败。
-UI_LOAD_MISSING_FMT,没有存档，无法读取：%s,No save to load: %s,没有存档，无法读取：%s
-UI_LOAD_FAILED_FMT,读取存档失败：%s,Failed to load save: %s,读取存档失败：%s
-UI_SAVE_AND_RETURN,保存并返回,Save and Return,保存并返回
-UI_SAVE_AND_QUIT,保存并退出,Save and Quit,保存并退出
+UI_SAVING_GAME,正在保存……,Saving…,保存中……
+UI_OVERWRITE_MANUAL,覆盖手动存档,Overwrite Manual Save,手動セーブを上書き
+UI_CANNOT_SAVE_STORY,剧情进行中，不能手动保存。,Cannot save while a story is playing.,物語の進行中は手動セーブできません。
+UI_SAVE_DAY_SUCCESS,保存成功：已记录本日开始状态。,Saved the start of the current day.,保存しました：その日の開始時点を記録しました。
+UI_SAVE_NIGHT_SUCCESS,保存成功：已记录当前夜晚状态。,Saved the current night.,保存しました：現在の夜の状態を記録しました。
+UI_SAVE_FAILED,保存失败。,Save failed.,保存に失敗しました。
+UI_LOAD_MISSING_FMT,没有存档，无法读取：%s,No save to load: %s,読み込めるセーブデータがありません：%s
+UI_LOAD_FAILED_FMT,读取存档失败：%s,Failed to load save: %s,セーブデータの読み込みに失敗しました：%s
+UI_SAVE_AND_RETURN,保存并返回,Save and Return,保存して戻る
+UI_SAVE_AND_QUIT,保存并退出,Save and Quit,保存して終了
 UI_RETURN_CONFIRM_DETAIL,"当前阶段尚未完成。
 直接返回主菜单后，本阶段未保存的进度将丢失。
 选择“保存并返回”会先保存到%s。
@@ -166,7 +166,7 @@ Try Save and Quit again, or Quit Game to discard unsaved progress.","保存失�
 已有存档,已有存档,Existing Save,已有存档
 损坏存档,损坏存档,Corrupt Save,损坏存档
 读取失败,读取失败,Load Failed,读取失败
-UI_DISCLAIMER_TITLE,内容声明,Content Notice,内容声明
+UI_DISCLAIMER_TITLE,内容声明,Content Notice,内容に関する注意
 UI_DISCLAIMER_BODY,"本游戏为虚构作品，仅供娱乐。游戏中涉及的医学知识、诊断及治疗内容可能并不准确，不可作为现实中的医疗依据，请勿据此自行诊断、用药或治疗。
 
 如有健康问题，请咨询专业医生，并以正规医疗机构的建议为准。游戏中的人物、事件及剧情均属虚构，如有雷同，纯属巧合。","This game is a work of fiction for entertainment only. Medical knowledge, diagnoses, and treatments shown here may be inaccurate and must not be used as medical advice. Do not use this game to diagnose yourself, take medication, or choose treatment.
@@ -174,26 +174,26 @@ UI_DISCLAIMER_BODY,"本游戏为虚构作品，仅供娱乐。游戏中涉及的
 If you have health concerns, consult a qualified doctor and follow the advice of a licensed medical institution. The characters, events, and story are fictional. Any resemblance to real people or events is coincidental.","本游戏为虚构作品，仅供娱乐。游戏中涉及的医学知识、诊断及治疗内容可能并不准确，不可作为现实中的医疗依据，请勿据此自行诊断、用药或治疗。
 
 如有健康问题，请咨询专业医生，并以正规医疗机构的建议为准。游戏中的人物、事件及剧情均属虚构，如有雷同，纯属巧合。"
-UI_PATIENT_NAME_PLACEHOLDER,病人姓名,Patient Name,病人姓名
-UI_PATIENT_DIALOGUE_PLACEHOLDER,病人台词,Patient Dialogue,病人台词
-UI_TOPBAR_DATE_PLACEHOLDER,天数,Date,天数
-UI_TOPBAR_TIME_PLACEHOLDER,时辰,Hour,时辰
+UI_PATIENT_NAME_PLACEHOLDER,病人姓名,Patient Name,患者の名前
+UI_PATIENT_DIALOGUE_PLACEHOLDER,病人台词,Patient Dialogue,患者の台詞
+UI_TOPBAR_DATE_PLACEHOLDER,天数,Date,日付
+UI_TOPBAR_TIME_PLACEHOLDER,时辰,Hour,時刻
 UI_TOPBAR_REPUTATION_PLACEHOLDER,名望：0　初窥门径,Rep 0 · Novice,名望：0　初窥门径
 UI_TOPBAR_MONEY_PLACEHOLDER,银钱：0两 0文,Money: 0 liang 0 wen,银钱：0两 0文
-UI_CURRENT_SHICHEN,当前时辰,Current Hour,当前时辰
-UI_MONEY_DEBT_SHORT,欠,Debt,欠
-UI_MONEY_LIANG_ZERO,0两,0 liang,0两
+UI_CURRENT_SHICHEN,当前时辰,Current Hour,現在の時刻
+UI_MONEY_DEBT_SHORT,欠,Debt,借金
+UI_MONEY_LIANG_ZERO,0两,0 liang,0両
 UI_MONEY_WEN_ZERO,0文,0 wen,0文
-UI_MONEY_LIANG_FMT,%d两,%d liang,%d两
+UI_MONEY_LIANG_FMT,%d两,%d liang,%d両
 UI_MONEY_WEN_FMT,%d文,%d wen,%d文
-UI_MONEY_TEXT_FMT,银钱：%s,Money: %s,银钱：%s
-UI_MONEY_DEBT_TEXT_FMT,银钱：欠 %s,Money: Debt %s,银钱：欠 %s
-UI_DAY_FALLBACK_FMT,第 %d 天,Day %d,第 %d 天
+UI_MONEY_TEXT_FMT,银钱：%s,Money: %s,所持金：%s
+UI_MONEY_DEBT_TEXT_FMT,银钱：欠 %s,Money: Debt %s,所持金：借金 %s
+UI_DAY_FALLBACK_FMT,第 %d 天,Day %d,%d日目
 UI_ERA_DATE_FMT,%s%s年%s,%s %s · %s,%s%s年%s
 UI_ERA_JIAJING,嘉靖,Jiajing,嘉靖
-UI_ERA_WANLI,万历,Wanli,万历
+UI_ERA_WANLI,万历,Wanli,万暦
 UI_FULL_TIME_FMT,%s %s · %s,%s %s · %s,%s %s · %s
-UI_UNKNOWN_SHICHEN,未知时辰,Unknown Hour,未知时辰
+UI_UNKNOWN_SHICHEN,未知时辰,Unknown Hour,時刻不明
 UI_REPUTATION_INFAMOUS,臭名昭著,Infamous,臭名昭著
 UI_REPUTATION_CRITICIZED,略有微词,Criticized,略有微词
 UI_REPUTATION_NOVICE,初窥门径,Novice,初窥门径
@@ -632,7 +632,7 @@ UI_BOOK_NAME_YI_FANG_JI_JIE,医方集解,Collected Explanations of Medical Formu
 UI_BOOK_NAME_YI_FANG_KAO,医方考,Investigation of Medical Formulas,医方考
 UI_BOOK_NAME_YI_LIN_GAI_CUO,医林改错,Correction of Errors in Medical Classics,医林改错
 UI_BOOK_NAME_ZHU_BING_YUAN_HOU_LUN,诸病源候论,Treatise on the Origins and Manifestations of Various Diseases,诸病源候论
-UI_BOOK_ENTRY_TITLE_SI_ZHEN,四诊,Four Examinations,四诊
+UI_BOOK_ENTRY_TITLE_SI_ZHEN,四诊,Four Examinations,四診
 UI_BOOK_ENTRY_BODY_SI_ZHEN,"【四诊】
 
 四诊是中医收集患者病情资料的四种基本诊察方法，包括望诊、闻诊、问诊和切诊。医者通过观察、听闻、询问和触按患者所表现出的各种信息，了解疾病的病因、病位、性质以及正邪盛衰，为辨证和治疗提供依据。
@@ -731,7 +731,7 @@ The eight principles are not mutually exclusive. A pattern may combine several q
 阴阳：统摄其余六纲，是八纲的总纲。一般而言，表、热、实偏属阳，里、寒、虚偏属阴。
 
 八纲之间并非彼此孤立，一种病证可以同时具有多种性质，如表寒证、里热证或虚寒证。病情发展过程中，还可能发生表里出入、寒热转化和虚实变化。因此，医者必须四诊合参，方能把握疾病的整体情况。"
-UI_BOOK_ENTRY_TITLE_YIN_YANG,阴阳,Yin and Yang,阴阳
+UI_BOOK_ENTRY_TITLE_YIN_YANG,阴阳,Yin and Yang,陰陽
 UI_BOOK_ENTRY_BODY_YIN_YANG,"【阴阳】
 
 阴阳是中医认识人体与自然变化的基本方法。阴代表相对安静、寒凉、内守的一面，阳代表相对活动、温热、外发的一面。二者相互对立，又彼此依存，并会随着时间与环境不断消长变化。
@@ -745,7 +745,7 @@ Cold and Heat, Exterior and Interior, Deficiency and Excess, and activity and st
 阴阳是中医认识人体与自然变化的基本方法。阴代表相对安静、寒凉、内守的一面，阳代表相对活动、温热、外发的一面。二者相互对立，又彼此依存，并会随着时间与环境不断消长变化。
 
 人体中的寒热、表里、虚实、动静，都可以用阴阳来概括。阴阳保持协调，身体便能正常运行；若一方偏盛或偏衰，就可能出现疾病。医者诊病时，需要分辨阴阳变化，判断失衡所在，再采用相应的方法使其重新趋于协调。"
-UI_BOOK_ENTRY_TITLE_BIAO_LI,表里,Exterior and Interior,表里
+UI_BOOK_ENTRY_TITLE_BIAO_LI,表里,Exterior and Interior,表裏
 UI_BOOK_ENTRY_BODY_BIAO_LI,"【表里】
 
 表里是中医八纲辨证中用来判断疾病部位深浅和病势进退的两项纲领。表证通常指病邪位于皮毛、肌腠和经络，多见于外邪侵袭人体的初期；里证通常指病邪深入脏腑、气血或骨髓，也可由饮食、情志、劳倦等内伤因素直接形成。这里的表里并不单纯指身体的外部和内部，而是对病位与病势的综合判断。
@@ -771,7 +771,7 @@ Exterior and Interior patterns can occur together. A shift from Exterior to Inte
 里证：临床表现较为复杂，可见但热不寒、口渴、烦躁、腹痛、呕吐、腹泻、便秘、小便异常、舌苔厚或脉沉等表现。由于病变涉及脏腑气血，其症状会随寒热、虚实及所病脏腑的不同而有所变化。
 
 表证和里证可以同时存在，称为表里同病；疾病由表入里，通常表示病邪逐渐深入；由里出表，则可能表示病邪向外透达。医者需要结合寒热、虚实以及望、闻、问、切所得信息进行判断，不可只凭一个症状确定表里。辨明疾病部位后，表证通常以解表为基本方向，里证则根据具体的寒热虚实采取相应治法。"
-UI_BOOK_ENTRY_TITLE_HAN_RE,寒热,Cold and Heat,寒热
+UI_BOOK_ENTRY_TITLE_HAN_RE,寒热,Cold and Heat,寒熱
 UI_BOOK_ENTRY_BODY_HAN_RE,"【寒热】
 
 寒热是中医八纲辨证中用来判断疾病性质的两项纲领。寒证多由寒邪侵袭，或人体阳气不足所致；热证多由热邪侵袭、阳气偏盛，或阴液不足所致。这里的寒热并不只指体温高低，而是对患者整体表现的综合判断。
@@ -797,7 +797,7 @@ Cold patterns can be further classified as Excess Cold or Deficiency Cold; Heat 
 热证：常见发热喜凉、面红烦躁、口渴喜冷饮、小便短黄、大便干结、舌红苔黄、脉象较数等表现。
 
 寒证又可分为实寒与虚寒，热证也可分为实热与虚热。医者需要结合表里、虚实以及望、闻、问、切所得信息进行判断，不可只凭一个症状确定寒热。辨明疾病性质后，通常遵循寒证用温法、热证用清法的基本方向。"
-UI_BOOK_ENTRY_TITLE_XU_SHI,虚实,Deficiency and Excess,虚实
+UI_BOOK_ENTRY_TITLE_XU_SHI,虚实,Deficiency and Excess,虚実
 UI_BOOK_ENTRY_BODY_XU_SHI,"【虚实】
 
 虚实是中医八纲辨证中用来判断人体正气强弱和病邪盛衰的两项纲领。虚证多由人体正气不足、脏腑功能衰退，或气血阴阳亏损所致；实证多由外邪侵袭，或痰饮、瘀血、食积等病理产物壅盛所致。这里的虚实并不单指身体强壮或虚弱，而是对正邪双方力量和病理状态的综合判断。
@@ -997,7 +997,7 @@ When the Lung fails to disperse and descend, signs may include coughing, wheezin
 肺在体合皮，其华在毛，开窍于鼻，在志为悲忧，在液为涕。肺气充足时，呼吸均匀，声音有力，皮肤和毛发得到濡养，人体抵御外邪的能力正常。若肺气不足，可能出现气短、咳嗽、声音低弱、自汗和容易感受外邪等表现。
 
 肺失宣降时，可见咳嗽、气喘、鼻塞或痰液增多；肺的通调水道功能失常，还可能出现水液停聚、小便不利或水肿等表现。判断肺的功能状态，需要结合呼吸、声音、皮毛、鼻窍和水液代谢情况综合分析。"
-UI_BOOK_ENTRY_TITLE_SHEN,肾,Kidney,肾
+UI_BOOK_ENTRY_TITLE_SHEN,肾,Kidney,腎
 UI_BOOK_ENTRY_BODY_SHEN,"【肾】
 
 肾是五脏之一，在五行属水，与膀胱相表里。中医认为肾具有藏精、主生长发育与生殖、主水和主纳气的功能。肾精是人体生长、发育和生殖的重要物质基础；肾主水，是指肾参与调节全身水液代谢；肾主纳气，是指肾能够帮助肺维持呼吸的深度和稳定。
@@ -1017,7 +1017,7 @@ Insufficient Kidney Yang may be associated with aversion to cold, cold limbs, sw
 肾在体合骨，生髓充脑，其华在发，开窍于耳及二阴，在志为恐，在液为唾。肾精充足时，骨骼坚固，牙齿强健，听觉正常，头发有光泽，生长发育和生殖功能正常。若肾精不足，可能出现腰膝酸软、耳鸣、健忘、牙齿松动或生长发育迟缓等表现。
 
 肾阳不足可见畏寒肢冷、水肿、夜尿增多等表现；肾阴不足则可能出现潮热盗汗、口咽干燥、头晕耳鸣等表现；肾不纳气时，可见呼吸短促、动则气喘等表现。判断肾的功能状态，需要结合精、气、阴、阳以及水液代谢情况综合分析。"
-UI_BOOK_ENTRY_TITLE_QI,气,Qi,气
+UI_BOOK_ENTRY_TITLE_QI,气,Qi,気
 UI_BOOK_ENTRY_BODY_QI,"【气】
 
 气是中医生命理论中的基本概念，既指构成人体和维持生命活动的精微物质，也指脏腑经络所表现出的功能活动。人体之气主要由先天之精、水谷精微和自然界清气化生，并依靠肺、脾、肾等脏腑共同维持。
