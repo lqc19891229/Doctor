@@ -94,19 +94,43 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func open_window() -> void:
 	_refresh_all()
-	# RecordsWindow 是 Night 中常驻的子窗口；关闭后用 show() 恢复可见性，
-	# 避免对同一个原生 Window 反复 popup 导致第二次打开失败。
 	show()
+	_bring_self_to_front()
 	move_to_center()
 	grab_focus()
 
 
+func _bring_self_to_front() -> void:
+	# Window 再次 show() 时不一定会改变同级窗口层级。
+	# RecordsWindow 是 Night 的常驻子节点，需要像 ClinicalLogWindow 一样
+	# 移到父节点最后，确保第二次打开时不会被其它子节点挡在后面。
+	var parent_node := get_parent()
+	if parent_node == null:
+		return
+	parent_node.move_child(self, parent_node.get_child_count() - 1)
+
+
 func close_window() -> void:
-	hide()
+	_hide_and_restore_parent_focus()
 
 
 func _on_close_requested() -> void:
+	_hide_and_restore_parent_focus()
+
+
+func _hide_and_restore_parent_focus() -> void:
 	hide()
+
+	# 关闭原生子窗口后，键盘焦点可能仍停留在已经隐藏的 RecordsWindow。
+	# 把焦点交还给主游戏窗口，保证 F2 能立即再次触发 Night._input()。
+	var parent_node := get_parent()
+	if parent_node == null:
+		return
+	var parent_window := parent_node.get_window()
+	if parent_window == null or parent_window == self:
+		return
+	parent_window.grab_focus()
+	parent_window.call_deferred("grab_focus")
 
 
 func _refresh_all() -> void:

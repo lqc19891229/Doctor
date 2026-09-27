@@ -453,6 +453,9 @@ func open_records_window() -> void:
 		records_window.call("open_window")
 	else:
 		records_window.show()
+		var parent_node := records_window.get_parent()
+		if parent_node != null:
+			parent_node.move_child(records_window, parent_node.get_child_count() - 1)
 		records_window.move_to_center()
 	records_window.grab_focus()
 
