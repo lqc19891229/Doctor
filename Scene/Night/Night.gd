@@ -452,7 +452,8 @@ func open_records_window() -> void:
 	if records_window.has_method("open_window"):
 		records_window.call("open_window")
 	else:
-		records_window.popup_centered()
+		records_window.show()
+		records_window.move_to_center()
 	records_window.grab_focus()
 
 
@@ -460,10 +461,6 @@ func _setup_records_window() -> void:
 	if records_window == null:
 		return
 	records_window.hide()
-	if records_window.has_signal("close_requested"):
-		var close_callable := Callable(records_window, "hide")
-		if not records_window.close_requested.is_connected(close_callable):
-			records_window.close_requested.connect(close_callable)
 
 
 func open_read_book_window() -> void:

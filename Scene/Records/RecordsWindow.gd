@@ -94,7 +94,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func open_window() -> void:
 	_refresh_all()
-	popup_centered()
+	# RecordsWindow 是 Night 中常驻的子窗口；关闭后用 show() 恢复可见性，
+	# 避免对同一个原生 Window 反复 popup 导致第二次打开失败。
+	show()
+	move_to_center()
 	grab_focus()
 
 
