@@ -1,0 +1,129 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://Scene/MainMenuReadBook/MainMenuReadBook.gd" id="1_main_menu_read_book"]
+[ext_resource type="Texture2D" path="res://Assets/UI/bookpage2.png" id="2_book_page"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/SourceHanSerifSC-Regular.otf" id="3_book_font"]
+[ext_resource type="Script" path="res://Scene/ClinicalLogWindow/ClassicalVerticalRichTextLabel.gd" id="4_vertical_text"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_book_title"]
+bg_color = Color(0.41960785, 0.27058825, 0.15686275, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_entry_title"]
+bg_color = Color(0.41960785, 0.27058825, 0.15686275, 1)
+
+[node name="MainMenuReadBook" type="Window"]
+visible = false
+transient = true
+oversampling_override = 1.0
+title = "UI_READ_BOOK_WINDOW_TITLE"
+position = Vector2i(50, 66)
+size = Vector2i(1800, 1000)
+script = ExtResource("1_main_menu_read_book")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxRoot" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="SearchEdit" type="LineEdit" parent="MarginContainer/VBoxRoot"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+tooltip_text = "UI_READ_BOOK_SEARCH_TOOLTIP"
+theme_override_colors/font_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_colors/font_placeholder_color = Color(0.75, 0.7, 0.6, 1)
+theme_override_font_sizes/font_size = 23
+placeholder_text = "UI_READ_BOOK_SEARCH_PLACEHOLDER"
+clear_button_enabled = true
+
+[node name="ContentRow" type="HBoxContainer" parent="MarginContainer/VBoxRoot"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BookPanel" type="PanelContainer" parent="MarginContainer/VBoxRoot/ContentRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="BookVBox" type="VBoxContainer" parent="MarginContainer/VBoxRoot/ContentRow/BookPanel"]
+layout_mode = 2
+
+[node name="BookTitle" type="Label" parent="MarginContainer/VBoxRoot/ContentRow/BookPanel/BookVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_book_title")
+text = "UI_READ_BOOK_BOOK_LIST"
+
+[node name="BookList" type="ItemList" parent="MarginContainer/VBoxRoot/ContentRow/BookPanel/BookVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_colors/font_hovered_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_colors/font_hovered_selected_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_colors/font_selected_color = Color(1, 0.956863, 0.839216, 1)
+theme_override_font_sizes/font_size = 25
+
+[node name="EntryPanel" type="PanelContainer" parent="MarginContainer/VBoxRoot/ContentRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EntryVBox" type="VBoxContainer" parent="MarginContainer/VBoxRoot/ContentRow/EntryPanel"]
+layout_mode = 2
+
+[node name="EntryTitle" type="Label" parent="MarginContainer/VBoxRoot/ContentRow/EntryPanel/EntryVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_entry_title")
+text = "UI_READ_BOOK_ENTRY_LIST"
+
+[node name="EntryList" type="ItemList" parent="MarginContainer/VBoxRoot/ContentRow/EntryPanel/EntryVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_colors/font_hovered_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_colors/font_hovered_selected_color = Color(0.9529412, 0.8862745, 0.74509805, 1)
+theme_override_colors/font_selected_color = Color(1, 0.956863, 0.839216, 1)
+theme_override_font_sizes/font_size = 25
+
+[node name="DetailPanel" type="PanelContainer" parent="MarginContainer/VBoxRoot/ContentRow"]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_stretch_ratio = 5.0
+
+[node name="DetailBookPage" type="TextureRect" parent="MarginContainer/VBoxRoot/ContentRow/DetailPanel"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_book_page")
+expand_mode = 1
+
+[node name="DetailScroll" type="ScrollContainer" parent="MarginContainer/VBoxRoot/ContentRow/DetailPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DetailText" type="RichTextLabel" parent="MarginContainer/VBoxRoot/ContentRow/DetailPanel/DetailScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_book_font")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+script = ExtResource("4_vertical_text")
+right_padding_chars = 3
+top_padding_lines = 1
+fixed_rows_per_column = 23
+fixed_columns_per_page = 12
+
+[node name="BottomRow" type="HBoxContainer" parent="MarginContainer/VBoxRoot"]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="MarginContainer/VBoxRoot/BottomRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "UI_READ_BOOK_CHOOSE_BOOK"

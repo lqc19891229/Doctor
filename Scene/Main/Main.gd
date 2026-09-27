@@ -68,7 +68,9 @@ const TUTORIAL_WINDOW_SCENE: PackedScene = preload(
 const ENDING_CREDITS_SCENE: PackedScene = preload(
 	"res://Scene/Ending/Ending_credits.tscn"
 )
-const READ_BOOK_SCENE: PackedScene = preload("res://Scene/ReadBook/ReadBook.tscn")
+const MAIN_MENU_READ_BOOK_SCENE: PackedScene = preload(
+	"res://Scene/MainMenuReadBook/MainMenuReadBook.tscn"
+)
 const GLOBAL_READBOOK_ARCHIVE_SCRIPT = preload(
 	"res://System/Book/Book/GlobalReadBookArchive.gd"
 )
@@ -80,7 +82,7 @@ const MAP_SCENE_PATH: String = "res://Scene/Map/Map.tscn"
 var current_scene: Node = null
 var current_story_scene: Node = null
 var story_treatment_backend: Node = null
-var read_book_window: Window = null
+var main_menu_read_book_window: Window = null
 
 # 教程窗口由 Main 动态创建并常驻，避免修改 Main.tscn。
 # CanvasLayer 保证教程显示在 Clinic / Night 之上。
@@ -265,8 +267,8 @@ func _connect_overlay_menu_signals() -> void:
 # 显示开始菜单
 # =========================================================
 func _show_main_menu() -> void:
-	if is_instance_valid(read_book_window) and read_book_window.visible:
-		read_book_window.call("close_window")
+	if is_instance_valid(main_menu_read_book_window) and main_menu_read_book_window.visible:
+		main_menu_read_book_window.call("close_window")
 
 	# 标题菜单没有正在进行的游戏，清除旧的绑定槽。
 	# 之后读档或新游戏成功进入时会重新设置。
@@ -315,8 +317,8 @@ func _show_main_menu() -> void:
 func _hide_main_menu() -> void:
 	_stop_main_menu_music()
 	main_menu_layer.visible = false
-	if is_instance_valid(read_book_window) and read_book_window.visible:
-		read_book_window.call("close_window")
+	if is_instance_valid(main_menu_read_book_window) and main_menu_read_book_window.visible:
+		main_menu_read_book_window.call("close_window")
 	_close_difficulty_popup()
 	_close_save_slot_popup()
 	_close_overwrite_confirm_dialog()
@@ -455,17 +457,17 @@ func _on_load_game_button_pressed() -> void:
 # 全局典籍
 # =========================================================
 func _on_read_book_button_pressed() -> void:
-	if not is_instance_valid(read_book_window):
-		read_book_window = READ_BOOK_SCENE.instantiate() as Window
-		if read_book_window == null:
-			push_error("无法实例化 ReadBook 场景。")
+	if not is_instance_valid(main_menu_read_book_window):
+		main_menu_read_book_window = MAIN_MENU_READ_BOOK_SCENE.instantiate() as Window
+		if main_menu_read_book_window == null:
+			push_error("无法实例化主菜单典籍场景。")
 			return
-		add_child(read_book_window)
+		add_child(main_menu_read_book_window)
 
-	if read_book_window.has_method("open_global_archive"):
-		read_book_window.call("open_global_archive")
+	if main_menu_read_book_window.has_method("open_global_archive"):
+		main_menu_read_book_window.call("open_global_archive")
 	else:
-		push_warning("ReadBook 场景缺少 open_global_archive() 接口。")
+		push_warning("主菜单典籍场景缺少 open_global_archive() 接口。")
 
 
 # =========================================================
