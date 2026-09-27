@@ -379,6 +379,9 @@ def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
 
         print(f"{sheet_name}：{count} 条")
 
+    if warnings:
+        raise ValueError("翻译占位符不一致，已停止导出：\n" + "\n".join(warnings))
+
     out_csv.parent.mkdir(parents=True, exist_ok=True)
 
     with out_csv.open("w", encoding="utf-8-sig", newline="") as f:

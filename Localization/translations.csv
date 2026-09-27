@@ -561,7 +561,7 @@ UI_TUTORIAL_DAY_01_TITLE,接诊,Seeing Patients,診察
 UI_TUTORIAL_DAY_01_DESCRIPTION,白天在医馆接诊病人，把脉(F1)确定疾病，翻阅行医记考(F3)确定方剂，给病人断病开方(F2)。,"During the day, see patients at the clinic. Check their pulse (F1) to identify the condition, consult the medical records (F3) for a formula, then diagnose and prescribe (F2).",昼は診療所で患者を迎え、脈診(F1)で病を調べ、診療記録(F3)を参考に処方を決め、診断と処方(F2)を行います。
 UI_TUTORIAL_DAY_02_TITLE,把脉,Pulse Diagnosis,脈診
 UI_TUTORIAL_DAY_02_DESCRIPTION,在把脉窗口按住QAZ显示右手脉象，按住WSX显示左手脉象。,"In the pulse window, hold Q, A or Z to show the right-hand pulse; hold W, S or X for the left-hand pulse.",脈診画面では Q・A・Z を押し続けると右手、W・S・X で左手の脈が表示されます。
-UI_TUTORIAL_DAY_03_TITLE,行医记考,Medical Records,診療記録
+UI_TUTORIAL_DAY_03_TITLE,行医记考,Clinical Records,診療記録
 UI_TUTORIAL_DAY_03_DESCRIPTION,在行医记考窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母查询。快捷键：疾病(1)，方剂(2)，药材(3),"Search the medical records by disease, formula or herb name, Chinese pinyin, or pinyin initials. Shortcuts: Conditions (1), Formulas (2), Herbs (3).",診療記録の検索欄では、病名・処方・薬材の漢字、ひらがな・カタカナ、ローマ字で検索できます。ショートカット：疾病(1)、処方(2)、薬材(3)。
 UI_TUTORIAL_DAY_04_TITLE,断病开方,Diagnosis and Prescription,診断と処方
 UI_TUTORIAL_DAY_04_DESCRIPTION,在断病开放窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母筛选对应条目。,"In the diagnosis and prescription window, search by disease, formula or herb name, Chinese pinyin, or pinyin initials to filter entries.",診断と処方の検索欄では、病名・処方・薬材の漢字、ひらがな・カタカナ、ローマ字で項目を絞り込めます。

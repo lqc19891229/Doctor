@@ -69,10 +69,11 @@ func _render_result(data: Dictionary) -> void:
 	var grade := str(data.get("grade", "")).strip_edges()
 	var grade_level := str(data.get("grade_level", "")).strip_edges().to_lower()
 	var is_english := TranslationServer.get_locale().to_lower().begins_with("en")
+	var is_non_chinese := not TranslationServer.get_locale().to_lower().begins_with("zh")
 
-	# 结果数据仍保留原始中文名称 / ID；英文环境只在显示层本地化。
+	# 结果数据仍保留原始中文名称 / ID；非中文环境只在显示层本地化。
 	# 这样切换语言时可立即重新渲染，不影响处方判定和存档数据。
-	if is_english:
+	if is_non_chinese:
 		if disease_id != "":
 			disease_name = LocalizedName.disease(disease_id, disease_name)
 
@@ -81,13 +82,13 @@ func _render_result(data: Dictionary) -> void:
 
 		var standard_formula = data.get("standard_formula_resource", null)
 		if standard_formula is FormulaData:
-			standard_formula_text = _format_formula_for_english(standard_formula)
+			standard_formula_text = _format_localized_formula(standard_formula)
 		elif standard_formula_text == "（未找到标准方）":
 			standard_formula_text = tr("UI_RESULT_FORMULA_NOT_FOUND")
 
 		var prescription = data.get("player_prescription_resource", null)
 		if prescription is Prescription:
-			player_prescription_text = _format_prescription_for_english(prescription)
+			player_prescription_text = _format_localized_prescription(prescription)
 		elif player_prescription_text == "（无）":
 			player_prescription_text = tr("UI_RESULT_NONE")
 
@@ -145,7 +146,7 @@ func _render_result(data: Dictionary) -> void:
 		)
 
 	if not newly_unlocked_entry_titles.is_empty():
-		if is_english:
+		if is_non_chinese:
 			for index in range(newly_unlocked_entry_titles.size()):
 				newly_unlocked_entry_titles[index] = _localized_unlock_title(newly_unlocked_entry_titles[index])
 
@@ -186,15 +187,15 @@ func _render_result(data: Dictionary) -> void:
 				_:
 					rating_image.texture = null
 
-	var use_english_text := is_english and not rating_key.is_empty()
-	rating_image.visible = rating_image.texture != null and not use_english_text
-	rating_text.visible = use_english_text
-	rating_text.text = tr(rating_key) if use_english_text else ""
+	var use_localized_text := is_non_chinese and not rating_key.is_empty()
+	rating_image.visible = rating_image.texture != null and not use_localized_text
+	rating_text.visible = use_localized_text
+	rating_text.text = tr(rating_key) if use_localized_text else ""
 
-	# 英文环境使用文字显示等级，并按等级应用颜色。
+	# 非中文环境使用文字显示等级，并按等级应用颜色。
 	# 妙手回春使用持续变色的炫彩效果；治疗失败使用灰色。
 	rating_rainbow_active = false
-	if use_english_text:
+	if use_localized_text:
 		match rating_key:
 			"UI_RESULT_GRADE_PERFECT":
 				rating_rainbow_active = true
@@ -209,7 +210,7 @@ func _render_result(data: Dictionary) -> void:
 				rating_text.add_theme_color_override("font_color", RATING_SUCCESS_COLOR)
 
 
-func _format_formula_for_english(formula: FormulaData) -> String:
+func _format_localized_formula(formula: FormulaData) -> String:
 	var groups := [
 		["UI_PRESCRIPTION_ROLE_JUN", formula.jun_group],
 		["UI_PRESCRIPTION_ROLE_CHEN", formula.chen_group],
@@ -238,7 +239,7 @@ func _format_formula_for_english(formula: FormulaData) -> String:
 				continue
 			var amount := ""
 			if ingredient.has_method("get_amount_in_fen"):
-				amount = _format_dose_for_english(int(ingredient.get_amount_in_fen()))
+				amount = _format_localized_dose(int(ingredient.get_amount_in_fen()))
 			if amount == "":
 				parts.append(herb_name)
 			else:
@@ -248,7 +249,7 @@ func _format_formula_for_english(formula: FormulaData) -> String:
 	return "\n".join(lines)
 
 
-func _format_prescription_for_english(prescription: Prescription) -> String:
+func _format_localized_prescription(prescription: Prescription) -> String:
 	var roles := [
 		["君", "UI_PRESCRIPTION_ROLE_JUN"],
 		["臣", "UI_PRESCRIPTION_ROLE_CHEN"],
@@ -269,13 +270,13 @@ func _format_prescription_for_english(prescription: Prescription) -> String:
 				continue
 			var amount := float(item.get("amount", 0.0))
 			var unit := str(item.get("unit", ""))
-			parts.append("%s %s" % [herb_name, _format_dose_for_english(HerbUnit.to_fen(amount, unit))])
+			parts.append("%s %s" % [herb_name, _format_localized_dose(HerbUnit.to_fen(amount, unit))])
 		var content := tr("UI_RESULT_NONE") if parts.is_empty() else tr("UI_RESULT_UNLOCK_SEPARATOR").join(parts)
 		lines.append(tr("UI_RESULT_ROLE_LINE_FMT") % [tr(role_data[1]), content])
 	return "\n".join(lines)
 
 
-func _format_dose_for_english(total_fen: int) -> String:
+func _format_localized_dose(total_fen: int) -> String:
 	if total_fen <= 0:
 		return tr("UI_PRESCRIPTION_ZERO_FEN")
 
@@ -324,7 +325,7 @@ func _format_change(value: int) -> String:
 
 func _format_money_change(value: int) -> String:
 	# 与银钱系统当前“两 / 文”显示格式保持一致。
-	if TranslationServer.get_locale().begins_with("en"):
+	if not TranslationServer.get_locale().to_lower().begins_with("zh"):
 		var amount := absi(value)
 		var liang: int = amount / 1000
 		var wen: int = amount % 1000
