@@ -4,7 +4,6 @@ signal result_closed
 
 @onready var title_label: Label = $Panel/VBoxContainer/Title
 @onready var result_text: RichTextLabel = $Panel/VBoxContainer/RichTextLabel
-@onready var rating_image: TextureRect = $Panel/VBoxContainer/RatingImage
 @onready var rating_text: Label = $Panel/VBoxContainer/RatingText
 
 var current_result_data: Dictionary = {}
@@ -165,34 +164,26 @@ func _render_result(data: Dictionary) -> void:
 	var rating_key := ""
 	match grade_level:
 		"perfect":
-			rating_image.texture = preload("res://Assets/Rating/rating_miaoshouhuichun.png")
 			rating_key = "UI_RESULT_GRADE_PERFECT"
 		"pass":
-			rating_image.texture = preload("res://Assets/Rating/rating_success.png")
 			rating_key = "UI_RESULT_GRADE_SUCCESS"
 		"fail":
-			rating_image.texture = preload("res://Assets/Rating/rating_failed.png")
 			rating_key = "UI_RESULT_GRADE_FAILED"
 		_:
 			match grade:
 				"妙手回春":
-					rating_image.texture = preload("res://Assets/Rating/rating_miaoshouhuichun.png")
 					rating_key = "UI_RESULT_GRADE_PERFECT"
 				"治疗成功":
-					rating_image.texture = preload("res://Assets/Rating/rating_success.png")
 					rating_key = "UI_RESULT_GRADE_SUCCESS"
 				"治疗失败":
-					rating_image.texture = preload("res://Assets/Rating/rating_failed.png")
 					rating_key = "UI_RESULT_GRADE_FAILED"
-				_:
-					rating_image.texture = null
 
-	var use_localized_text := is_non_chinese and not rating_key.is_empty()
-	rating_image.visible = rating_image.texture != null and not use_localized_text
+	# 所有语言统一显示可翻译的等级文字，避免中文环境仍依赖图片中的固定文字。
+	var use_localized_text := not rating_key.is_empty()
 	rating_text.visible = use_localized_text
 	rating_text.text = tr(rating_key) if use_localized_text else ""
 
-	# 非中文环境使用文字显示等级，并按等级应用颜色。
+	# 所有语言使用文字显示等级，并按等级应用颜色。
 	# 妙手回春使用持续变色的炫彩效果；治疗失败使用灰色。
 	rating_rainbow_active = false
 	if use_localized_text:

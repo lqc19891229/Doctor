@@ -11,6 +11,22 @@ const LOCALE_ZH_CN: String = "zh_CN"
 const LOCALE_EN: String = "en"
 const LOCALE_JA: String = "ja"
 
+const DISPLAY_MODE_FULLSCREEN: String = "fullscreen"
+const DISPLAY_MODE_WINDOW_1920X1080: String = "window_1920x1080"
+const DISPLAY_MODE_WINDOW_1600X900: String = "window_1600x900"
+const DISPLAY_MODE_WINDOW_1280X720: String = "window_1280x720"
+const DISPLAY_MODE_ORDER: Array[String] = [
+	DISPLAY_MODE_FULLSCREEN,
+	DISPLAY_MODE_WINDOW_1920X1080,
+	DISPLAY_MODE_WINDOW_1600X900,
+	DISPLAY_MODE_WINDOW_1280X720,
+]
+const DISPLAY_MODE_SIZES: Dictionary = {
+	DISPLAY_MODE_WINDOW_1920X1080: Vector2i(1920, 1080),
+	DISPLAY_MODE_WINDOW_1600X900: Vector2i(1600, 900),
+	DISPLAY_MODE_WINDOW_1280X720: Vector2i(1280, 720),
+}
+
 const MASTER_BUS: String = "Master"
 const MUSIC_BUS: String = "BGM"
 const SFX_BUS: String = "SFX"
@@ -21,7 +37,7 @@ const AMBIENT_BUS: String = "Ambient"
 @onready var sfx_volume_slider: HSlider = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SfxVolumeSlider
 @onready var ambient_volume_slider: HSlider = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AmbientVolumeSlider
 @onready var language_option_button: OptionButton = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LanguageOptionButton
-@onready var fullscreen_check_box: CheckBox = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FullscreenCheckBox
+@onready var display_mode_option_button: OptionButton = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DisplayModeOptionButton
 @onready var music_label: Label = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MusicLabel
 @onready var sfx_label: Label = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SfxLabel
 @onready var ambient_label: Label = $DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AmbientLabel
@@ -37,6 +53,7 @@ func _ready() -> void:
 	visible = false
 
 	_setup_language_options()
+	_setup_display_mode_options()
 	_load_settings()
 	_refresh_optional_audio_bus_state()
 	_connect_signals()
@@ -47,6 +64,29 @@ func _setup_language_options() -> void:
 	language_option_button.add_item("简体中文")
 	language_option_button.add_item("English")
 	language_option_button.add_item("日本語")
+
+
+func _setup_display_mode_options(selected_mode: String = "") -> void:
+	display_mode_option_button.clear()
+
+	for mode in DISPLAY_MODE_ORDER:
+		var label := ""
+		if mode == DISPLAY_MODE_FULLSCREEN:
+			label = tr("UI_FULLSCREEN")
+		else:
+			var size: Vector2i = DISPLAY_MODE_SIZES[mode]
+			label = tr("UI_DISPLAY_MODE_WINDOW_FMT") % [size.x, size.y]
+		display_mode_option_button.add_item(label)
+		display_mode_option_button.set_item_metadata(display_mode_option_button.item_count - 1, mode)
+
+	var mode_to_select := selected_mode
+	if not _is_valid_display_mode(mode_to_select):
+		mode_to_select = DISPLAY_MODE_WINDOW_1920X1080
+	for index in range(display_mode_option_button.item_count):
+		if str(display_mode_option_button.get_item_metadata(index)) == mode_to_select:
+			display_mode_option_button.select(index)
+			return
+	display_mode_option_button.select(0)
 
 
 func _connect_signals() -> void:
@@ -65,8 +105,8 @@ func _connect_signals() -> void:
 	if not language_option_button.item_selected.is_connected(_on_language_selected):
 		language_option_button.item_selected.connect(_on_language_selected)
 
-	if not fullscreen_check_box.toggled.is_connected(_on_fullscreen_toggled):
-		fullscreen_check_box.toggled.connect(_on_fullscreen_toggled)
+	if not display_mode_option_button.item_selected.is_connected(_on_display_mode_selected):
+		display_mode_option_button.item_selected.connect(_on_display_mode_selected)
 
 	if not back_button.pressed.is_connected(_on_back_button_pressed):
 		back_button.pressed.connect(_on_back_button_pressed)
@@ -114,11 +154,7 @@ func _load_settings() -> void:
 	var saved_locale := str(config.get_value(SECTION_LANGUAGE, "locale", LOCALE_ZH_CN))
 	if saved_locale != LOCALE_ZH_CN and saved_locale != LOCALE_EN and saved_locale != LOCALE_JA:
 		saved_locale = LOCALE_ZH_CN
-	var fullscreen_value := bool(config.get_value(
-		SECTION_DISPLAY,
-		"fullscreen",
-		DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
-	))
+	var saved_display_mode := _get_saved_display_mode()
 
 	master_volume_slider.value = clampf(master_value, 0.0, 100.0)
 	music_volume_slider.value = clampf(music_value, 0.0, 100.0)
@@ -131,14 +167,13 @@ func _load_settings() -> void:
 			language_option_button.select(2)
 		_:
 			language_option_button.select(0)
-	fullscreen_check_box.button_pressed = fullscreen_value
-
 	TranslationServer.set_locale(saved_locale)
+	_setup_display_mode_options(saved_display_mode)
 	_apply_bus_volume(MASTER_BUS, master_volume_slider.value)
 	_apply_bus_volume(MUSIC_BUS, music_volume_slider.value)
 	_apply_bus_volume(SFX_BUS, sfx_volume_slider.value)
 	_apply_bus_volume(AMBIENT_BUS, ambient_volume_slider.value)
-	_apply_fullscreen(fullscreen_value)
+	_apply_display_mode(saved_display_mode)
 
 	loading_settings = false
 
@@ -149,7 +184,10 @@ func _save_settings() -> void:
 	config.set_value(SECTION_AUDIO, "sfx_volume", sfx_volume_slider.value)
 	config.set_value(SECTION_AUDIO, "ambient_volume", ambient_volume_slider.value)
 	config.set_value(SECTION_LANGUAGE, "locale", _selected_locale())
-	config.set_value(SECTION_DISPLAY, "fullscreen", fullscreen_check_box.button_pressed)
+	var selected_display_mode := _selected_display_mode()
+	config.set_value(SECTION_DISPLAY, "display_mode", selected_display_mode)
+	# Keep the old key in sync so older builds can still read this setting.
+	config.set_value(SECTION_DISPLAY, "fullscreen", selected_display_mode == DISPLAY_MODE_FULLSCREEN)
 
 	var save_error := config.save(CONFIG_PATH)
 	if save_error != OK:
@@ -163,6 +201,33 @@ func _selected_locale() -> String:
 		2:
 			return LOCALE_JA
 	return LOCALE_ZH_CN
+
+
+func _selected_display_mode() -> String:
+	var selected_index := display_mode_option_button.selected
+	if selected_index < 0 or selected_index >= display_mode_option_button.item_count:
+		return DISPLAY_MODE_WINDOW_1920X1080
+
+	var selected_mode := str(display_mode_option_button.get_item_metadata(selected_index))
+	return selected_mode if _is_valid_display_mode(selected_mode) else DISPLAY_MODE_WINDOW_1920X1080
+
+
+func _get_saved_display_mode() -> String:
+	var saved_mode := str(config.get_value(SECTION_DISPLAY, "display_mode", "")).strip_edges()
+	if _is_valid_display_mode(saved_mode):
+		return saved_mode
+
+	# Migrate settings.cfg files created before the display-mode dropdown existed.
+	var legacy_fullscreen := bool(config.get_value(
+		SECTION_DISPLAY,
+		"fullscreen",
+		DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	))
+	return DISPLAY_MODE_FULLSCREEN if legacy_fullscreen else DISPLAY_MODE_WINDOW_1920X1080
+
+
+func _is_valid_display_mode(mode: String) -> bool:
+	return mode == DISPLAY_MODE_FULLSCREEN or DISPLAY_MODE_SIZES.has(mode)
 
 
 func _refresh_optional_audio_bus_state() -> void:
@@ -199,15 +264,16 @@ func _apply_bus_volume(bus_name: String, percent: float) -> void:
 	AudioServer.set_bus_volume_db(bus_index, db_value)
 
 
-func _apply_fullscreen(enabled: bool) -> void:
-	var target_mode := (
-		DisplayServer.WINDOW_MODE_FULLSCREEN
-		if enabled
-		else DisplayServer.WINDOW_MODE_WINDOWED
-	)
+func _apply_display_mode(mode: String) -> void:
+	if mode == DISPLAY_MODE_FULLSCREEN:
+		if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		return
 
-	if DisplayServer.window_get_mode() != target_mode:
-		DisplayServer.window_set_mode(target_mode)
+	if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_WINDOWED:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	var target_size = DISPLAY_MODE_SIZES.get(mode, Vector2i(1920, 1080))
+	DisplayServer.window_set_size(target_size)
 
 
 func _on_master_volume_changed(value: float) -> void:
@@ -237,14 +303,17 @@ func _on_ambient_volume_changed(value: float) -> void:
 func _on_language_selected(_index: int) -> void:
 	if loading_settings:
 		return
+	var selected_display_mode := _selected_display_mode()
 	TranslationServer.set_locale(_selected_locale())
+	_setup_display_mode_options(selected_display_mode)
 	_save_settings()
 
 
-func _on_fullscreen_toggled(enabled: bool) -> void:
+func _on_display_mode_selected(index: int) -> void:
 	if loading_settings:
 		return
-	_apply_fullscreen(enabled)
+	var selected_mode := str(display_mode_option_button.get_item_metadata(index))
+	_apply_display_mode(selected_mode)
 
 
 func _on_back_button_pressed() -> void:

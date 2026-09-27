@@ -630,11 +630,10 @@ custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 
-[node name="FullscreenCheckBox" type="CheckBox" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1796179758]
-custom_minimum_size = Vector2(0, 54)
+[node name="DisplayModeOptionButton" type="OptionButton" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1796179758]
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "UI_FULLSCREEN"
 
 [node name="BackButton" type="Button" parent="SettingsLayer/DarkBackground/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=550295947]
 custom_minimum_size = Vector2(0, 64)

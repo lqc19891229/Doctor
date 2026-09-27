@@ -8,6 +8,7 @@ UI_MUSIC_VOLUME,音乐音量,Music Volume,音楽の音量
 UI_AMBIENT_VOLUME,环境音量,Ambient Volume,環境音の音量
 UI_SFX_VOLUME,音效音量,Sound Effects Volume,効果音の音量
 UI_FULLSCREEN,全屏,Fullscreen,全画面表示
+UI_DISPLAY_MODE_WINDOW_FMT,窗口 %d×%d,Window %d×%d,ウィンドウ %d×%d
 UI_MENU_NEW_GAME,新游戏,New Game,ニューゲーム
 UI_MENU_LOAD_GAME,读取存档,Load Game,セーブデータを読み込む
 UI_MENU_READ_BOOK,查阅典籍,Read Books,書物を読む
