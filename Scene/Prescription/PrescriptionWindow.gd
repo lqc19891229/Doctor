@@ -212,6 +212,12 @@ func _build_localized_search_record(localized_name: String, original_name: Strin
 	if LocalizedName.is_japanese_locale():
 		return {"display": localized_name, "entity_id": entity_id}
 
+	if LocalizedName.is_korean_locale():
+		return {
+			"name": LocalizedName.normalize_search_text(localized_name),
+			"entity_id": LocalizedName.normalize_search_text(entity_id)
+		}
+
 	if _is_english_search_locale():
 		return {
 			"name": LocalizedName.normalize_search_text(localized_name),
@@ -231,6 +237,13 @@ func _localized_search_record_matches(record: Dictionary, keyword: String) -> bo
 	if LocalizedName.is_japanese_locale():
 		return LocalizedName.japanese_search_matches(
 			str(record.get("display", "")), str(record.get("entity_id", "")), keyword
+		)
+
+	if LocalizedName.is_korean_locale():
+		var normalized_keyword := LocalizedName.normalize_search_text(keyword)
+		return (
+			str(record.get("name", "")).contains(normalized_keyword)
+			or str(record.get("entity_id", "")).contains(normalized_keyword)
 		)
 
 	if _is_english_search_locale():

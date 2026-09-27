@@ -96,6 +96,15 @@ func _is_english_locale() -> bool:
 	return TranslationServer.get_locale().to_lower().begins_with("en")
 
 
+func _is_korean_locale() -> bool:
+	return TranslationServer.get_locale().to_lower().begins_with("ko")
+
+
+func _uses_spaced_dialogue_locale() -> bool:
+	# 英文和韩文都需要在前缀、症状、后缀之间使用空格连接。
+	return _is_english_locale() or _is_korean_locale()
+
+
 ## =========================================================
 ## 七、对外接口
 ## =========================================================
@@ -169,8 +178,8 @@ func _compose_dialogue(core: String) -> String:
 	var suffix_text := _get_localized_dialogue_part("SUFFIX", dialogue_suffix)
 	var symptom := core.strip_edges()
 
-	# 英文使用自然的空格 / 句号连接。
-	if _is_english_locale():
+	# 英文和韩文使用自然的空格 / 句号连接。
+	if _uses_spaced_dialogue_locale():
 		var result := prefix_text
 
 		if symptom != "":

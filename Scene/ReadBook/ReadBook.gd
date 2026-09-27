@@ -409,14 +409,14 @@ func _set_detail_text(value: String) -> void:
 	if detail_text == null:
 		return
 
-	var use_english_page := false
-	if value != "" and selected_entry != null and (LocalizedName.is_english_locale() or LocalizedName.is_japanese_locale()):
+	var use_horizontal_page := false
+	if value != "" and selected_entry != null and LocalizedName.is_horizontal_detail_locale():
 		var body_key := "UI_BOOK_ENTRY_BODY_" + selected_entry.entry_id.to_upper()
-		use_english_page = tr(body_key) != body_key
+		use_horizontal_page = tr(body_key) != body_key
 
 	# 如果 DetailText 挂的是 ClassicalVerticalRichTextLabel.gd，
 	# 使用 set_source_text 让它重新生成古籍竖排文本。
-	if use_english_page and detail_text.has_method("set_horizontal_source_text"):
+	if use_horizontal_page and detail_text.has_method("set_horizontal_source_text"):
 		detail_text.call("set_horizontal_source_text", value)
 	elif detail_text.has_method("set_source_text"):
 		detail_text.call("set_source_text", value)
@@ -474,6 +474,8 @@ func _entry_matches_search(entry: BookEntryData) -> bool:
 		elif entry is DiseaseBookEntryData:
 			entity_id = (entry as DiseaseBookEntryData).disease_id
 		return LocalizedName.japanese_search_matches(_localized_entry_title(entry), entity_id, query)
+	if LocalizedName.is_korean_locale():
+		return LocalizedName.korean_search_matches(_localized_entry_title(entry), query)
 
 	# findn() 为大小写不敏感搜索；中文标题可直接匹配。
 	return entry.title.findn(query) >= 0 or _localized_entry_title(entry).findn(query) >= 0

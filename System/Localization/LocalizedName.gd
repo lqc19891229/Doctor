@@ -10,6 +10,7 @@ class_name LocalizedName
 # - 找不到翻译时使用传入的中文 fallback。
 # - 中文环境搜索：中文名 + 拼音全拼 + 拼音首字母。
 # - 英文环境搜索：英文名 + 英文单词首字母。
+# - 韩文环境搜索：韩文显示名称。
 # =========================================================
 
 
@@ -48,6 +49,14 @@ static func is_english_locale() -> bool:
 
 static func is_japanese_locale() -> bool:
 	return TranslationServer.get_locale().to_lower().begins_with("ja")
+
+
+static func is_korean_locale() -> bool:
+	return TranslationServer.get_locale().to_lower().begins_with("ko")
+
+
+static func is_horizontal_detail_locale() -> bool:
+	return is_english_locale() or is_japanese_locale() or is_korean_locale()
 
 
 static var _japanese_aliases_loaded: bool = false
@@ -103,6 +112,13 @@ static func japanese_search_matches(display_name: String, entity_id: String, que
 		if not str(alias).is_empty() and str(alias).contains(needle):
 			return true
 	return false
+
+
+static func korean_search_matches(display_name: String, query: String) -> bool:
+	var needle := normalize_search_text(query)
+	if needle.is_empty():
+		return false
+	return normalize_search_text(display_name).contains(needle)
 
 
 static func normalize_search_text(value: String) -> String:
