@@ -46,8 +46,22 @@ static func is_english_locale() -> bool:
 	return TranslationServer.get_locale().to_lower().begins_with("en")
 
 
+static func is_korean_locale() -> bool:
+	return TranslationServer.get_locale().to_lower().begins_with("ko")
+
+
 static func is_japanese_locale() -> bool:
 	return TranslationServer.get_locale().to_lower().begins_with("ja")
+
+
+static func is_horizontal_locale() -> bool:
+	# 中文保留古籍竖排；英文、日文和韩文使用横排详情页。
+	return is_english_locale() or is_japanese_locale() or is_korean_locale()
+
+
+static func is_english_style_search_locale() -> bool:
+	# 韩语环境的默认翻译回退到英文，未来补齐韩文后仍应按本地化名称搜索。
+	return is_english_locale() or is_korean_locale()
 
 
 static var _japanese_aliases_loaded: bool = false

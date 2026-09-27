@@ -499,7 +499,7 @@ func _set_detail_text(value: String) -> void:
 	var use_horizontal_page := (
 		value != ""
 		and selected_entry != null
-		and (LocalizedName.is_english_locale() or LocalizedName.is_japanese_locale())
+		and LocalizedName.is_horizontal_locale()
 		and tr("UI_BOOK_ENTRY_BODY_" + selected_entry.entry_id.to_upper()) !=
 			"UI_BOOK_ENTRY_BODY_" + selected_entry.entry_id.to_upper()
 	)

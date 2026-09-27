@@ -86,7 +86,8 @@ func _notification(what: int) -> void:
 		_build_scroll()
 
 func _use_english_layout() -> bool:
-	return TranslationServer.get_locale().begins_with("en")
+	var locale := TranslationServer.get_locale().to_lower()
+	return locale.begins_with("en") or locale.begins_with("ko")
 
 func _ready() -> void:
 	resized.connect(_on_resized)

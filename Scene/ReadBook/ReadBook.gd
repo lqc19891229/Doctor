@@ -410,7 +410,7 @@ func _set_detail_text(value: String) -> void:
 		return
 
 	var use_english_page := false
-	if value != "" and selected_entry != null and (LocalizedName.is_english_locale() or LocalizedName.is_japanese_locale()):
+	if value != "" and selected_entry != null and LocalizedName.is_horizontal_locale():
 		var body_key := "UI_BOOK_ENTRY_BODY_" + selected_entry.entry_id.to_upper()
 		use_english_page = tr(body_key) != body_key
 

@@ -368,7 +368,8 @@ func get_day_text_by_index(day_index: int) -> String:
 
 	var era_year_from_jiajing_start: int = START_ERA_YEAR + year_offset
 	var solar_term_text: String = tr("UI_SOLAR_TERM_%02d" % solar_term_index)
-	var english_locale := TranslationServer.get_locale().begins_with("en")
+	var locale := TranslationServer.get_locale().to_lower()
+	var english_locale := locale.begins_with("en") or locale.begins_with("ko")
 
 	if era_year_from_jiajing_start <= START_ERA_LAST_YEAR:
 		var year_text := str(era_year_from_jiajing_start) if english_locale else era_year_to_chinese(era_year_from_jiajing_start)

@@ -205,7 +205,7 @@ func _refresh_localized_dynamic_names() -> void:
 
 
 func _is_english_search_locale() -> bool:
-	return LocalizedName.is_english_locale()
+	return LocalizedName.is_english_style_search_locale()
 
 
 func _build_localized_search_record(localized_name: String, original_name: String, entity_id: String) -> Dictionary:

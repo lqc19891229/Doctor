@@ -1372,7 +1372,8 @@ func build_finance_report_text(day: int) -> String:
 
 
 func _format_finance_change(amount_wen: int) -> String:
-	if not TranslationServer.get_locale().begins_with("en"):
+	var locale := TranslationServer.get_locale().to_lower()
+	if not (locale.begins_with("en") or locale.begins_with("ko")):
 		return format_money_change(amount_wen)
 
 	var amount := absi(amount_wen)

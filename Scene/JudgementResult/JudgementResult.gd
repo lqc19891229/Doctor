@@ -67,8 +67,9 @@ func _render_result(data: Dictionary) -> void:
 	var patient_thank_gift_wen: int = int(data.get("patient_thank_gift_wen", 0))
 	var grade := str(data.get("grade", "")).strip_edges()
 	var grade_level := str(data.get("grade_level", "")).strip_edges().to_lower()
-	var is_english := TranslationServer.get_locale().to_lower().begins_with("en")
-	var is_non_chinese := not TranslationServer.get_locale().to_lower().begins_with("zh")
+	var locale := TranslationServer.get_locale().to_lower()
+	var is_english := locale.begins_with("en") or locale.begins_with("ko")
+	var is_non_chinese := not locale.begins_with("zh")
 
 	# 结果数据仍保留原始中文名称 / ID；非中文环境只在显示层本地化。
 	# 这样切换语言时可立即重新渲染，不影响处方判定和存档数据。

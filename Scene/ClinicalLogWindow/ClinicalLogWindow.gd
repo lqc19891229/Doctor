@@ -425,8 +425,8 @@ func _is_entry_match_clinical_log_search(entry: BookEntryData, clean_keyword: St
 			entity_id = entry.entry_id
 		return LocalizedName.japanese_search_matches(localized_title, entity_id, clean_keyword)
 
-	# 英文环境：英文名称 + 英文单词首字母。
-	if LocalizedName.is_english_locale():
+	# 英文和韩文环境：本地化名称 + 可用的单词首字母。
+	if LocalizedName.is_english_style_search_locale():
 		var english_name := _normalize_clinical_log_search_text(localized_title)
 		var english_initials := LocalizedName.english_initials(localized_title)
 		return (
@@ -622,7 +622,7 @@ func _setup_page_controls(right_panel: Control, detail_scroll: ScrollContainer, 
 
 
 func _apply_detail_scroll_layout() -> void:
-	var is_english := LocalizedName.is_english_locale() or LocalizedName.is_japanese_locale()
+	var is_horizontal := LocalizedName.is_horizontal_locale()
 
 	for scroll in [
 		disease_detail_scroll,
@@ -632,14 +632,14 @@ func _apply_detail_scroll_layout() -> void:
 		if scroll == null:
 			continue
 
-		if is_english:
-			# 英文横排：正文只占书页内部区域。
+		if is_horizontal:
+			# 横排语言：正文只占书页内部区域。
 			scroll.offset_left = english_detail_margin_left
 			scroll.offset_top = english_detail_margin_top
 			scroll.offset_right = -english_detail_margin_right
 			scroll.offset_bottom = -english_detail_margin_bottom
 
-			# 英文长文本只允许上下滚动，禁止横向滚动。
+			# 横排长文本只允许上下滚动，禁止横向滚动。
 			scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 			scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 		else:
@@ -663,7 +663,7 @@ func _update_book_page_backgrounds() -> void:
 
 
 func _is_english_detail_layout() -> bool:
-	return LocalizedName.is_english_locale() or LocalizedName.is_japanese_locale()
+	return LocalizedName.is_horizontal_locale()
 
 
 func _set_page_controls_visible(

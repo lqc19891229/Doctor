@@ -93,7 +93,8 @@ func _get_localized_dialogue_part(part: String, fallback: String) -> String:
 
 
 func _is_english_locale() -> bool:
-	return TranslationServer.get_locale().to_lower().begins_with("en")
+	var locale := TranslationServer.get_locale().to_lower()
+	return locale.begins_with("en") or locale.begins_with("ko")
 
 
 ## =========================================================

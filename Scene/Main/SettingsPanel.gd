@@ -10,6 +10,7 @@ const SECTION_LANGUAGE: String = "language"
 const LOCALE_ZH_CN: String = "zh_CN"
 const LOCALE_EN: String = "en"
 const LOCALE_JA: String = "ja"
+const LOCALE_KO: String = "ko"
 
 const DISPLAY_MODE_FULLSCREEN: String = "fullscreen"
 const DISPLAY_MODE_WINDOW_1920X1080: String = "window_1920x1080"
@@ -64,6 +65,7 @@ func _setup_language_options() -> void:
 	language_option_button.add_item("简体中文")
 	language_option_button.add_item("English")
 	language_option_button.add_item("日本語")
+	language_option_button.add_item("한국어")
 
 
 func _setup_display_mode_options(selected_mode: String = "") -> void:
@@ -152,7 +154,7 @@ func _load_settings() -> void:
 	var music_value := float(config.get_value(SECTION_AUDIO, "music_volume", 80.0))
 	var sfx_value := float(config.get_value(SECTION_AUDIO, "sfx_volume", 80.0))
 	var saved_locale := str(config.get_value(SECTION_LANGUAGE, "locale", LOCALE_ZH_CN))
-	if saved_locale != LOCALE_ZH_CN and saved_locale != LOCALE_EN and saved_locale != LOCALE_JA:
+	if saved_locale != LOCALE_ZH_CN and saved_locale != LOCALE_EN and saved_locale != LOCALE_JA and saved_locale != LOCALE_KO:
 		saved_locale = LOCALE_ZH_CN
 	var saved_display_mode := _get_saved_display_mode()
 
@@ -165,6 +167,8 @@ func _load_settings() -> void:
 			language_option_button.select(1)
 		LOCALE_JA:
 			language_option_button.select(2)
+		LOCALE_KO:
+			language_option_button.select(3)
 		_:
 			language_option_button.select(0)
 	TranslationServer.set_locale(saved_locale)
@@ -200,6 +204,8 @@ func _selected_locale() -> String:
 			return LOCALE_EN
 		2:
 			return LOCALE_JA
+		3:
+			return LOCALE_KO
 	return LOCALE_ZH_CN
 
 
