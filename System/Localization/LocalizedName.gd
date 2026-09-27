@@ -11,6 +11,7 @@ class_name LocalizedName
 # - 中文环境搜索：中文名 + 拼音全拼 + 拼音首字母。
 # - 英文环境搜索：英文名 + 英文单词首字母。
 # - 韩文环境搜索：韩文显示名称。
+# - 详情排版：英文横排；中文、日文、韩文使用古籍竖排。
 # =========================================================
 
 
@@ -56,7 +57,8 @@ static func is_korean_locale() -> bool:
 
 
 static func is_horizontal_detail_locale() -> bool:
-	return is_english_locale() or is_japanese_locale() or is_korean_locale()
+	# 只有英文详情使用横排；中文、日文、韩文都走古籍竖排。
+	return is_english_locale()
 
 
 static var _japanese_aliases_loaded: bool = false
@@ -157,3 +159,4 @@ static func english_initials(value: String) -> String:
 			initials += clean_word.substr(0, 1).to_lower()
 
 	return initials
+
