@@ -49,11 +49,9 @@ var treatment_failed: bool = false
 @export_multiline var dialogue_after_treatment: String = ""
 @export_multiline var dialogue_treatment_failed: String = ""
 
-# 同一轮诊疗中保持固定，避免刷新 UI 时重新随机症状。
 var runtime_before_dialogue: String = ""
 var runtime_after_dialogue: String = ""
 var runtime_failed_dialogue: String = ""
-# -2 表示尚未抽取；-1 表示该疾病没有可选症状。
 var runtime_symptom_index: int = -2
 
 ## =========================================================
@@ -67,17 +65,29 @@ func get_localized_name() -> String:
 	if clean_id == "":
 		return fallback
 
-	var translation_key := "UI_NPC_NAME_" + clean_id.to_upper()
-	var translated := TranslationServer.translate(translation_key)
+	var translation_key := (
+		"UI_NPC_NAME_"
+		+ clean_id.to_upper()
+	)
+	var translated := TranslationServer.translate(
+		translation_key
+	)
 
-	if translated.strip_edges() == "" or translated == translation_key:
+	if (
+		translated.strip_edges() == ""
+		or translated == translation_key
+	):
 		return fallback
 
 	return translated
 
 
-func _get_localized_dialogue_part(part: String, fallback: String) -> String:
+func _get_localized_dialogue_part(
+	part: String,
+	fallback: String
+) -> String:
 	var clean_id := npc_id.strip_edges()
+
 	if clean_id == "":
 		return fallback.strip_edges()
 
@@ -86,29 +96,63 @@ func _get_localized_dialogue_part(part: String, fallback: String) -> String:
 		clean_id.to_upper()
 	]
 
-	var translated := TranslationServer.translate(translation_key)
+	var translated := TranslationServer.translate(
+		translation_key
+	)
 
-	if translated.strip_edges() == "" or translated == translation_key:
+	if (
+		translated.strip_edges() == ""
+		or translated == translation_key
+	):
 		return fallback.strip_edges()
 
 	return translated.strip_edges()
 
 
+func _translated_or_fallback(
+	key: String,
+	fallback: String
+) -> String:
+	var translated := TranslationServer.translate(key)
+
+	if (
+		translated.strip_edges() == ""
+		or translated == key
+	):
+		return fallback
+
+	return translated
+
+
 func _is_english_locale() -> bool:
-	return TranslationServer.get_locale().to_lower().begins_with("en")
+	return (
+		TranslationServer.get_locale()
+		.to_lower()
+		.begins_with("en")
+	)
 
 
 func _is_korean_locale() -> bool:
-	return TranslationServer.get_locale().to_lower().begins_with("ko")
+	return (
+		TranslationServer.get_locale()
+		.to_lower()
+		.begins_with("ko")
+	)
 
 
 func _is_japanese_locale() -> bool:
-	return TranslationServer.get_locale().to_lower().begins_with("ja")
+	return (
+		TranslationServer.get_locale()
+		.to_lower()
+		.begins_with("ja")
+	)
 
 
 func _uses_spaced_dialogue_locale() -> bool:
-	# 英文和韩文都需要在前缀、症状、后缀之间使用空格连接。
-	return _is_english_locale() or _is_korean_locale()
+	return (
+		_is_english_locale()
+		or _is_korean_locale()
+	)
 
 
 ## =========================================================
@@ -120,105 +164,172 @@ func setup_clinic_visit() -> void:
 	treatment_failed = false
 	runtime_symptom_index = -2
 
-	# 这里一次性随机好治疗前症状并组成台词。
-	# 后续刷新 Clinic UI 不会再次随机。
-	runtime_before_dialogue = _build_before_treatment_dialogue()
-	runtime_after_dialogue = _build_after_treatment_dialogue()
-	runtime_failed_dialogue = _build_treatment_failed_dialogue()
+	runtime_before_dialogue = (
+		_build_before_treatment_dialogue()
+	)
+	runtime_after_dialogue = (
+		_build_after_treatment_dialogue()
+	)
+	runtime_failed_dialogue = (
+		_build_treatment_failed_dialogue()
+	)
 
 
 func refresh_localized_dialogues() -> void:
-	# 复用已选症状的序号，语言切换时不重新抽取症状。
-	runtime_before_dialogue = _build_before_treatment_dialogue()
-	runtime_after_dialogue = _build_after_treatment_dialogue()
-	runtime_failed_dialogue = _build_treatment_failed_dialogue()
+	runtime_before_dialogue = (
+		_build_before_treatment_dialogue()
+	)
+	runtime_after_dialogue = (
+		_build_after_treatment_dialogue()
+	)
+	runtime_failed_dialogue = (
+		_build_treatment_failed_dialogue()
+	)
 
 
 func get_dialogue() -> String:
 	if treatment_failed:
 		return get_treatment_failed_dialogue()
+
 	if is_treated:
 		return get_after_treatment_dialogue()
+
 	return get_before_treatment_dialogue()
 
 
 func get_before_treatment_dialogue() -> String:
 	if runtime_before_dialogue.strip_edges() == "":
-		runtime_before_dialogue = _build_before_treatment_dialogue()
+		runtime_before_dialogue = (
+			_build_before_treatment_dialogue()
+		)
+
 	return runtime_before_dialogue
 
 
 func get_after_treatment_dialogue() -> String:
 	if runtime_after_dialogue.strip_edges() == "":
-		runtime_after_dialogue = _build_after_treatment_dialogue()
+		runtime_after_dialogue = (
+			_build_after_treatment_dialogue()
+		)
+
 	return runtime_after_dialogue
 
 
 func get_treatment_failed_dialogue() -> String:
 	if runtime_failed_dialogue.strip_edges() == "":
-		runtime_failed_dialogue = _build_treatment_failed_dialogue()
+		runtime_failed_dialogue = (
+			_build_treatment_failed_dialogue()
+		)
+
 	return runtime_failed_dialogue
 
 
 func _build_before_treatment_dialogue() -> String:
 	if runtime_symptom_index == -2:
-		var symptoms := LocalizedDiseaseSymptom.get_symptom_list(disease)
-		runtime_symptom_index = randi_range(0, symptoms.size() - 1) if not symptoms.is_empty() else -1
-	var symptom := LocalizedDiseaseSymptom.get_localized_symptom(disease, runtime_symptom_index)
+		var symptoms := (
+			LocalizedDiseaseSymptom
+			.get_symptom_list(disease)
+		)
+
+		runtime_symptom_index = (
+			randi_range(
+				0,
+				symptoms.size() - 1
+			)
+			if not symptoms.is_empty()
+			else -1
+		)
+
+	var symptom := (
+		LocalizedDiseaseSymptom
+		.get_localized_symptom(
+			disease,
+			runtime_symptom_index
+		)
+	)
+
 	if symptom.strip_edges() == "":
-		var fallback_key := "UI_NPC_GENERIC_SYMPTOM"
-		symptom = TranslationServer.translate(fallback_key)
-		if symptom == fallback_key or symptom.strip_edges() == "":
-			symptom = "身体不适"
+		symptom = _translated_or_fallback(
+			"UI_NPC_GENERIC_SYMPTOM",
+			"身体不适"
+		)
 
 	return _compose_dialogue(symptom)
 
 
 func _build_after_treatment_dialogue() -> String:
 	var fallback := dialogue_after_treatment.strip_edges()
-	if fallback == "":
-		fallback = "多谢大夫，我觉得好多了。"
 
-	return _get_localized_dialogue_part("AFTER", fallback)
+	if fallback == "":
+		fallback = _translated_or_fallback(
+			"UI_NPC_GENERIC_AFTER_TREATMENT",
+			"多谢大夫，我觉得好多了。"
+		)
+
+	return _get_localized_dialogue_part(
+		"AFTER",
+		fallback
+	)
 
 
 func _build_treatment_failed_dialogue() -> String:
-	var fallback := dialogue_treatment_failed.strip_edges()
-	if fallback == "":
-		fallback = "大夫，我这病怎么还不见好……"
+	var fallback := (
+		dialogue_treatment_failed.strip_edges()
+	)
 
-	return _get_localized_dialogue_part("FAILED", fallback)
+	if fallback == "":
+		fallback = _translated_or_fallback(
+			"UI_NPC_GENERIC_TREATMENT_FAILED",
+			"大夫，我这病怎么还不见好……"
+		)
+
+	return _get_localized_dialogue_part(
+		"FAILED",
+		fallback
+	)
 
 
 func _compose_dialogue(core: String) -> String:
-	var prefix_text := _get_localized_dialogue_part("PREFIX", dialogue_prefix)
-	var suffix_text := _get_localized_dialogue_part("SUFFIX", dialogue_suffix)
+	var prefix_text := _get_localized_dialogue_part(
+		"PREFIX",
+		dialogue_prefix
+	)
+	var suffix_text := _get_localized_dialogue_part(
+		"SUFFIX",
+		dialogue_suffix
+	)
 	var symptom := core.strip_edges()
 
-	# 英文和韩文使用自然的空格 / 句号连接。
 	if _uses_spaced_dialogue_locale():
 		var result := prefix_text
 
 		if symptom != "":
-			if result != "" and not result.ends_with(" "):
+			if (
+				result != ""
+				and not result.ends_with(" ")
+			):
 				result += " "
+
 			result += symptom
 
-		if result != "" and not (
-			result.ends_with(".")
-			or result.ends_with("!")
-			or result.ends_with("?")
+		if (
+			result != ""
+			and not (
+				result.ends_with(".")
+				or result.ends_with("!")
+				or result.ends_with("?")
+			)
 		):
 			result += "."
 
 		if suffix_text != "":
 			if result != "":
 				result += " "
+
 			result += suffix_text
 
 		return result.strip_edges()
 
-	# 中文完全保留原有拼接规则。
 	var result := ""
 
 	if prefix_text != "":
@@ -228,10 +339,18 @@ func _compose_dialogue(core: String) -> String:
 
 	if suffix_text != "":
 		if _is_japanese_locale():
-			if not result.ends_with("。") and not result.ends_with("！") and not result.ends_with("？"):
+			if (
+				not result.ends_with("。")
+				and not result.ends_with("！")
+				and not result.ends_with("？")
+			):
 				result += "。"
-		elif not suffix_text.begins_with("，") and not suffix_text.begins_with("。"):
+		elif (
+			not suffix_text.begins_with("，")
+			and not suffix_text.begins_with("。")
+		):
 			result += "，"
+
 		result += suffix_text
 
 	return result
@@ -242,7 +361,10 @@ func _compose_dialogue(core: String) -> String:
 ## =========================================================
 
 func get_current_portrait() -> Texture2D:
-	if is_treated and portrait_after_treatment != null:
+	if (
+		is_treated
+		and portrait_after_treatment != null
+	):
 		return portrait_after_treatment
 
 	if portrait_before_treatment != null:

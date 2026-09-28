@@ -28,7 +28,17 @@ var _last_judge_summary_text: String = ""
 var _last_info_text: String = ""
 
 
-func _treatment_locale_text(chinese: String, english: String, japanese: String, korean: String) -> String:
+func _localized_text(
+	key: String,
+	chinese: String,
+	english: String,
+	japanese: String,
+	korean: String
+) -> String:
+	var translated := tr(key)
+	if translated != key and not translated.strip_edges().is_empty():
+		return translated
+
 	if LocalizedName.is_english_locale():
 		return english
 	if LocalizedName.is_japanese_locale():
@@ -39,9 +49,6 @@ func _treatment_locale_text(chinese: String, english: String, japanese: String, 
 
 
 func _ready() -> void:
-	# 只创建一个纯数据 NpcManager。
-	# 第 3 步已经让 NpcManager 的模板目录使用 static 共享缓存，
-	# 因此这里不会再次扫描 / load 全部 NPC 资源。
 	_npc_manager = NPC_MANAGER_SCRIPT.new()
 	add_child(_npc_manager)
 
@@ -56,19 +63,43 @@ func prepare_story_npc_treatment(
 
 	var clean_npc_id := npc_id.strip_edges()
 	if clean_npc_id == "":
-		_set_info_text(_treatment_locale_text("剧情没有配置 clinic_npc_id。", "The story has no clinic_npc_id configured.", "シナリオに clinic_npc_id が設定されていません。", "이야기에 clinic_npc_id가 설정되어 있지 않습니다."))
+		_set_info_text(_localized_text(
+			"UI_STORY_TREATMENT_NO_NPC_ID",
+			"剧情没有配置 clinic_npc_id。",
+			"The story has no clinic_npc_id configured.",
+			"シナリオに clinic_npc_id が設定されていません。",
+			"이야기에 clinic_npc_id가 설정되어 있지 않습니다."
+		))
 		return false
 
 	if treatment_disease == null:
-		_set_info_text(_treatment_locale_text("发起诊疗的剧情没有配置 Disease。", "The treatment story has no Disease configured.", "診療シナリオに病名が設定されていません。", "진료 이야기에 Disease가 설정되어 있지 않습니다."))
+		_set_info_text(_localized_text(
+			"UI_STORY_TREATMENT_NO_DISEASE",
+			"发起诊疗的剧情没有配置 Disease。",
+			"The treatment story has no Disease configured.",
+			"診療シナリオに病名が設定されていません。",
+			"진료 이야기에 Disease가 설정되어 있지 않습니다."
+		))
 		return false
 
 	if _npc_manager == null or not is_instance_valid(_npc_manager):
-		_set_info_text(_treatment_locale_text("剧情诊疗服务的 NpcManager 不可用。", "NpcManager is unavailable for story treatment.", "シナリオ診療の NpcManager を使用できません。", "이야기 진료용 NpcManager를 사용할 수 없습니다."))
+		_set_info_text(_localized_text(
+			"UI_STORY_TREATMENT_NPC_MANAGER_UNAVAILABLE",
+			"剧情诊疗服务的 NpcManager 不可用。",
+			"NpcManager is unavailable for story treatment.",
+			"シナリオ診療の NpcManager を使用できません。",
+			"이야기 진료용 NpcManager를 사용할 수 없습니다."
+		))
 		return false
 
 	if not _npc_manager.has_method("replace_with_story_npc"):
-		_set_info_text(_treatment_locale_text("NpcManager 缺少 story NPC 接口。", "NpcManager does not provide the story NPC interface.", "NpcManager にシナリオ患者用の機能がありません。", "NpcManager에 story NPC 인터페이스가 없습니다."))
+		_set_info_text(_localized_text(
+			"UI_STORY_TREATMENT_NPC_MANAGER_INTERFACE_MISSING",
+			"NpcManager 缺少 story NPC 接口。",
+			"NpcManager does not provide the story NPC interface.",
+			"NpcManager にシナリオ患者用の機能がありません。",
+			"NpcManager에 story NPC 인터페이스가 없습니다."
+		))
 		return false
 
 	var npc: NpcData = _npc_manager.call(
@@ -76,12 +107,25 @@ func prepare_story_npc_treatment(
 		clean_npc_id,
 		treatment_disease
 	) as NpcData
+
 	if npc == null:
-		_set_info_text(_treatment_locale_text("story NPC 加载失败：%s", "Failed to load story NPC: %s", "シナリオ患者を読み込めません：%s", "story NPC를 불러오지 못했습니다: %s") % clean_npc_id)
+		_set_info_text(_localized_text(
+			"UI_STORY_TREATMENT_NPC_LOAD_FAILED_FMT",
+			"story NPC 加载失败：%s",
+			"Failed to load story NPC: %s",
+			"シナリオ患者を読み込めません：%s",
+			"story NPC를 불러오지 못했습니다: %s"
+		) % clean_npc_id)
 		return false
 
 	if npc.npc_type.strip_edges().to_lower() != "story":
-		_set_info_text(_treatment_locale_text("NPC【%s】的 npc_type 不是 story。", "NPC 【%s】 does not have npc_type 'story'.", "患者【%s】の種別が story ではありません。", "NPC【%s】의 npc_type이 story가 아닙니다.") % clean_npc_id)
+		_set_info_text(_localized_text(
+			"UI_STORY_TREATMENT_INVALID_NPC_TYPE_FMT",
+			"NPC【%s】的 npc_type 不是 story。",
+			"NPC 【%s】 does not have npc_type 'story'.",
+			"患者【%s】の種別が story ではありません。",
+			"NPC【%s】의 npc_type이 story가 아닙니다."
+		) % clean_npc_id)
 		return false
 
 	_current_npc = npc
@@ -100,17 +144,35 @@ func get_story_treatment_prescription():
 	return _current_prescription
 
 
-func show_story_pulse_hand(target_pulse_window: Node, hand_side: String) -> Dictionary:
+func show_story_pulse_hand(
+	target_pulse_window: Node,
+	hand_side: String
+) -> Dictionary:
 	if _current_npc == null or _current_npc.disease == null:
 		return {
 			"ok": false,
-			"text": _treatment_locale_text("当前没有可诊疗的剧情病人。", "There is no story patient available for treatment.", "診療できるシナリオ患者がいません。", "진료할 이야기 환자가 없습니다.")
+			"text": _localized_text(
+				"UI_STORY_TREATMENT_NO_ACTIVE_PATIENT",
+				"当前没有可诊疗的剧情病人。",
+				"There is no story patient available for treatment.",
+				"診療できるシナリオ患者がいません。",
+				"진료할 이야기 환자가 없습니다."
+			)
 		}
 
-	if target_pulse_window == null or not target_pulse_window.has_method("show_hand_group"):
+	if (
+		target_pulse_window == null
+		or not target_pulse_window.has_method("show_hand_group")
+	):
 		return {
 			"ok": false,
-			"text": _treatment_locale_text("Story 的 PulseWindow 不可用。", "The story PulseWindow is unavailable.", "脈診画面を使用できません。", "맥진 창을 사용할 수 없습니다.")
+			"text": _localized_text(
+				"UI_STORY_TREATMENT_PULSE_WINDOW_UNAVAILABLE",
+				"Story 的 PulseWindow 不可用。",
+				"The story PulseWindow is unavailable.",
+				"脈診画面を使用できません。",
+				"맥진 창을 사용할 수 없습니다."
+			)
 		}
 
 	var raw_result = target_pulse_window.call(
@@ -118,49 +180,103 @@ func show_story_pulse_hand(target_pulse_window: Node, hand_side: String) -> Dict
 		hand_side,
 		_current_npc.disease
 	)
+
 	if typeof(raw_result) == TYPE_DICTIONARY:
 		return raw_result
 
 	return {
 		"ok": false,
-		"text": _treatment_locale_text("Story 的 PulseWindow 返回了无效数据。", "The story PulseWindow returned invalid data.", "脈診画面から正しい結果を取得できませんでした。", "맥진 창에서 유효하지 않은 결과를 반환했습니다.")
+		"text": _localized_text(
+			"UI_STORY_TREATMENT_PULSE_INVALID_RESULT",
+			"Story 的 PulseWindow 返回了无效数据。",
+			"The story PulseWindow returned invalid data.",
+			"脈診画面から正しい結果を取得できませんでした。",
+			"맥진 창에서 유효하지 않은 결과를 반환했습니다."
+		)
 	}
 
 
 func submit_story_prescription() -> Dictionary:
 	if _current_npc == null:
-		return _submit_error(_treatment_locale_text("当前没有病人，无法提交处方", "There is no patient. The prescription cannot be submitted.", "患者がいないため処方を提出できません。", "현재 환자가 없어 처방을 제출할 수 없습니다."))
+		return _submit_error(_localized_text(
+			"UI_TREATMENT_NO_PATIENT",
+			"当前没有病人，无法提交处方",
+			"There is no patient. The prescription cannot be submitted.",
+			"患者がいないため処方を提出できません。",
+			"현재 환자가 없어 처방을 제출할 수 없습니다."
+		))
 
 	if _current_npc.disease == null:
-		return _submit_error(_treatment_locale_text("当前病人没有绑定疾病，无法提交处方", "This patient has no disease assigned.", "この患者には病名が設定されていません。", "현재 환자에게 연결된 병증이 없습니다."))
+		return _submit_error(_localized_text(
+			"UI_TREATMENT_NO_DISEASE",
+			"当前病人没有绑定疾病，无法提交处方",
+			"This patient has no disease assigned. The prescription cannot be submitted.",
+			"この患者には病名が設定されていないため、処方を提出できません。",
+			"현재 환자에게 연결된 병증이 없어 처방을 제출할 수 없습니다."
+		))
+
+	if not _current_prescription.has_disease():
+		return _submit_error(_localized_text(
+			"UI_TREATMENT_SELECT_DIAGNOSIS",
+			"请先选择疾病诊断",
+			"Please select a diagnosis first.",
+			"先に病名を選択してください。",
+			"먼저 병증을 진단해 주세요."
+		))
 
 	if _current_prescription == null or _current_prescription.is_empty():
-		return _submit_error(_treatment_locale_text("当前处方为空，请先开方", "The prescription is empty. Add herbs first.", "処方が空です。先に薬材を選んでください。", "처방이 비어 있습니다. 먼저 약재를 선택해 주세요."))
+		return _submit_error(_localized_text(
+			"UI_TREATMENT_EMPTY_PRESCRIPTION",
+			"当前处方为空，请先开方",
+			"The prescription is empty. Add herbs first.",
+			"処方が空です。先に薬材を選んでください。",
+			"처방이 비어 있습니다. 먼저 약재를 선택해 주세요."
+		))
 
 	var standard_formula := _get_current_standard_formula()
 	if standard_formula == null:
-		var disease_name := LocalizedName.disease(_current_npc.disease.disease_id, _current_npc.disease.disease_name)
-		return _submit_error(_treatment_locale_text("未找到疾病【%s】对应的标准方", "No standard prescription was found for 【%s】.", "【%s】の標準処方が見つかりません。", "【%s】에 해당하는 표준 처방을 찾을 수 없습니다.") % disease_name)
+		var disease_name := LocalizedName.disease(
+			_current_npc.disease.disease_id,
+			_current_npc.disease.disease_name
+		)
+		return _submit_error(_localized_text(
+			"UI_TREATMENT_STANDARD_FORMULA_NOT_FOUND_FMT",
+			"未找到疾病【%s】对应的标准方",
+			"No standard prescription was found for 【%s】.",
+			"【%s】の標準処方が見つかりません。",
+			"【%s】에 해당하는 표준 처방을 찾을 수 없습니다."
+		) % disease_name)
 
 	var result = _formula_judge.judge_formula(
 		_current_prescription,
 		standard_formula,
 		_current_npc.disease
 	)
+
 	if result == null:
-		return _submit_error(_treatment_locale_text("处方判定失败。", "Prescription evaluation failed.", "処方を判定できませんでした。", "처방 판정에 실패했습니다."))
+		return _submit_error(_localized_text(
+			"UI_STORY_TREATMENT_JUDGE_FAILED",
+			"处方判定失败。",
+			"Prescription evaluation failed.",
+			"処方を判定できませんでした。",
+			"처방 판정에 실패했습니다."
+		))
 
 	var was_already_submitted := _diagnosis_submitted
 	_diagnosis_submitted = true
 	_last_judge_result = result
 	_last_judge_summary_text = result.get_summary_text()
 
-	# 剧情病人同样进入医馆账册；只在第一次提交时计入治疗人数。
-	if not was_already_submitted and Records != null and Records.has_method("record_treatment"):
+	if (
+		not was_already_submitted
+		and Records != null
+		and Records.has_method("record_treatment")
+	):
 		var raw_grade = result.get("grade")
 		var raw_score = result.get("score")
 		if raw_score == null:
 			raw_score = -1
+
 		Records.record_treatment(_current_day, {
 			"patient_name": _current_npc.npc_name,
 			"npc_id": _current_npc.npc_id,
@@ -178,8 +294,6 @@ func submit_story_prescription() -> Dictionary:
 			"success": bool(result.success)
 		})
 
-	# story NPC 的名望 / 心得 / 银钱仍由后续 StoryData 在剧情播放完成后结算；
-	# 此处只更新当前治疗状态。
 	_current_npc.is_treated = bool(result.success)
 	_current_npc.treatment_failed = not bool(result.success)
 	_set_info_text(_last_judge_summary_text)
@@ -205,25 +319,31 @@ func finish_story_treatment_attempt(
 	var clean_trigger_scene := trigger_scene.strip_edges()
 	if clean_trigger_scene == "":
 		clean_trigger_scene = "clinic"
-	var clean_treatment_story_id := treatment_story_id.strip_edges()
 
+	var clean_treatment_story_id := treatment_story_id.strip_edges()
 	var next_story: StoryData = null
+
 	if success:
-		if StoryManager != null and StoryManager.has_method("report_story_npc_cured"):
+		if (
+			StoryManager != null
+			and StoryManager.has_method("report_story_npc_cured")
+		):
 			next_story = StoryManager.report_story_npc_cured(
 				_current_day,
 				clean_trigger_scene,
 				clean_treatment_story_id
 			)
 	else:
-		if StoryManager != null and StoryManager.has_method("report_story_npc_treatment_failed"):
+		if (
+			StoryManager != null
+			and StoryManager.has_method("report_story_npc_treatment_failed")
+		):
 			next_story = StoryManager.report_story_npc_treatment_failed(
 				_current_day,
 				clean_trigger_scene,
 				clean_treatment_story_id
 			)
 
-		# 治疗失败后允许同一 story NPC 再次开方。
 		_current_npc.is_treated = false
 		_current_npc.treatment_failed = false
 		_reset_attempt_state()
@@ -258,6 +378,7 @@ func _reset_attempt_state() -> void:
 func _get_current_disease_id() -> String:
 	if _current_npc == null or _current_npc.disease == null:
 		return ""
+
 	return _current_npc.disease.disease_id.strip_edges()
 
 
@@ -268,14 +389,25 @@ func _get_current_standard_formula() -> FormulaData:
 	if FormulaDB == null:
 		return null
 
-	var recommended_formula_id := _current_npc.disease.recommended_formula_id.strip_edges()
-	if recommended_formula_id != "" and FormulaDB.has_method("get_formula_by_id"):
-		var recommended_formula = FormulaDB.get_formula_by_id(recommended_formula_id)
+	var recommended_formula_id := (
+		_current_npc.disease.recommended_formula_id.strip_edges()
+	)
+
+	if (
+		recommended_formula_id != ""
+		and FormulaDB.has_method("get_formula_by_id")
+	):
+		var recommended_formula = FormulaDB.get_formula_by_id(
+			recommended_formula_id
+		)
 		if recommended_formula is FormulaData:
 			return recommended_formula as FormulaData
 
 	var disease_id := _get_current_disease_id()
-	if disease_id == "" or not FormulaDB.has_method("get_formulas_by_disease"):
+	if (
+		disease_id == ""
+		or not FormulaDB.has_method("get_formulas_by_disease")
+	):
 		return null
 
 	var formula_list = FormulaDB.get_formulas_by_disease(disease_id)
@@ -284,10 +416,14 @@ func _get_current_standard_formula() -> FormulaData:
 
 	if formula_list[0] is FormulaData:
 		return formula_list[0] as FormulaData
+
 	return null
 
 
-func _build_judgement_result_data(judge_result = null, summary_text: String = "") -> Dictionary:
+func _build_judgement_result_data(
+	judge_result = null,
+	summary_text: String = ""
+) -> Dictionary:
 	var npc_name := ""
 	var disease_name := ""
 	var standard_formula_name := ""
@@ -304,19 +440,31 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 			disease_name = _current_npc.disease.disease_name
 
 	var standard_formula := _get_current_standard_formula()
+
 	if standard_formula != null:
 		standard_formula_name = standard_formula.formula_name
-		standard_formula_text = _build_standard_formula_display_text(standard_formula)
+		standard_formula_text = _build_standard_formula_display_text(
+			standard_formula
+		)
 	else:
 		standard_formula_text = "（未找到标准方）"
 
 	if _current_prescription != null:
-		player_disease_name = _current_prescription.disease_name.strip_edges()
+		player_disease_name = (
+			_current_prescription.disease_name.strip_edges()
+		)
+
 		if player_disease_name == "":
-			player_disease_name = _current_prescription.disease_id.strip_edges()
+			player_disease_name = (
+				_current_prescription.disease_id.strip_edges()
+			)
+
 		if player_disease_name == "":
 			player_disease_name = "未选择疾病"
-		player_prescription_text = _current_prescription.get_display_text()
+
+		player_prescription_text = (
+			_current_prescription.get_display_text()
+		)
 	else:
 		player_disease_name = "未选择疾病"
 		player_prescription_text = "（无）"
@@ -325,6 +473,7 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 		var raw_grade = judge_result.get("grade")
 		if raw_grade != null:
 			grade = str(raw_grade)
+
 		var raw_level = judge_result.get("level")
 		if raw_level != null:
 			grade_level = str(raw_level).strip_edges()
@@ -336,13 +485,28 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 	return {
 		"npc_name": npc_name,
 		"disease_name": disease_name,
-		"disease_id": _current_npc.disease.disease_id if _current_npc != null and _current_npc.disease != null else "",
+		"disease_id": (
+			_current_npc.disease.disease_id
+			if (
+				_current_npc != null
+				and _current_npc.disease != null
+			)
+			else ""
+		),
 		"standard_formula_name": standard_formula_name,
-		"standard_formula_id": standard_formula.formula_id if standard_formula != null else "",
+		"standard_formula_id": (
+			standard_formula.formula_id
+			if standard_formula != null
+			else ""
+		),
 		"standard_formula_text": standard_formula_text,
 		"standard_formula_resource": standard_formula,
 		"player_disease_name": player_disease_name,
-		"player_disease_id": _current_prescription.disease_id if _current_prescription != null else "",
+		"player_disease_id": (
+			_current_prescription.disease_id
+			if _current_prescription != null
+			else ""
+		),
 		"player_prescription_text": player_prescription_text,
 		"player_prescription_resource": _current_prescription,
 		"grade": grade,
@@ -353,19 +517,32 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 		"show_reward_change": false,
 		"reputation_change": 0,
 		"experience_change": 0,
-		"treatment_income_wen": 0
+		"consultation_fee_wen": 0,
+		"medicine_income_wen": 0,
+		"patient_thank_gift_wen": 0
 	}
 
 
-func _build_standard_formula_display_text(formula: FormulaData) -> String:
+func _build_standard_formula_display_text(
+	formula: FormulaData
+) -> String:
 	if formula == null:
 		return "（无）"
 
 	var lines: Array[String] = []
-	lines.append("君：" + _build_formula_group_display_text(formula.jun_group))
-	lines.append("臣：" + _build_formula_group_display_text(formula.chen_group))
-	lines.append("佐：" + _build_formula_group_display_text(formula.zuo_group))
-	lines.append("使：" + _build_formula_group_display_text(formula.shi_group))
+	lines.append(
+		"君：" + _build_formula_group_display_text(formula.jun_group)
+	)
+	lines.append(
+		"臣：" + _build_formula_group_display_text(formula.chen_group)
+	)
+	lines.append(
+		"佐：" + _build_formula_group_display_text(formula.zuo_group)
+	)
+	lines.append(
+		"使：" + _build_formula_group_display_text(formula.shi_group)
+	)
+
 	return "\n".join(lines)
 
 
@@ -374,30 +551,49 @@ func _build_formula_group_display_text(group: Array) -> String:
 		return "（无）"
 
 	var parts: Array[String] = []
+
 	for ingredient in group:
 		if ingredient == null:
 			continue
-		if ingredient.has_method("is_valid_data") and not ingredient.is_valid_data():
+
+		if (
+			ingredient.has_method("is_valid_data")
+			and not ingredient.is_valid_data()
+		):
 			continue
 
 		var herb_name := ""
 		var amount_text := ""
 
 		if ingredient.has_method("get_herb_name"):
-			herb_name = str(ingredient.get_herb_name()).strip_edges()
-		if herb_name == "" and ingredient.has_method("get_herb_id"):
-			herb_name = str(ingredient.get_herb_id()).strip_edges()
+			herb_name = str(
+				ingredient.get_herb_name()
+			).strip_edges()
+
+		if (
+			herb_name == ""
+			and ingredient.has_method("get_herb_id")
+		):
+			herb_name = str(
+				ingredient.get_herb_id()
+			).strip_edges()
 
 		if ingredient.has_method("get_amount_in_fen"):
-			amount_text = HerbUnit.format_fen_auto(int(ingredient.get_amount_in_fen()))
+			amount_text = HerbUnit.format_fen_auto(
+				int(ingredient.get_amount_in_fen())
+			)
 
 		if herb_name == "":
 			continue
+
 		if amount_text == "":
 			parts.append(herb_name)
 		else:
-			parts.append("%s %s" % [herb_name, amount_text])
+			parts.append(
+				"%s %s" % [herb_name, amount_text]
+			)
 
 	if parts.is_empty():
 		return "（无）"
+
 	return "、".join(parts)

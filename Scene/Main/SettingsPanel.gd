@@ -49,7 +49,6 @@ var loading_settings: bool = false
 
 
 func _ready() -> void:
-	# Settings 既可以从标题菜单打开，也可以从已暂停的游戏中打开。
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	visible = false
 
@@ -58,6 +57,15 @@ func _ready() -> void:
 	_load_settings()
 	_refresh_optional_audio_bus_state()
 	_connect_signals()
+
+
+func _notification(what: int) -> void:
+	if what != NOTIFICATION_TRANSLATION_CHANGED or not is_node_ready():
+		return
+
+	var selected_display_mode := _selected_display_mode()
+	_setup_display_mode_options(selected_display_mode)
+	_refresh_optional_audio_bus_state()
 
 
 func _setup_language_options() -> void:
@@ -79,36 +87,68 @@ func _setup_display_mode_options(selected_mode: String = "") -> void:
 			var size: Vector2i = DISPLAY_MODE_SIZES[mode]
 			label = tr("UI_DISPLAY_MODE_WINDOW_FMT") % [size.x, size.y]
 		display_mode_option_button.add_item(label)
-		display_mode_option_button.set_item_metadata(display_mode_option_button.item_count - 1, mode)
+		display_mode_option_button.set_item_metadata(
+			display_mode_option_button.item_count - 1,
+			mode
+		)
 
 	var mode_to_select := selected_mode
 	if not _is_valid_display_mode(mode_to_select):
 		mode_to_select = DISPLAY_MODE_WINDOW_1920X1080
+
 	for index in range(display_mode_option_button.item_count):
-		if str(display_mode_option_button.get_item_metadata(index)) == mode_to_select:
+		if (
+			str(display_mode_option_button.get_item_metadata(index))
+			== mode_to_select
+		):
 			display_mode_option_button.select(index)
 			return
+
 	display_mode_option_button.select(0)
 
 
 func _connect_signals() -> void:
-	if not master_volume_slider.value_changed.is_connected(_on_master_volume_changed):
-		master_volume_slider.value_changed.connect(_on_master_volume_changed)
+	if not master_volume_slider.value_changed.is_connected(
+		_on_master_volume_changed
+	):
+		master_volume_slider.value_changed.connect(
+			_on_master_volume_changed
+		)
 
-	if not music_volume_slider.value_changed.is_connected(_on_music_volume_changed):
-		music_volume_slider.value_changed.connect(_on_music_volume_changed)
+	if not music_volume_slider.value_changed.is_connected(
+		_on_music_volume_changed
+	):
+		music_volume_slider.value_changed.connect(
+			_on_music_volume_changed
+		)
 
-	if not sfx_volume_slider.value_changed.is_connected(_on_sfx_volume_changed):
-		sfx_volume_slider.value_changed.connect(_on_sfx_volume_changed)
+	if not sfx_volume_slider.value_changed.is_connected(
+		_on_sfx_volume_changed
+	):
+		sfx_volume_slider.value_changed.connect(
+			_on_sfx_volume_changed
+		)
 
-	if not ambient_volume_slider.value_changed.is_connected(_on_ambient_volume_changed):
-		ambient_volume_slider.value_changed.connect(_on_ambient_volume_changed)
+	if not ambient_volume_slider.value_changed.is_connected(
+		_on_ambient_volume_changed
+	):
+		ambient_volume_slider.value_changed.connect(
+			_on_ambient_volume_changed
+		)
 
-	if not language_option_button.item_selected.is_connected(_on_language_selected):
-		language_option_button.item_selected.connect(_on_language_selected)
+	if not language_option_button.item_selected.is_connected(
+		_on_language_selected
+	):
+		language_option_button.item_selected.connect(
+			_on_language_selected
+		)
 
-	if not display_mode_option_button.item_selected.is_connected(_on_display_mode_selected):
-		display_mode_option_button.item_selected.connect(_on_display_mode_selected)
+	if not display_mode_option_button.item_selected.is_connected(
+		_on_display_mode_selected
+	):
+		display_mode_option_button.item_selected.connect(
+			_on_display_mode_selected
+		)
 
 	if not back_button.pressed.is_connected(_on_back_button_pressed):
 		back_button.pressed.connect(_on_back_button_pressed)
@@ -150,10 +190,19 @@ func _load_settings() -> void:
 	if load_error != OK:
 		config = ConfigFile.new()
 
-	var master_value := float(config.get_value(SECTION_AUDIO, "master_volume", 100.0))
-	var music_value := float(config.get_value(SECTION_AUDIO, "music_volume", 80.0))
-	var sfx_value := float(config.get_value(SECTION_AUDIO, "sfx_volume", 80.0))
-	var saved_locale := str(config.get_value(SECTION_LANGUAGE, "locale", LOCALE_ZH_CN))
+	var master_value := float(
+		config.get_value(SECTION_AUDIO, "master_volume", 100.0)
+	)
+	var music_value := float(
+		config.get_value(SECTION_AUDIO, "music_volume", 80.0)
+	)
+	var sfx_value := float(
+		config.get_value(SECTION_AUDIO, "sfx_volume", 80.0)
+	)
+	var saved_locale := str(
+		config.get_value(SECTION_LANGUAGE, "locale", LOCALE_ZH_CN)
+	)
+
 	if (
 		saved_locale != LOCALE_ZH_CN
 		and saved_locale != LOCALE_EN
@@ -161,12 +210,24 @@ func _load_settings() -> void:
 		and saved_locale != LOCALE_KO
 	):
 		saved_locale = LOCALE_ZH_CN
+
 	var saved_display_mode := _get_saved_display_mode()
 
 	master_volume_slider.value = clampf(master_value, 0.0, 100.0)
 	music_volume_slider.value = clampf(music_value, 0.0, 100.0)
 	sfx_volume_slider.value = clampf(sfx_value, 0.0, 100.0)
-	ambient_volume_slider.value = clampf(float(config.get_value(SECTION_AUDIO, "ambient_volume", 80.0)), 0.0, 100.0)
+	ambient_volume_slider.value = clampf(
+		float(
+			config.get_value(
+				SECTION_AUDIO,
+				"ambient_volume",
+				80.0
+			)
+		),
+		0.0,
+		100.0
+	)
+
 	match saved_locale:
 		LOCALE_EN:
 			language_option_button.select(1)
@@ -176,27 +237,68 @@ func _load_settings() -> void:
 			language_option_button.select(3)
 		_:
 			language_option_button.select(0)
+
 	TranslationServer.set_locale(saved_locale)
 	_setup_display_mode_options(saved_display_mode)
-	_apply_bus_volume(MASTER_BUS, master_volume_slider.value)
-	_apply_bus_volume(MUSIC_BUS, music_volume_slider.value)
-	_apply_bus_volume(SFX_BUS, sfx_volume_slider.value)
-	_apply_bus_volume(AMBIENT_BUS, ambient_volume_slider.value)
+	_apply_bus_volume(
+		MASTER_BUS,
+		master_volume_slider.value
+	)
+	_apply_bus_volume(
+		MUSIC_BUS,
+		music_volume_slider.value
+	)
+	_apply_bus_volume(
+		SFX_BUS,
+		sfx_volume_slider.value
+	)
+	_apply_bus_volume(
+		AMBIENT_BUS,
+		ambient_volume_slider.value
+	)
 	_apply_display_mode(saved_display_mode)
 
 	loading_settings = false
 
 
 func _save_settings() -> void:
-	config.set_value(SECTION_AUDIO, "master_volume", master_volume_slider.value)
-	config.set_value(SECTION_AUDIO, "music_volume", music_volume_slider.value)
-	config.set_value(SECTION_AUDIO, "sfx_volume", sfx_volume_slider.value)
-	config.set_value(SECTION_AUDIO, "ambient_volume", ambient_volume_slider.value)
-	config.set_value(SECTION_LANGUAGE, "locale", _selected_locale())
+	config.set_value(
+		SECTION_AUDIO,
+		"master_volume",
+		master_volume_slider.value
+	)
+	config.set_value(
+		SECTION_AUDIO,
+		"music_volume",
+		music_volume_slider.value
+	)
+	config.set_value(
+		SECTION_AUDIO,
+		"sfx_volume",
+		sfx_volume_slider.value
+	)
+	config.set_value(
+		SECTION_AUDIO,
+		"ambient_volume",
+		ambient_volume_slider.value
+	)
+	config.set_value(
+		SECTION_LANGUAGE,
+		"locale",
+		_selected_locale()
+	)
+
 	var selected_display_mode := _selected_display_mode()
-	config.set_value(SECTION_DISPLAY, "display_mode", selected_display_mode)
-	# Keep the old key in sync so older builds can still read this setting.
-	config.set_value(SECTION_DISPLAY, "fullscreen", selected_display_mode == DISPLAY_MODE_FULLSCREEN)
+	config.set_value(
+		SECTION_DISPLAY,
+		"display_mode",
+		selected_display_mode
+	)
+	config.set_value(
+		SECTION_DISPLAY,
+		"fullscreen",
+		selected_display_mode == DISPLAY_MODE_FULLSCREEN
+	)
 
 	var save_error := config.save(CONFIG_PATH)
 	if save_error != OK:
@@ -211,87 +313,178 @@ func _selected_locale() -> String:
 			return LOCALE_JA
 		3:
 			return LOCALE_KO
+
 	return LOCALE_ZH_CN
 
 
 func _selected_display_mode() -> String:
 	var selected_index := display_mode_option_button.selected
-	if selected_index < 0 or selected_index >= display_mode_option_button.item_count:
+	if (
+		selected_index < 0
+		or selected_index >= display_mode_option_button.item_count
+	):
 		return DISPLAY_MODE_WINDOW_1920X1080
 
-	var selected_mode := str(display_mode_option_button.get_item_metadata(selected_index))
-	return selected_mode if _is_valid_display_mode(selected_mode) else DISPLAY_MODE_WINDOW_1920X1080
+	var selected_mode := str(
+		display_mode_option_button.get_item_metadata(selected_index)
+	)
+
+	return (
+		selected_mode
+		if _is_valid_display_mode(selected_mode)
+		else DISPLAY_MODE_WINDOW_1920X1080
+	)
 
 
 func _get_saved_display_mode() -> String:
-	var saved_mode := str(config.get_value(SECTION_DISPLAY, "display_mode", "")).strip_edges()
+	var saved_mode := str(
+		config.get_value(
+			SECTION_DISPLAY,
+			"display_mode",
+			""
+		)
+	).strip_edges()
+
 	if _is_valid_display_mode(saved_mode):
 		return saved_mode
 
-	# Migrate settings.cfg files created before the display-mode dropdown existed.
-	var legacy_fullscreen := bool(config.get_value(
-		SECTION_DISPLAY,
-		"fullscreen",
-		DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
-	))
-	return DISPLAY_MODE_FULLSCREEN if legacy_fullscreen else DISPLAY_MODE_WINDOW_1920X1080
+	var legacy_fullscreen := bool(
+		config.get_value(
+			SECTION_DISPLAY,
+			"fullscreen",
+			DisplayServer.window_get_mode()
+			== DisplayServer.WINDOW_MODE_FULLSCREEN
+		)
+	)
+
+	return (
+		DISPLAY_MODE_FULLSCREEN
+		if legacy_fullscreen
+		else DISPLAY_MODE_WINDOW_1920X1080
+	)
 
 
 func _is_valid_display_mode(mode: String) -> bool:
-	return mode == DISPLAY_MODE_FULLSCREEN or DISPLAY_MODE_SIZES.has(mode)
+	return (
+		mode == DISPLAY_MODE_FULLSCREEN
+		or DISPLAY_MODE_SIZES.has(mode)
+	)
 
 
 func _refresh_optional_audio_bus_state() -> void:
 	var music_available := AudioServer.get_bus_index(MUSIC_BUS) >= 0
 	var sfx_available := AudioServer.get_bus_index(SFX_BUS) >= 0
-	var ambient_available := AudioServer.get_bus_index(AMBIENT_BUS) >= 0
+	var ambient_available := (
+		AudioServer.get_bus_index(AMBIENT_BUS) >= 0
+	)
 
 	music_volume_slider.editable = music_available
 	sfx_volume_slider.editable = sfx_available
 	ambient_volume_slider.editable = ambient_available
 
-	music_label.tooltip_text = _get_missing_audio_bus_message(MUSIC_BUS) if not music_available else ""
+	music_label.tooltip_text = (
+		_get_missing_audio_bus_message(MUSIC_BUS)
+		if not music_available
+		else ""
+	)
 	music_volume_slider.tooltip_text = music_label.tooltip_text
 
-	sfx_label.tooltip_text = _get_missing_audio_bus_message(SFX_BUS) if not sfx_available else ""
+	sfx_label.tooltip_text = (
+		_get_missing_audio_bus_message(SFX_BUS)
+		if not sfx_available
+		else ""
+	)
 	sfx_volume_slider.tooltip_text = sfx_label.tooltip_text
 
-	ambient_label.tooltip_text = _get_missing_audio_bus_message(AMBIENT_BUS) if not ambient_available else ""
+	ambient_label.tooltip_text = (
+		_get_missing_audio_bus_message(AMBIENT_BUS)
+		if not ambient_available
+		else ""
+	)
 	ambient_volume_slider.tooltip_text = ambient_label.tooltip_text
 
 
 func _get_missing_audio_bus_message(bus_name: String) -> String:
+	var key := "UI_SETTINGS_AUDIO_BUS_MISSING_FMT"
+	var translated := tr(key)
+
+	if translated != key and not translated.strip_edges().is_empty():
+		return translated % bus_name
+
 	var locale := TranslationServer.get_locale().to_lower()
 
 	if locale.begins_with("en"):
-		return "%s audio bus has not been created yet. This slider will take effect after it is created." % bus_name
+		return (
+			"%s audio bus has not been created yet. "
+			+ "This slider will take effect after it is created."
+		) % bus_name
+
 	if locale.begins_with("ja"):
-		return "%s オーディオバスはまだ作成されていません。作成すると、このスライダーが有効になります。" % bus_name
+		return (
+			"%s オーディオバスはまだ作成されていません。"
+			+ "作成すると、このスライダーが有効になります。"
+		) % bus_name
+
 	if locale.begins_with("ko"):
-		return "%s 오디오 버스가 아직 생성되지 않았습니다. 생성하면 이 슬라이더가 적용됩니다." % bus_name
+		return (
+			"%s 오디오 버스가 아직 생성되지 않았습니다. "
+			+ "생성하면 이 슬라이더가 적용됩니다."
+		) % bus_name
 
-	return "当前项目尚未创建 %s 音频总线。创建后该滑块会自动生效。" % bus_name
+	return (
+		"当前项目尚未创建 %s 音频总线。"
+		+ "创建后该滑块会自动生效。"
+	) % bus_name
 
 
-func _apply_bus_volume(bus_name: String, percent: float) -> void:
+func _apply_bus_volume(
+	bus_name: String,
+	percent: float
+) -> void:
 	var bus_index := AudioServer.get_bus_index(bus_name)
 	if bus_index < 0:
 		return
 
-	var linear_value := clampf(percent / 100.0, 0.0, 1.0)
-	var db_value := -80.0 if linear_value <= 0.0001 else linear_to_db(linear_value)
-	AudioServer.set_bus_volume_db(bus_index, db_value)
+	var linear_value := clampf(
+		percent / 100.0,
+		0.0,
+		1.0
+	)
+	var db_value := (
+		-80.0
+		if linear_value <= 0.0001
+		else linear_to_db(linear_value)
+	)
+
+	AudioServer.set_bus_volume_db(
+		bus_index,
+		db_value
+	)
 
 
 func _apply_display_mode(mode: String) -> void:
 	if mode == DISPLAY_MODE_FULLSCREEN:
-		if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		if (
+			DisplayServer.window_get_mode()
+			!= DisplayServer.WINDOW_MODE_FULLSCREEN
+		):
+			DisplayServer.window_set_mode(
+				DisplayServer.WINDOW_MODE_FULLSCREEN
+			)
 		return
 
-	if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_WINDOWED:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	var target_size = DISPLAY_MODE_SIZES.get(mode, Vector2i(1920, 1080))
+	if (
+		DisplayServer.window_get_mode()
+		!= DisplayServer.WINDOW_MODE_WINDOWED
+	):
+		DisplayServer.window_set_mode(
+			DisplayServer.WINDOW_MODE_WINDOWED
+		)
+
+	var target_size = DISPLAY_MODE_SIZES.get(
+		mode,
+		Vector2i(1920, 1080)
+	)
 	DisplayServer.window_set_size(target_size)
 
 
@@ -322,6 +515,7 @@ func _on_ambient_volume_changed(value: float) -> void:
 func _on_language_selected(_index: int) -> void:
 	if loading_settings:
 		return
+
 	var selected_display_mode := _selected_display_mode()
 	TranslationServer.set_locale(_selected_locale())
 	_setup_display_mode_options(selected_display_mode)
@@ -332,7 +526,10 @@ func _on_language_selected(_index: int) -> void:
 func _on_display_mode_selected(index: int) -> void:
 	if loading_settings:
 		return
-	var selected_mode := str(display_mode_option_button.get_item_metadata(index))
+
+	var selected_mode := str(
+		display_mode_option_button.get_item_metadata(index)
+	)
 	_apply_display_mode(selected_mode)
 
 
