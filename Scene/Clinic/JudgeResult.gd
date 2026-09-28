@@ -175,102 +175,278 @@ func has_any_problem() -> bool:
 # =========================================================
 
 func get_summary_text() -> String:
-	var locale := TranslationServer.get_locale().to_lower()
-
-	if locale.begins_with("en"):
-		var english_lines: Array[String] = []
-		if not english_message.is_empty():
-			english_lines.append(english_message)
-		english_lines.append("Score: %d" % score)
-
-		var english_grade_key := "UI_RESULT_GRADE_FAILED"
-		if level == "perfect":
-			english_grade_key = "UI_RESULT_GRADE_PERFECT"
-		elif level == "pass":
-			english_grade_key = "UI_RESULT_GRADE_SUCCESS"
-		english_lines.append("Grade: %s" % TranslationServer.translate(english_grade_key))
-
-		if not matched_formula_id.is_empty():
-			english_lines.append("Standard Prescription: %s" % LocalizedName.formula(matched_formula_id, matched_formula_name))
-		elif not matched_formula_name.is_empty():
-			english_lines.append("Standard Prescription: %s" % matched_formula_name)
-
-		if not english_disease_message.is_empty():
-			english_lines.append("Diagnosis: %s" % english_disease_message)
-
-		return "\n".join(english_lines)
-
-	if locale.begins_with("ja"):
-		var japanese_lines: Array[String] = []
-		if not japanese_message.is_empty():
-			japanese_lines.append(japanese_message)
-		japanese_lines.append("得点：%d" % score)
-		var japanese_grade_key := "UI_RESULT_GRADE_FAILED"
-		if level == "perfect":
-			japanese_grade_key = "UI_RESULT_GRADE_PERFECT"
-		elif level == "pass":
-			japanese_grade_key = "UI_RESULT_GRADE_SUCCESS"
-		japanese_lines.append("評価：%s" % TranslationServer.translate(japanese_grade_key))
-		if not matched_formula_id.is_empty():
-			japanese_lines.append("標準処方：%s" % LocalizedName.formula(matched_formula_id, matched_formula_name))
-		elif not matched_formula_name.is_empty():
-			japanese_lines.append("標準処方：%s" % matched_formula_name)
-		if not japanese_disease_message.is_empty():
-			japanese_lines.append("診断：%s" % japanese_disease_message)
-		return "\n".join(japanese_lines)
-
-	if locale.begins_with("ko"):
-		var korean_lines: Array[String] = []
-		if not korean_message.is_empty():
-			korean_lines.append(korean_message)
-		korean_lines.append("점수: %d" % score)
-		var grade_key := "UI_RESULT_GRADE_FAILED"
-		if level == "perfect":
-			grade_key = "UI_RESULT_GRADE_PERFECT"
-		elif level == "pass":
-			grade_key = "UI_RESULT_GRADE_SUCCESS"
-		korean_lines.append("평가: %s" % TranslationServer.translate(grade_key))
-		if not matched_formula_id.is_empty():
-			korean_lines.append("표준 처방: %s" % LocalizedName.formula(matched_formula_id, matched_formula_name))
-		elif not matched_formula_name.is_empty():
-			korean_lines.append("표준 처방: %s" % matched_formula_name)
-		if not korean_disease_message.is_empty():
-			korean_lines.append("진단: %s" % korean_disease_message)
-		return "\n".join(korean_lines)
-
 	var lines: Array[String] = []
 
-	if message != "":
-		lines.append(message)
+	var localized_message := _localized_result_message()
+	if not localized_message.is_empty():
+		lines.append(localized_message)
 
-	lines.append("评分：%d" % score)
-	lines.append("评价：%s" % grade)
+	lines.append(_tr_fmt(
+		"UI_JUDGE_SUMMARY_SCORE_FMT",
+		_score_fallback_fmt(),
+		[score]
+	))
 
-	if matched_formula_name != "":
-		lines.append("标准方：%s" % matched_formula_name)
-	elif matched_formula_id != "":
-		lines.append("标准方 ID：%s" % matched_formula_id)
+	var grade_key := _get_grade_translation_key()
+	var localized_grade := _translate_with_fallback(grade_key, grade)
+	lines.append(_tr_fmt(
+		"UI_JUDGE_SUMMARY_GRADE_FMT",
+		_grade_fallback_fmt(),
+		[localized_grade]
+	))
 
-	if disease_message != "":
-		lines.append("断病：%s" % disease_message)
+	var localized_formula_name := matched_formula_name
+	if not matched_formula_id.is_empty():
+		localized_formula_name = LocalizedName.formula(
+			matched_formula_id,
+			matched_formula_name
+		)
 
+	if not localized_formula_name.is_empty():
+		# 优先复用 JudgementResult 界面已经使用的统一翻译 key。
+		lines.append(_tr_fmt(
+			"UI_RESULT_FORMULA_FMT",
+			_formula_fallback_fmt(),
+			[localized_formula_name]
+		))
+	elif not matched_formula_id.is_empty():
+		lines.append(_tr_fmt(
+			"UI_JUDGE_SUMMARY_FORMULA_ID_FMT",
+			_formula_id_fallback_fmt(),
+			[matched_formula_id]
+		))
+
+	var localized_disease_message := _localized_disease_result_message()
+	if not localized_disease_message.is_empty():
+		# UI_RESULT_DIAGNOSIS_FMT 已由当前判定结果窗口使用。
+		lines.append(_tr_fmt(
+			"UI_RESULT_DIAGNOSIS_FMT",
+			_diagnosis_fallback_fmt(),
+			[localized_disease_message]
+		))
+
+	# 下面几类详细误差目前主要用于调试/兼容旧结果。
+	# 如果翻译表中已经加入对应 key，会自动使用；否则保持四语 fallback。
 	if not missing_herb_names.is_empty():
-		lines.append("缺少药材：%s" % "、".join(missing_herb_names))
+		lines.append(_tr_fmt(
+			"UI_JUDGE_SUMMARY_MISSING_HERBS_FMT",
+			_missing_herbs_fallback_fmt(),
+			[_localized_herb_list(missing_herb_ids, missing_herb_names)]
+		))
 
 	if not extra_herb_names.is_empty():
-		lines.append("多余药材：%s" % "、".join(extra_herb_names))
+		lines.append(_tr_fmt(
+			"UI_JUDGE_SUMMARY_EXTRA_HERBS_FMT",
+			_extra_herbs_fallback_fmt(),
+			[_localized_herb_list(extra_herb_ids, extra_herb_names)]
+		))
 
 	if not minor_dosage_errors.is_empty():
-		lines.append("剂量轻微偏差：")
+		lines.append(_translate_with_fallback(
+			"UI_JUDGE_SUMMARY_MINOR_DOSAGE",
+			_minor_dosage_fallback()
+		))
 		for item in minor_dosage_errors:
 			lines.append("- " + item)
 
 	if not major_dosage_errors.is_empty():
-		lines.append("剂量严重偏差：")
+		lines.append(_translate_with_fallback(
+			"UI_JUDGE_SUMMARY_MAJOR_DOSAGE",
+			_major_dosage_fallback()
+		))
 		for item in major_dosage_errors:
 			lines.append("- " + item)
 
 	return "\n".join(lines)
+
+
+func _localized_result_message() -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+
+	if locale.begins_with("en") and not english_message.is_empty():
+		return english_message
+	if locale.begins_with("ja") and not japanese_message.is_empty():
+		return japanese_message
+	if locale.begins_with("ko") and not korean_message.is_empty():
+		return korean_message
+
+	return message
+
+
+func _localized_disease_result_message() -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+
+	if locale.begins_with("en") and not english_disease_message.is_empty():
+		return english_disease_message
+	if locale.begins_with("ja") and not japanese_disease_message.is_empty():
+		return japanese_disease_message
+	if locale.begins_with("ko") and not korean_disease_message.is_empty():
+		return korean_disease_message
+
+	return disease_message
+
+
+func _get_grade_translation_key() -> String:
+	match level:
+		"perfect":
+			return "UI_RESULT_GRADE_PERFECT"
+		"pass":
+			return "UI_RESULT_GRADE_SUCCESS"
+		"fail":
+			return "UI_RESULT_GRADE_FAILED"
+
+	# 兼容旧数据：如果没有稳定 level，就继续读取中文 grade。
+	match grade:
+		"妙手回春":
+			return "UI_RESULT_GRADE_PERFECT"
+		"治疗成功":
+			return "UI_RESULT_GRADE_SUCCESS"
+		"治疗失败":
+			return "UI_RESULT_GRADE_FAILED"
+
+	return ""
+
+
+func _translate_with_fallback(key: String, fallback: String) -> String:
+	if key.is_empty():
+		return fallback
+
+	var translated := TranslationServer.translate(key)
+	if translated.strip_edges().is_empty() or translated == key:
+		return fallback
+
+	return translated
+
+
+func _tr_fmt(key: String, fallback_format: String, args: Array) -> String:
+	var format_text := _translate_with_fallback(key, fallback_format)
+
+	if args.size() == 1:
+		return format_text % args[0]
+
+	return format_text % args
+
+
+func _localized_herb_list(
+	herb_ids: Array[String],
+	herb_names: Array[String]
+) -> String:
+	var names: Array[String] = []
+
+	for index in range(herb_names.size()):
+		var fallback := herb_names[index]
+		var herb_id := herb_ids[index] if index < herb_ids.size() else ""
+
+		if not herb_id.is_empty():
+			names.append(LocalizedName.herb(herb_id, fallback))
+		else:
+			names.append(fallback)
+
+	return _list_separator().join(names)
+
+
+func _list_separator() -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+	return ", " if locale.begins_with("en") else "、"
+
+
+func _score_fallback_fmt() -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+	if locale.begins_with("en"):
+		return "Score: %d"
+	if locale.begins_with("ja"):
+		return "得点：%d"
+	if locale.begins_with("ko"):
+		return "점수: %d"
+	return "评分：%d"
+
+
+func _grade_fallback_fmt() -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+	if locale.begins_with("en"):
+		return "Grade: %s"
+	if locale.begins_with("ja"):
+		return "評価：%s"
+	if locale.begins_with("ko"):
+		return "평가: %s"
+	return "评价：%s"
+
+
+func _formula_fallback_fmt() -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+	if locale.begins_with("en"):
+		return "Standard Prescription: %s"
+	if locale.begins_with("ja"):
+		return "標準処方：%s"
+	if locale.begins_with("ko"):
+		return "표준 처방: %s"
+	return "标准方：%s"
+
+
+func _formula_id_fallback_fmt() -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+	if locale.begins_with("en"):
+		return "Standard Prescription ID: %s"
+	if locale.begins_with("ja"):
+		return "標準処方 ID：%s"
+	if locale.begins_with("ko"):
+		return "표준 처방 ID: %s"
+	return "标准方 ID：%s"
+
+
+func _diagnosis_fallback_fmt() -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+	if locale.begins_with("en"):
+		return "Diagnosis: %s"
+	if locale.begins_with("ja"):
+		return "診断：%s"
+	if locale.begins_with("ko"):
+		return "진단: %s"
+	return "断病：%s"
+
+
+func _missing_herbs_fallback_fmt() -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+	if locale.begins_with("en"):
+		return "Missing herbs: %s"
+	if locale.begins_with("ja"):
+		return "不足薬材：%s"
+	if locale.begins_with("ko"):
+		return "누락 약재: %s"
+	return "缺少药材：%s"
+
+
+func _extra_herbs_fallback_fmt() -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+	if locale.begins_with("en"):
+		return "Extra herbs: %s"
+	if locale.begins_with("ja"):
+		return "余分な薬材：%s"
+	if locale.begins_with("ko"):
+		return "불필요한 약재: %s"
+	return "多余药材：%s"
+
+
+func _minor_dosage_fallback() -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+	if locale.begins_with("en"):
+		return "Minor dosage deviations:"
+	if locale.begins_with("ja"):
+		return "用量の軽微なずれ："
+	if locale.begins_with("ko"):
+		return "경미한 용량 편차:"
+	return "剂量轻微偏差："
+
+
+func _major_dosage_fallback() -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+	if locale.begins_with("en"):
+		return "Major dosage deviations:"
+	if locale.begins_with("ja"):
+		return "用量の大きなずれ："
+	if locale.begins_with("ko"):
+		return "심각한 용량 편차:"
+	return "剂量严重偏差："
 
 # =========================================================
 # 七、调试输出
