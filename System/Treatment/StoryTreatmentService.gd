@@ -600,7 +600,7 @@ func _build_formula_group_display_text(group: Array) -> String:
 			herb_name = LocalizedName.herb(herb_id, herb_name)
 
 		if ingredient.has_method("get_amount_in_fen"):
-			amount_text = _format_fen_for_current_locale(
+			amount_text = HerbUnit.format_fen_auto(
 				int(ingredient.get_amount_in_fen())
 			)
 
@@ -648,42 +648,8 @@ func _localized_none_text() -> String:
 	return _localized_text("UI_NONE", "（无）", "(None)", "（なし）", "(없음)")
 
 
-func _format_fen_for_current_locale(total_fen: int) -> String:
-	if total_fen <= 0:
-		return _localized_text(
-			"UI_PRESCRIPTION_ZERO_FEN",
-			"0分",
-			"0 fen",
-			"0分",
-			"0푼"
-		)
-
-	var remaining := total_fen
-	var parts: Array[String] = []
-
-	for unit_data in [
-		[HerbUnit.FEN_PER_JIN, "UI_PRESCRIPTION_UNIT_JIN", "斤", "jin", "斤", "근"],
-		[HerbUnit.FEN_PER_LIANG, "UI_PRESCRIPTION_UNIT_LIANG", "两", "liang", "両", "냥"],
-		[HerbUnit.FEN_PER_QIAN, "UI_PRESCRIPTION_UNIT_QIAN", "钱", "qian", "銭", "전"],
-		[HerbUnit.FEN_PER_FEN, "UI_PRESCRIPTION_UNIT_FEN", "分", "fen", "分", "푼"]
-	]:
-		var unit_size: int = unit_data[0]
-		var count: int = remaining / unit_size
-		if count <= 0:
-			continue
-
-		var unit_text := _localized_text(
-			unit_data[1],
-			unit_data[2],
-			unit_data[3],
-			unit_data[4],
-			unit_data[5]
-		)
-		parts.append("%d %s" % [count, unit_text])
-		remaining %= unit_size
-
-	return " ".join(parts)
-
-
 func _list_separator() -> String:
-	return ", " if LocalizedName.is_english_locale() else "、"
+	var locale := TranslationServer.get_locale().to_lower()
+	if locale.begins_with("en") or locale.begins_with("ko"):
+		return ", "
+	return "、"

@@ -269,7 +269,7 @@ func _build_group_text(group: Array[Dictionary]) -> String:
 
 		parts.append(
 			"%s %s"
-			% [herb_name, _format_fen_for_current_locale(total_fen)]
+			% [herb_name, HerbUnit.format_fen_auto(total_fen)]
 		)
 
 	return _list_separator().join(parts)
@@ -301,43 +301,6 @@ func _localized_none_text() -> String:
 	return _localized_text("UI_NONE", "（无）", "(None)", "（なし）", "(없음)")
 
 
-func _format_fen_for_current_locale(total_fen: int) -> String:
-	if total_fen <= 0:
-		return _localized_text(
-			"UI_PRESCRIPTION_ZERO_FEN",
-			"0分",
-			"0 fen",
-			"0分",
-			"0푼"
-		)
-
-	var remaining := total_fen
-	var parts: Array[String] = []
-
-	for unit_data in [
-		[HerbUnit.FEN_PER_JIN, "UI_PRESCRIPTION_UNIT_JIN", "斤", "jin", "斤", "근"],
-		[HerbUnit.FEN_PER_LIANG, "UI_PRESCRIPTION_UNIT_LIANG", "两", "liang", "両", "냥"],
-		[HerbUnit.FEN_PER_QIAN, "UI_PRESCRIPTION_UNIT_QIAN", "钱", "qian", "銭", "전"],
-		[HerbUnit.FEN_PER_FEN, "UI_PRESCRIPTION_UNIT_FEN", "分", "fen", "分", "푼"]
-	]:
-		var unit_size: int = unit_data[0]
-		var count: int = remaining / unit_size
-		if count <= 0:
-			continue
-
-		var unit_text := _localized_text(
-			unit_data[1],
-			unit_data[2],
-			unit_data[3],
-			unit_data[4],
-			unit_data[5]
-		)
-		parts.append("%d %s" % [count, unit_text])
-		remaining %= unit_size
-
-	return " ".join(parts)
-
-
 func _localized_text(
 	key: String,
 	zh: String,
@@ -360,7 +323,10 @@ func _localized_text(
 
 
 func _list_separator() -> String:
-	return ", " if TranslationServer.get_locale().to_lower().begins_with("en") else "、"
+	var locale := TranslationServer.get_locale().to_lower()
+	if locale.begins_with("en") or locale.begins_with("ko"):
+		return ", "
+	return "、"
 
 
 # 疾病诊断操作方法

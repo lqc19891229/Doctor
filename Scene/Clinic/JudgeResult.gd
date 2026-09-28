@@ -376,78 +376,10 @@ func _localized_dosage_error_line(data: Dictionary) -> String:
 		_dosage_error_fallback_fmt(),
 		[
 			herb_name,
-			_format_fen_for_current_locale(int(data.get("player_fen", 0))),
-			_format_fen_for_current_locale(int(data.get("standard_fen", 0)))
+			HerbUnit.format_fen_auto(int(data.get("player_fen", 0))),
+			HerbUnit.format_fen_auto(int(data.get("standard_fen", 0)))
 		]
 	)
-
-
-func _format_fen_for_current_locale(total_fen: int) -> String:
-	if total_fen <= 0:
-		return _translate_with_fallback(
-			"UI_PRESCRIPTION_ZERO_FEN",
-			_zero_fen_fallback()
-		)
-
-	var remaining := total_fen
-	var parts: Array[String] = []
-
-	for unit_data in [
-		[HerbUnit.FEN_PER_JIN, "UI_PRESCRIPTION_UNIT_JIN", _unit_fallback("jin")],
-		[HerbUnit.FEN_PER_LIANG, "UI_PRESCRIPTION_UNIT_LIANG", _unit_fallback("liang")],
-		[HerbUnit.FEN_PER_QIAN, "UI_PRESCRIPTION_UNIT_QIAN", _unit_fallback("qian")],
-		[HerbUnit.FEN_PER_FEN, "UI_PRESCRIPTION_UNIT_FEN", _unit_fallback("fen")]
-	]:
-		var unit_size: int = unit_data[0]
-		var count: int = remaining / unit_size
-		if count <= 0:
-			continue
-
-		var unit_text := _translate_with_fallback(unit_data[1], unit_data[2])
-		parts.append("%d %s" % [count, unit_text])
-		remaining %= unit_size
-
-	return " ".join(parts)
-
-
-func _zero_fen_fallback() -> String:
-	var locale := TranslationServer.get_locale().to_lower()
-	if locale.begins_with("en"):
-		return "0 fen"
-	if locale.begins_with("ko"):
-		return "0푼"
-	return "0分"
-
-
-func _unit_fallback(unit: String) -> String:
-	var locale := TranslationServer.get_locale().to_lower()
-
-	if locale.begins_with("en"):
-		match unit:
-			"jin": return "jin"
-			"liang": return "liang"
-			"qian": return "qian"
-			_: return "fen"
-
-	if locale.begins_with("ja"):
-		match unit:
-			"jin": return "斤"
-			"liang": return "両"
-			"qian": return "銭"
-			_: return "分"
-
-	if locale.begins_with("ko"):
-		match unit:
-			"jin": return "근"
-			"liang": return "냥"
-			"qian": return "전"
-			_: return "푼"
-
-	match unit:
-		"jin": return "斤"
-		"liang": return "两"
-		"qian": return "钱"
-		_: return "分"
 
 
 func _dosage_error_fallback_fmt() -> String:
