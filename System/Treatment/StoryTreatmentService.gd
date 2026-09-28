@@ -28,6 +28,14 @@ var _last_judge_summary_text: String = ""
 var _last_info_text: String = ""
 
 
+func _treatment_locale_text(chinese: String, japanese: String, korean: String) -> String:
+	if LocalizedName.is_japanese_locale():
+		return japanese
+	if LocalizedName.is_korean_locale():
+		return korean
+	return chinese
+
+
 func _ready() -> void:
 	# 只创建一个纯数据 NpcManager。
 	# 第 3 步已经让 NpcManager 的模板目录使用 static 共享缓存，
@@ -46,19 +54,19 @@ func prepare_story_npc_treatment(
 
 	var clean_npc_id := npc_id.strip_edges()
 	if clean_npc_id == "":
-		_set_info_text("剧情没有配置 clinic_npc_id。")
+		_set_info_text("シナリオに clinic_npc_id が設定されていません。" if LocalizedName.is_japanese_locale() else "剧情没有配置 clinic_npc_id。")
 		return false
 
 	if treatment_disease == null:
-		_set_info_text("发起诊疗的剧情没有配置 Disease。")
+		_set_info_text("診療シナリオに病名が設定されていません。" if LocalizedName.is_japanese_locale() else "发起诊疗的剧情没有配置 Disease。")
 		return false
 
 	if _npc_manager == null or not is_instance_valid(_npc_manager):
-		_set_info_text("剧情诊疗服务的 NpcManager 不可用。")
+		_set_info_text("シナリオ診療の NpcManager を使用できません。" if LocalizedName.is_japanese_locale() else "剧情诊疗服务的 NpcManager 不可用。")
 		return false
 
 	if not _npc_manager.has_method("replace_with_story_npc"):
-		_set_info_text("NpcManager 缺少 story NPC 接口。")
+		_set_info_text("NpcManager にシナリオ患者用の機能がありません。" if LocalizedName.is_japanese_locale() else "NpcManager 缺少 story NPC 接口。")
 		return false
 
 	var npc: NpcData = _npc_manager.call(
@@ -67,11 +75,11 @@ func prepare_story_npc_treatment(
 		treatment_disease
 	) as NpcData
 	if npc == null:
-		_set_info_text("story NPC 加载失败：%s" % clean_npc_id)
+		_set_info_text(("シナリオ患者を読み込めません：%s" if LocalizedName.is_japanese_locale() else "story NPC 加载失败：%s") % clean_npc_id)
 		return false
 
 	if npc.npc_type.strip_edges().to_lower() != "story":
-		_set_info_text("NPC【%s】的 npc_type 不是 story。" % clean_npc_id)
+		_set_info_text(("患者【%s】の種別が story ではありません。" if LocalizedName.is_japanese_locale() else "NPC【%s】的 npc_type 不是 story。") % clean_npc_id)
 		return false
 
 	_current_npc = npc
@@ -83,7 +91,7 @@ func prepare_story_npc_treatment(
 func get_story_treatment_npc_name() -> String:
 	if _current_npc == null:
 		return ""
-	return _current_npc.npc_name
+	return _current_npc.get_localized_name()
 
 
 func get_story_treatment_prescription():
@@ -94,13 +102,13 @@ func show_story_pulse_hand(target_pulse_window: Node, hand_side: String) -> Dict
 	if _current_npc == null or _current_npc.disease == null:
 		return {
 			"ok": false,
-			"text": "진료할 이야기 환자가 없습니다." if LocalizedName.is_korean_locale() else "当前没有可诊疗的剧情病人。"
+			"text": _treatment_locale_text("当前没有可诊疗的剧情病人。", "診療できるシナリオ患者がいません。", "진료할 이야기 환자가 없습니다.")
 		}
 
 	if target_pulse_window == null or not target_pulse_window.has_method("show_hand_group"):
 		return {
 			"ok": false,
-			"text": "맥진 창을 사용할 수 없습니다." if LocalizedName.is_korean_locale() else "Story 的 PulseWindow 不可用。"
+			"text": _treatment_locale_text("Story 的 PulseWindow 不可用。", "脈診画面を使用できません。", "맥진 창을 사용할 수 없습니다.")
 		}
 
 	var raw_result = target_pulse_window.call(
@@ -113,24 +121,24 @@ func show_story_pulse_hand(target_pulse_window: Node, hand_side: String) -> Dict
 
 	return {
 		"ok": false,
-		"text": "맥진 창에서 유효하지 않은 결과를 반환했습니다." if LocalizedName.is_korean_locale() else "Story 的 PulseWindow 返回了无效数据。"
+		"text": _treatment_locale_text("Story 的 PulseWindow 返回了无效数据。", "脈診画面から正しい結果を取得できませんでした。", "맥진 창에서 유효하지 않은 결과를 반환했습니다.")
 	}
 
 
 func submit_story_prescription() -> Dictionary:
 	if _current_npc == null:
-		return _submit_error("현재 환자가 없어 처방을 제출할 수 없습니다." if LocalizedName.is_korean_locale() else "当前没有病人，无法提交处方")
+		return _submit_error(_treatment_locale_text("当前没有病人，无法提交处方", "患者がいないため処方を提出できません。", "현재 환자가 없어 처방을 제출할 수 없습니다."))
 
 	if _current_npc.disease == null:
-		return _submit_error("현재 환자에게 연결된 병증이 없습니다." if LocalizedName.is_korean_locale() else "当前病人没有绑定疾病，无法提交处方")
+		return _submit_error(_treatment_locale_text("当前病人没有绑定疾病，无法提交处方", "この患者には病名が設定されていません。", "현재 환자에게 연결된 병증이 없습니다."))
 
 	if _current_prescription == null or _current_prescription.is_empty():
-		return _submit_error("처방이 비어 있습니다. 먼저 약재를 선택해 주세요." if LocalizedName.is_korean_locale() else "当前处方为空，请先开方")
+		return _submit_error(_treatment_locale_text("当前处方为空，请先开方", "処方が空です。先に薬材を選んでください。", "처방이 비어 있습니다. 먼저 약재를 선택해 주세요."))
 
 	var standard_formula := _get_current_standard_formula()
 	if standard_formula == null:
 		var disease_name := LocalizedName.disease(_current_npc.disease.disease_id, _current_npc.disease.disease_name)
-		return _submit_error(("【%s】에 해당하는 표준 처방을 찾을 수 없습니다." if LocalizedName.is_korean_locale() else "未找到疾病【%s】对应的标准方") % disease_name)
+		return _submit_error(_treatment_locale_text("未找到疾病【%s】对应的标准方", "【%s】の標準処方が見つかりません。", "【%s】에 해당하는 표준 처방을 찾을 수 없습니다.") % disease_name)
 
 	var result = _formula_judge.judge_formula(
 		_current_prescription,
@@ -138,7 +146,7 @@ func submit_story_prescription() -> Dictionary:
 		_current_npc.disease
 	)
 	if result == null:
-		return _submit_error("처방 판정에 실패했습니다." if LocalizedName.is_korean_locale() else "处方判定失败。")
+		return _submit_error(_treatment_locale_text("处方判定失败。", "処方を判定できませんでした。", "처방 판정에 실패했습니다."))
 
 	var was_already_submitted := _diagnosis_submitted
 	_diagnosis_submitted = true

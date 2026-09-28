@@ -43,6 +43,8 @@ var grade: String = "治疗失败"
 var message: String = ""
 var korean_message: String = ""
 var korean_disease_message: String = ""
+var japanese_message: String = ""
+var japanese_disease_message: String = ""
 
 
 
@@ -171,6 +173,24 @@ func has_any_problem() -> bool:
 # =========================================================
 
 func get_summary_text() -> String:
+	if TranslationServer.get_locale().to_lower().begins_with("ja"):
+		var japanese_lines: Array[String] = []
+		if not japanese_message.is_empty():
+			japanese_lines.append(japanese_message)
+		japanese_lines.append("得点：%d" % score)
+		var japanese_grade_key := "UI_RESULT_GRADE_FAILED"
+		if level == "perfect":
+			japanese_grade_key = "UI_RESULT_GRADE_PERFECT"
+		elif level == "pass":
+			japanese_grade_key = "UI_RESULT_GRADE_SUCCESS"
+		japanese_lines.append("評価：%s" % TranslationServer.translate(japanese_grade_key))
+		if not matched_formula_id.is_empty():
+			japanese_lines.append("標準処方：%s" % LocalizedName.formula(matched_formula_id, matched_formula_name))
+		elif not matched_formula_name.is_empty():
+			japanese_lines.append("標準処方：%s" % matched_formula_name)
+		if not japanese_disease_message.is_empty():
+			japanese_lines.append("診断：%s" % japanese_disease_message)
+		return "\n".join(japanese_lines)
 	if TranslationServer.get_locale().to_lower().begins_with("ko"):
 		var korean_lines: Array[String] = []
 		if not korean_message.is_empty():

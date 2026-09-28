@@ -216,9 +216,9 @@ func _rebuild_book_list_for_search(preferred_book_id: String = "") -> int:
 		var new_entry_count = global_archive.get_unread_readable_entry_count_by_book(book.book_id)
 		var display_name := _localized_book_name(book)
 		if query != "":
-			display_name += tr("UI_READ_BOOK_MATCH_BADGE_FMT") % match_count
+			display_name += "  " + tr("UI_READ_BOOK_MATCH_BADGE_FMT") % match_count
 		if new_entry_count > 0:
-			display_name += tr("UI_READ_BOOK_NEW_COUNT_BADGE_FMT") % new_entry_count
+			display_name += "  " + tr("UI_READ_BOOK_NEW_COUNT_BADGE_FMT") % new_entry_count
 
 		books.append(book)
 		book_list.add_item(display_name)
@@ -315,7 +315,7 @@ func _is_unread_readable_entry(entry: BookEntryData) -> bool:
 func _get_entry_list_display_name(entry: BookEntryData) -> String:
 	var display_name := _localized_entry_title(entry)
 	if _is_unread_readable_entry(entry):
-		display_name += tr("UI_READ_BOOK_NEW_BADGE")
+		display_name += "  " + tr("UI_READ_BOOK_NEW_BADGE")
 	return display_name
 
 

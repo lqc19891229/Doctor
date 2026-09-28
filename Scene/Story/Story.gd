@@ -155,6 +155,8 @@ func _notification(what: int) -> void:
 		return
 	if is_treatment_mode:
 		if _treatment_display_key == "UI_STORY_SELECT_TREATMENT":
+			if treatment_backend != null and is_instance_valid(treatment_backend) and treatment_backend.has_method("get_story_treatment_npc_name"):
+				_treatment_npc_display_name = str(treatment_backend.call("get_story_treatment_npc_name")).strip_edges()
 			speaker_label.text = _treatment_npc_display_name if _treatment_npc_display_name != "" else tr("UI_STORY_TREATMENT_SPEAKER")
 		else:
 			speaker_label.text = tr("UI_STORY_TREATMENT_HINT")

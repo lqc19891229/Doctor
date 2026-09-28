@@ -204,7 +204,7 @@ static func format_fen_as_compound(total_fen: int) -> String:
 
 # 函数功能：根据总分值自动选择较简洁的剂量显示格式。
 static func format_fen_auto(total_fen: int) -> String:
-	if TranslationServer.get_locale().to_lower().begins_with("ko"):
+	if TranslationServer.get_locale().to_lower().begins_with("ko") or TranslationServer.get_locale().to_lower().begins_with("ja"):
 		if total_fen <= 0:
 			return TranslationServer.translate("UI_PRESCRIPTION_ZERO_FEN")
 		var remainder := total_fen

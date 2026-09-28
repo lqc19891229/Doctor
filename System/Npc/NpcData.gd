@@ -100,6 +100,10 @@ func _is_korean_locale() -> bool:
 	return TranslationServer.get_locale().to_lower().begins_with("ko")
 
 
+func _is_japanese_locale() -> bool:
+	return TranslationServer.get_locale().to_lower().begins_with("ja")
+
+
 func _uses_spaced_dialogue_locale() -> bool:
 	# 英文和韩文都需要在前缀、症状、后缀之间使用空格连接。
 	return _is_english_locale() or _is_korean_locale()
@@ -210,7 +214,10 @@ func _compose_dialogue(core: String) -> String:
 	result += symptom
 
 	if suffix_text != "":
-		if not suffix_text.begins_with("，") and not suffix_text.begins_with("。"):
+		if _is_japanese_locale():
+			if not result.ends_with("。") and not result.ends_with("！") and not result.ends_with("？"):
+				result += "。"
+		elif not suffix_text.begins_with("，") and not suffix_text.begins_with("。"):
 			result += "，"
 		result += suffix_text
 

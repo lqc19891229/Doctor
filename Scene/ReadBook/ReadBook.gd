@@ -322,10 +322,10 @@ func _rebuild_book_list_for_search(preferred_book_id: String = "") -> int:
 		var display_name := _localized_book_name(book)
 
 		if query != "":
-			display_name += tr("UI_READ_BOOK_MATCH_BADGE_FMT") % match_count
+			display_name += "  " + tr("UI_READ_BOOK_MATCH_BADGE_FMT") % match_count
 
 		if new_entry_count > 0:
-			display_name += tr("UI_READ_BOOK_NEW_COUNT_BADGE_FMT") % new_entry_count
+			display_name += "  " + tr("UI_READ_BOOK_NEW_COUNT_BADGE_FMT") % new_entry_count
 
 		books.append(book)
 		book_new_entry_counts.append(new_entry_count)
@@ -589,7 +589,7 @@ func _get_entry_list_display_name(entry: BookEntryData) -> String:
 
 	var display_name := _localized_entry_title(entry)
 	if not Unlock.is_entry_read(entry.entry_id) and Unlock.can_read_entry(entry.entry_id):
-		display_name += tr("UI_READ_BOOK_NEW_BADGE")
+		display_name += "  " + tr("UI_READ_BOOK_NEW_BADGE")
 
 	return display_name
 
