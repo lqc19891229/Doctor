@@ -465,29 +465,74 @@ func _entry_matches_search(entry: BookEntryData) -> bool:
 	var query := _get_search_query()
 	if query == "":
 		return true
+
+	var localized_title := _localized_entry_title(entry)
+	var entity_id := _get_search_entity_id(entry)
+
+	# 日文：日文名称 + 假名 + Romaji + Romaji 首字母。
 	if LocalizedName.is_japanese_locale():
-		var entity_id := entry.entry_id
-		if entry is HerbBookEntryData:
-			entity_id = (entry as HerbBookEntryData).herb_id
-		elif entry is FormulaBookEntryData:
-			entity_id = (entry as FormulaBookEntryData).formula_id
-		elif entry is DiseaseBookEntryData:
-			entity_id = (entry as DiseaseBookEntryData).disease_id
-		return LocalizedName.japanese_search_matches(_localized_entry_title(entry), entity_id, query)
+		return LocalizedName.japanese_search_matches(
+			localized_title,
+			entity_id,
+			query
+		)
+
+	# 韩文：韩文名称 + 초성 + Romaja + Romaja 首字母。
 	if LocalizedName.is_korean_locale():
-		var entity_id := entry.entry_id
-		if entry is HerbBookEntryData:
-			entity_id = (entry as HerbBookEntryData).herb_id
-		elif entry is FormulaBookEntryData:
-			entity_id = (entry as FormulaBookEntryData).formula_id
-		elif entry is DiseaseBookEntryData:
-			entity_id = (entry as DiseaseBookEntryData).disease_id
-		return LocalizedName.korean_search_matches(_localized_entry_title(entry), entity_id, query)
+		return LocalizedName.korean_search_matches(
+			localized_title,
+			entity_id,
+			query
+		)
 
-	# findn() 为大小写不敏感搜索；中文标题可直接匹配。
-	return entry.title.findn(query) >= 0 or _localized_entry_title(entry).findn(query) >= 0
+	var clean_query := LocalizedName.normalize_search_text(query)
+	if clean_query == "":
+		return false
+
+	# 英文：英文名称 + 英文单词首字母。
+	if LocalizedName.is_english_locale():
+		var english_name := LocalizedName.normalize_search_text(localized_title)
+		var english_initials := LocalizedName.english_initials(localized_title)
+
+		return (
+			english_name.contains(clean_query)
+			or english_initials.begins_with(clean_query)
+		)
+
+	# 中文：中文标题 + entry_id / data_id 全拼 + 拼音首字母。
+	var title_text := LocalizedName.normalize_search_text(entry.title)
+
+	var entry_id_raw := str(entry.entry_id).to_lower()
+	var entry_id_text := LocalizedName.normalize_search_text(entry_id_raw)
+	var entry_id_initials := LocalizedName.id_initials(entry_id_raw)
+
+	var data_id_raw := entity_id.to_lower()
+	var data_id_text := LocalizedName.normalize_search_text(data_id_raw)
+	var data_id_initials := LocalizedName.id_initials(data_id_raw)
+
+	return (
+		title_text.contains(clean_query)
+		or entry_id_text.contains(clean_query)
+		or entry_id_initials.contains(clean_query)
+		or data_id_text.contains(clean_query)
+		or data_id_initials.contains(clean_query)
+	)
 
 
+func _get_search_entity_id(entry: BookEntryData) -> String:
+	if entry == null:
+		return ""
+
+	if entry is HerbBookEntryData:
+		return str((entry as HerbBookEntryData).herb_id)
+
+	if entry is FormulaBookEntryData:
+		return str((entry as FormulaBookEntryData).formula_id)
+
+	if entry is DiseaseBookEntryData:
+		return str((entry as DiseaseBookEntryData).disease_id)
+
+	return str(entry.entry_id)
 func _refresh_entry_list_view(select_entry_id: String = "") -> void:
 	entry_list.clear()
 	displayed_entries.clear()
