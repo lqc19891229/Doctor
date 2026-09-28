@@ -15,7 +15,7 @@ UI_MENU_QUIT_GAME,退出游戏,Quit Game,ゲームを終了,게임 종료
 UI_DIFFICULTY_TITLE,选择难度,Choose Difficulty,難易度を選択,난이도 선택
 UI_DIFFICULTY_INFO,难度影响固定收入,Difficulty affects regular income,難易度によって定期収入が変わります,난이도에 따라 정기 수입이 달라집니다
 UI_DIFFICULTY_EASY,"简单
-全力依父","Easy
+全力倚父","Easy
 Daddy Carry","易しい
 父に頼る","쉬움
 아버지에게 맡기기"

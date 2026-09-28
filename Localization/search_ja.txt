@@ -1,4 +1,4 @@
-keys,ja_kana,ja_romaji
+﻿keys,ja_kana,ja_romaji
 UI_BOOK_ENTRY_TITLE_SI_ZHEN,ししん,shi|shin
 UI_BOOK_ENTRY_TITLE_BA_GANG_BIAN_ZHENG,はっこうべんしょう,hak|kou|ben|shou
 UI_BOOK_ENTRY_TITLE_YIN_YANG,いんよう,in|you
@@ -75,7 +75,7 @@ UI_BOOK_ENTRY_TITLE_HOU_PO,こうぼく,kou|boku
 UI_BOOK_ENTRY_TITLE_HUANG_LIAN,おうれん,ou|ren
 UI_BOOK_ENTRY_TITLE_HUANG_QI,おうぎ,ou|gi
 UI_BOOK_ENTRY_TITLE_HUANG_QIN,おうごん,ou|gon
-UI_BOOK_ENTRY_TITLE_HUI_XIANG,ういきょう,u|i|kyou
+UI_BOOK_ENTRY_TITLE_HUI_XIANG,ういきょう,ui|kyou
 UI_BOOK_ENTRY_TITLE_HUO_XIANG,かっこう,kak|kou
 UI_BOOK_ENTRY_TITLE_JI_ZI_HUANG,けいしおう,kei|shi|ou
 UI_BOOK_ENTRY_TITLE_JIE_GENG,ききょう,ki|kyou
@@ -158,7 +158,7 @@ UI_BOOK_ENTRY_TITLE_FANG_FENG_TANG,ぼうふうとう,bou|fuu|tou
 UI_BOOK_ENTRY_TITLE_MA_XING_SHI_GAN_TANG,まきょうせっかんとう,ma|kyou|sek|kan|tou
 UI_BOOK_ENTRY_TITLE_BU_FEI_TANG,ほはいとう,ho|hai|tou
 UI_BOOK_ENTRY_TITLE_ER_CHEN_TANG,にちんとう,ni|chin|tou
-UI_BOOK_ENTRY_TITLE_SHA_SHEN_MAI_DONG_TANG,しゃじんばくもんどうとう,sha|jin|baku|mon|dou|tou
+UI_BOOK_ENTRY_TITLE_SHA_SHEN_MAI_DONG_TANG,しゃじんばくもんどうとう,sha|jin|baku|dou|tou
 UI_BOOK_ENTRY_TITLE_QING_QI_HUA_TAN_WAN,せいきかたんがん,sei|ki|ka|tan|gan
 UI_BOOK_ENTRY_TITLE_DA_QING_LONG_TANG,だいせいりゅうとう,dai|sei|ryuu|tou
 UI_BOOK_ENTRY_TITLE_XIAO_QING_LONG_TANG,しょうせいりゅうとう,shou|sei|ryuu|tou
@@ -198,7 +198,7 @@ UI_BOOK_ENTRY_TITLE_FENG_HAN_BIAO_XU_ZHENG,ふうかんひょうきょしょう,
 UI_BOOK_ENTRY_TITLE_FENG_RE_BIAO_ZHENG,ふうねつひょうしょう,fuu|netsu|hyou|shou
 UI_BOOK_ENTRY_TITLE_WEN_ZAO_ZHENG,おんそうしょう,on|sou|shou
 UI_BOOK_ENTRY_TITLE_LIANG_ZAO_ZHENG,りょうそうしょう,ryou|sou|shou
-UI_BOOK_ENTRY_TITLE_WEI_QI_XU,えききょ,eki|kyo
+UI_BOOK_ENTRY_TITLE_WEI_QI_XU,えききょ,e|ki|kyo
 UI_BOOK_ENTRY_TITLE_TONG_BI,つうひ,tsuu|hi
 UI_BOOK_ENTRY_TITLE_RE_BI,ねつひ,netsu|hi
 UI_BOOK_ENTRY_TITLE_ZHUO_BI,ちゃくひ,chaku|hi

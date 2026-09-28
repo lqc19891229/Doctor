@@ -1,4 +1,4 @@
-keys,ko_hangul,ko_romaja
+﻿keys,ko_hangul,ko_romaja
 UI_BOOK_ENTRY_TITLE_SI_ZHEN,사진,sa|jin
 UI_BOOK_ENTRY_TITLE_BA_GANG_BIAN_ZHENG,팔강변증,pal|gang|byeon|jeung
 UI_BOOK_ENTRY_TITLE_YIN_YANG,음양,eum|yang
