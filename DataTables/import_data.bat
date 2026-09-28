@@ -1,78 +1,85 @@
 @echo off
-setlocal
+setlocal EnableExtensions
 cd /d "%~dp0"
 
 echo ==========================================
-echo Doctor æ•°æ®å¯¼å…¥
+echo Doctor Êı¾İµ¼Èë
 echo ==========================================
 echo.
 
-REM ä¼˜å…ˆä½¿ç”¨ pythonï¼›å¦‚æœä¸å¯ç”¨ï¼Œåˆ™å°è¯• Windows çš„ py å¯åŠ¨å™¨ã€‚
-where python >nul 2>nul
-if %errorlevel%==0 (
-    set "PYTHON_CMD=python"
-) else (
-    where py >nul 2>nul
-    if %errorlevel%==0 (
-        set "PYTHON_CMD=py"
-    ) else (
-        echo é”™è¯¯ï¼šæœªæ‰¾åˆ° Pythonã€‚
-        echo è¯·å…ˆå®‰è£… Pythonï¼Œå¹¶ç¡®è®¤ python æˆ– py å·²åŠ å…¥ PATHã€‚
-        echo.
-        pause
-        exit /b 1
-    )
-)
+REM ÓÅÏÈÊ¹ÓÃ python£»Èç¹û²»¿ÉÓÃ£¬Ôò³¢ÊÔ Windows µÄ py Æô¶¯Æ÷¡£
+where python >nul 2>&1
+if not errorlevel 1 goto :use_python
 
-REM import_data.py è¦æ±‚ Data.xlsx ä¸å®ƒä½äºåŒä¸€ä¸ª DataTables æ–‡ä»¶å¤¹ã€‚
-if not exist "import_data.py" (
-    echo é”™è¯¯ï¼šå½“å‰æ–‡ä»¶å¤¹ä¸­æ‰¾ä¸åˆ° import_data.pyï¼š
-    echo %cd%
-    echo.
-    echo è¯·æŠŠæœ¬ BAT æ–‡ä»¶æ”¾åˆ°ä¸ import_data.py å’Œ Data.xlsx ç›¸åŒçš„æ–‡ä»¶å¤¹ä¸­ã€‚
-    echo.
-    pause
-    exit /b 1
-)
+where py >nul 2>&1
+if not errorlevel 1 goto :use_py
 
-if not exist "Data.xlsx" (
-    echo é”™è¯¯ï¼šå½“å‰æ–‡ä»¶å¤¹ä¸­æ‰¾ä¸åˆ° Data.xlsxï¼š
-    echo %cd%
-    echo.
-    echo import_data.py ä¼šä»è‡ªèº«æ‰€åœ¨æ–‡ä»¶å¤¹è¯»å– Data.xlsxã€‚
-    echo.
-    pause
-    exit /b 1
-)
-
-echo å½“å‰ Python ç‰ˆæœ¬ï¼š
-%PYTHON_CMD% --version
+echo ´íÎó£ºÎ´ÕÒµ½ Python¡£
+echo ÇëÏÈ°²×° Python£¬²¢È·ÈÏ python »ò py ÒÑ¼ÓÈë PATH¡£
 echo.
-echo æ­£åœ¨è¿è¡Œ import_data.py...
+pause
+exit /b 1
+
+:use_python
+set "PYTHON_CMD=python"
+goto :python_ready
+
+:use_py
+set "PYTHON_CMD=py"
+
+:python_ready
+REM import_data.py ÒªÇó Data.xlsx ÓëËüÎ»ÓÚÍ¬Ò»¸ö DataTables ÎÄ¼ş¼Ğ¡£
+if not exist "import_data.py" goto :missing_script
+if not exist "Data.xlsx" goto :missing_xlsx
+
+echo µ±Ç° Python °æ±¾£º
+"%PYTHON_CMD%" --version
+echo.
+echo ÕıÔÚÔËĞĞ import_data.py...
 echo.
 
-%PYTHON_CMD% "import_data.py"
-set "RESULT=%errorlevel%"
+"%PYTHON_CMD%" "import_data.py"
+set "RESULT=%ERRORLEVEL%"
 
 echo.
-if not "%RESULT%"=="0" (
-    echo ==========================================
-    echo æ•°æ®å¯¼å…¥å¤±è´¥ - é€€å‡ºä»£ç  %RESULT%
-    echo ==========================================
-    echo.
-    echo è¯·æŸ¥çœ‹ä¸Šæ–¹çš„é”™è¯¯ä¿¡æ¯ã€‚
-    echo å¦‚æœæç¤ºç¼ºå°‘ openpyxlï¼Œè¯·è¿è¡Œï¼š
-    echo     %PYTHON_CMD% -m pip install openpyxl
-    echo.
-    pause
-    exit /b %RESULT%
-)
+if "%RESULT%"=="0" goto :import_success
 
+:import_failed
 echo ==========================================
-echo æ•°æ®å¯¼å…¥å®Œæˆ
+echo Êı¾İµ¼ÈëÊ§°Ü - ÍË³ö´úÂë %RESULT%
 echo ==========================================
 echo.
-echo Data.xlsx å·²æˆåŠŸå¯¼å…¥ï¼Œå¹¶é‡æ–°ç”Ÿæˆ Godot .tres èµ„æºã€‚
+echo Çë²é¿´ÉÏ·½µÄ´íÎóĞÅÏ¢¡£
+echo Èç¹ûÌáÊ¾È±ÉÙ openpyxl£¬ÇëÔËĞĞ£º
+echo     "%PYTHON_CMD%" -m pip install openpyxl
+echo.
+pause
+exit /b %RESULT%
+
+:import_success
+echo ==========================================
+echo Êı¾İµ¼ÈëÍê³É
+echo ==========================================
+echo.
+echo Data.xlsx ÒÑ³É¹¦µ¼Èë£¬²¢ÖØĞÂÉú³É Godot .tres ×ÊÔ´¡£
 echo.
 pause
 exit /b 0
+
+:missing_script
+echo ´íÎó£ºµ±Ç°ÎÄ¼ş¼ĞÖĞÕÒ²»µ½ import_data.py£º
+echo %cd%
+echo.
+echo Çë°Ñ±¾ BAT ÎÄ¼ş·Åµ½Óë import_data.py ºÍ Data.xlsx ÏàÍ¬µÄÎÄ¼ş¼ĞÖĞ¡£
+echo.
+pause
+exit /b 1
+
+:missing_xlsx
+echo ´íÎó£ºµ±Ç°ÎÄ¼ş¼ĞÖĞÕÒ²»µ½ Data.xlsx£º
+echo %cd%
+echo.
+echo import_data.py »á´Ó×ÔÉíËùÔÚÎÄ¼ş¼Ğ¶ÁÈ¡ Data.xlsx¡£
+echo.
+pause
+exit /b 1
