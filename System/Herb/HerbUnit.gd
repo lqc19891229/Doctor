@@ -26,12 +26,11 @@ const UNIT_QIAN := "qian"    # 钱
 const UNIT_LIANG := "liang"  # 两
 const UNIT_JIN := "jin"      # 斤
 
-const FEN_PER_FEN := 1        # 1分对应的分值
-const FEN_PER_QIAN := 10      # 1钱对应的分值
-const FEN_PER_LIANG := 100    # 1两对应的分值
-const FEN_PER_JIN := 1600     # 1斤对应的分值
+const FEN_PER_FEN := 1
+const FEN_PER_QIAN := 10
+const FEN_PER_LIANG := 100
+const FEN_PER_JIN := 1600
 
-# 单位到显示名称的映射表。
 const UNIT_DISPLAY_NAMES := {
 	UNIT_FEN: "分",
 	UNIT_QIAN: "钱",
@@ -39,7 +38,6 @@ const UNIT_DISPLAY_NAMES := {
 	UNIT_JIN: "斤",
 }
 
-# 单位到底层“分”的换算倍率映射表。
 const UNIT_FEN_RATES := {
 	UNIT_FEN: FEN_PER_FEN,
 	UNIT_QIAN: FEN_PER_QIAN,
@@ -47,10 +45,7 @@ const UNIT_FEN_RATES := {
 	UNIT_JIN: FEN_PER_JIN,
 }
 
-# 中文数字表，用于数字转中文显示。
 const CHINESE_DIGITS := ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"]
-
-# 中文整数单位表，当前用于 0 ~ 9999 的常规数字显示。
 const CHINESE_UNITS := ["", "十", "百", "千"]
 
 
@@ -58,42 +53,33 @@ const CHINESE_UNITS := ["", "十", "百", "千"]
 # 二、单位检查与换算
 # =========================================================
 
-# 函数功能：判断传入单位是否为系统支持的合法单位。
 static func is_valid_unit(unit: String) -> bool:
 	return UNIT_FEN_RATES.has(unit)
 
 
-# 函数功能：把内部单位 key 转换为界面显示用中文名称。
 static func get_unit_display_name(unit: String) -> String:
 	return UNIT_DISPLAY_NAMES.get(unit, unit)
 
 
-# 函数功能：获取指定单位换算为底层单位“分”的倍率。
 static func get_fen_rate(unit: String) -> int:
 	if not is_valid_unit(unit):
 		push_warning("HerbUnit.get_fen_rate: 未知单位 -> " + unit)
 		return FEN_PER_FEN
-
 	return UNIT_FEN_RATES[unit]
 
 
-# 函数功能：把“数量 + 单位”统一换算成底层总分值。
 static func to_fen(amount: float, unit: String) -> int:
 	if amount <= 0.0:
 		return 0
-
 	return int(round(amount * get_fen_rate(unit)))
 
 
-# 函数功能：把底层总分值换算回指定单位的数量。
 static func from_fen(total_fen: int, unit: String) -> float:
 	if total_fen <= 0:
 		return 0.0
-
 	return float(total_fen) / float(get_fen_rate(unit))
 
 
-# 函数功能：在两个单位之间直接换算。
 static func convert(amount: float, from_unit: String, to_unit: String) -> float:
 	return from_fen(to_fen(amount, from_unit), to_unit)
 
@@ -102,8 +88,6 @@ static func convert(amount: float, from_unit: String, to_unit: String) -> float:
 # 三、中文数字显示
 # =========================================================
 
-# 函数功能：把整数转换成中文数字文本，主要用于剂量显示。
-# 说明：当前适合 0 ~ 9999 的常规显示；超过该范围仍会尽量显示，但单位表只覆盖到“千”。
 static func number_to_chinese(num: int) -> String:
 	if num == 0:
 		return CHINESE_DIGITS[0]
@@ -135,19 +119,15 @@ static func number_to_chinese(num: int) -> String:
 
 			result = part + result
 
-		# 使用整数除法，避免 Godot 4 中“/”产生浮点结果。
 		value = value / 10
 		unit_index += 1
 
-	# 10 ~ 19 显示为“十、十一、十二”，而不是“一十、一十一、一十二”。
 	if result.begins_with("一十"):
 		result = result.substr(1)
 
 	return result
 
 
-# 函数功能：把浮点数转换成中文数字文本。
-# 规则：整数直接使用中文整数；小数使用“点”逐位读取，最多保留两位小数。
 static func float_to_chinese(amount: float) -> String:
 	var rounded_amount = round(amount * 100.0) / 100.0
 	var int_part := int(rounded_amount)
@@ -175,7 +155,6 @@ static func float_to_chinese(amount: float) -> String:
 # 四、剂量文本格式化
 # =========================================================
 
-# 函数功能：把底层总分值转换为“斤两钱分”的复合单位文本。
 static func format_fen_as_compound(total_fen: int) -> String:
 	if total_fen <= 0:
 		return "零分"
@@ -202,19 +181,39 @@ static func format_fen_as_compound(total_fen: int) -> String:
 	return "".join(parts)
 
 
-# 函数功能：根据总分值自动选择较简洁的剂量显示格式。
 static func format_fen_auto(total_fen: int) -> String:
-	if TranslationServer.get_locale().to_lower().begins_with("ko") or TranslationServer.get_locale().to_lower().begins_with("ja"):
+	var locale := TranslationServer.get_locale().to_lower()
+
+	if (
+		locale.begins_with("en")
+		or locale.begins_with("ja")
+		or locale.begins_with("ko")
+	):
 		if total_fen <= 0:
 			return TranslationServer.translate("UI_PRESCRIPTION_ZERO_FEN")
+
 		var remainder := total_fen
 		var parts: Array[String] = []
-		for unit_data in [[FEN_PER_JIN, UNIT_JIN], [FEN_PER_LIANG, UNIT_LIANG], [FEN_PER_QIAN, UNIT_QIAN], [1, UNIT_FEN]]:
+
+		for unit_data in [
+			[FEN_PER_JIN, UNIT_JIN],
+			[FEN_PER_LIANG, UNIT_LIANG],
+			[FEN_PER_QIAN, UNIT_QIAN],
+			[FEN_PER_FEN, UNIT_FEN],
+		]:
 			var count: int = remainder / int(unit_data[0])
 			remainder %= int(unit_data[0])
+
 			if count > 0:
-				parts.append("%d %s" % [count, _get_localized_unit_name(str(unit_data[1]))])
+				parts.append(
+					"%d %s" % [
+						count,
+						_get_localized_unit_name(str(unit_data[1]))
+					]
+				)
+
 		return " ".join(parts)
+
 	if total_fen <= 0:
 		return "零分"
 
@@ -230,17 +229,19 @@ static func format_fen_auto(total_fen: int) -> String:
 	return format_fen_as_compound(total_fen)
 
 
-# 函数功能：把输入的“数量 + 单位”格式化为中药剂量文本。
-# 中文环境保持原来的中文数字 + 中文单位；
-# 英文环境使用阿拉伯数字 + 本地化单位，例如：3 qian。
 static func format_amount(amount: float, unit: String) -> String:
-	if TranslationServer.get_locale().to_lower().begins_with("en") or TranslationServer.get_locale().to_lower().begins_with("ja") or TranslationServer.get_locale().to_lower().begins_with("ko"):
+	var locale := TranslationServer.get_locale().to_lower()
+
+	if (
+		locale.begins_with("en")
+		or locale.begins_with("ja")
+		or locale.begins_with("ko")
+	):
 		return _format_amount_english(amount, unit)
 
 	return format_fen_as_compound(to_fen(amount, unit))
 
 
-# 英文环境剂量显示。
 static func _format_amount_english(amount: float, unit: String) -> String:
 	var amount_text := _format_number_english(amount)
 	var unit_text := _get_localized_unit_name(unit)
@@ -251,8 +252,6 @@ static func _format_amount_english(amount: float, unit: String) -> String:
 	return "%s %s" % [amount_text, unit_text]
 
 
-# 英文环境使用阿拉伯数字。
-# 整数显示 3，不显示 3.0；小数最多保留两位。
 static func _format_number_english(amount: float) -> String:
 	var rounded_amount: float = round(amount * 100.0) / 100.0
 	var int_amount: int = int(rounded_amount)
@@ -269,7 +268,6 @@ static func _format_number_english(amount: float) -> String:
 	return text
 
 
-# 根据内部单位 key 获取当前语言下的显示名称。
 static func _get_localized_unit_name(unit: String) -> String:
 	var translation_key := ""
 
@@ -287,14 +285,12 @@ static func _get_localized_unit_name(unit: String) -> String:
 
 	var translated := TranslationServer.translate(translation_key)
 
-	# 找不到翻译时退回内部单位 key，避免显示翻译 key 本身。
 	if translated.strip_edges() == "" or translated == translation_key:
 		return unit
 
 	return translated
 
 
-# 函数功能：向复合剂量文本数组中追加非零单位片段。
 static func _append_compound_part(parts: Array[String], amount: int, unit_name: String) -> void:
 	if amount <= 0:
 		return
