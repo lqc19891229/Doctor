@@ -3,9 +3,9 @@ UI_TEST,测试中文,English test,日本語テスト,번역 테스트
 UI_LANGUAGE,语言,Language,言語,언어
 UI_BACK,返回,Back,戻る,뒤로
 UI_SETTINGS_TITLE,设置,Settings,設定,설정
-UI_MASTER_VOLUME,主音量,Master Volume,全体音量,주 음량
+UI_MASTER_VOLUME,主音量,Master Volume,全体音量,전체 음량
 UI_MUSIC_VOLUME,音乐音量,Music Volume,音楽の音量,음악 음량
-UI_AMBIENT_VOLUME,环境音量,Ambient Volume,環境音の音量,환경음 음량
+UI_AMBIENT_VOLUME,环境音量,Ambient Volume,環境音の音量,환경음
 UI_SFX_VOLUME,音效音量,Sound Effects Volume,効果音の音量,효과음 음량
 UI_FULLSCREEN,全屏,Fullscreen,全画面表示,전체 화면
 UI_DISPLAY_MODE_WINDOW_FMT,窗口 %d×%d,Window %d×%d,ウィンドウ %d×%d,창 %d×%d
@@ -198,7 +198,7 @@ Try Save and Quit again, or Quit Game to discard unsaved progress.","保存に�
 已有存档,已有存档,Existing Save,セーブデータあり,기존 저장 데이터
 损坏存档,损坏存档,Corrupt Save,破損したセーブデータ,손상된 저장 데이터
 读取失败,读取失败,Load Failed,読み込み失敗,불러오기 실패
-UI_DISCLAIMER_TITLE,内容声明,Content Notice,内容に関する注意,콘텐츠 주의사항
+UI_DISCLAIMER_TITLE,内容声明,Content Notice,内容に関する注意,콘텐츠 안내
 UI_DISCLAIMER_BODY,"本游戏为虚构作品，仅供娱乐。游戏中涉及的医学知识、诊断及治疗内容可能并不准确，不可作为现实中的医疗依据，请勿据此自行诊断、用药或治疗。
 
 如有健康问题，请咨询专业医生，并以正规医疗机构的建议为准。游戏中的人物、事件及剧情均属虚构，如有雷同，纯属巧合。","This game is a work of fiction for entertainment only. Medical knowledge, diagnoses, and treatments shown here may be inaccurate and must not be used as medical advice. Do not use this game to diagnose yourself, take medication, or choose treatment.
@@ -211,25 +211,25 @@ If you have health concerns, consult a qualified doctor and follow the advice of
 UI_PATIENT_NAME_PLACEHOLDER,病人姓名,Patient Name,患者の名前,환자 이름
 UI_PATIENT_DIALOGUE_PLACEHOLDER,病人台词,Patient Dialogue,患者の台詞,환자 대사
 UI_TOPBAR_DATE_PLACEHOLDER,天数,Date,日付,날짜
-UI_TOPBAR_TIME_PLACEHOLDER,时辰,Hour,時刻,시각
+UI_TOPBAR_TIME_PLACEHOLDER,时辰,Hour,時刻,시진
 UI_TOPBAR_REPUTATION_PLACEHOLDER,名望：0　初窥门径,Rep 0 · Novice,名声：0　見習い,명망 0 · 초심자
 UI_TOPBAR_MONEY_PLACEHOLDER,银钱：0两 0文,Money: 0 liang 0 wen,所持金：0両 0文,은전: 0냥 0문
-UI_CURRENT_SHICHEN,当前时辰,Current Hour,現在の時刻,현재 시각
-UI_MONEY_DEBT_SHORT,欠,Debt,借金,미납
+UI_CURRENT_SHICHEN,当前时辰,Current Hour,現在の時刻,현재 시진
+UI_MONEY_DEBT_SHORT,欠,Debt,借金,빚
 UI_MONEY_LIANG_ZERO,0两,0 liang,0両,0냥
 UI_MONEY_WEN_ZERO,0文,0 wen,0文,0문
 UI_MONEY_LIANG_FMT,%d两,%d liang,%d両,%d냥
 UI_MONEY_WEN_FMT,%d文,%d wen,%d文,%d문
 UI_MONEY_TEXT_FMT,银钱：%s,Money: %s,所持金：%s,은전: %s
-UI_MONEY_DEBT_TEXT_FMT,银钱：欠 %s,Money: Debt %s,所持金：借金 %s,은전: 미납 %s
+UI_MONEY_DEBT_TEXT_FMT,银钱：欠 %s,Money: Debt %s,所持金：借金 %s,은전: 빚 %s
 UI_DAY_FALLBACK_FMT,第 %d 天,Day %d,%d日目,제 %d일
 UI_ERA_DATE_FMT,%s%s年%s,%s %s · %s,%s%s年%s,%s %s · %s
 UI_ERA_JIAJING,嘉靖,Jiajing,嘉靖,가정
 UI_ERA_WANLI,万历,Wanli,万暦,만력
 UI_FULL_TIME_FMT,%s %s · %s,%s %s · %s,%s %s・%s,%s %s · %s
-UI_UNKNOWN_SHICHEN,未知时辰,Unknown Hour,時刻不明,알 수 없는 시각
+UI_UNKNOWN_SHICHEN,未知时辰,Unknown Hour,時刻不明,알 수 없는 시진
 UI_REPUTATION_INFAMOUS,臭名昭著,Infamous,悪名高い,악명 높음
-UI_REPUTATION_CRITICIZED,略有微词,Criticized,評判が悪い,비난받음
+UI_REPUTATION_CRITICIZED,略有微词,Criticized,評判が悪い,약간의 비판
 UI_REPUTATION_NOVICE,初窥门径,Novice,見習い,초심자
 UI_REPUTATION_LEARNER,略有小成,Apprentice,駆け出し,수련생
 UI_REPUTATION_SKILLED,融会贯通,Skilled,熟練,숙련자
@@ -479,10 +479,10 @@ UI_RECORDS_TAB_STATS,数据统计,Statistics,統計,통계
 UI_RECORDS_TAB_PRESETS,预制方剂,Formula Presets,定型処方,처방 프리셋
 UI_RECORDS_TREATMENT_DATES,诊疗日期,Treatment Dates,診療日,진료 날짜
 UI_RECORDS_FINANCE_DATES,账目日期,Account Dates,記帳日,장부 날짜
-UI_RECORDS_TOTAL_PATIENTS,治疗人数,Patients Treated,診療した患者,진료한 환자
-UI_RECORDS_SUCCESSFUL_PATIENTS,成功人数,Successful Treatments,治療成功,성공한 진료
-UI_RECORDS_MIRACULOUS_PATIENTS,妙手回春人数,Miraculous Recoveries,妙手回春,명의의 손길
-UI_RECORDS_FAILED_PATIENTS,失败人数,Failed Treatments,治療失敗,실패한 진료
+UI_RECORDS_TOTAL_PATIENTS,治疗人数,Patients Treated,診療した患者,진료 환자 수
+UI_RECORDS_SUCCESSFUL_PATIENTS,成功人数,Successful Treatments,治療成功,치료 성공 환자 수
+UI_RECORDS_MIRACULOUS_PATIENTS,妙手回春人数,Miraculous Recoveries,妙手回春,명의의 손길 환자 수
+UI_RECORDS_FAILED_PATIENTS,失败人数,Failed Treatments,治療失敗,치료 실패 환자 수
 UI_RECORDS_SUCCESS_RATE,成功率,Success Rate,成功率,성공률
 UI_RECORDS_TOTAL_INCOME,总收入,Total Income,総収入,총수입
 UI_RECORDS_TOTAL_EXPENSE,总支出,Total Expenses,総支出,총지출
@@ -510,7 +510,7 @@ UI_RECORDS_FINANCE_UNSETTLED,[color=#c6ae83]本日尚未结算，支出将在进
 UI_RECORDS_INCOME_HEADER,[b]收入[/b],[b]Income[/b],[b]収入[/b],[b]수입[/b]
 UI_RECORDS_EXPENSE_HEADER,[b]支出[/b],[b]Expenses[/b],[b]支出[/b],[b]지출[/b]
 UI_RECORDS_FINANCE_CONSULTATION,诊费,Consultation Fees,診察料,진료비
-UI_RECORDS_FINANCE_MEDICINE,药材收入,Herb Sales,薬材収入,약재 판매
+UI_RECORDS_FINANCE_MEDICINE,药材收入,Herb Sales,薬材収入,약재 수입
 UI_RECORDS_FINANCE_PATIENT_GIFT,病家谢礼,Patient Gifts,患者からの謝礼,환자 사례금
 UI_RECORDS_FINANCE_LI_JIAN_ZHONG,李建中俸禄,Li Jianzhong's Salary,李建中の俸禄,이건중 급여
 UI_RECORDS_FINANCE_LI_YAN_WEN,李言闻收入,Li Yanwen's Income,李言聞の収入,이언문 수입
@@ -563,7 +563,7 @@ UI_RESULT_NO_DIAGNOSIS,未选择疾病,No condition selected,病名を選択し�
 UI_RESULT_PRESET_UNLOCK,预制方剂,Formula Preset,定型処方,처방 프리셋
 UI_RESULT_PRESET_UNLOCK_FMT,预制方剂：%s,Formula Preset: %s,定型処方：%s,처방 프리셋: %s
 UI_TUTORIAL_WINDOW_TITLE,游戏说明,Game Guide,遊び方,게임 안내
-UI_TUTORIAL_KEYBOARD_HINT,← / → 翻页    Esc 关闭,← / →: Pages    Esc: Close,← / → ページ切り替え    Esc 閉じる,← / →: 페이지    Esc: 닫기
+UI_TUTORIAL_KEYBOARD_HINT,← / → 翻页    Esc 关闭,← / →: Pages    Esc: Close,← / → ページ切り替え    Esc 閉じる,← / →: 페이지 넘기기    Esc: 닫기
 UI_TUTORIAL_PREVIOUS,上一步,Previous,前へ,이전
 UI_TUTORIAL_NEXT,下一步,Next,次へ,다음
 UI_TUTORIAL_DONE,完成,Finish,完了,완료
@@ -666,7 +666,7 @@ UI_BOOK_NAME_BEI_JI_QIAN_JIN_YAO_FANG,备急千金要方,Essential Prescriptions
 UI_BOOK_NAME_HUANG_DI_NEI_JING,黄帝内经,Yellow Emperor's Inner Canon,黄帝内経,황제내경
 UI_BOOK_NAME_JIN_GUI_YAO_LUE,金匮要略,Essentials from the Golden Cabinet,金匱要略,금궤요략
 UI_BOOK_NAME_JING_YUE_QUAN_SHU,景岳全书,Complete Works of Jingyue,景岳全書,경악전서
-UI_BOOK_NAME_JIU_YUAN_FANG,究原方,Formulas for Investigating Origins,究原方,병인맥치
+UI_BOOK_NAME_JIU_YUAN_FANG,究原方,Formulas for Investigating Origins,究原方,구원방
 UI_BOOK_NAME_LAN_SHI_MI_CANG,兰室秘藏,Secret Treasury of the Orchid Chamber,蘭室秘蔵,난실비장
 UI_BOOK_NAME_LIU_ZHOU_YI_HUA,柳州医话,Medical Talks from Liuzhou,柳州医話,유주 의화
 UI_BOOK_NAME_PU_JI_BEN_SHI_FANG,普济本事方,Proven Formulas for Universal Relief,普済本事方,보제본사방
@@ -2889,7 +2889,7 @@ Shizhen ultimately distinguishes the two by saying White Peony Root supports the
 
 【독성】무독성으로 기록되어 있다.
 
-【귀경】
+【귀경】간.
 
 【효능】열을 내리고 혈을 식히며 어혈을 흩어 통증을 줄이고 간화를 맑힌다.
 
@@ -2951,7 +2951,7 @@ He disputes claims that it should never be used in decoction, pointing to older 
 
 【성미】쓴맛, 차다.
 
-【독성】독성과 용량에 주의하여 사용한다.
+【독성】약간의 독성이 있으므로 용량에 주의하여 사용한다.
 
 【귀경】간·소장·방광.
 
@@ -4439,7 +4439,7 @@ Liu Chun says it is appropriate when Qi and fluids decline and Yin and blood are
 
 【성미】짠맛, 평하다.
 
-【독성】독성과 용량에 주의하여 사용한다.
+【독성】약간의 독성이 있으므로 용량에 주의하여 사용한다.
 
 【귀경】폐·신.
 
@@ -5489,9 +5489,9 @@ Zhenheng emphasizes its ability to open constrained Lung Qi. For dry cough from 
 
 【성미】쓴맛·매운맛, 평하다.
 
-【독성】독성과 용량에 주의하여 사용한다.
+【독성】약간의 독성이 있으므로 용량에 주의하여 사용한다.
 
-【귀경】
+【귀경】폐.
 
 【효능】폐기를 열어 소통하고 목을 이롭게 하며 담을 삭이고 고름 배출을 돕는다.
 
@@ -7084,7 +7084,7 @@ Their indications may overlap, but their directional tendencies and channel affi
 
 【독성】무독성으로 기록되어 있다.
 
-【귀경】
+【귀경】폐.
 
 【효능】기를 아래로 내리고 담을 삭이며 풍을 흩고 열을 맑힌다.
 
@@ -7538,7 +7538,7 @@ Song also records unusual historical surgical uses of mulberry bark fiber, but t
 
 【독성】무독성으로 기록되어 있다.
 
-【귀경】
+【귀경】폐.
 
 【효능】폐열을 사해 천식을 줄이고 소변을 돕고 부기를 줄인다.
 
@@ -8568,7 +8568,7 @@ Zhang Zhongjing's Appropriate Decoction uses Peach Kernel with strongly stasis-b
 
 【성미】쓴맛·단맛, 평하다.
 
-【독성】독성과 용량에 주의하여 사용한다.
+【독성】약간의 독성이 있으므로 용량에 주의하여 사용한다.
 
 【귀경】심·간·대장.
 
@@ -8890,7 +8890,7 @@ The herb was also historically used in abnormal uterine bleeding, postpartum pai
 
 【독성】무독성으로 기록되어 있다.
 
-【귀경】
+【귀경】간.
 
 【효능】혈을 움직여 통증을 줄이고 어혈을 변화시키며 출혈을 멎게 한다.
 
@@ -9010,7 +9010,7 @@ The historical discussion therefore emphasizes both its strong analgesic reputat
 
 【성미】매운맛·쓴맛, 뜨겁다.
 
-【독성】독성과 용량에 주의하여 사용한다.
+【독성】독성이 매우 강하며, 초오는 독성이 더욱 강하다. 법제와 용량에 각별히 주의한다.
 
 【귀경】심·간·신·비.
 
@@ -9248,7 +9248,7 @@ Older texts warn strongly against excessive powdered doses, recording severe res
 
 【성미】매운맛, 따뜻하다.
 
-【독성】독성과 용량에 주의하여 사용한다.
+【독성】약간의 독성이 있으므로 용량에 주의하여 사용한다.
 
 【귀경】폐·신·심.
 
@@ -9399,7 +9399,7 @@ The historical entry therefore treats Apricot Kernel as a useful but potentially
 
 【성미】쓴맛, 따뜻하다.
 
-【독성】독성과 용량에 주의하여 사용한다.
+【독성】약간의 독성이 있으므로 용량에 주의하여 사용한다.
 
 【귀경】폐·대장.
 
@@ -10349,7 +10349,7 @@ Unlike strongly drying phlegm herbs, Aster Root was valued for chronic cough in 
 
 【독성】무독성으로 기록되어 있다.
 
-【귀경】
+【귀경】폐.
 
 【효능】폐를 윤택하게 하고 기를 아래로 내려 담을 삭여 기침을 멎게 한다.
 
@@ -10665,7 +10665,7 @@ Saposhnikovia Root reaches the surface and disperses Wind. It allows the formula
 黄耆：肺と脾の気を大いに補い、体表を固めて汗を抑える。
 白朮：脾と気を補い、黄耆を助けて体表を守る。
 防風：肌表の風邪を散らす。表を固めながら邪を閉じ込めず、風を除きながら正気を傷めない。","옥병풍산
-【출전】『병인맥치』
+【출전】『구원방』
 【효능】기를 보하고 표를 튼튼하게 하며 땀을 줄이고 풍사를 막는다.
 【주치】위기허증
 【구성】
@@ -14972,32 +14972,32 @@ UI_DISEASE_SYMPTOM_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI_01,不舒服,feeling unwel
 UI_DISEASE_SYMPTOM_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI_02,发烧,running a fever,熱がある,열이 나요
 UI_DISEASE_SYMPTOM_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI_03,拉肚子,having diarrhea,下痢をする,설사를 해요
 UI_DISEASE_SYMPTOM_HAN_NING_XIN_MAI_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
-UI_DISEASE_SYMPTOM_HAN_NING_XIN_MAI_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 불편해요
+UI_DISEASE_SYMPTOM_HAN_NING_XIN_MAI_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 초조해요
 UI_DISEASE_SYMPTOM_HAN_NING_XIN_MAI_03,胸闷气短,feeling tightness in my chest and short of breath,胸が苦しく、息切れする,가슴이 답답하고 숨이 차요
 UI_DISEASE_SYMPTOM_XIN_HUO_KANG_SHENG_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
-UI_DISEASE_SYMPTOM_XIN_HUO_KANG_SHENG_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 불편해요
+UI_DISEASE_SYMPTOM_XIN_HUO_KANG_SHENG_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 초조해요
 UI_DISEASE_SYMPTOM_XIN_HUO_KANG_SHENG_03,失眠多梦,sleeping poorly and having frequent dreams,眠れず、夢をよく見る,잠을 잘 못 자고 꿈을 자주 꿔요
 UI_DISEASE_SYMPTOM_TAN_MI_XIN_QIAO_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
 UI_DISEASE_SYMPTOM_TAN_MI_XIN_QIAO_02,痰多,bringing up a lot of phlegm,痰が多い,가래가 많이 나와요
 UI_DISEASE_SYMPTOM_TAN_MI_XIN_QIAO_03,胸闷气短,feeling tightness in my chest and short of breath,胸が苦しく、息切れする,가슴이 답답하고 숨이 차요
 UI_DISEASE_SYMPTOM_XIN_QI_XU_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
-UI_DISEASE_SYMPTOM_XIN_QI_XU_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 불편해요
+UI_DISEASE_SYMPTOM_XIN_QI_XU_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 초조해요
 UI_DISEASE_SYMPTOM_XIN_QI_XU_03,胸闷气短,feeling tightness in my chest and short of breath,胸が苦しく、息切れする,가슴이 답답하고 숨이 차요
 UI_DISEASE_SYMPTOM_XIN_MAI_YU_ZU_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
-UI_DISEASE_SYMPTOM_XIN_MAI_YU_ZU_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 불편해요
+UI_DISEASE_SYMPTOM_XIN_MAI_YU_ZU_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 초조해요
 UI_DISEASE_SYMPTOM_XIN_MAI_YU_ZU_03,胸闷气短,feeling tightness in my chest and short of breath,胸が苦しく、息切れする,가슴이 답답하고 숨이 차요
 UI_DISEASE_SYMPTOM_XIN_MAI_YU_ZU_04,胸口疼,having chest pain,胸が痛い,가슴이 아파요
 UI_DISEASE_SYMPTOM_XIN_YIN_XU_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
-UI_DISEASE_SYMPTOM_XIN_YIN_XU_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 불편해요
+UI_DISEASE_SYMPTOM_XIN_YIN_XU_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 초조해요
 UI_DISEASE_SYMPTOM_XIN_YIN_XU_03,失眠多梦,sleeping poorly and having frequent dreams,眠れず、夢をよく見る,잠을 잘 못 자고 꿈을 자주 꿔요
 UI_DISEASE_SYMPTOM_XIN_YANG_XU_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
-UI_DISEASE_SYMPTOM_XIN_YANG_XU_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 불편해요
+UI_DISEASE_SYMPTOM_XIN_YANG_XU_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 초조해요
 UI_DISEASE_SYMPTOM_XIN_YANG_XU_03,胸闷气短,feeling tightness in my chest and short of breath,胸が苦しく、息切れする,가슴이 답답하고 숨이 차요
 UI_DISEASE_SYMPTOM_TAN_HUO_RAO_XIN_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
-UI_DISEASE_SYMPTOM_TAN_HUO_RAO_XIN_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 불편해요
+UI_DISEASE_SYMPTOM_TAN_HUO_RAO_XIN_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 초조해요
 UI_DISEASE_SYMPTOM_TAN_HUO_RAO_XIN_03,失眠多梦,sleeping poorly and having frequent dreams,眠れず、夢をよく見る,잠을 잘 못 자고 꿈을 자주 꿔요
 UI_DISEASE_SYMPTOM_XIN_PI_LIANG_XU_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
-UI_DISEASE_SYMPTOM_XIN_PI_LIANG_XU_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 불편해요
+UI_DISEASE_SYMPTOM_XIN_PI_LIANG_XU_02,心神不宁,feeling restless and uneasy,落ち着かない,마음이 불안하고 초조해요
 UI_DISEASE_SYMPTOM_XIN_PI_LIANG_XU_03,头晕,feeling dizzy,めまいがする,어지러워요
 UI_DISEASE_SYMPTOM_XIN_PI_LIANG_XU_04,失眠多梦,sleeping poorly and having frequent dreams,眠れず、夢をよく見る,잠을 잘 못 자고 꿈을 자주 꿔요
 UI_DISEASE_SYMPTOM_GAN_HUO_SHANG_YAN_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
@@ -15029,21 +15029,21 @@ UI_DISEASE_SYMPTOM_SHEN_BU_NA_QI_02,腰膝酸软,having soreness and weakness in
 UI_DISEASE_SYMPTOM_SHEN_BU_NA_QI_03,胸闷气短,feeling tightness in my chest and short of breath,胸が苦しく、息切れする,가슴이 답답하고 숨이 차요
 UI_DISEASE_SYMPTOM_SHEN_YIN_XU_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
 UI_DISEASE_SYMPTOM_SHEN_YIN_XU_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰や膝がだるい,허리와 무릎이 시큰하고 힘이 없어요
-UI_DISEASE_SYMPTOM_SHEN_YIN_XU_03,耳鸣,having ringing in my ears,耳鳴りがする,귀에서 이명이 들려요
+UI_DISEASE_SYMPTOM_SHEN_YIN_XU_03,耳鸣,having ringing in my ears,耳鳴りがする,이명이 있어요
 UI_DISEASE_SYMPTOM_SHEN_YANG_XU_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
 UI_DISEASE_SYMPTOM_SHEN_YANG_XU_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰や膝がだるい,허리와 무릎이 시큰하고 힘이 없어요
 UI_DISEASE_SYMPTOM_SHEN_YANG_XU_03,夜尿多,urinating frequently at night,夜間の尿が多い,밤에 소변을 자주 봐요
-UI_DISEASE_SYMPTOM_SHEN_YANG_XU_04,耳鸣,having ringing in my ears,耳鳴りがする,귀에서 이명이 들려요
+UI_DISEASE_SYMPTOM_SHEN_YANG_XU_04,耳鸣,having ringing in my ears,耳鳴りがする,이명이 있어요
 UI_DISEASE_SYMPTOM_SHEN_XU_SHUI_FAN_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
 UI_DISEASE_SYMPTOM_SHEN_XU_SHUI_FAN_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰や膝がだるい,허리와 무릎이 시큰하고 힘이 없어요
 UI_DISEASE_SYMPTOM_SHEN_XU_SHUI_FAN_03,夜尿多,urinating frequently at night,夜間の尿が多い,밤에 소변을 자주 봐요
 UI_DISEASE_SYMPTOM_SHEN_JING_BU_ZU_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
 UI_DISEASE_SYMPTOM_SHEN_JING_BU_ZU_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰や膝がだるい,허리와 무릎이 시큰하고 힘이 없어요
-UI_DISEASE_SYMPTOM_SHEN_JING_BU_ZU_03,耳鸣,having ringing in my ears,耳鳴りがする,귀에서 이명이 들려요
+UI_DISEASE_SYMPTOM_SHEN_JING_BU_ZU_03,耳鸣,having ringing in my ears,耳鳴りがする,이명이 있어요
 UI_DISEASE_SYMPTOM_SHEN_QI_BU_GU_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
 UI_DISEASE_SYMPTOM_SHEN_QI_BU_GU_02,腰膝酸软,having soreness and weakness in my lower back and knees,腰や膝がだるい,허리와 무릎이 시큰하고 힘이 없어요
 UI_DISEASE_SYMPTOM_SHEN_QI_BU_GU_03,夜尿多,urinating frequently at night,夜間の尿が多い,밤에 소변을 자주 봐요
-UI_DISEASE_SYMPTOM_SHEN_QI_BU_GU_04,耳鸣,having ringing in my ears,耳鳴りがする,귀에서 이명이 들려요
+UI_DISEASE_SYMPTOM_SHEN_QI_BU_GU_04,耳鸣,having ringing in my ears,耳鳴りがする,이명이 있어요
 UI_DISEASE_SYMPTOM_REN_SHEN_DISEASE_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
 UI_DISEASE_SYMPTOM_REN_SHEN_DISEASE_02,恶心,feeling nauseous,吐き気がする,메스꺼워요
 UI_DISEASE_SYMPTOM_XIN_SHEN_BU_JIAO_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
