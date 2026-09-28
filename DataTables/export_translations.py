@@ -278,6 +278,8 @@ def sync_disease_symptoms(managed_wb, disease_symptoms: list[tuple[str, list[str
 
             if not en:
                 missing_translations.append(f"{key} | en | {zh}")
+            if not ja:
+                missing_translations.append(f"{key} | ja | {zh}")
             if not ko:
                 missing_translations.append(f"{key} | ko | {zh}")
 
@@ -340,6 +342,8 @@ def sync_story(wb, data_xlsx: Path) -> list[str]:
     for key, zh, en, ja, ko in rows:
         if not en:
             missing.append(f"{key} | en | {zh}")
+        if not ja:
+            missing.append(f"{key} | ja | {zh}")
         if not ko:
             missing.append(f"{key} | ko | {zh}")
     return missing
@@ -383,10 +387,16 @@ def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
             if not key and not zh and not en and not ja and not ko:
                 continue
 
-            if not key or not zh or (not en and sheet_name != "Story") or not ko:
+            if (
+                not key
+                or not zh
+                or (not en and sheet_name != "Story")
+                or not ja
+                or not ko
+            ):
                 raise ValueError(
                     f"数据不完整：{sheet_name} 第 {row_no} 行 "
-                    f"(key={key!r}, zh_CN={zh!r}, en={en!r}, ko={ko!r})"
+                    f"(key={key!r}, zh_CN={zh!r}, en={en!r}, ja={ja!r}, ko={ko!r})"
                 )
 
             if key in seen:
@@ -405,14 +415,15 @@ def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
                     f"zh={zh_ph}, en={en_ph}"
                 )
 
-            if ja and sorted(placeholders(ja)) != sorted(zh_ph):
-                warnings.append(f"{sheet_name} row {row_no} {key}: ja={placeholders(ja)}, zh={zh_ph}")
+            ja_ph = placeholders(ja)
+            if sorted(ja_ph) != sorted(zh_ph):
+                warnings.append(f"{sheet_name} row {row_no} {key}: ja={ja_ph}, zh={zh_ph}")
 
             ko_ph = placeholders(ko)
             if sorted(ko_ph) != sorted(zh_ph):
                 warnings.append(f"{sheet_name} row {row_no} {key}: ko={ko_ph}, zh={zh_ph}")
 
-            all_rows.append([key, zh, en or zh, ja or zh, ko])
+            all_rows.append([key, zh, en or zh, ja, ko])
             count += 1
 
         print(f"{sheet_name}：{count} 条")
@@ -588,21 +599,21 @@ def main() -> int:
         # New Chinese symptoms need human translation before producing a game CSV.
         if missing_symptom_translations:
             print()
-            print("停止导出：发现新增症状尚未填写英文或韩语翻译。")
+            print("停止导出：发现新增症状尚未填写英文、日语或韩语翻译。")
             print(
-                "以下症状已写入 translations_managed.xlsx，但 en 或 ko 列仍为空："
+                "以下症状已写入 translations_managed.xlsx，但 en、ja 或 ko 列仍为空："
             )
             for item in missing_symptom_translations:
                 print(" -", item)
             print()
-            print("请补全这些英文翻译，保存工作簿后再重新运行本脚本。")
+            print("请补全这些英文、日语和韩语翻译，保存工作簿后再重新运行本脚本。")
             return 2
 
         total, warnings = export_csv(wb, out_csv)
         search_count = export_japanese_search(wb, out_csv)
         korean_search_count = export_korean_search(wb, out_csv)
         if missing_story:
-            print(f"剧情待翻译：{len(missing_story)} 条；请补全 Story 工作表中的英文或韩语后重导出。")
+            print(f"剧情待翻译：{len(missing_story)} 条；请补全 Story 工作表中的英文、日语或韩语后重导出。")
 
         print()
         print(f"已导出 {total} 条翻译 -> {out_csv}")
