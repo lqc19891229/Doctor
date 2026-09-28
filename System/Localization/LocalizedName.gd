@@ -81,7 +81,7 @@ static func normalize_japanese_search_text(value: String) -> String:
 			code -= 0xFEE0
 
 		# 普通搜索忽略常见分隔符。
-		if code in [0x20, 0x3000, 0x2D, 0x5F, 0x27]:
+		if code in [0x20, 0x3000, 0x2D, 0x5F, 0x27, 0x7C]:
 			continue
 
 		result += String.chr(code)
@@ -193,7 +193,7 @@ static func _load_korean_aliases() -> void:
 
 		_korean_aliases[fields[0]] = {
 			"hangul": str(fields[1]),
-			"romaja": raw_romaja,
+			"romaja": normalize_search_text(raw_romaja),
 			"romaja_initials": romanization_initials(raw_romaja),
 		}
 
@@ -277,20 +277,21 @@ static func normalize_search_text(value: String) -> String:
 		.replace("_", "") \
 		.replace("-", "") \
 		.replace(" ", "") \
-		.replace("'", "")
+		.replace("'", "") \
+		.replace("|", "")
 
 
 static func romanization_initials(value: String) -> String:
-	# Romaji / Romaja 首字母。
+	# Romaji / Romaja 单字首字母。
 	#
-	# 以空格、连字符、下划线作为分词边界。
-	# 撇号仅移除，不作为新的单词边界。
+	# | 表示一个日文汉字 / 韩文音节对应的 Romanization 边界。
+	# 同时兼容旧的空格、连字符、下划线格式。
 	#
 	# 例：
-	# byaku jutsu -> bj
-	# wind-cold   -> wc
-	# hwang gi    -> hg
+	# hak|kou|ben|shou -> hkbs
+	# pal|gang|byeon|jeung -> pgbj
 	var clean_text := value.strip_edges().to_lower() \
+		.replace("|", " ") \
 		.replace("-", " ") \
 		.replace("_", " ") \
 		.replace("'", "")
