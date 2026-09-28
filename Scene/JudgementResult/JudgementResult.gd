@@ -291,8 +291,23 @@ func _localized_unlock_title(value: String) -> String:
 	if value == "预制方剂":
 		return tr("UI_RESULT_PRESET_UNLOCK")
 	if value.begins_with("预制方剂："):
-		return tr("UI_RESULT_PRESET_UNLOCK_FMT") % value.trim_prefix("预制方剂：")
-	return value
+		return tr("UI_RESULT_PRESET_UNLOCK_FMT") % _localized_unlock_entry_name(value.trim_prefix("预制方剂："))
+	return _localized_unlock_entry_name(value)
+
+
+func _localized_unlock_entry_name(original: String) -> String:
+	if BookEntryDB != null and BookEntryDB.has_method("get_all_entries"):
+		for entry in BookEntryDB.get_all_entries():
+			if entry == null or entry.title.strip_edges() != original:
+				continue
+			var key := "UI_BOOK_ENTRY_TITLE_" + entry.entry_id.to_upper()
+			var translated := tr(key)
+			return translated if translated != key and not translated.strip_edges().is_empty() else original
+	if FormulaDB != null and FormulaDB.has_method("get_all_formulas"):
+		for formula in FormulaDB.get_all_formulas():
+			if formula != null and formula.formula_name == original:
+				return LocalizedName.formula(formula.formula_id, original)
+	return original
 
 
 func _get_string_array(value) -> Array[String]:

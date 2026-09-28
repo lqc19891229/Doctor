@@ -238,6 +238,18 @@ var portrait_rest_position_initialized: bool = false
 # 生命周期
 # =========================================================
 
+func _notification(what: int) -> void:
+	if what != NOTIFICATION_TRANSLATION_CHANGED or not is_node_ready():
+		return
+	if current_npc == null:
+		return
+	current_npc.refresh_localized_dialogues()
+	_update_npc_name()
+	# 保留当前台词的显示状态与自动隐藏计时。
+	if npc_dialogue_label != null and npc_dialogue_visible:
+		npc_dialogue_label.set("text", current_npc.get_dialogue())
+
+
 func _ready() -> void:
 	# Clinic 平时不需要常驻 _process()。
 	# 只有 PulseWindow 打开期间临时启用，用于可靠读取多键组合。

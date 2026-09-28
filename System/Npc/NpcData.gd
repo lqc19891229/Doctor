@@ -53,6 +53,8 @@ var treatment_failed: bool = false
 var runtime_before_dialogue: String = ""
 var runtime_after_dialogue: String = ""
 var runtime_failed_dialogue: String = ""
+# -2 表示尚未抽取；-1 表示该疾病没有可选症状。
+var runtime_symptom_index: int = -2
 
 ## =========================================================
 ## 六、本地化辅助
@@ -116,9 +118,17 @@ func _uses_spaced_dialogue_locale() -> bool:
 func setup_clinic_visit() -> void:
 	is_treated = false
 	treatment_failed = false
+	runtime_symptom_index = -2
 
 	# 这里一次性随机好治疗前症状并组成台词。
 	# 后续刷新 Clinic UI 不会再次随机。
+	runtime_before_dialogue = _build_before_treatment_dialogue()
+	runtime_after_dialogue = _build_after_treatment_dialogue()
+	runtime_failed_dialogue = _build_treatment_failed_dialogue()
+
+
+func refresh_localized_dialogues() -> void:
+	# 复用已选症状的序号，语言切换时不重新抽取症状。
 	runtime_before_dialogue = _build_before_treatment_dialogue()
 	runtime_after_dialogue = _build_after_treatment_dialogue()
 	runtime_failed_dialogue = _build_treatment_failed_dialogue()
@@ -151,7 +161,10 @@ func get_treatment_failed_dialogue() -> String:
 
 
 func _build_before_treatment_dialogue() -> String:
-	var symptom := LocalizedDiseaseSymptom.get_random_symptom(disease)
+	if runtime_symptom_index == -2:
+		var symptoms := LocalizedDiseaseSymptom.get_symptom_list(disease)
+		runtime_symptom_index = randi_range(0, symptoms.size() - 1) if not symptoms.is_empty() else -1
+	var symptom := LocalizedDiseaseSymptom.get_localized_symptom(disease, runtime_symptom_index)
 	if symptom.strip_edges() == "":
 		var fallback_key := "UI_NPC_GENERIC_SYMPTOM"
 		symptom = TranslationServer.translate(fallback_key)
