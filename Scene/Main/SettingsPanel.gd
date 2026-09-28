@@ -256,10 +256,20 @@ func _refresh_optional_audio_bus_state() -> void:
 	sfx_label.tooltip_text = _get_missing_audio_bus_message(SFX_BUS) if not sfx_available else ""
 	sfx_volume_slider.tooltip_text = sfx_label.tooltip_text
 
+	ambient_label.tooltip_text = _get_missing_audio_bus_message(AMBIENT_BUS) if not ambient_available else ""
+	ambient_volume_slider.tooltip_text = ambient_label.tooltip_text
+
 
 func _get_missing_audio_bus_message(bus_name: String) -> String:
-	if TranslationServer.get_locale().to_lower().begins_with("ko"):
+	var locale := TranslationServer.get_locale().to_lower()
+
+	if locale.begins_with("en"):
+		return "%s audio bus has not been created yet. This slider will take effect after it is created." % bus_name
+	if locale.begins_with("ja"):
+		return "%s オーディオバスはまだ作成されていません。作成すると、このスライダーが有効になります。" % bus_name
+	if locale.begins_with("ko"):
 		return "%s 오디오 버스가 아직 생성되지 않았습니다. 생성하면 이 슬라이더가 적용됩니다." % bus_name
+
 	return "当前项目尚未创建 %s 音频总线。创建后该滑块会自动生效。" % bus_name
 
 
@@ -315,6 +325,7 @@ func _on_language_selected(_index: int) -> void:
 	var selected_display_mode := _selected_display_mode()
 	TranslationServer.set_locale(_selected_locale())
 	_setup_display_mode_options(selected_display_mode)
+	_refresh_optional_audio_bus_state()
 	_save_settings()
 
 
