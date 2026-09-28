@@ -39,16 +39,6 @@ def placeholders(value: str) -> list[str]:
 
 
 def find_data_xlsx(explicit_path: Path | None, managed_xlsx: Path) -> Path | None:
-    """
-    Locate Data.xlsx.
-
-    Priority:
-    1. Third command-line argument
-    2. Same folder as translations_managed.xlsx
-    3. ../DataTables/Data.xlsx relative to translations_managed.xlsx
-    4. ./DataTables/Data.xlsx relative to translations_managed.xlsx
-    5. Current working directory variants
-    """
     if explicit_path is not None:
         return explicit_path if explicit_path.exists() else None
 
@@ -89,7 +79,6 @@ def validate_managed_sheets(wb) -> None:
             continue
         ws = wb[sheet_name]
         header = [as_text(ws.cell(1, col).value) for col in range(1, len(EXPECTED_HEADER) + 1)]
-        # 兼容旧版四列表格：首次运行时自动补上 ko 表头，具体翻译仍需人工填写。
         if header[: len(LEGACY_HEADER)] == LEGACY_HEADER and not header[len(LEGACY_HEADER)]:
             ws.cell(1, len(EXPECTED_HEADER)).value = EXPECTED_HEADER[-1]
             header = [
@@ -106,6 +95,7 @@ def validate_managed_sheets(wb) -> None:
     search_header = [as_text(wb["JapaneseSearch"].cell(1, col).value) for col in range(1, 5)]
     if search_header != SEARCH_HEADER:
         raise ValueError(f"JapaneseSearch 的表头必须是 {SEARCH_HEADER}")
+
     if "KoreanSearch" not in wb.sheetnames:
         raise ValueError("翻译工作簿缺少 KoreanSearch 工作表")
     korean_header = [as_text(wb["KoreanSearch"].cell(1, col).value) for col in range(1, 5)]
@@ -114,10 +104,6 @@ def validate_managed_sheets(wb) -> None:
 
 
 def read_disease_symptoms(data_xlsx: Path) -> list[tuple[str, list[str]]]:
-    """
-    Read Data.xlsx -> Disease -> DiseaseID + Symptoms.
-    Symptoms uses | as the separator.
-    """
     wb = load_workbook(data_xlsx, data_only=True, read_only=True)
 
     if "Disease" not in wb.sheetnames:
@@ -196,10 +182,6 @@ def copy_row_style(source_ws, source_row: int, target_ws, target_row: int) -> No
 
 
 def update_table_ranges(ws) -> None:
-    """
-    The managed workbook uses Excel tables.
-    After deleting/appending symptom rows, extend any table on this sheet to the new end row.
-    """
     if ws.max_row < 1:
         return
 
@@ -208,17 +190,6 @@ def update_table_ranges(ws) -> None:
 
 
 def sync_disease_symptoms(managed_wb, disease_symptoms: list[tuple[str, list[str]]]) -> list[str]:
-    """
-    Synchronize UI_DISEASE_SYMPTOM_* rows in the Diseases sheet.
-
-    Translation preservation priority:
-    1. Same disease + same Chinese symptom
-    2. Same Chinese symptom anywhere in old symptom rows
-    3. Otherwise English remains blank and export stops so it can be translated
-
-    This means reordering Symptoms in Data.xlsx will not attach the wrong English
-    translation to the new _01 / _02 / _03 numbering.
-    """
     ws = managed_wb["Diseases"]
 
     existing_by_disease_and_zh: dict[tuple[str, str], tuple[str, str, str]] = {}
@@ -248,12 +219,9 @@ def sync_disease_symptoms(managed_wb, disease_symptoms: list[tuple[str, list[str
             existing_by_disease_and_zh[(disease_id, zh)] = (en, ja, ko)
             existing_by_zh.setdefault(zh, (en, ja, ko))
 
-    # If the workbook has no symptom rows yet, use the last ordinary Diseases row
-    # as the formatting template.
     if style_source_row is None:
         style_source_row = max(ws.max_row, 2)
 
-    # Remove old symptom rows bottom-up.
     for row_no in reversed(symptom_rows):
         ws.delete_rows(row_no, 1)
 
@@ -288,15 +256,16 @@ def sync_disease_symptoms(managed_wb, disease_symptoms: list[tuple[str, list[str
 
 
 def sync_story(wb, data_xlsx: Path) -> list[str]:
-    """Rebuild story rows from stable StoryID/LineIndex while retaining reviewed English."""
     source = load_workbook(data_xlsx, read_only=True, data_only=True)
     if "StoryLine" not in source.sheetnames:
         raise ValueError(f"{data_xlsx} 缺少 StoryLine 工作表")
+
     ws = wb["Story"] if "Story" in wb else wb.create_sheet("Story")
     if [as_text(ws.cell(1, col).value) for col in range(1, len(EXPECTED_HEADER) + 1)] != EXPECTED_HEADER:
         ws.insert_rows(1)
         for col, name in enumerate(EXPECTED_HEADER, start=1):
             ws.cell(1, col).value = name
+
     old = {}
     for row in ws.iter_rows(min_row=2, values_only=True):
         if row[0]:
@@ -306,38 +275,49 @@ def sync_story(wb, data_xlsx: Path) -> list[str]:
                 as_text(row[3]),
                 as_text(row[4]) if len(row) > 4 else "",
             )
+
     source_ws = source["StoryLine"]
     headers = {as_text(c.value): i for i, c in enumerate(source_ws[1])}
     required = ("StoryID", "LineIndex", "Speaker", "Text")
     if any(name not in headers for name in required):
         raise ValueError("Data.xlsx 的 StoryLine 工作表缺少必要列")
+
     rows = []
     seen = set()
+
     for row in source_ws.iter_rows(min_row=2, values_only=True):
         story_id = as_text(row[headers["StoryID"]])
         if not story_id:
             continue
+
         index = int(row[headers["LineIndex"]])
         if index < 1 or (story_id, index) in seen:
             raise ValueError(f"StoryLine 行号无效或重复：{story_id} / {index}")
         seen.add((story_id, index))
+
         for field, suffix in (("Speaker", "SPEAKER"), ("Text", "TEXT")):
             zh = as_text(row[headers[field]])
             if not zh:
                 continue
+
             key = f"STORY_{story_id}_{index:03d}_{suffix}"
             previous_zh, previous_en, previous_ja, previous_ko = old.get(
                 key, ("", "", "", "")
             )
+
             en = previous_en if previous_zh == zh else ""
             ja = previous_ja if previous_zh == zh else ""
             ko = previous_ko if previous_zh == zh else ""
             rows.append((key, zh, en, ja, ko))
+
     if ws.max_row > 1:
         ws.delete_rows(2, ws.max_row - 1)
+
     for key, zh, en, ja, ko in rows:
         ws.append((key, zh, en, ja, ko))
+
     update_table_ranges(ws)
+
     missing: list[str] = []
     for key, zh, en, ja, ko in rows:
         if not en:
@@ -346,14 +326,11 @@ def sync_story(wb, data_xlsx: Path) -> list[str]:
             missing.append(f"{key} | ja | {zh}")
         if not ko:
             missing.append(f"{key} | ko | {zh}")
+
     return missing
 
 
 def save_managed_workbook_safely(wb, path: Path) -> None:
-    """
-    Save through a temporary file, then replace the original.
-    This reduces the risk of leaving a damaged workbook if saving is interrupted.
-    """
     temp_path = path.with_name(path.stem + ".__tmp__" + path.suffix)
 
     try:
@@ -380,20 +357,13 @@ def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
             key = as_text(ws.cell(row_no, 1).value)
             zh = as_text(ws.cell(row_no, 2).value)
             en = as_text(ws.cell(row_no, 3).value)
-
             ja = as_text(ws.cell(row_no, 4).value)
             ko = as_text(ws.cell(row_no, 5).value)
 
             if not key and not zh and not en and not ja and not ko:
                 continue
 
-            if (
-                not key
-                or not zh
-                or (not en and sheet_name != "Story")
-                or not ja
-                or not ko
-            ):
+            if not key or not zh or not en or not ja or not ko:
                 raise ValueError(
                     f"数据不完整：{sheet_name} 第 {row_no} 行 "
                     f"(key={key!r}, zh_CN={zh!r}, en={en!r}, ja={ja!r}, ko={ko!r})"
@@ -417,13 +387,17 @@ def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
 
             ja_ph = placeholders(ja)
             if sorted(ja_ph) != sorted(zh_ph):
-                warnings.append(f"{sheet_name} row {row_no} {key}: ja={ja_ph}, zh={zh_ph}")
+                warnings.append(
+                    f"{sheet_name} row {row_no} {key}: ja={ja_ph}, zh={zh_ph}"
+                )
 
             ko_ph = placeholders(ko)
             if sorted(ko_ph) != sorted(zh_ph):
-                warnings.append(f"{sheet_name} row {row_no} {key}: ko={ko_ph}, zh={zh_ph}")
+                warnings.append(
+                    f"{sheet_name} row {row_no} {key}: ko={ko_ph}, zh={zh_ph}"
+                )
 
-            all_rows.append([key, zh, en or zh, ja, ko])
+            all_rows.append([key, zh, en, ja, ko])
             count += 1
 
         print(f"{sheet_name}：{count} 条")
@@ -442,75 +416,96 @@ def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
 
 
 def export_japanese_search(wb, out_csv: Path) -> int:
-    """Export explicit Japanese readings; never derive them from Chinese pinyin IDs."""
     title_keys = {
         as_text(row[0])
         for name in SHEET_ORDER
         for row in wb[name].iter_rows(min_row=2, values_only=True)
         if as_text(row[0]).startswith("UI_BOOK_ENTRY_TITLE_")
     }
+
     rows = []
     seen = set()
-    for row_no, row in enumerate(wb["JapaneseSearch"].iter_rows(min_row=2, values_only=True), start=2):
+
+    for row_no, row in enumerate(
+        wb["JapaneseSearch"].iter_rows(min_row=2, values_only=True),
+        start=2,
+    ):
         key, _source_zh, kana, romaji = (as_text(value) for value in row[:4])
+
         if not key and not kana and not romaji:
             continue
-        if key not in title_keys or key in seen:
-            raise ValueError(f"JapaneseSearch 第 {row_no} 行的 key 无效或重复：{key}")
+
+        if key not in title_keys or key in seen or not kana or not romaji:
+            raise ValueError(
+                f"JapaneseSearch 第 {row_no} 行无效、重复或缺少假名/罗马字：{key}"
+            )
+
         seen.add(key)
         rows.append((key, kana, romaji))
+
     if seen != title_keys:
         raise ValueError(f"JapaneseSearch 缺少 {len(title_keys - seen)} 个名称 key")
-    # .txt keeps this runtime lookup file as a regular text resource in Godot exports.
+
     path = out_csv.with_name("search_ja.txt")
     with path.open("w", encoding="utf-8-sig", newline="") as f:
         writer = csv.writer(f, lineterminator="\n")
         writer.writerow(SEARCH_EXPORT_HEADER)
         writer.writerows(rows)
+
     return len(rows)
 
 
 def sync_japanese_search(wb) -> None:
-    """Keep search keys in step with entry titles without losing edited readings."""
     ws = wb["JapaneseSearch"]
+
     existing = {
         as_text(row[0]): (as_text(row[2]), as_text(row[3]))
         for row in ws.iter_rows(min_row=2, values_only=True)
         if as_text(row[0])
     }
+
     titles = []
     seen = set()
+
     for name in SHEET_ORDER:
         for row in wb[name].iter_rows(min_row=2, values_only=True):
             key = as_text(row[0])
+
             if key.startswith("UI_BOOK_ENTRY_TITLE_") and key not in seen:
                 seen.add(key)
                 titles.append((key, as_text(row[1])))
+
     if ws.max_row > 1:
         ws.delete_rows(2, ws.max_row - 1)
+
     for key, zh in titles:
         kana, romaji = existing.get(key, ("", ""))
         ws.append((key, zh, kana, romaji))
 
 
 def sync_korean_search(wb) -> None:
-    """Keep title keys and source names in sync, retaining edited Romanization."""
     ws = wb["KoreanSearch"]
+
     existing = {
         as_text(row[0]): (as_text(row[2]), as_text(row[3]))
         for row in ws.iter_rows(min_row=2, values_only=True)
         if as_text(row[0])
     }
+
     titles = []
     seen = set()
+
     for name in SHEET_ORDER:
         for row in wb[name].iter_rows(min_row=2, values_only=True):
             key = as_text(row[0])
+
             if key.startswith("UI_BOOK_ENTRY_TITLE_") and key not in seen:
                 seen.add(key)
                 titles.append((key, as_text(row[1]), as_text(row[4])))
+
     if ws.max_row > 1:
         ws.delete_rows(2, ws.max_row - 1)
+
     for key, zh, ko in titles:
         hangul, romaja = existing.get(key, (ko, ""))
         ws.append((key, zh, hangul or ko, romaja))
@@ -523,23 +518,36 @@ def export_korean_search(wb, out_csv: Path) -> int:
         for row in wb[name].iter_rows(min_row=2, values_only=True)
         if as_text(row[0]).startswith("UI_BOOK_ENTRY_TITLE_")
     }
+
     rows = []
     seen = set()
-    for row_no, row in enumerate(wb["KoreanSearch"].iter_rows(min_row=2, values_only=True), start=2):
+
+    for row_no, row in enumerate(
+        wb["KoreanSearch"].iter_rows(min_row=2, values_only=True),
+        start=2,
+    ):
         key, _zh, hangul, romaja = (as_text(value) for value in row[:4])
+
         if not key and not hangul and not romaja:
             continue
-        if key not in title_keys or key in seen or not hangul:
-            raise ValueError(f"KoreanSearch 第 {row_no} 行无效、重复或缺少韩文：{key}")
+
+        if key not in title_keys or key in seen or not hangul or not romaja:
+            raise ValueError(
+                f"KoreanSearch 第 {row_no} 行无效、重复或缺少韩文/罗马字：{key}"
+            )
+
         seen.add(key)
         rows.append((key, hangul, romaja))
+
     if seen != title_keys:
         raise ValueError(f"KoreanSearch 缺少 {len(title_keys - seen)} 个名称 key")
+
     path = out_csv.with_name("search_ko.txt")
     with path.open("w", encoding="utf-8-sig", newline="") as f:
         writer = csv.writer(f, lineterminator="\n")
         writer.writerow(KOREAN_SEARCH_EXPORT_HEADER)
         writer.writerows(rows)
+
     return len(rows)
 
 
@@ -549,11 +557,13 @@ def main() -> int:
         if len(sys.argv) > 1
         else Path("translations_managed.xlsx")
     )
+
     out_csv = (
         Path(sys.argv[2])
         if len(sys.argv) > 2
         else Path("translations.csv")
     )
+
     explicit_data_xlsx = Path(sys.argv[3]) if len(sys.argv) > 3 else None
 
     if not managed_xlsx.exists():
@@ -592,19 +602,33 @@ def main() -> int:
         sync_japanese_search(wb)
         sync_korean_search(wb)
 
-        # Always save the synchronized managed workbook first.
         save_managed_workbook_safely(wb, managed_xlsx)
         print("症状已同步到 Diseases 工作表。")
 
-        # New Chinese symptoms need human translation before producing a game CSV.
         if missing_symptom_translations:
             print()
             print("停止导出：发现新增症状尚未填写英文、日语或韩语翻译。")
             print(
                 "以下症状已写入 translations_managed.xlsx，但 en、ja 或 ko 列仍为空："
             )
+
             for item in missing_symptom_translations:
                 print(" -", item)
+
+            print()
+            print("请补全这些英文、日语和韩语翻译，保存工作簿后再重新运行本脚本。")
+            return 2
+
+        if missing_story:
+            print()
+            print("停止导出：发现剧情尚未填写英文、日语或韩语翻译。")
+            print(
+                "以下剧情已写入 translations_managed.xlsx，但 en、ja 或 ko 列仍为空："
+            )
+
+            for item in missing_story:
+                print(" -", item)
+
             print()
             print("请补全这些英文、日语和韩语翻译，保存工作簿后再重新运行本脚本。")
             return 2
@@ -612,8 +636,6 @@ def main() -> int:
         total, warnings = export_csv(wb, out_csv)
         search_count = export_japanese_search(wb, out_csv)
         korean_search_count = export_korean_search(wb, out_csv)
-        if missing_story:
-            print(f"剧情待翻译：{len(missing_story)} 条；请补全 Story 工作表中的英文、日语或韩语后重导出。")
 
         print()
         print(f"已导出 {total} 条翻译 -> {out_csv}")
