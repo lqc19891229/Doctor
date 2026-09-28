@@ -204,6 +204,17 @@ static func format_fen_as_compound(total_fen: int) -> String:
 
 # 函数功能：根据总分值自动选择较简洁的剂量显示格式。
 static func format_fen_auto(total_fen: int) -> String:
+	if TranslationServer.get_locale().to_lower().begins_with("ko"):
+		if total_fen <= 0:
+			return TranslationServer.translate("UI_PRESCRIPTION_ZERO_FEN")
+		var remainder := total_fen
+		var parts: Array[String] = []
+		for unit_data in [[FEN_PER_JIN, UNIT_JIN], [FEN_PER_LIANG, UNIT_LIANG], [FEN_PER_QIAN, UNIT_QIAN], [1, UNIT_FEN]]:
+			var count: int = remainder / int(unit_data[0])
+			remainder %= int(unit_data[0])
+			if count > 0:
+				parts.append("%d %s" % [count, _get_localized_unit_name(str(unit_data[1]))])
+		return " ".join(parts)
 	if total_fen <= 0:
 		return "零分"
 
@@ -223,7 +234,7 @@ static func format_fen_auto(total_fen: int) -> String:
 # 中文环境保持原来的中文数字 + 中文单位；
 # 英文环境使用阿拉伯数字 + 本地化单位，例如：3 qian。
 static func format_amount(amount: float, unit: String) -> String:
-	if TranslationServer.get_locale().to_lower().begins_with("en") or TranslationServer.get_locale().to_lower().begins_with("ja"):
+	if TranslationServer.get_locale().to_lower().begins_with("en") or TranslationServer.get_locale().to_lower().begins_with("ja") or TranslationServer.get_locale().to_lower().begins_with("ko"):
 		return _format_amount_english(amount, unit)
 
 	return format_fen_as_compound(to_fen(amount, unit))

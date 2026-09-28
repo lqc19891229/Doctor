@@ -133,6 +133,21 @@ func get_all_herbs() -> Array[Dictionary]:
 	return result
 
 
+# 存档只保存可序列化的 ID 和剂量；显示时按当前语言重新取名称。
+func get_record_items() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for role_name in ["君", "臣", "佐", "使"]:
+		for item in get_herbs_by_role(role_name):
+			result.append({
+				"role": role_name,
+				"herb_id": str(item.get("herb_id", "")),
+				"herb_name": str(item.get("herb_name", "")),
+				"amount": float(item.get("amount", 0.0)),
+				"unit": str(item.get("unit", "qian"))
+			})
+	return result
+
+
 func get_herb_role(herb_id: String) -> String:
 	if _has_herb(jun_herbs, herb_id):
 		return "君"

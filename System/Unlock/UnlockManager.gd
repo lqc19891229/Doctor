@@ -655,17 +655,18 @@ func format_money(amount_wen: int) -> String:
 	# 2474 文 -> 2两 474文
 	# 0 文 -> 0文
 	var parts: Array[String] = []
+	var korean_locale := TranslationServer.get_locale().to_lower().begins_with("ko")
 	if liang > 0:
-		parts.append("%d两" % liang)
+		parts.append(tr("UI_MONEY_LIANG_FMT") % liang if korean_locale else "%d两" % liang)
 	if wen > 0:
-		parts.append("%d文" % wen)
+		parts.append(tr("UI_MONEY_WEN_FMT") % wen if korean_locale else "%d文" % wen)
 	if parts.is_empty():
-		parts.append("0文")
+		parts.append(tr("UI_MONEY_WEN_FMT") % 0 if korean_locale else "0文")
 
 	var text := " ".join(parts)
 
 	if amount_wen < 0:
-		return "欠 " + text
+		return ("미지급 " if korean_locale else "欠 ") + text
 
 	return text
 
@@ -675,7 +676,7 @@ func format_money_change(amount_wen: int) -> String:
 		return "+" + format_money(amount_wen)
 	if amount_wen < 0:
 		return "-" + format_money(-amount_wen)
-	return "0文"
+	return tr("UI_MONEY_WEN_FMT") % 0 if TranslationServer.get_locale().to_lower().begins_with("ko") else "0文"
 
 
 func _reset_daily_finance_ledger(day: int) -> void:
@@ -1372,7 +1373,7 @@ func build_finance_report_text(day: int) -> String:
 
 
 func _format_finance_change(amount_wen: int) -> String:
-	if not TranslationServer.get_locale().begins_with("en"):
+	if not TranslationServer.get_locale().begins_with("en") and not TranslationServer.get_locale().begins_with("ko"):
 		return format_money_change(amount_wen)
 
 	var amount := absi(amount_wen)

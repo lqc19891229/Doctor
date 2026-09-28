@@ -170,14 +170,14 @@ func _show_treatment_day(day: int) -> void:
 			var grade := _localized_grade(_record_text(record, "grade", ""))
 			lines.append("\n%d. [font_size=22][color=#fff1c7]%s[/color][/font_size]  %s  ·  %s" % [
 				index + 1,
-				_record_text(record, "patient_name", tr("UI_RECORDS_UNKNOWN_PATIENT")),
+				_localized_record_patient(record),
 				status,
 				grade
 			])
-			lines.append(tr("UI_RECORDS_DISEASE_FMT") % _record_text(record, "disease_name", tr("UI_RECORDS_NOT_RECORDED")))
-			lines.append(tr("UI_RECORDS_FORMULA_FMT") % _record_text(record, "standard_formula_name", tr("UI_RECORDS_NOT_RECORDED")))
-			lines.append(tr("UI_RECORDS_DIAGNOSIS_FMT") % _record_text(record, "diagnosis", tr("UI_RECORDS_NOT_RECORDED")))
-			lines.append(tr("UI_RECORDS_PRESCRIPTION_FMT") % _record_text(record, "prescription", tr("UI_RECORDS_EMPTY_PRESCRIPTION")).replace("\n", tr("UI_RECORDS_LINE_SEPARATOR")))
+			lines.append(tr("UI_RECORDS_DISEASE_FMT") % _localized_record_entity(record, "disease_id", "disease_name"))
+			lines.append(tr("UI_RECORDS_FORMULA_FMT") % _localized_record_entity(record, "standard_formula_id", "standard_formula_name", true))
+			lines.append(tr("UI_RECORDS_DIAGNOSIS_FMT") % _localized_record_entity(record, "diagnosis_id", "diagnosis"))
+			lines.append(tr("UI_RECORDS_PRESCRIPTION_FMT") % _localized_record_prescription(record).replace("\n", tr("UI_RECORDS_LINE_SEPARATOR")))
 			if index < records.size() - 1:
 				lines.append("[color=#62482f]────────────────────────[/color]")
 	treatment_detail.text = "\n".join(lines)
@@ -189,6 +189,58 @@ func _record_text(record: Dictionary, key: String, fallback: String) -> String:
 		return fallback
 	var text_value := str(value).strip_edges()
 	return text_value if not text_value.is_empty() else fallback
+
+
+func _localized_record_patient(record: Dictionary) -> String:
+	var fallback := _record_text(record, "patient_name", tr("UI_RECORDS_UNKNOWN_PATIENT"))
+	if not LocalizedName.is_korean_locale():
+		return fallback
+	var npc_id := _record_text(record, "npc_id", "")
+	if npc_id.is_empty():
+		return fallback
+	var key := "UI_NPC_NAME_" + npc_id.to_upper()
+	var translated := tr(key)
+	return fallback if translated == key else translated
+
+
+func _localized_record_entity(record: Dictionary, id_key: String, name_key: String, is_formula: bool = false) -> String:
+	var fallback := _record_text(record, name_key, tr("UI_RECORDS_NOT_RECORDED"))
+	if not LocalizedName.is_korean_locale():
+		return fallback
+	var entity_id := _record_text(record, id_key, "")
+	if entity_id.is_empty():
+		# 兼容旧存档：根据保存的中文名称找回 ID。
+		if is_formula and FormulaDB != null:
+			for formula in FormulaDB.get_all_formulas():
+				if formula != null and formula.formula_name == fallback:
+					entity_id = formula.formula_id
+		elif DiseaseDB != null:
+			for disease in DiseaseDB.get_all_diseases():
+				if disease != null and disease.disease_name == fallback:
+					entity_id = disease.disease_id
+		if entity_id.is_empty():
+			return fallback
+	return LocalizedName.formula(entity_id, fallback) if is_formula else LocalizedName.disease(entity_id, fallback)
+
+
+func _localized_record_prescription(record: Dictionary) -> String:
+	var fallback := _record_text(record, "prescription", tr("UI_RECORDS_EMPTY_PRESCRIPTION"))
+	if not LocalizedName.is_korean_locale():
+		return fallback
+	var items = record.get("prescription_items", [])
+	if not (items is Array) or items.is_empty():
+		return fallback # 旧存档没有处方 ID，保留原记录。
+	var lines: Array[String] = []
+	for role_data in [["君", "UI_PRESCRIPTION_ROLE_JUN"], ["臣", "UI_PRESCRIPTION_ROLE_CHEN"], ["佐", "UI_PRESCRIPTION_ROLE_ZUO"], ["使", "UI_PRESCRIPTION_ROLE_SHI"]]:
+		var parts: Array[String] = []
+		for item in items:
+			if not (item is Dictionary) or str(item.get("role", "")) != str(role_data[0]):
+				continue
+			var herb_id := str(item.get("herb_id", ""))
+			var herb_name := LocalizedName.herb(herb_id, str(item.get("herb_name", herb_id)))
+			parts.append("%s %s" % [herb_name, HerbUnit.format_amount(float(item.get("amount", 0.0)), str(item.get("unit", "qian")))])
+		lines.append("%s: %s" % [tr(str(role_data[1])), ", ".join(parts) if not parts.is_empty() else tr("UI_RESULT_NONE")])
+	return "\n".join(lines)
 
 
 func _refresh_finance_list() -> void:

@@ -94,13 +94,13 @@ func show_story_pulse_hand(target_pulse_window: Node, hand_side: String) -> Dict
 	if _current_npc == null or _current_npc.disease == null:
 		return {
 			"ok": false,
-			"text": "当前没有可诊疗的剧情病人。"
+			"text": "진료할 이야기 환자가 없습니다." if LocalizedName.is_korean_locale() else "当前没有可诊疗的剧情病人。"
 		}
 
 	if target_pulse_window == null or not target_pulse_window.has_method("show_hand_group"):
 		return {
 			"ok": false,
-			"text": "Story 的 PulseWindow 不可用。"
+			"text": "맥진 창을 사용할 수 없습니다." if LocalizedName.is_korean_locale() else "Story 的 PulseWindow 不可用。"
 		}
 
 	var raw_result = target_pulse_window.call(
@@ -113,25 +113,24 @@ func show_story_pulse_hand(target_pulse_window: Node, hand_side: String) -> Dict
 
 	return {
 		"ok": false,
-		"text": "Story 的 PulseWindow 返回了无效数据。"
+		"text": "맥진 창에서 유효하지 않은 결과를 반환했습니다." if LocalizedName.is_korean_locale() else "Story 的 PulseWindow 返回了无效数据。"
 	}
 
 
 func submit_story_prescription() -> Dictionary:
 	if _current_npc == null:
-		return _submit_error("当前没有病人，无法提交处方")
+		return _submit_error("현재 환자가 없어 처방을 제출할 수 없습니다." if LocalizedName.is_korean_locale() else "当前没有病人，无法提交处方")
 
 	if _current_npc.disease == null:
-		return _submit_error("当前病人没有绑定疾病，无法提交处方")
+		return _submit_error("현재 환자에게 연결된 병증이 없습니다." if LocalizedName.is_korean_locale() else "当前病人没有绑定疾病，无法提交处方")
 
 	if _current_prescription == null or _current_prescription.is_empty():
-		return _submit_error("当前处方为空，请先开方")
+		return _submit_error("처방이 비어 있습니다. 먼저 약재를 선택해 주세요." if LocalizedName.is_korean_locale() else "当前处方为空，请先开方")
 
 	var standard_formula := _get_current_standard_formula()
 	if standard_formula == null:
-		return _submit_error(
-			"未找到疾病【%s】对应的标准方" % _current_npc.disease.disease_name
-		)
+		var disease_name := LocalizedName.disease(_current_npc.disease.disease_id, _current_npc.disease.disease_name)
+		return _submit_error(("【%s】에 해당하는 표준 처방을 찾을 수 없습니다." if LocalizedName.is_korean_locale() else "未找到疾病【%s】对应的标准方") % disease_name)
 
 	var result = _formula_judge.judge_formula(
 		_current_prescription,
@@ -139,7 +138,7 @@ func submit_story_prescription() -> Dictionary:
 		_current_npc.disease
 	)
 	if result == null:
-		return _submit_error("处方判定失败。")
+		return _submit_error("처방 판정에 실패했습니다." if LocalizedName.is_korean_locale() else "处方判定失败。")
 
 	var was_already_submitted := _diagnosis_submitted
 	_diagnosis_submitted = true
@@ -154,11 +153,16 @@ func submit_story_prescription() -> Dictionary:
 			raw_score = -1
 		Records.record_treatment(_current_day, {
 			"patient_name": _current_npc.npc_name,
+			"npc_id": _current_npc.npc_id,
 			"npc_type": "story",
 			"disease_name": _current_npc.disease.disease_name,
+			"disease_id": _current_npc.disease.disease_id,
 			"standard_formula_name": standard_formula.formula_name,
+			"standard_formula_id": standard_formula.formula_id,
 			"diagnosis": _current_prescription.disease_name,
+			"diagnosis_id": _current_prescription.disease_id,
 			"prescription": _current_prescription.get_display_text(),
+			"prescription_items": _current_prescription.get_record_items(),
 			"grade": String(raw_grade) if raw_grade != null else "",
 			"score": raw_score,
 			"success": bool(result.success)
@@ -281,6 +285,7 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 	var player_disease_name := ""
 	var player_prescription_text := ""
 	var grade := ""
+	var grade_level := ""
 	var total_score := 0
 
 	if _current_npc != null:
@@ -310,6 +315,9 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 		var raw_grade = judge_result.get("grade")
 		if raw_grade != null:
 			grade = str(raw_grade)
+		var raw_level = judge_result.get("level")
+		if raw_level != null:
+			grade_level = str(raw_level).strip_edges()
 
 		var raw_score = judge_result.get("score")
 		if raw_score != null:
@@ -318,13 +326,17 @@ func _build_judgement_result_data(judge_result = null, summary_text: String = ""
 	return {
 		"npc_name": npc_name,
 		"disease_name": disease_name,
+		"disease_id": _current_npc.disease.disease_id if _current_npc != null and _current_npc.disease != null else "",
 		"standard_formula_name": standard_formula_name,
+		"standard_formula_id": standard_formula.formula_id if standard_formula != null else "",
 		"standard_formula_text": standard_formula_text,
 		"standard_formula_resource": standard_formula,
 		"player_disease_name": player_disease_name,
+		"player_disease_id": _current_prescription.disease_id if _current_prescription != null else "",
 		"player_prescription_text": player_prescription_text,
 		"player_prescription_resource": _current_prescription,
 		"grade": grade,
+		"grade_level": grade_level,
 		"total_score": total_score,
 		"summary_text": summary_text,
 		"newly_unlocked_entry_titles": [],

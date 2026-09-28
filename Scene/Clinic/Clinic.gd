@@ -1181,28 +1181,31 @@ func _calculate_current_prescription_price_summary_wen() -> Dictionary:
 
 func submit_prescription() -> bool:
 	if current_npc == null:
-		_set_info_text("当前没有病人，无法提交处方")
+		_set_info_text("현재 환자가 없어 처방을 제출할 수 없습니다." if LocalizedName.is_korean_locale() else "当前没有病人，无法提交处方")
 		return false
 
 	if current_npc.disease == null:
-		_set_info_text("当前病人没有绑定疾病，无法提交处方")
+		_set_info_text("현재 환자에게 연결된 병증이 없어 처방을 제출할 수 없습니다." if LocalizedName.is_korean_locale() else "当前病人没有绑定疾病，无法提交处方")
 		return false
 
 	if current_prescription == null:
-		_set_info_text("当前处方未初始化，无法提交")
+		_set_info_text("처방이 초기화되지 않아 제출할 수 없습니다." if LocalizedName.is_korean_locale() else "当前处方未初始化，无法提交")
 		return false
 
 	if not current_prescription.has_disease():
-		_set_info_text("请先选择疾病诊断")
+		_set_info_text("먼저 병증을 진단해 주세요." if LocalizedName.is_korean_locale() else "请先选择疾病诊断")
 		return false
 
 	if current_prescription.is_empty():
-		_set_info_text("当前处方为空，请先开方")
+		_set_info_text("처방이 비어 있습니다. 먼저 약재를 선택해 주세요." if LocalizedName.is_korean_locale() else "当前处方为空，请先开方")
 		return false
 
 	var standard_formula := _get_current_standard_formula()
 	if standard_formula == null:
-		_set_info_text("未找到疾病【%s】对应的标准方" % current_npc.disease.disease_name)
+		if LocalizedName.is_korean_locale():
+			_set_info_text("【%s】에 해당하는 표준 처방을 찾을 수 없습니다." % LocalizedName.disease(current_npc.disease.disease_id, current_npc.disease.disease_name))
+		else:
+			_set_info_text("未找到疾病【%s】对应的标准方" % current_npc.disease.disease_name)
 		return false
 
 	var was_already_submitted := diagnosis_submitted
@@ -1273,17 +1276,19 @@ func submit_prescription() -> bool:
 
 			last_patient_thank_gift_wen = patient_thank_gift_wen
 
-			if consultation_fee_wen > 0:
-				summary_text += "\n诊费：+%d文" % consultation_fee_wen
+			if LocalizedName.is_korean_locale():
+				summary_text += "\n" + tr("UI_DAILY_FINANCE_CONSULTATION_FMT") % Unlock.format_money_change(consultation_fee_wen)
+				summary_text += "\n" + tr("UI_DAILY_FINANCE_MEDICINE_NET_FMT") % Unlock.format_money_change(medicine_income_wen)
+				if patient_thank_gift_wen > 0:
+					summary_text += "\n" + tr("UI_DAILY_FINANCE_GIFT_FMT") % Unlock.format_money_change(patient_thank_gift_wen)
 			else:
-				summary_text += "\n诊费：0文"
-
-			summary_text += "\n药材收入：%s" % Unlock.format_money_change(
-				medicine_income_wen
-			)
-
-			if patient_thank_gift_wen > 0:
-				summary_text += "\n病家谢仪礼：+%d文" % patient_thank_gift_wen
+				if consultation_fee_wen > 0:
+					summary_text += "\n诊费：+%d文" % consultation_fee_wen
+				else:
+					summary_text += "\n诊费：0文"
+				summary_text += "\n药材收入：%s" % Unlock.format_money_change(medicine_income_wen)
+				if patient_thank_gift_wen > 0:
+					summary_text += "\n病家谢仪礼：+%d文" % patient_thank_gift_wen
 
 			_update_money_point_ui(true)
 
@@ -1307,18 +1312,18 @@ func submit_prescription() -> bool:
 			_update_reputation_point_ui(true)
 
 			if reputation_reward > 0:
-				summary_text += "\n获得名望：+%d" % reputation_reward
+				summary_text += ("\n명망 획득: +%d" if LocalizedName.is_korean_locale() else "\n获得名望：+%d") % reputation_reward
 			else:
-				summary_text += "\n损失名望：%d" % reputation_reward
+				summary_text += ("\n명망 감소: %d" if LocalizedName.is_korean_locale() else "\n损失名望：%d") % reputation_reward
 
 			if Unlock.has_method("get_reputation_points"):
-				summary_text += "\n当前名望：%d" % Unlock.get_reputation_points()
+				summary_text += ("\n현재 명망: %d" if LocalizedName.is_korean_locale() else "\n当前名望：%d") % Unlock.get_reputation_points()
 
 			# 名望变化只保留在内存，正常白天结束时统一写盘。
 	elif reputation_reward != 0 and was_already_submitted:
-		summary_text += "\n本病人已提交过处方，不重复改变名望。"
+		summary_text += "\n이 환자에게는 이미 처방을 제출하여 명망이 다시 변경되지 않습니다." if LocalizedName.is_korean_locale() else "\n本病人已提交过处方，不重复改变名望。"
 		if Unlock != null and Unlock.has_method("get_reputation_points"):
-			summary_text += "\n当前名望：%d" % Unlock.get_reputation_points()
+			summary_text += ("\n현재 명망: %d" if LocalizedName.is_korean_locale() else "\n当前名望：%d") % Unlock.get_reputation_points()
 
 	var result_grade := ""
 	if result != null:
@@ -1336,11 +1341,16 @@ func submit_prescription() -> bool:
 				score_value = raw_score_value
 		Records.record_treatment(current_day, {
 			"patient_name": current_npc.npc_name,
+			"npc_id": current_npc.npc_id,
 			"npc_type": current_npc.npc_type,
 			"disease_name": current_npc.disease.disease_name if current_npc.disease != null else "未记录",
+			"disease_id": current_npc.disease.disease_id if current_npc.disease != null else "",
 			"standard_formula_name": standard_formula.formula_name if standard_formula != null else "未记录",
+			"standard_formula_id": standard_formula.formula_id if standard_formula != null else "",
 			"diagnosis": current_prescription.disease_name,
+			"diagnosis_id": current_prescription.disease_id,
 			"prescription": current_prescription.get_display_text(),
+			"prescription_items": current_prescription.get_record_items(),
 			"grade": result_grade,
 			"score": score_value,
 			"success": bool(result.success),
@@ -1350,9 +1360,9 @@ func submit_prescription() -> bool:
 		})
 
 	if uses_fixed_treatment_rewards and result_grade == "治疗成功" and not was_already_submitted:
-		summary_text += "\n治疗成功：名望不变"
+		summary_text += "\n치료 성공: 명망은 그대로입니다." if LocalizedName.is_korean_locale() else "\n治疗成功：名望不变"
 	elif uses_fixed_treatment_rewards and result_grade == "治疗成功" and was_already_submitted:
-		summary_text += "\n本病人已提交过处方，名望不变。"
+		summary_text += "\n이 환자에게는 이미 처방을 제출하여 명망이 변경되지 않습니다." if LocalizedName.is_korean_locale() else "\n本病人已提交过处方，名望不变。"
 
 	# random NPC 达成妙手回春时：
 	# 1. 后台增加 1 点 experience_points，并立即检查心得条目解锁；

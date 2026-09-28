@@ -260,7 +260,14 @@ func _entry_matches_search(entry: BookEntryData) -> bool:
 			_localized_entry_title(entry), entity_id, query
 		)
 	if LocalizedName.is_korean_locale():
-		return LocalizedName.korean_search_matches(_localized_entry_title(entry), query)
+		var entity_id := entry.entry_id
+		if entry is HerbBookEntryData:
+			entity_id = (entry as HerbBookEntryData).herb_id
+		elif entry is FormulaBookEntryData:
+			entity_id = (entry as FormulaBookEntryData).formula_id
+		elif entry is DiseaseBookEntryData:
+			entity_id = (entry as DiseaseBookEntryData).disease_id
+		return LocalizedName.korean_search_matches(_localized_entry_title(entry), entity_id, query)
 
 	return (
 		entry.title.findn(query) >= 0

@@ -425,7 +425,10 @@ func _is_entry_match_clinical_log_search(entry: BookEntryData, clean_keyword: St
 			entity_id = entry.entry_id
 		return LocalizedName.japanese_search_matches(localized_title, entity_id, clean_keyword)
 	if LocalizedName.is_korean_locale():
-		return LocalizedName.korean_search_matches(localized_title, clean_keyword)
+		var entity_id := _get_entry_data_id(entry)
+		if entity_id.is_empty():
+			entity_id = entry.entry_id
+		return LocalizedName.korean_search_matches(localized_title, entity_id, clean_keyword)
 
 	# 英文环境：英文名称 + 英文单词首字母。
 	if LocalizedName.is_english_locale():

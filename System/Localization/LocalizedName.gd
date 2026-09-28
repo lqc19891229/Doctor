@@ -10,7 +10,7 @@ class_name LocalizedName
 # - 找不到翻译时使用传入的中文 fallback。
 # - 中文环境搜索：中文名 + 拼音全拼 + 拼音首字母。
 # - 英文环境搜索：英文名 + 英文单词首字母。
-# - 韩文环境搜索：韩文显示名称。
+# - 韩文环境搜索：韩文名称、罗马字和首音。
 # - 详情排版：英文横排；中文、日文、韩文使用古籍竖排。
 # =========================================================
 
@@ -116,11 +116,58 @@ static func japanese_search_matches(display_name: String, entity_id: String, que
 	return false
 
 
-static func korean_search_matches(display_name: String, query: String) -> bool:
+static var _korean_aliases_loaded: bool = false
+static var _korean_aliases: Dictionary = {}
+
+
+static func _load_korean_aliases() -> void:
+	if _korean_aliases_loaded:
+		return
+	_korean_aliases_loaded = true
+	var path := "res://Localization/search_ko.txt"
+	if not FileAccess.file_exists(path):
+		return
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		return
+	file.get_csv_line() # header
+	while not file.eof_reached():
+		var fields := file.get_csv_line()
+		if fields.size() < 3 or fields[0].strip_edges().is_empty():
+			continue
+		_korean_aliases[fields[0]] = [fields[1], fields[2]]
+
+
+static func _korean_initials(value: String) -> String:
+	const CHOSEONG = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
+	var result := ""
+	for index in range(value.length()):
+		var code := value.unicode_at(index)
+		if code >= 0xAC00 and code <= 0xD7A3:
+			result += CHOSEONG[int((code - 0xAC00) / 588)]
+	return result
+
+
+static func korean_search_matches(display_name: String, entity_id: String, query: String) -> bool:
 	var needle := normalize_search_text(query)
 	if needle.is_empty():
 		return false
-	return normalize_search_text(display_name).contains(needle)
+	_load_korean_aliases()
+	var key := "UI_BOOK_ENTRY_TITLE_" + entity_id.to_upper()
+	var aliases: Array = _korean_aliases.get(key, [])
+	var names: Array = [display_name]
+	if aliases.size() >= 1:
+		names.append(str(aliases[0]))
+	for name in names:
+		var normalized_name := normalize_search_text(str(name))
+		if normalized_name.contains(needle):
+			return true
+		var initials := _korean_initials(str(name))
+		if not initials.is_empty() and initials.begins_with(needle):
+			return true
+	if aliases.size() >= 2 and normalize_search_text(str(aliases[1])).contains(needle):
+		return true
+	return false
 
 
 static func normalize_search_text(value: String) -> String:
@@ -159,4 +206,3 @@ static func english_initials(value: String) -> String:
 			initials += clean_word.substr(0, 1).to_lower()
 
 	return initials
-
