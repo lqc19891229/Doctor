@@ -15051,307 +15051,307 @@ UI_DISEASE_SYMPTOM_XIN_SHEN_BU_JIAO_02,失眠多梦,sleeping poorly and having f
 UI_DISEASE_SYMPTOM_XIN_SHEN_BU_JIAO_03,腰膝酸软,having soreness and weakness in my lower back and knees,腰や膝がだるい,허리와 무릎이 시큰하고 힘이 없어요
 UI_DISEASE_SYMPTOM_QI_FEN_RE_SHENG_01,不舒服,feeling unwell,具合が悪い,몸이 불편해요
 UI_DISEASE_SYMPTOM_QI_FEN_RE_SHENG_02,发烧,running a fever,熱がある,열이 나요
-UI_NPC_NAME_CHA_BO_SHI,茶博士,Tea Master,茶博士,차 박사
-UI_NPC_DIALOGUE_AFTER_CHA_BO_SHI,哎呀，真是多谢先生了。,"Oh, thank you very much, Doctor.",先生、本当にありがとうございます。,"정말 감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_CHA_BO_SHI,感觉更不舒服了…,I feel even worse...,前より具合が悪くなりました……,더 불편해졌어요…
-UI_NPC_NAME_CHEN_ER,陈二,Chen Second,陳二,진이
-UI_NPC_DIALOGUE_AFTER_CHEN_ER,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_CHEN_ER,嗯…哎哟…,Mm... ow...,うう……痛い……,음… 아야…
-UI_NPC_NAME_CHEN_PO,陈婆,Chen Granny,陳婆,진 할머니
-UI_NPC_DIALOGUE_AFTER_CHEN_PO,真是太谢谢先生了。,"Thank you so much, Doctor.",先生、本当にありがとうございます。,"정말 감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_CHEN_PO,感觉不太对啊…,Something doesn't feel right...,どうも様子がおかしい……,뭔가 이상한데요…
-UI_NPC_NAME_CHEN_SHAN_ZHANG,陈山长,Chen Headmaster,陳山長,진 산장
-UI_NPC_DIALOGUE_AFTER_CHEN_SHAN_ZHANG,大夫真是妙手回春啊。,"Doctor, your skill is remarkable. I feel restored.",先生の腕は本当に見事です。,선생님의 솜씨가 정말 대단합니다. 다시 살아난 기분입니다.
-UI_NPC_DIALOGUE_FAILED_CHEN_SHAN_ZHANG,医术不精，还敢自称郎中！,You call yourself a physician with skills like that?!,腕もないくせに医者を名乗るな！,그런 실력으로 의원이라고 자처하는 겁니까?!
-UI_NPC_NAME_DU_ER_SAO,杜二嫂,Du Second Sister-in-law,杜二嫂,두 둘째 형수
-UI_NPC_DIALOGUE_AFTER_DU_ER_SAO,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better.",先生、本当にありがとうございます。楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_DU_ER_SAO,哎哟...哎哟…,Ow... ow...,あいたた……あいたた……,아야… 아야…
-UI_NPC_NAME_FENG_JUN_BAO,冯军保,Feng Army Protector,馮军保,펑 군보
-UI_NPC_DIALOGUE_AFTER_FENG_JUN_BAO,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_FENG_JUN_BAO,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……,흠… 이상하군요…
-UI_NPC_NAME_GAO_XIU_LIAN,高秀莲,Gao Elegant Lotus,高秀蓮,가오 수련
-UI_NPC_DIALOGUE_AFTER_GAO_XIU_LIAN,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor.",だいぶ楽になりました。先生、ありがとうございます。,"훨씬 나아졌어요. 감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_GAO_XIU_LIAN,哎哟...哎哟…,Ow... ow...,あいたた……あいたた……,아야… 아야…
-UI_NPC_NAME_HAN_ZHANG_GUI,韩掌柜,Han Shopkeeper,韓店主,한 장궤
-UI_NPC_DIALOGUE_AFTER_HAN_ZHANG_GUI,多谢大夫啦。,"Thank you, Doctor.",先生、ありがとうございます。,"감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_HAN_ZHANG_GUI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？,"선생님, 왜 아직도 낫지 않는 건가요?"
-UI_NPC_NAME_HE_SAN_JIE,贺三姐,He Third Sister,賀三姐,허 셋째 누이
-UI_NPC_DIALOGUE_AFTER_HE_SAN_JIE,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_HE_SAN_JIE,你会不会看病啊？,Do you actually know how to treat people?,本当に診察できるんですか？,정말 사람을 치료할 줄 아시는 겁니까?
+UI_NPC_NAME_CHA_BO_SHI,茶博士,Tea Master,茶博士,차박사
+UI_NPC_DIALOGUE_AFTER_CHA_BO_SHI,哎呀，真是多谢先生了。,"Oh, thank you very much, Doctor.",先生、本当にありがとうございます。,"아이고, 선생님. 정말 감사합니다."
+UI_NPC_DIALOGUE_FAILED_CHA_BO_SHI,感觉更不舒服了…,I feel even worse...,前より具合が悪くなりました……,전보다 더 불편해졌어요…
+UI_NPC_NAME_CHEN_ER,陈二,Chen Second,陳二,천얼
+UI_NPC_DIALOGUE_AFTER_CHEN_ER,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_CHEN_ER,嗯…哎哟…,Mm... ow...,うう……痛い……,음… 아이고…
+UI_NPC_NAME_CHEN_PO,陈婆,Chen Granny,陳婆,천 노파
+UI_NPC_DIALOGUE_AFTER_CHEN_PO,真是太谢谢先生了。,"Thank you so much, Doctor.",先生、本当にありがとうございます。,"선생님, 정말 감사합니다."
+UI_NPC_DIALOGUE_FAILED_CHEN_PO,感觉不太对啊…,Something doesn't feel right...,どうも様子がおかしい……,뭔가 느낌이 좋지 않아요…
+UI_NPC_NAME_CHEN_SHAN_ZHANG,陈山长,Chen Headmaster,陳山長,천 서원장
+UI_NPC_DIALOGUE_AFTER_CHEN_SHAN_ZHANG,大夫真是妙手回春啊。,"Doctor, your skill is remarkable. I feel restored.",先生の腕は本当に見事です。,"의원님, 정말 솜씨가 신묘하십니다."
+UI_NPC_DIALOGUE_FAILED_CHEN_SHAN_ZHANG,医术不精，还敢自称郎中！,You call yourself a physician with skills like that?!,腕もないくせに医者を名乗るな！,의술도 변변치 않으면서 감히 의원을 자처하다니!
+UI_NPC_NAME_DU_ER_SAO,杜二嫂,Du Second Sister-in-law,杜二嫂,두 둘째댁
+UI_NPC_DIALOGUE_AFTER_DU_ER_SAO,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better.",先生、本当にありがとうございます。楽になりました。,"선생님, 정말 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_DU_ER_SAO,哎哟...哎哟…,Ow... ow...,あいたた……あいたた……,아이고… 아이고…
+UI_NPC_NAME_FENG_JUN_BAO,冯军保,Feng Army Protector,馮军保,펑쥔바오
+UI_NPC_DIALOGUE_AFTER_FENG_JUN_BAO,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_FENG_JUN_BAO,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……,어… 이상하군요…
+UI_NPC_NAME_GAO_XIU_LIAN,高秀莲,Gao Elegant Lotus,高秀蓮,가오슈롄
+UI_NPC_DIALOGUE_AFTER_GAO_XIU_LIAN,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor.",だいぶ楽になりました。先生、ありがとうございます。,"훨씬 나아졌어요. 선생님, 감사합니다."
+UI_NPC_DIALOGUE_FAILED_GAO_XIU_LIAN,哎哟...哎哟…,Ow... ow...,あいたた……あいたた……,아이고… 아이고…
+UI_NPC_NAME_HAN_ZHANG_GUI,韩掌柜,Han Shopkeeper,韓店主,한 주인장
+UI_NPC_DIALOGUE_AFTER_HAN_ZHANG_GUI,多谢大夫啦。,"Thank you, Doctor.",先生、ありがとうございます。,"의원님, 고맙습니다."
+UI_NPC_DIALOGUE_FAILED_HAN_ZHANG_GUI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？,"의원님, 제 병은 왜 아직도 낫지 않는 겁니까?"
+UI_NPC_NAME_HE_SAN_JIE,贺三姐,He Third Sister,賀三姐,허싼제
+UI_NPC_DIALOGUE_AFTER_HE_SAN_JIE,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。楽になりました。,"의원님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_HE_SAN_JIE,你会不会看病啊？,Do you actually know how to treat people?,本当に診察できるんですか？,정말 진료할 줄 아는 거예요?
 UI_NPC_NAME_HE_ZHANG_SHAO,何掌勺,He Cook,何料理長,허 주방장
-UI_NPC_DIALOGUE_AFTER_HE_ZHANG_SHAO,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。,"감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_HE_ZHANG_SHAO,还是好难受啊…,I still feel awful...,まだとてもつらい……,여전히 너무 괴로워요…
-UI_NPC_NAME_HUA_JIN_NIANG,华锦娘,Hua Brocade Maiden,華錦娘,화 진냥
-UI_NPC_DIALOGUE_AFTER_HUA_JIN_NIANG,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_HUA_JIN_NIANG,您给我开的这是什么药啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,제게 무슨 약을 지어 주신 건가요…?
+UI_NPC_DIALOGUE_AFTER_HE_ZHANG_SHAO,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。,"선생님, 감사합니다."
+UI_NPC_DIALOGUE_FAILED_HE_ZHANG_SHAO,还是好难受啊…,I still feel awful...,まだとてもつらい……,아직도 너무 괴로워요…
+UI_NPC_NAME_HUA_JIN_NIANG,华锦娘,Hua Brocade Maiden,華錦娘,화진냥
+UI_NPC_DIALOGUE_AFTER_HUA_JIN_NIANG,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_HUA_JIN_NIANG,您给我开的这是什么药啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,대체 무슨 약을 지어 주신 건가요…?
 UI_NPC_NAME_HUA_YUN,花芸,Hua Rue,花芸,화윈
-UI_NPC_DIALOGUE_AFTER_HUA_YUN,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_HUA_YUN,嗯？感觉好奇怪啊…,Huh? I feel strange...,えっ？　なんだか変な感じがします……,어? 느낌이 이상한데요…
-UI_NPC_NAME_HUANG_NIU_ER,黄牛儿,Huang Little Ox,黄牛児,황 뉴얼
-UI_NPC_DIALOGUE_AFTER_HUANG_NIU_ER,真是太谢谢大夫了。,"Thank you so much, Doctor.",先生、本当にありがとうございます。,"정말 감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_HUANG_NIU_ER,感觉不太对啊…,Something doesn't feel right...,どうも様子がおかしい……,뭔가 이상한데요…
-UI_NPC_NAME_HUANG_QIU_JU,黄秋菊,Huang Autumn Chrysanthemum,黄秋菊,황 추국
-UI_NPC_DIALOGUE_AFTER_HUANG_QIU_JU,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_HUANG_QIU_JU,还是好难受啊…,I still feel awful...,まだとてもつらい……,여전히 너무 괴로워요…
+UI_NPC_DIALOGUE_AFTER_HUA_YUN,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"선생님, 수고하셨습니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_HUA_YUN,嗯？感觉好奇怪啊…,Huh? I feel strange...,えっ？　なんだか変な感じがします……,응? 느낌이 너무 이상한데요…
+UI_NPC_NAME_HUANG_NIU_ER,黄牛儿,Huang Little Ox,黄牛児,황뉴얼
+UI_NPC_DIALOGUE_AFTER_HUANG_NIU_ER,真是太谢谢大夫了。,"Thank you so much, Doctor.",先生、本当にありがとうございます。,"의원님, 정말 감사합니다."
+UI_NPC_DIALOGUE_FAILED_HUANG_NIU_ER,感觉不太对啊…,Something doesn't feel right...,どうも様子がおかしい……,뭔가 느낌이 좋지 않아요…
+UI_NPC_NAME_HUANG_QIU_JU,黄秋菊,Huang Autumn Chrysanthemum,黄秋菊,황추쥐
+UI_NPC_DIALOGUE_AFTER_HUANG_QIU_JU,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_HUANG_QIU_JU,还是好难受啊…,I still feel awful...,まだとてもつらい……,아직도 너무 괴로워요…
 UI_NPC_NAME_JI_YUN_NIANG,季云娘,Ji Cloud Maiden,季雲娘,지윈냥
-UI_NPC_DIALOGUE_AFTER_JI_YUN_NIANG,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_JI_YUN_NIANG,嗯…哎哟…,Mm... ow...,うう……痛い……,음… 아야…
-UI_NPC_NAME_JIANG_CHUAN_ER,蒋船儿,Jiang Little Boat,蔣船児,장 촨얼
-UI_NPC_DIALOGUE_AFTER_JIANG_CHUAN_ER,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_JIANG_CHUAN_ER,嗯…哎哟…,Mm... ow...,うう……痛い……,음… 아야…
-UI_NPC_NAME_JIANG_YUE_NIANG,姜月娘,Jiang Moon Maiden,姜月娘,장 웨냥
-UI_NPC_DIALOGUE_AFTER_JIANG_YUE_NIANG,先生医术真是高明，多谢了,"Your skill is impressive, Doctor. Thank you.",先生の腕は見事ですね。ありがとうございます。,선생님의 의술이 정말 훌륭하네요. 감사합니다.
-UI_NPC_DIALOGUE_FAILED_JIANG_YUE_NIANG,嗯？感觉好奇怪啊…,Huh? I feel strange...,えっ？　なんだか変な感じがします……,어? 느낌이 이상한데요…
-UI_NPC_NAME_LI_GOU_DAN,李狗蛋,Li Dog Egg,李狗蛋,리 거우단
-UI_NPC_DIALOGUE_AFTER_LI_GOU_DAN,真是太谢谢大夫了。,"Thank you so much, Doctor.",先生、本当にありがとうございます。,"정말 감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_LI_GOU_DAN,嗯…哎哟…,Mm... ow...,うう……痛い……,음… 아야…
-UI_NPC_NAME_LI_JIN_QING,李近卿,Li Near Noble,李近卿,리 진칭
-UI_NPC_DIALOGUE_AFTER_LI_JIN_QING,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_LI_JIN_QING,先生，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？,"선생님, 왜 아직도 낫지 않는 건가요?"
+UI_NPC_DIALOGUE_AFTER_JI_YUN_NIANG,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"선생님, 수고하셨습니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_JI_YUN_NIANG,嗯…哎哟…,Mm... ow...,うう……痛い……,음… 아이고…
+UI_NPC_NAME_JIANG_CHUAN_ER,蒋船儿,Jiang Little Boat,蔣船児,장촨얼
+UI_NPC_DIALOGUE_AFTER_JIANG_CHUAN_ER,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_JIANG_CHUAN_ER,嗯…哎哟…,Mm... ow...,うう……痛い……,음… 아이고…
+UI_NPC_NAME_JIANG_YUE_NIANG,姜月娘,Jiang Moon Maiden,姜月娘,장웨냥
+UI_NPC_DIALOGUE_AFTER_JIANG_YUE_NIANG,先生医术真是高明，多谢了,"Your skill is impressive, Doctor. Thank you.",先生の腕は見事ですね。ありがとうございます。,선생님 의술이 정말 훌륭하군요. 감사합니다.
+UI_NPC_DIALOGUE_FAILED_JIANG_YUE_NIANG,嗯？感觉好奇怪啊…,Huh? I feel strange...,えっ？　なんだか変な感じがします……,응? 느낌이 너무 이상한데요…
+UI_NPC_NAME_LI_GOU_DAN,李狗蛋,Li Dog Egg,李狗蛋,리거우단
+UI_NPC_DIALOGUE_AFTER_LI_GOU_DAN,真是太谢谢大夫了。,"Thank you so much, Doctor.",先生、本当にありがとうございます。,"의원님, 정말 감사합니다."
+UI_NPC_DIALOGUE_FAILED_LI_GOU_DAN,嗯…哎哟…,Mm... ow...,うう……痛い……,음… 아이고…
+UI_NPC_NAME_LI_JIN_QING,李近卿,Li Near Noble,李近卿,리진칭
+UI_NPC_DIALOGUE_AFTER_LI_JIN_QING,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"선생님, 수고하셨습니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_LI_JIN_QING,先生，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？,"선생님, 제 병은 왜 아직도 낫지 않는 겁니까?"
 UI_NPC_NAME_LI_SI,李四,Li Fourth,李四,리쓰
-UI_NPC_DIALOGUE_AFTER_LI_SI,多谢先生，我感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_LI_SI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？,"선생님, 왜 아직도 낫지 않는 건가요?"
-UI_NPC_NAME_LI_YUAN_WAI,李员外,Li Squire,李員外,리 원와이
-UI_NPC_DIALOGUE_AFTER_LI_YUAN_WAI,嗯，不错不错，医术高明啊。,"Mm, very good. Your medical skill is impressive.",うむ、素晴らしい。見事な腕前だ。,"음, 좋군요. 의술이 훌륭합니다."
-UI_NPC_DIALOGUE_FAILED_LI_YUAN_WAI,你这庸医，招摇撞骗！,You quack! You're nothing but a fraud!,このやぶ医者め、よくも騙したな！,이 돌팔이 같으니! 사기꾼이나 다름없군!
-UI_NPC_NAME_LIN_QIAO_NIANG,林巧娘,Lin Clever Maiden,林巧娘,린 차오냥
-UI_NPC_DIALOGUE_AFTER_LIN_QIAO_NIANG,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。,"감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_LIN_QIAO_NIANG,感觉不太对啊…,Something doesn't feel right...,どうも様子がおかしい……,뭔가 이상한데요…
+UI_NPC_DIALOGUE_AFTER_LI_SI,多谢先生，我感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_LI_SI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？,"의원님, 제 병은 왜 아직도 낫지 않는 겁니까?"
+UI_NPC_NAME_LI_YUAN_WAI,李员外,Li Squire,李員外,리 원외
+UI_NPC_DIALOGUE_AFTER_LI_YUAN_WAI,嗯，不错不错，医术高明啊。,"Mm, very good. Your medical skill is impressive.",うむ、素晴らしい。見事な腕前だ。,"음, 좋군. 좋군. 의술이 훌륭하오."
+UI_NPC_DIALOGUE_FAILED_LI_YUAN_WAI,你这庸医，招摇撞骗！,You quack! You're nothing but a fraud!,このやぶ医者め、よくも騙したな！,이 돌팔이 같으니! 사람을 속이고 다녔구나!
+UI_NPC_NAME_LIN_QIAO_NIANG,林巧娘,Lin Clever Maiden,林巧娘,린차오냥
+UI_NPC_DIALOGUE_AFTER_LIN_QIAO_NIANG,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。,"선생님, 감사합니다."
+UI_NPC_DIALOGUE_FAILED_LIN_QIAO_NIANG,感觉不太对啊…,Something doesn't feel right...,どうも様子がおかしい……,뭔가 느낌이 좋지 않아요…
 UI_NPC_NAME_LIU_DA,刘大,Liu Eldest,劉大,류다
-UI_NPC_DIALOGUE_AFTER_LIU_DA,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_LIU_DA,感觉不太对啊…,Something doesn't feel right...,どうも様子がおかしい……,뭔가 이상한데요…
+UI_NPC_DIALOGUE_AFTER_LIU_DA,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。楽になりました。,"의원님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_LIU_DA,感觉不太对啊…,Something doesn't feel right...,どうも様子がおかしい……,뭔가 느낌이 좋지 않아요…
 UI_NPC_NAME_LIU_FU,刘福,Liu Fortune,劉福,류푸
-UI_NPC_DIALOGUE_AFTER_LIU_FU,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。,"감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_LIU_FU,呃...不对啊。,Uh... something's not right.,あれ……おかしいな。,어… 뭔가 이상한데요.
+UI_NPC_DIALOGUE_AFTER_LIU_FU,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。,"선생님, 감사합니다."
+UI_NPC_DIALOGUE_FAILED_LIU_FU,呃...不对啊。,Uh... something's not right.,あれ……おかしいな。,어… 뭔가 잘못됐는데요.
 UI_NPC_NAME_LIU_TAI_GONG,刘太公,Liu Elder,劉太公,류 태공
-UI_NPC_DIALOGUE_AFTER_LIU_TAI_GONG,麻烦大夫啦，好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_LIU_TAI_GONG,咳咳咳，哎哟…,"Cough, cough... ow...",ゴホゴホ……あいたた……,콜록콜록… 아야…
+UI_NPC_DIALOGUE_AFTER_LIU_TAI_GONG,麻烦大夫啦，好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。楽になりました。,"의원님, 수고하셨습니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_LIU_TAI_GONG,咳咳咳，哎哟…,"Cough, cough... ow...",ゴホゴホ……あいたた……,콜록콜록… 아이고…
 UI_NPC_NAME_LIU_WEN_PO,刘稳婆,Liu Midwife,劉産婆,류 산파
-UI_NPC_DIALOGUE_AFTER_LIU_WEN_PO,哎哟，谢谢先生，您真是神医啊！,"Oh, thank you, Doctor! You're a marvelous physician!",先生、ありがとうございます！　本当に名医ですね！,"아, 감사합니다, 선생님! 정말 명의시군요!"
-UI_NPC_DIALOGUE_FAILED_LIU_WEN_PO,哎，不对啊…,"Hmm, something's not right...",あれ、おかしいな……,"흠, 뭔가 이상하군요…"
-UI_NPC_NAME_LIU_YING_ER,柳莺儿,Liu Little Oriole,柳鶯児,류 잉얼
-UI_NPC_DIALOGUE_AFTER_LIU_YING_ER,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ良くなりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_LIU_YING_ER,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……,흠… 이상하군요…
+UI_NPC_DIALOGUE_AFTER_LIU_WEN_PO,哎哟，谢谢先生，您真是神医啊！,"Oh, thank you, Doctor! You're a marvelous physician!",先生、ありがとうございます！　本当に名医ですね！,"아이고, 고맙습니다, 선생님! 정말 명의시네요!"
+UI_NPC_DIALOGUE_FAILED_LIU_WEN_PO,哎，不对啊…,"Hmm, something's not right...",あれ、おかしいな……,"어, 이게 아닌데…"
+UI_NPC_NAME_LIU_YING_ER,柳莺儿,Liu Little Oriole,柳鶯児,류잉얼
+UI_NPC_DIALOGUE_AFTER_LIU_YING_ER,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ良くなりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_LIU_YING_ER,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……,어… 이상하군요…
 UI_NPC_NAME_LV_TAI_JUN,吕太君,Lü Matriarch,呂太君,뤼 태군
-UI_NPC_DIALOGUE_AFTER_LV_TAI_JUN,多谢小先生，老婆子我好多啦。,"Thank you, Doctor. I feel much better.",若先生、ありがとうございます。ずいぶん楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_LV_TAI_JUN,咳咳咳，你这开的是什么药啊？,Something doesn't feel right...,ゴホゴホ……これは何の薬なんですか？,뭔가 이상한데요…
-UI_NPC_NAME_MA_CHANG_FENG,马长风,Ma Long Wind,馬長风,마 창펑
-UI_NPC_DIALOGUE_AFTER_MA_CHANG_FENG,麻烦大夫啦，好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_MA_CHANG_FENG,您给我开的这是什么药啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,제게 무슨 약을 지어 주신 건가요…?
-UI_NPC_NAME_QIAN_BU_LOU,钱不漏,Qian No Leak,銭不漏,첸 부러우
-UI_NPC_DIALOGUE_AFTER_QIAN_BU_LOU,谢啦。,Thanks.,ありがとう。,고마워요.
-UI_NPC_DIALOGUE_FAILED_QIAN_BU_LOU,这开的是什么药，我要到官府告你！,What medicine is this? I'll report you to the authorities!,これは何の薬だ！　役所に訴えてやる！,이게 무슨 약입니까? 관아에 고발하겠소!
-UI_NPC_NAME_QIN_SAN_NIANG,秦三娘,Qin Third Lady,秦三娘,친 삼낭
-UI_NPC_DIALOGUE_AFTER_QIN_SAN_NIANG,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_QIN_SAN_NIANG,哎哟...哎哟…,Ow... ow...,あいたた……あいたた……,아야… 아야…
+UI_NPC_DIALOGUE_AFTER_LV_TAI_JUN,多谢小先生，老婆子我好多啦。,"Thank you, Doctor. I feel much better.",若先生、ありがとうございます。ずいぶん楽になりました。,"젊은 의원님, 고맙습니다. 이 늙은이가 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_LV_TAI_JUN,咳咳咳，你这开的是什么药啊？,Something doesn't feel right...,ゴホゴホ……これは何の薬なんですか？,"콜록콜록… 젊은 의원님, 대체 무슨 약을 지어 주신 거예요?"
+UI_NPC_NAME_MA_CHANG_FENG,马长风,Ma Long Wind,馬長风,마창펑
+UI_NPC_DIALOGUE_AFTER_MA_CHANG_FENG,麻烦大夫啦，好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。楽になりました。,"의원님, 수고하셨습니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_MA_CHANG_FENG,您给我开的这是什么药啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,대체 무슨 약을 지어 주신 건가요…?
+UI_NPC_NAME_QIAN_BU_LOU,钱不漏,Qian No Leak,銭不漏,첸부러우
+UI_NPC_DIALOGUE_AFTER_QIAN_BU_LOU,谢啦。,Thanks.,ありがとう。,고맙소.
+UI_NPC_DIALOGUE_FAILED_QIAN_BU_LOU,这开的是什么药，我要到官府告你！,What medicine is this? I'll report you to the authorities!,これは何の薬だ！　役所に訴えてやる！,이게 대체 무슨 약이오? 관아에 고발하겠소!
+UI_NPC_NAME_QIN_SAN_NIANG,秦三娘,Qin Third Lady,秦三娘,친싼냥
+UI_NPC_DIALOGUE_AFTER_QIN_SAN_NIANG,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_QIN_SAN_NIANG,哎哟...哎哟…,Ow... ow...,あいたた……あいたた……,아이고… 아이고…
 UI_NPC_NAME_SHEN_GUI,沈贵,Shen Noble,沈貴,선구이
-UI_NPC_DIALOGUE_AFTER_SHEN_GUI,多谢多谢。,"Thank you, Doctor. I feel much better.",どうもありがとう。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_SHEN_GUI,你会不会看病啊？,Do you actually know how to treat people?,本当に診察できるんですか？,정말 사람을 치료할 줄 아시는 겁니까?
+UI_NPC_DIALOGUE_AFTER_SHEN_GUI,多谢多谢。,"Thank you, Doctor. I feel much better.",どうもありがとう。,"감사합니다, 정말 감사합니다."
+UI_NPC_DIALOGUE_FAILED_SHEN_GUI,你会不会看病啊？,Do you actually know how to treat people?,本当に診察できるんですか？,정말 진료할 줄 아는 거 맞아요?
 UI_NPC_NAME_SHI_GAN,石敢,Shi Daring,石敢,스간
-UI_NPC_DIALOGUE_AFTER_SHI_GAN,哎呀，真是太感谢了，好多了。,"Oh, thank you so much. I feel much better.",本当にありがとうございます。楽になりました。,"아, 정말 감사합니다. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_SHI_GAN,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……,흠… 이상하군요…
-UI_NPC_NAME_SHI_GENG_SHENG,史更生,Shi Reborn,史更生,스 겅성
-UI_NPC_DIALOGUE_AFTER_SHI_GENG_SHENG,好多了，真是太谢谢先生了。,"I feel much better. Thank you so much, Doctor.",ずいぶん良くなりました。先生、本当にありがとうございます。,"훨씬 나아졌어요. 정말 감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_SHI_GENG_SHENG,你给我开的什么药啊…,What medicine did you give me...?,いったい何の薬を出したんですか……,무슨 약을 지어 주신 건가요…?
-UI_NPC_NAME_SU_XIU_HE,苏绣荷,Su Embroidered Lotus,蘇繍荷,쑤 슈허
-UI_NPC_DIALOGUE_AFTER_SU_XIU_HE,好多了，真是太谢谢先生了。,"I feel much better. Thank you so much, Doctor.",ずいぶん良くなりました。先生、本当にありがとうございます。,"훨씬 나아졌어요. 정말 감사합니다, 선생님."
+UI_NPC_DIALOGUE_AFTER_SHI_GAN,哎呀，真是太感谢了，好多了。,"Oh, thank you so much. I feel much better.",本当にありがとうございます。楽になりました。,"아이고, 정말 고맙습니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_SHI_GAN,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……,어… 이상하군요…
+UI_NPC_NAME_SHI_GENG_SHENG,史更生,Shi Reborn,史更生,스겅성
+UI_NPC_DIALOGUE_AFTER_SHI_GENG_SHENG,好多了，真是太谢谢先生了。,"I feel much better. Thank you so much, Doctor.",ずいぶん良くなりました。先生、本当にありがとうございます。,"훨씬 나아졌어요. 선생님, 정말 감사합니다."
+UI_NPC_DIALOGUE_FAILED_SHI_GENG_SHENG,你给我开的什么药啊…,What medicine did you give me...?,いったい何の薬を出したんですか……,대체 무슨 약을 지어 준 거요…
+UI_NPC_NAME_SU_XIU_HE,苏绣荷,Su Embroidered Lotus,蘇繍荷,쑤슈허
+UI_NPC_DIALOGUE_AFTER_SU_XIU_HE,好多了，真是太谢谢先生了。,"I feel much better. Thank you so much, Doctor.",ずいぶん良くなりました。先生、本当にありがとうございます。,"훨씬 나아졌어요. 선생님, 정말 감사합니다."
 UI_NPC_DIALOGUE_FAILED_SU_XIU_HE,咳咳咳，好难受啊,"Cough, cough... I feel terrible.",ゴホゴホ……つらい……,콜록콜록… 너무 괴로워요.
-UI_NPC_NAME_SUN_JIANG_ER,孙匠儿,Sun Little Craftsman,孫匠児,쑨 장얼
-UI_NPC_DIALOGUE_AFTER_SUN_JIANG_ER,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。,"감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_SUN_JIANG_ER,呃…不对啊,Uh... something's not right.,あれ……おかしいな。,어… 뭔가 이상한데요.
-UI_NPC_NAME_SUN_XIAO_MEI,孙小妹,Sun Little Sister,孫小妹,쑨 샤오메이
-UI_NPC_DIALOGUE_AFTER_SUN_XIAO_MEI,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。,"감사합니다, 선생님."
+UI_NPC_NAME_SUN_JIANG_ER,孙匠儿,Sun Little Craftsman,孫匠児,쑨장얼
+UI_NPC_DIALOGUE_AFTER_SUN_JIANG_ER,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。,"선생님, 감사합니다."
+UI_NPC_DIALOGUE_FAILED_SUN_JIANG_ER,呃…不对啊,Uh... something's not right.,あれ……おかしいな。,어… 뭔가 잘못됐는데요.
+UI_NPC_NAME_SUN_XIAO_MEI,孙小妹,Sun Little Sister,孫小妹,쑨샤오메이
+UI_NPC_DIALOGUE_AFTER_SUN_XIAO_MEI,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。,"선생님, 감사합니다."
 UI_NPC_DIALOGUE_FAILED_SUN_XIAO_MEI,咳咳咳，好难受啊,"Cough, cough... I feel terrible.",ゴホゴホ……つらい……,콜록콜록… 너무 괴로워요.
-UI_NPC_NAME_TIAN_CHUN_LUO,田春萝,Tian Spring Vine,田春萝,톈 춘뤄
-UI_NPC_DIALOGUE_AFTER_TIAN_CHUN_LUO,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor.",だいぶ楽になりました。先生、ありがとうございます。,"훨씬 나아졌어요. 감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_TIAN_CHUN_LUO,嗯？感觉好奇怪啊…,Huh? I feel strange...,えっ？　なんだか変な感じがします……,어? 느낌이 이상한데요…
-UI_NPC_NAME_WANG_CHAO_FENG,王朝奉,Wang Court Attendant,王朝奉,왕 차오펑
-UI_NPC_DIALOGUE_AFTER_WANG_CHAO_FENG,好多了，多谢大夫。,"I feel much better. Thank you, Doctor.",楽になりました。先生、ありがとうございます。,"훨씬 나아졌어요. 감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_WANG_CHAO_FENG,你给我开的什么药啊…,What medicine did you give me...?,いったい何の薬を出したんですか……,무슨 약을 지어 주신 건가요…?
-UI_NPC_NAME_WANG_DA_SAO,王大嫂,Wang Sister-in-law,王おばさん,왕 큰언니
-UI_NPC_DIALOGUE_AFTER_WANG_DA_SAO,麻烦先生了，我感觉好多了,"Thank you, Doctor. I feel much better.",先生、お世話になりました。楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_WANG_DA_SAO,哎哟...哎哟…,Ow... ow...,あいたた……あいたた……,아야… 아야…
+UI_NPC_NAME_TIAN_CHUN_LUO,田春萝,Tian Spring Vine,田春萝,톈춘뤄
+UI_NPC_DIALOGUE_AFTER_TIAN_CHUN_LUO,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor.",だいぶ楽になりました。先生、ありがとうございます。,"훨씬 나아졌어요. 선생님, 감사합니다."
+UI_NPC_DIALOGUE_FAILED_TIAN_CHUN_LUO,嗯？感觉好奇怪啊…,Huh? I feel strange...,えっ？　なんだか変な感じがします……,응? 느낌이 너무 이상한데요…
+UI_NPC_NAME_WANG_CHAO_FENG,王朝奉,Wang Court Attendant,王朝奉,왕차오펑
+UI_NPC_DIALOGUE_AFTER_WANG_CHAO_FENG,好多了，多谢大夫。,"I feel much better. Thank you, Doctor.",楽になりました。先生、ありがとうございます。,"훨씬 나아졌습니다. 의원님, 감사합니다."
+UI_NPC_DIALOGUE_FAILED_WANG_CHAO_FENG,你给我开的什么药啊…,What medicine did you give me...?,いったい何の薬を出したんですか……,대체 무슨 약을 지어 준 거요…
+UI_NPC_NAME_WANG_DA_SAO,王大嫂,Wang Sister-in-law,王おばさん,왕 아주머니
+UI_NPC_DIALOGUE_AFTER_WANG_DA_SAO,麻烦先生了，我感觉好多了,"Thank you, Doctor. I feel much better.",先生、お世話になりました。楽になりました。,"선생님, 수고하셨습니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_WANG_DA_SAO,哎哟...哎哟…,Ow... ow...,あいたた……あいたた……,아이고… 아이고…
 UI_NPC_NAME_WANG_LAO_AN_REN,王老安人,Wang Old Madam,王老夫人,왕 노부인
-UI_NPC_DIALOGUE_AFTER_WANG_LAO_AN_REN,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better.",先生、本当にありがとうございます。楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_WANG_LAO_AN_REN,咳咳咳，哎哟...,"Cough, cough... ow...",ゴホゴホ……あいたた……,콜록콜록… 아야…
+UI_NPC_DIALOGUE_AFTER_WANG_LAO_AN_REN,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better.",先生、本当にありがとうございます。楽になりました。,"선생님, 정말 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_WANG_LAO_AN_REN,咳咳咳，哎哟...,"Cough, cough... ow...",ゴホゴホ……あいたた……,콜록콜록… 아이고…
 UI_NPC_NAME_WANG_WU,王五,Wang Fifth,王五,왕우
-UI_NPC_DIALOGUE_AFTER_WANG_WU,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_WANG_WU,还是好难受啊…,I still feel awful...,まだとてもつらい……,여전히 너무 괴로워요…
-UI_NPC_NAME_WANG_YUAN_SHAN,王远山,Wang Distant Mountain,王遠山,왕 위안산
-UI_NPC_DIALOGUE_AFTER_WANG_YUAN_SHAN,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ良くなりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_WANG_YUAN_SHAN,呃...不对啊。,Uh... something's not right.,あれ……おかしいな。,어… 뭔가 이상한데요.
-UI_NPC_NAME_WEI_DA_JIAO,魏大脚,Wei Bigfoot,魏大脚,웨이 대발
-UI_NPC_DIALOGUE_AFTER_WEI_DA_JIAO,真是麻烦大夫啦，我感觉好多了。,"Thank you for your trouble, Doctor. I feel much better.",先生、お世話になりました。楽になりました。,"수고 많으셨습니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_WEI_DA_JIAO,感觉更不舒服了…,I feel even worse...,前より具合が悪くなりました……,더 불편해졌어요…
-UI_NPC_NAME_WU_BAN_TOU,吴班头,Wu Constable,呉班頭,우 포두
-UI_NPC_DIALOGUE_AFTER_WU_BAN_TOU,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_WU_BAN_TOU,他娘的，你给我吃的是什么？,"Damn it, what did you make me take?",ちくしょう、何を飲ませたんだ？,"젠장, 대체 무슨 약을 먹인 겁니까?"
-UI_NPC_NAME_XU_SI_GU,徐四姑,Xu Fourth Aunt,徐四姑,쉬 넷째 고모
-UI_NPC_DIALOGUE_AFTER_XU_SI_GU,多谢大夫。,"Thank you, Doctor.",先生、ありがとうございます。,"감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_XU_SI_GU,这是什么药？你想害死本姑娘啊？,What is this medicine? Are you trying to kill me?,何の薬よ？　私を殺す気？,이게 무슨 약입니까? 절 죽이려는 겁니까?
-UI_NPC_NAME_XU_XIANG_JUN,许香君,Xu Fragrant Lady,許香君,쉬 샹쥔
-UI_NPC_DIALOGUE_AFTER_XU_XIANG_JUN,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ良くなりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_XU_XIANG_JUN,您给我开的这是什么药啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,제게 무슨 약을 지어 주신 건가요…?
+UI_NPC_DIALOGUE_AFTER_WANG_WU,多谢大夫，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。楽になりました。,"의원님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_WANG_WU,还是好难受啊…,I still feel awful...,まだとてもつらい……,아직도 너무 괴로워요…
+UI_NPC_NAME_WANG_YUAN_SHAN,王远山,Wang Distant Mountain,王遠山,왕위안산
+UI_NPC_DIALOGUE_AFTER_WANG_YUAN_SHAN,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ良くなりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_WANG_YUAN_SHAN,呃...不对啊。,Uh... something's not right.,あれ……おかしいな。,어… 뭔가 잘못됐는데요.
+UI_NPC_NAME_WEI_DA_JIAO,魏大脚,Wei Bigfoot,魏大脚,웨이다자오
+UI_NPC_DIALOGUE_AFTER_WEI_DA_JIAO,真是麻烦大夫啦，我感觉好多了。,"Thank you for your trouble, Doctor. I feel much better.",先生、お世話になりました。楽になりました。,"의원님, 수고 많으셨습니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_WEI_DA_JIAO,感觉更不舒服了…,I feel even worse...,前より具合が悪くなりました……,전보다 더 불편해졌어요…
+UI_NPC_NAME_WU_BAN_TOU,吴班头,Wu Constable,呉班頭,우 반두
+UI_NPC_DIALOGUE_AFTER_WU_BAN_TOU,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"선생님, 수고하셨습니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_WU_BAN_TOU,他娘的，你给我吃的是什么？,"Damn it, what did you make me take?",ちくしょう、何を飲ませたんだ？,"젠장, 대체 나한테 뭘 먹인 거야?"
+UI_NPC_NAME_XU_SI_GU,徐四姑,Xu Fourth Aunt,徐四姑,쉬쓰구
+UI_NPC_DIALOGUE_AFTER_XU_SI_GU,多谢大夫。,"Thank you, Doctor.",先生、ありがとうございます。,"의원님, 감사합니다."
+UI_NPC_DIALOGUE_FAILED_XU_SI_GU,这是什么药？你想害死本姑娘啊？,What is this medicine? Are you trying to kill me?,何の薬よ？　私を殺す気？,이게 무슨 약이에요? 절 죽이기라도 하려는 거예요?
+UI_NPC_NAME_XU_XIANG_JUN,许香君,Xu Fragrant Lady,許香君,쉬샹쥔
+UI_NPC_DIALOGUE_AFTER_XU_XIANG_JUN,多谢先生了，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ良くなりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_XU_XIANG_JUN,您给我开的这是什么药啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,대체 무슨 약을 지어 주신 건가요…?
 UI_NPC_NAME_YAN_BU_TOU,严捕头,Yan Constable,厳捕頭,옌 포두
-UI_NPC_DIALOGUE_AFTER_YAN_BU_TOU,好多了，多谢先生。,"Thank you, Doctor. I feel much better.",楽になりました。先生、ありがとうございます。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_YAN_BU_TOU,嗯…哎哟…,Mm... ow...,うう……痛い……,음… 아야…
-UI_NPC_NAME_YAN_PO,严婆,Yan Granny,厳婆,옌 할머니
-UI_NPC_DIALOGUE_AFTER_YAN_PO,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor.",だいぶ楽になりました。先生、ありがとうございます。,"훨씬 나아졌어요. 감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_YAN_PO,咳咳咳，哎哟...,"Cough, cough... ow...",ゴホゴホ……あいたた……,콜록콜록… 아야…
+UI_NPC_DIALOGUE_AFTER_YAN_BU_TOU,好多了，多谢先生。,"Thank you, Doctor. I feel much better.",楽になりました。先生、ありがとうございます。,"훨씬 나아졌어요. 선생님, 감사합니다."
+UI_NPC_DIALOGUE_FAILED_YAN_BU_TOU,嗯…哎哟…,Mm... ow...,うう……痛い……,음… 아이고…
+UI_NPC_NAME_YAN_PO,严婆,Yan Granny,厳婆,옌 노파
+UI_NPC_DIALOGUE_AFTER_YAN_PO,感觉好多了，多谢先生。,"I feel much better. Thank you, Doctor.",だいぶ楽になりました。先生、ありがとうございます。,"훨씬 나아졌어요. 선생님, 감사합니다."
+UI_NPC_DIALOGUE_FAILED_YAN_PO,咳咳咳，哎哟...,"Cough, cough... ow...",ゴホゴホ……あいたた……,콜록콜록… 아이고…
 UI_NPC_NAME_YANG_XIU_CAI,杨秀才,Yang Scholar,楊秀才,양 수재
-UI_NPC_DIALOGUE_AFTER_YANG_XIU_CAI,有劳大夫了，我好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_YANG_XIU_CAI,您给我开的这是什么药啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,제게 무슨 약을 지어 주신 건가요…?
-UI_NPC_NAME_YAO_ZHANG_GUI,姚掌柜,Yao Shopkeeper,姚店主,야오 장궤
-UI_NPC_DIALOGUE_AFTER_YAO_ZHANG_GUI,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_YAO_ZHANG_GUI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？,"선생님, 왜 아직도 낫지 않는 건가요?"
-UI_NPC_NAME_YE_JIANG_ZHOU,叶江舟,Ye River Boat,葉江舟,예 장저우
-UI_NPC_DIALOGUE_AFTER_YE_JIANG_ZHOU,麻烦先生了，我感觉好多了,"Thank you, Doctor. I feel much better.",先生、お世話になりました。楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_AFTER_YANG_XIU_CAI,有劳大夫了，我好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"의원님, 수고하셨습니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_YANG_XIU_CAI,您给我开的这是什么药啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,대체 무슨 약을 지어 주신 건가요…?
+UI_NPC_NAME_YAO_ZHANG_GUI,姚掌柜,Yao Shopkeeper,姚店主,야오 주인장
+UI_NPC_DIALOGUE_AFTER_YAO_ZHANG_GUI,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_YAO_ZHANG_GUI,大夫，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？,"의원님, 제 병은 왜 아직도 낫지 않는 겁니까?"
+UI_NPC_NAME_YE_JIANG_ZHOU,叶江舟,Ye River Boat,葉江舟,예장저우
+UI_NPC_DIALOGUE_AFTER_YE_JIANG_ZHOU,麻烦先生了，我感觉好多了,"Thank you, Doctor. I feel much better.",先生、お世話になりました。楽になりました。,"선생님, 수고하셨습니다. 훨씬 나아졌어요."
 UI_NPC_DIALOGUE_FAILED_YE_JIANG_ZHOU,咳咳咳，好难受啊,"Cough, cough... I feel terrible.",ゴホゴホ……つらい……,콜록콜록… 너무 괴로워요.
-UI_NPC_NAME_YOU_XIU_GU,尤秀姑,You Graceful Maiden,尤秀姑,유 슈구
-UI_NPC_DIALOGUE_AFTER_YOU_XIU_GU,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_YOU_XIU_GU,嗯…哎哟…,Mm... ow...,うう……痛い……,음… 아야…
-UI_NPC_NAME_ZHANG_SAN,张三,Zhang Third,張三,장삼
-UI_NPC_DIALOGUE_AFTER_ZHANG_SAN,多谢大夫，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_ZHANG_SAN,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……,흠… 이상하군요…
+UI_NPC_NAME_YOU_XIU_GU,尤秀姑,You Graceful Maiden,尤秀姑,유슈구
+UI_NPC_DIALOGUE_AFTER_YOU_XIU_GU,多谢先生，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_YOU_XIU_GU,嗯…哎哟…,Mm... ow...,うう……痛い……,음… 아이고…
+UI_NPC_NAME_ZHANG_SAN,张三,Zhang Third,張三,장싼
+UI_NPC_DIALOGUE_AFTER_ZHANG_SAN,多谢大夫，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。楽になりました。,"의원님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_ZHANG_SAN,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……,어… 이상하군요…
 UI_NPC_NAME_ZHANG_TU,张屠,Zhang Butcher,張屠,장 도살꾼
-UI_NPC_DIALOGUE_AFTER_ZHANG_TU,哈哈哈，太谢谢了。,Ha! Thank you very much.,ははは、本当にありがとう。,"하하하, 정말 고맙습니다."
-UI_NPC_DIALOGUE_FAILED_ZHANG_TU,他娘的怎么感觉怪怪的,"Damn it, why do I feel so strange?",ちくしょう、なんだか変な感じがする。,"젠장, 왜 이렇게 이상한 기분이지?"
-UI_NPC_NAME_ZHANG_YU_ZHI,张玉枝,Zhang Jade Branch,張玉枝,장 위즈
-UI_NPC_DIALOGUE_AFTER_ZHANG_YU_ZHI,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better.",先生、本当にありがとうございます。楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_ZHANG_YU_ZHI,嗯？感觉好奇怪啊…,Huh? I feel strange...,えっ？　なんだか変な感じがします……,어? 느낌이 이상한데요…
-UI_NPC_NAME_ZHAO_LIU,赵六,Zhao Sixth,趙六,자오 류
-UI_NPC_DIALOGUE_AFTER_ZHAO_LIU,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_ZHAO_LIU,还是好难受啊…,I still feel awful...,まだとてもつらい……,여전히 너무 괴로워요…
-UI_NPC_NAME_ZHAO_YA_PO,赵牙婆,Zhao Matchmaker,趙仲人,자오 야포
-UI_NPC_DIALOGUE_AFTER_ZHAO_YA_PO,哎哟，谢谢先生，您真是神医啊！,"Oh, thank you, Doctor! You're a marvelous physician!",先生、ありがとうございます！　本当に名医ですね！,"아, 감사합니다, 선생님! 정말 명의시군요!"
-UI_NPC_DIALOGUE_FAILED_ZHAO_YA_PO,哎，不对啊…,"Hmm, something's not right...",あれ、おかしいな……,"흠, 뭔가 이상하군요…"
-UI_NPC_NAME_ZHENG_ER_JIE,郑二姐,Zheng Second Sister,鄭二姐,정 둘째 언니
-UI_NPC_DIALOGUE_AFTER_ZHENG_ER_JIE,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"감사합니다, 선생님. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_ZHENG_ER_JIE,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……,흠… 이상하군요…
-UI_NPC_NAME_ZHOU_LU_AN,周炉安,Zhou Hearth Peace,周炉安,저우 루안
-UI_NPC_DIALOGUE_AFTER_ZHOU_LU_AN,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。,"감사합니다, 선생님."
-UI_NPC_DIALOGUE_FAILED_ZHOU_LU_AN,先生，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？,"선생님, 왜 아직도 낫지 않는 건가요?"
-UI_NPC_DIALOGUE_PREFIX_CHA_BO_SHI,我最近几日,"These past few days, I've been",ここ数日、,며칠 전부터
-UI_NPC_DIALOGUE_SUFFIX_CHA_BO_SHI,劳烦先生给小可看看。,"Would you kindly examine me, Doctor?",先生、診ていただけますか。,"진찰해 주시겠어요, 선생님?"
+UI_NPC_DIALOGUE_AFTER_ZHANG_TU,哈哈哈，太谢谢了。,Ha! Thank you very much.,ははは、本当にありがとう。,"하하하, 정말 고맙네!"
+UI_NPC_DIALOGUE_FAILED_ZHANG_TU,他娘的怎么感觉怪怪的,"Damn it, why do I feel so strange?",ちくしょう、なんだか変な感じがする。,"젠장, 왜 이렇게 느낌이 이상하지?"
+UI_NPC_NAME_ZHANG_YU_ZHI,张玉枝,Zhang Jade Branch,張玉枝,장위즈
+UI_NPC_DIALOGUE_AFTER_ZHANG_YU_ZHI,真是多谢先生了，好多了,"Thank you, Doctor. I feel much better.",先生、本当にありがとうございます。楽になりました。,"선생님, 정말 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_ZHANG_YU_ZHI,嗯？感觉好奇怪啊…,Huh? I feel strange...,えっ？　なんだか変な感じがします……,응? 느낌이 너무 이상한데요…
+UI_NPC_NAME_ZHAO_LIU,赵六,Zhao Sixth,趙六,자오류
+UI_NPC_DIALOGUE_AFTER_ZHAO_LIU,多谢先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_ZHAO_LIU,还是好难受啊…,I still feel awful...,まだとてもつらい……,아직도 너무 괴로워요…
+UI_NPC_NAME_ZHAO_YA_PO,赵牙婆,Zhao Matchmaker,趙仲人,자오 중매쟁이
+UI_NPC_DIALOGUE_AFTER_ZHAO_YA_PO,哎哟，谢谢先生，您真是神医啊！,"Oh, thank you, Doctor! You're a marvelous physician!",先生、ありがとうございます！　本当に名医ですね！,"아이고, 고맙습니다, 선생님! 정말 명의시네요!"
+UI_NPC_DIALOGUE_FAILED_ZHAO_YA_PO,哎，不对啊…,"Hmm, something's not right...",あれ、おかしいな……,"어, 이게 아닌데…"
+UI_NPC_NAME_ZHENG_ER_JIE,郑二姐,Zheng Second Sister,鄭二姐,정얼제
+UI_NPC_DIALOGUE_AFTER_ZHENG_ER_JIE,有劳先生了，感觉好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"선생님, 수고하셨습니다. 훨씬 나아졌어요."
+UI_NPC_DIALOGUE_FAILED_ZHENG_ER_JIE,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……,어… 이상하군요…
+UI_NPC_NAME_ZHOU_LU_AN,周炉安,Zhou Hearth Peace,周炉安,저우루안
+UI_NPC_DIALOGUE_AFTER_ZHOU_LU_AN,多谢先生了。,"Thank you, Doctor.",先生、ありがとうございます。,"선생님, 감사합니다."
+UI_NPC_DIALOGUE_FAILED_ZHOU_LU_AN,先生，我这病怎么还不见好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？,"선생님, 제 병은 왜 아직도 낫지 않는 겁니까?"
+UI_NPC_DIALOGUE_PREFIX_CHA_BO_SHI,我最近几日,"These past few days, I've been",ここ数日、,요 며칠
+UI_NPC_DIALOGUE_SUFFIX_CHA_BO_SHI,劳烦先生给小可看看。,"Would you kindly examine me, Doctor?",先生、診ていただけますか。,"선생님, 소인을 한번 진찰해 주십시오."
 UI_NPC_DIALOGUE_PREFIX_CHEN_ER,先生，我最近,"Doctor, lately I've been",先生、最近、,"선생님, 요즘"
-UI_NPC_DIALOGUE_SUFFIX_CHEN_ER,帮我看看吧。,Could you take a look?,診てください。,한번 봐 주실래요?
-UI_NPC_DIALOGUE_PREFIX_CHEN_PO,先生，老婆子我这几日,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
+UI_NPC_DIALOGUE_SUFFIX_CHEN_ER,帮我看看吧。,Could you take a look?,診てください。,한번 봐 주세요.
+UI_NPC_DIALOGUE_PREFIX_CHEN_PO,先生，老婆子我这几日,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 이 늙은이가 며칠 전부터"
 UI_NPC_DIALOGUE_SUFFIX_CHEN_PO,您快帮我看看吧。,"Please, have a look at me quickly.",早く診てください。,어서 진찰해 주세요.
-UI_NPC_DIALOGUE_PREFIX_CHEN_SHAN_ZHANG,大夫，我这几日,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_CHEN_SHAN_ZHANG,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。,진찰해 주시겠어요?
+UI_NPC_DIALOGUE_PREFIX_CHEN_SHAN_ZHANG,大夫，我这几日,"Doctor, these past few days I've been",先生、ここ数日、,"의원님, 며칠 전부터"
+UI_NPC_DIALOGUE_SUFFIX_CHEN_SHAN_ZHANG,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。,한번 진찰해 주시겠습니까?
 UI_NPC_DIALOGUE_PREFIX_DU_ER_SAO,先生，我这两天,"Doctor, for the past couple of days I've been",先生、この二日ほど、,"선생님, 이틀 전부터"
-UI_NPC_DIALOGUE_SUFFIX_DU_ER_SAO,请您帮我看看。,Could you please examine me?,診ていただけますか。,진찰해 주시겠어요?
+UI_NPC_DIALOGUE_SUFFIX_DU_ER_SAO,请您帮我看看。,Could you please examine me?,診ていただけますか。,한번 진찰해 주세요.
 UI_NPC_DIALOGUE_PREFIX_FENG_JUN_BAO,我这几日,"These past few days, I've been",ここ数日、,며칠 전부터
-UI_NPC_DIALOGUE_SUFFIX_FENG_JUN_BAO,请您帮我看看吧。,"Please, could you take a look?",診ていただけませんか。,부디 진찰해 주세요.
-UI_NPC_DIALOGUE_PREFIX_GAO_XIU_LIAN,大夫，我最近,"Doctor, lately I've been",先生、最近、,"선생님, 요즘"
-UI_NPC_DIALOGUE_SUFFIX_GAO_XIU_LIAN,麻烦您给瞧瞧,Would you mind taking a look?,診ていただけますか。,진찰해 주시겠어요?
-UI_NPC_DIALOGUE_PREFIX_HAN_ZHANG_GUI,大夫，我这两天,"Doctor, for the past couple of days I've been",先生、この二日ほど、,"선생님, 이틀 전부터"
-UI_NPC_DIALOGUE_SUFFIX_HAN_ZHANG_GUI,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。,진찰해 주시겠어요?
+UI_NPC_DIALOGUE_SUFFIX_FENG_JUN_BAO,请您帮我看看吧。,"Please, could you take a look?",診ていただけませんか。,한번 진찰해 주세요.
+UI_NPC_DIALOGUE_PREFIX_GAO_XIU_LIAN,大夫，我最近,"Doctor, lately I've been",先生、最近、,"의원님, 요즘"
+UI_NPC_DIALOGUE_SUFFIX_GAO_XIU_LIAN,麻烦您给瞧瞧,Would you mind taking a look?,診ていただけますか。,한번 살펴봐 주시겠어요?
+UI_NPC_DIALOGUE_PREFIX_HAN_ZHANG_GUI,大夫，我这两天,"Doctor, for the past couple of days I've been",先生、この二日ほど、,"의원님, 이틀 전부터"
+UI_NPC_DIALOGUE_SUFFIX_HAN_ZHANG_GUI,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。,한번 진찰해 주시겠습니까?
 UI_NPC_DIALOGUE_PREFIX_HE_SAN_JIE,我这两天,"For the past couple of days, I've been",この二日ほど、,이틀 전부터
-UI_NPC_DIALOGUE_SUFFIX_HE_SAN_JIE,请您给我看看吧。,Please take a look and see what's wrong.,診察をお願いします。,어디가 잘못됐는지 봐 주세요.
-UI_NPC_DIALOGUE_PREFIX_HE_ZHANG_SHAO,大夫，我最近,"Doctor, lately I've been",先生、最近、,"선생님, 요즘"
-UI_NPC_DIALOGUE_SUFFIX_HE_ZHANG_SHAO,大夫快给我看看吧。,"Doctor, please have a look at me quickly.",先生、早く診てください。,"선생님, 어서 진찰해 주세요."
+UI_NPC_DIALOGUE_SUFFIX_HE_SAN_JIE,请您给我看看吧。,Please take a look and see what's wrong.,診察をお願いします。,한번 진찰해 주세요.
+UI_NPC_DIALOGUE_PREFIX_HE_ZHANG_SHAO,大夫，我最近,"Doctor, lately I've been",先生、最近、,"의원님, 요즘"
+UI_NPC_DIALOGUE_SUFFIX_HE_ZHANG_SHAO,大夫快给我看看吧。,"Doctor, please have a look at me quickly.",先生、早く診てください。,"의원님, 어서 진찰해 주세요."
 UI_NPC_DIALOGUE_PREFIX_HUA_JIN_NIANG,我这几日,"These past few days, I've been",ここ数日、,며칠 전부터
-UI_NPC_DIALOGUE_SUFFIX_HUA_JIN_NIANG,劳烦先生您给小妇看看。,"Would you kindly examine me, Doctor?",先生、私を診ていただけませんか。,"진찰해 주시겠어요, 선생님?"
+UI_NPC_DIALOGUE_SUFFIX_HUA_JIN_NIANG,劳烦先生您给小妇看看。,"Would you kindly examine me, Doctor?",先生、私を診ていただけませんか。,"선생님, 저도 한번 진찰해 주세요."
 UI_NPC_DIALOGUE_PREFIX_HUA_YUN,先生，我这几天,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_HUA_YUN,烦请先生给我看看。,"Doctor, would you please take a look?",先生、どうか診てください。,"선생님, 한번 봐 주세요."
-UI_NPC_DIALOGUE_PREFIX_HUANG_NIU_ER,哎哟大夫，我,"Oh dear, Doctor, I've been",あいたた……先生、私は,"아이고, 선생님…"
-UI_NPC_DIALOGUE_SUFFIX_HUANG_NIU_ER,快给我看看吧。,Please have a look at me quickly.,早く診てください。,어서 진찰해 주세요.
+UI_NPC_DIALOGUE_SUFFIX_HUA_YUN,烦请先生给我看看。,"Doctor, would you please take a look?",先生、どうか診てください。,"선생님, 한번 살펴봐 주세요."
+UI_NPC_DIALOGUE_PREFIX_HUANG_NIU_ER,哎哟大夫，我,"Oh dear, Doctor, I've been",あいたた……先生、私は,"아이고, 의원님…"
+UI_NPC_DIALOGUE_SUFFIX_HUANG_NIU_ER,快给我看看吧。,Please have a look at me quickly.,早く診てください。,어서 좀 봐 주세요.
 UI_NPC_DIALOGUE_PREFIX_HUANG_QIU_JU,我这两天,"For the past couple of days, I've been",この二日ほど、,이틀 전부터
-UI_NPC_DIALOGUE_SUFFIX_HUANG_QIU_JU,请您给小女看看吧。,Please take a look at me.,娘を診ていただけませんか。,진찰해 주세요.
+UI_NPC_DIALOGUE_SUFFIX_HUANG_QIU_JU,请您给小女看看吧。,Please take a look at me.,娘を診ていただけませんか。,저도 한번 진찰해 주세요.
 UI_NPC_DIALOGUE_PREFIX_JI_YUN_NIANG,先生，我这几日,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_JI_YUN_NIANG,麻烦您给小女子看看。,Would you mind examining me?,私を診ていただけませんか。,진찰해 주시겠어요?
-UI_NPC_DIALOGUE_PREFIX_JIANG_CHUAN_ER,大夫，我这几天,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
+UI_NPC_DIALOGUE_SUFFIX_JI_YUN_NIANG,麻烦您给小女子看看。,Would you mind examining me?,私を診ていただけませんか。,저도 한번 진찰해 주시겠어요?
+UI_NPC_DIALOGUE_PREFIX_JIANG_CHUAN_ER,大夫，我这几天,"Doctor, these past few days I've been",先生、ここ数日、,"의원님, 며칠 전부터"
 UI_NPC_DIALOGUE_SUFFIX_JIANG_CHUAN_ER,给我看看吧。,"Have a look at me, please.",診てください。,한번 봐 주세요.
 UI_NPC_DIALOGUE_PREFIX_JIANG_YUE_NIANG,我这几日,"These past few days, I've been",ここ数日、,며칠 전부터
-UI_NPC_DIALOGUE_SUFFIX_JIANG_YUE_NIANG,劳烦先生给我看看。,"Doctor, would you kindly take a look?",先生、診ていただけますか。,"선생님, 진찰해 주시겠어요?"
-UI_NPC_DIALOGUE_PREFIX_LI_GOU_DAN,先生，俺这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、,"선생님, 이틀 전부터"
-UI_NPC_DIALOGUE_SUFFIX_LI_GOU_DAN,请您给俺看看吧。,Please take a look at me.,どうか診てください。,진찰해 주세요.
+UI_NPC_DIALOGUE_SUFFIX_JIANG_YUE_NIANG,劳烦先生给我看看。,"Doctor, would you kindly take a look?",先生、診ていただけますか。,"선생님, 한번 진찰해 주세요."
+UI_NPC_DIALOGUE_PREFIX_LI_GOU_DAN,先生，俺这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、,"선생님, 제가 이틀 전부터"
+UI_NPC_DIALOGUE_SUFFIX_LI_GOU_DAN,请您给俺看看吧。,Please take a look at me.,どうか診てください。,저 좀 진찰해 주세요.
 UI_NPC_DIALOGUE_PREFIX_LI_JIN_QING,先生，我这几日,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_LI_JIN_QING,烦请先生给看看。,"Doctor, please take a look.",先生、どうか診てください。,"선생님, 진찰해 주세요."
+UI_NPC_DIALOGUE_SUFFIX_LI_JIN_QING,烦请先生给看看。,"Doctor, please take a look.",先生、どうか診てください。,"선생님, 한번 살펴봐 주세요."
 UI_NPC_DIALOGUE_PREFIX_LI_SI,先生，我这几天,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_LI_SI,麻烦您帮我看看吧。,Could you please see what's wrong?,どうか診ていただけませんか。,어디가 잘못됐는지 봐 주시겠어요?
-UI_NPC_DIALOGUE_PREFIX_LI_YUAN_WAI,小郎中啊，老夫这几日,"Young doctor, these past few days I've been",若い先生、ここ数日、,"젊은 의원, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_LI_YUAN_WAI,你给老夫瞧瞧。,"Take a look at me, young doctor.",わしを診てくれ。,"젊은 의원, 저를 한번 봐 주시오."
+UI_NPC_DIALOGUE_SUFFIX_LI_SI,麻烦您帮我看看吧。,Could you please see what's wrong?,どうか診ていただけませんか。,한번 봐 주시겠어요?
+UI_NPC_DIALOGUE_PREFIX_LI_YUAN_WAI,小郎中啊，老夫这几日,"Young doctor, these past few days I've been",若い先生、ここ数日、,"젊은 의원, 내가 며칠 전부터"
+UI_NPC_DIALOGUE_SUFFIX_LI_YUAN_WAI,你给老夫瞧瞧。,"Take a look at me, young doctor.",わしを診てくれ。,나를 한번 살펴봐 주시오.
 UI_NPC_DIALOGUE_PREFIX_LIN_QIAO_NIANG,我这几日,"These past few days, I've been",ここ数日、,며칠 전부터
-UI_NPC_DIALOGUE_SUFFIX_LIN_QIAO_NIANG,劳烦先生您给小妇看看。,"Would you kindly examine me, Doctor?",先生、私を診ていただけませんか。,"진찰해 주시겠어요, 선생님?"
-UI_NPC_DIALOGUE_PREFIX_LIU_DA,大夫，俺这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、,"선생님, 이틀 전부터"
-UI_NPC_DIALOGUE_SUFFIX_LIU_DA,麻烦您帮俺看看吧。,Could you please see what's wrong with me?,どうか診てください。,어디가 잘못됐는지 봐 주시겠어요?
-UI_NPC_DIALOGUE_PREFIX_LIU_FU,大夫，我最近,"Doctor, lately I've been",先生、最近、,"선생님, 요즘"
+UI_NPC_DIALOGUE_SUFFIX_LIN_QIAO_NIANG,劳烦先生您给小妇看看。,"Would you kindly examine me, Doctor?",先生、私を診ていただけませんか。,"선생님, 저도 한번 진찰해 주세요."
+UI_NPC_DIALOGUE_PREFIX_LIU_DA,大夫，俺这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、,"의원님, 제가 이틀 전부터"
+UI_NPC_DIALOGUE_SUFFIX_LIU_DA,麻烦您帮俺看看吧。,Could you please see what's wrong with me?,どうか診てください。,저 좀 봐 주세요.
+UI_NPC_DIALOGUE_PREFIX_LIU_FU,大夫，我最近,"Doctor, lately I've been",先生、最近、,"의원님, 요즘"
 UI_NPC_DIALOGUE_SUFFIX_LIU_FU,给我看看吧。,"Have a look at me, please.",診てください。,한번 봐 주세요.
-UI_NPC_DIALOGUE_PREFIX_LIU_TAI_GONG,先生啊，老朽这几日,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_LIU_TAI_GONG,麻烦您给我看看。,Would you mind taking a look?,診察をお願いします。,진찰해 주시겠어요?
-UI_NPC_DIALOGUE_PREFIX_LIU_WEN_PO,先生啊，俺这几天,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_LIU_WEN_PO,请您给俺看看。,Please have a look at me.,どうか診てください。,진찰해 주세요.
+UI_NPC_DIALOGUE_PREFIX_LIU_TAI_GONG,先生啊，老朽这几日,"Doctor, these past few days I've been",先生、ここ数日、,"선생, 이 늙은이가 며칠 전부터"
+UI_NPC_DIALOGUE_SUFFIX_LIU_TAI_GONG,麻烦您给我看看。,Would you mind taking a look?,診察をお願いします。,좀 진찰해 주시겠소?
+UI_NPC_DIALOGUE_PREFIX_LIU_WEN_PO,先生啊，俺这几天,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 제가 요 며칠"
+UI_NPC_DIALOGUE_SUFFIX_LIU_WEN_PO,请您给俺看看。,Please have a look at me.,どうか診てください。,저 좀 진찰해 주세요.
 UI_NPC_DIALOGUE_PREFIX_LIU_YING_ER,先生，我这几天,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_LIU_YING_ER,请您给小女看看吧。,Please take a look at me.,娘を診ていただけませんか。,진찰해 주세요.
-UI_NPC_DIALOGUE_PREFIX_LV_TAI_JUN,小先生啊，老婆子我最近,"Young doctor, lately I've been",若先生、最近、,"젊은 의원, 요즘"
-UI_NPC_DIALOGUE_SUFFIX_LV_TAI_JUN,您给我瞧瞧。,"Have a look at me, would you?",診ていただけますか。,저를 한번 봐 주시겠어요?
+UI_NPC_DIALOGUE_SUFFIX_LIU_YING_ER,请您给小女看看吧。,Please take a look at me.,娘を診ていただけませんか。,저도 한번 진찰해 주세요.
+UI_NPC_DIALOGUE_PREFIX_LV_TAI_JUN,小先生啊，老婆子我最近,"Young doctor, lately I've been",若先生、最近、,"젊은 의원님, 이 늙은이가 요즘"
+UI_NPC_DIALOGUE_SUFFIX_LV_TAI_JUN,您给我瞧瞧。,"Have a look at me, would you?",診ていただけますか。,한번 살펴봐 주시겠어요?
 UI_NPC_DIALOGUE_PREFIX_MA_CHANG_FENG,先生，我最近,"Doctor, lately I've been",先生、最近、,"선생님, 요즘"
 UI_NPC_DIALOGUE_SUFFIX_MA_CHANG_FENG,麻烦您给看看。,Would you mind having a look?,診察をお願いします。,한번 봐 주시겠어요?
 UI_NPC_DIALOGUE_PREFIX_QIAN_BU_LOU,我最近,"Lately, I've been",最近、,요즘
-UI_NPC_DIALOGUE_SUFFIX_QIAN_BU_LOU,快快，快给我看看。,Quickly—please take a look at me.,早く、早く診てくれ。,어서 진찰해 주세요.
-UI_NPC_DIALOGUE_PREFIX_QIN_SAN_NIANG,咳咳，大夫，我这几日,"Ahem... Doctor, these past few days I've been",ゴホゴホ……先生、ここ数日、,"콜록… 선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_QIN_SAN_NIANG,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。,진찰해 주시겠어요?
+UI_NPC_DIALOGUE_SUFFIX_QIAN_BU_LOU,快快，快给我看看。,Quickly—please take a look at me.,早く、早く診てくれ。,"어서, 어서 좀 봐 주시오."
+UI_NPC_DIALOGUE_PREFIX_QIN_SAN_NIANG,咳咳，大夫，我这几日,"Ahem... Doctor, these past few days I've been",ゴホゴホ……先生、ここ数日、,"콜록콜록… 의원님, 며칠 전부터"
+UI_NPC_DIALOGUE_SUFFIX_QIN_SAN_NIANG,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。,한번 진찰해 주시겠습니까?
 UI_NPC_DIALOGUE_PREFIX_SHEN_GUI,哎哟哟，我,Oh dear... I've been,あいたた……私は,아이고…
-UI_NPC_DIALOGUE_SUFFIX_SHEN_GUI,快给我看看吧。,Please have a look at me quickly.,早く診てください。,어서 진찰해 주세요.
-UI_NPC_DIALOGUE_PREFIX_SHI_GAN,咳咳，先生我这两天,"Ahem... Doctor, these past couple of days I've been",ゴホゴホ……先生、この二日ほど、,"콜록… 선생님, 이틀 전부터"
+UI_NPC_DIALOGUE_SUFFIX_SHEN_GUI,快给我看看吧。,Please have a look at me quickly.,早く診てください。,어서 좀 봐 주세요.
+UI_NPC_DIALOGUE_PREFIX_SHI_GAN,咳咳，先生我这两天,"Ahem... Doctor, these past couple of days I've been",ゴホゴホ……先生、この二日ほど、,"콜록콜록… 선생님, 이틀 전부터"
 UI_NPC_DIALOGUE_SUFFIX_SHI_GAN,您快帮我看看吧。,"Please, have a look at me quickly.",早く診てください。,어서 진찰해 주세요.
-UI_NPC_DIALOGUE_PREFIX_SHI_GENG_SHENG,我最近几天,"These past few days, I've been",ここ数日、,며칠 전부터
-UI_NPC_DIALOGUE_SUFFIX_SHI_GENG_SHENG,请您给看看吧。,Please have a look.,どうか診てください。,진찰해 주세요.
+UI_NPC_DIALOGUE_PREFIX_SHI_GENG_SHENG,我最近几天,"These past few days, I've been",ここ数日、,요 며칠
+UI_NPC_DIALOGUE_SUFFIX_SHI_GENG_SHENG,请您给看看吧。,Please have a look.,どうか診てください。,한번 진찰해 주세요.
 UI_NPC_DIALOGUE_PREFIX_SU_XIU_HE,先生，我这几日,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_SU_XIU_HE,麻烦您给小女子看看。,Would you mind examining me?,私を診ていただけませんか。,진찰해 주시겠어요?
+UI_NPC_DIALOGUE_SUFFIX_SU_XIU_HE,麻烦您给小女子看看。,Would you mind examining me?,私を診ていただけませんか。,저도 한번 진찰해 주시겠어요?
 UI_NPC_DIALOGUE_PREFIX_SUN_JIANG_ER,先生，我这几日,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_SUN_JIANG_ER,请您帮我看看吧。,"Please, could you take a look?",診ていただけませんか。,부디 진찰해 주세요.
+UI_NPC_DIALOGUE_SUFFIX_SUN_JIANG_ER,请您帮我看看吧。,"Please, could you take a look?",診ていただけませんか。,한번 진찰해 주세요.
 UI_NPC_DIALOGUE_PREFIX_SUN_XIAO_MEI,我这几天,"These past few days, I've been",ここ数日、,며칠 전부터
-UI_NPC_DIALOGUE_SUFFIX_SUN_XIAO_MEI,请您给我看看吧。,Please take a look and see what's wrong.,診察をお願いします。,어디가 잘못됐는지 봐 주세요.
-UI_NPC_DIALOGUE_PREFIX_TIAN_CHUN_LUO,我最近几日,"These past few days, I've been",ここ数日、,며칠 전부터
-UI_NPC_DIALOGUE_SUFFIX_TIAN_CHUN_LUO,请您给看看。,Please take a look.,診ていただけますか。,진찰해 주세요.
-UI_NPC_DIALOGUE_PREFIX_WANG_CHAO_FENG,咳咳，我最近,"Ahem... Lately, I've been",ゴホゴホ……最近、,콜록… 요즘
-UI_NPC_DIALOGUE_SUFFIX_WANG_CHAO_FENG,您帮老夫瞧瞧。,"Would you take a look at me, Doctor?",わしを診ていただけますか。,"선생님, 저를 한번 봐 주시겠어요?"
-UI_NPC_DIALOGUE_PREFIX_WANG_DA_SAO,先生，俺这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、,"선생님, 이틀 전부터"
-UI_NPC_DIALOGUE_SUFFIX_WANG_DA_SAO,您帮俺瞧瞧。,Could you have a look at me?,診ていただけますか。,저를 한번 봐 주시겠어요?
-UI_NPC_DIALOGUE_PREFIX_WANG_LAO_AN_REN,先生，老妇这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、,"선생님, 이틀 전부터"
-UI_NPC_DIALOGUE_SUFFIX_WANG_LAO_AN_REN,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。,진찰해 주시겠어요?
-UI_NPC_DIALOGUE_PREFIX_WANG_WU,大夫，我这两天,"Doctor, for the past couple of days I've been",先生、この二日ほど、,"선생님, 이틀 전부터"
+UI_NPC_DIALOGUE_SUFFIX_SUN_XIAO_MEI,请您给我看看吧。,Please take a look and see what's wrong.,診察をお願いします。,한번 진찰해 주세요.
+UI_NPC_DIALOGUE_PREFIX_TIAN_CHUN_LUO,我最近几日,"These past few days, I've been",ここ数日、,요 며칠
+UI_NPC_DIALOGUE_SUFFIX_TIAN_CHUN_LUO,请您给看看。,Please take a look.,診ていただけますか。,한번 진찰해 주세요.
+UI_NPC_DIALOGUE_PREFIX_WANG_CHAO_FENG,咳咳，我最近,"Ahem... Lately, I've been",ゴホゴホ……最近、,콜록콜록… 요즘
+UI_NPC_DIALOGUE_SUFFIX_WANG_CHAO_FENG,您帮老夫瞧瞧。,"Would you take a look at me, Doctor?",わしを診ていただけますか。,나를 한번 살펴봐 주시오.
+UI_NPC_DIALOGUE_PREFIX_WANG_DA_SAO,先生，俺这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、,"선생님, 제가 이틀 전부터"
+UI_NPC_DIALOGUE_SUFFIX_WANG_DA_SAO,您帮俺瞧瞧。,Could you have a look at me?,診ていただけますか。,저 좀 살펴봐 주세요.
+UI_NPC_DIALOGUE_PREFIX_WANG_LAO_AN_REN,先生，老妇这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、,"선생님, 이 늙은이가 이틀 전부터"
+UI_NPC_DIALOGUE_SUFFIX_WANG_LAO_AN_REN,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。,한번 진찰해 주시겠습니까?
+UI_NPC_DIALOGUE_PREFIX_WANG_WU,大夫，我这两天,"Doctor, for the past couple of days I've been",先生、この二日ほど、,"의원님, 이틀 전부터"
 UI_NPC_DIALOGUE_SUFFIX_WANG_WU,给我看看吧。,"Have a look at me, please.",診てください。,한번 봐 주세요.
 UI_NPC_DIALOGUE_PREFIX_WANG_YUAN_SHAN,先生，我最近,"Doctor, lately I've been",先生、最近、,"선생님, 요즘"
-UI_NPC_DIALOGUE_SUFFIX_WANG_YUAN_SHAN,请您给我看看吧。,Please take a look and see what's wrong.,診察をお願いします。,어디가 잘못됐는지 봐 주세요.
-UI_NPC_DIALOGUE_PREFIX_WEI_DA_JIAO,哎哟，俺这两天,Oh dear... These past couple of days I've been,あいたた……この二日ほど、,아이고… 이틀 전부터
-UI_NPC_DIALOGUE_SUFFIX_WEI_DA_JIAO,麻烦您给瞧瞧,Would you mind taking a look?,診ていただけますか。,진찰해 주시겠어요?
-UI_NPC_DIALOGUE_PREFIX_WU_BAN_TOU,大夫，我最近,"Doctor, lately I've been",先生、最近、,"선생님, 요즘"
+UI_NPC_DIALOGUE_SUFFIX_WANG_YUAN_SHAN,请您给我看看吧。,Please take a look and see what's wrong.,診察をお願いします。,한번 진찰해 주세요.
+UI_NPC_DIALOGUE_PREFIX_WEI_DA_JIAO,哎哟，俺这两天,Oh dear... These past couple of days I've been,あいたた……この二日ほど、,아이고… 제가 이틀 전부터
+UI_NPC_DIALOGUE_SUFFIX_WEI_DA_JIAO,麻烦您给瞧瞧,Would you mind taking a look?,診ていただけますか。,한번 살펴봐 주시겠어요?
+UI_NPC_DIALOGUE_PREFIX_WU_BAN_TOU,大夫，我最近,"Doctor, lately I've been",先生、最近、,"의원님, 요즘"
 UI_NPC_DIALOGUE_SUFFIX_WU_BAN_TOU,您快帮我看看吧。,"Please, have a look at me quickly.",早く診てください。,어서 진찰해 주세요.
 UI_NPC_DIALOGUE_PREFIX_XU_SI_GU,我最近,"Lately, I've been",最近、,요즘
-UI_NPC_DIALOGUE_SUFFIX_XU_SI_GU,快给我看看吧。,Please have a look at me quickly.,早く診てください。,어서 진찰해 주세요.
+UI_NPC_DIALOGUE_SUFFIX_XU_SI_GU,快给我看看吧。,Please have a look at me quickly.,早く診てください。,어서 좀 봐 주세요.
 UI_NPC_DIALOGUE_PREFIX_XU_XIANG_JUN,先生，我这几日,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_XU_XIANG_JUN,烦请先生给奴家看看。,"Doctor, would you kindly examine me?",先生、どうか私を診てください。,"선생님, 진찰해 주시겠어요?"
+UI_NPC_DIALOGUE_SUFFIX_XU_XIANG_JUN,烦请先生给奴家看看。,"Doctor, would you kindly examine me?",先生、どうか私を診てください。,"선생님, 제 병도 한번 살펴봐 주세요."
 UI_NPC_DIALOGUE_PREFIX_YAN_BU_TOU,我这几日,"These past few days, I've been",ここ数日、,며칠 전부터
-UI_NPC_DIALOGUE_SUFFIX_YAN_BU_TOU,烦请先生给看看。,"Doctor, please take a look.",先生、どうか診てください。,"선생님, 진찰해 주세요."
-UI_NPC_DIALOGUE_PREFIX_YAN_PO,先生，老妇这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、,"선생님, 이틀 전부터"
-UI_NPC_DIALOGUE_SUFFIX_YAN_PO,请您帮我看看吧。,"Please, could you take a look?",診ていただけませんか。,부디 진찰해 주세요.
-UI_NPC_DIALOGUE_PREFIX_YANG_XIU_CAI,大夫，学生这几日,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_YANG_XIU_CAI,请您给看看吧。,Please have a look.,どうか診てください。,진찰해 주세요.
+UI_NPC_DIALOGUE_SUFFIX_YAN_BU_TOU,烦请先生给看看。,"Doctor, please take a look.",先生、どうか診てください。,"선생님, 한번 살펴봐 주세요."
+UI_NPC_DIALOGUE_PREFIX_YAN_PO,先生，老妇这两天,"Doctor, these past couple of days I've been",先生、この二日ほど、,"선생님, 이 늙은이가 이틀 전부터"
+UI_NPC_DIALOGUE_SUFFIX_YAN_PO,请您帮我看看吧。,"Please, could you take a look?",診ていただけませんか。,한번 진찰해 주세요.
+UI_NPC_DIALOGUE_PREFIX_YANG_XIU_CAI,大夫，学生这几日,"Doctor, these past few days I've been",先生、ここ数日、,"의원님, 소생이 며칠 전부터"
+UI_NPC_DIALOGUE_SUFFIX_YANG_XIU_CAI,请您给看看吧。,Please have a look.,どうか診てください。,한번 진찰해 주세요.
 UI_NPC_DIALOGUE_PREFIX_YAO_ZHANG_GUI,先生，我这两天,"Doctor, for the past couple of days I've been",先生、この二日ほど、,"선생님, 이틀 전부터"
-UI_NPC_DIALOGUE_SUFFIX_YAO_ZHANG_GUI,请您给看看。,Please take a look.,診ていただけますか。,진찰해 주세요.
+UI_NPC_DIALOGUE_SUFFIX_YAO_ZHANG_GUI,请您给看看。,Please take a look.,診ていただけますか。,한번 진찰해 주세요.
 UI_NPC_DIALOGUE_PREFIX_YE_JIANG_ZHOU,先生，我这几日,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_YE_JIANG_ZHOU,劳烦先生给小可看看。,"Would you kindly examine me, Doctor?",先生、診ていただけますか。,"진찰해 주시겠어요, 선생님?"
-UI_NPC_DIALOGUE_PREFIX_YOU_XIU_GU,我最近几天,"These past few days, I've been",ここ数日、,며칠 전부터
-UI_NPC_DIALOGUE_SUFFIX_YOU_XIU_GU,请先生给我看看吧,"Doctor, please take a look at me.",先生、どうか診てください。,"선생님, 저를 진찰해 주세요."
-UI_NPC_DIALOGUE_PREFIX_ZHANG_SAN,大夫，我这几天,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_ZHANG_SAN,帮我看看吧。,Could you take a look?,診てください。,한번 봐 주실래요?
-UI_NPC_DIALOGUE_PREFIX_ZHANG_TU,哎哟大夫，俺,"Oh dear, Doctor, I've been",あいたた……先生、私は,"아이고, 선생님…"
-UI_NPC_DIALOGUE_SUFFIX_ZHANG_TU,快给俺看看吧。,"Please, have a look at me quickly.",早く診てください。,어서 진찰해 주세요.
-UI_NPC_DIALOGUE_PREFIX_ZHANG_YU_ZHI,大夫，我这两天,"Doctor, for the past couple of days I've been",先生、この二日ほど、,"선생님, 이틀 전부터"
-UI_NPC_DIALOGUE_SUFFIX_ZHANG_YU_ZHI,麻烦您帮我看看吧。,Could you please see what's wrong?,どうか診ていただけませんか。,어디가 잘못됐는지 봐 주시겠어요?
+UI_NPC_DIALOGUE_SUFFIX_YE_JIANG_ZHOU,劳烦先生给小可看看。,"Would you kindly examine me, Doctor?",先生、診ていただけますか。,"선생님, 소인을 한번 진찰해 주십시오."
+UI_NPC_DIALOGUE_PREFIX_YOU_XIU_GU,我最近几天,"These past few days, I've been",ここ数日、,요 며칠
+UI_NPC_DIALOGUE_SUFFIX_YOU_XIU_GU,请先生给我看看吧,"Doctor, please take a look at me.",先生、どうか診てください。,"선생님, 한번 진찰해 주세요."
+UI_NPC_DIALOGUE_PREFIX_ZHANG_SAN,大夫，我这几天,"Doctor, these past few days I've been",先生、ここ数日、,"의원님, 며칠 전부터"
+UI_NPC_DIALOGUE_SUFFIX_ZHANG_SAN,帮我看看吧。,Could you take a look?,診てください。,한번 봐 주세요.
+UI_NPC_DIALOGUE_PREFIX_ZHANG_TU,哎哟大夫，俺,"Oh dear, Doctor, I've been",あいたた……先生、私は,"아이고, 의원님…"
+UI_NPC_DIALOGUE_SUFFIX_ZHANG_TU,快给俺看看吧。,"Please, have a look at me quickly.",早く診てください。,어서 좀 봐 주세요.
+UI_NPC_DIALOGUE_PREFIX_ZHANG_YU_ZHI,大夫，我这两天,"Doctor, for the past couple of days I've been",先生、この二日ほど、,"의원님, 이틀 전부터"
+UI_NPC_DIALOGUE_SUFFIX_ZHANG_YU_ZHI,麻烦您帮我看看吧。,Could you please see what's wrong?,どうか診ていただけませんか。,한번 봐 주시겠어요?
 UI_NPC_DIALOGUE_PREFIX_ZHAO_LIU,先生，我最近,"Doctor, lately I've been",先生、最近、,"선생님, 요즘"
-UI_NPC_DIALOGUE_SUFFIX_ZHAO_LIU,麻烦您给我看看。,Would you mind taking a look?,診察をお願いします。,진찰해 주시겠어요?
-UI_NPC_DIALOGUE_PREFIX_ZHAO_YA_PO,大夫，老婆子我这几日,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_ZHAO_YA_PO,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。,진찰해 주시겠어요?
+UI_NPC_DIALOGUE_SUFFIX_ZHAO_LIU,麻烦您给我看看。,Would you mind taking a look?,診察をお願いします。,한번 진찰해 주시겠어요?
+UI_NPC_DIALOGUE_PREFIX_ZHAO_YA_PO,大夫，老婆子我这几日,"Doctor, these past few days I've been",先生、ここ数日、,"의원님, 이 늙은이가 며칠 전부터"
+UI_NPC_DIALOGUE_SUFFIX_ZHAO_YA_PO,劳烦您给我看看。,Would you kindly take a look?,診ていただけますか。,한번 진찰해 주시겠습니까?
 UI_NPC_DIALOGUE_PREFIX_ZHENG_ER_JIE,先生，我最近,"Doctor, lately I've been",先生、最近、,"선생님, 요즘"
-UI_NPC_DIALOGUE_SUFFIX_ZHENG_ER_JIE,麻烦您给我看看。,Would you mind taking a look?,診察をお願いします。,진찰해 주시겠어요?
-UI_NPC_DIALOGUE_PREFIX_ZHOU_LU_AN,大夫，我这几天,"Doctor, these past few days I've been",先生、ここ数日、,"선생님, 며칠 전부터"
-UI_NPC_DIALOGUE_SUFFIX_ZHOU_LU_AN,麻烦您给我看看。,Would you mind taking a look?,診察をお願いします。,진찰해 주시겠어요?
-UI_NPC_GENERIC_SYMPTOM,身体不适,feeling unwell,体調が優れません,몸이 불편해요
+UI_NPC_DIALOGUE_SUFFIX_ZHENG_ER_JIE,麻烦您给我看看。,Would you mind taking a look?,診察をお願いします。,한번 진찰해 주시겠어요?
+UI_NPC_DIALOGUE_PREFIX_ZHOU_LU_AN,大夫，我这几天,"Doctor, these past few days I've been",先生、ここ数日、,"의원님, 며칠 전부터"
+UI_NPC_DIALOGUE_SUFFIX_ZHOU_LU_AN,麻烦您给我看看。,Would you mind taking a look?,診察をお願いします。,한번 진찰해 주시겠어요?
+UI_NPC_GENERIC_SYMPTOM,身体不适,feeling unwell,体調が優れません,몸이 좋지 않아요
 STORY_000_01_001_TEXT,转眼多年过去…,Years passed in the blink of an eye…,それから長い年月が流れた……,눈 깜짝할 사이에 여러 해가 흘렀다…
 STORY_000_01_002_TEXT,李东璧去各地实地考察，采集样本，参考800多种书籍，历经三次改写，终于完成著作。全书共52卷，载药1892种，方剂11096首，插图1109幅，约190万字。,"Li Dongbi traveled far and wide to study medicinal plants and collect specimens. Drawing on more than 800 books, he revised his manuscript three times before finally completing it: 52 volumes describing 1,892 medicinal substances and 11,096 prescriptions, with 1,109 illustrations and roughly 1.9 million Chinese characters.",李東璧は各地を実地調査し、標本を集め、800種を超える書物を参照した。原稿を三度書き直し、ついに著作を完成させた。全52巻、収録した薬は1892種、処方は11096方、挿絵は1109点、文字数は約190万字に及ぶ。,"이동벽은 각지를 직접 답사하며 표본을 모으고, 800여 권의 서적을 참고했다. 세 차례 원고를 고친 끝에 마침내 저술을 완성했다. 전 52권에 약재 1,892종, 처방 11,096수, 삽화 1,109점, 약 190만 자를 담았다."
 STORY_000_01_003_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
