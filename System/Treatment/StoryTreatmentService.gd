@@ -435,19 +435,31 @@ func _build_judgement_result_data(
 	var total_score := 0
 
 	if _current_npc != null:
-		npc_name = _current_npc.npc_name
+		npc_name = _current_npc.get_localized_name()
 		if _current_npc.disease != null:
-			disease_name = _current_npc.disease.disease_name
+			disease_name = LocalizedName.disease(
+				_current_npc.disease.disease_id,
+				_current_npc.disease.disease_name
+			)
 
 	var standard_formula := _get_current_standard_formula()
 
 	if standard_formula != null:
-		standard_formula_name = standard_formula.formula_name
+		standard_formula_name = LocalizedName.formula(
+			standard_formula.formula_id,
+			standard_formula.formula_name
+		)
 		standard_formula_text = _build_standard_formula_display_text(
 			standard_formula
 		)
 	else:
-		standard_formula_text = "（未找到标准方）"
+		standard_formula_text = _localized_text(
+			"UI_RESULT_NO_STANDARD_FORMULA",
+			"（未找到标准方）",
+			"(No standard prescription)",
+			"（標準処方なし）",
+			"(표준 처방 없음)"
+		)
 
 	if _current_prescription != null:
 		player_disease_name = (
@@ -460,14 +472,31 @@ func _build_judgement_result_data(
 			)
 
 		if player_disease_name == "":
-			player_disease_name = "未选择疾病"
+			player_disease_name = _localized_text(
+				"UI_RESULT_NO_DIAGNOSIS",
+				"未选择疾病",
+				"No diagnosis selected",
+				"病名未選択",
+				"병증 미선택"
+			)
+		elif not _current_prescription.disease_id.strip_edges().is_empty():
+			player_disease_name = LocalizedName.disease(
+				_current_prescription.disease_id,
+				player_disease_name
+			)
 
 		player_prescription_text = (
 			_current_prescription.get_display_text()
 		)
 	else:
-		player_disease_name = "未选择疾病"
-		player_prescription_text = "（无）"
+		player_disease_name = _localized_text(
+			"UI_RESULT_NO_DIAGNOSIS",
+			"未选择疾病",
+			"No diagnosis selected",
+			"病名未選択",
+			"병증 미선택"
+		)
+		player_prescription_text = _localized_none_text()
 
 	if judge_result != null:
 		var raw_grade = judge_result.get("grade")
@@ -527,28 +556,20 @@ func _build_standard_formula_display_text(
 	formula: FormulaData
 ) -> String:
 	if formula == null:
-		return "（无）"
+		return _localized_none_text()
 
 	var lines: Array[String] = []
-	lines.append(
-		"君：" + _build_formula_group_display_text(formula.jun_group)
-	)
-	lines.append(
-		"臣：" + _build_formula_group_display_text(formula.chen_group)
-	)
-	lines.append(
-		"佐：" + _build_formula_group_display_text(formula.zuo_group)
-	)
-	lines.append(
-		"使：" + _build_formula_group_display_text(formula.shi_group)
-	)
+	lines.append(_build_formula_role_line("君", formula.jun_group))
+	lines.append(_build_formula_role_line("臣", formula.chen_group))
+	lines.append(_build_formula_role_line("佐", formula.zuo_group))
+	lines.append(_build_formula_role_line("使", formula.shi_group))
 
 	return "\n".join(lines)
 
 
 func _build_formula_group_display_text(group: Array) -> String:
 	if group.is_empty():
-		return "（无）"
+		return _localized_none_text()
 
 	var parts: Array[String] = []
 
@@ -562,24 +583,24 @@ func _build_formula_group_display_text(group: Array) -> String:
 		):
 			continue
 
+		var herb_id := ""
 		var herb_name := ""
 		var amount_text := ""
 
-		if ingredient.has_method("get_herb_name"):
-			herb_name = str(
-				ingredient.get_herb_name()
-			).strip_edges()
+		if ingredient.has_method("get_herb_id"):
+			herb_id = str(ingredient.get_herb_id()).strip_edges()
 
-		if (
-			herb_name == ""
-			and ingredient.has_method("get_herb_id")
-		):
-			herb_name = str(
-				ingredient.get_herb_id()
-			).strip_edges()
+		if ingredient.has_method("get_herb_name"):
+			herb_name = str(ingredient.get_herb_name()).strip_edges()
+
+		if herb_name == "":
+			herb_name = herb_id
+
+		if herb_id != "":
+			herb_name = LocalizedName.herb(herb_id, herb_name)
 
 		if ingredient.has_method("get_amount_in_fen"):
-			amount_text = HerbUnit.format_fen_auto(
+			amount_text = _format_fen_for_current_locale(
 				int(ingredient.get_amount_in_fen())
 			)
 
@@ -589,11 +610,80 @@ func _build_formula_group_display_text(group: Array) -> String:
 		if amount_text == "":
 			parts.append(herb_name)
 		else:
-			parts.append(
-				"%s %s" % [herb_name, amount_text]
-			)
+			parts.append("%s %s" % [herb_name, amount_text])
 
 	if parts.is_empty():
-		return "（无）"
+		return _localized_none_text()
 
-	return "、".join(parts)
+	return _list_separator().join(parts)
+
+
+func _build_formula_role_line(
+	role_name: String,
+	group: Array
+) -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+	var colon := ": " if locale.begins_with("en") or locale.begins_with("ko") else "："
+	return (
+		_localized_role_name(role_name)
+		+ colon
+		+ _build_formula_group_display_text(group)
+	)
+
+
+func _localized_role_name(role_name: String) -> String:
+	match role_name:
+		"君":
+			return _localized_text("UI_PRESCRIPTION_ROLE_JUN", "君", "Chief", "君薬", "군약")
+		"臣":
+			return _localized_text("UI_PRESCRIPTION_ROLE_CHEN", "臣", "Deputy", "臣薬", "신약")
+		"佐":
+			return _localized_text("UI_PRESCRIPTION_ROLE_ZUO", "佐", "Assistant", "佐薬", "좌약")
+		"使":
+			return _localized_text("UI_PRESCRIPTION_ROLE_SHI", "使", "Envoy", "使薬", "사약")
+	return role_name
+
+
+func _localized_none_text() -> String:
+	return _localized_text("UI_NONE", "（无）", "(None)", "（なし）", "(없음)")
+
+
+func _format_fen_for_current_locale(total_fen: int) -> String:
+	if total_fen <= 0:
+		return _localized_text(
+			"UI_PRESCRIPTION_ZERO_FEN",
+			"0分",
+			"0 fen",
+			"0分",
+			"0푼"
+		)
+
+	var remaining := total_fen
+	var parts: Array[String] = []
+
+	for unit_data in [
+		[HerbUnit.FEN_PER_JIN, "UI_PRESCRIPTION_UNIT_JIN", "斤", "jin", "斤", "근"],
+		[HerbUnit.FEN_PER_LIANG, "UI_PRESCRIPTION_UNIT_LIANG", "两", "liang", "両", "냥"],
+		[HerbUnit.FEN_PER_QIAN, "UI_PRESCRIPTION_UNIT_QIAN", "钱", "qian", "銭", "전"],
+		[HerbUnit.FEN_PER_FEN, "UI_PRESCRIPTION_UNIT_FEN", "分", "fen", "分", "푼"]
+	]:
+		var unit_size: int = unit_data[0]
+		var count: int = remaining / unit_size
+		if count <= 0:
+			continue
+
+		var unit_text := _localized_text(
+			unit_data[1],
+			unit_data[2],
+			unit_data[3],
+			unit_data[4],
+			unit_data[5]
+		)
+		parts.append("%d %s" % [count, unit_text])
+		remaining %= unit_size
+
+	return " ".join(parts)
+
+
+func _list_separator() -> String:
+	return ", " if LocalizedName.is_english_locale() else "、"

@@ -141,6 +141,9 @@ func _notification(what: int) -> void:
 
 
 func _refresh_overwrite_confirm_language() -> void:
+	if save_slot_close_button != null:
+		save_slot_close_button.text = tr("UI_CLOSE")
+
 	if overwrite_confirm_title_label != null:
 		overwrite_confirm_title_label.text = tr("UI_CONFIRM_OVERWRITE")
 

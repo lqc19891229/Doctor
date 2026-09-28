@@ -117,6 +117,11 @@ var minor_dosage_errors: Array[String] = []
 # 剂量严重偏差
 var major_dosage_errors: Array[String] = []
 
+# 结构化剂量错误。
+# 每项字段：herb_id / herb_name / player_fen / standard_fen
+# 用于语言切换后重新本地化药名与剂量单位。
+var major_dosage_error_data: Array[Dictionary] = []
+
 
 # =========================================================
 # 四、统计信息
@@ -249,7 +254,14 @@ func get_summary_text() -> String:
 		for item in minor_dosage_errors:
 			lines.append("- " + item)
 
-	if not major_dosage_errors.is_empty():
+	if not major_dosage_error_data.is_empty():
+		lines.append(_translate_with_fallback(
+			"UI_JUDGE_SUMMARY_MAJOR_DOSAGE",
+			_major_dosage_fallback()
+		))
+		for item in major_dosage_error_data:
+			lines.append("- " + _localized_dosage_error_line(item))
+	elif not major_dosage_errors.is_empty():
 		lines.append(_translate_with_fallback(
 			"UI_JUDGE_SUMMARY_MAJOR_DOSAGE",
 			_major_dosage_fallback()
@@ -348,6 +360,105 @@ func _localized_herb_list(
 func _list_separator() -> String:
 	var locale := TranslationServer.get_locale().to_lower()
 	return ", " if locale.begins_with("en") else "、"
+
+
+func _localized_dosage_error_line(data: Dictionary) -> String:
+	var herb_id := str(data.get("herb_id", "")).strip_edges()
+	var fallback_name := str(data.get("herb_name", herb_id)).strip_edges()
+	var herb_name := (
+		LocalizedName.herb(herb_id, fallback_name)
+		if not herb_id.is_empty()
+		else fallback_name
+	)
+
+	return _tr_fmt(
+		"UI_JUDGE_SUMMARY_DOSAGE_ERROR_FMT",
+		_dosage_error_fallback_fmt(),
+		[
+			herb_name,
+			_format_fen_for_current_locale(int(data.get("player_fen", 0))),
+			_format_fen_for_current_locale(int(data.get("standard_fen", 0)))
+		]
+	)
+
+
+func _format_fen_for_current_locale(total_fen: int) -> String:
+	if total_fen <= 0:
+		return _translate_with_fallback(
+			"UI_PRESCRIPTION_ZERO_FEN",
+			_zero_fen_fallback()
+		)
+
+	var remaining := total_fen
+	var parts: Array[String] = []
+
+	for unit_data in [
+		[HerbUnit.FEN_PER_JIN, "UI_PRESCRIPTION_UNIT_JIN", _unit_fallback("jin")],
+		[HerbUnit.FEN_PER_LIANG, "UI_PRESCRIPTION_UNIT_LIANG", _unit_fallback("liang")],
+		[HerbUnit.FEN_PER_QIAN, "UI_PRESCRIPTION_UNIT_QIAN", _unit_fallback("qian")],
+		[HerbUnit.FEN_PER_FEN, "UI_PRESCRIPTION_UNIT_FEN", _unit_fallback("fen")]
+	]:
+		var unit_size: int = unit_data[0]
+		var count: int = remaining / unit_size
+		if count <= 0:
+			continue
+
+		var unit_text := _translate_with_fallback(unit_data[1], unit_data[2])
+		parts.append("%d %s" % [count, unit_text])
+		remaining %= unit_size
+
+	return " ".join(parts)
+
+
+func _zero_fen_fallback() -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+	if locale.begins_with("en"):
+		return "0 fen"
+	if locale.begins_with("ko"):
+		return "0푼"
+	return "0分"
+
+
+func _unit_fallback(unit: String) -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+
+	if locale.begins_with("en"):
+		match unit:
+			"jin": return "jin"
+			"liang": return "liang"
+			"qian": return "qian"
+			_: return "fen"
+
+	if locale.begins_with("ja"):
+		match unit:
+			"jin": return "斤"
+			"liang": return "両"
+			"qian": return "銭"
+			_: return "分"
+
+	if locale.begins_with("ko"):
+		match unit:
+			"jin": return "근"
+			"liang": return "냥"
+			"qian": return "전"
+			_: return "푼"
+
+	match unit:
+		"jin": return "斤"
+		"liang": return "两"
+		"qian": return "钱"
+		_: return "分"
+
+
+func _dosage_error_fallback_fmt() -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+	if locale.begins_with("en"):
+		return "%s: actual %s, standard %s"
+	if locale.begins_with("ja"):
+		return "%s：実際 %s、基準 %s"
+	if locale.begins_with("ko"):
+		return "%s: 실제 %s, 기준 %s"
+	return "%s：实际 %s，标准 %s"
 
 
 func _score_fallback_fmt() -> String:
@@ -510,6 +621,7 @@ func to_dict() -> Dictionary:
 
 		"minor_dosage_errors": minor_dosage_errors.duplicate(),
 		"major_dosage_errors": major_dosage_errors.duplicate(),
+		"major_dosage_error_data": major_dosage_error_data.duplicate(true),
 
 		"standard_herb_count": standard_herb_count,
 		"player_herb_count": player_herb_count,

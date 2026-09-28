@@ -735,6 +735,12 @@ func _record_role_problems_to_result(
 					HerbUnit.format_fen_auto(standard_fen)
 				]
 			)
+			result.major_dosage_error_data.append({
+				"herb_id": herb_id,
+				"herb_name": herb_name,
+				"player_fen": player_fen,
+				"standard_fen": standard_fen
+			})
 
 	# 玩家在该区域多放的药材。
 	for herb_id_value in player_fen_map.keys():

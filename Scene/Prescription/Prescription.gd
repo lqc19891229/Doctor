@@ -199,10 +199,10 @@ func build_role_maps() -> Dictionary:
 
 func get_display_text() -> String:
 	var lines: Array[String] = []
-	lines.append("君：" + _build_group_text(jun_herbs))
-	lines.append("臣：" + _build_group_text(chen_herbs))
-	lines.append("佐：" + _build_group_text(zuo_herbs))
-	lines.append("使：" + _build_group_text(shi_herbs))
+	lines.append(_build_role_group_line("君", jun_herbs))
+	lines.append(_build_role_group_line("臣", chen_herbs))
+	lines.append(_build_role_group_line("佐", zuo_herbs))
+	lines.append(_build_role_group_line("使", shi_herbs))
 	return "\n".join(lines)
 
 
@@ -250,15 +250,117 @@ func _is_valid_role(role_name: String) -> bool:
 
 func _build_group_text(group: Array[Dictionary]) -> String:
 	if group.is_empty():
-		return "（无）"
+		return _localized_none_text()
 
 	var parts: Array[String] = []
+
 	for item in group:
-		parts.append("%s %s" % [
-			item.get("herb_name", ""),
-			HerbUnit.format_amount(float(item.get("amount", 0.0)), str(item.get("unit", "")))
-		])
-	return "、".join(parts)
+		var herb_id := str(item.get("herb_id", "")).strip_edges()
+		var fallback_name := str(item.get("herb_name", herb_id)).strip_edges()
+		var herb_name := (
+			LocalizedName.herb(herb_id, fallback_name)
+			if not herb_id.is_empty()
+			else fallback_name
+		)
+
+		var amount := float(item.get("amount", 0.0))
+		var unit := str(item.get("unit", "")).strip_edges()
+		var total_fen := HerbUnit.to_fen(amount, unit)
+
+		parts.append(
+			"%s %s"
+			% [herb_name, _format_fen_for_current_locale(total_fen)]
+		)
+
+	return _list_separator().join(parts)
+
+
+func _build_role_group_line(
+	role_name: String,
+	group: Array[Dictionary]
+) -> String:
+	var locale := TranslationServer.get_locale().to_lower()
+	var colon := ": " if locale.begins_with("en") or locale.begins_with("ko") else "："
+	return _localized_role_name(role_name) + colon + _build_group_text(group)
+
+
+func _localized_role_name(role_name: String) -> String:
+	match role_name:
+		"君":
+			return _localized_text("UI_PRESCRIPTION_ROLE_JUN", "君", "Chief", "君薬", "군약")
+		"臣":
+			return _localized_text("UI_PRESCRIPTION_ROLE_CHEN", "臣", "Deputy", "臣薬", "신약")
+		"佐":
+			return _localized_text("UI_PRESCRIPTION_ROLE_ZUO", "佐", "Assistant", "佐薬", "좌약")
+		"使":
+			return _localized_text("UI_PRESCRIPTION_ROLE_SHI", "使", "Envoy", "使薬", "사약")
+	return role_name
+
+
+func _localized_none_text() -> String:
+	return _localized_text("UI_NONE", "（无）", "(None)", "（なし）", "(없음)")
+
+
+func _format_fen_for_current_locale(total_fen: int) -> String:
+	if total_fen <= 0:
+		return _localized_text(
+			"UI_PRESCRIPTION_ZERO_FEN",
+			"0分",
+			"0 fen",
+			"0分",
+			"0푼"
+		)
+
+	var remaining := total_fen
+	var parts: Array[String] = []
+
+	for unit_data in [
+		[HerbUnit.FEN_PER_JIN, "UI_PRESCRIPTION_UNIT_JIN", "斤", "jin", "斤", "근"],
+		[HerbUnit.FEN_PER_LIANG, "UI_PRESCRIPTION_UNIT_LIANG", "两", "liang", "両", "냥"],
+		[HerbUnit.FEN_PER_QIAN, "UI_PRESCRIPTION_UNIT_QIAN", "钱", "qian", "銭", "전"],
+		[HerbUnit.FEN_PER_FEN, "UI_PRESCRIPTION_UNIT_FEN", "分", "fen", "分", "푼"]
+	]:
+		var unit_size: int = unit_data[0]
+		var count: int = remaining / unit_size
+		if count <= 0:
+			continue
+
+		var unit_text := _localized_text(
+			unit_data[1],
+			unit_data[2],
+			unit_data[3],
+			unit_data[4],
+			unit_data[5]
+		)
+		parts.append("%d %s" % [count, unit_text])
+		remaining %= unit_size
+
+	return " ".join(parts)
+
+
+func _localized_text(
+	key: String,
+	zh: String,
+	en: String,
+	ja: String,
+	ko: String
+) -> String:
+	var translated := TranslationServer.translate(key)
+	if not translated.strip_edges().is_empty() and translated != key:
+		return translated
+
+	var locale := TranslationServer.get_locale().to_lower()
+	if locale.begins_with("en"):
+		return en
+	if locale.begins_with("ja"):
+		return ja
+	if locale.begins_with("ko"):
+		return ko
+	return zh
+
+
+func _list_separator() -> String:
+	return ", " if TranslationServer.get_locale().to_lower().begins_with("en") else "、"
 
 
 # 疾病诊断操作方法

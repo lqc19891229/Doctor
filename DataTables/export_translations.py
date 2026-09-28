@@ -38,6 +38,46 @@ def placeholders(value: str) -> list[str]:
     return PLACEHOLDER_RE.findall(value or "")
 
 
+SEARCH_IGNORED_CHARS = set(
+    " \t\r\n"
+    ",，.。・･、"
+    "()（）[]【】"
+    "/／-—_"
+    "·:：;；"
+)
+
+
+def segmented_romanization_parts(value: str, label: str) -> list[str]:
+    clean = as_text(value)
+    if not clean:
+        return []
+
+    if clean.startswith("|") or clean.endswith("|") or "||" in clean:
+        raise ValueError(f"{label} 分段格式错误：{clean!r}")
+
+    parts = [part.strip() for part in clean.split("|")]
+    if any(not part for part in parts):
+        raise ValueError(f"{label} 存在空分段：{clean!r}")
+
+    return parts
+
+
+def searchable_character_count(value: str) -> int:
+    return sum(
+        1
+        for char in as_text(value)
+        if char not in SEARCH_IGNORED_CHARS
+    )
+
+
+def hangul_syllable_count(value: str) -> int:
+    return sum(
+        1
+        for char in as_text(value)
+        if "\uAC00" <= char <= "\uD7A3"
+    )
+
+
 def find_data_xlsx(explicit_path: Path | None, managed_xlsx: Path) -> Path | None:
     if explicit_path is not None:
         return explicit_path if explicit_path.exists() else None
@@ -416,12 +456,13 @@ def export_csv(wb, out_csv: Path) -> tuple[int, list[str]]:
 
 
 def export_japanese_search(wb, out_csv: Path) -> int:
-    title_keys = {
-        as_text(row[0])
+    japanese_titles = {
+        as_text(row[0]): as_text(row[3])
         for name in SHEET_ORDER
         for row in wb[name].iter_rows(min_row=2, values_only=True)
         if as_text(row[0]).startswith("UI_BOOK_ENTRY_TITLE_")
     }
+    title_keys = set(japanese_titles.keys())
 
     rows = []
     seen = set()
@@ -438,6 +479,28 @@ def export_japanese_search(wb, out_csv: Path) -> int:
         if key not in title_keys or key in seen or not kana or not romaji:
             raise ValueError(
                 f"JapaneseSearch 第 {row_no} 行无效、重复或缺少假名/罗马字：{key}"
+            )
+
+        japanese_title = japanese_titles.get(key, "")
+        romaji_parts = segmented_romanization_parts(
+            romaji,
+            f"JapaneseSearch 第 {row_no} 行 Romaji",
+        )
+        title_unit_count = searchable_character_count(japanese_title)
+
+        if title_unit_count <= 0:
+            raise ValueError(
+                f"JapaneseSearch 第 {row_no} 行找不到日文标题："
+                f"{key} | ja={japanese_title!r}"
+            )
+
+        if len(romaji_parts) != title_unit_count:
+            raise ValueError(
+                f"JapaneseSearch 第 {row_no} 行不是逐字 Romaji："
+                f"{key} | ja={japanese_title!r} "
+                f"({title_unit_count} 字) | "
+                f"romaji={romaji!r} "
+                f"({len(romaji_parts)} 段)"
             )
 
         seen.add(key)
@@ -512,12 +575,13 @@ def sync_korean_search(wb) -> None:
 
 
 def export_korean_search(wb, out_csv: Path) -> int:
-    title_keys = {
-        as_text(row[0])
+    korean_titles = {
+        as_text(row[0]): as_text(row[4])
         for name in SHEET_ORDER
         for row in wb[name].iter_rows(min_row=2, values_only=True)
         if as_text(row[0]).startswith("UI_BOOK_ENTRY_TITLE_")
     }
+    title_keys = set(korean_titles.keys())
 
     rows = []
     seen = set()
@@ -534,6 +598,28 @@ def export_korean_search(wb, out_csv: Path) -> int:
         if key not in title_keys or key in seen or not hangul or not romaja:
             raise ValueError(
                 f"KoreanSearch 第 {row_no} 行无效、重复或缺少韩文/罗马字：{key}"
+            )
+
+        korean_title = korean_titles.get(key, "")
+        romaja_parts = segmented_romanization_parts(
+            romaja,
+            f"KoreanSearch 第 {row_no} 行 Romaja",
+        )
+        syllable_count = hangul_syllable_count(korean_title)
+
+        if syllable_count <= 0:
+            raise ValueError(
+                f"KoreanSearch 第 {row_no} 行找不到韩文标题："
+                f"{key} | ko={korean_title!r}"
+            )
+
+        if len(romaja_parts) != syllable_count:
+            raise ValueError(
+                f"KoreanSearch 第 {row_no} 行不是逐音节 Romaja："
+                f"{key} | ko={korean_title!r} "
+                f"({syllable_count} 音节) | "
+                f"romaja={romaja!r} "
+                f"({len(romaja_parts)} 段)"
             )
 
         seen.add(key)
