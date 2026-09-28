@@ -668,7 +668,7 @@ UI_BOOK_NAME_JIN_GUI_YAO_LUE,金匮要略,Essentials from the Golden Cabinet,金
 UI_BOOK_NAME_JING_YUE_QUAN_SHU,景岳全书,Complete Works of Jingyue,景岳全書,경악전서
 UI_BOOK_NAME_JIU_YUAN_FANG,究原方,Formulas for Investigating Origins,究原方,구원방
 UI_BOOK_NAME_LAN_SHI_MI_CANG,兰室秘藏,Secret Treasury of the Orchid Chamber,蘭室秘蔵,난실비장
-UI_BOOK_NAME_LIU_ZHOU_YI_HUA,柳州医话,Medical Talks from Liuzhou,柳州医話,유주 의화
+UI_BOOK_NAME_LIU_ZHOU_YI_HUA,柳州医话,Medical Talks from Liuzhou,柳州医話,유주의화
 UI_BOOK_NAME_PU_JI_BEN_SHI_FANG,普济本事方,Proven Formulas for Universal Relief,普済本事方,보제본사방
 UI_BOOK_NAME_REN_ZHAI_ZHI_ZHI_FANG_LUN,仁斋直指方论,Renzhai's Direct Guide to Formulas and Medical Theory,仁斎直指方論,인재직지방론
 UI_BOOK_NAME_SHANG_HAN_LUN,伤寒论,Treatise on Cold Damage,傷寒論,상한론
@@ -678,7 +678,7 @@ UI_BOOK_NAME_TAI_YI_YUAN_JING_YAN_QI_XIAO_LIANG_FANG_DA_QUAN,太医院经验奇�
 UI_BOOK_NAME_WANG_SHI_BO_JI_FANG,王氏博济方,Wang's Formulas for Broad Relief,王氏博済方,왕씨박제방
 UI_BOOK_NAME_WEN_BING_TIAO_BIAN,温病条辨,Systematic Differentiation of Warm Diseases,温病条弁,온병조변
 UI_BOOK_NAME_XIAO_ER_YAO_ZHENG_ZHI_JUE,小儿药证直诀,Key to Therapeutics of Children's Diseases,小児薬証直訣,소아약증직결
-UI_BOOK_NAME_XING_YI_JI_KAO,行医记考,Clinical Records,診療記録,형의기고
+UI_BOOK_NAME_XING_YI_JI_KAO,行医记考,Clinical Records,診療記録,행의기고
 UI_BOOK_NAME_YAN_SHI_JI_SHENG_FANG,严氏济生方,Yan's Formulas for Aiding Life,厳氏済生方,엄씨제생방
 UI_BOOK_NAME_YI_FANG_JI_JIE,医方集解,Collected Explanations of Medical Formulas,医方集解,의방집해
 UI_BOOK_NAME_YI_FANG_KAO,医方考,Investigation of Medical Formulas,医方考,의방고
@@ -15497,7 +15497,7 @@ STORY_004_02_006_TEXT,承蒙老师教诲，学生定不负师恩，精进医术�
 STORY_004_03_001_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_004_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 틀렸어. 무슨 병인지, 어떤 처방을 써야 하는지 잘 생각해 봐야 해."
 STORY_004_04_001_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
-STORY_004_04_001_TEXT,哎呀，是老师来了，学生失迎。,Master! Forgive me for not welcoming you sooner.,先生、いらしていたのですか。お迎えもせず失礼しました。,"아이고, 스승님께서 오셨구나. 제자가 미처 맞이하지 못했습니다."
+STORY_004_04_001_TEXT,哎呀，是老师来了，学生失迎。,Master! Forgive me for not welcoming you sooner.,先生、いらしていたのですか。お迎えもせず失礼しました。,"아이고, 스승님 오셨습니까. 제자가 미처 맞이하지 못했습니다."
 STORY_004_04_002_SPEAKER,顾问,Gu Wen,顧問,구원
 STORY_004_04_002_TEXT,东璧啊，朝廷来了调令，命我去福建赴任。临走来看看你和你爹。,"Dongbi, the court has ordered me to take up a post in Fujian. I came to see you and your father before I leave.",東璧よ、朝廷から福建への赴任を命じられた。発つ前に、お前とお父上に会いに来たのだ。,"둥비야, 조정에서 전임 명령이 내려와 내가 복건으로 부임하게 되었다. 떠나기 전에 너와 네 아버지를 보러 왔다."
 STORY_004_04_003_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
@@ -15511,11 +15511,11 @@ STORY_004_04_006_TEXT,学生想核对典籍，拾遗补正，重新编写一部�
 STORY_004_04_007_SPEAKER,顾问,Gu Wen,顧問,구원
 STORY_004_04_007_TEXT,嗯，好啊东璧，你这想法甚好。,"A fine ambition, Dongbi. A fine ambition indeed.",うむ、よい考えだ、東璧。,"음, 좋구나 둥비야. 참으로 훌륭한 생각이다."
 STORY_004_04_008_SPEAKER,顾问,Gu Wen,顧問,구원
-STORY_004_04_008_TEXT,"宋儒张载有四句教：""为天地立心，为生民立命，为往圣继绝学，为万世开太平""。",The Song scholar Zhang Zai wrote: “Establish a heart for Heaven and Earth; secure a life for the people; carry forward the lost learning of the sages; and bring peace to all generations.”,宋の儒者、張載には四句の教えがある。「天地のために心を立て、生民のために命を立て、往聖のために絶学を継ぎ、万世のために太平を開く」。,"송나라 유학자 장재가 네 구절의 가르침을 남겼지. ""천지에 마음을 세우고, 백성에게 운명을 세우며, 옛 성현의 끊긴 학문을 잇고, 만세에 태평을 열어라""."
+STORY_004_04_008_TEXT,"宋儒张载有四句教：""为天地立心，为生民立命，为往圣继绝学，为万世开太平""。",The Song scholar Zhang Zai wrote: “Establish a heart for Heaven and Earth; secure a life for the people; carry forward the lost learning of the sages; and bring peace to all generations.”,宋の儒者、張載には四句の教えがある。「天地のために心を立て、生民のために命を立て、往聖のために絶学を継ぎ、万世のために太平を開く」。,"송나라 유학자 장재가 네 구절의 가르침을 남겼지. ""천지를 위해 마음을 세우고, 백성을 위해 삶의 도리를 세우며, 옛 성현의 끊어진 학문을 잇고, 만세를 위해 태평을 연다."""
 STORY_004_04_009_SPEAKER,顾问,Gu Wen,顧問,구원
-STORY_004_04_009_TEXT,若是能著成此书，真可谓是为生民立命，为往圣继绝学了啊。,"If you complete this book, you will truly help secure a life for the people and carry forward the learning of the sages.",この書を書き上げれば、まさしく人々のために道を示し、先人の学問を後世へ伝えることになる。,이 책을 완성한다면 백성에게 삶의 길을 마련하고 옛 성현의 학문을 잇는 일이 될 것이다.
+STORY_004_04_009_TEXT,若是能著成此书，真可谓是为生民立命，为往圣继绝学了啊。,"If you complete this book, you will truly help secure a life for the people and carry forward the learning of the sages.",この書を書き上げれば、まさしく人々のために道を示し、先人の学問を後世へ伝えることになる。,"이 책을 완성한다면 참으로 백성을 위해 삶의 도리를 세우고, 옛 성현의 끊어진 학문을 잇는 일이 될 것이다."
 STORY_004_04_010_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
-STORY_004_04_010_TEXT,为生民立命，为往圣继绝学…学生记下了。,"Secure a life for the people, and carry forward the learning of the sages… I will remember that.",「生民のために命を立て、往聖のために絶学を継ぐ」……心に刻みます。,백성에게 삶의 길을 마련하고 옛 성현의 학문을 잇는다… 제자가 명심하겠습니다.
+STORY_004_04_010_TEXT,为生民立命，为往圣继绝学…学生记下了。,"Secure a life for the people, and carry forward the learning of the sages… I will remember that.",「生民のために命を立て、往聖のために絶学を継ぐ」……心に刻みます。,"백성을 위해 삶의 도리를 세우고, 옛 성현의 끊어진 학문을 잇는다… 제자가 명심하겠습니다."
 STORY_005_01_001_TEXT,咚咚咚...咚咚咚咚咚…,"Knock, knock… Knock, knock, knock, knock…",トントン……トントントントン……,"똑똑똑… 똑똑, 똑똑, 똑똑…"
 STORY_005_01_002_SPEAKER,陈皮,Chen Pi,陳皮,진피
 STORY_005_01_002_TEXT,大半夜的谁啊，谁在敲门啊？,Who could be knocking in the middle of the night?,こんな夜中に誰だ？　誰が戸を叩いている？,한밤중에 누가 문을 두드리는 거야?
@@ -15580,11 +15580,11 @@ STORY_006_003_TEXT,在下贾荃，是做药材生意的，在湖广省小有一�
 STORY_006_004_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_006_004_TEXT,久闻久闻，不知今日来小馆所为何事？,Of course I have heard of you. What brings you to my humble clinic today?,お名前はかねがね。今日は当院に何のご用ですか？,명성은 익히 들었습니다. 오늘 누추한 의원에는 무슨 일로 오셨습니까?
 STORY_006_005_SPEAKER,贾荃,Jia Quan,賈荃,가전
-STORY_006_005_TEXT,呃，呵呵，今日是想找李神医谈一桩好生意。,"Well, I have come to discuss a profitable arrangement with the famous Physician Li.",ええ、李先生にうまい商談を持ってきたのです。,"어… 허허, 오늘은 이 신의 이 선생과 좋은 거래를 의논하러 왔습니다."
+STORY_006_005_TEXT,呃，呵呵，今日是想找李神医谈一桩好生意。,"Well, I have come to discuss a profitable arrangement with the famous Physician Li.",ええ、李先生にうまい商談を持ってきたのです。,"어… 허허, 오늘은 이 의원님과 좋은 거래 하나를 의논하러 왔습니다."
 STORY_006_006_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_006_006_TEXT,哦？愿闻其详。,Oh? I am listening.,ほう？　詳しく聞かせてください。,오? 자세히 말씀해 보시지요.
 STORY_006_007_SPEAKER,贾荃,Jia Quan,賈荃,가전
-STORY_006_007_TEXT,小可上个月进了一批人参，想请李兄在医馆帮忙出货。,I acquired a shipment of ginseng last month. I was hoping you could help me sell it through your clinic.,先月、人参を大量に仕入れましてね。先生の診療所で売っていただけませんか。,"제가 지난달 인삼 한 묶음을 들여왔는데, 이 의원에서 팔아 주시면 어떨까 합니다."
+STORY_006_007_TEXT,小可上个月进了一批人参，想请李兄在医馆帮忙出货。,I acquired a shipment of ginseng last month. I was hoping you could help me sell it through your clinic.,先月、人参を大量に仕入れましてね。先生の診療所で売っていただけませんか。,"제가 지난달 인삼 한 물량을 들여왔는데, 이 의원에서 좀 팔아 주시면 어떨까 합니다."
 STORY_006_008_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_006_008_TEXT,小馆平时接待的病患多是平常百姓，人参这种名贵药材用量是不多的。,Most of my patients are ordinary people. We have little need for an expensive herb like ginseng.,うちに来る患者は普通の民が大半です。人参のような高価な薬材を使うことはあまりありません。,이 의원을 찾는 환자들은 대부분 평범한 백성이라 인삼 같은 귀한 약재는 많이 쓰지 않습니다.
 STORY_006_009_SPEAKER,贾荃,Jia Quan,賈荃,가전
@@ -15614,9 +15614,9 @@ STORY_007_02_002_TEXT,哎呀，这都被你看出来啦。,Ha! You saw right thr
 STORY_007_02_003_SPEAKER,雷万钧,Lei Wanjun,雷万鈞,뇌만균
 STORY_007_02_003_TEXT,昨日我带着兄弟们和州府的征粮官去收粮，这帮狗腿子淋尖踢斛下脚那叫一个狠，气得我当场骂娘。,Yesterday my men and I accompanied the prefecture's grain tax collectors. Those lackeys were heaping and kicking the measures so hard that I cursed them on the spot.,昨日、部下と徴税官を連れて年貢米を集めに行ったんだが、あの役人どもが升を蹴って米を巻き上げるやり方がひどくてな。思わずその場で怒鳴ったよ。,"어제 아우들과 함께 주부의 세곡 징수관을 따라 곡식을 거두러 갔네. 그 앞잡이들이 곡식 자루를 넘치게 담고 말로 쳐서 떨어뜨리는 짓을 어찌나 심하게 하던지, 화가 나서 그 자리에서 욕을 했다네."
 STORY_007_02_004_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
-STORY_007_02_004_TEXT,"什么叫""淋尖踢斛""呀？",What do you mean by “heaping and kicking the measures”?,升を蹴るとは、どういうことですか？,‘첨첨축곡’이 무엇입니까?
+STORY_007_02_004_TEXT,"什么叫""淋尖踢斛""呀？",What do you mean by “heaping and kicking the measures”?,升を蹴るとは、どういうことですか？,‘임첨척곡(淋尖踢斛)’이란 게 무엇입니까?
 STORY_007_02_005_SPEAKER,雷万钧,Lei Wanjun,雷万鈞,뇌만균
-STORY_007_02_005_TEXT,"贤弟你有所不知，百姓交粮时，要把粮食倒进斛里，堆得高出斛口，堆成尖尖的，这叫""淋尖""。","When common folk pay their grain tax, they pour grain into a measuring vessel until it forms a mound above the rim. That is the “heaping.”",民が年貢を納めるとき、升の縁より高く山になるまで米を盛らせる。それを「尖り盛り」と呼ぶんだ。,"백성들이 세곡을 낼 때 곡식을 말에 부어 말 가장자리보다 높게 뾰족하게 쌓는데, 이것을 ‘첨첨’이라고 하지."
+STORY_007_02_005_TEXT,"贤弟你有所不知，百姓交粮时，要把粮食倒进斛里，堆得高出斛口，堆成尖尖的，这叫""淋尖""。","When common folk pay their grain tax, they pour grain into a measuring vessel until it forms a mound above the rim. That is the “heaping.”",民が年貢を納めるとき、升の縁より高く山になるまで米を盛らせる。それを「尖り盛り」と呼ぶんだ。,"아우가 잘 모르는군. 백성들이 세곡을 낼 때 곡식을 말에 붓고, 말 가장자리보다 높이 뾰족하게 쌓는데 이것을 ‘임첨(淋尖)’이라고 하지."
 STORY_007_02_006_SPEAKER,雷万钧,Lei Wanjun,雷万鈞,뇌만균
 STORY_007_02_006_TEXT,官吏再踢一脚斛，那些被震落、洒在斛外的粮食，不算入百姓缴纳的赋税，直接入了这帮狗腿子的口袋。,Then an official kicks the vessel. The grain that spills out does not count toward the tax. Those lackeys pocket it instead.,役人が升を蹴ってこぼした米は納税分に数えられず、そのまま役人の懐に入る。,"관리가 다시 말에 발길질을 하면, 진동해 밖으로 떨어진 곡식은 백성의 세금으로 인정되지 않고 앞잡이들 주머니로 바로 들어간다네."
 STORY_007_02_007_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
@@ -15664,7 +15664,7 @@ STORY_009_01_004_TEXT,浙江省淳安建德两县突发水灾，周边各地已�
 STORY_009_01_005_SPEAKER,吴世良,Wu Shiliang,呉世良,오세량
 STORY_009_01_005_TEXT,昨日，赈灾药材已采办完备，这次除了惠民药局，还要各医馆药铺配合诊治病患、发放药材。,"The supplies were procured yesterday. This time, private clinics and apothecaries must help the public dispensary treat patients and distribute medicine.",薬材の調達は昨日終わった。今回は恵民薬局だけでなく、各診療所と薬舗にも患者の診療と薬材の配布に協力してもらう。,어제 구휼 약재의 조달을 마쳤습니다. 이번에는 혜민약국뿐 아니라 각 의원과 약방도 환자 진료와 약재 배포에 협조해야 합니다.
 STORY_009_01_006_SPEAKER,吴世良,Wu Shiliang,呉世良,오세량
-STORY_009_01_006_TEXT,一会儿诸位就去库房画押登记，明日起官府会张贴榜文，通知百姓就近领取药材。,"You will sign the register at the storehouse shortly. Starting tomorrow, the authorities will post notices telling residents where to collect medicine nearby.",皆にはこのあと倉庫で署名と登録をしてもらう。明日から役所が告示を出し、民に近くで薬を受け取るよう知らせる。,잠시 후 모두 창고로 가서 서명하고 등록하십시오. 내일부터 관아에서 방을 붙여 백성들에게 가까운 곳에서 약재를 받으라고 알릴 것입니다.
+STORY_009_01_006_TEXT,一会儿诸位就去库房画押登记，明日起官府会张贴榜文，通知百姓就近领取药材。,"You will sign the register at the storehouse shortly. Starting tomorrow, the authorities will post notices telling residents where to collect medicine nearby.",皆にはこのあと倉庫で署名と登録をしてもらう。明日から役所が告示を出し、民に近くで薬を受け取るよう知らせる。,잠시 후 모두 창고로 가서 서명하고 등록하십시오. 내일부터 관아에서 고시문을 붙여 백성들에게 가까운 곳에서 약재를 받도록 알릴 것입니다.
 STORY_009_01_007_SPEAKER,杨善泉,Yang Shanquan,楊善泉,양선천
 STORY_009_01_007_TEXT,诸位到我这画押，排好队一个一个来，写好收货地址，我们会专门派人运送。,"Line up here to sign, one at a time. Write down your delivery address and we will send someone with the supplies.",皆さん、こちらで署名してください。一列に並んで順番に。届け先の住所を書けば、担当者が運びます。,"여기서 서명하십시오. 한 사람씩 줄을 서서 오시고, 받을 주소를 적어 주시면 저희가 따로 사람을 보내 운송하겠습니다."
 STORY_009_01_008_SPEAKER,杨善泉,Yang Shanquan,楊善泉,양선천
@@ -15684,7 +15684,7 @@ STORY_009_02_005_TEXT,好嘞。,Right away.,はい！,알겠습니다.
 STORY_010_001_SPEAKER,李言闻,Li Yanwen,李言聞,이언문
 STORY_010_001_TEXT,数目都对，有劳几位了，进来喝点水吧。,"The count is correct. Thank you, gentlemen. Would you come in for some water?",数は合っています。お疲れさまでした。中で水でも飲んでいきませんか。,수량은 모두 맞습니다. 수고 많으셨습니다. 들어와서 물이라도 드시지요.
 STORY_010_002_SPEAKER,衙役,Constable,役人,포졸
-STORY_010_002_TEXT,还有公务在身，就不劳烦李太医啦，兄弟们，走了！,"We are still on duty, Doctor Li. No need to trouble yourself. Men, let us go!",まだ公務がありますので、お構いなく。皆、行くぞ！,"아직 공무가 남아 있으니 이 의원을 번거롭게 할 필요는 없습니다. 여러분, 가자!"
+STORY_010_002_TEXT,还有公务在身，就不劳烦李太医啦，兄弟们，走了！,"We are still on duty, Doctor Li. No need to trouble yourself. Men, let us go!",まだ公務がありますので、お構いなく。皆、行くぞ！,"아직 공무가 남아 있으니 이 태의를 번거롭게 할 수는 없습니다. 자, 가자!"
 STORY_010_003_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_010_003_TEXT,爹，货都到齐了吗？,"Father, has everything arrived?",父上、荷は全部届きましたか？,"아버지, 물건은 모두 도착했습니까?"
 STORY_010_004_SPEAKER,李言闻,Li Yanwen,李言聞,이언문
@@ -15774,11 +15774,11 @@ STORY_015_001_TEXT,咚咚咚…,"Knock, knock, knock…",トントン……,똑�
 STORY_015_002_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_015_002_TEXT,谁？,Who is there?,誰だ？,누구십니까?
 STORY_015_003_SPEAKER,雷万钧,Lei Wanjun,雷万鈞,뇌만균
-STORY_015_003_TEXT,贤弟，是我。,"It is me, my friend.",私だよ。,"나일세, 친구."
+STORY_015_003_TEXT,贤弟，是我。,"It is me, my friend.",私だよ。,"나일세, 아우."
 STORY_015_004_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_015_004_TEXT,雷兄，怎么样，事情有眉目了吗？,Brother Lei! Have you made any progress?,雷兄、どうでした？　何か分かりましたか？,뇌 형! 진전은 있었습니까?
 STORY_015_005_SPEAKER,雷万钧,Lei Wanjun,雷万鈞,뇌만균
-STORY_015_005_TEXT,唉…按察司、布政司都不受理，去所部都指挥使司面见老宪台，他老人家说这里面水太深，让我别多管闲事…,No… Neither the provincial surveillance office nor the provincial administration would hear the case. I even went to see the commander at the military commission. He said the matter runs too deep and told me to stay out of it…,はあ……按察司も布政司も訴えを受け付けなかった。都指揮使司の長官にも会ったが、裏が深いから関わるなと言われたよ……,"없었네… 포정사도 포정사도 이 사건을 맡으려 하지 않았네. 병마사까지 찾아갔지만, 일이 너무 깊이 얽혀 있으니 손을 떼라고 하더군…"
+STORY_015_005_TEXT,唉…按察司、布政司都不受理，去所部都指挥使司面见老宪台，他老人家说这里面水太深，让我别多管闲事…,No… Neither the provincial surveillance office nor the provincial administration would hear the case. I even went to see the commander at the military commission. He said the matter runs too deep and told me to stay out of it…,はあ……按察司も布政司も訴えを受け付けなかった。都指揮使司の長官にも会ったが、裏が深いから関わるなと言われたよ……,"없었네… 안찰사와 포정사 모두 이 사건을 받아 주지 않았네. 소속 도지휘사사까지 찾아가 노헌대감을 뵈었지만, 이 일은 너무 깊이 얽혀 있으니 괜히 끼어들지 말라고 하시더군…"
 STORY_015_006_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_015_006_TEXT,看来这事远比我们想的复杂…,Then this is far more complicated than we thought…,どうやら想像以上に複雑な話ですね……,그렇다면 우리가 생각한 것보다 훨씬 복잡하군…
 STORY_015_007_SPEAKER,雷万钧,Lei Wanjun,雷万鈞,뇌만균
@@ -15828,22 +15828,22 @@ STORY_016_006_TEXT,这是吴世良让我写的账册抄本，交给您应该能�
 STORY_016_007_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_016_007_TEXT,…....,…,…………,…
 STORY_016_008_SPEAKER,沈修文,Shen Xiuwen,沈修文,심수문
-STORY_016_008_TEXT,说实话我很羡慕李大夫，所学的本事能有处施展，唉…小生就此别过。,"To tell the truth, I envy you. Your abilities can be put to good use. Ah… Farewell, Doctor Li.",正直、先生が羨ましい。学んだことを人々のために生かせるのですから……では失礼します。,"솔직히 말하면 자네가 부럽네. 자네의 재능은 좋은 일에 쓰일 수 있으니 말일세. 아… 이 의원, 작별일세."
+STORY_016_008_TEXT,说实话我很羡慕李大夫，所学的本事能有处施展，唉…小生就此别过。,"To tell the truth, I envy you. Your abilities can be put to good use. Ah… Farewell, Doctor Li.",正直、先生が羨ましい。学んだことを人々のために生かせるのですから……では失礼します。,솔직히 말하면 이 의원이 부럽네. 배운 재주를 펼칠 곳이 있으니 말일세. 아… 소생은 이만 가 보겠네.
 STORY_016_009_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_016_009_TEXT,沈先生…....,Master Shen…,沈殿……,심 선생님…
 STORY_016_010_TEXT,获得赈灾药材账本抄本,Obtained a copy of the disaster relief medicine accounts.,救済用薬材の帳簿の写しを入手した。,구휼 약재 장부 사본을 얻었다.
 STORY_017_01_001_SPEAKER,杨善泉,Yang Shanquan,楊善泉,양선천
 STORY_017_01_001_TEXT,李大夫，我这两天腰酸腿软，夜尿还多，给我开点药吧。,"Doctor Li, my lower back and legs have felt weak these past few days, and I keep waking to urinate. Could you prescribe something?",李先生、この二日ほど腰と脚がだるく、夜も何度も小便に起きます。薬を出してください。,"이 의원, 며칠 전부터 허리와 다리에 힘이 빠지고 밤마다 소변을 보느라 깨곤 하네. 약을 지어 줄 수 있겠나?"
 STORY_017_01_002_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
-STORY_017_01_002_TEXT,杨大使请坐。,"Please, sit down, Officer Yang.",楊殿、どうぞお掛けください。,"앉으십시오, 양 대인."
+STORY_017_01_002_TEXT,杨大使请坐。,"Please, sit down, Officer Yang.",楊殿、どうぞお掛けください。,"양 대사, 앉으십시오."
 STORY_017_02_001_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
-STORY_017_02_001_TEXT,杨大使所患的是肾气不固之症，要注意休养，最近是遇到什么事受了惊吗？,You have a failure of the kidneys to secure qi. You need rest. Has something frightened you recently?,楊殿は腎気不固の証です。静養してください。最近、何か怖い目に遭いましたか？,신장이 기를 굳게 간직하지 못하고 있습니다. 쉬셔야 합니다. 최근에 무슨 일로 놀라신 적은 없습니까?
+STORY_017_02_001_TEXT,杨大使所患的是肾气不固之症，要注意休养，最近是遇到什么事受了惊吗？,You have a failure of the kidneys to secure qi. You need rest. Has something frightened you recently?,楊殿は腎気不固の証です。静養してください。最近、何か怖い目に遭いましたか？,양 대사께서는 신기불고증을 앓고 계십니다. 충분히 쉬셔야 합니다. 최근에 무슨 일로 크게 놀라신 적은 없습니까?
 STORY_017_02_002_SPEAKER,杨善泉,Yang Shanquan,楊善泉,양선천
-STORY_017_02_002_TEXT,您听说沈师爷的事了吗？,Have you heard what happened to Secretary Shen?,沈書記の件を聞きましたか？,심 서리가 어떻게 되었는지 들었나?
+STORY_017_02_002_TEXT,您听说沈师爷的事了吗？,Have you heard what happened to Secretary Shen?,沈書記の件を聞きましたか？,심 사야의 일은 들었나?
 STORY_017_02_003_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
-STORY_017_02_003_TEXT,沈师爷怎么了？,What happened to him?,沈殿に何があったのです？,무슨 일이 있었습니까?
+STORY_017_02_003_TEXT,沈师爷怎么了？,What happened to him?,沈殿に何があったのです？,심 사야에게 무슨 일이 있었습니까?
 STORY_017_02_004_SPEAKER,杨善泉,Yang Shanquan,楊善泉,양선천
-STORY_017_02_004_TEXT,昨天沈师爷在自己屋里死了…,They found him dead in his room yesterday…,昨日、自室で亡くなっていたんです……,어제 방에서 죽은 채 발견되었다네…
+STORY_017_02_004_TEXT,昨天沈师爷在自己屋里死了…,They found him dead in his room yesterday…,昨日、自室で亡くなっていたんです……,어제 심 사야가 자기 방에서 죽은 채 발견되었다네…
 STORY_017_02_005_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_017_02_005_TEXT,！！！,What?!,！！！,뭐라고요?!
 STORY_017_02_006_SPEAKER,杨善泉,Yang Shanquan,楊善泉,양선천
@@ -15855,15 +15855,15 @@ STORY_017_02_008_TEXT,......,…,…………,…
 STORY_017_02_009_TEXT,收入一两白银,Received one tael of silver.,収入：銀一両,은전 한 냥을 받았다.
 STORY_017_03_001_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_017_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 맞지 않아. 병증과 알맞은 처방을 신중히 다시 생각해야 해."
-STORY_018_001_TEXT,"""库房失火啦！快来人救火啊！""",“The storeroom is on fire! Somebody help!”,「倉庫が火事だ！　誰か、火を消してくれ！」,“창고에 불이 났다! 사람 살려!”
+STORY_018_001_TEXT,"""库房失火啦！快来人救火啊！""",“The storeroom is on fire! Somebody help!”,「倉庫が火事だ！　誰か、火を消してくれ！」,불이야! 창고에 불이 났다! 어서 와서 불 좀 꺼 줘!
 STORY_018_002_SPEAKER,陈皮,Chen Pi,陳皮,진피
-STORY_018_002_TEXT,少掌柜的，惠民药局的药料库起火啦！,"Young master, the public dispensary's medicine storehouse is burning!",若旦那、恵民薬局の薬材倉庫が燃えています！,"도련님, 관영 약국의 약재 창고가 불타고 있습니다!"
+STORY_018_002_TEXT,少掌柜的，惠民药局的药料库起火啦！,"Young master, the public dispensary's medicine storehouse is burning!",若旦那、恵民薬局の薬材倉庫が燃えています！,"도련님, 혜민약국의 약재 창고에 불이 났어요!"
 STORY_018_003_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_018_003_TEXT,走，去帮忙。,Come on. Let us help.,行こう、手伝うぞ。,어서 가자. 우리도 돕자.
 STORY_018_004_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_018_004_TEXT,这火烧得蹊跷。,There is something suspicious about this fire.,この火事は妙だ。,"이 불, 뭔가 수상해."
 STORY_018_005_SPEAKER,陈皮,Chen Pi,陳皮,진피
-STORY_018_005_TEXT,那边抬出来一个人。,They are carrying someone out over there.,向こうから誰かが運び出されてくる。,저쪽에서 누군가를 들쳐 업고 나오고 있습니다.
+STORY_018_005_TEXT,那边抬出来一个人。,They are carrying someone out over there.,向こうから誰かが運び出されてくる。,저쪽에서 사람 하나를 들것에 실어 나오고 있습니다.
 STORY_018_006_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_018_006_TEXT,……是杨善泉。,…It is Yang Shanquan.,……楊善泉だ。,…양선천이잖아.
 STORY_019_001_SPEAKER,赵顺,Zhao Shun,趙順,조순
@@ -15889,7 +15889,7 @@ STORY_020_006_TEXT,哎哟！,Ow!,痛っ！,아야!
 STORY_020_007_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_020_007_TEXT,！！！,What?!,！！！,뭐야?!
 STORY_020_008_SPEAKER,雷万钧,Lei Wanjun,雷万鈞,뇌만균
-STORY_020_008_TEXT,贤弟，你没事吧？王爷听说沈修文和杨善泉都被灭口了，猜想下一个就是你，便派我们在暗中保护。,"My friend, are you all right? When His Highness heard that Shen Xiuwen and Yang Shanquan had both been silenced, he feared you would be next. He sent us to protect you in secret.",無事か？　沈修文と楊善泉が口封じに遭ったと知った王様は、次はお前の番だと考え、我々を護衛に遣わしたのだ。,"친구, 괜찮나? 심수문과 양선천이 모두 입막음당했다는 소식을 들으신 전하께서 자네도 다음 차례일까 염려하셨네. 그래서 몰래 자네를 지키라고 우리를 보내셨지."
+STORY_020_008_TEXT,贤弟，你没事吧？王爷听说沈修文和杨善泉都被灭口了，猜想下一个就是你，便派我们在暗中保护。,"My friend, are you all right? When His Highness heard that Shen Xiuwen and Yang Shanquan had both been silenced, he feared you would be next. He sent us to protect you in secret.",無事か？　沈修文と楊善泉が口封じに遭ったと知った王様は、次はお前の番だと考え、我々を護衛に遣わしたのだ。,"아우, 괜찮나? 심수문과 양선천이 모두 입막음당했다는 소식을 들으신 전하께서 자네도 다음 차례일까 염려하셨네. 그래서 몰래 자네를 지키라고 우리를 보내셨지."
 STORY_020_009_SPEAKER,王府护卫,Palace Guard,王府の護衛,왕부 호위
 STORY_020_009_TEXT,把他绑起来。,Tie him up.,そいつを縛れ。,묶어라.
 STORY_020_010_SPEAKER,赵顺,Zhao Shun,趙順,조순
@@ -15898,25 +15898,25 @@ STORY_020_011_TEXT,一行人来到王府,The group arrived at the prince's resid
 STORY_020_012_SPEAKER,王府护卫,Palace Guard,王府の護衛,왕부 호위
 STORY_020_012_TEXT,启禀王爷，人都带来了。,"Your Highness, we have brought them all here.",王様、全員連れてまいりました。,"전하, 모두 데려왔습니다."
 STORY_020_013_SPEAKER,楚王,Prince of Chu,楚王,초왕
-STORY_020_013_TEXT,这几位是朝廷派来查赈灾药材案的钦差。,These gentlemen are imperial investigators sent to examine the disaster relief medicine case.,こちらは救済用薬材の事件を調べるため、朝廷から派遣された使者たちです。,이분들은 구휼 약재 사건을 조사하러 파견된 어사들이오.
+STORY_020_013_TEXT,这几位是朝廷派来查赈灾药材案的钦差。,These gentlemen are imperial investigators sent to examine the disaster relief medicine case.,こちらは救済用薬材の事件を調べるため、朝廷から派遣された使者たちです。,이분들은 구휼 약재 사건을 조사하라는 황명을 받고 파견된 흠차관들이오.
 STORY_020_014_SPEAKER,陆丁,Lu Ding,陸丁,육정
 STORY_020_014_TEXT,北镇抚司陆丁，你就是李东璧？,Lu Ding of the Northern Pacification Office. Are you Li Dongbi?,北鎮撫司の陸丁だ。お前が李東璧か？,북진무사 육정이다. 그대가 이동벽인가?
 STORY_020_015_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
-STORY_020_015_TEXT,正是草民。,"I am, sir.",はい、私でございます。,"그렇습니다, 나리."
+STORY_020_015_TEXT,正是草民。,"I am, sir.",はい、私でございます。,"예, 소인이 이동벽입니다."
 STORY_020_016_TEXT,李东璧将前前后后发生的事情一五一十地禀明钦差,Li Dongbi gave the imperial investigators a full account of everything that had happened.,李東璧は事件の一部始終を、朝廷の使者に包み隠さず伝えた。,이동벽은 어사들에게 지금까지 일어난 일을 빠짐없이 설명했다.
 STORY_021_001_TEXT,蕲州赈灾药材贪污案惊动朝廷，锦衣卫奉旨查办，地方涉案官员数十人，贪污银钱近万两。,"The corruption of Qizhou's disaster relief medicine drew the court's attention. The Imperial Guards were ordered to investigate. Dozens of local officials were implicated, and nearly ten thousand taels of silver had been embezzled.",蘄州の救済用薬材をめぐる汚職事件は朝廷を揺るがした。錦衣衛が勅命を受けて捜査し、数十人の地方官が関与、横領額は銀一万両近くに上った。,"기주의 구휼 약재 부정 사건이 조정의 관심을 끌었다. 금의위가 조사에 나섰다. 수십 명의 지방 관리가 연루되었고, 횡령된 은전은 거의 만 냥에 달했다."
-STORY_021_002_TEXT,主犯吴世良、赵顺等即刻斩首。湖广巡抚陈仕贤等，连坐失察，官降两级。,"The principal offenders, including Wu Shiliang and Zhao Shun, were executed at once. Chen Shixian, governor of Huguang, and others were demoted two ranks for failing to uncover the crime.",主犯の呉世良、趙順らは直ちに斬首された。湖広巡撫の陳仕賢らも監督不行き届きで連座し、官位を二階級下げられた。,오세량과 조순을 비롯한 주범들은 즉시 처형되었다. 호광 총독 진시현과 다른 관리들은 범죄를 밝혀내지 못한 책임으로 두 계급씩 강등되었다.
+STORY_021_002_TEXT,主犯吴世良、赵顺等即刻斩首。湖广巡抚陈仕贤等，连坐失察，官降两级。,"The principal offenders, including Wu Shiliang and Zhao Shun, were executed at once. Chen Shixian, governor of Huguang, and others were demoted two ranks for failing to uncover the crime.",主犯の呉世良、趙順らは直ちに斬首された。湖広巡撫の陳仕賢らも監督不行き届きで連座し、官位を二階級下げられた。,오세량과 조순을 비롯한 주범들은 즉시 처형되었다. 호광 순무 진시현 등은 사건을 제대로 살피지 못한 연대 책임을 물어 관직이 두 등급 강등되었다.
 STORY_021_003_TEXT,蕲州所需赈灾药材由太医院调拨，重新发放。,The Imperial Medical Academy supplied a new shipment of relief medicine for Qizhou to distribute.,蘄州に必要な薬材は太医院から改めて送られ、配り直された。,태의원이 기주에 나눠 줄 새로운 구휼 약재를 보냈다.
 STORY_021_004_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_021_004_TEXT,到头来这吴世良不过是个被推出来顶罪的罢了。,"In the end, Wu Shiliang was little more than a scapegoat.",結局、呉世良は身代わりにされたにすぎない。,결국 오세량은 희생양에 불과했군.
 STORY_021_005_SPEAKER,李言闻,Li Yanwen,李言聞,이언문
-STORY_021_005_TEXT,朝政被严党把持，这些做官的你中有我，我中有你，真细究起来又是一笔糊涂账。,"The Yan faction controls the court. Every official has ties to another. If anyone truly followed the trail, it would lead into a hopeless tangle.",朝政は厳党に握られている。役人同士は皆つながっている。突き詰めれば、またうやむやになるだろう。,연당이 조정을 장악하고 있습니다. 관리들은 모두 서로 얽혀 있지요. 누군가 진짜 꼬리를 따라갔다면 끝없는 혼란에 빠졌을 겁니다.
+STORY_021_005_TEXT,朝政被严党把持，这些做官的你中有我，我中有你，真细究起来又是一笔糊涂账。,"The Yan faction controls the court. Every official has ties to another. If anyone truly followed the trail, it would lead into a hopeless tangle.",朝政は厳党に握られている。役人同士は皆つながっている。突き詰めれば、またうやむやになるだろう。,"엄숭 일파가 조정을 장악하고 있으니, 관리들끼리 서로 얽히고설켜 있지. 끝까지 파고들면 또 하나의 풀기 어려운 장부가 될 게다."
 STORY_021_006_SPEAKER,楚王,Prince of Chu,楚王,초왕
 STORY_021_006_TEXT,李先生。,Doctor Li.,李先生。,이 의원.
 STORY_021_007_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_021_007_TEXT,楚王殿下。,Your Highness.,楚王殿下。,전하.
 STORY_021_008_SPEAKER,楚王,Prince of Chu,楚王,초왕
-STORY_021_008_TEXT,这次我上奏皇上，除了赈灾药材一案，还将先生举荐给朝廷。正好太医院院判一职空缺，特批先生赴任。,"When I reported the medicine case to His Majesty, I also recommended you for service at court. A deputy director's post at the Imperial Medical Academy happened to be vacant, and His Majesty has approved your appointment.",このたび陛下に上奏した際、薬材の事件とともに先生を朝廷へ推薦しました。太医院の院判がちょうど欠員となり、先生の任官が特に認められました。,"내가 폐하께 약재 사건을 아뢰면서 자네를 조정에 천거했소. 마침 태의원 의정 자리가 비어 있었고, 폐하께서 자네의 임명을 허락하셨소."
+STORY_021_008_TEXT,这次我上奏皇上，除了赈灾药材一案，还将先生举荐给朝廷。正好太医院院判一职空缺，特批先生赴任。,"When I reported the medicine case to His Majesty, I also recommended you for service at court. A deputy director's post at the Imperial Medical Academy happened to be vacant, and His Majesty has approved your appointment.",このたび陛下に上奏した際、薬材の事件とともに先生を朝廷へ推薦しました。太医院の院判がちょうど欠員となり、先生の任官が特に認められました。,"내가 폐하께 구휼 약재 사건을 아뢰면서 선생을 조정에 천거했소. 마침 태의원 원판 자리가 비어 있어, 폐하께서 선생의 부임을 특별히 허락하셨소."
 STORY_021_009_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_021_009_TEXT,多谢王爷提拔，可草民荆楚鄙人，幼多羸疾，质成钝椎，实在是力不从心。,"Thank you for your kindness, Your Highness. But I am only a humble man of Jingchu, sickly since childhood and slow of mind. I fear I am not equal to the task.",殿下のお引き立てに感謝します。しかし私は荊楚の田舎者で、幼少から病弱、才にも乏しい身です。大任を果たす自信がありません。,"호의에 감사드립니다, 전하. 하지만 저는 그저 병약하고 둔한 형초의 보잘것없는 백성일 뿐입니다. 그 일을 감당할 수 있을지 두렵습니다."
 STORY_021_010_SPEAKER,楚王,Prince of Chu,楚王,초왕
@@ -15934,7 +15934,7 @@ STORY_022_02_003_TEXT,给您开一副桑杏汤，一天三服，也记得多喝�
 STORY_022_02_004_SPEAKER,陈皮,Chen Pi,陳皮,진피
 STORY_022_02_004_TEXT,柳先生，我最喜欢听您说书啦，您真是啥都知道啥都会，讲什么像什么。,"Master Liu, I love hearing your stories! You know everything, and you bring every tale to life.",柳先生の語りは大好きです！　何でもご存じで、どんな話も本物みたいに語りますね。,"유 선생님, 저는 선생님의 이야기를 듣는 게 정말 좋아요! 모르는 것이 없으시고, 이야기를 생생하게 들려주시잖아요."
 STORY_022_02_005_SPEAKER,柳敬亭,Liu Jingting,柳敬亭,유경정
-STORY_022_02_005_TEXT,诶嘿嘿，小兄弟过奖了，我只是说些王侯将相，才子佳人的故事，来听书的客官喜欢什么，我就讲什么。,"Heh, heh. You flatter me, young man. I only tell tales of kings and generals, scholars and beauties. I tell the audience whatever they want to hear.",いやあ、褒めすぎだよ。王侯将相や才子佳人の話を、お客が好むように語っているだけさ。,"허허. 젊은이가 아첨하는군. 나는 왕과 장군, 선비와 미인 이야기를 할 뿐일세. 듣는 사람들이 원하는 것은 무엇이든 들려주지."
+STORY_022_02_005_TEXT,诶嘿嘿，小兄弟过奖了，我只是说些王侯将相，才子佳人的故事，来听书的客官喜欢什么，我就讲什么。,"Heh, heh. You flatter me, young man. I only tell tales of kings and generals, scholars and beauties. I tell the audience whatever they want to hear.",いやあ、褒めすぎだよ。王侯将相や才子佳人の話を、お客が好むように語っているだけさ。,"허허, 젊은이가 과찬이네. 나는 왕후장상이나 재자와 가인의 이야기를 들려줄 뿐이지. 손님들이 무엇을 좋아하든 그에 맞춰 이야기한다네."
 STORY_022_02_006_SPEAKER,陈皮,Chen Pi,陳皮,진피
 STORY_022_02_006_TEXT,先生，您现在就在这讲一段吧。,"Please tell us a story now, Master Liu.",先生、今ここで一席お願いします！,"유 선생님, 지금 이야기 하나 들려주세요."
 STORY_022_02_007_SPEAKER,半夏,Banxia,半夏,반하
@@ -15942,7 +15942,7 @@ STORY_022_02_007_TEXT,是啊是啊，讲一段吧。,"Yes, please! Just one stor
 STORY_022_02_008_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_022_02_008_TEXT,人家柳先生还病着呢，你们别在这胡闹。,Master Liu is still ill. Stop pestering him.,柳先生は病気なのよ。困らせないで。,유 선생님은 아직 아프시잖아. 그만 조르렴.
 STORY_022_02_009_SPEAKER,柳敬亭,Liu Jingting,柳敬亭,유경정
-STORY_022_02_009_TEXT,无妨，呵呵，那就说一个王道士胡诌妒妇方。,It is all right. Let me tell you the tale of Daoist Wang and his remedy for jealousy.,構わないさ。では「王道士がでっち上げた嫉妬の薬」をひとつ。,괜찮네. 왕 도사와 질투를 고친 처방 이야기를 들려주지.
+STORY_022_02_009_TEXT,无妨，呵呵，那就说一个王道士胡诌妒妇方。,It is all right. Let me tell you the tale of Daoist Wang and his remedy for jealousy.,構わないさ。では「王道士がでっち上げた嫉妬の薬」をひとつ。,"괜찮네. 허허, 그럼 왕 도사가 지어낸 ‘질투병 처방’ 이야기를 하나 해 주지."
 STORY_022_02_010_SPEAKER,柳敬亭,Liu Jingting,柳敬亭,유경정
 STORY_022_02_010_TEXT,说京城有一富商，娶了位善妒的夫人，家中鸡飞狗跳无一日安宁。他的朋友觉得这是病，得找人医治。,"Once, a wealthy merchant in the capital married a very jealous woman. Their home knew no peace. A friend decided her jealousy was an illness that needed a cure.",都にある裕福な商人が、ひどく嫉妬深い妻をめとった。家は毎日大騒ぎ。友人は、これは病気だから治してもらおうと考えた。,옛날에 도성의 한 부유한 상인이 몹시 질투가 많은 여자와 결혼했네. 집안에는 평온한 날이 없었지. 한 친구가 그 질투를 치료해야 할 병이라고 생각했네.
 STORY_022_02_011_SPEAKER,柳敬亭,Liu Jingting,柳敬亭,유경정
@@ -15973,7 +15973,7 @@ STORY_023_01_002_TEXT,…,…,……,…
 STORY_023_01_003_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_023_01_003_TEXT,这是您女儿？,She is your daughter?,こちらは娘さんですか？,따님입니까?
 STORY_023_01_004_SPEAKER,郭妈妈,Madam Guo,郭おばさん,곽 부인
-STORY_023_01_004_TEXT,哎呀，可不是嘛，这孩子随我学艺两年又半载，尤善歌舞，是咱柳月坊的花魁。,"Why, of course! She has studied with me for two and a half years. She is a fine singer and dancer, the star of our Willow Moon House.",そうですよ。二年半も私について芸を学び、特に歌と踊りが得意な柳月坊の花魁です。,"그럼, 당연하지요! 이 아이는 내 밑에서 이 년 반이나 배웠어요. 노래와 춤을 잘하는 우리 유월루의 간판이지요."
+STORY_023_01_004_TEXT,哎呀，可不是嘛，这孩子随我学艺两年又半载，尤善歌舞，是咱柳月坊的花魁。,"Why, of course! She has studied with me for two and a half years. She is a fine singer and dancer, the star of our Willow Moon House.",そうですよ。二年半も私について芸を学び、特に歌と踊りが得意な柳月坊の花魁です。,그럼요! 이 아이는 내 밑에서 이 년 반이나 배웠어요. 특히 노래와 춤에 뛰어나 우리 유월루의 최고 기녀랍니다.
 STORY_023_01_005_SPEAKER,郭妈妈,Madam Guo,郭おばさん,곽 부인
 STORY_023_01_005_TEXT,可你看她现在这个样子，还怎么接待客人啊。,But look at her now. How is she supposed to entertain guests like this?,でも今のこの様子では、お客をもてなせません。,하지만 지금 꼴을 보세요. 이런 상태로 어떻게 손님을 모실 수 있겠어요?
 STORY_023_01_006_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
@@ -16008,7 +16008,7 @@ STORY_023_02_012_TEXT,哎哟？这里面有事儿，快说来听听。,Oh? There
 STORY_023_02_013_SPEAKER,王百堂,Wang Baitang,王百堂,왕백당
 STORY_023_02_013_TEXT,实不相瞒，小生在柳月坊与飞燕相识，一见倾心，私底下定了终身。,"To be honest, I met Feiyan at Willow Moon House. We fell in love at first sight and privately pledged to marry.",実は柳月坊で飛燕と出会い、一目で心を奪われました。二人で将来を誓い合っています。,솔직히 말하면 저는 유월루에서 비연을 만났습니다. 첫눈에 반해 몰래 혼인을 약속했습니다.
 STORY_023_02_014_SPEAKER,王百堂,Wang Baitang,王百堂,왕백당
-STORY_023_02_014_TEXT,原想着凑够五百两银子，给她赎身。可那老鸨坐地起价，张口就要一千两，这让我们上哪去凑这么多银子啊…,I hoped to save five hundred taels to buy her freedom. But the madam doubled the price to a thousand. How could we ever raise that much silver?,銀五百両を貯めて身請けするつもりでした。ところが楼主が突然値を上げ、千両を要求してきたのです。そんな大金、どこから用意すれば……,그 아이의 몸값을 치르려고 은전 오백 냥을 모으려 했습니다. 그런데 마님이 값을 천 냥으로 두 배나 올렸습니다. 우리가 어떻게 그만한 돈을 마련하겠습니까?
+STORY_023_02_014_TEXT,原想着凑够五百两银子，给她赎身。可那老鸨坐地起价，张口就要一千两，这让我们上哪去凑这么多银子啊…,I hoped to save five hundred taels to buy her freedom. But the madam doubled the price to a thousand. How could we ever raise that much silver?,銀五百両を貯めて身請けするつもりでした。ところが楼主が突然値を上げ、千両を要求してきたのです。そんな大金、どこから用意すれば……,그 아이의 몸값을 치르려고 은전 오백 냥을 모으려 했습니다. 그런데 기방 주인이 갑자기 값을 올려 천 냥을 내놓으라는 겁니다. 우리가 어디서 그 많은 돈을 마련하겠습니까…
 STORY_023_02_015_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_023_02_015_TEXT,想必姑娘是因为这事急坏了身子。,No wonder her health has suffered from worry.,そのせいで、彼女は心労から体を壊したのでしょう。,걱정 때문에 건강이 나빠진 것도 당연하군요.
 STORY_023_02_016_SPEAKER,半夏,Banxia,半夏,반하
@@ -16047,7 +16047,7 @@ STORY_024_02_010_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭,오지란
 STORY_024_02_010_TEXT,明日你让郭妈妈来一趟，如此这般….,Ask Madam Guo to come here tomorrow. Here is what we shall do…,明日、郭おばさんをここへ呼んでください。それから……,내일 곽 부인을 여기로 부르세요. 이렇게 하는 겁니다…
 STORY_024_02_011_TEXT,吴芷兰和众人说出了自己的主意,Wu Zhilan explained her plan to everyone.,呉芷蘭は皆に考えた策を話した。,오지란은 모두에게 자신의 계획을 설명했다.
 STORY_024_02_012_SPEAKER,谢飞燕,Xie Feiyan,謝飛燕,사비연
-STORY_024_02_012_TEXT,先生若是能帮我们渡此难关，便是再造父母。,"If you can see us through this, we will owe you as much as we owe our own parents.",先生にこの苦境を救っていただけるなら、一生の恩人です。,저희를 도와주신다면 친부모님께 진 은혜만큼이나 보답하겠습니다.
+STORY_024_02_012_TEXT,先生若是能帮我们渡此难关，便是再造父母。,"If you can see us through this, we will owe you as much as we owe our own parents.",先生にこの苦境を救っていただけるなら、一生の恩人です。,"선생님께서 저희가 이 어려움을 넘도록 도와주신다면, 저희에게는 다시 태어나게 해 준 부모와 같은 은인이십니다."
 STORY_024_02_013_TEXT,收入一两白银,Received one tael of silver.,収入：銀一両,은전 한 냥을 받았다.
 STORY_024_02_014_TEXT,次日,The next day.,翌日。,다음 날.
 STORY_024_02_015_SPEAKER,郭妈妈,Madam Guo,郭おばさん,곽 부인
@@ -16055,7 +16055,7 @@ STORY_024_02_015_TEXT,李大夫，你叫我来是什么事儿啊？,"Doctor Li, 
 STORY_024_02_016_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_024_02_016_TEXT,昨日经我仔细检查，谢姑娘的病乃是肺痨，此病只能缓解，不能根治，而且身边之人都有可能沾染。,"After a careful examination yesterday, I found that Miss Xie has consumption of the lungs. We can ease it, but not cure it, and people close to her may catch it.",昨日詳しく診たところ、謝さんは肺癆でした。この病は和らげられても根治は難しく、近くの人にうつるおそれもあります。,"어제 자세히 진찰해 보니 사 아가씨는 폐로를 앓고 있습니다. 증상을 누그러뜨릴 수는 있지만 고칠 수는 없으며, 가까이 지내는 사람에게도 옮을 수 있습니다."
 STORY_024_02_017_SPEAKER,郭妈妈,Madam Guo,郭おばさん,곽 부인
-STORY_024_02_017_TEXT,啊？这可如何是好？,What? What am I to do?,えっ？　どうしたらいいの？,뭐라고요? 나는 어떻게 해야 합니까?
+STORY_024_02_017_TEXT,啊？这可如何是好？,What? What am I to do?,えっ？　どうしたらいいの？,뭐라고요? 그럼 이 일을 어쩌면 좋죠?
 STORY_024_02_018_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_024_02_018_TEXT,您还是早做打算，给女儿寻觅个好归宿吧。,You had best make arrangements soon and find your daughter a good home.,早めに娘さんの行く末を考え、良い嫁ぎ先を探してあげてください。,서둘러 준비해서 따님을 좋은 집안에 보내시는 편이 좋겠습니다.
 STORY_024_02_019_SPEAKER,郭妈妈,Madam Guo,郭おばさん,곽 부인
@@ -16063,40 +16063,40 @@ STORY_024_02_019_TEXT,(若是这样，不如趁那小子不知情，便宜与了
 STORY_024_03_001_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_024_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 맞지 않아. 병증과 알맞은 처방을 신중히 다시 생각해야 해."
 STORY_024_04_001_SPEAKER,王百堂,Wang Baitang,王百堂,왕백당
-STORY_024_04_001_TEXT,恩公！小生拜见恩公。,My benefactor! I have come to pay my respects.,恩人様！　お目にかかれて光栄です。,은인이시여! 인사드리러 왔습니다.
+STORY_024_04_001_TEXT,恩公！小生拜见恩公。,My benefactor! I have come to pay my respects.,恩人様！　お目にかかれて光栄です。,은공! 소생이 인사 올립니다.
 STORY_024_04_002_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_024_04_002_TEXT,是你啊，快请起。你和谢姑娘怎么样了？,"It is you. Please, get up. How are you and Miss Xie?",あなたでしたか。さあ、お立ちください。謝さんとはどうなりました？,자네였군. 일어나게. 자네와 사 아가씨는 어떻게 되었나?
 STORY_024_04_003_SPEAKER,王百堂,Wang Baitang,王百堂,왕백당
-STORY_024_04_003_TEXT,承蒙恩公出手相助，我二人已结为夫妻，在城外安顿下来，今日特来拜谢。,"Thanks to your help, we are married and have settled outside the city. We came today to thank you.",お力添えのおかげで夫婦になり、城の外に住まいを構えました。今日はお礼を申し上げに参りました。,의원님 덕분에 저희는 혼인해 성 밖에 자리 잡았습니다. 오늘은 감사 인사를 드리러 왔습니다.
+STORY_024_04_003_TEXT,承蒙恩公出手相助，我二人已结为夫妻，在城外安顿下来，今日特来拜谢。,"Thanks to your help, we are married and have settled outside the city. We came today to thank you.",お力添えのおかげで夫婦になり、城の外に住まいを構えました。今日はお礼を申し上げに参りました。,은공께서 도와주신 덕분에 저희 두 사람은 혼인하여 성 밖에 자리 잡았습니다. 오늘은 특별히 감사 인사를 드리러 왔습니다.
 STORY_024_04_004_SPEAKER,王百堂,Wang Baitang,王百堂,왕백당
 STORY_024_04_004_TEXT,听闻恩公酷好青囊之书，先父也是一生行医，家中有不少先父留下的笔记心得，今日便赠予恩公。,I hear you are devoted to medical books. My late father practiced medicine all his life and left many notes. I would like you to have them.,先生は医学書がお好きと聞きました。父も生涯医者を務め、多くの手控えを残しました。今日、それをお贈りします。,"의서에 관심이 많으시다고 들었습니다. 돌아가신 아버지께서 평생 의술을 행하시며 많은 기록을 남기셨는데, 의원님께 드리고 싶습니다."
 STORY_024_04_005_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_024_04_005_TEXT,哎呀，这可太好了，真是求之不得啊。,That is wonderful! I could ask for nothing better.,それはありがたい！　願ってもない贈り物です。,정말 잘됐군! 더 바랄 것이 없네.
-STORY_025_01_001_SPEAKER,性空,Xingkong,性空,싱쿵
-STORY_025_01_001_TEXT,"阿弥陀佛，贫僧法号性空，《中论》曰：""众因缘生法，我说即是空，亦为是假名，亦是中道义。""正所谓缘起性空是也。","Amitabha Buddha. My Dharma name is Xingkong. The Treatise on the Middle Way says: “Whatever arises through causes and conditions, I call emptiness. It is also a provisional name and the meaning of the Middle Way.” Such is the emptiness of dependent arising.",阿弥陀仏。拙僧は性空と申す。『中論』に「因縁より生じるものは空であり、仮の名であり、中道でもある」とある。これぞ縁起性空ですな。,"나무아미타불. 제 법명은 싱쿵입니다. 『중론』에 이르기를, “인연으로 생겨난 모든 것을 나는 공이라 부른다. 또한 임시로 붙인 이름이며 중도의 뜻이다.”라고 했습니다. 이것이 바로 연기와 공의 이치입니다."
+STORY_025_01_001_SPEAKER,性空,Xingkong,性空,성공
+STORY_025_01_001_TEXT,"阿弥陀佛，贫僧法号性空，《中论》曰：""众因缘生法，我说即是空，亦为是假名，亦是中道义。""正所谓缘起性空是也。","Amitabha Buddha. My Dharma name is Xingkong. The Treatise on the Middle Way says: “Whatever arises through causes and conditions, I call emptiness. It is also a provisional name and the meaning of the Middle Way.” Such is the emptiness of dependent arising.",阿弥陀仏。拙僧は性空と申す。『中論』に「因縁より生じるものは空であり、仮の名であり、中道でもある」とある。これぞ縁起性空ですな。,"나무아미타불. 빈승의 법명은 성공(性空)입니다. 『중론』에 이르기를, “인연으로 생겨난 모든 것을 나는 공이라 부른다. 또한 임시로 붙인 이름이며 중도의 뜻이다.”라고 했습니다. 이것이 바로 연기성공의 이치입니다."
 STORY_025_01_002_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_025_01_002_TEXT,师父请坐，今日来小馆是？(这和尚身上好大的酒味啊...),"Please, sit down, Master. What brings you to my clinic today? (He smells strongly of wine…)",どうぞお掛けください。今日は何のご用で？（この僧、酒の匂いが強いな……）,"앉으십시오, 스님. 오늘은 무슨 일로 제 진료소를 찾아오셨습니까? (술 냄새가 진동하는데…)"
-STORY_025_01_003_SPEAKER,性空,Xingkong,性空,싱쿵
+STORY_025_01_003_SPEAKER,性空,Xingkong,性空,성공
 STORY_025_01_003_TEXT,最近身体不太舒服，老是耳鸣头晕，请大夫给贫僧看看。,"I have not felt well lately. My ears ring and I often feel dizzy. Would you examine me, Doctor?",近ごろ具合が悪く、耳鳴りやめまいがします。診ていただきたい。,"요즘 몸이 좋지 않습니다. 귀에서 소리가 나고 자주 어지러운데, 의원님께서 진찰해 주시겠습니까?"
 STORY_025_02_001_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_025_02_001_TEXT,师父所患的乃是肾精不足之症，嗯…是房事过劳所致…,You have a deficiency of kidney essence. Hmm… caused by excessive sexual activity…,腎精不足の証ですね。ええと……房事のしすぎが原因かと……,신정이 부족하군요. 흠… 지나친 방사 때문입니다…
-STORY_025_02_002_SPEAKER,性空,Xingkong,性空,싱쿵
+STORY_025_02_002_SPEAKER,性空,Xingkong,性空,성공
 STORY_025_02_002_TEXT,哎哟，施主啊，这可不敢乱说啊，我可是出家人啊，怎么会干那种事呢。,"My good man, you must not say such things! I am a monk. How could I do that?",おいおい、そんなことを言ってはいかん。拙僧は出家の身、そんなことをするはずがなかろう。,"이보시오, 그런 말씀은 하지 마시오! 나는 승려요. 내가 어찌 그런 일을 하겠소?"
 STORY_025_02_003_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_025_02_003_TEXT,…,…,……,…
-STORY_025_02_004_SPEAKER,性空,Xingkong,性空,싱쿵
+STORY_025_02_004_SPEAKER,性空,Xingkong,性空,성공
 STORY_025_02_004_TEXT,一定是我晚上念经太过用功，着凉了。,It must be that I caught a chill while reciting sutras late at night.,夜に読経を頑張りすぎて、冷えたのに違いない。,밤늦게 경을 읽다가 한기를 맞은 것이 틀림없소.
 STORY_025_02_005_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_025_02_005_TEXT,是是是，师父说得对，也不是没有这个可能。,"Of course, Master. That is possible too.",ええ、おっしゃるとおりです。そういう可能性もありますね。,"물론이지요, 스님. 그럴 수도 있습니다."
-STORY_025_02_006_SPEAKER,性空,Xingkong,性空,싱쿵
+STORY_025_02_006_SPEAKER,性空,Xingkong,性空,성공
 STORY_025_02_006_TEXT,嗯，可别到处乱说啊，这钱你拿着吧，这小郎中真是…,"Yes. Do not spread any rumors. Here, take this money. What a young doctor you are…",うむ、人には言うでないぞ。ほら、これを受け取れ。まったく、この若い医者は……,그렇소. 헛소문은 내지 마시오. 여기 돈을 받으시오. 젊은 의원이 참 눈치가 빠르구려…
 STORY_025_02_007_TEXT,收入二两白银,Received two taels of silver.,収入：銀二両,은전 두 냥을 받았다.
 STORY_025_02_008_SPEAKER,半夏,Banxia,半夏,반하
-STORY_025_02_008_TEXT,哇，这就是传说中的花和尚吗？,Wow. Is that what they call a worldly monk?,わあ、あれが噂の生臭坊主ってやつ？,"와, 저런 승려를 속세에 물든 승려라고 하는 건가?"
+STORY_025_02_008_TEXT,哇，这就是传说中的花和尚吗？,Wow. Is that what they call a worldly monk?,わあ、あれが噂の生臭坊主ってやつ？,"와, 저분이 말로만 듣던 파계승인가요?"
 STORY_025_02_009_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_025_02_009_TEXT,…,…,……,…
 STORY_025_02_010_SPEAKER,陈皮,Chen Pi,陳皮,진피
-STORY_025_02_010_TEXT,他是花和尚，你是花痴，正好凑一对儿。,"He is a monk with a wandering eye, and you are lovestruck. You would make a fine pair.",あの人は生臭坊主、お前は色恋に夢中。お似合いだな。,"저 스님은 눈길이 헤프고 너는 사랑에 빠졌으니, 둘이 아주 잘 어울리겠구나."
+STORY_025_02_010_TEXT,他是花和尚，你是花痴，正好凑一对儿。,"He is a monk with a wandering eye, and you are lovestruck. You would make a fine pair.",あの人は生臭坊主、お前は色恋に夢中。お似合いだな。,"저 스님은 파계승이고 너는 사랑에 미쳤으니, 둘이 딱 한 쌍이네."
 STORY_025_02_011_SPEAKER,半夏,Banxia,半夏,반하
 STORY_025_02_011_TEXT,找打！,You are asking for it!,もう、怒るよ！,맞을래요?
 STORY_025_02_012_SPEAKER,陈皮,Chen Pi,陳皮,진피
@@ -16140,7 +16140,7 @@ STORY_027_006_TEXT,找打，你别跑！,Just you wait! Stop running!,こら、�
 STORY_027_007_SPEAKER,李言闻,Li Yanwen,李言聞,이언문
 STORY_027_007_TEXT,那边好像有唱戏的，咱们去那边看看。,There seems to be a play over there. Let us go and watch.,あちらで芝居をしているみたい。見に行きましょう。,저쪽에서 공연을 하는 모양이군. 가서 보세.
 STORY_027_008_SPEAKER,半夏,Banxia,半夏,반하
-STORY_027_008_TEXT,夫人，那边有座桥，咱们去走百病！,"Dear, there is a bridge over there. Let us cross it to ward off illness!",奥様、向こうに橋があります。渡って厄払いをしましょう！,"여보, 저쪽에 다리가 있어요. 병을 물리치려면 건너야 해요!"
+STORY_027_008_TEXT,夫人，那边有座桥，咱们去走百病！,"Dear, there is a bridge over there. Let us cross it to ward off illness!",奥様、向こうに橋があります。渡って厄払いをしましょう！,"마님, 저쪽에 다리가 있어요. 우리도 ‘주백병’하러 가요!"
 STORY_027_009_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭,오지란
 STORY_027_009_TEXT,走，今夜走三桥，一年无灾病。,"Yes! Cross three bridges tonight, and we will be free of sickness all year.",行こう。今夜三つの橋を渡れば、一年病気知らずだ。,맞아요! 오늘 밤 다리 세 개를 건너면 일 년 내내 병이 없대요.
 STORY_027_010_SPEAKER,李言闻,Li Yanwen,李言聞,이언문
@@ -16148,7 +16148,7 @@ STORY_027_010_TEXT,儿子啊，你和芷兰准备啥时候要孩子啊？,"Son, 
 STORY_027_011_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_027_011_TEXT,哎哟，爹，您就别操心了。,"Oh, Father, please do not worry about that.",父上、もう心配なさらないでください。,"아버지, 그런 일은 걱정하지 마세요."
 STORY_027_012_SPEAKER,李言闻,Li Yanwen,李言聞,이언문
-STORY_027_012_TEXT,你们俩一会儿去南门摸摸福气去，听说可灵了。,You two should go to the south gate and touch the lucky charm. I hear it really works.,あとで南門へ行って幸運を願うといい。よく効くらしいぞ。,너희 둘이 남문에 가서 부적을 만져 보거라. 정말 효험이 있다더구나.
+STORY_027_012_TEXT,你们俩一会儿去南门摸摸福气去，听说可灵了。,You two should go to the south gate and touch the lucky charm. I hear it really works.,あとで南門へ行って幸運を願うといい。よく効くらしいぞ。,너희 둘이 이따 남문에 가서 복기운을 좀 받아 보거라. 효험이 좋다더구나.
 STORY_027_013_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_027_013_TEXT,别说了爹，咱们看戏去吧。,"Please, Father. Let us watch the play.",父上、その話はもう。芝居を見に行きましょう。,"아버지, 공연부터 보시지요."
 STORY_027_014_SPEAKER,陈皮,Chen Pi,陳皮,진피
@@ -16167,7 +16167,7 @@ STORY_027_020_TEXT,还是娘子聪慧啊，哈哈。,"You are clever as ever, my
 STORY_027_021_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭,오지란
 STORY_027_021_TEXT,"你看这个，""大雪压青松""，打一味药材。",Look at this one: “Heavy snow presses on a green pine.” Name a medicinal herb.,こっちは「大雪が青松を押す」。薬材の名前を当てるんだ。,이것도 보세요. “큰 눈이 푸른 소나무를 누른다.” 약재 이름을 맞혀 보세요.
 STORY_027_022_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
-STORY_027_022_TEXT,"这个我会，是""忍冬""。",I know this one. It is honeysuckle.,これは分かる。「忍冬」だよ。,이건 알아. 금은화지.
+STORY_027_022_TEXT,"这个我会，是""忍冬""。",I know this one. It is honeysuckle.,これは分かる。「忍冬」だよ。,이건 알아. ‘인동’이지.
 STORY_027_023_SPEAKER,吴芷兰,Wu Zhilan,呉芷蘭,오지란
 STORY_027_023_TEXT,哇，放烟花啦！,Wow! Fireworks!,わあ、花火だ！,와! 불꽃놀이예요!
 STORY_027_024_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
@@ -16184,40 +16184,40 @@ STORY_027_029_SPEAKER,李言闻,Li Yanwen,李言聞,이언문
 STORY_027_029_TEXT,是啊，一家人平平安安就好啊。,Yes. Being together and well is enough.,そうだな。皆が無事なのが一番だ。,그래. 함께 건강하게 지내는 것만으로 충분하지.
 STORY_027_030_SPEAKER,李言闻,Li Yanwen,李言聞,이언문
 STORY_027_030_TEXT,好了，不早了，咱们该回家了。,It is getting late. We should go home.,さあ、もう遅い。家に帰ろう。,시간이 늦었구나. 집에 가자.
-STORY_028_01_001_SPEAKER,曾和,Zeng He,曽和,증허
+STORY_028_01_001_SPEAKER,曾和,Zeng He,曽和,증화
 STORY_028_01_001_TEXT,大夫啊，您快给看看吧，这孩子整日目光呆滞，叫他也不应，就在那自言自语，嘴里不知道嘟囔这什么，怪邪乎的…,"Doctor, please look at my son. He stares into space all day and does not answer when spoken to. He mutters to himself. It is downright uncanny…",先生、この子を診てください。一日中ぼんやりして、呼んでも返事をせず、何やら独り言をつぶやいているんです。気味が悪くて……,"의원님, 제 아들을 좀 봐 주십시오. 하루 종일 멍하니 허공만 바라보고 말을 걸어도 대답하지 않습니다. 혼잣말까지 중얼거리니 정말 이상합니다…"
-STORY_028_01_002_SPEAKER,曾题名,Zeng Timing,曽題名,증정명
+STORY_028_01_002_SPEAKER,曾题名,Zeng Timing,曽題名,증제명
 STORY_028_01_002_TEXT,…,…,……,…
 STORY_028_01_003_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_028_01_003_TEXT,别急，坐下来让我看看。,Do not worry. Sit down and let me examine him.,落ち着いて。座って診せてください。,걱정하지 마십시오. 앉아서 진찰을 받게 하세요.
 STORY_028_02_001_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
-STORY_028_02_001_TEXT,公子所患的是痰迷心窍之症，开副涤痰汤调理一下。,Your son has phlegm clouding the mind. I will prescribe Phlegm-Expelling Decoction to help him recover.,息子さんは痰迷心竅の証です。滌痰湯を処方して、調子を整えましょう。,아드님은 담이 심규를 가린 병증입니다. 거담탕을 처방해 회복을 돕겠습니다.
-STORY_028_02_002_SPEAKER,曾和,Zeng He,曽和,증허
+STORY_028_02_001_TEXT,公子所患的是痰迷心窍之症，开副涤痰汤调理一下。,Your son has phlegm clouding the mind. I will prescribe Phlegm-Expelling Decoction to help him recover.,息子さんは痰迷心竅の証です。滌痰湯を処方して、調子を整えましょう。,아드님은 담미심규증을 앓고 있습니다. 척담탕을 처방해 조리하겠습니다.
+STORY_028_02_002_SPEAKER,曾和,Zeng He,曽和,증화
 STORY_028_02_002_TEXT,好好的怎么就得了这怪病呢？,How did he suddenly develop such a strange illness?,元気だったのに、どうしてこんな病に？,어쩌다 갑자기 이런 괴상한 병이 생긴 겁니까?
 STORY_028_02_003_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
-STORY_028_02_003_TEXT,是不是读书压力太大了呀？,Could the pressure of studying be too much for him?,勉強の重圧が大きすぎたのでは？,공부의 부담이 너무 큰 것은 아닐까요?
-STORY_028_02_004_SPEAKER,曾题名,Zeng Timing,曽題名,증정명
+STORY_028_02_003_TEXT,是不是读书压力太大了呀？,Could the pressure of studying be too much for him?,勉強の重圧が大きすぎたのでは？,글공부로 받는 압박이 너무 큰 것은 아닐까요?
+STORY_028_02_004_SPEAKER,曾题名,Zeng Timing,曽題名,증제명
 STORY_028_02_004_TEXT,…,…,……,…
-STORY_028_02_005_SPEAKER,曾和,Zeng He,曽和,증허
+STORY_028_02_005_SPEAKER,曾和,Zeng He,曽和,증화
 STORY_028_02_005_TEXT,他就一门心思读书，其他的什么都不用他管，能有什么压力？,All he does is study. We take care of everything else. What pressure could he have?,この子は勉強だけして、ほかは何もしなくていいのよ。どんな重圧があるというの？,하는 일이라곤 공부뿐입니다. 나머지는 우리가 모두 돌봐 주는데 무슨 부담이 있겠습니까?
-STORY_028_02_006_SPEAKER,曾和,Zeng He,曽和,증허
+STORY_028_02_006_SPEAKER,曾和,Zeng He,曽和,증화
 STORY_028_02_006_TEXT,再说了天下那么多读书人，怎么就他得了这怪病？,"Besides, there are countless scholars in the world. Why would only he fall ill like this?",ほかにも勉強している子は大勢いるのに、どうしてこの子だけ？,"게다가 세상에 선비가 얼마나 많은데, 왜 하필 저 아이만 이런 병에 걸린단 말입니까?"
-STORY_028_02_007_SPEAKER,曾题名,Zeng Timing,曽題名,증정명
+STORY_028_02_007_SPEAKER,曾题名,Zeng Timing,曽題名,증제명
 STORY_028_02_007_TEXT,…,…,……,…
 STORY_028_02_008_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_028_02_008_TEXT,很多人表面上看着正常，其实都病得不轻呢。,Many people seem perfectly well on the outside when they are suffering deeply within.,外からは普通に見えても、心に重い病を抱えている人は少なくありません。,속으로 큰 고통을 겪으면서도 겉으로는 멀쩡해 보이는 사람이 많습니다.
-STORY_028_02_009_SPEAKER,曾和,Zeng He,曽和,증허
+STORY_028_02_009_SPEAKER,曾和,Zeng He,曽和,증화
 STORY_028_02_009_TEXT,胡扯，我看你就是没病说成有病，骗病人买药赚钱,"Nonsense! You call him sick when he is not, just to sell him medicine.",でたらめを言うな。病気でもないのに薬を売りつけたいだけだろう。,말도 안 됩니다! 약을 팔려고 멀쩡한 아이를 병자라고 하는군요.
-STORY_028_02_010_SPEAKER,曾和,Zeng He,曽和,증허
+STORY_028_02_010_SPEAKER,曾和,Zeng He,曽和,증화
 STORY_028_02_010_TEXT,咱们家可是花了好多钱，把地都卖了供你读书，就只望着你能出人头地，光宗耀祖。可你怎么就这么不争气呢？,We spent so much on your education that we even sold our land! All we ask is that you succeed and bring honor to the family. Why can you not live up to that?,うちはお前を学ばせるために大金を使い、畑まで売ったんだ。出世して家の名を上げてほしいだけなのに、どうして期待に応えてくれない？,"네 공부에 돈을 얼마나 썼는지 아느냐? 땅까지 팔았다! 네가 성공해서 가문을 빛내기만을 바랐는데, 왜 기대를 저버리는 게냐?"
-STORY_028_02_011_SPEAKER,曾题名,Zeng Timing,曽題名,증정명
+STORY_028_02_011_SPEAKER,曾题名,Zeng Timing,曽題名,증제명
 STORY_028_02_011_TEXT,...,…,……,…
 STORY_028_02_012_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
-STORY_028_02_012_TEXT,这位仁兄，我也是读过书考过科举的，读书人其实也是有很多难处的。,"Sir, I too studied and sat the imperial examinations. Scholars face many hardships of their own.",私も科挙を受けたことがあります。学問をする者にも、さまざまな苦しみがあるのです。,"어르신, 저도 공부하고 과거를 치렀습니다. 선비에게도 나름의 고충이 있습니다."
-STORY_028_02_013_SPEAKER,曾和,Zeng He,曽和,증허
+STORY_028_02_012_TEXT,这位仁兄，我也是读过书考过科举的，读书人其实也是有很多难处的。,"Sir, I too studied and sat the imperial examinations. Scholars face many hardships of their own.",私も科挙を受けたことがあります。学問をする者にも、さまざまな苦しみがあるのです。,"형씨, 저도 글을 읽고 과거를 치러 본 사람입니다. 선비에게도 나름의 고충이 있습니다."
+STORY_028_02_013_SPEAKER,曾和,Zeng He,曽和,증화
 STORY_028_02_013_TEXT,难？还能有我赚钱养家糊口难？天底下还能有比我们做父母更难的？,Hardships? Are they harder than earning enough to feed a family? Who has it harder than us parents?,苦しみ？　家族を食べさせる私より苦しいと？　親ほど苦労している者がいるか？,고충? 가족을 먹여 살릴 돈을 버는 것보다 어렵단 말이냐? 우리 부모보다 힘든 사람이 어디 있겠어?
-STORY_028_02_014_SPEAKER,曾和,Zeng He,曽和,증허
-STORY_028_02_014_TEXT,再过半年可就要考试了，你这次无论如何也要给我好好考。,"The examinations are only six months away. You must do well this time, whatever it takes.",試験まであと半年だ。今度こそ必ずしっかり勉強しなさい。,과거가 이제 겨우 여섯 달 남았다. 무슨 수를 써서라도 이번에는 반드시 잘해야 한다.
+STORY_028_02_014_SPEAKER,曾和,Zeng He,曽和,증화
+STORY_028_02_014_TEXT,再过半年可就要考试了，你这次无论如何也要给我好好考。,"The examinations are only six months away. You must do well this time, whatever it takes.",試験まであと半年だ。今度こそ必ずしっかり勉強しなさい。,이제 과거까지 반년밖에 남지 않았다. 이번에는 무슨 일이 있어도 반드시 제대로 치러야 한다.
 STORY_028_02_015_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
 STORY_028_02_015_TEXT,…,…,……,…
 STORY_028_03_001_SPEAKER,李东璧,Li Dongbi,李東璧,이동벽
