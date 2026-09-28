@@ -8,7 +8,6 @@ UI_MUSIC_VOLUME,音乐音量,Music Volume,音楽の音量,음악 음량
 UI_AMBIENT_VOLUME,环境音量,Ambient Volume,環境音の音量,환경음
 UI_SFX_VOLUME,音效音量,Sound Effects Volume,効果音の音量,효과음 음량
 UI_FULLSCREEN,全屏,Fullscreen,全画面表示,전체 화면
-UI_DISPLAY_MODE_WINDOW_FMT,窗口 %d×%d,Window %d×%d,ウィンドウ %d×%d,창 %d×%d
 UI_MENU_NEW_GAME,新游戏,New Game,ニューゲーム,새 게임
 UI_MENU_LOAD_GAME,读取存档,Load Game,セーブデータを読み込む,게임 불러오기
 UI_MENU_READ_BOOK,查阅典籍,Read Books,書物を読む,의서 읽기
@@ -1709,6 +1708,42 @@ When fright affects the Heart and spirit, signs may include palpitations, insomn
 경은 갑작스러운 놀람으로 기가 어지러워지는 상태다. 심신이 흔들리면 두근거림, 불면, 불안, 말이 어눌해짐과 같은 증상이 나타날 수 있다.
 
 놀람이 반복되면 심기와 신기가 손상되고 담이 심규를 막을 수 있다. 안신·화담·보익을 환자의 상태에 맞춰 선택한다."
+UI_DISPLAY_MODE_WINDOW_FMT,窗口 %d×%d,Window %d×%d,ウィンドウ %d×%d,창 %d×%d
+UI_TREATMENT_NO_PATIENT,当前没有病人，无法提交处方,There is no patient. The prescription cannot be submitted.,患者がいないため処方を提出できません。,현재 환자가 없어 처방을 제출할 수 없습니다.
+UI_TREATMENT_NO_DISEASE,当前病人没有绑定疾病，无法提交处方,This patient has no disease assigned. The prescription cannot be submitted.,この患者には病名が設定されていないため、処方を提出できません。,현재 환자에게 연결된 병증이 없어 처방을 제출할 수 없습니다.
+UI_TREATMENT_PRESCRIPTION_NOT_READY,当前处方未初始化，无法提交,The prescription has not been initialized and cannot be submitted.,処方が準備されていないため提出できません。,처방이 초기화되지 않아 제출할 수 없습니다.
+UI_TREATMENT_SELECT_DIAGNOSIS,请先选择疾病诊断,Please select a diagnosis first.,先に病名を選択してください。,먼저 병증을 진단해 주세요.
+UI_TREATMENT_EMPTY_PRESCRIPTION,当前处方为空，请先开方,The prescription is empty. Add herbs first.,処方が空です。先に薬材を選んでください。,처방이 비어 있습니다. 먼저 약재를 선택해 주세요.
+UI_TREATMENT_STANDARD_FORMULA_NOT_FOUND_FMT,未找到疾病【%s】对应的标准方,No standard prescription was found for 【%s】.,【%s】の標準処方が見つかりません。,【%s】에 해당하는 표준 처방을 찾을 수 없습니다.
+UI_TREATMENT_REPUTATION_GAIN_FMT,获得名望：+%d,Reputation gained: +%d,名声獲得：+%d,명망 획득: +%d
+UI_TREATMENT_REPUTATION_LOSS_FMT,损失名望：%d,Reputation lost: %d,名声減少：%d,명망 감소: %d
+UI_TREATMENT_CURRENT_REPUTATION_FMT,当前名望：%d,Current reputation: %d,現在の名声：%d,현재 명망: %d
+UI_TREATMENT_ALREADY_SUBMITTED_REPUTATION,本病人已提交过处方，不重复改变名望。,A prescription has already been submitted for this patient. Reputation will not change again.,この患者にはすでに処方を提出しているため、名声は再度変動しません。,이 환자에게는 이미 처방을 제출하여 명망이 다시 변경되지 않습니다.
+UI_TREATMENT_SUCCESS_REPUTATION_UNCHANGED,治疗成功：名望不变,Treatment succeeded: reputation unchanged.,治療成功：名声は変わりません。,치료 성공: 명망은 그대로입니다.
+UI_TREATMENT_ALREADY_SUBMITTED_UNCHANGED,本病人已提交过处方，名望不变。,A prescription has already been submitted for this patient. Reputation remains unchanged.,この患者にはすでに処方を提出しているため、名声は変わりません。,이 환자에게는 이미 처방을 제출하여 명망이 변경되지 않습니다.
+UI_STORY_TREATMENT_NO_NPC_ID,剧情没有配置 clinic_npc_id。,The story has no clinic_npc_id configured.,シナリオに clinic_npc_id が設定されていません。,이야기에 clinic_npc_id가 설정되어 있지 않습니다.
+UI_STORY_TREATMENT_NO_DISEASE,发起诊疗的剧情没有配置 Disease。,The treatment story has no Disease configured.,診療シナリオに病名が設定されていません。,진료 이야기에 Disease가 설정되어 있지 않습니다.
+UI_STORY_TREATMENT_NPC_MANAGER_UNAVAILABLE,剧情诊疗服务的 NpcManager 不可用。,NpcManager is unavailable for story treatment.,シナリオ診療の NpcManager を使用できません。,이야기 진료용 NpcManager를 사용할 수 없습니다.
+UI_STORY_TREATMENT_NPC_MANAGER_INTERFACE_MISSING,NpcManager 缺少 story NPC 接口。,NpcManager does not provide the story NPC interface.,NpcManager にシナリオ患者用の機能がありません。,NpcManager에 story NPC 인터페이스가 없습니다.
+UI_STORY_TREATMENT_NPC_LOAD_FAILED_FMT,story NPC 加载失败：%s,Failed to load story NPC: %s,シナリオ患者を読み込めません：%s,story NPC를 불러오지 못했습니다: %s
+UI_STORY_TREATMENT_INVALID_NPC_TYPE_FMT,NPC【%s】的 npc_type 不是 story。,NPC 【%s】 does not have npc_type 'story'.,患者【%s】の種別が story ではありません。,NPC【%s】의 npc_type이 story가 아닙니다.
+UI_STORY_TREATMENT_NO_ACTIVE_PATIENT,当前没有可诊疗的剧情病人。,There is no story patient available for treatment.,診療できるシナリオ患者がいません。,진료할 이야기 환자가 없습니다.
+UI_STORY_TREATMENT_PULSE_WINDOW_UNAVAILABLE,Story 的 PulseWindow 不可用。,The story PulseWindow is unavailable.,脈診画面を使用できません。,맥진 창을 사용할 수 없습니다.
+UI_STORY_TREATMENT_PULSE_INVALID_RESULT,Story 的 PulseWindow 返回了无效数据。,The story PulseWindow returned invalid data.,脈診画面から正しい結果を取得できませんでした。,맥진 창에서 유효하지 않은 결과를 반환했습니다.
+UI_STORY_TREATMENT_JUDGE_FAILED,处方判定失败。,Prescription evaluation failed.,処方を判定できませんでした。,처방 판정에 실패했습니다.
+UI_SETTINGS_AUDIO_BUS_MISSING_FMT,当前项目尚未创建 %s 音频总线。创建后该滑块会自动生效。,The %s audio bus has not been created yet. This slider will take effect after it is created.,%s オーディオバスはまだ作成されていません。作成すると、このスライダーが有効になります。,%s 오디오 버스가 아직 생성되지 않았습니다. 생성하면 이 슬라이더가 적용됩니다.
+UI_NPC_GENERIC_AFTER_TREATMENT,多谢大夫，我觉得好多了。,"Thank you, doctor. I feel much better now.",先生、ありがとうございます。だいぶ良くなりました。,"의원님, 감사합니다. 많이 좋아진 것 같습니다."
+UI_NPC_GENERIC_TREATMENT_FAILED,大夫，我这病怎么还不见好……,"Doctor, why am I still not getting better...",先生、まだ良くならないようですが……,"의원님, 아직도 병이 나아지지 않는 것 같습니다……"
+UI_NONE,（无）,(None),（なし）,(없음)
+UI_JUDGE_SUMMARY_DOSAGE_ERROR_FMT,%s：实际 %s，标准 %s,"%s: actual %s, standard %s",%s：実際 %s、基準 %s,"%s: 실제 %s, 기준 %s"
+UI_RESULT_NO_STANDARD_FORMULA,（未找到标准方）,(No standard prescription),（標準処方なし）,(표준 처방 없음)
+UI_JUDGE_SUMMARY_SCORE_FMT,评分：%d,Score: %d,得点：%d,점수: %d
+UI_JUDGE_SUMMARY_GRADE_FMT,评价：%s,Grade: %s,評価：%s,평가: %s
+UI_JUDGE_SUMMARY_FORMULA_ID_FMT,标准方 ID：%s,Standard Formula ID: %s,標準処方ID：%s,표준 처방 ID: %s
+UI_JUDGE_SUMMARY_MISSING_HERBS_FMT,缺少药材：%s,Missing herbs: %s,不足薬材：%s,누락 약재: %s
+UI_JUDGE_SUMMARY_EXTRA_HERBS_FMT,多余药材：%s,Extra herbs: %s,余分な薬材：%s,불필요한 약재: %s
+UI_JUDGE_SUMMARY_MINOR_DOSAGE,剂量轻微偏差：,Minor dosage differences:,軽微な用量差：,경미한 용량 차이:
+UI_JUDGE_SUMMARY_MAJOR_DOSAGE,剂量严重偏差：,Major dosage errors:,大きな用量差：,큰 용량 차이:
 UI_BOOK_ENTRY_TITLE_BAI_SHAO,白芍,White Peony Root,白芍,백작약
 UI_BOOK_ENTRY_BODY_BAI_SHAO,"白芍（芍药）
 【气味】苦、酸，微寒。
