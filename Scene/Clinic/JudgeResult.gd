@@ -41,6 +41,8 @@ var grade: String = "治疗失败"
 
 # 给玩家或 UI 显示的主信息
 var message: String = ""
+var english_message: String = ""
+var english_disease_message: String = ""
 var korean_message: String = ""
 var korean_disease_message: String = ""
 var japanese_message: String = ""
@@ -173,7 +175,32 @@ func has_any_problem() -> bool:
 # =========================================================
 
 func get_summary_text() -> String:
-	if TranslationServer.get_locale().to_lower().begins_with("ja"):
+	var locale := TranslationServer.get_locale().to_lower()
+
+	if locale.begins_with("en"):
+		var english_lines: Array[String] = []
+		if not english_message.is_empty():
+			english_lines.append(english_message)
+		english_lines.append("Score: %d" % score)
+
+		var english_grade_key := "UI_RESULT_GRADE_FAILED"
+		if level == "perfect":
+			english_grade_key = "UI_RESULT_GRADE_PERFECT"
+		elif level == "pass":
+			english_grade_key = "UI_RESULT_GRADE_SUCCESS"
+		english_lines.append("Grade: %s" % TranslationServer.translate(english_grade_key))
+
+		if not matched_formula_id.is_empty():
+			english_lines.append("Standard Prescription: %s" % LocalizedName.formula(matched_formula_id, matched_formula_name))
+		elif not matched_formula_name.is_empty():
+			english_lines.append("Standard Prescription: %s" % matched_formula_name)
+
+		if not english_disease_message.is_empty():
+			english_lines.append("Diagnosis: %s" % english_disease_message)
+
+		return "\n".join(english_lines)
+
+	if locale.begins_with("ja"):
 		var japanese_lines: Array[String] = []
 		if not japanese_message.is_empty():
 			japanese_lines.append(japanese_message)
@@ -191,7 +218,8 @@ func get_summary_text() -> String:
 		if not japanese_disease_message.is_empty():
 			japanese_lines.append("診断：%s" % japanese_disease_message)
 		return "\n".join(japanese_lines)
-	if TranslationServer.get_locale().to_lower().begins_with("ko"):
+
+	if locale.begins_with("ko"):
 		var korean_lines: Array[String] = []
 		if not korean_message.is_empty():
 			korean_lines.append(korean_message)
@@ -209,6 +237,7 @@ func get_summary_text() -> String:
 		if not korean_disease_message.is_empty():
 			korean_lines.append("진단: %s" % korean_disease_message)
 		return "\n".join(korean_lines)
+
 	var lines: Array[String] = []
 
 	if message != "":
@@ -242,7 +271,6 @@ func get_summary_text() -> String:
 			lines.append("- " + item)
 
 	return "\n".join(lines)
-
 
 # =========================================================
 # 七、调试输出

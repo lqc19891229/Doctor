@@ -1191,7 +1191,9 @@ func _calculate_current_prescription_price_summary_wen() -> Dictionary:
 # 提交处方并判定
 # =========================================================
 
-func _treatment_locale_text(chinese: String, japanese: String, korean: String) -> String:
+func _treatment_locale_text(chinese: String, english: String, japanese: String, korean: String) -> String:
+	if LocalizedName.is_english_locale():
+		return english
 	if LocalizedName.is_japanese_locale():
 		return japanese
 	if LocalizedName.is_korean_locale():
@@ -1201,33 +1203,34 @@ func _treatment_locale_text(chinese: String, japanese: String, korean: String) -
 
 func submit_prescription() -> bool:
 	if current_npc == null:
-		_set_info_text(_treatment_locale_text("当前没有病人，无法提交处方", "患者がいないため処方を提出できません。", "현재 환자가 없어 처방을 제출할 수 없습니다."))
+		_set_info_text(_treatment_locale_text("当前没有病人，无法提交处方", "There is no patient. The prescription cannot be submitted.", "患者がいないため処方を提出できません。", "현재 환자가 없어 처방을 제출할 수 없습니다."))
 		return false
 
 	if current_npc.disease == null:
-		_set_info_text(_treatment_locale_text("当前病人没有绑定疾病，无法提交处方", "この患者には病名が設定されていないため、処方を提出できません。", "현재 환자에게 연결된 병증이 없어 처방을 제출할 수 없습니다."))
+		_set_info_text(_treatment_locale_text("当前病人没有绑定疾病，无法提交处方", "This patient has no disease assigned. The prescription cannot be submitted.", "この患者には病名が設定されていないため、処方を提出できません。", "현재 환자에게 연결된 병증이 없어 처방을 제출할 수 없습니다."))
 		return false
 
 	if current_prescription == null:
-		_set_info_text(_treatment_locale_text("当前处方未初始化，无法提交", "処方が準備されていないため提出できません。", "처방이 초기화되지 않아 제출할 수 없습니다."))
+		_set_info_text(_treatment_locale_text("当前处方未初始化，无法提交", "The prescription has not been initialized and cannot be submitted.", "処方が準備されていないため提出できません。", "처방이 초기화되지 않아 제출할 수 없습니다."))
 		return false
 
 	if not current_prescription.has_disease():
-		_set_info_text(_treatment_locale_text("请先选择疾病诊断", "先に病名を選択してください。", "먼저 병증을 진단해 주세요."))
+		_set_info_text(_treatment_locale_text("请先选择疾病诊断", "Please select a diagnosis first.", "先に病名を選択してください。", "먼저 병증을 진단해 주세요."))
 		return false
 
 	if current_prescription.is_empty():
-		_set_info_text(_treatment_locale_text("当前处方为空，请先开方", "処方が空です。先に薬材を選んでください。", "처방이 비어 있습니다. 먼저 약재를 선택해 주세요."))
+		_set_info_text(_treatment_locale_text("当前处方为空，请先开方", "The prescription is empty. Add herbs first.", "処方が空です。先に薬材を選んでください。", "처방이 비어 있습니다. 먼저 약재를 선택해 주세요."))
 		return false
 
 	var standard_formula := _get_current_standard_formula()
 	if standard_formula == null:
-		if LocalizedName.is_korean_locale():
-			_set_info_text("【%s】에 해당하는 표준 처방을 찾을 수 없습니다." % LocalizedName.disease(current_npc.disease.disease_id, current_npc.disease.disease_name))
-		elif LocalizedName.is_japanese_locale():
-			_set_info_text("【%s】の標準処方が見つかりません。" % LocalizedName.disease(current_npc.disease.disease_id, current_npc.disease.disease_name))
-		else:
-			_set_info_text("未找到疾病【%s】对应的标准方" % current_npc.disease.disease_name)
+		var localized_disease_name := LocalizedName.disease(current_npc.disease.disease_id, current_npc.disease.disease_name)
+		_set_info_text(_treatment_locale_text(
+			"未找到疾病【%s】对应的标准方",
+			"No standard prescription was found for 【%s】.",
+			"【%s】の標準処方が見つかりません。",
+			"【%s】에 해당하는 표준 처방을 찾을 수 없습니다."
+		) % localized_disease_name)
 		return false
 
 	var was_already_submitted := diagnosis_submitted
@@ -1298,7 +1301,7 @@ func submit_prescription() -> bool:
 
 			last_patient_thank_gift_wen = patient_thank_gift_wen
 
-			if LocalizedName.is_korean_locale() or LocalizedName.is_japanese_locale():
+			if LocalizedName.is_english_locale() or LocalizedName.is_korean_locale() or LocalizedName.is_japanese_locale():
 				summary_text += "\n" + tr("UI_DAILY_FINANCE_CONSULTATION_FMT") % Unlock.format_money_change(consultation_fee_wen)
 				summary_text += "\n" + tr("UI_DAILY_FINANCE_MEDICINE_NET_FMT") % Unlock.format_money_change(medicine_income_wen)
 				if patient_thank_gift_wen > 0:
@@ -1334,18 +1337,18 @@ func submit_prescription() -> bool:
 			_update_reputation_point_ui(true)
 
 			if reputation_reward > 0:
-				summary_text += (_treatment_locale_text("\n获得名望：+%d", "\n名声獲得：+%d", "\n명망 획득: +%d")) % reputation_reward
+				summary_text += (_treatment_locale_text("\n获得名望：+%d", "\nReputation gained: +%d", "\n名声獲得：+%d", "\n명망 획득: +%d")) % reputation_reward
 			else:
-				summary_text += (_treatment_locale_text("\n损失名望：%d", "\n名声減少：%d", "\n명망 감소: %d")) % reputation_reward
+				summary_text += (_treatment_locale_text("\n损失名望：%d", "\nReputation lost: %d", "\n名声減少：%d", "\n명망 감소: %d")) % reputation_reward
 
 			if Unlock.has_method("get_reputation_points"):
-				summary_text += (_treatment_locale_text("\n当前名望：%d", "\n現在の名声：%d", "\n현재 명망: %d")) % Unlock.get_reputation_points()
+				summary_text += (_treatment_locale_text("\n当前名望：%d", "\nCurrent reputation: %d", "\n現在の名声：%d", "\n현재 명망: %d")) % Unlock.get_reputation_points()
 
 			# 名望变化只保留在内存，正常白天结束时统一写盘。
 	elif reputation_reward != 0 and was_already_submitted:
-		summary_text += _treatment_locale_text("\n本病人已提交过处方，不重复改变名望。", "\nこの患者にはすでに処方を提出しているため、名声は再度変動しません。", "\n이 환자에게는 이미 처방을 제출하여 명망이 다시 변경되지 않습니다.")
+		summary_text += _treatment_locale_text("\n本病人已提交过处方，不重复改变名望。", "\nA prescription has already been submitted for this patient. Reputation will not change again.", "\nこの患者にはすでに処方を提出しているため、名声は再度変動しません。", "\n이 환자에게는 이미 처방을 제출하여 명망이 다시 변경되지 않습니다.")
 		if Unlock != null and Unlock.has_method("get_reputation_points"):
-			summary_text += (_treatment_locale_text("\n当前名望：%d", "\n現在の名声：%d", "\n현재 명망: %d")) % Unlock.get_reputation_points()
+			summary_text += (_treatment_locale_text("\n当前名望：%d", "\nCurrent reputation: %d", "\n現在の名声：%d", "\n현재 명망: %d")) % Unlock.get_reputation_points()
 
 	var result_grade := ""
 	if result != null:
@@ -1382,9 +1385,9 @@ func submit_prescription() -> bool:
 		})
 
 	if uses_fixed_treatment_rewards and result_grade == "治疗成功" and not was_already_submitted:
-		summary_text += _treatment_locale_text("\n治疗成功：名望不变", "\n治療成功：名声は変わりません。", "\n치료 성공: 명망은 그대로입니다.")
+		summary_text += _treatment_locale_text("\n治疗成功：名望不变", "\nTreatment succeeded: reputation unchanged.", "\n治療成功：名声は変わりません。", "\n치료 성공: 명망은 그대로입니다.")
 	elif uses_fixed_treatment_rewards and result_grade == "治疗成功" and was_already_submitted:
-		summary_text += _treatment_locale_text("\n本病人已提交过处方，名望不变。", "\nこの患者にはすでに処方を提出しているため、名声は変わりません。", "\n이 환자에게는 이미 처방을 제출하여 명망이 변경되지 않습니다.")
+		summary_text += _treatment_locale_text("\n本病人已提交过处方，名望不变。", "\nA prescription has already been submitted for this patient. Reputation remains unchanged.", "\nこの患者にはすでに処方を提出しているため、名声は変わりません。", "\n이 환자에게는 이미 처방을 제출하여 명망이 변경되지 않습니다.")
 
 	# random NPC 达成妙手回春时：
 	# 1. 后台增加 1 点 experience_points，并立即检查心得条目解锁；

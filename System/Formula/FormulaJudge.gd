@@ -37,6 +37,7 @@ func judge_formula(player_prescription: Prescription, standard_formula: FormulaD
 		result.score = 0
 		result.grade = "治疗失败"
 		result.message = "玩家处方为空"
+		result.english_message = "The prescription is empty."
 		result.korean_message = "처방이 비어 있습니다."
 		result.japanese_message = "処方が空です。"
 		return result
@@ -47,6 +48,7 @@ func judge_formula(player_prescription: Prescription, standard_formula: FormulaD
 		result.score = 0
 		result.grade = "治疗失败"
 		result.message = "未找到标准方剂"
+		result.english_message = "No standard prescription was found."
 		result.korean_message = "표준 처방을 찾을 수 없습니다."
 		result.japanese_message = "標準処方が見つかりません。"
 		return result
@@ -71,6 +73,8 @@ func judge_formula(player_prescription: Prescription, standard_formula: FormulaD
 	var total_penalty := 0
 	var penalty_lines: Array[String] = []
 	var role_display_map := _make_empty_role_display_map()
+	var english_penalty_lines: Array[String] = []
+	var english_role_display_map := _make_empty_role_display_map()
 	var korean_penalty_lines: Array[String] = []
 	var korean_role_display_map := _make_empty_role_display_map()
 	var japanese_penalty_lines: Array[String] = []
@@ -80,6 +84,7 @@ func judge_formula(player_prescription: Prescription, standard_formula: FormulaD
 	total_penalty += disease_penalty
 	if disease_penalty > 0:
 		penalty_lines.append("疾病判断错误，扣 %d 分" % disease_penalty)
+		english_penalty_lines.append("Diagnosis error: -%d points" % disease_penalty)
 		korean_penalty_lines.append("진단 오류: %d점 감점" % disease_penalty)
 		japanese_penalty_lines.append("診断誤り：%d点減点" % disease_penalty)
 
@@ -96,6 +101,7 @@ func judge_formula(player_prescription: Prescription, standard_formula: FormulaD
 
 		if role_problem_texts.is_empty():
 			role_display_map[role_name].append("正确")
+			english_role_display_map[role_name].append("Correct")
 			korean_role_display_map[role_name].append("정확")
 			japanese_role_display_map[role_name].append("正解")
 			continue
@@ -104,13 +110,22 @@ func judge_formula(player_prescription: Prescription, standard_formula: FormulaD
 		total_penalty += role_penalty
 		role_display_map[role_name].append("错误 -%d" % role_penalty)
 		penalty_lines.append("%s药区错误：%s，扣 %d 分" % [role_name, "；".join(role_problem_texts), role_penalty])
+		var english_problems := _get_role_problem_texts(
+			role_name, player_fen_map, player_name_map, player_role_map,
+			standard_fen_map, standard_name_map, standard_role_map, false, false, true
+		)
+		english_role_display_map[role_name].append("Error -%d" % role_penalty)
+		english_penalty_lines.append("%s error: %s (-%d points)" % [
+			_localized_role_name(role_name), "; ".join(english_problems), role_penalty
+		])
+
 		var korean_problems := _get_role_problem_texts(
 			role_name, player_fen_map, player_name_map, player_role_map,
 			standard_fen_map, standard_name_map, standard_role_map, true
 		)
 		korean_role_display_map[role_name].append("오류 -%d" % role_penalty)
 		korean_penalty_lines.append("%s 오류: %s (%d점 감점)" % [
-			_korean_role_name(role_name), "; ".join(korean_problems), role_penalty
+			_localized_role_name(role_name), "; ".join(korean_problems), role_penalty
 		])
 		var japanese_problems := _get_role_problem_texts(
 			role_name, player_fen_map, player_name_map, player_role_map,
@@ -118,7 +133,7 @@ func judge_formula(player_prescription: Prescription, standard_formula: FormulaD
 		)
 		japanese_role_display_map[role_name].append("誤り -%d" % role_penalty)
 		japanese_penalty_lines.append("%sの誤り：%s（%d点減点）" % [
-			_korean_role_name(role_name), "；".join(japanese_problems), role_penalty
+			_localized_role_name(role_name), "；".join(japanese_problems), role_penalty
 		])
 
 		_record_role_problems_to_result(role_problem_texts, result)
@@ -140,6 +155,9 @@ func judge_formula(player_prescription: Prescription, standard_formula: FormulaD
 		result.message = _build_role_display_text(role_display_map)
 	else:
 		result.message = _build_role_display_text(role_display_map) + "\n\n扣分明细：\n- " + "\n- ".join(penalty_lines)
+	result.english_message = _build_english_role_display_text(english_role_display_map)
+	if not english_penalty_lines.is_empty():
+		result.english_message += "\n\nDeductions:\n- " + "\n- ".join(english_penalty_lines)
 	result.korean_message = _build_korean_role_display_text(korean_role_display_map)
 	if not korean_penalty_lines.is_empty():
 		result.korean_message += "\n\n감점 내역:\n- " + "\n- ".join(korean_penalty_lines)
@@ -161,6 +179,7 @@ func _judge_disease(player_prescription: Prescription, standard_disease: Disease
 		result.disease_correct = false
 		result.disease_penalty = 0
 		result.disease_message = "标准疾病缺失"
+		result.english_disease_message = "No standard disease is configured."
 		result.korean_disease_message = "표준 병증 정보가 없습니다."
 		result.japanese_disease_message = "標準の病名が設定されていません。"
 		return 0
@@ -183,6 +202,7 @@ func _judge_disease(player_prescription: Prescription, standard_disease: Disease
 		result.disease_correct = false
 		result.disease_penalty = 0
 		result.disease_message = "标准疾病缺少 disease_id"
+		result.english_disease_message = "The standard disease has no disease_id."
 		result.korean_disease_message = "표준 병증 ID가 없습니다."
 		result.japanese_disease_message = "標準の病名IDがありません。"
 		return 0
@@ -194,6 +214,7 @@ func _judge_disease(player_prescription: Prescription, standard_disease: Disease
 			player_disease_name = standard_disease_name
 		result.player_disease_name = player_disease_name
 		result.disease_message = "%s✅️" % player_disease_name
+		result.english_disease_message = "%s✅️" % LocalizedName.disease(standard_disease_id, player_disease_name)
 		result.korean_disease_message = "%s✅️" % LocalizedName.disease(standard_disease_id, player_disease_name)
 		result.japanese_disease_message = "%s✅️" % LocalizedName.disease(standard_disease_id, player_disease_name)
 		return 0
@@ -202,14 +223,17 @@ func _judge_disease(player_prescription: Prescription, standard_disease: Disease
 	result.disease_penalty = 100
 	if player_disease_id == "":
 		result.disease_message = "未选择疾病❌️，正确：%s -100" % standard_disease_name
+		result.english_disease_message = "No diagnosis selected❌️. Correct: %s (-100)" % LocalizedName.disease(standard_disease_id, standard_disease_name)
 		result.korean_disease_message = "병증을 선택하지 않았습니다❌️. 정답: %s (-100)" % LocalizedName.disease(standard_disease_id, standard_disease_name)
 		result.japanese_disease_message = "病名未選択❌️。正解：%s（-100）" % LocalizedName.disease(standard_disease_id, standard_disease_name)
 	elif player_disease_name == "":
 		result.disease_message = "%s❌️，正确：%s -100" % [player_disease_id, standard_disease_name]
+		result.english_disease_message = "%s❌️. Correct: %s (-100)" % [LocalizedName.disease(player_disease_id, player_disease_id), LocalizedName.disease(standard_disease_id, standard_disease_name)]
 		result.korean_disease_message = "%s❌️. 정답: %s (-100)" % [LocalizedName.disease(player_disease_id, player_disease_id), LocalizedName.disease(standard_disease_id, standard_disease_name)]
 		result.japanese_disease_message = "%s❌️。正解：%s（-100）" % [LocalizedName.disease(player_disease_id, player_disease_id), LocalizedName.disease(standard_disease_id, standard_disease_name)]
 	else:
 		result.disease_message = "%s❌️，正确：%s -100" % [player_disease_name, standard_disease_name]
+		result.english_disease_message = "%s❌️. Correct: %s (-100)" % [LocalizedName.disease(player_disease_id, player_disease_name), LocalizedName.disease(standard_disease_id, standard_disease_name)]
 		result.korean_disease_message = "%s❌️. 정답: %s (-100)" % [LocalizedName.disease(player_disease_id, player_disease_name), LocalizedName.disease(standard_disease_id, standard_disease_name)]
 		result.japanese_disease_message = "%s❌️。正解：%s（-100）" % [LocalizedName.disease(player_disease_id, player_disease_name), LocalizedName.disease(standard_disease_id, standard_disease_name)]
 	return result.disease_penalty
@@ -227,7 +251,8 @@ func _get_role_problem_texts(
 	standard_name_map: Dictionary,
 	standard_role_map: Dictionary,
 	korean: bool = false,
-	japanese: bool = false
+	japanese: bool = false,
+	english: bool = false
 ) -> Array[String]:
 	var problems: Array[String] = []
 
@@ -236,24 +261,24 @@ func _get_role_problem_texts(
 			continue
 
 		var herb_name: String = str(standard_name_map.get(herb_id, herb_id))
-		if korean or japanese:
+		if korean or japanese or english:
 			herb_name = LocalizedName.herb(str(herb_id), herb_name)
 		var standard_fen: int = int(standard_fen_map.get(herb_id, 0))
 
 		if not player_fen_map.has(herb_id):
-			var missing_fmt := "【%s】누락" if korean else ("【%s】が不足" if japanese else "缺少【%s】")
+			var missing_fmt := "【%s】누락" if korean else ("【%s】が不足" if japanese else ("Missing 【%s】" if english else "缺少【%s】"))
 			problems.append(missing_fmt % herb_name)
 			continue
 
 		var player_role_name: String = str(player_role_map.get(herb_id, ""))
 		if player_role_name != role_name:
-			var wrong_role_fmt := "【%s】잘못된 구역: %s" if korean else ("【%s】の配置が違います。現在：%s" if japanese else "【%s】放错区域，实际在%s药区")
-			problems.append(wrong_role_fmt % [herb_name, _korean_role_name(player_role_name) if korean or japanese else player_role_name])
+			var wrong_role_fmt := "【%s】잘못된 구역: %s" if korean else ("【%s】の配置が違います。現在：%s" if japanese else ("【%s】 is in the wrong role: %s" if english else "【%s】放错区域，实际在%s药区"))
+			problems.append(wrong_role_fmt % [herb_name, _localized_role_name(player_role_name) if korean or japanese or english else player_role_name])
 			continue
 
 		var player_fen: int = int(player_fen_map.get(herb_id, 0))
 		if player_fen != standard_fen:
-			var dosage_fmt := "【%s】용량 오류: 기준 %s, 실제 %s" if korean else ("【%s】の量が違います。基準：%s、実際：%s" if japanese else "【%s】剂量错误，标准%s，实际%s")
+			var dosage_fmt := "【%s】용량 오류: 기준 %s, 실제 %s" if korean else ("【%s】の量が違います。基準：%s、実際：%s" if japanese else ("【%s】 dosage mismatch: standard %s, actual %s" if english else "【%s】剂量错误，标准%s，实际%s"))
 			problems.append(dosage_fmt % [
 				herb_name,
 				HerbUnit.format_fen_auto(standard_fen),
@@ -266,18 +291,18 @@ func _get_role_problem_texts(
 			continue
 
 		var herb_name: String = str(player_name_map.get(herb_id, herb_id))
-		if korean or japanese:
+		if korean or japanese or english:
 			herb_name = LocalizedName.herb(str(herb_id), herb_name)
 
 		if not standard_fen_map.has(herb_id):
-			var extra_fmt := "추가 약재【%s】" if korean else ("余分な薬材【%s】" if japanese else "多出【%s】")
+			var extra_fmt := "추가 약재【%s】" if korean else ("余分な薬材【%s】" if japanese else ("Extra herb 【%s】" if english else "多出【%s】"))
 			problems.append(extra_fmt % herb_name)
 			continue
 
 		var standard_role_name: String = str(standard_role_map.get(herb_id, ""))
 		if standard_role_name != role_name:
-			var unexpected_fmt := "【%s】%s 구역에 속하지 않습니다. 기준: %s" if korean else ("【%s】は%sではなく%sに配置します" if japanese else "【%s】不属于%s药区，标准为%s药区")
-			problems.append(unexpected_fmt % [herb_name, _korean_role_name(role_name) if korean or japanese else role_name, _korean_role_name(standard_role_name) if korean or japanese else standard_role_name])
+			var unexpected_fmt := "【%s】%s 구역에 속하지 않습니다. 기준: %s" if korean else ("【%s】は%sではなく%sに配置します" if japanese else ("【%s】 does not belong in %s; standard role: %s" if english else "【%s】不属于%s药区，标准为%s药区"))
+			problems.append(unexpected_fmt % [herb_name, _localized_role_name(role_name) if korean or japanese or english else role_name, _localized_role_name(standard_role_name) if korean or japanese or english else standard_role_name])
 			continue
 
 	return problems
@@ -399,7 +424,7 @@ func _build_role_display_text(role_display_map: Dictionary) -> String:
 	return "\n".join(lines)
 
 
-func _korean_role_name(role_name: String) -> String:
+func _localized_role_name(role_name: String) -> String:
 	match role_name:
 		"君": return TranslationServer.translate("UI_PRESCRIPTION_ROLE_JUN")
 		"臣": return TranslationServer.translate("UI_PRESCRIPTION_ROLE_CHEN")
@@ -408,11 +433,19 @@ func _korean_role_name(role_name: String) -> String:
 	return role_name
 
 
+func _build_english_role_display_text(role_display_map: Dictionary) -> String:
+	var lines: Array[String] = []
+	for role_name in ROLE_ORDER:
+		var items: Array[String] = _to_string_array(role_display_map.get(role_name, []))
+		lines.append("%s: %s" % [_localized_role_name(role_name), " · ".join(items)])
+	return "\n".join(lines)
+
+
 func _build_korean_role_display_text(role_display_map: Dictionary) -> String:
 	var lines: Array[String] = []
 	for role_name in ROLE_ORDER:
 		var items: Array[String] = _to_string_array(role_display_map.get(role_name, []))
-		lines.append("%s: %s" % [_korean_role_name(role_name), " · ".join(items)])
+		lines.append("%s: %s" % [_localized_role_name(role_name), " · ".join(items)])
 	return "\n".join(lines)
 
 
@@ -420,7 +453,7 @@ func _build_japanese_role_display_text(role_display_map: Dictionary) -> String:
 	var lines: Array[String] = []
 	for role_name in ROLE_ORDER:
 		var items: Array[String] = _to_string_array(role_display_map.get(role_name, []))
-		lines.append("%s：%s" % [_korean_role_name(role_name), "・".join(items)])
+		lines.append("%s：%s" % [_localized_role_name(role_name), "・".join(items)])
 	return "\n".join(lines)
 
 
