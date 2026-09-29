@@ -63,7 +63,7 @@ func build_source_text_pages(value: String, preferred_columns_per_page: int = 0)
 
 	for start_index in range(0, columns.size(), columns_per_page):
 		var page_columns: Array[String] = []
-		var end_index := min(start_index + columns_per_page, columns.size())
+		var end_index = min(start_index + columns_per_page, columns.size())
 
 		for column_index in range(start_index, end_index):
 			page_columns.append(columns[column_index])
@@ -185,10 +185,10 @@ func _update_horizontal_content_size(column_count: int) -> void:
 	if font_size <= 0:
 		font_size = 16
 
-	var safe_column_count := max(1, column_count)
+	var safe_column_count = max(1, column_count)
 	var padding_width := float(max(0, right_padding_chars)) * float(font_size)
-	var column_width := max(1.0, float(font_size) * column_width_multiplier)
-	var content_width := max(
+	var column_width = max(1.0, float(font_size) * column_width_multiplier)
+	var content_width = max(
 		min_horizontal_content_width,
 		float(safe_column_count) * column_width + padding_width
 	)
@@ -240,7 +240,7 @@ func _estimate_rows_per_column(_char_count: int) -> int:
 		font_size = 16
 
 	var line_spacing := get_theme_constant("line_separation")
-	var row_height := max(1.0, float(font_size + line_spacing))
+	var row_height = max(1.0, float(font_size + line_spacing))
 
 	var visible_height := size.y
 	var parent_node := get_parent()
@@ -252,11 +252,11 @@ func _estimate_rows_per_column(_char_count: int) -> int:
 			return clamp(fixed_rows_per_column, min_rows_per_column, max_rows_per_column)
 		return min_rows_per_column
 
-	var visible_lines := int(floor(visible_height / row_height)) - max(0, top_padding_lines)
+	var visible_lines = int(floor(visible_height / row_height)) - max(0, top_padding_lines)
 	visible_lines = max(1, visible_lines)
 
-	var spacing := max(0, char_spacing_lines)
-	var max_fit_rows := visible_lines
+	var spacing = max(0, char_spacing_lines)
+	var max_fit_rows = visible_lines
 
 	if spacing > 0:
 		max_fit_rows = int(floor(float(visible_lines + spacing) / float(spacing + 1)))
@@ -292,7 +292,7 @@ func _estimate_columns_per_page(preferred_columns_per_page: int = 0) -> int:
 	if visible_width <= 0.0:
 		return 6
 
-	var column_width := max(1.0, float(font_size) * column_width_multiplier)
+	var column_width = max(1.0, float(font_size) * column_width_multiplier)
 	var result := int(floor(visible_width / column_width))
 	return max(1, result - 1)
 
@@ -370,9 +370,9 @@ func _build_fixed_cell_vertical_table(columns: Array[String], rows_per_column: i
 	# 韩文字体 fallback 往往不是等宽，所以每一行宽度不同，竖列就会左右漂移。
 	# Table 会让每一列共享同一个 cell 宽度，因此 Hangul / Kana / Kanji 都能对齐。
 	var visual_columns := columns.size()
-	var gap_columns := max(0, visual_columns - 1)
-	var right_pad_columns := max(0, right_padding_chars)
-	var table_columns := max(1, visual_columns + gap_columns + right_pad_columns)
+	var gap_columns = max(0, visual_columns - 1)
+	var right_pad_columns = max(0, right_padding_chars)
+	var table_columns = max(1, visual_columns + gap_columns + right_pad_columns)
 
 	var out := PackedStringArray()
 	out.append("[right][table=%d]" % table_columns)
