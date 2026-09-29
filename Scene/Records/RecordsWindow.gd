@@ -193,7 +193,7 @@ func _record_text(record: Dictionary, key: String, fallback: String) -> String:
 
 func _localized_record_patient(record: Dictionary) -> String:
 	var fallback := _record_text(record, "patient_name", tr("UI_RECORDS_UNKNOWN_PATIENT"))
-	if TranslationServer.get_locale().to_lower().begins_with("zh"):
+	if LocalizedName.is_chinese_locale():
 		return fallback
 	var npc_id := _record_text(record, "npc_id", "")
 	if npc_id.is_empty():
@@ -205,8 +205,6 @@ func _localized_record_patient(record: Dictionary) -> String:
 
 func _localized_record_entity(record: Dictionary, id_key: String, name_key: String, is_formula: bool = false) -> String:
 	var fallback := _record_text(record, name_key, tr("UI_RECORDS_NOT_RECORDED"))
-	if TranslationServer.get_locale().to_lower().begins_with("zh"):
-		return fallback
 	var entity_id := _record_text(record, id_key, "")
 	if entity_id.is_empty():
 		# 兼容旧存档：根据保存的中文名称找回 ID。
@@ -225,8 +223,6 @@ func _localized_record_entity(record: Dictionary, id_key: String, name_key: Stri
 
 func _localized_record_prescription(record: Dictionary) -> String:
 	var fallback := _record_text(record, "prescription", tr("UI_RECORDS_EMPTY_PRESCRIPTION"))
-	if TranslationServer.get_locale().to_lower().begins_with("zh"):
-		return fallback
 	var items = record.get("prescription_items", [])
 	if not (items is Array) or items.is_empty():
 		return fallback # 旧存档没有处方 ID，保留原记录。
