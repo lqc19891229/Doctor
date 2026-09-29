@@ -268,6 +268,14 @@ func _entry_matches_search(entry: BookEntryData) -> bool:
 			query
 		)
 
+	# 繁体中文：繁体名称 + 注音 + 拼音 + 拼音首字母。
+	if LocalizedName.is_traditional_chinese_locale():
+		return LocalizedName.traditional_chinese_search_matches(
+			localized_title,
+			entity_id,
+			query
+		)
+
 	var clean_query := LocalizedName.normalize_search_text(query)
 	if clean_query == "":
 		return false
@@ -282,7 +290,7 @@ func _entry_matches_search(entry: BookEntryData) -> bool:
 			or english_initials.begins_with(clean_query)
 		)
 
-	# 中文：中文标题 + entry_id / data_id 全拼 + 拼音首字母。
+	# 简体中文：中文标题 + entry_id / data_id 全拼 + 拼音首字母。
 	var title_text := LocalizedName.normalize_search_text(entry.title)
 
 	var entry_id_raw := str(entry.entry_id).to_lower()

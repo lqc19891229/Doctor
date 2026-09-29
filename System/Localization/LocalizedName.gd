@@ -8,7 +8,8 @@ class_name LocalizedName
 # - 程序逻辑始终使用 herb_id / formula_id / disease_id。
 # - 显示名称统一读取 UI_BOOK_ENTRY_TITLE_<ID>。
 # - 找不到翻译时使用传入的中文 fallback。
-# - 中文环境搜索：中文名 + 拼音全拼 + 拼音首字母。
+# - 简体中文搜索：中文名 + 拼音全拼 + 拼音首字母。
+# - 繁体中文搜索：繁体名 + 注音 + 拼音 + 拼音首字母。
 # - 英文环境搜索：英文名 + 英文单词首字母。
 # - 日文环境搜索：日文名称 + 假名 + Romaji + Romaji 首字母。
 # - 韩文环境搜索：韩文名称 + 초성 + Romaja + Romaja 首字母。
@@ -44,24 +45,151 @@ static func _entity_title(entity_id: String, fallback: String = "") -> String:
 	return translated
 
 
+static func _normalized_locale() -> String:
+	return TranslationServer.get_locale().to_lower().replace("-", "_")
+
+
 static func is_english_locale() -> bool:
-	return TranslationServer.get_locale().to_lower().begins_with("en")
+	return _normalized_locale().begins_with("en")
 
 
 static func is_japanese_locale() -> bool:
-	return TranslationServer.get_locale().to_lower().begins_with("ja")
+	return _normalized_locale().begins_with("ja")
 
 
 static func is_korean_locale() -> bool:
-	return TranslationServer.get_locale().to_lower().begins_with("ko")
+	return _normalized_locale().begins_with("ko")
 
 
 static func is_chinese_locale() -> bool:
-	return TranslationServer.get_locale().to_lower().begins_with("zh")
+	return _normalized_locale().begins_with("zh")
+
+
+static func is_traditional_chinese_locale() -> bool:
+	var locale := _normalized_locale()
+	return (
+		locale.begins_with("zh_tw")
+		or locale.begins_with("zh_hant")
+	)
 
 
 static func is_horizontal_detail_locale() -> bool:
 	return is_english_locale()
+
+
+# =========================================================
+# 繁体中文搜索
+# =========================================================
+
+static var _traditional_chinese_aliases_loaded: bool = false
+static var _traditional_chinese_aliases: Dictionary = {}
+
+
+static func normalize_traditional_chinese_search_text(value: String) -> String:
+	var result := value.strip_edges().to_lower()
+
+	# 全角 ASCII 统一为半角，方便直接输入全角英数字时也能搜索。
+	var normalized := ""
+	for index in range(result.length()):
+		var code := result.unicode_at(index)
+		if code >= 0xFF01 and code <= 0xFF5E:
+			code -= 0xFEE0
+		normalized += String.chr(code)
+	result = normalized
+
+	# 搜索忽略常见分隔符、空白以及注音声调符号。
+	for separator in [
+		" ", "\t", "\r", "\n", "_", "-", "'", "|",
+		",", "，", ".", "。", "、", "・", "･", "·",
+		"(", ")", "（", "）", "[", "]", "【", "】",
+		"/", "／", ":", "：", ";", "；",
+		"ˉ", "ˊ", "ˇ", "ˋ", "˙"
+	]:
+		result = result.replace(separator, "")
+
+	# 拼音声调统一成无声调形式；ü 系列统一成 v。
+	var replacements := {
+		"ā": "a", "á": "a", "ǎ": "a", "à": "a",
+		"ē": "e", "é": "e", "ě": "e", "è": "e",
+		"ī": "i", "í": "i", "ǐ": "i", "ì": "i",
+		"ō": "o", "ó": "o", "ǒ": "o", "ò": "o",
+		"ū": "u", "ú": "u", "ǔ": "u", "ù": "u",
+		"ü": "v", "ǖ": "v", "ǘ": "v", "ǚ": "v", "ǜ": "v",
+	}
+	for source in replacements:
+		result = result.replace(str(source), str(replacements[source]))
+
+	return result
+
+
+static func _load_traditional_chinese_aliases() -> void:
+	if _traditional_chinese_aliases_loaded:
+		return
+
+	_traditional_chinese_aliases_loaded = true
+
+	var path := "res://Localization/search_zh_TW.txt"
+	if not FileAccess.file_exists(path):
+		return
+
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		return
+
+	file.get_csv_line() # header
+
+	while not file.eof_reached():
+		var fields := file.get_csv_line()
+
+		if fields.size() < 3 or fields[0].strip_edges().is_empty():
+			continue
+
+		var raw_pinyin := str(fields[2])
+
+		_traditional_chinese_aliases[fields[0]] = {
+			"zhuyin": normalize_traditional_chinese_search_text(fields[1]),
+			"pinyin": normalize_traditional_chinese_search_text(raw_pinyin),
+			"pinyin_initials": romanization_initials(raw_pinyin),
+		}
+
+
+static func traditional_chinese_search_matches(
+	display_name: String,
+	entity_id: String,
+	query: String
+) -> bool:
+	var needle := normalize_traditional_chinese_search_text(query)
+
+	if needle.is_empty():
+		return false
+
+	if normalize_traditional_chinese_search_text(display_name).contains(needle):
+		return true
+
+	_load_traditional_chinese_aliases()
+
+	var key := "UI_BOOK_ENTRY_TITLE_" + entity_id.to_upper()
+	var aliases: Dictionary = _traditional_chinese_aliases.get(key, {})
+
+	if aliases.is_empty():
+		return false
+
+	var zhuyin := str(aliases.get("zhuyin", ""))
+	if not zhuyin.is_empty() and zhuyin.contains(needle):
+		return true
+
+	var pinyin := str(aliases.get("pinyin", ""))
+	if not pinyin.is_empty() and pinyin.contains(needle):
+		return true
+
+	var pinyin_initials := str(aliases.get("pinyin_initials", ""))
+	if (
+		not pinyin_initials.is_empty()
+		and pinyin_initials.begins_with(needle)
+	):
+		return true
+
+	return false
 
 
 # =========================================================
@@ -286,14 +414,10 @@ static func normalize_search_text(value: String) -> String:
 
 
 static func romanization_initials(value: String) -> String:
-	# Romaji / Romaja 单字首字母。
+	# Romaji / Romaja / Pinyin 单字首字母。
 	#
-	# | 表示一个日文汉字 / 韩文音节对应的 Romanization 边界。
+	# | 表示一个汉字 / 日文汉字 / 韩文音节对应的 Romanization 边界。
 	# 同时兼容旧的空格、连字符、下划线格式。
-	#
-	# 例：
-	# hak|kou|ben|shou -> hkbs
-	# pal|gang|byeon|jeung -> pgbj
 	var clean_text := value.strip_edges().to_lower() \
 		.replace("|", " ") \
 		.replace("-", " ") \
