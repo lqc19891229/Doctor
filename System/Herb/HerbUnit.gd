@@ -138,7 +138,7 @@ static func number_to_korean(num: int) -> String:
 				unit_text = KOREAN_UNITS[unit_index]
 
 			# 십/백/천 앞의 1은 보통 생략한다.
-			var digit_text := KOREAN_DIGITS[digit]
+			var digit_text = KOREAN_DIGITS[digit]
 			if digit == 1 and unit_index > 0:
 				digit_text = ""
 
