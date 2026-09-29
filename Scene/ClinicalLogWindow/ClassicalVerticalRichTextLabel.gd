@@ -2,8 +2,7 @@ extends RichTextLabel
 class_name ClassicalVerticalRichTextLabel
 
 # 古籍竖排 RichTextLabel
-# 中文继续使用原来的纯文本矩阵。
-# 日文 / 韩文使用 BBCode table 固定“字格”，避免比例字宽导致竖列左右漂移。
+# 中文、日文、韩文均使用原来的纯文本矩阵。
 
 @export var column_gap: String = "　"
 @export var right_padding_chars: int = 0
@@ -84,7 +83,7 @@ func set_prebuilt_vertical_page(page_data: Dictionary) -> void:
 	fit_content = false
 	autowrap_mode = TextServer.AUTOWRAP_OFF
 	horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	bbcode_enabled = _uses_fixed_cell_grid()
+	bbcode_enabled = false
 
 	_source_text = ""
 	_display_text = page_text
@@ -144,7 +143,7 @@ func _rebuild_vertical_text() -> void:
 	fit_content = false
 	autowrap_mode = TextServer.AUTOWRAP_OFF
 	horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	bbcode_enabled = _uses_fixed_cell_grid()
+	bbcode_enabled = false
 
 	var clean_text := _normalize_source_text(_source_text)
 	var rows_per_column := _estimate_rows_per_column(clean_text.length())
@@ -159,14 +158,6 @@ func _rebuild_vertical_text() -> void:
 
 	_defer_scroll_to_right_edge()
 	scroll_to_line(0)
-
-
-func _uses_fixed_cell_grid() -> bool:
-	var locale := TranslationServer.get_locale().to_lower().replace("-", "_")
-	# 仅韩文使用固定字格，避免韩文音节块的字面框和基线差异造成上下漂移。
-	# 日文保持原来的普通文本竖排矩阵，不改变现有排版行为。
-	return locale.begins_with("ko")
-
 
 func _scroll_parent_to_left_edge() -> void:
 	var parent_node := get_parent()
@@ -329,9 +320,6 @@ func _build_vertical_text_from_columns(columns: Array[String], rows_per_column: 
 	if columns.is_empty():
 		return ""
 
-	if _uses_fixed_cell_grid():
-		return _build_fixed_cell_vertical_table(columns, rows_per_column)
-
 	return _build_plain_vertical_matrix(columns, rows_per_column)
 
 
@@ -363,50 +351,6 @@ func _build_plain_vertical_matrix(columns: Array[String], rows_per_column: int) 
 				lines.append("")
 
 	return "\n".join(PackedStringArray(lines))
-
-
-func _build_fixed_cell_vertical_table(columns: Array[String], rows_per_column: int) -> String:
-	# 日文 / 韩文使用固定列数的 table。
-	# 关键点：
-	# 1. 不再把“列间距”做成额外 table 列，否则短文本会被拉得非常散。
-	# 2. 即使当前页只有少量正文列，也仍然按 fixed_columns_per_page 建表，
-	#    让短页和长页拥有相同的列宽，不会出现韩文第二页突然被撑宽。
-	# 3. 空列补在左边，正文仍从右往左阅读。
-	var visual_columns: int = columns.size()
-	var target_columns: int = maxi(visual_columns, fixed_columns_per_page)
-	target_columns = maxi(1, target_columns)
-
-	var out := PackedStringArray()
-	out.append("[right][table=%d]" % target_columns)
-
-	for _pad_row in range(maxi(0, top_padding_lines)):
-		for _cell in range(target_columns):
-			out.append("[cell][center]　[/center][/cell]")
-
-	for row in range(rows_per_column):
-		var blank_left_columns: int = maxi(0, target_columns - visual_columns)
-
-		# 左侧先补空列，保证实际正文始终贴在右侧。
-		for _blank in range(blank_left_columns):
-			out.append("[cell][center]　[/center][/cell]")
-
-		# 正文列反向写入，让第一列位于最右侧。
-		for column_index in range(columns.size() - 1, -1, -1):
-			var column_text: String = columns[column_index]
-			var ch: String = "　"
-			if row < column_text.length():
-				ch = column_text.substr(row, 1)
-
-			out.append("[cell][center]%s[/center][/cell]" % ch)
-
-		if row < rows_per_column - 1:
-			for _spacing_row in range(maxi(0, char_spacing_lines)):
-				for _cell in range(target_columns):
-					out.append("[cell][center]　[/center][/cell]")
-
-	out.append("[/table][/right]")
-	return "".join(out)
-
 
 func _to_vertical_char(ch: String) -> String:
 	match ch:
