@@ -8,6 +8,7 @@ const SECTION_DISPLAY: String = "display"
 const SECTION_LANGUAGE: String = "language"
 
 const LOCALE_ZH_CN: String = "zh_CN"
+const LOCALE_ZH_TW: String = "zh_TW"
 const LOCALE_EN: String = "en"
 const LOCALE_JA: String = "ja"
 const LOCALE_KO: String = "ko"
@@ -71,6 +72,7 @@ func _notification(what: int) -> void:
 func _setup_language_options() -> void:
 	language_option_button.clear()
 	language_option_button.add_item("简体中文")
+	language_option_button.add_item("繁體中文")
 	language_option_button.add_item("English")
 	language_option_button.add_item("日本語")
 	language_option_button.add_item("한국어")
@@ -205,6 +207,7 @@ func _load_settings() -> void:
 
 	if (
 		saved_locale != LOCALE_ZH_CN
+		and saved_locale != LOCALE_ZH_TW
 		and saved_locale != LOCALE_EN
 		and saved_locale != LOCALE_JA
 		and saved_locale != LOCALE_KO
@@ -229,12 +232,14 @@ func _load_settings() -> void:
 	)
 
 	match saved_locale:
-		LOCALE_EN:
+		LOCALE_ZH_TW:
 			language_option_button.select(1)
-		LOCALE_JA:
+		LOCALE_EN:
 			language_option_button.select(2)
-		LOCALE_KO:
+		LOCALE_JA:
 			language_option_button.select(3)
+		LOCALE_KO:
+			language_option_button.select(4)
 		_:
 			language_option_button.select(0)
 
@@ -308,10 +313,12 @@ func _save_settings() -> void:
 func _selected_locale() -> String:
 	match language_option_button.selected:
 		1:
-			return LOCALE_EN
+			return LOCALE_ZH_TW
 		2:
-			return LOCALE_JA
+			return LOCALE_EN
 		3:
+			return LOCALE_JA
+		4:
 			return LOCALE_KO
 
 	return LOCALE_ZH_CN
@@ -412,6 +419,12 @@ func _get_missing_audio_bus_message(bus_name: String) -> String:
 		return translated % bus_name
 
 	var locale := TranslationServer.get_locale().to_lower()
+
+	if locale.begins_with("zh_tw") or locale.begins_with("zh-tw"):
+		return (
+			"目前專案尚未建立 %s 音訊匯流排。"
+			+ "建立後此滑桿會自動生效。"
+		) % bus_name
 
 	if locale.begins_with("en"):
 		return (
