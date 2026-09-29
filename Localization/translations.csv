@@ -10,7 +10,7 @@ UI_FULLSCREEN,全屏,全螢幕,Fullscreen,全画面表示,전체 화면
 UI_MENU_NEW_GAME,新游戏,新遊戲,New Game,ニューゲーム,새 게임
 UI_MENU_LOAD_GAME,读取存档,讀取存檔,Load Game,セーブデータを読み込む,게임 불러오기
 UI_MENU_READ_BOOK,查阅典籍,查閱典籍,Read Books,書物を読む,의서 읽기
-UI_MENU_QUIT_GAME,退出游戏,退出遊戲,Quit Game,ゲームを終了,게임 종료
+UI_MENU_QUIT_GAME,退出游戏,離開遊戲,Quit Game,ゲームを終了,게임 종료
 UI_DIFFICULTY_TITLE,选择难度,選擇難度,Choose Difficulty,難易度を選択,난이도 선택
 UI_DIFFICULTY_INFO,难度影响固定收入,難度影響固定收入,Difficulty affects regular income,難易度によって定期収入が変わります,난이도에 따라 정기 수입이 달라집니다
 UI_DIFFICULTY_EASY,"简单
@@ -33,14 +33,14 @@ Dad, Take a Break","難しい
 아버지, 편히 쉬세요"
 UI_SAVE_SELECT,选择存档,選擇存檔,Choose Save,セーブデータを選択,저장 슬롯 선택
 UI_CLOSE,关闭,關閉,Close,閉じる,닫기
-UI_CONFIRM_OVERWRITE,确认覆盖,確認覆蓋,Overwrite,上書きを確認,덮어쓰기
-UI_OVERWRITE_QUESTION,该槽位已有存档，是否覆盖？,該槽位已有存檔，是否覆蓋？,This slot already has a save. Overwrite it?,このスロットにはセーブデータがあります。上書きしますか？,이 슬롯에는 이미 저장 데이터가 있습니다. 덮어쓰시겠습니까?
+UI_CONFIRM_OVERWRITE,确认覆盖,確認覆寫,Overwrite,上書きを確認,덮어쓰기
+UI_OVERWRITE_QUESTION,该槽位已有存档，是否覆盖？,該存檔欄位已有存檔，是否覆寫？,This slot already has a save. Overwrite it?,このスロットにはセーブデータがあります。上書きしますか？,이 슬롯에는 이미 저장 데이터가 있습니다. 덮어쓰시겠습니까?
 UI_CANCEL,取消,取消,Cancel,キャンセル,취소
 UI_PAUSED,暂停,暫停,Paused,一時停止,일시정지
 UI_RESUME_GAME,继续游戏,繼續遊戲,Resume Game,ゲームを再開,게임 계속하기
 UI_SAVE_GAME,保存游戏,儲存遊戲,Save Game,セーブ,게임 저장
 UI_LOAD_SAVE,读取存档,讀取存檔,Load Save,セーブデータを読み込む,저장 불러오기
-UI_RETURN_MENU,返回主菜单,返回主菜單,Return to Main Menu,メインメニューに戻る,메인 메뉴로 돌아가기
+UI_RETURN_MENU,返回主菜单,返回主選單,Return to Main Menu,メインメニューに戻る,메인 메뉴로 돌아가기
 UI_MANUAL_SAVE,手动保存,手動儲存,Manual Save,手動セーブ,수동 저장
 UI_MANUAL_SAVE_RULE,白天保存本日开始状态；夜晚保存当前状态。,白天儲存本日開始狀態；夜晚儲存目前狀態。,Daytime saves the start of the day; nighttime saves the current state.,昼はその日の開始時点、夜は現在の状態を保存します。,"낮에는 하루 시작 시점을 저장하고, 밤에는 현재 상태를 저장합니다."
 UI_MANUAL_SLOT_FMT,手动存档 %d,手動存檔 %d,Manual Save %d,手動セーブ %d,수동 저장 %d
@@ -51,7 +51,7 @@ UI_MANUAL_SLOT_4,手动存档 4,手動存檔 4,Manual Save 4,手動セーブ 4,�
 UI_LOAD_RULE,可读取自动存档与全部手动存档。,可讀取自動存檔與全部手動存檔。,Load an autosave or any manual save.,オートセーブとすべての手動セーブを読み込めます。,자동 저장 또는 모든 수동 저장을 불러옵니다.
 UI_AUTO_SAVE,自动存档,自動存檔,Autosave,オートセーブ,자동 저장
 UI_INVALID_SAVE,无效存档,無效存檔,Invalid Save,無効なセーブデータ,유효하지 않은 저장 데이터
-UI_LOAD_WARNING,读取后，当前未保存的进度将丢失。,讀取後，目前未儲存的進度將丟失。,Loading will discard unsaved progress.,読み込むと、保存していない進行状況は失われます。,불러오면 저장하지 않은 진행 상황이 사라집니다.
+UI_LOAD_WARNING,读取后，当前未保存的进度将丢失。,讀取後，目前未儲存的進度將遺失。,Loading will discard unsaved progress.,読み込むと、保存していない進行状況は失われます。,불러오면 저장하지 않은 진행 상황이 사라집니다.
 UI_SELECT_MANUAL_DIFFICULTY,选择手动存档（%s难度）,選擇手動存檔（%s難度）,Choose Manual Save (%s),手動セーブを選択（難易度：%s）,수동 저장 선택 (%s 난이도)
 UI_DIFFICULTY_NAME_EASY,简单,簡單,Easy,易しい,쉬움
 UI_DIFFICULTY_NAME_NORMAL,普通,普通,Normal,普通,보통
@@ -67,7 +67,7 @@ UI_OVERWRITE_DETAIL,"%s已有存档：
 是否覆盖该手动存档？","%s已有存檔：
 %s
 
-是否覆蓋該手動存檔？","%s already has a save:
+是否覆寫該手動存檔？","%s already has a save:
 %s
 
 Overwrite this manual save?","%sにはセーブデータがあります：
@@ -86,7 +86,7 @@ UI_LOAD_CONFIRM_DETAIL,"读取%s：
 是否读取？","讀取%s：
 %s
 
-目前未儲存的進度將丟失。
+目前未儲存的進度將遺失。
 是否讀取？","Load %s:
 %s
 
@@ -108,7 +108,7 @@ UI_MANUAL_OVERWRITE_DETAIL,"%s已有记录：
 是否覆盖？","%s已有記錄：
 %s
 
-是否覆蓋？","%s already has a save:
+是否覆寫？","%s already has a save:
 %s
 
 Overwrite it?","%sには記録があります：
@@ -119,7 +119,7 @@ Overwrite it?","%sには記録があります：
 
 덮어쓰시겠습니까?"
 UI_SAVING_GAME,正在保存……,正在儲存……,Saving…,保存中……,저장 중…
-UI_OVERWRITE_MANUAL,覆盖手动存档,覆蓋手動存檔,Overwrite Manual Save,手動セーブを上書き,수동 저장 덮어쓰기
+UI_OVERWRITE_MANUAL,覆盖手动存档,覆寫手動存檔,Overwrite Manual Save,手動セーブを上書き,수동 저장 덮어쓰기
 UI_CANNOT_SAVE_STORY,剧情进行中，不能手动保存。,劇情進行中，不能手動儲存。,Cannot save while a story is playing.,物語の進行中は手動セーブできません。,이야기가 진행 중일 때는 수동 저장을 할 수 없습니다.
 UI_SAVE_DAY_SUCCESS,保存成功：已记录本日开始状态。,儲存成功：已記錄本日開始狀態。,Saved the start of the current day.,保存しました：その日の開始時点を記録しました。,저장 완료: 오늘의 시작 시점을 기록했습니다.
 UI_SAVE_NIGHT_SUCCESS,保存成功：已记录当前夜晚状态。,儲存成功：已記錄目前夜晚狀態。,Saved the current night.,保存しました：現在の夜の状態を記録しました。,저장 완료: 현재 밤의 상태를 기록했습니다.
@@ -127,16 +127,16 @@ UI_SAVE_FAILED,保存失败。,儲存失敗。,Save failed.,保存に失敗し�
 UI_LOAD_MISSING_FMT,没有存档，无法读取：%s,沒有存檔，無法讀取：%s,No save to load: %s,読み込めるセーブデータがありません：%s,불러올 저장 데이터가 없습니다: %s
 UI_LOAD_FAILED_FMT,读取存档失败：%s,讀取存檔失敗：%s,Failed to load save: %s,セーブデータの読み込みに失敗しました：%s,저장 데이터를 불러오지 못했습니다: %s
 UI_SAVE_AND_RETURN,保存并返回,儲存並返回,Save and Return,保存して戻る,저장하고 돌아가기
-UI_SAVE_AND_QUIT,保存并退出,儲存並退出,Save and Quit,保存して終了,저장하고 종료하기
+UI_SAVE_AND_QUIT,保存并退出,儲存並離開,Save and Quit,保存して終了,저장하고 종료하기
 UI_RETURN_CONFIRM_DETAIL,"当前阶段尚未完成。
 直接返回主菜单后，本阶段未保存的进度将丢失。
 选择“保存并返回”会先保存到%s。
 
 是否返回主菜单？","目前階段尚未完成。
-直接返回主菜單後，本階段未儲存的進度將丟失。
-選擇“儲存並返回”會先儲存到%s。
+直接返回主選單後，本階段未儲存的進度將遺失。
+選擇「儲存並返回」會先儲存到%s。
 
-是否返回主菜單？","This stage is not complete.
+是否返回主選單？","This stage is not complete.
 Returning to the main menu will discard unsaved progress.
 Save and Return will save to %s first.
 
@@ -154,10 +154,10 @@ UI_QUIT_CONFIRM_DETAIL,"当前阶段尚未完成。
 选择“保存并退出”会先保存到%s。
 
 是否退出游戏？","目前階段尚未完成。
-直接退出遊戲後，本階段未儲存的進度將丟失。
-選擇“儲存並退出”會先儲存到%s。
+直接離開遊戲後，本階段未儲存的進度將遺失。
+選擇「儲存並離開」會先儲存到%s。
 
-是否退出遊戲？","This stage is not complete.
+是否離開遊戲？","This stage is not complete.
 Quitting will discard unsaved progress.
 Save and Quit will save to %s first.
 
@@ -174,9 +174,9 @@ UI_RETURN_DEFAULT_DETAIL,"当前阶段尚未完成。
 返回主菜单后，将从最近一次自动存档继续。
 
 是否返回主菜单？","目前階段尚未完成。
-返回主菜單後，將從最近一次自動存檔繼續。
+返回主選單後，將從最近一次自動存檔繼續。
 
-是否返回主菜單？","This stage is not complete.
+是否返回主選單？","This stage is not complete.
 Returning to the main menu will resume from the most recent autosave.
 
 Return to the main menu?","現在の段階はまだ完了していません。
@@ -190,9 +190,9 @@ UI_QUIT_DEFAULT_DETAIL,"当前阶段尚未完成。
 退出游戏后，本阶段未保存的进度将丢失。
 
 是否退出游戏？","目前階段尚未完成。
-退出遊戲後，本階段未儲存的進度將丟失。
+離開遊戲後，本階段未儲存的進度將遺失。
 
-是否退出遊戲？","This stage is not complete.
+是否離開遊戲？","This stage is not complete.
 Quitting will discard unsaved progress.
 
 Quit the game?","現在の段階はまだ完了していません。
@@ -204,9 +204,9 @@ Quit the game?","現在の段階はまだ完了していません。
 게임을 종료하시겠습니까?"
 UI_RETURN_SAVE_FAILED_DETAIL,"保存失败，未返回主菜单。
 
-请重试“保存并返回”，或选择“返回主菜单”放弃未保存进度。","儲存失敗，未返回主菜單。
+请重试“保存并返回”，或选择“返回主菜单”放弃未保存进度。","儲存失敗，未返回主選單。
 
-請重試“儲存並返回”，或選擇“返回主菜單”放棄未儲存進度。","Save failed. You are still in the game.
+請重試「儲存並返回」，或選擇「返回主選單」放棄未儲存進度。","Save failed. You are still in the game.
 
 Try Save and Return again, or Return to Main Menu to discard unsaved progress.","保存に失敗したため、メインメニューには戻りませんでした。
 
@@ -215,9 +215,9 @@ Try Save and Return again, or Return to Main Menu to discard unsaved progress.",
 ‘저장하고 돌아가기’를 다시 시도하거나, ‘메인 메뉴로 돌아가기’를 선택하여 저장하지 않은 진행 상황을 버리세요."
 UI_QUIT_SAVE_FAILED_DETAIL,"保存失败，未退出游戏。
 
-请重试“保存并退出”，或选择“退出游戏”放弃未保存进度。","儲存失敗，未退出遊戲。
+请重试“保存并退出”，或选择“退出游戏”放弃未保存进度。","儲存失敗，未離開遊戲。
 
-請重試“儲存並退出”，或選擇“退出遊戲”放棄未儲存進度。","Save failed. The game is still running.
+請重試「儲存並離開」，或選擇「離開遊戲」放棄未儲存進度。","Save failed. The game is still running.
 
 Try Save and Quit again, or Quit Game to discard unsaved progress.","保存に失敗したため、ゲームは終了しませんでした。
 
@@ -448,7 +448,7 @@ UI_PRESCRIPTION_UNIT_JIN,斤,斤,jin,斤,근
 UI_PRESCRIPTION_ZERO_FEN,零分,零分,0 fen,零分,0푼
 UI_PRESCRIPTION_HERB_DB_METHOD_MISSING,药材数据库缺少 get_all_herbs(),藥材資料庫缺少 get_all_herbs(),Herb database is missing get_all_herbs().,薬材データベースに get_all_herbs() がありません,약재 데이터베이스에 get_all_herbs()가 없습니다.
 UI_PRESCRIPTION_FORMULA_LOCKED,该方剂尚未解锁。,該方劑尚未解鎖。,This formula is still locked.,この処方はまだ解放されていません。,이 처방은 아직 잠겨 있습니다.
-UI_PRESCRIPTION_PRESET_LOCKED,该方剂尚未累计 5 次妙手回春，不能使用预制方剂。,該方劑尚未累計 5 次妙手回春，不能使用預製方劑。,Use this formula for 5 Miraculous Recovery results to unlock its preset.,この処方は「妙手回春」を5回達成していないため、定型処方を使用できません。,이 처방으로 ‘명의의 손길’을 5회 달성하면 프리셋이 해금됩니다.
+UI_PRESCRIPTION_PRESET_LOCKED,该方剂尚未累计 5 次妙手回春，不能使用预制方剂。,該方劑尚未累計 5 次妙手回春，不能使用預設方劑。,Use this formula for 5 Miraculous Recovery results to unlock its preset.,この処方は「妙手回春」を5回達成していないため、定型処方を使用できません。,이 처방으로 ‘명의의 손길’을 5회 달성하면 프리셋이 해금됩니다.
 UI_PRESCRIPTION_NOT_INITIALIZED,当前处方未初始化,目前處方未初始化,The current prescription is not ready.,処方が初期化されていません,현재 처방이 준비되지 않았습니다.
 UI_PRESCRIPTION_HERB_DB_NOT_INITIALIZED,药材数据库未初始化,藥材資料庫未初始化,The herb database is not ready.,薬材データベースが初期化されていません,약재 데이터베이스가 준비되지 않았습니다.
 UI_PRESCRIPTION_INVALID_FORMULA,方剂数据无效，无法填入处方。,方劑資料無效，無法填入處方。,Invalid formula data; the prescription could not be filled.,処方データが無効です。処方に追加できません。,처방 데이터가 유효하지 않아 처방을 채울 수 없습니다.
@@ -456,7 +456,7 @@ UI_PRESCRIPTION_EMPTY_INGREDIENT,方剂数据存在空药材，无法填入处�
 UI_PRESCRIPTION_HERB_MISSING_FMT,方剂中的药材资源缺失：%s,方劑中的藥材資源缺失：%s,Missing herb resource in formula: %s,処方の薬材データが見つかりません：%s,처방에 필요한 약재 리소스가 없습니다: %s
 UI_PRESCRIPTION_INVALID_DOSE_FMT,方剂中的药材剂量无效：%s,方劑中的藥材劑量無效：%s,Invalid herb dose in formula: %s,処方の薬材の用量が無効です：%s,처방의 약재 용량이 유효하지 않습니다: %s
 UI_PRESCRIPTION_NO_INGREDIENTS,该方剂没有可填入的药材。,該方劑沒有可填入的藥材。,This formula contains no usable herbs.,この処方には追加できる薬材がありません。,이 처방에는 추가할 수 있는 약재가 없습니다.
-UI_PRESCRIPTION_PRESET_FILLED_FMT,已按预制方剂填入：%s,已按預製方劑填入：%s,Filled from formula preset: %s,定型処方を入力しました：%s,처방 프리셋으로 입력했습니다: %s
+UI_PRESCRIPTION_PRESET_FILLED_FMT,已按预制方剂填入：%s,已按預設方劑填入：%s,Filled from formula preset: %s,定型処方を入力しました：%s,처방 프리셋으로 입력했습니다: %s
 UI_PRESCRIPTION_INCREASE_FAILED_FMT,累加药材失败：%s,累加藥材失敗：%s,Could not increase herb dose: %s,薬材の追加に失敗しました：%s,약재 용량을 늘릴 수 없습니다: %s
 UI_PRESCRIPTION_ADDED_TOTAL_FMT,已加入%s区：%s，当前%s,已加入%s區：%s，目前%s,"Added to %s: %s, now %s",%s欄に%sを追加しました。現在：%s,"%s 영역에 추가: %s, 현재 %s"
 UI_PRESCRIPTION_ADD_FAILED_FMT,加入药材失败：%s,加入藥材失敗：%s,Could not add herb: %s,薬材の追加に失敗しました：%s,약재를 추가할 수 없습니다: %s
@@ -501,12 +501,12 @@ UI_READ_BOOK_MATCH_BADGE_FMT,【匹配%d】,【符合%d】,[Matches: %d],【一�
 UI_READ_BOOK_NEW_COUNT_BADGE_FMT,【新%d】,【新%d】,[New: %d],【新着%d】,[신규: %d]
 UI_READ_BOOK_MATCH_TOOLTIP_FMT,找到 %d 个匹配条目,找到 %d 個符合條目,Found %d matching entries,一致する項目が %d 件見つかりました,일치하는 항목 %d개를 찾았습니다
 UI_READ_BOOK_NEW_TOOLTIP_FMT,有 %d 个新解锁条目可以查看,有 %d 個新解鎖條目可以查看,%d newly unlocked entries are available,新しく解放された項目が %d 件あります,새로 해금된 항목 %d개를 열람할 수 있습니다
-UI_READ_BOOK_SEARCH_SUMMARY_FMT,搜索“%s”：共找到 %d 个已解锁条目；当前《%s》有 %d 个匹配。,搜尋“%s”：共找到 %d 個已解鎖條目；目前《%s》有 %d 個符合。,"Search ""%s"": %d unlocked entries found; ""%s"" has %d matches.",「%s」の検索結果：解放済みの項目が合計 %d 件。現在の『%s』には %d 件あります。,‘%s’ 검색: 해금된 항목 %d개를 찾음; ‘%s’ 일치 %d개.
+UI_READ_BOOK_SEARCH_SUMMARY_FMT,搜索“%s”：共找到 %d 个已解锁条目；当前《%s》有 %d 个匹配。,搜尋「%s」：共找到 %d 個已解鎖條目；目前《%s》有 %d 個符合。,"Search ""%s"": %d unlocked entries found; ""%s"" has %d matches.",「%s」の検索結果：解放済みの項目が合計 %d 件。現在の『%s』には %d 件あります。,‘%s’ 검색: 해금된 항목 %d개를 찾음; ‘%s’ 일치 %d개.
 UI_READ_BOOK_EMPTY_BOOK_FMT,《%s》当前没有已解锁条目。,《%s》目前沒有已解鎖條目。,"""%s"" has no unlocked entries yet.",『%s』には現在、解放済みの項目がありません。,‘%s’에는 아직 해금된 항목이 없습니다.
 UI_READ_BOOK_UNREAD_COUNT_FMT,《%s》共有 %d 个已解锁条目，其中 %d 个尚未查看。,《%s》共有 %d 個已解鎖條目，其中 %d 個尚未查看。,"""%s"" has %d unlocked entries, including %d unread.",『%s』には解放済みの項目が %d 件あり、うち %d 件は未読です。,"‘%s’에는 해금된 항목 %d개가 있으며, 그중 %d개를 읽지 않았습니다."
 UI_READ_BOOK_ENTRY_COUNT_FMT,《%s》共有 %d 个已解锁条目。,《%s》共有 %d 個已解鎖條目。,"""%s"" has %d unlocked entries.",『%s』には解放済みの項目が %d 件あります。,‘%s’에는 해금된 항목이 %d개 있습니다.
 UI_READ_BOOK_NO_BOOKS,当前没有可查看的医书。,目前沒有可查看的醫書。,No books are available to view.,閲覧できる医学書がありません。,열람할 수 있는 의서가 없습니다.
-UI_READ_BOOK_NO_RESULTS_FMT,没有找到包含“%s”的已解锁条目。,沒有找到包含“%s”的已解鎖條目。,"No unlocked entries match ""%s"".",「%s」に一致する解放済みの項目は見つかりませんでした。,‘%s’와 일치하는 해금된 항목이 없습니다.
+UI_READ_BOOK_NO_RESULTS_FMT,没有找到包含“%s”的已解锁条目。,沒有找到包含「%s」的已解鎖條目。,"No unlocked entries match ""%s"".",「%s」に一致する解放済みの項目は見つかりませんでした。,‘%s’와 일치하는 해금된 항목이 없습니다.
 UI_READ_BOOK_NEW_BADGE,【新】,【新】,[New],【新着】,[신규]
 UI_READ_BOOK_NEW_ENTRY_TOOLTIP,新解锁条目，尚未查看,新解鎖條目，尚未查看,Newly unlocked; not yet read,新しく解放された未読の項目,새로 해금되었으며 아직 읽지 않았습니다
 UI_READ_BOOK_NO_CONTENT,暂无正文,暫無正文,No text available,本文はありません,표시할 내용이 없습니다
@@ -519,11 +519,11 @@ UI_READ_BOOK_SELECT_DISEASE_FIRST,请先选择一个疾病条目，再查看脉�
 UI_READ_BOOK_PULSE_MISSING,脉象练习窗口不存在。,脈象練習視窗不存在。,Pulse practice window is unavailable.,脈診の練習画面が見つかりません。,맥진 연습 창을 사용할 수 없습니다.
 UI_READ_BOOK_PULSE_TITLE_FMT,脉象练习 - %s,脈象練習 - %s,Pulse Practice - %s,脈診の練習・%s,맥진 연습 - %s
 UI_RECORDS_TAB_TREATMENT,诊疗记录,診療記錄,Treatments,診療記録,진료
-UI_RECORDS_TAB_FINANCE,账目明细,賬目明細,Accounts,収支明細,장부
+UI_RECORDS_TAB_FINANCE,账目明细,帳目明細,Accounts,収支明細,장부
 UI_RECORDS_TAB_STATS,数据统计,資料統計,Statistics,統計,통계
-UI_RECORDS_TAB_PRESETS,预制方剂,預製方劑,Formula Presets,定型処方,처방 프리셋
+UI_RECORDS_TAB_PRESETS,预制方剂,預設方劑,Formula Presets,定型処方,처방 프리셋
 UI_RECORDS_TREATMENT_DATES,诊疗日期,診療日期,Treatment Dates,診療日,진료 날짜
-UI_RECORDS_FINANCE_DATES,账目日期,賬目日期,Account Dates,記帳日,장부 날짜
+UI_RECORDS_FINANCE_DATES,账目日期,帳目日期,Account Dates,記帳日,장부 날짜
 UI_RECORDS_TOTAL_PATIENTS,治疗人数,治療人數,Patients Treated,診療した患者,진료 환자 수
 UI_RECORDS_SUCCESSFUL_PATIENTS,成功人数,成功人數,Successful Treatments,治療成功,치료 성공 환자 수
 UI_RECORDS_MIRACULOUS_PATIENTS,妙手回春人数,妙手回春人數,Miraculous Recoveries,妙手回春,명의의 손길 환자 수
@@ -548,9 +548,9 @@ UI_RECORDS_DIAGNOSIS_FMT,断病：[color=#e3d1aa]%s[/color],斷病：[color=#e3d
 UI_RECORDS_PRESCRIPTION_FMT,开方：[color=#e3d1aa]%s[/color],開方：[color=#e3d1aa]%s[/color],Prescription: [color=#e3d1aa]%s[/color],処方：[color=#e3d1aa]%s[/color],처방: [color=#e3d1aa]%s[/color]
 UI_RECORDS_EMPTY_PRESCRIPTION,（空方）,（空方）,(Empty prescription),（処方なし）,(빈 처방)
 UI_RECORDS_LINE_SEPARATOR,；,；,;,；,;
-UI_RECORDS_FINANCE_START_FMT,[color=#c6ae83]账目自%s开始记录。[/color],[color=#c6ae83]賬目自%s開始記錄。[/color],[color=#c6ae83]Accounts are recorded from %s onward.[/color],[color=#c6ae83]収支の記録は%sから始まります。[/color],[color=#c6ae83]장부는 %s부터 기록됩니다.[/color]
-UI_RECORDS_FINANCE_EMPTY_FMT,[color=#c6ae83]%s暂无账目数据。[/color],[color=#c6ae83]%s暫無賬目資料。[/color],[color=#c6ae83]No accounts are available for %s.[/color],[color=#c6ae83]%sの収支データはありません。[/color],[color=#c6ae83]%s의 장부 데이터가 없습니다.[/color]
-UI_RECORDS_FINANCE_HEADER_FMT,[font_size=24][color=#e3b66b]%s · 账目明细[/color][/font_size],[font_size=24][color=#e3b66b]%s · 賬目明細[/color][/font_size],[font_size=24][color=#e3b66b]%s · Accounts[/color][/font_size],[font_size=24][color=#e3b66b]%s・収支明細[/color][/font_size],[font_size=24][color=#e3b66b]%s · 장부[/color][/font_size]
+UI_RECORDS_FINANCE_START_FMT,[color=#c6ae83]账目自%s开始记录。[/color],[color=#c6ae83]帳目自%s開始記錄。[/color],[color=#c6ae83]Accounts are recorded from %s onward.[/color],[color=#c6ae83]収支の記録は%sから始まります。[/color],[color=#c6ae83]장부는 %s부터 기록됩니다.[/color]
+UI_RECORDS_FINANCE_EMPTY_FMT,[color=#c6ae83]%s暂无账目数据。[/color],[color=#c6ae83]%s暫無帳目資料。[/color],[color=#c6ae83]No accounts are available for %s.[/color],[color=#c6ae83]%sの収支データはありません。[/color],[color=#c6ae83]%s의 장부 데이터가 없습니다.[/color]
+UI_RECORDS_FINANCE_HEADER_FMT,[font_size=24][color=#e3b66b]%s · 账目明细[/color][/font_size],[font_size=24][color=#e3b66b]%s · 帳目明細[/color][/font_size],[font_size=24][color=#e3b66b]%s · Accounts[/color][/font_size],[font_size=24][color=#e3b66b]%s・収支明細[/color][/font_size],[font_size=24][color=#e3b66b]%s · 장부[/color][/font_size]
 UI_RECORDS_FINANCE_UNSETTLED,[color=#c6ae83]本日尚未结算，支出将在进入夜晚时生成。[/color],[color=#c6ae83]本日尚未結算，支出將在進入夜晚時生成。[/color],[color=#c6ae83]Today is not settled yet. Expenses are recorded when night begins.[/color],[color=#c6ae83]この日の決算はまだです。夜になると支出が計上されます。[/color],[color=#c6ae83]오늘은 아직 결산되지 않았습니다. 밤이 시작되면 지출이 기록됩니다.[/color]
 UI_RECORDS_INCOME_HEADER,[b]收入[/b],[b]收入[/b],[b]Income[/b],[b]収入[/b],[b]수입[/b]
 UI_RECORDS_EXPENSE_HEADER,[b]支出[/b],[b]支出[/b],[b]Expenses[/b],[b]支出[/b],[b]지출[/b]
@@ -605,8 +605,8 @@ UI_RESULT_ROLE_LINE_FMT,%s：%s,%s：%s,%s: %s,%s：%s,%s: %s
 UI_RESULT_NONE,（无）,（無）,(None),（なし）,(없음)
 UI_RESULT_FORMULA_NOT_FOUND,（未找到标准方）,（未找到標準方）,(Standard formula not found),（標準処方が見つかりません）,(표준 처방을 찾을 수 없음)
 UI_RESULT_NO_DIAGNOSIS,未选择疾病,未選擇疾病,No condition selected,病名を選択していません,선택한 병증 없음
-UI_RESULT_PRESET_UNLOCK,预制方剂,預製方劑,Formula Preset,定型処方,처방 프리셋
-UI_RESULT_PRESET_UNLOCK_FMT,预制方剂：%s,預製方劑：%s,Formula Preset: %s,定型処方：%s,처방 프리셋: %s
+UI_RESULT_PRESET_UNLOCK,预制方剂,預設方劑,Formula Preset,定型処方,처방 프리셋
+UI_RESULT_PRESET_UNLOCK_FMT,预制方剂：%s,預設方劑：%s,Formula Preset: %s,定型処方：%s,처방 프리셋: %s
 UI_TUTORIAL_WINDOW_TITLE,游戏说明,遊戲說明,Game Guide,遊び方,게임 안내
 UI_TUTORIAL_KEYBOARD_HINT,← / → 翻页    Esc 关闭,← / → 翻頁    Esc 關閉,← / →: Pages    Esc: Close,← / → ページ切り替え    Esc 閉じる,← / →: 페이지 넘기기    Esc: 닫기
 UI_TUTORIAL_PREVIOUS,上一步,上一步,Previous,前へ,이전
@@ -627,7 +627,7 @@ UI_TUTORIAL_NIGHT_04_DESCRIPTION,《诸病源候论》记载疾病的相关信�
 UI_TUTORIAL_NIGHT_05_TITLE,方剂,方劑,Formulas,処方,처방
 UI_TUTORIAL_NIGHT_05_DESCRIPTION,其他医书记载各类方剂，白天在开方窗口填入方剂的组成药材来给病人开药。,其他醫書記載各類方劑，白天在開方視窗填入方劑的組成藥材來給病人開藥。,"Other medical books list various formulas. During the day, enter their herbs in the prescription window to treat patients.",ほかの医学書にはさまざまな処方が載っています。昼間は処方画面で構成薬材を入力し、患者に薬を出します。,다른 의서에는 여러 처방이 기록되어 있습니다. 낮에는 처방 창에 처방을 구성하는 약재를 입력하여 환자에게 약을 지어 주세요.
 UI_TUTORIAL_NIGHT_06_TITLE,脉象,脈象,Pulse Readings,脈,맥상
-UI_TUTORIAL_NIGHT_06_DESCRIPTION,在《诸病源候论》中选择疾病条目时，点击右下角“查看脉象”按钮，可以观察该疾病的脉象。,在《諸病源候論》中選擇疾病條目時，點選右下角“查看脈象”按鈕，可以觀察該疾病的脈象。,"Select a disease entry in the Treatise on the Origins and Manifestations of Various Diseases, then click 'View Pulse' in the lower right to examine its pulse.",『諸病源候論』で疾病の項目を選び、右下の「脈を確認」を押すと、その病の脈を観察できます。,《제병원후론》에서 병증 항목을 선택한 다음 오른쪽 아래의 ‘맥상 보기’ 버튼을 클릭하면 해당 병증의 맥상을 확인할 수 있습니다.
+UI_TUTORIAL_NIGHT_06_DESCRIPTION,在《诸病源候论》中选择疾病条目时，点击右下角“查看脉象”按钮，可以观察该疾病的脉象。,在《諸病源候論》中選擇疾病條目時，點選右下角「查看脈象」按鈕，可以觀察該疾病的脈象。,"Select a disease entry in the Treatise on the Origins and Manifestations of Various Diseases, then click 'View Pulse' in the lower right to examine its pulse.",『諸病源候論』で疾病の項目を選び、右下の「脈を確認」を押すと、その病の脈を観察できます。,《제병원후론》에서 병증 항목을 선택한 다음 오른쪽 아래의 ‘맥상 보기’ 버튼을 클릭하면 해당 병증의 맥상을 확인할 수 있습니다.
 UI_TUTORIAL_NIGHT_07_TITLE,脉象,脈象,Pulse Readings,脈,맥상
 UI_TUTORIAL_NIGHT_07_DESCRIPTION,健康的脉象是不高不低，不粗不细，不宽不窄，一次呼吸脉搏跳动四到五次。,健康的脈象是不高不低，不粗不細，不寬不窄，一次呼吸脈搏跳動四到五次。,"A healthy pulse has neither increased nor decreased amplitude, neither a thicker nor thinner pulse line, and neither broader nor narrower pulse width. Its pulse frequency is four to five beats per breath.",健康な脈は高すぎず低すぎず、太すぎず細すぎず、広すぎず狭すぎず、呼吸一回につき四～五回打ちます。,"건강한 맥상은 높지도 낮지도, 굵지도 가늘지도, 넓지도 좁지도 않습니다. 한 번 숨 쉬는 동안 맥박은 네 번에서 다섯 번 뜁니다."
 UI_TUTORIAL_NIGHT_08_TITLE,气,氣,Qi,気,기
@@ -669,7 +669,7 @@ UI_TUTORIAL_DAY_04_DESCRIPTION,在断病开放窗口的搜索栏输入疾病、�
 UI_TUTORIAL_DAY_05_TITLE,开方,開方,Prescribing,処方,처방하기
 UI_TUTORIAL_DAY_05_DESCRIPTION,选择君臣佐使区域，左键再点击药材加入，右键点击减少。右键点击君臣佐使区域已加入的药材，可以删除。选择单位剂量控制每次点击加入的药量。快捷键:君(1)臣(2)佐(3)使(4)，单位切换(~和Tab)。,選擇君臣佐使區域，左鍵再點選藥材加入，右鍵點選減少。右鍵點選君臣佐使區域已加入的藥材，可以刪除。選擇單位劑量控制每次點選加入的藥量。快捷鍵:君(1)臣(2)佐(3)使(4)，單位切換(~和Tab)。,"Select a Chief, Deputy, Assistant or Envoy area, then left-click an herb to add it or right-click to reduce it. Right-click an herb already in the formula to remove it. Choose the dose per click. Shortcuts: Chief (1), Deputy (2), Assistant (3), Envoy (4); switch dose (~ or Tab).",君薬・臣薬・佐薬・使薬の欄を選び、薬材を左クリックして追加、右クリックして減量します。追加済みの薬材を欄内で右クリックすると削除できます。単位と用量を選ぶと一度に加える量が変わります。ショートカット：君(1)、臣(2)、佐(3)、使(4)、単位切り替え(~ / Tab)。,"군약·신약·좌약·사약 영역을 선택한 뒤 약재를 왼쪽 클릭하여 추가하고 오른쪽 클릭하여 줄이세요. 처방에 이미 추가된 약재를 오른쪽 클릭하면 삭제할 수 있습니다. 클릭당 추가할 용량을 선택하세요. 단축키: 군약(1), 신약(2), 좌약(3), 사약(4); 용량 전환(~ 또는 Tab)"
 UI_TUTORIAL_DAY_06_TITLE,方剂,方劑,Formulas,方剤,처방
-UI_TUTORIAL_DAY_06_DESCRIPTION,在搜索栏输入方剂名可筛选出该方剂所包含的药材条目。当达成一定次数的妙手回春评价后，会出现预制方剂条目，点击后会自动填入方剂所包含的所有药材及剂量。,在搜尋欄輸入方劑名可篩選出該方劑所包含的藥材條目。當達成一定次數的妙手回春評價後，會出現預製方劑條目，點選後會自動填入方劑所包含的所有藥材及劑量。,"Search for a formula to filter its herbs. After earning enough Miraculous Recovery ratings, a preset formula appears. Click it to fill in all of its herbs and doses automatically.",検索欄に処方名を入力すると、その処方に含まれる薬材を絞り込めます。同じ処方で「妙手回春」を一定回数達成すると定型処方が現れ、クリックすると薬材と用量が自動入力されます。,검색란에 처방 이름을 입력하면 해당 처방에 포함된 약재를 필터링할 수 있습니다. ‘명의의 손길’ 평가를 일정 횟수 달성하면 처방 프리셋이 나타납니다. 프리셋을 클릭하면 처방에 포함된 모든 약재와 용량이 자동으로 입력됩니다.
+UI_TUTORIAL_DAY_06_DESCRIPTION,在搜索栏输入方剂名可筛选出该方剂所包含的药材条目。当达成一定次数的妙手回春评价后，会出现预制方剂条目，点击后会自动填入方剂所包含的所有药材及剂量。,在搜尋欄輸入方劑名可篩選出該方劑所包含的藥材條目。當達成一定次數的妙手回春評價後，會出現預設方劑條目，點選後會自動填入方劑所包含的所有藥材及劑量。,"Search for a formula to filter its herbs. After earning enough Miraculous Recovery ratings, a preset formula appears. Click it to fill in all of its herbs and doses automatically.",検索欄に処方名を入力すると、その処方に含まれる薬材を絞り込めます。同じ処方で「妙手回春」を一定回数達成すると定型処方が現れ、クリックすると薬材と用量が自動入力されます。,검색란에 처방 이름을 입력하면 해당 처방에 포함된 약재를 필터링할 수 있습니다. ‘명의의 손길’ 평가를 일정 횟수 달성하면 처방 프리셋이 나타납니다. 프리셋을 클릭하면 처방에 포함된 모든 약재와 용량이 자동으로 입력됩니다.
 UI_CREDITS_GAME_TITLE,医 者,醫 者,Doctor,医 者,의사
 UI_CREDITS_GAME_DESIGN,游戏设计,遊戲設計,Game Design,ゲームデザイン,게임 디자인
 UI_CREDITS_LI_QIAOCHEN,李翘辰,李翹辰,Li Qiaochen,李翹辰,리차오천
@@ -689,7 +689,7 @@ UI_DAILY_FINANCE_INCOME,收入,收入,Income,収入,수입
 UI_DAILY_FINANCE_CONSULTATION_FMT,诊费：%s,診費：%s,Consultation: %s,診察料：%s,진료비: %s
 UI_DAILY_FINANCE_MEDICINE_NET_FMT,药材收入：%s,藥材收入：%s,Net Herb Income: %s,薬材収入：%s,약재 순수입: %s
 UI_DAILY_FINANCE_MEDICINE_SALES_FMT,药材销售：%s,藥材銷售：%s,Herb Sales: %s,薬材売上：%s,약재 판매: %s
-UI_DAILY_FINANCE_OLD_PROFIT_FMT,药材利润（旧账）：%s,藥材利潤（舊賬）：%s,Herb Profit (Legacy): %s,薬材の利益（旧帳簿）：%s,약재 이익(이전 장부): %s
+UI_DAILY_FINANCE_OLD_PROFIT_FMT,药材利润（旧账）：%s,藥材利潤（舊帳）：%s,Herb Profit (Legacy): %s,薬材の利益（旧帳簿）：%s,약재 이익(이전 장부): %s
 UI_DAILY_FINANCE_GIFT_FMT,病家谢礼：%s,病家謝禮：%s,Patient Gifts: %s,患者からの謝礼：%s,환자 사례금: %s
 UI_DAILY_FINANCE_LI_JIAN_ZHONG_FMT,李建中俸禄：%s,李建中俸祿：%s,Li Jianzhong's Salary: %s,李建中の俸禄：%s,이건중 급여: %s
 UI_DAILY_FINANCE_LI_YAN_WEN_FMT,李言闻收入：%s,李言聞收入：%s,Li Yanwen's Income: %s,李言聞の収入：%s,이언문 수입: %s
@@ -697,7 +697,7 @@ UI_DAILY_FINANCE_LAND_RENT_FMT,田租：%s,田租：%s,Land Rent: %s,地代：%s
 UI_DAILY_FINANCE_TOTAL_INCOME_FMT,收入合计：%s,收入合計：%s,Total Income: %s,収入合計：%s,총수입: %s
 UI_DAILY_FINANCE_EXPENSE,支出,支出,Expenses,支出,지출
 UI_DAILY_FINANCE_MEDICINE_COST_FMT,药材进货成本：%s,藥材進貨成本：%s,Herb Purchase Cost: %s,薬材の仕入れ：%s,약재 구입 비용: %s
-UI_DAILY_FINANCE_OLD_FAILURE_COST_FMT,治疗失败药材成本（旧账）：%s,治療失敗藥材成本（舊賬）：%s,Failed Treatment Herbs (Legacy): %s,治療失敗時の薬材費（旧帳簿）：%s,치료 실패 약재 비용(이전 장부): %s
+UI_DAILY_FINANCE_OLD_FAILURE_COST_FMT,治疗失败药材成本（旧账）：%s,治療失敗藥材成本（舊帳）：%s,Failed Treatment Herbs (Legacy): %s,治療失敗時の薬材費（旧帳簿）：%s,치료 실패 약재 비용(이전 장부): %s
 UI_DAILY_FINANCE_STAFF_WAGES_FMT,陈皮半夏工钱：%s,陳皮半夏工錢：%s,Chenpi & Banxia Pay: %s,陳皮と半夏の給金：%s,진피·반하 인건비: %s
 UI_DAILY_FINANCE_FOOD_FMT,食物：%s,食物：%s,Food: %s,食費：%s,식비: %s
 UI_DAILY_FINANCE_GIFTS_FMT,人情随礼：%s,人情隨禮：%s,Social Gifts: %s,贈答費：%s,인사 예물: %s
@@ -823,7 +823,7 @@ UI_BOOK_ENTRY_BODY_BA_GANG_BIAN_ZHENG,"【八纲辨证】
 
 八纲之间并非彼此孤立，一种病证可以同时具有多种性质，如表寒证、里热证或虚寒证。病情发展过程中，还可能发生表里出入、寒热转化和虚实变化。因此，医者必须四诊合参，方能把握疾病的整体情况。","【八綱辨證】
 
-八綱辨證是中醫分析病情的基本方法。醫者透過望、聞、問、切收集症狀，再以陰、陽、表、里、寒、熱、虛、實八項綱領進行歸納，從而判斷疾病的位置、...","EIGHT PRINCIPLES OF PATTERN IDENTIFICATION
+八綱辨證是中醫分析病情的基本方法。醫者透過望、聞、問、切收集症狀，再以陰、陽、表、裡、寒、熱、虛、實八項綱領進行歸納，從而判斷疾病的位置、...","EIGHT PRINCIPLES OF PATTERN IDENTIFICATION
 
 Pattern identification by the eight principles is a basic method of analyzing a patient's condition in traditional Chinese medicine. After gathering signs and symptoms through the four examinations, a physician groups them under eight principles: Yin, Yang, Exterior, Interior, Cold, Heat, Deficiency and Excess. This helps determine where the condition is located, its nature, and the relative strength of healthy Qi and pathogenic influences.
 
@@ -897,7 +897,7 @@ UI_BOOK_ENTRY_BODY_BIAO_LI,"【表里】
 
 表证和里证可以同时存在，称为表里同病；疾病由表入里，通常表示病邪逐渐深入；由里出表，则可能表示病邪向外透达。医者需要结合寒热、虚实以及望、闻、问、切所得信息进行判断，不可只凭一个症状确定表里。辨明疾病部位后，表证通常以解表为基本方向，里证则根据具体的寒热虚实采取相应治法。","【表裡】
 
-表裡是中醫八綱辨證中用來判斷疾病部位深淺和病勢進退的兩項綱領。表證通常指病邪位於皮毛、肌腠和經絡，多見於外邪侵襲人體的初期；里證通常指病邪深入...","EXTERIOR AND INTERIOR
+表裡是中醫八綱辨證中用來判斷疾病部位深淺和病勢進退的兩項綱領。表證通常指病邪位於皮毛、肌腠和經絡，多見於外邪侵襲人體的初期；裡證通常指病邪深入...","EXTERIOR AND INTERIOR
 
 Exterior and Interior are two of the eight principles used in traditional Chinese medicine to assess the depth of a condition and how it is progressing. An Exterior pattern generally means that a pathogenic influence is at the skin, superficial tissues or channels, often early in an externally contracted illness. An Interior pattern generally means that it has reached the organs, Qi, blood or bone marrow; it may also arise directly from internal factors such as diet, emotions or overwork. These terms describe the location and course of a condition, not simply the outside and inside of the body.
 
@@ -1097,7 +1097,7 @@ UI_BOOK_ENTRY_BODY_ZANG_XIANG,"【藏象】
 
 藏象理论强调人体是一个相互联系的整体。各脏腑不仅具有各自的功能，还通过气血津液、经络以及五行生克关系彼此协调，并与形体、官窍、情志和自然环境相联系。中医所说的脏腑属于功能体系，不能与现代医学中的解剖器官完全等同。","【藏象】
 
-藏象是中醫研究人體臟腑生理功能、病理變化及其相互關係的理論。“藏”指藏於體內的臟腑，“象”指臟腑功能表現於外的各種徵象。中醫透過觀察人的面色、...","VISCERAL MANIFESTATIONS
+藏象是中醫研究人體臟腑生理功能、病理變化及其相互關係的理論。「藏」指藏於體內的臟腑，「象」指臟腑功能表現於外的各種徵象。中醫透過觀察人的面色、...","VISCERAL MANIFESTATIONS
 
 Visceral Manifestations is a traditional Chinese medicine theory about the functions of the body's internal systems, how they change in illness and how they relate to one another. Zang refers to the internal organs, while Xiang refers to outward signs of their functions. By observing changes in complexion, build, emotions, voice, tongue and pulse, a physician infers how those systems are functioning.
 
@@ -1353,7 +1353,7 @@ UI_BOOK_ENTRY_BODY_JIN,"【津】
 
 津液不足时，常见口渴、口鼻干燥、皮肤干涩、小便短少或大便干结等表现；津的输布和排泄失常时，则可能停聚为水湿、痰饮或形成水肿。津和液性质有所不同，但能够相互转化，临床上通常结合起来判断。","【津】
 
-津是人體正常水液的一部分，與液合稱“津液”。中醫認為津的性質較為清稀、流動性較強，主要分布於皮膚、肌肉和孔竅，也可滲入血脈，參與血液的組成和運行...","JIN (THIN BODY FLUIDS)
+津是人體正常水液的一部分，與液合稱「津液」。中醫認為津的性質較為清稀、流動性較強，主要分布於皮膚、肌肉和孔竅，也可滲入血脈，參與血液的組成和運行...","JIN (THIN BODY FLUIDS)
 
 Jin is one component of the body's normal fluids. Together with the thicker Ye fluids, it makes up Jin-Ye, or body fluids. Traditional Chinese medicine describes Jin as relatively thin and mobile. It is found mainly in the skin, muscles and body openings, and can also enter the vessels and contribute to the composition and circulation of blood.
 
@@ -1385,7 +1385,7 @@ UI_BOOK_ENTRY_BODY_YE,"【液】
 
 液不足时，可能出现关节活动不利、肌肤失润、口干咽燥、眩晕或身体消瘦等表现；液的运行失常时，也可能停聚形成痰饮、水湿等病理产物。一般而言，津偏于清稀并滋润体表，液偏于稠厚并濡养体内，但二者之间没有绝对界限。","【液】
 
-液是人體正常水液的一部分，與津合稱“津液”。中醫認為液的性質較為稠厚、流動性相對較小，主要分布於臟腑、關節、骨髓和腦髓等較深部位。
+液是人體正常水液的一部分，與津合稱「津液」。中醫認為液的性質較為稠厚、流動性相對較小，主要分布於臟腑、關節、骨髓和腦髓等較深部位。
 
 液具有濡養...","YE (THICK BODY FLUIDS)
 
@@ -1417,7 +1417,7 @@ UI_BOOK_ENTRY_BODY_WAI_GAN_LIU_XIE,"【外感六邪】
 
 不同邪气具有不同的致病特点，但人体患病后的具体表现还会受到体质、环境、病程及脏腑状态的影响。医者需要结合表里、寒热、虚实以及望、闻、问、切所得信息综合判断，不能仅凭季节或单一症状确定邪气种类。","【外感六邪】
 
-外感六邪是中醫對風、寒、暑、濕、燥、熱六類外來致病因素的統稱，又稱“六淫”。風、寒、暑、濕、燥、熱原本是自然界正常的氣候變化，稱為“六氣”...","SIX EXTERNAL PATHOGENIC INFLUENCES
+外感六邪是中醫對風、寒、暑、濕、燥、熱六類外來致病因素的統稱，又稱「六淫」。風、寒、暑、濕、燥、熱原本是自然界正常的氣候變化，稱為「六氣」...","SIX EXTERNAL PATHOGENIC INFLUENCES
 
 In traditional Chinese medicine, the six external pathogenic influences are Wind, Cold, Summer Heat, Dampness, Dryness and Heat. They are also called the Six Excesses. Under normal conditions, these are natural climatic influences, known as the Six Climatic Influences. They may become pathogenic when the weather is extreme or unusual, or when the body's healthy Qi and ability to adapt are weakened.
 
@@ -2741,7 +2741,7 @@ UI_BOOK_ENTRY_BODY_CHAI_HU,"柴胡（茈胡）
 【氣味】味苦、辛，性微寒。
 【毒性】無毒。
 【歸經】歸肝、膽、肺經。
-【主治】疏散退熱，疏肝解郁，升舉陽氣。
+【主治】疏散退熱，疏肝解鬱，升舉陽氣。
 【釋名】地熏（《本經》）、芸蒿...","BUPLEURUM ROOT
 
 [Taste and nature] Bitter and acrid; slightly cold.
@@ -2983,7 +2983,7 @@ He cites Two Worthies Powder, made from tangerine peel, Licorice Root and salt, 
 【고전 해설】
 
 고전 의가들은 진피의 성미와 귀경을 바탕으로 위 효능을 설명했다. 임상에서는 병의 한열·허실과 환자의 체질을 살피고, 필요한 경우 다른 약재와 배합하여 사용한다."
-UI_BOOK_ENTRY_TITLE_CHEN_XIANG,沉香,沈香,Agarwood,沈香,침향
+UI_BOOK_ENTRY_TITLE_CHEN_XIANG,沉香,沉香,Agarwood,沈香,침향
 UI_BOOK_ENTRY_BODY_CHEN_XIANG,"沉香
 【气味】味辛、苦，性微温。
 【毒性】无毒。
@@ -2995,7 +2995,7 @@ UI_BOOK_ENTRY_BODY_CHEN_XIANG,"沉香
 
 《南越志》言︰交州人称为蜜香，谓其气如蜜脾也。梵书名阿迦香。
 
-【发明】","沈香
+【发明】","沉香
 【氣味】味辛、苦，性微溫。
 【毒性】無毒。
 【歸經】歸脾、胃、腎經。
@@ -3489,7 +3489,7 @@ UI_BOOK_ENTRY_BODY_DAN_DOU_CHI,"淡豆豉（大豆豉）
 【氣味】味苦、辛，性涼。
 【毒性】無毒。
 【歸經】歸肺、胃經。
-【主治】解表除煩，宣發郁熱。
+【主治】解表除煩，宣發鬱熱。
 【釋名】時珍曰︰按︰劉熙《釋名》雲︰豉，嗜...","FERMENTED SOYBEAN
 
 [Taste and nature] Bitter and acrid; cool.
@@ -4558,7 +4558,7 @@ Song cites old antidotal traditions in which Licorice Root was used after toxic 
 【고전 해설】
 
 고전 의가들은 감초의 성미와 귀경을 바탕으로 위 효능을 설명했다. 임상에서는 병의 한열·허실과 환자의 체질을 살피고, 필요한 경우 다른 약재와 배합하여 사용한다."
-UI_BOOK_ENTRY_TITLE_GAN_JIANG,干姜,乾姜,Dried Ginger,乾姜,건강
+UI_BOOK_ENTRY_TITLE_GAN_JIANG,干姜,乾薑,Dried Ginger,乾姜,건강
 UI_BOOK_ENTRY_BODY_GAN_JIANG,"干姜
 【气味】味辛，性热。
 【毒性】无毒。
@@ -4575,12 +4575,12 @@ UI_BOOK_ENTRY_BODY_GAN_JIANG,"干姜
 
 震亨曰：干姜入肺中利肺气，入肾中燥下湿，入肝经引血药生血，同补阴药亦能引血药入气分生血，故血虚发热、产后大热者用之。止唾血、痢血，须炒黑用之。有血脱色白而夭不泽脉濡者，此大寒也。宜干姜之辛温以益血，大热以温经。
 
-时珍曰：干姜，能引血药入血分，气药入气分，又能去恶养新，有阳生阴长之意，故血虚者用之；而人吐血、衄血、下血，有阴无阳者，亦宜用之。乃热因热用，从治之法也。","乾姜
+时珍曰：干姜，能引血药入血分，气药入气分，又能去恶养新，有阳生阴长之意，故血虚者用之；而人吐血、衄血、下血，有阴无阳者，亦宜用之。乃热因热用，从治之法也。","乾薑
 【氣味】味辛，性熱。
 【毒性】無毒。
 【歸經】歸脾、胃、腎、心、肺經。
 【主治】溫中散寒，回陽通脈，溫肺化飲。
-【釋名】時珍曰：以姜之乾者故名，乾姜...","DRIED GINGER
+【釋名】時珍曰：以薑之乾者故名，乾薑...","DRIED GINGER
 
 [Taste and nature] Acrid; hot.
 
@@ -4900,7 +4900,7 @@ Numerous legends describe extremely old goji plants, dog-shaped roots and people
 【고전 해설】
 
 고전 의가들은 구기자의 성미와 귀경을 바탕으로 위 효능을 설명했다. 임상에서는 병의 한열·허실과 환자의 체질을 살피고, 필요한 경우 다른 약재와 배합하여 사용한다."
-UI_BOOK_ENTRY_TITLE_GOU_TENG,钩藤,鈎藤,Uncaria Hook,釣藤鈎,조구등
+UI_BOOK_ENTRY_TITLE_GOU_TENG,钩藤,鉤藤,Uncaria Hook,釣藤鈎,조구등
 UI_BOOK_ENTRY_BODY_GOU_TENG,"钩藤（钓藤）
 【气味】味甘，性凉。
 【毒性】无毒。
@@ -4911,7 +4911,7 @@ UI_BOOK_ENTRY_BODY_GOU_TENG,"钩藤（钓藤）
 时珍曰︰其刺曲如钓钩，故名。或作吊，从简耳。
 
 【发明】
-时珍曰︰钓藤，手足厥阴药也。足厥阴主风，手厥阴主火。 惊痫眩晕，皆肝风相火之病。钓藤通心包于肝木，风静火息，则诸证自除。或云︰入数寸","鈎藤（釣藤）
+时珍曰︰钓藤，手足厥阴药也。足厥阴主风，手厥阴主火。 惊痫眩晕，皆肝风相火之病。钓藤通心包于肝木，风静火息，则诸证自除。或云︰入数寸","鉤藤（釣藤）
 【氣味】味甘，性涼。
 【毒性】無毒。
 【歸經】歸肝、心包經。
@@ -5441,7 +5441,7 @@ He rejects Daoist claims that prolonged use promotes immortality. Because Coptis
 【고전 해설】
 
 고전 의가들은 황련의 성미와 귀경을 바탕으로 위 효능을 설명했다. 임상에서는 병의 한열·허실과 환자의 체질을 살피고, 필요한 경우 다른 약재와 배합하여 사용한다."
-UI_BOOK_ENTRY_TITLE_HUANG_QI,黄芪,黃芪,Astragalus Root,黄耆,황기
+UI_BOOK_ENTRY_TITLE_HUANG_QI,黄芪,黃耆,Astragalus Root,黄耆,황기
 UI_BOOK_ENTRY_BODY_HUANG_QI,"黄芪（黄耆）
 【气味】味甘，性微温。
 【毒性】无毒。
@@ -5479,7 +5479,7 @@ UI_BOOK_ENTRY_BODY_HUANG_QI,"黄芪（黄耆）
 
 此方原出东垣，治慢惊土衰火旺之法。今借而治痘，以其内固营血，外护卫气，滋助阴阳，作为脓血，其证虽异，其理则同。去白芍药，加生姜，改名曰保元汤。炙黄耆三钱，人参二钱，炙甘草一钱，生姜一片，水煎服之。险证者，初出圆晕干红少润也，浆长光泽，顶陷不起也；既出虽起惨色不明也，浆行色灰不荣也，浆定光润不消也，浆老湿润不敛也，结痂而胃弱内虚也，痂落而口渴不食也，痂后生痈肿也，痈肿溃而敛迟也。凡有诸症，并宜此汤。或加芎 ，加官桂，加糯米以助之。详见本书。
 
-嘉谟曰︰人参补中，黄耆实表。凡内伤脾胃，发热恶寒，吐泄怠卧，胀满痞塞，神短脉微者，当以人参为君，黄耆为臣；若表虚自汗亡阳，溃疡痘疹阴疮者，当以黄耆为君，人参为臣，不可执一也。","黃芪（黃耆）
+嘉谟曰︰人参补中，黄耆实表。凡内伤脾胃，发热恶寒，吐泄怠卧，胀满痞塞，神短脉微者，当以人参为君，黄耆为臣；若表虚自汗亡阳，溃疡痘疹阴疮者，当以黄耆为君，人参为臣，不可执一也。","黃耆
 【氣味】味甘，性微溫。
 【毒性】無毒。
 【歸經】歸脾、肺經。
@@ -6040,7 +6040,7 @@ UI_BOOK_ENTRY_BODY_JING_JIE,"荆芥（假苏）
 【毒性】無毒。
 【歸經】歸肺、肝經。
 【主治】解表散風，透疹，利咽消腫，止血。
-【釋名】姜芥（《別錄》）、荊芥（《吳...","SCHIZONEPETA HERB
+【釋名】薑芥（《別錄》）、荊芥（《吳...","SCHIZONEPETA HERB
 
 [Taste and nature] Acrid; slightly warm.
 
@@ -8689,7 +8689,7 @@ UI_BOOK_ENTRY_BODY_SHENG_JIANG,"生姜
 【毒性】無毒。
 【歸經】歸肺、脾、胃經。
 【主治】解表散寒，溫中止嘔，解魚蟹毒。
-【釋名】時珍曰：按：許慎《說文》：姜作䕬，雲...","FRESH GINGER
+【釋名】時珍曰：按：許慎《說文》：薑作䕬，雲...","FRESH GINGER
 
 [Taste and nature] Acrid; warm.
 
@@ -9978,7 +9978,7 @@ UI_BOOK_ENTRY_BODY_XIANG_FU,"香附（莎根，香附子）
 【氣味】味辛、微苦、微甘，性平。
 【毒性】無毒。
 【歸經】歸肝、脾、三焦經。
-【主治】疏肝解郁，理氣寬中，調經止痛。
+【主治】疏肝解鬱，理氣寬中，調經止痛。
 【釋名】雀頭香...","CYPERUS RHIZOME
 
 [Taste and nature] Acrid, slightly bitter and slightly sweet; neutral.
@@ -11461,12 +11461,12 @@ UI_BOOK_ENTRY_BODY_YU_PING_FENG_SAN,"玉屏风散
 【功效】益氣固表，止汗御風
 【主治】衛氣虛
 【組成】
-君：黃芪  一兩
+君：黃耆  一兩
 臣：白朮 一兩
 佐：防風 五錢
 使：
 【配伍】
-黃芪...","JADE WINDSCREEN POWDER
+黃耆...","JADE WINDSCREEN POWDER
 [Source] Formulas for Investigating Origins
 [Actions] Supports Qi and strengthens the Exterior; reduces sweating and protects against Wind
 [Indication] Defensive Qi Deficiency
@@ -11523,7 +11523,7 @@ UI_BOOK_ENTRY_BODY_WU_TOU_TANG,"乌头汤
 【組成】
 君：烏頭 二錢
 臣：麻黃 三錢
-佐：白芍 三錢，黃芪 三錢
+佐：白芍 三錢，黃耆 三錢
 使：...","ACONITE DECOCTION
 [Source] Essentials from the Golden Cabinet
 [Actions] Warms the channels, disperses Cold and Dampness, and eases pain
@@ -11828,7 +11828,7 @@ UI_BOOK_ENTRY_BODY_BU_FEI_TANG,"补肺汤
 【功效】補肺益氣，止咳平喘
 【主治】肺氣虛
 【組成】
-君：人參 三錢，黃芪 五錢
+君：人參 三錢，黃耆 五錢
 臣：熟地黃 五錢
 佐：五味子 二錢，紫...","LUNG-TONIFYING DECOCTION
 [Source] Essential Prescriptions Worth a Thousand Gold for Emergencies
@@ -12072,8 +12072,8 @@ UI_BOOK_ENTRY_BODY_DA_QING_LONG_TANG,"大青龙汤
 大枣：补中滋液，防峻汗耗伤津液。
 炙甘草：调和诸药；缓麻黄峻烈之性，护中气；姜枣草合用，滋养营阴，防止大汗伤津。","大青龍湯
 【出處】《傷寒論》
-【功效】發汗解表，兼清里熱
-【主治】表寒里熱
+【功效】發汗解表，兼清裡熱
+【主治】表寒裡熱
 【組成】
 君：麻黃 六錢
 臣：桂枝 二錢，石膏 一兩
@@ -12139,10 +12139,10 @@ UI_BOOK_ENTRY_BODY_XIAO_QING_LONG_TANG,"小青龙汤
 炙甘草：调和全方；益气补中，顾护脾胃，缓和麻、辛、干姜峻烈之性。","小青龍湯
 【出處】《傷寒論》
 【功效】解表散寒，溫肺化飲
-【主治】表寒里飲
+【主治】表寒裡飲
 【組成】
 君：麻黃 三錢，桂枝 三錢
-臣：乾姜 二錢，細辛 二錢
+臣：乾薑 二錢，細辛 二錢
 佐：白芍 三...","MINOR AZURE DRAGON DECOCTION
 [Source] Treatise on Cold Damage
 [Actions] Releases the Exterior, disperses Cold, warms the Lung and transforms retained fluids
@@ -12322,7 +12322,7 @@ UI_BOOK_ENTRY_BODY_LI_ZHONG_WAN,"理中丸
 【功效】溫中祛寒，補氣健脾
 【主治】脾陽虛
 【組成】
-君：乾姜 五錢
+君：乾薑 五錢
 臣：人參 五錢
 佐：白朮 五錢
 使：甘草 五錢
@@ -12698,7 +12698,7 @@ UI_BOOK_ENTRY_BODY_YANG_XIN_TANG,"养心汤
 【功效】益氣補血，養心安神
 【主治】心氣虛
 【組成】
-君：黃芪 五錢，人參 三錢
+君：黃耆 五錢，人參 三錢
 臣：當歸 五錢，茯神 五錢，茯苓 五錢...","NOURISH THE HEART DECOCTION
 [Source] Renzhai's Direct Guide to Formulas and Medical Theory
 [Actions] Supports Qi, nourishes blood, nourishes the Heart and calms the spirit
@@ -13022,7 +13022,7 @@ UI_BOOK_ENTRY_BODY_GUI_PI_TANG,"归脾汤
 【功效】益氣補血，健脾養心
 【主治】心脾兩虛
 【組成】
-君：黃芪 一兩，人參 五錢
+君：黃耆 一兩，人參 五錢
 臣：龍眼 五錢，白朮 五錢，當歸 五錢...","RESTORE THE SPLEEN DECOCTION
 [Source] Yan's Formulas for Aiding Life
 [Actions] Supports Qi, nourishes blood, strengthens the Spleen and nourishes the Heart
@@ -13214,8 +13214,8 @@ UI_BOOK_ENTRY_BODY_CHAI_HU_SHU_GAN_SAN,"柴胡疏肝散
 白芍:柔肝缓急、养阴和营，防理气药耗伤肝阴。
 炙甘草:调和诸药，配白芍酸甘化阴、缓急止痛。","柴胡疏肝散
 【出處】《景岳全書》
-【功效】疏肝解郁，行氣止痛
-【主治】肝氣郁結
+【功效】疏肝解鬱，行氣止痛
+【主治】肝氣鬱結
 【組成】君：柴胡 二錢
 臣：香附 一錢五分錢，川芎 一錢五分
 佐：陳皮 二...","BUPLEURUM LIVER-SOOTHING POWDER
@@ -13452,7 +13452,7 @@ Sichuan Chinaberry Fruit clears Heat, moves Liver Qi and eases pain without depl
 사약: 없음
 【배오】
 생지황 1 냥·구기자 6 전·사삼 3 전·맥문동 3 전·당귀 3 전을 중심으로 구성하여 간음허증의 병기를 다스린다. 군약이 주된 병사를 치료하고, 신약과 좌약이 기혈·장부를 보조하며, 사약이 여러 약재의 작용을 조화시킨다."
-UI_BOOK_ENTRY_TITLE_GOU_TENG_SAN,钩藤散,鈎藤散,Uncaria Powder,釣藤散,조구등산
+UI_BOOK_ENTRY_TITLE_GOU_TENG_SAN,钩藤散,鉤藤散,Uncaria Powder,釣藤散,조구등산
 UI_BOOK_ENTRY_BODY_GOU_TENG_SAN,"钩藤散
 【出处】《普济本事方》
 【功效】平肝息风，清热化痰，益气养阴
@@ -13469,12 +13469,12 @@ UI_BOOK_ENTRY_BODY_GOU_TENG_SAN,"钩藤散
 半夏、陈皮、茯苓：燥湿化痰、和胃降逆
 麦冬、人参：益气养阴、扶正固本
 茯神：宁心安神
-炙甘草、生姜+调和诸药、和胃止呕、制半夏之毒","鈎藤散
+炙甘草、生姜+调和诸药、和胃止呕、制半夏之毒","鉤藤散
 【出處】《普濟本事方》
 【功效】平肝息風，清熱化痰，益氣養陰
 【主治】肝陽上亢
 【組成】
-君：鈎藤 三錢，菊花 三錢
+君：鉤藤 三錢，菊花 三錢
 臣：防風 三錢，石膏 三錢
 ...","UNCARIA POWDER
 [Source] Proven Formulas for Universal Relief
@@ -13536,8 +13536,8 @@ UI_BOOK_ENTRY_BODY_XIAO_YAO_SAN,"逍遥散
 薄荷：助柴胡疏肝透热、疏散郁遏；
 炙甘草：益气补中，调和诸药；合白芍缓急止痛。","逍遙散
 【出處】《太平惠民和劑局方》
-【功效】疏肝解郁，養血健脾
-【主治】肝脾不和（肝郁脾虛）
+【功效】疏肝解鬱，養血健脾
+【主治】肝脾不和（肝鬱脾虛）
 【組成】
 君：柴胡 三錢
 臣：當歸 三錢，白芍 三錢
@@ -13970,7 +13970,7 @@ UI_BOOK_ENTRY_BODY_TAI_SHAN_PAN_SHI_SAN,"泰山磐石散
 【主治】妊娠
 【組成】
 君：白朮 二錢
-臣：人參 一錢，黃芪 一錢，續斷 一錢，熟地黃 一錢...","MOUNT TAI ROCK-SOLID POWDER
+臣：人參 一錢，黃耆 一錢，續斷 一錢，熟地黃 一錢...","MOUNT TAI ROCK-SOLID POWDER
 [Source] Complete Works of Jingyue
 [Actions] Supports Qi, strengthens the Spleen, nourishes blood and steadies pregnancy
 [Indication] Pregnancy
@@ -14458,7 +14458,7 @@ UI_BOOK_ENTRY_BODY_RE_BI,"热痹
 
 【标准方】白虎桂枝汤","熱痹
 
-【病機】風濕熱邪侵襲經絡關節，或風寒濕邪郁而化熱，氣血壅滯、經絡痹阻。
+【病機】風濕熱邪侵襲經絡關節，或風寒濕邪鬱而化熱，氣血壅滯、經絡痹阻。
 
 【症狀】關節紅腫灼熱、疼痛劇烈；觸之發熱、拒按，得冷稍舒；發熱、口渴、煩...","HEAT BI
 
@@ -14503,7 +14503,7 @@ UI_BOOK_ENTRY_BODY_ZHUO_BI,"着痹（湿痹）
 
 【病機】風寒濕邪侵襲，濕邪偏盛；濕性重濁、黏滯，阻滯經絡、困遏氣機。
 
-【症狀】關節沈重酸痛、重著如裹；痛處固定，肌膚麻木、肢體困重；關節...","FIXED BI (DAMP BI)
+【症狀】關節沉重酸痛、重著如裹；痛處固定，肌膚麻木、肢體困重；關節...","FIXED BI (DAMP BI)
 
 [Pathogenesis] Wind-Cold-Damp invades, with Dampness predominating. Its heavy, sticky quality obstructs the channels and impedes the movement of Qi.
 
@@ -14792,7 +14792,7 @@ Right cun (Lung): higher pulse frequency, broader pulse width
 우촌(폐): 맥박 수가 많고 맥폭이 넓다.
 
 【표준 처방】청기화담환"
-UI_BOOK_ENTRY_TITLE_BIAO_HAN_LI_RE,表寒里热,表寒里熱,Exterior Cold with Interior Heat,表寒裏熱,표한리열
+UI_BOOK_ENTRY_TITLE_BIAO_HAN_LI_RE,表寒里热,表寒裡熱,Exterior Cold with Interior Heat,表寒裏熱,표한리열
 UI_BOOK_ENTRY_BODY_BIAO_HAN_LI_RE,"表寒里热
 
 【病机】寒邪束表，里有郁热，寒热错杂。
@@ -14803,9 +14803,9 @@ UI_BOOK_ENTRY_BODY_BIAO_HAN_LI_RE,"表寒里热
 浮脉（表）：脉搏次数少
 右寸（肺）：脉搏次数多
 
-【标准方】大青龙汤","表寒里熱
+【标准方】大青龙汤","表寒裡熱
 
-【病機】寒邪束表，里有郁熱，寒熱錯雜。
+【病機】寒邪束表，裡有鬱熱，寒熱錯雜。
 
 【症狀】怕冷無汗，口乾咽痛，渾身酸痛怕冷，同時心煩燥熱。
 
@@ -14842,7 +14842,7 @@ Right cun (Lung): higher pulse frequency
 우촌(폐): 맥박 수가 많다.
 
 【표준 처방】대청룡탕"
-UI_BOOK_ENTRY_TITLE_BIAO_HAN_LI_YIN,表寒里饮,表寒里飲,Exterior Cold with Interior Fluid Retention,表寒裏飲,표한리음
+UI_BOOK_ENTRY_TITLE_BIAO_HAN_LI_YIN,表寒里饮,表寒裡飲,Exterior Cold with Interior Fluid Retention,表寒裏飲,표한리음
 UI_BOOK_ENTRY_BODY_BIAO_HAN_LI_YIN,"表寒里饮
 
 【病机】外感风寒，寒邪束表；内有水饮伏肺，表里寒邪相合，寒饮壅遏肺气。
@@ -14855,7 +14855,7 @@ UI_BOOK_ENTRY_BODY_BIAO_HAN_LI_YIN,"表寒里饮
 浮脉（表）：脉搏次数少
 右寸（肺）：波宽宽
 
-【标准方】小青龙汤","表寒里飲
+【标准方】小青龙汤","表寒裡飲
 
 【病機】外感風寒，寒邪束表；內有水飲伏肺，表裡寒邪相合，寒飲壅遏肺氣。
 
@@ -15075,7 +15075,7 @@ UI_BOOK_ENTRY_BODY_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI,"外感风寒，内伤湿�
 
 【标准方】藿香正气散","外感風寒，內傷濕滯
 
-【病機】外感風寒之邪束表，內傷飲食濕濁阻滯中焦；表有風寒、里有濕滯。
+【病機】外感風寒之邪束表，內傷飲食濕濁阻滯中焦；表有風寒、裡有濕滯。
 
 【症狀】外感風寒：惡寒發熱、頭痛身重、無汗、鼻塞流清涕；內傷...","EXTERNAL Wind-Cold WITH INTERNAL DAMP STAGNATION
 
@@ -15204,7 +15204,7 @@ UI_BOOK_ENTRY_BODY_TAN_MI_XIN_QIAO,"痰迷心窍
 
 【标准方】涤痰汤","痰迷心竅
 
-【病機】痰濕濁邪蒙蔽心竅，神明失主，多由情志郁結、脾失健運、痰濁內生，上蒙心神所致。
+【病機】痰濕濁邪蒙蔽心竅，神明失主，多由情志鬱結、脾失健運、痰濁內生，上蒙心神所致。
 
 【症狀】神志痴呆、精神抑鬱、表情淡漠；喃喃自語、舉止失...","PHLEGM OBSCURING THE HEART ORIFICES
 
@@ -15425,7 +15425,7 @@ UI_BOOK_ENTRY_BODY_TAN_HUO_RAO_XIN,"痰火扰心
 
 【标准方】黄连温胆汤","痰火擾心
 
-【病機】痰濁郁而化火，痰火互結、上擾心神，神明躁動不寧。
+【病機】痰濁鬱而化火，痰火互結、上擾心神，神明躁動不寧。
 
 【症狀】心煩失眠、躁擾不寧、狂躁易怒；多夢易驚、甚至胡言亂語、哭笑無常；胸悶痞滿、...","PHLEGM-FIRE DISTURBING THE HEART
 
@@ -15513,7 +15513,7 @@ UI_BOOK_ENTRY_BODY_GAN_HUO_SHANG_YAN,"肝火上炎
 
 【标准方】龙胆泻肝汤","肝火上炎
 
-【病機】肝郁化火、暴怒傷肝，肝火熾盛、氣火上逆，屬實熱證。
+【病機】肝鬱化火、暴怒傷肝，肝火熾盛、氣火上逆，屬實熱證。
 
 【症狀】頭暈脹痛、面紅目赤、急躁易怒；口苦口乾、耳鳴耳聾、脅肋灼痛；失眠多夢、甚...","LIVER FIRE BLAZING UPWARD
 
@@ -15585,7 +15585,7 @@ Left guan (Liver): lower pulse frequency
 좌관(간): 맥박 수가 적다.
 
 【표준 처방】난간전"
-UI_BOOK_ENTRY_TITLE_GAN_QI_YU_JIE,肝气郁结,肝氣郁結,Liver Qi Stagnation,肝気鬱結,간기울결
+UI_BOOK_ENTRY_TITLE_GAN_QI_YU_JIE,肝气郁结,肝氣鬱結,Liver Qi Stagnation,肝気鬱結,간기울결
 UI_BOOK_ENTRY_BODY_GAN_QI_YU_JIE,"肝气郁结
 
 【病机】情志不遂，肝失疏泄，气机郁滞、经脉不畅。
@@ -15595,9 +15595,9 @@ UI_BOOK_ENTRY_BODY_GAN_QI_YU_JIE,"肝气郁结
 【脉象】
 左关（肝）：波峰高
 
-【标准方】柴胡疏肝散","肝氣郁結
+【标准方】柴胡疏肝散","肝氣鬱結
 
-【病機】情志不遂，肝失疏洩，氣機郁滯、經脈不暢。
+【病機】情志不遂，肝失疏洩，氣機鬱滯、經脈不暢。
 
 【症狀】胸脅、乳房、少腹脹痛走竄；情緒抑鬱、易怒、善太息；咽部異物感（梅核氣）、胸悶噯氣；...","LIVER QI STAGNATION
 
@@ -15809,9 +15809,9 @@ UI_BOOK_ENTRY_BODY_GAN_PI_BU_HE,"肝脾不和（肝郁脾虚）
 左关（肝）：波峰高
 右关（脾）：波峰低
 
-【标准方】逍遥散","肝脾不和（肝郁脾虛）
+【标准方】逍遥散","肝脾不和（肝鬱脾虛）
 
-【病機】情志不舒、肝氣郁結，木旺克土；脾虛失運、肝氣乘脾。
+【病機】情志不舒、肝氣鬱結，木旺克土；脾虛失運、肝氣乘脾。
 
 【症狀】胸脅脹痛、善太息、情緒抑鬱易怒；脘腹脹滿、噯氣食少；腹痛洩瀉...","LIVER-SPLEEN DISHARMONY
 
@@ -16195,7 +16195,7 @@ UI_BOOK_ENTRY_BODY_XIN_SHEN_BU_JIAO,"心肾不交
 
 【标准方】黄连阿胶汤","心腎不交
 
-【病機】腎陰不足，不能上滋心火；心火偏亢，不能下溫腎水，水火失濟、陰陽失調。多由勞神過度、久病耗陰、情志郁而化火所致，多屬陰虛火旺。
+【病機】腎陰不足，不能上滋心火；心火偏亢，不能下溫腎水，水火失濟、陰陽失調。多由勞神過度、久病耗陰、情志鬱而化火所致，多屬陰虛火旺。
 
 【症狀...","HEART-KIDNEY DISHARMONY
 
@@ -16246,7 +16246,7 @@ UI_BOOK_ENTRY_BODY_QI_FEN_RE_SHENG,"气分热盛
 
 【标准方】白虎汤","氣分熱盛
 
-【病機】外感溫熱病邪入裡，邪熱熾盛、入居氣分、里熱蒸騰、正邪劇爭，屬實熱證。
+【病機】外感溫熱病邪入裡，邪熱熾盛、入居氣分、裡熱蒸騰、正邪劇爭，屬實熱證。
 
 【症狀】大熱：全身壯熱、不惡寒反惡熱；大汗：熱迫津洩、大汗出；...","EXUBERANT HEAT AT THE QI LEVEL
 
@@ -16456,7 +16456,7 @@ UI_NPC_DIALOGUE_AFTER_HE_ZHANG_SHAO,多谢先生了。,多謝先生了。,"Thank
 UI_NPC_DIALOGUE_FAILED_HE_ZHANG_SHAO,还是好难受啊…,還是好難受啊…,I still feel awful...,まだとてもつらい……,아직도 너무 괴로워요…
 UI_NPC_NAME_HUA_JIN_NIANG,华锦娘,華錦娘,Hua Brocade Maiden,華錦娘,화진냥
 UI_NPC_DIALOGUE_AFTER_HUA_JIN_NIANG,多谢先生，感觉好多了。,多謝先生，感覺好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_HUA_JIN_NIANG,您给我开的这是什么药啊…,您給我開的這是甚麼藥啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,대체 무슨 약을 지어 주신 건가요…?
+UI_NPC_DIALOGUE_FAILED_HUA_JIN_NIANG,您给我开的这是什么药啊…,您給我開的這是什麼藥啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,대체 무슨 약을 지어 주신 건가요…?
 UI_NPC_NAME_HUA_YUN,花芸,花芸,Hua Rue,花芸,화윈
 UI_NPC_DIALOGUE_AFTER_HUA_YUN,有劳先生了，感觉好多了。,有勞先生了，感覺好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"선생님, 수고하셨습니다. 훨씬 나아졌어요."
 UI_NPC_DIALOGUE_FAILED_HUA_YUN,嗯？感觉好奇怪啊…,嗯？感覺好奇怪啊…,Huh? I feel strange...,えっ？　なんだか変な感じがします……,응? 느낌이 너무 이상한데요…
@@ -16507,13 +16507,13 @@ UI_NPC_DIALOGUE_AFTER_LIU_YING_ER,多谢先生了，我好多了。,多謝先生
 UI_NPC_DIALOGUE_FAILED_LIU_YING_ER,哎…奇怪…,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……,어… 이상하군요…
 UI_NPC_NAME_LV_TAI_JUN,吕太君,呂太君,Lü Matriarch,呂太君,뤼 태군
 UI_NPC_DIALOGUE_AFTER_LV_TAI_JUN,多谢小先生，老婆子我好多啦。,多謝小先生，老婆子我好多啦。,"Thank you, Doctor. I feel much better.",若先生、ありがとうございます。ずいぶん楽になりました。,"젊은 의원님, 고맙습니다. 이 늙은이가 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_LV_TAI_JUN,咳咳咳，你这开的是什么药啊？,咳咳咳，你這開的是甚麼藥啊？,Something doesn't feel right...,ゴホゴホ……これは何の薬なんですか？,"콜록콜록… 젊은 의원님, 대체 무슨 약을 지어 주신 거예요?"
+UI_NPC_DIALOGUE_FAILED_LV_TAI_JUN,咳咳咳，你这开的是什么药啊？,咳咳咳，你這開的是什麼藥啊？,Something doesn't feel right...,ゴホゴホ……これは何の薬なんですか？,"콜록콜록… 젊은 의원님, 대체 무슨 약을 지어 주신 거예요?"
 UI_NPC_NAME_MA_CHANG_FENG,马长风,馬長風,Ma Long Wind,馬長风,마창펑
 UI_NPC_DIALOGUE_AFTER_MA_CHANG_FENG,麻烦大夫啦，好多了。,麻煩大夫啦，好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。楽になりました。,"의원님, 수고하셨습니다. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_MA_CHANG_FENG,您给我开的这是什么药啊…,您給我開的這是甚麼藥啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,대체 무슨 약을 지어 주신 건가요…?
+UI_NPC_DIALOGUE_FAILED_MA_CHANG_FENG,您给我开的这是什么药啊…,您給我開的這是什麼藥啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,대체 무슨 약을 지어 주신 건가요…?
 UI_NPC_NAME_QIAN_BU_LOU,钱不漏,錢不漏,Qian No Leak,銭不漏,첸부러우
 UI_NPC_DIALOGUE_AFTER_QIAN_BU_LOU,谢啦。,謝啦。,Thanks.,ありがとう。,고맙소.
-UI_NPC_DIALOGUE_FAILED_QIAN_BU_LOU,这开的是什么药，我要到官府告你！,這開的是甚麼藥，我要到官府告你！,What medicine is this? I'll report you to the authorities!,これは何の薬だ！　役所に訴えてやる！,이게 대체 무슨 약이오? 관아에 고발하겠소!
+UI_NPC_DIALOGUE_FAILED_QIAN_BU_LOU,这开的是什么药，我要到官府告你！,這開的是什麼藥，我要到官府告你！,What medicine is this? I'll report you to the authorities!,これは何の薬だ！　役所に訴えてやる！,이게 대체 무슨 약이오? 관아에 고발하겠소!
 UI_NPC_NAME_QIN_SAN_NIANG,秦三娘,秦三娘,Qin Third Lady,秦三娘,친싼냥
 UI_NPC_DIALOGUE_AFTER_QIN_SAN_NIANG,多谢先生，感觉好多了。,多謝先生，感覺好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ楽になりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
 UI_NPC_DIALOGUE_FAILED_QIN_SAN_NIANG,哎哟...哎哟…,哎喲...哎喲…,Ow... ow...,あいたた……あいたた……,아이고… 아이고…
@@ -16525,7 +16525,7 @@ UI_NPC_DIALOGUE_AFTER_SHI_GAN,哎呀，真是太感谢了，好多了。,哎呀�
 UI_NPC_DIALOGUE_FAILED_SHI_GAN,哎…奇怪…,哎…奇怪…,Hmm... that's strange...,あれ……おかしいな……,어… 이상하군요…
 UI_NPC_NAME_SHI_GENG_SHENG,史更生,史更生,Shi Reborn,史更生,스겅성
 UI_NPC_DIALOGUE_AFTER_SHI_GENG_SHENG,好多了，真是太谢谢先生了。,好多了，真是太謝謝先生了。,"I feel much better. Thank you so much, Doctor.",ずいぶん良くなりました。先生、本当にありがとうございます。,"훨씬 나아졌어요. 선생님, 정말 감사합니다."
-UI_NPC_DIALOGUE_FAILED_SHI_GENG_SHENG,你给我开的什么药啊…,你給我開的甚麼藥啊…,What medicine did you give me...?,いったい何の薬を出したんですか……,대체 무슨 약을 지어 준 거요…
+UI_NPC_DIALOGUE_FAILED_SHI_GENG_SHENG,你给我开的什么药啊…,你給我開的什麼藥啊…,What medicine did you give me...?,いったい何の薬を出したんですか……,대체 무슨 약을 지어 준 거요…
 UI_NPC_NAME_SU_XIU_HE,苏绣荷,蘇繡荷,Su Embroidered Lotus,蘇繍荷,쑤슈허
 UI_NPC_DIALOGUE_AFTER_SU_XIU_HE,好多了，真是太谢谢先生了。,好多了，真是太謝謝先生了。,"I feel much better. Thank you so much, Doctor.",ずいぶん良くなりました。先生、本当にありがとうございます。,"훨씬 나아졌어요. 선생님, 정말 감사합니다."
 UI_NPC_DIALOGUE_FAILED_SU_XIU_HE,咳咳咳，好难受啊,咳咳咳，好難受啊,"Cough, cough... I feel terrible.",ゴホゴホ……つらい……,콜록콜록… 너무 괴로워요.
@@ -16540,7 +16540,7 @@ UI_NPC_DIALOGUE_AFTER_TIAN_CHUN_LUO,感觉好多了，多谢先生。,感覺好�
 UI_NPC_DIALOGUE_FAILED_TIAN_CHUN_LUO,嗯？感觉好奇怪啊…,嗯？感覺好奇怪啊…,Huh? I feel strange...,えっ？　なんだか変な感じがします……,응? 느낌이 너무 이상한데요…
 UI_NPC_NAME_WANG_CHAO_FENG,王朝奉,王朝奉,Wang Court Attendant,王朝奉,왕차오펑
 UI_NPC_DIALOGUE_AFTER_WANG_CHAO_FENG,好多了，多谢大夫。,好多了，多謝大夫。,"I feel much better. Thank you, Doctor.",楽になりました。先生、ありがとうございます。,"훨씬 나아졌습니다. 의원님, 감사합니다."
-UI_NPC_DIALOGUE_FAILED_WANG_CHAO_FENG,你给我开的什么药啊…,你給我開的甚麼藥啊…,What medicine did you give me...?,いったい何の薬を出したんですか……,대체 무슨 약을 지어 준 거요…
+UI_NPC_DIALOGUE_FAILED_WANG_CHAO_FENG,你给我开的什么药啊…,你給我開的什麼藥啊…,What medicine did you give me...?,いったい何の薬を出したんですか……,대체 무슨 약을 지어 준 거요…
 UI_NPC_NAME_WANG_DA_SAO,王大嫂,王大嫂,Wang Sister-in-law,王おばさん,왕 아주머니
 UI_NPC_DIALOGUE_AFTER_WANG_DA_SAO,麻烦先生了，我感觉好多了,麻煩先生了，我感覺好多了,"Thank you, Doctor. I feel much better.",先生、お世話になりました。楽になりました。,"선생님, 수고하셨습니다. 훨씬 나아졌어요."
 UI_NPC_DIALOGUE_FAILED_WANG_DA_SAO,哎哟...哎哟…,哎喲...哎喲…,Ow... ow...,あいたた……あいたた……,아이고… 아이고…
@@ -16558,13 +16558,13 @@ UI_NPC_DIALOGUE_AFTER_WEI_DA_JIAO,真是麻烦大夫啦，我感觉好多了。,
 UI_NPC_DIALOGUE_FAILED_WEI_DA_JIAO,感觉更不舒服了…,感覺更不舒服了…,I feel even worse...,前より具合が悪くなりました……,전보다 더 불편해졌어요…
 UI_NPC_NAME_WU_BAN_TOU,吴班头,吳班頭,Wu Constable,呉班頭,우 반두
 UI_NPC_DIALOGUE_AFTER_WU_BAN_TOU,有劳先生了，感觉好多了。,有勞先生了，感覺好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"선생님, 수고하셨습니다. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_WU_BAN_TOU,他娘的，你给我吃的是什么？,他娘的，你給我吃的是甚麼？,"Damn it, what did you make me take?",ちくしょう、何を飲ませたんだ？,"젠장, 대체 나한테 뭘 먹인 거야?"
+UI_NPC_DIALOGUE_FAILED_WU_BAN_TOU,他娘的，你给我吃的是什么？,他娘的，你給我吃的是什麼？,"Damn it, what did you make me take?",ちくしょう、何を飲ませたんだ？,"젠장, 대체 나한테 뭘 먹인 거야?"
 UI_NPC_NAME_XU_SI_GU,徐四姑,徐四姑,Xu Fourth Aunt,徐四姑,쉬쓰구
 UI_NPC_DIALOGUE_AFTER_XU_SI_GU,多谢大夫。,多謝大夫。,"Thank you, Doctor.",先生、ありがとうございます。,"의원님, 감사합니다."
-UI_NPC_DIALOGUE_FAILED_XU_SI_GU,这是什么药？你想害死本姑娘啊？,這是甚麼藥？你想害死本姑娘啊？,What is this medicine? Are you trying to kill me?,何の薬よ？　私を殺す気？,이게 무슨 약이에요? 절 죽이기라도 하려는 거예요?
+UI_NPC_DIALOGUE_FAILED_XU_SI_GU,这是什么药？你想害死本姑娘啊？,這是什麼藥？你想害死本姑娘啊？,What is this medicine? Are you trying to kill me?,何の薬よ？　私を殺す気？,이게 무슨 약이에요? 절 죽이기라도 하려는 거예요?
 UI_NPC_NAME_XU_XIANG_JUN,许香君,許香君,Xu Fragrant Lady,許香君,쉬샹쥔
 UI_NPC_DIALOGUE_AFTER_XU_XIANG_JUN,多谢先生了，我好多了。,多謝先生了，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。だいぶ良くなりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_XU_XIANG_JUN,您给我开的这是什么药啊…,您給我開的這是甚麼藥啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,대체 무슨 약을 지어 주신 건가요…?
+UI_NPC_DIALOGUE_FAILED_XU_XIANG_JUN,您给我开的这是什么药啊…,您給我開的這是什麼藥啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,대체 무슨 약을 지어 주신 건가요…?
 UI_NPC_NAME_YAN_BU_TOU,严捕头,嚴捕頭,Yan Constable,厳捕頭,옌 포두
 UI_NPC_DIALOGUE_AFTER_YAN_BU_TOU,好多了，多谢先生。,好多了，多謝先生。,"Thank you, Doctor. I feel much better.",楽になりました。先生、ありがとうございます。,"훨씬 나아졌어요. 선생님, 감사합니다."
 UI_NPC_DIALOGUE_FAILED_YAN_BU_TOU,嗯…哎哟…,嗯…哎喲…,Mm... ow...,うう……痛い……,음… 아이고…
@@ -16573,7 +16573,7 @@ UI_NPC_DIALOGUE_AFTER_YAN_PO,感觉好多了，多谢先生。,感覺好多了�
 UI_NPC_DIALOGUE_FAILED_YAN_PO,咳咳咳，哎哟...,咳咳咳，哎喲...,"Cough, cough... ow...",ゴホゴホ……あいたた……,콜록콜록… 아이고…
 UI_NPC_NAME_YANG_XIU_CAI,杨秀才,楊秀才,Yang Scholar,楊秀才,양 수재
 UI_NPC_DIALOGUE_AFTER_YANG_XIU_CAI,有劳大夫了，我好多了。,有勞大夫了，我好多了。,"Thank you, Doctor. I feel much better.",先生、お世話になりました。ずいぶん楽になりました。,"의원님, 수고하셨습니다. 훨씬 나아졌어요."
-UI_NPC_DIALOGUE_FAILED_YANG_XIU_CAI,您给我开的这是什么药啊…,您給我開的這是甚麼藥啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,대체 무슨 약을 지어 주신 건가요…?
+UI_NPC_DIALOGUE_FAILED_YANG_XIU_CAI,您给我开的这是什么药啊…,您給我開的這是什麼藥啊…,What kind of medicine did you give me...?,これはいったい何の薬ですか……,대체 무슨 약을 지어 주신 건가요…?
 UI_NPC_NAME_YAO_ZHANG_GUI,姚掌柜,姚掌櫃,Yao Shopkeeper,姚店主,야오 주인장
 UI_NPC_DIALOGUE_AFTER_YAO_ZHANG_GUI,多谢先生，我好多了。,多謝先生，我好多了。,"Thank you, Doctor. I feel much better.",先生、ありがとうございます。ずいぶん楽になりました。,"선생님, 감사합니다. 훨씬 나아졌어요."
 UI_NPC_DIALOGUE_FAILED_YAO_ZHANG_GUI,大夫，我这病怎么还不见好？,大夫，我這病怎麼還不見好？,"Doctor, why am I still not getting better?",先生、どうしてまだ治らないんですか？,"의원님, 제 병은 왜 아직도 낫지 않는 겁니까?"
@@ -16741,7 +16741,7 @@ STORY_000_02_003_TEXT,胡承龙大致确认了书的内容,胡承龍大致確認
 STORY_000_02_004_SPEAKER,胡承龙,胡承龍,Hu Chenglong,胡承竜,호승룡
 STORY_000_02_004_TEXT,哎呀，老先生大作真是让在下佩服，真是古今医书之集大成者啊。,哎呀，老先生大作真是讓在下佩服，真是古今醫書之集大成者啊。,"What a remarkable work, Master Li! It brings together the finest medical knowledge of past and present.",いやはや、先生の大著には感服いたしました。古今の医学書を集大成した一冊ですな。,"아이고, 선생님의 대작에는 정말 감탄했습니다. 고금의 의서를 집대성한 책이라 할 만합니다."
 STORY_000_02_005_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_000_02_005_TEXT,胡老板过奖了，您看什么时候能开始刻板？,胡老闆過獎了，您看甚麼時候能開始刻板？,"You flatter me, Master Hu. When might you begin carving the printing blocks?",お褒めにあずかり恐縮です。版木の彫刻はいつ始められますか？,"과찬이오, 호 사장. 언제쯤 판각을 시작할 수 있겠소?"
+STORY_000_02_005_TEXT,胡老板过奖了，您看什么时候能开始刻板？,胡老闆過獎了，您看什麼時候能開始刻板？,"You flatter me, Master Hu. When might you begin carving the printing blocks?",お褒めにあずかり恐縮です。版木の彫刻はいつ始められますか？,"과찬이오, 호 사장. 언제쯤 판각을 시작할 수 있겠소?"
 STORY_000_02_006_SPEAKER,胡承龙,胡承龍,Hu Chenglong,胡承竜,호승룡
 STORY_000_02_006_TEXT,唉，老先生我就跟您实话实说吧。,唉，老先生我就跟您實話實說吧。,"Master Li, I had best speak frankly.",はあ……先生には正直に申し上げましょう。,"선생님, 솔직히 말씀드리겠습니다."
 STORY_000_02_007_SPEAKER,胡承龙,胡承龍,Hu Chenglong,胡承竜,호승룡
@@ -16789,7 +16789,7 @@ STORY_000_04_005_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_000_04_005_TEXT,六百也不是个小数目，但总归是有盼头了…,六百也不是個小數目，但總歸是有盼頭了…,"Six hundred is still a great deal of money, but at least there is hope now…",六百両も小さな額ではないが、ようやく希望が見えた……,"600냥도 적은 돈은 아니지만, 그래도 이제 희망은 있구나…"
 STORY_000_05_001_TEXT,万历二十一年李东璧病逝，终年76岁…,萬曆二十一年李東璧病逝，終年76歲…,"Li Dongbi died in the twenty-first year of the Wanli reign, aged seventy-six…",万暦二十一年、李東璧は七十六歳で世を去った……,"만력 21년, 이동벽이 병으로 세상을 떠났다. 향년 76세…"
 STORY_000_05_002_TEXT,万历二十四年，这部耗尽他一生心血的医书终于刻板发行…,萬曆二十四年，這部耗盡他一生心血的醫書終於刻板發行…,"In the twenty-fourth year of Wanli, the medical book to which he had devoted his life was finally printed…",万暦二十四年、生涯をかけて書き上げた医学書が、ついに版木を彫って刊行された……,"만력 24년, 그가 평생 심혈을 기울인 의서가 마침내 판각되어 출간되었다…"
-STORY_000_05_003_TEXT,时珍，荆楚鄙人也。幼多羸疾，质成钝椎。僭纂述之权，岁历三十稔，书考八百余家，稿凡三易，复者芟之，阙者缉之，讹者绳之。旧本一千五百二十八种，今增药三百七十四种，分为一十六部，著成五十二卷，僭名曰本草纲目。,時珍，荊楚鄙人也。幼多羸疾，質成鈍椎。僭纂述之權，歲歷三十稔，書考八百余家，稿凡三易，復者芟之，闕者緝之，訛者繩之。舊本一千五百二十八種，今增藥三百七十四種，分為一十六部，著成五十二卷，僭名曰本草綱目。,"I, Shizhen, am a humble man of Jingchu. Sickly as a child and slow of mind, I presumed to undertake this compilation. Over thirty years I consulted more than eight hundred works and revised the manuscript three times, cutting repetition, filling gaps and correcting errors. To the 1,528 medicinal substances in earlier works, I added 374, arranged them in sixteen divisions and completed fifty-two volumes. I have dared to call it the Compendium of Materia Medica.",時珍は荊楚の片田舎の者である。幼少より病弱で、才も鈍かった。僭越ながら書を編むこと三十年余り、八百余家の書を調べ、稿を三度改め、重複を削り、欠落を補い、誤りを正した。旧書の薬千五百二十八種に三百七十四種を加え、十六部、五十二巻にまとめ、恐れ多くも『本草綱目』と名づけた。,"나 시진은 형초의 보잘것없는 사람이다. 어려서부터 병약했고 자질도 둔했다. 감히 이 편찬을 맡아 30년 세월을 보내며 800여 가문의 책을 고증하고, 원고를 세 번 고쳤다. 중복된 것은 덜어 내고, 빠진 것은 보충하고, 잘못된 것은 바로잡았다. 옛 책에 실린 1,528종에 374종의 약재를 더하고, 이를 16부로 나누어 52권을 완성했으며, 감히 《본초강목》이라 이름 붙였다."
+STORY_000_05_003_TEXT,时珍，荆楚鄙人也。幼多羸疾，质成钝椎。僭纂述之权，岁历三十稔，书考八百余家，稿凡三易，复者芟之，阙者缉之，讹者绳之。旧本一千五百二十八种，今增药三百七十四种，分为一十六部，著成五十二卷，僭名曰本草纲目。,時珍，荊楚鄙人也。幼多羸疾，質成鈍椎。僭纂述之權，歲歷三十稔，書考八百餘家，稿凡三易，復者芟之，闕者緝之，訛者繩之。舊本一千五百二十八種，今增藥三百七十四種，分為一十六部，著成五十二卷，僭名曰本草綱目。,"I, Shizhen, am a humble man of Jingchu. Sickly as a child and slow of mind, I presumed to undertake this compilation. Over thirty years I consulted more than eight hundred works and revised the manuscript three times, cutting repetition, filling gaps and correcting errors. To the 1,528 medicinal substances in earlier works, I added 374, arranged them in sixteen divisions and completed fifty-two volumes. I have dared to call it the Compendium of Materia Medica.",時珍は荊楚の片田舎の者である。幼少より病弱で、才も鈍かった。僭越ながら書を編むこと三十年余り、八百余家の書を調べ、稿を三度改め、重複を削り、欠落を補い、誤りを正した。旧書の薬千五百二十八種に三百七十四種を加え、十六部、五十二巻にまとめ、恐れ多くも『本草綱目』と名づけた。,"나 시진은 형초의 보잘것없는 사람이다. 어려서부터 병약했고 자질도 둔했다. 감히 이 편찬을 맡아 30년 세월을 보내며 800여 가문의 책을 고증하고, 원고를 세 번 고쳤다. 중복된 것은 덜어 내고, 빠진 것은 보충하고, 잘못된 것은 바로잡았다. 옛 책에 실린 1,528종에 374종의 약재를 더하고, 이를 16부로 나누어 52권을 완성했으며, 감히 《본초강목》이라 이름 붙였다."
 STORY_000_06_001_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
 STORY_000_06_001_TEXT,东璧啊，咱们这医馆已经经营不下去了，我们收拾行李回乡下老家吧…,東璧啊，咱們這醫館已經經營不下去了，我們收拾行李回鄉下老家吧…,"Dongbi, we can no longer keep this clinic open. Let us pack our things and return to our hometown in the countryside…",東璧、この診療所はもう続けられないわ。荷物をまとめて故郷の村へ帰りましょう……,"둥비야, 우리 의원을 더는 운영할 수 없겠구나. 짐을 꾸려 시골 고향으로 돌아가자…"
 STORY_000_06_002_TEXT,因经营不善，医馆被迫关闭,因經營不善，醫館被迫關閉,The clinic was forced to close after falling into financial difficulty.,経営難のため、診療所は閉鎖を余儀なくされた。,운영난으로 의원은 문을 닫을 수밖에 없었다.
@@ -16814,13 +16814,13 @@ STORY_001_005_TEXT,我看了好几遍了，确实没有少爷的名字...,我看
 STORY_001_006_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_001_006_TEXT,考了三次都没中举，爹，看来我不是读书的材料...,考了三次都沒中舉，爹，看來我不是讀書的材料...,"Three attempts, and still no success in the provincial examination. Father, perhaps I am simply not made for scholarship…",三度受けても郷試に受かりません。父上、私には学問が向いていないようです……,"세 번이나 시험을 치렀지만 향시에 합격하지 못했어요. 아버지, 저는 아무래도 공부할 재목이 아닌가 봐요…"
 STORY_001_007_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
-STORY_001_007_TEXT,这说的是什么话，你看隔壁村那个老范，考了大半辈子童试，年过半百才中秀才，后来又中了举人，你这才哪儿到哪儿。,這說的是甚麼話，你看隔壁村那個老範，考了大半輩子童試，年過半百才中秀才，後來又中了舉人，你這才哪兒到哪兒。,"Do not talk like that. Old Fan from the next village spent most of his life taking the lower examinations. He was over fifty when he finally earned his first degree, and later he passed the provincial examination too. You are still young.",何を言う。隣村の范じいさんは、半生を費やして童試を受け、五十を過ぎてようやく秀才になった。その後は挙人にもなったぞ。お前はまだまだこれからだ。,"그런 말 하지 마라. 옆 마을의 범 노인을 보거라. 반평생 동시를 치르고도 쉰이 넘어서야 수재가 되었고, 나중에는 거인에도 합격했다. 너는 아직 멀었다."
+STORY_001_007_TEXT,这说的是什么话，你看隔壁村那个老范，考了大半辈子童试，年过半百才中秀才，后来又中了举人，你这才哪儿到哪儿。,這說的是什麼話，你看隔壁村那個老範，考了大半輩子童試，年過半百才中秀才，後來又中了舉人，你這才哪兒到哪兒。,"Do not talk like that. Old Fan from the next village spent most of his life taking the lower examinations. He was over fifty when he finally earned his first degree, and later he passed the provincial examination too. You are still young.",何を言う。隣村の范じいさんは、半生を費やして童試を受け、五十を過ぎてようやく秀才になった。その後は挙人にもなったぞ。お前はまだまだこれからだ。,"그런 말 하지 마라. 옆 마을의 범 노인을 보거라. 반평생 동시를 치르고도 쉰이 넘어서야 수재가 되었고, 나중에는 거인에도 합격했다. 너는 아직 멀었다."
 STORY_001_008_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_001_008_TEXT,我看我还是跟您学医吧，科举八股什么的，孩儿实在是学不来…,我看我還是跟您學醫吧，科舉八股甚麼的，孩兒實在是學不來…,I think I would rather study medicine with you. I simply cannot get the hang of those examination essays…,それなら、父上について医術を学びたいです。科挙の文章はどうにも身につきません……,아무래도 아버지께 의술을 배우는 게 낫겠어요. 과거의 팔고문 같은 건 정말 배울 수가 없어요…
+STORY_001_008_TEXT,我看我还是跟您学医吧，科举八股什么的，孩儿实在是学不来…,我看我還是跟您學醫吧，科舉八股什麼的，孩兒實在是學不來…,I think I would rather study medicine with you. I simply cannot get the hang of those examination essays…,それなら、父上について医術を学びたいです。科挙の文章はどうにも身につきません……,아무래도 아버지께 의술을 배우는 게 낫겠어요. 과거의 팔고문 같은 건 정말 배울 수가 없어요…
 STORY_001_009_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
 STORY_001_009_TEXT,学医哪里比得上做官有前途啊，你爹我行医一辈子，辛苦又赚不到钱不说，医得不好还要受人白眼。,學醫哪裡比得上做官有前途啊，你爹我行醫一輩子，辛苦又賺不到錢不說，醫得不好還要受人白眼。,"A career in medicine offers nothing like the prospects of an official post. I have practiced all my life. The work is hard, the pay is poor, and if a treatment goes badly, people look down on you.",医者より役人のほうが将来があるだろう。わしは生涯医者をやってきたが、苦労の割に稼げず、治療がうまくいかなければ非難される。,의술을 배워서야 벼슬길만큼 앞날이 있겠느냐. 네 아비는 평생 의술을 펼쳤지만 고생만 하고 돈도 벌지 못했다. 치료를 잘못하면 사람들에게 멸시까지 받지.
 STORY_001_010_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_001_010_TEXT,可我真心喜欢研究那些药材方子，考证典籍，不赚钱我也愿意干。,可我真心喜歡研究那些藥材方子，考證典籍，不賺錢我也願意乾。,"But I truly love studying herbs, prescriptions and the old texts. I would do it even if I earned nothing.",それでも薬材や処方を調べ、古い書物を考証するのが好きなのです。儲からなくても構いません。,하지만 저는 약재와 처방을 연구하고 옛 의서를 고증하는 일이 정말 좋습니다. 돈을 벌지 못해도 하고 싶어요.
+STORY_001_010_TEXT,可我真心喜欢研究那些药材方子，考证典籍，不赚钱我也愿意干。,可我真心喜歡研究那些藥材方子，考證典籍，不賺錢我也願意幹。,"But I truly love studying herbs, prescriptions and the old texts. I would do it even if I earned nothing.",それでも薬材や処方を調べ、古い書物を考証するのが好きなのです。儲からなくても構いません。,하지만 저는 약재와 처방을 연구하고 옛 의서를 고증하는 일이 정말 좋습니다. 돈을 벌지 못해도 하고 싶어요.
 STORY_001_011_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
 STORY_001_011_TEXT,唉......也罢，科举考功名的学子千千万，可真能博取个功名的又有几人呢？东璧呀，你若真的想从医，今日起便随为父从《内经》、《本草》学起吧。,唉......也罷，科舉考功名的學子千千萬，可真能博取個功名的又有幾人呢？東璧呀，你若真的想從醫，今日起便隨為父從《內經》、《本草》學起吧。,"Ah… Very well. Thousands pursue an official title through the examinations, but how many ever obtain one? Dongbi, if you truly wish to become a physician, then from today we shall begin with the Inner Canon and the materia medica.",はあ……それもよかろう。科挙を受ける者は数知れぬが、功名を得られる者はわずかだ。東璧、本当に医の道へ進みたいなら、今日から父と『内経』『本草』を学ぼう。,"허… 그래, 좋다. 과거로 공명을 구하는 선비는 수천수만이지만 실제로 공명을 얻는 사람이 몇이나 되겠느냐? 둥비야, 네가 정말 의술을 배우고 싶다면 오늘부터 아비를 따라 《내경》과 《본초》부터 배우도록 하자."
 STORY_001_012_TEXT,李东璧十四岁考中秀才，可之后九年间三次参加乡试均告落榜，本就无心科举的李东璧决定开始随父亲学医,李東璧十四歲考中秀才，可之後九年間三次參加鄉試均告落榜，本就無心科舉的李東璧決定開始隨父親學醫,"Li Dongbi passed his first examination at fourteen, but failed the provincial examination three times over the next nine years. With little desire for an official career, he decided to study medicine under his father.",李東璧は十四歳で秀才となったが、その後九年間に三度の郷試で落第した。もとより科挙に心を向けていなかった彼は、父について医術を学ぶ決意をした。,"이동벽은 열네 살에 수재가 되었지만, 그 뒤 9년 동안 향시에 세 번 응시해 모두 낙방했다. 원래 과거에 뜻이 없었던 이동벽은 아버지를 따라 의술을 배우기 시작하기로 했다."
@@ -16834,7 +16834,7 @@ STORY_002_004_TEXT,来了来了。,來了來了。,"Coming, coming.",今行く�
 STORY_002_005_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
 STORY_002_005_TEXT,东璧啊，白天教你的都听明白了吗？,東璧啊，白天教你的都聽明白了嗎？,"Dongbi, did you understand everything I taught you today?",東璧、昼間教えたことは理解できたか？,"둥비야, 낮에 가르친 내용은 모두 이해했느냐?"
 STORY_002_006_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_002_006_TEXT,都明白了，平常日子里看您治病，其实已经窥得些门道了。,都明白了，平常日子里看您治病，其實已經窺得些門道了。,"Yes. I have watched you treat patients for years, so I already know a little of how it works.",はい。普段から父上の診療を見て、少しは心得ていました。,"네, 이해했습니다. 평소 아버지께서 병을 치료하시는 모습을 보며 어느 정도 요령을 익혔습니다."
+STORY_002_006_TEXT,都明白了，平常日子里看您治病，其实已经窥得些门道了。,都明白了，平常日子裡看您治病，其實已經窺得些門道了。,"Yes. I have watched you treat patients for years, so I already know a little of how it works.",はい。普段から父上の診療を見て、少しは心得ていました。,"네, 이해했습니다. 평소 아버지께서 병을 치료하시는 모습을 보며 어느 정도 요령을 익혔습니다."
 STORY_002_007_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
 STORY_002_007_TEXT,学医最要紧的是积累，吃完晚饭去把这些天教你的内容再看一遍，明日一早你随我一起出诊。,學醫最要緊的是積累，吃完晚飯去把這些天教你的內容再看一遍，明日一早你隨我一起出診。,"The most important thing in medicine is to build experience. After dinner, review what I have taught you these past few days. Tomorrow morning, you will accompany me on my rounds.",医術で大切なのは積み重ねだ。夕食の後は、この数日教えたことを復習しなさい。明朝はわしと一緒に往診に行くぞ。,의술에서 가장 중요한 것은 쌓아 가는 것이란다. 저녁을 먹고 며칠 동안 가르친 내용을 다시 읽어 보거라. 내일 아침에는 나와 함께 왕진을 나가자.
 STORY_002_008_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
@@ -16868,7 +16868,7 @@ STORY_004_02_005_TEXT,人生在世不止科举取仕一条路，你能找到一�
 STORY_004_02_006_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_004_02_006_TEXT,承蒙老师教诲，学生定不负师恩，精进医术。,承蒙老師教誨，學生定不負師恩，精進醫術。,"Thank you for your guidance, Master. I will honor your teaching by improving my medical skills.",先生の教えに感謝します。医術を磨き、ご恩に報います。,스승님의 가르침에 감사드립니다. 반드시 은혜를 저버리지 않고 의술을 갈고닦겠습니다.
 STORY_004_03_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_004_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是甚麼病，該開甚麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 틀렸어. 무슨 병인지, 어떤 처방을 써야 하는지 잘 생각해 봐야 해."
+STORY_004_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是什麼病，該開什麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 틀렸어. 무슨 병인지, 어떤 처방을 써야 하는지 잘 생각해 봐야 해."
 STORY_004_04_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_004_04_001_TEXT,哎呀，是老师来了，学生失迎。,哎呀，是老師來了，學生失迎。,Master! Forgive me for not welcoming you sooner.,先生、いらしていたのですか。お迎えもせず失礼しました。,"아이고, 스승님 오셨습니까. 제자가 미처 맞이하지 못했습니다."
 STORY_004_04_002_SPEAKER,顾问,顧問,Gu Wen,顧問,구원
@@ -16876,7 +16876,7 @@ STORY_004_04_002_TEXT,东璧啊，朝廷来了调令，命我去福建赴任。�
 STORY_004_04_003_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_004_04_003_TEXT,老师请坐，我去给您泡壶茶。,老師請坐，我去給您泡壺茶。,"Please, have a seat, Master. I will make you some tea.",先生、お掛けください。お茶をお淹れします。,"스승님, 앉으십시오. 제가 차를 한 주전자 끓여 오겠습니다."
 STORY_004_04_004_SPEAKER,顾问,顧問,Gu Wen,顧問,구원
-STORY_004_04_004_TEXT,嗯，最近如何，学医有什么进展吗？,嗯，最近如何，學醫有甚麼進展嗎？,"Well, how have you been? How are your medical studies coming along?",うむ、最近はどうだ。医術の勉強は進んでいるか？,"음, 요즘은 어떠냐? 의술 공부에는 진전이 있느냐?"
+STORY_004_04_004_TEXT,嗯，最近如何，学医有什么进展吗？,嗯，最近如何，學醫有什麼進展嗎？,"Well, how have you been? How are your medical studies coming along?",うむ、最近はどうだ。医術の勉強は進んでいるか？,"음, 요즘은 어떠냐? 의술 공부에는 진전이 있느냐?"
 STORY_004_04_005_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_004_04_005_TEXT,学生行医读书时发现，自《神农本草经》之后，历代本草著作屡经增补改订，其中药材、方子的遗漏、讹误不可枚举。一方之误，害及数人，一药之讹，误尽苍生。,學生行醫讀書時發現，自《神農本草經》之後，歷代本草著作屢經增補改訂，其中藥材、方子的遺漏、訛誤不可枚舉。一方之誤，害及數人，一藥之訛，誤盡蒼生。,"As I have practiced and studied, I have found that the materia medica has been expanded and revised many times since the Divine Farmer's Classic. Errors and omissions concerning herbs and prescriptions are beyond counting. A mistaken formula can harm several people; a mistaken herb can harm countless more.",診療と読書を続けるうちに、『神農本草経』以降の本草書には、度重なる増補や改訂によって薬材や処方の抜け、誤りが数えきれないほどあると気づきました。処方を一つ誤れば数人を害し、薬を一つ取り違えれば多くの命に関わります。,"제자가 진료하고 책을 읽으며 깨달은 바가 있습니다. 《신농본초경》 이후 역대 본초서가 거듭 증보·개정되었지만 약재와 처방의 누락과 오류는 헤아릴 수 없습니다. 처방 하나의 오류가 몇 사람을 해치고, 약재 하나의 오류가 수많은 백성을 그르칠 수 있습니다."
 STORY_004_04_006_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
@@ -16895,20 +16895,20 @@ STORY_005_01_002_TEXT,大半夜的谁啊，谁在敲门啊？,大半夜的誰啊
 STORY_005_01_003_SPEAKER,陈皮,陳皮,Chen Pi,陳皮,진피
 STORY_005_01_003_TEXT,啊！！！我的妈呀！！,啊！！！我的媽呀！！,Ah! Good heavens!,うわあっ！　びっくりした！,아! 세상에!
 STORY_005_01_004_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_005_01_004_TEXT,出什么事儿了？,出甚麼事兒了？,What happened?,何があった？,무슨 일이야?
+STORY_005_01_004_TEXT,出什么事儿了？,出什麼事兒了？,What happened?,何があった？,무슨 일이야?
 STORY_005_01_005_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_005_01_005_TEXT,啊！,啊！,Ah!,あっ！,아!
 STORY_005_01_006_SPEAKER,王府护卫,王府護衛,Palace Guard,王府の護衛,왕부 호위
 STORY_005_01_006_TEXT,奉楚王谕令，请先生去王府走一趟。,奉楚王諭令，請先生去王府走一趟。,"By order of the Prince of Chu, you are requested at his residence.",楚王のご命令により、先生を王府へお連れします。,"초왕 전하의 명으로, 선생님께서 왕부에 한 번 와 주시길 청합니다."
 STORY_005_01_007_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_005_01_007_TEXT,是什么人病了？要我去看病吗？,是甚麼人病了？要我去看病嗎？,Is someone ill? Am I being called to treat a patient?,どなたか病気なのですか？　診療に行くのですか？,누가 아픈 겁니까? 제가 진료하러 가는 건가요?
+STORY_005_01_007_TEXT,是什么人病了？要我去看病吗？,是什麼人病了？要我去看病嗎？,Is someone ill? Am I being called to treat a patient?,どなたか病気なのですか？　診療に行くのですか？,누가 아픈 겁니까? 제가 진료하러 가는 건가요?
 STORY_005_01_008_SPEAKER,王府护卫,王府護衛,Palace Guard,王府の護衛,왕부 호위
 STORY_005_01_008_TEXT,事关重大您去了就知道了，马车已经备好了，请先生速速启程。,事關重大您去了就知道了，馬車已經備好了，請先生速速啓程。,It is a matter of great importance. You will learn more when you arrive. The carriage is ready. Please leave at once.,重大な件です。行けば分かります。馬車は用意してありますので、すぐにお発ちください。,중요한 일입니다. 도착하시면 아시게 될 겁니다. 마차를 준비했으니 어서 출발하시지요.
 STORY_005_01_009_TEXT,一夜舟车劳顿，李东璧到了楚王府。,一夜舟車勞頓，李東璧到了楚王府。,"After a weary night on the road, Li Dongbi arrived at the Prince of Chu's residence.",一晩中の長旅を経て、李東璧は楚王府に到着した。,밤새 이동해 지친 끝에 이동벽은 초왕부에 도착했다.
 STORY_005_01_010_SPEAKER,楚王,楚王,Prince of Chu,楚王,초왕
 STORY_005_01_010_TEXT,您就是李神医啊，比我想得要年轻许多。请先生来，是小王有事相求。,您就是李神醫啊，比我想得要年輕許多。請先生來，是小王有事相求。,So you are the renowned Physician Li. You are much younger than I expected. I have asked you here because I need your help.,あなたが名医の李先生ですか。思ったよりずっとお若い。お呼びしたのは、私からお願いがあるからです。,당신이 바로 유명한 이 의원이오? 생각보다 훨씬 젊군. 선생을 부른 것은 내가 부탁할 일이 있어서요.
 STORY_005_01_011_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_005_01_011_TEXT,草民拜见王爷，有什么我能帮上忙的？,草民拜見王爺，有甚麼我能幫上忙的？,"My respects, Your Highness. How may I help you?",楚王殿下に拝謁いたします。私に何ができましょうか。,소인이 전하를 뵙습니다. 제가 무엇을 도와드릴 수 있겠습니까?
+STORY_005_01_011_TEXT,草民拜见王爷，有什么我能帮上忙的？,草民拜見王爺，有什麼我能幫上忙的？,"My respects, Your Highness. How may I help you?",楚王殿下に拝謁いたします。私に何ができましょうか。,소인이 전하를 뵙습니다. 제가 무엇을 도와드릴 수 있겠습니까?
 STORY_005_01_012_SPEAKER,楚王,楚王,Prince of Chu,楚王,초왕
 STORY_005_01_012_TEXT,犬子前些日子突然病倒了，卧床不起。精神萎靡，食欲不振。小王请了好几位大夫，给开了好多方子，都不见好转。眼见着人一天比一天瘦，再这么下去怕是要坏事了…,犬子前些日子突然病倒了，臥床不起。精神萎靡，食慾不振。小王請了好幾位大夫，給開了好多方子，都不見好轉。眼見著人一天比一天瘦，再這麼下去怕是要壞事了…,"My son suddenly fell ill some days ago and has been confined to bed. He is listless and has no appetite. I have called several physicians and tried many prescriptions, but he has not improved. He grows thinner by the day. I fear what may happen if this continues…",息子が先日突然倒れ、床から起きられなくなった。気力も食欲もない。何人も医者を呼び、さまざまな処方を試したが良くならぬ。日に日に痩せて、このままでは取り返しがつかない……,"내 아들이 며칠 전 갑자기 병이 나서 자리에서 일어나지 못하고 있소. 기운이 없고 식욕도 없지. 여러 의원을 불러 많은 처방을 써 보았지만 나아지지 않았소. 날이 갈수록 여위고 있으니, 이대로 가면 큰일이 날까 두렵소…"
 STORY_005_01_013_SPEAKER,楚王,楚王,Prince of Chu,楚王,초왕
@@ -16928,7 +16928,7 @@ STORY_005_02_004_TEXT,一千两太多了，草民不能收。,一千兩太多了
 STORY_005_02_005_SPEAKER,陈皮,陳皮,Chen Pi,陳皮,진피
 STORY_005_02_005_TEXT,少掌柜的，那可是一千两白银啊！,少掌櫃的，那可是一千兩白銀啊！,"Young master, that is a thousand taels of silver!",若旦那、銀千両ですよ！,"도련님, 그건 은전 천 냥이라고요!"
 STORY_005_02_006_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_005_02_006_TEXT,世子乃人中龙凤，可草民眼里看到的只有一位需要医治的病人，王爷只需付一两白银诊费即可。,世子乃人中龍鳳，可草民眼里看到的只有一位需要醫治的病人，王爺只需付一兩白銀診費即可。,"Your son is of noble birth, but to me he is simply a patient in need of care. One tael of silver for the consultation will suffice, Your Highness.",世子様は尊いお方ですが、私にとっては治療を必要とする一人の患者です。診察料として銀一両だけいただきます。,"세자는 귀한 분이지만, 제 눈에는 치료가 필요한 환자일 뿐입니다. 전하께서는 은전 한 냥의 진료비만 주시면 됩니다."
+STORY_005_02_006_TEXT,世子乃人中龙凤，可草民眼里看到的只有一位需要医治的病人，王爷只需付一两白银诊费即可。,世子乃人中龍鳳，可草民眼裡看到的只有一位需要醫治的病人，王爺只需付一兩白銀診費即可。,"Your son is of noble birth, but to me he is simply a patient in need of care. One tael of silver for the consultation will suffice, Your Highness.",世子様は尊いお方ですが、私にとっては治療を必要とする一人の患者です。診察料として銀一両だけいただきます。,"세자는 귀한 분이지만, 제 눈에는 치료가 필요한 환자일 뿐입니다. 전하께서는 은전 한 냥의 진료비만 주시면 됩니다."
 STORY_005_02_007_SPEAKER,楚王,楚王,Prince of Chu,楚王,초왕
 STORY_005_02_007_TEXT,……先生好风骨，本王平日见的那些儒生满口仁义，可见了真金白银没几个不迷糊的。有您这样的大夫是天下苍生之福啊。,……先生好風骨，本王平日見的那些儒生滿口仁義，可見了真金白銀沒幾個不迷糊的。有您這樣的大夫是天下蒼生之福啊。,"…You are a man of rare integrity. Many scholars speak of virtue, yet few keep their heads when they see silver. The people are fortunate to have a doctor like you.",……先生の気骨には恐れ入った。日頃会う儒者は仁義を語るが、大金を前にして心を乱さぬ者は少ない。あなたのような医者がいるのは民の幸せだ。,…선생의 기개가 참으로 대단하오. 평소 만나는 유생들은 입으로는 인의를 말하면서도 진짜 은전을 보면 정신을 못 차리기 일쑤지. 선생 같은 의원이 있다는 것은 천하 백성의 복이오.
 STORY_005_02_008_SPEAKER,楚王,楚王,Prince of Chu,楚王,초왕
@@ -16947,7 +16947,7 @@ STORY_005_03_005_TEXT,不好！啊啊啊啊！！！,不好！啊啊啊啊！！
 STORY_006_001_SPEAKER,贾荃,賈荃,Jia Quan,賈荃,가전
 STORY_006_001_TEXT,生意兴隆啊老板，嘿嘿嘿。,生意興隆啊老闆，嘿嘿嘿。,"May business prosper, Master Li. Heh, heh, heh.",ご繁盛ですね、旦那。へへへ。,"장사 번창하십시오, 사장님. 헤헤헤."
 STORY_006_002_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_006_002_TEXT,敢问您是？(这人什么时候进来的...),敢問您是？(這人甚麼時候進來的...),And you are…? (When did he come in…?),失礼ですが、どなたですか？（いつの間に入ってきたんだ……）,실례지만 누구십니까? (이 사람은 언제 들어온 거지…)
+STORY_006_002_TEXT,敢问您是？(这人什么时候进来的...),敢問您是？(這人什麼時候進來的...),And you are…? (When did he come in…?),失礼ですが、どなたですか？（いつの間に入ってきたんだ……）,실례지만 누구십니까? (이 사람은 언제 들어온 거지…)
 STORY_006_003_SPEAKER,贾荃,賈荃,Jia Quan,賈荃,가전
 STORY_006_003_TEXT,在下贾荃，是做药材生意的，在湖广省小有一点名气，嘿嘿嘿。,在下賈荃，是做藥材生意的，在湖廣省小有一點名氣，嘿嘿嘿。,"I am Jia Quan, a medicinal herb merchant of some repute in Huguang Province. Heh, heh, heh.",薬材商の賈荃と申します。湖広では少し名の知れた商人ですよ。へへへ。,저는 가전이라 하는 약재 상인입니다. 호광성에서 조금 이름이 알려져 있지요. 헤헤헤.
 STORY_006_004_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
@@ -16987,9 +16987,9 @@ STORY_007_02_002_TEXT,哎呀，这都被你看出来啦。,哎呀，這都被你
 STORY_007_02_003_SPEAKER,雷万钧,雷萬鈞,Lei Wanjun,雷万鈞,뇌만균
 STORY_007_02_003_TEXT,昨日我带着兄弟们和州府的征粮官去收粮，这帮狗腿子淋尖踢斛下脚那叫一个狠，气得我当场骂娘。,昨日我帶著兄弟們和州府的徵糧官去收糧，這幫狗腿子淋尖踢斛下腳那叫一個狠，氣得我當場罵娘。,Yesterday my men and I accompanied the prefecture's grain tax collectors. Those lackeys were heaping and kicking the measures so hard that I cursed them on the spot.,昨日、部下と徴税官を連れて年貢米を集めに行ったんだが、あの役人どもが升を蹴って米を巻き上げるやり方がひどくてな。思わずその場で怒鳴ったよ。,"어제 아우들과 함께 주부의 세곡 징수관을 따라 곡식을 거두러 갔네. 그 앞잡이들이 곡식 자루를 넘치게 담고 말로 쳐서 떨어뜨리는 짓을 어찌나 심하게 하던지, 화가 나서 그 자리에서 욕을 했다네."
 STORY_007_02_004_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_007_02_004_TEXT,"什么叫""淋尖踢斛""呀？","甚麼叫""淋尖踢斛""呀？",What do you mean by “heaping and kicking the measures”?,升を蹴るとは、どういうことですか？,‘임첨척곡(淋尖踢斛)’이란 게 무엇입니까?
+STORY_007_02_004_TEXT,"什么叫""淋尖踢斛""呀？","什麼叫""淋尖踢斛""呀？",What do you mean by “heaping and kicking the measures”?,升を蹴るとは、どういうことですか？,‘임첨척곡(淋尖踢斛)’이란 게 무엇입니까?
 STORY_007_02_005_SPEAKER,雷万钧,雷萬鈞,Lei Wanjun,雷万鈞,뇌만균
-STORY_007_02_005_TEXT,"贤弟你有所不知，百姓交粮时，要把粮食倒进斛里，堆得高出斛口，堆成尖尖的，这叫""淋尖""。","賢弟你有所不知，百姓交糧時，要把糧食倒進斛里，堆得高出斛口，堆成尖尖的，這叫""淋尖""。","When common folk pay their grain tax, they pour grain into a measuring vessel until it forms a mound above the rim. That is the “heaping.”",民が年貢を納めるとき、升の縁より高く山になるまで米を盛らせる。それを「尖り盛り」と呼ぶんだ。,"아우가 잘 모르는군. 백성들이 세곡을 낼 때 곡식을 말에 붓고, 말 가장자리보다 높이 뾰족하게 쌓는데 이것을 ‘임첨(淋尖)’이라고 하지."
+STORY_007_02_005_TEXT,"贤弟你有所不知，百姓交粮时，要把粮食倒进斛里，堆得高出斛口，堆成尖尖的，这叫""淋尖""。","賢弟你有所不知，百姓交糧時，要把糧食倒進斛裡，堆得高出斛口，堆成尖尖的，這叫""淋尖""。","When common folk pay their grain tax, they pour grain into a measuring vessel until it forms a mound above the rim. That is the “heaping.”",民が年貢を納めるとき、升の縁より高く山になるまで米を盛らせる。それを「尖り盛り」と呼ぶんだ。,"아우가 잘 모르는군. 백성들이 세곡을 낼 때 곡식을 말에 붓고, 말 가장자리보다 높이 뾰족하게 쌓는데 이것을 ‘임첨(淋尖)’이라고 하지."
 STORY_007_02_006_SPEAKER,雷万钧,雷萬鈞,Lei Wanjun,雷万鈞,뇌만균
 STORY_007_02_006_TEXT,官吏再踢一脚斛，那些被震落、洒在斛外的粮食，不算入百姓缴纳的赋税，直接入了这帮狗腿子的口袋。,官吏再踢一腳斛，那些被震落、灑在斛外的糧食，不算入百姓繳納的賦稅，直接入了這幫狗腿子的口袋。,Then an official kicks the vessel. The grain that spills out does not count toward the tax. Those lackeys pocket it instead.,役人が升を蹴ってこぼした米は納税分に数えられず、そのまま役人の懐に入る。,"관리가 다시 말에 발길질을 하면, 진동해 밖으로 떨어진 곡식은 백성의 세금으로 인정되지 않고 앞잡이들 주머니로 바로 들어간다네."
 STORY_007_02_007_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
@@ -17001,11 +17001,11 @@ STORY_007_02_009_TEXT,百姓的日子是越来越不好过了，我去给你抓�
 STORY_007_02_010_SPEAKER,雷万钧,雷萬鈞,Lei Wanjun,雷万鈞,뇌만균
 STORY_007_02_010_TEXT,有劳贤弟。,有勞賢弟。,"Thank you, my friend.",すまないな。,"수고 많네, 아우."
 STORY_007_03_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_007_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是甚麼病，該開甚麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 틀렸어. 무슨 병인지, 어떤 처방을 써야 하는지 잘 생각해 봐야 해."
+STORY_007_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是什麼病，該開什麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 틀렸어. 무슨 병인지, 어떤 처방을 써야 하는지 잘 생각해 봐야 해."
 STORY_008_01_001_SPEAKER,陆忠,陸忠,Lu Zhong,陸忠,육충
 STORY_008_01_001_TEXT,大夫大夫！救命啊大夫！我家老爷要不行了！,大夫大夫！救命啊大夫！我家老爺要不行了！,"Doctor! Doctor, help! My master is dying!",先生！　先生！　助けてください！　うちの旦那様が危ないんです！,의원님! 의원님! 살려 주십시오! 우리 나리께서 위독하십니다!
 STORY_008_01_002_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_008_01_002_TEXT,出什么事了？,出甚麼事了？,What happened?,何があったんですか？,무슨 일이오?
+STORY_008_01_002_TEXT,出什么事了？,出什麼事了？,What happened?,何があったんですか？,무슨 일이오?
 STORY_008_01_003_SPEAKER,陆忠,陸忠,Lu Zhong,陸忠,육충
 STORY_008_01_003_TEXT,我家老爷刚才在醉仙楼喝酒，突然就开始胡言乱语，神志不清了。,我家老爺剛才在醉仙樓喝酒，突然就開始胡言亂語，神志不清了。,He was drinking at the Drunken Immortal Tavern when he suddenly began speaking nonsense. He no longer knows what is going on.,旦那様が酔仙楼で飲んでいたところ、突然訳の分からないことを言い始め、意識もはっきりしなくなりました。,우리 나리께서 방금 취선루에서 술을 드시다가 갑자기 헛소리를 하기 시작하시더니 정신을 잃으셨습니다.
 STORY_008_01_004_SPEAKER,贾荃,賈荃,Jia Quan,賈荃,가전
@@ -17021,11 +17021,11 @@ STORY_008_02_002_TEXT,贾老板的神志不清是由痰火扰心所致，心情�
 STORY_008_02_003_SPEAKER,陆忠,陸忠,Lu Zhong,陸忠,육충
 STORY_008_02_003_TEXT,真是太谢谢先生了，老爷，我们走吧。,真是太謝謝先生了，老爺，我們走吧。,"Thank you so much, Doctor. Come, Master, let us go home.",先生、本当にありがとうございます。旦那様、帰りましょう。,"정말 감사합니다, 선생님. 나리, 이제 돌아가시지요."
 STORY_008_02_004_SPEAKER,陈皮,陳皮,Chen Pi,陳皮,진피
-STORY_008_02_004_TEXT,这贾老板怎么突然犯病了呀？我看是这个奸商干坏事儿遭报应了。,這賈老闆怎麼突然犯病了呀？我看是這個奸商乾壞事兒遭報應了。,Why did Master Jia suddenly fall ill? I bet that crooked merchant is getting what he deserves.,賈旦那はどうして急に倒れたんでしょう？　悪事を働いた報いじゃありませんか。,가전 사장이 왜 갑자기 발작한 거지? 저 악덕 상인이 나쁜 짓을 한 벌을 받는 모양이군.
+STORY_008_02_004_TEXT,这贾老板怎么突然犯病了呀？我看是这个奸商干坏事儿遭报应了。,這賈老闆怎麼突然犯病了呀？我看是這個奸商幹壞事兒遭報應了。,Why did Master Jia suddenly fall ill? I bet that crooked merchant is getting what he deserves.,賈旦那はどうして急に倒れたんでしょう？　悪事を働いた報いじゃありませんか。,가전 사장이 왜 갑자기 발작한 거지? 저 악덕 상인이 나쁜 짓을 한 벌을 받는 모양이군.
 STORY_008_02_005_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_008_02_005_TEXT,别乱说，快去把他吐的地方收拾收拾，还有病患要看病呢。,別亂說，快去把他吐的地方收拾收拾，還有病患要看病呢。,Do not say that. Clean up where he was sick. We still have patients to see.,余計なことを言わず、吐いた場所を片づけて。まだ患者を診なくては。,그런 말 하지 마라. 그가 토한 곳을 치우거라. 아직 진료할 환자가 있다.
 STORY_008_03_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_008_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是甚麼病，該開甚麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 틀렸어. 무슨 병인지, 어떤 처방을 써야 하는지 잘 생각해 봐야 해."
+STORY_008_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是什麼病，該開什麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 틀렸어. 무슨 병인지, 어떤 처방을 써야 하는지 잘 생각해 봐야 해."
 STORY_009_01_001_SPEAKER,衙役,衙役,Constable,役人,포졸
 STORY_009_01_001_TEXT,李大夫，知州大人请您去州衙有事商议。,李大夫，知州大人請您去州衙有事商議。,"Doctor Li, the prefect requests your presence at the government office.",李先生、知州様が州役所で相談したいことがあるそうです。,"이 의원, 지주 대감께서 주 아문으로 와서 의논할 일이 있다고 하십니다."
 STORY_009_01_002_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
@@ -17045,7 +17045,7 @@ STORY_009_01_008_TEXT,李大夫您在这画押，上面催得紧，我们赶着�
 STORY_009_01_009_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_009_01_009_TEXT,好的好的。,好的好的。,"Yes, of course.",はい、分かりました。,"알겠습니다, 알겠습니다."
 STORY_009_02_001_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
-STORY_009_02_001_TEXT,东璧回来啦，什么事儿啊，一大早就被叫去了？,東璧回來啦，甚麼事兒啊，一大早就被叫去了？,"Dongbi, you are back. Why did they call you away so early?",東璧、おかえり。朝早くから呼ばれて、何の用だったの？,"둥비야, 돌아왔구나. 무슨 일이길래 아침부터 불려 간 거냐?"
+STORY_009_02_001_TEXT,东璧回来啦，什么事儿啊，一大早就被叫去了？,東璧回來啦，什麼事兒啊，一大早就被叫去了？,"Dongbi, you are back. Why did they call you away so early?",東璧、おかえり。朝早くから呼ばれて、何の用だったの？,"둥비야, 돌아왔구나. 무슨 일이길래 아침부터 불려 간 거냐?"
 STORY_009_02_002_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_009_02_002_TEXT,朝廷调拨了赈灾药材，这次不光惠民药局，咱们这些医馆药铺也要一起帮忙发放。,朝廷調撥了賑災藥材，這次不光惠民藥局，咱們這些醫館藥鋪也要一起幫忙發放。,"The court has sent medicine for disaster relief. This time, our clinics and apothecaries must help distribute it alongside the public dispensary.",朝廷が救済用の薬材を配るそうだ。今回は恵民薬局だけでなく、うちのような診療所も配布を手伝う。,조정에서 구휼 약재를 보냈습니다. 이번에는 혜민약국뿐 아니라 우리 같은 의원과 약방도 함께 나누어 주어야 합니다.
 STORY_009_02_003_SPEAKER,吴芷兰,吳芷蘭,Wu Zhilan,呉芷蘭,오지란
@@ -17069,11 +17069,11 @@ STORY_010_006_TEXT,知道了爹。,知道了爹。,"Of course, Father.",分か�
 STORY_011_001_SPEAKER,吴芷兰,吳芷蘭,Wu Zhilan,呉芷蘭,오지란
 STORY_011_001_TEXT,爹，药熬好了。,爹，藥熬好了。,"Father, the medicine is ready.",父上、薬が煎じ上がりました。,"아버지, 약을 다 달였습니다."
 STORY_011_002_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
-STORY_011_002_TEXT,忙活了一天，药材发得差不多了，咱们家也该把药喝了。我看看这次开的是什么方子。,忙活了一天，藥材發得差不多了，咱們家也該把藥喝了。我看看這次開的是甚麼方子。,"After a full day's work, we have handed out nearly all the supplies. We should take our own medicine too. Let me see what formula they have given us.",一日働いて薬もほぼ配り終えた。わしらも飲んでおこう。今回はどんな処方か見せてくれ。,하루 종일 바빴구나. 약재도 거의 다 나누어 주었으니 우리 집에서도 약을 먹어야지. 이번에 무슨 처방을 받았는지 보자꾸나.
+STORY_011_002_TEXT,忙活了一天，药材发得差不多了，咱们家也该把药喝了。我看看这次开的是什么方子。,忙活了一天，藥材發得差不多了，咱們家也該把藥喝了。我看看這次開的是什麼方子。,"After a full day's work, we have handed out nearly all the supplies. We should take our own medicine too. Let me see what formula they have given us.",一日働いて薬もほぼ配り終えた。わしらも飲んでおこう。今回はどんな処方か見せてくれ。,하루 종일 바빴구나. 약재도 거의 다 나누어 주었으니 우리 집에서도 약을 먹어야지. 이번에 무슨 처방을 받았는지 보자꾸나.
 STORY_011_003_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
 STORY_011_003_TEXT,嗯…有藿香，有紫苏，应该是藿香正气散的方子。,嗯…有藿香，有紫蘇，應該是藿香正氣散的方子。,Hmm… Agastache and perilla leaf. This should be Agastache Powder to Rectify the Qi.,うむ……藿香と紫蘇が入っている。藿香正気散だろう。,음… 곽향과 자소엽이 있구나. 곽향정기산 처방인 모양이야.
 STORY_011_004_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
-STORY_011_004_TEXT,嗯？…味道不对啊，这药里怎么掺了面粉？厚朴里也混杂了树皮充数。,嗯？…味道不對啊，這藥里怎麼摻了麵粉？厚朴里也混雜了樹皮充數。,"Hm? It does not taste right. Why is flour mixed in with the medicine? They have bulked out the magnolia bark with ordinary tree bark, too.",ん？　匂いがおかしい。薬に小麦粉が混じっているぞ。厚朴には別の木の皮まで混ぜてかさ増ししてある。,음? 맛이 이상하구나. 이 약에 밀가루가 섞여 있잖으냐? 후박에도 분량을 채우려고 다른 나무껍질을 섞었구나.
+STORY_011_004_TEXT,嗯？…味道不对啊，这药里怎么掺了面粉？厚朴里也混杂了树皮充数。,嗯？…味道不對啊，這藥裡怎麼摻了麵粉？厚朴裡也混雜了樹皮充數。,"Hm? It does not taste right. Why is flour mixed in with the medicine? They have bulked out the magnolia bark with ordinary tree bark, too.",ん？　匂いがおかしい。薬に小麦粉が混じっているぞ。厚朴には別の木の皮まで混ぜてかさ増ししてある。,음? 맛이 이상하구나. 이 약에 밀가루가 섞여 있잖으냐? 후박에도 분량을 채우려고 다른 나무껍질을 섞었구나.
 STORY_011_005_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_011_005_TEXT,我尝尝…藿香用的是梗，气味微薄。,我嘗嘗…藿香用的是梗，氣味微薄。,Let me taste it… They used agastache stems. The aroma is weak.,少し味を見よう……藿香は茎ばかりで、香りが弱い。,제가 맛을 보겠습니다… 곽향은 줄기를 썼고 향이 약합니다.
 STORY_011_006_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
@@ -17085,11 +17085,11 @@ STORY_011_008_TEXT,明日我去药剂局跟孙大夫商量商量。,明日我去
 STORY_012_001_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
 STORY_012_001_TEXT,坏事了坏事了，孙大夫被抓了。,壞事了壞事了，孫大夫被抓了。,Something terrible has happened! Doctor Sun has been arrested!,大変だ！　孫先生が捕まった！,"큰일이다, 큰일이야. 손 의원이 잡혀갔다."
 STORY_012_002_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_012_002_TEXT,出什么事了？,出甚麼事了？,What happened?,何があった？,무슨 일입니까?
+STORY_012_002_TEXT,出什么事了？,出什麼事了？,What happened?,何があった？,무슨 일입니까?
 STORY_012_003_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
-STORY_012_003_TEXT,孙大夫也发现赈灾药材有问题，去州衙找吴世良，谁知被扣了个私换药材的罪名，打了二十板子关进大狱里了。,孫大夫也發現賑災藥材有問題，去州衙找吳世良，誰知被扣了個私換藥材的罪名，打了二十板子關進大獄里了。,"Doctor Sun noticed the problems with the relief medicine too. He went to confront Wu Shiliang at the prefectural office. Instead, they accused him of secretly swapping the medicine, flogged him twenty times and threw him in prison.",孫先生も薬材の異常に気づいて、州役所の呉世良に会いに行った。ところが薬材を勝手にすり替えたと罪を着せられ、杖で二十回打たれて牢に入れられたんだ。,"손 의원도 구휼 약재에 문제가 있다는 것을 알아채고 오세량을 찾아 주 아문으로 갔지만, 도리어 약재를 몰래 바꿔치기했다는 죄명을 뒤집어쓰고 곤장 20대를 맞은 뒤 감옥에 갇혔다."
+STORY_012_003_TEXT,孙大夫也发现赈灾药材有问题，去州衙找吴世良，谁知被扣了个私换药材的罪名，打了二十板子关进大狱里了。,孫大夫也發現賑災藥材有問題，去州衙找吳世良，誰知被扣了個私換藥材的罪名，打了二十板子關進大獄裡了。,"Doctor Sun noticed the problems with the relief medicine too. He went to confront Wu Shiliang at the prefectural office. Instead, they accused him of secretly swapping the medicine, flogged him twenty times and threw him in prison.",孫先生も薬材の異常に気づいて、州役所の呉世良に会いに行った。ところが薬材を勝手にすり替えたと罪を着せられ、杖で二十回打たれて牢に入れられたんだ。,"손 의원도 구휼 약재에 문제가 있다는 것을 알아채고 오세량을 찾아 주 아문으로 갔지만, 도리어 약재를 몰래 바꿔치기했다는 죄명을 뒤집어쓰고 곤장 20대를 맞은 뒤 감옥에 갇혔다."
 STORY_012_004_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
-STORY_012_004_TEXT,这个吴世良，平日里看着人模狗样的，真不是个东西啊。,這個吳世良，平日里看著人模狗樣的，真不是個東西啊。,"Wu Shiliang always looked respectable, but he is rotten to the core.",呉世良め、普段は立派そうに見えたのに、とんでもないやつだ。,"그 오세량이란 놈은 평소에는 멀쩡한 사람처럼 굴더니, 정말 인간 말종이구나."
+STORY_012_004_TEXT,这个吴世良，平日里看着人模狗样的，真不是个东西啊。,這個吳世良，平日裡看著人模狗樣的，真不是個東西啊。,"Wu Shiliang always looked respectable, but he is rotten to the core.",呉世良め、普段は立派そうに見えたのに、とんでもないやつだ。,"그 오세량이란 놈은 평소에는 멀쩡한 사람처럼 굴더니, 정말 인간 말종이구나."
 STORY_012_005_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_012_005_TEXT,我们得给孙大夫讨回公道。,我們得給孫大夫討回公道。,We have to seek justice for Doctor Sun.,孫先生の無実を証明しなければ。,손 의원의 억울함을 풀어 드려야 합니다.
 STORY_012_006_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
@@ -17109,7 +17109,7 @@ STORY_013_005_TEXT,是啊，这次的药材统一由蕲州采办存放，哪里�
 STORY_013_006_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_013_006_TEXT,有件事儿你知道吗？这次的赈灾药材被人动了手脚，以次充好，根本治不了病。,有件事兒你知道嗎？這次的賑災藥材被人動了手腳，以次充好，根本治不了病。,Have you heard? Someone has tampered with these relief supplies. They have replaced good medicine with poor quality stock. It cannot cure anyone.,ご存じですか？　今回の薬材には粗悪品が混ざっています。あれでは病を治せません。,"한 가지 아십니까? 이번 구휼 약재가 누군가의 손을 타서 좋은 약재 대신 질 낮은 것을 넣었고, 도저히 병을 치료할 수 없게 되었습니다."
 STORY_013_007_SPEAKER,雷万钧,雷萬鈞,Lei Wanjun,雷万鈞,뇌만균
-STORY_013_007_TEXT,什么？有这事儿？,甚麼？有這事兒？,What? Is that true?,何だって？　本当か？,뭐라고? 그런 일이 있었나?
+STORY_013_007_TEXT,什么？有这事儿？,什麼？有這事兒？,What? Is that true?,何だって？　本当か？,뭐라고? 그런 일이 있었나?
 STORY_013_008_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_013_008_TEXT,药剂局的孙大夫去找吴世良理论，被关进大牢，知情的大夫们都不敢声张。,藥劑局的孫大夫去找吳世良理論，被關進大牢，知情的大夫們都不敢聲張。,Doctor Sun from the dispensary challenged Wu Shiliang about it and was imprisoned. The other doctors who know are afraid to speak up.,薬剤局の孫先生が呉世良に抗議したら、牢に入れられました。事情を知る医者は誰も声を上げられません。,"약제국의 손 의원이 오세량을 찾아 따졌지만 감옥에 갇혔고, 사정을 아는 의원들도 모두 입을 다물고 있습니다."
 STORY_013_009_SPEAKER,雷万钧,雷萬鈞,Lei Wanjun,雷万鈞,뇌만균
@@ -17121,7 +17121,7 @@ STORY_014_01_001_TEXT,李大夫，小生有礼了。,李大夫，小生有禮了
 STORY_014_01_002_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_014_01_002_TEXT,是沈先生啊，请坐。,是沈先生啊，請坐。,"Master Shen. Please, sit down.",沈殿でしたか。どうぞお掛けください。,심 선생이시군요. 앉으십시오.
 STORY_014_01_003_SPEAKER,沈修文,沈修文,Shen Xiuwen,沈修文,심수문
-STORY_014_01_003_TEXT,最近有点失眠，没什么食欲，来请李大夫给看看。,最近有點失眠，沒甚麼食慾，來請李大夫給看看。,I have been sleeping poorly and have little appetite. I hoped you would examine me.,最近よく眠れず、食欲もありません。診ていただきたいのです。,최근 잠을 잘 못 자고 식욕도 없어 이 의원께 진찰을 부탁드리러 왔습니다.
+STORY_014_01_003_TEXT,最近有点失眠，没什么食欲，来请李大夫给看看。,最近有點失眠，沒什麼食慾，來請李大夫給看看。,I have been sleeping poorly and have little appetite. I hoped you would examine me.,最近よく眠れず、食欲もありません。診ていただきたいのです。,최근 잠을 잘 못 자고 식욕도 없어 이 의원께 진찰을 부탁드리러 왔습니다.
 STORY_014_02_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_014_02_001_TEXT,先生这是心脾两虚之症，思虑过度暗耗心血导致心血不足，脾气虚弱。给您开一服归脾汤，您可要注意休息啊。,先生這是心脾兩虛之症，思慮過度暗耗心血導致心血不足，脾氣虛弱。給您開一服歸脾湯，您可要注意休息啊。,You have a deficiency of both heart and spleen. Too much worry has depleted your heart blood and weakened your spleen qi. I will prescribe Restore the Spleen Decoction. Please make sure you rest.,心脾両虚の証です。考えすぎて心血を消耗し、脾の気も弱っています。帰脾湯を処方しますから、しっかり休んでください。,선생께서는 심비양허 증입니다. 지나친 걱정이 몰래 심혈을 소모하여 심혈이 부족해지고 비기가 약해진 것입니다. 귀비탕을 한 첩 지어 드릴 테니 충분히 쉬셔야 합니다.
 STORY_014_02_002_SPEAKER,沈修文,沈修文,Shen Xiuwen,沈修文,심수문
@@ -17133,7 +17133,7 @@ STORY_014_02_004_TEXT,这是衙门公务，在下不方便说，也劝李大夫�
 STORY_014_02_005_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_014_02_005_TEXT,是在下唐突了。,是在下唐突了。,Forgive my presumption.,出過ぎたことを申しました。,제가 경솔했습니다.
 STORY_014_02_006_SPEAKER,沈修文,沈修文,Shen Xiuwen,沈修文,심수문
-STORY_014_02_006_TEXT,无妨，您和令尊医术高明，赈灾药材用的是什么，想必你们心里有数。,無妨，您和令尊醫術高明，賑災藥材用的是甚麼，想必你們心裡有數。,No matter. You and your father are skilled physicians. I imagine you know exactly what is in the relief medicine.,いえ。あなたと父上ほどの医者なら、救済用の薬材に何が使われているか、お分かりでしょう。,괜찮습니다. 선생과 부친께서는 의술이 뛰어나시니 구휼 약재가 무엇으로 되어 있는지는 이미 잘 알고 계시겠지요.
+STORY_014_02_006_TEXT,无妨，您和令尊医术高明，赈灾药材用的是什么，想必你们心里有数。,無妨，您和令尊醫術高明，賑災藥材用的是什麼，想必你們心裡有數。,No matter. You and your father are skilled physicians. I imagine you know exactly what is in the relief medicine.,いえ。あなたと父上ほどの医者なら、救済用の薬材に何が使われているか、お分かりでしょう。,괜찮습니다. 선생과 부친께서는 의술이 뛰어나시니 구휼 약재가 무엇으로 되어 있는지는 이미 잘 알고 계시겠지요.
 STORY_014_02_007_SPEAKER,沈修文,沈修文,Shen Xiuwen,沈修文,심수문
 STORY_014_02_007_TEXT,但我得提醒您一句，赈灾药材不只是一两个州府的事，更不是你我能管的事。,但我得提醒您一句，賑災藥材不只是一兩個州府的事，更不是你我能管的事。,But let me warn you: these supplies concern more than one or two prefectures. Neither you nor I can set things right.,ただ、ひとつ忠告します。この件は一つ二つの州府だけの問題ではない。私たちにどうにかできることでもありません。,"하지만 한마디 충고드리겠습니다. 구휼 약재는 한두 주부만의 일이 아니며, 더구나 당신과 제가 관여할 수 있는 일도 아닙니다."
 STORY_014_02_008_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
@@ -17142,7 +17142,7 @@ STORY_014_02_009_SPEAKER,沈修文,沈修文,Shen Xiuwen,沈修文,심수문
 STORY_014_02_009_TEXT,先生医术闻名全省，在下十分钦佩，不要浪费了老天给您的才华。在下告辞。,先生醫術聞名全省，在下十分欽佩，不要浪費了老天給您的才華。在下告辭。,"Your medical skill is renowned throughout the province, and I admire it greatly. Do not squander the gift Heaven has given you. I shall take my leave.",先生の医術は省中に知れ渡っています。その天から授かった才能を無駄になさらぬよう。では失礼します。,"선생의 의술은 성 전체에 이름이 높고, 저는 매우 존경합니다. 하늘이 내린 재능을 낭비하지 마십시오. 저는 이만 물러가겠습니다."
 STORY_014_02_010_TEXT,收入一两白银,收入一兩白銀,Received one tael of silver.,収入：銀一両,은전 한 냥 수입
 STORY_014_03_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_014_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是甚麼病，該開甚麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 틀렸어. 무슨 병인지, 어떤 처방을 써야 하는지 잘 생각해 봐야 해."
+STORY_014_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是什麼病，該開什麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 틀렸어. 무슨 병인지, 어떤 처방을 써야 하는지 잘 생각해 봐야 해."
 STORY_015_001_TEXT,咚咚咚…,咚咚咚…,"Knock, knock, knock…",トントン……,똑똑똑…
 STORY_015_002_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_015_002_TEXT,谁？,誰？,Who is there?,誰だ？,누구십니까?
@@ -17167,7 +17167,7 @@ STORY_015_011_TEXT,贤弟认识这么大的人物？,賢弟認識這麼大的人
 STORY_015_012_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_015_012_TEXT,之前医治过世子，应该能说得上话。,之前醫治過世子，應該能說得上話。,I treated his son. He may be willing to hear me out.,以前、世子様を治療しました。話は聞いていただけるはずです。,그분의 아드님을 치료한 적이 있습니다. 제 말을 들어 주실지도 모릅니다.
 STORY_015_013_SPEAKER,雷万钧,雷萬鈞,Lei Wanjun,雷万鈞,뇌만균
-STORY_015_013_TEXT,那还等什么，我陪你现在就去！,那還等甚麼，我陪你現在就去！,Then what are we waiting for? I will go with you now!,それならすぐに行こう。私も同行する！,그럼 무엇을 망설이십니까? 지금 함께 가겠습니다!
+STORY_015_013_TEXT,那还等什么，我陪你现在就去！,那還等什麼，我陪你現在就去！,Then what are we waiting for? I will go with you now!,それならすぐに行こう。私も同行する！,그럼 무엇을 망설이십니까? 지금 함께 가겠습니다!
 STORY_015_014_TEXT,一路无话，两人来到了楚王府,一路無話，兩人來到了楚王府,The two traveled to the Prince of Chu's residence in silence.,道中、二人は無言のまま楚王府へたどり着いた。,두 사람은 말없이 초왕의 저택으로 향했다.
 STORY_015_015_SPEAKER,楚王,楚王,Prince of Chu,楚王,초왕
 STORY_015_015_TEXT,前日一别，先生别来无恙啊。,前日一別，先生別來無恙啊。,"Doctor Li, it is good to see you again.",先日以来ですね。先生、お元気でしたか。,"이 의원, 다시 보니 반갑구려."
@@ -17197,20 +17197,20 @@ STORY_016_004_TEXT,治得了病，治不了命。今天来是有样东西要交�
 STORY_016_005_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_016_005_TEXT,这是？,這是？,What is this?,これは？,이게 무엇입니까?
 STORY_016_006_SPEAKER,沈修文,沈修文,Shen Xiuwen,沈修文,심수문
-STORY_016_006_TEXT,这是吴世良让我写的账册抄本，交给您应该能派上用场。,這是吳世良讓我寫的賬冊抄本，交給您應該能派上用場。,A copy of the accounts Wu Shiliang ordered me to keep. I think it will be useful in your hands.,呉世良に命じられて私が書いた帳簿の写しです。あなたのお役に立つでしょう。,오세량이 내게 작성하라고 한 장부의 사본일세. 자네 손에 들어가면 도움이 될 것 같네.
+STORY_016_006_TEXT,这是吴世良让我写的账册抄本，交给您应该能派上用场。,這是吳世良讓我寫的帳冊抄本，交給您應該能派上用場。,A copy of the accounts Wu Shiliang ordered me to keep. I think it will be useful in your hands.,呉世良に命じられて私が書いた帳簿の写しです。あなたのお役に立つでしょう。,오세량이 내게 작성하라고 한 장부의 사본일세. 자네 손에 들어가면 도움이 될 것 같네.
 STORY_016_007_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_016_007_TEXT,…....,…....,…,…………,…
 STORY_016_008_SPEAKER,沈修文,沈修文,Shen Xiuwen,沈修文,심수문
 STORY_016_008_TEXT,说实话我很羡慕李大夫，所学的本事能有处施展，唉…小生就此别过。,說實話我很羨慕李大夫，所學的本事能有處施展，唉…小生就此別過。,"To tell the truth, I envy you. Your abilities can be put to good use. Ah… Farewell, Doctor Li.",正直、先生が羨ましい。学んだことを人々のために生かせるのですから……では失礼します。,솔직히 말하면 이 의원이 부럽네. 배운 재주를 펼칠 곳이 있으니 말일세. 아… 소생은 이만 가 보겠네.
 STORY_016_009_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_016_009_TEXT,沈先生…....,沈先生…....,Master Shen…,沈殿……,심 선생님…
-STORY_016_010_TEXT,获得赈灾药材账本抄本,獲得賑災藥材賬本抄本,Obtained a copy of the disaster relief medicine accounts.,救済用薬材の帳簿の写しを入手した。,구휼 약재 장부 사본을 얻었다.
+STORY_016_010_TEXT,获得赈灾药材账本抄本,獲得賑災藥材帳本抄本,Obtained a copy of the disaster relief medicine accounts.,救済用薬材の帳簿の写しを入手した。,구휼 약재 장부 사본을 얻었다.
 STORY_017_01_001_SPEAKER,杨善泉,楊善泉,Yang Shanquan,楊善泉,양선천
 STORY_017_01_001_TEXT,李大夫，我这两天腰酸腿软，夜尿还多，给我开点药吧。,李大夫，我這兩天腰酸腿軟，夜尿還多，給我開點藥吧。,"Doctor Li, my lower back and legs have felt weak these past few days, and I keep waking to urinate. Could you prescribe something?",李先生、この二日ほど腰と脚がだるく、夜も何度も小便に起きます。薬を出してください。,"이 의원, 며칠 전부터 허리와 다리에 힘이 빠지고 밤마다 소변을 보느라 깨곤 하네. 약을 지어 줄 수 있겠나?"
 STORY_017_01_002_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_017_01_002_TEXT,杨大使请坐。,楊大使請坐。,"Please, sit down, Officer Yang.",楊殿、どうぞお掛けください。,"양 대사, 앉으십시오."
 STORY_017_02_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_017_02_001_TEXT,杨大使所患的是肾气不固之症，要注意休养，最近是遇到什么事受了惊吗？,楊大使所患的是腎氣不固之症，要注意休養，最近是遇到甚麼事受了驚嗎？,You have a failure of the kidneys to secure qi. You need rest. Has something frightened you recently?,楊殿は腎気不固の証です。静養してください。最近、何か怖い目に遭いましたか？,양 대사께서는 신기불고증을 앓고 계십니다. 충분히 쉬셔야 합니다. 최근에 무슨 일로 크게 놀라신 적은 없습니까?
+STORY_017_02_001_TEXT,杨大使所患的是肾气不固之症，要注意休养，最近是遇到什么事受了惊吗？,楊大使所患的是腎氣不固之症，要注意休養，最近是遇到什麼事受了驚嗎？,You have a failure of the kidneys to secure qi. You need rest. Has something frightened you recently?,楊殿は腎気不固の証です。静養してください。最近、何か怖い目に遭いましたか？,양 대사께서는 신기불고증을 앓고 계십니다. 충분히 쉬셔야 합니다. 최근에 무슨 일로 크게 놀라신 적은 없습니까?
 STORY_017_02_002_SPEAKER,杨善泉,楊善泉,Yang Shanquan,楊善泉,양선천
 STORY_017_02_002_TEXT,您听说沈师爷的事了吗？,您聽說沈師爺的事了嗎？,Have you heard what happened to Secretary Shen?,沈書記の件を聞きましたか？,심 사야의 일은 들었나?
 STORY_017_02_003_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
@@ -17222,12 +17222,12 @@ STORY_017_02_005_TEXT,！！！,！！！,What?!,！！！,뭐라고요?!
 STORY_017_02_006_SPEAKER,杨善泉,楊善泉,Yang Shanquan,楊善泉,양선천
 STORY_017_02_006_TEXT,他们开始灭口了...下一个就该轮到我了...,他們開始滅口了...下一個就該輪到我了...,They have begun silencing witnesses… I will be next…,口封じが始まった……次は私の番だ……,이제 증인들을 입막음하기 시작했네… 다음은 나일 걸세…
 STORY_017_02_007_SPEAKER,杨善泉,楊善泉,Yang Shanquan,楊善泉,양선천
-STORY_017_02_007_TEXT,这一批药材入库验收、各地调拨都是我经的手，多少药、什么成色、送到哪里，账上都有我的画押。他们想把这笔账做干净，就不会留我这个活口。,這一批藥材入庫驗收、各地調撥都是我經的手，多少藥、甚麼成色、送到哪裡，賬上都有我的畫押。他們想把這筆賬做乾淨，就不會留我這個活口。,"I oversaw the receipt of that shipment and its dispatch to each district. How much medicine there was, its quality, where it went—my signature is on every entry. If they want to erase the trail, they cannot leave me alive.",この薬材の検収から各地への発送まで、すべて私が担当しました。量、品質、届け先、帳簿には私の署名が残っています。証拠を消すつもりなら、私を生かしてはおかないでしょう。,"나는 그 약재가 들어온 것부터 각 고을로 보내진 것까지 감독했네. 약재의 양과 품질, 어디로 갔는지 모두 장부마다 내 서명이 남아 있지. 흔적을 지우려 한다면 나를 살려 둘 수 없을 걸세."
+STORY_017_02_007_TEXT,这一批药材入库验收、各地调拨都是我经的手，多少药、什么成色、送到哪里，账上都有我的画押。他们想把这笔账做干净，就不会留我这个活口。,這一批藥材入庫驗收、各地調撥都是我經的手，多少藥、什麼成色、送到哪裡，帳上都有我的畫押。他們想把這筆帳做乾淨，就不會留我這個活口。,"I oversaw the receipt of that shipment and its dispatch to each district. How much medicine there was, its quality, where it went—my signature is on every entry. If they want to erase the trail, they cannot leave me alive.",この薬材の検収から各地への発送まで、すべて私が担当しました。量、品質、届け先、帳簿には私の署名が残っています。証拠を消すつもりなら、私を生かしてはおかないでしょう。,"나는 그 약재가 들어온 것부터 각 고을로 보내진 것까지 감독했네. 약재의 양과 품질, 어디로 갔는지 모두 장부마다 내 서명이 남아 있지. 흔적을 지우려 한다면 나를 살려 둘 수 없을 걸세."
 STORY_017_02_008_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_017_02_008_TEXT,......,......,…,…………,…
 STORY_017_02_009_TEXT,收入一两白银,收入一兩白銀,Received one tael of silver.,収入：銀一両,은전 한 냥을 받았다.
 STORY_017_03_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_017_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是甚麼病，該開甚麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 맞지 않아. 병증과 알맞은 처방을 신중히 다시 생각해야 해."
+STORY_017_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是什麼病，該開什麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 맞지 않아. 병증과 알맞은 처방을 신중히 다시 생각해야 해."
 STORY_018_001_TEXT,"""库房失火啦！快来人救火啊！""","""庫房失火啦！快來人救火啊！""",“The storeroom is on fire! Somebody help!”,「倉庫が火事だ！　誰か、火を消してくれ！」,불이야! 창고에 불이 났다! 어서 와서 불 좀 꺼 줘!
 STORY_018_002_SPEAKER,陈皮,陳皮,Chen Pi,陳皮,진피
 STORY_018_002_TEXT,少掌柜的，惠民药局的药料库起火啦！,少掌櫃的，惠民藥局的藥料庫起火啦！,"Young master, the public dispensary's medicine storehouse is burning!",若旦那、恵民薬局の薬材倉庫が燃えています！,"도련님, 혜민약국의 약재 창고에 불이 났어요!"
@@ -17242,7 +17242,7 @@ STORY_018_006_TEXT,……是杨善泉。,……是楊善泉。,…It is Yang Sha
 STORY_019_001_SPEAKER,赵顺,趙順,Zhao Shun,趙順,조순
 STORY_019_001_TEXT,掌柜的生意兴隆啊(四处打量...)，那扇门是通后院的吧？,掌櫃的生意興隆啊(四處打量...)，那扇門是通後院的吧？,"Business looks good, Master Li. (Looks around…) That door leads to the rear courtyard, does it?",お店は繁盛しているようですね。（辺りを見回す……）あの扉は裏庭に通じるんですか？,"주인장, 장사가 잘되는군요. (주위를 둘러보며…) 저 문이 뒤뜰로 통하는 문이지요?"
 STORY_019_002_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_019_002_TEXT,敢问来小馆有何贵干？,敢問來小館有何貴乾？,May I ask what brings you to my clinic?,当院に何のご用ですか？,무슨 일로 제 진료소를 찾아오셨는지 여쭤도 되겠습니까?
+STORY_019_002_TEXT,敢问来小馆有何贵干？,敢問來小館有何貴幹？,May I ask what brings you to my clinic?,当院に何のご用ですか？,무슨 일로 제 진료소를 찾아오셨는지 여쭤도 되겠습니까?
 STORY_019_003_SPEAKER,赵顺,趙順,Zhao Shun,趙順,조순
 STORY_019_003_TEXT,啊，哈哈，没事没事，就来看看，听说咱蕲州有一位李神医，来瞻仰瞻仰。,啊，哈哈，沒事沒事，就來看看，聽說咱蘄州有一位李神醫，來瞻仰瞻仰。,"Oh, ha, ha, nothing in particular. I heard Qizhou had a famous Physician Li and came to see him for myself.",いや、はは、何でもありません。蘄州に名医の李先生がいると聞いて、お顔を拝みに来ただけです。,"오, 하하, 별일은 아니네. 기주에 이름난 이 의원이 있다기에 어떤 사람인지 보러 왔지."
 STORY_019_004_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
@@ -17283,7 +17283,7 @@ STORY_021_003_TEXT,蕲州所需赈灾药材由太医院调拨，重新发放。,
 STORY_021_004_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_021_004_TEXT,到头来这吴世良不过是个被推出来顶罪的罢了。,到頭來這吳世良不過是個被推出來頂罪的罷了。,"In the end, Wu Shiliang was little more than a scapegoat.",結局、呉世良は身代わりにされたにすぎない。,결국 오세량은 희생양에 불과했군.
 STORY_021_005_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
-STORY_021_005_TEXT,朝政被严党把持，这些做官的你中有我，我中有你，真细究起来又是一笔糊涂账。,朝政被嚴黨把持，這些做官的你中有我，我中有你，真細究起來又是一筆糊塗賬。,"The Yan faction controls the court. Every official has ties to another. If anyone truly followed the trail, it would lead into a hopeless tangle.",朝政は厳党に握られている。役人同士は皆つながっている。突き詰めれば、またうやむやになるだろう。,"엄숭 일파가 조정을 장악하고 있으니, 관리들끼리 서로 얽히고설켜 있지. 끝까지 파고들면 또 하나의 풀기 어려운 장부가 될 게다."
+STORY_021_005_TEXT,朝政被严党把持，这些做官的你中有我，我中有你，真细究起来又是一笔糊涂账。,朝政被嚴黨把持，這些做官的你中有我，我中有你，真細究起來又是一筆糊塗帳。,"The Yan faction controls the court. Every official has ties to another. If anyone truly followed the trail, it would lead into a hopeless tangle.",朝政は厳党に握られている。役人同士は皆つながっている。突き詰めれば、またうやむやになるだろう。,"엄숭 일파가 조정을 장악하고 있으니, 관리들끼리 서로 얽히고설켜 있지. 끝까지 파고들면 또 하나의 풀기 어려운 장부가 될 게다."
 STORY_021_006_SPEAKER,楚王,楚王,Prince of Chu,楚王,초왕
 STORY_021_006_TEXT,李先生。,李先生。,Doctor Li.,李先生。,이 의원.
 STORY_021_007_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
@@ -17305,9 +17305,9 @@ STORY_022_02_002_TEXT,您这是温燥证，整日说书久坐少动，伤津耗�
 STORY_022_02_003_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_022_02_003_TEXT,给您开一副桑杏汤，一天三服，也记得多喝水。,給您開一副桑杏湯，一天三服，也記得多喝水。,"I will prescribe Mulberry Leaf and Apricot Kernel Decoction, three doses a day. Remember to drink plenty of water too.",桑杏湯を処方します。一日三回服用し、水もよく飲んでください。,상행탕을 하루 세 번 복용하십시오. 물도 충분히 드시는 것을 잊지 마십시오.
 STORY_022_02_004_SPEAKER,陈皮,陳皮,Chen Pi,陳皮,진피
-STORY_022_02_004_TEXT,柳先生，我最喜欢听您说书啦，您真是啥都知道啥都会，讲什么像什么。,柳先生，我最喜歡聽您說書啦，您真是啥都知道啥都會，講甚麼像甚麼。,"Master Liu, I love hearing your stories! You know everything, and you bring every tale to life.",柳先生の語りは大好きです！　何でもご存じで、どんな話も本物みたいに語りますね。,"유 선생님, 저는 선생님의 이야기를 듣는 게 정말 좋아요! 모르는 것이 없으시고, 이야기를 생생하게 들려주시잖아요."
+STORY_022_02_004_TEXT,柳先生，我最喜欢听您说书啦，您真是啥都知道啥都会，讲什么像什么。,柳先生，我最喜歡聽您說書啦，您真是啥都知道啥都會，講什麼像什麼。,"Master Liu, I love hearing your stories! You know everything, and you bring every tale to life.",柳先生の語りは大好きです！　何でもご存じで、どんな話も本物みたいに語りますね。,"유 선생님, 저는 선생님의 이야기를 듣는 게 정말 좋아요! 모르는 것이 없으시고, 이야기를 생생하게 들려주시잖아요."
 STORY_022_02_005_SPEAKER,柳敬亭,柳敬亭,Liu Jingting,柳敬亭,유경정
-STORY_022_02_005_TEXT,诶嘿嘿，小兄弟过奖了，我只是说些王侯将相，才子佳人的故事，来听书的客官喜欢什么，我就讲什么。,誒嘿嘿，小兄弟過獎了，我只是說些王侯將相，才子佳人的故事，來聽書的客官喜歡甚麼，我就講甚麼。,"Heh, heh. You flatter me, young man. I only tell tales of kings and generals, scholars and beauties. I tell the audience whatever they want to hear.",いやあ、褒めすぎだよ。王侯将相や才子佳人の話を、お客が好むように語っているだけさ。,"허허, 젊은이가 과찬이네. 나는 왕후장상이나 재자와 가인의 이야기를 들려줄 뿐이지. 손님들이 무엇을 좋아하든 그에 맞춰 이야기한다네."
+STORY_022_02_005_TEXT,诶嘿嘿，小兄弟过奖了，我只是说些王侯将相，才子佳人的故事，来听书的客官喜欢什么，我就讲什么。,誒嘿嘿，小兄弟過獎了，我只是說些王侯將相，才子佳人的故事，來聽書的客官喜歡什麼，我就講什麼。,"Heh, heh. You flatter me, young man. I only tell tales of kings and generals, scholars and beauties. I tell the audience whatever they want to hear.",いやあ、褒めすぎだよ。王侯将相や才子佳人の話を、お客が好むように語っているだけさ。,"허허, 젊은이가 과찬이네. 나는 왕후장상이나 재자와 가인의 이야기를 들려줄 뿐이지. 손님들이 무엇을 좋아하든 그에 맞춰 이야기한다네."
 STORY_022_02_006_SPEAKER,陈皮,陳皮,Chen Pi,陳皮,진피
 STORY_022_02_006_TEXT,先生，您现在就在这讲一段吧。,先生，您現在就在這講一段吧。,"Please tell us a story now, Master Liu.",先生、今ここで一席お願いします！,"유 선생님, 지금 이야기 하나 들려주세요."
 STORY_022_02_007_SPEAKER,半夏,半夏,Banxia,半夏,반하
@@ -17323,22 +17323,22 @@ STORY_022_02_011_TEXT,正巧天齐庙有位摆摊卖膏药的王道士，因膏�
 STORY_022_02_012_SPEAKER,柳敬亭,柳敬亭,Liu Jingting,柳敬亭,유경정
 STORY_022_02_012_TEXT,王一贴道：“这贴妒的膏药倒没经过。有一种汤药，或者可医，只是慢些儿，不能立刻见效的。”,王一貼道：“這貼妒的膏藥倒沒經過。有一種湯藥，或者可醫，只是慢些兒，不能立刻見效的。”,"Wang said, “I have never made a plaster for jealousy. There is a decoction that might help, but it works slowly. Do not expect an immediate cure.”",王一貼は言った。「嫉妬に効く膏薬は知らないが、煎じ薬ならあるかもしれん。ただし効き目は遅く、すぐには治らない」,왕 도사가 말했네. “질투를 치료하는 약고는 만들어 본 적이 없소. 도움이 될 만한 탕약은 있지만 효과가 느리니 당장 낫기를 기대하지는 마시오.”
 STORY_022_02_013_SPEAKER,柳敬亭,柳敬亭,Liu Jingting,柳敬亭,유경정
-STORY_022_02_013_TEXT,朋友问：“什么汤？怎么吃法？”,朋友問：“甚麼湯？怎麼吃法？”,"The friend asked, “What decoction? How does she take it?”",友人は尋ねた。「どんな薬で、どう飲むんだ？」,친구가 물었네. “무슨 탕약입니까? 어떻게 먹여야 합니까?”
+STORY_022_02_013_TEXT,朋友问：“什么汤？怎么吃法？”,朋友問：“什麼湯？怎麼吃法？”,"The friend asked, “What decoction? How does she take it?”",友人は尋ねた。「どんな薬で、どう飲むんだ？」,친구가 물었네. “무슨 탕약입니까? 어떻게 먹여야 합니까?”
 STORY_022_02_014_SPEAKER,柳敬亭,柳敬亭,Liu Jingting,柳敬亭,유경정
 STORY_022_02_014_TEXT,王一贴道：“这叫做‘疗妒汤’。用极好的秋梨一个，二钱冰糖，一钱陈皮，水三碗，梨熟为度。每日清晨吃这一个梨，吃来吃去就好了。”,王一貼道：“這叫做‘療妒湯’。用極好的秋梨一個，二錢冰糖，一錢陳皮，水三碗，梨熟為度。每日清晨吃這一個梨，吃來吃去就好了。”,"Wang replied, “It is called Jealousy-Curing Decoction. Take one fine autumn pear, two qian of rock sugar and one qian of aged tangerine peel. Boil them in three bowls of water until the pear is tender. Have her eat one pear each morning. Keep at it, and she will get better.”",王一貼は答えた。「『療妬湯』という。上等な秋梨一個、氷砂糖二銭、陳皮一銭を水三杯で煮込み、梨が柔らかくなればよい。毎朝梨を一個食べれば、そのうち治る」,"왕 도사가 대답했네. “이름은 질투를 고치는 탕약이오. 잘 익은 가을 배 하나와 빙당 두 전, 진피 한 전을 물 세 사발에 넣고 배가 무를 때까지 달이시오. 매일 아침 배 하나를 먹이면 되오. 꾸준히 먹이면 나을 것이오.”"
 STORY_022_02_015_SPEAKER,柳敬亭,柳敬亭,Liu Jingting,柳敬亭,유경정
-STORY_022_02_015_TEXT,朋友道：“这也不值什么。只怕未必见效。”,朋友道：“這也不值甚麼。只怕未必見效。”,"“That costs next to nothing,” the friend said. “But will it really work?”",友人は言った。「大した手間ではないが、効くとは思えない」,“돈도 거의 들지 않는군요.” 친구가 말했네. “정말 효과가 있습니까?”
+STORY_022_02_015_TEXT,朋友道：“这也不值什么。只怕未必见效。”,朋友道：“這也不值什麼。只怕未必見效。”,"“That costs next to nothing,” the friend said. “But will it really work?”",友人は言った。「大した手間ではないが、効くとは思えない」,“돈도 거의 들지 않는군요.” 친구가 말했네. “정말 효과가 있습니까?”
 STORY_022_02_016_SPEAKER,柳敬亭,柳敬亭,Liu Jingting,柳敬亭,유경정
 STORY_022_02_016_TEXT,王一贴道：“一剂不效，吃十剂；今日不效，明日再吃；今年不效，明年再吃。”,王一貼道：“一劑不效，吃十劑；今日不效，明日再吃；今年不效，明年再吃。”,"Wang replied, “If one dose fails, give her ten. If it fails today, try tomorrow. If it fails this year, try again next year.”",王一貼は答えた。「一回で効かなければ十回飲め。今日効かなければ明日、今年効かなければ来年だ」,왕 도사가 대답했네. “한 첩으로 낫지 않으면 열 첩을 먹이시오. 오늘 낫지 않으면 내일 다시 해 보시오. 올해 낫지 않으면 내년에 또 해 보시오.”
 STORY_022_02_017_SPEAKER,柳敬亭,柳敬亭,Liu Jingting,柳敬亭,유경정
-STORY_022_02_017_TEXT,“横竖这三味药都是润肺开胃不伤人的，甜丝丝的，又止咳嗽，又好吃。吃过一百岁，人横竖是要死的，死了还妒什么？那时就见效了。”,“橫竪這三味藥都是潤肺開胃不傷人的，甜絲絲的，又止咳嗽，又好吃。吃過一百歲，人橫竪是要死的，死了還妒甚麼？那時就見效了。”,"“After all, these ingredients soothe the lungs and aid the appetite. They are sweet, tasty and ease a cough. They will do her no harm. Once she is past a hundred, she must die someday. And once she is dead, she cannot be jealous. Then you will see it has worked!”",「どれも肺を潤して食欲を促す、害のない甘い薬だ。咳にもよく、おいしい。百歳まで飲めば、いずれ人は死ぬ。死んでしまえば嫉妬もしない。そのときには確かに効くだろう」,"“어차피 이 약재들은 폐를 편안하게 하고 식욕을 돕소. 달고 맛있으며 기침도 누그러뜨리니 해가 될 리 없지. 백 살을 넘긴 사람도 언젠가는 죽는 법이오. 죽고 나면 질투도 할 수 없으니, 그때야 효과가 있었다는 것을 알게 될 거요!”"
+STORY_022_02_017_TEXT,“横竖这三味药都是润肺开胃不伤人的，甜丝丝的，又止咳嗽，又好吃。吃过一百岁，人横竖是要死的，死了还妒什么？那时就见效了。”,“橫豎這三味藥都是潤肺開胃不傷人的，甜絲絲的，又止咳嗽，又好吃。吃過一百歲，人橫豎是要死的，死了還妒什麼？那時就見效了。”,"“After all, these ingredients soothe the lungs and aid the appetite. They are sweet, tasty and ease a cough. They will do her no harm. Once she is past a hundred, she must die someday. And once she is dead, she cannot be jealous. Then you will see it has worked!”",「どれも肺を潤して食欲を促す、害のない甘い薬だ。咳にもよく、おいしい。百歳まで飲めば、いずれ人は死ぬ。死んでしまえば嫉妬もしない。そのときには確かに効くだろう」,"“어차피 이 약재들은 폐를 편안하게 하고 식욕을 돕소. 달고 맛있으며 기침도 누그러뜨리니 해가 될 리 없지. 백 살을 넘긴 사람도 언젠가는 죽는 법이오. 죽고 나면 질투도 할 수 없으니, 그때야 효과가 있었다는 것을 알게 될 거요!”"
 STORY_022_02_018_SPEAKER,陈皮,陳皮,Chen Pi,陳皮,진피
 STORY_022_02_018_TEXT,哈哈哈，还有这种方子。,哈哈哈，還有這種方子。,"Ha, ha, ha! What sort of prescription is that?",ははは、そんな処方があるのか。,하하하! 그게 무슨 처방이에요?
 STORY_022_02_019_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_022_02_019_TEXT,哈哈哈，这道士说的也不无道理。,哈哈哈，這道士說的也不無道理。,"Ha, ha, ha! The Daoist does have a point.",ははは、道士の言うことも一理あるな。,하하하! 그 도사도 일리가 있군.
 STORY_022_02_020_TEXT,收入一两白银,收入一兩白銀,Received one tael of silver.,収入：銀一両,은전 한 냥을 받았다.
 STORY_022_03_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_022_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是甚麼病，該開甚麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 맞지 않아. 병증과 알맞은 처방을 신중히 다시 생각해야 해."
+STORY_022_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是什麼病，該開什麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 맞지 않아. 병증과 알맞은 처방을 신중히 다시 생각해야 해."
 STORY_023_01_001_SPEAKER,郭妈妈,郭媽媽,Madam Guo,郭おばさん,곽 부인
 STORY_023_01_001_TEXT,李大夫，您快给我女儿瞧瞧吧，这孩子整日茶饭不进，愁眉苦脸咳个不停。,李大夫，您快給我女兒瞧瞧吧，這孩子整日茶飯不進，愁眉苦臉咳個不停。,"Doctor Li, please examine my daughter. She hardly eats or drinks, looks miserable all day and cannot stop coughing.",李先生、娘を診てください。食事も取らず、沈んだ顔で咳ばかりしているんです。,"이 의원, 제 딸을 좀 진찰해 주세요. 먹지도 마시지도 않고 하루 종일 기운이 없어 보이며 기침을 멈추지 못합니다."
 STORY_023_01_002_SPEAKER,谢飞燕,謝飛燕,Xie Feiyan,謝飛燕,사비연
@@ -17350,7 +17350,7 @@ STORY_023_01_004_TEXT,哎呀，可不是嘛，这孩子随我学艺两年又半�
 STORY_023_01_005_SPEAKER,郭妈妈,郭媽媽,Madam Guo,郭おばさん,곽 부인
 STORY_023_01_005_TEXT,可你看她现在这个样子，还怎么接待客人啊。,可你看她現在這個樣子，還怎麼接待客人啊。,But look at her now. How is she supposed to entertain guests like this?,でも今のこの様子では、お客をもてなせません。,하지만 지금 꼴을 보세요. 이런 상태로 어떻게 손님을 모실 수 있겠어요?
 STORY_023_01_006_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_023_01_006_TEXT,姑娘你坐下，我给你把把脉。哎，半夏你在这干什么？,姑娘你坐下，我給你把把脈。哎，半夏你在這幹甚麼？,"Please sit down, miss. I will take your pulse. Banxia, what are you doing here?",お嬢さん、座ってください。脈を診ます。……半夏、ここで何をしている？,"아가씨, 앉으십시오. 맥을 짚어 보겠습니다. 반하야, 여기서 무엇을 하고 있느냐?"
+STORY_023_01_006_TEXT,姑娘你坐下，我给你把把脉。哎，半夏你在这干什么？,姑娘你坐下，我給你把把脈。哎，半夏你在這幹什麼？,"Please sit down, miss. I will take your pulse. Banxia, what are you doing here?",お嬢さん、座ってください。脈を診ます。……半夏、ここで何をしている？,"아가씨, 앉으십시오. 맥을 짚어 보겠습니다. 반하야, 여기서 무엇을 하고 있느냐?"
 STORY_023_01_007_SPEAKER,半夏,半夏,Banxia,半夏,반하
 STORY_023_01_007_TEXT,我替少夫人来看着你。,我替少夫人來看著你。,The young mistress sent me to keep an eye on you.,若奥様の代わりに、旦那様を見張っています。,마님께서 도련님을 지켜보라고 보내셨어요.
 STORY_023_01_008_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
@@ -17360,16 +17360,16 @@ STORY_023_02_001_TEXT,姑娘这病是肺气虚，平日注意避风避寒，开�
 STORY_023_02_002_SPEAKER,谢飞燕,謝飛燕,Xie Feiyan,謝飛燕,사비연
 STORY_023_02_002_TEXT,…多谢先生。,…多謝先生。,"…Thank you, Doctor.",……ありがとうございます。,"…감사합니다, 의원님."
 STORY_023_02_003_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_023_02_003_TEXT,姑娘可是有什么心事？,姑娘可是有甚麼心事？,Is something troubling you?,何か悩みがあるのですか？,무슨 걱정이라도 있습니까?
+STORY_023_02_003_TEXT,姑娘可是有什么心事？,姑娘可是有什麼心事？,Is something troubling you?,何か悩みがあるのですか？,무슨 걱정이라도 있습니까?
 STORY_023_02_004_SPEAKER,郭妈妈,郭媽媽,Madam Guo,郭おばさん,곽 부인
-STORY_023_02_004_TEXT,成天好吃好喝的伺候着，她能有什么心事。,成天好吃好喝的伺候著，她能有甚麼心事。,She eats and drinks well every day. What could she possibly be worried about?,毎日おいしいものを食べさせているのに、何を悩むことがあるんです？,매일 잘 먹고 잘 마시는데 무슨 걱정이 있겠어요?
+STORY_023_02_004_TEXT,成天好吃好喝的伺候着，她能有什么心事。,成天好吃好喝的伺候著，她能有什麼心事。,She eats and drinks well every day. What could she possibly be worried about?,毎日おいしいものを食べさせているのに、何を悩むことがあるんです？,매일 잘 먹고 잘 마시는데 무슨 걱정이 있겠어요?
 STORY_023_02_005_SPEAKER,郭妈妈,郭媽媽,Madam Guo,郭おばさん,곽 부인
 STORY_023_02_005_TEXT,那就多谢大夫了，走吧女儿。,那就多謝大夫了，走吧女兒。,"Thank you, Doctor. Come along, daughter.",先生、ありがとうございました。さあ、帰るよ。,"고맙습니다, 의원님. 가자, 얘야."
 STORY_023_02_006_SPEAKER,谢飞燕,謝飛燕,Xie Feiyan,謝飛燕,사비연
 STORY_023_02_006_TEXT,…,…,…,……,…
 STORY_023_02_007_TEXT,收入一两白银,收入一兩白銀,Received one tael of silver.,収入：銀一両,은전 한 냥을 받았다.
 STORY_023_02_008_SPEAKER,王百堂,王百堂,Wang Baitang,王百堂,왕백당
-STORY_023_02_008_TEXT,大夫，刚才那姑娘是得了什么病啊？,大夫，剛才那姑娘是得了甚麼病啊？,"Doctor, what was wrong with the young woman who just left?",先生、さっきの娘さんは何の病気だったんですか？,"의원님, 방금 나간 아가씨는 무슨 병이었습니까?"
+STORY_023_02_008_TEXT,大夫，刚才那姑娘是得了什么病啊？,大夫，剛才那姑娘是得了什麼病啊？,"Doctor, what was wrong with the young woman who just left?",先生、さっきの娘さんは何の病気だったんですか？,"의원님, 방금 나간 아가씨는 무슨 병이었습니까?"
 STORY_023_02_009_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_023_02_009_TEXT,您是？,您是？,And you are?,失礼ですが、あなたは？,당신은 누구십니까?
 STORY_023_02_010_SPEAKER,王百堂,王百堂,Wang Baitang,王百堂,왕백당
@@ -17391,7 +17391,7 @@ STORY_023_02_017_TEXT,相公咱想办法帮帮他们吧。,相公咱想辦法幫
 STORY_023_02_018_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_023_02_018_TEXT,我也想帮他们，可怎么帮呢？,我也想幫他們，可怎麼幫呢？,"I would like to, but how?",助けたいが、どうすればいい？,"그러고 싶지만, 어떻게 하지?"
 STORY_023_03_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_023_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是甚麼病，該開甚麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 맞지 않아. 병증과 알맞은 처방을 신중히 다시 생각해야 해."
+STORY_023_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是什麼病，該開什麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 맞지 않아. 병증과 알맞은 처방을 신중히 다시 생각해야 해."
 STORY_024_01_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_024_01_001_TEXT,姑娘你来啦，病好点了吗？,姑娘你來啦，病好點了嗎？,"You have come back, miss. Are you feeling any better?",お嬢さん、また来たのですね。具合は良くなりましたか？,"아가씨, 다시 오셨군요. 몸은 좀 나아졌습니까?"
 STORY_024_01_002_SPEAKER,谢飞燕,謝飛燕,Xie Feiyan,謝飛燕,사비연
@@ -17415,7 +17415,7 @@ STORY_024_02_007_TEXT,王郎待我真心诚意，我俩满心欢喜想着赎身�
 STORY_024_02_008_SPEAKER,吴芷兰,吳芷蘭,Wu Zhilan,呉芷蘭,오지란
 STORY_024_02_008_TEXT,我有一计，可使你二人有情人终成眷属。,我有一計，可使你二人有情人終成眷屬。,I have an idea that may help the two of you marry.,二人が結ばれるための策があります。,두 분이 혼인할 수 있도록 도울 방법이 떠올랐어요.
 STORY_024_02_009_SPEAKER,半夏,半夏,Banxia,半夏,반하
-STORY_024_02_009_TEXT,少夫人你有什么主意呀？快说快说！,少夫人你有甚麼主意呀？快說快說！,"Young mistress, what is it? Tell us!",若奥様、どんな策ですか？　早く教えてください！,"마님, 무슨 방법인데요? 말씀해 주세요!"
+STORY_024_02_009_TEXT,少夫人你有什么主意呀？快说快说！,少夫人你有什麼主意呀？快說快說！,"Young mistress, what is it? Tell us!",若奥様、どんな策ですか？　早く教えてください！,"마님, 무슨 방법인데요? 말씀해 주세요!"
 STORY_024_02_010_SPEAKER,吴芷兰,吳芷蘭,Wu Zhilan,呉芷蘭,오지란
 STORY_024_02_010_TEXT,明日你让郭妈妈来一趟，如此这般….,明日你讓郭媽媽來一趟，如此這般….,Ask Madam Guo to come here tomorrow. Here is what we shall do…,明日、郭おばさんをここへ呼んでください。それから……,내일 곽 부인을 여기로 부르세요. 이렇게 하는 겁니다…
 STORY_024_02_011_TEXT,吴芷兰和众人说出了自己的主意,吳芷蘭和眾人說出了自己的主意,Wu Zhilan explained her plan to everyone.,呉芷蘭は皆に考えた策を話した。,오지란은 모두에게 자신의 계획을 설명했다.
@@ -17424,7 +17424,7 @@ STORY_024_02_012_TEXT,先生若是能帮我们渡此难关，便是再造父母�
 STORY_024_02_013_TEXT,收入一两白银,收入一兩白銀,Received one tael of silver.,収入：銀一両,은전 한 냥을 받았다.
 STORY_024_02_014_TEXT,次日,次日,The next day.,翌日。,다음 날.
 STORY_024_02_015_SPEAKER,郭妈妈,郭媽媽,Madam Guo,郭おばさん,곽 부인
-STORY_024_02_015_TEXT,李大夫，你叫我来是什么事儿啊？,李大夫，你叫我來是甚麼事兒啊？,"Doctor Li, why did you ask me to come?",李先生、何の用で呼んだんですか？,"이 의원, 왜 나를 오라고 했소?"
+STORY_024_02_015_TEXT,李大夫，你叫我来是什么事儿啊？,李大夫，你叫我來是什麼事兒啊？,"Doctor Li, why did you ask me to come?",李先生、何の用で呼んだんですか？,"이 의원, 왜 나를 오라고 했소?"
 STORY_024_02_016_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_024_02_016_TEXT,昨日经我仔细检查，谢姑娘的病乃是肺痨，此病只能缓解，不能根治，而且身边之人都有可能沾染。,昨日經我仔細檢查，謝姑娘的病乃是肺癆，此病只能緩解，不能根治，而且身邊之人都有可能沾染。,"After a careful examination yesterday, I found that Miss Xie has consumption of the lungs. We can ease it, but not cure it, and people close to her may catch it.",昨日詳しく診たところ、謝さんは肺癆でした。この病は和らげられても根治は難しく、近くの人にうつるおそれもあります。,"어제 자세히 진찰해 보니 사 아가씨는 폐로를 앓고 있습니다. 증상을 누그러뜨릴 수는 있지만 고칠 수는 없으며, 가까이 지내는 사람에게도 옮을 수 있습니다."
 STORY_024_02_017_SPEAKER,郭妈妈,郭媽媽,Madam Guo,郭おばさん,곽 부인
@@ -17434,7 +17434,7 @@ STORY_024_02_018_TEXT,您还是早做打算，给女儿寻觅个好归宿吧。,
 STORY_024_02_019_SPEAKER,郭妈妈,郭媽媽,Madam Guo,郭おばさん,곽 부인
 STORY_024_02_019_TEXT,(若是这样，不如趁那小子不知情，便宜与了他去….),(若是這樣，不如趁那小子不知情，便宜與了他去….),"(In that case, I should let that young man have her cheaply before he finds out…)",（そういうことなら、あの若造が知らぬうちに安く引き取らせたほうがいい……）,(그렇다면 저 젊은이가 병을 알기 전에 싸게 넘겨야겠군…)
 STORY_024_03_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_024_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是甚麼病，該開甚麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 맞지 않아. 병증과 알맞은 처방을 신중히 다시 생각해야 해."
+STORY_024_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是什麼病，該開什麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 맞지 않아. 병증과 알맞은 처방을 신중히 다시 생각해야 해."
 STORY_024_04_001_SPEAKER,王百堂,王百堂,Wang Baitang,王百堂,왕백당
 STORY_024_04_001_TEXT,恩公！小生拜见恩公。,恩公！小生拜見恩公。,My benefactor! I have come to pay my respects.,恩人様！　お目にかかれて光栄です。,은공! 소생이 인사 올립니다.
 STORY_024_04_002_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
@@ -17454,7 +17454,7 @@ STORY_025_01_003_TEXT,最近身体不太舒服，老是耳鸣头晕，请大夫�
 STORY_025_02_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_025_02_001_TEXT,师父所患的乃是肾精不足之症，嗯…是房事过劳所致…,師父所患的乃是腎精不足之症，嗯…是房事過勞所致…,You have a deficiency of kidney essence. Hmm… caused by excessive sexual activity…,腎精不足の証ですね。ええと……房事のしすぎが原因かと……,신정이 부족하군요. 흠… 지나친 방사 때문입니다…
 STORY_025_02_002_SPEAKER,性空,性空,Xingkong,性空,성공
-STORY_025_02_002_TEXT,哎哟，施主啊，这可不敢乱说啊，我可是出家人啊，怎么会干那种事呢。,哎喲，施主啊，這可不敢亂說啊，我可是出家人啊，怎麼會乾那種事呢。,"My good man, you must not say such things! I am a monk. How could I do that?",おいおい、そんなことを言ってはいかん。拙僧は出家の身、そんなことをするはずがなかろう。,"이보시오, 그런 말씀은 하지 마시오! 나는 승려요. 내가 어찌 그런 일을 하겠소?"
+STORY_025_02_002_TEXT,哎哟，施主啊，这可不敢乱说啊，我可是出家人啊，怎么会干那种事呢。,哎喲，施主啊，這可不敢亂說啊，我可是出家人啊，怎麼會幹那種事呢。,"My good man, you must not say such things! I am a monk. How could I do that?",おいおい、そんなことを言ってはいかん。拙僧は出家の身、そんなことをするはずがなかろう。,"이보시오, 그런 말씀은 하지 마시오! 나는 승려요. 내가 어찌 그런 일을 하겠소?"
 STORY_025_02_003_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_025_02_003_TEXT,…,…,…,……,…
 STORY_025_02_004_SPEAKER,性空,性空,Xingkong,性空,성공
@@ -17475,7 +17475,7 @@ STORY_025_02_011_TEXT,找打！,找打！,You are asking for it!,もう、怒る
 STORY_025_02_012_SPEAKER,陈皮,陳皮,Chen Pi,陳皮,진피
 STORY_025_02_012_TEXT,哎哟！,哎喲！,Ow!,痛っ！,아야!
 STORY_025_03_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_025_03_001_TEXT,虽然这不是个正经和尚，但还是得好好想想他得的是什么病。,雖然這不是個正經和尚，但還是得好好想想他得的是甚麼病。,"He may not be a model monk, but I still need to diagnose his illness properly.",まともな僧とは言えないが、病はきちんと考えなければ。,"모범적인 승려는 아닌 듯하지만, 그래도 병은 제대로 진단해야 해."
+STORY_025_03_001_TEXT,虽然这不是个正经和尚，但还是得好好想想他得的是什么病。,雖然這不是個正經和尚，但還是得好好想想他得的是什麼病。,"He may not be a model monk, but I still need to diagnose his illness properly.",まともな僧とは言えないが、病はきちんと考えなければ。,"모범적인 승려는 아닌 듯하지만, 그래도 병은 제대로 진단해야 해."
 STORY_026_01_001_SPEAKER,半夏,半夏,Banxia,半夏,반하
 STORY_026_01_001_TEXT,少掌柜的，少夫人在屋里晕倒了，您快来看看啊！,少掌櫃的，少夫人在屋裡暈倒了，您快來看看啊！,Young master! The young mistress has fainted in her room! Please come quickly!,若旦那、若奥様がお部屋で倒れました！　早く来てください！,도련님! 마님께서 방에서 쓰러지셨어요! 어서 와 주세요!
 STORY_026_01_002_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
@@ -17487,7 +17487,7 @@ STORY_026_01_004_TEXT,相公，我最近头晕目眩，时不时的还恶心想�
 STORY_026_01_005_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_026_01_005_TEXT,夫人一定是操持家务太过劳累，我给你把把脉。,夫人一定是操持家務太過勞累，我給你把把脈。,You must be exhausted from running the household. Let me take your pulse.,家事で疲れすぎたんだろう。脈を診るよ。,집안일을 돌보느라 지친 모양이오. 내가 맥을 짚어 보겠소.
 STORY_026_02_001_SPEAKER,半夏,半夏,Banxia,半夏,반하
-STORY_026_02_001_TEXT,呜呜呜，少夫人到底是得了什么病啊。,嗚嗚嗚，少夫人到底是得了甚麼病啊。,Oh no… What illness does the young mistress have?,うう……若奥様は何の病気なんですか？,어머나… 마님께 무슨 병이 생긴 거예요?
+STORY_026_02_001_TEXT,呜呜呜，少夫人到底是得了什么病啊。,嗚嗚嗚，少夫人到底是得了什麼病啊。,Oh no… What illness does the young mistress have?,うう……若奥様は何の病気なんですか？,어머나… 마님께 무슨 병이 생긴 거예요?
 STORY_026_02_002_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_026_02_002_TEXT,芷兰…我们有孩子了…,芷蘭…我們有孩子了…,Zhilan… We are going to have a child…,芷蘭……私たちに子どもができたんだ……,지란아… 우리에게 아이가 생겼소…
 STORY_026_02_003_SPEAKER,吴芷兰,吳芷蘭,Wu Zhilan,呉芷蘭,오지란
@@ -17497,7 +17497,7 @@ STORY_026_02_004_TEXT,现在还看不出来，男孩儿女孩儿都一样，我�
 STORY_026_02_005_SPEAKER,半夏,半夏,Banxia,半夏,반하
 STORY_026_02_005_TEXT,哇，恭喜恭喜，真是菩萨保佑，我去把这喜事告诉老爷去！,哇，恭喜恭喜，真是菩薩保佑，我去把這喜事告訴老爺去！,Congratulations! The Bodhisattva has blessed us! I am going to tell the master the good news!,わあ、おめでとうございます！　ありがたいことです。旦那様にも知らせてきます！,축하드려요! 보살님께서 복을 내려 주셨어요! 어르신께 이 기쁜 소식을 전하러 갈게요!
 STORY_026_03_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_026_03_001_TEXT,不对不对，我在干什么呀，冷静冷静，再好好想想。,不對不對，我在幹甚麼呀，冷靜冷靜，再好好想想。,"No, no. What am I doing? Calm down and think again.",違う、私は何を考えているんだ。落ち着いて、もう一度よく考えよう。,"아니, 아니야. 내가 무슨 생각을 하는 거지? 진정하고 다시 생각하자."
+STORY_026_03_001_TEXT,不对不对，我在干什么呀，冷静冷静，再好好想想。,不對不對，我在幹什麼呀，冷靜冷靜，再好好想想。,"No, no. What am I doing? Calm down and think again.",違う、私は何を考えているんだ。落ち着いて、もう一度よく考えよう。,"아니, 아니야. 내가 무슨 생각을 하는 거지? 진정하고 다시 생각하자."
 STORY_027_001_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
 STORY_027_001_TEXT,今天是上元佳节，咱们全家去城里逛逛，听说今年的灯节格外热闹。,今天是上元佳節，咱們全家去城裡逛逛，聽說今年的燈節格外熱鬧。,It is the Lantern Festival today. Let us all go into town. I hear this year's celebrations are especially lively.,今日は元宵節だ。家族みんなで町へ出よう。今年の灯籠祭りはとりわけ賑やからしい。,오늘은 정월대보름이오. 모두 함께 성 안으로 나가세. 올해 행사가 특히 성대하다더군.
 STORY_027_002_SPEAKER,吴芷兰,吳芷蘭,Wu Zhilan,呉芷蘭,오지란
@@ -17526,7 +17526,7 @@ STORY_027_013_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_027_013_TEXT,别说了爹，咱们看戏去吧。,別說了爹，咱們看戲去吧。,"Please, Father. Let us watch the play.",父上、その話はもう。芝居を見に行きましょう。,"아버지, 공연부터 보시지요."
 STORY_027_014_SPEAKER,陈皮,陳皮,Chen Pi,陳皮,진피
 STORY_027_014_TEXT,老爷，那边儿在唱紫钗记呢。,老爺，那邊兒在唱紫釵記呢。,"Master, they are performing The Purple Hairpin over there.",旦那様、あちらでは『紫釵記』を演じていますよ。,"어르신, 저쪽에서 『자채기』를 공연하고 있습니다."
-STORY_027_015_TEXT,谢皇恩灯华月华，谢天恩春华岁华，遍写着国泰民安天下，遨头去唱声哗。好灯也，说灯花南天门最佳，香车隘挑笼绛纱，喝道转身停马，尘影里看谁家。,謝皇恩燈華月華，謝天恩春華歲華，遍寫著國泰民安天下，遨頭去唱聲嘩。好燈也，說燈花南天門最佳，香車隘挑籠絳紗，喝道轉身停馬，塵影里看誰家。,"We thank the emperor for lantern light and moonlight; we thank Heaven for springtime and the turning year. Peace fills the realm. Hear the revelers sing! What splendid lanterns! The finest shine at the southern gate. Carriages crowd beneath red silk lanterns. The escort calls for a halt, and through the dusty shadows we wonder who has come.",皇恩に感謝せん、灯も月も華やかに。天恩に感謝せん、春も歳も栄えゆく。国泰民安の世に歌声は満ち、灯火の美しさは南天門が随一。絹の灯籠を掲げた車が行き交い、馬を止め、塵の中に誰の家かを眺める。,"황제의 등불과 달빛에 감사하고, 하늘의 봄과 한 해의 순환에 감사하세. 천하에 평화가 가득하고, 구경꾼의 노랫소리가 들리는구나! 등불이 참 아름답다! 남문 쪽 등불이 가장 빛나는군. 붉은 비단 등불 아래 수레가 가득하고, 시종이 멈추라 외치니 먼지 낀 어둠 속에서 누가 왔는지 궁금하구나."
+STORY_027_015_TEXT,谢皇恩灯华月华，谢天恩春华岁华，遍写着国泰民安天下，遨头去唱声哗。好灯也，说灯花南天门最佳，香车隘挑笼绛纱，喝道转身停马，尘影里看谁家。,謝皇恩燈華月華，謝天恩春華歲華，遍寫著國泰民安天下，遨頭去唱聲嘩。好燈也，說燈花南天門最佳，香車隘挑籠絳紗，喝道轉身停馬，塵影裡看誰家。,"We thank the emperor for lantern light and moonlight; we thank Heaven for springtime and the turning year. Peace fills the realm. Hear the revelers sing! What splendid lanterns! The finest shine at the southern gate. Carriages crowd beneath red silk lanterns. The escort calls for a halt, and through the dusty shadows we wonder who has come.",皇恩に感謝せん、灯も月も華やかに。天恩に感謝せん、春も歳も栄えゆく。国泰民安の世に歌声は満ち、灯火の美しさは南天門が随一。絹の灯籠を掲げた車が行き交い、馬を止め、塵の中に誰の家かを眺める。,"황제의 등불과 달빛에 감사하고, 하늘의 봄과 한 해의 순환에 감사하세. 천하에 평화가 가득하고, 구경꾼의 노랫소리가 들리는구나! 등불이 참 아름답다! 남문 쪽 등불이 가장 빛나는군. 붉은 비단 등불 아래 수레가 가득하고, 시종이 멈추라 외치니 먼지 낀 어둠 속에서 누가 왔는지 궁금하구나."
 STORY_027_016_SPEAKER,吴芷兰,吳芷蘭,Wu Zhilan,呉芷蘭,오지란
 STORY_027_016_TEXT,相公，咱们去猜灯谜吧！,相公，咱們去猜燈謎吧！,"Husband, let us go solve the lantern riddles!",あなた、灯籠のなぞなぞを解きましょう！,"여보, 등불 수수께끼를 풀러 가요!"
 STORY_027_017_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
@@ -17548,17 +17548,17 @@ STORY_027_024_TEXT,真漂亮啊。,真漂亮啊。,How beautiful.,きれいだ�
 STORY_027_025_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
 STORY_027_025_TEXT,东璧，芷兰，咱们去小摊儿坐会儿吃点元宵。,東璧，芷蘭，咱們去小攤兒坐會兒吃點元宵。,"Dongbi, Zhilan, let us sit at a stall and have some sweet rice balls.",東璧、芷蘭、露店で休んで元宵を食べよう。,"동벽아, 지란아, 노점에 앉아 탕위안이나 먹자꾸나."
 STORY_027_026_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
-STORY_027_026_TEXT,干了一年坐堂医，感觉怎么样，和你之前想的一样吗？,乾了一年坐堂醫，感覺怎麼樣，和你之前想的一樣嗎？,You have spent a year treating patients at the clinic. How does it feel? Is it what you expected?,医者として一年働いて、どうだった？　想像していたとおりか？,네가 진료소에서 환자를 본 지도 일 년이 되었구나. 어떠냐? 생각했던 것과 같으냐?
+STORY_027_026_TEXT,干了一年坐堂医，感觉怎么样，和你之前想的一样吗？,幹了一年坐堂醫，感覺怎麼樣，和你之前想的一樣嗎？,You have spent a year treating patients at the clinic. How does it feel? Is it what you expected?,医者として一年働いて、どうだった？　想像していたとおりか？,네가 진료소에서 환자를 본 지도 일 년이 되었구나. 어떠냐? 생각했던 것과 같으냐?
 STORY_027_027_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_027_027_TEXT,我倒是挺喜欢这一行，只是赚不到什么钱，苦了您和芷兰了…,我倒是挺喜歡這一行，只是賺不到甚麼錢，苦了您和芷蘭了…,I do enjoy the work. I only wish it earned more. You and Zhilan have had to make sacrifices because of me…,私はこの仕事が好きです。ただ収入が少なく、父上と芷蘭に苦労をかけてしまって……,일은 즐겁습니다. 다만 수입이 좀 더 많았으면 좋겠어요. 저 때문에 아버지와 지란이 고생이 많았지요…
+STORY_027_027_TEXT,我倒是挺喜欢这一行，只是赚不到什么钱，苦了您和芷兰了…,我倒是挺喜歡這一行，只是賺不到什麼錢，苦了您和芷蘭了…,I do enjoy the work. I only wish it earned more. You and Zhilan have had to make sacrifices because of me…,私はこの仕事が好きです。ただ収入が少なく、父上と芷蘭に苦労をかけてしまって……,일은 즐겁습니다. 다만 수입이 좀 더 많았으면 좋겠어요. 저 때문에 아버지와 지란이 고생이 많았지요…
 STORY_027_028_SPEAKER,吴芷兰,吳芷蘭,Wu Zhilan,呉芷蘭,오지란
-STORY_027_028_TEXT,只要咱们一家人能一起平平安安的过日子，我就知足了，要那么多钱做什么。,只要咱們一家人能一起平平安安的過日子，我就知足了，要那麼多錢做甚麼。,"As long as our family can live safely together, I have all I need. What would we do with more money?",家族みんなが無事に暮らせれば、私はそれで十分。そんなにお金があっても仕方ないわ。,우리 가족이 함께 평안하게 살 수 있다면 저는 더 바랄 것이 없어요. 돈이 더 많아서 무엇 하겠어요?
+STORY_027_028_TEXT,只要咱们一家人能一起平平安安的过日子，我就知足了，要那么多钱做什么。,只要咱們一家人能一起平平安安的過日子，我就知足了，要那麼多錢做什麼。,"As long as our family can live safely together, I have all I need. What would we do with more money?",家族みんなが無事に暮らせれば、私はそれで十分。そんなにお金があっても仕方ないわ。,우리 가족이 함께 평안하게 살 수 있다면 저는 더 바랄 것이 없어요. 돈이 더 많아서 무엇 하겠어요?
 STORY_027_029_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
 STORY_027_029_TEXT,是啊，一家人平平安安就好啊。,是啊，一家人平平安安就好啊。,Yes. Being together and well is enough.,そうだな。皆が無事なのが一番だ。,그래. 함께 건강하게 지내는 것만으로 충분하지.
 STORY_027_030_SPEAKER,李言闻,李言聞,Li Yanwen,李言聞,이언문
 STORY_027_030_TEXT,好了，不早了，咱们该回家了。,好了，不早了，咱們該回家了。,It is getting late. We should go home.,さあ、もう遅い。家に帰ろう。,시간이 늦었구나. 집에 가자.
 STORY_028_01_001_SPEAKER,曾和,曾和,Zeng He,曽和,증화
-STORY_028_01_001_TEXT,大夫啊，您快给看看吧，这孩子整日目光呆滞，叫他也不应，就在那自言自语，嘴里不知道嘟囔这什么，怪邪乎的…,大夫啊，您快給看看吧，這孩子整日目光呆滯，叫他也不應，就在那自言自語，嘴裡不知道嘟囔這甚麼，怪邪乎的…,"Doctor, please look at my son. He stares into space all day and does not answer when spoken to. He mutters to himself. It is downright uncanny…",先生、この子を診てください。一日中ぼんやりして、呼んでも返事をせず、何やら独り言をつぶやいているんです。気味が悪くて……,"의원님, 제 아들을 좀 봐 주십시오. 하루 종일 멍하니 허공만 바라보고 말을 걸어도 대답하지 않습니다. 혼잣말까지 중얼거리니 정말 이상합니다…"
+STORY_028_01_001_TEXT,大夫啊，您快给看看吧，这孩子整日目光呆滞，叫他也不应，就在那自言自语，嘴里不知道嘟囔这什么，怪邪乎的…,大夫啊，您快給看看吧，這孩子整日目光呆滯，叫他也不應，就在那自言自語，嘴裡不知道嘟囔這什麼，怪邪乎的…,"Doctor, please look at my son. He stares into space all day and does not answer when spoken to. He mutters to himself. It is downright uncanny…",先生、この子を診てください。一日中ぼんやりして、呼んでも返事をせず、何やら独り言をつぶやいているんです。気味が悪くて……,"의원님, 제 아들을 좀 봐 주십시오. 하루 종일 멍하니 허공만 바라보고 말을 걸어도 대답하지 않습니다. 혼잣말까지 중얼거리니 정말 이상합니다…"
 STORY_028_01_002_SPEAKER,曾题名,曾題名,Zeng Timing,曽題名,증제명
 STORY_028_01_002_TEXT,…,…,…,……,…
 STORY_028_01_003_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
@@ -17572,7 +17572,7 @@ STORY_028_02_003_TEXT,是不是读书压力太大了呀？,是不是讀書壓力
 STORY_028_02_004_SPEAKER,曾题名,曾題名,Zeng Timing,曽題名,증제명
 STORY_028_02_004_TEXT,…,…,…,……,…
 STORY_028_02_005_SPEAKER,曾和,曾和,Zeng He,曽和,증화
-STORY_028_02_005_TEXT,他就一门心思读书，其他的什么都不用他管，能有什么压力？,他就一門心思讀書，其他的甚麼都不用他管，能有甚麼壓力？,All he does is study. We take care of everything else. What pressure could he have?,この子は勉強だけして、ほかは何もしなくていいのよ。どんな重圧があるというの？,하는 일이라곤 공부뿐입니다. 나머지는 우리가 모두 돌봐 주는데 무슨 부담이 있겠습니까?
+STORY_028_02_005_TEXT,他就一门心思读书，其他的什么都不用他管，能有什么压力？,他就一門心思讀書，其他的什麼都不用他管，能有什麼壓力？,All he does is study. We take care of everything else. What pressure could he have?,この子は勉強だけして、ほかは何もしなくていいのよ。どんな重圧があるというの？,하는 일이라곤 공부뿐입니다. 나머지는 우리가 모두 돌봐 주는데 무슨 부담이 있겠습니까?
 STORY_028_02_006_SPEAKER,曾和,曾和,Zeng He,曽和,증화
 STORY_028_02_006_TEXT,再说了天下那么多读书人，怎么就他得了这怪病？,再說了天下那麼多讀書人，怎麼就他得了這怪病？,"Besides, there are countless scholars in the world. Why would only he fall ill like this?",ほかにも勉強している子は大勢いるのに、どうしてこの子だけ？,"게다가 세상에 선비가 얼마나 많은데, 왜 하필 저 아이만 이런 병에 걸린단 말입니까?"
 STORY_028_02_007_SPEAKER,曾题名,曾題名,Zeng Timing,曽題名,증제명
@@ -17594,4 +17594,4 @@ STORY_028_02_014_TEXT,再过半年可就要考试了，你这次无论如何也�
 STORY_028_02_015_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
 STORY_028_02_015_TEXT,…,…,…,……,…
 STORY_028_03_001_SPEAKER,李东璧,李東璧,Li Dongbi,李東璧,이동벽
-STORY_028_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是甚麼病，該開甚麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 맞지 않아. 병증과 알맞은 처방을 신중히 다시 생각해야 해."
+STORY_028_03_001_TEXT,不对，我需要好好想想这是什么病，该开什么方。,不對，我需要好好想想這是什麼病，該開什麼方。,"No, that is not right. I need to think carefully about the illness and the proper prescription.",違う。これは何の病か、どんな処方を出すべきか、よく考えなければ。,"아니야, 이건 맞지 않아. 병증과 알맞은 처방을 신중히 다시 생각해야 해."
