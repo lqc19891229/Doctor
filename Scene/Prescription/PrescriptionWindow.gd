@@ -431,26 +431,9 @@ func _localized_role_name(role_name: String) -> String:
 
 
 func _format_amount_for_ui(amount: float, unit: String) -> String:
-	if TranslationServer.get_locale().begins_with("zh"):
-		return HerbUnit.format_amount(amount, unit)
-
-	var remaining := HerbUnit.to_fen(amount, unit)
-	if remaining <= 0:
-		return tr("UI_PRESCRIPTION_ZERO_FEN")
-
-	var parts: Array[String] = []
-	for unit_data in [
-		[HerbUnit.FEN_PER_JIN, "UI_PRESCRIPTION_UNIT_JIN"],
-		[HerbUnit.FEN_PER_LIANG, "UI_PRESCRIPTION_UNIT_LIANG"],
-		[HerbUnit.FEN_PER_QIAN, "UI_PRESCRIPTION_UNIT_QIAN"],
-		[HerbUnit.FEN_PER_FEN, "UI_PRESCRIPTION_UNIT_FEN"]
-	]:
-		var unit_size: int = unit_data[0]
-		var count: int = remaining / unit_size
-		if count > 0:
-			parts.append("%d %s" % [count, tr(unit_data[1])])
-			remaining %= unit_size
-	return " ".join(parts)
+	# 统一交给 HerbUnit 按当前语言格式化。
+	# 中文/日文使用汉字数字，韩文使用汉字词数词，英文保留阿拉伯数字。
+	return HerbUnit.format_fen_auto(HerbUnit.to_fen(amount, unit))
 
 
 # =========================================================

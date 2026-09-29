@@ -9,7 +9,7 @@ class_name HerbUnit
 #   1. 统一维护药材剂量单位常量。
 #   2. 将不同单位统一换算为底层单位“分”。
 #   3. 将底层“分”转换为适合界面显示的中药剂量文本。
-#   4. 提供阿拉伯数字转中文数字的显示辅助函数。
+#   4. 提供本地化数字显示辅助函数。
 #
 # 底层统一单位：分
 # 换算关系：
@@ -18,13 +18,10 @@ class_name HerbUnit
 #   1斤 = 1600分
 # =========================================================
 
-# =========================================================
-# 一、单位常量
-# =========================================================
-const UNIT_FEN := "fen"      # 分
-const UNIT_QIAN := "qian"    # 钱
-const UNIT_LIANG := "liang"  # 两
-const UNIT_JIN := "jin"      # 斤
+const UNIT_FEN := "fen"
+const UNIT_QIAN := "qian"
+const UNIT_LIANG := "liang"
+const UNIT_JIN := "jin"
 
 const FEN_PER_FEN := 1
 const FEN_PER_QIAN := 10
@@ -47,11 +44,9 @@ const UNIT_FEN_RATES := {
 
 const CHINESE_DIGITS := ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"]
 const CHINESE_UNITS := ["", "十", "百", "千"]
+const KOREAN_DIGITS := ["영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구"]
+const KOREAN_UNITS := ["", "십", "백", "천"]
 
-
-# =========================================================
-# 二、单位检查与换算
-# =========================================================
 
 static func is_valid_unit(unit: String) -> bool:
 	return UNIT_FEN_RATES.has(unit)
@@ -83,10 +78,6 @@ static func from_fen(total_fen: int, unit: String) -> float:
 static func convert(amount: float, from_unit: String, to_unit: String) -> float:
 	return from_fen(to_fen(amount, from_unit), to_unit)
 
-
-# =========================================================
-# 三、中文数字显示
-# =========================================================
 
 static func number_to_chinese(num: int) -> String:
 	if num == 0:
@@ -128,6 +119,37 @@ static func number_to_chinese(num: int) -> String:
 	return result
 
 
+static func number_to_korean(num: int) -> String:
+	if num == 0:
+		return KOREAN_DIGITS[0]
+
+	if num < 0:
+		return "마이너스 " + number_to_korean(-num)
+
+	var result := ""
+	var unit_index := 0
+	var value := num
+
+	while value > 0:
+		var digit := value % 10
+		if digit != 0:
+			var unit_text := ""
+			if unit_index < KOREAN_UNITS.size():
+				unit_text = KOREAN_UNITS[unit_index]
+
+			# 십/백/천 앞의 1은 보통 생략한다.
+			var digit_text := KOREAN_DIGITS[digit]
+			if digit == 1 and unit_index > 0:
+				digit_text = ""
+
+			result = digit_text + unit_text + result
+
+		value = value / 10
+		unit_index += 1
+
+	return result
+
+
 static func float_to_chinese(amount: float) -> String:
 	var rounded_amount = round(amount * 100.0) / 100.0
 	var int_part := int(rounded_amount)
@@ -150,10 +172,6 @@ static func float_to_chinese(amount: float) -> String:
 
 	return integer_text + "点" + decimal_text
 
-
-# =========================================================
-# 四、剂量文本格式化
-# =========================================================
 
 static func format_fen_as_compound(total_fen: int) -> String:
 	if total_fen <= 0:
@@ -182,37 +200,16 @@ static func format_fen_as_compound(total_fen: int) -> String:
 
 
 static func format_fen_auto(total_fen: int) -> String:
-	var locale := TranslationServer.get_locale().to_lower()
+	var locale := TranslationServer.get_locale().to_lower().replace("-", "_")
 
-	if (
-		locale.begins_with("en")
-		or locale.begins_with("ja")
-		or locale.begins_with("ko")
-	):
-		if total_fen <= 0:
-			return TranslationServer.translate("UI_PRESCRIPTION_ZERO_FEN")
+	if locale.begins_with("en"):
+		return _format_fen_localized(total_fen, "arabic")
 
-		var remainder := total_fen
-		var parts: Array[String] = []
+	if locale.begins_with("ja"):
+		return _format_fen_localized(total_fen, "kanji")
 
-		for unit_data in [
-			[FEN_PER_JIN, UNIT_JIN],
-			[FEN_PER_LIANG, UNIT_LIANG],
-			[FEN_PER_QIAN, UNIT_QIAN],
-			[FEN_PER_FEN, UNIT_FEN],
-		]:
-			var count: int = remainder / int(unit_data[0])
-			remainder %= int(unit_data[0])
-
-			if count > 0:
-				parts.append(
-					"%d %s" % [
-						count,
-						_get_localized_unit_name(str(unit_data[1]))
-					]
-				)
-
-		return " ".join(parts)
+	if locale.begins_with("ko"):
+		return _format_fen_localized(total_fen, "korean")
 
 	if total_fen <= 0:
 		return "零分"
@@ -229,17 +226,61 @@ static func format_fen_auto(total_fen: int) -> String:
 	return format_fen_as_compound(total_fen)
 
 
-static func format_amount(amount: float, unit: String) -> String:
-	var locale := TranslationServer.get_locale().to_lower()
+static func _format_fen_localized(total_fen: int, number_style: String) -> String:
+	if total_fen <= 0:
+		return TranslationServer.translate("UI_PRESCRIPTION_ZERO_FEN")
 
-	if (
-		locale.begins_with("en")
-		or locale.begins_with("ja")
-		or locale.begins_with("ko")
-	):
+	var remainder := total_fen
+	var parts: Array[String] = []
+
+	for unit_data in [
+		[FEN_PER_JIN, UNIT_JIN],
+		[FEN_PER_LIANG, UNIT_LIANG],
+		[FEN_PER_QIAN, UNIT_QIAN],
+		[FEN_PER_FEN, UNIT_FEN],
+	]:
+		var count: int = remainder / int(unit_data[0])
+		remainder %= int(unit_data[0])
+
+		if count <= 0:
+			continue
+
+		var number_text := str(count)
+		match number_style:
+			"kanji":
+				number_text = number_to_chinese(count)
+			"korean":
+				number_text = number_to_korean(count)
+
+		var unit_text := _get_localized_unit_name(str(unit_data[1]))
+
+		# 日文古籍风格不插空格：一銭五分；韩文/英文保留词间空格。
+		if number_style == "kanji":
+			parts.append("%s%s" % [number_text, unit_text])
+		else:
+			parts.append("%s %s" % [number_text, unit_text])
+
+	return "".join(parts) if number_style == "kanji" else " ".join(parts)
+
+
+static func format_amount(amount: float, unit: String) -> String:
+	var locale := TranslationServer.get_locale().to_lower().replace("-", "_")
+
+	if locale.begins_with("en"):
 		return _format_amount_english(amount, unit)
 
+	if locale.begins_with("ja"):
+		return _format_amount_native(amount, unit, "kanji")
+
+	if locale.begins_with("ko"):
+		return _format_amount_native(amount, unit, "korean")
+
 	return format_fen_as_compound(to_fen(amount, unit))
+
+
+static func _format_amount_native(amount: float, unit: String, number_style: String) -> String:
+	# 处方内部最终都能精确换算为分，统一走复合单位格式最稳定。
+	return _format_fen_localized(to_fen(amount, unit), number_style)
 
 
 static func _format_amount_english(amount: float, unit: String) -> String:
