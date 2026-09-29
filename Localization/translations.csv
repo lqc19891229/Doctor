@@ -755,7 +755,24 @@ UI_BOOK_ENTRY_BODY_SI_ZHEN,"【四诊】
 右关：脾
 右尺：肾阳","【四診】
 
-四診是中醫收集患者病情資料的四種基本診察方法，包括望診、聞診、問診和切診。醫者透過觀察、聽聞、詢問和觸按患者所表現出的各種資訊，瞭解疾病的病因...","FOUR EXAMINATIONS
+四診是中醫收集患者病情資料的四種基本診察方法，包括望診、聞診、問診和切診。醫者透過觀察、聽聞、詢問和觸按患者所表現出的各種資訊，了解疾病的病因、病位、性質以及正邪盛衰，為辨證和治療提供依據。
+
+望診是觀察患者的神、色、形、態以及舌象和局部變化；
+聞診包括聽聲音和嗅氣味，如辨別說話、呼吸、咳嗽等聲音及異常氣味；
+問診是詢問疾病經過、主要症狀、生活習慣及既往情況；
+切診包括脈診和按診，透過切脈與觸按身體了解脈象及局部變化。
+
+【寸關尺】
+寸、關、尺是脈診中的三個把脈位置，在手腕橈骨動脈上。醫者透過按壓這三個位置，感受脈象的強弱、快慢、沉浮、流暢程度，從而推測人體不同區域和臟腑的健康狀況。
+
+【對應臟腑區域】
+浮脈：表
+左寸：心
+左關：肝
+左尺：腎陰
+右寸：肺
+右關：脾
+右尺：腎陽","FOUR EXAMINATIONS
 
 The four examinations are the basic ways of gathering information about a patient's condition in traditional Chinese medicine: inspection, listening and smelling, inquiry, and palpation. By observing, listening, asking questions and feeling the patient, a physician learns about the cause, location and nature of the condition and the relative strength of healthy and harmful influences. This helps guide pattern identification and treatment.
 
@@ -823,7 +840,17 @@ UI_BOOK_ENTRY_BODY_BA_GANG_BIAN_ZHENG,"【八纲辨证】
 
 八纲之间并非彼此孤立，一种病证可以同时具有多种性质，如表寒证、里热证或虚寒证。病情发展过程中，还可能发生表里出入、寒热转化和虚实变化。因此，医者必须四诊合参，方能把握疾病的整体情况。","【八綱辨證】
 
-八綱辨證是中醫分析病情的基本方法。醫者透過望、聞、問、切收集症狀，再以陰、陽、表、裡、寒、熱、虛、實八項綱領進行歸納，從而判斷疾病的位置、...","EIGHT PRINCIPLES OF PATTERN IDENTIFICATION
+八綱辨證是中醫分析病情的基本方法。醫者透過望、聞、問、切收集症狀，再以陰、陽、表、裡、寒、熱、虛、實八項綱領進行歸納，從而判斷疾病的位置、性質以及正邪力量的盛衰。
+
+表裡：辨別病位的內外深淺。病在肌表、經絡，多屬表；病入臟腑、氣血，多屬裡。
+
+寒熱：辨別疾病的性質。寒證多見畏寒喜暖、口淡不渴；熱證多見發熱喜涼、口渴煩躁。
+
+虛實：辨別正邪盛衰。虛證多為正氣不足、功能衰弱；實證多為邪氣較盛、病理產物壅滯。
+
+陰陽：統攝其餘六綱，是八綱的總綱。一般而言，表、熱、實偏屬陽，里、寒、虛偏屬陰。
+
+八綱之間並非彼此孤立，一種病證可以同時具有多種性質，如表寒證、裡熱證或虛寒證。病情發展過程中，還可能發生表裡出入、寒熱轉化和虛實變化。因此，醫者必須四診合參，方能把握疾病的整體情況。","EIGHT PRINCIPLES OF PATTERN IDENTIFICATION
 
 Pattern identification by the eight principles is a basic method of analyzing a patient's condition in traditional Chinese medicine. After gathering signs and symptoms through the four examinations, a physician groups them under eight principles: Yin, Yang, Exterior, Interior, Cold, Heat, Deficiency and Excess. This helps determine where the condition is located, its nature, and the relative strength of healthy Qi and pathogenic influences.
 
@@ -867,7 +894,9 @@ UI_BOOK_ENTRY_BODY_YIN_YANG,"【阴阳】
 
 人体中的寒热、表里、虚实、动静，都可以用阴阳来概括。阴阳保持协调，身体便能正常运行；若一方偏盛或偏衰，就可能出现疾病。医者诊病时，需要分辨阴阳变化，判断失衡所在，再采用相应的方法使其重新趋于协调。","【陰陽】
 
-陰陽是中醫認識人體與自然變化的基本方法。陰代表相對安靜、寒涼、內守的一面，陽代表相對活動、溫熱、外發的一面。二者相互對立，又彼此依存，並會隨著...","YIN AND YANG
+陰陽是中醫認識人體與自然變化的基本方法。陰代表相對安靜、寒涼、內守的一面，陽代表相對活動、溫熱、外發的一面。二者相互對立，又彼此依存，並會隨著時間與環境不斷消長變化。
+
+人體中的寒熱、表裡、虛實、動靜，都可以用陰陽來概括。陰陽保持協調，身體便能正常運行；若一方偏盛或偏衰，就可能出現疾病。醫者診病時，需要分辨陰陽變化，判斷失衡所在，再採用相應的方法使其重新趨於協調。","YIN AND YANG
 
 Yin and Yang are a basic framework in traditional Chinese medicine for understanding the human body and changes in nature. Yin represents qualities that are relatively still, cool and inward directed, while Yang represents qualities that are relatively active, warm and outward directed. They are opposing yet interdependent, and their balance changes over time and with the environment.
 
@@ -897,7 +926,13 @@ UI_BOOK_ENTRY_BODY_BIAO_LI,"【表里】
 
 表证和里证可以同时存在，称为表里同病；疾病由表入里，通常表示病邪逐渐深入；由里出表，则可能表示病邪向外透达。医者需要结合寒热、虚实以及望、闻、问、切所得信息进行判断，不可只凭一个症状确定表里。辨明疾病部位后，表证通常以解表为基本方向，里证则根据具体的寒热虚实采取相应治法。","【表裡】
 
-表裡是中醫八綱辨證中用來判斷疾病部位深淺和病勢進退的兩項綱領。表證通常指病邪位於皮毛、肌腠和經絡，多見於外邪侵襲人體的初期；裡證通常指病邪深入...","EXTERIOR AND INTERIOR
+表裡是中醫八綱辨證中用來判斷疾病部位深淺和病勢進退的兩項綱領。表證通常指病邪位於皮毛、肌腠和經絡，多見於外邪侵襲人體的初期；裡證通常指病邪深入臟腑、氣血或骨髓，也可由飲食、情志、勞倦等內傷因素直接形成。這裡的表裡並不單純指身體的外部和內部，而是對病位與病勢的綜合判斷。
+
+表證：常見惡寒發熱、頭痛身痛、鼻塞流涕、咳嗽、舌苔薄白、脈浮等表現。由於病邪尚在體表，通常病程較短，起病較急。
+
+裡證：臨床表現較為複雜，可見但熱不寒、口渴、煩躁、腹痛、嘔吐、腹瀉、便秘、小便異常、舌苔厚或脈沈等表現。由於病變涉及臟腑氣血，其症狀會隨寒熱、虛實及所病臟腑的不同而有所變化。
+
+表證和裡證可以同時存在，稱為表裡同病；疾病由表入裡，通常表示病邪逐漸深入；由裡出表，則可能表示病邪向外透達。醫者需要結合寒熱、虛實以及望、聞、問、切所得資訊進行判斷，不可只憑一個症狀確定表裡。辨明疾病部位後，表證通常以解表為基本方向，裡證則根據具體的寒熱虛實採取相應治法。","EXTERIOR AND INTERIOR
 
 Exterior and Interior are two of the eight principles used in traditional Chinese medicine to assess the depth of a condition and how it is progressing. An Exterior pattern generally means that a pathogenic influence is at the skin, superficial tissues or channels, often early in an externally contracted illness. An Interior pattern generally means that it has reached the organs, Qi, blood or bone marrow; it may also arise directly from internal factors such as diet, emotions or overwork. These terms describe the location and course of a condition, not simply the outside and inside of the body.
 
@@ -935,7 +970,13 @@ UI_BOOK_ENTRY_BODY_HAN_RE,"【寒热】
 
 寒证又可分为实寒与虚寒，热证也可分为实热与虚热。医者需要结合表里、虚实以及望、闻、问、切所得信息进行判断，不可只凭一个症状确定寒热。辨明疾病性质后，通常遵循寒证用温法、热证用清法的基本方向。","【寒熱】
 
-寒熱是中醫八綱辨證中用來判斷疾病性質的兩項綱領。寒證多由寒邪侵襲，或人體陽氣不足所致；熱證多由熱邪侵襲、陽氣偏盛，或陰液不足所致。這裡的寒熱並...","COLD AND HEAT
+寒熱是中醫八綱辨證中用來判斷疾病性質的兩項綱領。寒證多由寒邪侵襲，或人體陽氣不足所致；熱證多由熱邪侵襲、陽氣偏盛，或陰液不足所致。這裡的寒熱並不只指體溫高低，而是對患者整體表現的綜合判斷。
+
+寒證：常見畏寒喜暖、四肢發冷、面色蒼白、口淡不渴、小便清長、大便稀溏、舌淡苔白、脈象遲緩等表現。
+
+熱證：常見發熱喜涼、面紅煩躁、口渴喜冷飲、小便短黃、大便乾結、舌紅苔黃、脈象較數等表現。
+
+寒證又可分為實寒與虛寒，熱證也可分為實熱與虛熱。醫者需要結合表裡、虛實以及望、聞、問、切所得資訊進行判斷，不可只憑一個症狀確定寒熱。辨明疾病性質後，通常遵循寒證用溫法、熱證用清法的基本方向。","COLD AND HEAT
 
 Cold and Heat are two of the eight principles used to assess the nature of a condition. A Cold pattern may result from an external cold influence or insufficient Yang Qi. A Heat pattern may result from an external heat influence, excessive Yang Qi or insufficient Yin fluids. These terms describe the overall pattern of signs, not just body temperature.
 
@@ -973,7 +1014,13 @@ UI_BOOK_ENTRY_BODY_XU_SHI,"【虚实】
 
 虚证又可分为气虚、血虚、阴虚和阳虚等类型，实证则可见气滞、血瘀、痰湿、食积等不同情况。虚实也可能同时存在，称为虚实夹杂；病程中还可能出现由实转虚或因虚致实。医者需要结合表里、寒热以及望、闻、问、切所得信息进行判断，不可只凭一个症状确定虚实。辨明正邪盛衰后，虚证通常以补虚扶正为基本方向，实证通常以祛邪泻实为基本方向。","【虛實】
 
-虛實是中醫八綱辨證中用來判斷人體正氣強弱和病邪盛衰的兩項綱領。虛證多由人體正氣不足、臟腑功能衰退，或氣血陰陽虧損所致；實證多由外邪侵襲，或痰飲...","DEFICIENCY AND EXCESS
+虛實是中醫八綱辨證中用來判斷人體正氣強弱和病邪盛衰的兩項綱領。虛證多由人體正氣不足、臟腑功能衰退，或氣血陰陽虧損所致；實證多由外邪侵襲，或痰飲、瘀血、食積等病理產物壅盛所致。這裡的虛實並不單指身體強壯或虛弱，而是對正邪雙方力量和病理狀態的綜合判斷。
+
+虛證：常見精神疲倦、身體乏力、面色少華、聲音低弱、氣短、自汗或盜汗、疼痛喜按、舌質淡嫩或少苔、脈象細弱無力等表現。其具體症狀會因氣、血、陰、陽虧虛的不同而有所變化。
+
+實證：常見起病較急、精神煩躁、聲音洪亮、呼吸氣粗、腹脹拒按、疼痛明顯、痰涎壅盛、便秘或小便不利、舌苔厚膩、脈象有力等表現。其具體症狀會隨寒熱性質以及病邪種類的不同而有所變化。
+
+虛證又可分為氣虛、血虛、陰虛和陽虛等類型，實證則可見氣滯、血瘀、痰濕、食積等不同情況。虛實也可能同時存在，稱為虛實夾雜；病程中還可能出現由實轉虛或因虛致實。醫者需要結合表裡、寒熱以及望、聞、問、切所得資訊進行判斷，不可只憑一個症狀確定虛實。辨明正邪盛衰後，虛證通常以補虛扶正為基本方向，實證通常以祛邪瀉實為基本方向。","DEFICIENCY AND EXCESS
 
 Deficiency and Excess are two of the eight principles used to assess the strength of healthy Qi relative to pathogenic influences. Deficiency patterns may arise from insufficient healthy Qi, weakened organ functions, or depleted Qi, blood, Yin or Yang. Excess patterns may arise from an external pathogenic influence or from an accumulation of phlegm, retained fluids, stagnant blood or undigested food. These terms assess the underlying balance, not simply whether a person looks strong or weak.
 
@@ -1027,7 +1074,29 @@ UI_BOOK_ENTRY_BODY_WU_XING,"【五行】
 
 这些对应关系并不是说五脏只会受到某一种季节、气候或味道影响，而是用来说明自然环境、饮食情志和人体功能之间可能存在的联系。医者可以据此观察疾病发生与传变的规律，但诊断时仍须结合患者的全部症状综合判断。","【五行】
 
-五行是以木、火、土、金、水五種屬性，說明自然與人體之間相互聯繫、不斷變化的規律。五行並非單指五種物質，而是對生長、溫熱、承載、收斂和滋潤等不同...","FIVE PHASES
+五行是以木、火、土、金、水五種屬性，說明自然與人體之間相互聯繫、不斷變化的規律。五行並非單指五種物質，而是對生長、溫熱、承載、收斂和滋潤等不同特性的概括。
+
+五行之間既有相生，也有相克。木生火、火生土、土生金、金生水、水生木；木克土、土克水、水克火、火克金、金克木。中醫以五行聯繫五臟：肝屬木、心屬火、脾屬土、肺屬金、腎屬水。五臟彼此滋養、相互制約，共同維持人體平衡；若生克關係失常，也可能使疾病相互傳變。
+
+【五行與五類相應】
+
+五行是中醫用來歸納自然現象和人體功能的方法。木、火、土、金、水分別象徵生長、溫熱、承載、收斂和閉藏。中醫透過“取象比類”，將季節、氣候、味道、顏色以及人體臟腑聯繫起來，從整體上觀察人體與自然環境的變化。
+
+五行：木，火，土，金，水
+五季：春，夏，長夏，秋，冬
+五氣：溫，熱，平，涼，寒
+五味：酸，苦，甘，辛，咸
+五色：青，赤，黃，白，黑
+五臟：肝，心，脾，肺，腎
+五腑：膽，小腸，胃，大腸，膀胱
+五官：目，舌，口，鼻，耳
+五志：怒，喜，思，悲，恐
+五體：筋，脈，肉，皮毛，骨
+五液：淚，汗，涎，涕，唾
+
+春季萬物生發，屬木，與風、酸味和肝相應；夏季氣候炎熱，屬火，與暑、苦味和心相應；長夏濕氣較盛，屬土，與濕、甘味和脾相應；秋季萬物收斂，屬金，與燥、辛味和肺相應；冬季萬物閉藏，屬水，與寒、咸味和腎相應。
+
+這些對應關係並不是說五臟只會受到某一種季節、氣候或味道影響，而是用來說明自然環境、飲食情志和人體功能之間可能存在的聯繫。醫者可以據此觀察疾病發生與傳變的規律，但診斷時仍須結合患者的全部症狀綜合判斷。","FIVE PHASES
 
 The Five Phases—Wood, Fire, Earth, Metal and Water—describe patterns of connection and change in nature and the human body. They do not simply name five physical substances; they also represent qualities such as growth, warmth, nourishment, contraction and moisture.
 
@@ -1097,7 +1166,11 @@ UI_BOOK_ENTRY_BODY_ZANG_XIANG,"【藏象】
 
 藏象理论强调人体是一个相互联系的整体。各脏腑不仅具有各自的功能，还通过气血津液、经络以及五行生克关系彼此协调，并与形体、官窍、情志和自然环境相联系。中医所说的脏腑属于功能体系，不能与现代医学中的解剖器官完全等同。","【藏象】
 
-藏象是中醫研究人體臟腑生理功能、病理變化及其相互關係的理論。「藏」指藏於體內的臟腑，「象」指臟腑功能表現於外的各種徵象。中醫透過觀察人的面色、...","VISCERAL MANIFESTATIONS
+藏象是中醫研究人體臟腑生理功能、病理變化及其相互關係的理論。“藏”指藏於體內的臟腑，“象”指臟腑功能表現於外的各種徵象。中醫透過觀察人的面色、形體、情志、聲音、舌象和脈象等外在變化，推斷臟腑的功能狀態。
+
+藏象學說將人體內臟分為五臟、六腑和奇恆之腑。五臟包括肝、心、脾、肺、腎，以化生和貯藏精氣為主要特點；六腑包括膽、小腸、胃、大腸、膀胱、三焦，以受盛和傳化水谷為主要特點。奇恆之腑包括腦、髓、骨、脈、膽和女子胞。
+
+藏象理論強調人體是一個相互聯繫的整體。各臟腑不僅具有各自的功能，還透過氣血津液、經絡以及五行生克關係彼此協調，並與形體、官竅、情志和自然環境相聯繫。中醫所說的臟腑屬於功能體系，不能與現代醫學中的解剖器官完全等同。","VISCERAL MANIFESTATIONS
 
 Visceral Manifestations is a traditional Chinese medicine theory about the functions of the body's internal systems, how they change in illness and how they relate to one another. Zang refers to the internal organs, while Xiang refers to outward signs of their functions. By observing changes in complexion, build, emotions, voice, tongue and pulse, a physician infers how those systems are functioning.
 
@@ -1129,7 +1202,11 @@ UI_BOOK_ENTRY_BODY_GAN,"【肝】
 
 肝的疏泄功能失常，可见情志抑郁、急躁易怒、胸胁胀满、食欲不振等表现；肝阳偏亢或肝火上炎，则可能出现头晕、头痛、面红目赤等表现。判断肝的功能状态，需要结合气血阴阳及其他脏腑情况综合分析。","【肝】
 
-肝是五臟之一，在五行屬木，與膽相表裡。中醫認為肝具有主疏洩和藏血的功能。主疏洩是指肝能夠調暢全身氣機，促進脾胃運化、膽汁排泄和情志活動；藏血是指...","LIVER
+肝是五臟之一，在五行屬木，與膽相表裡。中醫認為肝具有主疏洩和藏血的功能。主疏洩是指肝能夠調暢全身氣機，促進脾胃運化、膽汁排泄和情志活動；藏血是指肝能夠貯藏血液，並根據人體活動和休息的需要調節血量。
+
+肝在體合筋，其華在爪，開竅於目，在志為怒，在液為淚。肝血充足時，筋脈得到濡養，肢體活動靈活，雙目視物清晰，指甲堅韌潤澤。若肝血不足，可能出現視物模糊、肢體麻木、筋脈拘急或指甲失養等表現。
+
+肝的疏洩功能失常，可見情志抑鬱、急躁易怒、胸脅脹滿、食慾不振等表現；肝陽偏亢或肝火上炎，則可能出現頭暈、頭痛、面紅目赤等表現。判斷肝的功能狀態，需要結合氣血陰陽及其他臟腑情況綜合分析。","LIVER
 
 The Liver is one of the five zang organs. In the Five Phases it corresponds to Wood and is paired with the Gallbladder. In traditional Chinese medicine, the Liver governs the free flow of Qi and stores blood. The free flow of Qi supports the movement of Qi throughout the body, the digestive functions of the Spleen and Stomach, the release of bile and emotional activity. Storing blood means that the Liver holds blood and adjusts its distribution to the body's needs during activity and rest.
 
@@ -1161,7 +1238,11 @@ UI_BOOK_ENTRY_BODY_XIN,"【心】
 
 心气不足或心阳不振，可见心悸气短、精神疲倦、畏寒肢冷等表现；心火偏盛，则可能出现心烦失眠、口舌生疮、舌尖红等表现。判断心的功能状态，需要结合血脉、神志、舌象和脉象综合分析。","【心】
 
-心是五臟之一，在五行屬火，與小腸相表裡。中醫認為心具有主血脈和藏神的功能。主血脈是指心氣推動血液在脈中運行，以濡養全身；藏神是指心與人的精神、意...","HEART
+心是五臟之一，在五行屬火，與小腸相表裡。中醫認為心具有主血脈和藏神的功能。主血脈是指心氣推動血液在脈中運行，以濡養全身；藏神是指心與人的精神、意識、思維、情志和睡眠等活動密切相關。
+
+心在體合脈，其華在面，開竅於舌，在志為喜，在液為汗。心氣和心血充足時，血脈運行通暢，面色紅潤，精神充沛，意識清楚，語言表達正常。若心血不足或心神失養，可能出現心悸、失眠、多夢、健忘、面色少華等表現。
+
+心氣不足或心陽不振，可見心悸氣短、精神疲倦、畏寒肢冷等表現；心火偏盛，則可能出現心煩失眠、口舌生瘡、舌尖紅等表現。判斷心的功能狀態，需要結合血脈、神志、舌象和脈象綜合分析。","HEART
 
 The Heart is one of the five zang organs. In the Five Phases it corresponds to Fire and is paired with the Small Intestine. In traditional Chinese medicine, the Heart governs blood and the vessels and houses the spirit (shen). Governing blood and the vessels means that Heart Qi moves blood through the vessels to nourish the body. Housing the spirit refers to the Heart's close connection with awareness, thinking, emotions and sleep.
 
@@ -1193,7 +1274,11 @@ UI_BOOK_ENTRY_BODY_PI,"【脾】
 
 脾气不足可导致水谷精微化生不足，也可能使水湿停聚，形成痰湿；脾不统血时，则可能出现便血、皮下出血或女性月经过多等表现。判断脾的功能状态，需要结合胃的受纳、气血生成和水液代谢情况综合分析。","【脾】
 
-脾是五臟之一，在五行屬土，與胃相表裡。中醫認為脾具有主運化、升清和統血的功能。主運化是指脾將飲食物轉化為水谷精微，並輸布至全身；升清是指將精微物...","SPLEEN
+脾是五臟之一，在五行屬土，與胃相表裡。中醫認為脾具有主運化、升清和統血的功能。主運化是指脾將飲食物轉化為水谷精微，並輸布至全身；升清是指將精微物質向上輸送；統血是指脾氣能夠固攝血液，使其正常運行於脈中。
+
+脾在體合肉，主四肢，其華在唇，開竅於口，在志為思，在液為涎。脾氣健運時，飲食消化正常，肌肉充實，四肢有力，口唇紅潤。若脾失健運，可能出現食慾不振、腹脹、便溏、身體困重、四肢乏力等表現。
+
+脾氣不足可導致水谷精微化生不足，也可能使水濕停聚，形成痰濕；脾不統血時，則可能出現便血、皮下出血或女性月經過多等表現。判斷脾的功能狀態，需要結合胃的受納、氣血生成和水液代謝情況綜合分析。","SPLEEN
 
 The Spleen is one of the five zang organs. In the Five Phases it corresponds to Earth and is paired with the Stomach. In traditional Chinese medicine, the Spleen transforms and transports, raises the clear, and governs blood. Transforming and transporting means turning food and drink into nourishing substances and distributing them throughout the body. Raising the clear means sending these refined substances upward. Governing blood means that Spleen Qi helps keep blood within the vessels.
 
@@ -1225,7 +1310,11 @@ UI_BOOK_ENTRY_BODY_FEI,"【肺】
 
 肺失宣降时，可见咳嗽、气喘、鼻塞或痰液增多；肺的通调水道功能失常，还可能出现水液停聚、小便不利或水肿等表现。判断肺的功能状态，需要结合呼吸、声音、皮毛、鼻窍和水液代谢情况综合分析。","【肺】
 
-肺是五臟之一，在五行屬金，與大腸相表裡。中醫認為肺具有主氣、司呼吸、主宣發肅降和通調水道的功能。肺吸入自然界的清氣，並參與宗氣的生成；宣發使氣和...","LUNG
+肺是五臟之一，在五行屬金，與大腸相表裡。中醫認為肺具有主氣、司呼吸、主宣發肅降和通調水道的功能。肺吸入自然界的清氣，並參與宗氣的生成；宣發使氣和津液向上、向外輸布，肅降使氣和津液向下運行，並維持呼吸通暢。
+
+肺在體合皮，其華在毛，開竅於鼻，在志為悲憂，在液為涕。肺氣充足時，呼吸均勻，聲音有力，皮膚和毛髮得到濡養，人體抵御外邪的能力正常。若肺氣不足，可能出現氣短、咳嗽、聲音低弱、自汗和容易感受外邪等表現。
+
+肺失宣降時，可見咳嗽、氣喘、鼻塞或痰液增多；肺的通調水道功能失常，還可能出現水液停聚、小便不利或水腫等表現。判斷肺的功能狀態，需要結合呼吸、聲音、皮毛、鼻竅和水液代謝情況綜合分析。","LUNG
 
 The Lung is one of the five zang organs. In the Five Phases it corresponds to Metal and is paired with the Large Intestine. In traditional Chinese medicine, the Lung governs Qi and breathing, disperses and descends, and regulates the water pathways. It draws in clear Qi from the air and helps form gathering Qi. Dispersing distributes Qi and body fluids upward and outward; descending directs them downward and helps maintain smooth breathing.
 
@@ -1257,7 +1346,11 @@ UI_BOOK_ENTRY_BODY_SHEN,"【肾】
 
 肾阳不足可见畏寒肢冷、水肿、夜尿增多等表现；肾阴不足则可能出现潮热盗汗、口咽干燥、头晕耳鸣等表现；肾不纳气时，可见呼吸短促、动则气喘等表现。判断肾的功能状态，需要结合精、气、阴、阳以及水液代谢情况综合分析。","【腎】
 
-腎是五臟之一，在五行屬水，與膀胱相表裡。中醫認為腎具有藏精、主生長髮育與生殖、主水和主納氣的功能。腎精是人體生長、發育和生殖的重要物質基礎；腎主...","KIDNEY
+腎是五臟之一，在五行屬水，與膀胱相表裡。中醫認為腎具有藏精、主生長髮育與生殖、主水和主納氣的功能。腎精是人體生長、發育和生殖的重要物質基礎；腎主水，是指腎參與調節全身水液代謝；腎主納氣，是指腎能夠幫助肺維持呼吸的深度和穩定。
+
+腎在體合骨，生髓充腦，其華在發，開竅於耳及二陰，在志為恐，在液為唾。腎精充足時，骨骼堅固，牙齒強健，聽覺正常，頭髮有光澤，生長髮育和生殖功能正常。若腎精不足，可能出現腰膝酸軟、耳鳴、健忘、牙齒松動或生長髮育遲緩等表現。
+
+腎陽不足可見畏寒肢冷、水腫、夜尿增多等表現；腎陰不足則可能出現潮熱盜汗、口咽乾燥、頭暈耳鳴等表現；腎不納氣時，可見呼吸短促、動則氣喘等表現。判斷腎的功能狀態，需要結合精、氣、陰、陽以及水液代謝情況綜合分析。","KIDNEY
 
 The Kidney is one of the five zang organs. In the Five Phases it corresponds to Water and is paired with the Bladder. In traditional Chinese medicine, the Kidney stores essence, governs growth, development and reproduction, regulates water, and grasps Qi. Kidney essence provides a foundation for growth, development and reproduction. Regulating water means that the Kidney helps manage the body's fluid metabolism. Grasping Qi means that it helps the Lung maintain deep, steady breathing.
 
@@ -1289,7 +1382,11 @@ UI_BOOK_ENTRY_BODY_QI,"【气】
 
 气的生成不足或功能减退，可形成气虚，常见乏力、气短、声音低弱、自汗等表现；气机运行不畅可形成气滞，出现胀满或疼痛；气机上逆、下陷或闭塞时，还可分别形成气逆、气陷和气闭。判断气的状态，需要结合脏腑功能、气血津液及全身表现综合分析。","【氣】
 
-氣是中醫生命理論中的基本概念，既指構成人體和維持生命活動的精微物質，也指臟腑經絡所表現出的功能活動。人體之氣主要由先天之精、水谷精微和自然界清氣...","QI
+氣是中醫生命理論中的基本概念，既指構成人體和維持生命活動的精微物質，也指臟腑經絡所表現出的功能活動。人體之氣主要由先天之精、水谷精微和自然界清氣化生，並依靠肺、脾、腎等臟腑共同維持。
+
+氣具有推動、溫煦、防禦、固攝和氣化等作用。它能夠推動血液和津液運行，溫暖臟腑形體，抵御外邪，固攝血液、汗液和二便，並促進飲食物及水液的轉化。根據來源、分布和功能的不同，氣還可分為元氣、宗氣、營氣和衛氣等。
+
+氣的生成不足或功能減退，可形成氣虛，常見乏力、氣短、聲音低弱、自汗等表現；氣機運行不暢可形成氣滯，出現脹滿或疼痛；氣機上逆、下陷或閉塞時，還可分別形成氣逆、氣陷和氣閉。判斷氣的狀態，需要結合臟腑功能、氣血津液及全身表現綜合分析。","QI
 
 Qi is a basic concept in traditional Chinese medicine's account of life. It refers both to the subtle substances that make up the body and sustain life, and to the activities of the organs and channels. The body's Qi arises chiefly from inherited essence, the refined substances obtained from food and drink, and clear Qi from the air. The Lung, Spleen, Kidney and other organs work together to sustain it.
 
@@ -1321,7 +1418,11 @@ UI_BOOK_ENTRY_BODY_XUE,"【血】
 
 血液不足可形成血虚，常见面色淡白、头晕、心悸、肢体麻木等表现；血行不畅可形成血瘀，常见固定刺痛、肿块或面色晦暗；血热、血寒及血液逸出脉外，也会形成不同证候。判断血的状态，需要结合气、津液和相关脏腑功能综合分析。","【血】
 
-血是中醫所說運行於脈中、具有濡養和滋潤作用的紅色液態物質，也是維持人體生命活動的重要基礎。血主要由脾胃運化所得的水谷精微化生，並與營氣、津液及腎...","BLOOD
+血是中醫所說運行於脈中、具有濡養和滋潤作用的紅色液態物質，也是維持人體生命活動的重要基礎。血主要由脾胃運化所得的水谷精微化生，並與營氣、津液及腎精的作用密切相關。
+
+血在心氣推動下循脈運行，由肝貯藏和調節，並依靠脾氣固攝而不致逸出脈外。血能夠濡養臟腑、經絡、肌肉、皮膚和官竅，同時也是精神意識活動的重要物質基礎。血液充足、運行通暢時，面色潤澤，感覺和運動正常，精神安定。
+
+血液不足可形成血虛，常見面色淡白、頭暈、心悸、肢體麻木等表現；血行不暢可形成血瘀，常見固定刺痛、腫塊或面色晦暗；血熱、血寒及血液逸出脈外，也會形成不同證候。判斷血的狀態，需要結合氣、津液和相關臟腑功能綜合分析。","BLOOD
 
 In traditional Chinese medicine, blood is a red fluid that circulates in the vessels, nourishes and moistens the body, and supports life. It is formed mainly from the refined substances obtained from food and drink through the work of the Spleen and Stomach, with the involvement of nutritive Qi, body fluids and Kidney essence.
 
@@ -1353,7 +1454,11 @@ UI_BOOK_ENTRY_BODY_JIN,"【津】
 
 津液不足时，常见口渴、口鼻干燥、皮肤干涩、小便短少或大便干结等表现；津的输布和排泄失常时，则可能停聚为水湿、痰饮或形成水肿。津和液性质有所不同，但能够相互转化，临床上通常结合起来判断。","【津】
 
-津是人體正常水液的一部分，與液合稱「津液」。中醫認為津的性質較為清稀、流動性較強，主要分布於皮膚、肌肉和孔竅，也可滲入血脈，參與血液的組成和運行...","JIN (THIN BODY FLUIDS)
+津是人體正常水液的一部分，與液合稱“津液”。中醫認為津的性質較為清稀、流動性較強，主要分布於皮膚、肌肉和孔竅，也可滲入血脈，參與血液的組成和運行。
+
+津具有滋潤皮膚、肌肉、口鼻和其他官竅的作用，並參與汗液、尿液等的生成和排泄。津的輸布與脾的運化、肺的宣發肅降、腎的氣化以及三焦水道是否通暢密切相關。
+
+津液不足時，常見口渴、口鼻乾燥、皮膚乾澀、小便短少或大便乾結等表現；津的輸布和排泄失常時，則可能停聚為水濕、痰飲或形成水腫。津和液性質有所不同，但能夠相互轉化，臨床上通常結合起來判斷。","JIN (THIN BODY FLUIDS)
 
 Jin is one component of the body's normal fluids. Together with the thicker Ye fluids, it makes up Jin-Ye, or body fluids. Traditional Chinese medicine describes Jin as relatively thin and mobile. It is found mainly in the skin, muscles and body openings, and can also enter the vessels and contribute to the composition and circulation of blood.
 
@@ -1385,9 +1490,11 @@ UI_BOOK_ENTRY_BODY_YE,"【液】
 
 液不足时，可能出现关节活动不利、肌肤失润、口干咽燥、眩晕或身体消瘦等表现；液的运行失常时，也可能停聚形成痰饮、水湿等病理产物。一般而言，津偏于清稀并滋润体表，液偏于稠厚并濡养体内，但二者之间没有绝对界限。","【液】
 
-液是人體正常水液的一部分，與津合稱「津液」。中醫認為液的性質較為稠厚、流動性相對較小，主要分布於臟腑、關節、骨髓和腦髓等較深部位。
+液是人體正常水液的一部分，與津合稱“津液”。中醫認為液的性質較為稠厚、流動性相對較小，主要分布於臟腑、關節、骨髓和腦髓等較深部位。
 
-液具有濡養...","YE (THICK BODY FLUIDS)
+液具有濡養臟腑、滑利關節、充養骨髓和腦髓等作用，使關節活動靈活，並維持深部組織的滋潤。液的生成、輸布與排泄同樣依賴脾、肺、腎和三焦等臟腑的協調作用。
+
+液不足時，可能出現關節活動不利、肌膚失潤、口乾咽燥、眩暈或身體消瘦等表現；液的運行失常時，也可能停聚形成痰飲、水濕等病理產物。一般而言，津偏於清稀並滋潤體表，液偏於稠厚並濡養體內，但二者之間沒有絕對界限。","YE (THICK BODY FLUIDS)
 
 Ye is one component of the body's normal fluids. Together with the thinner Jin fluids, it makes up Jin-Ye, or body fluids. Traditional Chinese medicine describes Ye as relatively thick and less mobile. It is found mainly in deeper areas, including the organs, joints, bone marrow and brain.
 
@@ -1417,7 +1524,11 @@ UI_BOOK_ENTRY_BODY_WAI_GAN_LIU_XIE,"【外感六邪】
 
 不同邪气具有不同的致病特点，但人体患病后的具体表现还会受到体质、环境、病程及脏腑状态的影响。医者需要结合表里、寒热、虚实以及望、闻、问、切所得信息综合判断，不能仅凭季节或单一症状确定邪气种类。","【外感六邪】
 
-外感六邪是中醫對風、寒、暑、濕、燥、熱六類外來致病因素的統稱，又稱「六淫」。風、寒、暑、濕、燥、熱原本是自然界正常的氣候變化，稱為「六氣」...","SIX EXTERNAL PATHOGENIC INFLUENCES
+外感六邪是中醫對風、寒、暑、濕、燥、熱六類外來致病因素的統稱，又稱“六淫”。風、寒、暑、濕、燥、熱原本是自然界正常的氣候變化，稱為“六氣”；當氣候變化過於強烈、反常，或人體正氣不足、適應能力下降時，六氣便可能成為致病因素。
+
+外感六邪通常從皮毛、口鼻侵入人體，具有一定的季節性和地域性。例如春季多風、冬季多寒、長夏多濕、秋季多燥。六邪既可單獨致病，也可相互結合，形成風寒、風熱、寒濕、濕熱等證候，在一定條件下還可能相互轉化。
+
+不同邪氣具有不同的致病特點，但人體患病後的具體表現還會受到體質、環境、病程及臟腑狀態的影響。醫者需要結合表裡、寒熱、虛實以及望、聞、問、切所得資訊綜合判斷，不能僅憑季節或單一症狀確定邪氣種類。","SIX EXTERNAL PATHOGENIC INFLUENCES
 
 In traditional Chinese medicine, the six external pathogenic influences are Wind, Cold, Summer Heat, Dampness, Dryness and Heat. They are also called the Six Excesses. Under normal conditions, these are natural climatic influences, known as the Six Climatic Influences. They may become pathogenic when the weather is extreme or unusual, or when the body's healthy Qi and ability to adapt are weakened.
 
@@ -1447,7 +1558,11 @@ UI_BOOK_ENTRY_BODY_FENG_XIE,"【风邪】
 
 风邪常见恶风、发热、头痛、鼻塞、咳嗽、汗出、皮肤瘙痒等表现。由于风邪容易与其他邪气结合，又被称为“百病之长”，临床上常见风寒、风热、风湿和风燥等不同证候。","【風邪】
 
-風邪是外感六邪之一，在五行與春季相應，但其他季節也可出現。中醫認為風為陽邪，性質輕揚開洩，容易侵襲人體上部、肌表和肺衛，因此風邪致病多見頭面部...","WIND PATHOGEN
+風邪是外感六邪之一，在五行與春季相應，但其他季節也可出現。中醫認為風為陽邪，性質輕揚開洩，容易侵襲人體上部、肌表和肺衛，因此風邪致病多見頭面部及體表症狀。
+
+風邪具有善行數變的特點。“善行”是指症狀位置游走不定，如游走性關節疼痛；“數變”是指發病較急、症狀變化較快。風邪還具有主動的特點，可能出現眩暈、震顫、抽搐或肢體活動異常等表現。
+
+風邪常見惡風、發熱、頭痛、鼻塞、咳嗽、汗出、皮膚瘙癢等表現。由於風邪容易與其他邪氣結合，又被稱為“百病之長”，臨床上常見風寒、風熱、風濕和風燥等不同證候。","WIND PATHOGEN
 
 Wind is one of the six external pathogenic influences. It is associated with spring in the Five Phases framework but can also occur in other seasons. Traditional Chinese medicine regards Wind as a Yang influence that is light, rising and opening. It readily affects the upper body, the surface and the Lung's defensive functions, so signs often appear on the head, face and skin.
 
@@ -1475,7 +1590,11 @@ UI_BOOK_ENTRY_BODY_HAN_XIE,"【寒邪】
 
 寒邪侵袭肌表时，常见恶寒明显、发热较轻、无汗、头痛身痛、鼻流清涕、舌苔薄白、脉浮紧等表现；寒邪深入脏腑时，则可能出现脘腹冷痛、呕吐、腹泻或四肢发冷等表现。辨治时还需区分外寒、内寒以及寒邪所在部位。","【寒邪】
 
-寒邪是外感六邪之一，在五行與冬季相應，氣溫驟降、衣著不足或長時間處於寒冷環境時較易侵襲人體。中醫認為寒為陰邪，容易損傷人體陽氣，使溫煦和推動功...","COLD PATHOGEN
+寒邪是外感六邪之一，在五行與冬季相應，氣溫驟降、衣著不足或長時間處於寒冷環境時較易侵襲人體。中醫認為寒為陰邪，容易損傷人體陽氣，使溫煦和推動功能受到影響。
+
+寒邪具有凝滯和收引的特點。凝滯是指寒邪可使氣血運行不暢，容易引起較為明顯的疼痛；收引是指寒邪可使腠理、筋脈和經絡收縮，出現無汗、肢體拘急、關節屈伸不利等表現。
+
+寒邪侵襲肌表時，常見惡寒明顯、發熱較輕、無汗、頭痛身痛、鼻流清涕、舌苔薄白、脈浮緊等表現；寒邪深入臟腑時，則可能出現脘腹冷痛、嘔吐、腹瀉或四肢發冷等表現。辨治時還需區分外寒、內寒以及寒邪所在部位。","COLD PATHOGEN
 
 Cold is one of the six external pathogenic influences. It is associated with winter and is more likely to affect the body when temperatures fall suddenly, clothing is inadequate or exposure to cold is prolonged. Traditional Chinese medicine regards Cold as a Yin influence that can weaken Yang Qi and impair its warming and moving functions.
 
@@ -1503,7 +1622,11 @@ UI_BOOK_ENTRY_BODY_SHU_XIE,"【暑邪】
 
 暑季气候往往炎热而潮湿，因此暑邪常与湿邪同时侵袭人体，形成“暑湿”。除发热口渴外，还可见胸闷、恶心、食欲不振、身体困重、腹泻和舌苔腻等表现。辨治时需要根据暑热与湿邪所占比重分别判断。","【暑邪】
 
-暑邪是外感六邪之一，是夏季特有的致病邪氣，多由天氣炎熱、長時間暴露於高溫環境或勞作過度所致。中醫認為暑為陽邪，性質炎熱升散，容易使人體腠理開洩...","SUMMER HEAT PATHOGEN
+暑邪是外感六邪之一，是夏季特有的致病邪氣，多由天氣炎熱、長時間暴露於高溫環境或勞作過度所致。中醫認為暑為陽邪，性質炎熱升散，容易使人體腠理開洩、汗液大量排出。
+
+暑邪容易耗氣傷津，常見高熱、面紅、心煩、口渴、大量出汗、身體乏力、氣短、小便短黃等表現。暑邪嚴重時還可能出現頭暈、惡心、突然昏倒或意識異常等情況。
+
+暑季氣候往往炎熱而潮濕，因此暑邪常與濕邪同時侵襲人體，形成“暑濕”。除發熱口渴外，還可見胸悶、惡心、食慾不振、身體困重、腹瀉和舌苔膩等表現。辨治時需要根據暑熱與濕邪所佔比重分別判斷。","SUMMER HEAT PATHOGEN
 
 Summer Heat is one of the six external pathogenic influences and is specific to summer. It is associated with hot weather, prolonged exposure to high temperatures or excessive exertion. Traditional Chinese medicine regards it as a Yang influence that is intensely hot, rising and dispersing. It can open the skin's pores and cause profuse sweating.
 
@@ -1531,7 +1654,11 @@ UI_BOOK_ENTRY_BODY_SHI_XIE,"【湿邪】
 
 湿邪致病常见胸闷脘痞、食欲不振、恶心、腹胀、便溏、肢体沉重、关节酸痛、舌苔厚腻等表现。湿邪还常与风、寒、热等邪气结合，形成风湿、寒湿或湿热等不同证候。","【濕邪】
 
-濕邪是外感六邪之一，在五行與長夏相應，常與氣候潮濕、淋雨涉水或長期處於濕潤環境有關。中醫認為濕為陰邪，容易阻礙氣機、損傷陽氣，並與脾的運化功能...","DAMPNESS PATHOGEN
+濕邪是外感六邪之一，在五行與長夏相應，常與氣候潮濕、淋雨涉水或長期處於濕潤環境有關。中醫認為濕為陰邪，容易阻礙氣機、損傷陽氣，並與脾的運化功能關係密切。
+
+濕邪具有重濁、黏滯和趨下的特點。重濁是指患者常有身體沉重、頭重如裹、四肢困倦等感覺；黏滯是指症狀纏綿、病程較長、分泌物黏膩不爽；趨下是指濕邪引起的症狀較易出現在人體下部。
+
+濕邪致病常見胸悶脘痞、食慾不振、惡心、腹脹、便溏、肢體沉重、關節酸痛、舌苔厚膩等表現。濕邪還常與風、寒、熱等邪氣結合，形成風濕、寒濕或濕熱等不同證候。","DAMPNESS PATHOGEN
 
 Dampness is one of the six external pathogenic influences. It is associated with Late Summer and may be linked with humid weather, getting soaked by rain or prolonged exposure to damp surroundings. Traditional Chinese medicine regards Dampness as a Yin influence that may obstruct the movement of Qi and weaken Yang Qi. It is closely connected with the Spleen's function of transforming and transporting.
 
@@ -1559,7 +1686,11 @@ UI_BOOK_ENTRY_BODY_ZAO_XIE,"【燥邪】
 
 燥邪可分为温燥与凉燥。温燥多带有热象，可见发热、微恶风、口渴等表现；凉燥多带有寒象，可见恶寒、头痛、无汗等表现。医者需要结合季节、寒热和津液受损程度综合判断。","【燥邪】
 
-燥邪是外感六邪之一，在五行與秋季相應，常見於氣候乾燥或人體津液不足以適應環境變化時。中醫認為燥邪性質乾澀，最容易耗傷人體津液，並容易侵襲肺臟。...","DRYNESS PATHOGEN
+燥邪是外感六邪之一，在五行與秋季相應，常見於氣候乾燥或人體津液不足以適應環境變化時。中醫認為燥邪性質乾澀，最容易耗傷人體津液，並容易侵襲肺臟。
+
+燥邪損傷津液後，常見口鼻乾燥、咽乾口渴、皮膚乾澀、毛髮失潤、大便乾結、小便短少等表現。肺為嬌髒，喜潤惡燥，因此燥邪犯肺時還可能出現乾咳少痰，或痰液黏稠、不易咳出等表現。
+
+燥邪可分為溫燥與涼燥。溫燥多帶有熱象，可見發熱、微惡風、口渴等表現；涼燥多帶有寒象，可見惡寒、頭痛、無汗等表現。醫者需要結合季節、寒熱和津液受損程度綜合判斷。","DRYNESS PATHOGEN
 
 Dryness is one of the six external pathogenic influences. It is associated with autumn and may arise in dry weather or when the body's fluids cannot adequately adapt to environmental changes. Traditional Chinese medicine describes Dryness as parching and especially likely to deplete body fluids and affect the Lung.
 
@@ -1587,7 +1718,11 @@ UI_BOOK_ENTRY_BODY_RE_XIE,"【热邪】
 
 热邪还可能生风、动血或腐肉成脓。热极生风时可见抽搐、颈项强直等表现；热迫血行时可见出血、皮疹等表现；热邪壅聚局部时可能形成红、肿、热、痛的疮疡。判断热邪时，需要结合病位、病程及津液损伤程度综合分析。","【熱邪】
 
-熱邪是外感六邪之一，又常稱為火邪。中醫認為熱為陽邪，性質炎熱升騰，容易使人體出現陽熱偏盛的表現。熱邪可由外界侵入，也可由其他邪氣在體內轉化而成...","HEAT PATHOGEN
+熱邪是外感六邪之一，又常稱為火邪。中醫認為熱為陽邪，性質炎熱升騰，容易使人體出現陽熱偏盛的表現。熱邪可由外界侵入，也可由其他邪氣在體內轉化而成；熱邪發展至較嚴重程度時，常稱為火邪。
+
+熱邪容易耗氣傷津，常見高熱、口渴喜冷飲、汗多、身體乏力、小便短黃、大便乾結等表現。熱邪具有炎上的特點，容易出現面紅、目赤、咽喉腫痛、口舌生瘡等人體上部症狀。
+
+熱邪還可能生風、動血或腐肉成膿。熱極生風時可見抽搐、頸項強直等表現；熱迫血行時可見出血、皮疹等表現；熱邪壅聚局部時可能形成紅、腫、熱、痛的瘡瘍。判斷熱邪時，需要結合病位、病程及津液損傷程度綜合分析。","HEAT PATHOGEN
 
 Heat is one of the six external pathogenic influences and is also associated with Fire. Traditional Chinese medicine regards it as a Yang influence that burns and rises, producing signs of excessive Yang heat. Heat may enter from outside or develop when another influence transforms inside the body. A more severe form is often described as Fire.
 
@@ -1617,7 +1752,13 @@ UI_BOOK_ENTRY_BODY_QI_QING_NEI_SHANG,"【七情内伤】
 
 七情内伤通常直接影响内在脏腑，也可能导致气滞、血瘀、痰湿或阴阳失调。由于不同情志能够相互影响，具体表现还会因个人体质、情绪强度和持续时间而有所不同。医者需要结合患者的情志变化、脏腑症状以及望、闻、问、切所得信息综合判断。","【七情內傷】
 
-七情內傷是中醫對喜、怒、憂、思、悲、恐、驚七種情志活動引起疾病的概括。七情原本是人體對外界事物產生的正常情緒反應，一般不會致病；當情緒過於...","INTERNAL INJURY FROM THE SEVEN EMOTIONS
+七情內傷是中醫對喜、怒、憂、思、悲、恐、驚七種情志活動引起疾病的概括。七情原本是人體對外界事物產生的正常情緒反應，一般不會致病；當情緒過於強烈、突然發生或持續時間過長，超過人體自身的調節能力時，便可能影響臟腑氣血，成為內傷病因。
+
+中醫認為七情分別與五臟關係密切，即喜與心相應、怒與肝相應、思與脾相應、憂悲與肺相應、恐與腎相應。某種情緒過度時，容易影響相應臟腑；臟腑功能失調後，也可能反過來導致情緒變化。
+
+七情主要透過影響氣機而致病，常概括為“怒則氣上、喜則氣緩、悲則氣消、恐則氣下、驚則氣亂、思則氣結”。例如，過怒可能出現頭痛、面紅、胸脅脹滿；過思可能出現食慾不振、腹脹、失眠；驚恐過度可能出現心悸、神志不安或二便異常等表現。
+
+七情內傷通常直接影響內在臟腑，也可能導致氣滯、血瘀、痰濕或陰陽失調。由於不同情志能夠相互影響，具體表現還會因個人體質、情緒強度和持續時間而有所不同。醫者需要結合患者的情志變化、臟腑症狀以及望、聞、問、切所得資訊綜合判斷。","INTERNAL INJURY FROM THE SEVEN EMOTIONS
 
 In traditional Chinese medicine, internal injury from the seven emotions refers to illness associated with Joy, Anger, Worry, Pensiveness, Grief, Fear and Fright. These emotions are normal responses to life and generally do not cause illness. If an emotion is exceptionally intense, comes on suddenly or persists for too long, it may exceed the body's ability to regulate itself and affect the organs, Qi and blood.
 
@@ -1651,7 +1792,11 @@ UI_BOOK_ENTRY_BODY_XI,"【喜】
 
 过喜伤心时，可能出现心悸、失眠、精神涣散、注意力不集中或情绪异常兴奋等表现；情况严重时，还可能出现神志恍惚。判断是否由喜伤心，需要结合情绪变化、心神表现及个人体质综合分析。","【喜】
 
-喜是七情之一，是人在願望得到滿足或遇到愉快事物時產生的正常情緒。適度的喜悅能夠使心情舒暢、氣血和緩，對身心具有積極作用。中醫認為喜與心相應，正常...","JOY
+喜是七情之一，是人在願望得到滿足或遇到愉快事物時產生的正常情緒。適度的喜悅能夠使心情舒暢、氣血和緩，對身心具有積極作用。中醫認為喜與心相應，正常的喜悅有助於心氣調暢。
+
+喜悅過度或突然大喜時，則可能使心氣渙散、心神失守，稱為“喜則氣緩”。這裡的“緩”既有氣機舒緩的一面，也包含過度時氣機弛緩、精神難以集中的含義。
+
+過喜傷心時，可能出現心悸、失眠、精神渙散、注意力不集中或情緒異常興奮等表現；情況嚴重時，還可能出現神志恍惚。判斷是否由喜傷心，需要結合情緒變化、心神表現及個人體質綜合分析。","JOY
 
 Joy is one of the seven emotions. It is a normal feeling that arises when a wish is fulfilled or something pleasant happens. Moderate joy can ease the mind and help Qi and blood move smoothly. In traditional Chinese medicine, Joy is linked with the Heart, and ordinary happiness is thought to support the free movement of Heart Qi.
 
@@ -1677,7 +1822,11 @@ UI_BOOK_ENTRY_BODY_NU,"【怒】
 
 怒伤肝时，常见头胀头痛、面红目赤、急躁易怒、胸胁胀满、口苦或眩晕等表现。肝气长期郁滞还可能影响脾胃，出现食欲不振、腹胀等症状。判断时需要区分肝气郁结、肝火上炎和肝阳上亢等不同情况。","【怒】
 
-怒是七情之一，是人在受到挫折、壓迫或不公平對待時產生的正常情緒。適度表達憤怒有助於情緒疏解，但長期壓抑、頻繁發怒或突然暴怒，都可能影響人體氣機。...","ANGER
+怒是七情之一，是人在受到挫折、壓迫或不公平對待時產生的正常情緒。適度表達憤怒有助於情緒疏解，但長期壓抑、頻繁發怒或突然暴怒，都可能影響人體氣機。
+
+中醫認為怒與肝相應。肝主疏洩，負責調暢氣機；憤怒過度容易使肝的疏洩功能失常，導致氣機上逆，稱為“怒則氣上”。
+
+怒傷肝時，常見頭脹頭痛、面紅目赤、急躁易怒、胸脅脹滿、口苦或眩暈等表現。肝氣長期鬱滯還可能影響脾胃，出現食慾不振、腹脹等症狀。判斷時需要區分肝氣鬱結、肝火上炎和肝陽上亢等不同情況。","ANGER
 
 Anger is one of the seven emotions and a normal response to frustration, pressure or unfair treatment. Expressing it in moderation can help release emotion, while prolonged suppression, frequent anger or a sudden outburst may disturb the movement of Qi.
 
@@ -1705,7 +1854,9 @@ UI_BOOK_ENTRY_BODY_YOU,"【忧】
 
 憂是七情之一，主要指因擔心、顧慮或處境不安而產生的憂愁情緒。短暫的憂慮屬於正常心理活動，但長期憂心忡忡、反復擔憂，則可能使氣機受到抑制。
 
-中醫...","WORRY
+中醫認為憂與肺關係密切。憂愁過度容易損傷肺氣，使肺的宣發肅降功能失常；長期憂慮也可能影響脾的運化，導致氣血化生不足。
+
+憂傷肺時，可能出現胸悶、氣短、呼吸不暢、聲音低弱、精神疲倦或容易嘆息等表現；影響脾胃時，還可能出現食慾減退、腹脹和身體乏力。判斷時需要結合憂慮持續時間以及肺、脾的相關症狀綜合分析。","WORRY
 
 Worry is one of the seven emotions. It refers to distress arising from concerns, uncertainty or an unsettled situation. Brief periods of worry are normal, but persistent or repeated worrying may constrain the movement of Qi.
 
@@ -1731,7 +1882,11 @@ UI_BOOK_ENTRY_BODY_SI,"【思】
 
 思伤脾时，常见食欲不振、腹胀、便溏、身体乏力、精神倦怠等表现；心脾同时受到影响时，还可能出现心悸、健忘、失眠、多梦等症状。判断时需要结合饮食、睡眠和精神状态综合分析。","【思】
 
-思是七情之一，主要指思考、謀慮和注意力集中的精神活動。正常思考有助於學習和處理問題，但思慮過度、長期用腦或反復糾結同一件事，則可能影響人體氣機。...","PENSIVENESS
+思是七情之一，主要指思考、謀慮和注意力集中的精神活動。正常思考有助於學習和處理問題，但思慮過度、長期用腦或反復糾結同一件事，則可能影響人體氣機。
+
+中醫認為思與脾相應。思慮過度容易使氣機鬱結，稱為“思則氣結”，並可能影響脾的運化功能，使飲食物不能正常轉化為氣血津液。
+
+思傷脾時，常見食慾不振、腹脹、便溏、身體乏力、精神倦怠等表現；心脾同時受到影響時，還可能出現心悸、健忘、失眠、多夢等症狀。判斷時需要結合飲食、睡眠和精神狀態綜合分析。","PENSIVENESS
 
 Pensiveness is one of the seven emotions. It refers to thinking, planning and focused attention. Ordinary thought helps with learning and problem-solving, while excessive thinking, prolonged mental effort or repeated rumination on one subject may disrupt the movement of Qi.
 
@@ -1757,7 +1912,11 @@ UI_BOOK_ENTRY_BODY_BEI,"【悲】
 
 悲伤过度时，常见精神低落、气短乏力、声音低弱、胸闷、哭泣、食欲下降等表现。长期悲伤还可能进一步影响心、脾等脏腑。忧与悲都和肺有关，但忧偏于担心和愁虑，悲则偏于哀痛和失落。","【悲】
 
-悲是七情之一，是人在經歷失去、離別或重大打擊時產生的哀傷情緒。適度悲傷屬於正常的情感反應，但悲傷過度或長期不能緩解時，可能消耗人體之氣，使精神和...","GRIEF
+悲是七情之一，是人在經歷失去、離別或重大打擊時產生的哀傷情緒。適度悲傷屬於正常的情感反應，但悲傷過度或長期不能緩解時，可能消耗人體之氣，使精神和身體逐漸衰弱。
+
+中醫認為悲與肺相應，悲傷過度容易耗傷肺氣，稱為“悲則氣消”。肺氣受損後，肺主氣、司呼吸以及宣發肅降的功能可能受到影響。
+
+悲傷過度時，常見精神低落、氣短乏力、聲音低弱、胸悶、哭泣、食慾下降等表現。長期悲傷還可能進一步影響心、脾等臟腑。憂與悲都和肺有關，但憂偏於擔心和愁慮，悲則偏於哀痛和失落。","GRIEF
 
 Grief is one of the seven emotions and a normal response to loss, separation or a major setback. Moderate sadness is a normal human feeling. When grief is overwhelming or does not ease over a long period, it may deplete Qi and gradually weaken the body and mind.
 
@@ -1783,7 +1942,11 @@ UI_BOOK_ENTRY_BODY_KONG,"【恐】
 
 恐伤肾时，可能出现腰膝酸软、精神不安、遗尿、尿失禁或二便异常等表现；长期恐惧还可能耗伤肾精，使人出现健忘、耳鸣和意志消沉等症状。判断时需要结合恐惧发生的原因、持续时间及肾的相关表现综合分析。","【恐】
 
-恐是七情之一，是人在面臨危險、威脅或未知事物時產生的害怕情緒。適度恐懼能夠使人提高警覺、躲避危險，但長期處於恐懼之中或突然受到強烈驚嚇，則可能擾...","FEAR
+恐是七情之一，是人在面臨危險、威脅或未知事物時產生的害怕情緒。適度恐懼能夠使人提高警覺、躲避危險，但長期處於恐懼之中或突然受到強烈驚嚇，則可能擾亂臟腑氣機。
+
+中醫認為恐與腎相應。恐懼過度容易使腎氣不固、氣機下陷，稱為“恐則氣下”，從而影響腎的封藏及對二便的固攝功能。
+
+恐傷腎時，可能出現腰膝酸軟、精神不安、遺尿、尿失禁或二便異常等表現；長期恐懼還可能耗傷腎精，使人出現健忘、耳鳴和意志消沈等症狀。判斷時需要結合恐懼發生的原因、持續時間及腎的相關表現綜合分析。","FEAR
 
 Fear is one of the seven emotions and a normal response to danger, threats or the unknown. Moderate fear helps a person stay alert and avoid harm. Living with fear for a long time or experiencing an intense sudden scare may, however, disturb the movement of Qi and the functions of the organs.
 
@@ -1809,7 +1972,11 @@ UI_BOOK_ENTRY_BODY_JING,"【惊】
 
 惊伤心神时，常见心悸、失眠、神志不宁、精神恍惚、容易受惊或注意力难以集中等表现；情况严重时，还可能出现昏厥或神志异常。判断时需要结合刺激强度、持续影响及患者原有的身心状态综合分析。","【驚】
 
-驚是七情之一，是人在突然遇到意外、聲響或危險時產生的急劇情緒反應。驚與恐有所不同：驚通常由突發刺激引起，事先沒有心理準備；恐則多是對已知或預期危...","FRIGHT
+驚是七情之一，是人在突然遇到意外、聲響或危險時產生的急劇情緒反應。驚與恐有所不同：驚通常由突發刺激引起，事先沒有心理準備；恐則多是對已知或預期危險產生的害怕。
+
+中醫認為驚主要影響心神，可使氣機紊亂，稱為“驚則氣亂”。受到突然驚嚇後，心神失去安定，氣血運行也可能暫時失常，並可進一步影響腎的封藏功能。
+
+驚傷心神時，常見心悸、失眠、神志不寧、精神恍惚、容易受驚或注意力難以集中等表現；情況嚴重時，還可能出現昏厥或神志異常。判斷時需要結合刺激強度、持續影響及患者原有的身心狀態綜合分析。","FRIGHT
 
 Fright is one of the seven emotions. It is an abrupt emotional response to an unexpected event, sound or danger. It differs from Fear: Fright follows a sudden stimulus that a person was not prepared for, while Fear is more often a response to a known or anticipated threat.
 
@@ -1924,7 +2091,30 @@ UI_BOOK_ENTRY_BODY_BAI_SHAO,"白芍（芍药）
 【毒性】無毒。
 【歸經】歸肝、脾經。
 【主治】養血調經，斂陰止汗，柔肝止痛，平抑肝陽。
-【釋名】將離（《綱目》）、犁...","WHITE PEONY ROOT
+【釋名】將離（《綱目》）、犁食（《別錄》）、白朮（《別錄》）、余容（《別錄》）、鋌（《別錄》），白者名金芍藥，赤者名木芍藥（《圖經》）。
+
+時珍曰：芍藥，猶約也。約，美好貌。此草花容婥約，故以為名。又《雅翼》言：制食之毒，莫良於芍，故得藥名，亦通。
+
+鄭風詩雲：伊其相謔，贈之以芍藥。
+
+《韓詩外傳》雲：芍藥，離草也。董子雲：芍藥一名將離，故將別贈之。俗呼其花之千葉者，為小牡丹；赤者為木芍藥，與牡丹同名也。
+
+【發明】
+志曰：赤者，利小便下氣；白者，止痛散血。
+
+大明曰：赤者補氣，白者補血。
+
+弘景曰：赤者小利，俗方以止痛不減當歸。白者道家亦服食之，及煮石用。
+
+成無己曰：**白補而赤瀉，白收而赤散。酸以收之，甘以緩之，故酸甘相合，用補陰血。收逆氣而除肺燥。**又雲：芍藥之酸，斂津液而益營血，收陰氣而洩邪熱。
+
+元素曰：**白補赤散，瀉肝補脾胃。**酒浸行經，止中部腹痛；與姜同用，溫經散濕通塞，利腹中痛，胃氣不通。**白芍入脾經補中焦，乃下利必用之藥。**蓋瀉利皆太陰病，故不可缺此。得炙甘草為佐，治腹中痛，夏月少加黃芩，惡寒加桂，此仲景神方也。其用凡六：安脾經，一也；治腹痛，二也；收胃氣，三也；止瀉痢，四也；和血脈，五也；固腠理，六也。
+
+宗奭曰：芍藥須用單葉紅花者為佳，然血虛寒人禁之。古人雲：減芍藥以避中寒。誠不可忽。
+
+震亨曰：芍藥瀉脾火，性味酸寒，冬月必以酒炒。凡腹痛多是血脈凝澀，亦必酒炒用。然止能治血虛腹痛，余並不治。為其酸寒收斂，無溫散之功也。下痢腹痛必炒用，後重者不炒。產後不可用者，以其酸寒伐生發之氣也。必不得已，亦酒炒用之。
+
+時珍曰：白芍藥益脾，能於土中瀉木。赤芍藥散邪，能行血中之滯。《日華子》言：赤補氣，白治血，欠審矣。產後肝血已虛，不可更瀉，故禁之。酸寒之藥多矣，何獨避芍藥耶？以此杲曰：或言古人以酸澀為收，《本經》何以言利小便？曰：芍藥能益陰滋濕而停津液，故小便自行，非因通利也。曰：又言緩中何也？曰：損其肝者緩其中，即調血也，故四物湯用芍藥。大抵酸澀者為收斂停濕之劑，故主手足太陰經收斂之體，又能治血海而入於九地之下，後至厥陰經。白者色在西方，故補；赤者色在南方，故瀉。","WHITE PEONY ROOT
 
 [Taste and nature] Bitter and sour; slightly cold.
 
@@ -2035,7 +2225,24 @@ UI_BOOK_ENTRY_BODY_BAI_ZHI,"白芷
 【毒性】無毒。
 【歸經】歸肺、胃、大腸經。
 【主治】解表散寒，祛風止痛，宣通鼻竅，燥濕止帶，消腫排膿。
-【釋名】白茝（音止，又昌海...","ANGELICA DAHURICA ROOT
+【釋名】白茝（音止，又昌海切《別錄》）、芳香（《本經》）、澤芬（《別錄》）、苻蘺（《別錄》）、䖀（許驕切《吳普》）、莞（音官《別錄》）；葉名蒚麻（音力《別錄》）、藥（音約《圖經》）。
+
+時珍曰︰徐鍇雲︰初生根乾為芷，則白芷之義取乎此也。
+
+王安石《字說》雲︰ 香可以養鼻，又可養體，故 字從臣。臣音怡，養也。
+
+許慎《說文》雲︰晉謂之 ，齊謂之 ，楚謂之蘺，又謂之藥。生於下澤，芬芳與蘭同德，故騷人以蘭 為詠，而本草有芬香、澤芬之名，古人謂之香白芷雲。
+
+【發明】
+杲曰︰白芷療風通用，其氣芳香，能通九竅，表汗不可缺也。
+
+劉完素曰︰治正陽明頭痛，熱厥頭痛，加而用之。
+
+好古曰︰同辛夷、細辛用治鼻病，入內托散用長肌肉，則入陽明可知矣。
+
+時珍曰︰白芷色白味辛，行手陽明庚金；性溫氣濃，行足陽明戊土；芳香上達，入手太陰肺經。肺者，庚之弟，戊之子也。故所主之病不離三經。如頭目眉齒諸病，三經之風熱也；如漏帶癰疽諸病，三經之濕熱也。風熱者辛以散之，濕熱者溫以除之。為陽明主藥，故又能治血病胎病，而排膿生肌止痛。按王 《百一選方》雲︰王定國病風頭痛，至都 梁求名醫楊介治之，連進三丸，即時病失。懇求其方，則用香白芷一味，洗曬為末，煉蜜丸彈子大。每嚼一丸，以茶清或荊芥湯化下。遂命名都梁丸。其藥治頭風眩運，女人胎前產後，傷風頭痛，血風頭痛，皆效。戴原禮《要訣》亦雲︰頭痛挾熱，項生磊塊者，服之甚宜。又《仙神隱書》言︰種白芷能辟蛇，則《夷堅志》所載治腹蛇傷之方，亦制以所畏也，而本草不曾言及。
+
+宗奭曰︰《藥性論》言白芷能蝕膿。今人用治帶下，腸有敗膿，淋露不已，腥穢殊甚，遂致臍腹冷痛，皆由敗膿血所致，須此排膿。白芷一兩，單葉紅蜀葵根二兩，白芍藥、白枯 礬各半兩。為末，以蠟化丸梧子大。每空心及飯前，米飲下十丸或十五丸。俟膿盡，乃以他藥補之。","ANGELICA DAHURICA ROOT
 
 [Taste and nature] Acrid; warm.
 
@@ -2126,7 +2333,16 @@ UI_BOOK_ENTRY_BODY_BAI_ZHU,"白术（术）
 【毒性】無毒。
 【歸經】歸脾、胃經。
 【主治】健脾益氣，燥濕利水，止汗，安胎。
-【釋名】山薊（《本經》）、楊桴（音孚...","WHITE ATRACTYLODES RHIZOME
+【釋名】山薊（《本經》）、楊桴（音孚）、桴薊（《爾雅》）、馬薊（《綱目》）、山姜（《別錄》）、山連（《別錄》）、吃力伽（《日華》）。
+
+時珍曰︰按《六書本義》，術字篆文，象其根乾枝葉之形。《吳普本草》一名山芥，一名天薊。因其葉似薊，而味似姜、芥也。西域謂之吃力伽，故《外台秘要》有吃力伽散。揚州之域多種白朮，其狀如桴，故有楊桴及桴薊之名，今人謂之吳術是也。桴乃鼓槌之名。古方二術通用。後人始有蒼、白之分，詳見下。
+
+【發明】
+好古曰︰本草無蒼、白朮之名。近世多用白朮，治皮間風，止汗消痞，補胃和發，有汗則止，與黃耆同功。
+
+元素曰︰白朮除濕益燥，和中補氣。其用有九︰溫中，一也；去脾胃中濕，二也；除胃中熱，三也；強脾胃，進飲食，四也；和胃生津液，五也；止肌熱，六也；四肢困倦，嗜臥，目不能開，不思飲食，七也；止渴，八也；安胎，九也。凡中焦不受濕不能下利，必須白朮以逐水益脾。非白朮不能去濕，非枳實不能消痞，故枳術丸以之為君。
+
+機曰︰脾惡濕，濕勝則氣不得施化，津何由生？故曰︰膀胱者津液之府，氣化則能出焉。用白朮以除其濕，則氣得周流而津液生矣。","WHITE ATRACTYLODES RHIZOME
 
 [Taste and nature] Bitter and sweet; warm.
 
@@ -2201,7 +2417,18 @@ UI_BOOK_ENTRY_BODY_BAI_ZI_REN,"柏子仁（柏）
 【毒性】無毒。
 【歸經】歸心、腎、大腸經。
 【主治】養心安神，潤腸通便，止汗。
-【釋名】椈（音菊《爾雅》）、側柏（《爾...","ARBORVITAE SEED
+【釋名】椈（音菊《爾雅》）、側柏（《爾雅翼》）。
+
+李時珍曰︰按︰魏子才《六書精蘊》雲︰萬木皆向陽，而柏獨西指，蓋陰木而有貞德者，故字從白。白者，西方也。陸佃《埤雅》雲︰柏之指西，猶針之指南也。柏有數種，入藥惟取葉扁而側生者，故曰側柏。
+
+寇宗奭曰︰予官陝西，登高望柏，千萬株皆一一西指。蓋此木至堅，不畏霜雪，得木之正氣，他木不及。所以受金之正氣所制，一一西指也。
+
+【發明】
+王好古曰︰柏子仁，肝經氣分藥也。又潤腎，古方十精丸用之。
+
+時珍曰︰柏子仁性平而不寒不燥，味甘而補，辛而能潤，其氣清香，能透心腎，益脾蓋仙家上品藥也，宜乎滋養之劑用之。
+
+《列仙傳》雲︰赤松子食柏實，齒落更生，行及奔馬。諒非虛語也。","ARBORVITAE SEED
 
 [Taste and nature] Sweet; neutral.
 
@@ -2286,7 +2513,24 @@ UI_BOOK_ENTRY_BODY_BAN_XIA,"半夏
 【毒性】有毒。
 【歸經】歸脾、胃、肺經。
 【主治】燥濕化痰，降逆止嘔，消痞散結。
-【釋名】守田（《別錄》）、水玉（《本經》）、...","PINELLIA RHIZOME
+【釋名】守田（《別錄》）、水玉（《本經》）、地文（《本經》）、和姑（《吳普》）。
+
+時珍曰︰《禮記‧月令》︰五月半夏生。蓋當夏之半也，故名。守田會意，水玉因形。
+
+【發明】
+權曰︰半夏使也。虛而有痰氣，宜加用之。
+
+頌曰︰胃冷嘔噦，方藥之最要。
+
+成無己曰︰辛者散也，潤也。半夏之辛，以散逆氣結氣，除煩嘔，發音聲，行水氣，而潤腎燥。
+
+好古曰︰《經》雲︰腎主五液，化為五濕。自入為唾，入肝為泣，入心為汗，入脾為痰，入肺為涕。有痰曰嗽，無痰曰咳。痰者，因咳而動脾之濕也。 半夏能洩痰之標，不能洩痰之本。洩本者，洩腎也。咳無形，痰有形；無形則潤，有形 則燥，所以為流濕潤燥也。俗以半夏為肺藥，非也。止嘔吐為足陽明，除痰為足太陰。柴胡為之使，故今柴胡湯中用之，雖為止嘔，亦助柴胡、黃芩主往來寒熱，是又為足少陽、陽明也。
+
+宗奭曰︰今人惟知半夏去痰，不言益脾，蓋能分水故也。脾惡濕，濕則濡困，困則不能治水。《經》雲︰濕勝則瀉。一男子夜數如廁，或教以生薑一兩，半夏、大棗各三十枚，水一升，瓷瓶中慢火燒為熟水，時呷之，便已也。 趙繼宗曰︰丹溪言︰二陳湯治一身之痰，世醫執之，凡有痰者皆用。夫二陳內有半夏，其性燥烈，若風痰、寒痰、濕痰、食痰則相宜；至於勞痰、失血諸痰，用之反能燥血液而加 病，不可不知。 
+
+機曰︰俗以半夏性燥有毒，多以貝母代之。貝母乃太陰肺經之藥，半夏乃太陰脾經、陽 明胃經之藥，何可代也？夫咳嗽吐痰，虛勞吐血，或痰中見血，諸鬱，咽痛喉痹，肺癰肺痿，癰疽，婦人乳難，此皆貝母為嚮導，半夏乃禁用之藥。若涎者脾之液，美味膏粱炙爆，皆能生脾胃濕熱，故涎化為痰，久則痰火上攻，令人昏憒口噤，偏廢僵僕，蹇澀不語，生死旦夕，自非半夏、南星，曷可治乎？若以貝母代之，則翹首待斃矣。
+
+時珍曰︰脾無留濕不生痰，故脾為生痰之源，肺為貯痰之器。半夏能主痰飲及腹脹者，為其體滑而味辛性溫也。涎滑能潤，辛溫能散亦能潤，故行濕而通大便，利竅而洩小便。所謂辛走氣，能化液，辛以潤之是矣。潔古張氏雲︰半夏、南星治其痰，而咳嗽自愈。丹溪朱氏雲︰二陳湯能使大便潤而小便長。聊攝成氏雲︰半夏辛而散，行水氣而潤腎燥。又《和劑 局方》，用半硫丸治老人虛秘，皆取其滑潤也。世俗皆以南星、半夏為性燥，誤矣。濕去則土燥，痰涎不生，非二物之性燥也。古方治咽痛喉痹，吐血下血，多用二物，非禁劑也。二物亦能散血，故破傷打撲皆主之。惟陰虛勞損，則非濕熱之邪，而用利竅行濕之藥，是乃重 竭其津液，醫之罪也，豈藥之咎哉？《甲乙經》用治夜不眠，是果性燥者乎？岐伯雲︰衛氣行於陽，陽氣滿，不得入於陰，陰氣虛，故目不得瞑。治法︰飲以半夏湯一劑，陰陽既通，其臥立至。方用流水千里者八升，揚之萬遍，取清五升，煮之，炊以葦薪，大沸，入秫米一升，半夏五合，煮一升半，飲汁一杯，日三，以知為度。病新發者，覆杯則臥，汗出則已。久者，三飲而已。","PINELLIA RHIZOME
 
 [Taste and nature] Acrid; warm.
 
@@ -2387,7 +2631,24 @@ UI_BOOK_ENTRY_BODY_BEI_MU,"贝母
 【毒性】無毒。
 【歸經】歸肺、心經。
 【主治】清熱潤肺，化痰止咳，散結消癰。
-【釋名】（《爾雅》，音萌）、勤母（《別錄》...","FRITILLARIA BULB
+【釋名】（《爾雅》，音萌）、勤母（《別錄》）、苦菜（《別錄》）、苦花（《別錄》）、空草（《本經》）、藥實（《別錄》）。
+
+弘景曰：形似聚貝子，故名貝母。
+
+時珍曰：《詩》雲言採其 ，即此。一作虻，謂根狀如虻也。苦菜、藥實，與野苦 、黃藥子同名。
+
+【發明】
+承曰：貝母能散心胸鬱結之氣，故《詩》雲言：採其 ，是也。作詩者，本以不得志而言。今用治心中氣不快、多愁鬱者，殊有功。信矣。
+
+好古曰：貝母乃肺經氣分藥也。 仲景治寒實結胸、外無熱證者，三物小陷胸湯主之，白散亦可，以其內有貝母也。
+
+成無己雲： 辛散而苦洩，桔梗、貝母之苦辛，用以下氣。
+
+機曰：俗以半夏有毒，用貝母代之。夫貝母乃太陰肺經之藥，半夏乃太陰脾經、陽明胃經之藥，何可以代？若虛勞咳嗽、吐血咯血、肺痿 肺癰、婦人乳癰、癰疽及諸鬱之證，半夏乃禁忌，皆貝母為嚮導，猶可代也；至於脾胃濕熱，涎化為痰，久則生火，痰火上攻，昏憒僵僕蹇澀諸證，生死旦夕，亦豈貝母可代乎？頌曰： 貝母治惡瘡。
+
+唐人記其事雲：江左嘗有商人，左膊上有瘡如人面，亦無他苦。商人戲以酒滴 口中，其面赤色。以物食之，亦能食，多則膊內肉脹起。或不食，則一臂痹焉。有名醫教其歷試諸藥，金石草木之類，悉無所苦，至貝母，其瘡乃聚眉閉口。商人喜，因以小葦筒毀其口灌之，數日成痂遂愈，然不知何疾也。
+
+《本經》言主金瘡，此豈金瘡之類歟？","FRITILLARIA BULB
 
 [Taste and nature] Sweet and bitter; slightly cold.
 
@@ -2474,7 +2735,10 @@ UI_BOOK_ENTRY_BODY_BIAN_DOU,"扁豆（藊豆）
 【主治】健脾化濕，和中消暑。
 【釋名】沿籬豆（俗）、蛾眉豆（《綱目》）。
 
-時...","HYACINTH BEAN
+時珍曰︰ 藊本作扁，莢形扁也。沿籬，蔓延也。蛾眉，象豆脊白路之形也。
+
+【發明】
+時珍曰︰硬殼白扁豆，其子充實，白而微黃，其氣腥香，其性溫平，得乎中和，脾之谷也。入太陰氣分，通利三焦，能化清降濁，故專治中宮之病，消暑除濕而解毒也。其軟殼及黑鵲色者，其性微涼，但可供食，亦調脾胃。","HYACINTH BEAN
 
 [Taste and nature] Sweet; slightly warm.
 
@@ -2548,7 +2812,23 @@ UI_BOOK_ENTRY_BODY_BO_HE,"薄荷
 【毒性】無毒。
 【歸經】歸肺、肝經。
 【主治】疏散風熱，清利頭目，利咽透疹，疏肝行氣。
-【釋名】菝（《食性》）、蕃荷菜（《千金》）...","MINT
+【釋名】菝（《食性》）、蕃荷菜（《千金》）、吳菝（《食性》）、南薄荷（《衍義》）、金錢薄荷（《會編》）。
+
+時珍曰：薄荷，俗稱也。陳士良《食性本草》作菝，揚雄《甘泉賦》作茇，呂忱《字林》作茇，則薄荷之為訛稱可知矣。
+
+孫思邈《千金方》作蕃荷，又方音之訛也。今人藥用，多以蘇州者為勝，故陳士良謂之吳菝，以別胡菝也。
+
+宗奭曰：世稱此為南薄荷，為有一種龍腦薄荷，所以別之。機曰：小兒方多用金錢薄荷，謂其葉小頗圓如錢也，書作金銀誤矣。
+
+【發明】元素曰：薄荷辛涼，氣味俱薄，浮而升，陽也。故能去高巔及皮膚風熱。
+
+士良曰：薄荷能引諸藥入營衛，故能發散風寒。
+
+宗奭曰：小兒驚狂壯熱，須此引藥。又治骨蒸熱勞，用其汁與眾藥熬為膏。貓食薄荷則醉，物相感爾。
+
+好古曰：薄荷，手、足厥陰氣分藥也。能搜肝氣，又主肺盛有餘肩背痛，及風寒汗出。
+
+時珍曰：薄荷入手太陰、足厥陰，辛能發散，涼能清利，專於消風散熱，故頭痛頭風眼目咽喉口齒諸病，小兒驚熱及瘰癧瘡疥，為要藥。戴原禮氏治貓咬，取其汁塗之有效，蓋取其相制也。陸農師曰：薄荷，貓之酒也。犬，虎之酒也。桑椹，鳩之酒也。草，魚之酒也。昝殷","MINT
 
 [Taste and nature] Acrid; cool.
 
@@ -2643,7 +2923,24 @@ UI_BOOK_ENTRY_BODY_CANG_ZHU,"苍术
 【毒性】無毒。
 【歸經】歸脾、胃、肝經。
 【主治】燥濕健脾，祛風散寒，明目。
-【釋名】赤朮（《別錄》）、山精（《抱樸》）、仙朮...","ATRACTYLODES RHIZOME
+【釋名】赤朮（《別錄》）、山精（《抱樸》）、仙朮（《綱目》）、山薊（《本經》）。
+
+時珍曰︰《異術》言︰術者山之精也，服之令人長生辟谷，致神仙，故有山精、仙朮之號。術有赤、白二種，主治雖近，而性味止發不同。本草不分蒼、白，亦未可據。今將《本經》並《別錄》、甄權、大明四家所說功用，參考分別，各自附方，庶使用者有所依憑。
+
+【發明】
+宗 曰︰蒼朮，氣味辛烈；白朮，微辛苦而不烈。古方及《本經》止言術，未分蒼、白。只緣陶隱居言術有兩種，自此人多貴白者，往往將蒼朮置而不用。如古方平胃散之類，蒼朮為最要藥，功效尤速。殊不詳本草原無白朮之名。嵇康曰︰聞道人遺言，餌術、黃精，令人久壽。亦無白字，用宜兩審。
+
+杲曰︰本草但言術，不分蒼、白。而蒼朮別有雄壯上行之氣，能除濕，下安太陰，使邪氣不傳入脾也。以其經泔浸、火炒，故能出汗，與白朮止汗特異，用者不可以此代彼。蓋有止、發之殊，其餘主治則同。
+
+元素曰︰蒼朮與白朮主治同，但比白朮氣重而體沈。若除上濕發汗，功最大；若補中焦，除脾胃濕，力少不如白朮。腹中窄狹者，須用之。
+
+震亨曰︰蒼朮治濕，上、中、下皆有可用。又能總解諸鬱。痰、火、濕、食、氣、血六鬱，皆因傳化失常，不得升降。病在中焦，故藥必兼升降。將欲升之，必先降之；將欲降之，必先升之。故蒼朮為足陽明經藥，氣味辛烈，強胃強脾，發谷之氣，能徑入諸經，疏洩陽明之濕，通行斂澀。香附乃陰中快氣之藥，下氣最速。一升一降，故鬱散而平。楊士瀛曰︰脾精不禁，小便漏濁淋不止，腰背酸疼，宜用蒼朮以斂脾精，精生於谷故也。弘景曰︰白朮少膏，可作丸散；赤朮多膏，可作煎用。昔劉涓子 取其精而丸之，名守中金丸，可以長生。頌曰︰服食多單餌術，或合白茯苓，或合石菖蒲，並搗末。旦日水服，晚再進，久久彌佳。 取生術，去土水浸，再三煎如飴糖，酒調飲之，更善。今茅山所造術煎，是此法也。
+
+陶隱居言取其精丸之，今乃是膏煎，恐非真也。慎微曰︰梁庾肩吾答陶隱居 術煎啓雲︰綠葉抽條，紫花標色。百邪外御，六腑內充。山精見書，華神在錄。木榮火謝，盡採擷之難； 啓旦移申，窮淋漉之劑。又謝術蒸啓雲︰味重金漿，芳逾玉液。足使坐致延生，伏深銘感。
+
+又葛洪《抱樸子‧內篇》雲︰南陽文氏，漢末逃難壺山中，飢困欲死。有人教之食術，遂不飢。數十年乃還鄉里，顏色更少，氣力轉勝。故術一名山精，《神農藥經》所謂必欲長生，常服山精，是也。
+
+時珍曰︰按︰《吐納經》雲︰紫微夫人術序雲︰吾察草木之勝速益於己者，並不及術之多驗也。可以長生久視，遠而更靈。山林隱逸，得服術者，五嶽比肩。又《神仙傳》雲︰陳子皇得餌術要方，其妻姜氏得疲病，服之自愈，顏色氣力如二十時也。時珍謹按︰以上諸說，皆似蒼朮，不獨白朮。今服食家亦呼蒼朮為仙朮，故皆列於蒼朮之後。又張仲景辟一切惡氣，用赤朮同豬蹄甲燒煙。陶隱居亦言術能除惡氣，弭災 。故今病疫及歲旦，人家往往燒蒼朮以闢邪氣。《類編》載越民高氏妻，病恍惚譫語，亡夫之鬼憑之。其家燒蒼朮煙，鬼遽求去。《夷堅志》載江西一士人，為女妖所染。其鬼將別曰︰君為陰氣所浸，必當暴洩，但多服平胃散為良。中有蒼朮能去邪也。許叔微《本事方》雲︰微患飲癖三十年。始因少年夜坐寫文，左向伏幾，是以飲食多墜左邊。中夜必飲酒數杯，又向左臥。壯時不覺，三、五年後，覺酒止從左下有聲，脅痛食減嘈雜，飲酒半杯即止。十數日，必嘔酸水數升。暑月止右邊有汗，左邊絕無。遍訪名醫及海上方，間或中病，止得月餘復作。其補，如天雄、附子、礬石輩；利，如牽牛、甘遂、大戟，備嘗之矣。自揣必有癖囊，如潦水之有科臼，不盈科不行。但清者可行，而濁者停滯，無路以決之，故積至五、七日必嘔而去。脾土惡濕，而水則流濕，莫若燥脾以去濕，崇土以填科臼。乃悉屏諸藥，只以蒼朮一斤（去皮，切片，為末），生油麻（半兩）（水二盞，研，濾汁），大棗（五十枚）（煮，去皮核）。搗和丸梧子大。每日空腹溫服五十丸，增至一、二百丸。忌桃、李、雀肉。服三月而疾除。自此常服，不嘔不痛，胸膈寬利，飲啖如故，暑月汗亦周身，燈下能書細字，皆術之力也。初服時必覺微燥，以山梔子末，沸湯點服解之，久服亦自不燥矣。","ATRACTYLODES RHIZOME
 
 [Taste and nature] Acrid and bitter; warm.
 
@@ -2742,7 +3039,24 @@ UI_BOOK_ENTRY_BODY_CHAI_HU,"柴胡（茈胡）
 【毒性】無毒。
 【歸經】歸肝、膽、肺經。
 【主治】疏散退熱，疏肝解鬱，升舉陽氣。
-【釋名】地熏（《本經》）、芸蒿...","BUPLEURUM ROOT
+【釋名】地熏（《本經》）、芸蒿（《別錄》）、山菜（《吳普》）、茹草（《吳普》）。
+
+恭曰：茈，是古柴字。《上林賦》雲茈姜，及《爾雅》雲茈草，並作此茈字。此草根紫色，今太常用茈胡是也。又以木代系，相承呼為柴胡。且檢諸本草無名此者。
+
+時珍曰：茈字，有柴、紫二音。茈姜、茈草之茈，皆音紫；茈胡之茈，音柴。茈胡生山中，嫩則可茹，老則採而為柴，故苗有芸蒿、山菜、茹草之名，而根名柴胡也。蘇恭之說殊欠明。古本張仲景《傷寒論》，尚作茈字也
+
+【發明】
+之才曰：茈胡，得茯苓、桔梗、大黃、石膏、麻子仁、甘草、桂。以水一斗，煮取四升入硝石三方寸匕，療傷寒寒熱頭痛，心下煩滿。
+
+頌曰：張仲景治傷寒，有大、小柴胡，及柴胡加龍骨、柴胡加芒硝等湯，故後人治寒熱，此為最要之藥。
+
+杲曰：能引清氣而行陽道，傷寒外，諸有熱則加之，無熱則不加也。又能引胃氣上行、升騰而行春令者，宜加之。又凡諸瘧，以柴胡為君，隨所發時所在經分，佐以引經之藥。十二經瘡疽中，須用柴胡以散諸經血結氣聚，功與連翹同也。
+
+好古曰：柴胡能去臟腑內外俱乏，既能引清氣上行而順陽道，又入足少陽。在經主氣，在髒主血。證前行則惡熱，卻退則惡寒。惟氣之微寒，味之薄者，故能行經。若佐以三稜、廣術、巴豆之類，則能消堅積，是主血也。婦人經水適來適斷，傷寒雜病，易老俱用小柴胡湯，加以四物之類，並秦艽、牡丹皮輩，為調經之劑。又言婦人產後血熱必用之藥也。
+
+宗奭曰：柴胡，《本經》並無一字治勞，今人治勞方中鮮有不用者。嗚呼﹗凡此誤世甚多。嘗原病勞，有一種其髒虛損，復受邪熱，因虛而致勞，故曰勞者牢也，當須斟酌用之。如《經驗方》中治勞熱青蒿煎之用柴胡，正合宜爾，服之無不效，熱去即須急止。若或無熱，得此愈甚，雖至死，人亦不怨，目擊甚多。《日華子》又謂補五勞七傷，《藥性論》亦謂治勞乏羸瘦。若此等病，苟無實熱，醫者執而用之，不死何待？注釋本草，一字亦不可忽。 蓋萬世之後，所誤無窮，可不謹哉？如張仲景治寒熱往來如瘧狀，用柴胡湯，正合其宜也。
+
+時珍曰：勞有五勞，病在五臟。若勞在肝、膽、心，及包絡有熱，或少陽經寒熱者，則柴胡乃手足厥陰、少陽必用之藥；勞在脾胃有熱，或陽氣下陷，則柴胡乃引清氣、退熱必用之藥；惟勞在肺、腎者，不用可爾。然東垣李氏言諸有熱者，宜加之；無熱，則不加。又言諸經之瘧，皆以柴胡為君。十二經瘡疽，須用柴胡以散結聚。則是肺瘧、腎瘧，十二經之瘡，有熱者皆可用之矣。但要用者精思病原，加減佐使可也。寇氏不分臟腑經絡、有熱無熱，乃謂柴胡不治勞乏，一概擯斥，殊非通論。如《和劑局方》治上下諸血，龍腦雞蘇丸，用銀柴胡浸汁熬膏之法，則世人知此意者鮮矣。按：龐元英《談藪》雲：張知 久病瘧，熱時如火，年余骨立。醫用茸、附諸藥，熱益甚。召醫官孫琳診之。琳投小柴胡湯一帖，熱減十之九，三服脫然。琳曰：此名勞瘧，熱從髓出，加以剛劑，氣血愈虧，安得不瘦？蓋熱有在皮膚、在臟腑、在骨髓，非柴胡不可。若得銀柴胡，只須一服；南方者力減，故三服乃效也。觀此，則得用藥之妙的矣。寇氏之說，可盡憑乎？","BUPLEURUM ROOT
 
 [Taste and nature] Bitter and acrid; slightly cold.
 
@@ -2835,7 +3149,18 @@ UI_BOOK_ENTRY_BODY_CHE_QIAN_ZI,"车前子（车前）
 【毒性】無毒。
 【歸經】歸肝、腎、肺、小腸經。
 【主治】清熱利尿，滲濕止瀉，明目，清肺化痰。
-【釋名】當道（《本經》...","PLANTAIN SEED
+【釋名】當道（《本經》）、芣苡（音浮以）、馬舄（音昔）、牛遺（並《別錄》）、牛舌（《詩疏》）、車輪菜（《救荒》）、地衣（《綱目》）、蛤蟆衣（《別錄》）。
+
+時珍曰︰按《爾雅》雲︰芣苡，馬舄。馬舄，車前。陸璣《詩疏》雲︰此草牛馬跡中，故有車前、當道、馬舄、牛遺之名。舄，足履也。幽州人謂之牛舌草。蝦蟆喜藏伏於下，故江東稱為蝦蟆衣。又《韓詩外傳》言︰直曰車前；瞿曰芣苡，恐亦強說也生於兩旁者。
+
+【發明】
+弘景曰︰車前子性冷利，仙經亦服餌之，雲令人身輕，能跳越岸谷，不老長生也。
+
+頌曰︰車前子入藥最多。駐景丸用車前、菟絲二物，蜜丸食下服，古今以為奇方也。
+
+好古曰︰車前子，能利小便而不走氣，與茯苓同功。
+
+時珍曰︰按《神仙服食經》雲︰車前一名地衣，雷之精也，服之形化，八月採之。今車前五月子已老，而雲七八月者，地氣有不同爾。唐《張籍詩》雲︰開州午月，皆道有神。慚愧文君憐病眼，三千裡外寄閒人。觀此亦以五月採開州者為良，又可見其治目之功。大抵入服食，須佐他藥，如六味地黃丸之用澤瀉可也。若單用則洩太過，恐非久服之物。歐陽公常得暴下病，國醫不能治。夫人買市人藥一帖，進之而愈。力叩其方，則車前子一味為末，米飲服二錢匕。雲此藥利水道而不動氣，水道利則清濁分，而谷藏自止矣。","PLANTAIN SEED
 
 [Taste and nature] Sweet; cold.
 
@@ -2920,7 +3245,18 @@ UI_BOOK_ENTRY_BODY_CHEN_PI,"陈皮（橘）
 【主治】理氣健脾，燥濕化痰。
 【釋名】紅皮（《湯液》）、陳皮（《食療》）。
 
-...","AGED TANGERINE PEEL
+弘景曰︰橘皮療氣大勝。以東橘為好，西江者不如。須陳久者為良。
+
+好古曰︰橘皮以色紅日久者為佳，故曰紅皮、陳皮。去白者曰橘紅也。
+
+【發明】
+杲曰︰橘皮，氣薄味濃，陽中之陰也。可升可降，為脾、肺二經氣分藥。留白則補脾胃，去白則理肺氣；同白朮則補脾胃，同甘草則補肺，獨用則瀉肺損脾。其體輕浮，一能導胸中寒邪，二破滯氣，三益脾胃。加青皮減半用之，去滯氣，推陳致新。但多用久服，能損元氣也。
+
+原曰︰橘皮，能散、能瀉、能溫、能補、能和，化痰治嗽，順氣理中，調脾快膈，通五淋，療酒病，其功當在諸藥之上。
+
+時珍曰︰橘皮，苦能洩、能燥，辛能散，溫能和。其治百病，總是取其理氣燥濕之功。
+
+同補藥則補，同瀉藥則瀉，同升藥則升，同降藥則降。脾乃元氣之母，肺乃攝氣之 ，故橘皮為二經氣分之藥，但隨所配而補瀉升降也。潔古張氏雲︰陳皮、枳殼利其氣而痰自下，蓋此義也。同杏仁治大腸氣秘，同桃仁治大腸血秘，皆取其通滯也。詳見杏仁下。按方勺《泊宅編》雲︰橘皮寬膈降氣，消痰飲，極有殊功。他藥貴新，惟此貴陳。外舅莫強中令豐城時得疾，凡食已輒胸滿不下，百方不效。偶家人合橘紅湯，因取嘗之，似相宜，連日飲之。一日忽覺胸中有物墜下，大驚目瞪，自汗如雨。須臾腹痛，下數塊如鐵彈子，臭不可聞。自此胸次廓然，其疾頓愈，蓋脾之冷積也。其方︰用橘皮（去穰）一斤，甘草、鹽花各四兩。水五碗，慢火煮乾，焙研為末，白湯點服。名二賢散，治一切痰氣特驗。世醫徒知半夏、南星之屬，何足以語此哉？珍按︰二賢散，丹溪變之為潤下丸，用治痰氣有效。惟氣實人服之相宜，氣不足者不宜用之也。","AGED TANGERINE PEEL
 
 [Taste and nature] Bitter and acrid; warm.
 
@@ -2995,12 +3331,18 @@ UI_BOOK_ENTRY_BODY_CHEN_XIANG,"沉香
 
 《南越志》言︰交州人称为蜜香，谓其气如蜜脾也。梵书名阿迦香。
 
-【发明】","沉香
+【发明】","沈香
 【氣味】味辛、苦，性微溫。
 【毒性】無毒。
 【歸經】歸脾、胃、腎經。
 【主治】行氣止痛，溫中止嘔，納氣平喘。
-【釋名】沈水香（《綱目》）、蜜香（《南...","AGARWOOD
+【釋名】沈水香（《綱目》）、蜜香（《南越志》）。
+
+時珍曰︰木之心節置水則沈，故名沈水，亦曰水沈。半沈者為棧香，不沈者為黃熟香。
+
+《南越志》言︰交州人稱為蜜香，謂其氣如蜜脾也。梵書名阿迦香。
+
+【發明】","AGARWOOD
 
 [Taste and nature] Acrid and bitter; slightly warm.
 
@@ -3082,7 +3424,29 @@ UI_BOOK_ENTRY_BODY_CHI_SHAO,"赤芍（芍药）
 【毒性】無毒。
 【歸經】歸肝經。
 【主治】清熱涼血，散瘀止痛，清肝瀉火。
-【釋名】將離（《綱目》）、犁食（《別錄》）、白...","RED PEONY ROOT
+【釋名】將離（《綱目》）、犁食（《別錄》）、白朮（《別錄》）、余容（《別錄》）、鋌（《別錄》），白者名金芍藥，赤者名木芍藥（《圖經》）。
+
+時珍曰：芍藥，猶約也。約，美好貌。此草花容婥約，故以為名。又《雅翼》言：制食之毒，莫良於芍，故得藥名，亦通。
+
+鄭風詩雲：伊其相謔，贈之以芍藥。
+
+《韓詩外傳》雲：芍藥，離草也。董子雲：芍藥一名將離，故將別贈之。俗呼其花之千葉者，為小牡丹；赤者為木芍藥，與牡丹同名也。
+
+【發明】志曰：赤者，利小便下氣；白者，止痛散血。
+
+大明曰：赤者補氣，白者補血。
+
+弘景曰：赤者小利，俗方以止痛不減當歸。白者道家亦服食之，及煮石用。
+
+成無己曰：**白補而赤瀉，白收而赤散。酸以收之，甘以緩之，故酸甘相合，用補陰血。收逆氣而除肺燥。**又雲：芍藥之酸，斂津液而益營血，收陰氣而洩邪熱。
+
+元素曰：**白補赤散，瀉肝補脾胃。**酒浸行經，止中部腹痛；與姜同用，溫經散濕通塞，利腹中痛，胃氣不通。**白芍入脾經補中焦，乃下利必用之藥。**蓋瀉利皆太陰病，故不可缺此。得炙甘草為佐，治腹中痛，夏月少加黃芩，惡寒加桂，此仲景神方也。其用凡六：安脾經，一也；治腹痛，二也；收胃氣，三也；止瀉痢，四也；和血脈，五也；固腠理，六也。
+
+宗奭曰：芍藥須用單葉紅花者為佳，然血虛寒人禁之。古人雲：減芍藥以避中寒。誠不可忽。
+
+震亨曰：芍藥瀉脾火，性味酸寒，冬月必以酒炒。凡腹痛多是血脈凝澀，亦必酒炒用。然止能治血虛腹痛，余並不治。為其酸寒收斂，無溫散之功也。下痢腹痛必炒用，後重者不炒。產後不可用者，以其酸寒伐生發之氣也。必不得已，亦酒炒用之。
+
+時珍曰：白芍藥益脾，能於土中瀉木。赤芍藥散邪，能行血中之滯。《日華子》言：赤補氣，白治血，欠審矣。產後肝血已虛，不可更瀉，故禁之。酸寒之藥多矣，何獨避芍藥耶？以此杲曰：或言古人以酸澀為收，《本經》何以言利小便？曰：芍藥能益陰滋濕而停津液，故小便自行，非因通利也。曰：又言緩中何也？曰：損其肝者緩其中，即調血也，故四物湯用芍藥。大抵酸澀者為收斂停濕之劑，故主手足太陰經收斂之體，又能治血海而入於九地之下，後至厥陰經。白者色在西方，故補；赤者色在南方，故瀉。","RED PEONY ROOT
 
 [Taste and nature] Bitter; slightly cold.
 
@@ -3173,7 +3537,14 @@ UI_BOOK_ENTRY_BODY_CHUAN_LIAN_ZI,"川楝子（楝）
 【毒性】小毒。
 【歸經】歸肝、小腸、膀胱經。
 【主治】疏肝洩熱，行氣止痛，殺蟲。
-【釋名】苦楝（《圖經》），實名金鈴子...","SICHUAN CHINABERRY FRUIT
+【釋名】苦楝（《圖經》），實名金鈴子（《侯氏藥譜》）。
+
+時珍曰︰按︰羅願《爾雅翼》雲︰楝葉可以練物，故謂之楝。其子如小鈴，熟則黃色。名金鈴，象形也。
+
+【發明】
+元素曰︰熱厥暴痛，非此不能除。
+
+時珍曰︰楝實，導小腸、膀胱之熱，因引心包相火下行，故心腹痛及疝氣為要藥。甄權乃言不入湯使，則《本經》何以有治熱狂、利小便之文耶？近方治疝，有四治、五治、七治諸法，蓋亦配合之巧耳。","SICHUAN CHINABERRY FRUIT
 
 [Taste and nature] Bitter; cold.
 
@@ -3252,7 +3623,24 @@ UI_BOOK_ENTRY_BODY_CHUAN_XIONG,"川芎（芎䓖）
 【毒性】無毒。
 【歸經】歸肝、膽、心包經。
 【主治】活血行氣，祛風止痛。
-【釋名】胡藭（《別錄》）、川芎（《綱目》）、...","SICHUAN LOVAGE RHIZOME
+【釋名】胡藭（《別錄》）、川芎（《綱目》）、香果（《別錄》）、山鞠窮（《綱目》）。
+
+時珍曰︰芎本作營，名義未詳。或雲︰人頭穹窿窮高，天之象也。此藥上行，專治頭腦 諸疾，故有芎 之名。以胡戎者為佳，故曰胡芎。古人因其根節狀如馬銜，謂之馬銜芎 。 後世因其狀如雀腦，謂之雀腦芎。其出關中者，呼為京芎，亦曰西芎；出蜀中者，為川芎；出天台者，為台芎；出江南者，為撫芎，皆因地而名也。《左傳》︰楚人謂蕭人曰︰有麥曲乎？ 有山鞠窮乎？河魚腹疾柰何？二物皆御濕，故以諭之。丹溪朱氏治六鬱越鞠丸中用越桃、鞠 窮，故以命名。《金光明經》謂之 莫迦。
+
+【發明】
+宗奭曰︰今人用此最多，頭面風不可缺也，然須以他藥佐之。
+
+元素曰︰川芎上行頭目，下行血海，故清神及四物湯皆用之。能散肝經之風，治少陽厥 陰經頭痛，及血虛頭痛之聖藥也。其用有四︰為少陽引經，一也；諸經頭痛，二也；助清陽 之氣，三也；去濕氣在頭，四也。
+
+杲曰︰頭痛必用川芎。如不愈，加各引經藥︰太陽羌活，陽明白芷，少陽柴胡，太陰蒼朮，厥陰吳茱萸，少陰細辛，是也。
+
+震亨曰︰鬱在中焦，須撫芎開提其氣以升之，氣升則鬱自降。故撫芎總解諸鬱，直達三焦，為通陰陽氣血之使。
+
+時珍曰︰芎 ，血中氣藥也。肝苦急，以辛補之，故血虛者宜之。辛以散之，故氣鬱者宜之。《左傳》言︰麥曲鞠窮御濕，治河魚腹疾。予治濕瀉每加二味，其應如響也。血痢已 通而痛不止者，乃陰虧氣鬱，藥中加芎為佐，氣行血調，其病立止。此皆醫學妙旨，圓機之士，始可語之。
+
+宗奭曰︰沈括《筆談》雲︰一族子舊服芎 ，醫鄭叔熊見之雲︰芎 不可久服，多令人暴死。後族子果無疾而卒。又朝士張子通之妻，病腦風，服芎 甚久，一旦暴亡。皆目見者。 此皆單服既久，則走散真氣。若使他藥佐使，又不久服，中病便已，則焉能至此哉？ 虞搏曰︰骨蒸多汗，及氣弱之人，不可久服。其性辛散，令真氣走洩，而陰愈虛也。
+
+時珍曰︰五味入胃，各歸其本髒。久服則增氣偏勝，必有偏絕，故有暴夭之患。若藥具 五味，備四氣，君臣佐使配合得宜，豈有此害哉？如芎 ，肝經藥也。若單服既久，則辛喜 歸肺，肺氣偏勝，金來賊木，肝必受邪，久則偏絕，豈不夭亡？故醫者貴在格物也。","SICHUAN LOVAGE RHIZOME
 
 [Taste and nature] Acrid; warm.
 
@@ -3334,7 +3722,11 @@ UI_BOOK_ENTRY_BODY_DA_FU_PI,"大腹皮（槟榔）
 【毒性】無毒。
 【歸經】歸脾、胃、大腸、小腸經。
 【主治】行氣寬中，行水消腫。
-【釋名】賓門（李當之《藥對》）、仁...","ARECA HUSK
+【釋名】賓門（李當之《藥對》）、仁頻（《上林賦》）、洗瘴丹（《候氏藥譜》）。
+
+時珍曰︰賓與郎皆貴客之稱。稽含《南方草木狀》言︰交廣人凡貴勝族客，必先呈此果。若邂逅不設，用相嫌恨。則檳榔名義，蓋取於此。雷《炮炙論》謂尖者為檳，圓者為榔，亦似強說。又顏師古注《上林賦》雲︰仁頻即檳榔也。詵曰︰閩中呼為橄欖子。
+
+【發明】","ARECA HUSK
 
 [Taste and nature] Acrid; slightly warm.
 
@@ -3407,7 +3799,22 @@ UI_BOOK_ENTRY_BODY_DA_ZAO,"大枣（枣）
 【毒性】無毒。
 【歸經】歸脾、胃、心經。
 【主治】補中益氣，養血安神，緩和藥性。
-【釋名】乾棗（《別錄》）、美棗（《別錄...","JUJUBE
+【釋名】乾棗（《別錄》）、美棗（《別錄》）、良棗（《別錄》）。
+
+《別錄》曰︰八月採，曝乾。
+
+瑞曰︰此即曬乾大棗也。味最良美，故宜入藥。今人亦有用膠棗之肥大者。
+
+【發明】
+弘景曰︰道家方藥，以棗為佳餌。其皮利，肉補虛，所以合湯皆擘之也。
+
+杲曰︰大棗氣味俱濃，陽也。溫以補不足，甘以緩陰血。
+
+成無己曰︰邪在營衛者，辛甘以解之。故用姜、棗以和營衛，生發脾胃升騰之氣。張仲景治奔豚，用大棗滋脾土以平腎氣也。治水飲脅痛有十棗湯，益土而勝水也。
+
+震亨曰︰棗屬土而有火，味甘性緩。甘先入脾，補脾者未嘗用甘。故今人食甘多者，脾必受病也。
+
+時珍曰︰《素問》言棗為脾之果，脾病宜食之。謂治病和藥，棗為脾經血分藥也。若無故頻食，則生蟲損齒，貽害多矣。按王好古雲︰中滿者勿食甘，甘令人滿。故張仲景建中湯心下痞者，減餳、棗，與甘草同例，此得用棗之方矣。又按許叔微《本事方》雲︰一婦病髒燥悲泣不止，祈禱備至。予憶古方治此證用大棗湯，遂治，與服盡劑而愈。古人識病治方，妙絕如此。又陳自明《婦人良方》雲︰程虎卿內人妊娠四、五個月，遇晝則慘戚悲傷，淚下數欠，如有所憑，醫巫兼治皆無益。管伯周說︰先人曾語此，治須大棗湯乃愈。虎卿借方治藥，一投而愈。方見下條。又《摘玄方》治此證，用紅棗燒存性，酒服三錢，亦大棗湯變法也。","JUJUBE
 
 [Taste and nature] Sweet; warm.
 
@@ -3490,7 +3897,14 @@ UI_BOOK_ENTRY_BODY_DAN_DOU_CHI,"淡豆豉（大豆豉）
 【毒性】無毒。
 【歸經】歸肺、胃經。
 【主治】解表除煩，宣發鬱熱。
-【釋名】時珍曰︰按︰劉熙《釋名》雲︰豉，嗜...","FERMENTED SOYBEAN
+【釋名】時珍曰︰按︰劉熙《釋名》雲︰豉，嗜也。調和五味，可甘嗜也。許慎《說文》謂豉為配鹽幽菽者，乃咸豉也。
+
+【發明】
+弘景曰︰豉，食中常用。春夏之氣不和，蒸炒以酒漬服之至佳。依康伯法，先以醋、酒溲蒸曝燥，麻油和，再蒸曝之，凡三過，末椒、姜治和進食，大勝今時油豉也。患腳人，常將漬酒飲之，以滓敷腳，皆瘥。
+
+頌曰︰古今方書用豉治病最多，江南人善作豉，凡得時氣，即先用蔥豉湯服之取汗，往往便瘥也。
+
+時珍曰︰陶說康伯豉法，見《博物志》，雲原出外國，中國謂之康伯，乃傳此法之姓名耳。其豉調中下氣最妙。黑豆性平，作豉則溫。既經蒸 ，故能升能散。得蔥則發汗，得鹽則能吐，得酒則治風，得薤則治痢，得蒜則止血，炒熟則又能止汗，亦麻黃根節之義也。","FERMENTED SOYBEAN
 
 [Taste and nature] Bitter and acrid; cool.
 
@@ -3563,7 +3977,18 @@ UI_BOOK_ENTRY_BODY_DAN_NAN_XING,"胆南星（虎掌）
 【毒性】有毒。
 【歸經】歸肺、肝、脾經。
 【主治】清熱化痰，息風定驚。
-【釋名】虎膏（《綱目》）、鬼蒟蒻（《日...","BILE-PROCESSED ARISAEMA
+【釋名】虎膏（《綱目》）、鬼蒟蒻（《日華》）。
+
+恭曰︰其根四畔有圓牙，看如虎掌，故有此名。
+
+頌曰︰天南星即本草虎掌也，小者名由跋。古方多用虎掌，不言天南星。南星近出唐人中風痰毒方中用之，乃後人採用，別立此名爾。
+
+時珍曰︰虎掌因葉形似之，非根也。南星因根圓白，形如老人星狀，故名南星，即虎掌也。蘇頌說甚明白。宋《開寶》不當重出南星條，今併入。
+
+【發明】
+時珍曰︰虎掌、天南星，乃手足太陰脾肺之藥。味辛而麻，故能治風散血；氣溫而燥，故能勝濕除涎；性緊而毒，故能攻積拔腫而治口 舌糜。
+
+楊士瀛《直指方》雲︰諸風口噤，宜用南星，更以人參、石菖蒲佐之。","BILE-PROCESSED ARISAEMA
 
 [Taste and nature] Bitter and slightly acrid; cool.
 
@@ -3640,7 +4065,16 @@ UI_BOOK_ENTRY_BODY_DAN_PI,"丹皮（牡丹）
 【毒性】無毒。
 【歸經】歸心、肝、腎經。
 【主治】清熱涼血，活血化瘀，退虛熱。
-【釋名】鼠姑（《本經》）、鹿韭（...","MOUTAN CORTEX
+【釋名】鼠姑（《本經》）、鹿韭（《本經》）、百兩金（《唐本》）、木芍藥（《綱目》）、花王（《洛陽名園記》）。
+
+時珍曰︰牡丹，以色丹者為上，雖結子而根上生苗，故謂之牡丹。唐人謂之木芍藥，以其花似芍藥，而宿乾似木也。群花品中，以牡丹第一，芍藥第二，故世謂牡丹為花王，芍藥為花相。歐陽修《花譜》所載，凡三十餘種。其名或以地，或以人，或以色，或以異，詳見本書。
+
+【發明】
+元素曰︰牡丹乃天地之精，為群花之首。葉為陽，發生也；花為陰，成實也。 丹者赤色，火也。故能瀉陰胞中之火。四物東加之，治婦人骨蒸。又曰︰牡丹皮入手厥陰、足少陰，故治無汗之骨蒸；地骨皮入足少陰、手少陽，故治有汗之骨蒸。神不足者手少陰，志不足者足少陰，故仲景腎氣丸用之，治神志不足也。又能治腸胃積血，及吐血、衄血，必用之藥，故犀角地黃湯用之。
+
+杲曰︰心虛，腸胃積熱，心火熾甚，心氣不足者，以牡丹皮為君。
+
+時珍曰︰牡丹皮治手、足少陰、厥陰四經血分伏火。蓋伏火即陰火也，陰火即相火也。 古方惟以此治相火，故仲景腎氣丸用之。後人乃專以黃柏治相火，不知牡丹之功更勝也。此乃千載秘奧，人所不知，今為拈出。赤花者利，白花者補，人亦罕悟，宜分別之。","MOUTAN CORTEX
 
 [Taste and nature] Bitter and acrid; slightly cold.
 
@@ -3713,7 +4147,12 @@ UI_BOOK_ENTRY_BODY_DAN_SHEN,"丹参
 【毒性】無毒。
 【歸經】歸心、肝經。
 【主治】活血祛瘀，通經止痛，清心除煩，涼血消癰。
-【釋名】赤參（《別錄》）、山參（《日...","RED SAGE ROOT
+【釋名】赤參（《別錄》）、山參（《日華》）、 蟬草（《本經》）、木羊乳（《吳普》）、逐馬（弘景）、奔馬草（《四聲》）。
+
+時珍曰︰五參五色配五臟。故人參入脾，曰黃參；沙參入肺，曰白參；玄參入腎，曰黑參；牡蒙入肝，曰紫參；丹參入心，曰赤參。其苦參，則右腎命門之藥也。古人捨紫參而稱苦參，未達此義爾。炳曰︰丹參治風軟腳，可逐奔馬，故名奔馬草。曾用，實有效。
+
+【發明】
+時珍曰︰丹參色赤味苦，氣平而降，陰中之陽也。入手少陰、厥陰之經，心與包絡血分藥也。按︰《婦人明理論》雲︰四物湯治婦人病，不問產前、產後，經水多少，皆可通用。惟一味丹參散，主治與之相同。蓋丹參能破宿血，補新血，安生胎，落死胎，止崩中帶下，調經脈，其功大類當歸、地黃、芎 、芍藥故也。","RED SAGE ROOT
 
 [Taste and nature] Bitter; slightly cold.
 
@@ -3798,7 +4237,30 @@ UI_BOOK_ENTRY_BODY_DANG_GUI,"当归
 【毒性】無毒。
 【歸經】歸肝、心、脾經。
 【主治】補血活血，調經止痛，潤腸通便。
-【釋名】乾歸（《本經》）、山蘄（《爾雅》...","CHINESE ANGELICA ROOT
+【釋名】乾歸（《本經》）、山蘄（《爾雅》）、白蘄（《爾雅》）、文無（《綱目》）。
+
+頌曰︰按而粗大。許慎《說文》雲︰生山中者，名薜，一名山蘄。然則當歸，芹類也。在平地者名芹，生山中粗大者，名當歸也。
+
+宗奭曰︰今川蜀皆以畦種，尤肥好多脂，不以平地、山中為等差也。
+
+時珍曰︰當歸本非芹類，特以花葉似芹，故得芹名。古人娶妻為嗣續也，當歸調血為女人要藥，有思夫之意，故有當歸之名，正與唐詩胡麻好種無人種，正是歸時又不歸之旨相同。崔豹《古今注》雲，古人相贈以芍藥，相招以文無。文無一名當歸，芍藥一名將離，故也。
+
+承曰︰當歸治妊婦產後惡血上衝，倉猝取效。氣血昏亂者，服之即定。能使氣血各有所歸，恐當歸之名必因此出也。
+
+【發明】
+權曰︰患人虛冷者，加而用之。
+
+承曰︰世俗多謂惟能治血，而《金匱》、《外台》、《千金》諸方皆為大補不足、決取立效之藥。古方用治婦人產後惡血上衝，取效無急於此。凡氣血昏亂者，服之即定。可以補虛，備產後要藥也。
+
+宗奭曰︰《藥性論》補女子諸不足一說，盡當歸之用矣。成無己曰︰脈者血之府，諸血皆屬心。凡通脈者，必先補心益血。故張仲景治手足厥寒、脈細欲絕者，用當歸之苦溫以助心血。
+
+元素曰︰其用有三︰一，心經本藥；二，和血；三，治諸病夜甚。凡血受病，必須用之。血壅而不流則痛，當歸之甘溫能和血，辛溫能散內寒，苦溫能助心散寒，使氣血各有所歸。
+
+好古曰︰入手少陰，以其心生血也。入足太陰，以其脾裹血也。入足厥陰，以其肝藏血也。頭，能破血；身，能養血，尾能行血。全用，同人參、黃耆，則補氣而生血；同牽牛、大治頭痛，諸痛皆屬木，故以血藥主之。
+
+機曰︰治頭痛，酒煮服清，取其浮而上也。治心痛，酒調末服，取其濁而半沈半浮也。治小便出血，用酒煎服，取其沈入下極也。自有高低之分如此。王海藏言當歸血藥，如何治胸中咳逆上氣？按當歸其味辛散，乃血中氣藥也。況咳逆上氣，有陰虛陽無所附者，故用血藥補陰，則血和而氣降矣。
+
+韓𢘅曰︰當歸主血分之病。川產力剛可攻，秦產力柔宜補。凡用，本病宜酒制，有痰以姜制，導血歸源之理。血虛以人參、石脂為佐，血熱以生地黃、條芩為佐，不絕生化之源。血積配以大黃。要之，血藥不容捨當歸。故古方四物湯以為君，芍藥為臣，地黃為佐，芎為使也。","CHINESE ANGELICA ROOT
 
 [Taste and nature] Sweet and acrid; warm.
 
@@ -3893,7 +4355,16 @@ UI_BOOK_ENTRY_BODY_DU_HUO,"独活（独活羌活）
 【毒性】無毒。
 【歸經】歸膀胱、腎經。
 【主治】解表散寒，祛風除濕，止痛。
-【釋名】羌活（《本經》）、羌青（《...","ANGELICA PUBESCENS ROOT
+【釋名】羌活（《本經》）、羌青（《本經》）、獨搖草（《別錄》）、護羌使者（《本經》）、胡王使者（《吳普》）、長生草（《綱目》）。
+
+弘景曰：一莖直上，不為風搖，故曰獨活。《別錄》曰：此草得風不搖，無風自動，故名獨搖草。大明曰：獨活，是羌活母也。
+
+時珍曰：獨活、羌活乃一類二種，獨活以羌中來者為良，故有羌活、胡王使者諸名，乃一物二種也。正如川芎、撫芎，白朮、蒼朮之義，入用
+
+【發明】
+恭曰：療風，宜用獨活；兼水，宜用羌活。
+
+劉完素曰：獨活不搖風而治風，浮萍不沈水而利水，因其所勝而為制也。張元素曰：風能勝濕，故羌活能治水濕。獨活與細辛同用，治少陰頭痛，頭運目眩，非此不能除；羌活與川芎同用，治太陽、少陰頭痛，透關利節，治督脈為病，脊強而厥。好古曰：羌活乃足太陽、厥陰、少陰藥，與獨活不分二種。後人因羌活氣雄，獨活氣細。故雄者，治足太陽風濕相搏，頭痛、肢節痛、一身盡痛者，非此不能除，乃卻亂反正之主君藥也。細者，治足少陰伏風，頭痛、兩足濕痹、不能動止者，非此不能治，而不治太陽之證。時珍曰：羌活、獨活皆能逐 風勝濕，透關利節，但氣有剛、劣不同爾。《素問》雲：從下上者，引而去之。二味苦辛而溫，味之薄者，陰中之陽，故能引氣上升，通達周身，而散風勝濕。按文系曰：唐劉師貞之兄病風，夢神人曰：但取胡王使者浸酒服，便愈。師貞訪問，皆不曉。復夢其母曰：胡王使 者，即羌活也。求而用之，兄疾遂愈。嘉謨曰：羌活，本手足太陽表裡引經之藥，又入足少陰、厥陰。名列君部之中，非比柔懦之主。小無不入，大無不通。故能散肌表八風之邪，利周身百節之痛。","ANGELICA PUBESCENS ROOT
 
 [Taste and nature] Acrid and bitter; warm.
 
@@ -3979,7 +4450,17 @@ UI_BOOK_ENTRY_BODY_E_JIAO,"阿胶
 【主治】補血滋陰，潤燥，止血。
 【釋名】傅致膠（《本經》）。
 
-弘景曰︰出東阿，故名阿膠...","DONKEY-HIDE GELATIN
+弘景曰︰出東阿，故名阿膠。
+
+時珍曰︰阿井，在今山東兗州府陽谷縣東北六十里，即古之東阿縣也。有官捨禁之。
+
+酈道元《水經注》雲︰東阿有井大如輪，深六七丈，歲常煮膠以貢天府者，即此也。其井乃濟水所注，取井水煮膠，用攪濁水則清。故人服之，下膈疏痰止吐。蓋濟水清而重，其性趨下，故治淤濁及逆上之痰也。
+
+【發明】藏器曰︰諸膠皆主風、止洩、補虛，而驢皮主風為最。
+
+宗奭曰︰驢皮煎膠，取其發散皮膚之外也。用烏者，取烏色屬水，以制熱則生風之義，如烏蛇、烏鴉、烏雞之類皆然。時珍曰︰阿膠大要只是補血與液，故能清肺益陰而治諸證。按陳自明雲︰補虛用牛皮膠，去風用驢皮膠。
+
+成無己雲︰陰不足者補之以味，阿膠之甘以補陰血。，不論肺虛肺實，可下可溫，須用阿膠以安肺潤肺。其性和平，為肺經要藥。小兒驚風後瞳仁不正者，以阿膠倍人參煎服最良。阿膠育神，人參益氣也。又痢疾多因傷暑伏熱而成，阿膠乃大腸之要藥。有熱毒留滯者，則能疏導；無熱毒留滯者，則能平安。數說足以發明阿膠之蘊矣。","DONKEY-HIDE GELATIN
 
 [Taste and nature] Sweet; neutral.
 
@@ -4057,7 +4538,11 @@ UI_BOOK_ENTRY_BODY_FANG_FENG,"防风
 【毒性】無毒。
 【歸經】歸膀胱、肝、脾經。
 【主治】祛風解表，勝濕止痛，止痙。
-【釋名】銅芸（《本經》）、茴芸（《吳普》...","SAPOSHNIKOVIA ROOT
+【釋名】銅芸（《本經》）、茴芸（《吳普》）、茴草（《別錄》）、屏風（《別錄》）、 根（《別錄》）、百枝（《別錄》）、百蜚（《吳普》）。
+
+時珍曰：防者，御也。其功療風最要，故名。屏風者，防風隱語也。曰芸、曰茴、曰蕳者，其花如茴香，其氣如芸蒿、蕳蘭也。
+
+【發明】元素曰：防風，治風通用。身半以上風邪用身，身半以下風邪，用梢，治風去濕之仙藥也，風能勝濕故爾。能瀉肺實，誤服瀉人上焦元氣。杲曰：防風治一身盡痛，乃猝 伍卑賤之職，隨所引而至，乃風藥中潤劑也。若補脾胃，非此引用不能行。凡脊痛項強，不可回顧，腰似折，項似拔者，乃手足太陽證，正當用防風。凡瘡在胸膈以上，雖無手足太陽 證，亦當用之，為能散結，去上部風。病患身體拘倦者，風也，諸瘡見此證，亦須用之。錢 仲陽瀉黃散中倍用防風者，乃於土中瀉木也。","SAPOSHNIKOVIA ROOT
 
 [Taste and nature] Acrid and sweet; slightly warm.
 
@@ -4129,7 +4614,15 @@ UI_BOOK_ENTRY_BODY_FENG_MI,"蜂蜜
 【毒性】無毒。
 【歸經】歸肺、脾、大腸經。
 【主治】補中潤燥，止痛解毒，外用生肌斂瘡。
-【釋名】蜂糖（俗名）生岩石者名石蜜（《...","HONEY
+【釋名】蜂糖（俗名）生岩石者名石蜜（《本經》）、石飴（同上）、岩蜜（《拾遺》）。
+
+時珍曰︰蜜以密成，故謂之蜜。《本經》原作石蜜，蓋以生岩石者為良耳，而諸家反致疑辯。今直題曰蜂蜜，正名也。
+
+【發明】弘景曰︰石蜜道家丸餌，莫不須之。仙方亦單煉服食，雲致長生不老也。
+
+時珍曰︰蜂採無毒之花，釀以小便而成蜜，所謂臭腐生神奇也。其入藥之功有五︰清熱也，補中也，解毒也，潤燥也，止痛也。生則性涼，故能清熱；熟則性溫，故能補中。甘而和平，故能解毒；柔而濡澤，故能潤燥。緩可以去急，故能止心腹、肌肉、瘡瘍之痛；和可以致中，故能調和百藥，而與甘草同功。張仲景治陽明結燥，大便不通，蜜煎導法，誠千古神方也。
+
+詵曰︰但凡覺有熱，四肢不和，即服蜜漿一碗，甚良。又點目中熱膜，以家養白蜜為上，木蜜次之，崖蜜更次之也。與姜汁熬煉，治癩甚效。","HONEY
 
 [Taste and nature] Sweet; neutral.
 
@@ -4217,7 +4710,25 @@ UI_BOOK_ENTRY_BODY_FU_LING,"茯苓
 【毒性】無毒。
 【歸經】歸心、肺、脾、腎經。
 【主治】利水滲濕，健脾寧心。
-【釋名】伏靈（《綱目》）、伏菟（《本經》）、松...","PORIA
+【釋名】伏靈（《綱目》）、伏菟（《本經》）、松腴、不死面（《記事珠》），抱根者名伏神（《別錄》）。
+
+宗奭曰︰多年樵斫之松根之氣味，抑鬱未絕，精英未淪。其精氣盛者，發洩於外，結為茯苓，故不抱根，離其本體，有零之義也。津氣不盛，只能附結本根，既不離本，故曰伏神。
+
+時珍曰︰茯苓，《史記•龜策傳》作伏靈。蓋松之神靈之氣，伏結而成，故謂之伏靈、伏神也。《仙經》言︰伏靈大如拳者，佩之令百鬼消滅，則神靈之氣，亦可徵矣。俗作苓者，傳寫之訛爾。下有伏靈，上有菟絲，故又名伏莬。或雲“其形如兔，故名”，亦通。
+
+【發明】弘景曰︰茯苓白色者補，赤色者利。俗用甚多，仙方服食亦為至要。雲其通神而致靈，和魂而煉魄，利竅而益肌，濃腸而開心，調營而理衛，上品仙藥也。善能斷谷不飢。
+
+宗奭曰︰茯苓行水之功多，益心脾不可缺也。
+
+元素曰︰茯苓赤瀉白補，上古無此說。氣味俱薄，性浮而升。其用有五︰利小便也；開腠理也，生津液也，除虛熱也，止瀉也。如小便利或數者，多服則損人目。汗多人服之，亦損元氣，夭人壽，為其淡而滲也。又雲︰淡為天之陽，陽當上行，何以利水而瀉下？氣薄者陽中之陰，所以茯苓利水瀉下。不離陽之體，故入手太陽。
+
+杲曰︰白者入壬癸，赤者入丙丁。味甘而淡，降也，陽中陰也。其用有六︰利竅而除濕，益氣而和中，治驚悸，生津液，小便多者能止，小便結者能通。又雲︰濕淫所勝，小便不利。淡以利竅，甘以助陽。甘平能益脾逐水，乃除濕之聖藥也。
+
+好古曰︰白者入手太陰、足太陽、少陽經氣分，赤者入足太陰、手少陰、太陽氣分。伐腎邪。小便多，能止之；小便澀，能利之。與車前子相似，雖利小便而不走氣。酒浸與光明朱砂同用，能秘真元。味甘而平，如何是利小便耶？
+
+震亨曰︰茯苓，得松之餘氣而成，屬金，仲景利小便多用之，此暴新病之要藥也。若陰虛者，恐未為宜。此物有行水之功，久服損人。八味丸用之者，亦不過接引他藥歸就腎經，去胞中久陳積垢，為搬運之功爾。
+
+時珍曰︰茯苓本草又言利小便，伐腎邪。至李東垣、王海藏乃言小便多者能止，澀者能通，同朱砂能秘真元。而朱丹溪又言陰虛者不宜用，義似相反，何哉？茯苓氣味淡而滲，其性上行，生津液，開腠理，滋水之源而下降，利小便。故張潔古謂其屬陽，浮而升，言其性也；東垣謂其為陽中之陰，降而下，言其功也。《素問》雲︰飲食入胃，游溢精氣，上輸於肺，通調水道，下輸膀胱。觀此，則知淡滲之藥，俱皆上行而後下降，非直下行也。小便多，其源亦異。《素問》雲︰肺氣盛則小便數而欠；虛則欠欬、小便遺數。心虛則少氣遺溺。下焦虛則遺溺。胞移熱於膀胱則遺溺。膀胱不利為癃，不約為遺溺。厥陰病則遺溺閉癃。所謂肺氣盛者，實熱也。其人必氣壯脈強，宜用茯苓甘淡以滲其熱，故曰︰小便多者能止也。若夫肺虛、心虛、胞熱、厥陰病者，皆虛熱也。其人必上熱下寒，脈虛而弱。法當用升陽之藥，以升水降火。膀胱不約、下焦虛者，乃火投於水，水泉不藏，脫陽之症。其人必肢冷脈遲。法當用溫熱之藥，峻補其下，交濟坎離。二症皆非茯苓輩淡滲之藥所可治，故曰︰陰虛者不宜用也。仙家雖有服食之法，亦當因人而用焉。","PORIA
 
 [Taste and nature] Sweet and bland; neutral.
 
@@ -4314,7 +4825,20 @@ UI_BOOK_ENTRY_BODY_FU_SHEN,"茯神（茯苓）
 【毒性】無毒。
 【歸經】歸心、脾經。
 【主治】寧心安神，利水滲濕。
-【釋名】伏靈（《綱目》）、伏菟（《本經》）、松...","PORIA WITH PINE ROOT
+【釋名】伏靈（《綱目》）、伏菟（《本經》）、松腴、不死面（《記事珠》），抱根者名伏神（《別錄》）。
+
+宗奭曰︰多年樵斫之松根之氣味，抑鬱未絕，精英未淪。其精氣盛者，發洩於外，結為茯苓，故不抱根，離其本體，有零之義也。津氣不盛，只能附結本根，既不離本，故曰伏神。
+
+時珍曰︰茯苓，《史記•龜策傳》作伏靈。蓋松之神靈之氣，伏結而成，故謂之伏靈、伏神也。《仙經》言︰伏靈大如拳者，佩之令百鬼消滅，則神靈之氣，亦可徵矣。俗作苓者，傳寫之訛爾。下有伏靈，上有菟絲，故又名伏莬。或雲“其形如兔，故名”，亦通。
+
+【發明】
+弘景曰︰仙方只雲茯苓而無茯神，為療既同，用應無嫌。
+
+時珍曰︰《神農本草》只言茯苓，《名醫別錄》始添茯神，而主治皆同。後人治心病必用茯神。故潔古張氏雲︰風眩心虛，非茯神不能除。然茯苓亦未嘗不治心病也。陶弘景始言茯苓赤瀉白補。
+
+李杲復分赤入丙丁、白入壬癸。此其發前人之秘者。時珍則謂茯苓、茯神，只當雲赤入血分，則白茯神不能治心病，赤茯苓不能入膀胱矣。張元素不分赤白之說，於理欠通。
+
+《聖濟錄》松節散︰用茯神心中木一兩，乳香一錢，石器炒，研為末。每服二錢，木瓜酒下。治風寒冷濕搏於筋骨，足筋攣痛，行步艱難，但是諸筋攣縮疼痛並主之。","PORIA WITH PINE ROOT
 
 [Taste and nature] Sweet and bland; neutral.
 
@@ -4400,7 +4924,19 @@ UI_BOOK_ENTRY_BODY_FU_ZI,"附子
 【主治】回陽救逆，補火助陽，散寒止痛。
 【釋名】其母名烏頭（《本經》）。
 
-時...","PREPARED ACONITE ROOT
+時珍曰︰初種為烏頭，象烏之頭也。附烏頭而生者為附子，如子附母也。烏頭如芋魁，附子如芋子，蓋一物也。別有草烏頭、白附子，故俗呼此為黑附子，川烏頭以別之。諸家不分烏頭有川、草兩種，皆混雜注解，今悉正之。
+
+【發明】宗奭曰︰補虛寒須用附子，風家即多用天雄，大略如此。其烏頭、烏喙、附子，則量其材而用之。時珍曰︰按王氏《究原方》雲︰附子性重滯，溫脾逐寒。川烏頭性輕疏，溫脾去風。若是寒疾即用附子；風疾即用川烏頭。一雲︰凡人中風，不可先用風藥及烏附。 若先用氣藥，後用烏附乃宜也。又凡用烏、附藥，並宜冷服者，熱因寒用也。蓋陰寒在下，虛陽上浮。治之以寒，則陰氣益甚而病增；治之以熱，則拒格而不納。熱藥冷凍飲料，下嗌之後，冷體既消，熱性便發，而病氣隨愈。不違其情，而致大益，此反治之妙也。昔張仲景治寒疝 內結，用蜜煎烏頭。《近效方》治喉痹，用蜜炙附子，含之咽汁。朱丹溪治疝氣，用烏頭、梔子。並熱因寒用也。李東垣治馮翰林侄陰盛格陽傷寒，面赤目赤，煩渴引飲，脈來七、八至，但按之則散。用姜附東加人參，投半斤服之，得汗而愈。此則神聖之妙也。 吳綬曰︰附子乃陰證要藥。凡傷寒傳變三陰，及中寒夾陰，雖身大熱而脈沈者，必用之。或厥冷腹痛，脈沈細，甚則唇青囊縮者，急須用之，有退陰回陽之力，起死回生之功。近 世陰證傷寒，往往疑似，不敢用附子，直待陰極陽竭而用之，已遲矣。且夾陰傷寒，內外皆陰，陽氣頓衰。必須急用人參，健脈以益其原；佐以附子，溫經散寒。捨此不用，將何以救 之？
+
+劉完素曰︰俗方治麻痹多用烏附，其氣暴能衝開道路，故氣愈麻；及藥氣盡而正氣行，則麻病癒矣。
+
+張元素曰︰附子以白朮為佐，乃除寒濕之聖藥。濕藥宜少加之引經。又益火之原，以消陰翳，則便溺有節，烏、附是也。 虞摶曰︰附子稟雄壯之質，有斬關奪將之氣。能引補氣藥行十二經，以追復散失之元陽；引 補血藥入血分，以滋養不足之真陰；引發散藥開腠理，以驅逐在表之風寒；引溫暖藥達下焦，以祛除在里之冷濕。
+
+震亨曰︰氣虛熱甚者，宜少用附子，以行參 。肥人多濕，亦宜少加烏、附行經。仲景八味丸，用為少陰響導，其補自是地黃，後世因以附子為補藥，誤矣。附子走而不守，取其健悍 走下之性，以行地黃之滯，可致遠爾。烏頭、天雄皆氣壯形偉，可為下部藥之佐；無人表其害人之禍，相習用為治風之藥及補藥，殺人多矣。 王履曰︰仲景八味丸，蓋兼陰火不足者設。錢仲陽六味地黃丸，為陰虛者設。附子乃補陽之藥，非為行滯也。
+
+好古曰︰烏、附，非身涼而四肢厥者，不可僭用。服附子以補火，必妨涸水。
+
+時珍曰︰烏、附毒藥，非危病不用，而補藥中少加引導，其功甚捷。有人才服錢匕，即發燥不堪，而昔人補劑用為常藥，豈古今運氣不同耶？荊府都昌王，體瘦而冷，無他病。日以附子煎湯飲，兼嚼硫黃，如此數歲。蘄州衛張百戶，平生服鹿茸、附子藥，至八十餘，康 健倍常。宋張杲《醫說》載︰趙知府耽酒色，每日煎乾薑熟附湯，吞硫黃金液丹百粒，乃能健啖，否則倦弱不支，壽至九十。他人服一粒即為害。若此數人，皆其臟腑稟賦之偏，服之有益無害，不可以常理概論也。又《瑣碎錄》言︰滑颱風土極寒，民啖附子如啖芋栗。此則地氣使然爾。","PREPARED ACONITE ROOT
 
 [Taste and nature] Acrid and sweet; very hot.
 
@@ -4493,7 +5029,22 @@ UI_BOOK_ENTRY_BODY_GAN_CAO,"甘草
 【毒性】無毒。
 【歸經】歸心、肺、脾、胃經。
 【主治】益氣補中，清熱解毒，祛痰止咳，緩急止痛，調和諸藥。
-【釋名】密甘（《別錄...","LICORICE ROOT
+【釋名】密甘（《別錄》）、密草（《別錄》）、美草（《別錄》）、蕗草（《別錄》）、靈通（《記事珠》）、國老（《別錄》）。
+
+弘景曰︰此草最為眾藥之主，經方少有不用者，猶如香中有沈香也。國老即帝師之稱，雖非君而為君所宗，是以能安和草石而解諸毒也。
+
+甄權曰︰諸藥中甘草為君，治七十二種乳石毒，解一千二百般草木毒，調和眾藥有功故有國老之號。
+
+【發明】
+震亨曰︰甘草味甘，大緩諸火，黃中通理，厚德載物之君子也。欲達下焦，須用稍子。
+
+杲曰︰甘草氣薄味濃，可升可降，陰中陽也。陽不足者，補之以甘。甘溫能除大熱，故生用則氣平，補脾胃不足而大瀉心火；炙之則氣溫，補三焦元氣而散表寒，除邪熱，去咽痛，緩正氣，養陰血。凡心火乘脾，腹中急痛，腹皮急縮者，宜倍用之。其性能緩急，而又協和諸藥，使之不爭。故熱藥得之緩其熱；寒藥得之緩其寒；寒熱相雜者用之得其平。
+
+好古曰︰五味之用，苦洩辛散，酸收咸斂，甘上行而發，而本草言甘草下氣何也？蓋甘味主中，有升降浮沈，可上可下，可外可內，有和有緩，有補有洩，居中之道盡矣。張仲景附子理中湯用甘草，恐其僭上也；調胃承氣湯用甘草，恐其速下也，皆緩之之意。小柴胡湯有柴胡、黃芩之寒，人參、半夏之溫，而用甘草者，則有調和之意。建中湯用甘草，以補中而緩脾急也；鳳髓丹用甘草，以緩腎急而生元氣也，乃甘補之意。又曰︰甘者令人中滿；中滿者勿食甘，甘緩而壅氣，非中滿所宜也。凡不滿而用炙甘草為之補；若中滿而用生甘草為之瀉，能引諸藥直至滿所，甘味入脾，歸其所喜，此升降、浮沈之理也。《經》雲︰以甘補之，以甘瀉之，以甘緩之，是矣。
+
+時珍曰︰甘草外赤中黃，色兼坤離；味濃氣薄，資全土德。協和群品，有元老之功；普治百邪，得王道之化。贊帝力而人不知，斂神功而己不與，可謂藥中之良相也。然中滿、嘔吐、酒客之病，不喜其甘；而大戟、芫花、甘遂、海藻，與之相反。是亦迂緩不可以救昏昧，而君子嘗見嫉於宵人之意歟？
+
+頌曰︰按孫思邈《千金方論》雲：甘草解百藥毒，如湯沃雪。有中烏頭、巴豆毒，甘草入腹即定，驗如反掌。方稱大豆汁解百藥毒，予每試之不效。加入甘草為甘豆湯，其驗乃奇也。又葛洪《肘後備急方》雲：席辯刺史嘗言嶺南俚人解蠱毒藥，並是常用之物，畏人得其法，乃言三百頭牛藥，或言三百兩銀藥。久與親狎，乃得其詳。凡飲食時，先取炙熟甘草一寸，嚼之咽汁，若中毒，隨即吐出。仍以炙甘草三兩、生薑四兩，水六升，煮二升，日三服。或用都淋藤、黃藤二物，酒煎溫常服，則毒隨大小溲出。又常帶甘草數寸，隨身備急。若經含甘草而食物不吐者，非毒物也。三百頭牛藥，即土常山也；三百兩銀藥，即馬兜鈴藤也。詳見各條。","LICORICE ROOT
 
 [Taste and nature] Sweet; neutral.
 
@@ -4580,7 +5131,18 @@ UI_BOOK_ENTRY_BODY_GAN_JIANG,"干姜
 【毒性】無毒。
 【歸經】歸脾、胃、腎、心、肺經。
 【主治】溫中散寒，回陽通脈，溫肺化飲。
-【釋名】時珍曰：以薑之乾者故名，乾薑...","DRIED GINGER
+【釋名】時珍曰：以姜之乾者故名，乾薑以母姜造之。以白淨結實者為良，故人呼為白姜，又曰均姜。凡入藥並宜炮用。
+
+【發明】
+元素曰：乾薑氣薄味厚，半沈半浮，可升可降，陽中之陰也。又曰：大辛大熱，陽中之陽。其用有四：通心助陽，一也；去臟腑沈寒痼冷，二也；發諸經之寒氣，三也；治感寒腹痛，四也。腎中無陽，脈氣欲絕，黑附子為引，水煎服之，名姜附湯。亦治中焦寒邪，寒淫所勝，以辛散之也。又能補下焦，故四逆湯用之。乾薑本辛，炮之稍苦，故止而不移，所以能治裡寒，非若附子行而不止也。理中湯用之者，以其回陽也。
+
+李杲曰：乾薑生辛炮苦，陽也。生則逐寒邪而發表，炮則除胃冷而守中。多用則耗散元氣，辛以散之，是壯火食氣故也，須以生甘草緩之。辛熱以散裡寒，同五味子用以溫肺，同入參用以溫胃也。
+
+好古曰：乾薑，心、脾二經氣分藥也，故補心氣不足。或言：乾薑辛熱而言補脾。今理中湯用之，言洩不言補，何也？蓋辛熱燥濕，洩脾中寒濕邪氣，非洩正氣也。又雲：服乾薑以治中者，必僭上，不可不知。
+
+震亨曰：乾薑入肺中利肺氣，入腎中燥下濕，入肝經引血藥生血，同補陰藥亦能引血藥入氣分生血，故血虛發熱、產後大熱者用之。止唾血、痢血，須炒黑用之。有血脫色白而夭不澤脈濡者，此大寒也。宜乾薑之辛溫以益血，大熱以溫經。
+
+時珍曰：乾薑，能引血藥入血分，氣藥入氣分，又能去惡養新，有陽生陰長之意，故血虛者用之；而人吐血、衄血、下血，有陰無陽者，亦宜用之。乃熱因熱用，從治之法也。","DRIED GINGER
 
 [Taste and nature] Acrid; hot.
 
@@ -4668,7 +5230,23 @@ UI_BOOK_ENTRY_BODY_GE_GEN,"葛根（葛）
 【毒性】無毒。
 【歸經】歸脾、胃、肺經。
 【主治】解肌退熱，透發麻疹，生津止渴，升陽止瀉，通經活絡，解酒毒。
-【釋名...","KUDZU ROOT
+【釋名】雞齊（《本經》）、鹿藿（《別錄》）、黃斤（《別錄》）。
+
+時珍曰︰葛從曷，諧聲也。鹿食九草，此其一種，故曰鹿藿。黃斤未詳。
+
+【發明】弘景曰︰生葛搗汁飲，解溫病發熱。五月五日日中時，取根為屑，熬令黃黑，屑末水服方寸匕，療瘧及瘡，至良。
+
+頌曰︰張仲景治傷寒有葛根湯，以其主大熱、解肌、發腠理故也。
+
+元素曰︰升陽生津。脾虛作渴者，非此不除。勿多用，恐傷胃氣。張仲景治太陽陽明合病，桂枝湯內加麻黃、葛根，又有葛根黃芩黃連解肌湯，是用此以斷太陽入陽明之路，非即太陽藥也。頭顱痛如破，乃陽明中風，可用葛根蔥白湯，為陽明仙藥。若太陽初病，未入陽明而頭痛者，不可便服升麻、葛根發之，是反引邪氣入陽明，為引賊破家也。
+
+震亨曰︰凡痘已見紅點，不可用葛根升麻湯，恐表虛反增斑爛也。
+
+杲曰︰乾葛其氣輕浮，鼓舞胃氣上行，生津液，又解肌熱，治脾胃虛弱洩瀉聖藥也。
+
+徐用誠曰︰葛根氣味俱薄，輕而上行，浮而微降，陽中陰也。其用有四︰止渴，一也；解酒，二也；發散表邪，三也；發瘡疹難出，四也。
+
+時珍曰︰本草十劑雲︰輕可去實，麻黃、葛根之屬。蓋麻黃乃太陽經藥，兼入肺經，肺主皮毛；葛根乃陽明經藥，兼入脾經，脾主肌肉。所以二味藥皆輕揚發散，而所入迥然不同也。","KUDZU ROOT
 
 [Taste and nature] Sweet and acrid; cool.
 
@@ -4758,7 +5336,13 @@ UI_BOOK_ENTRY_BODY_GE_JIE,"蛤蚧
 【主治】補肺益腎，納氣定喘，助陽益精。
 【釋名】蛤蟹（《日華》）、仙蟾（《綱目》）。
 
-志...","GECKO
+志曰︰一雌一雄，常自呼其名。
+
+時珍曰︰蛤蚧，因聲而名，仙蟾，因形而名；嶺南人呼蛙為蛤，又因其首如蛙、蟾也。雷𢽾以雄為蛤，以雌為蚧，亦通。
+
+【發明】宗奭曰︰補肺虛勞嗽有功。
+
+時珍曰︰昔人言補可去弱，人參羊肉之屬。蛤蚧補肺氣，定喘止渴，功同人參。益陰血，助精扶羸，功同羊肉。近世治勞損痿弱，許叔微治消渴，皆用之，俱取其滋補也。劉純雲︰氣液衰、陰血竭者，宜用之。何大英雲︰定喘止嗽，莫佳於此。","GECKO
 
 [Taste and nature] Salty; neutral.
 
@@ -4841,7 +5425,24 @@ UI_BOOK_ENTRY_BODY_GOU_QI_ZI,"枸杞子（枸杞地骨皮）
 【毒性】無毒。
 【歸經】歸肝、腎經。
 【主治】滋補肝腎，益精明目。
-【釋名】枸 （《爾雅》。音計。《本經》作枸...","GOJI BERRY
+【釋名】枸 （《爾雅》。音計。《本經》作枸忌）、枸棘（《衍義》）、苦杞（《詩疏》）、紅菜頭（《圖經》）、天精（《抱樸》）、地骨（《本經》）、地輔（《本經》）、地仙（《日華》）、卻暑（《別錄》）。
+
+時珍曰︰枸、杞二樹名。此物棘如枸之刺，莖如杞之條，故兼名之。道書言︰千載枸杞，其形如犬，故得枸名，未審然否？
+
+頌曰︰仙人杖有三種︰一是枸杞；一是菜類，葉似苦苣；一是枯死竹竿之色黑者也。
+
+【發明】
+弘景曰︰枸杞葉作羹，小苦。俗諺雲︰去家千里，勿食蘿摩、枸杞。此言二物補益精氣，強盛陰道也。枸杞根、實為服食家用，其說甚美，名為仙人之杖，遠有旨乎？
+
+頌曰︰莖、葉及子，服之輕身益氣。《淮南枕中記》載︰西河女子服枸杞法︰正月上寅採根，二月上卯治服之；三月上辰採莖，四月上巳治服之；五月上午採其葉，六月上未治服之；七月上申採花，八月上酉治服之；九月上戌採子，十月上亥治服之；十一月上子採根，十二月上醜治服之。又有花、實、根、莖、葉作煎，或單榨子汁煎膏服之者，其功並同。世傳蓬萊縣南丘村多枸杞，高者一、二丈，其根盤結甚固。其鄉人多壽考，亦飲食其水土之氣使然。又潤州開元寺大井旁生枸杞，歲久。土人目為枸杞井，雲飲其水甚益人也。
+
+𢽾曰︰其根似物形狀者為上。
+
+時珍曰︰按︰劉禹錫《枸杞井詩》雲︰僧房藥樹依寒井，井有清泉藥有靈。翠黛葉生籠石，殷紅子熟照銅瓶。枝繁本是仙人杖，根老能成瑞犬形。上品功能甘露味，還知一勺可延齡。又《續仙傳》雲︰朱孺子見溪側二花犬，逐入於枸杞叢下。掘之得根，形如二犬。烹而食之，忽覺身輕。周密《浩然齋日抄》雲︰宋徽宗時，順州築城，得枸杞於土中，其形如狀，馳獻闕下，乃仙家所謂千歲枸杞，其形如犬者。據前數說，則枸杞之滋益不獨子，而根亦不止於退熱而已。但根、苗、子之氣味稍殊，而主治亦未必無別。蓋其苗乃天精，苦甘而涼，上焦心肺客熱者宜之；根乃地骨，甘淡而寒，下焦肝腎虛熱者宜之。此皆三焦氣分之藥，所謂熱淫於內、瀉以甘寒也。至於子則甘平而潤，性滋而補，不能退熱，只能補腎潤肺，生精益氣。此乃平補之藥，所謂精不足者、補之以味也。分而用之，則各有所主；兼而用之，則一舉兩得。世人但知用黃芩、黃連，苦寒以治上焦之火；黃柏、知母，苦寒以治下焦陰火。
+
+謂之補陰降火，久服致傷元氣。而不知枸杞、地骨甘寒平補，使精氣充而邪火自退之妙，惜哉﹗予嘗以青蒿佐地骨退熱，屢有殊功，人所未喻者。兵部尚書劉松石，諱天和，麻城人。
+
+所集《保壽堂方》載地仙丹雲︰昔有異人赤腳張，傳此方於猗氏縣一老人，服之壽百餘，行走如飛，發白反黑，齒落更生，陽事強健。此藥性平，常服能除邪熱，明目輕身。春採枸杞葉，名天精草；夏採花，名長生草；秋採子，名枸杞子；冬採根，名地骨皮。並陰乾，用無灰酒浸一夜，曬露四十九晝夜，取日精月華氣，待乾為末，煉蜜丸如彈子大。每早晚各用一丸細嚼，以隔夜百沸湯下。此藥採無刺味甜者，其有刺者服之無益。","GOJI BERRY
 
 [Taste and nature] Sweet; neutral.
 
@@ -4916,7 +5517,12 @@ UI_BOOK_ENTRY_BODY_GOU_TENG,"钩藤（钓藤）
 【毒性】無毒。
 【歸經】歸肝、心包經。
 【主治】息風定驚，清熱平肝。
-【釋名】弘景曰︰出建平。亦作吊藤。療小兒，不入余...","UNCARIA HOOK
+【釋名】弘景曰︰出建平。亦作吊藤。療小兒，不入餘方。
+
+時珍曰︰其刺曲如釣鈎，故名。或作吊，從簡耳。
+
+【發明】
+時珍曰︰釣藤，手足厥陰藥也。足厥陰主風，手厥陰主火。 驚癇眩暈，皆肝風相火之病。釣藤通心包於肝木，風靜火息，則諸證自除。或雲︰入數寸","UNCARIA HOOK
 
 [Taste and nature] Sweet; cool.
 
@@ -4988,7 +5594,17 @@ UI_BOOK_ENTRY_BODY_GUA_LOU_REN,"瓜蒌仁（栝蒌）
 【毒性】無毒。
 【歸經】歸肺、胃、大腸經。
 【主治】潤肺化痰，滑腸通便。
-【釋名】果裸（音裸）、栝蔞（《綱目》）、天...","TRICHOSANTHES SEED
+【釋名】果裸（音裸）、栝蔞（《綱目》）、天瓜（《別錄》）、黃瓜（《別錄》）、地蔞（《本經》）、澤姑（《別錄》）
+根名白藥（《圖經》）、天花粉（《圖經》）、瑞雪（《趙宜真》）。
+
+時珍曰︰裸，與蓏同。
+
+許慎雲︰木上曰果，地下曰蓏。此物蔓生附木，故得兼名。《詩》雲︰果裸之實，亦施於宇，是矣。栝蔞，即果裸二字音轉也，亦作𤫱𤬏，後人又轉為栝蔞，愈轉愈失其真矣。古者瓜姑同音，故有澤姑之名。齊人謂之天瓜，象形也。雷 《炮炙論》，以圓者為栝，長者為蔞，亦出牽強，但分雌雄可也。其根作粉，潔白如雪，故謂之天花粉。蘇頌《圖經》重出天花粉，謬矣，今削之。
+
+【發明】
+震亨曰︰栝蔞實治胸痹者，以其味甘性潤。甘能補肺，潤能降氣。胸中有痰者，乃肺受火逼，失其降下之令。今得甘緩潤下之助，則痰自降，宜其為治嗽之要藥也。且又能洗滌胸膈中垢膩鬱熱，為治消渴之神藥。
+
+時珍曰︰張仲景治胸痹痛引心背，咳唾喘息，及結胸滿痛，皆用栝蔞實。乃取其甘寒不犯胃氣，能降上焦之火，使痰氣下降也。成無己不知此意，乃雲苦寒以瀉熱。蓋不嘗其味原不苦，而隨文傅會爾。","TRICHOSANTHES SEED
 
 [Taste and nature] Sweet; cold.
 
@@ -5061,7 +5677,16 @@ UI_BOOK_ENTRY_BODY_GUI_BAN_JIAO,"龟板胶（水龟）
 【毒性】無毒。
 【歸經】歸 肝、腎、心經。
 【主治】滋陰潛陽，益腎健骨，養血補心，涼血止血。
-【釋名】神屋（《本經》...","TORTOISE SHELL GELATIN
+【釋名】神屋（《本經》）、敗龜版（《日華》）、敗將（《日華》）、漏天機（《圖經》）。
+
+時珍曰︰並隱名也。
+
+【發明】
+陰之物，稟北方之氣而生，故能補陰、治血、治勞也。
+
+時珍曰︰龜、鹿皆靈而有壽。龜首常藏向腹，能通任脈。故取其甲以補心、補腎、補血，皆以養陰也。鹿鼻常反向尾，能通督脈，故取其角以補命、補精、補氣，皆以養陽也。
+
+乃物理之玄微，神工之能事。觀龜甲所主諸病，皆屬陰虛血弱，自可心解矣。又見鱉甲。","TORTOISE SHELL GELATIN
 
 [Taste and nature] Sweet and salty; cool.
 
@@ -5132,7 +5757,18 @@ UI_BOOK_ENTRY_BODY_GUI_ZHI,"桂枝（桂）
 【毒性】無毒。
 【歸經】歸心、肺、膀胱經。
 【主治】發汗解肌，溫通經脈，助陽化氣。
-【釋名】時珍曰︰按︰範成大《桂海...","CINNAMON TWIG
+【釋名】時珍曰︰按︰範成大《桂海志》雲︰凡木葉心皆一縱理，獨桂有兩道如圭形，故字從圭。
+
+陸佃《埤雅》雲︰桂猶圭也。宣導百藥，為之先聘通使，如執圭之使也。《爾雅》謂之梫者，能侵害他木也。故《呂氏春秋》雲︰桂枝之下無雜木。《雷公炮炙論》雲︰桂釘木根，其木即死，是也。桂即牡桂之濃而辛烈者，牡桂即桂之薄而味淡者，《別錄》不當重出，今並為一，而分目於下。
+
+【發明】
+宗奭曰︰桂甘、辛，大熱。《素問》雲︰辛甘發散為陽。故漢張仲景桂枝湯治傷寒表虛，皆須此藥，正合辛甘發散之意。本草三種之桂，不用牡桂、菌桂者，此二種性只於溫，不可以治風寒之病也。然《本經》只言桂，仲景又言桂枝者，取枝上皮也。
+
+好古曰︰或問︰本草言桂能止煩出汗，而張仲景治傷寒有當發汗，凡數處，皆用桂枝湯。又雲無汗不得服桂枝。汗家不得重發汗，若用桂枝是重發其汗。汗多者用桂枝甘草湯，此又用桂枝閉汗也。一藥二用，與本草之義相通否乎？曰︰本草言桂辛甘大熱，能宣導百藥，通血脈，止煩出汗，是調其血而汗自出也。仲景雲︰太陽中風，陰弱者，汗自出。衛實營虛，故發熱汗出。又雲太陽病發熱汗出者，此為營弱衛強，陰虛陽必湊之，故皆用桂枝發其汗。此乃調其營氣，則衛氣自和，風邪無所容，遂自汗而解。非桂枝能開腠理，發出其汗也。汗多用桂枝者，以之調和營衛，則邪從汗出而汗自止，非桂枝能閉汗孔也。昧者不知出汗、閉汗之意，遇傷寒無汗者亦用桂枝，誤之甚矣。桂枝湯下發汗字，當認作出字，汗自然發出，非若麻黃能開腠理，發出其汗也。其治虛汗，亦當逆察其意可也。
+
+成無己曰︰桂枝本為解肌。若太陽中風，腠理致密，營衛邪實，津液禁固，其脈浮緊，發熱汗不出者，不可與此必也。皮膚疏洩，自汗，脈浮緩，風邪乾於衛氣者，乃可投之。發散以辛甘為主，桂枝辛熱，故以為君。而以芍藥為臣、甘草為佐者，風淫所勝，平以辛苦，以甘緩之，以酸收之也。以姜、棗為使者，辛甘能發散，而又用其行脾胃之津液而和營衛，不專於發散也。故麻黃湯不用姜、棗，專於發汗，不待行其津液也。
+
+時珍曰︰麻黃遍徹皮毛，故專於發汗而寒邪散，肺主皮毛，辛走肺也。桂枝透達營衛，故能解肌而風邪去，脾主營，肺主衛，甘走脾，辛走肺也。肉桂下行，益火之原，此東垣所謂腎苦燥，急食辛以潤之，開腠理，致津液，通其氣者也。《聖惠方》言︰桂心入心，引血化汗化膿。蓋手少陰君火、厥陰相火，與命門同氣者也。《別錄》雲桂通血脈是矣。","CINNAMON TWIG
 
 [Taste and nature] Acrid and sweet; warm.
 
@@ -5207,7 +5843,10 @@ UI_BOOK_ENTRY_BODY_HONG_HUA,"红花（红蓝花）
 【毒性】無毒
 【歸經】歸心、肝經。
 【主治】活血通經，散瘀止痛
-【釋名】紅花（《開寶》）、黃藍頌曰︰其花紅色，葉頗似...","SAFFLOWER
+【釋名】紅花（《開寶》）、黃藍頌曰︰其花紅色，葉頗似藍，故有藍名。
+
+【發明】
+時珍曰︰血生於心包，藏於肝，屬於衝任。紅花汁與之同類，故能行男子血脈，通女子經水。多則行血，少則養血。按《養 漫筆》雲︰新昌徐氏婦，病產暈已死，但胸膈 微熱。有名醫陸氏曰︰血悶也。得紅花數十斤，乃可活。遂亟購得，以大鍋煮湯，盛三桶於窗格之下，舁婦寢其上熏之，湯冷再加。有頃指動，半日乃蘇。按此亦得唐許胤宗，以黃湯熏柳太后風病之法也。","SAFFLOWER
 
 [Taste and nature] Acrid; warm.
 
@@ -5280,7 +5919,22 @@ UI_BOOK_ENTRY_BODY_HOU_PO,"厚朴（浓朴）
 【毒性】無毒。
 【歸經】歸脾、胃、肺、大腸經。
 【主治】燥濕消痰，下氣除滿。
-【釋名】烈樸（《日華》）、赤樸（《別...","MAGNOLIA BARK
+【釋名】烈樸（《日華》）、赤樸（《別錄》）、濃皮（同）、重皮（《廣雅》），樹名榛（《別錄》），子名逐折（《別錄》）。
+
+時珍曰︰其木質樸而皮濃，味辛烈而色紫赤，故有濃樸、烈、赤諸名。
+
+頌曰︰《廣雅》謂之重皮，方書或作濃皮也。
+
+【發明】
+宗奭曰：厚朴，平胃散中用，最調中。至今此藥盛行，既能溫脾胃，又能走冷氣，為世所須也。
+
+元素曰：厚朴之用有三：平胃，一也；去腹脹，二也；孕婦忌之，三也。雖除腹脹，若虛弱人，宜斟酌用之，誤服脫人元氣。惟寒脹大熱藥中兼用，乃結者散之之神藥也。
+
+震亨曰：厚朴屬土，有火。其氣溫，能瀉胃中之實也，平胃散用之。佐以蒼朮，正為瀉胃中之濕，平胃土之太過，以致於中和而已，非謂溫補脾胃也。習以成俗，皆謂之補，哀哉！其治腹脹者，因其味辛以提其滯氣，滯行則宜去之。若氣實人，誤服參、耆藥多補氣，脹悶或作喘，宜此瀉之。
+
+好古曰：《本草》言厚朴治中風傷寒頭痛，溫中益氣，消痰下氣，厚腸胃，去腹滿，果洩氣乎？果益氣乎？蓋與枳實、大黃同用，則能洩實滿，所謂消痰下氣是也。若與橘皮、蒼朮同用，則能除濕滿，所謂溫中益氣是也。與解利藥同用，則治傷寒頭痛；與瀉痢藥同用，則厚腸胃。大抵其性味苦溫，用苦則洩，用溫則補也。故成無己雲：厚朴之苦，以洩腹滿。
+
+杲曰：苦能下氣，故洩實滿；溫能益氣，故散濕滿。","MAGNOLIA BARK
 
 [Taste and nature] Bitter and acrid; warm.
 
@@ -5380,7 +6034,37 @@ UI_BOOK_ENTRY_BODY_HUANG_LIAN,"黄连
 【毒性】無毒。
 【歸經】歸心、脾、胃、肝、膽、大腸經。
 【主治】清熱燥濕，瀉火解毒。
-【釋名】王連（《本經》）、支連（《藥性》...","COPTIS RHIZOME
+【釋名】王連（《本經》）、支連（《藥性》）。
+
+時珍曰：其根連珠而色黃，故名。
+
+【發明】元素曰：黃連性寒味苦，氣味俱濃，可升可降，陰中陽也，入手少陰經。其用有六：瀉心臟火，一也；去中焦濕熱，二也；諸瘡必用，三也；去風濕，四也；赤眼暴發，五也；止中部見血，六也。張仲景治九種心下痞，五等瀉心湯，皆用之。
+
+成無己曰：苦入心，寒勝熱，黃連、大黃之苦寒，以導心下之虛熱。蛔得甘則動，得苦 則安，黃連、黃柏之苦，以安蛔也。
+
+好古曰：黃連苦燥，苦入心，火就燥。瀉心者，其實瀉脾也，實則瀉其子也。
+
+震亨曰：黃連，去中焦濕熱而瀉心火。若脾胃氣虛，不能轉運者，則以茯苓、黃芩代之。以豬膽汁拌炒，佐以龍膽草，則大瀉肝膽之火。下痢胃口熱禁口者，用黃連、人參煎湯，終日呷之，如吐再強飲，但得一呷下嚥便好。
+
+劉完素曰：古方以黃連為治痢之最。蓋治痢惟宜辛苦寒藥，辛能發散開通鬱結，苦能燥 濕，寒能勝熱，使氣宣平而已。諸苦寒藥多洩，惟黃連、黃柏性冷而燥，能降火去濕而止瀉痢，故治痢以之為君。
+
+宗奭曰：今人多用黃連治痢，蓋執以苦燥之義。下俚但見腸虛滲洩，微似有血，便即用之，又罔顧寒熱多少，惟欲盡劑，由是多致危困。若氣實初病，熱多血痢，服之便止，不必 盡劑。虛而冷者，慎勿輕用。
+
+杲曰：諸痛癢瘡瘍，皆屬心火。凡諸瘡宜以黃連、當歸為君，甘草、黃芩為佐。凡眼暴 發赤腫，痛不可忍者，宜黃連、當歸以酒浸煎之。宿食不消，心下痞滿者，須用黃連、枳實。
+
+頌曰：黃連治目方多，而羊肝丸尤奇異。今醫家洗眼，以黃連、當歸、芍藥等分，用雪 水或甜水煎湯熱洗之，冷即再溫，甚益眼目。但是風毒赤目花翳，用之無不神效。蓋眼目之病，皆是血脈凝滯使然，故以行血藥合黃連治之。血得熱則行，故乘熱洗也。
+
+韓 曰：火分之病，黃連為主，不但瀉心火，而與芩、柏諸苦藥例稱者比也。目疾，入以人乳浸蒸，或點或服之。生用為君，佐以官桂少許，煎百沸，入蜜空心服之，能使心腎 交於頃刻。入五苓、滑石，大治夢遺。以黃土、姜汁、酒、蜜四炒為君，以使君子為臣，白芍藥酒煮為佐，廣木香為使，治小兒五疳。以茱萸炒者，加木香等分，生大黃倍之，水丸，治五痢。此皆得制方之法也。
+
+時珍曰：黃連，治目及痢為要藥。古方治痢：香連丸，用黃連、木香；姜連散，用乾薑、黃連；變通丸，用黃連、茱萸；姜黃散，用黃連、生薑。治消渴，用酒蒸黃連；治伏暑，用酒煮黃連；治下血，用黃連、大蒜；治肝火，用黃連、茱萸；治口瘡，用黃連、細辛。皆是一冷一熱，一陰一陽，寒因熱用，熱因寒用，君臣相佐，陰陽相濟，最得制方之妙，所以有成功而無偏勝之害也。
+
+弘景曰：俗方多用黃連治痢及渴，道方服食長生。
+
+慎微曰：劉宋王微《黃連贊》雲：黃連味苦，左右相因。斷涼滌暑，闡命輕身。縉雲昔御，飛蹕上 。不行而至，吾聞其人。又梁江淹《黃連頌》雲：黃連上草，丹砂之次。御孽 辟妖，長靈久視。驂龍行天，馴馬匝地。鴻飛以儀，順道則利。
+
+時珍曰：《本經》、《別錄》並無黃連久服長生之說，惟陶弘景言道方久服長生。
+
+《神仙傳》載封君達、黑穴公，並服黃連五十年得仙。竊謂黃連大苦大寒之藥，用之降火燥 濕，中病即當止。豈可久服，使肅殺之令常行，而伐其生發衝和之氣乎？《素問》載岐伯言 ：五味入胃，各歸所喜攻。久而增氣，物化之常也。氣增而久，夭之由也。王冰注雲：酸入肝為溫，苦入心為熱，辛入肺為清，咸入腎為寒，甘入脾為至陰而四氣兼之，皆增其味而益其氣，故各從本髒之氣為用。所以久服黃連、苦參反熱，從火化也，余味皆然。久則臟氣偏 勝，即有偏絕，則有暴夭之道。是以絕粒服餌之人不暴亡者，無五味偏助也。又秦觀與喬希 聖論黃連書雲：聞公以眼疾餌黃連，至十數兩猶不巳，殆不可也。醫經有久服黃連、苦參反 熱之說。此雖大寒，其味至苦，入胃則先歸於心，久而不己，心火偏勝則熱，乃其理也。況 眼疾本於肝熱，肝與心為子母。心火也，肝亦火也，腎孤髒也，人患一水不勝二火。豈可久 服苦藥，使心有所偏勝，是以火救火，其可乎？秦公此書，蓋因王公之說而推詳之也。我明荊端王素多火病，醫令服金花丸，乃芩、連、梔、柏四味，餌至數年，其火愈熾，遂至內障 喪明。觀此，則寒苦之藥，不但使人不能長生，久則氣增偏勝，速夭之由矣。當以《素問》 之言為法，陶氏道書之說，皆謬談也。楊士瀛雲：黃連能去心竅惡血。","COPTIS RHIZOME
 
 [Taste and nature] Bitter; very cold.
 
@@ -5483,7 +6167,40 @@ UI_BOOK_ENTRY_BODY_HUANG_QI,"黄芪（黄耆）
 【氣味】味甘，性微溫。
 【毒性】無毒。
 【歸經】歸脾、肺經。
-【主治】補氣升陽，固表止汗，利水消腫，生津養血，行滯通痹，托毒排膿，斂瘡生肌。...","ASTRAGALUS ROOT
+【主治】補氣升陽，固表止汗，利水消腫，生津養血，行滯通痹，托毒排膿，斂瘡生肌。
+【釋名】黃耆（《綱目》）、戴糝（《本經》）、戴椹（《別錄》，又名獨椹）、芰草（《別錄》，又名蜀脂）、百本（《別錄》）、王孫（《藥性論》）。
+
+時珍曰︰耆，長也。黃耆色黃，為補藥之長，故名。今俗通作黃芪。或作蓍者，非矣。蓍，乃蓍龜之蓍，音屍。王孫與牡蒙同名異物。
+
+【發明】弘景曰︰出隴西者，溫補；出白水者，冷補。又有赤色者，可作膏，用消癰腫。
+
+藏器曰︰虛而客熱，用白水黃耆；虛而客冷，用隴西黃耆。
+
+大明曰︰黃耆，藥中補益，呼為羊肉；白水耆，涼，無毒，排膿治血，及煩悶熱毒骨蒸勞；赤水耆，涼，無毒，治血退熱毒，餘功並同；木耆，涼，無毒，治煩排膿之力，微於黃，遇闕即倍用之。
+
+元素曰︰黃耆甘溫純陽，其用有五︰補諸虛不足，一也；益元氣，二也；壯脾胃，三也；去肌熱，四也；排膿止痛，活血生血，內托陰疽，為瘡家聖藥，五也。又曰︰補五臟諸虛，治脈弦自汗，瀉陰火，去虛熱，無汗，則發之；有汗，則止之。
+
+好古曰︰黃耆，治氣虛盜汗，並自汗及膚痛，是皮表之藥；治咯血，柔脾胃，是中州之藥；治傷寒尺脈不至，補腎臟元氣，是里藥。乃上、中、下、內、外、三焦之藥也。
+
+杲曰︰《靈樞》雲衛氣者，所以溫分肉而充皮膚，肥腠理而司開闔。黃耆既補三焦，實衛氣，與桂同功；特比桂甘平，不辛熱為異耳。但桂則通血脈，能破血而實衛氣， 則益氣也。又黃耆與人參、甘草三味，為除躁熱肌熱之聖藥。脾胃一虛，肺氣先絕，必用黃耆溫分肉，益皮毛，實腠理，不令汗出，以益元氣而補三焦。
+
+震亨曰︰黃耆補元氣，肥白而多汗者，為宜；若面黑形實而瘦者，服之，令人胸滿，宜以三拗湯瀉之。
+
+宗奭曰︰防風、黃耆，世多相須而用。唐許胤宗初仕陳為新蔡王外兵參軍時，柳太后病風不能言，脈沈而口噤。
+
+胤宗曰︰既不能下藥，宜湯氣蒸之，藥入腠理，周時可瘥。乃造黃耆防風湯數斛，置於床下，氣如煙霧，其夕便得語也。
+
+杲曰︰防風能制黃耆，黃耆得防風其功愈大，乃相畏而相使也。
+
+震亨曰︰人之口通乎地，鼻通乎天。口以養陰，鼻以養陽。天主清，故鼻不受有形而受無形；地主濁，故口受有形而兼乎無形。柳太后之病不言，若以有形之湯，緩不及事；今投以二物，湯氣滿室，則口鼻俱受。非智者通神，不可回生也。
+
+杲曰︰小兒外物驚，宜用黃連安神丸鎮心藥。若脾胃寒濕，嘔吐腹痛，瀉痢青白，宜用益黃散藥。如脾胃伏火，勞役不足之證，及服巴豆之類，胃虛而成慢驚者，用益黃、理中之藥，必傷人命。當於心經中，以甘溫補土之源，更於脾土中，以甘寒瀉火，以酸涼補金，使金旺火衰，風木自平矣。今立黃耆湯瀉火補金益土，為神治之法。用炙黃耆二錢，人參一錢，炙甘草五分，白芍藥五分，水一大盞，煎半盞，溫服。
+
+機曰︰蕭山魏直著《博愛心鑒》三卷，言小兒痘瘡，惟有順、逆、險三證。順者為吉，不用藥。逆者為凶，不必用藥。惟險乃悔吝之象，當以藥轉危為安，宜用保元東加減主之。
+
+此方原出東垣，治慢驚土衰火旺之法。今借而治痘，以其內固營血，外護衛氣，滋助陰陽，作為膿血，其證雖異，其理則同。去白芍藥，加生薑，改名曰保元湯。炙黃耆三錢，人參二錢，炙甘草一錢，生薑一片，水煎服之。險證者，初出圓暈乾紅少潤也，漿長光澤，頂陷不起也；既出雖起慘色不明也，漿行色灰不榮也，漿定光潤不消也，漿老濕潤不斂也，結痂而胃弱內虛也，痂落而口渴不食也，痂後生癰腫也，癰腫潰而斂遲也。凡有諸症，並宜此湯。或加芎 ，加官桂，加糯米以助之。詳見本書。
+
+嘉謨曰︰人參補中，黃耆實表。凡內傷脾胃，發熱惡寒，吐洩怠臥，脹滿痞塞，神短脈微者，當以人參為君，黃耆為臣；若表虛自汗亡陽，潰瘍痘疹陰瘡者，當以黃耆為君，人參為臣，不可執一也。","ASTRAGALUS ROOT
 
 [Taste and nature] Sweet; slightly warm.
 
@@ -5569,7 +6286,21 @@ UI_BOOK_ENTRY_BODY_HUANG_QIN,"黄芩
 【毒性】無毒。
 【歸經】歸肺、膽、脾、大腸、小腸經。
 【主治】清熱燥濕，瀉火解毒，止血，安胎。
-【釋名】腐腸（《本經》）、空腸...","SCUTELLARIA ROOT
+【釋名】腐腸（《本經》）、空腸（《別錄》）、內虛（《別錄》）、妒婦（《吳普》）、經芩 （《別錄》）、黃文（《別錄》）、印頭（《吳普》）、苦督郵（《記事》），內實者名子芩（弘景）、條芩（《綱目》）、 尾芩（《唐本》）、鼠尾芩（《綱目》）。
+
+弘景曰：圓者，名子芩；破者，名宿芩，其腹中皆爛，故名腐腸。
+
+時珍曰：芩，《說文》作 ，謂其色黃也。或雲芩者，黔也，黔乃黃黑之色也。宿芩乃舊根，多中空，外黃內黑，即今所謂片芩，故又有腐腸、妒婦諸名。妒 婦心黯，故以比之。子芩乃新根，多內實，即今所謂條芩。或雲西芩多中空而色黔，北芩多內實而深黃。
+
+【發明】杲曰：黃芩之中枯而飄者，瀉肺火，利氣，消痰，除風熱，清肌表之熱；細實而堅者，瀉大腸火，養陰退陽，補膀胱寒水，滋其化源。高下之分與枳實、枳殼同例。
+
+元素曰：黃芩之用有九：瀉肺熱，一也；上焦皮膚風熱風濕，二也；去諸熱，三也；利胸中氣，四也；消痰膈，五也；除脾經諸濕，六也；夏月須用，七也；婦人產後養陰退陽，八也；安胎，九也。酒炒上行，主上部積血，非此不能除。下痢膿血，腹痛後重，身熱久不能止者，與芍藥、甘草同用之。凡諸瘡痛不可忍者，宜芩、連苦寒之藥，詳上下，分身、梢及引經藥用之。
+
+震亨曰：黃芩降痰，假其降火也。凡去上焦濕熱，須以酒洗過用。片芩瀉肺火，須用桑白皮佐之。若肺虛者，多用則傷肺，必先以天門冬保定肺氣而後用之。黃芩、白朮乃安胎聖藥，俗以黃芩為寒而不敢用，蓋不知胎孕宜清熱涼血，血不妄行，乃能養胎。黃芩乃上、中二焦藥，能降火下行，白朮能補脾也。
+
+羅天益曰：肺主氣，熱傷氣，故身體麻木。又五臭入肺為腥，故黃芩之苦寒，能瀉火、補氣而利肺，治喉中腥臭。頌曰：張仲景治傷寒心下痞滿，瀉心湯。凡四方皆用黃芩，以其主諸熱、利小腸故也。又太陽病下之利不止，喘而汗出者，有葛根黃芩黃連湯，及主妊娠安胎散，亦多用之。
+
+時珍曰：潔古張氏言：黃芩瀉肺火，治脾濕；東垣李氏言：片芩治肺火，條芩治大腸火；丹溪朱氏言：黃芩治上中二焦火；而張仲景治少陽證小柴胡湯，太陽少陽合病下利黃芩湯，少陽證下後心下滿而不痛瀉心湯，並用之；成無己言黃芩苦而入心，洩痞熱。是黃芩能入手少陰陽明、手足太陰少陽六經矣。蓋黃芩氣寒味苦，色黃帶綠，苦入心，寒勝熱，瀉心火，治脾之濕熱，一則金不受刑，一則胃火不流入肺，即所以救肺也。肺虛不宜者，苦寒傷脾胃，損其母也。少陽之證，寒熱胸脅痞滿，默默不欲飲食，心煩嘔，或渴或痞，或小便不利。雖曰病在半表半里，而胸脅痞滿，實兼心肺上焦之邪。心煩喜嘔，默默不欲飲食，又兼脾胃中焦之證。故用黃芩以治手足少陽相火，黃芩亦少陽本經藥也。成無己《注傷寒論》，但雲柴胡、黃芩之苦，以發傳邪之熱；芍藥、黃芩之苦，以堅斂腸胃之氣，殊昧其治火之妙。楊士瀛《直指方》雲：柴胡退熱，不及黃芩。蓋亦不知柴胡之退熱，乃苦以發之，散火之標也；黃芩之退熱，乃寒能勝熱，折火之本也。仲景又雲：少陽證腹中痛者，去黃芩，加芍藥。心下悸，小便不利者，去黃芩，加茯苓。似與《別錄》治少腹絞痛、利小腸之文不合。成氏言黃芩寒中，苦能堅腎，故去之，蓋亦不然。至此當以意逆之，辨以脈證可也。若因飲寒受寒，腹中痛，及飲水心下悸，小便不利，而脈不數者，是里無熱證，則黃芩不可用也。若熱厥腹痛，肺熱而小便不利者，黃芩其可不用乎？故善觀書者，先求之理，毋徒泥其文。昔有人素多酒欲，病少腹絞痛不可忍，小便如淋，諸藥不效。偶用黃芩、木通、甘草三味煎服，遂止。王海藏言有人因虛服附子藥多，病小便秘，服芩、連藥而愈。此皆熱厥之痛也，學人其可拘乎？予年二十時，因感冒咳嗽既久，且犯戒，遂病骨蒸發熱，膚如火燎，每日吐痰碗許，暑月煩渴，寢食幾廢，六脈浮洪。遍服柴胡、麥門冬、荊瀝諸藥，月餘益劇，皆以為必死矣。先君偶思李東垣治肺熱如火燎，煩躁引飲而晝盛者，氣分熱也。宜一味黃芩湯，以瀉肺經氣分之火。遂按方用片芩一兩，水二鐘，煎一鐘，頓服。次日身熱盡退，而痰嗽皆愈。藥中肯綮，如鼓應桴，醫中之妙，有如此哉。","SCUTELLARIA ROOT
 
 [Taste and nature] Bitter; cold.
 
@@ -5650,7 +6381,19 @@ UI_BOOK_ENTRY_BODY_HUI_XIANG,"茴香
 【毒性】無毒。
 【歸經】歸肝、腎、脾、胃經。
 【主治】散寒止痛，理氣和胃。
-【釋名】茴香（《圖經》），八月珠（《侯氏藥譜》）。...","FENNEL
+【釋名】茴香（《圖經》），八月珠（《侯氏藥譜》）。
+
+頌曰： 香，北人呼為茴香，聲相近也。
+
+思邈曰：煮臭肉，下少許，即無臭氣，臭醬入末亦香，故曰茴香。
+
+時珍曰：俚俗多懷之衿衽咀嚼，恐 香之名，或以此也。
+
+【發明】詵曰：茴香，國人重之，雲有助陽道，未得其方法也。
+
+好古曰：茴香，本治膀胱藥，以其先丙，故曰小腸也，能潤丙燥；以其先戊，故從丙至壬，又手、足少陰二藥，以開上下經之通道，所以壬與丙交也。
+
+時珍曰：小茴香性平，理氣開胃，夏月祛蠅辟臭，食料宜之。大茴香性熱，多食傷目發瘡，食料不宜過用。古方有去鈴丸：用茴香二兩，連皮生薑四兩，同入坩器內醃一伏時，慢火炒之，入鹽一兩，為末，糊丸梧子大。每服三、五十丸，空心鹽酒下。此方本治脾胃虛弱病。茴香得鹽則引入腎經，發出邪氣。腎不受邪，病自不生也。亦治小腸疝氣有效。","FENNEL
 
 [Taste and nature] Acrid; warm.
 
@@ -5727,7 +6470,12 @@ UI_BOOK_ENTRY_BODY_HUO_XIANG,"藿香
 【主治】芳香化濕，和中止嘔，發表解暑。
 【釋名】兜婁婆香（《楞嚴經》）。
 
-時珍曰...","PATCHOULI
+時珍曰︰豆葉曰藿，其葉似之，故名。《楞嚴經》雲︰壇前以兜婁婆香煎水洗浴。即此。《法華經》謂之多摩羅跋香，《金光明經》謂之鉢怛羅香，皆兜婁二字梵言也。《涅槃》又謂之迦算香。
+
+【發明】
+杲曰︰芳香之氣助脾胃，故藿香能止嘔逆，進飲食。
+
+好古曰︰手、足太陰之藥。 故入順氣烏藥散，則補肺；入黃 、四君子湯，則補脾也。","PATCHOULI
 
 [Taste and nature] Acrid; slightly warm.
 
@@ -5802,7 +6550,14 @@ UI_BOOK_ENTRY_BODY_JI_ZI_HUANG,"鸡子黄
 【主治】滋陰養血，潤燥息風，清心安神，養胃止渴。
 【釋名】燭夜（《古今志》）。
 
-...","EGG YOLK
+時珍曰︰按徐鉉雲︰“雞者稽也，能稽時也。”
+
+《廣志》雲︰“大曰蜀，小曰荊，雛曰𪇗 。
+
+《梵書》曰︰“雞曰鳩七吒 。”
+
+【發明】
+時珍曰︰雞子黃，氣味俱濃，陰中之陰，故能補形。昔人謂其與阿膠同功，正此意也。其治嘔逆諸瘡，則取其除熱引蟲而已。頌曰︰雞子入藥最多，而發煎方特奇。劉禹錫《傳信方》雲︰亂發雞子膏，治孩子熱瘡。用雞子五枚，去白取黃，亂發如雞子大，相和，於鐵銚中炭火熬之。初甚乾，少頃即發焦，乃有液出。旋取置碗中，以液盡為度。取塗瘡上，即以苦參末粉之。頃在武陵生子，蓐內便有熱瘡，塗諸藥無益，而日益劇，蔓延半身，晝夜號啼，不乳不睡。因閱本草發 條雲︰合雞子黃煎之，消為水，療小兒驚熱、下痢。注雲︰俗中嫗母為小兒作雞子煎，用發雜熬之，良久得汁，與小兒服，去痰熱，主百病。又雞子條雲︰療火瘡。因是用之，果如神效也。","EGG YOLK
 
 [Taste and nature] Sweet; neutral.
 
@@ -5877,7 +6632,18 @@ UI_BOOK_ENTRY_BODY_JIE_GENG,"桔梗
 【毒性】小毒。
 【歸經】歸肺經。
 【主治】宣肺利咽，祛痰排膿。
-【釋名】白藥（《別錄》）、梗草（《別錄》）、薺 （《本經》...","PLATYCODON ROOT
+【釋名】白藥（《別錄》）、梗草（《別錄》）、薺 （《本經》）。
+
+時珍曰︰此草之根結實而梗直，故名。《吳普本草》一名利如，一名符扈，一名房圖，方書並無見，蓋亦瘦辭爾。桔梗、薺 乃一類，有甜、苦二種，故《本經》桔梗一名薺 ，而今俗呼薺 為甜桔梗也。至《別錄》始出薺 條，分為二物，然其性味功用皆不同，當以《別錄》為是。
+
+【發明】
+好古曰︰桔梗氣微溫，味苦辛，味濃氣輕，陽中之陰，升也。入手太陰肺經氣分及足少陰經。
+
+元素曰︰桔梗清肺氣，利咽喉，其色白，故為肺部引經。
+
+與甘草同行，為舟楫之劑。如大黃苦洩峻下之藥，欲引至胸中至高之分成功，須用辛甘之劑升之。譬如鐵石入江，非舟楫不載。所以諸藥有此一味，不能下沈也。
+
+時珍曰︰朱肱《活人書》治胸中痞滿不痛，用桔梗、枳殼，取其通肺利膈下氣也。張仲景《傷寒論》治寒實結胸，用桔梗、貝母、巴豆，取其溫中消谷破積也。又治肺癰唾膿，用桔梗、甘草，取其苦辛清肺，甘溫瀉火，又能排膿血、補內漏也。其治少陰證二、三日咽痛，亦用桔梗、甘草，取其苦辛散寒，甘平除熱，合而用之，能調寒熱也。後人易名甘桔湯，通治咽喉口舌諸病。宋仁宗加荊芥、防風、連翹，遂名如聖湯，極言其驗也。按︰王好古《醫壘元戎》載之頗詳，雲失音，加訶子；聲不出，加半夏；上氣，加陳皮；涎嗽，加知母、貝母；咳渴，加五味子；酒毒，加葛根；少氣，加人參；嘔，加半夏、生薑；唾膿血，加紫菀；肺痿，加阿膠；胸膈不利，加枳殼；心胸痞滿，加枳實；目赤，加梔子、大黃；面腫，加茯苓；膚痛，加黃耆；發斑，加防風、荊芥；疫毒，加鼠粘子、大黃；不得眠，加梔子。震亨曰︰乾咳嗽，乃痰火之邪鬱在肺中，宜苦梗以開之；痢疾腹痛，乃肺金之氣鬱在大腸，亦宜苦梗開之，後用痢藥。此藥能開提氣血，故氣藥中宜用之。","PLATYCODON ROOT
 
 [Taste and nature] Bitter and acrid; neutral.
 
@@ -5955,7 +6721,15 @@ UI_BOOK_ENTRY_BODY_JIN_YIN_HUA,"金银花（忍冬）
 【毒性】無毒。
 【歸經】歸肺、心、胃經。
 【主治】清熱解毒，疏散風熱。
-【釋名】金銀藤（《綱目》）、鴛鴦藤（《綱目》...","HONEYSUCKLE FLOWER
+【釋名】金銀藤（《綱目》）、鴛鴦藤（《綱目》）、鷺鷥藤（《綱目》）、老翁須（《綱目》）、左纏藤（《綱目》）、金釵股（《綱目》）、通靈草（《土宿》）、蜜桶藤（《土宿》）。
+
+弘景曰︰處處有之。藤生，凌冬不凋，故名忍冬。
+
+時珍曰︰其花長瓣垂須，黃白相半，而藤左纏，故有金銀、鴛鴦以下諸名。金釵股，貴其功也。土宿真君雲︰蜜桶藤，陰草也。取汁能伏硫制汞，故有通靈之稱。
+
+【發明】弘景曰︰忍冬，煮汁釀酒飲，補虛療風。此既長年益壽，可常採服，而《仙經》少用。凡易得之草，人多不肯為之，更求難得者，貴遠賤近，庸人之情也。
+
+時珍曰︰忍冬，莖葉及花，功用皆同。昔人稱其治風除脹，解痢逐屍為要藥，而後世不復知用，後世稱其消腫散毒治瘡為要藥，而昔人並未言及。乃知古今之理，萬變不同，未可一轍論也。按︰陳自明《外科精要》雲︰忍冬酒，治癰疽發背，初發便當服此，其效甚奇，勝於紅內消。洪內翰邁、沈內翰括諸方，所載甚詳。如瘍醫丹陽僧、江西僧鑒清、金陵王琪、王尉子駿、海州劉秀才純臣等，所載療癰疽發背經效奇方，皆是此物。故張相公雲︰誰知至賤之中，乃有殊常之效，正此類也。","HONEYSUCKLE FLOWER
 
 [Taste and nature] Sweet; cold.
 
@@ -6040,7 +6814,26 @@ UI_BOOK_ENTRY_BODY_JING_JIE,"荆芥（假苏）
 【毒性】無毒。
 【歸經】歸肺、肝經。
 【主治】解表散風，透疹，利咽消腫，止血。
-【釋名】薑芥（《別錄》）、荊芥（《吳...","SCHIZONEPETA HERB
+【釋名】姜芥（《別錄》）、荊芥（《吳普》）、鼠蓂（《本經》）。
+
+弘景曰︰假蘇方藥不復用。
+
+恭曰︰此即菜中荊芥也，姜芥聲訛爾。先居草部，今錄入菜部。
+
+士良曰︰荊芥本草呼為假蘇。假蘇又別是一物。葉銳圓，多野生，以香氣似蘇，故呼為蘇。
+
+頌曰︰醫官陳巽言︰江左人謂假蘇、荊芥實兩物。蘇恭以本草一名姜芥，荊姜聲訛，謂為荊芥，非矣。
+
+時珍曰︰按《吳普本草》雲︰假蘇一名荊芥，葉似落藜而細，蜀中生啖之。普乃東漢末 人，去《別錄》時未遠，其言當不謬，故唐人蘇恭祖其說。而陳士良、蘇頌復啓為兩物之疑，亦臆說爾。曰蘇、曰姜、曰芥，皆因氣味辛香，如蘇、如姜、如芥也。
+
+【發明】
+元素曰︰荊芥辛苦，氣味俱薄，浮而升，陽也。
+
+好古曰︰肝經氣分藥也。能搜肝氣。
+
+時珍曰︰荊芥入足厥陰經氣分，其功長於祛風邪，散瘀血，破結氣，消瘡毒。蓋厥陰乃風木也，主血，而相火寄之，故風病血病瘡病為要藥。其治風也，賈丞相稱為再生丹，許學 士謂有神聖功，戴院使許為產後要藥，蕭存敬呼為一捻金，陳無擇隱為舉卿古拜散，夫豈無故而得此隆譽哉？按《唐韻》︰荊字，舉卿切，芥字古拜切。蓋二字之反切，隱語以秘其方也。
+
+又曰︰荊芥反魚蟹河豚之說，本草醫方並未言及，而稗官小說往往載之。按李廷飛《延 壽書》雲︰凡食一切無鱗魚，忌荊芥。食黃 魚後食之，令人吐血，惟地漿可解。與蟹同食，動風。又《蔡絛鐵圍山叢話》雲︰予居嶺嶠，見食黃顙魚犯姜芥者立死，甚於鈎吻。洪 邁《夷堅志》雲︰吳人魏幾道，啖黃顙魚羹，後採荊芥和茶飲。少頃足癢，上徹心肺，狂走，足皮欲裂。急服藥，兩日乃解。陶九成《輟耕錄》雲︰凡食河豚，不可服荊芥藥，大相反。 予在江陰見一儒者，因此喪命。《葦航紀談》雲︰凡服荊芥風藥，忌食魚。楊誠齋曾見一人，立致於死也。時珍按︰荊芥乃日用之藥，其相反如此，故詳錄之，以為警戒。又按《物類相感志》言︰河豚用荊芥同煮，三五次換水，則無毒。其說與諸書不同，何哉？大抵養生者，寧守前說為戒可也。","SCHIZONEPETA HERB
 
 [Taste and nature] Acrid; slightly warm.
 
@@ -6122,7 +6915,19 @@ UI_BOOK_ENTRY_BODY_JING_MI,"粳米（粳）
 【歸經】歸脾、胃、肺經。
 【主治】補中益氣，健脾和胃，除煩渴，止瀉痢。
 【釋名】秔（《說文》與粳同）。
-...","NON-GLUTINOUS RICE
+
+時珍曰︰粳乃谷稻之總名也，有早、中、晚三收。諸本草獨以晚稻為粳者，非矣。粘者為糯，不粘者為粳。糯者懦也，粳者硬也。但入解熱藥，以晚粳為良爾。
+
+【發明】
+詵曰︰粳米赤者粒大而香，水漬之有味益人。大抵新熟者動氣，經再年者亦發病。惟江南人多收火稻貯倉，燒去毛，至春舂米食之，即不發病宜人，溫中益氣，補下元也。
+
+宗奭曰︰粳以白晚米為第一，早熟米不及也。平和五臟，補益胃氣，其功莫逮。然稍生則復不益脾，過熟乃佳。
+
+穎曰︰粳有早、中、晚三收，以晚白米為第一。各處所產，種類甚多，氣味不能無少異，而亦不大相遠也。天生五穀，所以養人，得之則生，不得則死。惟此谷得天地中和之氣，同造化生育之功，故非他物可比。入藥之功在所略爾。
+
+好古曰︰《本草》言粳米益脾胃，而張仲景白虎湯用之入肺。以味甘為陽明之經，色白為西方之象，而氣寒入手太陰也。少陰證桃花湯，用之以補正氣。竹葉石膏湯，用之以益不足。
+
+時珍曰︰粳稻六、七月收者為早粳（止可充食），八、九月收者為遲粳，十月收者為晚粳。北方氣寒，粳性多涼，八、九月收者即可入藥。南方氣熱，粳性多溫，惟十月晚稻氣涼乃可入藥。遲粳、晚粳得金氣多，故色白者入肺而解熱也。早粳得土氣多，故赤者益脾而白者益胃。若滇、嶺之粳則性熱，惟彼土宜之耳。","NON-GLUTINOUS RICE
 
 [Taste and nature] Sweet; neutral.
 
@@ -6204,7 +7009,19 @@ UI_BOOK_ENTRY_BODY_JU_HUA,"菊花（菊）
 【毒性】無毒。
 【歸經】歸肺、肝經。
 【主治】疏散風熱，平抑肝陽，清肝明目，清熱解毒。
-【釋名】節華（《本經》）、...","CHRYSANTHEMUM FLOWER
+【釋名】節華（《本經》）、女節（《別錄》）、女華（《別錄》）、女莖（《別錄》）、日精（《別錄》）、更生（《別錄》）、傅延年（《別錄》）、治薔（《爾雅》）、金蕊（《綱目》）、陰成（《別錄》）、周盈（《別錄》）。
+
+時珍曰︰按陸佃《埤雅》雲︰菊本作蘜，從鞠。鞠，窮也。
+
+《月令》︰九月，菊有黃華。華事至此而窮盡，故謂之蘜。節華之名，亦取其應節候也。
+
+崔實《月令》雲︰女節、女華，菊華之名也。治薔、日精，菊根之名也。
+
+《抱樸子》雲︰仙方所謂日精、更生、周盈，皆一菊而根、莖、花、實之名異也。
+
+【發明】震亨曰︰黃菊花屬土與金，有水與火，能補陰血，故養目。
+
+時珍曰︰菊春生夏茂，秋花冬實，備受四氣，飽經露霜，葉枯不落，花槁不零，味兼甘苦，性稟平和。昔人謂其能除風熱，益肝補陰，蓋不知其得金水之精英尤多，能益金水二髒也。補水所以制火，益金所以平木，木平則風息，火降則熱除，用治諸風頭目，其旨深微。黃者入金水陰分；白者，入金水陽分；紅者，行婦人血分。皆可入藥，神而明之，存乎其人。其苗可蔬，葉可啜，花可餌，根實可藥，囊之可枕，釀之可飲，自本至末，罔不有功。宜乎前賢比之君子，神農列之上品，隱士採入酒餌，騷人餐其落英。費長房言︰九日飲菊酒，可以辟不祥。《神仙傳》言︰康風子、朱孺子皆以服菊花成仙。《荊州記》言︰胡廣久病風羸，飲菊潭水多壽。菊之貴重如此，是豈群芳可伍哉？鐘會《菊有五美贊》雲︰圓花高懸，准天極也。純黃不雜，后土色也。早植晚發，君子德也；冒霜吐穎，象貞質也；杯中體輕，神仙 食也。《西京雜記》言︰採菊花莖葉，雜秫米釀酒，至次年九月始熟，用之","CHRYSANTHEMUM FLOWER
 
 [Taste and nature] Sweet and bitter; slightly cold.
 
@@ -6285,7 +7102,18 @@ UI_BOOK_ENTRY_BODY_LI_PI,"梨皮（梨）
 【毒性】無毒。
 【歸經】歸肺、心、腎經。
 【主治】清心潤肺，降火生津，止咳化痰。
-【釋名】快果（《弘景》）、果宗（...","PEAR PEEL
+【釋名】快果（《弘景》）、果宗（《綱目》）、玉乳（《綱目》）、蜜父（《清異錄》）。
+
+震亨曰︰梨者，利也。其性下行流利也。
+
+弘景曰︰梨種殊多，並皆冷利，多食損人，故俗人謂之快果，不入藥用。
+
+【發明】
+宗奭曰︰梨，多食動脾，少則不及病，用梨者當斟酌之。惟病酒煩渴人食之甚佳，終不能卻疾。
+
+慎微曰︰孫光憲《北夢瑣言》雲︰有一朝士見奉御梁新診之，曰︰風疾已深，請速歸去。復見 州馬醫趙鄂診之，言與梁同，但請多吃消梨，咀 不及，絞汁而飲。到家旬日，唯吃消梨，頓爽也。
+
+時珍曰︰《別錄》著梨，只言其害，不著其功。陶隱居言梨不入藥。蓋古人論病多主風寒，用藥皆是桂、附，故不知梨有治風熱、潤肺涼心、消痰降火、解毒之功也。今人痰病、火病，十居六、七。梨之有益，蓋不為少，但不宜過食爾。按︰《類編》雲︰一士人狀若有疾，厭厭無聊，往謁楊吉老診之。楊曰︰君熱症已極，氣血消鑠，此去三年，當以疽死。士人不樂而去。聞茅山有道士醫術通神，而不欲自鳴。乃衣僕衣，詣山拜之，願執薪水之役。道士留置弟子中。久之以實白道士。道士診之，笑曰︰汝便下山，但日日吃好梨一顆。如生梨已盡，則取乾者泡湯，食滓飲汁，疾自當平。士人如其戒，經一歲復見吉老。見其顏貌腴澤，脈息和平，驚曰︰君必遇異人，不然豈有痊理？士人備告吉老。吉老具衣冠望茅山設拜，自咎其學之未至。此與瑣言之說彷彿。觀夫二條，則梨之功豈小補哉？然惟乳梨、鵝梨、消梨可食，余梨則亦不能去病也。","PEAR PEEL
 
 [Taste and nature] Sweet and slightly astringent; cool.
 
@@ -6370,7 +7198,22 @@ UI_BOOK_ENTRY_BODY_LIAN_QIAO,"连翘
 【毒性】無毒。
 【歸經】歸肺、心、小腸經。
 【主治】清熱解毒，消腫散結，疏散風熱。
-【釋名】連（《爾雅》）、異翹（《爾雅》）...","FORSYTHIA FRUIT
+【釋名】連（《爾雅》）、異翹（《爾雅》）、旱蓮子（《藥性》）、蘭華（《吳普》）、三廉（別錄）、根名連軺（仲景）、折根（別錄）。 
+
+恭曰︰其實似蓮作房，翹出眾草，故名。
+
+宗奭曰︰連翹亦不翹出眾草。太山山谷間甚多。其子折之，片片相比如翹，應以此得名耳。
+
+時珍曰︰按《爾雅》雲︰連，異翹。則是本名連，又名異翹，人因合稱為連翹矣。連軺亦作連苕，即《本經》下品翹根是也。唐蘇恭《修本草》退入有名未用中，今並為一。旱蓮乃小翹，人以為鱧腸者，故同名。
+
+【發明】
+元素曰︰連翹之用有三︰瀉心經客熱，一也；去上焦諸熱，二也；為瘡家聖藥，三也。
+
+杲曰︰十二經瘡藥中不可無此，乃結者散之之義。
+
+好古曰︰手足少陽之藥，治瘡瘍瘤癭結核有神，與柴衚衕功，但分氣血之異爾。與鼠粘子同用治瘡瘍，別有神功。
+
+時珍曰︰連翹狀似人心，兩片合成，其中有仁甚香，乃少陰心經、厥陰包絡氣分主藥也。諸痛癢瘡瘍皆屬心火，故為十二經瘡家聖藥，而兼治手足少陽手陽明三經氣分之熱也。","FORSYTHIA FRUIT
 
 [Taste and nature] Bitter; slightly cold.
 
@@ -6442,7 +7285,15 @@ UI_BOOK_ENTRY_BODY_LIAN_XU,"莲须（莲藕）
 【毒性】無毒。
 【歸經】歸心、腎經。
 【主治】清心益腎，澀精止血。
-【釋名】其根藕（《爾雅》），其實蓮（《爾雅》），其...","LOTUS STAMEN
+【釋名】其根藕（《爾雅》），其實蓮（《爾雅》），其莖葉荷（《說文》）。
+
+韓保升曰︰藕生水中，其葉名荷。按︰《爾雅》雲︰荷，芙蕖。其莖茄，其葉蕸，其本蔤，其華菡萏，其實蓮，其根藕，其中菂，菂中薏。邢昺注雲︰芙蕖，總名也，別名芙蓉，江東人呼為荷。菡萏，蓮花也。菂，蓮實也。薏，菂中青心也。
+郭璞注雲︰蔤，乃莖下白蒻在泥中者。蓮，乃房也；菂，乃子也；薏，乃中心苦薏也。江東人呼荷花為芙蓉，北人以藕為荷，亦以蓮為荷，蜀人以藕為茄，此皆習俗傳誤也。陸機《詩疏》雲︰其莖為荷。其花未發為菡萏，已發為芙蕖。其實蓮，蓮之皮青里白。其子菂，菂為苦薏也。
+
+時珍曰︰《爾雅》以荷為根名，韓氏以荷為葉名，陸機以荷為莖名。按︰莖乃負葉者也，有負荷之義，當從陸說。蔤乃嫩蒻，如竹之行鞭者。節生二莖，一為葉，一為花，盡處乃生藕，為花、葉、根、實之本。顯仁藏用，功成不居，可謂退藏於密矣，故謂之蔤。花葉常偶生，不偶不生，故根曰藕。或雲藕善耕泥，故字從耦，耦者耕也。茄音加，加於蔤上也。蕸音遐，遠於密也。菡萏，函合未發之意。芙蓉，敷布容艷之意。蓮者連也，花實相連而出也。菂者的也，子在房中點點如的也。的乃凡物點注之名。薏，猶意也，含苦在內也。古詩雲︰食子心無棄，苦心生意存是矣。
+
+【發明】
+時珍曰︰蓮須本草不收，而《三因》諸方、固真丸、巨勝子丸各補益方中，往往用之。其功大抵與蓮子同也。","LOTUS STAMEN
 
 [Taste and nature] Sweet and astringent; neutral.
 
@@ -6519,7 +7370,18 @@ UI_BOOK_ENTRY_BODY_LIAN_ZI,"莲子（莲藕）
 【毒性】無毒。
 【歸經】歸脾、腎、心經。
 【主治】補脾止瀉，止帶，益腎澀精，養心安神。
-【釋名】其根藕（《爾雅》）...","LOTUS SEED
+【釋名】其根藕（《爾雅》），其實蓮（《爾雅》），其莖葉荷（《說文》）。
+
+韓保升曰︰藕生水中，其葉名荷。按︰《爾雅》雲︰荷，芙蕖。其莖茄，其葉蕸，其本蔤，其華菡萏，其實蓮，其根藕，其中菂，菂中薏。邢昺注雲︰芙蕖，總名也，別名芙蓉，江東人呼為荷。菡萏，蓮花也。菂，蓮實也。薏，菂中青心也。郭璞注雲︰蔤，乃莖下白蒻在泥中者。蓮，乃房也；菂，乃子也；薏，乃中心苦薏也。江東人呼荷花為芙蓉，北人以藕為荷，亦以蓮為荷，蜀人以藕為茄，此皆習俗傳誤也。陸機《詩疏》雲︰其莖為荷。其花未發為菡萏，已發為芙蕖。其實蓮，蓮之皮青里白。其子菂，菂為苦薏也。
+
+時珍曰︰《爾雅》以荷為根名，韓氏以荷為葉名，陸機以荷為莖名。按︰莖乃負葉者也，有負荷之義，當從陸說。蔤乃嫩蒻，如竹之行鞭者。節生二莖，一為葉，一為花，盡處乃生藕，為花、葉、根、實之本。顯仁藏用，功成不居，可謂退藏於密矣，故謂之蔤。花葉常偶生，不偶不生，故根曰藕。或雲藕善耕泥，故字從耦，耦者耕也。茄音加，加於蔤上也。蕸音遐，遠於密也。菡萏，函合未發之意。芙蓉，敷布容艷之意。蓮者連也，花實相連而出也。菂者的也，子在房中點點如的也。的乃凡物點注之名。薏，猶意也，含苦在內也。古詩雲︰食子心無棄，苦心生意存是矣。
+
+【發明】
+時珍曰︰蓮產於淤泥而不為泥染；居於水中而不為水沒。根莖花實，凡品難同；清淨濟用，群美兼得。自 而節節生莖，生葉，生花，生藕；由菡萏而生蕊，生蓮，生 ，生薏。其蓮 則始而黃，黃而青，青而綠，綠而黑，中含白肉，內隱青心。石蓮堅剛，可歷永久。薏藏生意，藕復萌芽，展轉生生，造化不息。故釋氏用為引譬，妙理具存；醫家取為服食，百病可卻。蓋蓮之味甘氣溫而性嗇，稟清芳之氣，得稼穡之味，乃脾之果也。脾者，黃宮，所以交媾水、火，會合木、金者也。土為元氣之母，母氣既和，津液相成，神乃自生，久視耐老，此其權輿也。昔人治心腎不交，勞傷白濁，有清心蓮子飲；補心腎，益精血，有瑞蓮丸，皆得此理。
+
+藏器曰︰經秋正黑，名石蓮子，入水必沈，惟煎鹽滷能浮之。此物居山海間，經百年不壞，人得食之，令發黑不老。
+
+詵曰︰諸鳥、猿猴取得不食，藏之石室內，人得三百年者，食之永不老也。又雁食之，糞於田野山岩之中，不逢陰雨，經久不壞。人得之，每旦空腹食十枚，身輕能登高涉遠也。","LOTUS SEED
 
 [Taste and nature] Sweet and astringent; neutral.
 
@@ -6596,7 +7458,12 @@ UI_BOOK_ENTRY_BODY_LONG_DAN_CAO,"龙胆草（龙胆）
 【主治】清熱燥濕，瀉肝膽火。
 【釋名】陵游（《本經》）。
 
-志曰：葉如龍葵，味...","GENTIAN ROOT
+志曰：葉如龍葵，味苦如膽，因以為名。
+
+【發明】
+元素曰：龍膽味苦性寒，氣味俱濃，沈而降，陰也，足厥陰、少陽經氣分藥也。其用有四：除下部風濕，一也；及濕熱，二也；臍下至足腫痛，三也；寒濕腳氣，四也。 下行之功與防己同，酒浸則能上行，外行以柴胡為主，龍膽為使治眼中疾必用之藥。好古曰：益肝膽之氣而洩火。
+
+時珍曰：相火寄在肝膽，有瀉無補，故龍膽之益肝膽之氣，正以其能瀉肝膽之邪熱也。但大苦大寒，過服恐傷胃中生發之氣，反助火邪，亦久服黃連反從火化之義。《別錄》久服輕身之說，恐不足信。","GENTIAN ROOT
 
 [Taste and nature] Bitter; cold.
 
@@ -6667,7 +7534,12 @@ UI_BOOK_ENTRY_BODY_LONG_GU,"龙骨
 【毒性】無毒。
 【歸經】歸心、肝、腎經。
 【主治】鎮驚安神，平肝潛陽，收斂固澀，收濕斂瘡。
-【釋名】時珍曰︰按許慎《說文》︰龍...","FOSSILIZED BONE
+【釋名】時珍曰︰按許慎《說文》︰龍字篆文象形。《生肖論》雲︰龍耳虧聰，故謂之龍。梵書名那伽。
+
+【發明】
+斆曰︰氣入丈夫腎臟中，故益腎藥宜用之。
+
+時珍曰︰澀可去脫。故成氏雲︰龍骨能收斂浮越之正氣，固大腸而鎮驚。又主帶脈為病。","FOSSILIZED BONE
 
 [Taste and nature] Sweet and astringent; neutral.
 
@@ -6736,7 +7608,16 @@ UI_BOOK_ENTRY_BODY_LONG_YAN,"龙眼
 【毒性】無毒。
 【歸經】歸心、脾經。
 【主治】補益心脾，養血安神。
-【釋名】龍目（《吳普》）、圓眼（俗名）、益智（《本經》）、...","LONGAN FRUIT
+【釋名】龍目（《吳普》）、圓眼（俗名）、益智（《本經》）、亞荔枝（《開寶》）、荔枝奴、驪珠、燕卵、蜜脾、鮫淚、時珍曰︰龍眼、龍目，象形也。《吳普本草》謂之龍目，又曰比目。曹憲《博雅》謂之益智。
+
+弘景曰︰廣州有龍眼，非益智也，恐彼人別名耳。
+
+志曰︰甘味歸脾，能益人智，故名益智，非今之益智子也。
+
+頌曰︰荔枝才過，龍眼即熟，故南人目為荔枝奴。又名木彈。曬乾寄遠，北人以為佳果，目為亞荔枝。
+
+【發明】
+時珍曰︰食品以荔枝為貴，而資益則龍眼為良。蓋荔枝性熱，而龍眼性和平也。嚴用和《濟生方》，治思慮勞傷心脾有歸脾湯，取甘味歸脾、能益人智之義。","LONGAN FRUIT
 
 [Taste and nature] Sweet; warm.
 
@@ -6805,7 +7686,12 @@ UI_BOOK_ENTRY_BODY_LU_GEN,"芦根（芦）
 【毒性】無毒。
 【歸經】歸肺、胃經。
 【主治】清熱瀉火，生津止渴，除煩止嘔，利尿。
-【釋名】葦（音偉《爾雅》）、葭（音加...","REED RHIZOME
+【釋名】葦（音偉《爾雅》）、葭（音加《爾雅》），花名蓬蕽（《唐本》）、筍名虇（音拳《爾雅》）。
+
+時珍曰︰按毛萇《詩疏》雲︰葦之初生曰葭；未秀曰蘆；長成曰葦。葦者，偉大也。蘆者，色盧黑也。葭者，嘉美也。
+
+【發明】
+時珍曰︰按《雷公炮炙論》序雲︰益食加觴，須煎蘆、樸。注雲︰用逆水蘆根並濃樸二味等分，煎湯服。蓋蘆根甘能益胃，寒能降火故也。","REED RHIZOME
 
 [Taste and nature] Sweet; cold.
 
@@ -6877,7 +7763,15 @@ UI_BOOK_ENTRY_BODY_LU_JIAO_JIAO,"鹿角胶
 【主治】溫補肝腎，益精養血，止血。
 【釋名】一名鹿角膠（《本經》）、粉名鹿角霜。
 
-...","DEER ANTLER GELATIN
+甄權曰︰白膠一名黃明膠。
+
+時珍︰正誤見黃明膠。
+
+【發明】𢽾曰︰凡使，鹿角勝於麋角。
+
+頌曰︰今醫家多用麋茸、麋角，雲力緊於鹿也。
+
+時珍曰︰蘇東坡《良方》雲︰鹿陽獸，見陰而角解；麋陰獸，見陽而角解。故補陽以鹿角為勝，補陰以麋角為勝。其不同如此，但雲鹿勝麋，麋勝鹿，疏矣。按此說與沈存中“鹿茸利補陰，麋茸利補陽”之說相反。以理與功推之，蘇說為是。詳見茸下。","DEER ANTLER GELATIN
 
 [Taste and nature] Sweet and salty; warm.
 
@@ -6952,7 +7846,18 @@ UI_BOOK_ENTRY_BODY_MA_HUANG,"麻黄
 【毒性】無毒。
 【歸經】歸肺、膀胱經。
 【主治】發汗解表，宣肺平喘，利水消腫。
-【釋名】龍沙（《本經》）、卑相（《別錄》）、卑鹽...","EPHEDRA HERB
+【釋名】龍沙（《本經》）、卑相（《別錄》）、卑鹽（《別錄》）。
+
+時珍曰：諸名殊不可解。或雲其味麻，其色黃，未審然否？張揖《廣雅》雲：龍沙，麻黃也。狗骨，麻黃根也。不知何以分別如此？
+
+【發明】弘景曰︰麻黃療傷寒，解肌第一藥。
+
+頌曰︰張仲景治傷寒，有麻黃湯及葛根湯、大小青龍湯，皆用麻黃。治肺痿上氣，有射乾麻黃湯、濃樸麻黃湯，皆大方也。
+
+杲曰︰輕可去實，麻黃、葛根之屬是也。六淫有餘之邪，客於陽分皮毛之間，腠理閉拒，營衛氣血不行，故謂之實。二藥輕清成象，故可去之。麻黃微苦，其形中空，陰中之陽，入足太陽寒水之經。其經循背下行，本寒而又受外寒，故宜發汗，去皮毛氣分寒邪，以洩表實。若過發則汗多亡陽，或飲食勞倦及雜病自汗表虛之證用之，則脫人元氣，不可不禁。
+好古曰︰麻黃治衛實之藥，桂枝治衛虛之藥，二物雖為太陽證藥，其實營衛藥也。心主營為血，肺主衛為氣。故麻黃為手太陰肺之劑，桂枝為手少陰心之劑。傷寒傷風而咳嗽，用麻黃、桂枝，即湯液之源也。
+
+時珍曰︰麻黃乃肺經專藥，故治肺病多用之。張仲景治傷寒無汗用麻黃，有汗用桂枝。歷代明醫解釋，皆隨文傅會，未有究其精微者。時珍常繹思之，似有一得，與昔人所解不同雲。津液為汗，汗即血也。在營則為血，在衛則為汗。夫寒傷營，營血內澀，不能外通於衛，衛氣閉固，津液不行，故無汗發熱而憎寒。夫風傷衛，衛氣外洩，不能內護於營，營氣虛弱，津液不固，故有汗發熱而惡風。然風寒之邪，皆由皮毛而入。皮毛者，肺之合也。肺主衛氣，包羅一身，天之象也。是證雖屬乎太陽，而肺實受邪氣。其證時兼面赤怫鬱，咳嗽有痰，喘而胸滿諸證者，非肺病乎？蓋皮毛外閉，則邪熱內攻，而肺氣鬱。故用麻黃、甘引出營分之邪，達之肌表，佐以杏仁洩肺而利氣。汗後無大熱而喘者，加以石膏。朱肱《活人書》，夏至後加石膏、知母，皆是洩肺火之藥。是則麻黃湯雖太陽發汗重劑，實為發散肺經火鬱之藥也。腠理不密，則津液外洩，而肺氣自虛。虛則補其母。故用桂枝同甘草，外散風邪以救表，內伐肝木以防脾。佐以芍藥，洩木而固脾，洩東所以補西也。使以姜棗，行脾之津液而和營衛也。下後微喘者加濃樸、杏仁，以利肺氣也。汗後脈沈遲者加人參，以益肺氣也。朱肱加黃芩為陽旦湯，以瀉肺熱也。皆是脾肺之藥。是則桂枝雖太陽解肌輕劑，實為理脾救肺之藥也。此千古未發之秘旨，愚因表而出之。又少陰病發熱脈沈，有麻黃附子細辛湯、麻黃附子甘草湯。少陰與太陽為表裡，乃趙嗣真所謂熟附配麻黃，補中有發也。一錦衣夏月飲酒達旦，病水洩，數日不止，水谷直出。服分利消導升提諸藥則反劇。時珍診之，脈浮而緩，大腸下弩，復發痔血。此因肉食生冷茶水過雜，抑遏陽氣在下，木盛土衰，《素問》所謂久風成飧洩也。法當升之揚之。遂以小續命湯投之，一服而愈。昔仲景治傷寒六七日，大下後，脈沈遲，手足厥逆，咽喉不利，唾膿血，洩利不止者，用麻黃湯平其肝肺，兼升發之，即斯理也。神而明之，此類是矣。","EPHEDRA HERB
 
 [Taste and nature] Acrid and bitter; warm.
 
@@ -7042,7 +7947,19 @@ UI_BOOK_ENTRY_BODY_MAI_MEN_DONG,"麦门冬
 【毒性】無毒。
 【歸經】歸心、肺、胃經。
 【主治】養陰生津，潤肺清心。
-【釋名】虋冬（音門《爾雅》），秦名羊韭、齊名...","OPHIOPOGON TUBER
+【釋名】虋冬（音門《爾雅》），秦名羊韭、齊名愛韭、楚名馬韭、越名羊耆（並《別錄》）。禹韭（《吳普》）、禹餘糧（《別錄》）、忍冬（《吳普》）、忍凌（《吳普》）、不死藥（《吳普》）、階前草（《梅堯臣詩》）。
+
+弘景曰：根似穬麥，故謂之麥門冬。
+
+時珍曰︰麥須曰虋，此草根似麥而有須，其葉如韭，凌冬不凋，故謂之麥 冬，及有諸韭、忍冬諸名。俗作門冬，便於字也。可以服食斷谷，一名僕壘，一名隨脂。
+
+【發明】宗奭曰︰麥門冬治肺熱之功為多，其味苦，但專洩而不專收，寒多人禁服。治心肺虛熱及虛勞。與地黃、阿膠、麻仁，同為潤經益血、復脈通心之劑；與五味子、枸杞子，同為生脈之劑。
+
+元素曰︰麥門冬治肺中伏火、脈氣欲絕者，加五味子、人參二味為生脈散，補肺中元氣不足。
+
+杲曰︰六七月間濕熱方旺，人病骨乏無力，身重氣短，頭旋眼黑，甚則痿軟。故孫真人以生脈散補其天元真氣。脈者，人之元氣也。人參之甘寒，瀉熱火而益元氣。麥門冬之苦寒，滋燥金而清水源。五味子之酸溫，瀉丙火而補庚金，兼益五臟之氣也。
+
+時珍曰︰按︰趙繼宗《儒醫精要》雲︰麥門冬以地黃為使，服之令人頭不白，補髓，通腎氣，定喘促，令人肌體滑澤，除身上一切惡氣不潔之疾，蓋有君而有使也。若有君無使，是獨行無功矣。此方惟火盛氣壯之人服之相宜。若氣弱胃寒者，必不可餌也。","OPHIOPOGON TUBER
 
 [Taste and nature] Sweet and slightly bitter; slightly cold.
 
@@ -7131,7 +8048,24 @@ UI_BOOK_ENTRY_BODY_MU_LI,"牡蛎
 【毒性】無毒。
 【歸經】歸肝、膽、腎經。
 【主治】重鎮安神，潛陽補陰，軟堅散結，收斂固澀，制酸止痛。
-【釋名】牡蛤（《別錄》）、...","OYSTER SHELL
+【釋名】牡蛤（《別錄》）、蠣蛤（《本經》）、古賁（《異物志》）、蠔。
+
+弘景曰︰道家方以左顧是雄，故名牡蠣，右顧則牝蠣也。或以尖頭為左顧，未詳孰是。
+
+藏器曰︰天生萬物皆有牡牝。惟蠣是咸水結成，塊然不動，陰陽之道，何從而生？《經》言牡者，應是雄耳。
+
+宗奭曰︰《本經》不言左顧，止從陶說。而段成式亦雲︰牡蠣言牡，非謂雄也。且如牡丹，豈有牝丹乎？此物無目，更何顧盻？
+
+時珍曰︰蛤蚌之屬，皆有胎生、卵生。獨此化生，純雄無雌，故得牡名。曰蠣曰蠔，言其粗大也。
+
+【發明】
+權曰︰病虛而多熱者，宜同地黃、小草用之。
+
+好古曰︰牡蠣入足少陰，為軟堅之劑。以柴胡引之，能去脅下硬。以茶引之，能消項上結核。以大黃引之，能消股間腫。以地黃為使，能益精收澀，止小便，本腎經血分之藥也。
+
+成無己曰︰牡蠣之咸，以消胸膈之滿，以洩水氣，使痞者消，硬者軟也。
+
+元素曰︰壯水之主，以制陽光，則渴飲不思。故蛤蠣之類，能止渴也。","OYSTER SHELL
 
 [Taste and nature] Salty; slightly cold.
 
@@ -7206,7 +8140,14 @@ UI_BOOK_ENTRY_BODY_MU_TONG,"木通（通草）
 【毒性】無毒。
 【歸經】歸心、小腸、膀胱經。
 【主治】利尿通淋，清心除煩，通經下乳。
-【釋名】木通（士良）、附支（《本...","AKEBIA STEM
+【釋名】木通（士良）、附支（《本經》）、丁翁（《吳普》）、萬年藤（甄權），子名燕覆（《唐本》）。
+
+時珍曰︰有細細孔，兩頭皆通，故名通草，即今所謂木通也。今之通草，乃古之通脫木也。宋本草混注為一，名實相亂，今分出之。
+
+【發明】
+杲曰︰本草十劑︰通可去滯，通草、防己之屬是也。夫防己大苦寒，能瀉血中濕熱之滯，又通大便。通草甘淡，能助西方秋氣下降，利小便，專瀉氣滯也。肺受熱邪，津液氣化之原絕，則寒水斷流，膀胱受濕熱，癃閉約縮，小便不通，宜此治之。其症胸中煩熱，口燥舌乾，咽乾，大渴引飲，小便淋瀝，或閉塞不通，脛酸腳熱，並宜通草主之。凡氣味與之同者，茯苓、澤瀉、燈草、豬苓、琥珀、瞿麥、車前子之類，皆可以滲濕利小便，洩其滯氣也。又曰︰木通下行，洩小腸火，利小便，與琥珀同功，無他藥可比。
+
+時珍曰︰木通手厥陰心包絡、手足太陽小腸、膀胱之藥也。故上能通心清肺，治頭痛，利九竅；下能洩濕熱，利小便，通大腸，治遍身拘痛。《本經》及《別錄》皆不言及利小便治淋之功，甄權、日華子輩始發揚之。蓋其能洩丙丁之火，則肺不受邪，能通水道。水源既清，則津液自化，而諸經之濕與熱，皆由小便洩去。故古方導赤散用之，亦瀉南補北、扶西抑東之意。楊仁齋《直指方》言︰人遍身胸腹隱熱，疼痛拘急，足冷，皆是伏熱傷血。血屬於心，宜木通以通心竅，則經絡流行也。","AKEBIA STEM
 
 [Taste and nature] Bitter; cold.
 
@@ -7295,7 +8236,28 @@ UI_BOOK_ENTRY_BODY_MU_XIANG,"木香
 【毒性】無毒。
 【歸經】歸脾、胃、大腸、三焦、膽經。
 【主治】行氣止痛，健脾消食。
-【釋名】蜜香（《別錄》）、青木香（弘景...","COSTUS ROOT
+【釋名】蜜香（《別錄》）、青木香（弘景）、五木香（《圖經》）、南木香（《綱目》）。
+
+時珍曰︰木香，草類也。本名蜜香，因其香氣如蜜也。緣沈香中有蜜香，遂訛此為木香爾。昔人謂之青木香。後人因呼馬兜鈴根為青木香，乃呼此為南木香、廣木香以別之。今人又呼一種薔薇為木香，愈亂真矣。《三洞珠囊》雲︰五香者，即青木香也。一株五根，一莖五枝，一枝五葉，葉間五節，故名五香，燒之能上徹九天也。古方治癰疽有五香連翹湯，內用青木香。《古樂府》雲︰氍毹 五木香，皆指此也。
+
+頌曰︰《修養書》雲︰正月一日取五木煮湯以浴，令人至老須發黑。徐鍇注雲︰道家謂青木香為五香，亦雲五木，多以為浴是矣。《金光明經》謂之矩琵佗香。
+
+【發明】
+弘景曰︰青木香，大秦國人以療毒腫、消惡氣有驗。今惟制蛀蟲丸用之。常以煮汁沐浴大佳。
+
+宗奭曰︰木香專洩決胸腹間滯塞冷氣，他則次之。得橘皮、肉豆蔻、生薑相佐使絕佳，效尤速。
+
+元素曰︰木香除肺中滯氣，若治中、下二焦氣結滯，及不轉運，須用檳榔為使。
+
+震亨曰︰調氣用木香，其味辛，氣能上升，如氣鬱不達者宜之。若陰火衝上者，則反助 火邪，當用黃柏、知母，而少以木香佐之。
+
+好古曰︰本草雲︰主氣劣，氣不足，補也；通壅氣，導一切氣，破也。安胎，健脾胃，補也；除 癖症塊，破也。其不同如此。潔古張氏 機曰︰與補藥為佐則補，與洩藥為君則洩也。
+
+時珍曰︰木香乃三焦氣分之藥，能升降諸氣。諸氣 鬱，皆屬於肺，故上焦氣滯用之者，乃金鬱則洩之也。中氣不運，皆屬於脾，故中焦氣滯宜之者，脾胃喜芳香也。大腸氣滯則後重，膀胱氣不化則癃淋，肝氣鬱則為痛，故下焦氣滯者宜之，乃塞者通之也。
+
+權曰︰《隋書》言︰樊子蓋為武威太守，車駕入吐谷渾，子蓋以彼多瘴氣，獻青木香以御霧露之邪。
+
+頌曰︰《續傳信方》著張仲景青木香丸，主陽衰諸不足。用崑崙青木香、六路訶子皮各二十兩。搗篩，糖和丸梧桐子大。每空腹酒下三十丸，日再，其效尤速。鄭駙馬去沙糖用白蜜，加羚羊角十二兩。用藥不類古方，而雲仲景，不知何從而得也？","COSTUS ROOT
 
 [Taste and nature] Acrid and bitter; warm.
 
@@ -7374,7 +8336,14 @@ UI_BOOK_ENTRY_BODY_NIU_BANG_ZI,"牛蒡子（恶实）
 【毒性】無毒。
 【歸經】歸肺、胃經。
 【主治】疏散風熱，宣肺透疹，解毒利咽，滑腸通便。
-【釋名】鼠粘（《別錄》）...","BURDOCK FRUIT
+【釋名】鼠粘（《別錄》）、牛蒡（《別錄》）、大力子（《綱目》）、蒡翁菜（《綱目》）、便牽牛（《綱目》）、蝙蝠刺（《鬥門方》）。
+
+時珍曰︰其實狀惡而多刺鈎，故名也。其根葉皆可食，人呼為牛菜，術人隱之呼為大力也。俚人謂之便牽牛。河南人呼為夜叉頭。
+
+頌曰︰實殼多刺，鼠過之則綴惹不可脫，故謂之鼠粘子，亦如羊負來之比。
+
+【發明】
+杲曰︰鼠粘子其用有四︰治風濕癮疹，咽喉風熱，散諸腫瘡瘍之毒，利凝滯腰 膝之氣，是也。","BURDOCK FRUIT
 
 [Taste and nature] Acrid and bitter; cold.
 
@@ -7447,7 +8416,18 @@ UI_BOOK_ENTRY_BODY_NIU_XI,"牛膝
 【毒性】無毒。
 【歸經】歸 肝、腎經。
 【主治】逐瘀通經，補肝腎，強筋骨，利尿通淋，引血下行。
-【釋名】牛荎（《廣雅》）、...","ACHYRANTHES ROOT
+【釋名】牛荎（《廣雅》）、百倍（《本經》）。
+
+弘景曰︰其莖有節，似牛膝，故以為名。
+
+時珍曰︰《本經》又名百倍，隱語也，言其滋補之功，如牛之多力也。其葉似莧，其節對生，故俗有山莧、對節之稱。
+
+【發明】
+權曰︰病患虛羸者，加而用之。
+
+震亨曰︰牛膝能引諸藥下行，筋骨痛風在下者，宜加用之。凡用土牛膝，春夏用葉，秋冬用根，惟葉汁效尤速。
+
+時珍曰︰牛膝乃足厥陰、少陰之藥。所主之病，大抵得酒則能補肝腎，生用則能去惡血，二者而已。其治腰膝骨痛、足痿陰消、失溺久瘧、傷中少氣諸病，非取其補肝腎之功歟？其症瘕心腹諸痛、按陳日華《經驗方》雲︰方夷吾書雲︰老人久苦淋疾，百藥不效。偶見臨汀《集要方》中用牛膝者，服之而愈。又葉朝議親人患血淋，流下小便在盆內凝如 ，膝根煎濃汁，日飲五服，名地髓湯。雖未即愈，而血色漸淡，久乃復舊。後十年病又作，服之又瘥。因檢本草，見《肘後方》治小便不利，莖中痛欲死，用牛膝並葉，以酒煮服之。今再拈出，表其神功。又按楊士瀛《直指方》雲︰小便淋痛，或尿血，或沙石脹痛。用川牛膝一兩，水二盞，煎一盞，溫服。一婦患此十年，服之得效。杜牛膝亦可，或入麝香、乳香尤良。","ACHYRANTHES ROOT
 
 [Taste and nature] Bitter, sweet and sour; neutral.
 
@@ -7523,7 +8503,15 @@ UI_BOOK_ENTRY_BODY_NUO_MI,"糯米（稻）
 【歸經】歸脾、胃、肺經。
 【主治】脾胃虛寒洩瀉；消渴尿多；自汗盜汗。
 【釋名】稌（音杜）、糯（亦作穤）。
-...","GLUTINOUS RICE
+
+時珍曰：稻、稌者，粳、糯之通稱。《物理論》所謂 “稻者溉種之總稱” 是矣。本草則專指糯以為稻也。稻從舀（音函），象人在臼上治稻之義。稌則方言稻音之轉爾。其性粘軟，故謂之糯。
+
+穎曰：糯米緩筋，令人多睡，其性懦也。
+
+【發明】
+思邈曰︰糯米味甘，脾之谷也，脾病宜食之。 楊士瀛曰︰痘疹用 米，取其解毒，能釀而發之也。
+
+時珍曰︰糯米性溫，釀酒則熱，熬餳尤甚，故脾肺虛寒者宜之。若素有痰熱風病，及脾病不能轉輸，食之最能發病成積。孟詵、蘇頌或言其性涼、性寒者，謬說也。《別錄》已謂其溫中堅大便，令人多熱，是豈寒涼者乎？今人冷洩者，炒食即止。老人小便數者，作粢糕 或丸子，夜食亦止。其溫肺暖脾可驗矣。痘證用之，亦取此義。","GLUTINOUS RICE
 
 [Taste and nature] Sweet; warm.
 
@@ -7598,7 +8586,8 @@ UI_BOOK_ENTRY_BODY_QIAN_HU,"前胡
 【主治】降氣化痰，散風清熱。
 【釋名】時珍曰：按：孫 《唐韻》作湔胡，名義未解。
 
-【...","PEUCEDANUM ROOT
+【發明】
+時珍曰：前胡味甘、辛，氣微平，陽中之陰，降也。乃手足太陰、陽明之藥，與柴胡純陽上升入少陽、厥陰者不同也。其功長於下氣，故能治痰熱喘嗽、痞膈嘔逆諸疾，氣下則火降，痰亦降矣。所以有推陳致新之績，為痰氣要藥。陶弘景言其與柴衚衕功，非矣。治證雖同，而所入所主則異。","PEUCEDANUM ROOT
 
 [Taste and nature] Bitter and acrid; slightly cold.
 
@@ -7673,7 +8662,22 @@ UI_BOOK_ENTRY_BODY_QIAN_SHI,"芡实
 【毒性】無毒。
 【歸經】歸脾、腎經。
 【主治】補腎固精，養肝明目。
-【釋名】雞頭（《本經》）、雁喙（同）、雁頭（《古今注》）、...","EURYALE SEED
+【釋名】雞頭（《本經》）、雁喙（同）、雁頭（《古今注》）、鴻頭（韓退之）、雞雍（《莊子》）、卯菱（《管子》）、 子（音唯《弘景》）、水流黃（《談圃》）。
+
+弘景曰︰此即今 子也。莖上花似雞冠，故名雞頭。
+
+頌曰︰其苞形類雞、雁頭，故有諸名。
+
+時珍曰︰芡可濟儉歉，故謂之芡。雞雍見《莊子‧徐無鬼篇》。卯菱見《管子‧五行篇》。揚雄《方言》雲︰南楚謂之雞頭，幽燕謂之雁頭，徐、青、淮、泗謂之芡子。其莖謂之 ，亦曰 。鄭樵《通志》以鈎 為芡，誤矣。鈎 ，陸生草也，其莖可食。水流黃見下。
+
+【發明】
+弘景曰︰《仙方》取此合蓮實餌之，甚益人。
+
+恭曰︰作粉食，益人勝於菱也。
+
+頌曰︰取其實及中子，搗爛曝乾，再搗篩末，熬金櫻子煎和丸服之，雲補下益人，謂之水陸丹。
+
+時珍曰︰案孫升《談圃》雲︰芡本不益人，而俗謂之水流黃何也？蓋人之食芡，必咀之，終日囁囁。而芡味甘平，腴而不膩。食之者能使華液流通，轉相灌溉，其功勝於乳石也。《淮南子》雲︰狸頭愈 ，雞頭已 。注者雲︰即芡實也。","EURYALE SEED
 
 [Taste and nature] Sweet and astringent; neutral.
 
@@ -7750,7 +8754,16 @@ UI_BOOK_ENTRY_BODY_QIANG_HUO,"羌活（独活羌活）
 【毒性】無毒。
 【歸經】歸膀胱、腎經。
 【主治】解表散寒，祛風除濕，止痛。
-【釋名】羌活（《本經》）、羌青（《...","NOTOPTERYGIUM ROOT
+【釋名】羌活（《本經》）、羌青（《本經》）、獨搖草（《別錄》）、護羌使者（《本經》）、胡王使者（《吳普》）、長生草（《綱目》）。
+
+弘景曰：一莖直上，不為風搖，故曰獨活。《別錄》曰：此草得風不搖，無風自動，故名獨搖草。大明曰：獨活，是羌活母也。
+
+時珍曰：獨活、羌活乃一類二種，獨活以羌中來者為良，故有羌活、胡王使者諸名，乃一物二種也。正如川芎、撫芎，白朮、蒼朮之義，入用
+
+【發明】
+恭曰：療風，宜用獨活；兼水，宜用羌活。
+
+劉完素曰：獨活不搖風而治風，浮萍不沈水而利水，因其所勝而為制也。張元素曰：風能勝濕，故羌活能治水濕。獨活與細辛同用，治少陰頭痛，頭運目眩，非此不能除；羌活與川芎同用，治太陽、少陰頭痛，透關利節，治督脈為病，脊強而厥。好古曰：羌活乃足太陽、厥陰、少陰藥，與獨活不分二種。後人因羌活氣雄，獨活氣細。故雄者，治足太陽風濕相搏，頭痛、肢節痛、一身盡痛者，非此不能除，乃卻亂反正之主君藥也。細者，治足少陰伏風，頭痛、兩足濕痹、不能動止者，非此不能治，而不治太陽之證。時珍曰：羌活、獨活皆能逐 風勝濕，透關利節，但氣有剛、劣不同爾。《素問》雲：從下上者，引而去之。二味苦辛而溫，味之薄者，陰中之陽，故能引氣上升，通達周身，而散風勝濕。按文系曰：唐劉師貞之兄病風，夢神人曰：但取胡王使者浸酒服，便愈。師貞訪問，皆不曉。復夢其母曰：胡王使 者，即羌活也。求而用之，兄疾遂愈。嘉謨曰：羌活，本手足太陽表裡引經之藥，又入足少陰、厥陰。名列君部之中，非比柔懦之主。小無不入，大無不通。故能散肌表八風之邪，利周身百節之痛。","NOTOPTERYGIUM ROOT
 
 [Taste and nature] Acrid and bitter; warm.
 
@@ -7829,7 +8842,14 @@ UI_BOOK_ENTRY_BODY_QIN_JIAO,"秦艽
 【毒性】無毒。
 【歸經】歸胃、肝、膽經。
 【主治】祛風濕，清濕熱，止痹痛，退虛熱。
-【釋名】秦糺（《唐本》）、秦爪（蕭炳）...","GENTIANA MACROPHYLLA ROOT
+【釋名】秦糺（《唐本》）、秦爪（蕭炳）。
+
+恭曰：秦艽，俗作秦膠，本名秦糺，與糾同。
+
+時珍曰：秦艽出秦中，以根作羅紋交糾者佳，故名秦艽、秦糺。
+
+【發明】
+時珍曰：秦艽，手足陽明經藥也，兼入肝膽，故手足不遂、黃膽煩渴之病須之，取其去陽明之濕熱也。陽明有濕，則身體酸疼煩熱；有熱，則日晡潮熱骨蒸。所以《聖惠方》治急勞煩熱，身體酸疼。用秦艽、柴胡各一兩，甘草五錢。為末，每服三錢，白湯調下。治小兒骨蒸潮熱，減食瘦弱。用秦艽、炙甘草各一兩。每用一、二錢，水煎服之。錢乙加 薄荷葉五錢。","GENTIANA MACROPHYLLA ROOT
 
 [Taste and nature] Acrid and bitter; neutral.
 
@@ -7904,7 +8924,20 @@ UI_BOOK_ENTRY_BODY_REN_SHEN,"人参
 【毒性】無毒。
 【歸經】歸脾、肺、心經。
 【主治】大補元氣，復脈固脫，益氣攝血，生津安神。
-【釋名】人薓（音參。或省作...","GINSENG ROOT
+【釋名】人薓（音參。或省作參）、黃參（《吳普》）、血參（《別錄》）、人銜（《本經》）、鬼蓋（《本經》）、神草（《別錄》）、土精（《別錄》）、地精（《廣雅》）、海腴、皺面還丹（《廣雅》）。
+
+時珍曰︰人薓年深，浸漸長成者，根如人形，有神，故謂之人薓、神草。薓字，從𣹰，亦浸漸之義。𣹰，即浸字，後世因字文繁，遂以參星之字代之，從簡便爾。然承誤日久，亦不能變矣，惟張仲景《傷寒論》尚作薓字。《別錄》一名人微，微乃薓字之訛也。其成有階級，故曰人銜。其草背陽向陰，故曰鬼蓋。其在五參，色黃屬土，而補脾胃，生陰血，故有黃參、血參之名。得地之精靈，故有土精、地精之名。《廣五行記》雲︰隋文帝時，上黨有人宅後每夜聞人呼聲，求之不得。去宅一里許，見人參枝葉異常，掘之入地五尺，得人參，一如人體，四肢畢備，呼聲遂絕。觀此，則土精之名，尤可證也。《禮鬥威儀》雲︰下有人參，上有紫氣。《春秋運鬥樞》雲︰搖光星散而為人參。人君廢山瀆之利，則搖光不明，人參不生。觀此，則神草之名，又可證矣。
+
+【發明】
+弘景曰︰人參為藥切要，與甘草同功。
+
+杲曰︰人參甘溫，能補肺中元氣，肺氣旺則四髒之氣皆旺，精自生而形自盛，肺主諸氣故也。張仲景雲︰病患汗後身熱、亡血、脈沈遲者，下痢身涼、脈微、血虛者，並加人參。
+
+古人血脫者益氣，蓋血不自生，須得生陽氣之藥乃生，陽生則陰長，血乃旺也。若單用補血藥，血無由而生矣。《素問》言︰無陽則陰無以生，無陰則陽無以化。故補氣須用人參，血虛者亦須用之。本草十劑雲︰補可去弱，人參、羊肉之屬是也。蓋人參補氣，羊肉補形，形氣者，有無之象也。
+
+好古曰︰潔古老人言︰以沙參代人參，取其味甘也。然人參補五臟之陽，沙參補五臟之陰，安得無異？雖雲補五臟，亦須各用本髒藥相佐使引之。
+
+言聞曰︰人參生用氣涼，熟用氣溫；味甘補陽，微苦補陰。氣主生物，本呼天；味主成物，本呼地。氣味生成，陰陽之造化也。涼者，高秋清肅之氣，天之陰也，其性降；溫者，陽春生發之氣，天之陽也，其性升。甘者，濕土化成之味，地之陽也，其性浮；微苦者，火土相生之味，地之陰也，其性沈。人參氣味俱薄。氣之薄者，生降熟升；味之薄者，生升熟降。如土虛火旺之病，則宜生參，涼薄之氣，以瀉火而補土，是純用其氣也；脾虛肺怯之病，則宜熟參，甘溫之味，以補土而生金，是純用其味也。東垣以相火乘脾，身熱而煩，氣高而喘，頭痛而渴，脈洪而大者，用黃柏佐人參。孫真人治夏月熱傷元氣，人汗大洩，欲成痿厥，用生脈散，以瀉熱火而救金水。君以人參之甘寒，瀉火而補元氣；臣以麥門冬之苦甘寒，清金而滋水源，佐以五味子之酸溫，生腎精而收耗氣。此皆補天元之真氣，非補熱火也。白飛霞雲︰人參煉膏服，回元氣於無何有之鄉。凡病後氣虛及肺虛嗽者，並宜之。若氣虛有火者，合天門冬膏對服之。","GINSENG ROOT
 
 [Taste and nature] Sweet and slightly bitter; slightly warm.
 
@@ -7993,7 +9026,20 @@ UI_BOOK_ENTRY_BODY_ROU_GUI,"肉桂（桂）
 【毒性】無毒。
 【歸經】歸腎、脾、心、肝經。
 【主治】補火助陽，引火歸元，散寒止痛，溫通經脈。
-【釋名】時珍曰︰按...","CINNAMON BARK
+【釋名】時珍曰︰按︰範成大《桂海志》雲︰凡木葉心皆一縱理，獨桂有兩道如圭形，故字從圭。
+
+陸佃《埤雅》雲︰桂猶圭也。宣導百藥，為之先聘通使，如執圭之使也。《爾雅》謂之梫者，能侵害他木也。故《呂氏春秋》雲︰桂枝之下無雜木。《雷公炮炙論》雲︰桂釘木根，其木即死，是也。桂即牡桂之濃而辛烈者，牡桂即桂之薄而味淡者，《別錄》不當重出，今並為一，而分目於下。
+
+【發明】
+承曰︰凡桂之濃實氣味重者，宜入治水髒及下焦藥；輕薄氣味淡者，宜入治頭目發散藥。故《本經》以菌桂養精神，牡桂利關節。仲景發汗用桂枝，乃枝條，非身乾也，取其輕薄能發散。又有一種柳桂，乃桂之嫩小枝條，尤宜入上焦藥用。
+
+時珍曰︰麻黃遍徹皮毛，故專於發汗而寒邪散，肺主皮毛，辛走肺也。桂枝透達營衛，故能解肌而風邪去，脾主營，肺主衛，甘走脾，辛走肺也。肉桂下行，益火之原，此東垣所謂腎苦燥，急食辛以潤之，開腠理，致津液，通其氣者也。《聖惠方》言︰桂心入心，引血化汗化膿。蓋手少陰君火、厥陰相火，與命門同氣者也。《別錄》雲桂通血脈是矣。
+
+曾世榮言︰小兒驚風及洩瀉，並宜用五苓散以瀉丙火，滲土濕。內有桂，能抑肝風而扶脾土。
+
+又《醫余錄》雲︰有人患赤眼腫痛，脾虛不能飲食，肝脈盛，脾脈弱。用涼藥治肝則脾愈虛，用暖藥治脾則肝愈盛。但於溫平藥中倍加肉桂，殺肝而益脾，故一治兩得之。傳雲木得桂而枯是也。此皆與《別錄》桂利肝肺氣，牡桂治脅痛脅風之義相符。人所不知者，今為拈出。
+
+又桂性辛散，能通子宮而破血，故《別錄》言其墮胎，龐安時乃雲炒過則不損胎也。又丁香、官桂治痘瘡灰塌，能溫托化膿，詳見丁香下。","CINNAMON BARK
 
 [Taste and nature] Acrid and sweet; very hot.
 
@@ -8074,7 +9120,14 @@ UI_BOOK_ENTRY_BODY_SANG_BAI_PI,"桑白皮（桑）
 【主治】瀉肺平喘，利水消腫。
 【釋名】子名椹（《集韻》）。
 
-時珍曰︰徐鍇《說文解字...","MULBERRY ROOT BARK
+時珍曰︰徐鍇《說文解字》雲︰桑，音若，東方自然神木之名，其字象形。桑乃蠶所食，異於東方自然之神木，故加木於桑下而別之。《典術》雲︰桑乃箕星之精。
+
+【發明】
+杲曰︰桑白皮，甘以固元氣之不足而補虛，辛以瀉肺氣之有餘而止嗽。又雲︰桑白皮瀉肺，然性不純良，不宜多用。
+
+時珍曰︰桑白皮長於利小水，乃實則瀉其子也，故肺中有水氣及肺火有餘者宜之。十劑雲︰燥可去濕，桑白皮、赤小豆之屬是矣。宋醫錢乙治肺氣熱盛，咳嗽而後喘，面腫身熱，瀉白散︰用桑白皮（炒）一兩，地骨皮（焙）一兩，甘草（炒）半兩。每服一、二錢，入粳米百粒，水煎，食後溫服。桑白皮、地骨皮皆能瀉火從小便去，甘草瀉火而緩中，粳米清肺而養血，此乃瀉肺諸方之準繩也。元醫羅天益言其瀉肺中伏火而補正氣，瀉邪所以補正也。若肺虛而小便利者，不宜用之。
+
+頌曰︰桑白皮作線縫金瘡腸出，更以熱雞血塗之。唐‧安金藏剖腹，用此法而愈。","MULBERRY ROOT BARK
 
 [Taste and nature] Sweet; cold.
 
@@ -8154,7 +9207,17 @@ UI_BOOK_ENTRY_BODY_SANG_YE,"桑叶（桑）
 【毒性】無毒。
 【歸經】歸肺、肝經。
 【主治】疏散風熱，清肺潤燥，平抑肝陽，清肝明目，涼血止血。
-【釋名】子名椹（《...","MULBERRY LEAF
+【釋名】子名椹（《集韻》）。
+
+時珍曰︰徐鍇《說文解字》雲︰桑，音若，東方自然神木之名，其字象形。桑乃蠶所食，異於東方自然之神木，故加木於桑下而別之。
+《典術》雲︰桑乃箕星之精。
+
+【發明】
+頌曰︰桑葉可常服。神仙服食方︰以四月桑茂盛時採葉。又十月霜後三分，二分已落時，一分在者，名神仙葉，即採取，與前葉同陰乾搗末，丸、散任服，或煎水代茶飲之。又霜後葉煮湯，淋渫手足，去風痹殊勝。又微炙和桑衣煎服，治痢及金瘡諸損傷，止血。
+
+震亨曰︰經霜桑葉研末，米飲服，止盜汗。
+
+時珍曰︰桑葉乃手、足陽明之藥，汁煎代茗，能止消渴。","MULBERRY LEAF
 
 [Taste and nature] Sweet and bitter; cold.
 
@@ -8223,7 +9286,10 @@ UI_BOOK_ENTRY_BODY_SHA_REN,"砂仁
 【毒性】無毒。
 【歸經】歸脾、胃、腎經。
 【主治】化濕開胃，溫脾止瀉，理氣安胎。
-【釋名】時珍曰︰名義未詳。藕下白 多密，取其...","AMOMUM FRUIT
+【釋名】時珍曰︰名義未詳。藕下白 多密，取其密藏之意。此物實在根下，仁藏殼內，亦或此意歟。
+
+【發明】
+時珍曰︰按韓 《醫通》雲︰腎惡燥，以辛潤之。縮砂仁之辛，以潤腎燥。又雲︰縮砂屬土，主醒脾調胃，引諸藥歸宿丹田。香而能竄，和合五臟衝和之氣，如天地以土 為衝和之氣，故補腎藥用同地黃丸蒸，取其達下之旨也。又化骨，食草木藥及方士煉三黃皆用之，不知其性何以能制此物也？","AMOMUM FRUIT
 
 [Taste and nature] Acrid; warm.
 
@@ -8292,7 +9358,16 @@ UI_BOOK_ENTRY_BODY_SHA_SHEN,"沙参
 【毒性】無毒。
 【歸經】歸肺、胃經。
 【主治】養陰清肺，益胃生津，化痰益氣。
-【釋名】白參（《吳普》）、知母（《別錄》）、羊...","ADENOPHORA ROOT
+【釋名】白參（《吳普》）、知母（《別錄》）、羊乳（《別錄》）、羊婆奶（《綱目》）、鈴兒草（《別錄》）、虎須（《別錄》）、苦心（《別錄》，又名文希，一名識美，一名志取。）
+
+弘景曰︰此與人參、玄參、丹參、苦參是為五參，其形不盡相類，而主療頗同，故皆有參名。又有紫參，乃牡蒙也。
+
+時珍曰︰沙參白色，宜於沙地，故名。其根多白汁，俚人呼為羊婆奶。《別錄》有名未用，羊乳即此也。此物無心味淡，而《別錄》一名苦心，又與知母同名，不知所謂也。鈴兒草，象花形也。
+
+【發明】
+元素曰︰肺寒者，用人參；肺熱者，用沙參代之，取其味甘也。好古曰︰沙參味甘微苦，厥陰本經之藥，又為脾經氣分藥。微苦補陰，甘則補陽，故潔古取沙參代人參。蓋人參性溫，補五臟之陽；沙參性寒，補五臟之陰。雖雲補五臟，亦須各用本髒藥相佐，使隨所引而相輔之可也。
+
+時珍曰︰人參甘苦溫，其體重實，專補脾胃元氣，因而益肺與腎，故內傷元氣者宜之。沙參甘淡而寒，其體輕虛，專補肺氣，因而益脾與腎，故金能受火克者宜之。一補陽而生陰，一補陰而制陽，不可不辨之也。","ADENOPHORA ROOT
 
 [Taste and nature] Sweet; slightly cold.
 
@@ -8373,7 +9448,20 @@ UI_BOOK_ENTRY_BODY_SHA_YUAN_ZI,"沙苑子 （白蒺藜）
 【毒性】無毒。
 【歸經】歸肝、腎經。
 【主治】補腎固精，養肝明目。
-【釋名】茨（《爾雅》）、旁通（《本經》）、屈人（...","FLATSTEM MILKVETCH SEED
+【釋名】茨（《爾雅》）、旁通（《本經》）、屈人（《本經》）、止行（《本經》）、豺羽（《本經》）、升推（《本經》）。
+
+弘景曰︰多生道上及牆上，葉布地，子有刺，狀如菱而小。長安最饒，人行多著木履。今軍家乃鑄鐵作之，以布敵路，名鐵蒺藜。
+
+《易》雲︰據於蒺藜，言其凶傷；
+
+《詩》雲︰牆有茨，不可掃也，以刺梗穢。方用甚稀。
+
+時珍曰︰蒺，疾也；藜，利也；茨，刺也。其刺傷人，甚疾而利也。屈人、止行，皆因其傷人也。
+
+【發明】
+頌曰︰古方皆用有刺者，治風明目最良。神仙方亦有單服蒺藜法，雲不問黑白，但取堅實者，舂去刺用。
+
+時珍曰︰古方補腎治風，皆用刺蒺藜。後世補腎多用沙苑蒺藜，或以熬膏和藥，恐其功亦不甚相遠也。刺蒺藜炒黃去刺，磨面作餅，或蒸食，可以救荒。","FLATSTEM MILKVETCH SEED
 
 [Taste and nature] Sweet; warm.
 
@@ -8452,7 +9540,22 @@ UI_BOOK_ENTRY_BODY_SHAN_YAO,"山药（薯蓣）
 【毒性】無毒。
 【歸經】歸脾、肺、腎經。
 【主治】益氣養陰，補脾肺腎，固精止帶。
-【釋名】藷藇（音諸預《山海經》）、土...","CHINESE YAM
+【釋名】藷藇（音諸預《山海經》）、土藷（音除《別錄》）、山藷（《圖經》）、山芋（《吳普》）、山藥（《衍義》）、玉延（《吳普》）。
+
+吳普曰︰薯蕷，一名薯薯，一名兒草，一名修脆。齊、魯名山芋，鄭、越名土薯，秦、楚名玉延。
+
+頌曰︰江、閩人單呼為薯（音若殊及韶），亦曰山薯。《山海經》雲︰景山北望少澤，其草多薯藇（音同薯蕷）。則是一種，但字（或音殊，或音諸）不一，或語有輕重，或相傳之訛耳。
+
+宗奭曰︰薯蕷，因唐代宗名預，避諱改為薯藥；又因宋英宗諱署，改為山藥。盡失當日本名。恐歲久以山藥為別物，故詳著之。
+
+【發明】
+權曰︰凡患人體虛羸者，宜加而用之。
+
+詵曰︰利丈夫，助陰力。熟煮和蜜，或為湯煎，或為粉，並佳。乾之入藥更妙。惟和面作 則動氣，為不能制面毒也。
+
+李杲曰︰山藥入手太陰。張仲景八味丸用乾山藥，以其涼而能補也。亦治皮膚乾燥，以此潤之。
+
+時珍曰︰按吳綬雲︰山藥入手、足太陰二經，補其不足，清其虛熱。又按︰王履《溯洄集》雲︰山藥雖入手太陰，然肺為腎之上源，源既有滋，流豈無益，此八味丸所以用其強陰也。又按曹毗《杜蘭香傳》雲︰食薯蕷可以辟霧露。","CHINESE YAM
 
 [Taste and nature] Sweet; neutral.
 
@@ -8527,7 +9630,14 @@ UI_BOOK_ENTRY_BODY_SHAN_ZHU_YU,"山茱萸
 【毒性】無毒。
 【歸經】歸肝、腎經。
 【主治】補益肝腎，收澀固脫。
-【釋名】蜀酸棗（《本經》）、肉棗（《綱目》）、鬾實...","CORNUS FRUIT
+【釋名】蜀酸棗（《本經》）、肉棗（《綱目》）、鬾實（《別錄》）、雞足（《吳普》）、鼠矢（《吳普》）。
+
+宗奭曰︰山茱萸與吳茱萸甚不相類，治療大不同，未審何緣命此名也？
+
+時珍曰︰《本經》一名蜀酸棗，今人呼為肉棗，皆象形也。
+
+【發明】
+好古曰︰滑則氣脫，澀劑所以收之。山茱萸止小便利，秘精氣，取其味酸澀以收滑也。仲景八味丸用之為君，其性味可知矣。","CORNUS FRUIT
 
 [Taste and nature] Sour and astringent; slightly warm.
 
@@ -8606,7 +9716,22 @@ UI_BOOK_ENTRY_BODY_SHENG_DI_HUANG,"生地黄（地黄）
 【毒性】無毒。
 【歸經】歸心、肝、腎經。
 【主治】清熱涼血，養陰生津。
-【釋名】芐（音戶《別錄》）、芑（音起《別...","FRESH REHMANNIA ROOT
+【釋名】芐（音戶《別錄》）、芑（音起《別錄》）、地髓（《本經》）。
+
+大明曰︰生者以水浸驗之。浮者名天黃；半浮半沈者名人黃；沈者名地黃。入藥沈者為佳，半沈者次之，浮者不堪。
+
+時珍曰︰《爾雅》雲︰ 芐，地黃。郭璞雲︰江東呼為芐。羅願雲︰芐以沈下者為貴，故字從下。
+
+【發明】
+好古曰︰生地黃入手少陰，又為手太陽之劑，故錢仲陽瀉丙火與木通同用以導赤也。諸經之血熱，與他藥相隨，亦能治之。溺血、便血皆同。
+
+權曰︰病患虛而多熱者，宜加用之。
+
+戴原禮曰︰陰微陽盛，相火熾強，來乘陰位，日漸煎熬，為虛火之證者，宜地黃之屬，以滋陰退陽。
+
+宗奭曰︰《本經》只言乾、生二種，不言熟者。如血虛勞熱，產後虛熱，老人中虛燥熱者，若與生乾，當慮太寒，故後世改用蒸曝熟者。生熟之功殊別，不可不詳。
+
+時珍曰︰《本經》所謂乾地黃者，乃陰乾、日乾、火乾者，故又雲生者尤良。《別錄》復雲生地黃者，乃新掘鮮者，故其性大寒。其熟地黃乃後人復蒸曬者。諸家本草皆指乾地黃為熟地黃，雖主治證同，而涼血、補血之功稍異，故今別出熟地黃一條於下。","FRESH REHMANNIA ROOT
 
 [Taste and nature] Sweet and bitter; cold.
 
@@ -8689,7 +9814,20 @@ UI_BOOK_ENTRY_BODY_SHENG_JIANG,"生姜
 【毒性】無毒。
 【歸經】歸肺、脾、胃經。
 【主治】解表散寒，溫中止嘔，解魚蟹毒。
-【釋名】時珍曰：按：許慎《說文》：薑作䕬，雲...","FRESH GINGER
+【釋名】時珍曰：按：許慎《說文》：姜作䕬，雲御濕之菜也。
+
+王安石《字說》雲：姜能強御百邪，故謂之姜。初生嫩者，其尖微紫，名紫姜，或作子姜；宿根謂之母姜也。
+
+【發明】
+成無己曰︰姜、棗味辛、甘，專行脾之津液而和營衛。藥中用之，不獨專於發散也。
+
+杲曰︰生薑之用有四︰制半夏、濃樸之毒，一也；發散風寒，二也；與棗同用，辛溫益脾胃元氣，溫中去濕，三也；與芍藥同用，溫經散寒，四也。孫真人雲︰姜為嘔家聖藥，蓋辛以散之。嘔乃氣逆不散，此藥行陽而散氣也。或問︰生薑辛溫入肺，何以雲入胃口？曰︰俗以心下為胃口者，非矣。咽門之下，受有形之物，乃胃之系，便是胃口，與肺系同行，故能入肺而開胃口也。曰︰人雲夜間勿食生薑，令人閉氣，何也？曰︰生薑辛溫主開發。夜則氣本收斂，反開發之，則違天道矣。若有病患，則不然也。生薑屑，比之乾薑則不熱，比之生薑則不濕。以乾生薑代乾薑者，以其不僭故也。俗言上床蘿蔔下床姜。姜能開胃，蘿蔔消食也。
+
+時珍曰︰姜，辛而不葷，去邪辟惡，生啖熟食，醋、醬、糟、鹽、蜜煎調和，無不宜之。可蔬可和，可果可藥，其利博矣。凡早行山行，宜含一塊，不犯霧露清濕之氣，及山嵐不正之邪。
+
+頌曰︰崔元亮《集驗方》載︰敕賜姜茶治痢方︰以生薑切細，和好茶一、兩碗，任意呷之，便瘥。若是熱痢，留姜皮；冷痢，去皮，大妙。
+
+楊士瀛曰︰姜能助陽，茶能助陰，二物皆消散惡氣，調和陰陽，且解濕熱及酒食暑氣之毒，不問赤、白通宜用之。蘇東坡治文潞公有效。","FRESH GINGER
 
 [Taste and nature] Acrid; warm.
 
@@ -8768,7 +9906,18 @@ UI_BOOK_ENTRY_BODY_SHI_CHANG_PU,"石菖蒲（菖蒲）
 【毒性】無毒。
 【歸經】歸心、胃經。
 【主治】開竅豁痰，醒神益智，化濕開胃。
-【釋名】昌陽（《本經》）、堯韭（普...","ACORUS RHIZOME
+【釋名】昌陽（《本經》）、堯韭（普）、水劍草（《綱目》）。
+
+時珍曰︰菖蒲，乃蒲類之昌盛者，故曰菖蒲。又《呂氏春秋》雲︰冬至後五十七日，菖始生。菖者百草之先生者，於是始耕。則菖蒲、昌陽又取此義也。《典術》雲︰堯時天降精於庭為韭，感百陰之氣為菖蒲。故曰堯韭。方士隱為水劍，因葉形也。
+
+【發明】
+頌曰︰古方有單服菖蒲法。蜀人治心腹冷氣 痛者，取一、二寸捶碎，同吳茱萸煎湯飲之。亦將隨行，卒患心痛，嚼一、二寸，熱湯或酒送下，亦效。
+
+時珍曰︰國初周顛仙對太祖高皇帝常嚼菖蒲飲水。問其故。雲服之無腹痛之疾。高皇御制碑中載之。菖蒲氣溫味辛，乃手少陰、足厥陰之藥。心氣不足者用之，虛則補其母也。肝苦急以辛補之，是矣。《道藏經》有《菖蒲傳》一卷，其語粗陋。今略節其要雲︰菖蒲者，水草之精英，神仙之靈藥也。其法採緊小似魚鱗者一斤，以水及米泔浸各一宿，刮去皮切，曝乾搗篩，以糯米粥和勻，更入熟蜜搜和，丸如梧子大，稀葛袋盛，置當風處令乾。每旦酒、飲任下三十丸，臨臥更服三十丸。服至一月，消食；二月，痰除；服至五年，骨髓充，顏色澤，白發黑，落齒更生。其藥以五德配五行︰葉青，花赤，節白，心黃，根黑。能治一切諸風，手足頑痹，癱緩不遂，五勞七傷，填血補腦，堅骨髓，長精神，潤五臟，裨六腑，開胃口，和血脈，益口齒，明耳目，澤皮膚，去寒熱，除三屍九蟲，天行時疾，瘴疫瘦病，瀉痢痔漏，婦人帶下，產後血運。並以酒服。河內葉敬母中風，服之一年而百病癒。寇天師服之得道，至今廟前猶生菖蒲。鄭魚、曾原等，皆以服此得道也。
+
+又按︰葛洪《抱樸子》雲︰韓眾服菖蒲十三年，身上生毛，冬袒不寒，日記萬言。商丘子不娶，惟食菖蒲根，不飢不老，不知所終。《神仙傳》雲︰咸陽王典食菖蒲得長生。安期生採一寸九節菖蒲服，仙去。又按︰ 仙《神隱書》雲︰石菖蒲置一盆於幾上，夜間觀書，則收煙無害目之患。或置星露之下，至旦取葉尖露水洗目，大能明視，久則白晝見星。端午日以酒服，尤妙。蘇東坡雲︰凡草生石上，必須微土以附其根。惟石菖蒲濯去泥土，漬以清水，置盆中，可數十年不枯。節葉堅瘦，根須連絡，蒼然於幾案間，久更可喜。其延年輕身之功，既非昌陽可比；至於忍寒淡泊，不待泥土而生，又豈昌陽所能彷彿哉？
+
+楊士瀛曰︰下痢噤口，雖是脾虛，亦熱氣閉隔心胸所致。俗用木香失之溫，用山藥失之閉。惟參苓白朮散加石菖蒲，粳米飲調下。或用參、苓、石蓮肉，少入菖蒲服。胸次一開，自然思食。","ACORUS RHIZOME
 
 [Taste and nature] Acrid and bitter; warm.
 
@@ -8859,7 +10008,22 @@ UI_BOOK_ENTRY_BODY_SHI_GAO,"石膏
 【主治】清熱瀉火，除煩止渴。
 【釋名】細理石（《別錄》）、寒水石（《綱目》）。
 
-...","GYPSUM
+震享曰︰火煅細研醋調，封丹灶，其固密甚於脂膏。此蓋兼質與能而得名，正與石脂同意。
+
+時珍曰︰其紋理細密，故名細理石。其性大寒如水，故名寒水石，與凝水石同名異物。
+
+【發明】
+成無己曰︰風，陽邪也；寒，陰邪也。風喜傷陽，寒喜傷陰。營衛陰陽，為風寒所傷，則非輕劑所能獨散，必須輕重之劑同散之，乃得陰陽之邪俱去，營衛之氣俱和。是以大青龍湯，以石膏為使。石膏乃重劑，而又專達肌表也。又雲︰熱淫所勝，佐以苦甘。知母、石膏之苦甘以散熱。
+
+元素曰︰石膏性寒，味辛而淡，氣味俱薄，體重而沈，降也，陰也，乃陽明經大寒之藥。善治本經頭痛牙痛，止消渴中暑潮熱。然能寒胃，令人不食，非腹有極熱者，不宜輕用。又陽明經中熱，發熱惡寒燥熱，日晡潮熱，肌肉壯熱，小便濁赤，大渴引飲，自汗，苦頭痛之藥，仲景用白虎湯是也。若無以上諸證，勿服之。多有血虛發熱象白虎證，及脾胃虛勞，形體病證，初得之時，與此證同。醫者不識而誤用之，不可勝救也。
+
+杲曰︰石膏，足陽明藥也。故仲景治傷寒陽明證，身熱、目痛、鼻乾、不得臥。身以前，胃之經也；胸前，肺之室也；邪在陽明，肺受火制，故用辛寒以清肺氣，所以有白虎之名。又治三焦皮膚大熱，入手少陽也。凡病脈數不退者，宜用之；胃弱者，不可用。
+
+宗奭曰︰孫兆言︰四月以後天氣熱時，宜用白虎。但四方氣候不齊，歲中運氣不一，亦宜兩審。其說甚雅。
+
+時珍曰︰東垣李氏雲︰立夏前多服白虎湯者，令人小便不禁，此乃降令太過也。陽明津液不能上輸於肺，肺之清氣亦復下降故爾。甄立言《古今錄驗方》︰治諸蒸病有五蒸湯，亦是白虎加人參、茯苓、地黃、葛根，因病加減。王燾《外台秘要》︰治骨蒸勞熱久嗽，用石膏（紋如束針者）一斤，粉甘草一兩。細研如面，日以水調三、四服。言其無毒有大益，乃養命上藥，不可忽其賤而疑其寒。《名醫錄》言︰睦州楊士丞女，病骨蒸內熱外寒，眾醫不瘥，處州吳醫用此方而體遂涼。愚謂此皆少壯肺胃火盛，能食而病者言也。若衰暮及氣虛、血虛、胃弱者，恐非所宜。
+
+廣濟林訓導年五十，病痰嗽發熱。或令單服石膏藥至一斤許，遂不能食，而咳益頻，病益甚，遂至不起。此蓋用藥者之瞀瞀也，石膏何與焉。楊士瀛雲︰石膏 過，最能收瘡暈，不至爛肌。按︰劉 《錢乙傳》雲︰宗室子病嘔洩，醫用溫藥加喘。乙曰︰病本中熱，奈何以剛劑燥之，將不得前後溲，宜與石膏湯。宗室與醫皆不信。後二日果來召。乙曰︰仍石膏湯證也。竟如言而愈。又按︰古方所用寒水石，是凝水石；唐宋以來諸方所用寒水石，即今之石膏也。故寒水石諸方多附於後。近人又以長石、方解石為寒水石，不可不辨之。","GYPSUM
 
 [Taste and nature] Sweet and acrid; very cold.
 
@@ -8952,7 +10116,24 @@ UI_BOOK_ENTRY_BODY_SHU_DI_HUANG,"熟地黄（地黄）
 【毒性】無毒。
 【歸經】歸肝、腎經。
 【主治】補血滋陰，益精填髓。
-【釋名】芐（音戶《別錄》）、芑（音起《別錄》）...","PREPARED REHMANNIA ROOT
+【釋名】芐（音戶《別錄》）、芑（音起《別錄》）、地髓（《本經》）。
+
+大明曰︰生者以水浸驗之。浮者名天黃；半浮半沈者名人黃；沈者名地黃。入藥沈者為佳，半沈者次之，浮者不堪。
+
+時珍曰︰《爾雅》雲︰ 芐，地黃。郭璞雲︰江東呼為芐。羅願雲︰芐以沈下者為貴，故字從下。
+
+【發明】
+元素曰︰地黃生則大寒而涼血，血熱者須用之；熟則微溫而補腎，血衰者須用之。又臍下痛屬腎經，非熟地黃不能除，乃通腎之藥也。
+
+好古曰︰生地黃治心熱、手足心熱，入手足少陰厥陰，能益腎水，涼心血，其脈洪實者宜之。若脈虛者，則宜熟地黃，假火力蒸九數，故能補腎中元氣。仲景八味丸以之為諸藥之首，天一所生之源也。湯液四物湯治藏血之髒，以之為君者，癸乙同歸一治也。
+
+時珍曰︰按王碩《易簡方》雲︰男子多陰虛，宜用熟地黃；女子多血熱，宜用生地黃。
+
+又雲︰生地黃能生精血，天門冬引入所生之處；熟地黃能補精血，用麥門冬引入所補之處。
+
+虞搏《醫學正傳》雲︰生地黃生血，而胃氣弱者服之，恐妨食；熟地黃補血，而痰飲多者服之，恐泥膈。或雲︰生地黃酒炒則不妨胃，熟地黃姜汁炒則不泥膈。此皆得用地黃之精微者也。
+
+頌曰︰崔元亮《海上方》︰治一切心痛，無問新久。以生地黃一味，隨人所食多少，搗絞取汁，搜面作患此病二年，深以為恨，臨終戒其家人，吾死後當剖去病本。從其言果得蟲，置於竹節中，每所食皆飼之。因食地黃 亦與之，隨即壞爛。由此得方。劉禹錫《傳信方》亦紀其事雲︰貞元十年，通事捨人崔抗女，患心痛垂絕，遂作地黃冷淘食，便吐一物，可方寸匕，狀如蛤蟆，無足目，似有口，遂愈。冷淘勿著","PREPARED REHMANNIA ROOT
 
 [Taste and nature] Sweet; slightly warm.
 
@@ -9037,7 +10218,16 @@ UI_BOOK_ENTRY_BODY_SU_YE,"苏叶（苏）
 【毒性】無毒。
 【歸經】歸肺、脾經。
 【主治】解表散寒，行氣和胃。
-【釋名】紫蘇（《食療》）、赤蘇（《肘後方》）、桂荏（...","PERILLA LEAF
+【釋名】紫蘇（《食療》）、赤蘇（《肘後方》）、桂荏（《爾雅》）。
+
+時珍曰︰蘇從酥，音酥，舒暢也。蘇性舒暢，行氣和血，故謂之蘇。曰紫蘇者，以別白蘇也。蘇乃荏類，而味更辛如桂，故《爾 雅》謂之桂荏。
+
+【發明】
+頌曰︰若宣通風毒，則單用莖，去節尤良。
+
+時珍曰︰紫蘇，近世要藥也。其味辛，入氣分；其色紫，入血分。故同橘皮，砂仁，則行氣安胎；同藿香、烏藥，則溫中止痛；同香附、麻黃，則發汗解肌；同芎 、當歸則和血散血；同木瓜、濃樸，則散濕解暑，治霍亂、腳氣；同桔梗、枳殼，則利膈寬腸；同杏仁、萊菔子，則消痰定喘也。 久則洩人真氣焉。
+
+宗奭曰︰紫蘇其氣香，其味微辛甘能散。今人朝暮飲紫蘇湯，甚無益。醫家謂芳草致豪貴之疾者，此有一焉。若脾胃寒人，多致滑洩，往往不覺。","PERILLA LEAF
 
 [Taste and nature] Acrid; warm.
 
@@ -9115,7 +10305,15 @@ UI_BOOK_ENTRY_BODY_SUAN_ZAO_REN,"酸枣仁（酸枣）
 【毒性】無毒。
 【歸經】歸肝、膽、心經。
 【主治】養心補肝，寧心安神，斂汗生津。
-【釋名】樲（《爾雅》）、山棗（...","SOUR JUJUBE SEED
+【釋名】樲（《爾雅》）、山棗（《弘景》）。
+
+【發明】恭曰︰《本經》用實療不得眠，不言用仁。今方皆用仁。補中益肝，堅筋骨，助陰氣，皆酸棗仁之功也。
+
+宗奭曰︰酸棗，《經》不言用仁，而今天下皆用之。
+
+志曰︰按︰《五代史‧後唐》刊石藥驗雲︰酸棗仁，睡多生使，不得睡炒熟。陶雲食之醒睡，而《經》雲療不得眠。蓋其子肉味酸，食之使不思睡；核中仁服之，療不得眠。正如麻黃發汗，根節止汗也。
+
+時珍曰︰酸棗實，味酸性收，故主肝病，寒熱結氣，酸痹久洩，臍下滿痛之症。其仁甘而潤，故熟用療膽虛不得眠、煩渴虛汗之症，生用療膽熱好眠，皆足厥陰、少陽藥也。今人專以為心家藥，殊昧此理。","SOUR JUJUBE SEED
 
 [Taste and nature] Sweet and sour; neutral.
 
@@ -9186,7 +10384,12 @@ UI_BOOK_ENTRY_BODY_TAO_REN,"桃仁
 【毒性】小毒
 【歸經】歸心、肝、大腸經。
 【主治】活血祛瘀，潤腸通便，止咳平喘
-【釋名】時珍曰︰桃性早花，易植而子繁，故字從木...","PEACH KERNEL
+【釋名】時珍曰︰桃性早花，易植而子繁，故字從木、兆。十億曰兆，言其多也。或雲從兆諧聲也。
+
+【發明】
+杲曰︰桃仁苦重於甘，氣薄味濃，沈而降，陰中之陽，手、足厥陰經血分藥也。苦以洩滯血，甘以生新血，故破凝血者用之。其功有四︰治熱入血室，一也；洩腹中滯血，二也；除皮膚血熱燥癢，三也；行皮膚凝聚之血，四也。
+
+成無己曰︰肝者血之源，血聚則肝氣燥。肝苦急，急食甘以緩之。桃仁之甘以緩肝散血，故張仲景抵當湯用之，以治傷寒八、九日，內有畜血，發熱如狂，小腹滿痛，小便自利者。又有當汗失汗，熱毒深入，吐血及血結胸，煩躁譫語者，亦以此湯主之。與虻蟲、水蛭、大黃同用。","PEACH KERNEL
 
 [Taste and nature] Bitter and sweet; neutral.
 
@@ -9260,7 +10463,19 @@ UI_BOOK_ENTRY_BODY_TIAN_HUA_FEN,"天花粉（栝蒌）
 【毒性】無毒。
 【歸經】歸肺、胃經。
 【主治】清熱瀉火，生津止渴，消腫排膿。
-【釋名】果裸（音裸）、栝蔞（《...","TRICHOSANTHES ROOT
+【釋名】果裸（音裸）、栝蔞（《綱目》）、天瓜（《別錄》）、黃瓜（《別錄》）、地蔞（《本經》）、澤姑（《別錄》）
+根名白藥（《圖經》）、天花粉（《圖經》）、瑞雪（《趙宜真》）。
+
+時珍曰︰裸，與蓏同。
+
+許慎雲︰木上曰果，地下曰蓏。此物蔓生附木，故得兼名。《詩》雲︰果裸之實，亦施於宇，是矣。栝蔞，即果裸二字音轉也，亦作𤫱𤬏，後人又轉為栝蔞，愈轉愈失其真矣。古者瓜姑同音，故有澤姑之名。齊人謂之天瓜，象形也。雷 《炮炙論》，以圓者為栝，長者為蔞，亦出牽強，但分雌雄可也。其根作粉，潔白如雪，故謂之天花粉。蘇頌《圖經》重出天花粉，謬矣，今削之。
+
+【發明】
+恭曰︰用根作粉，潔白美好，食之大宜虛熱人。
+
+杲曰︰栝蔞根純陰，解煩渴，行津液。心中枯涸者，非此不能除。與辛酸同用，導腫氣成無己曰︰津液不足則為渴。栝蔞根味苦微寒，潤枯燥而通行津液，是為渴所宜也。
+
+時珍曰︰栝蔞根味甘微苦酸。其莖葉味酸。酸能生津，感召之理，故能止渴潤枯。微苦降火，甘不傷胃。昔人只言其苦寒，似未深察。","TRICHOSANTHES ROOT
 
 [Taste and nature] Sweet and slightly bitter; slightly cold.
 
@@ -9353,7 +10568,30 @@ UI_BOOK_ENTRY_BODY_TIAN_MEN_DONG,"天门冬
 【毒性】無毒。
 【歸經】歸肺、腎經。
 【主治】養陰潤燥，清肺生津。
-【釋名】虋冬（音門《爾雅》）、顛勒（《本經》）、天棘...","ASPARAGUS ROOT
+【釋名】虋冬（音門《爾雅》）、顛勒（《本經》）、天棘（《綱目》）、萬歲藤（《救荒》）。
+
+禹錫曰︰按︰《爾雅》雲︰薔蘼，虋冬。注雲︰門冬也，一名滿冬。《抱樸子》雲︰一名顛棘，或名地門冬，或名筵門冬。在東嶽名淫羊藿；在中嶽名天門冬；在西嶽名管松；在北嶽，名無不愈；在南嶽名百部；在京陸山阜名顛棘；在越人，名浣草。雖處處有之，其名不同，其實一也。別有百部草，其根有百許如一，而苗小異，其苗似菝 ，惟可治咳，不中服食，須分別之。
+
+時珍曰︰草之茂者為 ，俗作門。此草蔓茂，而功同麥門冬，故曰天門冬，或曰天棘。《爾雅》雲︰髦，顛棘也。因其細葉如髦，有細棘也。顛、天，音相近也。按︰《救荒本草》雲︰俗名萬歲藤，又名娑蘿樹。其形與治肺之功頗同百部，故亦名百部也。薔蘼乃營實苗，而《爾雅》指為虋冬，蓋古書錯簡也。
+
+【發明】
+權曰︰天門冬冷而能補，患人體虛而熱者，宜加用之。和地黃為使，服之耐老頭不白。
+
+宗奭曰︰治肺熱之功為多。其味苦，專洩而不專收，寒多人禁服之。
+
+元素曰︰苦以洩滯血，甘以助元氣，及治血妄行，此天門冬之功也。保定肺氣，治血熱侵肺，上氣喘促，宜加人參、黃耆為主，用之神效。
+
+嘉謨曰︰天、麥門冬併入手太陰，祛煩解渴，止咳消痰。而麥門冬兼行手少陰，清心降火，使肺不犯邪，故止咳立效。天門冬復走足少陰，滋腎助元，全其母氣，故消痰殊功。蓋腎主津液，燥則凝而為痰，得潤劑則化，所謂治痰之本也。
+
+好古曰︰入手太陰、足少陰經。營衛枯涸，宜以濕劑潤之。二門冬、人參、五味、枸杞子同為生脈之劑，此上焦獨取寸口之意。
+
+趙繼宗曰︰五藥雖為生脈之劑，然生地黃、貝母為天門冬之使；地黃、車前，為麥門冬之使；茯苓，為人參之使。若有君無使，是獨行無功也。故張三丰與胡KT 尚書長生不方，用天門冬三斤，地黃一斤， 乃有君而有使也。
+
+禹錫曰︰《抱樸子》言︰入山便可以天門冬蒸煮，啖之，取足以斷谷。若有力可餌之，或作散、酒服，或搗汁作液、膏服。至百日丁壯兼倍，快於術及黃精也。二百日強筋髓，駐顏色。與煉成松脂同蜜丸服，尤善。杜紫微服之，御八十外家，一百四十歲，日行三百里。
+
+慎微曰︰《列仙傳》雲︰赤須子食天門冬，齒落更生，細發復出。太原甘始服天門冬，在人間三百餘年。《聖化經》雲︰以天門冬、茯苓等分，為末，日服方寸匕。則不畏寒，大寒時單衣汗出也。
+
+時珍曰︰天門冬清金降火，益水之上源，故能下通腎氣，入滋補方，合群藥用之有效。若脾胃虛寒人，單餌既久，必病腸滑，反成痼疾。此物性寒而潤，能利大腸故也。","ASPARAGUS ROOT
 
 [Taste and nature] Sweet and bitter; cold.
 
@@ -9447,7 +10685,21 @@ UI_BOOK_ENTRY_BODY_TU_SI_ZI,"菟丝子
 【毒性】無毒。
 【歸經】歸 肝、腎、脾經。
 【主治】補腎益精，養肝明目，止瀉，安胎。
-【釋名】菟縷（《別錄》）、菟虆（《別錄》）...","CUSCUTA SEED
+【釋名】菟縷（《別錄》）、菟虆（《別錄》）、菟蘆（《本經》）、菟丘（《廣雅》）、赤網（《別錄》）、玉女（《爾雅》）、唐蒙（《爾雅》）、火焰草（《綱目》）、野狐絲（《綱目》）、金線草（《綱目》）。
+
+禹錫曰︰按《呂氏春秋》雲︰或謂菟絲無根也。其根不屬地，茯苓是也。《抱樸子》雲︰菟絲之草，下有伏菟之根。無此菟，則絲不得生於上，然實不屬也。伏菟抽則菟絲死。又雲︰菟絲初生之根，其形似兔握，故割其血以和丹服，立能變化。則菟絲之名因此也。
+
+弘景曰︰舊言下有茯苓，上有菟絲，不必爾也。
+
+頌曰︰《抱樸》所說今未見，豈別一類乎？孫炎釋《爾雅》雲︰唐也，蒙也，女蘿也，菟絲也，一物四名，而本草唐蒙為一名。《詩》雲︰蔦與女蘿。毛萇雲︰女蘿，菟絲也。而本草菟絲無女蘿之名，惟松蘿一名女蘿。豈二物皆是寄生同名，而本草脫漏乎？
+
+震亨曰︰菟絲未嘗與茯苓共類，女蘿附松而生，不相關涉，皆承訛而言也。
+
+時珍曰︰《毛詩》注女蘿即菟絲。《吳普本草》菟絲一名松蘿。陸佃言︰在木為女蘿，在草為菟絲，二物殊別，皆由《爾雅》釋《詩》誤以為一物故也。張揖《廣雅》雲︰菟丘，菟絲也。女蘿，松蘿也。陸璣《詩疏》言︰菟絲蔓草上，黃赤如金；松蘿蔓松上，生枝正青，無雜蔓者，皆得之。詳見木部松蘿下。又菟絲茯苓說，見茯苓下。
+
+【發明】𢽾曰︰菟絲子稟中和凝正陽氣，一莖從樹感枝而成，從中春上陽結實，故偏補人衛氣，助人筋脈。
+
+頌曰︰《抱樸子》仙方單服法︰取實一斗，酒一斗浸，曝乾再浸又曝，令酒盡乃止，搗篩。每酒服二錢，日二服。此藥治腰膝去風，兼能明目。久服令人光澤，老變為少。十日外，飲啖如湯沃雪也。","CUSCUTA SEED
 
 [Taste and nature] Sweet; warm.
 
@@ -9522,7 +10774,12 @@ UI_BOOK_ENTRY_BODY_WU_LING_ZHI,"五灵脂
 【主治】活血止痛，化瘀止血。
 【釋名】鶡鴠、獨舂。屎名五靈脂。
 
-時珍曰：楊氏《丹鉛...","TROGOPTERUS DUNG
+時珍曰：楊氏《丹鉛錄》謂寒號蟲即鶡鴠，今從之。鶡鴠，《詩》作盍旦，《禮》作曷旦，《說文》作䳚鴠，《廣志》作侃旦，《唐詩》作渴旦，皆隨義借名耳。揚雄《方言》雲：鶡鴠，自關而西謂之鶡鴠；自關而東謂之城旦，亦曰倒懸。周、魏、宋、楚謂之獨舂。郭璞雲：鶡鴠，夜鳴求旦之鳥。夏月毛盛，冬月裸體，晝夜鳴叫，故曰寒號，曰鶡旦。古刑有城旦舂，謂晝夜舂米也。故又有城旦、獨舂之名。《月令》雲：仲冬，曷旦不鳴。蓋冬至陽生漸暖故也。其屎名五靈脂者，謂狀如凝脂而受五行之靈氣也。
+
+【發明】
+宗奭曰︰五靈脂引經有功，不能生血，此物入肝最速也。嘗有人病目中翳。往來不定，此乃血所病也。肝受血則能視，目病不治血，為背理也。用五靈脂之藥而愈。又有人被毒蛇所傷，良久昏憒。一老僧以酒調藥二錢灌之，遂蘇。仍以滓敷咬處，少頃復灌二錢，其苦皆去。問之，乃五靈脂一兩，雄黃半兩，同為末耳。其後有中蛇毒者，用之咸效。
+
+時珍曰︰五靈脂，足厥陰肝經藥也。氣味俱濃，陰中之陰，故入血分。肝主血，諸痛皆屬於木，諸蟲皆生於風；故此藥能治血病，散血和血而止諸痛。治驚癇，除瘧痢，消積化痰，療疳殺蟲，治血痹、血眼諸症，皆屬肝經也。失笑散，不獨治婦人心痛血痛；凡男女老幼，一切心腹、脅肋、少腹痛，疝氣，並胎前產後，血氣作痛，及血崩經溢，百藥不效者，俱能奏功。屢用屢驗，真近世神方也。又案︰李仲南雲︰五靈脂治崩中，非只治血之藥，乃去風之劑。風，動物也，衝任經虛，被風傷襲營血，以致崩中暴下，與荊芥、防風治崩義同。方悟古人識見，深奧如此。此亦一說，但未及肝血虛滯，亦自生風之意。","TROGOPTERUS DUNG
 
 [Taste and nature] Sweet, bitter and salty; warm.
 
@@ -9619,7 +10876,34 @@ UI_BOOK_ENTRY_BODY_WU_TOU,"乌头（川乌，草乌）
 【歸經】歸心、肝、腎、脾經。
 【主治】祛風除濕，溫經止痛。
 【釋名】
-[川烏...","ACONITE ROOT
+[川烏]
+時珍曰︰初種為烏頭，象烏之頭也。附烏頭而生者為附子，如子附母也。烏頭如芋魁，附子如芋子，蓋一物也。別有草烏頭、白附子，故俗呼此為黑附子，川烏頭以別之。諸家不分烏頭有川、草兩種，皆混雜注解，今悉正之。
+
+[草烏]
+烏喙（《本經》，即兩頭尖）、草烏頭（《綱目》）、土附子（《日華》）、奚毒（《本經》）、耿子（《吳普》）、毒公（《吳普》。又名帝秋)、金鴉（《綱目》）、苗名茛（音艮）、芨（音及）、堇（音近）、獨白草（《拾遺》）、鴛鴦菊（《綱目》）、汁煎名射罔
+
+普曰︰烏頭，形如烏之頭也。有兩歧相合如烏之喙者，名曰烏喙。喙即烏之口也。
+
+恭曰︰烏喙，即烏頭異名也。此有三歧者，然兩歧者少。若烏頭兩歧名烏喙，則天雄、附子之兩歧者，復何以名之？
+
+時珍曰︰此即烏頭之野生於他處者，俗謂之草烏頭，亦曰竹節烏頭，出江北者曰淮烏頭，《日華子》所謂土附子者是也。烏喙，即偶生兩歧者，今俗呼為兩頭尖，因形而名，其實乃一物也。附子、天雄之偶生兩歧者，亦謂之烏喙，功亦同於天雄，非此烏頭也。蘇恭不知此義，故反疑之。草烏頭取汁，曬為毒藥，射禽獸，故有射罔之稱。《後魏書》言︰遼東塞外秋收烏頭為毒藥射禽獸，陳藏器所引《續漢五行志》，言西國生獨白草，煎為藥，敷箭射人即死者，皆此烏頭，非川烏頭也。《菊譜》雲︰鴛鴦菊，即烏喙苗也。
+
+【發明】
+[川烏]
+宗奭曰︰補虛寒須用附子，風家即多用天雄，大略如此。其烏頭、烏喙、附子，則量其材而用之。時珍曰︰按王氏《究原方》雲︰附子性重滯，溫脾逐寒。川烏頭性輕疏，溫脾去風。若是寒疾即用附子；風疾即用川烏頭。一雲︰凡人中風，不可先用風藥及烏附。 若先用氣藥，後用烏附乃宜也。又凡用烏、附藥，並宜冷服者，熱因寒用也。蓋陰寒在下，虛陽上浮。治之以寒，則陰氣益甚而病增；治之以熱，則拒格而不納。熱藥冷凍飲料，下嗌之後，冷體既消，熱性便發，而病氣隨愈。不違其情，而致大益，此反治之妙也。昔張仲景治寒疝 內結，用蜜煎烏頭。《近效方》治喉痹，用蜜炙附子，含之咽汁。朱丹溪治疝氣，用烏頭、梔子。並熱因寒用也。李東垣治馮翰林侄陰盛格陽傷寒，面赤目赤，煩渴引飲，脈來七、八至，但按之則散。用姜附東加人參，投半斤服之，得汗而愈。此則神聖之妙也。 吳綬曰︰附子乃陰證要藥。凡傷寒傳變三陰，及中寒夾陰，雖身大熱而脈沈者，必用之。或厥冷腹痛，脈沈細，甚則唇青囊縮者，急須用之，有退陰回陽之力，起死回生之功。近 世陰證傷寒，往往疑似，不敢用附子，直待陰極陽竭而用之，已遲矣。且夾陰傷寒，內外皆陰，陽氣頓衰。必須急用人參，健脈以益其原；佐以附子，溫經散寒。捨此不用，將何以救 之？
+
+劉完素曰︰俗方治麻痹多用烏附，其氣暴能衝開道路，故氣愈麻；及藥氣盡而正氣行，則麻病癒矣。
+
+張元素曰︰附子以白朮為佐，乃除寒濕之聖藥。濕藥宜少加之引經。又益火之原，以消陰翳，則便溺有節，烏、附是也。 虞摶曰︰附子稟雄壯之質，有斬關奪將之氣。能引補氣藥行十二經，以追復散失之元陽；引 補血藥入血分，以滋養不足之真陰；引發散藥開腠理，以驅逐在表之風寒；引溫暖藥達下焦，以祛除在里之冷濕。
+
+震亨曰︰氣虛熱甚者，宜少用附子，以行參 。肥人多濕，亦宜少加烏、附行經。仲景八味丸，用為少陰響導，其補自是地黃，後世因以附子為補藥，誤矣。附子走而不守，取其健悍 走下之性，以行地黃之滯，可致遠爾。烏頭、天雄皆氣壯形偉，可為下部藥之佐；無人表其害人之禍，相習用為治風之藥及補藥，殺人多矣。 王履曰︰仲景八味丸，蓋兼陰火不足者設。錢仲陽六味地黃丸，為陰虛者設。附子乃補陽之藥，非為行滯也。
+
+好古曰︰烏、附，非身涼而四肢厥者，不可僭用。服附子以補火，必妨涸水。
+
+時珍曰︰烏、附毒藥，非危病不用，而補藥中少加引導，其功甚捷。有人才服錢匕，即發燥不堪，而昔人補劑用為常藥，豈古今運氣不同耶？荊府都昌王，體瘦而冷，無他病。日以附子煎湯飲，兼嚼硫黃，如此數歲。蘄州衛張百戶，平生服鹿茸、附子藥，至八十餘，康 健倍常。宋張杲《醫說》載︰趙知府耽酒色，每日煎乾薑熟附湯，吞硫黃金液丹百粒，乃能健啖，否則倦弱不支，壽至九十。他人服一粒即為害。若此數人，皆其臟腑稟賦之偏，服之有益無害，不可以常理概論也。又《瑣碎錄》言︰滑颱風土極寒，民啖附子如啖芋栗。此則地氣使然爾。
+
+[草烏]
+時珍曰︰草烏頭、射罔，乃至毒之藥。非若川烏頭、附子，人所栽種，加以釀 制，殺其毒性之比。自非風頑急疾，不可輕投。甄權《藥性論》言其益陽事，治男子腎氣衰弱者，未可遽然也。此類止能搜風勝濕，開頑痰，治頑瘡，以毒攻毒而已，豈有川烏頭、附子補右腎命門之功哉？吾蘄郝知府自負知醫，因病風癬，服草烏頭、木鱉子藥過多，甫入腹而麻痹，遂至不救，可不慎乎？ 機曰︰烏喙形如烏嘴，其氣鋒銳。宜其通經絡，利關節，尋蹊達徑，而直抵病所。煎為射罔，能殺禽獸。非氣之鋒銳捷利，能如是乎？ 楊清叟曰︰凡風寒濕痹，骨內冷痛，及損傷入骨，年久發痛，或一切陰疽腫毒。並宜草烏頭、南星等分，少加肉桂為末，姜汁熱酒調塗。未破者能內消，久潰者能去黑爛。二藥性味辛烈，能破惡塊，逐寒熱，遇冷即消，遇熱即潰。","ACONITE ROOT
 
 [Taste and nature] Acrid and bitter; hot.
 
@@ -9739,7 +11023,28 @@ UI_BOOK_ENTRY_BODY_WU_WEI_ZI,"五味子
 【毒性】無毒。
 【歸經】歸肺、心、腎經。
 【主治】收斂固澀，益氣生津，補腎寧心。
-【釋名】荎藸 （《爾雅》，音知除）、玄...","SCHISANDRA FRUIT
+【釋名】荎藸 （《爾雅》，音知除）、玄及（《別錄》）、會及（《別錄》）。
+
+恭曰︰五味，皮、肉甘、酸，核中辛、苦，都有咸味，此則五味具也。《本經》但雲味酸，當以木為五行之先也。
+
+【發明】
+成無己曰︰肺欲收，急食酸以收之，以酸補之。芍藥、五味之酸，以收逆氣而安肺。
+
+杲曰︰收肺氣，補氣不足，升也。酸以收逆氣，肺寒氣逆，則宜此與乾薑同治之。又五味子收肺氣，乃火熱必用之藥，故治嗽以之為君。但有外邪者不可驟用，恐閉其邪氣，必先發散而後用之乃良。有痰者，以半夏為佐；喘者，阿膠為佐，但分兩少不同耳。
+
+宗奭曰︰今華州以西至秦州多產之。方紅熟時，彼人採得，蒸爛，研濾汁，熬成稀膏，量酸甘入蜜煉勻，待冷收器中。肺虛寒人，作湯時時飲之。作果可以寄遠。《本經》言其性溫，今食之多致虛熱，小兒益甚。《藥性論》謂其除熱氣，《日華子》謂其暖水髒、除煩熱，後學至此多惑。今既用治肺虛寒，則更不取其除熱之說。
+
+震亨曰︰五味大能收肺氣，宜其有補腎之功。收肺氣，非除熱乎？補腎，非暖水髒乎？乃火熱嗽必用之藥。寇氏所謂食之多致虛熱者，蓋收補之驟也，何惑之有？又黃昏嗽乃火氣浮入肺中，不宜用涼藥，宜五味子、五倍子斂而降之。
+
+思邈曰︰五、六月宜常服五味子湯，以益肺金之氣，在上則滋源，在下則補腎。其法︰以五味子一大合，木臼搗細，瓷瓶中，以百沸湯投之，入少蜜，封置火邊良久，湯成任飲。
+
+元素曰︰孫真人《千金月令》言︰五月常服五味，以補五臟之氣。遇夏月季夏之間，睏乏無力，無氣以動。與黃 、人參、麥門冬，少加黃柏，煎湯服之。使人精神頓加，兩足筋力湧出也。蓋五味子之酸，輔人參，能瀉丙火而補庚金，收斂耗散之氣。
+
+好古曰︰張仲景八味丸，用此補腎，亦兼述類象形也。
+
+機曰︰五味治喘嗽，須分南北。生津止渴，潤肺補腎，勞嗽，宜用北者；風寒在肺，宜用南者。
+
+慎微曰︰《抱樸子》雲︰五味者，五行之精，其子有五味。淮南公羨門子服之十六年，面色如玉女，入水不沾，入火不灼。","SCHISANDRA FRUIT
 
 [Taste and nature] Sour and sweet; warm.
 
@@ -9820,7 +11125,16 @@ UI_BOOK_ENTRY_BODY_WU_YAO,"乌药
 【毒性】無毒。
 【歸經】歸肺、脾、腎、膀胱經。
 【主治】行氣止痛，溫腎散寒。
-【釋名】旁其（《拾遺》）、鰟魮（《綱目》）、矮樟...","LINDERA ROOT
+【釋名】旁其（《拾遺》）、鰟魮（《綱目》）、矮樟（《綱目》）。
+
+時珍曰︰烏以色名。其葉狀似 鯽魚，故俗呼為 樹。《拾遺》作旁其，方音訛也。南人亦呼為矮樟，其氣似樟也。
+
+【發明】
+宗奭曰︰烏藥性和，來氣少，走洩多，但不甚剛猛。與沈香同磨作湯點服，治胸腹冷氣甚穩當。
+
+時珍曰︰烏藥辛溫香竄，能散諸氣。故《惠民和劑局方》治中風中氣諸證，用烏藥順氣散者，先疏其氣，氣順則風散也。嚴用和《濟生方》治七情鬱結，上氣喘急，用四磨湯者，降中兼升，瀉中帶補也。其方以人參、烏藥、沈香、檳榔各磨濃汁七分，合煎，細細咽之。
+
+《朱氏集驗方》治虛寒小便頻數，縮泉丸，用同益智子等分為丸服者，取其通陽明、少陰經也，方見草部益智子下。","LINDERA ROOT
 
 [Taste and nature] Acrid; warm.
 
@@ -9901,7 +11215,24 @@ UI_BOOK_ENTRY_BODY_XI_XIN,"细辛
 【毒性】小毒。
 【歸經】歸肺、腎、心經。
 【主治】解表散寒，祛風止痛，通竅，溫肺化飲。
-【釋名】小辛（《本經》）、少辛（《山海...","ASARUM HERB
+【釋名】小辛（《本經》）、少辛（《山海經》）。
+
+頌曰：華州真細辛，根細而味極辛，故名之曰細辛。
+
+時珍曰：小辛、少辛，皆此義也。按《山海經》雲，浮戲之山多少辛。《管子》雲，五沃之土，群藥生少辛，是矣。
+
+【發明】
+宗奭曰：治頭面風痛，不可缺此。
+
+元素曰：細辛氣溫，味大辛，氣濃於味，陽也，升也，入足厥陰、少陰血分，為手少陰引經之藥。香味俱細，故入少陰，與獨活相類。以獨活為使，治少陰頭痛如神。亦止諸陽頭痛，諸風通用之。味辛而熱，溫少陰之經，散水氣以去內寒。
+
+成無己曰：水停心下不行，則腎氣燥，宜辛以潤之。細辛之辛，以行水氣而潤燥。
+
+杲曰：膽氣不足，細辛補之。又治邪氣自里之表，故仲景少陰證，用麻黃附子細辛湯。
+
+時珍曰：氣之濃者能發熱，陽中之陽也。辛溫能散，故諸風寒、風濕頭痛、痰飲、胸中滯氣、驚癇者，宜用之。口瘡、喉痹、 齒諸病用之者，取其能散浮熱，亦火鬱則發之之義也。辛能洩肺，故風寒咳嗽上氣者，宜用之。辛能補肝，故膽氣不足，驚癇眼目諸病，宜用之。辛能潤燥，故通少陰及耳竅，便澀者宜用之。
+
+承曰：細辛非華陰者不得為真。若單用末，不可過一錢。多則氣悶塞不通者死，雖死無傷。近年開平獄中嘗治此，不可不記。非本有毒，但不識多寡耳。","ASARUM HERB
 
 [Taste and nature] Acrid; warm.
 
@@ -9979,7 +11310,15 @@ UI_BOOK_ENTRY_BODY_XIANG_FU,"香附（莎根，香附子）
 【毒性】無毒。
 【歸經】歸肝、脾、三焦經。
 【主治】疏肝解鬱，理氣寬中，調經止痛。
-【釋名】雀頭香...","CYPERUS RHIZOME
+【釋名】雀頭香（《唐本》）、草附子（《圖經》）、水香稜（《圖經》）、水巴戟（《圖經》）、水莎（《圖經》）、侯莎（《爾雅》）、莎結（《圖經》）、夫須（《別錄》）、續根草（《圖經》）、地毛（《廣雅》）。
+
+時珍曰︰《別錄》止雲莎草，不言用苗用根。後世皆用其根，名香附子，而不知莎草之名也。其草可為笠及雨衣，疏而不沾，故字從草從沙。亦作蓑字，因其為衣垂 ，如孝子衰衣之狀，故又從苔乃笠名，賤夫所須也。其根相附連續而生，可以合香，故謂之香附子。上古謂之雀頭香。 按《江表傳》雲︰魏文帝遣使於吳求雀頭香，即此。其葉似三稜及巴戟，而生下濕地，故有水三稜、水巴戟之名。俗人呼為雷公頭。《金光明經》謂之月萃哆。《記事珠》謂之抱靈居士。
+
+【發明】好古曰︰香附治膀胱兩脅氣妨，心忪少氣，是能益氣，乃血中之氣藥也。本草不言治崩漏，而方中用治崩漏，是能益氣而止血也。又能逐去瘀血，是推陳也。正如巴豆治大便不通而又止洩瀉同意。又雲︰香附陽中之陰，血中之氣藥，凡氣鬱血氣必用之。炒黑能止血治崩漏，此婦人之仙藥也。多服亦能走氣。
+
+震亨曰︰香附須用童子小便浸過，能總解諸鬱，凡血氣必用之藥，引至氣分而生血，此正陰生陽長之義。本草不言補，而方家言於老人有益，意有存焉。蓋於行中有補理。天之所以為天者，健而有常也。健運不息，所以生生無窮，即此理爾。今即香中亦用之。
+
+時珍曰︰香附之氣平而不寒，香而能竄。其味多辛能散，微苦能降，微甘能和。乃足厥 陰肝、手少陽三焦氣分主藥，而兼通十二經氣分。生則上行胸膈，外達皮膚；熟則下走肝腎，外徹腰足。炒黑則止血，得童溲浸炒則入血分而補虛，鹽水浸炒則入血分而潤燥，青鹽炒則補腎氣，酒浸炒則行經絡，醋浸炒則消積聚，姜汁炒則化痰飲。得參、術，則補氣；得歸、，則補血；得木香，則疏滯和中；得檀香則理氣醒脾，得沈香則升降諸氣，得芎 、蒼朮 則總解諸鬱，得梔子、黃連則能降火熱，得茯神則交濟心腎，得茴香、破故紙則引氣歸元，得濃樸、半夏則決壅消脹，得紫蘇、蔥白則解散邪氣，得三稜、莪術則消磨積塊，得艾葉則治血氣暖子宮，乃氣病之總司，女科之主帥也。飛霞子韓 雲︰香附能推陳致新，故諸書皆雲益氣。而俗有耗氣之說，宜於女人不宜於男子者，非矣。蓋婦人以血用事，氣行則無疾。 老人精枯血閉，惟氣是資。小兒氣日充，則形乃日固。大凡病則氣滯而餒，故香附於氣分為君藥，世所罕知。臣以參、 ，佐以甘草，治虛怯甚速也。 游方外時，懸壺輕賚，治百病黃鶴丹，治婦人青囊丸，隨宜用引，輒有小效。人索不已，用者當思法外意可也。黃鶴丹乃銖衣翁在黃鶴樓所授之方，故名。其方用香附一斤，黃連半斤，洗曬為末，水糊丸梧子大。 假如外感，蔥姜湯下；內傷，米飲下；氣病，木香湯下；血病，酒下；痰病，姜湯下；火病，白湯下。余可類推。青囊丸乃邵應節真人禱母病，感方士所授者。方用香附（略炒）一斤，烏藥（略炮）五兩三錢，為末，水醋煮面糊為丸。隨證用引，如頭痛，茶下；痰氣，姜湯下；多用酒下，為妙。","CYPERUS RHIZOME
 
 [Taste and nature] Acrid, slightly bitter and slightly sweet; neutral.
 
@@ -10064,7 +11403,16 @@ UI_BOOK_ENTRY_BODY_XING_REN,"杏仁（杏）
 【毒性】有小毒。
 【歸經】歸肺、大腸經。
 【主治】止咳平喘，潤腸通便。
-【釋名】時珍曰︰杏字篆文象子在木枝之形。或雲從口...","APRICOT KERNEL
+【釋名】時珍曰︰杏字篆文象子在木枝之形。或雲從口及從可者，並非也。《江南錄》雲︰楊行密改杏名甜梅。
+
+【發明】
+元素曰︰杏仁氣薄味濃，濁而沈墜，降也、陰也。入手太陰經。其用有三︰潤肺也，消食積也，散滯氣也。
+
+杲曰︰杏仁散結潤燥，除肺中風熱咳嗽。杏仁下喘，治氣也；桃仁療狂，治血也。俱治大便秘，當分氣、血。晝則便難，行陽氣也；夜則便難，行陰血也。故虛人便閉，不可過洩。脈浮者屬氣，用杏仁、陳皮；脈沈者屬血，用桃仁、陳皮。手陽明與手太陰為表裡，賁門主往來，魄門主收閉，為氣之通道，故並用陳皮佐之。
+
+好古曰︰張仲景麻黃湯，及王朝奉治傷寒氣上喘逆，並用杏仁者，為其利氣、瀉肺、解肌也。
+
+時珍曰︰杏仁能散能降，故解肌散風、降氣潤燥、消積治傷損藥中用之。治瘡殺蟲，用其毒也。按《醫余》雲︰凡索面、豆粉近杏仁則爛。頃一兵官食粉成積，醫師以積氣丸、杏仁相半研為丸，熟水下，數服愈。又《野人閒話》雲︰翰林學士辛士遜，在青城山道院中，夢皇姑謂曰︰可服杏仁，令汝聰明，老而健壯，心力不倦。求其方，則用杏仁一味，每盥漱畢，以七枚納口中，良久脫去皮，細嚼和津液頓咽。日日食之，一年必換血，令人輕健。此申天師方也。又楊士瀛《直指方》雲︰凡人以水浸杏仁五枚，五更端坐，逐粒細嚼至盡，和津吞下。久則能潤五臟，去塵滓，驅風明目，治肝腎風虛，瞳人帶青，眼翳風癢之病。珍按杏仁性熱降氣，亦非久服之藥。此特其咀嚼吞納津液，以消積穢則可耳。古有服杏丹法，雲是左慈之方。唐慎微收入本草，雲久服壽至千萬。其說妄誕可鄙，今刪其紕謬之辭，存之於下，使讀者毋信其誑也。","APRICOT KERNEL
 
 [Taste and nature] Bitter; warm.
 
@@ -10137,7 +11485,12 @@ UI_BOOK_ENTRY_BODY_XU_DUAN,"续断
 【毒性】無毒
 【歸經】歸肝、腎經。
 【主治】肝腎虧虛，衝任不固之崩漏，胎漏、胎動不安。
-【釋名】屬折（《本經》）、接骨（...","DIPSACUS ROOT
+【釋名】屬折（《本經》）、接骨（《別錄》）、龍豆（《本經》）、南草（《別錄》）。
+
+時珍曰︰續斷、屬折、接骨，皆以功命名也。
+
+【發明】
+時珍曰︰宋張叔潛秘書，知劍州時，其閣下病血痢。一醫用平胃散一兩，入川續斷末二錢半。每服二錢，水煎服即愈。紹興壬子，會稽時行痢疾。叔潛之子以方傳人，往往有驗。小兒痢服之效。","DIPSACUS ROOT
 
 [Taste and nature] Bitter and acrid; slightly warm.
 
@@ -10204,7 +11557,14 @@ UI_BOOK_ENTRY_BODY_XUAN_SHEN,"玄参
 【毒性】無毒。
 【歸經】歸肺、胃、腎經。
 【主治】清熱涼血，滋陰降火，解毒散結。
-【釋名】黑參（《綱目》）、玄台（《...","SCROPHULARIA ROOT
+【釋名】黑參（《綱目》）、玄台（《吳普》）、重台（《本經》）、鹿腸（《吳普》）、正馬（《別錄》）、逐馬（《藥性》）、馥草（《開寶》）、野脂麻（《綱目》）、鬼藏（《吳普》）。時珍曰︰玄，黑色也。《別錄》一名端，一名咸，多未詳。
+
+弘景曰︰其莖微似人參，故得參名。志曰︰合香家用之，故俗呼馥草。
+
+【發明】
+元素曰︰玄參乃樞機之劑，管領諸氣上下，清肅而不濁，風藥中多用之。故《活人書》治傷寒陽毒，汗下後毒不散，及心下懊 ，煩不得眠，心神顛倒欲絕者，俱用玄參。以此論之，治胸中氤氳之氣，無根之火，當以玄參為聖劑也。
+
+時珍曰︰腎水受傷，真陰失守，孤陽無根，發為火病。法宜壯水以制火，故玄參與地黃同功。其消瘰 亦是散火，劉守真言︰結核是火病。","SCROPHULARIA ROOT
 
 [Taste and nature] Sweet, bitter and salty; slightly cold.
 
@@ -10281,7 +11641,14 @@ UI_BOOK_ENTRY_BODY_YAN_HU_SUO,"延胡索
 【毒性】無毒
 【歸經】歸肝、脾、心經。
 【主治】活血化瘀，行氣止痛。
-【釋名】玄胡索。好古曰：本名玄胡索，避宋真宗諱，改...","CORYDALIS RHIZOME
+【釋名】玄胡索。好古曰：本名玄胡索，避宋真宗諱，改玄為延也。
+
+【發明】
+李珣曰：主腎氣，及破產後惡露或兒枕，與三稜、鱉甲、大黃為散，甚良，蟲蛀成末者，尤良。
+
+時珍曰：玄胡索，味苦微辛，氣溫，入手、足太陰、厥陰四經。能行血中氣滯，氣中血滯，故專治一身上下諸痛，用之中的，妙不可言。
+荊穆王妃胡氏，因食蕎麥面著怒，遂病胃脘當心痛，不可忍。醫用吐下行氣化滯諸藥，皆入口即吐，不能奏功，大便三日不通。因思《雷公炮炙論》雲：心痛欲死，速覓延胡。乃以玄胡索末三錢，溫酒調下，即納藥。少頃，大便行而痛遂止。又華圭年五十餘，病下痢腹痛垂死，已備棺木。予用此藥三錢，米飲服之，痛即減十之五，調理而安。按方勺《泊宅編》雲：一人病遍體作痛，殆不可忍。都下醫或雲中風，或雲中濕，或雲肺氣，藥悉不效。周離亨言是氣血凝滯所致，用延胡索、當歸、桂心等分為末，溫酒服三四錢，隨量頻進，以痛止為度，遂痛若失。蓋延胡索活血化氣，第一品藥也。
+趙待制傳雲：凡治婦人，月候不調，腹中結塊，產前產後諸疾，及跌打損傷，心腹諸痛，服之立效。蓋其溫而能散，利氣止痛也。","CORYDALIS RHIZOME
 
 [Taste and nature] Acrid and bitter; warm.
 
@@ -10362,7 +11729,18 @@ UI_BOOK_ENTRY_BODY_YI_YI_REN,"薏苡仁
 【毒性】無毒。
 【歸經】歸脾、胃、肺經。
 【主治】利水滲濕，健脾止瀉，除痹排膿，解毒散結。
-【釋名】解蠡（音禮。《本經》...","COIX SEED
+【釋名】解蠡（音禮。《本經》）、芑實（音起。《別錄》）、贛米（《別錄》。音感。陶氏作珠，雷氏作 米）、回回米（《救荒本草》）、薏珠子（《圖經》）。
+
+時珍曰︰薏苡名義未詳。其葉似蠡實葉而解散，又似芑黍之苗，故有解蠡、芑實之名。 贛米乃其堅硬者，有贛強之意。苗名屋 。《救荒本草》雲︰回回米又呼西番蜀秫。俗名草珠兒。
+
+【發明】
+宗奭曰︰薏苡仁《本經》雲︰微寒，主筋急拘攣。拘攣有兩等︰《素問》注中，大筋受熱，則縮而短，故攣急不伸，此是因熱而拘攣也，故可用薏苡；若《素問》言因寒則筋急者，不可更用此也。 蓋受寒使人筋急；寒熱使人筋攣；若但受熱不曾受寒，亦使人筋緩；受濕則又引長無力 也。此藥力勢和緩，凡用須加倍即見效。
+
+震亨曰︰寒則筋急，熱則筋縮。急因於堅強，縮因於短促。若受濕則弛，弛則引長。然寒與濕未嘗不挾熱。三者皆因於濕，然外濕非內濕啓之不能成病。故濕之為病，因酒而魚肉繼之。甘滑、陳久、燒炙並辛香，皆致濕之因也。
+
+時珍曰︰薏苡仁屬土，陽明藥也，故能健脾益胃。虛則補其母，故肺痿、肺癰用之。筋骨之病，以治陽明為本，故拘攣筋急風痹者用之。土能勝水除濕，故洩痢水腫用之。按︰古方小續命湯注雲︰中風筋急拘攣，語遲脈弦者，加薏苡仁。亦扶脾抑肝之義。又《後漢書》雲︰馬援在交趾常餌薏苡實，雲能輕身省欲以勝瘴氣也。又張師正《倦遊錄》雲︰辛稼軒忽患疝疾，重墜大如杯。一道人教以薏珠用東壁黃土炒過，水煮為膏服，數服即消。程沙隨病此，稼軒授之亦效。《本草》薏苡乃上品養心藥，故此有功。
+
+頌曰︰薏苡仁，心肺之藥多用之。故範汪治肺癰，張仲景治風濕、胸痹，並有方法。《濟生方》治肺損咯血，以熟豬肺切，蘸薏苡仁末，空心食之。薏苡補肺，豬肺引經也。趙君猷言屢用有效。","COIX SEED
 
 [Taste and nature] Sweet and bland; cool.
 
@@ -10447,7 +11825,20 @@ UI_BOOK_ENTRY_BODY_YU_ZHU,"玉竹（萎蕤）
 【毒性】無毒。
 【歸經】歸肺、胃經。
 【主治】養陰潤燥，生津止渴。
-【釋名】女萎（《本經》）、葳蕤（《吳普》）、萎 ...","POLYGONATUM ODORATUM RHIZOME
+【釋名】女萎（《本經》）、葳蕤（《吳普》）、萎 （音威移）、委萎（《爾雅》）、萎香（《綱目》）、熒（《爾雅》，音行）、玉竹（《別錄》）、地節（《別錄》）。
+
+時珍曰︰按︰黃公紹《古今韻會》雲︰葳蕤，草木葉垂之貌。此草根長多須，如冠纓下垂之 而有威儀，故以名之。凡羽蓋旌旗之纓 ，皆象葳蕤，是矣。張氏《瑞應圖》雲︰王者禮備，則葳蕤生於殿前。一名萎香。則威儀之義，於此可見。《別錄》作葳蕤，省文也。《說文》作萎 ，音相近也。《爾雅》作委萎，字相近也。其葉光瑩而象竹，其根多節，故有熒及玉竹、地節諸名。《吳普本草》又有烏女、蟲蟬之名。宋本一名馬熏，即烏萎之訛者也。
+
+【發明】
+杲曰︰葳蕤能升能降，陽中陰也。其用有四︰主風淫四末，兩目淚爛，男子濕注腰痛，女子面生黑 。
+
+時珍曰︰葳蕤性平味甘，柔潤可食。故朱肱《南陽活人書》，治風溫自汗身重，語言難出，用葳蕤湯，以之為君藥。予每用治虛勞寒熱 瘧，及一切不足之證，用代參、 ，不寒不燥，大有殊功，不只於去風熱濕毒而已，此昔人所未闡者也。
+
+藏器曰︰陳壽《魏志‧樊阿傳》雲︰青粘，一名黃芝，一名地節。此即葳蕤，極似偏精。
+
+本功外，主聰明，調血氣，令人強壯。和漆葉為散服，主五臟益精，去三蟲，輕身不老，變白，潤肌膚，暖腰腳惟有熱不可服。晉嵇紹有胸中寒疾，每酒後苦唾，服之得愈。草似竹，取根花葉陰乾用。昔華佗入山見仙人所服，以告樊阿，服之壽百歲也。頌曰︰陳藏器以青粘即葳蕤。世無識者，未敢以為信然。
+
+時珍曰︰蘇頌注黃精，疑青粘是黃精，與此說不同。今考黃精、葳蕤性味功用大抵相近，而葳蕤之功更勝。故青粘，一名黃芝，與黃精同名；一名地節，與葳蕤同名，則二物雖通用亦可。","POLYGONATUM ODORATUM RHIZOME
 
 [Taste and nature] Sweet; slightly cold.
 
@@ -10518,7 +11909,14 @@ UI_BOOK_ENTRY_BODY_YUAN_ZHI,"远志
 【毒性】無毒。
 【歸經】歸心、腎、肺經。
 【主治】安神益智，交通心腎，祛痰，消腫。
-【釋名】苗名小草（《本經》）、細草（《...","POLYGALA ROOT
+【釋名】苗名小草（《本經》）、細草（《本經》）、棘菀（《本經》）、 繞（《本經》）。
+
+時珍曰︰此草服之能益智強志，故有遠志之稱。《世說》載郝隆譏謝安雲︰處則為遠志，出則為小草。《記事珠》謂之醒心杖。
+
+【發明】
+好古曰︰遠志，腎經氣分藥也。
+
+時珍曰︰遠志，入足少陰腎經，非心經藥也。其功專於強志益精，治善忘。蓋精與志，皆腎經之所藏也。腎經不足，則志氣衰，不能上通於心，故迷惑善忘。《靈樞經》雲︰腎藏精，精合志。腎盛怒而不止則傷志，志傷則喜忘其前言，腰脊不可以俯仰屈伸，毛悴色夭。又雲︰人之善忘者，上氣不足，下氣有餘，腸胃實而心肺虛，虛則營衛留於下，久之不以時上，故善忘也。陳言《三因方》遠志酒，治癰疽，雲有奇功，蓋亦補腎之力爾。葛洪《抱樸子》雲：陵陽子仲服遠志二十年，有子三十七人，能開書所視不忘，坐在立亡。","POLYGALA ROOT
 
 [Taste and nature] Bitter and acrid; warm.
 
@@ -10593,7 +11991,20 @@ UI_BOOK_ENTRY_BODY_ZE_XIE,"泽泻
 【毒性】無毒。
 【歸經】歸腎、膀胱經。
 【主治】利小便，清濕熱，洩腎濁。
-【釋名】水瀉（《本經》）、鵠瀉（《本經》）、及瀉...","ALISMA RHIZOME
+【釋名】水瀉（《本經》）、鵠瀉（《本經》）、及瀉（《別錄》）、蕍（音俞）、芒芋（《本經》）、禹孫（《侯氏藥譜》）。
+
+時珍曰︰去水曰瀉，如澤水之瀉也。禹能治水，故曰禹孫。餘未詳。
+
+【發明】
+頌曰︰《素問》治酒風身熱汗出，用澤瀉、術；《深師方》治支飲，亦用澤瀉、術，但煮法小別爾。張仲景治雜病，心下有支飲苦冒，有澤瀉湯，治傷寒有大小澤瀉湯、五苓散輩，皆用澤瀉，行利停水，為最要藥。元素曰︰澤瀉乃除濕之聖藥，入腎經，治小便淋瀝，去陰間汗。無此疾服之，令人目
+
+宗奭曰︰澤瀉之功，長於行水。張仲景治水蓄渴煩，小便不利，或吐或瀉，五苓散主之，方用澤瀉，故知其長於行水。本草引扁鵲雲︰多服病患眼。誠為行去其水也。凡服澤瀉散人，未有不小便多者。小便既多，腎氣焉得復實？今人止洩精，多不敢用之。仲景八味丸用之者，亦不過引接桂、附等，歸就腎經，別無他意。
+
+好古曰︰《本經》雲久服明目，扁鵲雲多服昏目，何也？易老雲︰去脬中留垢，以其味咸能瀉伏水故也。瀉伏水，去留垢，故明目；小便利，腎氣虛，故昏目。
+
+王履曰︰寇宗奭之說，王好古韙之。竊謂八味丸以地黃為君，余藥佐之，非止補血，兼補氣也，所謂陽旺則能生陰血也。地黃、山茱萸、茯苓、牡丹皮皆腎經之藥，附子、官桂乃右腎命門之藥，皆不待澤瀉之接引而後至也。則八味丸之用此，蓋取其瀉腎邪，養五臟，益氣力，起陰氣，補虛損五勞之功而已。雖能瀉腎，從於諸補藥群眾之中，則亦不能瀉矣。
+
+時珍曰︰澤瀉氣平，味甘而淡。淡能滲洩，氣味俱薄，所以利水而洩下。脾胃有濕熱，則頭重而目昏耳鳴。澤瀉滲去其濕，則熱亦隨去，而土氣得令，清氣上行，天氣明爽，故澤瀉有養五臟、益氣力、治頭旋、聰明耳目之功。若久服，則降令太過，清氣不升，真陰潛耗，安得不目昏耶？仲景地黃丸用茯苓、澤瀉者，乃取其瀉膀胱之邪氣，非引接也。古人用補藥必兼瀉邪，邪去則補藥得力，一辟一闔，此乃玄妙。後世不知此理，專一於補，所以久服必致偏勝之害也﹗","ALISMA RHIZOME
 
 [Taste and nature] Sweet and bland; cold.
 
@@ -10676,7 +12087,24 @@ UI_BOOK_ENTRY_BODY_ZHI_KE,"枳壳（枳）
 【毒性】無毒。
 【歸經】歸脾、胃、大腸經。
 【主治】行氣消脹，寬中除痞，化痰消積。
-【釋名】子名枳實（《本經》...","MATURE BITTER ORANGE
+【釋名】子名枳實（《本經》）、枳殼（宋《開寶》）。
+
+宗奭曰：枳實、枳殼，一物也。小則其性酷而速，大則其性詳而緩。故張仲景治傷寒倉猝之病，承氣湯中用枳實，皆取其疏通、決洩、破結實之義。他方但導敗風壅之氣，可常服者，故用枳殼，其義如此。
+
+恭曰：既稱枳實，須合核瓤，今殊不然。
+
+時珍曰：枳乃木名，從只，諧聲也。實乃其子，故曰枳實。後人因小者性速，又呼老者為枳殼。生則皮厚而實，熟則殼薄而虛，正如青橘皮、陳橘皮之義。宋人復出枳殼一條，非矣。寇氏以為破結實而名，亦未必然。
+
+【發明】
+元素曰︰枳殼破氣，勝濕化痰，洩肺走大腸，多用損胸中至高之氣，只可二、三服而已。稟受素壯而氣刺痛者，看在何杲曰︰氣血弱者不可服，以其損氣也。
+
+好古曰︰枳殼主高，枳實主下；高者主氣，下者主血。故殼主胸膈皮毛之病，實主心腹脾胃之病，大同小異。朱肱《活人書》言︰治痞宜先用桔梗枳殼湯，非用此治心下痞也。果知能消分別。魏、晉以來，始分實、殼之用。
+
+皆能利氣。氣下則痰喘止，氣行則痞脹消，氣通則痛刺止，氣利則後重除。故以枳殼利胸膈，枳實利腸胃。然張仲景治胸痹痞滿，以枳實為要藥；諸方治下血痔痢、大腸秘塞、里急後重，又以枳殼為通用。則枳實不獨治下，而殼不獨治高也。蓋自飛門至魄門，皆肺主之，三焦相通，一氣而已。則二物分之可也，不分亦無傷。杜壬方載湖陽公方。用枳殼四兩，甘草二兩，為末。每服一錢，白湯點服。自五月後一日一服，至臨月，不惟易產，仍無胎中惡病也。張潔古《活法機要》改以枳術丸日服，令胎瘦易生，謂之束胎丸。
+
+而寇宗奭《衍義》言︰胎壯則子有力易生，令服枳殼藥反致無力，兼胎易產者，大不然也。以理思之，寇氏之說似覺為優。或胎前氣盛壅滯者宜用之，所謂八、九月胎必用枳殼、蘇梗以順氣，胎前無滯，則產後無虛也。若氣稟弱者，即大非所宜矣。
+
+震享曰︰難產多見於鬱悶安逸之人，富貴奉養之家。古方瘦胎飲，為湖陽公主作也。予妹苦於難產，其形肥而好坐，予思此與公主正相反也。彼奉養之人，其氣必實，故耗其氣使平則易產。今形肥則氣虛，久坐則氣不運，當補其母之氣。以紫蘇飲加補氣藥，與十數貼服之，遂快產。","MATURE BITTER ORANGE
 
 [Taste and nature] Bitter, acrid and sour; slightly cold.
 
@@ -10747,7 +12175,16 @@ UI_BOOK_ENTRY_BODY_ZHI_MU,"知母
 【毒性】無毒。
 【歸經】歸肺、胃、腎經。
 【主治】清熱瀉火，滋陰潤燥。
-【釋名】母（《本經》音遲。《說文》作 ）、連母（《...","ANEMARRHENA RHIZOME
+【釋名】母（《本經》音遲。《說文》作 ）、連母（《本經》）、 母（ 音匙，又音提，或作 ）、貨母（《本經》）、地參（《本經》）、水參（又名水須、水浚）、 （《爾雅》，音覃）、 藩（音沈煩）、苦心（《別錄》）、兒草（《別錄》，又名兒踵草、女雷、女理、鹿列、韭逢、東根、野蓼、昌支）
+
+時珍曰︰宿根之旁，初生子根，狀如 虻之狀，故謂之 母，訛為知母、 母也。餘多未詳。
+
+【發明】
+權曰︰知母治諸熱勞，患人虛而口乾者，加用之。
+
+杲曰︰知母入足陽明、手太陰。其用有四︰瀉無根之腎火，療有汗之骨蒸，止虛勞之熱，滋化源之陰。仲景用此入白虎湯治不得眠者，煩躁也。煩出於肺，躁出於腎。君以石膏，佐以知母之苦寒，以清腎之源；緩以甘草、粳米，使不速下也。又凡病小便 塞而渴者，熱在上焦氣分，肺中伏熱不能生水，膀胱絕其化源，宜用氣薄、味薄、淡滲之藥，以瀉肺火、清肺金而滋水之化源。若熱在下焦血分而不渴者，乃真水不足，膀胱乾涸，乃無陰則陽無以化，法當用黃柏、知母大苦寒之藥，以補腎與膀胱，使陰氣行而陽自化，小便自通。方法詳載木部黃柏下。
+
+時珍曰︰腎苦燥，宜食辛以潤之。肺苦逆，宜食苦以瀉之。知母之辛苦寒涼，下則潤腎燥而滋陰，上則清肺金而瀉火，乃二經氣分藥也。黃柏則是腎經血分藥。故二藥必相須而行，昔人譬之蝦與水母，必相依附。補陰之說，詳黃柏條。","ANEMARRHENA RHIZOME
 
 [Taste and nature] Bitter and sweet; cold.
 
@@ -10822,7 +12259,22 @@ UI_BOOK_ENTRY_BODY_ZHI_SHI,"枳实（枳）
 【毒性】無毒。
 【歸經】歸脾、胃、大腸經。
 【主治】破氣消積，化痰散痞。
-【釋名】子名枳實（《本經》）、枳殼（...","IMMATURE BITTER ORANGE
+【釋名】子名枳實（《本經》）、枳殼（宋《開寶》）。
+
+宗奭曰：枳實、枳殼，一物也。小則其性酷而速，大則其性詳而緩。故張仲景治傷寒倉猝之病，承氣湯中用枳實，皆取其疏通、決洩、破結實之義。他方但導敗風壅之氣，可常服者，故用枳殼，其義如此。
+
+恭曰：既稱枳實，須合核瓤，今殊不然。
+
+時珍曰：枳乃木名，從只，諧聲也。實乃其子，故曰枳實。後人因小者性速，又呼老者為枳殼。生則皮厚而實，熟則殼薄而虛，正如青橘皮、陳橘皮之義。宋人復出枳殼一條，非矣。寇氏以為破結實而名，亦未必然。
+
+【發明】
+震亨曰：枳實瀉痰，能衝牆倒壁，滑竅破氣之藥也。
+
+元素曰：心下痞及宿食不消，並宜枳實、黃連。
+
+杲曰：以蜜炙用，則破水積以洩氣，除內熱。潔古用去脾經積血。脾無積血，則心下不痞也。
+
+好古曰：益氣則佐之以人參、白朮、乾薑，破氣則佐之以大黃、牽牛、芒硝，此《本經》所以言益氣而復言消痞也。非白朮不能去濕，非枳實不能除痞。故潔古制枳術丸方，以調胃脾；張仲景治心下堅大如盤，水飲所作，枳實白朮湯，用枳實七枚，術三兩，水一斗，煎三升，分三服，腹中軟，即消也。余見枳殼下。","IMMATURE BITTER ORANGE
 
 [Taste and nature] Bitter, acrid and sour; slightly cold.
 
@@ -10901,7 +12353,22 @@ UI_BOOK_ENTRY_BODY_ZHI_ZI,"栀子
 【毒性】無毒。
 【歸經】心、肺、三焦經。
 【主治】清洩肺熱，疏散肌表濕熱，涼血解毒。
-【釋名】木丹（《本經》）、越桃（《別錄》...","GARDENIA FRUIT
+【釋名】木丹（《本經》）、越桃（《別錄》）、鮮支（《綱目》），花名薝蔔（《酉陽雜俎》）。
+
+時珍曰︰卮，酒器也。梔子象之，故名。俗作梔。司馬相如賦雲︰鮮支黃礫。注雲︰鮮支即支子也。佛書稱其花為卜，謝靈運謂之林蘭，曾端伯呼為禪友。或曰︰卜金色，非梔子也。
+
+【發明】
+元素曰︰梔子輕飄而象肺，色赤而象火，故能瀉肺中之火。
+
+其用有四︰心經客熱一也，除煩躁二也，去上焦虛熱三也，治風四也。
+
+震亨曰︰梔子瀉三焦之火，及痞塊中火邪，最清胃脘之血。其性屈曲下行，能降火從小便中洩去。凡心痛稍久，不宜溫散，反助火邪。故古方多用梔子以導熱藥，則邪易伏而病易退。
+
+好古曰︰本草不言梔子能吐，仲景用為吐藥。梔子本非吐藥，為邪氣在上，拒而不納，食令上吐，則邪因以出，所謂“其高者因而越之”也。或用為利小便藥，實非利小便，乃清肺也。肺清則化行，而膀胱津液之府，得此氣化而出也。本草言治大小腸熱，乃辛與庚合，又與丙合，又能洩戊，先入中州故也。仲景治煩躁用梔子豉湯，煩者氣也，躁者血也。氣主肺，血主腎。故用梔子以治肺煩，香杲曰︰仲景以梔子色赤味苦，入心而治煩；香豉色黑味咸，入腎而治躁。
+
+宗奭曰︰仲景治傷寒發汗吐下後，虛煩不得眠；若劇者，必反復顛倒，心中懊 ，梔子豉湯治之。因其虛，故不用大黃，有寒毒故也。梔子雖寒而無毒，治胃中熱氣，既亡血亡津液，腑髒無潤養，內生虛熱，非此物不可去也。又治心經留熱，小便赤澀，用去皮梔子（火煨）、大黃、連翹、炙甘草等分末之，水煎三錢服，無不利也。
+
+發黃，皆用梔子、茵陳、甘草、香豉四物作湯飲。又治大病後勞復，皆用梔子、鼠矢等湯，利小便而愈。其方極多，不可悉載。","GARDENIA FRUIT
 
 [Taste and nature] Bitter; cold.
 
@@ -10967,7 +12434,9 @@ UI_BOOK_ENTRY_BODY_ZHU_RU,"竹茹（竹）
 【毒性】無毒。
 【歸經】歸肺、胃、心、膽經。
 【主治】清熱化痰，除煩止嘔。
-【釋名】時珍曰︰竹字象形。許慎《說文》雲︰...","BAMBOO SHAVINGS
+【釋名】時珍曰︰竹字象形。許慎《說文》雲︰“竹，冬生草也”。故字從倒草。戴凱之《竹譜》雲︰植物之中，有名曰竹。不剛不柔，非草非木。小異實虛，大同節目。
+
+【發明】","BAMBOO SHAVINGS
 
 [Taste and nature] Sweet; slightly cold.
 
@@ -11032,7 +12501,18 @@ UI_BOOK_ENTRY_BODY_ZHU_YE,"竹叶（竹）
 【毒性】無毒。
 【歸經】歸心、胃、小腸經。
 【主治】清熱瀉火，除煩，生津利尿。
-【釋名】時珍曰︰竹字象形。許慎《說文...","BAMBOO LEAF
+【釋名】時珍曰︰竹字象形。許慎《說文》雲︰“竹，冬生草也”。故字從倒草。戴凱之《竹譜》雲︰植物之中，有名曰竹。不剛不柔，非草非木。小異實虛，大同節目。
+
+【發明】
+弘景曰︰甘竹葉最勝。
+
+詵曰︰竹葉︰ 、苦、淡、甘之外，餘皆不堪入藥，不宜人。淡竹為上，甘竹次之。
+
+宗奭曰︰諸竹筍性皆微寒，故知其葉一致也。張仲景竹葉湯，惟用淡竹。
+
+元素曰︰竹葉苦平，陰中微陽。
+
+杲曰︰竹葉辛苦寒，可升可降，陽中陰也。其用有二︰除新久風邪之煩熱，止喘促氣勝","BAMBOO LEAF
 
 [Taste and nature] Sweet and bland; cold.
 
@@ -11094,7 +12574,11 @@ UI_BOOK_ENTRY_BODY_ZI_WAN,"紫菀
 【毒性】無毒。
 【歸經】歸肺經。
 【主治】潤肺下氣，化痰止咳。
-【釋名】青菀（《別錄》）、紫蒨（《別錄》）、返魂草（《綱目...","ASTER ROOT
+【釋名】青菀（《別錄》）、紫蒨（《別錄》）、返魂草（《綱目》）、夜牽牛（《鬥門方》）。
+
+時珍曰︰其根色紫而柔宛，故名許慎《說文》作茈菀。《鬥門方》謂之返魂草。
+
+【發明】","ASTER ROOT
 
 [Taste and nature] Acrid and bitter; warm.
 
@@ -11161,7 +12645,10 @@ UI_BOOK_ENTRY_BODY_MA_HUANG_TANG,"麻黄汤
 臣：桂枝 二錢
 佐：杏仁 二錢
 使：甘草 一錢
-【配...","EPHEDRA DECOCTION
+【配伍】
+麻桂相須，增強發汗散寒之力，專治表實無汗。
+麻杏相使，宣降相配，專治寒邪閉肺之喘逆。
+甘草調和諸藥","EPHEDRA DECOCTION
 [Source] Treatise on Cold Damage
 [Actions] Promotes sweating to release the Exterior; disperses Lung Qi to ease wheezing
 [Indication] Wind-Cold Exterior Excess pattern
@@ -11216,7 +12703,10 @@ UI_BOOK_ENTRY_BODY_GUI_ZHI_TANG,"桂枝汤
 君：桂枝 三錢
 臣：白芍 三錢
 佐：生薑 三錢，大棗 二錢
-使：甘草...","CINNAMON TWIG DECOCTION
+使：甘草 二錢
+【配伍】
+桂枝辛散衛邪，白芍酸斂營陰；一散一收，調和營衛，不傷正、不斂邪。
+姜棗相合，調和脾胃，化生氣血，資營衛之源。","CINNAMON TWIG DECOCTION
 [Source] Treatise on Cold Damage
 [Actions] Releases the muscle layer and Exterior; harmonizes nutritive and defensive Qi
 [Indication] Wind-Cold Exterior Deficiency pattern
@@ -11271,7 +12761,16 @@ UI_BOOK_ENTRY_BODY_YIN_QIAO_SAN,"银翘散
 【主治】風熱表證
 【組成】
 君：金銀花 一兩，連翹 一兩
-臣：牛蒡子 六錢，荊芥四錢，薄荷 六錢...","HONEYSUCKLE AND FORSYTHIA POWDER
+臣：牛蒡子 六錢，荊芥四錢，薄荷 六錢，淡豆豉 五錢
+佐：桔梗 六錢，蘆根 四錢，竹葉 四錢
+使：甘草 五錢
+【配伍】
+金銀花、連翹：辛涼透表、疏散風熱，清熱解毒，輕清宣透上焦風熱
+薄荷、牛蒡子：辛涼疏散風熱，清利咽喉、宣肺止咳
+荊芥穗、淡豆豉：辛溫透表，發汗透邪，防寒涼鬱遏氣機，助邪外達
+桔梗：宣肺利咽、開氣止咳
+淡竹葉、蘆根：清熱生津、除煩止渴，緩解風熱口渴
+生甘草：調和諸藥，兼清熱解毒、利咽止痛","HONEYSUCKLE AND FORSYTHIA POWDER
 [Source] Systematic Differentiation of Warm Diseases
 [Actions] Releases the Exterior with acrid, cool herbs; clears Heat and resolves toxin
 [Indication] Wind-Heat Exterior pattern
@@ -11336,7 +12835,16 @@ UI_BOOK_ENTRY_BODY_SANG_XING_TANG,"桑杏汤
 【組成】
 君：桑葉 一錢五分，杏仁 二錢
 臣：沙參 一錢
-佐：貝母 一錢，淡豆豉...","MULBERRY LEAF AND APRICOT KERNEL DECOCTION
+佐：貝母 一錢，淡豆豉 一錢，梔子 一錢，梨皮一錢
+使：
+【配伍】
+桑葉：輕清宣透、疏散上焦溫燥
+杏仁：苦潤降肺、潤燥止咳
+淡豆豉：透表散邪
+貝母：清熱化痰、潤肺散結
+沙參：養陰生津、潤肺
+梔子：輕清洩上焦燥熱
+梨皮：清熱潤燥、生津止渴","MULBERRY LEAF AND APRICOT KERNEL DECOCTION
 [Source] Systematic Differentiation of Warm Diseases
 [Actions] Gently disperses Warm Dryness; moistens the Lung and eases cough
 [Indication] Warm Dryness pattern
@@ -11402,7 +12910,15 @@ UI_BOOK_ENTRY_BODY_XING_SU_SAN,"杏苏散
 【組成】
 君：杏仁 三錢，蘇葉 三錢
 臣：半夏 三錢，前胡 三錢，陳皮 三錢
-佐...","APRICOT KERNEL AND PERILLA LEAF POWDER
+佐：茯苓 二錢，桔梗 二錢，枳殼 二錢
+使：甘草 一錢
+【配伍】
+蘇葉：辛溫發散，輕宣涼燥、疏散風寒；
+杏仁：苦溫潤燥，降肺止咳。
+前胡：疏風降氣、化痰；
+桔梗枳殼：一升一降，宣暢肺氣。
+半夏、陳皮、茯苓：燥濕化痰、理氣健脾，杜生痰之源。
+生甘草：調和諸藥","APRICOT KERNEL AND PERILLA LEAF POWDER
 [Source] Systematic Differentiation of Warm Diseases
 [Actions] Gently disperses Cool Dryness; regulates the Lung and transforms phlegm
 [Indication] Cool Dryness pattern
@@ -11466,7 +12982,9 @@ UI_BOOK_ENTRY_BODY_YU_PING_FENG_SAN,"玉屏风散
 佐：防風 五錢
 使：
 【配伍】
-黃耆...","JADE WINDSCREEN POWDER
+黃耆：大補肺脾之氣，固表實衛、益氣止汗。
+白朮：健脾益氣，助黃耆培補元氣、固護肌表。
+防風：走肌表、疏散風邪，固表不留邪、祛風不傷正。","JADE WINDSCREEN POWDER
 [Source] Formulas for Investigating Origins
 [Actions] Supports Qi and strengthens the Exterior; reduces sweating and protects against Wind
 [Indication] Defensive Qi Deficiency
@@ -11524,7 +13042,13 @@ UI_BOOK_ENTRY_BODY_WU_TOU_TANG,"乌头汤
 君：烏頭 二錢
 臣：麻黃 三錢
 佐：白芍 三錢，黃耆 三錢
-使：...","ACONITE DECOCTION
+使：甘草 三錢，蜂蜜 一斤
+【配伍】
+烏頭：大辛大熱，溫經散寒、逐寒濕、止劇痛，專治寒凝痹痛；
+麻黃：發汗散寒，宣通經絡，助烏頭透邪外出。
+黃耆：益氣固表、扶正實衛，防辛散耗氣；
+白芍：養血和營、緩急止痛，柔筋止拘攣；
+炙甘草、蜂蜜：緩烏頭峻烈毒性，調和諸藥，緩急止痛。","ACONITE DECOCTION
 [Source] Essentials from the Golden Cabinet
 [Actions] Warms the channels, disperses Cold and Dampness, and eases pain
 [Indication] Painful Cold Bi pattern
@@ -11585,7 +13109,12 @@ UI_BOOK_ENTRY_BODY_BAI_HU_GUI_ZHI_TANG,"白虎桂枝汤
 君：石膏 二兩
 臣：知母 六錢
 佐：桂枝 三錢，粳米 五錢
-使：甘草...","WHITE TIGER DECOCTION WITH CINNAMON TWIG
+使：甘草 三錢
+【配伍】
+生石膏：大寒大清，清氣分實熱，瀉火除煩，專治關節紅腫灼熱。
+知母：苦寒清熱、滋陰潤燥，助石膏清洩裡熱。
+桂枝：辛溫通絡、祛風和營，引藥直達經絡關節，散經絡風濕熱邪；辛溫反佐，防寒涼凝滯氣血。
+炙甘草、粳米：益氣養胃，緩和石膏、知母寒涼之性，保護胃氣。","WHITE TIGER DECOCTION WITH CINNAMON TWIG
 [Source] Essentials from the Golden Cabinet
 [Actions] Clears Heat, opens the channels, harmonizes the nutritive layer and dispels Wind
 [Indication] Heat Bi pattern
@@ -11643,7 +13172,15 @@ UI_BOOK_ENTRY_BODY_YI_YI_REN_TANG,"薏苡仁汤
 【主治】著痹（濕痹）
 【組成】
 君：薏苡仁 一兩
-臣：羌活 三錢，獨活 三錢，麻...","COIX SEED DECOCTION
+臣：羌活 三錢，獨活 三錢，麻黃 三錢，桂枝 三錢
+佐：當歸 二錢，川芎 二錢
+使：甘草 三錢
+【配伍】
+薏苡仁：利水滲濕、健脾除痹、舒筋緩急，專治濕痹重著。
+羌活、獨活：祛風勝濕、通絡止痛，上下分治周身濕邪
+麻、桂：溫經散寒、通陽通絡，助祛濕
+當歸、川芎：養血活血、通絡止痛，治風先治血、血行風自滅
+甘草：調和諸藥，溫散助祛濕。","COIX SEED DECOCTION
 [Source] Complete Collection of Proven and Miraculous Formulas from the Imperial Medical Academy
 [Actions] Drains Dampness, opens the channels, dispels Wind and disperses Cold
 [Indication] Fixed Damp Bi pattern
@@ -11706,7 +13243,16 @@ UI_BOOK_ENTRY_BODY_FANG_FENG_TANG,"防风汤
 【組成】
 君：防風 五錢
 臣：桂枝 三錢，秦艽 三錢
-佐：當歸 二...","SAPOSHNIKOVIA DECOCTION
+佐：當歸 二錢，川芎 二錢，葛根 三錢
+使：甘草 一錢
+【配伍】
+防風：祛風勝濕、走竄經絡，專治游走痹痛。
+桂枝：溫散風寒、通經活絡；
+秦艽：祛風濕、通絡止痛，善治游走痹。
+當歸：養血和營、祛風通絡；
+川芎：活血通絡；
+葛根：解肌舒筋；
+甘草調和諸藥，調和營衛。","SAPOSHNIKOVIA DECOCTION
 [Source] Formulary of the Taiping Imperial Pharmacy for the People's Welfare
 [Actions] Dispels Wind, opens the channels, and disperses Cold and Dampness
 [Indication] Wandering Wind Bi pattern
@@ -11772,7 +13318,11 @@ UI_BOOK_ENTRY_BODY_MA_XING_SHI_GAN_TANG,"麻杏石甘汤
 臣：石膏 八錢
 佐：杏仁 三錢
 使：甘草 二錢
-【...","EPHEDRA, APRICOT KERNEL, GYPSUM AND LICORICE DECOCTION
+【配伍】
+麻黃：辛溫，宣肺平喘、開洩肺氣，散邪解表。
+石膏:辛甘大寒，清瀉肺熱、生津止渴，清裡熱以制麻黃之溫。
+杏仁:苦降肺氣，降利平喘，與麻黃一宣一降，恢復肺之宣肅。
+炙甘草:調和諸藥，益氣護中，緩急潤肺。","EPHEDRA, APRICOT KERNEL, GYPSUM AND LICORICE DECOCTION
 [Source] Treatise on Cold Damage
 [Actions] Releases the Exterior with acrid, cool herbs; clears Lung Heat and eases wheezing
 [Indication] Excessive Lung Heat
@@ -11830,7 +13380,13 @@ UI_BOOK_ENTRY_BODY_BU_FEI_TANG,"补肺汤
 【組成】
 君：人參 三錢，黃耆 五錢
 臣：熟地黃 五錢
-佐：五味子 二錢，紫...","LUNG-TONIFYING DECOCTION
+佐：五味子 二錢，紫菀 三錢，桑白皮 三錢
+使：
+【配伍】
+人參、黃耆：大補肺氣、固表益氣，補益肺氣虛之本。
+熟地黃：滋腎填精，金水相生，助肺氣之源。
+五味子：收斂肺氣、斂汗止喘，固表止自汗。
+紫菀、桑白皮：降肺氣、化痰止咳，清潤不燥，補虛不滯。","LUNG-TONIFYING DECOCTION
 [Source] Essential Prescriptions Worth a Thousand Gold for Emergencies
 [Actions] Supports Lung Qi, relieves cough and eases wheezing
 [Indication] Lung Qi Deficiency
@@ -11889,7 +13445,12 @@ UI_BOOK_ENTRY_BODY_ER_CHEN_TANG,"二陈汤
 君：半夏 五錢
 臣：陳皮 五錢
 佐：茯苓 三錢
-使：甘草 一...","TWO-CURED DECOCTION
+使：甘草 一錢五分
+【配伍】
+半夏：辛溫燥烈，燥濕化痰、降逆止嘔。
+陳皮：理氣行滯、燥濕化痰，使氣順則痰消。
+茯苓：健脾滲濕，杜生痰之源。
+甘草：調和諸藥，益氣和中。","TWO-CURED DECOCTION
 [Source] Formulary of the Taiping Imperial Pharmacy for the People's Welfare
 [Actions] Dries Dampness, transforms phlegm, regulates Qi and harmonizes the middle
 [Indication] Phlegm-Dampness obstructing the Lung
@@ -11948,7 +13509,14 @@ UI_BOOK_ENTRY_BODY_SHA_SHEN_MAI_DONG_TANG,"沙参麦冬汤
 【組成】
 君：沙參 三錢，麥門冬 三錢
 臣：玉竹 二錢，天花粉 一錢五分
-佐...","ADENOPHORA AND OPHIOPOGON DECOCTION
+佐：扁豆 一錢五分，桑葉 一錢五分
+使：甘草 一錢
+【配伍】
+沙參、麥冬：養陰潤肺、生津止渴，直補肺陰。
+玉竹、天花粉：增強養陰生津、潤燥止咳，清虛熱、潤肺燥。
+桑葉：輕清宣肺、疏散虛熱；
+扁豆：健脾養胃，培土生金，助生津之源。
+甘草：調和諸藥，益氣和中。","ADENOPHORA AND OPHIOPOGON DECOCTION
 [Source] Systematic Differentiation of Warm Diseases
 [Actions] Nourishes and clears the Lung and Stomach, generates fluids and moistens Dryness
 [Indication] Lung Yin Deficiency
@@ -12010,7 +13578,17 @@ UI_BOOK_ENTRY_BODY_QING_QI_HUA_TAN_WAN,"清气化痰丸
 【主治】痰熱壅肺
 【組成】
 君：膽南星 一兩五錢
-臣：半夏 一兩五錢，瓜蔞仁 一兩，黃芩 一兩...","CLEAR QI AND TRANSFORM PHLEGM PILL
+臣：半夏 一兩五錢，瓜蔞仁 一兩，黃芩 一兩
+佐：杏仁 一兩，陳皮 一兩，枳實 一兩，茯苓 一兩
+使：生薑 三兩
+【配伍】
+膽南星：清熱化痰，專治痰熱壅肺。
+瓜蔞仁：清熱化痰、潤肺下氣、寬胸散結；
+黃芩：清瀉肺火，助南星清化痰熱。
+杏仁、半夏：降利肺氣、化痰止咳
+陳皮、枳實：理氣破結，氣順痰自消
+茯苓：健脾滲濕，杜絕生痰之源
+生薑：制膽南星、半夏之毒","CLEAR QI AND TRANSFORM PHLEGM PILL
 [Source] Investigation of Medical Formulas
 [Actions] Clears Heat, transforms phlegm, regulates Qi and eases cough
 [Indication] Phlegm-Heat congesting the Lung
@@ -12077,7 +13655,16 @@ UI_BOOK_ENTRY_BODY_DA_QING_LONG_TANG,"大青龙汤
 【組成】
 君：麻黃 六錢
 臣：桂枝 二錢，石膏 一兩
-佐：杏仁 三錢，生薑 三...","GREAT AZURE DRAGON DECOCTION
+佐：杏仁 三錢，生薑 三錢，大棗 三錢
+使：甘草 二錢
+【配伍】
+麻黃：發汗峻散，開表散寒，同時宣肺平喘。
+桂枝：助麻黃發汗解表，溫通衛陽，散肌表寒邪，解決周身疼痛；
+石膏：辛甘大寒，專清鬱於肌腠、肺胃之裡熱，除煩躁，制約麻黃辛溫燥熱之性，使發汗而不助熱。
+杏仁：降利肺氣，配麻黃平喘止咳；
+生薑：辛溫，助解表，和胃散水氣；
+大棗：補中滋液，防峻汗耗傷津液。
+炙甘草：調和諸藥；緩麻黃峻烈之性，護中氣；姜棗草合用，滋養營陰，防止大汗傷津。","GREAT AZURE DRAGON DECOCTION
 [Source] Treatise on Cold Damage
 [Actions] Promotes sweating to release the Exterior while clearing internal Heat
 [Indication] Exterior Cold with Interior Heat
@@ -12143,7 +13730,15 @@ UI_BOOK_ENTRY_BODY_XIAO_QING_LONG_TANG,"小青龙汤
 【組成】
 君：麻黃 三錢，桂枝 三錢
 臣：乾薑 二錢，細辛 二錢
-佐：白芍 三...","MINOR AZURE DRAGON DECOCTION
+佐：白芍 三錢，五味子 二錢，半夏 三錢
+使：甘草 二錢
+【配伍】
+麻黃、桂枝：麻黃發汗解表、宣肺平喘；桂枝解肌通陽，溫散肌表風寒。
+乾薑、細辛：乾薑溫脾肺，散臟腑寒邪、化水飲；細辛溫散少陰寒飲，既助麻桂解表，又入肺內化伏飲。
+半夏：燥濕化痰，降逆止咳，消胸膈水飲痰濁；
+五味子：酸收斂肺止咳。防麻、桂、姜、辛辛溫發散太過耗傷肺氣，散收並用；
+白芍：酸寒斂陰和營。防諸辛溫藥耗傷陰血，制約燥烈之性。
+炙甘草：調和全方；益氣補中，顧護脾胃，緩和麻、辛、乾薑峻烈之性。","MINOR AZURE DRAGON DECOCTION
 [Source] Treatise on Cold Damage
 [Actions] Releases the Exterior, disperses Cold, warms the Lung and transforms retained fluids
 [Indication] Exterior Cold with internal retained fluids
@@ -12207,7 +13802,11 @@ UI_BOOK_ENTRY_BODY_SI_JUN_ZI_TANG,"四君子汤
 臣：白朮 三錢
 佐：茯苓 三錢
 使：甘草 二錢
-【配伍...","FOUR GENTLEMEN DECOCTION
+【配伍】
+人參：大補元氣、益氣健脾。
+白朮：健脾燥濕，助人參運化。
+茯苓：健脾滲濕，寧心安神，使補而不滯。
+炙甘草：益氣和中、調和諸藥。","FOUR GENTLEMEN DECOCTION
 [Source] Formulary of the Taiping Imperial Pharmacy for the People's Welfare
 [Actions] Supports Qi and strengthens the Spleen
 [Indication] Spleen Qi Deficiency
@@ -12266,7 +13865,12 @@ UI_BOOK_ENTRY_BODY_PING_WEI_SAN,"平胃散
 君：蒼朮 三錢
 臣：厚朴 二錢
 佐：陳皮 二錢
-使：甘草 一...","CALM THE STOMACH POWDER
+使：甘草 一錢
+【配伍】
+蒼朮：苦溫燥濕、健脾運脾，專治濕困脾胃。
+厚朴：行氣除滿、燥濕化濁，消脘腹脹痞。
+陳皮：理氣和胃、燥濕醒脾，使氣機條達。
+炙甘草：益氣和中、調和諸藥；姜棗調和脾胃。","CALM THE STOMACH POWDER
 [Source] Formulary of the Taiping Imperial Pharmacy for the People's Welfare
 [Actions] Dries Dampness, restores the Spleen's transport, moves Qi and harmonizes the Stomach
 [Indication] Dampness overwhelming the Spleen
@@ -12326,7 +13930,11 @@ UI_BOOK_ENTRY_BODY_LI_ZHONG_WAN,"理中丸
 臣：人參 五錢
 佐：白朮 五錢
 使：甘草 五錢
-【配伍】...","REGULATE THE MIDDLE PILL
+【配伍】
+乾薑：大辛大熱，溫中祛寒、振奮脾陽。
+人參：益氣健脾，補益脾胃氣虛之本。
+白朮：健脾燥濕，助運化、利水濕。
+炙甘草：益氣和中、調和諸藥，緩急止痛。","REGULATE THE MIDDLE PILL
 [Source] Treatise on Cold Damage
 [Actions] Warms the middle, dispels Cold, supports Qi and strengthens the Spleen
 [Indication] Spleen Yang Deficiency
@@ -12384,7 +13992,15 @@ UI_BOOK_ENTRY_BODY_SHEN_LING_BAI_ZHU_SAN,"参苓白术散
 【主治】脾虛濕盛
 【組成】
 君：人參 五錢，茯苓 五錢，白朮 五錢
-臣：山藥 五錢，...","GINSENG, PORIA AND ATRACTYLODES POWDER
+臣：山藥 五錢，蓮子 三錢，扁豆 三錢，薏苡仁 七錢
+佐：砂仁 二錢，桔梗 二錢
+使：甘草 二錢
+【配伍】
+人參、白朮、茯苓、炙甘草：即四君子湯，益氣健脾、補益脾虛之本。
+山藥、蓮子：健脾益氣、固腸止瀉；
+扁豆、薏仁：健脾滲濕、利水除濁；
+砂仁：芳香醒脾、行氣和胃，防補藥滋膩礙胃；
+桔梗：宣利肺氣、載藥上行，培土生金，兼治肺虛久咳。","GINSENG, PORIA AND ATRACTYLODES POWDER
 [Source] Formulary of the Taiping Imperial Pharmacy for the People's Welfare
 [Actions] Supports Qi, strengthens the Spleen, drains Dampness and relieves diarrhea
 [Indication] Spleen Deficiency with excess Dampness
@@ -12445,7 +14061,16 @@ UI_BOOK_ENTRY_BODY_HUO_XIANG_ZHENG_QI_SAN,"藿香正气散
 【主治】外感風寒，內傷濕滯
 【組成】
 君：藿香 五錢
-臣：蘇葉 三錢，白芷...","PATCHOULI QI-RECTIFYING POWDER
+臣：蘇葉 三錢，白芷 三錢，半夏 四錢，厚朴 四錢
+佐：白朮 四錢，蒼朮 四錢，陳皮 三錢，茯苓 五錢，大腹皮 五錢 ，桔梗 二錢
+使：甘草 二錢，生薑 二錢，大棗 二錢
+【配伍】
+藿香：芳香化濕、和中止嘔，兼解表散寒，表裡兼顧。
+紫蘇、白芷：解表散寒、化濕辟穢，助藿香散外感風寒。
+陳皮、半夏、厚朴、大腹皮：理氣燥濕、消脹除滿、降逆止嘔；
+白朮、蒼朮、 茯苓：健脾祛濕、實脾止瀉；
+桔梗：宣利肺氣、載藥上行。
+炙甘草、姜棗：調和脾胃，益氣和中，調和諸藥。","PATCHOULI QI-RECTIFYING POWDER
 [Source] Formulary of the Taiping Imperial Pharmacy for the People's Welfare
 [Actions] Releases the Exterior, disperses Cold, transforms Dampness, harmonizes the middle and relieves nausea
 [Indication] External Wind-Cold with internal Dampness stagnation
@@ -12509,7 +14134,15 @@ UI_BOOK_ENTRY_BODY_DANG_GUI_SI_NI_TANG,"当归四逆汤
 【組成】
 君：當歸 四錢
 臣：桂枝 三錢，白芍 三錢
-佐：細辛 一錢，木通 ...","CHINESE ANGELICA DECOCTION FOR FRIGID EXTREMITIES
+佐：細辛 一錢，木通 二錢
+使：甘草 二錢，大棗 二錢
+【配伍】
+當歸：養血和血、溫補肝血，濡養經脈。
+桂枝：溫通經脈、宣通陽氣；
+白芍：養血斂陰，緩急止痛；
+細辛：直入三陰，溫經散寒、破寒凝。
+通草：通利經脈，引寒邪外洩。
+大棗、炙甘草益氣健脾、調和諸藥，養血以助脈道充盈。","CHINESE ANGELICA DECOCTION FOR FRIGID EXTREMITIES
 [Source] Treatise on Cold Damage
 [Actions] Warms the channels, disperses Cold, nourishes blood and opens the vessels
 [Indication] Cold congealing in the Heart vessels
@@ -12573,7 +14206,11 @@ UI_BOOK_ENTRY_BODY_DAO_CHI_SAN,"导赤散
 臣：竹葉 二錢
 佐：甘草 二錢
 使：
-【...","GUIDE OUT THE RED POWDER
+【配伍】
+生地黃：涼血滋陰、清心降火，養陰以制心火。
+木通：清心瀉火、利水通淋，導心火從小便而出。
+竹葉：清心除煩、淡滲利水，助木通清心導赤。
+生甘草：梢清熱解毒、直達莖中，緩尿痛、調和諸藥。","GUIDE OUT THE RED POWDER
 [Source] Key to Therapeutics of Children's Diseases
 [Actions] Clears Heart Heat, promotes urination and nourishes Yin
 [Indication] Excessive Heart fire
@@ -12633,7 +14270,17 @@ UI_BOOK_ENTRY_BODY_DI_TAN_TANG,"涤痰汤
 【主治】痰迷心竅
 【組成】
 君：半夏 二錢五分，膽南星 二錢五分
-臣：枳實 二錢，...","SCOUR PHLEGM DECOCTION
+臣：枳實 二錢，陳皮 一錢五分
+佐：竹茹 一錢，茯苓 二錢，石菖蒲 一錢，人參 一錢
+使：生薑 一錢，甘草 一錢
+【配伍】
+半夏、陳皮：燥濕化痰、理氣和胃，直祛痰濕之本。
+膽南星：清氣化痰，助半夏化痰之力
+枳實、竹茹：清熱化痰、破氣開鬱，降逆滌痰。
+石菖蒲：豁痰開竅、交通心腎、醒神益智；
+茯苓：健脾滲濕，杜絕生痰之源；
+人參：益氣扶正，扶助正氣以運痰。
+甘草、生薑：調和諸藥，益氣和中，制膽南星、半夏之毒。","SCOUR PHLEGM DECOCTION
 [Source] Complete Collection of Proven and Miraculous Formulas from the Imperial Medical Academy
 [Actions] Clears phlegm and opens the sensory orifices; supports Qi and healthy functions
 [Indication] Phlegm clouding the Heart orifices
@@ -12699,7 +14346,17 @@ UI_BOOK_ENTRY_BODY_YANG_XIN_TANG,"养心汤
 【主治】心氣虛
 【組成】
 君：黃耆 五錢，人參 三錢
-臣：當歸 五錢，茯神 五錢，茯苓 五錢...","NOURISH THE HEART DECOCTION
+臣：當歸 五錢，茯神 五錢，茯苓 五錢
+佐：酸棗仁 三錢，柏子仁 三錢，遠志 三錢，五味子 三錢，川芎 五錢，半夏 五錢，肉桂 三錢
+使：甘草 四錢，生薑 一錢，大棗 一錢
+【配伍】
+人參、黃耆：大補心氣，固元益氣，直補心氣之本。
+當歸、川芎：養血和營，氣陰雙補，氣血互生。
+茯苓、茯神：健脾寧心、安神定悸
+棗仁、柏子仁、遠志、五味子：養心安神、斂心止汗、交通心腎
+半夏：和胃化痰，防滋補壅滯
+肉桂：少佐溫通，助心陽以鼓心氣
+炙甘草、生薑、大棗：益氣和中，調和諸藥，制半夏之毒。","NOURISH THE HEART DECOCTION
 [Source] Renzhai's Direct Guide to Formulas and Medical Theory
 [Actions] Supports Qi, nourishes blood, nourishes the Heart and calms the spirit
 [Indication] Heart Qi Deficiency
@@ -12765,7 +14422,17 @@ UI_BOOK_ENTRY_BODY_XUE_FU_ZHU_YU_TANG,"血府逐瘀汤
 【主治】心脈瘀阻
 【組成】
 君：桃仁 四錢，紅花 三錢
-臣：赤芍 二錢，川芎 二錢，牛膝 三...","DRIVE OUT STASIS IN THE MANSION OF BLOOD DECOCTION
+臣：赤芍 二錢，川芎 二錢，牛膝 三錢
+佐：當歸 三錢，生地黃 三錢，桔梗 二錢，枳殼 三錢，柴胡 一錢
+使：甘草 二錢
+【配伍】
+桃仁、紅花：破血行瘀，疏通胸中凝滯瘀血，直攻血府瘀阻，專治瘀血刺痛，為活血核心。
+川芎、赤芍：川芎上行頭目、疏通胸脅血脈，活血行氣；赤芍涼血散瘀，緩胸脅刺痛。
+牛膝：活血祛瘀，引胸中瘀血向下排出，化解胸中瘀堵。
+柴胡、枳殼：柴胡疏肝解鬱，升發胸中之氣；枳殼寬胸行氣。氣行則血行，解決氣滯致瘀之本，緩解胸悶脹痛。
+桔梗：宣開肺氣、上行胸中，載活血藥直達血府，與牛膝一升一降，疏通胸膈氣機血脈。
+當歸、生地：當歸補血活血，化瘀而不傷新血；生地滋陰涼血，防活血藥耗傷陰血，祛瘀不傷正。
+使藥：調和諸藥。","DRIVE OUT STASIS IN THE MANSION OF BLOOD DECOCTION
 [Source] Correction of Errors in Medical Classics
 [Actions] Moves blood, dispels stasis, moves Qi and relieves pain
 [Indication] Blood stasis obstructing the Heart vessels
@@ -12831,7 +14498,17 @@ UI_BOOK_ENTRY_BODY_TIAN_WANG_BU_XIN_DAN,"天王补心丹
 【主治】心陰虛
 【組成】
 君：生地黃 四兩
-臣：天門冬 一兩，麥門冬 一兩，酸棗仁 一兩，柏...","HEAVENLY EMPEROR'S HEART-TONIFYING ELIXIR
+臣：天門冬 一兩，麥門冬 一兩，酸棗仁 一兩，柏子仁 一兩，當歸一兩
+佐：人參五錢，茯苓 五錢，玄參 五錢，丹參 五錢，遠志 五錢，五味子 五錢
+使：桔梗 五錢
+【配伍】
+生地黃：重用甘寒，滋陰養血、清心降火，直補心腎陰血。
+天冬、麥冬、玄參：滋陰清熱、生津潤燥，壯水制虛火；
+當歸、丹參：養血和血、清心安神。
+人參、茯苓：益氣寧心；
+酸棗仁、柏子仁、五味子：養心安神、斂汗寧心；
+遠志：交通心腎、安神益智。
+桔梗：載藥上行入心經，引藥歸經。","HEAVENLY EMPEROR'S HEART-TONIFYING ELIXIR
 [Source] Essentials from the Golden Cabinet
 [Actions] Nourishes Yin and blood, supports the Heart and calms the spirit
 [Indication] Heart Yin Deficiency
@@ -12896,7 +14573,8 @@ UI_BOOK_ENTRY_BODY_GUI_ZHI_GAN_CAO_TANG,"桂枝甘草汤
 佐：
 使：
 【配伍】
-桂枝：辛甘溫，...","CINNAMON TWIG AND LICORICE DECOCTION
+桂枝：辛甘溫，溫通心陽、平衝降逆、溫經通脈。
+炙甘草：益氣補中、緩急養心，甘溫益氣。","CINNAMON TWIG AND LICORICE DECOCTION
 [Source] Treatise on Cold Damage
 [Actions] Warms and supports Heart Yang, strengthens Qi and settles palpitations
 [Indication] Heart Yang Deficiency
@@ -12955,7 +14633,18 @@ UI_BOOK_ENTRY_BODY_HUANG_LIAN_WEN_DAN_TANG,"黄连温胆汤
 【組成】
 君：黃連 三錢
 臣：半夏 四錢，竹茹 五錢
-佐：陳皮 四錢，...","COPTIS WARM-GALLBLADDER DECOCTION
+佐：陳皮 四錢，枳實 四錢，茯苓 四錢
+使：甘草 二錢，生薑 一錢，大棗 一錢
+【配伍】
+黃連：苦寒直折，清心瀉火、燥濕清熱，專清痰火。
+半夏：燥濕化痰；
+竹茹：清熱化痰、除煩安神。
+陳皮：理氣化痰；
+枳實：破氣消痞、導痰下行；
+茯苓：健脾滲濕，絕生痰之源。
+甘草:調和諸藥，和中緩急。
+生薑：和胃止嘔，制半夏之毒
+大棗：益氣補中，調和脾胃","COPTIS WARM-GALLBLADDER DECOCTION
 [Source] Essential Prescriptions Worth a Thousand Gold for Emergencies
 [Actions] Clears Heat, transforms phlegm, harmonizes the middle and calms the spirit
 [Indication] Phlegm-Fire disturbing the Heart
@@ -13023,7 +14712,17 @@ UI_BOOK_ENTRY_BODY_GUI_PI_TANG,"归脾汤
 【主治】心脾兩虛
 【組成】
 君：黃耆 一兩，人參 五錢
-臣：龍眼 五錢，白朮 五錢，當歸 五錢...","RESTORE THE SPLEEN DECOCTION
+臣：龍眼 五錢，白朮 五錢，當歸 五錢，酸棗仁 六錢
+佐：茯神 五錢，遠志 三錢，木香 二錢
+使：甘草 二錢，生薑 一錢，大棗 一錢
+【配伍】
+黃耆、人參：大補脾氣，益氣生血。
+當歸、龍眼：肉養血補心、安神。
+白朮：助健脾；
+酸棗仁、茯神：寧心安神；
+遠志：安神益智、交通心腎；
+木香：理氣醒脾，防滋補壅滯礙胃。
+炙甘草、姜棗：益氣和中、調和諸藥，助脾胃生化氣血。","RESTORE THE SPLEEN DECOCTION
 [Source] Yan's Formulas for Aiding Life
 [Actions] Supports Qi, nourishes blood, strengthens the Spleen and nourishes the Heart
 [Indication] Heart and Spleen Deficiency
@@ -13089,7 +14788,15 @@ UI_BOOK_ENTRY_BODY_LONG_DAN_XIE_GAN_TANG,"龙胆泻肝汤
 【組成】
 君：龍膽草 二錢
 臣：黃芩 三錢，梔子 三錢
-佐：澤瀉四...","GENTIAN DECOCTION TO DRAIN THE LIVER
+佐：澤瀉四錢，木通三錢，車前子 三錢，當歸 三錢，生地黃 六錢，柴胡 三錢
+使：甘草 二錢
+【配伍】
+龍膽草：大苦大寒，直瀉肝膽實火、清利下焦濕熱。
+黃芩、梔子：苦寒瀉火，清熱燥濕，助龍膽草清瀉肝火。
+澤瀉、木通、車前子：清熱利濕，導濕熱從小便而去；
+生地黃、當歸：滋陰養血，防苦寒藥燥烈傷陰；
+柴胡：疏肝引經，暢達肝膽氣機。
+生甘草清熱解毒、調和諸藥，護胃安中。","GENTIAN DECOCTION TO DRAIN THE LIVER
 [Source] Secret Treasury of the Orchid Chamber
 [Actions] Drains Excess fire from the Liver and Gallbladder and clears Damp-Heat from the Liver channel
 [Indication] Rising Liver fire
@@ -13154,7 +14861,16 @@ UI_BOOK_ENTRY_BODY_NUAN_GAN_JIAN,"暖肝煎
 【組成】
 君：肉桂 一錢，茴香 二錢
 臣：當歸 二錢，枸杞子 三錢
-佐：烏藥 ...","WARM THE LIVER DECOCTION
+佐：烏藥 二錢，茯苓 二錢，沈香 一錢
+使：生薑 一錢
+【配伍】
+肉桂：溫腎暖肝、散寒止痛；
+茴香：暖肝理氣、專治寒疝睪丸冷痛。
+當歸、枸杞：養血補肝、溫補肝腎，扶正固本。
+烏藥：行氣散寒、疏肝止痛；
+沈香：降氣暖肝、下氣止痛；
+茯苓：健脾滲濕，助肝腎氣化。
+生薑：散寒和胃，輔助中焦","WARM THE LIVER DECOCTION
 [Source] Complete Works of Jingyue
 [Actions] Warms and supports the Liver and Kidney, moves Qi and disperses Cold
 [Indication] Cold stagnating in the Liver channel
@@ -13218,7 +14934,15 @@ UI_BOOK_ENTRY_BODY_CHAI_HU_SHU_GAN_SAN,"柴胡疏肝散
 【主治】肝氣鬱結
 【組成】君：柴胡 二錢
 臣：香附 一錢五分錢，川芎 一錢五分
-佐：陳皮 二...","BUPLEURUM LIVER-SOOTHING POWDER
+佐：陳皮 二錢，枳殼 一錢五分，白芍 一錢五分
+使：甘草 五分
+【配伍】
+柴胡：疏肝解鬱、調暢氣機，直入肝膽疏洩鬱滯。
+香附:理氣疏肝、止痛；
+川芎:行氣活血、通絡止痛。
+枳殼、陳皮:理氣行滯、寬胸除脹；
+白芍:柔肝緩急、養陰和營，防理氣藥耗傷肝陰。
+炙甘草:調和諸藥，配白芍酸甘化陰、緩急止痛。","BUPLEURUM LIVER-SOOTHING POWDER
 [Source] Complete Works of Jingyue
 [Actions] Spreads Liver Qi, relieves constraint, moves Qi and eases pain
 [Indication] Liver Qi stagnation
@@ -13282,7 +15006,11 @@ UI_BOOK_ENTRY_BODY_SI_WU_TANG,"四物汤
 臣：當歸 三錢
 佐：白芍 三錢，川芎 二錢
 使：
-【配...","FOUR-SUBSTANCE DECOCTION
+【配伍】
+熟地黃：甘溫味厚，滋陰補血、填精益髓，為補血之本。
+當歸：補血養肝、活血調經，既補又行，補而不滯。
+白芍：養血斂陰、柔肝緩急，濡養筋脈。
+川芎：行氣活血、疏肝通絡，使補而不壅、補血不滯氣。","FOUR-SUBSTANCE DECOCTION
 [Source] Formulary of the Taiping Imperial Pharmacy for the People's Welfare
 [Actions] Nourishes and regulates blood
 [Indication] Liver blood Deficiency
@@ -13345,7 +15073,20 @@ UI_BOOK_ENTRY_BODY_GE_XIA_ZHU_YU_TANG,"膈下逐瘀汤
 【主治】肝血瘀滯
 【組成】
 君：當歸 三錢，川芎 二錢，赤芍 二錢
-臣：桃仁 三錢，紅花 ...","DRIVE OUT BLOOD STASIS BELOW THE DIAPHRAGM DECOCTION
+臣：桃仁 三錢，紅花 三錢，五靈脂 二錢，丹皮 二錢
+佐：香附 一錢，烏藥 二錢，枳殼 一錢，延胡索 一錢
+使：甘草 三錢
+【配伍】
+桃仁、紅花：破血逐瘀；
+五靈脂：專散胸腹瘀血、化瘀止痛，共主散膈下深部瘀血。
+當歸：養血活血，散瘀不傷血；
+川芎：行氣活血；
+赤芍、丹皮：涼血散瘀，清瘀久鬱熱。
+香附：疏肝行氣；
+烏藥：溫散下焦膈下寒凝氣滯；
+枳殼：寬中下氣；
+延胡索：行氣活血止痛。
+甘草：調和諸藥，緩急止痛，緩和活血破瘀藥峻烈之性。","DRIVE OUT BLOOD STASIS BELOW THE DIAPHRAGM DECOCTION
 [Source] Correction of Errors in Medical Classics
 [Actions] Moves blood, dispels stasis, moves Qi and eases pain
 [Indication] Stagnant Liver blood
@@ -13413,7 +15154,14 @@ UI_BOOK_ENTRY_BODY_YI_GUAN_JIAN,"一贯煎
 【組成】
 君：生地黃 一兩
 臣：枸杞子 六錢，沙參 三錢，麥門冬 三錢，當歸 三錢
-佐：川...","LINKING DECOCTION
+佐：川楝子 一錢五分
+使：
+【配伍】
+生地黃：重用滋陰養血、補益肝腎，直補肝陰之本。
+枸杞：滋補肝腎、填精養陰；
+當歸：養血柔肝、濡養經脈。
+北沙參、麥冬：養陰生津、潤肺養胃，滋水以涵木；
+川楝子：苦寒疏肝洩熱、行氣止痛，疏肝而不傷陰。","LINKING DECOCTION
 [Source] Medical Talks from Liuzhou
 [Actions] Nourishes Yin and spreads Liver Qi
 [Indication] Liver Yin Deficiency
@@ -13476,7 +15224,16 @@ UI_BOOK_ENTRY_BODY_GOU_TENG_SAN,"钩藤散
 【組成】
 君：鉤藤 三錢，菊花 三錢
 臣：防風 三錢，石膏 三錢
-...","UNCARIA POWDER
+佐：茯苓 三錢，半夏 三錢，陳皮 三錢，人參 三錢
+使：甘草 三錢，生薑 二錢
+【配伍】
+鉤藤、菊花：平肝息風、清利頭目
+石膏：清熱瀉火、除煩止暈
+防風：祛風解痙、載藥上行
+半夏、陳皮、茯苓：燥濕化痰、和胃降逆
+麥冬、人參：益氣養陰、扶正固本
+茯神：寧心安神
+炙甘草、生薑+調和諸藥、和胃止嘔、制半夏之毒","UNCARIA POWDER
 [Source] Proven Formulas for Universal Relief
 [Actions] Calms the Liver and Wind, clears Heat and phlegm, and supports Qi and Yin
 [Indication] Rising Liver Yang
@@ -13541,7 +15298,15 @@ UI_BOOK_ENTRY_BODY_XIAO_YAO_SAN,"逍遥散
 【組成】
 君：柴胡 三錢
 臣：當歸 三錢，白芍 三錢
-佐：...","FREE AND EASY WANDERER POWDER
+佐：白朮 三錢，茯苓 三錢，生薑 一錢，薄荷 一錢
+使：甘草 一錢
+【配伍】
+柴胡：疏肝解鬱、條達肝氣，疏散鬱滯。
+當歸、白芍：養血柔肝，補肝體、緩肝急；防肝鬱化火傷陰。
+白朮、茯苓：健脾祛濕、培土榮木；
+生薑：溫胃和中、調和氣血。
+薄荷：助柴胡疏肝透熱、疏散鬱遏；
+炙甘草：益氣補中，調和諸藥；合白芍緩急止痛。","FREE AND EASY WANDERER POWDER
 [Source] Formulary of the Taiping Imperial Pharmacy for the People's Welfare
 [Actions] Spreads Liver Qi, relieves constraint, nourishes blood and strengthens the Spleen
 [Indication] Liver-Spleen disharmony with Liver constraint and Spleen Deficiency
@@ -13604,7 +15369,16 @@ UI_BOOK_ENTRY_BODY_REN_SHEN_GE_JIE_SAN,"人参蛤蚧散
 【主治】腎不納氣
 【組成】
 君：蛤蚧 五錢，人參 四錢
-臣：知母 三錢，貝母 三錢，...","GINSENG AND GECKO POWDER
+臣：知母 三錢，貝母 三錢，桑白皮 三錢
+佐：茯苓 四錢，杏仁 四錢
+使：甘草 三錢
+【配伍】
+蛤蚧：補肺益腎、溫腎納氣、定喘止嗽，專治腎不納氣虛喘。
+人參：大補元氣、補益肺氣，助蛤蚧固本益氣。
+杏仁、貝母：潤肺化痰、降氣止咳
+桑白皮、知母：清瀉肺熱、潤燥止咳
+茯苓：健脾滲濕、杜絕生痰之源
+炙甘草：益氣和中，調和諸藥。","GINSENG AND GECKO POWDER
 [Source] Formulas for Broad Relief
 [Actions] Supports the Lung and Kidney, helps the Kidney grasp Qi, eases wheezing and transforms phlegm
 [Indication] Kidney failing to grasp Qi
@@ -13668,7 +15442,15 @@ UI_BOOK_ENTRY_BODY_LIU_WEI_DI_HUANG_WAN,"六味地黄丸
 【組成】
 君：熟地黃 八錢
 臣：山茱萸 四錢，山藥 四錢
-佐：澤瀉 三錢，茯苓 三...","SIX-INGREDIENT REHMANNIA PILL
+佐：澤瀉 三錢，茯苓 三錢，丹皮 三錢
+使：
+【配伍】
+熟地黃：重用滋陰補腎、填精益髓。
+萸肉：補肝腎、斂精氣；
+山藥：補脾益腎、固澀下焦。
+澤瀉：瀉腎濁、防熟地滋膩；
+丹皮：清瀉虛火、涼血除蒸；
+茯苓：健脾滲濕、助山藥補脾。","SIX-INGREDIENT REHMANNIA PILL
 [Source] Key to Therapeutics of Children's Diseases
 [Actions] Nourishes Yin and supports the Kidney
 [Indication] Kidney Yin Deficiency
@@ -13728,7 +15510,13 @@ UI_BOOK_ENTRY_BODY_JIN_GUI_SHEN_QI_WAN,"金匮肾气丸
 【主治】腎陽虛
 【組成】
 君：附子 二錢，桂枝 三錢
-臣：熟地黃 一錢，山茱萸 四錢，山藥 ...","KIDNEY QI PILL FROM THE GOLDEN CABINET
+臣：熟地黃 一錢，山茱萸 四錢，山藥 五錢
+佐：澤瀉 三錢，茯苓 三錢，丹皮 三錢
+使：
+【配伍】
+附子、桂枝：溫補腎陽、溫通命門，微微生火、鼓舞腎氣。
+熟地、山萸肉、山藥：即六味三補，滋補腎陰、陰中求陽。
+丹皮、茯苓、澤瀉：即六味三瀉，瀉濁降火、滲濕利水，防滋膩壅滯。","KIDNEY QI PILL FROM THE GOLDEN CABINET
 [Source] Essentials from the Golden Cabinet
 [Actions] Warms and supports Kidney Yang, transforms Qi and moves water
 [Indication] Kidney Yang Deficiency
@@ -13787,7 +15575,12 @@ UI_BOOK_ENTRY_BODY_ZHEN_WU_TANG,"真武汤
 臣：茯苓 三錢，白朮 三錢
 佐：生薑 二錢，白芍 三錢
 使：
-【...","TRUE WARRIOR DECOCTION
+【配伍】
+附子：大辛大熱，溫補腎陽、散陰寒，助氣化以行水。
+茯苓：健脾滲濕、利水消腫；
+白朮：健脾燥濕、培土制水。
+生薑：溫散水氣、助附子溫陽，兼和胃散飲。
+芍藥：利小便、柔肝緩急止痛，防附子燥熱傷陰，斂陰和營。","TRUE WARRIOR DECOCTION
 [Source] Treatise on Cold Damage
 [Actions] Warms Yang and promotes the movement of water
 [Indication] Kidney Deficiency with overflowing fluids
@@ -13847,7 +15640,15 @@ UI_BOOK_ENTRY_BODY_ZUO_GUI_WAN,"左归丸
 【主治】腎精不足
 【組成】
 君：熟地黃 八錢
-臣：龜板膠四錢，鹿角膠四錢，枸杞子四錢，菟絲子四錢...","RESTORE THE LEFT PILL
+臣：龜板膠四錢，鹿角膠四錢，枸杞子四錢，菟絲子四錢
+佐：山茱萸 四錢，山藥 四錢
+使：牛膝 三錢
+【配伍】
+熟地黃：大補真陰、填精補髓。
+山藥、枸杞、山茱萸：滋補肝腎、養陰固精，助熟地滋補腎精。
+龜鹿二膠：峻補精血、陰陽雙補、側重填髓
+菟絲子：補腎益精
+川牛膝：補肝腎、強筋骨、引藥下行","RESTORE THE LEFT PILL
 [Source] Complete Works of Jingyue
 [Actions] Nourishes Yin, supports the Kidney and replenishes essence and marrow
 [Indication] Insufficient Kidney essence
@@ -13908,7 +15709,14 @@ UI_BOOK_ENTRY_BODY_JIN_SUO_GU_JING_WAN,"金锁固精丸
 【組成】
 君：沙苑子 五錢
 臣：芡實 五錢
-佐：龍骨 五錢，牡蠣 五錢，蓮...","METAL LOCK PILL TO SECURE THE ESSENCE
+佐：龍骨 五錢，牡蠣 五錢，蓮須 三錢
+使：蓮子 三兩
+【配伍】
+沙苑子：補腎益精、平補肝腎，固本培元。
+芡實：健脾益腎、固澀精氣。
+蓮須：專澀精；
+龍骨、牡蠣：重鎮收斂、固澀滑脫。
+蓮子：養心安神，補腎澀精，制丸藥賦形","METAL LOCK PILL TO SECURE THE ESSENCE
 [Source] Collected Explanations of Medical Formulas
 [Actions] Supports the Kidney, astringes essence and strengthens Kidney Qi
 [Indication] Kidney Qi failing to secure essence
@@ -13970,7 +15778,17 @@ UI_BOOK_ENTRY_BODY_TAI_SHAN_PAN_SHI_SAN,"泰山磐石散
 【主治】妊娠
 【組成】
 君：白朮 二錢
-臣：人參 一錢，黃耆 一錢，續斷 一錢，熟地黃 一錢...","MOUNT TAI ROCK-SOLID POWDER
+臣：人參 一錢，黃耆 一錢，續斷 一錢，熟地黃 一錢，當歸 一錢
+佐：白芍 八分，川芎 八分，黃芩 一錢，砂仁 五分
+使：甘草 五分，糯米 五分
+【配伍】
+人參、黃耆、白朮：脾胃為氣血生化之源，健脾益氣以固胎之本。
+當歸、熟地、白芍、川芎：養血和血，補益衝任。衝為血海，任主胞胎，血足則養胎。
+續斷：補肝腎、固衝任、安胎；腎主系胎。
+黃芩：清熱安胎。
+砂仁：理氣和胃，醒脾行滯；防補藥滋膩礙胃，使氣血流通，胎氣安和。
+炙甘草：益氣和中，調和諸藥；
+糯米：補脾養胃，滋養胎元。","MOUNT TAI ROCK-SOLID POWDER
 [Source] Complete Works of Jingyue
 [Actions] Supports Qi, strengthens the Spleen, nourishes blood and steadies pregnancy
 [Indication] Pregnancy
@@ -14035,7 +15853,13 @@ UI_BOOK_ENTRY_BODY_HUANG_LIAN_E_JIAO_TANG,"黄连阿胶汤
 君：黃連 四錢
 臣：黃芩 三錢，白芍 三錢
 佐：阿膠 三錢
-使：雞...","COPTIS AND DONKEY-HIDE GELATIN DECOCTION
+使：雞子黃 一兩
+【配伍】
+黃連：苦寒直折，清瀉心火、除煩安神。
+黃芩：助黃連清心瀉火；
+阿膠：滋陰補腎、養血填陰，滋腎陰以濟心火。
+白芍：斂陰和營、柔肝緩急；
+雞子黃：滋陰潤燥、養心安神，入少陰交通心腎。","COPTIS AND DONKEY-HIDE GELATIN DECOCTION
 [Source] Treatise on Cold Damage
 [Actions] Nourishes Yin, clears fire and connects Heart and Kidney functions
 [Indication] Heart-Kidney disharmony
@@ -14096,7 +15920,10 @@ UI_BOOK_ENTRY_BODY_BAI_HU_TANG,"白虎汤
 臣：知母 六錢
 佐：粳米 三錢
 使：甘草 二錢
-【配伍...","WHITE TIGER DECOCTION
+【配伍】
+生石膏：辛甘大寒，清瀉陽明氣分實熱，除壯熱、止大汗。
+知母：苦寒質潤，清熱瀉火、滋陰生津，助石膏清潤除煩止渴。
+粳米、炙甘草：益氣養胃、緩和石膏知母寒涼之性，保護胃氣；生津補液，防大寒傷中。","WHITE TIGER DECOCTION
 [Source] Treatise on Cold Damage
 [Actions] Clears Heat and generates body fluids, especially Heat at the Qi level
 [Indication] Intense Heat at the Qi level
@@ -14289,7 +16116,9 @@ UI_BOOK_ENTRY_BODY_WEN_ZAO_ZHENG,"温燥证
 【症狀】發熱惡風，口鼻乾燥、咽乾口渴、乾咳少痰，痰涕黃稠。
 
 【脈象】
-浮脈（表）：脈搏次數多，波寬...","WARM-DRYNESS PATTERN
+浮脈（表）：脈搏次數多，波寬窄
+
+【標準方】桑杏湯","WARM-DRYNESS PATTERN
 
 [Pathogenesis] Warm and dry influences in early autumn invade the Lung and defensive level, impairing the Lung's moistening function.
 
@@ -14334,7 +16163,9 @@ UI_BOOK_ENTRY_BODY_LIANG_ZAO_ZHENG,"凉燥证
 【症狀】惡寒發熱、鼻塞流清涕、乾咳少痰、咽乾唇燥、皮膚乾燥。
 
 【脈象】
-浮脈（表）：脈搏次數少，...","COOL-DRYNESS PATTERN
+浮脈（表）：脈搏次數少，波寬窄
+
+【標準方】杏蘇散","COOL-DRYNESS PATTERN
 
 [Pathogenesis] As cold sets in during late autumn, Dryness together with Wind-Cold invades the Lung and defensive level.
 
@@ -14376,7 +16207,12 @@ UI_BOOK_ENTRY_BODY_WEI_QI_XU,"卫气虚
 
 【病機】素體虛弱、久病耗傷肺氣，衛氣不固、腠理酥鬆、防禦固攝功能減退。
 
-【症狀】自汗：不活動也出汗，動則更甚；易感冒：怕風畏冷、不耐風寒，稍受...","DEFENSIVE QI DEFICIENCY
+【症狀】自汗：不活動也出汗，動則更甚；易感冒：怕風畏冷、不耐風寒，稍受涼即感冒；面色㿠白、氣短乏力、神疲懶言；皮膚腠理酥鬆、常畏風。
+
+【脈象】
+浮脈（表）：波峰低
+
+【標準方】玉屏風散","DEFENSIVE QI DEFICIENCY
 
 [Pathogenesis] An inherently weak constitution or prolonged illness depletes Lung Qi. Defensive Qi fails to secure the surface; loose pores weaken protection and containment.
 
@@ -14418,7 +16254,12 @@ UI_BOOK_ENTRY_BODY_TONG_BI,"痛痹（寒痹）
 
 【病機】風寒濕邪痹阻經絡，寒邪偏盛。寒主收引、凝滯，氣血不通則疼痛劇烈。
 
-【症狀】肢體關節疼痛劇烈、固定不移；遇寒加重、得溫痛減；關節屈...","PAINFUL BI (COLD BI)
+【症狀】肢體關節疼痛劇烈、固定不移；遇寒加重、得溫痛減；關節屈伸不利，局部怕冷。
+
+【脈象】
+浮脈（表）：波峰高（輕微），脈搏次數少（劇烈），波寬寬（輕微）
+
+【標準方】烏頭湯","PAINFUL BI (COLD BI)
 
 [Pathogenesis] Wind-Cold-Damp obstructs the channels, with Cold predominating. Cold contracts and congeals; blocked Qi and blood cause severe pain.
 
@@ -14460,7 +16301,12 @@ UI_BOOK_ENTRY_BODY_RE_BI,"热痹
 
 【病機】風濕熱邪侵襲經絡關節，或風寒濕邪鬱而化熱，氣血壅滯、經絡痹阻。
 
-【症狀】關節紅腫灼熱、疼痛劇烈；觸之發熱、拒按，得冷稍舒；發熱、口渴、煩...","HEAT BI
+【症狀】關節紅腫灼熱、疼痛劇烈；觸之發熱、拒按，得冷稍舒；發熱、口渴、煩躁；肢體屈伸不利。
+
+【脈象】
+浮脈（表）：波峰高（輕微），脈搏次數多，波寬寬（輕微）
+
+【標準方】白虎桂枝湯","HEAT BI
 
 [Pathogenesis] Wind-Damp-Heat invades the channels and joints, or Wind-Cold-Damp stagnates and turns to Heat. Qi and blood become congested, obstructing the channels.
 
@@ -14503,7 +16349,13 @@ UI_BOOK_ENTRY_BODY_ZHUO_BI,"着痹（湿痹）
 
 【病機】風寒濕邪侵襲，濕邪偏盛；濕性重濁、黏滯，阻滯經絡、困遏氣機。
 
-【症狀】關節沉重酸痛、重著如裹；痛處固定，肌膚麻木、肢體困重；關節...","FIXED BI (DAMP BI)
+【症狀】關節沉重酸痛、重著如裹；痛處固定，肌膚麻木、肢體困重；關節腫脹、屈伸不利。
+陰雨潮濕天氣加重
+
+【脈象】
+浮脈（表）：波峰高（輕微），脈搏次數少（輕微），波寬寬（劇烈）
+
+【標準方】薏苡仁湯","FIXED BI (DAMP BI)
 
 [Pathogenesis] Wind-Cold-Damp invades, with Dampness predominating. Its heavy, sticky quality obstructs the channels and impedes the movement of Qi.
 
@@ -14549,7 +16401,9 @@ UI_BOOK_ENTRY_BODY_XING_BI,"行痹（风痹）
 【症狀】肢體關節酸痛，疼痛游走不定，竄走周身。
 
 【脈象】
-浮脈（表）：...","WANDERING BI (WIND BI)
+浮脈（表）：波峰高（劇烈），脈搏次數少（輕微），波寬寬（輕微）
+
+【標準方】防風湯","WANDERING BI (WIND BI)
 
 [Pathogenesis] Wind-Cold-Damp invades the channels, with Wind predominating. Wind moves readily and causes shifting symptoms.
 
@@ -14591,7 +16445,12 @@ UI_BOOK_ENTRY_BODY_FEI_RE_YONG_SHENG,"肺热壅盛
 
 【病機】邪熱壅滯於肺，肺失宣降，氣機閉塞，熱盛氣逆。
 
-【症狀】咳嗽氣粗、喘促胸悶；痰黃黏稠、不易咳出；發熱、口渴咽痛；鼻翼煽動，大便偏乾，小...","EXUBERANT HEAT IN THE LUNG
+【症狀】咳嗽氣粗、喘促胸悶；痰黃黏稠、不易咳出；發熱、口渴咽痛；鼻翼煽動，大便偏乾，小便黃。
+
+【脈象】
+右寸（肺）：脈搏次數多
+
+【標準方】麻杏石甘湯","EXUBERANT HEAT IN THE LUNG
 
 [Pathogenesis] Pathogenic Heat congests the Lung, impairing its dispersing and descending functions; Qi becomes blocked and rises against its normal flow.
 
@@ -14635,7 +16494,10 @@ UI_BOOK_ENTRY_BODY_FEI_QI_XU,"肺气虚
 
 【症狀】咳喘無力，氣短懶言，動則加重；語聲低微、少氣乏力；自汗、怕風、易感冒；痰液清稀、量少。
 
-【脈...","LUNG QI DEFICIENCY
+【脈象】
+右寸（肺）：波峰低
+
+【標準方】補肺湯","LUNG QI DEFICIENCY
 
 [Pathogenesis] Insufficient Lung Qi weakens its dispersing and descending functions and fails to secure the exterior.
 
@@ -14679,7 +16541,10 @@ UI_BOOK_ENTRY_BODY_TAN_SHI_ZU_FEI,"痰湿阻肺
 
 【症狀】咳嗽痰多，色白黏稠、量多易咯；胸悶、氣喘、喉間痰鳴；肢體困重，口淡不渴。
 
-【脈象...","PHLEGM-DAMP OBSTRUCTING THE LUNG
+【脈象】
+右寸（肺）：波寬寬
+
+【標準方】二陳湯","PHLEGM-DAMP OBSTRUCTING THE LUNG
 
 [Pathogenesis] When the Spleen fails to transform and transport, Phlegm-Damp forms internally and accumulates in the Lung, impairing its dispersing and descending functions.
 
@@ -14722,7 +16587,11 @@ UI_BOOK_ENTRY_BODY_FEI_YIN_XU,"肺阴虚
 【病機】肺陰虧虛，虛火內生，肺失滋潤、清肅無權。
 
 【症狀】乾咳無痰，或痰少黏稠難咯；咽乾口燥、聲音嘶啞；潮熱盜汗、五心煩熱；顴紅、形體消瘦。
-...","LUNG YIN DEFICIENCY
+
+【脈象】
+右寸（肺）：波線細，脈搏次數多，波寬窄
+
+【標準方】沙參麥冬湯","LUNG YIN DEFICIENCY
 
 [Pathogenesis] Depleted Lung Yin gives rise to deficiency Fire; the Lung loses moisture and cannot perform its clearing function.
 
@@ -14764,7 +16633,12 @@ UI_BOOK_ENTRY_BODY_TAN_RE_YONG_FEI,"痰热壅肺
 
 【病機】邪熱入裡，灼津成痰、痰熱互結，壅遏肺氣，肺失宣降。
 
-【症狀】咳嗽氣喘，痰多黃稠、黏稠難咯；胸悶胸痛，甚則鼻翼煽動；發熱口渴、煩躁、大...","PHLEGM-HEAT CONGESTING THE LUNG
+【症狀】咳嗽氣喘，痰多黃稠、黏稠難咯；胸悶胸痛，甚則鼻翼煽動；發熱口渴、煩躁、大便乾結、小便黃。
+
+【脈象】
+右寸（肺）：脈搏次數多，波寬寬
+
+【標準方】清氣化痰丸","PHLEGM-HEAT CONGESTING THE LUNG
 
 [Pathogenesis] Pathogenic Heat enters the interior and scorches fluids into Phlegm. Phlegm and Heat combine and congest the Lung, impairing its dispersing and descending functions.
 
@@ -14805,13 +16679,15 @@ UI_BOOK_ENTRY_BODY_BIAO_HAN_LI_RE,"表寒里热
 
 【标准方】大青龙汤","表寒裡熱
 
-【病機】寒邪束表，裡有鬱熱，寒熱錯雜。
+【病機】寒邪束表，里有鬱熱，寒熱錯雜。
 
 【症狀】怕冷無汗，口乾咽痛，渾身酸痛怕冷，同時心煩燥熱。
 
 【脈象】
 浮脈（表）：脈搏次數少
-右寸（...","EXTERIOR COLD WITH INTERIOR HEAT
+右寸（肺）：脈搏次數多
+
+【標準方】大青龍湯","EXTERIOR COLD WITH INTERIOR HEAT
 
 [Pathogenesis] Cold constrains the exterior while Heat is trapped inside, producing a mixed Cold-Heat pattern.
 
@@ -14863,7 +16739,11 @@ UI_BOOK_ENTRY_BODY_BIAO_HAN_LI_YIN,"表寒里饮
 【症狀】惡寒發熱，咳嗽氣喘；痰多清稀，胸悶胸滿，面部浮腫。
 
 
-【...","EXTERIOR COLD WITH INTERIOR FLUID RETENTION
+【脈象】
+浮脈（表）：脈搏次數少
+右寸（肺）：波寬寬
+
+【標準方】小青龍湯","EXTERIOR COLD WITH INTERIOR FLUID RETENTION
 
 [Pathogenesis] External Wind-Cold constrains the surface. Retained fluid within the Lung combines with exterior Cold, obstructing Lung Qi.
 
@@ -14908,7 +16788,12 @@ UI_BOOK_ENTRY_BODY_PI_QI_XU,"脾气虚
 
 【病機】飲食勞倦、久病耗傷，脾失健運、中氣不足、運化失職。
 
-【症狀】食少納呆、脘腹脹滿，飯後尤甚；神疲乏力、少氣懶言、肢體倦怠；面色萎黃、形體...","SPLEEN QI DEFICIENCY
+【症狀】食少納呆、脘腹脹滿，飯後尤甚；神疲乏力、少氣懶言、肢體倦怠；面色萎黃、形體消瘦或浮腫；大便溏薄。
+
+【脈象】
+右關（脾）：波峰低
+
+【標準方】四君子湯","SPLEEN QI DEFICIENCY
 
 [Pathogenesis] Poor diet, overwork or prolonged illness depletes the Spleen. Middle Qi becomes weak and the Spleen cannot transform and transport properly.
 
@@ -14950,7 +16835,12 @@ UI_BOOK_ENTRY_BODY_SHI_SHENG_KUN_PI,"湿盛困脾
 
 【病機】外感濕邪、或嗜食生冷肥甘，濕邪壅滯、脾陽被困、運化失司，屬實證。
 
-【症狀】脘腹痞悶、食少納呆；惡心欲嘔、口中黏膩、口淡不渴；頭身困重...","EXCESS DAMPNESS ENCUMBERING THE SPLEEN
+【症狀】脘腹痞悶、食少納呆；惡心欲嘔、口中黏膩、口淡不渴；頭身困重、四肢酸楚、困倦嗜睡；大便溏稀不爽。
+
+【脈象】
+右關（脾）：波寬寬
+
+【標準方】平胃散","EXCESS DAMPNESS ENCUMBERING THE SPLEEN
 
 [Pathogenesis] External Dampness, or frequent cold, raw and rich foods, causes Dampness to accumulate. It constrains Spleen Yang and impairs transformation and transport; this is an excess pattern.
 
@@ -14992,7 +16882,12 @@ UI_BOOK_ENTRY_BODY_PI_YANG_XU,"脾阳虚
 
 【病機】脾氣久虛，脾陽不足、虛寒內生、運化腐熟無權。
 
-【症狀】食少納呆、脘腹冷痛，喜溫喜按；大便清稀溏薄，甚至完谷不化；畏寒肢冷、四肢不溫、神...","SPLEEN YANG DEFICIENCY
+【症狀】食少納呆、脘腹冷痛，喜溫喜按；大便清稀溏薄，甚至完谷不化；畏寒肢冷、四肢不溫、神疲乏力；口淡不渴、面色㿠白或萎黃；或肢體浮腫、白帶清稀量多。
+
+【脈象】
+右關（脾）：波峰低，脈搏次數少，波寬寬
+
+【標準方】理中丸","SPLEEN YANG DEFICIENCY
 
 [Pathogenesis] Longstanding Spleen Qi deficiency weakens Spleen Yang. Deficiency Cold develops and the Spleen can no longer transform or digest food effectively.
 
@@ -15034,7 +16929,12 @@ UI_BOOK_ENTRY_BODY_PI_XU_SHI_SHENG,"脾虚湿盛
 
 【病機】脾氣本虛，運化無力，水濕內生，濕濁內停。
 
-【症狀】食少納呆，脘腹痞悶，飯後脹甚；神疲乏力、少氣懶言、四肢困重；大便溏薄、或洩瀉、黏滯...","SPLEEN DEFICIENCY WITH EXCESS DAMPNESS
+【症狀】食少納呆，脘腹痞悶，飯後脹甚；神疲乏力、少氣懶言、四肢困重；大便溏薄、或洩瀉、黏滯不爽；面色萎黃，或肢體浮腫、帶下量多清稀。
+
+【脈象】
+右關（脾）：波峰低，波寬寬
+
+【標準方】參苓白朮散","SPLEEN DEFICIENCY WITH EXCESS DAMPNESS
 
 [Pathogenesis] Underlying Spleen Qi deficiency weakens transformation and transport, causing fluids to accumulate as Dampness.
 
@@ -15075,9 +16975,15 @@ UI_BOOK_ENTRY_BODY_WAI_GAN_FENG_HAN_NEI_SHANG_SHI_ZHI,"外感风寒，内伤湿�
 
 【标准方】藿香正气散","外感風寒，內傷濕滯
 
-【病機】外感風寒之邪束表，內傷飲食濕濁阻滯中焦；表有風寒、裡有濕滯。
+【病機】外感風寒之邪束表，內傷飲食濕濁阻滯中焦；表有風寒、里有濕滯。
 
-【症狀】外感風寒：惡寒發熱、頭痛身重、無汗、鼻塞流清涕；內傷...","EXTERNAL Wind-Cold WITH INTERNAL DAMP STAGNATION
+【症狀】外感風寒：惡寒發熱、頭痛身重、無汗、鼻塞流清涕；內傷濕滯：胸膈滿悶、脘腹脹痛、惡心嘔吐、腸鳴洩瀉；怕冷發熱 + 又吐又瀉、身重胸悶。
+
+【脈象】
+浮脈（表）：脈搏次數少
+右關（脾）：波寬寬
+
+【標準方】藿香正氣散","EXTERNAL Wind-Cold WITH INTERNAL DAMP STAGNATION
 
 [Pathogenesis] External Wind-Cold constrains the surface while dietary injury and Dampness obstruct the middle burner: Wind-Cold outside and Damp stagnation inside.
 
@@ -15122,7 +17028,12 @@ UI_BOOK_ENTRY_BODY_HAN_NING_XIN_MAI,"寒凝心脉
 
 【病機】素體陽虛，陰寒凝滯，寒邪痹阻心脈、胸陽不振，心脈拘急不通而痛。
 
-【症狀】猝然胸痛、痛勢劇烈、遇寒加重、得溫痛減；胸悶氣短、心悸怔忡；...","COLD CONGEALING IN THE HEART VESSELS
+【症狀】猝然胸痛、痛勢劇烈、遇寒加重、得溫痛減；胸悶氣短、心悸怔忡；畏寒肢冷、面色蒼白、唇甲青紫。
+
+【脈象】
+左寸（心）：脈搏次數少
+
+【標準方】當歸四逆湯","COLD CONGEALING IN THE HEART VESSELS
 
 [Pathogenesis] In a person with underlying Yang deficiency, Cold congeals and obstructs the Heart vessels. Chest Yang is weakened; the constricted vessels cannot carry blood freely, causing pain.
 
@@ -15164,7 +17075,12 @@ UI_BOOK_ENTRY_BODY_XIN_HUO_KANG_SHENG,"心火亢盛
 
 【病機】心火內熾，火熱擾心、灼傷脈絡、下移小腸。
 
-【症狀】心胸煩熱、心悸失眠、煩躁易怒；口舌生瘡、舌尖紅赤疼痛；口乾口苦、面紅目赤；小便短赤...","EXUBERANT HEART FIRE
+【症狀】心胸煩熱、心悸失眠、煩躁易怒；口舌生瘡、舌尖紅赤疼痛；口乾口苦、面紅目赤；小便短赤、灼熱澀痛。
+
+【脈象】
+左寸（心）：脈搏次數多
+
+【標準方】導赤散","EXUBERANT HEART FIRE
 
 [Pathogenesis] Heart Fire blazes internally, disturbing the mind and scorching the vessels; the Fire also descends to the Small Intestine.
 
@@ -15206,7 +17122,12 @@ UI_BOOK_ENTRY_BODY_TAN_MI_XIN_QIAO,"痰迷心窍
 
 【病機】痰濕濁邪蒙蔽心竅，神明失主，多由情志鬱結、脾失健運、痰濁內生，上蒙心神所致。
 
-【症狀】神志痴呆、精神抑鬱、表情淡漠；喃喃自語、舉止失...","PHLEGM OBSCURING THE HEART ORIFICES
+【症狀】神志痴呆、精神抑鬱、表情淡漠；喃喃自語、舉止失常、昏不知人；喉中痰鳴、胸悶痰多、意識模糊；甚則突然昏僕、不省人事。
+
+【脈象】
+左寸（心）：波寬寬
+
+【標準方】滌痰湯","PHLEGM OBSCURING THE HEART ORIFICES
 
 [Pathogenesis] Turbid Phlegm-Damp clouds the Heart orifices and disrupts awareness. Emotional constraint and weak Spleen transport may generate Phlegm that rises to disturb the mind.
 
@@ -15252,7 +17173,8 @@ UI_BOOK_ENTRY_BODY_XIN_QI_XU,"心气虚
 
 【脈象】
 左寸（心）：波峰低
-...","HEART QI DEFICIENCY
+
+【標準方】養心湯","HEART QI DEFICIENCY
 
 [Pathogenesis] Insufficient Heart Qi weakens its ability to propel blood and fails to nourish the mind.
 
@@ -15297,7 +17219,9 @@ UI_BOOK_ENTRY_BODY_XIN_MAI_YU_ZU,"心脉瘀阻
 【症狀】心胸疼痛，心悸心慌，胸悶氣短，喘不得臥；面色晦暗、唇甲青紫。
 
 【脈象】
-...","BLOOD STASIS OBSTRUCTING THE HEART VESSELS
+左寸（心）：波線粗
+
+【標準方】血府逐瘀湯","BLOOD STASIS OBSTRUCTING THE HEART VESSELS
 
 [Pathogenesis] Blood stasis blocks the Heart vessels, impedes the circulation of Qi and blood, and deprives the Heart of nourishment. Obstruction causes pain.
 
@@ -15342,7 +17266,9 @@ UI_BOOK_ENTRY_BODY_XIN_YIN_XU,"心阴虚
 【症狀】心悸怔忡，心慌不安；心煩失眠、多夢易醒；五心煩熱、潮熱盜汗；口乾咽燥、面色顴紅。
 
 【脈象】
-...","HEART YIN DEFICIENCY
+左寸（心）：波線細，脈搏次數多，波寬窄
+
+【標準方】天王補心丹","HEART YIN DEFICIENCY
 
 [Pathogenesis] Depleted Heart Yin fails to nourish the mind, while deficiency Fire disturbs it internally.
 
@@ -15385,7 +17311,11 @@ UI_BOOK_ENTRY_BODY_XIN_YANG_XU,"心阳虚
 【病機】心陽不足，溫煦、鼓動無力，虛寒內生。
 
 【症狀】心悸怔忡，心慌不安；胸悶氣短、遇寒加重；畏寒怕冷、四肢不溫；面色㿠白，精神疲乏，自汗。
-...","HEART YANG DEFICIENCY
+
+【脈象】
+左寸（心）：波峰低，脈搏次數少
+
+【標準方】桂枝甘草湯","HEART YANG DEFICIENCY
 
 [Pathogenesis] Insufficient Heart Yang cannot warm or propel effectively, giving rise to internal deficiency Cold.
 
@@ -15427,7 +17357,12 @@ UI_BOOK_ENTRY_BODY_TAN_HUO_RAO_XIN,"痰火扰心
 
 【病機】痰濁鬱而化火，痰火互結、上擾心神，神明躁動不寧。
 
-【症狀】心煩失眠、躁擾不寧、狂躁易怒；多夢易驚、甚至胡言亂語、哭笑無常；胸悶痞滿、...","PHLEGM-FIRE DISTURBING THE HEART
+【症狀】心煩失眠、躁擾不寧、狂躁易怒；多夢易驚、甚至胡言亂語、哭笑無常；胸悶痞滿、口苦、痰多黃稠。
+
+【脈象】
+左寸（心）：脈搏次數多，波寬寬
+
+【標準方】黃連溫膽湯","PHLEGM-FIRE DISTURBING THE HEART
 
 [Pathogenesis] Stagnant Phlegm turns into Fire. Phlegm and Fire combine and rise to disturb the Heart and mind, causing agitation.
 
@@ -15470,7 +17405,13 @@ UI_BOOK_ENTRY_BODY_XIN_PI_LIANG_XU,"心脾两虚
 
 【病機】思慮過度、勞倦傷脾、久病體虛、失血過多；脾氣虛弱，氣血生化不足，心血虧虛、心神失養，屬氣血兩虛、虛證。
 
-【症狀】心悸怔忡、失眠多夢、...","HEART AND SPLEEN DEFICIENCY
+【症狀】心悸怔忡、失眠多夢、健忘頭暈；食慾不振、腹脹便溏、神疲乏力；面色萎黃或蒼白、肢體倦怠；女子月經量少色淡、淋灕不盡。
+
+【脈象】
+左寸（心）：波線細
+右關（脾）：波峰低
+
+【標準方】歸脾湯","HEART AND SPLEEN DEFICIENCY
 
 [Pathogenesis] Overthinking, overwork, prolonged illness or blood loss weakens the Spleen. Insufficient production of Qi and blood depletes Heart blood, leaving the mind unnourished; this is a deficiency of both Qi and blood.
 
@@ -15515,7 +17456,12 @@ UI_BOOK_ENTRY_BODY_GAN_HUO_SHANG_YAN,"肝火上炎
 
 【病機】肝鬱化火、暴怒傷肝，肝火熾盛、氣火上逆，屬實熱證。
 
-【症狀】頭暈脹痛、面紅目赤、急躁易怒；口苦口乾、耳鳴耳聾、脅肋灼痛；失眠多夢、甚...","LIVER FIRE BLAZING UPWARD
+【症狀】頭暈脹痛、面紅目赤、急躁易怒；口苦口乾、耳鳴耳聾、脅肋灼痛；失眠多夢、甚至狂躁；吐血、衄血。
+
+【脈象】
+左關（肝）：脈搏次數多
+
+【標準方】龍膽瀉肝湯","LIVER FIRE BLAZING UPWARD
 
 [Pathogenesis] Constrained Liver Qi turns to Fire, or intense anger injures the Liver. Liver Fire blazes and Qi and Fire rise; this is an excess Heat pattern.
 
@@ -15557,7 +17503,12 @@ UI_BOOK_ENTRY_BODY_HAN_ZHI_GAN_MAI,"寒滞肝脉
 
 【病機】外感寒邪、凝滯肝經，肝脈拘急、氣血阻滯、陽氣被遏，屬實寒證。
 
-【症狀】少腹冷痛、睪丸墜脹冷痛、疝氣痛；巔頂頭痛、畏寒喜暖、得溫痛減、...","COLD STAGNATING IN THE LIVER CHANNEL
+【症狀】少腹冷痛、睪丸墜脹冷痛、疝氣痛；巔頂頭痛、畏寒喜暖、得溫痛減、遇寒加重；四肢厥冷、面色青白。
+
+【脈象】
+左關（肝）：脈搏次數少
+
+【標準方】暖肝煎","COLD STAGNATING IN THE LIVER CHANNEL
 
 [Pathogenesis] External Cold congeals in the Liver channel, constricting its vessels, obstructing Qi and blood, and suppressing Yang. This is an excess Cold pattern.
 
@@ -15599,7 +17550,12 @@ UI_BOOK_ENTRY_BODY_GAN_QI_YU_JIE,"肝气郁结
 
 【病機】情志不遂，肝失疏洩，氣機鬱滯、經脈不暢。
 
-【症狀】胸脅、乳房、少腹脹痛走竄；情緒抑鬱、易怒、善太息；咽部異物感（梅核氣）、胸悶噯氣；...","LIVER QI STAGNATION
+【症狀】胸脅、乳房、少腹脹痛走竄；情緒抑鬱、易怒、善太息；咽部異物感（梅核氣）、胸悶噯氣；女子月經不調、痛經。
+
+【脈象】
+左關（肝）：波峰高
+
+【標準方】柴胡疏肝散","LIVER QI STAGNATION
 
 [Pathogenesis] Emotional frustration impairs the Liver's free flow, causing Qi to stagnate and the channels to become obstructed.
 
@@ -15641,7 +17597,12 @@ UI_BOOK_ENTRY_BODY_GAN_XUE_XU,"肝血虚
 
 【病機】肝血不足，筋脈、目、爪甲、心神失於濡養。
 
-【症狀】頭暈眼花、視力減退、視物模糊；爪甲乾枯脆薄，肢體麻木、筋脈拘攣；面色淡白或萎黃，唇舌...","LIVER BLOOD DEFICIENCY
+【症狀】頭暈眼花、視力減退、視物模糊；爪甲乾枯脆薄，肢體麻木、筋脈拘攣；面色淡白或萎黃，唇舌色淡；女子月經量少、色淡，甚則閉經；失眠多夢、易驚。
+
+【脈象】
+左關（肝）：波線細
+
+【標準方】四物湯","LIVER BLOOD DEFICIENCY
 
 [Pathogenesis] Insufficient Liver blood fails to nourish the sinews, eyes, nails and mind.
 
@@ -15686,7 +17647,9 @@ UI_BOOK_ENTRY_BODY_GAN_XUE_YU_ZHI,"肝血瘀滞
 【症狀】肌膚甲錯，周身瘀斑、蛛絲紅縷；脅肋刺痛脹滿，情緒壓抑、生氣後疼痛加重。
 
 【脈象】
-...","LIVER BLOOD STASIS
+左關（肝）：波線粗
+
+【標準方】膈下逐瘀湯","LIVER BLOOD STASIS
 
 [Pathogenesis] Impaired free flow of Liver Qi slows the blood. Blood stasis obstructs the Liver vessels.
 
@@ -15728,7 +17691,12 @@ UI_BOOK_ENTRY_BODY_GAN_YIN_XU,"肝阴虚
 
 【病機】情志化火、久病耗傷，肝陰不足、虛火內生、頭目筋脈失養。
 
-【症狀】頭暈耳鳴、兩目乾澀、視物昏花；脅肋隱隱灼痛、五心煩熱；潮熱盜汗、口燥咽...","LIVER YIN DEFICIENCY
+【症狀】頭暈耳鳴、兩目乾澀、視物昏花；脅肋隱隱灼痛、五心煩熱；潮熱盜汗、口燥咽乾、面部烘熱；手足蠕動、筋脈拘急。
+
+【脈象】
+左關（肝）：波線細，脈搏次數多，波寬窄
+
+【標準方】一貫煎","LIVER YIN DEFICIENCY
 
 [Pathogenesis] Emotional strain generating Fire or prolonged illness depletes Liver Yin. Deficiency Fire arises, leaving the head, eyes and sinews unnourished.
 
@@ -15770,7 +17738,12 @@ UI_BOOK_ENTRY_BODY_GAN_YANG_SHANG_KANG,"肝阳上亢
 
 【病機】肝腎陰虛，陰不制陽、肝陽升發太過、上擾頭目，屬本虛標實。
 
-【症狀】眩暈耳鳴、頭目脹痛、面紅目赤；急躁易怒、失眠多夢、腰膝酸軟；頭重腳...","LIVER YANG RISING
+【症狀】眩暈耳鳴、頭目脹痛、面紅目赤；急躁易怒、失眠多夢、腰膝酸軟；頭重腳輕、步履不穩。
+
+【脈象】
+左關（肝）：波峰高，脈搏次數多
+
+【標準方】鉤藤散","LIVER YANG RISING
 
 [Pathogenesis] Liver and Kidney Yin deficiency cannot restrain Yang. Liver Yang rises excessively to disturb the head and eyes: deficiency at the root, excess in the manifestation.
 
@@ -15813,7 +17786,13 @@ UI_BOOK_ENTRY_BODY_GAN_PI_BU_HE,"肝脾不和（肝郁脾虚）
 
 【病機】情志不舒、肝氣鬱結，木旺克土；脾虛失運、肝氣乘脾。
 
-【症狀】胸脅脹痛、善太息、情緒抑鬱易怒；脘腹脹滿、噯氣食少；腹痛洩瀉...","LIVER-SPLEEN DISHARMONY
+【症狀】胸脅脹痛、善太息、情緒抑鬱易怒；脘腹脹滿、噯氣食少；腹痛洩瀉、瀉後痛減；食慾不振、腸鳴矢氣多。
+
+【脈象】
+左關（肝）：波峰高
+右關（脾）：波峰低
+
+【標準方】逍遙散","LIVER-SPLEEN DISHARMONY
 
 [Pathogenesis] Emotional distress constrains Liver Qi, so Wood overacts on Earth. A weakened Spleen fails to transport properly, and Liver Qi overwhelms it.
 
@@ -15859,7 +17838,13 @@ UI_BOOK_ENTRY_BODY_SHEN_BU_NA_QI,"肾不纳气
 
 【病機】久病咳喘、年老腎虛、勞傷腎氣；腎氣虧虛，下元不固，不能攝納肺氣，氣浮於上。屬虛喘、肺腎兩虛，無明顯實邪。
 
-【症狀】喘促日久、呼多吸少...","KIDNEY FAILURE TO GRASP QI
+【症狀】喘促日久、呼多吸少、動則喘甚；氣短不足以息、吸氣淺表；腰膝酸軟、神疲乏力；或自汗、語聲低怯。
+
+【脈象】
+右寸（肺）：波峰低
+右尺（腎陽）：波峰低
+
+【標準方】人參蛤蚧散","KIDNEY FAILURE TO GRASP QI
 
 [Pathogenesis] Chronic coughing or wheezing, aging or overwork depletes Kidney Qi. The lower source cannot secure and draw down Lung Qi, which rises. This is deficiency wheezing involving both Lung and Kidney, without an obvious excess pathogen.
 
@@ -15905,7 +17890,13 @@ UI_BOOK_ENTRY_BODY_SHEN_YIN_XU,"肾阴虚
 
 【病機】久病耗傷、房勞過度、過服溫燥，腎陰虧虛、虛火內生、失於滋養。
 
-【症狀】腰膝酸痛、眩暈耳鳴、健忘；潮熱盜汗、五心煩熱、口燥咽乾；男子遺精...","KIDNEY YIN DEFICIENCY
+【症狀】腰膝酸痛、眩暈耳鳴、健忘；潮熱盜汗、五心煩熱、口燥咽乾；男子遺精早洩，女子經少、閉經或崩漏；形體消瘦、失眠多夢。
+
+【脈象】
+右尺（腎陽）：脈搏次數多
+左尺（腎陰）：波線細，波寬窄
+
+【標準方】六味地黃丸","KIDNEY YIN DEFICIENCY
 
 [Pathogenesis] Prolonged illness, excessive sexual activity or too many warming and drying substances depletes Kidney Yin. Deficiency Fire arises and nourishment is lost.
 
@@ -15951,7 +17942,13 @@ UI_BOOK_ENTRY_BODY_SHEN_YANG_XU,"肾阳虚
 
 【病機】年老腎虧、久病傷陽、房勞耗損，腎陽虧虛、命門火衰、溫煦氣化無權。
 
-【症狀】腰膝冷痛、酸軟無力；畏寒肢冷，尤以下肢為甚；精神萎靡、面色㿠...","KIDNEY YANG DEFICIENCY
+【症狀】腰膝冷痛、酸軟無力；畏寒肢冷，尤以下肢為甚；精神萎靡、面色㿠白或黧黑；小便清長、夜尿多、遺尿；男子陽痿早洩，女子宮寒不孕、帶下清稀；大便久洩不止、完谷不化、五更洩瀉。
+
+【脈象】
+右尺（腎陽）：波峰低，脈搏次數少
+左尺（腎陰）：波寬寬
+
+【標準方】金匱腎氣丸","KIDNEY YANG DEFICIENCY
 
 [Pathogenesis] Aging, prolonged illness or sexual overexertion depletes Kidney Yang. The Fire of the Gate of Life weakens, impairing warmth and fluid transformation.
 
@@ -15998,7 +17995,14 @@ UI_BOOK_ENTRY_BODY_SHEN_XU_SHUI_FAN,"肾虚水泛
 
 【病機】腎陽虛衰，氣化無權，水濕內停，泛溢肌膚。
 
-【症狀】周身浮腫，腰以下腫甚，按之凹陷不起；腰膝酸軟冷痛，畏寒肢冷；小便短少，或小便不利；...","KIDNEY DEFICIENCY WITH OVERFLOWING WATER
+【症狀】周身浮腫，腰以下腫甚，按之凹陷不起；腰膝酸軟冷痛，畏寒肢冷；小便短少，或小便不利；心悸氣短、喘咳痰稀如水；面色㿠白或灰黯。
+
+【脈象】
+右關（脾）：波寬寬
+右尺（腎陽）：波峰低，脈搏次數少
+左尺（腎陰）：波寬寬
+
+【標準方】真武湯","KIDNEY DEFICIENCY WITH OVERFLOWING WATER
 
 [Pathogenesis] Deficient Kidney Yang cannot transform fluids. Water and Dampness accumulate and overflow into the skin.
 
@@ -16048,7 +18052,14 @@ UI_BOOK_ENTRY_BODY_SHEN_JING_BU_ZU,"肾精不足
 
 【病機】先天稟賦不足、後天耗傷太過、久病及腎、房勞過度，腎精虧少，不能充養骨骼、腦髓、生殖之本。
 
-【症狀】小兒五遲五軟：立遲、行遲、語遲、發...","KIDNEY ESSENCE DEFICIENCY
+【症狀】小兒五遲五軟：立遲、行遲、語遲、發遲、齒遲；囟門遲閉、智力低下、身材矮小。
+成人腦髓失養：頭暈耳鳴、健忘失眠、精神遲鈍；早衰特徵：發脫齒搖、須發早白；骨骼失養：腰膝酸軟、足痿無力生殖虧虛：男子精少不育；女子經閉、不孕。
+
+【脈象】
+右尺（腎陽）：波峰低
+左尺（腎陰）：波線細
+
+【標準方】左歸丸","KIDNEY ESSENCE DEFICIENCY
 
 [Pathogenesis] Weak congenital endowment, excessive later-life depletion, chronic illness or sexual overexertion reduces Kidney essence, which can no longer nourish the bones, brain and reproductive system.
 
@@ -16095,7 +18106,13 @@ UI_BOOK_ENTRY_BODY_SHEN_QI_BU_GU,"肾气不固
 
 【病機】久病勞損、年老體弱、房事不節，腎氣虧虛、封藏固攝無權，偏虛證、無明顯寒熱。
 
-【症狀】腰膝酸軟、神疲乏力，耳鳴；小便頻數清長、夜尿多、...","KIDNEY QI FAILING TO SECURE
+【症狀】腰膝酸軟、神疲乏力，耳鳴；小便頻數清長、夜尿多、遺尿、小便失禁；男子：滑精、早洩；女子：帶下清稀量多、胎動易滑。
+
+【脈象】
+右尺（腎陽）：波峰低
+左尺（腎陰）：波寬寬
+
+【標準方】金鎖固精丸","KIDNEY QI FAILING TO SECURE
 
 [Pathogenesis] Chronic illness, aging or sexual overexertion depletes Kidney Qi, weakening its ability to store and secure. This is mainly a deficiency pattern without marked Cold or Heat.
 
@@ -16147,7 +18164,13 @@ UI_BOOK_ENTRY_BODY_REN_SHEN_DISEASE,"妊娠
 【症狀】惡心嘔吐，食入即吐、厭油膩、頭暈倦怠；
 
 
-【脈象】...","PREGNANCY
+【脈象】
+
+右關（脾）：波寬寬
+右尺（腎陽）：波峰高
+左尺（腎陰）：波線粗
+
+【標準方】泰山磐石散","PREGNANCY
 
 [Pathogenesis] Qi and blood gather in the Chong and Ren vessels to nourish the fetus. Maternal Qi and blood sustain fetal growth: the Kidney supports its formation and the Spleen its nourishment.
 
@@ -16197,7 +18220,14 @@ UI_BOOK_ENTRY_BODY_XIN_SHEN_BU_JIAO,"心肾不交
 
 【病機】腎陰不足，不能上滋心火；心火偏亢，不能下溫腎水，水火失濟、陰陽失調。多由勞神過度、久病耗陰、情志鬱而化火所致，多屬陰虛火旺。
 
-【症狀...","HEART-KIDNEY DISHARMONY
+【症狀】心火亢於上：心煩失眠、多夢易醒、心悸怔忡、口舌生瘡；腎陰虧於下：腰膝酸軟、眩暈耳鳴、潮熱盜汗、五心煩熱；失眠多夢 ， 腰膝酸軟 ， 夜寐不安。
+
+【脈象】
+左寸（心）：脈搏次數多
+左尺（腎陰）：波線細，波寬窄
+右尺（腎陽）：脈搏次數多
+
+【標準方】黃連阿膠湯","HEART-KIDNEY DISHARMONY
 
 [Pathogenesis] Insufficient Kidney Yin fails to nourish the Heart, while excessive Heart Fire cannot descend to the Kidney. Water and Fire fail to balance, disturbing Yin and Yang. Overwork, chronic illness or emotional constraint turning to Fire may contribute; this is generally Yin deficiency with exuberant Fire.
 
@@ -16248,7 +18278,15 @@ UI_BOOK_ENTRY_BODY_QI_FEN_RE_SHENG,"气分热盛
 
 【病機】外感溫熱病邪入裡，邪熱熾盛、入居氣分、裡熱蒸騰、正邪劇爭，屬實熱證。
 
-【症狀】大熱：全身壯熱、不惡寒反惡熱；大汗：熱迫津洩、大汗出；...","EXUBERANT HEAT AT THE QI LEVEL
+【症狀】大熱：全身壯熱、不惡寒反惡熱；大汗：熱迫津洩、大汗出；大渴：口大渴、喜冷飲；脈洪大。
+
+【脈象】
+浮脈（表）：波峰高（輕微），脈搏次數多（輕微），波寬窄（輕微）
+左寸（心）：波峰高（輕微），脈搏次數多（輕微），波寬窄（輕微）
+右寸（肺）：波峰高（劇烈），脈搏次數多（劇烈），波寬窄（劇烈）
+右關（脾）：波峰高（劇烈），脈搏次數多（劇烈），波寬窄（劇烈）
+
+【標準方】白虎湯","EXUBERANT HEAT AT THE QI LEVEL
 
 [Pathogenesis] An external warm pathogen enters the interior and blazes at the Qi level. Internal Heat rises as the body's defenses struggle against it; this is an excess Heat pattern.
 
