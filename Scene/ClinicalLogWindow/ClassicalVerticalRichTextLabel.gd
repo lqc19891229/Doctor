@@ -365,44 +365,43 @@ func _build_plain_vertical_matrix(columns: Array[String], rows_per_column: int) 
 
 
 func _build_fixed_cell_vertical_table(columns: Array[String], rows_per_column: int) -> String:
-	# 重点：
-	# 旧实现依赖 "字符 + 全角空格" 的实际 advance 相等。
-	# 韩文字体 fallback 往往不是等宽，所以每一行宽度不同，竖列就会左右漂移。
-	# Table 会让每一列共享同一个 cell 宽度，因此 Hangul / Kana / Kanji 都能对齐。
-	var visual_columns := columns.size()
-	var gap_columns = max(0, visual_columns - 1)
-	var right_pad_columns = max(0, right_padding_chars)
-	var table_columns = max(1, visual_columns + gap_columns + right_pad_columns)
+	# 日文 / 韩文使用固定列数的 table。
+	# 关键点：
+	# 1. 不再把“列间距”做成额外 table 列，否则短文本会被拉得非常散。
+	# 2. 即使当前页只有少量正文列，也仍然按 fixed_columns_per_page 建表，
+	#    让短页和长页拥有相同的列宽，不会出现韩文第二页突然被撑宽。
+	# 3. 空列补在左边，正文仍从右往左阅读。
+	var visual_columns: int = columns.size()
+	var target_columns: int = maxi(visual_columns, fixed_columns_per_page)
+	target_columns = maxi(1, target_columns)
 
 	var out := PackedStringArray()
-	out.append("[right][table=%d]" % table_columns)
+	out.append("[right][table=%d]" % target_columns)
 
-	# 上边距：生成完整空白 table row。
-	for _pad_row in range(max(0, top_padding_lines)):
-		for _cell in range(table_columns):
-			out.append("[cell]　[/cell]")
+	for _pad_row in range(maxi(0, top_padding_lines)):
+		for _cell in range(target_columns):
+			out.append("[cell][center]　[/center][/cell]")
 
 	for row in range(rows_per_column):
+		var blank_left_columns: int = maxi(0, target_columns - visual_columns)
+
+		# 左侧先补空列，保证实际正文始终贴在右侧。
+		for _blank in range(blank_left_columns):
+			out.append("[cell][center]　[/center][/cell]")
+
+		# 正文列反向写入，让第一列位于最右侧。
 		for column_index in range(columns.size() - 1, -1, -1):
-			var column_text := columns[column_index]
-			var ch := "　"
+			var column_text: String = columns[column_index]
+			var ch: String = "　"
 			if row < column_text.length():
 				ch = column_text.substr(row, 1)
 
-			out.append("[cell]%s[/cell]" % ch)
+			out.append("[cell][center]%s[/center][/cell]" % ch)
 
-			# 内容列之间插入独立间隔列。
-			if column_index > 0:
-				out.append("[cell]%s[/cell]" % column_gap)
-
-		for _pad_col in range(right_pad_columns):
-			out.append("[cell]　[/cell]")
-
-		# char_spacing_lines 通过插入完整空白 table row 实现。
 		if row < rows_per_column - 1:
-			for _spacing_row in range(max(0, char_spacing_lines)):
-				for _cell in range(table_columns):
-					out.append("[cell]　[/cell]")
+			for _spacing_row in range(maxi(0, char_spacing_lines)):
+				for _cell in range(target_columns):
+					out.append("[cell][center]　[/center][/cell]")
 
 	out.append("[/table][/right]")
 	return "".join(out)
