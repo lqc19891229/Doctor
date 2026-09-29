@@ -755,8 +755,8 @@ func _ensure_formula_search_cache() -> void:
 		formula_button.focus_mode = Control.FOCUS_NONE
 		formula_button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
 		formula_button.set_meta("formula_id", formula_id)
-		if LocalizedName.is_japanese_locale() and formula is FormulaData:
-			formula_button.tooltip_text = _japanese_formula_tooltip(formula as FormulaData)
+		if formula is FormulaData:
+			formula_button.tooltip_text = _localized_formula_tooltip(formula as FormulaData)
 		elif formula.has_method("get_display_text"):
 			formula_button.tooltip_text = str(formula.get_display_text())
 		formula_button.pressed.connect(_on_formula_button_pressed.bind(formula))
@@ -765,7 +765,7 @@ func _ensure_formula_search_cache() -> void:
 		_formula_button_by_id[formula_id] = formula_button
 
 
-func _japanese_formula_tooltip(formula: FormulaData) -> String:
+func _localized_formula_tooltip(formula: FormulaData) -> String:
 	var lines: Array[String] = [tr("UI_RESULT_FORMULA_FMT") % LocalizedName.formula(formula.formula_id, formula.formula_name)]
 	if not formula.target_disease_id.strip_edges().is_empty():
 		lines.append(tr("UI_RESULT_DISEASE_FMT") % LocalizedName.disease(formula.target_disease_id, formula.target_disease_name))
@@ -778,7 +778,15 @@ func _japanese_formula_tooltip(formula: FormulaData) -> String:
 				LocalizedName.herb(ingredient.get_herb_id(), ingredient.get_herb_name()),
 				HerbUnit.format_amount(ingredient.amount, ingredient.unit)
 			])
-		lines.append(tr("UI_RESULT_ROLE_LINE_FMT") % [tr(str(role_data[0])), "、".join(parts) if not parts.is_empty() else tr("UI_RESULT_NONE")])
+		var ingredient_separator := "、"
+		if LocalizedName.is_english_locale() or LocalizedName.is_korean_locale():
+			ingredient_separator = ", "
+		lines.append(tr("UI_RESULT_ROLE_LINE_FMT") % [
+			tr(str(role_data[0])),
+			ingredient_separator.join(parts)
+			if not parts.is_empty()
+			else tr("UI_RESULT_NONE")
+		])
 	return "\n".join(lines)
 
 
@@ -1011,7 +1019,11 @@ func _on_formula_button_pressed(formula) -> void:
 	_set_selected_role(ROLE_JUN)
 	_refresh_prescription_list()
 
-	emit_signal("info_requested", tr("UI_PRESCRIPTION_PRESET_FILLED_FMT") % str(formula.formula_name))
+	emit_signal(
+		"info_requested",
+		tr("UI_PRESCRIPTION_PRESET_FILLED_FMT")
+		% LocalizedName.formula(formula.formula_id, formula.formula_name)
+	)
 
 
 func _normalize_herb_search_text(value: String) -> String:

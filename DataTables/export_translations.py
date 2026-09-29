@@ -370,6 +370,118 @@ def sync_story(wb, data_xlsx: Path) -> list[str]:
     return missing
 
 
+def read_story_npc_names() -> list[tuple[str, str]]:
+    npc_dir = Path(__file__).resolve().parent.parent / "Data" / "Npc"
+    if not npc_dir.exists():
+        raise ValueError(f"找不到剧情 NPC 目录：{npc_dir}")
+
+    result: list[tuple[str, str]] = []
+
+    for path in sorted(npc_dir.glob("*.tres")):
+        text = path.read_text(encoding="utf-8")
+
+        if not re.search(
+            r'^npc_type\s*=\s*"story"\s*$',
+            text,
+            re.MULTILINE,
+        ):
+            continue
+
+        id_match = re.search(
+            r'^npc_id\s*=\s*"([^"]*)"\s*$',
+            text,
+            re.MULTILINE,
+        )
+        name_match = re.search(
+            r'^npc_name\s*=\s*"([^"]*)"\s*$',
+            text,
+            re.MULTILINE,
+        )
+
+        if id_match is None or name_match is None:
+            raise ValueError(f"剧情 NPC 缺少 npc_id 或 npc_name：{path}")
+
+        npc_id = as_text(id_match.group(1))
+        npc_name = as_text(name_match.group(1))
+
+        if not npc_id or not npc_name:
+            raise ValueError(f"剧情 NPC 的 npc_id 或 npc_name 为空：{path}")
+
+        result.append((npc_id, npc_name))
+
+    return result
+
+
+def sync_story_npc_names(wb) -> list[str]:
+    if "Story" not in wb.sheetnames:
+        return []
+
+    story_ws = wb["Story"]
+    speaker_translations: dict[str, tuple[str, str, str]] = {}
+
+    for row in story_ws.iter_rows(min_row=2, values_only=True):
+        key = as_text(row[0])
+        if not key.endswith("_SPEAKER"):
+            continue
+
+        zh = as_text(row[1])
+        if not zh:
+            continue
+
+        translations = (
+            as_text(row[2]),
+            as_text(row[3]),
+            as_text(row[4]),
+        )
+        previous = speaker_translations.get(zh)
+
+        if previous is not None and previous != translations:
+            raise ValueError(
+                f"同一剧情说话人存在不一致译名：{zh!r} "
+                f"{previous} 与 {translations}"
+            )
+
+        speaker_translations[zh] = translations
+
+    ui_ws = wb["UI"]
+    existing_rows: dict[str, int] = {}
+
+    for row_no in range(2, ui_ws.max_row + 1):
+        key = as_text(ui_ws.cell(row_no, 1).value)
+        if key:
+            existing_rows[key] = row_no
+
+    style_source_row = 2 if ui_ws.max_row >= 2 else None
+    missing: list[str] = []
+
+    for npc_id, npc_name in read_story_npc_names():
+        key = f"UI_NPC_NAME_{npc_id.upper()}"
+        row_no = existing_rows.get(key)
+
+        if row_no is None:
+            translations = speaker_translations.get(
+                npc_name,
+                ("", "", ""),
+            )
+            ui_ws.append((key, npc_name, *translations))
+            row_no = ui_ws.max_row
+            existing_rows[key] = row_no
+
+            if style_source_row is not None:
+                copy_row_style(ui_ws, style_source_row, ui_ws, row_no)
+
+        values = [
+            as_text(ui_ws.cell(row_no, column).value)
+            for column in range(2, 6)
+        ]
+        for language, value in zip(("en", "ja", "ko"), values[1:]):
+            if not value:
+                missing.append(f"{key} | {language} | {npc_name}")
+
+    update_table_ranges(ui_ws)
+    return missing
+
+
 def save_managed_workbook_safely(wb, path: Path) -> None:
     temp_path = path.with_name(path.stem + ".__tmp__" + path.suffix)
 
@@ -685,6 +797,7 @@ def main() -> int:
 
         missing_symptom_translations = sync_disease_symptoms(wb, disease_symptoms)
         missing_story = sync_story(wb, data_xlsx)
+        missing_story_npc_names = sync_story_npc_names(wb)
         sync_japanese_search(wb)
         sync_korean_search(wb)
 
@@ -705,14 +818,14 @@ def main() -> int:
             print("请补全这些英文、日语和韩语翻译，保存工作簿后再重新运行本脚本。")
             return 2
 
-        if missing_story:
+        if missing_story or missing_story_npc_names:
             print()
-            print("停止导出：发现剧情尚未填写英文、日语或韩语翻译。")
+            print("停止导出：发现剧情台词或剧情 NPC 姓名尚未填写英文、日语或韩语翻译。")
             print(
-                "以下剧情已写入 translations_managed.xlsx，但 en、ja 或 ko 列仍为空："
+                "以下内容已写入 translations_managed.xlsx，但 en、ja 或 ko 列仍为空："
             )
 
-            for item in missing_story:
+            for item in missing_story + missing_story_npc_names:
                 print(" -", item)
 
             print()

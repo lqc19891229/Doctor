@@ -826,7 +826,10 @@ func _update_pulse_practice_button() -> void:
 
 	pulse_practice_button.disabled = false
 	pulse_practice_button.text = tr("UI_READ_BOOK_VIEW_PULSE")
-	pulse_practice_button.tooltip_text = tr("UI_READ_BOOK_PULSE_TOOLTIP_FMT") % disease.disease_name
+	pulse_practice_button.tooltip_text = tr("UI_READ_BOOK_PULSE_TOOLTIP_FMT") % LocalizedName.disease(
+		disease.disease_id,
+		disease.disease_name
+	)
 
 
 func _on_pulse_practice_button_pressed() -> void:
@@ -854,7 +857,10 @@ func _update_pulse_practice_title() -> void:
 		return
 	var disease := _get_selected_disease_data()
 	if disease != null:
-		pulse_practice_window.title = tr("UI_READ_BOOK_PULSE_TITLE_FMT") % disease.disease_name
+		pulse_practice_window.title = tr("UI_READ_BOOK_PULSE_TITLE_FMT") % LocalizedName.disease(
+			disease.disease_id,
+			disease.disease_name
+		)
 
 
 func _show_pulse_practice_disease(disease: DiseaseData) -> void:

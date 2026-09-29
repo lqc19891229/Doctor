@@ -1744,6 +1744,34 @@ UI_JUDGE_SUMMARY_MISSING_HERBS_FMT,缺少药材：%s,Missing herbs: %s,不足薬
 UI_JUDGE_SUMMARY_EXTRA_HERBS_FMT,多余药材：%s,Extra herbs: %s,余分な薬材：%s,불필요한 약재: %s
 UI_JUDGE_SUMMARY_MINOR_DOSAGE,剂量轻微偏差：,Minor dosage differences:,軽微な用量差：,경미한 용량 차이:
 UI_JUDGE_SUMMARY_MAJOR_DOSAGE,剂量严重偏差：,Major dosage errors:,大きな用量差：,큰 용량 차이:
+UI_NPC_NAME_BAN_XIA,半夏,Banxia,半夏,반하
+UI_NPC_NAME_CHEN_PI,陈皮,Chen Pi,陳皮,진피
+UI_NPC_NAME_CHU_WANG,楚王,Prince of Chu,楚王,초왕
+UI_NPC_NAME_GU_WEN,顾问,Gu Wen,顧問,구원
+UI_NPC_NAME_GUO_MA_MA,郭妈妈,Madam Guo,郭おばさん,곽 부인
+UI_NPC_NAME_HEI_YI_REN,黑衣人,Man in Black,黒衣の者,흑의인
+UI_NPC_NAME_HU_CHENG_LONG,胡承龙,Hu Chenglong,胡承竜,호승룡
+UI_NPC_NAME_JIA_QUAN,贾荃,Jia Quan,賈荃,가전
+UI_NPC_NAME_LEI_WAN_JUN,雷万钧,Lei Wanjun,雷万鈞,뇌만균
+UI_NPC_NAME_LI_DONG_BI,李东璧,Li Dongbi,李東璧,이동벽
+UI_NPC_NAME_LI_JIAN_ZHONG,李建中,Li Jianzhong,李建中,이건중
+UI_NPC_NAME_LI_YAN_WEN,李言闻,Li Yanwen,李言聞,이언문
+UI_NPC_NAME_LIU_JING_TING,柳敬亭,Liu Jingting,柳敬亭,유경정
+UI_NPC_NAME_LU_DING,陆丁,Lu Ding,陸丁,육정
+UI_NPC_NAME_LU_ZHONG,陆忠,Lu Zhong,陸忠,육충
+UI_NPC_NAME_SHEN_XIU_WEN,沈修文,Shen Xiuwen,沈修文,심수문
+UI_NPC_NAME_SHI_ZI,世子,The Heir,世子,세자
+UI_NPC_NAME_WANG_BAI_TANG,王百堂,Wang Baitang,王百堂,왕백당
+UI_NPC_NAME_WANG_FU_HU_WEI,王府护卫,Palace Guard,王府の護衛,왕부 호위
+UI_NPC_NAME_WU_SHI_LIANG,吴世良,Wu Shiliang,呉世良,오세량
+UI_NPC_NAME_WU_ZHI_LAN,吴芷兰,Wu Zhilan,呉芷蘭,오지란
+UI_NPC_NAME_XIE_FEI_YAN,谢飞燕,Xie Feiyan,謝飛燕,사비연
+UI_NPC_NAME_XING_KONG,性空,Xingkong,性空,성공
+UI_NPC_NAME_YA_YI,衙役,Constable,役人,포졸
+UI_NPC_NAME_YANG_SHAN_QUAN,杨善泉,Yang Shanquan,楊善泉,양선천
+UI_NPC_NAME_ZENG_HE,曾和,Zeng He,曽和,증화
+UI_NPC_NAME_ZENG_TI_MING,曾题名,Zeng Timing,曽題名,증제명
+UI_NPC_NAME_ZHAO_SHUN,赵顺,Zhao Shun,趙順,조순
 UI_BOOK_ENTRY_TITLE_BAI_SHAO,白芍,White Peony Root,白芍,백작약
 UI_BOOK_ENTRY_BODY_BAI_SHAO,"白芍（芍药）
 【气味】苦、酸，微寒。

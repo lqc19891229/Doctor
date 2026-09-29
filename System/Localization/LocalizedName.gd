@@ -56,6 +56,10 @@ static func is_korean_locale() -> bool:
 	return TranslationServer.get_locale().to_lower().begins_with("ko")
 
 
+static func is_chinese_locale() -> bool:
+	return TranslationServer.get_locale().to_lower().begins_with("zh")
+
+
 static func is_horizontal_detail_locale() -> bool:
 	return is_english_locale()
 
