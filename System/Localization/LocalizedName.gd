@@ -74,14 +74,8 @@ static func is_traditional_chinese_locale() -> bool:
 
 
 static func is_horizontal_detail_locale() -> bool:
-	# 拉丁字母、日文和韩文详情统一使用横排。
-	# ClassicalVerticalRichTextLabel 的矩阵式竖排主要针对中日韩汉字等宽排版；
-	# 韩文字形在当前字体下横向 advance 不一致，强行竖排会出现列错位。
-	return (
-		is_english_locale()
-		or is_japanese_locale()
-		or is_korean_locale()
-	)
+	# 只有英文正文使用横排；简/繁中、日文、韩文都保持古籍竖排。
+	return is_english_locale()
 
 
 # =========================================================
