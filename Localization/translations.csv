@@ -6,8 +6,8 @@ UI_MASTER_VOLUME,主音量,主音量,Master Volume,全体音量,전체 음량
 UI_MUSIC_VOLUME,音乐音量,音樂音量,Music Volume,音楽の音量,음악 음량
 UI_AMBIENT_VOLUME,环境音量,環境音量,Ambient Volume,環境音の音量,환경음
 UI_SFX_VOLUME,音效音量,音效音量,Sound Effects Volume,効果音の音量,효과음 음량
-UI_FULLSCREEN,全屏,全屏,Fullscreen,全画面表示,전체 화면
-UI_MENU_NEW_GAME,新游戏,新游戲,New Game,ニューゲーム,새 게임
+UI_FULLSCREEN,全屏,全螢幕,Fullscreen,全画面表示,전체 화면
+UI_MENU_NEW_GAME,新游戏,新遊戲,New Game,ニューゲーム,새 게임
 UI_MENU_LOAD_GAME,读取存档,讀取存檔,Load Game,セーブデータを読み込む,게임 불러오기
 UI_MENU_READ_BOOK,查阅典籍,查閱典籍,Read Books,書物を読む,의서 읽기
 UI_MENU_QUIT_GAME,退出游戏,退出遊戲,Quit Game,ゲームを終了,게임 종료
@@ -37,12 +37,12 @@ UI_CONFIRM_OVERWRITE,确认覆盖,確認覆蓋,Overwrite,上書きを確認,덮�
 UI_OVERWRITE_QUESTION,该槽位已有存档，是否覆盖？,該槽位已有存檔，是否覆蓋？,This slot already has a save. Overwrite it?,このスロットにはセーブデータがあります。上書きしますか？,이 슬롯에는 이미 저장 데이터가 있습니다. 덮어쓰시겠습니까?
 UI_CANCEL,取消,取消,Cancel,キャンセル,취소
 UI_PAUSED,暂停,暫停,Paused,一時停止,일시정지
-UI_RESUME_GAME,继续游戏,繼續游戲,Resume Game,ゲームを再開,게임 계속하기
-UI_SAVE_GAME,保存游戏,保存游戲,Save Game,セーブ,게임 저장
+UI_RESUME_GAME,继续游戏,繼續遊戲,Resume Game,ゲームを再開,게임 계속하기
+UI_SAVE_GAME,保存游戏,儲存遊戲,Save Game,セーブ,게임 저장
 UI_LOAD_SAVE,读取存档,讀取存檔,Load Save,セーブデータを読み込む,저장 불러오기
 UI_RETURN_MENU,返回主菜单,返回主菜單,Return to Main Menu,メインメニューに戻る,메인 메뉴로 돌아가기
-UI_MANUAL_SAVE,手动保存,手動保存,Manual Save,手動セーブ,수동 저장
-UI_MANUAL_SAVE_RULE,白天保存本日开始状态；夜晚保存当前状态。,白天保存本日開始狀態；夜晚保存當前狀態。,Daytime saves the start of the day; nighttime saves the current state.,昼はその日の開始時点、夜は現在の状態を保存します。,"낮에는 하루 시작 시점을 저장하고, 밤에는 현재 상태를 저장합니다."
+UI_MANUAL_SAVE,手动保存,手動儲存,Manual Save,手動セーブ,수동 저장
+UI_MANUAL_SAVE_RULE,白天保存本日开始状态；夜晚保存当前状态。,白天儲存本日開始狀態；夜晚儲存目前狀態。,Daytime saves the start of the day; nighttime saves the current state.,昼はその日の開始時点、夜は現在の状態を保存します。,"낮에는 하루 시작 시점을 저장하고, 밤에는 현재 상태를 저장합니다."
 UI_MANUAL_SLOT_FMT,手动存档 %d,手動存檔 %d,Manual Save %d,手動セーブ %d,수동 저장 %d
 UI_MANUAL_SLOT_1,手动存档 1,手動存檔 1,Manual Save 1,手動セーブ 1,수동 저장 1
 UI_MANUAL_SLOT_2,手动存档 2,手動存檔 2,Manual Save 2,手動セーブ 2,수동 저장 2
@@ -51,7 +51,7 @@ UI_MANUAL_SLOT_4,手动存档 4,手動存檔 4,Manual Save 4,手動セーブ 4,�
 UI_LOAD_RULE,可读取自动存档与全部手动存档。,可讀取自動存檔與全部手動存檔。,Load an autosave or any manual save.,オートセーブとすべての手動セーブを読み込めます。,자동 저장 또는 모든 수동 저장을 불러옵니다.
 UI_AUTO_SAVE,自动存档,自動存檔,Autosave,オートセーブ,자동 저장
 UI_INVALID_SAVE,无效存档,無效存檔,Invalid Save,無効なセーブデータ,유효하지 않은 저장 데이터
-UI_LOAD_WARNING,读取后，当前未保存的进度将丢失。,讀取後，當前未保存的進度將丟失。,Loading will discard unsaved progress.,読み込むと、保存していない進行状況は失われます。,불러오면 저장하지 않은 진행 상황이 사라집니다.
+UI_LOAD_WARNING,读取后，当前未保存的进度将丢失。,讀取後，目前未儲存的進度將丟失。,Loading will discard unsaved progress.,読み込むと、保存していない進行状況は失われます。,불러오면 저장하지 않은 진행 상황이 사라집니다.
 UI_SELECT_MANUAL_DIFFICULTY,选择手动存档（%s难度）,選擇手動存檔（%s難度）,Choose Manual Save (%s),手動セーブを選択（難易度：%s）,수동 저장 선택 (%s 난이도)
 UI_DIFFICULTY_NAME_EASY,简单,簡單,Easy,易しい,쉬움
 UI_DIFFICULTY_NAME_NORMAL,普通,普通,Normal,普通,보통
@@ -77,7 +77,7 @@ Overwrite this manual save?","%sにはセーブデータがあります：
 %s
 
 이 수동 저장을 덮어쓰시겠습니까?"
-UI_MANUAL_SAVE_DETAIL,白天保存：记录本日开始状态；夜晚保存：记录当前夜晚状态。,白天保存：記錄本日開始狀態；夜晚保存：記錄當前夜晚狀態。,Daytime saves the start of the day; nighttime saves the current state.,昼：その日の開始時点を保存します。夜：現在の夜の状態を保存します。,낮 저장: 하루 시작 시점을 기록합니다. 밤 저장: 현재 밤의 상태를 기록합니다.
+UI_MANUAL_SAVE_DETAIL,白天保存：记录本日开始状态；夜晚保存：记录当前夜晚状态。,白天儲存：記錄本日開始狀態；夜晚儲存：記錄目前夜晚狀態。,Daytime saves the start of the day; nighttime saves the current state.,昼：その日の開始時点を保存します。夜：現在の夜の状態を保存します。,낮 저장: 하루 시작 시점을 기록합니다. 밤 저장: 현재 밤의 상태를 기록합니다.
 UI_NO_LOAD_IN_SLOT,该栏位没有可读取的存档。,該欄位沒有可讀取的存檔。,There is no save to load in this slot.,このスロットには読み込めるセーブデータがありません。,이 슬롯에는 불러올 저장 데이터가 없습니다.
 UI_LOAD_CONFIRM_DETAIL,"读取%s：
 %s
@@ -86,7 +86,7 @@ UI_LOAD_CONFIRM_DETAIL,"读取%s：
 是否读取？","讀取%s：
 %s
 
-當前未保存的進度將丟失。
+目前未儲存的進度將丟失。
 是否讀取？","Load %s:
 %s
 
@@ -118,23 +118,23 @@ Overwrite it?","%sには記録があります：
 %s
 
 덮어쓰시겠습니까?"
-UI_SAVING_GAME,正在保存……,正在保存……,Saving…,保存中……,저장 중…
+UI_SAVING_GAME,正在保存……,正在儲存……,Saving…,保存中……,저장 중…
 UI_OVERWRITE_MANUAL,覆盖手动存档,覆蓋手動存檔,Overwrite Manual Save,手動セーブを上書き,수동 저장 덮어쓰기
-UI_CANNOT_SAVE_STORY,剧情进行中，不能手动保存。,劇情進行中，不能手動保存。,Cannot save while a story is playing.,物語の進行中は手動セーブできません。,이야기가 진행 중일 때는 수동 저장을 할 수 없습니다.
-UI_SAVE_DAY_SUCCESS,保存成功：已记录本日开始状态。,保存成功：已記錄本日開始狀態。,Saved the start of the current day.,保存しました：その日の開始時点を記録しました。,저장 완료: 오늘의 시작 시점을 기록했습니다.
-UI_SAVE_NIGHT_SUCCESS,保存成功：已记录当前夜晚状态。,保存成功：已記錄當前夜晚狀態。,Saved the current night.,保存しました：現在の夜の状態を記録しました。,저장 완료: 현재 밤의 상태를 기록했습니다.
-UI_SAVE_FAILED,保存失败。,保存失敗。,Save failed.,保存に失敗しました。,저장에 실패했습니다.
+UI_CANNOT_SAVE_STORY,剧情进行中，不能手动保存。,劇情進行中，不能手動儲存。,Cannot save while a story is playing.,物語の進行中は手動セーブできません。,이야기가 진행 중일 때는 수동 저장을 할 수 없습니다.
+UI_SAVE_DAY_SUCCESS,保存成功：已记录本日开始状态。,儲存成功：已記錄本日開始狀態。,Saved the start of the current day.,保存しました：その日の開始時点を記録しました。,저장 완료: 오늘의 시작 시점을 기록했습니다.
+UI_SAVE_NIGHT_SUCCESS,保存成功：已记录当前夜晚状态。,儲存成功：已記錄目前夜晚狀態。,Saved the current night.,保存しました：現在の夜の状態を記録しました。,저장 완료: 현재 밤의 상태를 기록했습니다.
+UI_SAVE_FAILED,保存失败。,儲存失敗。,Save failed.,保存に失敗しました。,저장에 실패했습니다.
 UI_LOAD_MISSING_FMT,没有存档，无法读取：%s,沒有存檔，無法讀取：%s,No save to load: %s,読み込めるセーブデータがありません：%s,불러올 저장 데이터가 없습니다: %s
 UI_LOAD_FAILED_FMT,读取存档失败：%s,讀取存檔失敗：%s,Failed to load save: %s,セーブデータの読み込みに失敗しました：%s,저장 데이터를 불러오지 못했습니다: %s
-UI_SAVE_AND_RETURN,保存并返回,保存並返回,Save and Return,保存して戻る,저장하고 돌아가기
-UI_SAVE_AND_QUIT,保存并退出,保存並退出,Save and Quit,保存して終了,저장하고 종료하기
+UI_SAVE_AND_RETURN,保存并返回,儲存並返回,Save and Return,保存して戻る,저장하고 돌아가기
+UI_SAVE_AND_QUIT,保存并退出,儲存並退出,Save and Quit,保存して終了,저장하고 종료하기
 UI_RETURN_CONFIRM_DETAIL,"当前阶段尚未完成。
 直接返回主菜单后，本阶段未保存的进度将丢失。
 选择“保存并返回”会先保存到%s。
 
-是否返回主菜单？","當前階段尚未完成。
-直接返回主菜單後，本階段未保存的進度將丟失。
-選擇“保存並返回”會先保存到%s。
+是否返回主菜单？","目前階段尚未完成。
+直接返回主菜單後，本階段未儲存的進度將丟失。
+選擇“儲存並返回”會先儲存到%s。
 
 是否返回主菜單？","This stage is not complete.
 Returning to the main menu will discard unsaved progress.
@@ -153,9 +153,9 @@ UI_QUIT_CONFIRM_DETAIL,"当前阶段尚未完成。
 直接退出游戏后，本阶段未保存的进度将丢失。
 选择“保存并退出”会先保存到%s。
 
-是否退出游戏？","當前階段尚未完成。
-直接退出遊戲後，本階段未保存的進度將丟失。
-選擇“保存並退出”會先保存到%s。
+是否退出游戏？","目前階段尚未完成。
+直接退出遊戲後，本階段未儲存的進度將丟失。
+選擇“儲存並退出”會先儲存到%s。
 
 是否退出遊戲？","This stage is not complete.
 Quitting will discard unsaved progress.
@@ -173,7 +173,7 @@ Quit the game?","現在の段階はまだ完了していません。
 UI_RETURN_DEFAULT_DETAIL,"当前阶段尚未完成。
 返回主菜单后，将从最近一次自动存档继续。
 
-是否返回主菜单？","當前階段尚未完成。
+是否返回主菜单？","目前階段尚未完成。
 返回主菜單後，將從最近一次自動存檔繼續。
 
 是否返回主菜單？","This stage is not complete.
@@ -189,8 +189,8 @@ Return to the main menu?","現在の段階はまだ完了していません。
 UI_QUIT_DEFAULT_DETAIL,"当前阶段尚未完成。
 退出游戏后，本阶段未保存的进度将丢失。
 
-是否退出游戏？","當前階段尚未完成。
-退出遊戲後，本階段未保存的進度將丟失。
+是否退出游戏？","目前階段尚未完成。
+退出遊戲後，本階段未儲存的進度將丟失。
 
 是否退出遊戲？","This stage is not complete.
 Quitting will discard unsaved progress.
@@ -204,9 +204,9 @@ Quit the game?","現在の段階はまだ完了していません。
 게임을 종료하시겠습니까?"
 UI_RETURN_SAVE_FAILED_DETAIL,"保存失败，未返回主菜单。
 
-请重试“保存并返回”，或选择“返回主菜单”放弃未保存进度。","保存失敗，未返回主菜單。
+请重试“保存并返回”，或选择“返回主菜单”放弃未保存进度。","儲存失敗，未返回主菜單。
 
-請重試“保存並返回”，或選擇“返回主菜單”放棄未保存進度。","Save failed. You are still in the game.
+請重試“儲存並返回”，或選擇“返回主菜單”放棄未儲存進度。","Save failed. You are still in the game.
 
 Try Save and Return again, or Return to Main Menu to discard unsaved progress.","保存に失敗したため、メインメニューには戻りませんでした。
 
@@ -215,9 +215,9 @@ Try Save and Return again, or Return to Main Menu to discard unsaved progress.",
 ‘저장하고 돌아가기’를 다시 시도하거나, ‘메인 메뉴로 돌아가기’를 선택하여 저장하지 않은 진행 상황을 버리세요."
 UI_QUIT_SAVE_FAILED_DETAIL,"保存失败，未退出游戏。
 
-请重试“保存并退出”，或选择“退出游戏”放弃未保存进度。","保存失敗，未退出遊戲。
+请重试“保存并退出”，或选择“退出游戏”放弃未保存进度。","儲存失敗，未退出遊戲。
 
-請重試“保存並退出”，或選擇“退出遊戲”放棄未保存進度。","Save failed. The game is still running.
+請重試“儲存並退出”，或選擇“退出遊戲”放棄未儲存進度。","Save failed. The game is still running.
 
 Try Save and Quit again, or Quit Game to discard unsaved progress.","保存に失敗したため、ゲームは終了しませんでした。
 
@@ -230,9 +230,9 @@ Try Save and Quit again, or Quit Game to discard unsaved progress.","保存に�
 UI_DISCLAIMER_TITLE,内容声明,內容聲明,Content Notice,内容に関する注意,콘텐츠 안내
 UI_DISCLAIMER_BODY,"本游戏为虚构作品，仅供娱乐。游戏中涉及的医学知识、诊断及治疗内容可能并不准确，不可作为现实中的医疗依据，请勿据此自行诊断、用药或治疗。
 
-如有健康问题，请咨询专业医生，并以正规医疗机构的建议为准。游戏中的人物、事件及剧情均属虚构，如有雷同，纯属巧合。","本游戲為虛構作品，僅供娛樂。游戲中涉及的醫學知識、診斷及治療內容可能並不準確，不可作為現實中的醫療依據，請勿據此自行診斷、用藥或治療。
+如有健康问题，请咨询专业医生，并以正规医疗机构的建议为准。游戏中的人物、事件及剧情均属虚构，如有雷同，纯属巧合。","本遊戲為虛構作品，僅供娛樂。遊戲中涉及的醫學知識、診斷及治療內容可能並不準確，不可作為現實中的醫療依據，請勿據此自行診斷、用藥或治療。
 
-如有健康問題，請咨詢專業醫生，並以正規醫療機構的建議為準。游戲中的人物、事件及劇情均屬虛構，如有雷同，純屬巧合。","This game is a work of fiction for entertainment only. Medical knowledge, diagnoses, and treatments shown here may be inaccurate and must not be used as medical advice. Do not use this game to diagnose yourself, take medication, or choose treatment.
+如有健康問題，請諮詢專業醫師，並以合格醫療機構的建議為準。遊戲中的人物、事件及劇情均屬虛構，如有雷同，純屬巧合。","This game is a work of fiction for entertainment only. Medical knowledge, diagnoses, and treatments shown here may be inaccurate and must not be used as medical advice. Do not use this game to diagnose yourself, take medication, or choose treatment.
 
 If you have health concerns, consult a qualified doctor and follow the advice of a licensed medical institution. The characters, events, and story are fictional. Any resemblance to real people or events is coincidental.","本作はフィクションであり、娯楽を目的としています。ゲーム中の医学知識、診断や治療の内容は正確でない場合があり、現実の医療判断には使用できません。これを根拠に自己診断、服薬、治療を行わないでください。
 
@@ -245,7 +245,7 @@ UI_TOPBAR_DATE_PLACEHOLDER,天数,天數,Date,日付,날짜
 UI_TOPBAR_TIME_PLACEHOLDER,时辰,時辰,Hour,時刻,시진
 UI_TOPBAR_REPUTATION_PLACEHOLDER,名望：0　初窥门径,名望：0　初窺門徑,Rep 0 · Novice,名声：0　見習い,명망 0 · 초심자
 UI_TOPBAR_MONEY_PLACEHOLDER,银钱：0两 0文,銀錢：0兩 0文,Money: 0 liang 0 wen,所持金：0両 0文,은전: 0냥 0문
-UI_CURRENT_SHICHEN,当前时辰,當前時辰,Current Hour,現在の時刻,현재 시진
+UI_CURRENT_SHICHEN,当前时辰,目前時辰,Current Hour,現在の時刻,현재 시진
 UI_MONEY_DEBT_SHORT,欠,欠,Debt,借金,빚
 UI_MONEY_LIANG_ZERO,0两,0兩,0 liang,0両,0냥
 UI_MONEY_WEN_ZERO,0文,0文,0 wen,0文,0문
@@ -352,13 +352,13 @@ UI_PULSE_AREA_LUNG,肺,肺,Lung,肺,폐
 UI_PULSE_AREA_KIDNEY_YIN,肾阴,腎陰,Kidney Yin,腎陰,신음
 UI_PULSE_AREA_LIVER,肝,肝,Liver,肝,간
 UI_PULSE_AREA_HEART,心,心,Heart,心,심
-UI_PULSE_NO_DISEASE,当前没有疾病数据,當前沒有疾病數據,No disease data available.,現在、疾病データはありません,현재 병증 데이터가 없습니다.
+UI_PULSE_NO_DISEASE,当前没有疾病数据,目前沒有疾病資料,No disease data available.,現在、疾病データはありません,현재 병증 데이터가 없습니다.
 UI_PULSE_UNKNOWN_REGION_FMT,未知脉诊区域：%s,未知脈診區域：%s,Unknown pulse region: %s,不明な脈診部位：%s,알 수 없는 맥진 영역: %s
 UI_PULSE_REGION_MISSING_FMT,"当前部位：%s
 对应区域：%s
-未找到区域数据","當前部位：%s
+未找到区域数据","目前部位：%s
 對應區域：%s
-未找到區域數據","Current pulse point: %s
+未找到區域資料","Current pulse point: %s
 Corresponding area: %s
 No data for this area.","現在の部位：%s
 対応領域：%s
@@ -367,7 +367,7 @@ No data for this area.","現在の部位：%s
 이 영역의 데이터가 없습니다."
 UI_PULSE_REGION_VALUES_FMT,"当前查看：%s
 对应区域：%s
-气：%s  血：%s  寒热：%s  湿燥：%s","當前查看：%s
+气：%s  血：%s  寒热：%s  湿燥：%s","目前查看：%s
 對應區域：%s
 氣：%s  血：%s  寒熱：%s  濕燥：%s","Viewing: %s
 Corresponding area: %s
@@ -379,12 +379,12 @@ Qi: %s  Blood: %s  Cold/Heat: %s  Damp/Dry: %s","現在の部位：%s
 UI_PULSE_HAND_RIGHT,右,右,Right,右,오른쪽
 UI_PULSE_HAND_LEFT,左,左,Left,左,왼쪽
 UI_PULSE_UNKNOWN_HAND_FMT,未知整手类型：%s,未知整手類型：%s,Unknown hand: %s,不明な手の種類：%s,알 수 없는 손 유형: %s
-UI_PULSE_HAND_LINE_EMPTY_FMT,%s（%s）：无数据,%s（%s）：無數據,%s (%s): No data,%s（%s）：データなし,%s (%s): 데이터 없음
+UI_PULSE_HAND_LINE_EMPTY_FMT,%s（%s）：无数据,%s（%s）：無資料,%s (%s): No data,%s（%s）：データなし,%s (%s): 데이터 없음
 UI_PULSE_HAND_LINE_VALUES_FMT,%s（%s） 气：%s  血：%s  寒热：%s  湿燥：%s,%s（%s） 氣：%s  血：%s  寒熱：%s  濕燥：%s,%s (%s) Qi: %s  Blood: %s  Cold/Heat: %s  Damp/Dry: %s,%s（%s） 気：%s  血：%s  寒熱：%s  湿燥：%s,%s (%s) 기: %s  혈: %s  한열: %s  습조: %s
 UI_PULSE_HAND_SUMMARY_FMT,"当前查看：%s手整手脉象
 显示顺序：%s / %s / %s / %s
 
-%s","當前查看：%s手整手脈象
+%s","目前查看：%s手整手脈象
 顯示順序：%s / %s / %s / %s
 
 %s","Full pulse reading: %s hand
@@ -399,7 +399,7 @@ Display order: %s / %s / %s / %s
 %s"
 UI_RESULT_TITLE,结果判定,結果判定,Treatment Result,診療結果,치료 결과
 UI_RESULT_CONTENT_PLACEHOLDER,内容,內容,Details,内容,상세 내용
-UI_RESULT_CLOSE_HINT,点击任意区域关闭,點擊任意區域關閉,Click anywhere to close,画面をクリックして閉じる,아무 곳이나 클릭하여 닫기
+UI_RESULT_CLOSE_HINT,点击任意区域关闭,點選任意區域關閉,Click anywhere to close,画面をクリックして閉じる,아무 곳이나 클릭하여 닫기
 UI_RESULT_DISEASE_FMT,病人疾病：%s,病人疾病：%s,Patient's condition: %s,患者の病名：%s,환자의 병증: %s
 UI_RESULT_FORMULA_FMT,标准方：%s,標準方：%s,Standard formula: %s,標準処方：%s,표준 처방: %s
 UI_RESULT_FORMULA_DETAIL_FMT,"方剂配伍：
@@ -428,13 +428,13 @@ UI_RESULT_GRADE_SUCCESS,治疗成功,治療成功,Treatment Successful,治療成
 UI_RESULT_GRADE_FAILED,治疗失败,治療失敗,Treatment Failed,治療失敗,치료 실패
 UI_PRESCRIPTION_WINDOW_TITLE,断病开方,斷病開方,Diagnosis and Prescription,診断と処方,진단 및 처방
 UI_PRESCRIPTION_DIAGNOSE,断病,斷病,Diagnosis,診断,진단
-UI_PRESCRIPTION_SEARCH_DISEASE,搜索疾病,搜索疾病,Search conditions,病名を検索,병증 검색
+UI_PRESCRIPTION_SEARCH_DISEASE,搜索疾病,搜尋疾病,Search conditions,病名を検索,병증 검색
 UI_PRESCRIPTION_PRESCRIBE,开方,開方,Prescription,処方,처방
 UI_PRESCRIPTION_ROLE_JUN_SHORTCUT,君(1),君(1),Chief (1),君薬(1),군약 (1)
 UI_PRESCRIPTION_ROLE_CHEN_SHORTCUT,臣(2),臣(2),Deputy (2),臣薬(2),신약 (2)
 UI_PRESCRIPTION_ROLE_ZUO_SHORTCUT,佐(3),佐(3),Assistant (3),佐薬(3),좌약 (3)
 UI_PRESCRIPTION_ROLE_SHI_SHORTCUT,使(4),使(4),Envoy (4),使薬(4),사약 (4)
-UI_PRESCRIPTION_SEARCH_HERB,搜索药材,搜索藥材,Search herbs,薬材を検索,약재 검색
+UI_PRESCRIPTION_SEARCH_HERB,搜索药材,搜尋藥材,Search herbs,薬材を検索,약재 검색
 UI_PRESCRIPTION_CLEAR,清空处方,清空處方,Clear Prescription,処方を消去,처방 비우기
 UI_PRESCRIPTION_SUBMIT,提交处方,提交處方,Submit Prescription,処方を提出,처방 제출
 UI_PRESCRIPTION_ROLE_JUN,君,君,Chief,君薬,군약
@@ -446,33 +446,33 @@ UI_PRESCRIPTION_UNIT_QIAN,钱,錢,qian,銭,전
 UI_PRESCRIPTION_UNIT_LIANG,两,兩,liang,両,냥
 UI_PRESCRIPTION_UNIT_JIN,斤,斤,jin,斤,근
 UI_PRESCRIPTION_ZERO_FEN,零分,零分,0 fen,零分,0푼
-UI_PRESCRIPTION_HERB_DB_METHOD_MISSING,药材数据库缺少 get_all_herbs(),藥材數據庫缺少 get_all_herbs(),Herb database is missing get_all_herbs().,薬材データベースに get_all_herbs() がありません,약재 데이터베이스에 get_all_herbs()가 없습니다.
+UI_PRESCRIPTION_HERB_DB_METHOD_MISSING,药材数据库缺少 get_all_herbs(),藥材資料庫缺少 get_all_herbs(),Herb database is missing get_all_herbs().,薬材データベースに get_all_herbs() がありません,약재 데이터베이스에 get_all_herbs()가 없습니다.
 UI_PRESCRIPTION_FORMULA_LOCKED,该方剂尚未解锁。,該方劑尚未解鎖。,This formula is still locked.,この処方はまだ解放されていません。,이 처방은 아직 잠겨 있습니다.
 UI_PRESCRIPTION_PRESET_LOCKED,该方剂尚未累计 5 次妙手回春，不能使用预制方剂。,該方劑尚未累計 5 次妙手回春，不能使用預製方劑。,Use this formula for 5 Miraculous Recovery results to unlock its preset.,この処方は「妙手回春」を5回達成していないため、定型処方を使用できません。,이 처방으로 ‘명의의 손길’을 5회 달성하면 프리셋이 해금됩니다.
-UI_PRESCRIPTION_NOT_INITIALIZED,当前处方未初始化,當前處方未初始化,The current prescription is not ready.,処方が初期化されていません,현재 처방이 준비되지 않았습니다.
-UI_PRESCRIPTION_HERB_DB_NOT_INITIALIZED,药材数据库未初始化,藥材數據庫未初始化,The herb database is not ready.,薬材データベースが初期化されていません,약재 데이터베이스가 준비되지 않았습니다.
-UI_PRESCRIPTION_INVALID_FORMULA,方剂数据无效，无法填入处方。,方劑數據無效，無法填入處方。,Invalid formula data; the prescription could not be filled.,処方データが無効です。処方に追加できません。,처방 데이터가 유효하지 않아 처방을 채울 수 없습니다.
-UI_PRESCRIPTION_EMPTY_INGREDIENT,方剂数据存在空药材，无法填入处方。,方劑數據存在空藥材，無法填入處方。,The formula has an empty ingredient; the prescription could not be filled.,処方データに空の薬材があります。処方に追加できません。,처방에 빈 약재가 있어 처방을 채울 수 없습니다.
+UI_PRESCRIPTION_NOT_INITIALIZED,当前处方未初始化,目前處方未初始化,The current prescription is not ready.,処方が初期化されていません,현재 처방이 준비되지 않았습니다.
+UI_PRESCRIPTION_HERB_DB_NOT_INITIALIZED,药材数据库未初始化,藥材資料庫未初始化,The herb database is not ready.,薬材データベースが初期化されていません,약재 데이터베이스가 준비되지 않았습니다.
+UI_PRESCRIPTION_INVALID_FORMULA,方剂数据无效，无法填入处方。,方劑資料無效，無法填入處方。,Invalid formula data; the prescription could not be filled.,処方データが無効です。処方に追加できません。,처방 데이터가 유효하지 않아 처방을 채울 수 없습니다.
+UI_PRESCRIPTION_EMPTY_INGREDIENT,方剂数据存在空药材，无法填入处方。,方劑資料存在空藥材，無法填入處方。,The formula has an empty ingredient; the prescription could not be filled.,処方データに空の薬材があります。処方に追加できません。,처방에 빈 약재가 있어 처방을 채울 수 없습니다.
 UI_PRESCRIPTION_HERB_MISSING_FMT,方剂中的药材资源缺失：%s,方劑中的藥材資源缺失：%s,Missing herb resource in formula: %s,処方の薬材データが見つかりません：%s,처방에 필요한 약재 리소스가 없습니다: %s
 UI_PRESCRIPTION_INVALID_DOSE_FMT,方剂中的药材剂量无效：%s,方劑中的藥材劑量無效：%s,Invalid herb dose in formula: %s,処方の薬材の用量が無効です：%s,처방의 약재 용량이 유효하지 않습니다: %s
 UI_PRESCRIPTION_NO_INGREDIENTS,该方剂没有可填入的药材。,該方劑沒有可填入的藥材。,This formula contains no usable herbs.,この処方には追加できる薬材がありません。,이 처방에는 추가할 수 있는 약재가 없습니다.
 UI_PRESCRIPTION_PRESET_FILLED_FMT,已按预制方剂填入：%s,已按預製方劑填入：%s,Filled from formula preset: %s,定型処方を入力しました：%s,처방 프리셋으로 입력했습니다: %s
 UI_PRESCRIPTION_INCREASE_FAILED_FMT,累加药材失败：%s,累加藥材失敗：%s,Could not increase herb dose: %s,薬材の追加に失敗しました：%s,약재 용량을 늘릴 수 없습니다: %s
-UI_PRESCRIPTION_ADDED_TOTAL_FMT,已加入%s区：%s，当前%s,已加入%s區：%s，當前%s,"Added to %s: %s, now %s",%s欄に%sを追加しました。現在：%s,"%s 영역에 추가: %s, 현재 %s"
+UI_PRESCRIPTION_ADDED_TOTAL_FMT,已加入%s区：%s，当前%s,已加入%s區：%s，目前%s,"Added to %s: %s, now %s",%s欄に%sを追加しました。現在：%s,"%s 영역에 추가: %s, 현재 %s"
 UI_PRESCRIPTION_ADD_FAILED_FMT,加入药材失败：%s,加入藥材失敗：%s,Could not add herb: %s,薬材の追加に失敗しました：%s,약재를 추가할 수 없습니다: %s
 UI_PRESCRIPTION_ADDED_FMT,已加入%s区：%s %s,已加入%s區：%s %s,Added to %s: %s %s,%s欄に追加：%s %s,%s 영역에 추가: %s %s
 UI_PRESCRIPTION_NOT_FOUND_TO_DECREASE,未找到要减少的药材,未找到要減少的藥材,No herb found to decrease.,減量する薬材が見つかりません,줄일 약재를 찾을 수 없습니다.
 UI_PRESCRIPTION_HERB_NOT_ADDED_FMT,该药材尚未加入处方：%s,該藥材尚未加入處方：%s,Herb is not in the prescription: %s,この薬材はまだ処方に追加されていません：%s,이 약재는 처방에 추가되지 않았습니다: %s
 UI_PRESCRIPTION_REMOVED_FMT,已移除%s区药材：%s,已移除%s區藥材：%s,Removed from %s: %s,%s欄から薬材を削除：%s,%s 영역에서 삭제: %s
 UI_PRESCRIPTION_DECREASE_FAILED_FMT,减少药材失败：%s,減少藥材失敗：%s,Could not decrease herb dose: %s,薬材の減量に失敗しました：%s,약재 용량을 줄일 수 없습니다: %s
-UI_PRESCRIPTION_DECREASED_FMT,已减少%s区药材：%s，当前%s,已減少%s區藥材：%s，當前%s,"Decreased in %s: %s, now %s",%s欄の薬材を減量：%s、現在：%s,"%s 영역에서 감소: %s, 현재 %s"
-UI_PRESCRIPTION_CLEARED,当前处方已清空,當前處方已清空,Prescription cleared.,現在の処方を消去しました,처방을 비웠습니다.
+UI_PRESCRIPTION_DECREASED_FMT,已减少%s区药材：%s，当前%s,已減少%s區藥材：%s，目前%s,"Decreased in %s: %s, now %s",%s欄の薬材を減量：%s、現在：%s,"%s 영역에서 감소: %s, 현재 %s"
+UI_PRESCRIPTION_CLEARED,当前处方已清空,目前處方已清空,Prescription cleared.,現在の処方を消去しました,처방을 비웠습니다.
 UI_PRESCRIPTION_ENTER_DISEASE,请先填入疾病。,請先填入疾病。,Select a condition first.,先に病名を入力してください。,먼저 병증을 선택하세요.
 UI_PRESCRIPTION_ENTER_HERB,请先填入药材。,請先填入藥材。,Add an herb first.,先に薬材を入力してください。,먼저 약재를 추가하세요.
 UI_PRESCRIPTION_NOT_FOUND_TO_REMOVE,未找到要移除的药材,未找到要移除的藥材,No herb found to remove.,削除する薬材が見つかりません,삭제할 약재를 찾을 수 없습니다.
-UI_PRESCRIPTION_DISEASE_DB_NOT_INITIALIZED,疾病数据库未初始化,疾病數據庫未初始化,The condition database is not ready.,疾病データベースが初期化されていません,병증 데이터베이스가 준비되지 않았습니다.
+UI_PRESCRIPTION_DISEASE_DB_NOT_INITIALIZED,疾病数据库未初始化,疾病資料庫未初始化,The condition database is not ready.,疾病データベースが初期化されていません,병증 데이터베이스가 준비되지 않았습니다.
 UI_PRESCRIPTION_DISEASE_DB_METHOD_MISSING,DiseaseDB 缺少 get_all_diseases(),DiseaseDB 缺少 get_all_diseases(),Condition database is missing get_all_diseases().,DiseaseDB に get_all_diseases() がありません,병증 데이터베이스에 get_all_diseases()가 없습니다.
-UI_PRESCRIPTION_DISEASE_ID_MISSING,疾病数据缺少 disease_id，无法选择,疾病數據缺少 disease_id，無法選擇,Condition data has no disease_id; selection failed.,疾病データに disease_id がないため選択できません,병증 데이터에 disease_id가 없어 선택할 수 없습니다.
+UI_PRESCRIPTION_DISEASE_ID_MISSING,疾病数据缺少 disease_id，无法选择,疾病資料缺少 disease_id，無法選擇,Condition data has no disease_id; selection failed.,疾病データに disease_id がないため選択できません,병증 데이터에 disease_id가 없어 선택할 수 없습니다.
 UI_PRESCRIPTION_DISEASE_LOCKED,该疾病尚未解锁，不能用于断病,該疾病尚未解鎖，不能用於斷病,This condition is still locked and cannot be diagnosed.,この病名はまだ解放されていないため、診断には使えません,이 병증은 아직 잠겨 있어 진단할 수 없습니다.
 UI_PRESCRIPTION_DIAGNOSIS_SELECTED_FMT,已选择疾病诊断：%s,已選擇疾病診斷：%s,Selected diagnosis: %s,診断を選択しました：%s,선택한 진단: %s
 UI_LOG_WINDOW_TITLE,行医记考,行醫記考,Clinical Records,診療記録,진료 기록
@@ -482,30 +482,30 @@ UI_LOG_TAB_HERB_SHORTCUT,药材(3),藥材(3),Herbs (3),薬材(3),약재 (3)
 UI_LOG_TAB_DISEASE,疾病,疾病,Conditions,疾病,병증
 UI_LOG_TAB_FORMULA,方剂,方劑,Formulas,処方,처방
 UI_LOG_TAB_HERB,药材,藥材,Herbs,薬材,약재
-UI_LOG_SEARCH_DISEASE,搜索疾病,搜索疾病,Search conditions,病名を検索,병증 검색
-UI_LOG_SEARCH_FORMULA,搜索方剂,搜索方劑,Search formulas,処方を検索,처방 검색
-UI_LOG_SEARCH_HERB,搜索药材,搜索藥材,Search herbs,薬材を検索,약재 검색
+UI_LOG_SEARCH_DISEASE,搜索疾病,搜尋疾病,Search conditions,病名を検索,병증 검색
+UI_LOG_SEARCH_FORMULA,搜索方剂,搜尋方劑,Search formulas,処方を検索,처방 검색
+UI_LOG_SEARCH_HERB,搜索药材,搜尋藥材,Search herbs,薬材を検索,약재 검색
 UI_LOG_SELECT_DISEASE,请选择左侧疾病条目,請選擇左側疾病條目,Select a condition,左側の疾病を選択してください,병증 선택
 UI_LOG_SELECT_FORMULA,请选择左侧方剂条目,請選擇左側方劑條目,Select a formula,左側の処方を選択してください,처방 선택
 UI_LOG_SELECT_HERB,请选择左侧药材条目,請選擇左側藥材條目,Select an herb,左側の薬材を選択してください,약재 선택
 UI_LOG_PREV_PAGE,上一页,上一頁,Previous,前のページ,이전
 UI_LOG_NEXT_PAGE,下一页,下一頁,Next,次のページ,다음
 UI_READ_BOOK_WINDOW_TITLE,读书,讀書,Read Books,読書,의서 읽기
-UI_READ_BOOK_SEARCH_TOOLTIP,搜索全部可阅读医书中的已解锁条目。,搜索全部可閱讀醫書中的已解鎖條目。,Search unlocked entries in all available books.,閲覧可能な医学書にある、解放済みの項目をすべて検索します。,이용 가능한 모든 의서에서 해금된 항목을 검색합니다.
-UI_READ_BOOK_SEARCH_PLACEHOLDER,搜索全部已解锁条目...,搜索全部已解鎖條目...,Search all unlocked entries...,解放済みの項目を検索……,해금된 모든 항목 검색...
+UI_READ_BOOK_SEARCH_TOOLTIP,搜索全部可阅读医书中的已解锁条目。,搜尋全部可閱讀醫書中的已解鎖條目。,Search unlocked entries in all available books.,閲覧可能な医学書にある、解放済みの項目をすべて検索します。,이용 가능한 모든 의서에서 해금된 항목을 검색합니다.
+UI_READ_BOOK_SEARCH_PLACEHOLDER,搜索全部已解锁条目...,搜尋全部已解鎖條目...,Search all unlocked entries...,解放済みの項目を検索……,해금된 모든 항목 검색...
 UI_READ_BOOK_BOOK_LIST,医书列表,醫書列表,Medical Books,医学書一覧,의서
 UI_READ_BOOK_ENTRY_LIST,条目列表,條目列表,Entries,項目一覧,항목
 UI_READ_BOOK_CHOOSE_BOOK_TONIGHT,请选择今晚要阅读的医书。,請選擇今晚要閱讀的醫書。,Choose a book to read tonight.,今夜読む医学書を選んでください。,오늘 밤 읽을 의서를 선택하세요.
 UI_READ_BOOK_CHOOSE_BOOK,请选择要查看的医书。,請選擇要查看的醫書。,Choose a book to view.,閲覧する医学書を選んでください。,열람할 의서를 선택하세요.
-UI_READ_BOOK_MATCH_BADGE_FMT,【匹配%d】,【匹配%d】,[Matches: %d],【一致%d】,[일치: %d]
+UI_READ_BOOK_MATCH_BADGE_FMT,【匹配%d】,【符合%d】,[Matches: %d],【一致%d】,[일치: %d]
 UI_READ_BOOK_NEW_COUNT_BADGE_FMT,【新%d】,【新%d】,[New: %d],【新着%d】,[신규: %d]
-UI_READ_BOOK_MATCH_TOOLTIP_FMT,找到 %d 个匹配条目,找到 %d 個匹配條目,Found %d matching entries,一致する項目が %d 件見つかりました,일치하는 항목 %d개를 찾았습니다
+UI_READ_BOOK_MATCH_TOOLTIP_FMT,找到 %d 个匹配条目,找到 %d 個符合條目,Found %d matching entries,一致する項目が %d 件見つかりました,일치하는 항목 %d개를 찾았습니다
 UI_READ_BOOK_NEW_TOOLTIP_FMT,有 %d 个新解锁条目可以查看,有 %d 個新解鎖條目可以查看,%d newly unlocked entries are available,新しく解放された項目が %d 件あります,새로 해금된 항목 %d개를 열람할 수 있습니다
-UI_READ_BOOK_SEARCH_SUMMARY_FMT,搜索“%s”：共找到 %d 个已解锁条目；当前《%s》有 %d 个匹配。,搜索“%s”：共找到 %d 個已解鎖條目；當前《%s》有 %d 個匹配。,"Search ""%s"": %d unlocked entries found; ""%s"" has %d matches.",「%s」の検索結果：解放済みの項目が合計 %d 件。現在の『%s』には %d 件あります。,‘%s’ 검색: 해금된 항목 %d개를 찾음; ‘%s’ 일치 %d개.
-UI_READ_BOOK_EMPTY_BOOK_FMT,《%s》当前没有已解锁条目。,《%s》當前沒有已解鎖條目。,"""%s"" has no unlocked entries yet.",『%s』には現在、解放済みの項目がありません。,‘%s’에는 아직 해금된 항목이 없습니다.
+UI_READ_BOOK_SEARCH_SUMMARY_FMT,搜索“%s”：共找到 %d 个已解锁条目；当前《%s》有 %d 个匹配。,搜尋“%s”：共找到 %d 個已解鎖條目；目前《%s》有 %d 個符合。,"Search ""%s"": %d unlocked entries found; ""%s"" has %d matches.",「%s」の検索結果：解放済みの項目が合計 %d 件。現在の『%s』には %d 件あります。,‘%s’ 검색: 해금된 항목 %d개를 찾음; ‘%s’ 일치 %d개.
+UI_READ_BOOK_EMPTY_BOOK_FMT,《%s》当前没有已解锁条目。,《%s》目前沒有已解鎖條目。,"""%s"" has no unlocked entries yet.",『%s』には現在、解放済みの項目がありません。,‘%s’에는 아직 해금된 항목이 없습니다.
 UI_READ_BOOK_UNREAD_COUNT_FMT,《%s》共有 %d 个已解锁条目，其中 %d 个尚未查看。,《%s》共有 %d 個已解鎖條目，其中 %d 個尚未查看。,"""%s"" has %d unlocked entries, including %d unread.",『%s』には解放済みの項目が %d 件あり、うち %d 件は未読です。,"‘%s’에는 해금된 항목 %d개가 있으며, 그중 %d개를 읽지 않았습니다."
 UI_READ_BOOK_ENTRY_COUNT_FMT,《%s》共有 %d 个已解锁条目。,《%s》共有 %d 個已解鎖條目。,"""%s"" has %d unlocked entries.",『%s』には解放済みの項目が %d 件あります。,‘%s’에는 해금된 항목이 %d개 있습니다.
-UI_READ_BOOK_NO_BOOKS,当前没有可查看的医书。,當前沒有可查看的醫書。,No books are available to view.,閲覧できる医学書がありません。,열람할 수 있는 의서가 없습니다.
+UI_READ_BOOK_NO_BOOKS,当前没有可查看的医书。,目前沒有可查看的醫書。,No books are available to view.,閲覧できる医学書がありません。,열람할 수 있는 의서가 없습니다.
 UI_READ_BOOK_NO_RESULTS_FMT,没有找到包含“%s”的已解锁条目。,沒有找到包含“%s”的已解鎖條目。,"No unlocked entries match ""%s"".",「%s」に一致する解放済みの項目は見つかりませんでした。,‘%s’와 일치하는 해금된 항목이 없습니다.
 UI_READ_BOOK_NEW_BADGE,【新】,【新】,[New],【新着】,[신규]
 UI_READ_BOOK_NEW_ENTRY_TOOLTIP,新解锁条目，尚未查看,新解鎖條目，尚未查看,Newly unlocked; not yet read,新しく解放された未読の項目,새로 해금되었으며 아직 읽지 않았습니다
@@ -516,11 +516,11 @@ UI_READ_BOOK_VIEW_PULSE,查看脉象,查看脈象,View Pulse,脈を確認,맥상
 UI_READ_BOOK_PULSE_SELECT_HINT,请先在条目列表中选择一个已解锁的疾病。,請先在條目列表中選擇一個已解鎖的疾病。,Select an unlocked condition from the entries first.,まず項目一覧から解放済みの疾病を選んでください。,먼저 항목에서 해금된 병증을 선택하세요.
 UI_READ_BOOK_PULSE_TOOLTIP_FMT,查看《%s》的左右手脉象，用于夜晚练习。,查看《%s》的左右手脈象，用於夜晚練習。,View left and right pulse patterns for %s to practice at night.,『%s』の左右の脈を確認し、夜間の練習に使います。,밤에 연습할 수 있도록 %s의 좌우 맥상 패턴을 봅니다.
 UI_READ_BOOK_SELECT_DISEASE_FIRST,请先选择一个疾病条目，再查看脉象。,請先選擇一個疾病條目，再查看脈象。,Select a condition entry before viewing its pulse.,脈を確認する前に、疾病の項目を選んでください。,맥상을 보기 전에 병증 항목을 선택하세요.
-UI_READ_BOOK_PULSE_MISSING,脉象练习窗口不存在。,脈象練習窗口不存在。,Pulse practice window is unavailable.,脈診の練習画面が見つかりません。,맥진 연습 창을 사용할 수 없습니다.
+UI_READ_BOOK_PULSE_MISSING,脉象练习窗口不存在。,脈象練習視窗不存在。,Pulse practice window is unavailable.,脈診の練習画面が見つかりません。,맥진 연습 창을 사용할 수 없습니다.
 UI_READ_BOOK_PULSE_TITLE_FMT,脉象练习 - %s,脈象練習 - %s,Pulse Practice - %s,脈診の練習・%s,맥진 연습 - %s
 UI_RECORDS_TAB_TREATMENT,诊疗记录,診療記錄,Treatments,診療記録,진료
 UI_RECORDS_TAB_FINANCE,账目明细,賬目明細,Accounts,収支明細,장부
-UI_RECORDS_TAB_STATS,数据统计,數據統計,Statistics,統計,통계
+UI_RECORDS_TAB_STATS,数据统计,資料統計,Statistics,統計,통계
 UI_RECORDS_TAB_PRESETS,预制方剂,預製方劑,Formula Presets,定型処方,처방 프리셋
 UI_RECORDS_TREATMENT_DATES,诊疗日期,診療日期,Treatment Dates,診療日,진료 날짜
 UI_RECORDS_FINANCE_DATES,账目日期,賬目日期,Account Dates,記帳日,장부 날짜
@@ -535,7 +535,7 @@ UI_RECORDS_PROFIT,利润,利潤,Profit,利益,순이익
 UI_RECORDS_FORMULA_MASTERY,方剂熟练度,方劑熟練度,Formula Mastery,処方の熟練度,처방 숙련도
 UI_RECORDS_ZERO_PATIENTS,0 人,0 人,0 people,0人,0명
 UI_RECORDS_ZERO_MONEY,0两0文,0兩0文,0 liang 0 wen,0両0文,0냥 0문
-UI_RECORDS_TREATMENT_EMPTY,[color=#c6ae83]尚无诊疗记录。完成一次诊疗后，这里会按天保存病人、疾病、标准方、断病和开方。[/color],[color=#c6ae83]尚無診療記錄。完成一次診療後，這裡會按天保存病人、疾病、標準方、斷病和開方。[/color],"[color=#c6ae83]No treatments recorded yet. After your first treatment, patients, conditions, standard formulas, diagnoses and prescriptions will be saved here by day.[/color]",[color=#c6ae83]診療記録はまだありません。診療を終えると、患者・疾病・標準処方・診断・処方が日ごとに記録されます。[/color],"[color=#c6ae83]아직 기록된 진료가 없습니다. 첫 진료를 마치면 환자, 병증, 표준 처방, 진단과 처방이 날짜별로 이곳에 저장됩니다.[/color]"
+UI_RECORDS_TREATMENT_EMPTY,[color=#c6ae83]尚无诊疗记录。完成一次诊疗后，这里会按天保存病人、疾病、标准方、断病和开方。[/color],[color=#c6ae83]尚無診療記錄。完成一次診療後，這裡會按天儲存病人、疾病、標準方、斷病和開方。[/color],"[color=#c6ae83]No treatments recorded yet. After your first treatment, patients, conditions, standard formulas, diagnoses and prescriptions will be saved here by day.[/color]",[color=#c6ae83]診療記録はまだありません。診療を終えると、患者・疾病・標準処方・診断・処方が日ごとに記録されます。[/color],"[color=#c6ae83]아직 기록된 진료가 없습니다. 첫 진료를 마치면 환자, 병증, 표준 처방, 진단과 처방이 날짜별로 이곳에 저장됩니다.[/color]"
 UI_RECORDS_TREATMENT_HEADER_FMT,[font_size=24][color=#e3b66b]%s · 诊疗记录[/color][/font_size],[font_size=24][color=#e3b66b]%s · 診療記錄[/color][/font_size],[font_size=24][color=#e3b66b]%s · Treatments[/color][/font_size],[font_size=24][color=#e3b66b]%s・診療記録[/color][/font_size],[font_size=24][color=#e3b66b]%s · 진료[/color][/font_size]
 UI_RECORDS_TREATMENT_DAY_EMPTY,[color=#c6ae83]本日暂无记录。[/color],[color=#c6ae83]本日暫無記錄。[/color],[color=#c6ae83]No treatments recorded today.[/color],[color=#c6ae83]この日の記録はありません。[/color],[color=#c6ae83]오늘 기록된 진료가 없습니다.[/color]
 UI_RECORDS_STATUS_SUCCESS,成功,成功,Successful,成功,성공
@@ -549,7 +549,7 @@ UI_RECORDS_PRESCRIPTION_FMT,开方：[color=#e3d1aa]%s[/color],開方：[color=#
 UI_RECORDS_EMPTY_PRESCRIPTION,（空方）,（空方）,(Empty prescription),（処方なし）,(빈 처방)
 UI_RECORDS_LINE_SEPARATOR,；,；,;,；,;
 UI_RECORDS_FINANCE_START_FMT,[color=#c6ae83]账目自%s开始记录。[/color],[color=#c6ae83]賬目自%s開始記錄。[/color],[color=#c6ae83]Accounts are recorded from %s onward.[/color],[color=#c6ae83]収支の記録は%sから始まります。[/color],[color=#c6ae83]장부는 %s부터 기록됩니다.[/color]
-UI_RECORDS_FINANCE_EMPTY_FMT,[color=#c6ae83]%s暂无账目数据。[/color],[color=#c6ae83]%s暫無賬目數據。[/color],[color=#c6ae83]No accounts are available for %s.[/color],[color=#c6ae83]%sの収支データはありません。[/color],[color=#c6ae83]%s의 장부 데이터가 없습니다.[/color]
+UI_RECORDS_FINANCE_EMPTY_FMT,[color=#c6ae83]%s暂无账目数据。[/color],[color=#c6ae83]%s暫無賬目資料。[/color],[color=#c6ae83]No accounts are available for %s.[/color],[color=#c6ae83]%sの収支データはありません。[/color],[color=#c6ae83]%s의 장부 데이터가 없습니다.[/color]
 UI_RECORDS_FINANCE_HEADER_FMT,[font_size=24][color=#e3b66b]%s · 账目明细[/color][/font_size],[font_size=24][color=#e3b66b]%s · 賬目明細[/color][/font_size],[font_size=24][color=#e3b66b]%s · Accounts[/color][/font_size],[font_size=24][color=#e3b66b]%s・収支明細[/color][/font_size],[font_size=24][color=#e3b66b]%s · 장부[/color][/font_size]
 UI_RECORDS_FINANCE_UNSETTLED,[color=#c6ae83]本日尚未结算，支出将在进入夜晚时生成。[/color],[color=#c6ae83]本日尚未結算，支出將在進入夜晚時生成。[/color],[color=#c6ae83]Today is not settled yet. Expenses are recorded when night begins.[/color],[color=#c6ae83]この日の決算はまだです。夜になると支出が計上されます。[/color],[color=#c6ae83]오늘은 아직 결산되지 않았습니다. 밤이 시작되면 지출이 기록됩니다.[/color]
 UI_RECORDS_INCOME_HEADER,[b]收入[/b],[b]收入[/b],[b]Income[/b],[b]収入[/b],[b]수입[/b]
@@ -579,22 +579,22 @@ UI_RECORDS_MONEY_FMT,%s%d两%d文,%s%d兩%d文,%s%d liang %d wen,%s%d両%d文,%s
 UI_RECORDS_DATE_UNKNOWN,日期未载,日期未載,Date Unknown,日付不明,날짜 미상
 UI_RECORDS_PATIENT_COUNT_FMT,%d 人,%d 人,%d people,%d人,%d명
 UI_RECORDS_PRESET_UNLOCKED_BADGE,· 已解锁,· 已解鎖,· Unlocked,・解放済み,· 해금됨
-UI_RECORDS_NO_FORMULAS,[color=#c6ae83]暂无方剂数据。[/color],[color=#c6ae83]暫無方劑數據。[/color],[color=#c6ae83]No formula data available.[/color],[color=#c6ae83]処方データはありません。[/color],[color=#c6ae83]처방 데이터가 없습니다.[/color]
+UI_RECORDS_NO_FORMULAS,[color=#c6ae83]暂无方剂数据。[/color],[color=#c6ae83]暫無方劑資料。[/color],[color=#c6ae83]No formula data available.[/color],[color=#c6ae83]処方データはありません。[/color],[color=#c6ae83]처방 데이터가 없습니다.[/color]
 UI_RECORDS_PRESET_UNLOCKED,已解锁：可在开方时一键使用,已解鎖：可在開方時一鍵使用,Unlocked: ready to use while prescribing,解放済み：処方時にワンクリックで使用できます,해금됨: 처방할 때 바로 사용할 수 있습니다
 UI_RECORDS_PRESET_LOCKED,未解锁：该方剂获得 5 次妙手回春后解锁,未解鎖：該方劑獲得 5 次妙手回春後解鎖,Locked: earn 5 Miraculous Recovery results with this formula,未解放：この処方で「妙手回春」を5回達成すると解放されます,잠김: 이 처방으로 ‘명의의 손길’을 5회 달성하면 해금됩니다
 UI_RECORDS_PRESET_PROGRESS_FMT,掌握次数：%d / 5,掌握次數：%d / 5,Mastery: %d / 5,達成回数：%d / 5,숙련도: %d / 5
 UI_RECORDS_PRESET_STATUS_FMT,状态：[color=%s]%s[/color],狀態：[color=%s]%s[/color],Status: [color=%s]%s[/color],状態：[color=%s]%s[/color],상태: [color=%s]%s[/color]
 UI_RECORDS_PRESET_INGREDIENTS,标准方组成：,標準方組成：,Standard Formula Ingredients:,標準処方の構成：,표준 처방 구성:
-UI_RECORDS_NO_INGREDIENTS,（暂无组成数据）,（暫無組成數據）,(No ingredient data),（構成データなし）,(구성 약재 없음)
+UI_RECORDS_NO_INGREDIENTS,（暂无组成数据）,（暫無組成資料）,(No ingredient data),（構成データなし）,(구성 약재 없음)
 UI_RECORDS_INGREDIENT_FMT,%s（%s）,%s（%s）,%s (%s),%s（%s）,%s (%s)
 UI_NIGHT_UNREAD_BEFORE_REST,尚有未读条目，请先阅读后再休息。,尚有未讀條目，請先閱讀後再休息。,Some entries are unread. Read them before resting.,未読の項目があります。休む前に読んでください。,아직 읽지 않은 항목이 있습니다. 먼저 읽은 후 쉬세요.
 UI_STORY_DIALOGUE_PLACEHOLDER,人物对话显示区域,人物對話顯示區域,Dialogue appears here,人物の会話が表示されます,여기에 대사가 표시됩니다
 UI_STORY_PULSE_BUTTON,把脉(F1),把脈(F1),Pulse (F1),脈診(F1),맥진 (F1)
 UI_STORY_PRESCRIPTION_BUTTON,开方(F2),開方(F2),Prescribe (F2),処方(F2),처방 (F2)
 UI_STORY_CLINICAL_LOG_BUTTON,行医记考(F3),行醫記考(F3),Records (F3),診療記録(F3),진료 기록 (F3)
-UI_STORY_CONTINUE_HINT,点击 / 空格 /  继续，回车跳过剧情,點擊 / 空格 /  繼續，回車跳過劇情,Click / Space: Continue · Hold Enter: Skip Story,クリック / スペース：続ける、Enter：物語をスキップ,클릭 / 스페이스: 계속 · Enter 길게 누르기: 이야기 건너뛰기
+UI_STORY_CONTINUE_HINT,点击 / 空格 /  继续，回车跳过剧情,點選 / 空白鍵繼續，Enter 鍵跳過劇情,Click / Space: Continue · Hold Enter: Skip Story,クリック / スペース：続ける、Enter：物語をスキップ,클릭 / 스페이스: 계속 · Enter 길게 누르기: 이야기 건너뛰기
 UI_STORY_SUBTITLE_PLACEHOLDER,背景字幕显示区域,背景字幕顯示區域,Subtitles appear here,場面の字幕が表示されます,여기에 자막이 표시됩니다
-UI_STORY_SUBTITLE_CONTINUE_HINT,点击 / 空格 /  继续，长按回车跳过剧情,點擊 / 空格 /  繼續，長按回車跳過劇情,Click / Space: Continue · Hold Enter: Skip Story,クリック / スペース：続ける、Enter長押し：物語をスキップ,클릭 / 스페이스: 계속 · Enter 길게 누르기: 이야기 건너뛰기
+UI_STORY_SUBTITLE_CONTINUE_HINT,点击 / 空格 /  继续，长按回车跳过剧情,點選 / 空白鍵繼續，長按 Enter 鍵跳過劇情,Click / Space: Continue · Hold Enter: Skip Story,クリック / スペース：続ける、Enter長押し：物語をスキップ,클릭 / 스페이스: 계속 · Enter 길게 누르기: 이야기 건너뛰기
 UI_STORY_TREATMENT_SPEAKER,诊疗,診療,Treatment,診療,진료
 UI_STORY_SELECT_TREATMENT,请选择诊疗项目。,請選擇診療項目。,Choose a treatment action.,診療項目を選んでください。,진료 항목을 선택하세요.
 UI_STORY_TREATMENT_HINT,诊疗提示,診療提示,Treatment Notice,診療のヒント,진료 안내
@@ -607,7 +607,7 @@ UI_RESULT_FORMULA_NOT_FOUND,（未找到标准方）,（未找到標準方）,(S
 UI_RESULT_NO_DIAGNOSIS,未选择疾病,未選擇疾病,No condition selected,病名を選択していません,선택한 병증 없음
 UI_RESULT_PRESET_UNLOCK,预制方剂,預製方劑,Formula Preset,定型処方,처방 프리셋
 UI_RESULT_PRESET_UNLOCK_FMT,预制方剂：%s,預製方劑：%s,Formula Preset: %s,定型処方：%s,처방 프리셋: %s
-UI_TUTORIAL_WINDOW_TITLE,游戏说明,游戲說明,Game Guide,遊び方,게임 안내
+UI_TUTORIAL_WINDOW_TITLE,游戏说明,遊戲說明,Game Guide,遊び方,게임 안내
 UI_TUTORIAL_KEYBOARD_HINT,← / → 翻页    Esc 关闭,← / → 翻頁    Esc 關閉,← / →: Pages    Esc: Close,← / → ページ切り替え    Esc 閉じる,← / →: 페이지 넘기기    Esc: 닫기
 UI_TUTORIAL_PREVIOUS,上一步,上一步,Previous,前へ,이전
 UI_TUTORIAL_NEXT,下一步,下一步,Next,次へ,다음
@@ -615,19 +615,19 @@ UI_TUTORIAL_DONE,完成,完成,Finish,完了,완료
 UI_TUTORIAL_NO_PAGES,暂无说明,暫無說明,No guide pages yet,説明はありません,아직 안내 페이지가 없습니다
 UI_TUTORIAL_ADD_DAY_SLIDES,请在 Inspector 的 Day Slides 中添加 TutorialSlideData。,請在 Inspector 的 Day Slides 中添加 TutorialSlideData。,Add TutorialSlideData to Day Slides in the Inspector.,Inspector の Day Slides に TutorialSlideData を追加してください。,Inspector의 Day Slides에 TutorialSlideData를 추가하세요.
 UI_TUTORIAL_ADD_NIGHT_SLIDES,请在 Inspector 的 Slides 中添加 TutorialSlideData。,請在 Inspector 的 Slides 中添加 TutorialSlideData。,Add TutorialSlideData to Slides in the Inspector.,Inspector の Slides に TutorialSlideData を追加してください。,Inspector의 Slides에 TutorialSlideData를 추가하세요.
-UI_TUTORIAL_MISSING_SLIDE,当前教程页未设置 TutorialSlideData。,當前教程頁未設定 TutorialSlideData。,No TutorialSlideData is set for this guide page.,このチュートリアルページには TutorialSlideData が設定されていません。,이 안내 페이지에 TutorialSlideData가 설정되지 않았습니다.
+UI_TUTORIAL_MISSING_SLIDE,当前教程页未设置 TutorialSlideData。,目前教學頁未設定 TutorialSlideData。,No TutorialSlideData is set for this guide page.,このチュートリアルページには TutorialSlideData が設定されていません。,이 안내 페이지에 TutorialSlideData가 설정되지 않았습니다.
 UI_TUTORIAL_NIGHT_01_TITLE,夜间,夜間,Night,夜,밤
-UI_TUTORIAL_NIGHT_01_DESCRIPTION,夜间点击书籍(F1)读书，行医记考(F2)查看记录，油灯(F3)休息进入下一天。,夜間點擊書籍(F1)讀書，行醫記考(F2)查看記錄，油燈(F3)休息進入下一天。,"At night, click the books (F1) to read, the medical records (F2) to review entries, or the oil lamp (F3) to rest and begin the next day.",夜は書物(F1)をクリックして読書、診療記録(F2)で記録の確認、灯火(F3)で休んで翌日へ進みます。,"밤에는 의서(F1)를 클릭하여 읽고, 진료 기록(F2)을 클릭하여 기록을 확인하거나, 등불(F3)을 클릭하여 쉬고 다음 날을 시작하세요."
+UI_TUTORIAL_NIGHT_01_DESCRIPTION,夜间点击书籍(F1)读书，行医记考(F2)查看记录，油灯(F3)休息进入下一天。,夜間點選書籍(F1)讀書，行醫記考(F2)查看記錄，油燈(F3)休息進入下一天。,"At night, click the books (F1) to read, the medical records (F2) to review entries, or the oil lamp (F3) to rest and begin the next day.",夜は書物(F1)をクリックして読書、診療記録(F2)で記録の確認、灯火(F3)で休んで翌日へ進みます。,"밤에는 의서(F1)를 클릭하여 읽고, 진료 기록(F2)을 클릭하여 기록을 확인하거나, 등불(F3)을 클릭하여 쉬고 다음 날을 시작하세요."
 UI_TUTORIAL_NIGHT_02_TITLE,读书,讀書,Reading,読書,독서
-UI_TUTORIAL_NIGHT_02_DESCRIPTION,在读书窗口中可以阅读医学典籍，《黄帝内经》记载中医基础理论，作为参考。,在讀書窗口中可以閱讀醫學典籍，《黃帝內經》記載中醫基礎理論，作為參考。,Read medical classics in the reading window. The Yellow Emperor's Inner Canon explains the foundations of traditional Chinese medicine and serves as a reference.,読書画面では医学書を読めます。『黄帝内経』には東洋医学の基礎理論が記されており、参考にできます。,독서 창에서 의학 고전을 읽을 수 있습니다. 《황제내경》은 한의학의 기초 이론을 설명하며 참고 자료로 사용됩니다.
+UI_TUTORIAL_NIGHT_02_DESCRIPTION,在读书窗口中可以阅读医学典籍，《黄帝内经》记载中医基础理论，作为参考。,在讀書視窗中可以閱讀醫學典籍，《黃帝內經》記載中醫基礎理論，作為參考。,Read medical classics in the reading window. The Yellow Emperor's Inner Canon explains the foundations of traditional Chinese medicine and serves as a reference.,読書画面では医学書を読めます。『黄帝内経』には東洋医学の基礎理論が記されており、参考にできます。,독서 창에서 의학 고전을 읽을 수 있습니다. 《황제내경》은 한의학의 기초 이론을 설명하며 참고 자료로 사용됩니다.
 UI_TUTORIAL_NIGHT_03_TITLE,药材,藥材,Herbs,薬材,약재
-UI_TUTORIAL_NIGHT_03_DESCRIPTION,《神农本草经》记载药材的相关信息，作为参考。,《神農本草經》記載藥材的相關信息，作為參考。,The Divine Farmer's Classic of Materia Medica records information about medicinal herbs and serves as a reference.,『神農本草経』には薬材に関する情報が記されています。参考にしてください。,《신농본초경》에는 약재에 관한 정보가 기록되어 있으며 참고 자료로 사용됩니다.
+UI_TUTORIAL_NIGHT_03_DESCRIPTION,《神农本草经》记载药材的相关信息，作为参考。,《神農本草經》記載藥材的相關資訊，作為參考。,The Divine Farmer's Classic of Materia Medica records information about medicinal herbs and serves as a reference.,『神農本草経』には薬材に関する情報が記されています。参考にしてください。,《신농본초경》에는 약재에 관한 정보가 기록되어 있으며 참고 자료로 사용됩니다.
 UI_TUTORIAL_NIGHT_04_TITLE,疾病,疾病,Conditions,疾病,병증
-UI_TUTORIAL_NIGHT_04_DESCRIPTION,《诸病源候论》记载疾病的相关信息，游戏中通过脉象来判断疾病，通过标准方治疗疾病。,《諸病源候論》記載疾病的相關信息，游戲中通過脈象來判斷疾病，通過標準方治療疾病。,"The Treatise on the Origins and Manifestations of Various Diseases records information about diseases. In the game, diagnose conditions from pulse readings and treat them with standard formulas.",『諸病源候論』には疾病に関する情報が記されています。ゲームでは脈から疾病を判断し、標準処方で治療します。,《제병원후론》에는 질병에 관한 정보가 기록되어 있습니다. 게임에서는 맥상으로 병증을 판단하고 표준 처방으로 치료합니다.
+UI_TUTORIAL_NIGHT_04_DESCRIPTION,《诸病源候论》记载疾病的相关信息，游戏中通过脉象来判断疾病，通过标准方治疗疾病。,《諸病源候論》記載疾病的相關資訊，遊戲中透過脈象來判斷疾病，透過標準方治療疾病。,"The Treatise on the Origins and Manifestations of Various Diseases records information about diseases. In the game, diagnose conditions from pulse readings and treat them with standard formulas.",『諸病源候論』には疾病に関する情報が記されています。ゲームでは脈から疾病を判断し、標準処方で治療します。,《제병원후론》에는 질병에 관한 정보가 기록되어 있습니다. 게임에서는 맥상으로 병증을 판단하고 표준 처방으로 치료합니다.
 UI_TUTORIAL_NIGHT_05_TITLE,方剂,方劑,Formulas,処方,처방
-UI_TUTORIAL_NIGHT_05_DESCRIPTION,其他医书记载各类方剂，白天在开方窗口填入方剂的组成药材来给病人开药。,其他醫書記載各類方劑，白天在開方窗口填入方劑的組成藥材來給病人開藥。,"Other medical books list various formulas. During the day, enter their herbs in the prescription window to treat patients.",ほかの医学書にはさまざまな処方が載っています。昼間は処方画面で構成薬材を入力し、患者に薬を出します。,다른 의서에는 여러 처방이 기록되어 있습니다. 낮에는 처방 창에 처방을 구성하는 약재를 입력하여 환자에게 약을 지어 주세요.
+UI_TUTORIAL_NIGHT_05_DESCRIPTION,其他医书记载各类方剂，白天在开方窗口填入方剂的组成药材来给病人开药。,其他醫書記載各類方劑，白天在開方視窗填入方劑的組成藥材來給病人開藥。,"Other medical books list various formulas. During the day, enter their herbs in the prescription window to treat patients.",ほかの医学書にはさまざまな処方が載っています。昼間は処方画面で構成薬材を入力し、患者に薬を出します。,다른 의서에는 여러 처방이 기록되어 있습니다. 낮에는 처방 창에 처방을 구성하는 약재를 입력하여 환자에게 약을 지어 주세요.
 UI_TUTORIAL_NIGHT_06_TITLE,脉象,脈象,Pulse Readings,脈,맥상
-UI_TUTORIAL_NIGHT_06_DESCRIPTION,在《诸病源候论》中选择疾病条目时，点击右下角“查看脉象”按钮，可以观察该疾病的脉象。,在《諸病源候論》中選擇疾病條目時，點擊右下角“查看脈象”按鈕，可以觀察該疾病的脈象。,"Select a disease entry in the Treatise on the Origins and Manifestations of Various Diseases, then click 'View Pulse' in the lower right to examine its pulse.",『諸病源候論』で疾病の項目を選び、右下の「脈を確認」を押すと、その病の脈を観察できます。,《제병원후론》에서 병증 항목을 선택한 다음 오른쪽 아래의 ‘맥상 보기’ 버튼을 클릭하면 해당 병증의 맥상을 확인할 수 있습니다.
+UI_TUTORIAL_NIGHT_06_DESCRIPTION,在《诸病源候论》中选择疾病条目时，点击右下角“查看脉象”按钮，可以观察该疾病的脉象。,在《諸病源候論》中選擇疾病條目時，點選右下角“查看脈象”按鈕，可以觀察該疾病的脈象。,"Select a disease entry in the Treatise on the Origins and Manifestations of Various Diseases, then click 'View Pulse' in the lower right to examine its pulse.",『諸病源候論』で疾病の項目を選び、右下の「脈を確認」を押すと、その病の脈を観察できます。,《제병원후론》에서 병증 항목을 선택한 다음 오른쪽 아래의 ‘맥상 보기’ 버튼을 클릭하면 해당 병증의 맥상을 확인할 수 있습니다.
 UI_TUTORIAL_NIGHT_07_TITLE,脉象,脈象,Pulse Readings,脈,맥상
 UI_TUTORIAL_NIGHT_07_DESCRIPTION,健康的脉象是不高不低，不粗不细，不宽不窄，一次呼吸脉搏跳动四到五次。,健康的脈象是不高不低，不粗不細，不寬不窄，一次呼吸脈搏跳動四到五次。,"A healthy pulse has neither increased nor decreased amplitude, neither a thicker nor thinner pulse line, and neither broader nor narrower pulse width. Its pulse frequency is four to five beats per breath.",健康な脈は高すぎず低すぎず、太すぎず細すぎず、広すぎず狭すぎず、呼吸一回につき四～五回打ちます。,"건강한 맥상은 높지도 낮지도, 굵지도 가늘지도, 넓지도 좁지도 않습니다. 한 번 숨 쉬는 동안 맥박은 네 번에서 다섯 번 뜁니다."
 UI_TUTORIAL_NIGHT_08_TITLE,气,氣,Qi,気,기
@@ -661,26 +661,26 @@ higher pulse frequency indicates greater Heat, while lower pulse frequency indic
 UI_TUTORIAL_DAY_01_TITLE,接诊,接診,Seeing Patients,診察,환자 진료
 UI_TUTORIAL_DAY_01_DESCRIPTION,白天在医馆接诊病人，把脉(F1)确定疾病，翻阅行医记考(F3)确定方剂，给病人断病开方(F2)。,白天在醫館接診病人，把脈(F1)確定疾病，翻閱行醫記考(F3)確定方劑，給病人斷病開方(F2)。,"During the day, see patients at the clinic. Check their pulse (F1) to identify the condition, consult the medical records (F3) for a formula, then diagnose and prescribe (F2).",昼は診療所で患者を迎え、脈診(F1)で病を調べ、診療記録(F3)を参考に処方を決め、診断と処方(F2)を行います。,"낮에는 의원에서 환자를 진료합니다. 맥진(F1)으로 병증을 확인하고, 진료 기록(F3)에서 처방을 확인한 다음 진단 및 처방(F2)을 진행하세요."
 UI_TUTORIAL_DAY_02_TITLE,把脉,把脈,Pulse Diagnosis,脈診,맥진
-UI_TUTORIAL_DAY_02_DESCRIPTION,在把脉窗口按住QAZ显示右手脉象，按住WSX显示左手脉象。,在把脈窗口按住QAZ顯示右手脈象，按住WSX顯示左手脈象。,"In the pulse window, hold Q, A or Z to show the right-hand pulse; hold W, S or X for the left-hand pulse.",脈診画面では Q・A・Z を押し続けると右手、W・S・X で左手の脈が表示されます。,"맥진 창에서 Q, A 또는 Z를 누르고 있으면 오른손 맥상이 표시되고, W, S 또는 X를 누르고 있으면 왼손 맥상이 표시됩니다."
+UI_TUTORIAL_DAY_02_DESCRIPTION,在把脉窗口按住QAZ显示右手脉象，按住WSX显示左手脉象。,在把脈視窗按住QAZ顯示右手脈象，按住WSX顯示左手脈象。,"In the pulse window, hold Q, A or Z to show the right-hand pulse; hold W, S or X for the left-hand pulse.",脈診画面では Q・A・Z を押し続けると右手、W・S・X で左手の脈が表示されます。,"맥진 창에서 Q, A 또는 Z를 누르고 있으면 오른손 맥상이 표시되고, W, S 또는 X를 누르고 있으면 왼손 맥상이 표시됩니다."
 UI_TUTORIAL_DAY_03_TITLE,行医记考,行醫記考,Clinical Records,診療記録,진료 기록
-UI_TUTORIAL_DAY_03_DESCRIPTION,在行医记考窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母查询。快捷键：疾病(1)，方剂(2)，药材(3),在行醫記考窗口的搜索欄輸入疾病、方劑、藥材的名稱、漢語拼音、漢語拼音首字母查詢。快捷鍵：疾病(1)，方劑(2)，藥材(3),"Search the medical records by disease, formula or herb name, Chinese pinyin, or pinyin initials. Shortcuts: Conditions (1), Formulas (2), Herbs (3).",診療記録の検索欄では、病名・処方・薬材の漢字、ひらがな・カタカナ、ローマ字で検索できます。ショートカット：疾病(1)、処方(2)、薬材(3)。,"진료 기록에서 병증, 처방 또는 약재의 이름, 중국어 병음, 병음 첫 글자로 검색할 수 있습니다. 단축키: 병증(1), 처방(2), 약재(3)"
+UI_TUTORIAL_DAY_03_DESCRIPTION,在行医记考窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母查询。快捷键：疾病(1)，方剂(2)，药材(3),在行醫記考視窗的搜尋欄輸入疾病、方劑、藥材名稱，也可使用注音、漢語拼音或拼音首字母查詢。快捷鍵：疾病(1)，方劑(2)，藥材(3),"Search the medical records by disease, formula or herb name, Chinese pinyin, or pinyin initials. Shortcuts: Conditions (1), Formulas (2), Herbs (3).",診療記録の検索欄では、病名・処方・薬材の漢字、ひらがな・カタカナ、ローマ字で検索できます。ショートカット：疾病(1)、処方(2)、薬材(3)。,"진료 기록에서 병증, 처방 또는 약재의 이름, 중국어 병음, 병음 첫 글자로 검색할 수 있습니다. 단축키: 병증(1), 처방(2), 약재(3)"
 UI_TUTORIAL_DAY_04_TITLE,断病开方,斷病開方,Diagnosis and Prescription,診断と処方,진단 및 처방
-UI_TUTORIAL_DAY_04_DESCRIPTION,在断病开放窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母筛选对应条目。,在斷病開放窗口的搜索欄輸入疾病、方劑、藥材的名稱、漢語拼音、漢語拼音首字母篩選對應條目。,"In the diagnosis and prescription window, search by disease, formula or herb name, Chinese pinyin, or pinyin initials to filter entries.",診断と処方の検索欄では、病名・処方・薬材の漢字、ひらがな・カタカナ、ローマ字で項目を絞り込めます。,"진단 및 처방 창의 검색란에 병증, 처방 또는 약재의 이름, 중국어 병음, 병음 첫 글자를 입력하여 항목을 필터링할 수 있습니다."
+UI_TUTORIAL_DAY_04_DESCRIPTION,在断病开放窗口的搜索栏输入疾病、方剂、药材的名称、汉语拼音、汉语拼音首字母筛选对应条目。,在斷病開方視窗的搜尋欄輸入疾病、方劑、藥材名稱，也可使用注音、漢語拼音或拼音首字母篩選對應條目。,"In the diagnosis and prescription window, search by disease, formula or herb name, Chinese pinyin, or pinyin initials to filter entries.",診断と処方の検索欄では、病名・処方・薬材の漢字、ひらがな・カタカナ、ローマ字で項目を絞り込めます。,"진단 및 처방 창의 검색란에 병증, 처방 또는 약재의 이름, 중국어 병음, 병음 첫 글자를 입력하여 항목을 필터링할 수 있습니다."
 UI_TUTORIAL_DAY_05_TITLE,开方,開方,Prescribing,処方,처방하기
-UI_TUTORIAL_DAY_05_DESCRIPTION,选择君臣佐使区域，左键再点击药材加入，右键点击减少。右键点击君臣佐使区域已加入的药材，可以删除。选择单位剂量控制每次点击加入的药量。快捷键:君(1)臣(2)佐(3)使(4)，单位切换(~和Tab)。,選擇君臣佐使區域，左鍵再點擊藥材加入，右鍵點擊減少。右鍵點擊君臣佐使區域已加入的藥材，可以刪除。選擇單位劑量控制每次點擊加入的藥量。快捷鍵:君(1)臣(2)佐(3)使(4)，單位切換(~和Tab)。,"Select a Chief, Deputy, Assistant or Envoy area, then left-click an herb to add it or right-click to reduce it. Right-click an herb already in the formula to remove it. Choose the dose per click. Shortcuts: Chief (1), Deputy (2), Assistant (3), Envoy (4); switch dose (~ or Tab).",君薬・臣薬・佐薬・使薬の欄を選び、薬材を左クリックして追加、右クリックして減量します。追加済みの薬材を欄内で右クリックすると削除できます。単位と用量を選ぶと一度に加える量が変わります。ショートカット：君(1)、臣(2)、佐(3)、使(4)、単位切り替え(~ / Tab)。,"군약·신약·좌약·사약 영역을 선택한 뒤 약재를 왼쪽 클릭하여 추가하고 오른쪽 클릭하여 줄이세요. 처방에 이미 추가된 약재를 오른쪽 클릭하면 삭제할 수 있습니다. 클릭당 추가할 용량을 선택하세요. 단축키: 군약(1), 신약(2), 좌약(3), 사약(4); 용량 전환(~ 또는 Tab)"
+UI_TUTORIAL_DAY_05_DESCRIPTION,选择君臣佐使区域，左键再点击药材加入，右键点击减少。右键点击君臣佐使区域已加入的药材，可以删除。选择单位剂量控制每次点击加入的药量。快捷键:君(1)臣(2)佐(3)使(4)，单位切换(~和Tab)。,選擇君臣佐使區域，左鍵再點選藥材加入，右鍵點選減少。右鍵點選君臣佐使區域已加入的藥材，可以刪除。選擇單位劑量控制每次點選加入的藥量。快捷鍵:君(1)臣(2)佐(3)使(4)，單位切換(~和Tab)。,"Select a Chief, Deputy, Assistant or Envoy area, then left-click an herb to add it or right-click to reduce it. Right-click an herb already in the formula to remove it. Choose the dose per click. Shortcuts: Chief (1), Deputy (2), Assistant (3), Envoy (4); switch dose (~ or Tab).",君薬・臣薬・佐薬・使薬の欄を選び、薬材を左クリックして追加、右クリックして減量します。追加済みの薬材を欄内で右クリックすると削除できます。単位と用量を選ぶと一度に加える量が変わります。ショートカット：君(1)、臣(2)、佐(3)、使(4)、単位切り替え(~ / Tab)。,"군약·신약·좌약·사약 영역을 선택한 뒤 약재를 왼쪽 클릭하여 추가하고 오른쪽 클릭하여 줄이세요. 처방에 이미 추가된 약재를 오른쪽 클릭하면 삭제할 수 있습니다. 클릭당 추가할 용량을 선택하세요. 단축키: 군약(1), 신약(2), 좌약(3), 사약(4); 용량 전환(~ 또는 Tab)"
 UI_TUTORIAL_DAY_06_TITLE,方剂,方劑,Formulas,方剤,처방
-UI_TUTORIAL_DAY_06_DESCRIPTION,在搜索栏输入方剂名可筛选出该方剂所包含的药材条目。当达成一定次数的妙手回春评价后，会出现预制方剂条目，点击后会自动填入方剂所包含的所有药材及剂量。,在搜索欄輸入方劑名可篩選出該方劑所包含的藥材條目。當達成一定次數的妙手回春評價後，會出現預製方劑條目，點擊後會自動填入方劑所包含的所有藥材及劑量。,"Search for a formula to filter its herbs. After earning enough Miraculous Recovery ratings, a preset formula appears. Click it to fill in all of its herbs and doses automatically.",検索欄に処方名を入力すると、その処方に含まれる薬材を絞り込めます。同じ処方で「妙手回春」を一定回数達成すると定型処方が現れ、クリックすると薬材と用量が自動入力されます。,검색란에 처방 이름을 입력하면 해당 처방에 포함된 약재를 필터링할 수 있습니다. ‘명의의 손길’ 평가를 일정 횟수 달성하면 처방 프리셋이 나타납니다. 프리셋을 클릭하면 처방에 포함된 모든 약재와 용량이 자동으로 입력됩니다.
+UI_TUTORIAL_DAY_06_DESCRIPTION,在搜索栏输入方剂名可筛选出该方剂所包含的药材条目。当达成一定次数的妙手回春评价后，会出现预制方剂条目，点击后会自动填入方剂所包含的所有药材及剂量。,在搜尋欄輸入方劑名可篩選出該方劑所包含的藥材條目。當達成一定次數的妙手回春評價後，會出現預製方劑條目，點選後會自動填入方劑所包含的所有藥材及劑量。,"Search for a formula to filter its herbs. After earning enough Miraculous Recovery ratings, a preset formula appears. Click it to fill in all of its herbs and doses automatically.",検索欄に処方名を入力すると、その処方に含まれる薬材を絞り込めます。同じ処方で「妙手回春」を一定回数達成すると定型処方が現れ、クリックすると薬材と用量が自動入力されます。,검색란에 처방 이름을 입력하면 해당 처방에 포함된 약재를 필터링할 수 있습니다. ‘명의의 손길’ 평가를 일정 횟수 달성하면 처방 프리셋이 나타납니다. 프리셋을 클릭하면 처방에 포함된 모든 약재와 용량이 자동으로 입력됩니다.
 UI_CREDITS_GAME_TITLE,医 者,醫 者,Doctor,医 者,의사
-UI_CREDITS_GAME_DESIGN,游戏设计,游戲設計,Game Design,ゲームデザイン,게임 디자인
+UI_CREDITS_GAME_DESIGN,游戏设计,遊戲設計,Game Design,ゲームデザイン,게임 디자인
 UI_CREDITS_LI_QIAOCHEN,李翘辰,李翹辰,Li Qiaochen,李翹辰,리차오천
-UI_CREDITS_PROGRAMMING,程序,程序,Programming,プログラミング,프로그래밍
+UI_CREDITS_PROGRAMMING,程序,程式設計,Programming,プログラミング,프로그래밍
 UI_CREDITS_ART,美术,美術,Art,アート,아트
 UI_CREDITS_AUDIO_TITLE,音 乐 音 效,音 樂 音 效,Music & Sound,音 楽 ・ 効 果 音,음악 및 사운드
 UI_CREDITS_MUSIC,音乐,音樂,Music,音楽,음악
 UI_CREDITS_SOUND_ASSETS,音效素材,音效素材,Sound Assets,効果音素材,사운드 리소스
 UI_CREDITS_SPECIAL_THANKS,特 别 感 谢,特 別 感 謝,Special Thanks,特 別 な 感 謝,특별히 감사드리는 분들
 UI_CREDITS_INSPIRATION,以及所有给予本作灵感与参考的,以及所有給予本作靈感與參考的,Inspired by the work and ideas of,そして本作に着想と参考を与えてくださった,다음 분들의 작품과 아이디어에서 영감을 받았습니다
-UI_CREDITS_INDIE_DEVS,独立游戏制作人,獨立游戲製作人,Independent Game Developers,インディーゲーム制作者の皆様,인디 게임 개발자들
+UI_CREDITS_INDIE_DEVS,独立游戏制作人,獨立遊戲製作人,Independent Game Developers,インディーゲーム制作者の皆様,인디 게임 개발자들
 UI_CREDITS_END,终,終,The End,終,끝
 UI_CREDITS_THANK_YOU,感谢游玩,感謝游玩,Thank You for Playing,ご遊戯ありがとうございました,플레이해 주셔서 감사합니다
 UI_CREDITS_BOOK_TITLE,本草纲目,本草綱目,Compendium of Materia Medica,本草綱目,본초강목
@@ -755,7 +755,7 @@ UI_BOOK_ENTRY_BODY_SI_ZHEN,"【四诊】
 右关：脾
 右尺：肾阳","【四診】
 
-四診是中醫收集患者病情資料的四種基本診察方法，包括望診、聞診、問診和切診。醫者通過觀察、聽聞、詢問和觸按患者所表現出的各種信息，瞭解疾病的病因...","FOUR EXAMINATIONS
+四診是中醫收集患者病情資料的四種基本診察方法，包括望診、聞診、問診和切診。醫者透過觀察、聽聞、詢問和觸按患者所表現出的各種資訊，瞭解疾病的病因...","FOUR EXAMINATIONS
 
 The four examinations are the basic ways of gathering information about a patient's condition in traditional Chinese medicine: inspection, listening and smelling, inquiry, and palpation. By observing, listening, asking questions and feeling the patient, a physician learns about the cause, location and nature of the condition and the relative strength of healthy and harmful influences. This helps guide pattern identification and treatment.
 
@@ -823,7 +823,7 @@ UI_BOOK_ENTRY_BODY_BA_GANG_BIAN_ZHENG,"【八纲辨证】
 
 八纲之间并非彼此孤立，一种病证可以同时具有多种性质，如表寒证、里热证或虚寒证。病情发展过程中，还可能发生表里出入、寒热转化和虚实变化。因此，医者必须四诊合参，方能把握疾病的整体情况。","【八綱辨證】
 
-八綱辨證是中醫分析病情的基本方法。醫者通過望、聞、問、切收集症狀，再以陰、陽、表、里、寒、熱、虛、實八項綱領進行歸納，從而判斷疾病的位置、...","EIGHT PRINCIPLES OF PATTERN IDENTIFICATION
+八綱辨證是中醫分析病情的基本方法。醫者透過望、聞、問、切收集症狀，再以陰、陽、表、里、寒、熱、虛、實八項綱領進行歸納，從而判斷疾病的位置、...","EIGHT PRINCIPLES OF PATTERN IDENTIFICATION
 
 Pattern identification by the eight principles is a basic method of analyzing a patient's condition in traditional Chinese medicine. After gathering signs and symptoms through the four examinations, a physician groups them under eight principles: Yin, Yang, Exterior, Interior, Cold, Heat, Deficiency and Excess. This helps determine where the condition is located, its nature, and the relative strength of healthy Qi and pathogenic influences.
 
@@ -1097,7 +1097,7 @@ UI_BOOK_ENTRY_BODY_ZANG_XIANG,"【藏象】
 
 藏象理论强调人体是一个相互联系的整体。各脏腑不仅具有各自的功能，还通过气血津液、经络以及五行生克关系彼此协调，并与形体、官窍、情志和自然环境相联系。中医所说的脏腑属于功能体系，不能与现代医学中的解剖器官完全等同。","【藏象】
 
-藏象是中醫研究人體臟腑生理功能、病理變化及其相互關係的理論。“藏”指藏於體內的臟腑，“象”指臟腑功能表現於外的各種徵象。中醫通過觀察人的面色、...","VISCERAL MANIFESTATIONS
+藏象是中醫研究人體臟腑生理功能、病理變化及其相互關係的理論。“藏”指藏於體內的臟腑，“象”指臟腑功能表現於外的各種徵象。中醫透過觀察人的面色、...","VISCERAL MANIFESTATIONS
 
 Visceral Manifestations is a traditional Chinese medicine theory about the functions of the body's internal systems, how they change in illness and how they relate to one another. Zang refers to the internal organs, while Xiang refers to outward signs of their functions. By observing changes in complexion, build, emotions, voice, tongue and pulse, a physician infers how those systems are functioning.
 
@@ -1826,30 +1826,30 @@ When fright affects the Heart and spirit, signs may include palpitations, insomn
 경은 갑작스러운 놀람으로 기가 어지러워지는 상태다. 심신이 흔들리면 두근거림, 불면, 불안, 말이 어눌해짐과 같은 증상이 나타날 수 있다.
 
 놀람이 반복되면 심기와 신기가 손상되고 담이 심규를 막을 수 있다. 안신·화담·보익을 환자의 상태에 맞춰 선택한다."
-UI_DISPLAY_MODE_WINDOW_FMT,窗口 %d×%d,窗口 %d×%d,Window %d×%d,ウィンドウ %d×%d,창 %d×%d
-UI_TREATMENT_NO_PATIENT,当前没有病人，无法提交处方,當前沒有病人，無法提交處方,There is no patient. The prescription cannot be submitted.,患者がいないため処方を提出できません。,현재 환자가 없어 처방을 제출할 수 없습니다.
-UI_TREATMENT_NO_DISEASE,当前病人没有绑定疾病，无法提交处方,當前病人沒有綁定疾病，無法提交處方,This patient has no disease assigned. The prescription cannot be submitted.,この患者には病名が設定されていないため、処方を提出できません。,현재 환자에게 연결된 병증이 없어 처방을 제출할 수 없습니다.
-UI_TREATMENT_PRESCRIPTION_NOT_READY,当前处方未初始化，无法提交,當前處方未初始化，無法提交,The prescription has not been initialized and cannot be submitted.,処方が準備されていないため提出できません。,처방이 초기화되지 않아 제출할 수 없습니다.
+UI_DISPLAY_MODE_WINDOW_FMT,窗口 %d×%d,視窗 %d×%d,Window %d×%d,ウィンドウ %d×%d,창 %d×%d
+UI_TREATMENT_NO_PATIENT,当前没有病人，无法提交处方,目前沒有病人，無法提交處方,There is no patient. The prescription cannot be submitted.,患者がいないため処方を提出できません。,현재 환자가 없어 처방을 제출할 수 없습니다.
+UI_TREATMENT_NO_DISEASE,当前病人没有绑定疾病，无法提交处方,目前病人沒有綁定疾病，無法提交處方,This patient has no disease assigned. The prescription cannot be submitted.,この患者には病名が設定されていないため、処方を提出できません。,현재 환자에게 연결된 병증이 없어 처방을 제출할 수 없습니다.
+UI_TREATMENT_PRESCRIPTION_NOT_READY,当前处方未初始化，无法提交,目前處方未初始化，無法提交,The prescription has not been initialized and cannot be submitted.,処方が準備されていないため提出できません。,처방이 초기화되지 않아 제출할 수 없습니다.
 UI_TREATMENT_SELECT_DIAGNOSIS,请先选择疾病诊断,請先選擇疾病診斷,Please select a diagnosis first.,先に病名を選択してください。,먼저 병증을 진단해 주세요.
-UI_TREATMENT_EMPTY_PRESCRIPTION,当前处方为空，请先开方,當前處方為空，請先開方,The prescription is empty. Add herbs first.,処方が空です。先に薬材を選んでください。,처방이 비어 있습니다. 먼저 약재를 선택해 주세요.
+UI_TREATMENT_EMPTY_PRESCRIPTION,当前处方为空，请先开方,目前處方為空，請先開方,The prescription is empty. Add herbs first.,処方が空です。先に薬材を選んでください。,처방이 비어 있습니다. 먼저 약재를 선택해 주세요.
 UI_TREATMENT_STANDARD_FORMULA_NOT_FOUND_FMT,未找到疾病【%s】对应的标准方,未找到疾病【%s】對應的標準方,No standard prescription was found for 【%s】.,【%s】の標準処方が見つかりません。,【%s】에 해당하는 표준 처방을 찾을 수 없습니다.
 UI_TREATMENT_REPUTATION_GAIN_FMT,获得名望：+%d,獲得名望：+%d,Reputation gained: +%d,名声獲得：+%d,명망 획득: +%d
 UI_TREATMENT_REPUTATION_LOSS_FMT,损失名望：%d,損失名望：%d,Reputation lost: %d,名声減少：%d,명망 감소: %d
-UI_TREATMENT_CURRENT_REPUTATION_FMT,当前名望：%d,當前名望：%d,Current reputation: %d,現在の名声：%d,현재 명망: %d
+UI_TREATMENT_CURRENT_REPUTATION_FMT,当前名望：%d,目前名望：%d,Current reputation: %d,現在の名声：%d,현재 명망: %d
 UI_TREATMENT_ALREADY_SUBMITTED_REPUTATION,本病人已提交过处方，不重复改变名望。,本病人已提交過處方，不重復改變名望。,A prescription has already been submitted for this patient. Reputation will not change again.,この患者にはすでに処方を提出しているため、名声は再度変動しません。,이 환자에게는 이미 처방을 제출하여 명망이 다시 변경되지 않습니다.
 UI_TREATMENT_SUCCESS_REPUTATION_UNCHANGED,治疗成功：名望不变,治療成功：名望不變,Treatment succeeded: reputation unchanged.,治療成功：名声は変わりません。,치료 성공: 명망은 그대로입니다.
 UI_TREATMENT_ALREADY_SUBMITTED_UNCHANGED,本病人已提交过处方，名望不变。,本病人已提交過處方，名望不變。,A prescription has already been submitted for this patient. Reputation remains unchanged.,この患者にはすでに処方を提出しているため、名声は変わりません。,이 환자에게는 이미 처방을 제출하여 명망이 변경되지 않습니다.
-UI_STORY_TREATMENT_NO_NPC_ID,剧情没有配置 clinic_npc_id。,劇情沒有配置 clinic_npc_id。,The story has no clinic_npc_id configured.,シナリオに clinic_npc_id が設定されていません。,이야기에 clinic_npc_id가 설정되어 있지 않습니다.
-UI_STORY_TREATMENT_NO_DISEASE,发起诊疗的剧情没有配置 Disease。,發起診療的劇情沒有配置 Disease。,The treatment story has no Disease configured.,診療シナリオに病名が設定されていません。,진료 이야기에 Disease가 설정되어 있지 않습니다.
+UI_STORY_TREATMENT_NO_NPC_ID,剧情没有配置 clinic_npc_id。,劇情尚未設定 clinic_npc_id。,The story has no clinic_npc_id configured.,シナリオに clinic_npc_id が設定されていません。,이야기에 clinic_npc_id가 설정되어 있지 않습니다.
+UI_STORY_TREATMENT_NO_DISEASE,发起诊疗的剧情没有配置 Disease。,發起診療的劇情尚未設定 Disease。,The treatment story has no Disease configured.,診療シナリオに病名が設定されていません。,진료 이야기에 Disease가 설정되어 있지 않습니다.
 UI_STORY_TREATMENT_NPC_MANAGER_UNAVAILABLE,剧情诊疗服务的 NpcManager 不可用。,劇情診療服務的 NpcManager 不可用。,NpcManager is unavailable for story treatment.,シナリオ診療の NpcManager を使用できません。,이야기 진료용 NpcManager를 사용할 수 없습니다.
 UI_STORY_TREATMENT_NPC_MANAGER_INTERFACE_MISSING,NpcManager 缺少 story NPC 接口。,NpcManager 缺少 story NPC 接口。,NpcManager does not provide the story NPC interface.,NpcManager にシナリオ患者用の機能がありません。,NpcManager에 story NPC 인터페이스가 없습니다.
-UI_STORY_TREATMENT_NPC_LOAD_FAILED_FMT,story NPC 加载失败：%s,story NPC 加載失敗：%s,Failed to load story NPC: %s,シナリオ患者を読み込めません：%s,story NPC를 불러오지 못했습니다: %s
+UI_STORY_TREATMENT_NPC_LOAD_FAILED_FMT,story NPC 加载失败：%s,story NPC 載入失敗：%s,Failed to load story NPC: %s,シナリオ患者を読み込めません：%s,story NPC를 불러오지 못했습니다: %s
 UI_STORY_TREATMENT_INVALID_NPC_TYPE_FMT,NPC【%s】的 npc_type 不是 story。,NPC【%s】的 npc_type 不是 story。,NPC 【%s】 does not have npc_type 'story'.,患者【%s】の種別が story ではありません。,NPC【%s】의 npc_type이 story가 아닙니다.
-UI_STORY_TREATMENT_NO_ACTIVE_PATIENT,当前没有可诊疗的剧情病人。,當前沒有可診療的劇情病人。,There is no story patient available for treatment.,診療できるシナリオ患者がいません。,진료할 이야기 환자가 없습니다.
+UI_STORY_TREATMENT_NO_ACTIVE_PATIENT,当前没有可诊疗的剧情病人。,目前沒有可診療的劇情病人。,There is no story patient available for treatment.,診療できるシナリオ患者がいません。,진료할 이야기 환자가 없습니다.
 UI_STORY_TREATMENT_PULSE_WINDOW_UNAVAILABLE,Story 的 PulseWindow 不可用。,Story 的 PulseWindow 不可用。,The story PulseWindow is unavailable.,脈診画面を使用できません。,맥진 창을 사용할 수 없습니다.
-UI_STORY_TREATMENT_PULSE_INVALID_RESULT,Story 的 PulseWindow 返回了无效数据。,Story 的 PulseWindow 返回了無效數據。,The story PulseWindow returned invalid data.,脈診画面から正しい結果を取得できませんでした。,맥진 창에서 유효하지 않은 결과를 반환했습니다.
+UI_STORY_TREATMENT_PULSE_INVALID_RESULT,Story 的 PulseWindow 返回了无效数据。,Story 的 PulseWindow 返回了無效資料。,The story PulseWindow returned invalid data.,脈診画面から正しい結果を取得できませんでした。,맥진 창에서 유효하지 않은 결과를 반환했습니다.
 UI_STORY_TREATMENT_JUDGE_FAILED,处方判定失败。,處方判定失敗。,Prescription evaluation failed.,処方を判定できませんでした。,처방 판정에 실패했습니다.
-UI_SETTINGS_AUDIO_BUS_MISSING_FMT,当前项目尚未创建 %s 音频总线。创建后该滑块会自动生效。,當前項目尚未創建 %s 音頻總線。創建後該滑塊會自動生效。,The %s audio bus has not been created yet. This slider will take effect after it is created.,%s オーディオバスはまだ作成されていません。作成すると、このスライダーが有効になります。,%s 오디오 버스가 아직 생성되지 않았습니다. 생성하면 이 슬라이더가 적용됩니다.
+UI_SETTINGS_AUDIO_BUS_MISSING_FMT,当前项目尚未创建 %s 音频总线。创建后该滑块会自动生效。,目前專案尚未建立 %s 音訊匯流排。建立後此滑桿會自動生效。,The %s audio bus has not been created yet. This slider will take effect after it is created.,%s オーディオバスはまだ作成されていません。作成すると、このスライダーが有効になります。,%s 오디오 버스가 아직 생성되지 않았습니다. 생성하면 이 슬라이더가 적용됩니다.
 UI_NPC_GENERIC_AFTER_TREATMENT,多谢大夫，我觉得好多了。,多謝大夫，我覺得好多了。,"Thank you, doctor. I feel much better now.",先生、ありがとうございます。だいぶ良くなりました。,"의원님, 감사합니다. 많이 좋아진 것 같습니다."
 UI_NPC_GENERIC_TREATMENT_FAILED,大夫，我这病怎么还不见好……,大夫，我這病怎麼還不見好……,"Doctor, why am I still not getting better...",先生、まだ良くならないようですが……,"의원님, 아직도 병이 나아지지 않는 것 같습니다……"
 UI_NONE,（无）,（無）,(None),（なし）,(없음)
