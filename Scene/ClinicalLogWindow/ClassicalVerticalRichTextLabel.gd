@@ -84,7 +84,7 @@ func set_prebuilt_vertical_page(page_data: Dictionary) -> void:
 	fit_content = false
 	autowrap_mode = TextServer.AUTOWRAP_OFF
 	horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	bbcode_enabled = _uses_fixed_cell_grid()
+	bbcode_enabled = false
 
 	_source_text = ""
 	_display_text = page_text
@@ -144,7 +144,7 @@ func _rebuild_vertical_text() -> void:
 	fit_content = false
 	autowrap_mode = TextServer.AUTOWRAP_OFF
 	horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	bbcode_enabled = _uses_fixed_cell_grid()
+	bbcode_enabled = false
 
 	var clean_text := _normalize_source_text(_source_text)
 	var rows_per_column := _estimate_rows_per_column(clean_text.length())
@@ -162,9 +162,9 @@ func _rebuild_vertical_text() -> void:
 
 
 func _uses_fixed_cell_grid() -> bool:
-	var locale := TranslationServer.get_locale().to_lower().replace("-", "_")
-	# 韩文字形宽度差异最明显；日文假名/汉字混排也统一走固定字格。
-	return locale.begins_with("ko") or locale.begins_with("ja")
+	# 简中、繁中、日文、韩文全部使用同一套纯文本竖排矩阵。
+	# 这样列距、行距、分页宽度和右到左阅读顺序完全一致。
+	return false
 
 
 func _scroll_parent_to_left_edge() -> void:
