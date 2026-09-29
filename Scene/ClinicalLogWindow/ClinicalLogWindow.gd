@@ -429,6 +429,15 @@ func _is_entry_match_clinical_log_search(entry: BookEntryData, clean_keyword: St
 		if entity_id.is_empty():
 			entity_id = entry.entry_id
 		return LocalizedName.korean_search_matches(localized_title, entity_id, clean_keyword)
+	if LocalizedName.is_traditional_chinese_locale():
+		var entity_id := _get_entry_data_id(entry)
+		if entity_id.is_empty():
+			entity_id = entry.entry_id
+		return LocalizedName.traditional_chinese_search_matches(
+			localized_title,
+			entity_id,
+			clean_keyword
+		)
 
 	# 英文环境：英文名称 + 英文单词首字母。
 	if LocalizedName.is_english_locale():
@@ -439,7 +448,7 @@ func _is_entry_match_clinical_log_search(entry: BookEntryData, clean_keyword: St
 			or english_initials.begins_with(clean_keyword)
 		)
 
-	# 中文环境保持原有逻辑：
+	# 简体中文环境保持原有逻辑：
 	# 中文标题 + ID 拼音全拼 + 拼音首字母。
 	var title_text := _normalize_clinical_log_search_text(entry.title)
 	var entry_id_raw := str(entry.entry_id).to_lower()
