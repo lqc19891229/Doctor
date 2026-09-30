@@ -2,7 +2,10 @@ extends RichTextLabel
 class_name ClassicalVerticalRichTextLabel
 
 # 古籍竖排 RichTextLabel
-# 中文、日文、韩文均使用原来的纯文本矩阵。
+# 中文、日文保持竖排；韩文按英文一样使用横排。
+
+const DEFAULT_FONT_PATH := "res://Assets/Fonts/SourceHanSerifSC-Regular.otf"
+const KOREAN_FONT_PATH := "res://Assets/Fonts/SourceHanSerifKR-Regular.otf"
 
 @export var column_gap: String = "　"
 @export var right_padding_chars: int = 0
@@ -22,9 +25,30 @@ var _horizontal_source: bool = false
 var _display_text: String = ""
 var _is_applying_text: bool = false
 var _rebuild_requested: bool = false
+var _default_font: Font
+var _korean_font: Font
+var _locale_driven_source: bool = false
+
+
+func _notification(what: int) -> void:
+	if what != NOTIFICATION_TRANSLATION_CHANGED or not is_node_ready():
+		return
+
+	# 游戏运行时切换语言后，重新选择字体。
+	_apply_locale_font()
+
+	# 直接通过 set_source_text() 设置的文本可以在这里立即重排。
+	# 预构建分页文本由上层窗口刷新页面，避免把已构建页面清空。
+	if not _source_text.is_empty():
+		if _locale_driven_source:
+			_horizontal_source = _is_korean_locale()
+		_request_rebuild()
 
 
 func _ready() -> void:
+	_cache_fonts()
+	_apply_locale_font()
+
 	scroll_following = false
 	autowrap_mode = TextServer.AUTOWRAP_OFF
 	scroll_active = false
@@ -36,13 +60,47 @@ func _ready() -> void:
 		set_source_text(text)
 
 
+func _cache_fonts() -> void:
+	# 保存场景中原本的字体，确保非韩文环境继续使用原字体。
+	_default_font = get_theme_font("normal_font")
+	if _default_font == null:
+		_default_font = load(DEFAULT_FONT_PATH) as Font
+
+	# 使用 load 而不是 preload：即使用户尚未复制韩文字体，游戏也不会因为资源不存在而无法启动。
+	_korean_font = load(KOREAN_FONT_PATH) as Font
+	if _korean_font == null:
+		push_warning(
+			"韩文字体不存在：%s；韩文环境将暂时使用原字体。" % KOREAN_FONT_PATH
+		)
+
+
+func _is_korean_locale() -> bool:
+	var locale := TranslationServer.get_locale().to_lower().replace("-", "_")
+	return locale.begins_with("ko")
+
+
+func _apply_locale_font() -> void:
+	if _default_font == null:
+		_default_font = get_theme_font("normal_font")
+
+	var target_font: Font = _default_font
+	if _is_korean_locale() and _korean_font != null:
+		target_font = _korean_font
+
+	if target_font != null:
+		add_theme_font_override("normal_font", target_font)
+
+
 func set_source_text(value: String) -> void:
-	_horizontal_source = false
+	# 普通文本入口由当前语言决定方向：韩文横排，中文/日文竖排。
+	_locale_driven_source = true
+	_horizontal_source = _is_korean_locale()
 	_source_text = value
 	_request_rebuild()
 
 
 func set_horizontal_source_text(value: String) -> void:
+	_locale_driven_source = false
 	_horizontal_source = true
 	_source_text = value
 	_request_rebuild()
@@ -50,6 +108,16 @@ func set_horizontal_source_text(value: String) -> void:
 
 func build_source_text_pages(value: String, preferred_columns_per_page: int = 0) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
+
+	# 韩文和英文一样使用横排文本，不再按竖排列切分页。
+	if _is_korean_locale():
+		result.append({
+			"text": _normalize_horizontal_source_text(value),
+			"column_count": 1,
+			"horizontal": true,
+		})
+		return result
+
 	var clean_text := _normalize_source_text(value)
 	var rows_per_column := _estimate_rows_per_column(clean_text.length())
 	var columns := _split_text_to_columns(clean_text, rows_per_column)
@@ -78,26 +146,42 @@ func build_source_text_pages(value: String, preferred_columns_per_page: int = 0)
 func set_prebuilt_vertical_page(page_data: Dictionary) -> void:
 	var page_text := str(page_data.get("text", ""))
 	var column_count := int(page_data.get("column_count", 1))
+	var is_horizontal_page := bool(page_data.get("horizontal", _is_korean_locale()))
 
-	_horizontal_source = false
-	fit_content = false
-	autowrap_mode = TextServer.AUTOWRAP_OFF
-	horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	_locale_driven_source = true
+	_horizontal_source = is_horizontal_page
 	bbcode_enabled = false
 
 	_source_text = ""
 	_display_text = page_text
-	_update_horizontal_content_size(column_count)
+
+	if _horizontal_source:
+		fit_content = true
+		autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		custom_minimum_size.x = 0.0
+	else:
+		fit_content = false
+		autowrap_mode = TextServer.AUTOWRAP_OFF
+		horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		_update_horizontal_content_size(column_count)
 
 	_is_applying_text = true
 	text = _display_text
 	_is_applying_text = false
 
-	_defer_scroll_to_right_edge()
+	if _horizontal_source:
+		call_deferred("_scroll_parent_to_left_edge")
+	else:
+		_defer_scroll_to_right_edge()
 	scroll_to_line(0)
 
 
 func scroll_to_text_start() -> void:
+	if _horizontal_source:
+		call_deferred("_scroll_parent_to_left_edge")
+		return
+
 	call_deferred("_scroll_parent_to_right_edge")
 	call_deferred("_scroll_parent_to_right_edge_late")
 
@@ -158,7 +242,6 @@ func _rebuild_vertical_text() -> void:
 
 	_defer_scroll_to_right_edge()
 	scroll_to_line(0)
-
 func _scroll_parent_to_left_edge() -> void:
 	var parent_node := get_parent()
 	if parent_node is ScrollContainer:
@@ -222,6 +305,10 @@ func _normalize_source_text(value: String) -> String:
 		result += _to_vertical_char(ch)
 
 	return result
+
+
+func _normalize_horizontal_source_text(value: String) -> String:
+	return value.replace("\r\n", "\n").replace("\r", "\n")
 
 
 func _estimate_rows_per_column(_char_count: int) -> int:
@@ -351,7 +438,6 @@ func _build_plain_vertical_matrix(columns: Array[String], rows_per_column: int) 
 				lines.append("")
 
 	return "\n".join(PackedStringArray(lines))
-
 func _to_vertical_char(ch: String) -> String:
 	match ch:
 		"(":
