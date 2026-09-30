@@ -13,7 +13,7 @@ class_name LocalizedName
 # - 英文环境搜索：英文名 + 英文单词首字母。
 # - 日文环境搜索：日文名称 + 假名 + Romaji + Romaji 首字母。
 # - 韩文环境搜索：韩文名称 + 초성 + Romaja + Romaja 首字母。
-# - 详情排版：英文横排；中文、日文、韩文使用古籍竖排。
+# - 详情排版：英文、韩文横排；中文、日文使用古籍竖排。
 # =========================================================
 
 
@@ -74,8 +74,8 @@ static func is_traditional_chinese_locale() -> bool:
 
 
 static func is_horizontal_detail_locale() -> bool:
-	# 只有英文正文使用横排；简/繁中、日文、韩文都保持古籍竖排。
-	return is_english_locale()
+	# 英文、韩文正文使用横排；简/繁中、日文保持古籍竖排。
+	return is_english_locale() or is_korean_locale()
 
 
 # =========================================================

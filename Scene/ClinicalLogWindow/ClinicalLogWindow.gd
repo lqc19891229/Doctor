@@ -25,12 +25,12 @@ class_name ClinicalLogWindow
 # =========================================================
 @export var fixed_window_position: Vector2i = Vector2i(1010, 66)
 
-# 中文竖排 / 英文横排使用不同书页背景。
+# 中文、日文竖排 / 英文、韩文横排使用不同书页背景。
 const BOOK_PAGE_TEXTURE_ZH: Texture2D = preload("res://Assets/UI/bookpage.png")
 const BOOK_PAGE_TEXTURE_EN: Texture2D = preload("res://Assets/UI/bookpage2.png")
 
-# 英文横排正文在 bookpage2.png 中的可书写区域边距。
-# 中文竖排继续使用原来的满区域布局。
+# 英文、韩文横排正文在 bookpage2.png 中的可书写区域边距。
+# 中文、日文竖排继续使用原来的满区域布局。
 @export var english_detail_margin_left: float = 24.0
 @export var english_detail_margin_top: float = 58.0
 @export var english_detail_margin_right: float = 24.0
@@ -202,7 +202,7 @@ func _ready() -> void:
 	_update_book_page_backgrounds()
 
 	# 根据当前语言设置详情正文区域。
-	# 英文正文限制在 bookpage2.png 的纸张范围内，并启用纵向滚动。
+	# 英文、韩文正文限制在 bookpage2.png 的纸张范围内，并启用纵向滚动。
 	_apply_detail_scroll_layout()
 
 	# 设置页签、翻页按钮及初始空状态。
@@ -647,36 +647,36 @@ func _apply_detail_scroll_layout() -> void:
 			continue
 
 		if is_horizontal:
-			# 英文、日文和韩文横排：正文只占书页内部区域。
+			# 英文、韩文横排：正文只占书页内部区域。
 			scroll.offset_left = english_detail_margin_left
 			scroll.offset_top = english_detail_margin_top
 			scroll.offset_right = -english_detail_margin_right
 			scroll.offset_bottom = -english_detail_margin_bottom
 
-			# 英文长文本只允许上下滚动，禁止横向滚动。
+			# 英文、韩文长文本只允许上下滚动，禁止横向滚动。
 			scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 			scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 		else:
-			# 中文竖排恢复原布局。
+			# 中文、日文竖排恢复原布局。
 			scroll.offset_left = 0.0
 			scroll.offset_top = 0.0
 			scroll.offset_right = 0.0
 			scroll.offset_bottom = 0.0
 
-			# 中文竖排保留横向浏览，不使用纵向滚动。
+			# 中文、日文竖排保留横向浏览，不使用纵向滚动。
 			scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 			scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 
 
 func _update_book_page_backgrounds() -> void:
-	var target_texture: Texture2D = BOOK_PAGE_TEXTURE_EN if _is_english_detail_layout() else BOOK_PAGE_TEXTURE_ZH
+	var target_texture: Texture2D = BOOK_PAGE_TEXTURE_EN if _is_horizontal_detail_layout() else BOOK_PAGE_TEXTURE_ZH
 
 	for book_page in [disease_book_page, formula_book_page, herb_book_page]:
 		if book_page != null:
 			book_page.texture = target_texture
 
 
-func _is_english_detail_layout() -> bool:
+func _is_horizontal_detail_layout() -> bool:
 	return LocalizedName.is_horizontal_detail_locale()
 
 
@@ -827,7 +827,7 @@ func _set_disease_detail_text_with_pages(value: String) -> void:
 	_current_disease_detail_text = value
 	_disease_page_index = 0
 
-	if _is_english_detail_layout():
+	if _is_horizontal_detail_layout():
 		_disease_pages = [{"text": value, "column_count": 1}]
 		_disease_page_count = 1
 		_show_horizontal_detail(disease_detail_label, disease_detail_scroll, value)
@@ -887,7 +887,7 @@ func _set_formula_detail_text_with_pages(value: String) -> void:
 	_current_formula_detail_text = value
 	_formula_page_index = 0
 
-	if _is_english_detail_layout():
+	if _is_horizontal_detail_layout():
 		_formula_pages = [{"text": value, "column_count": 1}]
 		_formula_page_count = 1
 		_show_horizontal_detail(formula_detail_label, formula_detail_scroll, value)
@@ -947,7 +947,7 @@ func _set_herb_detail_text_with_pages(value: String) -> void:
 	_current_herb_detail_text = value
 	_herb_page_index = 0
 
-	if _is_english_detail_layout():
+	if _is_horizontal_detail_layout():
 		_herb_pages = [{"text": value, "column_count": 1}]
 		_herb_page_count = 1
 		_show_horizontal_detail(herb_detail_label, herb_detail_scroll, value)
@@ -1024,10 +1024,14 @@ func _reset_scroll_position(scroll: ScrollContainer) -> void:
 	if scroll == null:
 		return
 
-	# 竖排古书正文起点在最右侧。
+	# 横排正文从左上角开始；竖排古书正文从最右侧开始。
 	# 用 set_deferred 设置属性，比 call_deferred 调不存在的 setter 方法更稳。
-	scroll.set_deferred("scroll_horizontal", 100000000)
-	scroll.set_deferred("scroll_vertical", 0)
+	if LocalizedName.is_horizontal_detail_locale():
+		scroll.set_deferred("scroll_horizontal", 0)
+		scroll.set_deferred("scroll_vertical", 0)
+	else:
+		scroll.set_deferred("scroll_horizontal", 100000000)
+		scroll.set_deferred("scroll_vertical", 0)
 
 
 func _update_page_controls(prev_button: Button, indicator: Label, next_button: Button, page_index: int, page_count: int) -> void:
