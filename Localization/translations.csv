@@ -497,8 +497,8 @@ UI_READ_BOOK_BOOK_LIST,医书列表,醫書列表,Medical Books,医学書一覧,�
 UI_READ_BOOK_ENTRY_LIST,条目列表,條目列表,Entries,項目一覧,항목
 UI_READ_BOOK_CHOOSE_BOOK_TONIGHT,请选择今晚要阅读的医书。,請選擇今晚要閱讀的醫書。,Choose a book to read tonight.,今夜読む医学書を選んでください。,오늘 밤 읽을 의서를 선택하세요.
 UI_READ_BOOK_CHOOSE_BOOK,请选择要查看的医书。,請選擇要查看的醫書。,Choose a book to view.,閲覧する医学書を選んでください。,열람할 의서를 선택하세요.
-UI_READ_BOOK_MATCH_BADGE_FMT,【匹配%d】,【符合%d】,[Matches: %d],【一致%d】,[일치: %d]
-UI_READ_BOOK_NEW_COUNT_BADGE_FMT,【新%d】,【新%d】,[New: %d],【新着%d】,[신규: %d]
+UI_READ_BOOK_MATCH_BADGE_FMT,【匹配%d】,【符合%d】,【Matches: %d】,【一致%d】,【일치: %d】
+UI_READ_BOOK_NEW_COUNT_BADGE_FMT,【新%d】,【新%d】,【New: %d】,【新着%d】,【신규: %d】
 UI_READ_BOOK_MATCH_TOOLTIP_FMT,找到 %d 个匹配条目,找到 %d 個符合條目,Found %d matching entries,一致する項目が %d 件見つかりました,일치하는 항목 %d개를 찾았습니다
 UI_READ_BOOK_NEW_TOOLTIP_FMT,有 %d 个新解锁条目可以查看,有 %d 個新解鎖條目可以查看,%d newly unlocked entries are available,新しく解放された項目が %d 件あります,새로 해금된 항목 %d개를 열람할 수 있습니다
 UI_READ_BOOK_SEARCH_SUMMARY_FMT,搜索“%s”：共找到 %d 个已解锁条目；当前《%s》有 %d 个匹配。,搜尋「%s」：共找到 %d 個已解鎖條目；目前《%s》有 %d 個符合。,"Search ""%s"": %d unlocked entries found; ""%s"" has %d matches.",「%s」の検索結果：解放済みの項目が合計 %d 件。現在の『%s』には %d 件あります。,‘%s’ 검색: 해금된 항목 %d개를 찾음; ‘%s’ 일치 %d개.
@@ -507,7 +507,7 @@ UI_READ_BOOK_UNREAD_COUNT_FMT,《%s》共有 %d 个已解锁条目，其中 %d �
 UI_READ_BOOK_ENTRY_COUNT_FMT,《%s》共有 %d 个已解锁条目。,《%s》共有 %d 個已解鎖條目。,"""%s"" has %d unlocked entries.",『%s』には解放済みの項目が %d 件あります。,‘%s’에는 해금된 항목이 %d개 있습니다.
 UI_READ_BOOK_NO_BOOKS,当前没有可查看的医书。,目前沒有可查看的醫書。,No books are available to view.,閲覧できる医学書がありません。,열람할 수 있는 의서가 없습니다.
 UI_READ_BOOK_NO_RESULTS_FMT,没有找到包含“%s”的已解锁条目。,沒有找到包含「%s」的已解鎖條目。,"No unlocked entries match ""%s"".",「%s」に一致する解放済みの項目は見つかりませんでした。,‘%s’와 일치하는 해금된 항목이 없습니다.
-UI_READ_BOOK_NEW_BADGE,【新】,【新】,[New],【新着】,[신규]
+UI_READ_BOOK_NEW_BADGE,【新】,【新】,【New】,【新着】,【신규】
 UI_READ_BOOK_NEW_ENTRY_TOOLTIP,新解锁条目，尚未查看,新解鎖條目，尚未查看,Newly unlocked; not yet read,新しく解放された未読の項目,새로 해금되었으며 아직 읽지 않았습니다
 UI_READ_BOOK_NO_CONTENT,暂无正文,暫無正文,No text available,本文はありません,표시할 내용이 없습니다
 UI_READ_BOOK_ENTRY_LOCKED,该条目尚未解锁，请先满足对应的解锁条件。,該條目尚未解鎖，請先滿足對應的解鎖條件。,This entry is locked. Meet its unlock requirements first.,この項目はまだ解放されていません。先に解放条件を満たしてください。,이 항목은 잠겨 있습니다. 먼저 해금 조건을 충족하세요.
