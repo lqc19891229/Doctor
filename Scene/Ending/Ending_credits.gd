@@ -138,15 +138,15 @@ func _build_scroll() -> void:
 
 	_create_paper_background()
 
-	# 长卷从左侧向右滚动时，本地 x 越大的页面越先进入屏幕。
-	# 因此把封面放在最右侧，再把工作人员页按阅读顺序反向铺到左侧，
-	# 实际播放顺序就是：封面 -> 制作人员 -> 协力 -> 感谢游玩。
+	# 长卷从左侧向右滚动，因此本地 x 最小的页面最先进入屏幕。
+	# 按实际阅读顺序铺设：封面 -> 制作人员 -> 音频 -> 特别鸣谢 -> 感谢游玩。
 	var x := horizontal_margin
-	for page_index in range(CREDITS.size() - 1, -1, -1):
-		_create_credit_page(x, CREDITS[page_index])
-		x += page_width
-
 	_create_cover_page(x)
+	x += page_width
+
+	for page_data in CREDITS:
+		_create_credit_page(x, page_data)
+		x += page_width
 
 func _create_paper_background() -> void:
 	var paper := ColorRect.new()
