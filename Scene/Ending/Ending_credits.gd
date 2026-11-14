@@ -42,7 +42,7 @@ const CREDITS := [
 	{
 		"title": "UI_CREDITS_GAME_TITLE",
 		"columns": [
-			["UI_CREDITS_GAME_DESIGN", "UI_CREDITS_LI_QIAOCHEN"],			
+			["UI_CREDITS_GAME_DESIGN", "Starward"],			
 
 			["UI_CREDITS_PROGRAMMING", "ChatGPT-Sol"],			
 
