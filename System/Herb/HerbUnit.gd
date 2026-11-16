@@ -214,15 +214,8 @@ static func format_fen_auto(total_fen: int) -> String:
 	if total_fen <= 0:
 		return "零分"
 
-	if total_fen % FEN_PER_JIN == 0:
-		return "%s斤" % number_to_chinese(total_fen / FEN_PER_JIN)
-
-	if total_fen % FEN_PER_LIANG == 0:
-		return "%s两" % number_to_chinese(total_fen / FEN_PER_LIANG)
-
-	if total_fen % FEN_PER_QIAN == 0:
-		return "%s钱" % number_to_chinese(total_fen / FEN_PER_QIAN)
-
+	# 中文统一按“斤 → 两 → 钱 → 分”拆分，避免较大单位被低位单位吞掉。
+	# 例如 1700 分显示为“一斤一两”，而不是“十七两”。
 	return format_fen_as_compound(total_fen)
 
 
