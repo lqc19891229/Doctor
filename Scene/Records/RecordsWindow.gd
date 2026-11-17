@@ -415,7 +415,11 @@ func _show_preset(index: int) -> void:
 	preset_detail.text = "\n".join(lines)
 
 
-# 本地化模板仍带有旧的 5 次门槛；统一按解锁管理器的常量更新数字。\nfunc _preset_threshold_text(value: String) -> String:\n\tvar required := UnlockManager.PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT\n\treturn value.replace("5", str(required)).replace("５", str(required)).replace("五", "三")\n
+# 本地化模板仍带有旧的 5 次门槛；统一按解锁管理器的常量更新数字。
+func _preset_threshold_text(value: String) -> String:
+	var required := UnlockManager.PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT
+	return value.replace("5", str(required)).replace("５", str(required)).replace("五", "三")
+
 
 func _formula_ingredients_text(formula: FormulaData) -> String:
 	var parts: Array[String] = []
