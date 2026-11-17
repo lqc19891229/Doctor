@@ -47,7 +47,7 @@ const SORT_INDEX_FALLBACK := 2147483647
 
 # 方剂搜索与预制套方分开控制：
 # - 方剂本身已解锁：搜索方名时即可显示该方剂包含的药材。
-# - 同一方剂累计 5 次“妙手回春”：才开放该方剂的一键预制套方。
+# - 同一方剂累计 3 次“妙手回春”：才开放该方剂的一键预制套方。
 
 # 开方窗口固定位置，和场景中的初始坐标保持一致。
 @export var fixed_window_position: Vector2i = Vector2i(5, 66)
@@ -832,7 +832,7 @@ func _apply_herb_filter() -> void:
 
 	# 先收集“当前搜索词命中的已解锁方剂”中包含的全部药材 ID。
 	# 方剂本身一旦解锁，输入方剂名就显示其组成药材；
-	# 对应方剂累计 5 次“妙手回春”后，才额外显示可一键套用的方剂按钮。
+	# 对应方剂累计 3 次“妙手回春”后，才额外显示可一键套用的方剂按钮。
 	var formula_herb_ids: Dictionary = {}
 	if herb_search_keyword != "":
 		for record_value in _formula_search_records:
@@ -918,7 +918,7 @@ func _formula_record_matches(record: Dictionary) -> bool:
 
 func _apply_formula_filter() -> void:
 	# 无关键词时不显示全部预制方剂。
-	# 每个方剂独立检查是否已累计 5 次“妙手回春”。
+	# 每个方剂独立检查是否已累计 3 次“妙手回春”。
 	for record_value in _formula_search_records:
 		if typeof(record_value) != TYPE_DICTIONARY:
 			continue

@@ -1465,7 +1465,7 @@ func submit_prescription() -> bool:
 
 	# random NPC 达成妙手回春时：
 	# 1. 后台增加 1 点 experience_points，并立即检查心得条目解锁；
-	# 2. 按本次标准方的 formula_id 独立累计，第 5 次解锁该方剂的一键预制。
+	# 2. 按本次标准方的 formula_id 独立累计，第 3 次解锁该方剂的一键预制。
 	# was_already_submitted 用于防止同一名病人重复提交刷后台进度。
 	var is_miaoshouhuichun := false
 	if result != null and result.has_method("is_miaoshouhuichun"):
@@ -1477,7 +1477,7 @@ func submit_prescription() -> bool:
 		var newly_unlocked_titles: Array[String] = []
 
 		# 按本次匹配到的标准方独立记录预制方剂熟练度。
-		# 第 1～4 次静默累计；第 5 次只解锁这个 formula_id 的一键预制。
+		# 第 1～2 次静默累计；第 3 次只解锁这个 formula_id 的一键预制。
 		var mastered_formula_id := ""
 		var mastered_formula_name := ""
 

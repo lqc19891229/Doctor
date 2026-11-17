@@ -272,7 +272,7 @@ func _get_index_values(index: Dictionary, key: String) -> Array:
 # =========================================================
 
 const PRESET_FORMULA_ENTRY_ID: String = "yu_zhi_fang_ji"
-const PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT: int = 5
+const PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT: int = 3
 
 var experience_points: int = 0
 
@@ -321,7 +321,7 @@ func add_experience_point(amount: int = 1) -> Array[String]:
 
 
 # 记录一次指定标准方的有效“妙手回春”。
-# 每个 formula_id 独立累计：第 1～4 次静默累计，第 5 次解锁该方剂的一键预制。
+# 每个 formula_id 独立累计：第 1～2 次静默累计，第 3 次解锁该方剂的一键预制。
 # PRESET_FORMULA_ENTRY_ID 只作为“已经掌握过预制方剂”的说明条目，
 # 不再作为所有方剂共用的一键预制开关。
 func record_miaoshouhuichun_prescription(formula_id: String = "") -> Dictionary:
@@ -349,7 +349,7 @@ func record_miaoshouhuichun_prescription(formula_id: String = "") -> Dictionary:
 		and new_count >= PRESET_FORMULA_REQUIRED_MIAOSHOU_COUNT
 	)
 
-	# 第一次有任意方剂达到 5 次时，仍解锁原来的“预制方剂”说明条目，
+	# 第一次有任意方剂达到 3 次时，仍解锁原来的“预制方剂”说明条目，
 	# 但其它方剂不会因此自动获得一键预制权限。
 	if just_unlocked and not is_entry_unlocked(PRESET_FORMULA_ENTRY_ID):
 		unlock_entry(PRESET_FORMULA_ENTRY_ID)
@@ -371,7 +371,7 @@ func get_miaoshouhuichun_prescription_count(formula_id: String = "") -> int:
 	return maxi(int(miaoshouhuichun_formula_counts.get(clean_formula_id, 0)), 0)
 
 
-# 指定方剂是否已经达到 5 次“妙手回春”，从而允许一键预制。
+# 指定方剂是否已经达到 3 次“妙手回春”，从而允许一键预制。
 func is_preset_formula_unlocked(formula_id: String) -> bool:
 	var clean_formula_id := formula_id.strip_edges()
 	if clean_formula_id == "":
