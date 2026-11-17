@@ -11,6 +11,7 @@ line_type = "dialogue"
 portrait_side = "mid"
 inactive_portrait_mode = "dim"
 speaker = "李东璧"
+music = "res://Assets/Music/BGM/Clinic/Autumn/古意悠长-秋.mp3"
 text = "是沈先生啊，病好点了吗？"
 portrait = ExtResource("portrait_1")
 [sub_resource type="Resource" id="StoryLine_002"]
