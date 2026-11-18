@@ -168,7 +168,10 @@ func _flush_pending() -> void:
 				_pending_patient_count_floor = 0
 				_has_pending_patient_stat = false
 
-			if desired_count >= PATIENT_ACHIEVEMENT_TARGET:
+			if (
+				desired_count >= PATIENT_ACHIEVEMENT_TARGET
+				and (desired_count <= current_count or stat_set)
+			):
 				_pending_achievements[ACHIEVEMENT_100_PATIENTS] = true
 
 			if desired_count > current_count and stat_set:
