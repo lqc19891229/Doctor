@@ -785,9 +785,15 @@ func _mark_story_played(story: StoryData) -> void:
 	if story_id == "":
 		return
 
+	var first_completion := not played_story_ids.has(story_id)
 	played_story_ids[story_id] = true
 	if not played_story_days.has(story_id):
 		played_story_days[story_id] = int(GameTime.current_day)
+
+	# The same completion hook handles regular stories, cured-treatment
+	# follow-ups, and the actual endgame. Do not unlock on story start.
+	if first_completion:
+		SteamAchievements.unlock_for_completed_story(story_id)
 
 
 # =========================================================
@@ -818,3 +824,9 @@ func load_save_data(data: Dictionary) -> void:
 		has_played_clinic_intro = bool(data["has_played_clinic_intro"])
 	else:
 		has_played_clinic_intro = false
+
+	# Backfill milestones already completed in a save created before Steam
+	# achievements were added. It is safe if Steam already has the award.
+	for completed_story_id in played_story_ids.keys():
+		if bool(played_story_ids[completed_story_id]):
+			SteamAchievements.unlock_for_completed_story(String(completed_story_id))
