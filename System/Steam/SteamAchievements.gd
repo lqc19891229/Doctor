@@ -12,6 +12,7 @@ const RETRY_SECONDS := 5.0
 
 var _steam: Object = null
 var _initialized := false
+var _stats_ready := false
 var _pending_achievements: Dictionary = {}
 var _pending_patient_increments := 0
 var _pending_patient_count_floor := 0
@@ -49,15 +50,33 @@ func _ready() -> void:
 		push_warning("Steam initialization failed: %s" % str(init_result.get("verbal", "unknown")))
 		return
 
-	print("Steam initialized for App ID %d." % APP_ID
-	)
+	print("Steam initialized for App ID %d." % APP_ID)
 
-	# A Steam account may already have enough progress to satisfy a stat-based achievement.
+	# Steam user stats are delivered asynchronously after steamInitEx().
+	if _steam.has_signal("user_stats_received"):
+		var callback := Callable(self, "_on_user_stats_received")
+		if not _steam.is_connected("user_stats_received", callback):
+			_steam.connect("user_stats_received", callback)
+	else:
+		# Compatibility fallback for builds that do not expose the callback signal.
+		_stats_ready = true
+		_on_steam_stats_ready()
+
+
+func _on_user_stats_received(_game_id: int, result: int, _user_id: int) -> void:
+	if result != 1:
+		push_warning("Steam user stats could not be received (result %d)." % result)
+		return
+
+	_stats_ready = true
+	_on_steam_stats_ready()
+
+
+func _on_steam_stats_ready() -> void:
 	if _steam.has_method("getStatInt"):
 		var current_count := int(_steam.call("getStatInt", STAT_TOTAL_PATIENTS_CURED))
 		if current_count >= PATIENT_ACHIEVEMENT_TARGET:
 			_pending_achievements[ACHIEVEMENT_100_PATIENTS] = true
-
 	_flush_pending()
 
 
@@ -67,6 +86,9 @@ func _process(delta: float) -> void:
 
 	if _steam.has_method("run_callbacks"):
 		_steam.call("run_callbacks")
+
+	if not _stats_ready:
+		return
 
 	if (
 		_pending_achievements.is_empty()
@@ -133,7 +155,7 @@ func get_successful_patient_count() -> int:
 # -------------------------------------------------------------------
 
 func _flush_pending() -> void:
-	if not _initialized:
+	if not _initialized or not _stats_ready:
 		return
 
 	var should_store := false
