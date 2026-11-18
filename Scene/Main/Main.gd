@@ -1829,6 +1829,11 @@ func _on_story_finished() -> void:
 	if StoryManager != null and StoryManager.current_story != null:
 		completed_story_id = String(StoryManager.current_story.story_id).strip_edges()
 
+	# 000_01「完书」结束后，时间跳至万历六年立春（从嘉靖二十年立春起第 745 个节气）。
+	# 先更新日期再记录已播放时间，使后续剧情按完书时间计算间隔。
+	if completed_story_id == "000_01":
+		GameTime.set_day_index(745)
+
 	StoryManager.mark_current_story_played()
 	StoryManager.clear_story()
 
