@@ -87,6 +87,31 @@ func get_readable_entries_by_book(book_id: String) -> Array[BookEntryData]:
 	return result
 
 
+
+func get_total_entry_count() -> int:
+	return BookEntryDB.get_all_entries().size()
+
+
+func get_read_entry_count() -> int:
+	_ensure_loaded()
+	var count := 0
+	for entry in BookEntryDB.get_all_entries():
+		if entry != null and read_entry_ids.has(entry.entry_id.strip_edges()):
+			count += 1
+	return count
+
+
+func has_read_all_entries() -> bool:
+	_ensure_loaded()
+	var all_entries: Array[BookEntryData] = BookEntryDB.get_all_entries()
+	if all_entries.is_empty():
+		return false
+
+	for entry in all_entries:
+		if entry == null or not read_entry_ids.has(entry.entry_id.strip_edges()):
+			return false
+	return true
+
 func get_unread_readable_entry_count_by_book(book_id: String) -> int:
 	var count := 0
 	for entry in get_readable_entries_by_book(book_id):
