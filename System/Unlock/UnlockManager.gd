@@ -114,6 +114,10 @@ func _touch_readbook_state() -> void:
 	var global_archive = GLOBAL_READBOOK_ARCHIVE_SCRIPT.new()
 	global_archive.merge_progress(get_save_data())
 
+	# The achievement uses the global archive so reading progress across save slots counts.
+	if global_archive.has_read_all_entries():
+		SteamAchievements.unlock_read_all_book_entries()
+
 
 func _emit_all_player_stat_signals() -> void:
 	experience_points_changed.emit(experience_points)
