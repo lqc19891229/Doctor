@@ -35,6 +35,9 @@ func record_treatment(day: int, data: Dictionary) -> Dictionary:
 	# Unlock once for any successful treatment (pass or perfect).
 	if bool(record.get("success", false)):
 		SteamAchievements.unlock_first_patient_cured()
+		SteamAchievements.record_successful_patient(
+			int(get_statistics().get("successful_patients", 0))
+		)
 
 	return record.duplicate(true)
 
@@ -134,10 +137,10 @@ func load_save_data(data: Dictionary) -> void:
 		if parts.size() >= 2 and String(parts[1]).is_valid_int():
 			_next_record_serial = maxi(_next_record_serial, int(parts[1]) + 1)
 
-	# A save from before Steam integration should still grant earned achievements.
-	for saved_record in get_treatment_records():
-		if bool(saved_record.get("success", false)):
-			SteamAchievements.unlock_first_patient_cured()
-			break
+	# Recover Steam achievements and the lifetime stat from existing local save data.
+	var successful_count := int(get_statistics().get("successful_patients", 0))
+	if successful_count > 0:
+		SteamAchievements.unlock_first_patient_cured()
+	SteamAchievements.sync_successful_patient_count(successful_count)
 
 	records_changed.emit()
