@@ -30,6 +30,12 @@ func record_treatment(day: int, data: Dictionary) -> Dictionary:
 	day_records.append(record)
 	treatment_records[day_key] = day_records
 	records_changed.emit()
+
+	# Clinic and story patients both use this recording path.
+	# Unlock once for any successful treatment (pass or perfect).
+	if bool(record.get("success", false)):
+		SteamAchievements.unlock_first_patient_cured()
+
 	return record.duplicate(true)
 
 
@@ -127,5 +133,11 @@ func load_save_data(data: Dictionary) -> void:
 		var parts := record_id.split("_")
 		if parts.size() >= 2 and String(parts[1]).is_valid_int():
 			_next_record_serial = maxi(_next_record_serial, int(parts[1]) + 1)
+
+	# A save from before Steam integration should still grant earned achievements.
+	for saved_record in get_treatment_records():
+		if bool(saved_record.get("success", false)):
+			SteamAchievements.unlock_first_patient_cured()
+			break
 
 	records_changed.emit()
