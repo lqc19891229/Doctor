@@ -18,6 +18,8 @@ var _pending_patient_increments := 0
 var _pending_patient_count_floor := 0
 var _has_pending_patient_stat := false
 var _needs_store := false
+var _logged_unavailable_achievements: Dictionary = {}
+var _logged_known_achievements: Dictionary = {}
 var _retry_in_seconds := 0.0
 
 
@@ -152,6 +154,10 @@ func _flush_pending() -> void:
 			push_warning("GodotSteam stat methods are unavailable; patient progress remains pending.")
 		else:
 			var current_count := int(_steam.call("getStatInt", STAT_TOTAL_PATIENTS_CURED))
+			if OS.is_debug_build():
+				print("[Steam diagnosis] current Steam patient stat: ", current_count,
+					"; pending increments: ", _pending_patient_increments,
+					"; local floor: ", _pending_patient_count_floor)
 			var desired_count := maxi(
 				current_count + _pending_patient_increments,
 				_pending_patient_count_floor
@@ -197,10 +203,17 @@ func _flush_pending() -> void:
 
 		var state = _steam.call("getAchievement", api_name)
 		if typeof(state) != TYPE_DICTIONARY or not bool(state.get("ret", false)):
-			# The achievement may not have been published yet; keep it pending and retry.
+			# Do not hide unknown API names: report once, then retain the retry queue.
+			if not _logged_unavailable_achievements.has(api_name):
+				_logged_unavailable_achievements[api_name] = true
+				push_warning("[Steam diagnosis] achievement is unavailable: %s; publish Steamworks settings and check the API name." % api_name)
 			continue
 
+		_logged_unavailable_achievements.erase(api_name)
 		if bool(state.get("achieved", false)):
+			if OS.is_debug_build() and not _logged_known_achievements.has(api_name):
+				_logged_known_achievements[api_name] = true
+				print("[Steam diagnosis] achievement already unlocked: ", api_name)
 			_pending_achievements.erase(api_name)
 			continue
 
