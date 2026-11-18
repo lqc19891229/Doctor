@@ -7,6 +7,17 @@ const ACHIEVEMENT_FIRST_PATIENT := "FIRST_PATIENT_CURED"
 const ACHIEVEMENT_100_PATIENTS := "TREAT_100_PATIENTS"
 const ACHIEVEMENT_ALL_BOOK_ENTRIES := "READ_ALL_BOOK_ENTRIES"
 const STAT_TOTAL_PATIENTS_CURED := "TOTAL_PATIENTS_CURED"
+# Story achievements unlock only after a story is formally marked as completed.
+# IDs match Data/Story/*.tres; 000_05 is the normal ending, not gameover.
+const STORY_ACHIEVEMENTS := {
+	"004_04": "FAREWELL_TEACHER",
+	"005_02": "CURE_PRINCE_HEIR",
+	"027": "LANTERN_FESTIVAL",
+	"026_02": "WUZHILAN_PREGNANCY",
+	"021": "CASE_RESOLVED",
+	"000_01": "FINISH_BENCAO_GANGMU",
+	"000_05": "COMPLETE_GAME",
+}
 const PATIENT_ACHIEVEMENT_TARGET := 100
 const RETRY_SECONDS := 5.0
 
@@ -96,6 +107,16 @@ func _process(delta: float) -> void:
 
 func unlock_first_patient_cured() -> void:
 	unlock(ACHIEVEMENT_FIRST_PATIENT)
+
+
+# Called by StoryManager when a story has finished, or when an old save
+# containing completed stories is loaded. Steam keeps achievements account-wide.
+func unlock_for_completed_story(story_id: String) -> void:
+	var clean_story_id := story_id.strip_edges()
+	var achievement_api := String(STORY_ACHIEVEMENTS.get(clean_story_id, ""))
+	if achievement_api.is_empty():
+		return
+	unlock(achievement_api)
 
 
 func unlock_read_all_book_entries() -> void:
