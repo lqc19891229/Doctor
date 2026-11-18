@@ -34,6 +34,8 @@ func record_treatment(day: int, data: Dictionary) -> Dictionary:
 	# Clinic and story patients both use this recording path.
 	# Unlock once for any successful treatment (pass or perfect).
 	if bool(record.get("success", false)):
+		if OS.is_debug_build():
+			print("[Steam diagnosis] successful treatment recorded: ", record["record_id"])
 		SteamAchievements.unlock_first_patient_cured()
 		SteamAchievements.record_successful_patient(
 			int(get_statistics().get("successful_patients", 0))
