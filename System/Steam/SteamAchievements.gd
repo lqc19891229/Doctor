@@ -52,22 +52,9 @@ func _ready() -> void:
 
 	print("Steam initialized for App ID %d." % APP_ID)
 
-	# Steam user stats are delivered asynchronously after steamInitEx().
-	if _steam.has_signal("user_stats_received"):
-		var callback := Callable(self, "_on_user_stats_received")
-		if not _steam.is_connected("user_stats_received", callback):
-			_steam.connect("user_stats_received", callback)
-	else:
-		# Compatibility fallback for builds that do not expose the callback signal.
-		_stats_ready = true
-		_on_steam_stats_ready()
-
-
-func _on_user_stats_received(_game_id: int, result: int, _user_id: int) -> void:
-	if result != 1:
-		push_warning("Steam user stats could not be received (result %d)." % result)
-		return
-
+	# Steamworks SDK 1.61+ synchronizes the current user's stats before the game
+	# launches. requestCurrentStats() and its callback were removed in this SDK line.
+	# The user_stats_received signal is for other-user stat requests, not local startup.
 	_stats_ready = true
 	_on_steam_stats_ready()
 

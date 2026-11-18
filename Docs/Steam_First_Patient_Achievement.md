@@ -72,6 +72,7 @@ Steam App ID: `5608660`
 - 未安装 GodotSteam 或 Steam 客户端不可用时，游戏诊疗、读书和存档流程继续运行；Steam 功能停用。
 - Steam 初始化设置 `SteamAppId` 和 `SteamGameId` 为 `5608660`。
 - Steam 回调由自动加载节点持续处理。
+- 当前 GodotSteam 4.24 使用 Steamworks SDK 1.65；该 SDK 已由 Steam 客户端在游戏启动前同步当前用户统计与成就，因此初始化成功后直接读取，不等待旧版 `user_stats_received` / `requestCurrentStats()` 启动回调。
 - 成就状态和统计数据通过 `storeStats()` 提交。
 - 尚未发布的成就 API 或统计 API 会保持待提交状态并定时重试。
 - 成功治疗统计只在新治疗记录写入时增加；读档时仅将 Steam 统计补到当前存档成功治疗数以上，避免重复累计。
