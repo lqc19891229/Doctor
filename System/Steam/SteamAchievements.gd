@@ -157,8 +157,10 @@ func _flush_pending() -> void:
 				_pending_patient_count_floor
 			)
 
+			# Declare in the enclosing scope: both checks below also read stat_set.
+			var stat_set := false
 			if desired_count > current_count:
-				var stat_set := bool(_steam.call(
+				stat_set = bool(_steam.call(
 					"setStatInt",
 					STAT_TOTAL_PATIENTS_CURED,
 					desired_count
