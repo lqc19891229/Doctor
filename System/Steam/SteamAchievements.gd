@@ -171,10 +171,7 @@ func _flush_pending() -> void:
 			if desired_count >= PATIENT_ACHIEVEMENT_TARGET:
 				_pending_achievements[ACHIEVEMENT_100_PATIENTS] = true
 
-			if desired_count > current_count and bool(_steam.call(
-				"getStatInt",
-				STAT_TOTAL_PATIENTS_CURED
-			)) >= desired_count:
+			if desired_count > current_count and stat_set:
 				_pending_patient_increments = 0
 				_pending_patient_count_floor = 0
 				_has_pending_patient_stat = false
