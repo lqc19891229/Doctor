@@ -13,6 +13,7 @@ line_type = "dialogue"
 portrait_side = "right"
 inactive_portrait_mode = "dim"
 speaker = "吴芷兰"
+music = "res://Assets/Music/Story/问斩.mp3"
 text = "爹，药熬好了。"
 portrait = ExtResource("portrait_1")
 background = ExtResource("background_2")
